@@ -32,6 +32,14 @@ activation and roving `tabindex` for an author-provided ARIA tabs structure.
 Pagination, Tag, Segment and Notification require no controller: native links,
 buttons and radios own their state.
 
+Modal and the first, modal-only Drawer contract are progressive enhancements of
+native `<dialog>`. Their controllers call `showModal()`/`close()`, resolve
+declarative trigger and close controls, synchronize trigger ARIA state, provide
+opt-in backdrop dismissal and restore the invoking focus. The browser owns the
+top layer, background inertness, sequential-focus containment, Escape/cancel
+and native dialog forms. SHLZ does not install a focus trap, inert polyfill,
+document scroll lock, z-index manager or overlay stack.
+
 ## Shared internals
 
 - `internal/floating` is used by Popover and Tooltip for placement, offset,
@@ -40,6 +48,9 @@ buttons and radios own their state.
   pointer dismissal.
 - Tabs currently owns its small roving-tabindex loop. No second identical
   consumer exists, so a generic focus framework was not extracted.
+- `internal/native-dialog` is the proven common lifecycle composition for Modal
+  and Drawer. It is deliberately a function, not an OverlayController or base
+  class, and it delegates modal mechanics to the browser.
 
 ## Distribution
 
@@ -53,11 +64,15 @@ self-contained browser ESM bundle:
 <script type="module">
   import {
     enhanceDropdowns,
+    enhanceDrawers,
+    enhanceModals,
     enhancePopovers,
     enhanceTabs,
     enhanceTooltips,
   } from "/vendor/@shlz/behaviors/dist/browser.js";
   enhanceDropdowns();
+  enhanceModals();
+  enhanceDrawers();
   enhancePopovers();
   enhanceTabs();
   enhanceTooltips();
@@ -67,7 +82,7 @@ self-contained browser ESM bundle:
 The consumer controls loading strategy and CSP-compatible asset URLs. There is
 no bundler-specific runtime.
 
-## Web Components verdict after Popover
+## Web Components verdict after native overlays
 
 No new requirement justifies Custom Elements. Explicit initialization and
 `destroy()` cover lifecycle; native attributes cover state synchronization;
@@ -76,3 +91,7 @@ contract; no form association or encapsulated rendering is needed. Framework
 adapters can initialize and destroy controllers directly. Web Components remain
 a component-specific future experiment only if a concrete lifecycle, form or
 DOM-ownership problem appears.
+
+Native dialog strengthens this verdict: lifecycle, form submission, focus and
+modal state have platform contracts, while author content remains light DOM.
+No observed Modal or Drawer requirement needs custom-element encapsulation.
