@@ -7,6 +7,8 @@ Evidence authority is fixed:
 3. Repository tokens and contracts — reviewed design-system decisions.
 4. Consumer applications — validation cases, never visual authorities.
 
+Within the raw SVG tier, a specialized specification sheet such as `Colors.svg`, `Spacing.svg`, a corner-radius source, or a component sheet has higher semantic authority for its subject than numeric frequency in generic screen geometry. Statistics can locate evidence; they cannot override an explicit specification.
+
 The entire source directory is read-only. Generated implementation belongs in `packages/`, `apps/`, `tools/`, and `docs/`.
 
 Every material claim uses one of: **FACT** (direct raw SVG observation), **DERIVED** (pattern across observations), **DECISION** (repository contract), or **UNKNOWN** (not recoverable). A derived frequency is not proof of a Figma variable.

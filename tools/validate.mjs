@@ -14,8 +14,19 @@ for (const source of sourceInventory) {
 }
 
 const tokens = await json("packages/tokens/dist/tokens.json");
-if (!tokens.color || !tokens.semantic || !tokens.control)
+if (
+  !tokens.source?.color ||
+  !tokens.source?.spacing ||
+  !tokens.source?.radius ||
+  !tokens.semantic
+)
   throw new Error("Token groups are incomplete");
+if (
+  Object.keys(tokens).some(
+    (key) => !["$schema", "source", "semantic"].includes(key),
+  )
+)
+  throw new Error("Tokens must use only source and semantic layers");
 const manifest = await json("packages/icons/dist/manifest.json");
 if (new Set(manifest.map(({ name }) => name)).size !== manifest.length)
   throw new Error("Icon names are not unique");

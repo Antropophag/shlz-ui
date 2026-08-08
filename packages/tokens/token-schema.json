@@ -1,14 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
-  "required": [
-    "color",
-    "semantic",
-    "space",
-    "radius",
-    "border",
-    "opacity",
-    "shadow",
-    "control"
-  ]
+  "required": ["source", "semantic"],
+  "properties": {
+    "source": {
+      "type": "object",
+      "required": ["color", "spacing", "radius"]
+    },
+    "semantic": {
+      "type": "object",
+      "required": ["color", "font", "border", "opacity", "control"]
+    }
+  },
+  "additionalProperties": false
 }

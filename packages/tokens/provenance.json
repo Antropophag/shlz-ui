@@ -5,81 +5,69 @@
     "DECISION": "repository contract",
     "UNKNOWN": "not recoverable"
   },
-  "groups": {
-    "color": {
+  "layers": {
+    "source": {
       "classification": "FACT",
       "confidence": "high",
+      "rationale": "Literal grouping, labels and values from specialized Figma specification sheets; these outrank generic geometry statistics.",
+      "groups": {
+        "color": {
+          "source": "raw/svg/Colors.svg",
+          "groups": [
+            "Dark Blue",
+            "Blue",
+            "Gray",
+            "White",
+            "Background",
+            "Aditional"
+          ]
+        },
+        "spacing": {
+          "source": "raw/svg/Spacing.svg",
+          "values": [
+            "4px",
+            "8px",
+            "16px",
+            "24px",
+            "32px",
+            "40px",
+            "48px",
+            "56px",
+            "64px"
+          ]
+        },
+        "radius": {
+          "source": "human-verified Corner radius source",
+          "labels": {
+            "Min": "8px",
+            "Regular": "12px",
+            "Medium": "16px",
+            "Large": "48px",
+            "Max": "100px"
+          }
+        }
+      }
+    },
+    "semantic": {
+      "classification": "DECISION",
+      "confidence": "medium",
       "sources": [
         "raw/svg/Colors.svg",
         "raw/svg/Buttons.svg",
         "raw/svg/Select.svg"
       ],
-      "rationale": "Exact paints recur in component sheets and screens."
-    },
-    "semantic": {
-      "classification": "DERIVED",
-      "confidence": "medium",
-      "sources": [
-        "raw/svg/Buttons.svg",
-        "raw/svg/Select.svg",
-        "raw/svg/Status.svg"
-      ],
-      "rationale": "Roles inferred from repeated placement and state rows; names were not preserved by SVG."
-    },
-    "space": {
-      "classification": "DERIVED",
-      "confidence": "medium",
-      "sources": [
-        "raw/svg/Spacing.svg",
-        "geometry/repeated-numeric-values.json",
-        "tokens/spacing-candidates.json"
-      ],
-      "rationale": "Conservative 4px multiples supported by the spacing sheet and repeated geometry; incidental dimensions excluded."
-    },
-    "radius": {
-      "classification": "DERIVED",
-      "confidence": "medium",
-      "sources": [
-        "raw/svg/Buttons.svg",
-        "raw/svg/Popover.svg",
-        "raw/svg/Modal.svg",
-        "tokens/radii-observed.json"
-      ],
-      "rationale": "Repeated component corner families; pill is a CSS implementation decision for half-height radii."
-    },
-    "border": {
-      "classification": "DERIVED",
-      "confidence": "medium",
-      "sources": ["tokens/strokes-observed.json", "raw/svg/Select.svg"],
-      "rationale": "1px control outlines and dominant 1.5px icon strokes have different roles."
-    },
-    "opacity": {
-      "classification": "DECISION",
-      "confidence": "low",
-      "sources": ["tokens/opacity-observed.json"],
-      "rationale": "Observed values exist but intended semantic roles are not explicit."
-    },
-    "shadow": {
-      "classification": "DERIVED",
-      "confidence": "medium",
-      "sources": ["tokens/filter-definitions.json"],
-      "rationale": "Repeated SVG drop shadow: y=1, blur radius=3, #253D98 at 5%."
-    },
-    "control": {
-      "classification": "FACT",
-      "confidence": "high",
-      "sources": [
-        "raw/svg/Buttons.svg",
-        "raw/svg/Select.svg",
-        "raw/svg/Date-Picker.svg"
-      ],
-      "rationale": "32px and 40px control heights appear in explicit component sheets."
-    },
-    "typography": {
-      "classification": "UNKNOWN",
-      "confidence": "none",
-      "sources": ["tokens/typography-recoverability.json"],
-      "rationale": "Most text is outlined; no canonical family, weight, size scale, or line height is emitted."
+      "rationale": "Engineering roles alias source tokens. Component-only state paints and geometry are not promoted into this layer.",
+      "groups": {
+        "font": {
+          "classification": "DECISION",
+          "confidence": "medium",
+          "source": "tokens/typography-recoverability.json",
+          "rationale": "The exact family is not recoverable because text is outlined. An explicit system sans stack prevents browser serif fallback."
+        },
+        "border": { "classification": "DERIVED", "confidence": "medium" },
+        "opacity": { "classification": "DECISION", "confidence": "low" },
+        "control": { "classification": "DERIVED", "confidence": "high" }
+      }
     }
   }
 }

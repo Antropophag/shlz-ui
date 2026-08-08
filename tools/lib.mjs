@@ -5,6 +5,8 @@ export const kebab = (parts) =>
   parts
     .join("-")
     .replace(/[^a-z0-9-]/gi, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
     .toLowerCase();
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 
