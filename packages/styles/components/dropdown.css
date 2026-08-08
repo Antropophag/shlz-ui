@@ -6,13 +6,13 @@
 .shlz-dropdown__menu {
   position: absolute;
   z-index: 10;
-  inset-block-start: calc(100% + var(--shlz-space-1));
+  inset-block-start: calc(100% + var(--shlz-source-spacing-4));
   inset-inline-start: 0;
   inline-size: 200px; /* FACT: dominant menu width in Dropdown menu.svg. */
   padding-block: 10px; /* DERIVED: menu heights equal rows × 40px + 20px. */
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-base);
-  border-radius: var(--shlz-radius-lg);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
+  border-radius: var(--shlz-source-radius-regular);
 
   /* FACT: two filter layers in Dropdown menu.svg; intentionally component-specific. */
   box-shadow:
@@ -30,11 +30,11 @@
 
 .shlz-dropdown__item {
   display: flex;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   inline-size: 100%;
-  min-block-size: var(--shlz-control-height-md);
-  padding: 0 var(--shlz-space-4);
+  min-block-size: var(--shlz-semantic-control-height-medium);
+  padding: 0 var(--shlz-source-spacing-16);
   color: inherit;
   text-align: start;
   background: transparent;
@@ -46,18 +46,19 @@
 .shlz-dropdown__item:hover,
 .shlz-dropdown__item:focus-visible,
 .shlz-dropdown__item[aria-current="true"] {
-  background: var(--shlz-semantic-surface-muted);
+  background: var(--shlz-semantic-color-surface-muted);
 }
 
 .shlz-dropdown__item:focus-visible {
-  outline: var(--shlz-border-icon) solid var(--shlz-semantic-action-primary);
-  outline-offset: calc(-1 * var(--shlz-border-icon));
+  outline: var(--shlz-semantic-border-width-icon) solid
+    var(--shlz-semantic-color-action-primary);
+  outline-offset: calc(-1 * var(--shlz-semantic-border-width-icon));
 }
 
 .shlz-dropdown__item:disabled,
 .shlz-dropdown__item[aria-disabled="true"] {
   cursor: not-allowed;
-  opacity: var(--shlz-opacity-disabled);
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-dropdown__icon {
@@ -67,8 +68,8 @@
 }
 
 .shlz-dropdown__separator {
-  margin: var(--shlz-space-1) var(--shlz-space-3);
+  margin: var(--shlz-source-spacing-4) 12px; /* Dropdown menu.svg geometry */
   border: 0;
-  border-block-start: var(--shlz-border-thin) solid
-    var(--shlz-semantic-border-default);
+  border-block-start: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
 }

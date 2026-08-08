@@ -7,7 +7,7 @@ dialog.shlz-drawer {
   max-block-size: none;
   padding: 0;
   overflow: visible;
-  color: var(--shlz-semantic-text-primary);
+  color: var(--shlz-semantic-color-text-primary);
   font: inherit;
   background: transparent;
   border: 0;
@@ -15,7 +15,7 @@ dialog.shlz-drawer {
 
 dialog.shlz-drawer::backdrop {
   /* DECISION: source does not represent an overlay backdrop. */
-  background: rgb(11 22 35 / var(--shlz-opacity-overlay));
+  background: rgb(11 22 35 / var(--shlz-semantic-opacity-overlay));
 }
 
 .shlz-drawer__surface {
@@ -24,17 +24,18 @@ dialog.shlz-drawer::backdrop {
   min-block-size: 0;
   overflow: hidden;
   flex-direction: column;
-  background: var(--shlz-semantic-surface-base);
-  border-radius: var(--shlz-radius-xl) 0 0 var(--shlz-radius-xl);
+  background: var(--shlz-semantic-color-surface-base);
+  border-radius: var(--shlz-source-radius-medium) 0 0
+    var(--shlz-source-radius-medium);
 }
 
 .shlz-drawer__header {
   display: flex;
   flex: 0 0 auto;
-  gap: var(--shlz-space-4);
+  gap: var(--shlz-source-spacing-16);
   align-items: center;
   min-block-size: 64px; /* FACT: Drawer.svg header height. */
-  padding: var(--shlz-space-4) var(--shlz-space-6);
+  padding: var(--shlz-source-spacing-16) var(--shlz-source-spacing-24);
 }
 
 .shlz-drawer__title {
@@ -46,15 +47,15 @@ dialog.shlz-drawer::backdrop {
 
 .shlz-drawer__close {
   display: inline-grid;
-  flex: 0 0 var(--shlz-control-height-sm);
+  flex: 0 0 var(--shlz-semantic-control-height-small);
   place-items: center;
-  inline-size: var(--shlz-control-height-sm);
-  block-size: var(--shlz-control-height-sm);
+  inline-size: var(--shlz-semantic-control-height-small);
+  block-size: var(--shlz-semantic-control-height-small);
   padding: 0;
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-muted);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-muted);
   border: 0;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
   cursor: pointer;
 }
@@ -62,7 +63,7 @@ dialog.shlz-drawer::backdrop {
 .shlz-drawer__body {
   flex: 1 1 auto;
   min-block-size: 0;
-  padding: var(--shlz-space-6);
+  padding: var(--shlz-source-spacing-24);
   overflow: auto;
   overscroll-behavior: contain;
 }
@@ -70,10 +71,10 @@ dialog.shlz-drawer::backdrop {
 .shlz-drawer__footer {
   display: flex;
   flex: 0 0 auto;
-  gap: var(--shlz-space-3);
+  gap: 12px; /* Drawer.svg footer geometry */
   align-items: center;
   min-block-size: 72px; /* FACT: Drawer.svg footer height. */
-  padding: var(--shlz-space-4) var(--shlz-space-6);
+  padding: var(--shlz-source-spacing-16) var(--shlz-source-spacing-24);
 }
 
 .shlz-drawer__footer > * {
@@ -81,7 +82,7 @@ dialog.shlz-drawer::backdrop {
 }
 
 .shlz-drawer__close:focus-visible {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 2px;
 }
 

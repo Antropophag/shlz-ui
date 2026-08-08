@@ -1,23 +1,23 @@
 .shlz-notification {
   display: flex;
-  gap: var(--shlz-space-3);
+  gap: 12px; /* Notification.svg component geometry */
   align-items: center;
   inline-size: min(384px, 100%);
   min-block-size: 58px; /* FACT: Notification.svg surfaces are 384x58. */
-  padding: 9px var(--shlz-space-3);
-  color: var(--shlz-semantic-text-inverse);
-  background: var(--shlz-color-neutral-900);
-  border-radius: var(--shlz-radius-pill);
+  padding: 9px 12px; /* Notification.svg component geometry */
+  color: var(--shlz-semantic-color-text-inverse);
+  background: var(--shlz-source-color-dark-blue-dark-blue);
+  border-radius: var(--shlz-source-radius-max);
   box-shadow: 0 4px 15px rgb(11 22 35 / 10%);
 }
 
 .shlz-notification--danger {
-  background: var(--shlz-semantic-status-danger);
+  background: var(--shlz-semantic-color-status-danger);
 }
 
 .shlz-notification--light {
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-base);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
 }
 
 .shlz-notification__icon {
@@ -26,7 +26,7 @@
   place-items: center;
   inline-size: 40px;
   block-size: 40px;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   background: rgb(255 255 255 / 12%);
 }
 
@@ -46,26 +46,26 @@
 }
 
 .shlz-notification__action {
-  min-block-size: var(--shlz-control-height-sm);
-  padding-inline: var(--shlz-space-4);
+  min-block-size: var(--shlz-semantic-control-height-small);
+  padding-inline: var(--shlz-source-spacing-16);
   color: inherit;
   background: transparent;
-  border: var(--shlz-border-thin) solid currentcolor;
-  border-radius: var(--shlz-radius-pill);
+  border: var(--shlz-semantic-border-width-default) solid currentcolor;
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
 }
 
 .shlz-notification__close {
   display: inline-grid;
-  flex: 0 0 var(--shlz-control-height-sm);
+  flex: 0 0 var(--shlz-semantic-control-height-small);
   place-items: center;
-  inline-size: var(--shlz-control-height-sm);
-  block-size: var(--shlz-control-height-sm);
+  inline-size: var(--shlz-semantic-control-height-small);
+  block-size: var(--shlz-semantic-control-height-small);
   padding: 0;
   color: inherit;
   background: transparent;
   border: 0;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
   cursor: pointer;
 }

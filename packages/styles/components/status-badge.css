@@ -1,37 +1,37 @@
 .shlz-status {
   /* FACT: Status.svg uses 30px pills; named meanings are UNKNOWN. */
   display: inline-flex;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   min-block-size: 30px;
-  padding-inline: var(--shlz-space-3);
-  color: var(--shlz-semantic-text-inverse);
-  background: var(--shlz-semantic-action-primary);
-  border-radius: var(--shlz-radius-pill);
+  padding-inline: 12px; /* Status.svg component geometry */
+  color: var(--shlz-semantic-color-text-inverse);
+  background: var(--shlz-semantic-color-action-primary);
+  border-radius: var(--shlz-source-radius-max);
 }
 
 .shlz-status--green {
-  background: var(--shlz-color-green-500);
+  background: var(--shlz-source-color-aditional-green);
 }
 
 .shlz-status--orange {
   /* FACT: directly observed Status.svg component paint. */
-  background: #d47e2e;
+  background: var(--shlz-source-color-aditional-orange);
 }
 
 .shlz-status--purple {
   /* FACT: directly observed Status.svg component paint. */
-  background: #8131a7;
+  background: var(--shlz-source-color-aditional-violet);
 }
 
 .shlz-status--cyan {
   /* FACT: directly observed Status.svg component paint. */
-  background: #4191b3;
+  background: var(--shlz-source-color-aditional-turquoise);
 }
 
 .shlz-status--neutral {
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-subtle);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-subtle);
 }
 
 .shlz-badge {
@@ -39,10 +39,10 @@
   place-content: center;
   min-inline-size: 29px;
   block-size: 16px;
-  padding-inline: var(--shlz-space-1);
-  color: var(--shlz-semantic-text-inverse);
-  background: var(--shlz-semantic-action-primary);
-  border-radius: var(--shlz-radius-pill);
+  padding-inline: var(--shlz-source-spacing-4);
+  color: var(--shlz-semantic-color-text-inverse);
+  background: var(--shlz-semantic-color-action-primary);
+  border-radius: var(--shlz-source-radius-max);
   line-height: 1;
 }
 
@@ -52,6 +52,6 @@
 }
 
 .shlz-badge--neutral {
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-color-neutral-200);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-source-color-blue-blue-100);
 }

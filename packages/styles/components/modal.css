@@ -1,10 +1,10 @@
 dialog.shlz-modal {
-  inline-size: min(572px, calc(100vw - var(--shlz-space-8)));
+  inline-size: min(572px, calc(100vw - var(--shlz-source-spacing-32)));
   max-inline-size: none;
-  max-block-size: calc(100dvh - var(--shlz-space-8));
+  max-block-size: calc(100dvh - var(--shlz-source-spacing-32));
   padding: 0;
   overflow: visible;
-  color: var(--shlz-semantic-text-primary);
+  color: var(--shlz-semantic-color-text-primary);
   font: inherit;
   background: transparent;
   border: 0;
@@ -12,20 +12,20 @@ dialog.shlz-modal {
 
 dialog.shlz-modal::backdrop {
   /* DECISION: source does not represent an overlay backdrop. */
-  background: rgb(11 22 35 / var(--shlz-opacity-overlay));
+  background: rgb(11 22 35 / var(--shlz-semantic-opacity-overlay));
 }
 
 .shlz-modal--compact {
-  inline-size: min(416px, calc(100vw - var(--shlz-space-8)));
+  inline-size: min(416px, calc(100vw - var(--shlz-source-spacing-32)));
 }
 
 .shlz-modal__surface {
   display: flex;
-  max-block-size: calc(100dvh - var(--shlz-space-8));
+  max-block-size: calc(100dvh - var(--shlz-source-spacing-32));
   overflow: hidden;
   flex-direction: column;
-  background: var(--shlz-semantic-surface-base);
-  border-radius: var(--shlz-radius-xl);
+  background: var(--shlz-semantic-color-surface-base);
+  border-radius: var(--shlz-source-radius-medium);
 
   /* FACT: all Modal.svg surfaces use these two filter layers. */
   box-shadow:
@@ -36,10 +36,10 @@ dialog.shlz-modal::backdrop {
 .shlz-modal__header {
   display: flex;
   flex: 0 0 auto;
-  gap: var(--shlz-space-4);
+  gap: var(--shlz-source-spacing-16);
   align-items: center;
   min-block-size: 56px; /* FACT: structured Modal header height. */
-  padding: var(--shlz-space-3) var(--shlz-space-6);
+  padding: 12px var(--shlz-source-spacing-24); /* Modal.svg header geometry */
 }
 
 .shlz-modal__title {
@@ -51,22 +51,22 @@ dialog.shlz-modal::backdrop {
 
 .shlz-modal__close {
   display: inline-grid;
-  flex: 0 0 var(--shlz-control-height-sm);
+  flex: 0 0 var(--shlz-semantic-control-height-small);
   place-items: center;
-  inline-size: var(--shlz-control-height-sm);
-  block-size: var(--shlz-control-height-sm);
+  inline-size: var(--shlz-semantic-control-height-small);
+  block-size: var(--shlz-semantic-control-height-small);
   padding: 0;
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-muted);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-muted);
   border: 0;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
   cursor: pointer;
 }
 
 .shlz-modal__body {
   min-block-size: 0;
-  padding: var(--shlz-space-6);
+  padding: var(--shlz-source-spacing-24);
   overflow: auto;
   overscroll-behavior: contain;
 }
@@ -75,26 +75,26 @@ dialog.shlz-modal::backdrop {
   display: flex;
   flex: 0 0 auto;
   flex-wrap: wrap;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   justify-content: flex-end;
   min-block-size: 60px; /* FACT: structured Modal footer height. */
-  padding: 14px var(--shlz-space-4);
+  padding: 14px var(--shlz-source-spacing-16);
 }
 
 .shlz-modal__close:focus-visible {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 2px;
 }
 
 @media (width < 480px) {
   dialog.shlz-modal,
   .shlz-modal--compact {
-    inline-size: calc(100vw - var(--shlz-space-4));
-    max-block-size: calc(100dvh - var(--shlz-space-4));
+    inline-size: calc(100vw - var(--shlz-source-spacing-16));
+    max-block-size: calc(100dvh - var(--shlz-source-spacing-16));
   }
 
   .shlz-modal__surface {
-    max-block-size: calc(100dvh - var(--shlz-space-4));
+    max-block-size: calc(100dvh - var(--shlz-source-spacing-16));
   }
 }

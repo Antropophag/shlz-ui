@@ -1,15 +1,15 @@
 .shlz-choice,
 .shlz-switch {
   display: inline-flex;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
-  color: var(--shlz-semantic-text-primary);
+  color: var(--shlz-semantic-color-text-primary);
   cursor: pointer;
 }
 
 .shlz-choice:has(.shlz-checkbox:disabled, .shlz-radio:disabled),
 .shlz-switch:has(.shlz-switch__input:disabled) {
-  color: var(--shlz-semantic-text-muted);
+  color: var(--shlz-semantic-color-text-secondary);
   cursor: not-allowed;
 }
 
@@ -22,13 +22,14 @@
   block-size: 20px;
   flex: none;
   margin: 0;
-  background: var(--shlz-semantic-surface-base);
-  border: var(--shlz-border-icon) solid var(--shlz-semantic-border-default);
+  background: var(--shlz-semantic-color-surface-base);
+  border: var(--shlz-semantic-border-width-icon) solid
+    var(--shlz-semantic-color-border-default);
   cursor: inherit;
 }
 
 .shlz-checkbox {
-  border-radius: var(--shlz-radius-sm);
+  border-radius: 6px; /* Checkbox.svg component geometry, not source radius scale */
 }
 
 .shlz-checkbox--sm {
@@ -40,16 +41,16 @@
 .shlz-checkbox::before {
   inline-size: 10px;
   block-size: 6px;
-  border-block-end: 2px solid var(--shlz-semantic-text-inverse);
-  border-inline-start: 2px solid var(--shlz-semantic-text-inverse);
+  border-block-end: 2px solid var(--shlz-semantic-color-text-inverse);
+  border-inline-start: 2px solid var(--shlz-semantic-color-text-inverse);
   content: "";
   transform: translateY(-1px) rotate(-45deg) scale(0);
 }
 
 .shlz-checkbox:checked,
 .shlz-checkbox:indeterminate {
-  background: var(--shlz-semantic-action-primary);
-  border-color: var(--shlz-semantic-action-primary);
+  background: var(--shlz-semantic-color-action-primary);
+  border-color: var(--shlz-semantic-color-action-primary);
 }
 
 .shlz-checkbox:checked::before {
@@ -71,14 +72,14 @@
 .shlz-radio::before {
   inline-size: 10px;
   block-size: 10px;
-  background: var(--shlz-semantic-action-primary);
+  background: var(--shlz-semantic-color-action-primary);
   border-radius: 50%;
   content: "";
   transform: scale(0);
 }
 
 .shlz-radio:checked {
-  border-color: var(--shlz-semantic-action-primary);
+  border-color: var(--shlz-semantic-color-action-primary);
 }
 
 .shlz-radio:checked::before {
@@ -88,14 +89,15 @@
 .shlz-checkbox:focus-visible,
 .shlz-radio:focus-visible,
 .shlz-switch__input:focus-visible {
-  outline: var(--shlz-border-icon) solid var(--shlz-semantic-action-primary);
+  outline: var(--shlz-semantic-border-width-icon) solid
+    var(--shlz-semantic-color-action-primary);
   outline-offset: 2px;
 }
 
 .shlz-checkbox:disabled,
 .shlz-radio:disabled,
 .shlz-switch__input:disabled {
-  opacity: var(--shlz-opacity-disabled);
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-switch__input {
@@ -110,9 +112,9 @@
   flex: none;
   margin: 0;
   padding: var(--shlz-switch-inset);
-  background: var(--shlz-color-neutral-300);
+  background: var(--shlz-source-color-gray-gray-100);
   border: 0;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   cursor: inherit;
 }
 
@@ -120,14 +122,14 @@
   display: block;
   inline-size: var(--shlz-switch-thumb);
   block-size: var(--shlz-switch-thumb);
-  background: var(--shlz-semantic-surface-base);
+  background: var(--shlz-semantic-color-surface-base);
   border-radius: 50%;
   content: "";
   transition: transform 120ms ease;
 }
 
 .shlz-switch__input:checked {
-  background: var(--shlz-semantic-action-primary);
+  background: var(--shlz-semantic-color-action-primary);
 }
 
 .shlz-switch__input:checked::before {

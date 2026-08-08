@@ -3,12 +3,12 @@
   z-index: 30;
   inset-block-start: 0;
   inset-inline-start: 0;
-  max-inline-size: min(280px, calc(100vw - var(--shlz-space-4)));
+  max-inline-size: min(280px, calc(100vw - var(--shlz-source-spacing-16)));
   min-block-size: 37px; /* FACT: Tooltip.svg surfaces are 100x37. */
-  padding: 10px var(--shlz-space-3);
-  color: var(--shlz-semantic-text-inverse);
-  background: var(--shlz-color-neutral-900);
-  border-radius: var(--shlz-radius-md);
+  padding: 10px 12px; /* Tooltip.svg component geometry */
+  color: var(--shlz-semantic-color-text-inverse);
+  background: var(--shlz-source-color-dark-blue-dark-blue);
+  border-radius: var(--shlz-source-radius-min);
   line-height: 1.25;
   pointer-events: auto; /* DECISION: bridges the visual trigger/surface gap without interactive content. */
 }
@@ -19,8 +19,8 @@
 
 .shlz-tooltip__arrow {
   position: absolute;
-  inline-size: var(--shlz-space-2);
-  block-size: var(--shlz-space-2);
-  background: var(--shlz-color-neutral-900);
+  inline-size: var(--shlz-source-spacing-8);
+  block-size: var(--shlz-source-spacing-8);
+  background: var(--shlz-source-color-dark-blue-dark-blue);
   transform: rotate(45deg);
 }

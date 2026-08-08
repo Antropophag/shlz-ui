@@ -2,10 +2,10 @@
   display: inline-flex;
   gap: 0;
   margin: 0;
-  padding: var(--shlz-space-1);
-  background: var(--shlz-semantic-surface-muted);
+  padding: var(--shlz-source-spacing-4);
+  background: var(--shlz-semantic-color-surface-muted);
   border: 0;
-  border-radius: var(--shlz-radius-md);
+  border-radius: var(--shlz-source-radius-min);
   inline-size: max-content;
   max-inline-size: 100%;
 }
@@ -24,38 +24,40 @@
 
 .shlz-segment__label {
   display: inline-flex;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   justify-content: center;
   min-block-size: 25px;
-  padding-inline: var(--shlz-space-3);
-  border-radius: var(--shlz-radius-sm);
+  padding-inline: 12px; /* Segment.svg component geometry */
+  border-radius: 6px; /* Segment.svg component geometry, not source radius scale */
   cursor: pointer;
 }
 
 .shlz-segment__input:checked + .shlz-segment__label {
-  color: var(--shlz-semantic-action-primary);
-  background: var(--shlz-semantic-surface-base);
-  box-shadow: var(--shlz-shadow-surface);
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-semantic-color-surface-base);
+
+  /* Segment.svg component-specific elevation; no canonical source shadow token. */
+  box-shadow: 0 4px 12px rgb(11 22 35 / 10%);
 }
 
 .shlz-segment__input:focus-visible + .shlz-segment__label {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 1px;
 }
 
 .shlz-segment__input:disabled + .shlz-segment__label {
-  color: var(--shlz-semantic-text-muted);
+  color: var(--shlz-semantic-color-text-secondary);
   cursor: not-allowed;
-  opacity: var(--shlz-opacity-disabled);
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-segment--sm .shlz-segment__label {
   min-block-size: 18px;
-  padding-inline: var(--shlz-space-2);
+  padding-inline: var(--shlz-source-spacing-8);
 }
 
 .shlz-segment--lg .shlz-segment__label {
   min-block-size: 33px;
-  padding-inline: var(--shlz-space-4);
+  padding-inline: var(--shlz-source-spacing-16);
 }

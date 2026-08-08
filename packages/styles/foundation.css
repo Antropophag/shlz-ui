@@ -6,58 +6,60 @@
 }
 
 .shlz-scope {
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-base);
+  font-family: var(--shlz-semantic-font-family);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
 }
 
 .shlz-surface {
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-base);
-  border: var(--shlz-border-thin) solid var(--shlz-semantic-border-default);
-  border-radius: var(--shlz-radius-lg);
-  box-shadow: var(--shlz-shadow-surface);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
+  border: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
+  border-radius: var(--shlz-source-radius-regular);
 }
 
 .shlz-stack {
   display: flex;
   flex-direction: column;
-  gap: var(--shlz-space-4);
+  gap: var(--shlz-source-spacing-16);
 }
 
 .shlz-cluster {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--shlz-space-3);
+  gap: 12px; /* component/layout geometry; not a source spacing token */
   align-items: center;
 }
 
 .shlz-control {
-  min-block-size: var(--shlz-control-height-md);
-  padding-inline: var(--shlz-space-4);
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-base);
-  border: var(--shlz-border-thin) solid var(--shlz-semantic-border-default);
-  border-radius: var(--shlz-radius-pill);
+  min-block-size: var(--shlz-semantic-control-height-medium);
+  padding-inline: var(--shlz-source-spacing-16);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
+  border: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
 }
 
 .shlz-control[data-size="sm"] {
-  min-block-size: var(--shlz-control-height-sm);
+  min-block-size: var(--shlz-semantic-control-height-small);
 }
 
 .shlz-control:focus-visible,
 .shlz-focusable:focus-visible {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 2px;
 }
 
 .shlz-control:disabled {
   cursor: not-allowed;
-  opacity: var(--shlz-opacity-disabled);
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-typography-hook {
-  font-family: var(--shlz-font-family, inherit);
+  font-family: var(--shlz-semantic-font-family);
   line-height: var(--shlz-line-height, normal);
 }
 

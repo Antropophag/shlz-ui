@@ -1,25 +1,25 @@
 .shlz-tag {
   display: inline-flex;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   min-block-size: 30px; /* FACT: Tag.svg plain tag height. */
-  padding-inline: var(--shlz-space-3);
-  color: var(--shlz-semantic-text-primary);
-  background: var(--shlz-semantic-surface-muted);
-  border: var(--shlz-border-thin) solid transparent;
-  border-radius: var(--shlz-radius-pill);
+  padding-inline: 12px; /* Tag.svg component geometry */
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-muted);
+  border: var(--shlz-semantic-border-width-default) solid transparent;
+  border-radius: var(--shlz-source-radius-max);
 }
 
 .shlz-tag--outlined {
-  background: var(--shlz-semantic-surface-base);
-  border-color: var(--shlz-semantic-border-default);
+  background: var(--shlz-semantic-color-surface-base);
+  border-color: var(--shlz-semantic-color-border-default);
 }
 
 .shlz-tag__avatar {
   inline-size: 24px;
   block-size: 24px;
   margin-inline-start: -9px;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   object-fit: cover;
 }
 
@@ -33,7 +33,7 @@
   color: inherit;
   background: transparent;
   border: 0;
-  border-radius: var(--shlz-radius-pill);
+  border-radius: var(--shlz-source-radius-max);
   font: inherit;
   cursor: pointer;
 }
@@ -43,6 +43,6 @@
 }
 
 .shlz-tag__remove:focus-visible {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 1px;
 }

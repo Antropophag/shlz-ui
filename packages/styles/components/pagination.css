@@ -1,7 +1,7 @@
 .shlz-pagination__list {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--shlz-space-2);
+  gap: var(--shlz-source-spacing-8);
   align-items: center;
   margin: 0;
   padding: 0;
@@ -11,35 +11,36 @@
 .shlz-pagination__item {
   display: inline-grid;
   place-items: center;
-  min-inline-size: var(--shlz-control-height-md);
-  block-size: var(--shlz-control-height-md);
-  padding-inline: var(--shlz-space-2);
-  color: var(--shlz-semantic-text-primary);
+  min-inline-size: var(--shlz-semantic-control-height-medium);
+  block-size: var(--shlz-semantic-control-height-medium);
+  padding-inline: var(--shlz-source-spacing-8);
+  color: var(--shlz-semantic-color-text-primary);
   text-decoration: none;
-  background: var(--shlz-semantic-surface-base);
-  border: var(--shlz-border-thin) solid var(--shlz-semantic-border-default);
-  border-radius: var(--shlz-radius-pill);
+  background: var(--shlz-semantic-color-surface-base);
+  border: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
+  border-radius: var(--shlz-source-radius-max);
 }
 
 .shlz-pagination a.shlz-pagination__item:hover {
-  background: var(--shlz-semantic-surface-muted);
+  background: var(--shlz-semantic-color-surface-muted);
 }
 
 .shlz-pagination a.shlz-pagination__item:active,
 .shlz-pagination__item[aria-current="page"] {
-  color: var(--shlz-semantic-action-primary);
-  background: var(--shlz-color-neutral-200);
-  border-color: var(--shlz-color-neutral-200);
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-blue-blue-100);
+  border-color: var(--shlz-source-color-blue-blue-100);
 }
 
 .shlz-pagination a.shlz-pagination__item:focus-visible {
-  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 2px;
 }
 
 .shlz-pagination__item--disabled {
-  color: var(--shlz-semantic-text-muted);
-  background: var(--shlz-semantic-surface-subtle);
+  color: var(--shlz-semantic-color-text-secondary);
+  background: var(--shlz-semantic-color-surface-subtle);
 }
 
 .shlz-pagination__item--ellipsis {
