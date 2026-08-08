@@ -49,6 +49,26 @@ article {
   min-block-size: 560px;
 }
 
+#tooltip-demo {
+  min-block-size: 250px;
+}
+
+.shlz-floating-lab {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  gap: var(--shlz-space-6);
+  align-items: center;
+  padding-block: var(--shlz-space-8);
+  text-align: center;
+}
+
+.shlz-tag__avatar {
+  display: inline-grid;
+  place-items: center;
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-primary);
+}
+
 .shlz-popover-lab,
 .shlz-popover-scenarios {
   display: grid;
@@ -192,6 +212,10 @@ article {
 
   .shlz-popover-lab,
   .shlz-popover-scenarios {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .shlz-floating-lab {
     grid-template-columns: 1fr 1fr;
   }
 }

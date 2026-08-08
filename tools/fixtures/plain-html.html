@@ -68,13 +68,113 @@
       <div class="shlz-popover__header">Заголовок</div>
       <div class="shlz-popover__body">Plain HTML + direct ESM import.</div>
     </div>
+    <button
+      class="shlz-button"
+      type="button"
+      data-shlz-tooltip-trigger="fixture-tooltip"
+      data-shlz-tooltip-open-delay="0"
+    >
+      Справка
+    </button>
+    <div
+      class="shlz-tooltip"
+      id="fixture-tooltip"
+      role="tooltip"
+      data-shlz-tooltip
+      hidden
+    >
+      Подсказка<span class="shlz-tooltip__arrow" aria-hidden="true"></span>
+    </div>
+    <div class="shlz-tabs" data-shlz-tabs>
+      <div class="shlz-tabs__list" role="tablist" aria-label="Пример вкладок">
+        <button
+          class="shlz-tabs__tab"
+          id="fixture-tab-a"
+          type="button"
+          role="tab"
+          aria-selected="true"
+          aria-controls="fixture-panel-a"
+        >
+          A
+        </button>
+        <button
+          class="shlz-tabs__tab"
+          id="fixture-tab-b"
+          type="button"
+          role="tab"
+          aria-selected="false"
+          aria-controls="fixture-panel-b"
+        >
+          B
+        </button>
+      </div>
+      <div
+        class="shlz-tabs__panel"
+        id="fixture-panel-a"
+        role="tabpanel"
+        aria-labelledby="fixture-tab-a"
+      >
+        Панель A
+      </div>
+      <div
+        class="shlz-tabs__panel"
+        id="fixture-panel-b"
+        role="tabpanel"
+        aria-labelledby="fixture-tab-b"
+        hidden
+      >
+        Панель B
+      </div>
+    </div>
+    <nav class="shlz-pagination" aria-label="Пагинация">
+      <ul class="shlz-pagination__list">
+        <li>
+          <a class="shlz-pagination__item" href="#one" aria-current="page">1</a>
+        </li>
+        <li><a class="shlz-pagination__item" href="#two">2</a></li>
+      </ul>
+    </nav>
+    <span class="shlz-tag shlz-tag--outlined"
+      >Фильтр<button
+        class="shlz-tag__remove"
+        type="button"
+        aria-label="Удалить фильтр"
+      >
+        ×
+      </button></span
+    >
+    <fieldset class="shlz-segment">
+      <legend class="shlz-visually-hidden">Режим</legend>
+      <label class="shlz-segment__option"
+        ><input
+          class="shlz-segment__input"
+          type="radio"
+          name="mode"
+          checked
+        /><span class="shlz-segment__label">A</span></label
+      ><label class="shlz-segment__option"
+        ><input class="shlz-segment__input" type="radio" name="mode" /><span
+          class="shlz-segment__label"
+          >B</span
+        ></label
+      >
+    </fieldset>
+    <div class="shlz-notification" role="status">
+      <div class="shlz-notification__content">
+        <p class="shlz-notification__title">Сохранено</p>
+      </div>
+    </div>
     <script type="module">
       import {
         enhanceDropdowns,
         enhancePopovers,
+        enhanceTabs,
+        enhanceTooltips,
       } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
       enhancePopovers();
+      enhanceTabs();
+      enhanceTooltips();
     </script>
   </body>
 </html>
