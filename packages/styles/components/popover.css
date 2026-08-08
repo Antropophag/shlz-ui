@@ -7,6 +7,8 @@
   color: var(--shlz-semantic-color-text-primary);
   background: var(--shlz-semantic-color-surface-base);
   border-radius: var(--shlz-source-radius-regular);
+  font-size: 14px;
+  line-height: 19px;
 
   /* FACT: the same two filter layers are repeated for every Popover surface. */
   box-shadow:
@@ -19,13 +21,15 @@
 }
 
 .shlz-popover__header {
-  min-block-size: var(--shlz-semantic-control-height-medium);
+  block-size: var(--shlz-semantic-control-height-medium);
   padding: 10px var(--shlz-source-spacing-16);
   border-block-end: var(--shlz-semantic-border-width-default) solid
     var(--shlz-source-color-dark-blue-dark-blue-10);
+  font-weight: 600;
 }
 
 .shlz-popover__body {
+  block-size: 50px;
   padding: 12px var(--shlz-source-spacing-16); /* Popover.svg geometry */
 }
 

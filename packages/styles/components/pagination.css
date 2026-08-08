@@ -20,6 +20,18 @@
   border: var(--shlz-semantic-border-width-default) solid
     var(--shlz-semantic-color-border-default);
   border-radius: var(--shlz-source-radius-max);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.shlz-pagination__item--visual-hover {
+  color: var(--shlz-semantic-color-action-primary);
+}
+
+.shlz-pagination__item--visual-pressed {
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-gray-gray-100);
+  border-color: var(--shlz-source-color-gray-gray-100);
 }
 
 .shlz-pagination a.shlz-pagination__item:hover {
@@ -46,4 +58,15 @@
 .shlz-pagination__item--ellipsis {
   border-color: transparent;
   background: transparent;
+}
+
+.shlz-pagination__summary,
+.shlz-pagination__page-size-label {
+  font-size: 12px;
+}
+
+.shlz-pagination__group {
+  display: flex;
+  gap: var(--shlz-source-spacing-8);
+  align-items: center;
 }

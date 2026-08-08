@@ -32,12 +32,16 @@
 }
 
 .shlz-input:hover:not(:disabled, [readonly]),
-.shlz-textarea:hover:not(:disabled, [readonly]) {
+.shlz-textarea:hover:not(:disabled, [readonly]),
+.shlz-input--visual-hover,
+.shlz-textarea--visual-hover {
   background: var(--shlz-semantic-color-surface-subtle);
 }
 
 .shlz-input:focus-visible,
-.shlz-textarea:focus-visible {
+.shlz-textarea:focus-visible,
+.shlz-input--visual-focus,
+.shlz-textarea--visual-focus {
   border-color: var(--shlz-semantic-color-action-primary);
   outline: 2px solid transparent;
   box-shadow: none;

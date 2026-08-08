@@ -8,6 +8,8 @@
   background: var(--shlz-semantic-color-surface-muted);
   border: var(--shlz-semantic-border-width-default) solid transparent;
   border-radius: var(--shlz-source-radius-max);
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .shlz-tag--outlined {

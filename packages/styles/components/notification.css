@@ -9,6 +9,8 @@
   background: var(--shlz-source-color-dark-blue-dark-blue);
   border-radius: var(--shlz-source-radius-max);
   box-shadow: 0 4px 15px rgb(11 22 35 / 10%);
+  font-size: 14px;
+  line-height: 18px;
 }
 
 .shlz-notification--danger {
@@ -22,12 +24,12 @@
 
 .shlz-notification__icon {
   display: inline-grid;
-  flex: 0 0 40px;
+  flex: 0 0 16px;
   place-items: center;
-  inline-size: 40px;
-  block-size: 40px;
+  inline-size: 16px;
+  block-size: 16px;
   border-radius: var(--shlz-source-radius-max);
-  background: rgb(255 255 255 / 12%);
+  background: transparent;
 }
 
 .shlz-notification__content {
@@ -37,7 +39,7 @@
 
 .shlz-notification__title {
   margin: 0;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .shlz-notification__message {
@@ -46,21 +48,22 @@
 }
 
 .shlz-notification__action {
+  min-inline-size: 79px;
   min-block-size: var(--shlz-semantic-control-height-small);
   padding-inline: var(--shlz-source-spacing-16);
-  color: inherit;
-  background: transparent;
-  border: var(--shlz-semantic-border-width-default) solid currentcolor;
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-muted);
+  border: 0;
   border-radius: var(--shlz-source-radius-max);
   font: inherit;
 }
 
 .shlz-notification__close {
   display: inline-grid;
-  flex: 0 0 var(--shlz-semantic-control-height-small);
+  flex: 0 0 20px;
   place-items: center;
-  inline-size: var(--shlz-semantic-control-height-small);
-  block-size: var(--shlz-semantic-control-height-small);
+  inline-size: 20px;
+  block-size: 20px;
   padding: 0;
   color: inherit;
   background: transparent;
@@ -68,6 +71,26 @@
   border-radius: var(--shlz-source-radius-max);
   font: inherit;
   cursor: pointer;
+}
+
+.shlz-notification__leading-progress {
+  display: inline-grid;
+  flex: 0 0 40px;
+  place-items: center;
+  inline-size: 40px;
+  block-size: 40px;
+  background:
+    radial-gradient(
+      circle,
+      var(--shlz-source-color-dark-blue-dark-blue) 58%,
+      transparent 60%
+    ),
+    conic-gradient(
+      currentcolor calc(var(--shlz-progress, 1) * 1turn),
+      rgb(255 255 255 / 30%) 0
+    );
+  border-radius: 50%;
+  font-variant-numeric: tabular-nums;
 }
 
 .shlz-notification__countdown {

@@ -18,11 +18,13 @@
   cursor: pointer;
 }
 
-.shlz-button:hover:not(:disabled) {
+.shlz-button:hover:not(:disabled),
+.shlz-button--visual-hover {
   background: var(--shlz-source-color-blue-blue-100);
 }
 
-.shlz-button:active:not(:disabled) {
+.shlz-button:active:not(:disabled),
+.shlz-button--visual-active {
   color: var(--shlz-semantic-color-text-inverse);
   background: var(--shlz-source-color-blue-blue-300);
 }
@@ -44,12 +46,14 @@
   background: var(--shlz-semantic-color-action-primary);
 }
 
-.shlz-button--primary:hover:not(:disabled) {
+.shlz-button--primary:hover:not(:disabled),
+.shlz-button--primary.shlz-button--visual-hover {
   /* Buttons.svg FACT: primary hover is #425ba6; it is not a palette token. */
   background: #425ba6;
 }
 
-.shlz-button--primary:active:not(:disabled) {
+.shlz-button--primary:active:not(:disabled),
+.shlz-button--primary.shlz-button--visual-active {
   background: var(--shlz-source-color-blue-blue-300);
 }
 

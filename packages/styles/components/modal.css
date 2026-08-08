@@ -33,6 +33,72 @@ dialog.shlz-modal::backdrop {
     0 1px 3px rgb(0 0 0 / 5%);
 }
 
+.shlz-modal__surface--structured {
+  inline-size: 572px;
+  block-size: 196px;
+}
+
+.shlz-modal__surface--compact {
+  inline-size: 416px;
+  block-size: 165px;
+  padding: var(--shlz-source-spacing-32);
+}
+
+.shlz-modal__compact-content {
+  display: grid;
+  grid-template-columns: 22px 1fr;
+  gap: var(--shlz-source-spacing-16);
+}
+
+.shlz-modal__variant-icon {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 22px;
+  block-size: 22px;
+  color: var(--shlz-semantic-color-action-primary);
+}
+
+.shlz-modal__surface--success .shlz-modal__variant-icon {
+  color: var(--shlz-semantic-color-status-success);
+}
+
+.shlz-modal__surface--warning .shlz-modal__variant-icon {
+  color: var(--shlz-source-color-aditional-orange);
+}
+
+.shlz-modal__surface--error .shlz-modal__variant-icon {
+  color: var(--shlz-semantic-color-status-danger);
+}
+
+.shlz-modal__compact-copy h4,
+.shlz-modal__compact-copy p {
+  margin: 0;
+}
+
+.shlz-modal__compact-copy h4 {
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.shlz-modal__source-slot {
+  inline-size: 100%;
+  block-size: var(--shlz-semantic-control-height-small);
+  background: var(--shlz-source-color-blue-blue-50);
+}
+
+.shlz-modal__compact-copy p {
+  color: var(--shlz-semantic-color-text-secondary);
+  font-size: 12px;
+  line-height: 19px;
+}
+
+.shlz-modal__compact-actions {
+  display: flex;
+  gap: var(--shlz-source-spacing-8);
+  justify-content: flex-end;
+  margin-block-start: var(--shlz-source-spacing-24);
+}
+
 .shlz-modal__header {
   display: flex;
   flex: 0 0 auto;

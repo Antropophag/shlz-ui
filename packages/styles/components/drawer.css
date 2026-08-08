@@ -43,6 +43,8 @@ dialog.shlz-drawer::backdrop {
   margin: 0;
   font: inherit;
   font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 .shlz-drawer__close {
@@ -66,6 +68,12 @@ dialog.shlz-drawer::backdrop {
   padding: var(--shlz-source-spacing-24);
   overflow: auto;
   overscroll-behavior: contain;
+}
+
+.shlz-drawer__source-slot {
+  inline-size: 100%;
+  block-size: var(--shlz-semantic-control-height-small);
+  background: var(--shlz-source-color-blue-blue-50);
 }
 
 .shlz-drawer__footer {
