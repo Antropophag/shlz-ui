@@ -10,6 +10,21 @@ test("showcase primitives keep their visual contract", async ({ page }) => {
   );
 });
 
+test("source specification and fidelity surfaces are reviewable", async ({
+  page,
+}) => {
+  await expect(page.locator("#source-spec")).toHaveScreenshot(
+    "showcase-source-spec.png",
+  );
+  await expect(page.locator("#fidelity")).toHaveScreenshot(
+    "showcase-fidelity.png",
+  );
+  await expect(page.locator("body")).toHaveCSS(
+    "font-family",
+    /system-ui|-apple-system|Segoe UI/,
+  );
+});
+
 test("keyboard focus is visible", async ({ page }) => {
   const primary = page
     .getByRole("button", { name: "Создать", exact: true })

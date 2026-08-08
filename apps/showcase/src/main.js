@@ -22,32 +22,33 @@ const iconUrls = import.meta.glob(
 );
 
 const app = document.querySelector("#app");
-const label = (group) => {
-  const item = provenance.groups[group];
-  return `<span class="shlz-evidence" data-kind="${item.classification}">${item.classification} · ${item.confidence}</span>`;
-};
-const entries = (record, prefix = "") =>
-  Object.entries(record).flatMap(([key, value]) =>
-    value && typeof value === "object"
-      ? entries(value, `${prefix}${key}.`)
-      : [[`${prefix}${key}`, value]],
-  );
-const colors = entries(tokens.color)
+const evidenceLabel = (item) =>
+  `<span class="shlz-evidence" data-kind="${item.classification}">${item.classification} · ${item.confidence}</span>`;
+const sourceEvidence = evidenceLabel(provenance.layers.source);
+const semanticEvidence = evidenceLabel(provenance.layers.semantic);
+const colors = Object.entries(tokens.source.color)
   .map(
-    ([name, value]) =>
-      `<div class="shlz-swatch"><i style="--shlz-swatch:${value}"></i><b>${name}</b><code>${value}</code></div>`,
+    ([group, values]) =>
+      `<article class="shlz-source-group"><h3>${group}</h3><div class="shlz-source-swatches">${Object.entries(
+        values,
+      )
+        .map(
+          ([name, value]) =>
+            `<div class="shlz-swatch"><i style="--shlz-swatch:${value}"></i><b>${name}</b><code>${value}</code></div>`,
+        )
+        .join("")}</div></article>`,
   )
   .join("");
-const spaces = Object.entries(tokens.space)
+const spaces = Object.entries(tokens.source.spacing)
   .map(
     ([name, value]) =>
       `<div class="shlz-measure"><i style="inline-size:${value}"></i><code>${name} · ${value}</code></div>`,
   )
   .join("");
-const radii = Object.entries(tokens.radius)
+const radii = Object.entries(tokens.source.radius)
   .map(
     ([name, value]) =>
-      `<div class="shlz-radius" style="border-radius:${value}"><code>${name} · ${value}</code></div>`,
+      `<div class="shlz-radius" style="border-radius:${value}"><b>${name}</b><code>${value}</code></div>`,
   )
   .join("");
 const iconCards = manifest
@@ -73,12 +74,12 @@ const overlayDemos = `
 <dialog class="shlz-modal shlz-modal--compact" id="showcase-confirm" data-shlz-modal aria-labelledby="showcase-confirm-title"><form class="shlz-modal__surface" method="dialog"><div class="shlz-modal__body"><h2 class="shlz-modal__title" id="showcase-confirm-title">Подтвердить действие?</h2><p>Для confirm/cancel доступна нативная форма <code>method=&quot;dialog&quot;</code>.</p></div><footer class="shlz-modal__footer"><button class="shlz-button" value="cancel">Отмена</button><button class="shlz-button shlz-button--primary" value="confirm">Подтвердить</button></footer></form></dialog></article>
 <article id="drawer-demo"><h3>Drawer</h3><p><code>Drawer.svg</code> · <span class="shlz-evidence" data-kind="FACT">FACT · 420×900, 64/764/72 regions</span> <span class="shlz-evidence" data-kind="DECISION">DECISION · modal right-side native dialog</span></p><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-trigger="showcase-drawer">Открыть Drawer</button><dialog class="shlz-drawer" id="showcase-drawer" data-shlz-drawer data-shlz-drawer-backdrop-close aria-labelledby="showcase-drawer-title"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="showcase-drawer-title">Заголовок Drawer</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть">×</button></header><div class="shlz-drawer__body" data-drawer-scroll><div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Параметр</span><input class="shlz-input" autofocus></label><p>Drawer использует ту же native modal lifecycle, но независимую source-derived geometry.</p>${drawerLongContent}</div></div><footer class="shlz-drawer__footer"><button class="shlz-button" type="button" data-shlz-drawer-close>Отмена</button><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-close="apply">Применить</button></footer></div></dialog></article>`;
 
-app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · iteration 2</p><h1>Foundation and native primitives</h1><p>Инструмент визуальной проверки source evidence и framework-free HTML/CSS contracts.</p></header>
-<section><h2>Primitive colors ${label("color")}</h2><div class="shlz-palette">${colors}</div></section>
-<section><h2>Semantic mapping ${label("semantic")}</h2><div class="shlz-cluster"><div class="shlz-demo-surface">surface.base / text.primary</div><div class="shlz-demo-action">action.primary</div><div class="shlz-demo-status">status.success</div><div class="shlz-demo-danger">status.danger</div></div></section>
-<section><h2>Spacing ${label("space")}</h2><div class="shlz-stack">${spaces}</div></section>
-<section><h2>Radii, borders, effects ${label("radius")} ${label("shadow")}</h2><div class="shlz-cluster">${radii}<div class="shlz-surface shlz-effect">surface shadow</div></div></section>
-<section><h2>Control geometry ${label("control")}</h2><div class="shlz-cluster"><input class="shlz-control" aria-label="Пример поля" value="40 px control"/><button class="shlz-control shlz-focusable">Focus me</button><button class="shlz-control" data-size="sm">32 px</button><button class="shlz-control" disabled>Disabled</button></div><p>Typography: ${label("typography")} — consumer supplies font variables.</p></section>
+app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · source-spec reset</p><h1>Source specification and implementation fidelity</h1><p>Специализированные Figma sheets отделены от инженерных aliases и component-specific geometry.</p></header>
+<section id="source-spec" class="shlz-major-section"><p class="shlz-section-kicker">A. SOURCE SPEC</p><h2>Буквальная спецификация Figma ${sourceEvidence}</h2><p><code>Colors.svg</code>, <code>Spacing.svg</code> и human-verified Corner radius source. Имена, группы и значения не нормализованы в искусственные шкалы.</p>
+<div class="shlz-source-sheet"><h2>Colors</h2><div class="shlz-source-palette">${colors}</div></div>
+<div class="shlz-source-sheet shlz-source-sheet--split"><div><h2>Spacing</h2><div class="shlz-stack">${spaces}</div></div><div><h2>Corner radius</h2><div class="shlz-radius-grid">${radii}</div></div></div>
+<div class="shlz-source-sheet"><h2>Typography</h2><p class="shlz-type-sample">Аа Бб 0123 — явный system sans stack</p><p>${semanticEvidence} Точная гарнитура не восстанавливается из outlined text; браузерный serif запрещён.</p></div></section>
+<section id="implementation" class="shlz-major-section"><p class="shlz-section-kicker">B. IMPLEMENTATION</p><h2>Production library</h2><section><h3>Semantic aliases ${semanticEvidence}</h3><div class="shlz-cluster"><div class="shlz-demo-surface">surface.base / text.primary</div><div class="shlz-demo-action">action.primary</div><div class="shlz-demo-status">status.success</div><div class="shlz-demo-danger">status.danger</div></div></section><section><h3>Control geometry</h3><div class="shlz-cluster"><input class="shlz-control" aria-label="Пример поля" value="40 px control"/><button class="shlz-control shlz-focusable">Focus me</button><button class="shlz-control" data-size="sm">32 px</button><button class="shlz-control" disabled>Disabled</button></div></section>
 <section id="components"><h2>Components <span class="shlz-evidence" data-kind="FACT">FACT · component sheets</span></h2>
 <article><h3>Button</h3><p><code>Buttons.svg</code> · 26/32/40 px, primary/neutral, icon forms.</p><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Создать</button><button class="shlz-button">Отмена</button><button class="shlz-button shlz-button--primary shlz-button--sm">32 px</button><button class="shlz-button shlz-button--xs">26 px</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Добавить">+</button><button class="shlz-button shlz-button--primary" disabled>Недоступно</button></div></article>
 <article><h3>Input and textarea</h3><p><code>Select.svg</code>, <code>Input Number.svg</code>, <code>Textarea.svg</code> · input-like geometry only.</p><div class="shlz-component-grid"><label class="shlz-field"><span class="shlz-field__label">Название</span><input class="shlz-input" placeholder="Введите название"></label><label class="shlz-field"><span class="shlz-field__label">32 px</span><input class="shlz-input shlz-input--sm" value="Заполнено"></label><label class="shlz-field"><span class="shlz-field__label">Ошибка</span><input class="shlz-input" aria-invalid="true" value="Некорректно"><span class="shlz-field__message">Проверьте значение</span></label><label class="shlz-field"><span class="shlz-field__label">Комментарий</span><textarea class="shlz-textarea">Длинный текст проверяет перенос и вертикальный ритм.</textarea></label><label class="shlz-field"><span class="shlz-field__label">Disabled</span><input class="shlz-input" disabled value="Недоступно"></label></div></article>
@@ -105,7 +106,8 @@ app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · iteration 2</p><h1>Foun
 <article id="segment-demo"><h3>Segment</h3><p><code>Segment.svg</code> · single selection is represented by native radios (DECISION).</p><div class="shlz-stack"><fieldset class="shlz-segment"><legend class="shlz-visually-hidden">Период</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="period" checked><span class="shlz-segment__label">День</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="period"><span class="shlz-segment__label">Неделя</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="period"><span class="shlz-segment__label">Месяц</span></label></fieldset><fieldset class="shlz-segment shlz-segment--sm"><legend class="shlz-visually-hidden">Размер small</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="small" checked><span class="shlz-segment__label">A</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="small" disabled><span class="shlz-segment__label">B</span></label></fieldset><fieldset class="shlz-segment shlz-segment--lg"><legend class="shlz-visually-hidden">Размер large</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="large" checked><span class="shlz-segment__label">Список</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="large"><span class="shlz-segment__label">Карточки</span></label></fieldset></div></article>
 <article id="notification-demo"><h3>Notification</h3><p><code>Notification.svg</code> · static 384×58 visual primitive; lifecycle remains UNKNOWN.</p><div class="shlz-stack"><div class="shlz-notification" role="status"><span class="shlz-notification__icon" aria-hidden="true">✓</span><div class="shlz-notification__content"><p class="shlz-notification__title">Изменения сохранены</p></div><button class="shlz-notification__close" type="button" aria-label="Закрыть уведомление">×</button></div><div class="shlz-notification shlz-notification--danger" role="alert"><div class="shlz-notification__content"><p class="shlz-notification__title">Не удалось выполнить действие</p></div><button class="shlz-notification__action" type="button">Повторить</button></div><div class="shlz-notification shlz-notification--light"><div class="shlz-notification__content"><p class="shlz-notification__title">Нейтральное сообщение</p><p class="shlz-notification__message">Без live-region semantics по умолчанию</p></div></div></div></article>
 ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition</h3><div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Заголовок</span><input class="shlz-input" value="Пример композиции"></label><label class="shlz-field"><span class="shlz-field__label">Описание</span><textarea class="shlz-textarea"></textarea></label><label class="shlz-choice"><input class="shlz-checkbox" type="checkbox" checked>Подтверждение</label><fieldset class="shlz-demo-fieldset"><legend>Вариант</legend><label class="shlz-choice"><input class="shlz-radio" type="radio" name="composition" checked>Первый</label><label class="shlz-choice"><input class="shlz-radio" type="radio" name="composition">Второй</label></fieldset><label class="shlz-switch"><input class="shlz-switch__input" type="checkbox" role="switch">Настройка</label><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Сохранить</button><button class="shlz-button">Отмена</button><span class="shlz-status shlz-status--green">Готово</span></div></div></article></section>
-<section><h2>Icons <span class="shlz-evidence" data-kind="DERIVED">DERIVED · manifest</span></h2><div class="shlz-icon-grid">${iconCards}</div></section>`;
+<section><h2>Icons <span class="shlz-evidence" data-kind="DERIVED">DERIVED · manifest</span></h2><div class="shlz-icon-grid">${iconCards}</div></section></section>
+<section id="fidelity" class="shlz-major-section"><p class="shlz-section-kicker">C. FIDELITY</p><h2>Source vs implementation</h2><div class="shlz-fidelity-grid"><article><h3>Source fact</h3><p><code>Buttons.svg</code>: Blue 200, 40 px control, Max radius.</p><div class="shlz-fidelity-source"><span>#253D98</span><span>40 px</span><span>100 px</span></div></article><article><h3>Library output</h3><p>Реальный <code>@shlz/styles</code> primitive.</p><button class="shlz-button shlz-button--primary">Сохранить</button></article><article><h3>Classification</h3><p><span class="shlz-evidence" data-kind="FACT">FACT</span> paint and geometry</p><p><span class="shlz-evidence" data-kind="DECISION">DECISION</span> system sans typography and focus-visible</p></article></div></section>`;
 
 document.querySelector("[data-indeterminate]").indeterminate = true;
 enhanceDropdowns();
