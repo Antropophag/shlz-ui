@@ -8,6 +8,7 @@ dialog.shlz-drawer {
   padding: 0;
   overflow: visible;
   color: var(--shlz-semantic-text-primary);
+  font: inherit;
   background: transparent;
   border: 0;
 }
