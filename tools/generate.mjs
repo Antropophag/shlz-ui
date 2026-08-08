@@ -41,20 +41,16 @@ await mkdir(path.join(iconDist, "file-types"), { recursive: true });
 const sourceManifest = await json(
   path.join(sourceRoot, "assets/icon-manifest.json"),
 );
-const seen = new Map();
 const manifest = [];
 for (const entry of sourceManifest) {
   const isFileType = entry.category === "file-types";
-  let name = entry.name;
-  if (seen.has(name)) name = `${name}-${entry.category}-uncertain`;
-  seen.set(name, true);
+  const isRecoveredCalendar =
+    entry.name === "calendar" && entry.category === "sidebar";
+  const name = isRecoveredCalendar ? "calendar-sidebar-uncertain" : entry.name;
   const sourceDir = isFileType ? "file-types" : "icons";
-  const source = path.join(
-    sourceRoot,
-    "assets",
-    sourceDir,
-    `${entry.name}.svg`,
-  );
+  const source = isRecoveredCalendar
+    ? path.join(iconRoot, "source", "calendar-sidebar-uncertain.svg")
+    : path.join(sourceRoot, "assets", sourceDir, `${entry.name}.svg`);
   const targetDir = isFileType ? "file-types" : "icons";
   let svg = await readFile(source, "utf8");
   const hasPreservedPalette =
@@ -67,12 +63,18 @@ for (const entry of sourceManifest) {
     file: `${targetDir}/${name}.svg`,
     colorMode: hasPreservedPalette ? "multicolor" : "currentColor",
     provenance: {
-      classification: "DERIVED",
+      classification: isRecoveredCalendar ? "FACT" : "DERIVED",
       source: `raw/svg/${entry.source}`,
       sourceIds: entry.source_ids,
+      ...(isRecoveredCalendar
+        ? {
+            recovery:
+              "Exact path geometry recovered from the sidebar section; translated from the 24px cell at (454, 490).",
+          }
+        : {}),
     },
-    uncertainty: name.includes("uncertain")
-      ? "Source extraction collision: distinct source geometry was overwritten before this iteration; retained under explicit uncertain name."
+    uncertainty: isRecoveredCalendar
+      ? "The source category is sidebar, but a more specific semantic meaning is not recoverable from static SVG."
       : null,
   });
 }
