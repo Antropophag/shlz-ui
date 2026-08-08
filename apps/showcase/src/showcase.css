@@ -15,6 +15,32 @@ section {
   border-block-end: 1px solid var(--shlz-semantic-border-default);
 }
 
+article {
+  padding: var(--shlz-space-4);
+  margin-block: var(--shlz-space-4);
+  background: var(--shlz-semantic-surface-base);
+  border-radius: var(--shlz-radius-lg);
+}
+
+.shlz-component-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--shlz-space-4);
+}
+
+.shlz-demo-fieldset {
+  display: flex;
+  gap: var(--shlz-space-3);
+  padding: var(--shlz-space-3);
+  margin-block: var(--shlz-space-3);
+  border: 1px solid var(--shlz-semantic-border-default);
+  border-radius: var(--shlz-radius-md);
+}
+
+.shlz-composition {
+  max-inline-size: 520px;
+}
+
 .shlz-hero p,
 .shlz-icon-card small {
   color: var(--shlz-semantic-text-muted);

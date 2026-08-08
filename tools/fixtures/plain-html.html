@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>SHLZ plain HTML fixture</title>
+    <link rel="stylesheet" href="../../packages/styles/dist/shlz.css" />
+  </head>
+  <body class="shlz-scope">
+    <label class="shlz-field" for="fixture-title">
+      <span class="shlz-field__label">Название</span>
+      <input class="shlz-input" id="fixture-title" />
+    </label>
+    <label class="shlz-choice">
+      <input class="shlz-checkbox" type="checkbox" checked />
+      <span>Подтверждение</span>
+    </label>
+    <fieldset>
+      <legend>Вариант</legend>
+      <label
+        ><input class="shlz-radio" type="radio" name="fixture-choice" checked />
+        Первый</label
+      >
+    </fieldset>
+    <label class="shlz-switch">
+      <input class="shlz-switch__input" type="checkbox" role="switch" />
+      <span>Настройка</span>
+    </label>
+    <button class="shlz-button shlz-button--primary" type="button">
+      Создать
+    </button>
+    <span class="shlz-status shlz-status--green">Активен</span>
+  </body>
+</html>
