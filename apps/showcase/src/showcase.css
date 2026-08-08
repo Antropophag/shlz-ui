@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--shlz-semantic-surface-subtle);
+}
+
+main {
+  max-inline-size: 1200px;
+  padding: var(--shlz-space-8);
+  margin-inline: auto;
+}
+
+section {
+  padding-block: var(--shlz-space-6);
+  border-block-end: 1px solid var(--shlz-semantic-border-default);
+}
+
+.shlz-hero p,
+.shlz-icon-card small {
+  color: var(--shlz-semantic-text-muted);
+}
+
+.shlz-palette,
+.shlz-icon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: var(--shlz-space-3);
+}
+
+.shlz-swatch,
+.shlz-icon-card {
+  padding: var(--shlz-space-3);
+  margin: 0;
+  background: var(--shlz-semantic-surface-base);
+  border-radius: var(--shlz-radius-md);
+}
+
+.shlz-swatch i {
+  display: block;
+  block-size: 56px;
+  margin-block-end: var(--shlz-space-2);
+  background: var(--shlz-swatch);
+  border: 1px solid var(--shlz-semantic-border-default);
+  border-radius: var(--shlz-radius-sm);
+}
+
+.shlz-swatch code,
+.shlz-icon-card small {
+  display: block;
+}
+
+.shlz-evidence {
+  display: inline-block;
+  padding: 3px 8px;
+  color: var(--shlz-semantic-text-muted);
+  background: var(--shlz-semantic-surface-muted);
+  border-radius: var(--shlz-radius-pill);
+  font-size: 11px;
+  font-weight: normal;
+}
+
+.shlz-evidence[data-kind="FACT"] {
+  color: var(--shlz-semantic-status-success);
+}
+
+.shlz-evidence[data-kind="UNKNOWN"] {
+  color: var(--shlz-semantic-status-danger);
+}
+
+.shlz-measure {
+  display: flex;
+  gap: var(--shlz-space-3);
+  align-items: center;
+}
+
+.shlz-measure i {
+  block-size: 12px;
+  background: var(--shlz-semantic-action-primary);
+}
+
+.shlz-radius,
+.shlz-effect,
+.shlz-demo-surface,
+.shlz-demo-action,
+.shlz-demo-status,
+.shlz-demo-danger {
+  min-inline-size: 120px;
+  padding: var(--shlz-space-5);
+  border: 1px solid var(--shlz-semantic-border-default);
+}
+
+.shlz-demo-action {
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-primary);
+}
+
+.shlz-demo-status {
+  color: white;
+  background: var(--shlz-semantic-status-success);
+}
+
+.shlz-demo-danger {
+  color: white;
+  background: var(--shlz-semantic-status-danger);
+}
+
+.shlz-icon-card img {
+  inline-size: 32px;
+  block-size: 32px;
+  color: var(--shlz-semantic-action-primary);
+}
+
+.shlz-icon-card figcaption {
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+@media (width <= 600px) {
+  main {
+    padding: var(--shlz-space-4);
+  }
+}

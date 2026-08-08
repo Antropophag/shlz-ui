@@ -1,0 +1,15 @@
+{
+  "name": "@shlz/showcase",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@shlz/icons": "0.1.0",
+    "@shlz/styles": "0.1.0",
+    "@shlz/tokens": "0.1.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  }
+}
