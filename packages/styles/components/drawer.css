@@ -1,0 +1,91 @@
+dialog.shlz-drawer {
+  position: fixed;
+  inset: 0 0 0 auto;
+  inline-size: min(420px, 100vw); /* FACT: Drawer.svg surface width. */
+  max-inline-size: none;
+  block-size: 100dvh;
+  max-block-size: none;
+  padding: 0;
+  overflow: visible;
+  color: var(--shlz-semantic-text-primary);
+  background: transparent;
+  border: 0;
+}
+
+dialog.shlz-drawer::backdrop {
+  /* DECISION: source does not represent an overlay backdrop. */
+  background: rgb(11 22 35 / var(--shlz-opacity-overlay));
+}
+
+.shlz-drawer__surface {
+  display: flex;
+  block-size: 100%;
+  min-block-size: 0;
+  overflow: hidden;
+  flex-direction: column;
+  background: var(--shlz-semantic-surface-base);
+  border-radius: var(--shlz-radius-xl) 0 0 var(--shlz-radius-xl);
+}
+
+.shlz-drawer__header {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--shlz-space-4);
+  align-items: center;
+  min-block-size: 64px; /* FACT: Drawer.svg header height. */
+  padding: var(--shlz-space-4) var(--shlz-space-6);
+}
+
+.shlz-drawer__title {
+  flex: 1 1 auto;
+  margin: 0;
+  font: inherit;
+  font-weight: 600;
+}
+
+.shlz-drawer__close {
+  display: inline-grid;
+  flex: 0 0 var(--shlz-control-height-sm);
+  place-items: center;
+  inline-size: var(--shlz-control-height-sm);
+  block-size: var(--shlz-control-height-sm);
+  padding: 0;
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-semantic-surface-muted);
+  border: 0;
+  border-radius: var(--shlz-radius-pill);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shlz-drawer__body {
+  flex: 1 1 auto;
+  min-block-size: 0;
+  padding: var(--shlz-space-6);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.shlz-drawer__footer {
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--shlz-space-3);
+  align-items: center;
+  min-block-size: 72px; /* FACT: Drawer.svg footer height. */
+  padding: var(--shlz-space-4) var(--shlz-space-6);
+}
+
+.shlz-drawer__footer > * {
+  flex: 1 1 0;
+}
+
+.shlz-drawer__close:focus-visible {
+  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline-offset: 2px;
+}
+
+@media (width < 480px) {
+  .shlz-drawer__surface {
+    border-radius: 0;
+  }
+}
