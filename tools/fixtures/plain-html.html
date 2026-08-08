@@ -164,14 +164,76 @@
         <p class="shlz-notification__title">Сохранено</p>
       </div>
     </div>
+    <button
+      class="shlz-button"
+      type="button"
+      data-shlz-modal-trigger="fixture-modal"
+    >
+      Открыть Modal
+    </button>
+    <dialog
+      class="shlz-modal"
+      id="fixture-modal"
+      data-shlz-modal
+      aria-labelledby="fixture-modal-title"
+    >
+      <div class="shlz-modal__surface">
+        <header class="shlz-modal__header">
+          <h2 class="shlz-modal__title" id="fixture-modal-title">Modal</h2>
+          <button
+            class="shlz-modal__close"
+            type="button"
+            data-shlz-modal-close
+            aria-label="Закрыть"
+          >
+            ×
+          </button>
+        </header>
+        <div class="shlz-modal__body">
+          Standalone CSS + direct ESM behavior import.
+        </div>
+      </div>
+    </dialog>
+    <button
+      class="shlz-button"
+      type="button"
+      data-shlz-drawer-trigger="fixture-drawer"
+    >
+      Открыть Drawer
+    </button>
+    <dialog
+      class="shlz-drawer"
+      id="fixture-drawer"
+      data-shlz-drawer
+      aria-labelledby="fixture-drawer-title"
+    >
+      <div class="shlz-drawer__surface">
+        <header class="shlz-drawer__header">
+          <h2 class="shlz-drawer__title" id="fixture-drawer-title">Drawer</h2>
+          <button
+            class="shlz-drawer__close"
+            type="button"
+            data-shlz-drawer-close
+            aria-label="Закрыть Drawer"
+          >
+            ×
+          </button>
+        </header>
+        <div class="shlz-drawer__body">Plain HTML consumer.</div>
+      </div>
+    </dialog>
     <script type="module">
       import {
+        enhanceDrawers,
         enhanceDropdowns,
+        enhanceModals,
         enhancePopovers,
         enhanceTabs,
         enhanceTooltips,
       } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
+      enhanceModals();
+      enhanceDrawers();
       enhancePopovers();
       enhanceTabs();
       enhanceTooltips();
