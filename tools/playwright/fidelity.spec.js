@@ -32,13 +32,62 @@ test("closed-by-default primitives expose static review states", async ({
   ).toHaveCount(12);
   await expect(
     page.locator("#fidelity-dropdown .shlz-dropdown__menu"),
-  ).toHaveCount(2);
+  ).toHaveCount(10);
   await expect(
-    page.locator("#fidelity-modal .shlz-modal__surface"),
+    page.locator("#fidelity-modal .shlz-modal__surface").first(),
   ).toBeVisible();
   await expect(
     page.locator("#fidelity-drawer .shlz-drawer__surface"),
   ).toBeVisible();
+});
+
+test("source references render at their intrinsic one-to-one scale", async ({
+  page,
+}) => {
+  const images = page.locator(".shlz-reference img");
+  expect(
+    await images.evaluateAll((items) =>
+      items.every((item) => item.clientWidth === item.naturalWidth),
+    ),
+  ).toBe(true);
+});
+
+test("source-critical matrices and geometry remain complete", async ({
+  page,
+}) => {
+  await expect(
+    page.locator("#fidelity-pagination .shlz-pagination-matrix > span"),
+  ).toHaveCount(24);
+  await expect(page.locator("#fidelity-tag .shlz-tag")).toHaveCount(4);
+  await expect(
+    page.locator("#fidelity-segment .shlz-segment__item"),
+  ).toHaveCount(39);
+  await expect(
+    page.locator("#fidelity-modal .shlz-modal__surface"),
+  ).toHaveCount(5);
+
+  for (const selector of [
+    "#fidelity-tooltip .shlz-tooltip",
+    "#fidelity-popover .shlz-popover",
+    "#fidelity-notification .shlz-notification",
+  ]) {
+    const box = await page.locator(selector).first().boundingBox();
+    expect(box).not.toBeNull();
+    expect(Math.round(box.width)).toBe(
+      selector.includes("tooltip")
+        ? 100
+        : selector.includes("popover")
+          ? 236
+          : 384,
+    );
+    expect(Math.round(box.height)).toBe(
+      selector.includes("tooltip")
+        ? 37
+        : selector.includes("popover")
+          ? 90
+          : 58,
+    );
+  }
 });
 
 test("notification exposes source-confirmed visual states", async ({
@@ -46,11 +95,10 @@ test("notification exposes source-confirmed visual states", async ({
 }) => {
   const fixture = page.locator("#fidelity-notification");
   await expect(fixture.locator(".shlz-notification--danger")).toHaveCount(1);
-  await expect(fixture.locator(".shlz-notification__action")).toHaveCount(1);
-  await expect(fixture.locator(".shlz-notification__countdown")).toHaveCount(7);
+  await expect(fixture.locator(".shlz-notification__action")).toHaveCount(8);
   await expect(
-    fixture.locator(".shlz-notification__countdown--loading"),
-  ).toHaveCount(1);
+    fixture.locator(".shlz-notification__leading-progress"),
+  ).toHaveCount(7);
 });
 
 for (const component of [
