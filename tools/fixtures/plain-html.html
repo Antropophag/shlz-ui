@@ -53,9 +53,28 @@
         </button>
       </div>
     </div>
+    <button
+      class="shlz-button"
+      type="button"
+      aria-expanded="false"
+      aria-controls="fixture-popover"
+      data-shlz-popover-trigger="fixture-popover"
+      data-shlz-popover-placement="bottom"
+    >
+      Подробнее
+    </button>
+    <div class="shlz-popover" id="fixture-popover" data-shlz-popover hidden>
+      <span class="shlz-popover__arrow" aria-hidden="true"></span>
+      <div class="shlz-popover__header">Заголовок</div>
+      <div class="shlz-popover__body">Plain HTML + direct ESM import.</div>
+    </div>
     <script type="module">
-      import { enhanceDropdowns } from "../../packages/behaviors/dist/index.js";
+      import {
+        enhanceDropdowns,
+        enhancePopovers,
+      } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
+      enhancePopovers();
     </script>
   </body>
 </html>
