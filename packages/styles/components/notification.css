@@ -70,6 +70,31 @@
   cursor: pointer;
 }
 
+.shlz-notification__countdown {
+  display: inline-grid;
+  flex: 0 0 var(--shlz-semantic-control-height-small);
+  place-items: center;
+  inline-size: var(--shlz-semantic-control-height-small);
+  block-size: var(--shlz-semantic-control-height-small);
+  color: inherit;
+  background:
+    radial-gradient(
+      circle,
+      var(--shlz-source-color-dark-blue-dark-blue) 58%,
+      transparent 60%
+    ),
+    conic-gradient(
+      currentcolor calc(var(--shlz-progress, 1) * 1turn),
+      rgb(255 255 255 / 30%) 0
+    );
+  border-radius: 50%;
+  font-variant-numeric: tabular-nums;
+}
+
+.shlz-notification__countdown--loading {
+  --shlz-progress: 0.72;
+}
+
 .shlz-notification__action:focus-visible,
 .shlz-notification__close:focus-visible {
   outline: 2px solid currentcolor;
