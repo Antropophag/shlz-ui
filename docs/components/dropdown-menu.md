@@ -8,26 +8,26 @@ value. `Dropdown menu.svg` is the only visual authority used here.
 
 ## Evidence matrix
 
-| Classification | Observation | Evidence / consequence |
-| --- | --- | --- |
-| FACT | Menus are predominantly 200 px wide; a 216 px family is also present | Raw rectangles and component fingerprint: `200×100…352`, `216×340` |
-| FACT | Menu item rows are 40 px high | 63 raw `200×40` rows and seven `216×40` rows |
-| FACT | Menu surfaces are white with 12 px corners | 13 raw surface rectangles with `rx=12` |
-| FACT | Eight represented rows use `#EEF0F4`; most use white | Raw fills; this proves a highlighted-looking state, not its event cause |
-| FACT | Leading icon/mark slots repeatedly use 20×20; some avatar examples use 24×24 | Raw geometry and fingerprints |
-| FACT | The sheet contains menu heights corresponding to different item counts | 100/140/180/220/260/300/340 px surfaces |
-| FACT | A 352 px scrollable-looking example and 6×80 scrollbar track are represented | Raw geometry; scrollbar behavior is not recoverable |
-| FACT | The menu surface uses two-layer shadow filters | Raw filters: y=4/blur=15 and y=1/blur=1.5 |
-| DERIVED | A base menu is a vertical stack of 40 px items with 10 px outer block padding | Surface heights equal `items × 40 + 20` across repeated examples |
-| DERIVED | `#EEF0F4` is suitable for hover/current-item presentation | Repeated highlighted rows; exact state labels are outlined and not machine-recoverable |
-| DECISION | Trigger is a native `<button>` with `aria-haspopup="menu"`, `aria-expanded`, and `aria-controls` | Progressive enhancement and keyboard accessibility contract |
-| DECISION | Menu uses `role="menu"`; command items are native `<button role="menuitem">` | Keeps activation native while adding composite-widget navigation |
-| DECISION | Separators use `<hr role="separator">` and are not focusable | Semantic boundary; separator geometry is not reliably isolated in extraction |
-| DECISION | Disabled items use native `disabled` plus `aria-disabled="true"` | Native click suppression with explicit composite-widget state |
-| DECISION | A selected command may use `aria-current="true"`; this is visual metadata, not selection state | Avoids inventing menuitemradio/menuitemcheckbox semantics |
-| UNKNOWN | Whether highlighted raw rows mean hover, focus, selected, or a mixture | Static SVG cannot establish interaction cause |
-| UNKNOWN | Exact separator inset and all item label/icon combinations | Outlined text and heterogeneous examples prevent a canonical rule |
-| UNKNOWN | Collision/viewport placement behavior | Static component sheet provides no positioning algorithm |
+| Classification | Observation                                                                                      | Evidence / consequence                                                                 |
+| -------------- | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
+| FACT           | Menus are predominantly 200 px wide; a 216 px family is also present                             | Raw rectangles and component fingerprint: `200×100…352`, `216×340`                     |
+| FACT           | Menu item rows are 40 px high                                                                    | 63 raw `200×40` rows and seven `216×40` rows                                           |
+| FACT           | Menu surfaces are white with 12 px corners                                                       | 13 raw surface rectangles with `rx=12`                                                 |
+| FACT           | Eight represented rows use `#EEF0F4`; most use white                                             | Raw fills; this proves a highlighted-looking state, not its event cause                |
+| FACT           | Leading icon/mark slots repeatedly use 20×20; some avatar examples use 24×24                     | Raw geometry and fingerprints                                                          |
+| FACT           | The sheet contains menu heights corresponding to different item counts                           | 100/140/180/220/260/300/340 px surfaces                                                |
+| FACT           | A 352 px scrollable-looking example and 6×80 scrollbar track are represented                     | Raw geometry; scrollbar behavior is not recoverable                                    |
+| FACT           | The menu surface uses two-layer shadow filters                                                   | Raw filters: y=4/blur=15 and y=1/blur=1.5                                              |
+| DERIVED        | A base menu is a vertical stack of 40 px items with 10 px outer block padding                    | Surface heights equal `items × 40 + 20` across repeated examples                       |
+| DERIVED        | `#EEF0F4` is suitable for hover/current-item presentation                                        | Repeated highlighted rows; exact state labels are outlined and not machine-recoverable |
+| DECISION       | Trigger is a native `<button>` with `aria-haspopup="menu"`, `aria-expanded`, and `aria-controls` | Progressive enhancement and keyboard accessibility contract                            |
+| DECISION       | Menu uses `role="menu"`; command items are native `<button role="menuitem">`                     | Keeps activation native while adding composite-widget navigation                       |
+| DECISION       | Separators use `<hr role="separator">` and are not focusable                                     | Semantic boundary; separator geometry is not reliably isolated in extraction           |
+| DECISION       | Disabled items use native `disabled` plus `aria-disabled="true"`                                 | Native click suppression with explicit composite-widget state                          |
+| DECISION       | A selected command may use `aria-current="true"`; this is visual metadata, not selection state   | Avoids inventing menuitemradio/menuitemcheckbox semantics                              |
+| UNKNOWN        | Whether highlighted raw rows mean hover, focus, selected, or a mixture                           | Static SVG cannot establish interaction cause                                          |
+| UNKNOWN        | Exact separator inset and all item label/icon combinations                                       | Outlined text and heterogeneous examples prevent a canonical rule                      |
+| UNKNOWN        | Collision/viewport placement behavior                                                            | Static component sheet provides no positioning algorithm                               |
 
 ## Supported contract
 
@@ -54,13 +54,13 @@ placement and selectable listbox behavior are outside this iteration.
   >
     Действия
   </button>
-  <div class="shlz-menu" id="actions-menu" role="menu" hidden>
-    <button class="shlz-menu__item" type="button" role="menuitem">
+  <div class="shlz-dropdown__menu" id="actions-menu" role="menu" hidden>
+    <button class="shlz-dropdown__item" type="button" role="menuitem">
       Редактировать
     </button>
-    <hr class="shlz-menu__separator" role="separator" />
+    <hr class="shlz-dropdown__separator" role="separator" />
     <button
-      class="shlz-menu__item"
+      class="shlz-dropdown__item"
       type="button"
       role="menuitem"
       aria-disabled="true"
@@ -74,6 +74,12 @@ placement and selectable listbox behavior are outside this iteration.
 
 Without JavaScript the trigger remains a button and the menu remains hidden.
 The controller enhances only roots marked with `data-shlz-dropdown`.
+
+```js
+import { enhanceDropdowns } from "@shlz/behaviors";
+
+enhanceDropdowns();
+```
 
 ## Accessibility
 

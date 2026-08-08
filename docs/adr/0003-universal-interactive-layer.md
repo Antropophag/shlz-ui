@@ -1,6 +1,6 @@
 # ADR 0003: Universal interactive layer
 
-Status: proposed.
+Status: superseded by [ADR 0005](0005-progressive-enhancement-behaviors.md).
 
 Use standards-based custom elements selectively for interaction-heavy reusable widgets after contracts are researched. Native HTML plus CSS remains preferred for buttons and form primitives. Web Components are a candidate universal layer for popovers, dialogs, and composite widgets because they cross framework boundaries, but they introduce form-association, SSR/declarative-shadow-DOM, styling, and upgrade-timing costs.
 
