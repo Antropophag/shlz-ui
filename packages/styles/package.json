@@ -1,0 +1,17 @@
+{
+  "name": "@shlz/styles",
+  "version": "0.1.0",
+  "files": [
+    "foundation.css"
+  ],
+  "exports": {
+    ".": "./foundation.css",
+    "./foundation.css": "./foundation.css"
+  },
+  "dependencies": {
+    "@shlz/tokens": "0.1.0"
+  },
+  "scripts": {
+    "build": "node -e \"require('node:fs').accessSync('foundation.css')\""
+  }
+}

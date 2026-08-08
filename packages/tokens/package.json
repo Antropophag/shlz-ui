@@ -1,0 +1,20 @@
+{
+  "name": "@shlz/tokens",
+  "version": "0.1.0",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./tokens.json": "./dist/tokens.json",
+    "./tokens.css": "./dist/tokens.css",
+    "./provenance.json": "./dist/provenance.json"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json"
+  }
+}
