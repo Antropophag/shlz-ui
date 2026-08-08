@@ -8,7 +8,19 @@ const componentFiles = [
   "choice",
   "status-badge",
   "dropdown",
+  "popover",
 ];
+
+test("popover behavior keeps native ownership and delegates positioning", async () => {
+  const source = await readFile("packages/behaviors/src/popover.ts", "utf8");
+  assert.match(source, /button\[data-shlz-popover-trigger\]/);
+  assert.match(source, /aria-expanded/);
+  assert.match(source, /Escape/);
+  assert.match(source, /autoUpdate/);
+  assert.match(source, /flip/);
+  assert.match(source, /shift/);
+  assert.doesNotMatch(source, /customElements|Vue|innerHTML/);
+});
 
 test("dropdown behavior stays framework-agnostic and native-first", async () => {
   const source = await readFile("packages/behaviors/src/dropdown.ts", "utf8");
@@ -53,6 +65,9 @@ test("plain HTML fixture keeps accessibility-critical native contracts", async (
   assert.match(html, /<label[^>]+for="fixture-title"/);
   assert.match(html, /<fieldset>[\s\S]*<legend>/);
   assert.match(html, /packages\/styles\/dist\/shlz\.css/);
+  assert.match(html, /packages\/behaviors\/dist\/browser\.js/);
+  assert.match(html, /data-shlz-popover-trigger="fixture-popover"/);
+  assert.match(html, /aria-controls="fixture-popover"/);
 });
 
 test("interactive selectors include native states and keyboard focus", async () => {
