@@ -18,15 +18,28 @@ styles package and never owns application state or markup rendering.
   a Custom Element.
 
 Dropdown is the first validation case. Popover extends that proof to floating
-geometry without changing the progressive-enhancement contract. It delegates
-clipping, flip/shift and update observation to an internal positioning engine;
-SHLZ continues to own state, DOM events, focus and public attributes. The two
-controllers share only one proven behavior helper: outside-pointer detection.
+geometry without changing the progressive-enhancement contract. Tooltip reuses
+the same internal Floating UI adapter while retaining a separate trigger,
+timing and accessibility contract. SHLZ continues to own state, DOM events,
+focus and public attributes; the positioning dependency remains private.
 
 Popover does not expose one fixed ARIA role and does not trap focus. It can hold
 ordinary supplementary content or consumer-labelled non-modal dialog content.
-Tooltip remains a separate future behavior even though it may reuse the same
-coordinate infrastructure.
+Tooltip is non-interactive, uses `role="tooltip"` and synchronizes
+`aria-describedby`; it never inherits Popover dismissal or focus semantics.
+Tabs is the other behavior added in this iteration. It provides automatic
+activation and roving `tabindex` for an author-provided ARIA tabs structure.
+Pagination, Tag, Segment and Notification require no controller: native links,
+buttons and radios own their state.
+
+## Shared internals
+
+- `internal/floating` is used by Popover and Tooltip for placement, offset,
+  flip/shift, arrow coordinates and geometry observation.
+- `internal/dismissal` remains shared by Dropdown and Popover for outside
+  pointer dismissal.
+- Tabs currently owns its small roving-tabindex loop. No second identical
+  consumer exists, so a generic focus framework was not extracted.
 
 ## Distribution
 
@@ -41,9 +54,13 @@ self-contained browser ESM bundle:
   import {
     enhanceDropdowns,
     enhancePopovers,
+    enhanceTabs,
+    enhanceTooltips,
   } from "/vendor/@shlz/behaviors/dist/browser.js";
   enhanceDropdowns();
   enhancePopovers();
+  enhanceTabs();
+  enhanceTooltips();
 </script>
 ```
 
