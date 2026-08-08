@@ -29,7 +29,7 @@ test("closed-by-default primitives expose static review states", async ({
   ).toHaveCount(8);
   await expect(
     page.locator("#fidelity-popover .shlz-static-popover"),
-  ).toHaveCount(6);
+  ).toHaveCount(12);
   await expect(
     page.locator("#fidelity-dropdown .shlz-dropdown__menu"),
   ).toHaveCount(2);
