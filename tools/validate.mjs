@@ -38,9 +38,11 @@ if (
 for (const pkg of ["tokens", "icons", "styles", "behaviors"]) {
   const packageJson = await json(`packages/${pkg}/package.json`);
   for (const target of Object.values(packageJson.exports)) {
-    const file = typeof target === "string" ? target : target.import;
-    if (file && !file.includes("*"))
-      await access(path.join(`packages/${pkg}`, file));
+    const files = typeof target === "string" ? [target] : Object.values(target);
+    for (const file of files) {
+      if (typeof file === "string" && !file.includes("*"))
+        await access(path.join(`packages/${pkg}`, file));
+    }
   }
 }
 console.log(
