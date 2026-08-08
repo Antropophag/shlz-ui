@@ -1,0 +1,48 @@
+.shlz-tag {
+  display: inline-flex;
+  gap: var(--shlz-space-2);
+  align-items: center;
+  min-block-size: 30px; /* FACT: Tag.svg plain tag height. */
+  padding-inline: var(--shlz-space-3);
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-semantic-surface-muted);
+  border: var(--shlz-border-thin) solid transparent;
+  border-radius: var(--shlz-radius-pill);
+}
+
+.shlz-tag--outlined {
+  background: var(--shlz-semantic-surface-base);
+  border-color: var(--shlz-semantic-border-default);
+}
+
+.shlz-tag__avatar {
+  inline-size: 24px;
+  block-size: 24px;
+  margin-inline-start: -9px;
+  border-radius: var(--shlz-radius-pill);
+  object-fit: cover;
+}
+
+.shlz-tag__remove {
+  display: inline-grid;
+  place-items: center;
+  inline-size: 24px;
+  block-size: 24px;
+  margin-inline-end: -9px;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: var(--shlz-radius-pill);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shlz-tag__remove:hover {
+  background: rgb(11 22 35 / 8%);
+}
+
+.shlz-tag__remove:focus-visible {
+  outline: 2px solid var(--shlz-semantic-action-primary);
+  outline-offset: 1px;
+}
