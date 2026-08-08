@@ -1,0 +1,37 @@
+.shlz-popover {
+  position: fixed;
+  z-index: 20;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  inline-size: min(236px, calc(100vw - var(--shlz-space-4)));
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-semantic-surface-base);
+  border-radius: var(--shlz-radius-lg);
+
+  /* FACT: the same two filter layers are repeated for every Popover surface. */
+  box-shadow:
+    0 4px 15px rgb(11 22 35 / 10%),
+    0 1px 1.5px rgb(11 22 35 / 8%);
+}
+
+.shlz-popover[hidden] {
+  display: none;
+}
+
+.shlz-popover__header {
+  min-block-size: var(--shlz-control-height-md);
+  padding: 10px var(--shlz-space-4);
+  border-block-end: var(--shlz-border-thin) solid rgb(11 22 35 / 10%);
+}
+
+.shlz-popover__body {
+  padding: var(--shlz-space-3) var(--shlz-space-4);
+}
+
+.shlz-popover__arrow {
+  position: absolute;
+  inline-size: 10px;
+  block-size: 10px;
+  background: var(--shlz-semantic-surface-base);
+  transform: rotate(45deg);
+}

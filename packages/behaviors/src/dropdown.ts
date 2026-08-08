@@ -1,3 +1,5 @@
+import { listenForOutsidePointer } from "./internal/dismissal.js";
+
 const itemSelector = '[role="menuitem"]';
 
 function isAvailable(item: HTMLElement): boolean {
@@ -107,14 +109,12 @@ export class DropdownController {
       },
       { signal },
     );
-    document.addEventListener(
-      "pointerdown",
-      (event) => {
-        if (this.expanded && !this.root.contains(event.target as Node)) {
-          this.close();
-        }
+    listenForOutsidePointer(
+      [this.root],
+      () => {
+        if (this.expanded) this.close();
       },
-      { signal },
+      signal,
     );
   }
 

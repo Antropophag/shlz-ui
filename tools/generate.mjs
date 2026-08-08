@@ -113,6 +113,7 @@ const styleSources = [
   "components/choice.css",
   "components/status-badge.css",
   "components/dropdown.css",
+  "components/popover.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
 await mkdir(path.join(styleRoot, "dist"), { recursive: true });
