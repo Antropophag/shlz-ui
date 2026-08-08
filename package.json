@@ -11,12 +11,15 @@
     "generate": "node tools/generate.mjs",
     "build": "npm run generate && npm run build --workspaces --if-present",
     "test": "node --test tools/tests/*.test.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:update": "playwright test --update-snapshots",
     "lint": "eslint . && stylelint 'packages/**/*.css' 'apps/**/*.css' && prettier --check .",
-    "check": "npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs",
+    "check": "npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs && npm run test:e2e",
     "format": "prettier --write ."
   },
   "devDependencies": {
     "@eslint/js": "^9.32.0",
+    "@playwright/test": "^1.62.1",
     "eslint": "^9.32.0",
     "prettier": "^3.6.2",
     "stylelint": "^16.23.1",

@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "@shlz/behaviors": "0.1.0",
     "@shlz/icons": "0.1.0",
     "@shlz/styles": "0.1.0",
     "@shlz/tokens": "0.1.0"
