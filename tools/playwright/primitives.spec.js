@@ -16,7 +16,7 @@ test("source specification and fidelity surfaces are reviewable", async ({
   await expect(page.locator("#source-spec")).toHaveScreenshot(
     "showcase-source-spec.png",
   );
-  await expect(page.locator("#fidelity")).toHaveScreenshot(
+  await expect(page.locator("#fidelity-button")).toHaveScreenshot(
     "showcase-fidelity.png",
   );
   await expect(page.locator("body")).toHaveCSS(

@@ -71,7 +71,7 @@ test("opens, synchronizes state, dismisses and restores focus", async ({
   await expect(trigger).toBeFocused();
 
   await trigger.click();
-  await page.getByRole("heading", { name: "Popover" }).click();
+  await page.getByRole("heading", { name: "Popover", exact: true }).click();
   await expect(popover).toBeHidden();
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
 });
