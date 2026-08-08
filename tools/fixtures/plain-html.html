@@ -29,5 +29,33 @@
       Создать
     </button>
     <span class="shlz-status shlz-status--green">Активен</span>
+    <div class="shlz-dropdown" data-shlz-dropdown>
+      <button
+        class="shlz-button"
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded="false"
+        aria-controls="fixture-menu"
+      >
+        Действия
+      </button>
+      <div class="shlz-dropdown__menu" id="fixture-menu" role="menu" hidden>
+        <button class="shlz-dropdown__item" type="button" role="menuitem">
+          Создать
+        </button>
+        <button
+          class="shlz-dropdown__item"
+          type="button"
+          role="menuitem"
+          disabled
+        >
+          Недоступно
+        </button>
+      </div>
+    </div>
+    <script type="module">
+      import { enhanceDropdowns } from "../../packages/behaviors/dist/index.js";
+      enhanceDropdowns();
+    </script>
   </body>
 </html>

@@ -35,7 +35,7 @@ if (
   manifest.filter(({ colorMode }) => colorMode === "multicolor").length !== 22
 )
   throw new Error("Expected 21 file-type palettes and one colored XLS glyph");
-for (const pkg of ["tokens", "icons", "styles"]) {
+for (const pkg of ["tokens", "icons", "styles", "behaviors"]) {
   const packageJson = await json(`packages/${pkg}/package.json`);
   for (const target of Object.values(packageJson.exports)) {
     const file = typeof target === "string" ? target : target.import;

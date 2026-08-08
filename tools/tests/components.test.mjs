@@ -2,7 +2,22 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 
-const componentFiles = ["button", "field", "choice", "status-badge"];
+const componentFiles = [
+  "button",
+  "field",
+  "choice",
+  "status-badge",
+  "dropdown",
+];
+
+test("dropdown behavior stays framework-agnostic and native-first", async () => {
+  const source = await readFile("packages/behaviors/src/dropdown.ts", "utf8");
+  assert.match(source, /button\[aria-haspopup="menu"\]\[aria-controls\]/);
+  assert.match(source, /:disabled/);
+  assert.match(source, /ArrowDown/);
+  assert.match(source, /Escape/);
+  assert.doesNotMatch(source, /customElements|Vue|innerHTML/);
+});
 
 test("standalone stylesheet contains every component source", async () => {
   const bundle = await readFile("packages/styles/dist/shlz.css", "utf8");
