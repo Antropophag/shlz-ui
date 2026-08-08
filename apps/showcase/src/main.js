@@ -110,6 +110,10 @@ ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition<
 <section><h2>Icons <span class="shlz-evidence" data-kind="DERIVED">DERIVED · manifest</span></h2><div class="shlz-icon-grid">${iconCards}</div></section></section>
 <section id="fidelity" class="shlz-major-section"><p class="shlz-section-kicker">C. VISUAL FIDELITY</p><h2>Raw SVG source vs production implementation</h2><p>Левая колонка генерируется непосредственно из raw SVG через документированный viewBox crop; правая использует production DOM, classes, CSS и tokens. Интерактивные behavior demos находятся в Implementation выше.</p>${fidelityMarkup}</section>`;
 
+for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
+  checkbox.indeterminate = true;
+}
+
 document.querySelector("[data-indeterminate]").indeterminate = true;
 enhanceDropdowns();
 window.__shlzModalControllers = enhanceModals();

@@ -28,10 +28,11 @@ const unit = ({
   title,
   sources,
   implementation,
+  fidelity = "MEDIUM",
   deviations = "Typography uses the documented system-sans DECISION.",
 }) => `
   <article class="shlz-fidelity-unit" id="fidelity-${id}">
-    <h3>${title} — fidelity</h3>
+    <h3>${title} — fidelity <span class="shlz-fidelity-rating shlz-fidelity-rating--${fidelity.toLowerCase()}">${fidelity}</span></h3>
     <div class="shlz-fidelity-columns">
       <section><h4>Source reference</h4><div class="shlz-reference-strip">${source(...sources)}</div></section>
       <section><h4>Implementation</h4><div class="shlz-visual-fixture" inert aria-hidden="true">${implementation}</div></section>
@@ -39,70 +40,171 @@ const unit = ({
     <p class="shlz-fidelity-notes"><strong>Known deviations:</strong> ${deviations}</p>
   </article>`;
 
-const dropdownMenu = (wide = false) =>
-  `<div class="shlz-dropdown"><div class="shlz-dropdown__menu${wide ? " shlz-dropdown__menu--wide" : ""}"><button class="shlz-dropdown__item"><span class="shlz-dropdown__icon">□</span>1st menu item</button><button class="shlz-dropdown__item shlz-visual-state"><span class="shlz-dropdown__icon">□</span>2nd menu item</button><button class="shlz-dropdown__item" disabled><span class="shlz-dropdown__icon">□</span>Disabled</button><hr class="shlz-dropdown__separator"><button class="shlz-dropdown__item">Action</button></div></div>`;
+const dropdownMenu = (
+  count,
+  { wide = false, highlighted = -1, separator = false } = {},
+) =>
+  `<div class="shlz-dropdown"><div class="shlz-dropdown__menu${wide ? " shlz-dropdown__menu--wide" : ""}">${Array.from({ length: count }, (_, index) => `${separator && index === 3 ? '<hr class="shlz-dropdown__separator">' : ""}<button class="shlz-dropdown__item${index === highlighted ? " shlz-dropdown__item--visual-highlight" : ""}"><span class="shlz-dropdown__icon"></span>${index + 1}${index === 0 ? "st" : index === 1 ? "nd" : index === 2 ? "rd" : "th"} menu item</button>`).join("")}</div></div>`;
 const tooltip = (placement) =>
   `<div class="shlz-tooltip shlz-static-tooltip" role="tooltip" data-static-placement="${placement}">prompt text<span class="shlz-tooltip__arrow"></span></div>`;
 const popover = (placement, align = "center") =>
   `<div class="shlz-popover shlz-static-popover" data-static-placement="${placement}" data-static-align="${align}"><div class="shlz-popover__header">Заголовок</div><div class="shlz-popover__body">Текст Popover</div><span class="shlz-popover__arrow"></span></div>`;
-const notification = (kind, trailing) =>
-  `<div class="shlz-notification ${kind}"><span class="shlz-notification__icon">✓</span><div class="shlz-notification__content"><p class="shlz-notification__title">Notification Title</p></div>${trailing}</div>`;
+const notification = (kind, leading, title, trailing) =>
+  `<div class="shlz-notification ${kind}">${leading}<div class="shlz-notification__content"><p class="shlz-notification__title">${title}</p></div>${trailing}</div>`;
+const paginationItem = (content, state = "") =>
+  `<span class="shlz-pagination__item${state ? ` shlz-pagination__item--${state}` : ""}">${content}</span>`;
+const segmentGroup = (size = "", icons = false) =>
+  `<div class="shlz-segment${size ? ` shlz-segment--${size}` : ""}">${["Daily", "Weekly", "Monthly", "Quarterly", "Yearly"].map((label, index) => `<span class="shlz-segment__item${size ? ` shlz-segment__item--${size}` : ""}${index === 0 ? " shlz-segment__item--selected" : ""}">${icons ? "≡ " : ""}${label}</span>`).join("")}</div>`;
+const compactModal = (kind, title) =>
+  `<div class="shlz-modal__surface shlz-modal__surface--compact shlz-modal__surface--${kind}"><div class="shlz-modal__compact-content"><span class="shlz-modal__variant-icon">ⓘ</span><div class="shlz-modal__compact-copy"><h4>${title}</h4><p>Some contents...</p></div></div><div class="shlz-modal__compact-actions"><button class="shlz-button shlz-button--sm">Cancel</button><button class="shlz-button shlz-button--primary shlz-button--sm">Done</button></div></div>`;
+const buttonMatrix = (variant = "") =>
+  `<div class="shlz-control-matrix"><b>Size</b><b>Default</b><b>Hover</b><b>Active</b><b>Disabled</b>${[
+    ["Large", ""],
+    ["Medium", "sm"],
+    ["Small", "xs"],
+  ]
+    .map(
+      ([label, size]) =>
+        `<span>${label}</span>${["", "visual-hover", "visual-active", "disabled"].map((state) => `<button class="shlz-button${variant ? ` shlz-button--${variant}` : ""}${size ? ` shlz-button--${size}` : ""}${state && state !== "disabled" ? ` shlz-button--${state}` : ""}"${state === "disabled" ? " disabled" : ""}>Загрузить файл</button>`).join("")}`,
+    )
+    .join("")}</div>`;
+const fieldMatrix = (type) => {
+  const element = type === "textarea" ? "textarea" : "input";
+  const base = type === "textarea" ? "shlz-textarea" : "shlz-input";
+  return `<div class="shlz-control-matrix shlz-control-matrix--six"><b></b><b>Default</b><b>Hover</b><b>Focus</b><b>Error</b><b>Disabled</b><b>Readonly</b><span>${type}</span>${[
+    ["", ""],
+    ["visual-hover", ""],
+    ["visual-focus", ""],
+    ["", ' aria-invalid="true"'],
+    ["", " disabled"],
+    ["", " readonly"],
+  ]
+    .map(([state, attrs]) => {
+      const open = `<${element} class="${base}${state ? ` ${base}--${state}` : ""}"${attrs} placeholder="Placeholder">`;
+      return element === "textarea" ? `${open}</textarea>` : open;
+    })
+    .join("")}</div>`;
+};
 
 const implementations = {
-  button: `<div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Сохранить</button><button class="shlz-button">Отмена</button><button class="shlz-button shlz-button--primary shlz-button--sm">Small</button><button class="shlz-button shlz-button--icon" aria-label="Icon">+</button></div>`,
-  input: `<div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Label</span><input class="shlz-input" placeholder="Placeholder"></label><input class="shlz-input" value="Filled"><input class="shlz-input" aria-invalid="true" value="Error"></div>`,
-  textarea: `<div class="shlz-stack"><textarea class="shlz-textarea" placeholder="Placeholder"></textarea><textarea class="shlz-textarea">Filled textarea value</textarea></div>`,
-  checkbox: `<div class="shlz-cluster"><label class="shlz-choice"><input class="shlz-checkbox" type="checkbox">Default</label><label class="shlz-choice"><input class="shlz-checkbox" type="checkbox" checked>Checked</label><label class="shlz-choice"><input class="shlz-checkbox" type="checkbox" disabled>Disabled</label></div>`,
-  radio: `<div class="shlz-cluster"><label class="shlz-choice"><input class="shlz-radio" type="radio" name="f-radio">Default</label><label class="shlz-choice"><input class="shlz-radio" type="radio" name="f-radio" checked>Selected</label><label class="shlz-choice"><input class="shlz-radio" type="radio" disabled>Disabled</label></div>`,
-  switch: `<div class="shlz-cluster"><label class="shlz-switch"><input class="shlz-switch__input" type="checkbox" role="switch">Off</label><label class="shlz-switch"><input class="shlz-switch__input" type="checkbox" role="switch" checked>On</label><label class="shlz-switch"><input class="shlz-switch__input" type="checkbox" role="switch" disabled>Disabled</label></div>`,
-  status: `<div class="shlz-cluster"><span class="shlz-status">Blue</span><span class="shlz-status shlz-status--green">Green</span><span class="shlz-status shlz-status--orange">Orange</span><span class="shlz-status shlz-status--purple">Violet</span><span class="shlz-badge">12</span><span class="shlz-badge shlz-badge--lg">100</span></div>`,
-  dropdown: `<div class="shlz-static-floating-row">${dropdownMenu()}${dropdownMenu(true)}</div><p>Highlighted-looking row is labelled visual state; hover/selection/focus meaning is UNKNOWN.</p>`,
+  button: `<div class="shlz-visual-matrix"><div><p class="shlz-visual-matrix__label">Primary · 26/32/40 · four source rows</p>${buttonMatrix("primary")}</div><div><p class="shlz-visual-matrix__label">Neutral · 26/32/40 · four source rows</p>${buttonMatrix()}</div><div class="shlz-visual-row"><button class="shlz-button shlz-button--primary"><span class="shlz-button__icon">＋</span>Icon + text</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Icon">＋</button></div></div>`,
+  input: fieldMatrix("input"),
+  textarea: fieldMatrix("textarea"),
+  checkbox: `<div class="shlz-control-matrix"><b>Size</b><b>Default</b><b>Checked</b><b>Mixed</b><b>Disabled</b>${[
+    ["20", ""],
+    ["16", "shlz-checkbox--sm"],
+  ]
+    .map(
+      ([label, size]) =>
+        `<span>${label}</span><input class="shlz-checkbox ${size}" type="checkbox"><input class="shlz-checkbox ${size}" type="checkbox" checked><input class="shlz-checkbox ${size}" type="checkbox" data-shlz-indeterminate><input class="shlz-checkbox ${size}" type="checkbox" checked disabled>`,
+    )
+    .join("")}</div>`,
+  radio: `<div class="shlz-control-matrix"><b></b><b>Default</b><b>Selected</b><b>Disabled</b><b>Selected disabled</b><span>20</span><input class="shlz-radio" type="radio"><input class="shlz-radio" type="radio" checked><input class="shlz-radio" type="radio" disabled><input class="shlz-radio" type="radio" checked disabled></div>`,
+  switch: `<div class="shlz-control-matrix"><b>Size</b><b>Off</b><b>On</b><b>Off disabled</b><b>On disabled</b>${[
+    ["24×14", "sm"],
+    ["38×20", ""],
+    ["52×30", "lg"],
+  ]
+    .map(
+      ([label, size]) =>
+        `<span>${label}</span>${["", "checked", "disabled", "checked disabled"].map((attrs) => `<input class="shlz-switch__input${size ? ` shlz-switch__input--${size}` : ""}" type="checkbox" role="switch" ${attrs}>`).join("")}`,
+    )
+    .join("")}</div>`,
+  status: `<div class="shlz-visual-matrix"><div class="shlz-visual-row"><span class="shlz-status">Blue</span><span class="shlz-status shlz-status--green">Green</span><span class="shlz-status shlz-status--orange">Orange</span><span class="shlz-status shlz-status--purple">Violet</span><span class="shlz-status shlz-status--cyan">Cyan</span><span class="shlz-status shlz-status--neutral">Neutral</span></div><div class="shlz-visual-row"><span class="shlz-badge">12</span><span class="shlz-badge shlz-badge--neutral">12</span><span class="shlz-badge shlz-badge--lg">100</span><span class="shlz-badge shlz-badge--lg shlz-badge--neutral">100</span></div></div>`,
+  dropdown: `<div class="shlz-visual-matrix"><div><p class="shlz-visual-matrix__label">200 px source families</p><div class="shlz-static-floating-row">${[2, 3, 4, 5, 6, 7, 8].map((count, index) => dropdownMenu(count, { highlighted: index % 2 ? 1 : -1, separator: count === 8 })).join("")}</div></div><div><p class="shlz-visual-matrix__label">Search / check-slot / scrollbar-looking visual</p><div class="shlz-dropdown"><div class="shlz-dropdown__menu"><input class="shlz-dropdown__search" placeholder="Поиск">${[1, 2, 3, 4, 5, 6, 7].map((n) => `<button class="shlz-dropdown__item"><span class="shlz-dropdown__check-slot"></span>${n}${n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th"} menu item</button>`).join("")}</div></div></div><div><p class="shlz-visual-matrix__label">216 px status composition</p><div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-dropdown__menu--wide">${[
+    ["Новое", ""],
+    ["В работе ОКС", "green"],
+    ["Передано в ОГО", "orange"],
+    ["В работе у ОГО", ""],
+    ["Передано в БГО", "purple"],
+    ["Реализация решения", "cyan"],
+    ["Передано поставщику", "purple"],
+    ["Выполнено", "green"],
+  ]
+    .map(
+      ([label, kind]) =>
+        `<span class="shlz-dropdown__item"><span class="shlz-status${kind ? ` shlz-status--${kind}` : ""}">${label}</span></span>`,
+    )
+    .join(
+      "",
+    )}</div></div></div><div><p class="shlz-visual-matrix__label">216 px family · highlighted-looking state semantics UNKNOWN</p>${dropdownMenu(7, { wide: true, highlighted: 2 })}</div></div>`,
   tooltip: `<div class="shlz-tooltip-matrix">${["top-start", "top", "top-end", "left", "right", "bottom-start", "bottom", "bottom-end"].map(tooltip).join("")}</div>`,
   popover: `<div class="shlz-popover-matrix">${["top", "bottom", "left", "right"].flatMap((placement) => ["start", "center", "end"].map((align) => popover(placement, align))).join("")}</div>`,
-  tabs: `<div class="shlz-tabs"><div class="shlz-tabs__list" role="tablist"><button class="shlz-tabs__tab" role="tab" aria-selected="true">Active</button><button class="shlz-tabs__tab" role="tab" aria-selected="false">Default</button><button class="shlz-tabs__tab" role="tab" disabled>Disabled</button></div></div>`,
-  pagination: `<nav class="shlz-pagination" aria-label="Fidelity pagination"><ul class="shlz-pagination__list"><li><span class="shlz-pagination__item shlz-pagination__item--disabled">‹</span></li><li><a class="shlz-pagination__item" href="#fidelity-pagination">1</a></li><li><a class="shlz-pagination__item" aria-current="page" href="#fidelity-pagination">2</a></li><li><span class="shlz-pagination__item shlz-pagination__item--ellipsis">…</span></li><li><a class="shlz-pagination__item" href="#fidelity-pagination">12</a></li></ul></nav>`,
-  tag: `<div class="shlz-cluster"><span class="shlz-tag">Tag</span><span class="shlz-tag shlz-tag--outlined">Outlined</span><span class="shlz-tag">Removable<button class="shlz-tag__remove" aria-label="Remove">×</button></span></div>`,
-  segment: `<fieldset class="shlz-segment"><legend class="shlz-visually-hidden">View</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="f-segment" checked><span class="shlz-segment__label">Список</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="f-segment"><span class="shlz-segment__label">Карточки</span></label></fieldset>`,
-  notification: `<div class="shlz-stack">${notification("", '<button class="shlz-notification__close" aria-label="Close">×</button>')}${notification("shlz-notification--danger", '<button class="shlz-notification__close" aria-label="Close">×</button>')}${notification("", '<button class="shlz-notification__action">Удалить</button>')}${[5, 4, 3, 2, 1, 0].map((n) => notification("", `<span class="shlz-notification__countdown" style="--shlz-progress:${n / 5}">${n}</span>`)).join("")}${notification("", '<span class="shlz-notification__countdown shlz-notification__countdown--loading" aria-label="Loading"></span>')}</div>`,
-  modal: `<div class="shlz-static-backdrop"><div class="shlz-modal__surface"><header class="shlz-modal__header"><h3 class="shlz-modal__title">Заголовок</h3><button class="shlz-modal__close" aria-label="Close">×</button></header><div class="shlz-modal__body">Modal body source-comparison fixture.</div><footer class="shlz-modal__footer"><button class="shlz-button">Отмена</button><button class="shlz-button shlz-button--primary">Сохранить</button></footer></div></div>`,
-  drawer: `<div class="shlz-static-backdrop shlz-static-backdrop--drawer"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h3 class="shlz-drawer__title">Заголовок</h3><button class="shlz-drawer__close" aria-label="Close">×</button></header><div class="shlz-drawer__body">Drawer body source-comparison fixture.</div><footer class="shlz-drawer__footer"><button class="shlz-button">Отмена</button><button class="shlz-button shlz-button--primary">Применить</button></footer></div></div>`,
+  tabs: `<div class="shlz-visual-matrix">${["", "pill", "boxed"].map((variant) => `<div class="shlz-tabs${variant ? ` shlz-tabs--${variant}` : ""}"><div class="shlz-tabs__list" role="tablist"><button class="shlz-tabs__tab" role="tab">Default</button><button class="shlz-tabs__tab shlz-tabs__tab--visual-hover" role="tab">Hover</button><button class="shlz-tabs__tab" role="tab" aria-selected="true">Selected</button><button class="shlz-tabs__tab" role="tab" disabled>Disabled</button></div></div>`).join("")}</div>`,
+  pagination: `<div class="shlz-visual-matrix"><div class="shlz-pagination-matrix"><b></b><b>Prev</b><b>Next</b><b>Number</b><b>Ellipsis</b><b>Last</b>${[
+    ["Default", "", ""],
+    ["Hover", "visual-hover", "visual-hover"],
+    ["Pressed", "visual-pressed", "visual-pressed"],
+    ["Disabled", "disabled", "disabled"],
+  ]
+    .map(
+      ([label, state]) =>
+        `<span>${label}</span>${paginationItem("‹", state)}${paginationItem("›", state)}${paginationItem("1", state)}${paginationItem("…", `ellipsis${state ? ` shlz-pagination__item--${state}` : ""}`)}${paginationItem("»", state)}`,
+    )
+    .join(
+      "",
+    )}</div><div><p class="shlz-visual-matrix__label">Group</p><div class="shlz-pagination__group">${paginationItem("‹", "disabled")}${paginationItem("1", "visual-pressed")}${paginationItem("2")}${paginationItem("3")}${paginationItem("…", "ellipsis")}${paginationItem("8")}${paginationItem("›")}</div></div><div class="shlz-pagination__group"><span class="shlz-pagination__summary">1–20 из 289</span><span class="shlz-pagination__page-size-label">Показывать по:</span>${paginationItem("20", "visual-pressed")}${paginationItem("50")}${paginationItem("80")}</div></div>`,
+  tag: `<div class="shlz-visual-matrix"><div class="shlz-visual-row"><span class="shlz-tag">По гарантии</span><span class="shlz-tag shlz-tag--outlined">По гарантии</span></div><div class="shlz-visual-row"><span class="shlz-tag shlz-tag--outlined"><span class="shlz-tag__avatar">А</span>Александр Васильев</span><span class="shlz-tag shlz-tag--outlined"><span class="shlz-tag__avatar">А</span>Александр Васильев<button class="shlz-tag__remove" aria-label="Remove">×</button></span></div></div>`,
+  segment: `<div class="shlz-visual-matrix"><div><p class="shlz-visual-matrix__label">Segmented-Group · text</p><div class="shlz-visual-matrix">${segmentGroup("sm")}${segmentGroup()}${segmentGroup("lg")}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Group · icon slots</p><div class="shlz-visual-matrix">${segmentGroup("sm", true)}${segmentGroup("", true)}${segmentGroup("lg", true)}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Item matrix · state meaning UNKNOWN</p><div class="shlz-segment-item-matrix">${["sm", "", "lg"].flatMap((size) => ["", "disabled", "selected"].map((state) => `<span class="shlz-segment__item${state ? ` shlz-segment__item--${state}` : ""}${size ? ` shlz-segment__item--${size}` : ""}">Daily</span>`)).join("")}</div></div></div>`,
+  notification: `<div class="shlz-notification-matrix">${notification("", '<span class="shlz-notification__icon">✓</span>', "Notification Title", '<button class="shlz-notification__close" aria-label="Close">×</button>')}${notification("shlz-notification--danger", '<span class="shlz-notification__icon">✓</span>', "Notification Title", '<button class="shlz-notification__close" aria-label="Close">×</button>')}${notification("", '<span class="shlz-notification__icon">✓</span>', "Notification Title", '<button class="shlz-notification__action">Удалить</button>')}${[5, 4, 3, 2, 1, 0].map((n) => notification("", `<span class="shlz-notification__leading-progress" style="--shlz-progress:${n / 5}">${n}</span>`, "Сообщение отправлено", '<button class="shlz-notification__action">Отменить</button>')).join("")}${notification("", '<span class="shlz-notification__leading-progress" style="--shlz-progress:.72"></span>', "Сообщение отправляется", '<button class="shlz-notification__action">Отменить</button>')}</div>`,
+  modal: `<div class="shlz-modal-matrix"><div class="shlz-modal__surface shlz-modal__surface--structured"><header class="shlz-modal__header"><h3 class="shlz-modal__title">Basic Modal</h3><button class="shlz-modal__close" aria-label="Close">×</button></header><div class="shlz-modal__body"><div class="shlz-modal__source-slot"></div></div><footer class="shlz-modal__footer"><button class="shlz-button shlz-button--sm">Cancel</button><button class="shlz-button shlz-button--primary shlz-button--sm">Done</button></footer></div>${compactModal("info", "This is some info")}${compactModal("success", "Some task has completed!")}${compactModal("warning", "This is a warning message")}${compactModal("error", "This is an error message")}</div>`,
+  drawer: `<div class="shlz-static-backdrop shlz-static-backdrop--drawer"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h3 class="shlz-drawer__title">Drawer Title</h3><button class="shlz-drawer__close" aria-label="Close">×</button></header><div class="shlz-drawer__body"><div class="shlz-drawer__source-slot"></div></div><footer class="shlz-drawer__footer"><button class="shlz-button">Назад</button><button class="shlz-button shlz-button--primary">Сохранить</button></footer></div></div>`,
 };
 
 export const fidelityMarkup = [
-  { id: "button", title: "Button", sources: ["button"] },
-  { id: "input", title: "Input", sources: ["input"] },
-  { id: "textarea", title: "Textarea", sources: ["textarea"] },
-  { id: "checkbox", title: "Checkbox", sources: ["checkbox"] },
-  { id: "radio", title: "Radio", sources: ["radio"] },
-  { id: "switch", title: "Switch", sources: ["switch"] },
-  { id: "status", title: "Status / Badge", sources: ["status", "badge"] },
+  { id: "button", title: "Button", sources: ["button"], fidelity: "HIGH" },
+  { id: "input", title: "Input", sources: ["input"], fidelity: "MEDIUM" },
+  {
+    id: "textarea",
+    title: "Textarea",
+    sources: ["textarea"],
+    fidelity: "HIGH",
+  },
+  {
+    id: "checkbox",
+    title: "Checkbox",
+    sources: ["checkbox"],
+    fidelity: "HIGH",
+  },
+  { id: "radio", title: "Radio", sources: ["radio"], fidelity: "HIGH" },
+  { id: "switch", title: "Switch", sources: ["switch"], fidelity: "HIGH" },
+  {
+    id: "status",
+    title: "Status / Badge",
+    sources: ["status", "badge"],
+    fidelity: "HIGH",
+  },
   {
     id: "dropdown",
     title: "Dropdown",
     sources: ["dropdown"],
+    fidelity: "MEDIUM",
     deviations:
       "Highlighted source row semantics are UNKNOWN; fixture exposes the visual state without naming it hover/selected/focus.",
   },
-  { id: "popover", title: "Popover", sources: ["popover"] },
+  { id: "popover", title: "Popover", sources: ["popover"], fidelity: "HIGH" },
   {
     id: "tooltip",
     title: "Tooltip",
     sources: ["tooltip"],
+    fidelity: "HIGH",
     deviations:
       "Outlined source typography differs from browser text; all eight source placements remain simultaneously visible.",
   },
-  { id: "tabs", title: "Tabs", sources: ["tabs"] },
+  { id: "tabs", title: "Tabs", sources: ["tabs"], fidelity: "MEDIUM" },
   {
     id: "pagination",
     title: "Pagination",
     sources: ["pagination", "pagination-compact", "pagination-wide"],
+    fidelity: "HIGH",
   },
-  { id: "tag", title: "Tag", sources: ["tag"] },
-  { id: "segment", title: "Segment", sources: ["segment"] },
+  { id: "tag", title: "Tag", sources: ["tag"], fidelity: "MEDIUM" },
+  { id: "segment", title: "Segment", sources: ["segment"], fidelity: "HIGH" },
   {
     id: "notification",
     title: "Notification",
     sources: ["notification"],
+    fidelity: "HIGH",
     deviations:
       "Countdown and loading are static source-confirmed visuals; lifecycle remains UNKNOWN.",
   },
@@ -110,6 +212,7 @@ export const fidelityMarkup = [
     id: "modal",
     title: "Modal",
     sources: ["modal"],
+    fidelity: "HIGH",
     deviations:
       "Static fixture exposes production surface DOM/CSS; interactive demo above remains native <dialog>. Backdrop is a DECISION.",
   },
@@ -117,6 +220,7 @@ export const fidelityMarkup = [
     id: "drawer",
     title: "Drawer",
     sources: ["drawer"],
+    fidelity: "HIGH",
     deviations:
       "Static fixture exposes production surface DOM/CSS; interactive demo above remains native <dialog>.",
   },
