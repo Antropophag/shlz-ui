@@ -2,7 +2,7 @@
 
 The dependency direction is `tokens → icons/styles → behaviors → adapters → applications`.
 
-`@shlz/tokens` is the single generated value contract. Its `source.*` layer preserves literal specialized-sheet facts and its `semantic.*` layer contains justified engineering aliases. `@shlz/icons` exposes stable individual assets, a sprite, manifest, and TypeScript names. `@shlz/styles` is a low-impact CSS layer usable from HTML, PHP, and JavaScript. The showcase consumes package exports and is not a design authority; it is organized as Source Spec, Implementation and Fidelity review surfaces.
+`@shlz/tokens` is the single generated value contract. Its `source.*` layer preserves literal specialized-sheet facts and its `semantic.*` layer contains justified engineering aliases. `@shlz/icons` exposes stable individual assets, a sprite, manifest, and TypeScript names. `@shlz/styles` is a low-impact CSS layer usable from HTML, PHP, and JavaScript. The showcase consumes package exports and is not a design authority; it is organized as Source Spec Data, Component Implementation and actual SVG-derived Visual Fidelity review surfaces. See [the fidelity methodology](visual-fidelity.md).
 
 No runtime framework is in the core. `@shlz/behaviors` provides opt-in progressive-enhancement controllers over native markup; it does not render components or register Custom Elements. Popover uses a framework-independent positioning engine behind the SHLZ contract rather than implementing a partial Popper. No Vue package is created yet because an empty adapter would imply a contract that does not exist. See [ADR 0005](adr/0005-progressive-enhancement-behaviors.md) and [ADR 0006](adr/0006-floating-positioning-engine.md).
 
