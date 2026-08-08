@@ -2,16 +2,16 @@
   "name": "@shlz/styles",
   "version": "0.1.0",
   "files": [
-    "foundation.css"
+    "dist"
   ],
   "exports": {
-    ".": "./foundation.css",
-    "./foundation.css": "./foundation.css"
+    ".": "./dist/shlz.css",
+    "./shlz.css": "./dist/shlz.css"
   },
   "dependencies": {
     "@shlz/tokens": "0.1.0"
   },
   "scripts": {
-    "build": "node -e \"require('node:fs').accessSync('foundation.css')\""
+    "build": "node -e \"require('node:fs').accessSync('dist/shlz.css')\""
   }
 }

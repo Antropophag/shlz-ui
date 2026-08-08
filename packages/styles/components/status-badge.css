@@ -1,0 +1,57 @@
+.shlz-status {
+  /* FACT: Status.svg uses 30px pills; named meanings are UNKNOWN. */
+  display: inline-flex;
+  gap: var(--shlz-space-2);
+  align-items: center;
+  min-block-size: 30px;
+  padding-inline: var(--shlz-space-3);
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-primary);
+  border-radius: var(--shlz-radius-pill);
+}
+
+.shlz-status--green {
+  background: var(--shlz-color-green-500);
+}
+
+.shlz-status--orange {
+  /* FACT: directly observed Status.svg component paint. */
+  background: #d47e2e;
+}
+
+.shlz-status--purple {
+  /* FACT: directly observed Status.svg component paint. */
+  background: #8131a7;
+}
+
+.shlz-status--cyan {
+  /* FACT: directly observed Status.svg component paint. */
+  background: #4191b3;
+}
+
+.shlz-status--neutral {
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-semantic-surface-subtle);
+}
+
+.shlz-badge {
+  display: inline-grid;
+  place-content: center;
+  min-inline-size: 29px;
+  block-size: 16px;
+  padding-inline: var(--shlz-space-1);
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-primary);
+  border-radius: var(--shlz-radius-pill);
+  line-height: 1;
+}
+
+.shlz-badge--lg {
+  min-inline-size: 35px;
+  block-size: 23px;
+}
+
+.shlz-badge--neutral {
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-color-neutral-200);
+}

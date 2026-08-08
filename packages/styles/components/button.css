@@ -1,0 +1,80 @@
+.shlz-button {
+  --shlz-button-size: var(--shlz-control-height-md);
+
+  display: inline-flex;
+  gap: var(--shlz-space-2);
+  align-items: center;
+  justify-content: center;
+  min-inline-size: var(--shlz-button-size);
+  min-block-size: var(--shlz-button-size);
+  padding: 0 var(--shlz-space-4);
+  color: var(--shlz-semantic-text-primary);
+  background: var(--shlz-color-neutral-100);
+  border: 0;
+  border-radius: var(--shlz-radius-pill);
+  font: inherit;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shlz-button:hover:not(:disabled) {
+  background: var(--shlz-color-neutral-200);
+}
+
+.shlz-button:active:not(:disabled) {
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-color-brand-700);
+}
+
+.shlz-button:focus-visible {
+  outline: var(--shlz-border-icon) solid var(--shlz-semantic-action-primary);
+  outline-offset: 2px;
+}
+
+.shlz-button:disabled {
+  color: var(--shlz-semantic-text-muted);
+  background: var(--shlz-color-neutral-200);
+  cursor: not-allowed;
+}
+
+.shlz-button--primary {
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-primary);
+}
+
+.shlz-button--primary:hover:not(:disabled) {
+  background: var(--shlz-semantic-action-primary-hover);
+}
+
+.shlz-button--primary:active:not(:disabled) {
+  background: var(--shlz-semantic-action-primary-active);
+}
+
+.shlz-button--primary:disabled {
+  color: var(--shlz-semantic-text-inverse);
+  background: var(--shlz-semantic-action-disabled);
+}
+
+.shlz-button--sm {
+  --shlz-button-size: var(--shlz-control-height-sm);
+
+  padding-inline: var(--shlz-space-3);
+}
+
+.shlz-button--xs {
+  /* FACT: Buttons.svg contains a distinct 26px row; not a system-wide control token. */
+  --shlz-button-size: 26px;
+
+  padding-inline: var(--shlz-space-3);
+}
+
+.shlz-button--icon {
+  padding-inline: 0;
+}
+
+.shlz-button__icon {
+  inline-size: 1.25em;
+  block-size: 1.25em;
+  flex: none;
+}

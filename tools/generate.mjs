@@ -14,6 +14,7 @@ const tokenDist = path.join(tokenRoot, "dist");
 const iconRoot = path.join(root, "packages/icons");
 const iconDist = path.join(iconRoot, "dist");
 const sourceRoot = path.join(root, "shlz-design-source");
+const styleRoot = path.join(root, "packages/styles");
 
 await rm(tokenDist, { recursive: true, force: true });
 await mkdir(tokenDist, { recursive: true });
@@ -103,4 +104,21 @@ await writeFile(
 await writeFile(
   path.join(iconDist, "index.js"),
   `export const iconNames = ${JSON.stringify(manifest.map(({ name }) => name))};\n`,
+);
+
+const styleSources = [
+  "foundation.css",
+  "components/button.css",
+  "components/field.css",
+  "components/choice.css",
+  "components/status-badge.css",
+];
+await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
+await mkdir(path.join(styleRoot, "dist"), { recursive: true });
+const bundledStyles = await Promise.all(
+  styleSources.map((file) => readFile(path.join(styleRoot, file), "utf8")),
+);
+await writeFile(
+  path.join(styleRoot, "dist/shlz.css"),
+  `/* Generated standalone bundle: tokens followed by foundation and components. */\n${css}\n${bundledStyles.join("\n")}`,
 );
