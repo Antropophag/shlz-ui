@@ -15,7 +15,28 @@ const componentFiles = [
   "tag",
   "segment",
   "notification",
+  "modal",
+  "drawer",
 ];
+
+test("modal and drawer compose the native dialog lifecycle", async () => {
+  const [shared, modal, drawer] = await Promise.all([
+    readFile("packages/behaviors/src/internal/native-dialog.ts", "utf8"),
+    readFile("packages/behaviors/src/modal.ts", "utf8"),
+    readFile("packages/behaviors/src/drawer.ts", "utf8"),
+  ]);
+  assert.match(shared, /showModal\(\)/);
+  assert.match(shared, /dialog\.close/);
+  assert.match(shared, /addEventListener\(\s*"close"/);
+  assert.match(shared, /pointerdown/);
+  assert.match(shared, /pointerup/);
+  assert.match(modal, /dialog\[data-shlz-modal\]/);
+  assert.match(drawer, /dialog\[data-shlz-drawer\]/);
+  assert.doesNotMatch(
+    `${shared}${modal}${drawer}`,
+    /focusTrap|inert\s*=|customElements|Vue|OverlayController|ModalManager/,
+  );
+});
 
 test("popover behavior keeps native ownership and delegates positioning", async () => {
   const source = await readFile("packages/behaviors/src/popover.ts", "utf8");
@@ -117,6 +138,10 @@ test("plain HTML fixture keeps accessibility-critical native contracts", async (
   );
   assert.match(html, /shlz-segment__input" type="radio" name=/);
   assert.match(html, /shlz-notification" role="status"/);
+  assert.match(html, /<dialog[\s\S]+data-shlz-modal/);
+  assert.match(html, /<dialog[\s\S]+data-shlz-drawer/);
+  assert.match(html, /enhanceModals\(\)/);
+  assert.match(html, /enhanceDrawers\(\)/);
   assert.match(html, /enhanceTooltips\(\)/);
   assert.match(html, /enhanceTabs\(\)/);
 });
