@@ -8,6 +8,7 @@ import {
   normalizeMonochromeSvg,
   resolveAliases,
 } from "../lib.mjs";
+import { generateSourceReferences } from "../source-references.mjs";
 
 test("flattens and resolves token aliases", () => {
   const flat = flatten({
@@ -148,4 +149,27 @@ test("calendar collision preserves two distinct source geometries", async () => 
       .provenance.sourceIds,
     ["path41"],
   );
+});
+
+test("source references are deterministic viewBox crops of raw SVG", async () => {
+  const before = await generateSourceReferences();
+  const first = await readFile(
+    "apps/showcase/generated/source-references/tooltip.svg",
+    "utf8",
+  );
+  const after = await generateSourceReferences();
+  const second = await readFile(
+    "apps/showcase/generated/source-references/tooltip.svg",
+    "utf8",
+  );
+  assert.deepEqual(after, before);
+  assert.equal(second, first);
+  assert.match(first, /viewBox="0 440 572 330"/);
+  assert.match(first, /clip8_145_26864/);
+  assert.equal(before.length, 20);
+  const tooltip = before.find(({ component }) => component === "tooltip");
+  assert.equal(tooltip.originalViewBox, "0 0 572 770");
+  assert.match(tooltip.sourceSha256, /^[a-f0-9]{64}$/);
+  assert.equal(tooltip.references[0].cropViewBox, "0 440 572 330");
+  assert.match(tooltip.references[0].reason, /component matrix/);
 });

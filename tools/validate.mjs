@@ -14,6 +14,9 @@ for (const source of sourceInventory) {
 }
 
 const tokens = await json("packages/tokens/dist/tokens.json");
+const sourceReferences = await json(
+  "apps/showcase/generated/source-references/manifest.json",
+);
 if (
   !tokens.source?.color ||
   !tokens.source?.spacing ||
@@ -27,6 +30,20 @@ if (
   )
 )
   throw new Error("Tokens must use only source and semantic layers");
+for (const reference of sourceReferences) {
+  const raw = await readFile(
+    path.join("shlz-design-source/raw/svg", reference.sourceFile),
+  );
+  if (hash(raw) !== reference.sourceSha256)
+    throw new Error(`Stale source reference: ${reference.sourceFile}`);
+  if (!reference.originalViewBox)
+    throw new Error(`Missing original viewBox: ${reference.sourceFile}`);
+  for (const crop of reference.references) {
+    if (!crop.cropViewBox || !crop.reason)
+      throw new Error(`Incomplete crop provenance: ${crop.file}`);
+    await access(`apps/showcase/generated/source-references/${crop.file}`);
+  }
+}
 const manifest = await json("packages/icons/dist/manifest.json");
 if (new Set(manifest.map(({ name }) => name)).size !== manifest.length)
   throw new Error("Icon names are not unique");

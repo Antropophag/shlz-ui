@@ -7,6 +7,7 @@ import {
   normalizeMonochromeSvg,
   resolveAliases,
 } from "./lib.mjs";
+import { generateSourceReferences } from "./source-references.mjs";
 
 const root = process.cwd();
 const tokenRoot = path.join(root, "packages/tokens");
@@ -15,6 +16,8 @@ const iconRoot = path.join(root, "packages/icons");
 const iconDist = path.join(iconRoot, "dist");
 const sourceRoot = path.join(root, "shlz-design-source");
 const styleRoot = path.join(root, "packages/styles");
+
+await generateSourceReferences(root);
 
 await rm(tokenDist, { recursive: true, force: true });
 await mkdir(tokenDist, { recursive: true });

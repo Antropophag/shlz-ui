@@ -1,0 +1,302 @@
+[
+  {
+    "component": "button",
+    "sourceFile": "Buttons.svg",
+    "originalViewBox": "0 0 3872 1240",
+    "sourceSha256": "0aef5af2452293963f4656edd99d6b150a53176ecaedab136687a03aff1d952a",
+    "references": [
+      {
+        "file": "button.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 3872 880",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "input",
+    "sourceFile": "Select.svg",
+    "originalViewBox": "0 0 2660 2033",
+    "sourceSha256": "0d1e2e6661ae600bd9d9b63d6463a6909cb702868a518c1a7d87b3b31f325385",
+    "references": [
+      {
+        "file": "input.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 2660 1673",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "textarea",
+    "sourceFile": "Textarea.svg",
+    "originalViewBox": "0 0 2783 1141",
+    "sourceSha256": "d11a416e20439d443a97fd96e6b6560f3de478bc6c351e054ce2a71cbfdf20b5",
+    "references": [
+      {
+        "file": "textarea.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 2783 781",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "checkbox",
+    "sourceFile": "Checkbox.svg",
+    "originalViewBox": "0 0 1160 1006",
+    "sourceSha256": "5940aae7086887c9a97365c9027a982f4f09802011a4afe0a961eb07318d9940",
+    "references": [
+      {
+        "file": "checkbox.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 1160 646",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "radio",
+    "sourceFile": "Radio.svg",
+    "originalViewBox": "0 0 1030 838",
+    "sourceSha256": "3e0bcdebd9aa7c40baa0987ce4d933d251560f02fe10acbace745720b55752dd",
+    "references": [
+      {
+        "file": "radio.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 340 1030 498",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "switch",
+    "sourceFile": "Switch.svg",
+    "originalViewBox": "0 0 990 1001",
+    "sourceSha256": "aa7373c7d14defcf570cd2ca9222fa334f3070d266eb348d3034bd9fb7b49f57",
+    "references": [
+      {
+        "file": "switch.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 990 641",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "status",
+    "sourceFile": "Status.svg",
+    "originalViewBox": "0 0 700 1462",
+    "sourceSha256": "fa0e32fb188e7630fa8a06d566ec1a3d9eea6e1e6cfd8c1a6e8b157cadd5ee1f",
+    "references": [
+      {
+        "file": "status.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 700 1102",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "badge",
+    "sourceFile": "Bage.svg",
+    "originalViewBox": "0 0 500 1046",
+    "sourceSha256": "8a60735807cab6ee274e6ed51b311955ab72c9c13204dbc0428b9c38ef7fe9e8",
+    "references": [
+      {
+        "file": "badge.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 340 500 706",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "dropdown",
+    "sourceFile": "Dropdown menu.svg",
+    "originalViewBox": "0 0 1339 2257",
+    "sourceSha256": "6fee02eaf5634887b12c9c2ef8d68647c80e5eaadf494a9f9967a342e349576b",
+    "references": [
+      {
+        "file": "dropdown.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 800 1339 1457",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "popover",
+    "sourceFile": "Popover.svg",
+    "originalViewBox": "0 0 1072 1165",
+    "sourceSha256": "9fc564399a0f1856eb11c494c1620c0676aec2a9248ea4c39abbab97f8c44f26",
+    "references": [
+      {
+        "file": "popover.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 1072 805",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "tooltip",
+    "sourceFile": "Tooltip.svg",
+    "originalViewBox": "0 0 572 770",
+    "sourceSha256": "dd46298b3f80605a71369e51d3cb71e721958ec4bb13cb66f6a85dd084b22594",
+    "references": [
+      {
+        "file": "tooltip.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 440 572 330",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "tabs",
+    "sourceFile": "Tabs.svg",
+    "originalViewBox": "0 0 746 1158",
+    "sourceSha256": "52a8798c27a5c5525add89120966d2d5a8bf3f845d53e778b22aca12fa0172b8",
+    "references": [
+      {
+        "file": "tabs.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 746 798",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "pagination",
+    "sourceFile": "Pagination.svg",
+    "originalViewBox": "0 0 975 1140",
+    "sourceSha256": "e0d0f07efcab4f49faab050489119beea9543c974e838bf7261fd5297ecd95a5",
+    "references": [
+      {
+        "file": "pagination.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 975 780",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "pagination-compact",
+    "sourceFile": "Pagination (1).svg",
+    "originalViewBox": "0 0 674 1090",
+    "sourceSha256": "c3e4dc9b115948cf74004205777291ccd9d2278ff1d2d3d46cc10b81b6d39d85",
+    "references": [
+      {
+        "file": "pagination-compact.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 674 730",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "pagination-wide",
+    "sourceFile": "Pagination (2).svg",
+    "originalViewBox": "0 0 1528 648",
+    "sourceSha256": "114b2c9cb8207269d6075f957db07b15632967f264e01897fbc05f6d1ad98377",
+    "references": [
+      {
+        "file": "pagination-wide.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 300 1528 348",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "tag",
+    "sourceFile": "Tag.svg",
+    "originalViewBox": "0 0 401 872",
+    "sourceSha256": "f94bea181b7233687bab38a3c1d48bcf9b9dba235c1194356558310c49cdf1e4",
+    "references": [
+      {
+        "file": "tag.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 340 401 532",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "segment",
+    "sourceFile": "Segment.svg",
+    "originalViewBox": "0 0 1151 1089",
+    "sourceSha256": "66a00e02c28f99bc44f0922256460da50babd7bb8aa664e20b4f368e6511e5e4",
+    "references": [
+      {
+        "file": "segment.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 340 1151 749",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "notification",
+    "sourceFile": "Notification.svg",
+    "originalViewBox": "0 0 584 1802",
+    "sourceSha256": "47452a53ea7b6b123de3292d0a0deed656d7f3a5dfa138e7577429ed07abbf05",
+    "references": [
+      {
+        "file": "notification.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 460 584 1342",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "modal",
+    "sourceFile": "Modal.svg",
+    "originalViewBox": "0 0 794 1496",
+    "sourceSha256": "62b0686f4ea17ecb8bb0bf25fe9020ee3a1512728e4271fd6fc734595e2b7fed",
+    "references": [
+      {
+        "file": "modal.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 794 1136",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  },
+  {
+    "component": "drawer",
+    "sourceFile": "Drawer.svg",
+    "originalViewBox": "0 0 580 1460",
+    "sourceSha256": "a7ff3b75584ad5782bb2e3b2bc6b2dd62baec589c32edb334d619a65dbf49e8e",
+    "references": [
+      {
+        "file": "drawer.svg",
+        "kind": "component-sheet-crop",
+        "cropViewBox": "0 360 580 1100",
+        "reason": "Exclude the sheet title/index area above the component matrix; retain the complete matrix width and all geometry below it.",
+        "method": "root viewBox crop; SVG geometry is otherwise byte-preserved"
+      }
+    ]
+  }
+]
