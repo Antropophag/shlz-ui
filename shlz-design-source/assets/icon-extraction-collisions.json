@@ -1,0 +1,38 @@
+{
+  "manifest_entries": 125,
+  "unique_output_paths": 124,
+  "collisions": [
+    {
+      "file": "core/calendar.svg",
+      "count": 2,
+      "entries": [
+        {
+          "name": "calendar",
+          "category": "sidebar",
+          "file": "core/calendar.svg",
+          "source": "Icons.svg",
+          "source_ids": [
+            "path41"
+          ],
+          "viewBox": "0 0 24 24",
+          "semantic_name_confidence": "medium"
+        },
+        {
+          "name": "calendar",
+          "category": "interface-2",
+          "file": "core/calendar.svg",
+          "source": "Icons.svg",
+          "source_ids": [
+            "path83",
+            "path80",
+            "path82",
+            "path81"
+          ],
+          "viewBox": "0 0 24 24",
+          "semantic_name_confidence": "medium"
+        }
+      ]
+    }
+  ],
+  "note": "A collision means distinct source candidates were assigned the same semantic output filename in the earlier icon extraction. Preserve both source entries before finalizing the icon API."
+}

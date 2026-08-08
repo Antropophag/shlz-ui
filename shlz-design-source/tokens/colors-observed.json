@@ -1,0 +1,4686 @@
+[
+  {
+    "value": "#F5F5F5",
+    "count": 37548,
+    "fill_count": 37547,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 12925
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 9218
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 6696
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 5012
+      },
+      {
+        "file": "Planner.svg",
+        "count": 2055
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 508
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 245
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 163
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 158
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 93
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 87
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 78
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 36
+      },
+      {
+        "file": "Select.svg",
+        "count": 29
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 26
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 25
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 15
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 15
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 12
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 12
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 10
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 6
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 2
+      },
+      {
+        "file": "Modal.svg",
+        "count": 2
+      },
+      {
+        "file": "Notification.svg",
+        "count": 2
+      },
+      {
+        "file": "Status.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Messages.svg",
+        "count": 1
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#FFFFFF",
+    "count": 25824,
+    "fill_count": 25625,
+    "stroke_count": 199,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 3907
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 2354
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 2147
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 1812
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1629
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 1583
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 1151
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 982
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 874
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 857
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 837
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 741
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 677
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 671
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 569
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 420
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 417
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 406
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 398
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 384
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 364
+      },
+      {
+        "file": "Table.svg",
+        "count": 322
+      },
+      {
+        "file": "Planner.svg",
+        "count": 292
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 266
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 227
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 161
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 157
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 122
+      },
+      {
+        "file": "Messages.svg",
+        "count": 111
+      },
+      {
+        "file": "Select.svg",
+        "count": 89
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 77
+      },
+      {
+        "file": "Popover.svg",
+        "count": 75
+      },
+      {
+        "file": "Segment.svg",
+        "count": 73
+      },
+      {
+        "file": "Icons.svg",
+        "count": 68
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 64
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 57
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 45
+      },
+      {
+        "file": "Notification.svg",
+        "count": 39
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 36
+      },
+      {
+        "file": "Bage.svg",
+        "count": 33
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 32
+      },
+      {
+        "file": "Documents.svg",
+        "count": 28
+      },
+      {
+        "file": "Switch.svg",
+        "count": 27
+      },
+      {
+        "file": "Modal.svg",
+        "count": 23
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 23
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 20
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 19
+      },
+      {
+        "file": "Tooltip.svg",
+        "count": 19
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 18
+      },
+      {
+        "file": "Avatar.svg",
+        "count": 16
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 15
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 11
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 11
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 10
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 7
+      },
+      {
+        "file": "Radio.svg",
+        "count": 7
+      },
+      {
+        "file": "Colors.svg",
+        "count": 6
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 6
+      },
+      {
+        "file": "Tag.svg",
+        "count": 6
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 5
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 4
+      },
+      {
+        "file": "Header.svg",
+        "count": 3
+      },
+      {
+        "file": "Link.svg",
+        "count": 3
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 3
+      },
+      {
+        "file": "Status.svg",
+        "count": 3
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 3
+      },
+      {
+        "file": "Cover.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#D1D8DF",
+    "count": 23443,
+    "fill_count": 19351,
+    "stroke_count": 4092,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 3914
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 1926
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 1790
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 1599
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 1385
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 1236
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 1129
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1084
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 963
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 939
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 883
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 819
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 729
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 672
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 577
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 486
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 443
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 436
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 379
+      },
+      {
+        "file": "Table.svg",
+        "count": 276
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 259
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 256
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 244
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 217
+      },
+      {
+        "file": "Planner.svg",
+        "count": 186
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 173
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 156
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 92
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 50
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 28
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 17
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 16
+      },
+      {
+        "file": "Icons.svg",
+        "count": 14
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 13
+      },
+      {
+        "file": "Select.svg",
+        "count": 11
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 7
+      },
+      {
+        "file": "Bage.svg",
+        "count": 6
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 6
+      },
+      {
+        "file": "Switch.svg",
+        "count": 6
+      },
+      {
+        "file": "Colors.svg",
+        "count": 4
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 4
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 3
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 3
+      },
+      {
+        "file": "Segment.svg",
+        "count": 3
+      },
+      {
+        "file": "Messages.svg",
+        "count": 2
+      },
+      {
+        "file": "Radio.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#0B1623",
+    "count": 16423,
+    "fill_count": 14413,
+    "stroke_count": 2010,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2294
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 1827
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 1090
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1086
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 1050
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 930
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 756
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 706
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 539
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 469
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 443
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 429
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 421
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 351
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 313
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 284
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 280
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 260
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 247
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 243
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 243
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 220
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 165
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 157
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 145
+      },
+      {
+        "file": "Select.svg",
+        "count": 145
+      },
+      {
+        "file": "Colors.svg",
+        "count": 132
+      },
+      {
+        "file": "Planner.svg",
+        "count": 132
+      },
+      {
+        "file": "Icons.svg",
+        "count": 93
+      },
+      {
+        "file": "Table.svg",
+        "count": 93
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 91
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 87
+      },
+      {
+        "file": "Messages.svg",
+        "count": 77
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 74
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 71
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 53
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 48
+      },
+      {
+        "file": "Documents.svg",
+        "count": 41
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 38
+      },
+      {
+        "file": "Popover.svg",
+        "count": 38
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 34
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 21
+      },
+      {
+        "file": "Notification.svg",
+        "count": 19
+      },
+      {
+        "file": "Tooltip.svg",
+        "count": 18
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 15
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 15
+      },
+      {
+        "file": "Modal.svg",
+        "count": 13
+      },
+      {
+        "file": "Segment.svg",
+        "count": 13
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 13
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 12
+      },
+      {
+        "file": "Switch.svg",
+        "count": 12
+      },
+      {
+        "file": "Bage.svg",
+        "count": 9
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 9
+      },
+      {
+        "file": "Radio.svg",
+        "count": 8
+      },
+      {
+        "file": "Tag.svg",
+        "count": 8
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 6
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 6
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 5
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 5
+      },
+      {
+        "file": "Header.svg",
+        "count": 4
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 4
+      },
+      {
+        "file": "Status.svg",
+        "count": 4
+      },
+      {
+        "file": "Avatar.svg",
+        "count": 2
+      },
+      {
+        "file": "Cover.svg",
+        "count": 2
+      },
+      {
+        "file": "Link.svg",
+        "count": 2
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 2
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#939CA5",
+    "count": 8394,
+    "fill_count": 7023,
+    "stroke_count": 1371,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1168
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 961
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 757
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 672
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 599
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 417
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 325
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 310
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 298
+      },
+      {
+        "file": "Messages.svg",
+        "count": 256
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 235
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 206
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 176
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 155
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 149
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 140
+      },
+      {
+        "file": "Planner.svg",
+        "count": 120
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 107
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 100
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 90
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 90
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 85
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 82
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 79
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 71
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 68
+      },
+      {
+        "file": "Select.svg",
+        "count": 66
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 59
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 56
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 51
+      },
+      {
+        "file": "Table.svg",
+        "count": 48
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 44
+      },
+      {
+        "file": "Segment.svg",
+        "count": 39
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 38
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 38
+      },
+      {
+        "file": "Documents.svg",
+        "count": 38
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 37
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 25
+      },
+      {
+        "file": "Icons.svg",
+        "count": 18
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 16
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 14
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 12
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 10
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 10
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 9
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 7
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 7
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 7
+      },
+      {
+        "file": "Radio.svg",
+        "count": 6
+      },
+      {
+        "file": "Switch.svg",
+        "count": 6
+      },
+      {
+        "file": "Link.svg",
+        "count": 4
+      },
+      {
+        "file": "Modal.svg",
+        "count": 4
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 3
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 2
+      },
+      {
+        "file": "Status.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Header.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#253D98",
+    "count": 2774,
+    "fill_count": 2476,
+    "stroke_count": 298,
+    "files": [
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 354
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 329
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 292
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 163
+      },
+      {
+        "file": "Planner.svg",
+        "count": 162
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 161
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 106
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 81
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 73
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 64
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 58
+      },
+      {
+        "file": "Table.svg",
+        "count": 53
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 52
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 49
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 48
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 46
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 42
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 41
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 41
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 40
+      },
+      {
+        "file": "Select.svg",
+        "count": 40
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 34
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 27
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 27
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 26
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 24
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 20
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 20
+      },
+      {
+        "file": "Bage.svg",
+        "count": 19
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 19
+      },
+      {
+        "file": "Messages.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 17
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 16
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 13
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 11
+      },
+      {
+        "file": "Status.svg",
+        "count": 11
+      },
+      {
+        "file": "Switch.svg",
+        "count": 10
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 9
+      },
+      {
+        "file": "Avatar.svg",
+        "count": 8
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 8
+      },
+      {
+        "file": "Icons.svg",
+        "count": 8
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 8
+      },
+      {
+        "file": "Modal.svg",
+        "count": 8
+      },
+      {
+        "file": "Radio.svg",
+        "count": 8
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 8
+      },
+      {
+        "file": "Documents.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 6
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 6
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 6
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 6
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 6
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 6
+      },
+      {
+        "file": "Colors.svg",
+        "count": 5
+      },
+      {
+        "file": "Link.svg",
+        "count": 5
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 5
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 5
+      },
+      {
+        "file": "Segment.svg",
+        "count": 5
+      },
+      {
+        "file": "Tag.svg",
+        "count": 5
+      },
+      {
+        "file": "Notification.svg",
+        "count": 4
+      },
+      {
+        "file": "Popover.svg",
+        "count": 4
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 4
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 4
+      },
+      {
+        "file": "Tooltip.svg",
+        "count": 4
+      },
+      {
+        "file": "Cover.svg",
+        "count": 3
+      },
+      {
+        "file": "Header.svg",
+        "count": 3
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 2
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#EEF0F4",
+    "count": 1753,
+    "fill_count": 1682,
+    "stroke_count": 71,
+    "files": [
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 246
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 166
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 157
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 145
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 105
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 89
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 79
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 64
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 60
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 53
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 48
+      },
+      {
+        "file": "Table.svg",
+        "count": 44
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 38
+      },
+      {
+        "file": "Select.svg",
+        "count": 37
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 32
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 27
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 27
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 24
+      },
+      {
+        "file": "Planner.svg",
+        "count": 24
+      },
+      {
+        "file": "Messages.svg",
+        "count": 23
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 22
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 22
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 19
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 14
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 14
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 12
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 12
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 10
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 8
+      },
+      {
+        "file": "Notification.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 7
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 6
+      },
+      {
+        "file": "Modal.svg",
+        "count": 6
+      },
+      {
+        "file": "Segment.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 5
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 4
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 3
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 2
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 2
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 2
+      },
+      {
+        "file": "Radio.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 1
+      },
+      {
+        "file": "Tag.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#F4F6F9",
+    "count": 1204,
+    "fill_count": 1186,
+    "stroke_count": 18,
+    "files": [
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 624
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 212
+      },
+      {
+        "file": "Planner.svg",
+        "count": 54
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 38
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 29
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 26
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 23
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 22
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 19
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 17
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 14
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 14
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 13
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 11
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 10
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 9
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 3
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 2
+      },
+      {
+        "file": "Documents.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 1
+      },
+      {
+        "file": "Table.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#DFE2F0",
+    "count": 1185,
+    "fill_count": 1184,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 295
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 178
+      },
+      {
+        "file": "Planner.svg",
+        "count": 125
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 112
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 78
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 68
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 44
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 39
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 38
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 35
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 34
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 24
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 16
+      },
+      {
+        "file": "Table.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 11
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 8
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 7
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 7
+      },
+      {
+        "file": "Bage.svg",
+        "count": 5
+      },
+      {
+        "file": "Avatar.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 3
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 3
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 1
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#57965C",
+    "count": 841,
+    "fill_count": 840,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 251
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 91
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 63
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 59
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 36
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 35
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 27
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 25
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 23
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 22
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "Planner.svg",
+        "count": 20
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 17
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 17
+      },
+      {
+        "file": "Select.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 12
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 10
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 8
+      },
+      {
+        "file": "Table.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 4
+      },
+      {
+        "file": "Status.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 2
+      },
+      {
+        "file": "Icons.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#45B64E",
+    "count": 633,
+    "fill_count": 633,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 418
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 38
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 36
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 18
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 18
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 18
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 16
+      },
+      {
+        "file": "Table.svg",
+        "count": 10
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 4
+      },
+      {
+        "file": "Icons.svg",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "value": "#4191B3",
+    "count": 594,
+    "fill_count": 594,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 287
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 130
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 73
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 35
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 22
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 6
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 2
+      },
+      {
+        "file": "Status.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#000000",
+    "count": 557,
+    "fill_count": 386,
+    "stroke_count": 171,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 161
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 53
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 40
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 37
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 35
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 28
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 24
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 24
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 23
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 22
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 19
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 13
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 11
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 11
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 10
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "Select.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 5
+      },
+      {
+        "file": "Messages.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 3
+      },
+      {
+        "file": "Segment.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 1
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#A942A7",
+    "count": 553,
+    "fill_count": 553,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 247
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 113
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 42
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 39
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 37
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 2
+      },
+      {
+        "file": "Status.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#CC1F1F",
+    "count": 478,
+    "fill_count": 402,
+    "stroke_count": 76,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 136
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 54
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 51
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 36
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 29
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 22
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 20
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 15
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 12
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 10
+      },
+      {
+        "file": "Planner.svg",
+        "count": 10
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 9
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 8
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 8
+      },
+      {
+        "file": "Documents.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 3
+      },
+      {
+        "file": "Icons.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Notification.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#E0E0E0",
+    "count": 408,
+    "fill_count": 35,
+    "stroke_count": 373,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 130
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 72
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 54
+      },
+      {
+        "file": "Planner.svg",
+        "count": 36
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 26
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 20
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 20
+      },
+      {
+        "file": "Messages.svg",
+        "count": 14
+      },
+      {
+        "file": "Documents.svg",
+        "count": 6
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 5
+      },
+      {
+        "file": "Tag.svg",
+        "count": 3
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#F0F0F0",
+    "count": 343,
+    "fill_count": 343,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 115
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 100
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 44
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 22
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 12
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 6
+      }
+    ]
+  },
+  {
+    "value": "#245B99",
+    "count": 342,
+    "fill_count": 342,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 80
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 63
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 59
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 51
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 26
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 14
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 10
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 4
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 3
+      },
+      {
+        "file": "Table.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      },
+      {
+        "file": "Status.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#DBDBDB",
+    "count": 306,
+    "fill_count": 0,
+    "stroke_count": 306,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 133
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 47
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 27
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 26
+      },
+      {
+        "file": "Icons.svg",
+        "count": 22
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 20
+      },
+      {
+        "file": "Messages.svg",
+        "count": 17
+      },
+      {
+        "file": "Documents.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "Planner.svg",
+        "count": 2
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#D4D4D8",
+    "count": 302,
+    "fill_count": 302,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 133
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 47
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 26
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 23
+      },
+      {
+        "file": "Icons.svg",
+        "count": 22
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 20
+      },
+      {
+        "file": "Messages.svg",
+        "count": 17
+      },
+      {
+        "file": "Documents.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "Planner.svg",
+        "count": 2
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#D47E2E",
+    "count": 289,
+    "fill_count": 289,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 85
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 63
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 35
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 24
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 17
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 14
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 3
+      },
+      {
+        "file": "Status.svg",
+        "count": 3
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 1
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#FAFAFA",
+    "count": 249,
+    "fill_count": 249,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 86
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 75
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 30
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 11
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 10
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "value": "#25983E",
+    "count": 232,
+    "fill_count": 232,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 63
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 40
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 37
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 25
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 14
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 2
+      },
+      {
+        "file": "Planner.svg",
+        "count": 2
+      },
+      {
+        "file": "Status.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#231F23",
+    "count": 228,
+    "fill_count": 17,
+    "stroke_count": 211,
+    "files": [
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 32
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 21
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 18
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 14
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 14
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 13
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 13
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 8
+      },
+      {
+        "file": "Icons.svg",
+        "count": 8
+      },
+      {
+        "file": "Planner.svg",
+        "count": 8
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 6
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 3
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 1
+      },
+      {
+        "file": "Modal.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#8131A7",
+    "count": 227,
+    "fill_count": 227,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 63
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 34
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 33
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 25
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 21
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 16
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 14
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 6
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 4
+      },
+      {
+        "file": "Status.svg",
+        "count": 4
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#3D88DE",
+    "count": 196,
+    "fill_count": 196,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 63
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 49
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 26
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 10
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 5
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 4
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 4
+      },
+      {
+        "file": "Table.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      },
+      {
+        "file": "Status.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#1E1E1E",
+    "count": 152,
+    "fill_count": 152,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 24
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 19
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 13
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 11
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "value": "#DE753D",
+    "count": 139,
+    "fill_count": 139,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 65
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 28
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 3
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 1
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 1
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      },
+      {
+        "file": "Status.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#18A6C8",
+    "count": 102,
+    "fill_count": 68,
+    "stroke_count": 34,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 102
+      }
+    ]
+  },
+  {
+    "value": "#079455",
+    "count": 93,
+    "fill_count": 93,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 38
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 10
+      },
+      {
+        "file": "Messages.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 6
+      },
+      {
+        "file": "Documents.svg",
+        "count": 5
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "Icons.svg",
+        "count": 4
+      },
+      {
+        "file": "Planner.svg",
+        "count": 2
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#414651",
+    "count": 76,
+    "fill_count": 76,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 32
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 18
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 12
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 8
+      },
+      {
+        "file": "Messages.svg",
+        "count": 4
+      },
+      {
+        "file": "Icons.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#D92D20",
+    "count": 70,
+    "fill_count": 70,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 32
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 14
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 7
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 7
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "Messages.svg",
+        "count": 4
+      },
+      {
+        "file": "Documents.svg",
+        "count": 1
+      },
+      {
+        "file": "Icons.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "none",
+    "count": 68,
+    "fill_count": 68,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 1
+      },
+      {
+        "file": "Avatar.svg",
+        "count": 1
+      },
+      {
+        "file": "Bage.svg",
+        "count": 1
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 1
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 1
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 1
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Cover.svg",
+        "count": 1
+      },
+      {
+        "file": "Dashboard.svg",
+        "count": 1
+      },
+      {
+        "file": "Date-Picker.svg",
+        "count": 1
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 1
+      },
+      {
+        "file": "Documents.svg",
+        "count": 1
+      },
+      {
+        "file": "Drawer.svg",
+        "count": 1
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      },
+      {
+        "file": "Form constructor.svg",
+        "count": 1
+      },
+      {
+        "file": "Header.svg",
+        "count": 1
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 1
+      },
+      {
+        "file": "Icons.svg",
+        "count": 1
+      },
+      {
+        "file": "Input Number.svg",
+        "count": 1
+      },
+      {
+        "file": "Link.svg",
+        "count": 1
+      },
+      {
+        "file": "Managing appeals.svg",
+        "count": 1
+      },
+      {
+        "file": "Messages.svg",
+        "count": 1
+      },
+      {
+        "file": "Modal.svg",
+        "count": 1
+      },
+      {
+        "file": "Notification.svg",
+        "count": 1
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 1
+      },
+      {
+        "file": "Pagination (2).svg",
+        "count": 1
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 1
+      },
+      {
+        "file": "Planner.svg",
+        "count": 1
+      },
+      {
+        "file": "Popover.svg",
+        "count": 1
+      },
+      {
+        "file": "Radio.svg",
+        "count": 1
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 1
+      },
+      {
+        "file": "Segment.svg",
+        "count": 1
+      },
+      {
+        "file": "Select.svg",
+        "count": 1
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 1
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 1
+      },
+      {
+        "file": "Status.svg",
+        "count": 1
+      },
+      {
+        "file": "Switch.svg",
+        "count": 1
+      },
+      {
+        "file": "Table Cell.svg",
+        "count": 1
+      },
+      {
+        "file": "Table.svg",
+        "count": 1
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 1
+      },
+      {
+        "file": "Tag.svg",
+        "count": 1
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 1
+      },
+      {
+        "file": "Tooltip.svg",
+        "count": 1
+      },
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#222A36",
+    "count": 57,
+    "fill_count": 39,
+    "stroke_count": 18,
+    "files": [
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 23
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 20
+      },
+      {
+        "file": "History of changes.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 5
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "value": "#155EEF",
+    "count": 57,
+    "fill_count": 57,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 31
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 14
+      },
+      {
+        "file": "Icons.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 1
+      },
+      {
+        "file": "Documents.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#9B7E46",
+    "count": 53,
+    "fill_count": 53,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 47
+      },
+      {
+        "file": "Calendar.svg",
+        "count": 2
+      },
+      {
+        "file": "Colors.svg",
+        "count": 2
+      },
+      {
+        "file": "Detailed appeals.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#444444",
+    "count": 48,
+    "fill_count": 48,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U0410#U0432#U0442#U043e#U043d#U0430#U0437#U043d#U0430#U0447#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0414#U0435#U0442#U0430#U043b#U044c#U043d#U0430#U044f #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0417#U0430#U044f#U0432#U043a#U0430 #U043d#U0430 #U043f#U0440#U043e#U0438#U0437#U0432#U043e#U0434#U0441#U0442#U0432#U043e.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0438 #U043f#U0440#U0430#U0437#U0434#U043d#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U043e#U043c#U043c#U0435#U043d#U0442#U0430#U0440#U0438#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435 #U043f#U043e #U0433#U0430#U0440#U0430#U043d#U0442#U0438#U0439#U043d#U043e#U043c#U0443 #U043e#U0431#U0441#U043b#U0443#U0436#U0438#U0432#U0430#U043d#U0438#U044e.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U0435#U0440#U0432#U0438#U0447#U043d#U043e#U0435 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0435.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041f#U043e#U0441#U0442#U0430#U0432#U0449#U0438#U043a#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0420#U0435#U0434#U0430#U043a#U0442#U0438#U0440#U043e#U0432#U0430#U043d#U0438#U0435 #U0434#U0430#U0448#U0431#U043e#U0440#U0434#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U0440#U043e#U043a#U0438 #U043e#U0431#U0440#U0430#U0431#U043e#U0442#U043a#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043e#U0440#U0433#U0430#U043d#U0438#U0437#U0430#U0446#U0438#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U0441#U0442#U0430#U0442#U0443#U0441#U0430#U043c#U0438 #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#162773",
+    "count": 45,
+    "fill_count": 35,
+    "stroke_count": 10,
+    "files": [
+      {
+        "file": "Buttons.svg",
+        "count": 15
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 11
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 9
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 3
+      },
+      {
+        "file": "#U0418#U0441#U0442#U043e#U0440#U0438#U044f #U0438#U0437#U043c#U0435#U043d#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0414#U0430#U0448#U0431#U043e#U0440#U0434#U044b.svg",
+        "count": 1
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Link.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#7383BE",
+    "count": 29,
+    "fill_count": 27,
+    "stroke_count": 2,
+    "files": [
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 12
+      },
+      {
+        "file": "Buttons.svg",
+        "count": 5
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 4
+      },
+      {
+        "file": "Radio.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "Link.svg",
+        "count": 1
+      },
+      {
+        "file": "Messages.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#E6EFE7",
+    "count": 25,
+    "fill_count": 25,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 21
+      },
+      {
+        "file": "Planner.svg",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "value": "#F5F5F7",
+    "count": 24,
+    "fill_count": 24,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Dashboard.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#DCE0E6",
+    "count": 24,
+    "fill_count": 24,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Dashboard.svg",
+        "count": 6
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 4
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 2
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#FFF",
+    "count": 19,
+    "fill_count": 1,
+    "stroke_count": 18,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 19
+      }
+    ]
+  },
+  {
+    "value": "#3C4350",
+    "count": 18,
+    "fill_count": 18,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 18
+      }
+    ]
+  },
+  {
+    "value": "#F2A13B",
+    "count": 17,
+    "fill_count": 0,
+    "stroke_count": 17,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 17
+      }
+    ]
+  },
+  {
+    "value": "#8A642E",
+    "count": 17,
+    "fill_count": 17,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 17
+      }
+    ]
+  },
+  {
+    "value": "#5364C6",
+    "count": 16,
+    "fill_count": 16,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 16
+      }
+    ]
+  },
+  {
+    "value": "#777E89",
+    "count": 13,
+    "fill_count": 13,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Buttons.svg",
+        "count": 1
+      },
+      {
+        "file": "Checkbox.svg",
+        "count": 1
+      },
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Cover.svg",
+        "count": 1
+      },
+      {
+        "file": "Dropdown menu.svg",
+        "count": 1
+      },
+      {
+        "file": "Icons.svg",
+        "count": 1
+      },
+      {
+        "file": "Pagination.svg",
+        "count": 1
+      },
+      {
+        "file": "Radio.svg",
+        "count": 1
+      },
+      {
+        "file": "Select.svg",
+        "count": 1
+      },
+      {
+        "file": "Spacing.svg",
+        "count": 1
+      },
+      {
+        "file": "Switch.svg",
+        "count": 1
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 1
+      },
+      {
+        "file": "Textarea.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#AEB8C2",
+    "count": 12,
+    "fill_count": 12,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Dashboard.svg",
+        "count": 3
+      },
+      {
+        "file": "#U041a#U0430#U043b#U0435#U043d#U0434#U0430#U0440#U044c #U0434#U043b#U044f #U043d#U0430#U0447#U0430#U043b#U044c#U043d#U0438#U043a#U0430.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0431#U0440#U0430#U0449#U0435#U043d#U0438#U0439.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 2
+      },
+      {
+        "file": "#U0421#U043e#U043e#U0431#U0449#U0435#U043d#U0438#U044f.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U043f#U0440#U0430#U0432#U043b#U0435#U043d#U0438#U0435 #U043a#U0430#U0442#U0435#U0433#U043e#U0440#U0438#U044f#U043c#U0438 #U0438 #U043f#U043e#U043b#U044f#U043c#U0438.svg",
+        "count": 1
+      },
+      {
+        "file": "Pagination (1).svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#B589EC",
+    "count": 9,
+    "fill_count": 0,
+    "stroke_count": 9,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 1
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#B68BEC",
+    "count": 9,
+    "fill_count": 0,
+    "stroke_count": 9,
+    "files": [
+      {
+        "file": "#U0421#U043f#U0438#U0441#U043e#U043a #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 6
+      },
+      {
+        "file": "#U0421#U043e#U0437#U0434#U0430#U043d#U0438#U0435 #U043e#U0442#U0447#U0435#U0442#U0430.svg",
+        "count": 1
+      },
+      {
+        "file": "#U0423#U0432#U0435#U0434#U043e#U043c#U043b#U0435#U043d#U0438#U044f #U0434#U043b#U044f #U043e#U0442#U0447#U0435#U0442#U043e#U0432.svg",
+        "count": 1
+      },
+      {
+        "file": "Card with button.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#425BA6",
+    "count": 7,
+    "fill_count": 7,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Buttons.svg",
+        "count": 5
+      },
+      {
+        "file": "Link.svg",
+        "count": 1
+      },
+      {
+        "file": "Tabs.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#9747FF",
+    "count": 6,
+    "fill_count": 0,
+    "stroke_count": 6,
+    "files": [
+      {
+        "file": "Dashboard.svg",
+        "count": 1
+      },
+      {
+        "file": "Messages.svg",
+        "count": 1
+      },
+      {
+        "file": "Notification.svg",
+        "count": 1
+      },
+      {
+        "file": "Planner.svg",
+        "count": 1
+      },
+      {
+        "file": "Reports card.svg",
+        "count": 1
+      },
+      {
+        "file": "Sidebar.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#F2F6F2",
+    "count": 5,
+    "fill_count": 5,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Planner.svg",
+        "count": 4
+      },
+      {
+        "file": "#U041f#U043b#U0430#U043d#U0438#U0440#U043e#U0432#U0449#U0438#U043a #U0434#U043b#U044f #U0441#U043e#U0442#U0440#U0443#U0434#U043d#U0438#U043a#U0430.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#F05A28",
+    "count": 5,
+    "fill_count": 3,
+    "stroke_count": 2,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 5
+      }
+    ]
+  },
+  {
+    "value": "#BFBFBF",
+    "count": 4,
+    "fill_count": 4,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Avatar.svg",
+        "count": 4
+      }
+    ]
+  },
+  {
+    "value": "#7F56D9",
+    "count": 3,
+    "fill_count": 3,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "value": "#1890FF",
+    "count": 3,
+    "fill_count": 3,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 3
+      }
+    ]
+  },
+  {
+    "value": "#FBD5D5",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Colors.svg",
+        "count": 1
+      },
+      {
+        "file": "Planner.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#E62E05",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#52C41A",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#FFC53D",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#FF4D4F",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#7D8491",
+    "count": 2,
+    "fill_count": 1,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#E6E9EF",
+    "count": 2,
+    "fill_count": 0,
+    "stroke_count": 2,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#B94822",
+    "count": 2,
+    "fill_count": 2,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#A8AEB9",
+    "count": 2,
+    "fill_count": 0,
+    "stroke_count": 2,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 2
+      }
+    ]
+  },
+  {
+    "value": "#D5E5D6",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#343A3E",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#DD2590",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Icons.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#E6F7FF",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#91D5FF",
+    "count": 1,
+    "fill_count": 0,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "Modal.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#D9DEE8",
+    "count": 1,
+    "fill_count": 0,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#F7F8FB",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#CBD1DC",
+    "count": 1,
+    "fill_count": 0,
+    "stroke_count": 1,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#272C38",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#7A8190",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#7886CB",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "value": "#5D6471",
+    "count": 1,
+    "fill_count": 1,
+    "stroke_count": 0,
+    "files": [
+      {
+        "file": "shlz_guide_rail_layout.svg",
+        "count": 1
+      }
+    ]
+  }
+]

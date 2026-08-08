@@ -1,0 +1,369 @@
+{
+  "method": "Observed rect width/height values <=64px occurring >=5 times. These are candidates, not semantic Figma token names.",
+  "values": [
+    {
+      "value": 2.5,
+      "count": 36614
+    },
+    {
+      "value": 40,
+      "count": 3129
+    },
+    {
+      "value": 20,
+      "count": 2804
+    },
+    {
+      "value": 32,
+      "count": 2217
+    },
+    {
+      "value": 39,
+      "count": 1954
+    },
+    {
+      "value": 18.5,
+      "count": 1924
+    },
+    {
+      "value": 2,
+      "count": 1153
+    },
+    {
+      "value": 48,
+      "count": 1051
+    },
+    {
+      "value": 30,
+      "count": 1038
+    },
+    {
+      "value": 16,
+      "count": 948
+    },
+    {
+      "value": 21.5,
+      "count": 935
+    },
+    {
+      "value": 24,
+      "count": 877
+    },
+    {
+      "value": 32.0002,
+      "count": 876
+    },
+    {
+      "value": 38,
+      "count": 735
+    },
+    {
+      "value": 11.9643,
+      "count": 595
+    },
+    {
+      "value": 24.0002,
+      "count": 556
+    },
+    {
+      "value": 50,
+      "count": 516
+    },
+    {
+      "value": 4,
+      "count": 412
+    },
+    {
+      "value": 7,
+      "count": 384
+    },
+    {
+      "value": 10,
+      "count": 383
+    },
+    {
+      "value": 40.0002,
+      "count": 324
+    },
+    {
+      "value": 1,
+      "count": 294
+    },
+    {
+      "value": 25,
+      "count": 291
+    },
+    {
+      "value": 54,
+      "count": 275
+    },
+    {
+      "value": 1.5,
+      "count": 262
+    },
+    {
+      "value": 44,
+      "count": 261
+    },
+    {
+      "value": 14.25,
+      "count": 250
+    },
+    {
+      "value": 27,
+      "count": 229
+    },
+    {
+      "value": 22.5,
+      "count": 202
+    },
+    {
+      "value": 22,
+      "count": 195
+    },
+    {
+      "value": 23,
+      "count": 184
+    },
+    {
+      "value": 21,
+      "count": 166
+    },
+    {
+      "value": 55,
+      "count": 160
+    },
+    {
+      "value": 33,
+      "count": 150
+    },
+    {
+      "value": 29,
+      "count": 134
+    },
+    {
+      "value": 64,
+      "count": 123
+    },
+    {
+      "value": 41,
+      "count": 110
+    },
+    {
+      "value": 61,
+      "count": 104
+    },
+    {
+      "value": 52,
+      "count": 96
+    },
+    {
+      "value": 14,
+      "count": 87
+    },
+    {
+      "value": 21.85,
+      "count": 73
+    },
+    {
+      "value": 30.5,
+      "count": 72
+    },
+    {
+      "value": 24.7,
+      "count": 68
+    },
+    {
+      "value": 8,
+      "count": 65
+    },
+    {
+      "value": 39.001,
+      "count": 60
+    },
+    {
+      "value": 11.2,
+      "count": 60
+    },
+    {
+      "value": 30.4,
+      "count": 58
+    },
+    {
+      "value": 31,
+      "count": 53
+    },
+    {
+      "value": 58.001,
+      "count": 50
+    },
+    {
+      "value": 26,
+      "count": 43
+    },
+    {
+      "value": 35,
+      "count": 42
+    },
+    {
+      "value": 18,
+      "count": 42
+    },
+    {
+      "value": 33.25,
+      "count": 42
+    },
+    {
+      "value": 9,
+      "count": 40
+    },
+    {
+      "value": 19,
+      "count": 39
+    },
+    {
+      "value": 56,
+      "count": 35
+    },
+    {
+      "value": 11,
+      "count": 32
+    },
+    {
+      "value": 58,
+      "count": 30
+    },
+    {
+      "value": 15,
+      "count": 29
+    },
+    {
+      "value": 28.75,
+      "count": 28
+    },
+    {
+      "value": 7.0711,
+      "count": 26
+    },
+    {
+      "value": 56.501,
+      "count": 26
+    },
+    {
+      "value": 60,
+      "count": 22
+    },
+    {
+      "value": 46,
+      "count": 19
+    },
+    {
+      "value": 4.2427,
+      "count": 18
+    },
+    {
+      "value": 14.5,
+      "count": 17
+    },
+    {
+      "value": 59,
+      "count": 16
+    },
+    {
+      "value": 57,
+      "count": 15
+    },
+    {
+      "value": 51.8,
+      "count": 14
+    },
+    {
+      "value": 23.4,
+      "count": 14
+    },
+    {
+      "value": 13.8,
+      "count": 13
+    },
+    {
+      "value": 11.3137,
+      "count": 13
+    },
+    {
+      "value": 5.655,
+      "count": 13
+    },
+    {
+      "value": 24.6,
+      "count": 12
+    },
+    {
+      "value": 51,
+      "count": 11
+    },
+    {
+      "value": 37,
+      "count": 11
+    },
+    {
+      "value": 62,
+      "count": 10
+    },
+    {
+      "value": 3,
+      "count": 10
+    },
+    {
+      "value": 6,
+      "count": 9
+    },
+    {
+      "value": 36,
+      "count": 9
+    },
+    {
+      "value": 27.55,
+      "count": 9
+    },
+    {
+      "value": 59.3979,
+      "count": 9
+    },
+    {
+      "value": 26.2433,
+      "count": 9
+    },
+    {
+      "value": 44.5484,
+      "count": 9
+    },
+    {
+      "value": 28.6383,
+      "count": 9
+    },
+    {
+      "value": 45,
+      "count": 8
+    },
+    {
+      "value": 63,
+      "count": 8
+    },
+    {
+      "value": 36.4,
+      "count": 6
+    },
+    {
+      "value": 38.5,
+      "count": 6
+    },
+    {
+      "value": 12,
+      "count": 6
+    },
+    {
+      "value": 53,
+      "count": 5
+    }
+  ]
+}

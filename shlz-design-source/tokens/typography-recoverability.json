@@ -1,0 +1,31 @@
+{
+  "text_elements_total": 40,
+  "font_attributes_observed": [
+    {
+      "attribute": "font-size",
+      "value": "11",
+      "count": 19
+    },
+    {
+      "attribute": "font-size",
+      "value": "10",
+      "count": 19
+    },
+    {
+      "attribute": "font-weight",
+      "value": "700",
+      "count": 2
+    },
+    {
+      "attribute": "font-size",
+      "value": "20",
+      "count": 1
+    },
+    {
+      "attribute": "font-size",
+      "value": "12",
+      "count": 1
+    }
+  ],
+  "conclusion": "Typography names/content cannot be reliably recovered when Figma exported text as outlined paths. Numeric glyph geometry exists but is not a trustworthy font token source."
+}

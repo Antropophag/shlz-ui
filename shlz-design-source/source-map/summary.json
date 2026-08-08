@@ -1,0 +1,47 @@
+{
+  "source_files": 68,
+  "component_sheets": 34,
+  "screen_or_reference_files": 34,
+  "elements_total": 165320,
+  "tags_global": {
+    "path": 68486,
+    "rect": 57098,
+    "mask": 12244,
+    "g": 6250,
+    "clipPath": 4933,
+    "feColorMatrix": 2970,
+    "feBlend": 2607,
+    "feGaussianBlur": 1560,
+    "feOffset": 1485,
+    "feComposite": 1458,
+    "pattern": 1152,
+    "use": 1151,
+    "filter": 1122,
+    "feFlood": 1122,
+    "line": 1088,
+    "circle": 147,
+    "image": 112,
+    "stop": 88,
+    "svg": 68,
+    "defs": 67,
+    "linearGradient": 44,
+    "text": 40,
+    "feMorphology": 27,
+    "marker": 1
+  },
+  "colors_unique": 79,
+  "rect_dimension_pairs_unique": 1120,
+  "exact_duplicate_path_groups": 6662,
+  "embedded_image_unique": 27,
+  "text_elements_total": 40,
+  "derived_vector_assets": {
+    "icons": 103,
+    "file_types": 21
+  },
+  "limitations": [
+    "Outlined text cannot be losslessly converted back to font family/weight/text style names.",
+    "Semantic component/state names are absent from exported SVG when Figma layer names are not represented in XML.",
+    "Spacing candidate values are observed geometry frequencies, not proof of original variable/token names.",
+    "Exact repeated path data contains both UI shapes/icons and outlined glyphs; semantic deduplication requires visual classification."
+  ]
+}

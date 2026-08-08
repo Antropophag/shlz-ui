@@ -1,0 +1,1685 @@
+{
+  "method": "Rounded to 0.01px across rect/circle/line/svg numeric geometry; values shown occur >=10 times in >=3 source files.",
+  "values": [
+    {
+      "value": 2.5,
+      "count": 36639,
+      "source_file_count": 27,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 20.0,
+      "count": 4828,
+      "source_file_count": 50,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 40.0,
+      "count": 3477,
+      "source_file_count": 43,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 32.0,
+      "count": 3109,
+      "source_file_count": 38,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 16.0,
+      "count": 2933,
+      "source_file_count": 47,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 8.0,
+      "count": 2121,
+      "source_file_count": 43,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 39.0,
+      "count": 2030,
+      "source_file_count": 27,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 18.5,
+      "count": 1924,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 2.0,
+      "count": 1792,
+      "source_file_count": 28,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 24.0,
+      "count": 1713,
+      "source_file_count": 36,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 0.2,
+      "count": 1149,
+      "source_file_count": 13,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 48.0,
+      "count": 1067,
+      "source_file_count": 26,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 30.0,
+      "count": 1054,
+      "source_file_count": 38,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 19.5,
+      "count": 1051,
+      "source_file_count": 23,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 5.25,
+      "count": 938,
+      "source_file_count": 24,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 21.5,
+      "count": 935,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 15.0,
+      "count": 913,
+      "source_file_count": 34,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 38.0,
+      "count": 735,
+      "source_file_count": 24,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 4.0,
+      "count": 647,
+      "source_file_count": 33,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 12.0,
+      "count": 604,
+      "source_file_count": 26,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 11.96,
+      "count": 595,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 332.49,
+      "count": 595,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 96.0,
+      "count": 578,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 10.0,
+      "count": 577,
+      "source_file_count": 24,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 50.0,
+      "count": 528,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 10.75,
+      "count": 468,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 7.0,
+      "count": 399,
+      "source_file_count": 16,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 6.0,
+      "count": 376,
+      "source_file_count": 23,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 11.5,
+      "count": 370,
+      "source_file_count": 17,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 368.0,
+      "count": 323,
+      "source_file_count": 22,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 72.0,
+      "count": 321,
+      "source_file_count": 27,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 1.0,
+      "count": 294,
+      "source_file_count": 31,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 25.0,
+      "count": 291,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 54.0,
+      "count": 275,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 1.5,
+      "count": 267,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 2.85,
+      "count": 263,
+      "source_file_count": 8,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 44.0,
+      "count": 261,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 14.25,
+      "count": 250,
+      "source_file_count": 7,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 66.0,
+      "count": 230,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 27.0,
+      "count": 229,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 372.0,
+      "count": 227,
+      "source_file_count": 27,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 22.5,
+      "count": 202,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 352.0,
+      "count": 198,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 22.0,
+      "count": 195,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 23.0,
+      "count": 184,
+      "source_file_count": 15,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 21.0,
+      "count": 182,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 13.5,
+      "count": 179,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 229.0,
+      "count": 169,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 364.0,
+      "count": 168,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 33.0,
+      "count": 164,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 55.0,
+      "count": 160,
+      "source_file_count": 19,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 29.0,
+      "count": 154,
+      "source_file_count": 30,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 230.0,
+      "count": 153,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 142.0,
+      "count": 148,
+      "source_file_count": 20,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 109.0,
+      "count": 148,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 400.0,
+      "count": 141,
+      "source_file_count": 54,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 87.0,
+      "count": 141,
+      "source_file_count": 19,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 280.0,
+      "count": 141,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 314.0,
+      "count": 137,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 80.0,
+      "count": 132,
+      "source_file_count": 21,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 7.25,
+      "count": 129,
+      "source_file_count": 15,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 70.0,
+      "count": 125,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 64.0,
+      "count": 125,
+      "source_file_count": 21,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 41.0,
+      "count": 122,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 250.0,
+      "count": 117,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 14.5,
+      "count": 117,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 100.0,
+      "count": 116,
+      "source_file_count": 22,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 103.0,
+      "count": 114,
+      "source_file_count": 17,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 200.0,
+      "count": 111,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 168.0,
+      "count": 109,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 110.0,
+      "count": 107,
+      "source_file_count": 17,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 61.0,
+      "count": 104,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 124.0,
+      "count": 104,
+      "source_file_count": 15,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 130.0,
+      "count": 103,
+      "source_file_count": 15,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 300.0,
+      "count": 102,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 246.0,
+      "count": 99,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 102.0,
+      "count": 98,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 52.0,
+      "count": 96,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 239.0,
+      "count": 95,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 151.0,
+      "count": 94,
+      "source_file_count": 20,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 245.0,
+      "count": 94,
+      "source_file_count": 16,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 3.0,
+      "count": 91,
+      "source_file_count": 29,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 137.0,
+      "count": 89,
+      "source_file_count": 20,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 14.0,
+      "count": 87,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 150.0,
+      "count": 85,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 176.0,
+      "count": 84,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 58.0,
+      "count": 80,
+      "source_file_count": 19,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 106.0,
+      "count": 75,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 119.0,
+      "count": 74,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 228.0,
+      "count": 73,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 21.85,
+      "count": 73,
+      "source_file_count": 5,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 80.5,
+      "count": 72,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 81.0,
+      "count": 71,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 222.0,
+      "count": 69,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 138.0,
+      "count": 69,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 24.7,
+      "count": 68,
+      "source_file_count": 7,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 82.0,
+      "count": 63,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 140.0,
+      "count": 62,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 213.0,
+      "count": 61,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 11.2,
+      "count": 60,
+      "source_file_count": 3,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 77.0,
+      "count": 59,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 128.0,
+      "count": 59,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 340.0,
+      "count": 58,
+      "source_file_count": 20,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 30.4,
+      "count": 58,
+      "source_file_count": 5,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 113.0,
+      "count": 57,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 256.0,
+      "count": 55,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 249.0,
+      "count": 54,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 31.0,
+      "count": 53,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 93.0,
+      "count": 52,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 160.0,
+      "count": 52,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 132.0,
+      "count": 52,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 144.0,
+      "count": 51,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 384.0,
+      "count": 51,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 354.0,
+      "count": 50,
+      "source_file_count": 17,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 4.5,
+      "count": 50,
+      "source_file_count": 29,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 69.0,
+      "count": 50,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 75.0,
+      "count": 49,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 90.0,
+      "count": 48,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 240.0,
+      "count": 47,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 89.0,
+      "count": 46,
+      "source_file_count": 14,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 78.0,
+      "count": 45,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 111.0,
+      "count": 45,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 65.0,
+      "count": 45,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 92.0,
+      "count": 45,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 208.0,
+      "count": 44,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 172.0,
+      "count": 44,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 157.0,
+      "count": 43,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 26.0,
+      "count": 43,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 339.0,
+      "count": 43,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 68.0,
+      "count": 43,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 98.0,
+      "count": 42,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 220.0,
+      "count": 42,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 35.0,
+      "count": 42,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 18.0,
+      "count": 42,
+      "source_file_count": 13,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 276.0,
+      "count": 41,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 237.0,
+      "count": 41,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 105.0,
+      "count": 40,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 156.0,
+      "count": 40,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 270.0,
+      "count": 40,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 79.0,
+      "count": 39,
+      "source_file_count": 18,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 394.0,
+      "count": 39,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 167.0,
+      "count": 39,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 19.0,
+      "count": 39,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 236.0,
+      "count": 39,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 348.0,
+      "count": 39,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 184.0,
+      "count": 38,
+      "source_file_count": 15,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 60.0,
+      "count": 38,
+      "source_file_count": 11,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 201.0,
+      "count": 38,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 363.0,
+      "count": 37,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 206.0,
+      "count": 37,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 210.0,
+      "count": 36,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 83.0,
+      "count": 35,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 180.0,
+      "count": 35,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 56.0,
+      "count": 35,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 179.0,
+      "count": 35,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 360.0,
+      "count": 34,
+      "source_file_count": 25,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 159.0,
+      "count": 34,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 127.0,
+      "count": 34,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 131.0,
+      "count": 34,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 120.0,
+      "count": 34,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 264.0,
+      "count": 34,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 327.0,
+      "count": 34,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 336.0,
+      "count": 34,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 227.0,
+      "count": 33,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 117.0,
+      "count": 33,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 219.0,
+      "count": 33,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 345.0,
+      "count": 33,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 141.0,
+      "count": 33,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 11.0,
+      "count": 32,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 158.0,
+      "count": 32,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 318.0,
+      "count": 32,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 255.0,
+      "count": 32,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 390.0,
+      "count": 32,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 104.0,
+      "count": 32,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 395.0,
+      "count": 32,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 126.0,
+      "count": 32,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 207.0,
+      "count": 31,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 57.0,
+      "count": 31,
+      "source_file_count": 16,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 356.0,
+      "count": 31,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 177.0,
+      "count": 31,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 123.0,
+      "count": 31,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 381.0,
+      "count": 30,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 399.0,
+      "count": 30,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 9.25,
+      "count": 30,
+      "source_file_count": 5,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 5.6,
+      "count": 30,
+      "source_file_count": 3,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 286.0,
+      "count": 29,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 192.0,
+      "count": 29,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 309.0,
+      "count": 29,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 212.0,
+      "count": 29,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 95.0,
+      "count": 29,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 59.0,
+      "count": 28,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 153.0,
+      "count": 27,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 13.0,
+      "count": 27,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 129.0,
+      "count": 27,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 7.07,
+      "count": 26,
+      "source_file_count": 6,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 268.0,
+      "count": 26,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 51.0,
+      "count": 26,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 164.0,
+      "count": 26,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 56.5,
+      "count": 26,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 367.0,
+      "count": 25,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 290.0,
+      "count": 25,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 171.0,
+      "count": 25,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 40.5,
+      "count": 24,
+      "source_file_count": 24,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 320.0,
+      "count": 24,
+      "source_file_count": 10,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 121.0,
+      "count": 24,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 17.5,
+      "count": 24,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 169.0,
+      "count": 24,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 149.0,
+      "count": 23,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 99.0,
+      "count": 23,
+      "source_file_count": 9,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 162.0,
+      "count": 23,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 392.0,
+      "count": 22,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 350.0,
+      "count": 22,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 275.0,
+      "count": 22,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 248.0,
+      "count": 22,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 382.0,
+      "count": 22,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 101.0,
+      "count": 21,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 351.0,
+      "count": 21,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 165.0,
+      "count": 20,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 122.0,
+      "count": 19,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 183.0,
+      "count": 19,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 86.0,
+      "count": 19,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 187.0,
+      "count": 19,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 178.0,
+      "count": 19,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 377.0,
+      "count": 19,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 91.0,
+      "count": 18,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 84.0,
+      "count": 18,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 365.0,
+      "count": 18,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 322.0,
+      "count": 18,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 4.24,
+      "count": 18,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 2.12,
+      "count": 18,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 147.0,
+      "count": 17,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 174.0,
+      "count": 17,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 293.0,
+      "count": 17,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 310.0,
+      "count": 17,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 359.0,
+      "count": 16,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 133.0,
+      "count": 16,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 329.0,
+      "count": 16,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 196.0,
+      "count": 16,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 112.0,
+      "count": 16,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 186.5,
+      "count": 16,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 233.0,
+      "count": 15,
+      "source_file_count": 8,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 194.0,
+      "count": 15,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 385.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 313.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 295.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 241.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 223.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 214.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 115.0,
+      "count": 15,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 296.0,
+      "count": 15,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 211.0,
+      "count": 15,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 244.0,
+      "count": 14,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 279.0,
+      "count": 14,
+      "source_file_count": 6,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 51.8,
+      "count": 14,
+      "source_file_count": 3,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 23.4,
+      "count": 14,
+      "source_file_count": 3,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 4.8,
+      "count": 14,
+      "source_file_count": 3,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 5.0,
+      "count": 14,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 173.0,
+      "count": 14,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 100.5,
+      "count": 14,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 353.0,
+      "count": 13,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 13.8,
+      "count": 13,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 284.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 332.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 323.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 391.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 373.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 308.0,
+      "count": 13,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 11.31,
+      "count": 13,
+      "source_file_count": 5,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 5.66,
+      "count": 13,
+      "source_file_count": 5,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 28.5,
+      "count": 12,
+      "source_file_count": 12,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 62.0,
+      "count": 12,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 24.6,
+      "count": 12,
+      "source_file_count": 4,
+      "integer_or_half_step": false
+    },
+    {
+      "value": 108.0,
+      "count": 12,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 148.0,
+      "count": 12,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 37.0,
+      "count": 12,
+      "source_file_count": 5,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 88.0,
+      "count": 11,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 261.0,
+      "count": 11,
+      "source_file_count": 3,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 254.0,
+      "count": 11,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 15.5,
+      "count": 11,
+      "source_file_count": 4,
+      "integer_or_half_step": true
+    },
+    {
+      "value": 297.0,
+      "count": 10,
+      "source_file_count": 7,
+      "integer_or_half_step": true
+    }
+  ]
+}

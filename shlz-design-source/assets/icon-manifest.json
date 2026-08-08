@@ -1,0 +1,1554 @@
+[
+  {
+    "name": "settings",
+    "category": "sidebar",
+    "file": "core/settings.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path9",
+      "path8"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "panel",
+    "category": "sidebar",
+    "file": "core/panel.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path10",
+      "path11"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "globe",
+    "category": "sidebar",
+    "file": "core/globe.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path15",
+      "path13",
+      "path12",
+      "path14",
+      "path16",
+      "path17",
+      "path20",
+      "path18",
+      "path19"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "pie-chart",
+    "category": "sidebar",
+    "file": "core/pie-chart.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path21",
+      "path22"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "chevrons-left",
+    "category": "sidebar",
+    "file": "core/chevrons-left.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path23"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "chevrons-right",
+    "category": "sidebar",
+    "file": "core/chevrons-right.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path24"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "user-circle",
+    "category": "sidebar",
+    "file": "core/user-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path25",
+      "path26",
+      "path27"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "edit-square",
+    "category": "sidebar",
+    "file": "core/edit-square.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path28"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "apps-add",
+    "category": "sidebar",
+    "file": "core/apps-add.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path29",
+      "path30",
+      "path31",
+      "path32"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "cloud-sync",
+    "category": "sidebar",
+    "file": "core/cloud-sync.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path33",
+      "path35",
+      "path36",
+      "path37",
+      "path34"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "layers",
+    "category": "sidebar",
+    "file": "core/layers.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path38",
+      "path39",
+      "path40"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "calendar",
+    "category": "sidebar",
+    "file": "core/calendar.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path41"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "archive",
+    "category": "sidebar",
+    "file": "core/archive.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path42",
+      "path43"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "chart-add",
+    "category": "sidebar",
+    "file": "core/chart-add.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path45",
+      "path44",
+      "path46"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "link-circle",
+    "category": "sidebar",
+    "file": "core/link-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path47",
+      "path48"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "logout",
+    "category": "sidebar",
+    "file": "core/logout.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path49"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "chevron-down",
+    "category": "interface-1",
+    "file": "core/chevron-down.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path51"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "chevron-up",
+    "category": "interface-1",
+    "file": "core/chevron-up.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path52"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "chevron-left",
+    "category": "interface-1",
+    "file": "core/chevron-left.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path53"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "chevron-right",
+    "category": "interface-1",
+    "file": "core/chevron-right.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path54"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "chevron-right-small",
+    "category": "interface-1",
+    "file": "core/chevron-right-small.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path55"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "chevron-left-small",
+    "category": "interface-1",
+    "file": "core/chevron-left-small.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path56"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "arrow-left",
+    "category": "interface-1",
+    "file": "core/arrow-left.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path57"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "arrow-right",
+    "category": "interface-1",
+    "file": "core/arrow-right.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path58"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "arrow-down",
+    "category": "interface-1",
+    "file": "core/arrow-down.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path59"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "arrow-up",
+    "category": "interface-1",
+    "file": "core/arrow-up.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path60"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "expand",
+    "category": "interface-1",
+    "file": "core/expand.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path61",
+      "path62"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "plus",
+    "category": "interface-1",
+    "file": "core/plus.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path63",
+      "path64"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "minus",
+    "category": "interface-1",
+    "file": "core/minus.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path65"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "check",
+    "category": "interface-1",
+    "file": "core/check.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path66"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "close",
+    "category": "interface-1",
+    "file": "core/close.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path67",
+      "path68"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "sort",
+    "category": "interface-2",
+    "file": "core/sort.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path69",
+      "path70"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sort-desc",
+    "category": "interface-2",
+    "file": "core/sort-desc.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path71"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sort-asc",
+    "category": "interface-2",
+    "file": "core/sort-asc.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path72"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "edit",
+    "category": "interface-2",
+    "file": "core/edit.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path73",
+      "path74"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "trash",
+    "category": "interface-2",
+    "file": "core/trash.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path75",
+      "path76",
+      "path77",
+      "path78",
+      "path79"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "calendar",
+    "category": "interface-2",
+    "file": "core/calendar.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path83",
+      "path80",
+      "path82",
+      "path81"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "search",
+    "category": "interface-2",
+    "file": "core/search.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path84",
+      "path85"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "history",
+    "category": "interface-2",
+    "file": "core/history.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path86"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sliders",
+    "category": "interface-2",
+    "file": "core/sliders.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path87"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "refresh",
+    "category": "interface-2",
+    "file": "core/refresh.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path88",
+      "path89"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "angle",
+    "category": "interface-2",
+    "file": "core/angle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path90"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "search-bold",
+    "category": "interface-2",
+    "file": "core/search-bold.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path91"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "more-vertical",
+    "category": "interface-2",
+    "file": "core/more-vertical.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path95",
+      "path96",
+      "path97",
+      "path92",
+      "path93",
+      "path94"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "collapse-horizontal",
+    "category": "interface-2",
+    "file": "core/collapse-horizontal.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path99",
+      "path98",
+      "path100"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "upload-cloud",
+    "category": "interface-2",
+    "file": "core/upload-cloud.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path101",
+      "path102"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "flag",
+    "category": "interface-3",
+    "file": "core/flag.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path103"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "message-circle",
+    "category": "interface-3",
+    "file": "core/message-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path104",
+      "path105",
+      "path106",
+      "path107"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "paperclip",
+    "category": "interface-3",
+    "file": "core/paperclip.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path108"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "plus-circle",
+    "category": "interface-3",
+    "file": "core/plus-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path109",
+      "path110",
+      "path111"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "minus-circle",
+    "category": "interface-3",
+    "file": "core/minus-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path112",
+      "path113"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "download",
+    "category": "interface-3",
+    "file": "core/download.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path114",
+      "path115"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "print",
+    "category": "interface-3",
+    "file": "core/print.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path116",
+      "path118",
+      "path117",
+      "path119"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "undo",
+    "category": "interface-3",
+    "file": "core/undo.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path120"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "redo",
+    "category": "interface-3",
+    "file": "core/redo.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path121"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "mail",
+    "category": "interface-3",
+    "file": "core/mail.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path122",
+      "path123",
+      "path124"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "note-add",
+    "category": "interface-3",
+    "file": "core/note-add.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path125",
+      "path127",
+      "path126"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "eye",
+    "category": "interface-3",
+    "file": "core/eye.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path128",
+      "path129"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "folder",
+    "category": "interface-3",
+    "file": "core/folder.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path131",
+      "path130"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "external-link",
+    "category": "interface-3",
+    "file": "core/external-link.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path132",
+      "path133"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "link",
+    "category": "interface-3",
+    "file": "core/link.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path135",
+      "path134"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "caret-right",
+    "category": "interface-4",
+    "file": "core/caret-right.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path136"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sliders-alt",
+    "category": "interface-4",
+    "file": "core/sliders-alt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path137"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "info-circle",
+    "category": "interface-4",
+    "file": "core/info-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path138",
+      "path139"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "user",
+    "category": "interface-4",
+    "file": "core/user.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path140",
+      "path141",
+      "path142"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "focus",
+    "category": "interface-4",
+    "file": "core/focus.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path145",
+      "path146",
+      "path143",
+      "path147",
+      "path144"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "currency-circle",
+    "category": "interface-4",
+    "file": "core/currency-circle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path149",
+      "path148"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "copy",
+    "category": "interface-4",
+    "file": "core/copy.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path150",
+      "path151"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "table",
+    "category": "interface-4",
+    "file": "core/table.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path152",
+      "path154",
+      "path155",
+      "path153"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "menu",
+    "category": "interface-4",
+    "file": "core/menu.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path156",
+      "path157",
+      "path158"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "search-small",
+    "category": "interface-4",
+    "file": "core/search-small.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path159"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "download-box",
+    "category": "interface-4",
+    "file": "core/download-box.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path160",
+      "path162",
+      "path161"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "briefcase",
+    "category": "interface-4",
+    "file": "core/briefcase.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path163",
+      "path166",
+      "path165",
+      "path164"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "toggle",
+    "category": "interface-4",
+    "file": "core/toggle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path167",
+      "path168"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "laptop",
+    "category": "interface-4",
+    "file": "core/laptop.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path169",
+      "path171",
+      "path170"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sync",
+    "category": "interface-4",
+    "file": "core/sync.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path175",
+      "path172",
+      "path174",
+      "path173"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "apps-add-alt",
+    "category": "interface-5",
+    "file": "core/apps-add-alt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path176",
+      "path177",
+      "path178",
+      "path179"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "drag-handle",
+    "category": "interface-5",
+    "file": "core/drag-handle.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path180",
+      "path181",
+      "path182",
+      "path183",
+      "path184",
+      "path185"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "formula",
+    "category": "interface-5",
+    "file": "core/formula.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path186",
+      "path187"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "grid",
+    "category": "interface-5",
+    "file": "core/grid.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path188",
+      "path189",
+      "path190",
+      "path191"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "user-alt",
+    "category": "interface-5",
+    "file": "core/user-alt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path192",
+      "path193"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "sync-alt",
+    "category": "interface-5",
+    "file": "core/sync-alt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path194",
+      "path196",
+      "path197",
+      "path195"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "xls-file",
+    "category": "interface-5",
+    "file": "core/xls-file.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "rect199",
+      "path200",
+      "path198",
+      "path199"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "flag-outline",
+    "category": "interface-5",
+    "file": "core/flag-outline.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path201"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "flag-filled",
+    "category": "interface-5",
+    "file": "core/flag-filled.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path203",
+      "path202"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "star",
+    "category": "interface-5",
+    "file": "core/star.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path204"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "cube",
+    "category": "interface-5",
+    "file": "core/cube.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path205",
+      "path207",
+      "path206",
+      "path208"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "medium"
+  },
+  {
+    "name": "move-vertical",
+    "category": "text-editor",
+    "file": "core/move-vertical.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path210"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "strikethrough",
+    "category": "text-editor",
+    "file": "core/strikethrough.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path211"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "underline",
+    "category": "text-editor",
+    "file": "core/underline.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path212"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "italic",
+    "category": "text-editor",
+    "file": "core/italic.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path213"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "bold",
+    "category": "text-editor",
+    "file": "core/bold.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path214"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "align-left",
+    "category": "text-editor",
+    "file": "core/align-left.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path215"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "align-center",
+    "category": "text-editor",
+    "file": "core/align-center.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path216"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "align-right",
+    "category": "text-editor",
+    "file": "core/align-right.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path217"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "heading-1",
+    "category": "text-editor",
+    "file": "core/heading-1.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path218"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "heading-2",
+    "category": "text-editor",
+    "file": "core/heading-2.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path219"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "heading-3",
+    "category": "text-editor",
+    "file": "core/heading-3.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path220"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "heading-4",
+    "category": "text-editor",
+    "file": "core/heading-4.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path221"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "heading-5",
+    "category": "text-editor",
+    "file": "core/heading-5.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path222"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "ordered-list",
+    "category": "text-editor",
+    "file": "core/ordered-list.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path223"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "unordered-list",
+    "category": "text-editor",
+    "file": "core/unordered-list.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path224"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "paperclip-editor",
+    "category": "text-editor",
+    "file": "core/paperclip-editor.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path225"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "image",
+    "category": "text-editor",
+    "file": "core/image.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path226"
+    ],
+    "viewBox": "0 0 24 24",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "pdf",
+    "category": "file-types",
+    "file": "file-types/pdf.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path283",
+      "path284",
+      "rect284",
+      "path285"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "doc",
+    "category": "file-types",
+    "file": "file-types/doc.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path286",
+      "path287",
+      "rect287",
+      "path288"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "docx",
+    "category": "file-types",
+    "file": "file-types/docx.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path289",
+      "path290",
+      "rect290",
+      "path291"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "txt",
+    "category": "file-types",
+    "file": "file-types/txt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path292",
+      "path293",
+      "rect293",
+      "path294"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "csv",
+    "category": "file-types",
+    "file": "file-types/csv.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path295",
+      "path296",
+      "rect296",
+      "path297"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "xls",
+    "category": "file-types",
+    "file": "file-types/xls.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path298",
+      "path299",
+      "rect299",
+      "path300"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "xlsx",
+    "category": "file-types",
+    "file": "file-types/xlsx.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path301",
+      "path302",
+      "rect302",
+      "path303"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "ppt",
+    "category": "file-types",
+    "file": "file-types/ppt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path304",
+      "path305",
+      "rect305",
+      "path306"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "pptx",
+    "category": "file-types",
+    "file": "file-types/pptx.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path307",
+      "path308",
+      "rect308",
+      "path309"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "mp3",
+    "category": "file-types",
+    "file": "file-types/mp3.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path310",
+      "path311",
+      "rect311",
+      "path312"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "mp4",
+    "category": "file-types",
+    "file": "file-types/mp4.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path313",
+      "path314",
+      "rect314",
+      "path315"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "mpeg",
+    "category": "file-types",
+    "file": "file-types/mpeg.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path316",
+      "path317",
+      "rect317",
+      "path318"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "avi",
+    "category": "file-types",
+    "file": "file-types/avi.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path319",
+      "path320",
+      "rect320",
+      "path321"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "mkv",
+    "category": "file-types",
+    "file": "file-types/mkv.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path322",
+      "path323",
+      "rect323",
+      "path324"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "zip",
+    "category": "file-types",
+    "file": "file-types/zip.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path325",
+      "path326",
+      "rect326",
+      "path327"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "rar",
+    "category": "file-types",
+    "file": "file-types/rar.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path328",
+      "path329",
+      "rect329",
+      "path330"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "img",
+    "category": "file-types",
+    "file": "file-types/img.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path331",
+      "path332",
+      "rect332",
+      "path333"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "png",
+    "category": "file-types",
+    "file": "file-types/png.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path334",
+      "path335",
+      "rect335",
+      "path336"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "svg",
+    "category": "file-types",
+    "file": "file-types/svg.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path337",
+      "path338",
+      "rect338",
+      "path339"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "pdf-alt",
+    "category": "file-types",
+    "file": "file-types/pdf-alt.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path340",
+      "path341",
+      "rect341",
+      "path342"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  },
+  {
+    "name": "file",
+    "category": "file-types",
+    "file": "file-types/file.svg",
+    "source": "Icons.svg",
+    "source_ids": [
+      "path343",
+      "path344",
+      "rect344",
+      "path345"
+    ],
+    "viewBox": "0 0 44 44",
+    "semantic_name_confidence": "high"
+  }
+]

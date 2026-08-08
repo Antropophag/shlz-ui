@@ -1,0 +1,402 @@
+[
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Разбивка направляющей",
+    "x": "515",
+    "y": "52",
+    "font_family": null,
+    "font_size": "20",
+    "font_weight": "700",
+    "fill": "#272C38"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Общая длина 84 890 мм · масштаб условный",
+    "x": "515",
+    "y": "74",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#7A8190"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Нижняя · 2 890 мм",
+    "x": "568",
+    "y": "1263.7773851590105",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Вторая · 5 000 мм",
+    "x": "568",
+    "y": "1208.946996466431",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Третья · 5 000 мм",
+    "x": "568",
+    "y": "1139.4534746760896",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Четвёртая · 5 000 мм",
+    "x": "568",
+    "y": "1069.959952885748",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №1 · 5 000 мм",
+    "x": "568",
+    "y": "1000.4664310954064",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №2 · 5 000 мм",
+    "x": "568",
+    "y": "930.9729093050648",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №3 · 5 000 мм",
+    "x": "568",
+    "y": "861.4793875147232",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №4 · 5 000 мм",
+    "x": "568",
+    "y": "791.9858657243817",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №5 · 5 000 мм",
+    "x": "568",
+    "y": "722.49234393404",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №6 · 5 000 мм",
+    "x": "568",
+    "y": "652.9988221436984",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №7 · 5 000 мм",
+    "x": "568",
+    "y": "583.5053003533569",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №8 · 5 000 мм",
+    "x": "568",
+    "y": "514.0117785630152",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №9 · 5 000 мм",
+    "x": "568",
+    "y": "444.5182567726737",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №10 · 5 000 мм",
+    "x": "568",
+    "y": "375.0247349823321",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №11 · 5 000 мм",
+    "x": "568",
+    "y": "305.5312131919906",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №12 · 5 000 мм",
+    "x": "568",
+    "y": "236.037691401649",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Промежуточная №13 · 5 000 мм",
+    "x": "568",
+    "y": "166.54416961130732",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Верхняя · 2 000 мм",
+    "x": "568",
+    "y": "117.89870435806824",
+    "font_family": null,
+    "font_size": "11",
+    "font_weight": null,
+    "fill": "#3C4350"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 1",
+    "x": "452",
+    "y": "1243.693757361602",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 2",
+    "x": "452",
+    "y": "1174.2002355712602",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 3",
+    "x": "452",
+    "y": "1104.7067137809188",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 4",
+    "x": "452",
+    "y": "1035.2131919905771",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 5",
+    "x": "452",
+    "y": "965.7196702002357",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 6",
+    "x": "452",
+    "y": "896.226148409894",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 7",
+    "x": "452",
+    "y": "826.7326266195524",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 8",
+    "x": "452",
+    "y": "757.2391048292109",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 9",
+    "x": "452",
+    "y": "687.7455830388692",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 10",
+    "x": "452",
+    "y": "618.2520612485276",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 11",
+    "x": "452",
+    "y": "548.7585394581861",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 12",
+    "x": "452",
+    "y": "479.2650176678445",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 13",
+    "x": "452",
+    "y": "409.77149587750284",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 14",
+    "x": "452",
+    "y": "340.2779740871614",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 15",
+    "x": "452",
+    "y": "270.78445229681984",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 16",
+    "x": "452",
+    "y": "201.29093050647816",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Стык 17",
+    "x": "452",
+    "y": "131.7974087161365",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#8A642E"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Шаг 1: 1 420 мм",
+    "x": "614",
+    "y": "118.17667844522975",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#B94822"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "84 890 мм",
+    "x": "238",
+    "y": "690",
+    "font_family": null,
+    "font_size": "12",
+    "font_weight": "700",
+    "fill": "#5D6471"
+  },
+  {
+    "file": "shlz_guide_rail_layout.svg",
+    "text": "Начало верхней секции",
+    "x": "730",
+    "y": "131.7974087161365",
+    "font_family": null,
+    "font_size": "10",
+    "font_weight": null,
+    "fill": "#B94822"
+  }
+]
