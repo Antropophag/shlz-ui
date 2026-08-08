@@ -26,6 +26,14 @@
       "types": "./dist/tabs.d.ts",
       "import": "./dist/tabs.js"
     },
+    "./modal": {
+      "types": "./dist/modal.d.ts",
+      "import": "./dist/modal.js"
+    },
+    "./drawer": {
+      "types": "./dist/drawer.d.ts",
+      "import": "./dist/drawer.js"
+    },
     "./browser": {
       "types": "./dist/index.d.ts",
       "import": "./dist/browser.js"
