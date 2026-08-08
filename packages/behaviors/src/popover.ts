@@ -1,46 +1,10 @@
-import {
-  arrow,
-  autoUpdate,
-  computePosition,
-  flip,
-  offset,
-  shift,
-  type Placement,
-} from "@floating-ui/dom";
-
 import { listenForOutsidePointer } from "./internal/dismissal.js";
-
-const supportedPlacements = new Set<Placement>([
-  "top",
-  "top-start",
-  "top-end",
-  "bottom",
-  "bottom-start",
-  "bottom-end",
-  "left",
-  "left-start",
-  "left-end",
-  "right",
-  "right-start",
-  "right-end",
-]);
-
-const oppositeSide = {
-  top: "bottom",
-  right: "left",
-  bottom: "top",
-  left: "right",
-} as const;
-
-function readPlacement(trigger: HTMLButtonElement): Placement {
-  const value = trigger.dataset.shlzPopoverPlacement as Placement | undefined;
-  return value && supportedPlacements.has(value) ? value : "bottom";
-}
-
-function readOffset(trigger: HTMLButtonElement): number {
-  const value = Number(trigger.dataset.shlzPopoverOffset ?? 8);
-  return Number.isFinite(value) && value >= 0 ? value : 8;
-}
+import {
+  observeFloating,
+  positionFloating,
+  readFloatingPlacement,
+  readNonNegativeNumber,
+} from "./internal/floating.js";
 
 export class PopoverController {
   readonly trigger: HTMLButtonElement;
@@ -81,7 +45,7 @@ export class PopoverController {
     if (this.#destroyed || this.trigger.disabled || this.expanded) return;
     this.trigger.setAttribute("aria-expanded", "true");
     this.popover.hidden = false;
-    this.#cleanupPositioning = autoUpdate(
+    this.#cleanupPositioning = observeFloating(
       this.trigger,
       this.popover,
       () => void this.updatePosition(),
@@ -107,39 +71,15 @@ export class PopoverController {
     const arrowElement = this.popover.querySelector<HTMLElement>(
       ".shlz-popover__arrow",
     );
-    const { x, y, placement, strategy, middlewareData } = await computePosition(
-      this.trigger,
-      this.popover,
-      {
-        placement: readPlacement(this.trigger),
-        strategy: "fixed",
-        middleware: [
-          offset(readOffset(this.trigger)),
-          flip({ padding: 8 }),
-          shift({ padding: 8 }),
-          arrowElement && arrow({ element: arrowElement, padding: 12 }),
-        ],
-      },
-    );
-
-    Object.assign(this.popover.style, {
-      left: `${x}px`,
-      top: `${y}px`,
-      position: strategy,
+    await positionFloating(this.trigger, this.popover, {
+      placement: readFloatingPlacement(
+        this.trigger.dataset.shlzPopoverPlacement,
+        "bottom",
+      ),
+      offset: readNonNegativeNumber(this.trigger.dataset.shlzPopoverOffset, 8),
+      arrow: arrowElement,
+      arrowPadding: 12,
     });
-    this.popover.dataset.placement = placement;
-
-    if (arrowElement) {
-      const side = placement.split("-")[0] as keyof typeof oppositeSide;
-      const arrowData = middlewareData.arrow;
-      Object.assign(arrowElement.style, {
-        left: arrowData?.x == null ? "" : `${arrowData.x}px`,
-        top: arrowData?.y == null ? "" : `${arrowData.y}px`,
-        right: "",
-        bottom: "",
-        [oppositeSide[side]]: "-5px",
-      });
-    }
   }
 
   destroy(): void {

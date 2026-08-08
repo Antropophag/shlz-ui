@@ -18,6 +18,14 @@
       "types": "./dist/popover.d.ts",
       "import": "./dist/popover.js"
     },
+    "./tooltip": {
+      "types": "./dist/tooltip.d.ts",
+      "import": "./dist/tooltip.js"
+    },
+    "./tabs": {
+      "types": "./dist/tabs.d.ts",
+      "import": "./dist/tabs.js"
+    },
     "./browser": {
       "types": "./dist/index.d.ts",
       "import": "./dist/browser.js"
