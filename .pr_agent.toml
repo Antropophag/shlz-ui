@@ -1,0 +1,25 @@
+[config]
+repo_context_files = ["AGENTS.md"]
+
+[ignore]
+glob = [
+  "shlz-design-source/**",
+  "apps/showcase/generated/source-references/**",
+  "packages/icons/normalized/**",
+  "tools/playwright/**/*-snapshots/**",
+  "package-lock.json",
+  "**/dist/**",
+  "**/node_modules/**",
+  "test-results/**",
+  "playwright-report/**",
+]
+
+[pr_reviewer]
+require_tests_review = true
+require_security_review = true
+extra_instructions = """\
+Prioritize handwritten production code, component contracts, CSS and token semantics,
+accessibility, framework-agnostic behavior, tests, generators, icon normalization,
+validation, and build tooling. Treat the showcase as a consumer, never as design authority.
+Flag changes that mutate authoritative design sources or lose SVG geometry, paint, or provenance.
+"""

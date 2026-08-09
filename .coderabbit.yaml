@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://coderabbit.ai/integrations/schema.v2.json
+language: "en-US"
+
+reviews:
+  auto_review:
+    enabled: true
+    drafts: false
+  path_filters:
+    - "!shlz-design-source/**"
+    - "!apps/showcase/generated/source-references/**"
+    - "!packages/icons/normalized/**"
+    - "!tools/playwright/**/*-snapshots/**"
+    - "!package-lock.json"
+    - "!**/dist/**"
+    - "!**/node_modules/**"
+    - "!test-results/**"
+    - "!playwright-report/**"
+  path_instructions:
+    - path: "packages/**"
+      instructions: |
+        Review handwritten production code and public contracts for framework independence,
+        backwards compatibility, accessibility, token semantics, and correct icon paint behavior.
+    - path: "apps/showcase/src/**"
+      instructions: |
+        Treat the showcase as a consumer and verification surface, not as design authority.
+        Review accessibility and whether examples exercise production package contracts faithfully.
+    - path: "tools/**"
+      instructions: |
+        Review generators, normalization, validation, build tooling, and tests for determinism,
+        source provenance, safe filesystem behavior, and preservation of authoritative SVG paint and geometry.
