@@ -6,6 +6,7 @@ glob = [
   "shlz-design-source/**",
   "apps/showcase/generated/source-references/**",
   "packages/icons/normalized/**",
+  "tools/playwright/*-snapshots/**",
   "tools/playwright/**/*-snapshots/**",
   "package-lock.json",
   "**/dist/**",
