@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -35,7 +36,9 @@ test("tooltip visual placements remain source-shaped", async ({ page }) => {
   await page.evaluate(() => {
     for (const controller of window.__shlzTooltipControllers) controller.open();
   });
-  await expect(page.locator("#tooltip-demo")).toHaveScreenshot(
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("#tooltip-demo"),
     "tooltip-placements.png",
   );
 });
@@ -62,7 +65,11 @@ for (const [id, snapshot] of [
   ["notification-demo", "notification.png"],
 ]) {
   test(`${id} representative visual`, async ({ page }) => {
-    await expect(page.locator(`#${id}`)).toHaveScreenshot(snapshot);
+    await expectStableShowcaseScreenshot(
+      page,
+      page.locator(`#${id}`),
+      snapshot,
+    );
   });
 }
 

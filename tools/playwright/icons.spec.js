@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 const representativeIcons = [
   "add-documents",
@@ -97,7 +98,9 @@ test("representative paint topologies remain visually stable", async ({
 test("Icon Catalog review is captured independently at large scale", async ({
   page,
 }) => {
-  await expect(page.locator(".shlz-icon-catalog")).toHaveScreenshot(
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator(".shlz-icon-catalog"),
     "icon-catalog.png",
   );
 });

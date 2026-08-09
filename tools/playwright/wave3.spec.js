@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -75,7 +76,9 @@ test("Avatar showcase renders the complete source matrix at exact geometry", asy
   expect(
     await icon.evaluate((node) => node.getBoundingClientRect().width),
   ).toBe(40);
-  await expect(page.locator("#avatar-demo")).toHaveScreenshot(
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("#avatar-demo"),
     "wave3-avatar.png",
   );
 });
@@ -105,5 +108,9 @@ test("Table showcase remains a 50px coherent grid with bounded affordances", asy
   await expect(table.locator(".shlz-checkbox")).toHaveCount(3);
   await expect(table.locator(".shlz-status")).toHaveCount(1);
   await expect(table.locator(".shlz-table__dropdown")).toHaveCount(2);
-  await expect(page.locator("#table-demo")).toHaveScreenshot("wave3-table.png");
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("#table-demo"),
+    "wave3-table.png",
+  );
 });

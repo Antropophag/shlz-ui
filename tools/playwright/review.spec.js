@@ -1,4 +1,8 @@
 import { expect, test } from "@playwright/test";
+import {
+  expectStableShowcaseScreenshot,
+  stabilizeShowcaseLayout,
+} from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -15,11 +19,16 @@ for (const [name, selector] of [
   ["notification", "#notification-demo"],
 ]) {
   test(`production showcase review: ${name}`, async ({ page }) => {
-    await expect(page.locator(selector)).toHaveScreenshot(`review-${name}.png`);
+    await expectStableShowcaseScreenshot(
+      page,
+      page.locator(selector),
+      `review-${name}.png`,
+    );
   });
 }
 
 test("production showcase review: dropdown", async ({ page }) => {
+  await stabilizeShowcaseLayout(page);
   await page
     .locator('#dropdown-demo [aria-controls="showcase-actions"]')
     .click();

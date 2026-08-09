@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { stabilizeShowcaseLayout } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -33,6 +34,7 @@ test("dropdown keyboard navigation skips disabled items and restores focus", asy
 test("dropdown preserves native disabled and has a visual snapshot", async ({
   page,
 }) => {
+  await stabilizeShowcaseLayout(page);
   const trigger = page.getByRole("button", { name: "Действия" });
   await trigger.click();
   await expect(

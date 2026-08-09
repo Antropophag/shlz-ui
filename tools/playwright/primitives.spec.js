@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -23,7 +24,9 @@ test("source specification and fidelity surfaces are reviewable", async ({
     details.open = true;
   });
   await isolateDocumentationSurface(page);
-  await expect(page.locator("#source-spec")).toHaveScreenshot(
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("#source-spec"),
     "showcase-source-spec.png",
   );
   const buttonEvidence = page.locator(
@@ -32,7 +35,11 @@ test("source specification and fidelity surfaces are reviewable", async ({
   await buttonEvidence.evaluate((details) => {
     details.open = true;
   });
-  await expect(buttonEvidence).toHaveScreenshot("showcase-fidelity.png");
+  await expectStableShowcaseScreenshot(
+    page,
+    buttonEvidence,
+    "showcase-fidelity.png",
+  );
   await expect(page.locator("body")).toHaveCSS(
     "font-family",
     /system-ui|-apple-system|Segoe UI/,
@@ -65,7 +72,9 @@ test("monochrome control icons inherit every control foreground", async ({
       await control.evaluate((node) => window.getComputedStyle(node).color),
     );
   }
-  await expect(page.locator("[data-shlz-button-icons]")).toHaveScreenshot(
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("[data-shlz-button-icons]"),
     "button-icon-foregrounds.png",
   );
 });

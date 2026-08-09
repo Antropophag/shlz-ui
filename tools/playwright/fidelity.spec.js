@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -251,7 +252,9 @@ for (const component of [
   "drawer",
 ]) {
   test(`fidelity review: ${component}`, async ({ page }) => {
-    await expect(page.locator(`#fidelity-${component}`)).toHaveScreenshot(
+    await expectStableShowcaseScreenshot(
+      page,
+      page.locator(`#fidelity-${component}`),
       `fidelity-${component}.png`,
     );
   });

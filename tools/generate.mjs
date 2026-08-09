@@ -207,6 +207,8 @@ const styleSources = [
   "components/notification.css",
   "components/modal.css",
   "components/drawer.css",
+  "components/file-row.css",
+  "components/empty-state.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
 await mkdir(path.join(styleRoot, "dist"), { recursive: true });

@@ -81,6 +81,39 @@ main {
   scroll-margin-block-start: var(--shlz-source-spacing-24);
 }
 
+#file-row-demo,
+#empty-state-demo {
+  scroll-margin-block-start: var(--shlz-source-spacing-24);
+}
+
+.shlz-content-state-examples {
+  display: grid;
+  gap: 12px;
+}
+
+.shlz-file-row-example--source {
+  inline-size: 240px;
+}
+
+.shlz-file-row-example--source-state {
+  inline-size: 230px;
+}
+
+.shlz-file-row-example--long {
+  inline-size: min(360px, 100%);
+}
+
+.shlz-file-row-example--actions {
+  inline-size: min(420px, 100%);
+}
+
+.shlz-empty-state-examples {
+  display: grid;
+  gap: 32px;
+  justify-items: center;
+  padding-block: 24px;
+}
+
 .shlz-docs-anchor {
   display: block;
   block-size: 1px;

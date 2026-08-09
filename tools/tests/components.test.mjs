@@ -17,6 +17,8 @@ const componentFiles = [
   "notification",
   "modal",
   "drawer",
+  "file-row",
+  "empty-state",
 ];
 
 test("modal and drawer compose the native dialog lifecycle", async () => {
