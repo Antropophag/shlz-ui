@@ -7,7 +7,8 @@
     "apps/*"
   ],
   "scripts": {
-    "dev": "npm run generate && npm run dev -w @shlz/showcase",
+    "dev": "npm run generate && npm run build:packages && npm run dev -w @shlz/showcase",
+    "build:packages": "npm run build -w @shlz/tokens -w @shlz/icons -w @shlz/styles -w @shlz/behaviors",
     "generate": "npm run generate:basic-icons && node tools/generate.mjs",
     "generate:basic-icons": "node tools/normalize-basic-icons.mjs",
     "generate:source-index": "node tools/generate-design-source-index.mjs",

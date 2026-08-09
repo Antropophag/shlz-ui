@@ -47,6 +47,32 @@ test("all canonical icons resolve to painted production sprite symbols", async (
   expect(failures).toEqual([]);
 });
 
+test("standalone monochrome icons use the semantic default foreground", async ({
+  page,
+}) => {
+  const monochrome = page.locator(".shlz-icon-card > svg.shlz-icon");
+  await expect(monochrome).toHaveCount(97);
+  const colors = await monochrome.evaluateAll((items) => [
+    ...new Set(items.map((item) => window.getComputedStyle(item).color)),
+  ]);
+  const semanticDefault = await page
+    .locator(".shlz-scope")
+    .evaluate((node) => window.getComputedStyle(node).color);
+  expect(colors).toEqual([semanticDefault]);
+
+  const inherited = await page.locator(".shlz-scope").evaluate((scope) => {
+    const host = document.createElement("span");
+    host.style.color = "rgb(198, 31, 55)";
+    host.innerHTML =
+      '<svg class="shlz-icon shlz-icon--inherit" viewBox="0 0 1 1"><rect width="1" height="1" fill="currentColor"></rect></svg>';
+    scope.append(host);
+    const color = window.getComputedStyle(host.firstElementChild).color;
+    host.remove();
+    return color;
+  });
+  expect(inherited).toBe("rgb(198, 31, 55)");
+});
+
 test("representative paint topologies remain visually stable", async ({
   page,
 }) => {

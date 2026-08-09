@@ -27,6 +27,7 @@
 .shlz-pagination__icon {
   inline-size: 20px;
   block-size: 20px;
+  color: inherit;
 }
 
 .shlz-pagination__item--visual-hover {

@@ -4,6 +4,13 @@
 
 `tools/generate.mjs` copies normalized SVG bytes without a second paint or geometry transform. The normalized layer has already classified monochrome icons (`currentColor`) and semantic/multicolor icons (preserved paints). Production emits individual SVGs, logical manifest records with variants, a sprite, runtime name lists and TypeScript name unions.
 
+The framework-agnostic `.shlz-icon` host gives standalone monochrome icons the
+semantic `text-primary` foreground observed in the authoritative interface
+exports. Component-owned slots set `color: inherit`, and custom consumers can
+use `.shlz-icon--inherit`, so Button, field, menu, feedback and other component
+states remain the source of their icon foreground. Preserved-paint assets stay
+external images and are not recolored by this contract.
+
 The production manifest contains 119 canonical logical icons and 125 emitted variants. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
 
 ## Migration boundary

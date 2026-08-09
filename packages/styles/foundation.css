@@ -78,6 +78,10 @@
   inline-size: 1em;
   block-size: 1em;
   overflow: hidden;
-  color: inherit;
+  color: var(--shlz-semantic-color-text-primary);
   vertical-align: middle;
+}
+
+.shlz-icon--inherit {
+  color: inherit;
 }

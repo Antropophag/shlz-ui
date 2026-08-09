@@ -38,6 +38,7 @@
 .shlz-segment__icon {
   inline-size: 16px;
   block-size: 16px;
+  color: inherit;
 }
 
 .shlz-segment__input:checked + .shlz-segment__label {

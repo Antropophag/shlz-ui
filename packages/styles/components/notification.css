@@ -39,8 +39,11 @@
 }
 
 .shlz-notification:not(.shlz-notification--light)
-  :is(.shlz-notification__icon img, .shlz-notification__close img) {
-  filter: brightness(0) invert(1);
+  :is(
+    .shlz-notification__icon .shlz-icon,
+    .shlz-notification__close .shlz-icon
+  ) {
+  color: inherit;
 }
 
 .shlz-notification__content {

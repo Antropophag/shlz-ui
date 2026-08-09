@@ -104,6 +104,7 @@
   flex: 0 0 20px;
   inline-size: 20px;
   block-size: 20px;
+  color: inherit;
   object-fit: contain;
   pointer-events: none;
 }

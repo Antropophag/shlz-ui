@@ -82,6 +82,7 @@
   display: block;
   inline-size: 20px;
   block-size: 20px;
+  color: inherit;
 }
 
 .shlz-dropdown__separator {

@@ -33,6 +33,7 @@
 .shlz-tag__icon {
   inline-size: 16px;
   block-size: 16px;
+  color: inherit;
 }
 
 .shlz-tag__remove {

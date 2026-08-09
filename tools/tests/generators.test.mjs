@@ -193,6 +193,23 @@ test("icon generator no longer reads the legacy production manifest", async () =
   assert.match(showcase, /@shlz\/icons\/compatibility-aliases\.json/);
 });
 
+test("development bootstrap builds package exports before starting Vite", async () => {
+  const rootPackage = await json("package.json");
+  assert.match(rootPackage.scripts.dev, /npm run generate/);
+  assert.match(rootPackage.scripts.dev, /npm run build:packages/);
+  assert.ok(
+    rootPackage.scripts.dev.indexOf("npm run build:packages") <
+      rootPackage.scripts.dev.indexOf("npm run dev -w @shlz/showcase"),
+  );
+  for (const workspace of [
+    "@shlz/tokens",
+    "@shlz/icons",
+    "@shlz/styles",
+    "@shlz/behaviors",
+  ])
+    assert.match(rootPackage.scripts["build:packages"], new RegExp(workspace));
+});
+
 test("icon API exposes a sprite href that preserves currentColor inheritance", async () => {
   const icons = await import("../../packages/icons/dist/index.js");
   assert.equal(icons.iconSymbolId("search"), "shlz-icon-search");
