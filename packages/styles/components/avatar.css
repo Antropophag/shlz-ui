@@ -1,0 +1,58 @@
+.shlz-avatar {
+  --shlz-avatar-size: 32px;
+
+  display: inline-flex;
+  overflow: hidden;
+  inline-size: var(--shlz-avatar-size);
+  block-size: var(--shlz-avatar-size);
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--shlz-source-color-blue-blue-200);
+  background: var(--shlz-source-color-blue-blue-100);
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.shlz-avatar--24 {
+  --shlz-avatar-size: 24px;
+
+  font-size: 12px;
+}
+
+.shlz-avatar--32 {
+  --shlz-avatar-size: 32px;
+
+  font-size: 14px;
+}
+
+.shlz-avatar--40 {
+  --shlz-avatar-size: 40px;
+
+  font-size: 16px;
+}
+
+.shlz-avatar--64 {
+  --shlz-avatar-size: 64px;
+
+  font-size: 20px;
+}
+
+.shlz-avatar__image {
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+}
+
+.shlz-avatar__icon {
+  display: block;
+  inline-size: 62.5%;
+  block-size: 62.5%;
+}
+
+.shlz-avatar--icon {
+  color: var(--shlz-semantic-color-text-inverse);
+  background: #bfbfbf;
+}

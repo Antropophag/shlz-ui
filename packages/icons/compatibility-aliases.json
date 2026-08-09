@@ -1,0 +1,80 @@
+[
+  { "alias": "settings", "target": "setting", "variant": "setting" },
+  { "alias": "pie-chart", "target": "graph", "variant": "graph" },
+  {
+    "alias": "apps-add",
+    "target": "circle-grid-interface-sidebar",
+    "variant": "circle-grid-interface-sidebar"
+  },
+  {
+    "alias": "chevron-right-small",
+    "target": "chevron-right-md",
+    "variant": "chevron-right-md"
+  },
+  {
+    "alias": "chevron-left-small",
+    "target": "chevron-left-md",
+    "variant": "chevron-left-md"
+  },
+  {
+    "alias": "arrow-left",
+    "target": "arrow-left-md",
+    "variant": "arrow-left-md"
+  },
+  {
+    "alias": "arrow-right",
+    "target": "arrow-right-md",
+    "variant": "arrow-right-md"
+  },
+  {
+    "alias": "arrow-down",
+    "target": "arrow-down-md",
+    "variant": "arrow-down-md"
+  },
+  { "alias": "arrow-up", "target": "arrow-up-md", "variant": "arrow-up-md" },
+  {
+    "alias": "expand",
+    "target": "arrows-diagonal-maximize-alt",
+    "variant": "arrows-diagonal-maximize-alt"
+  },
+  { "alias": "plus", "target": "plus-alt-4", "variant": "plus-alt-4" },
+  { "alias": "close", "target": "close-remove", "variant": "close-remove" },
+  { "alias": "sort-desc", "target": "down", "variant": "down" },
+  { "alias": "sort-asc", "target": "up", "variant": "up" },
+  { "alias": "trash", "target": "delete", "variant": "delete" },
+  { "alias": "plus-circle", "target": "plus-alt-2", "variant": "plus-alt-2" },
+  { "alias": "minus-circle", "target": "minus-alt", "variant": "minus-alt" },
+  { "alias": "table", "target": "gallery-view", "variant": "gallery-view" },
+  {
+    "alias": "download-box",
+    "target": "add-documents",
+    "variant": "add-documents"
+  },
+  {
+    "alias": "apps-add-alt",
+    "target": "circle-grid-interface",
+    "variant": "circle-grid-interface"
+  },
+  { "alias": "sync-alt", "target": "update-right", "variant": "update-right" },
+  { "alias": "flag-filled", "target": "flag-alt", "variant": "flag-alt" },
+  { "alias": "pdf", "target": "file-pdf", "variant": "file-pdf-default" },
+  { "alias": "pdf-alt", "target": "file-pdf", "variant": "file-pdf-gray" },
+  { "alias": "doc", "target": "file-doc", "variant": "file-doc" },
+  { "alias": "docx", "target": "file-docx", "variant": "file-docx" },
+  { "alias": "txt", "target": "file-txt", "variant": "file-txt" },
+  { "alias": "csv", "target": "file-csv", "variant": "file-csv" },
+  { "alias": "xls", "target": "file-xls", "variant": "file-xls" },
+  { "alias": "xlsx", "target": "file-xlsx", "variant": "file-xlsx" },
+  { "alias": "ppt", "target": "file-ppt", "variant": "file-ppt" },
+  { "alias": "pptx", "target": "file-pptx", "variant": "file-pptx" },
+  { "alias": "mp3", "target": "file-mp3", "variant": "file-mp3" },
+  { "alias": "mp4", "target": "file-mp4", "variant": "file-mp4" },
+  { "alias": "mpeg", "target": "file-mpeg", "variant": "file-mpeg" },
+  { "alias": "avi", "target": "file-avi", "variant": "file-avi" },
+  { "alias": "mkv", "target": "file-mkv", "variant": "file-mkv" },
+  { "alias": "zip", "target": "file-zip", "variant": "file-zip" },
+  { "alias": "rar", "target": "file-rar", "variant": "file-rar" },
+  { "alias": "img", "target": "file-img", "variant": "file-img" },
+  { "alias": "png", "target": "file-png", "variant": "file-png" },
+  { "alias": "svg", "target": "file-svg", "variant": "file-svg" }
+]

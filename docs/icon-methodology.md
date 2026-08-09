@@ -1,20 +1,29 @@
 # Icon methodology
 
-The package is reproducibly generated from the read-only extracted icon assets and manifest, with `raw/svg/Icons.svg` as authority.
+`packages/icons/normalized/manifest.json` and its normalized SVG files are the only production input for Basic Elements icons. They are generated from the read-only Figma export under `shlz-design-source/raw/svg/UI Kit – Basic elements/icons/`; raw remains the authority.
 
-- Core monochrome paints are normalized to `currentColor`.
-- File-type icons preserve embedded colors.
-- Every manifest item carries category, source IDs, source file, confidence, color mode, and provenance.
-- Individual SVGs, a combined sprite, runtime name list, and TypeScript `IconName` union are emitted.
-- Similar shapes are retained. No fuzzy visual deduplication is performed.
+`tools/generate.mjs` copies normalized SVG bytes without a second paint or geometry transform. The normalized layer has already classified monochrome icons (`currentColor`) and semantic/multicolor icons (preserved paints). Production emits individual SVGs, logical manifest records with variants, a sprite, runtime name lists and TypeScript name unions.
 
-## Collision audit
+The production manifest contains 119 canonical logical icons and 125 emitted variants. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
 
-The source manifest has 125 entries: 104 core candidates and 21 file types. Two distinct candidates were named `calendar`; the earlier extraction physically retained only the `interface-2` output. Iteration two recovered the other exact path from the sidebar section of `raw/svg/Icons.svg` (`path41`) without changing the source tree.
+## Migration boundary
 
-- `calendar` keeps the retained interface geometry and existing public name.
-- `calendar-sidebar-uncertain` contains the distinct recovered geometry.
-- `sidebar` is a confirmed source category; a more specific semantic meaning is UNKNOWN.
-- Generated provenance records the raw sheet, source id and recovery translation; a regression test requires two distinct geometries.
+The former pipeline (`shlz-design-source/assets/icon-manifest.json` and `shlz-design-source/assets/{icons,file-types}`) is retained as historical derived evidence, but `@shlz/icons` no longer reads it. No fuzzy name mapping is performed.
 
-Exact path repetition data is not used for automatic deletion because it also contains outlined glyphs and incidental repetitions.
+Coverage analysis found 46 source/geometry-confirmed old-to-new mappings. Forty-two renamed public names are retained as explicit aliases. Same-name confirmed mappings need no alias. Seventy-nine old emitted records remain conservative breaking candidates because a correspondence was not sufficiently evidenced.
+
+Known collisions are deliberately not aliased:
+
+- old editor `align-left` corresponds visually to canonical `align-left-editor`, while the normalized corpus already owns `align-left` for another glyph;
+- old file-type `file` corresponds to `file-generic`, while normalized canonical `file` is an editor glyph;
+- misleading or uncertain pairs such as `sort → icon-20-uncertain`, `flag-outline → flagq-uncertain` and `menu → list` remain migration issues rather than silent substitutions.
+
+The old recovered calendar collision is not carried into production because neither old calendar geometry has a confirmed normalized-corpus mapping.
+
+## Consumer contract
+
+- `canonicalIconNames` contains only normalized logical names.
+- `compatibilityAliases` exposes migration metadata separately.
+- `iconNames` is the compatibility union.
+- `resolveIconName()` resolves an old alias to its canonical logical name.
+- Alias individual SVGs and sprite symbols contain the target normalized SVG geometry, never the legacy asset.

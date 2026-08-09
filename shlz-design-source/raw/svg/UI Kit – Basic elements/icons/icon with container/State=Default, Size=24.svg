@@ -1,0 +1,12 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="State=Default, Size=24">
+<rect x="0.75" y="0.75" width="22.5" height="22.5" rx="7.25" stroke="#D1D8DF" stroke-width="1.5"/>
+<g id="Delete">
+<path id="Vector" d="M6 8L18 8" stroke="#0B1623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_2" d="M16.6666 8V17.3333C16.6666 18 15.9999 18.6667 15.3333 18.6667H8.66659C7.99992 18.6667 7.33325 18 7.33325 17.3333L7.33325 8" stroke="#0B1623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_3" d="M9.33325 8.00001V6.66668C9.33325 6.00001 9.99992 5.33334 10.6666 5.33334L13.3333 5.33334C13.9999 5.33334 14.6666 6.00001 14.6666 6.66668V8.00001" stroke="#0B1623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_4" d="M10.6667 11.3333V15.3333" stroke="#0B1623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path id="Vector_5" d="M13.3333 11.3333V15.3333" stroke="#0B1623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

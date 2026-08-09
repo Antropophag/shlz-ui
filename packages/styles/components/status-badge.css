@@ -5,28 +5,51 @@
   align-items: center;
   min-block-size: 30px;
   padding-inline: 12px; /* Status.svg component geometry */
-  color: var(--shlz-semantic-color-text-inverse);
-  background: var(--shlz-semantic-color-action-primary);
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-blue-blue-200-15);
   border-radius: var(--shlz-source-radius-max);
 }
 
 .shlz-status--green {
-  background: var(--shlz-source-color-aditional-green);
+  color: var(--shlz-source-color-aditional-green);
+  background: var(--shlz-source-color-aditional-green-15);
+}
+
+.shlz-status--bright-green {
+  color: var(--shlz-source-color-aditional-bright-green);
+  background: var(--shlz-source-color-aditional-bright-green-15);
+}
+
+.shlz-status--source-blue {
+  color: var(--shlz-source-color-aditional-blue);
+  background: var(--shlz-source-color-aditional-bright-blue-15);
 }
 
 .shlz-status--orange {
   /* FACT: directly observed Status.svg component paint. */
-  background: var(--shlz-source-color-aditional-orange);
+  color: var(--shlz-source-color-aditional-orange);
+  background: rgb(
+    222 117 61 / 15%
+  ); /* Variant 52:3622 uses #DE753D for its surface. */
 }
 
 .shlz-status--purple {
   /* FACT: directly observed Status.svg component paint. */
-  background: var(--shlz-source-color-aditional-violet);
+  color: var(--shlz-source-color-aditional-violet);
+  background: var(--shlz-source-color-aditional-violet-15);
 }
 
 .shlz-status--cyan {
   /* FACT: directly observed Status.svg component paint. */
-  background: var(--shlz-source-color-aditional-turquoise);
+  color: var(--shlz-source-color-aditional-turquoise);
+  background: var(--shlz-source-color-aditional-turquoise-15);
+}
+
+.shlz-status--pink {
+  color: var(--shlz-source-color-aditional-pink);
+  background: var(--shlz-source-color-aditional-pink-15);
 }
 
 .shlz-status--neutral {
@@ -43,15 +66,46 @@
   color: var(--shlz-semantic-color-text-inverse);
   background: var(--shlz-semantic-color-action-primary);
   border-radius: var(--shlz-source-radius-max);
+  font-size: 12px;
+  font-weight: 500;
   line-height: 1;
 }
 
 .shlz-badge--lg {
   min-inline-size: 35px;
   block-size: 23px;
+  font-size: 14px;
+}
+
+.shlz-badge--invert {
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-blue-blue-100);
 }
 
 .shlz-badge--neutral {
   color: var(--shlz-semantic-color-text-primary);
-  background: var(--shlz-source-color-blue-blue-100);
+  background: transparent;
+  border: 1.5px solid var(--shlz-source-color-gray-gray-100);
+}
+
+.shlz-badge--single {
+  min-inline-size: 16px;
+  padding-inline: 0;
+}
+
+.shlz-badge--lg.shlz-badge--single {
+  min-inline-size: 23px;
+}
+
+.shlz-badge-dot {
+  display: inline-block;
+  inline-size: 10px;
+  block-size: 10px;
+  background: var(--shlz-semantic-color-action-primary);
+  border: 2px solid var(--shlz-semantic-color-surface-base);
+  border-radius: 50%;
+}
+
+.shlz-badge-dot--neutral {
+  background: var(--shlz-source-color-gray-gray-100);
 }

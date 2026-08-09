@@ -35,11 +35,24 @@ Component sizes such as 26/32/40px button heights, 12px internal padding, 6px ch
 
 ## Typography
 
-The exact family, weight and type scale remain **UNKNOWN** because most Figma text is outlined. Browser-default serif is not acceptable. `semantic.font.family` is an explicit **DECISION**:
+Direct Figma Plugin API exports from both `UI Kit – Basic elements` and
+`UI Kit – Interface elements` supersede the earlier outline-only assessment.
+They contain 2,193 text nodes and confirm **Golos Text** Regular, Medium and
+SemiBold across product component paths. The family is a source **FACT**; the
+repository still has no font files, font package, `@font-face`, or other existing
+delivery mechanism.
 
-`system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+`semantic.font.family` is therefore a production **DECISION** which requests the
+source family when it is installed by the consumer and degrades explicitly:
 
-The scoped foundation and showcase both consume this alias. A future verified font source may replace the decision without changing component contracts.
+`"Golos Text", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
+
+The source also confirms product candidates at 12, 14, 15, 16, 20, 24, 28 and
+32px, with several line-height and tracking combinations. These are observations,
+not a canonical semantic scale: Figma does not provide authoritative names such
+as Body, Caption or Heading. Production components keep only the combinations
+their own source evidence requires. The complete classified inventory is in
+`design-source-index/typography.json`.
 
 ## Exclusions
 

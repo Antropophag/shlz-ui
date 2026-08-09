@@ -1,0 +1,436 @@
+{
+  "schemaVersion": 1,
+  "generatedBy": "tools/generate-design-source-index.mjs",
+  "authority": [
+    "shlz-design-source/raw (primary Figma source: SVG for visuals, Plugin API JSON for TEXT typography facts)",
+    "other shlz-design-source extraction data (derived evidence)",
+    "packages/icons/normalized (normalized asset inventory)"
+  ],
+  "corpus": {
+    "archives": [
+      {
+        "source": {
+          "mode": "Current page",
+          "type": "PAGE",
+          "name": "UI Kit – Basic elements",
+          "id": "19:6335"
+        },
+        "exportedAt": "2026-08-08T20:13:03.160Z",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "sha256": "1c468cc4c1246aabfd0932451dedd5126cce2d24597b3141b50f8437146e3cf8",
+        "counts": {
+          "componentSets": 40,
+          "standaloneComponents": 119,
+          "variants": 489,
+          "instancesSkipped": 37,
+          "sourceWarnings": 31,
+          "errors": 9
+        }
+      },
+      {
+        "source": {
+          "mode": "Current page",
+          "type": "PAGE",
+          "name": "UI Kit – Interface elements",
+          "id": "537:87357"
+        },
+        "exportedAt": "2026-08-08T20:15:08.682Z",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "sha256": "cbf849d38e8ff176c7413a85595eb69e49797e2f55bbebf4a0db3bfca0e2516a",
+        "counts": {
+          "componentSets": 29,
+          "standaloneComponents": 7,
+          "variants": 141,
+          "instancesSkipped": 10,
+          "sourceWarnings": 4,
+          "errors": 0
+        }
+      }
+    ],
+    "foundations": {
+      "colors": 40,
+      "spacing": 9,
+      "cornerRadius": 5,
+      "typographySignatures": 36
+    },
+    "components": {
+      "componentSets": 69,
+      "standaloneComponents": 126,
+      "variants": 630
+    },
+    "icons": {
+      "logicalGlyphs": 119,
+      "emittedSvgFiles": 125,
+      "currentColor": 97,
+      "preservedColor": 22
+    },
+    "referenceScreens": {
+      "total": 34,
+      "serviceDesk": 24
+    },
+    "issues": {
+      "reportedWarnings": 35,
+      "reportedErrors": 9,
+      "instancesSkipped": 47,
+      "indexedComponentWarnings": 35,
+      "indexedComponentErrors": 9,
+      "duplicateOrNearDuplicateNameGroups": 13
+    }
+  },
+  "assets": {
+    "icons": {
+      "manifest": "packages/icons/normalized/manifest.json",
+      "analysis": "packages/icons/normalized/analysis.json",
+      "logicalGlyphs": 119,
+      "emittedSvgFiles": 125,
+      "categories": [
+        {
+          "category": "interface",
+          "count": 62
+        },
+        {
+          "category": "sidebar",
+          "count": 16
+        },
+        {
+          "category": "editor",
+          "count": 17
+        },
+        {
+          "category": "navigation",
+          "count": 2
+        },
+        {
+          "category": "actions",
+          "count": 1
+        },
+        {
+          "category": "files",
+          "count": 20
+        },
+        {
+          "category": "status",
+          "count": 1
+        }
+      ],
+      "fileTypes": [
+        {
+          "name": "file-avi",
+          "normalizedPath": "files/file-avi.svg"
+        },
+        {
+          "name": "file-csv",
+          "normalizedPath": "files/file-csv.svg"
+        },
+        {
+          "name": "file-doc",
+          "normalizedPath": "files/file-doc.svg"
+        },
+        {
+          "name": "file-docx",
+          "normalizedPath": "files/file-docx.svg"
+        },
+        {
+          "name": "file-generic",
+          "normalizedPath": "files/file-generic.svg"
+        },
+        {
+          "name": "file-img",
+          "normalizedPath": "files/file-img.svg"
+        },
+        {
+          "name": "file-mkv",
+          "normalizedPath": "files/file-mkv.svg"
+        },
+        {
+          "name": "file-mp3",
+          "normalizedPath": "files/file-mp3.svg"
+        },
+        {
+          "name": "file-mp4",
+          "normalizedPath": "files/file-mp4.svg"
+        },
+        {
+          "name": "file-mpeg",
+          "normalizedPath": "files/file-mpeg.svg"
+        },
+        {
+          "name": "file-pdf",
+          "normalizedPath": "files/file-pdf-gray.svg"
+        },
+        {
+          "name": "file-png",
+          "normalizedPath": "files/file-png.svg"
+        },
+        {
+          "name": "file-ppt",
+          "normalizedPath": "files/file-ppt.svg"
+        },
+        {
+          "name": "file-pptx",
+          "normalizedPath": "files/file-pptx.svg"
+        },
+        {
+          "name": "file-rar",
+          "normalizedPath": "files/file-rar.svg"
+        },
+        {
+          "name": "file-svg",
+          "normalizedPath": "files/file-svg.svg"
+        },
+        {
+          "name": "file-txt",
+          "normalizedPath": "files/file-txt.svg"
+        },
+        {
+          "name": "file-xls",
+          "normalizedPath": "files/file-xls.svg"
+        },
+        {
+          "name": "file-xlsx",
+          "normalizedPath": "files/file-xlsx.svg"
+        },
+        {
+          "name": "file-zip",
+          "normalizedPath": "files/file-zip.svg"
+        }
+      ],
+      "semanticOrMulticolor": [
+        {
+          "name": "file-avi",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-csv",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-doc",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-docx",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-generic",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-img",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-mkv",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-mp3",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-mp4",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-mpeg",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-pdf",
+          "category": "files",
+          "semanticColors": [
+            "white",
+            "#DBDBDB",
+            "#D4D4D8",
+            "#939CA5",
+            "#D92D20"
+          ],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-png",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-ppt",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-pptx",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-rar",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-svg",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-txt",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-type-icon",
+          "category": "interface",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-xls",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-xlsx",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-zip",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "priority",
+          "category": "status",
+          "semanticColors": ["#CC1F1F", "#D5E5D6", "#57965C", "#45B64E"],
+          "paintPolicy": "preserved-source-colors"
+        }
+      ]
+    }
+  },
+  "typography": {
+    "index": "typography.json",
+    "sourceFiles": [
+      {
+        "path": "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+        "sha256": "29f8a9f5782fec45f854ffd45301e07ae5abed13dd4b4e0627d8f4f6aeb95692",
+        "source": {
+          "mode": "current-page",
+          "id": "19:6335",
+          "name": "UI Kit – Basic elements",
+          "type": "PAGE"
+        },
+        "extractedAt": "2026-08-08T20:34:37.729Z",
+        "counts": {
+          "textNodes": 1480,
+          "uniqueTypographySignatures": 29,
+          "referencedTextStyles": 14,
+          "mixedNodes": 0,
+          "warnings": 0,
+          "errors": 0
+        }
+      },
+      {
+        "path": "shlz-design-source/raw/typography-UI Kit – Interface elements.json",
+        "sha256": "677f0e232fce8e12eb198832afa707d5979f0d21e6d3ff01970a8ef6cf7f5143",
+        "source": {
+          "mode": "current-page",
+          "id": "537:87357",
+          "name": "UI Kit – Interface elements",
+          "type": "PAGE"
+        },
+        "extractedAt": "2026-08-08T20:34:55.770Z",
+        "counts": {
+          "textNodes": 713,
+          "uniqueTypographySignatures": 19,
+          "referencedTextStyles": 11,
+          "mixedNodes": 15,
+          "warnings": 0,
+          "errors": 0
+        }
+      }
+    ],
+    "summary": {
+      "textNodes": 2193,
+      "sourceSignatures": 48,
+      "mergedSignatures": 36,
+      "crossPageSignatures": 12,
+      "referencedTextStyles": 18,
+      "mixedNodes": 15,
+      "styledSegmentsInMixedNodes": 43,
+      "classificationCounts": {
+        "PRODUCT_CANDIDATE": 15,
+        "DOCUMENTATION_SHOWCASE": 8,
+        "EMBEDDED_ASSET_TYPOGRAPHY": 4,
+        "FOREIGN_LEGACY": 8,
+        "LOCAL_OVERRIDE_OUTLIER": 1
+      }
+    },
+    "coverage": {
+      "status": "SOURCE_FACTS_AVAILABLE",
+      "primaryProductFamily": {
+        "value": "Golos Text",
+        "classification": "DERIVED_FROM_SOURCE_CONTEXT",
+        "evidence": "Regular, Medium and SemiBold are used across concrete Interface elements component paths, including Sidebar, Status, Documents, History, Messages, Header and Table."
+      },
+      "limitations": [
+        "Figma text style names are absent; IDs must remain opaque.",
+        "Classification does not create production or semantic typography tokens.",
+        "Font delivery, fallback and browser rendering are outside this source index."
+      ]
+    }
+  },
+  "coverage": {
+    "reliableFoundations": [
+      "40 explicitly named colors",
+      "spacing: 4/8/16/24/32/40/48/56/64 px",
+      "corner radius: Min 8 / Regular 12 / Medium 16 / Large 48 / Max 100 px"
+    ],
+    "componentMetadata": "All component sets, standalone components and exported variants reported by both archive manifests are indexed with hierarchy, properties, dimensions and diagnostics.",
+    "referenceUse": "Large Service Desk screens are validation references, not foundation-token or component-contract authorities.",
+    "gapsBeforePortalTransfer": [
+      "Typography facts are recovered, but authoritative semantic style names and production mapping are absent.",
+      "No specialized named effects foundation specification was found.",
+      "Ambiguous duplicate/near-duplicate component names require source-owner review before semantic merging.",
+      "Static exports do not define behavior, accessibility contracts or responsive rules.",
+      "Archive warnings, failed invisible Spacing exports and skipped instances must remain visible during downstream interpretation."
+    ]
+  },
+  "files": [
+    "foundations.json",
+    "components.json",
+    "source-issues.json",
+    "reference-screens.json",
+    "typography.json",
+    "README.md"
+  ]
+}

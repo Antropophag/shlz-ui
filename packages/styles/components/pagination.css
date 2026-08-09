@@ -24,6 +24,11 @@
   line-height: 16px;
 }
 
+.shlz-pagination__icon {
+  inline-size: 20px;
+  block-size: 20px;
+}
+
 .shlz-pagination__item--visual-hover {
   color: var(--shlz-semantic-color-action-primary);
 }

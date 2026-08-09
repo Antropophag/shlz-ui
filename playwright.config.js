@@ -30,9 +30,9 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: "npm run dev -w @shlz/showcase -- --host 127.0.0.1 --port 4173",
+    command: "npm run build && node tools/serve-built-showcase.mjs",
     url: "http://127.0.0.1:4173",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     timeout: 120_000,
   },
 });

@@ -15,7 +15,7 @@ The authored model has two explicit roots only:
 - `source`: literal specialized-sheet groups, labels and values, classified **FACT**;
 - `semantic`: justified aliases or engineering defaults, classified **DERIVED** or **DECISION**.
 
-Specialized sheets outrank statistical frequency. We accept breaking variable names because there are no production consumers. Component-specific geometry stays in component CSS with provenance instead of being promoted into the source scale. Typography uses an explicit system sans stack until an exact family is recoverable.
+Specialized sheets outrank statistical frequency. We accept breaking variable names because there are no production consumers. Component-specific geometry stays in component CSS with provenance instead of being promoted into the source scale. A later direct Figma Plugin API extraction recovered Golos Text as the product family; the production alias now requests it first and retains an explicit system-sans fallback because no font asset is distributed by this repository.
 
 The showcase separates Source Spec reconstruction, real Implementation, and Fidelity comparison.
 

@@ -67,6 +67,15 @@ for (const [id, snapshot] of [
 }
 
 test("CSS-only components retain native semantics", async ({ page }) => {
+  await expect(page.locator("#link-demo a.shlz-link")).toHaveCount(3);
+  await expect(
+    page.locator("#link-demo [aria-disabled='true']"),
+  ).not.toHaveAttribute("href");
+  await expect(page.locator("#avatar-demo .shlz-avatar")).toHaveCount(12);
+  await expect(page.locator("#table-demo table")).toHaveCount(1);
+  await expect(
+    page.locator("#table-demo th[aria-sort='ascending']"),
+  ).toHaveCount(1);
   const pagination = page.getByRole("navigation", {
     name: "Пагинация примера",
   });

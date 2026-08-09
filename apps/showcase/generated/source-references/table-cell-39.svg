@@ -1,0 +1,29 @@
+<svg width="54" height="50" viewBox="0 0 54 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_490_38665)">
+<mask id="path-1-inside-1_490_38665" fill="white">
+<path d="M0 0H54V50H0V0Z"/>
+</mask>
+<path d="M0 0H54V50H0V0Z" fill="#EEF0F4"/>
+<rect x="8" y="15" width="38" height="20" rx="10" fill="#D1D8DF"/>
+<g opacity="0.01" filter="url(#filter0_f_490_38665)">
+<rect x="1.00195" y="10" width="52" height="30" rx="15" fill="#0B1623"/>
+</g>
+<g clip-path="url(#clip1_490_38665)">
+<rect x="10" y="17" width="16" height="16" rx="8" fill="white"/>
+</g>
+</g>
+<path d="M54 49H0V51H54V49Z" fill="#DFE2F0" mask="url(#path-1-inside-1_490_38665)"/>
+<defs>
+<filter id="filter0_f_490_38665" x="-0.998047" y="8" width="56" height="34" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="1" result="effect1_foregroundBlur_490_38665"/>
+</filter>
+<clipPath id="clip0_490_38665">
+<path d="M0 0H54V50H0V0Z" fill="white"/>
+</clipPath>
+<clipPath id="clip1_490_38665">
+<rect x="10" y="17" width="16" height="16" rx="8" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -1,0 +1,31 @@
+.shlz-link {
+  color: var(--shlz-source-color-blue-blue-200);
+  font: inherit;
+  font-size: 16px;
+  line-height: 21px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shlz-link:hover,
+.shlz-link--visual-hover {
+  color: #425ba6; /* Link source: component-specific hover color. */
+}
+
+.shlz-link:active,
+.shlz-link--visual-pressed {
+  color: var(--shlz-source-color-blue-blue-300);
+}
+
+.shlz-link:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--shlz-semantic-color-action-primary);
+  outline-offset: 2px;
+}
+
+.shlz-link[aria-disabled="true"],
+.shlz-link--disabled {
+  color: #7383be; /* Link source: component-specific disabled color. */
+  cursor: not-allowed;
+  pointer-events: none;
+}

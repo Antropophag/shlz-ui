@@ -11,6 +11,7 @@
       "import": "./dist/index.js"
     },
     "./manifest.json": "./dist/manifest.json",
+    "./compatibility-aliases.json": "./dist/compatibility-aliases.json",
     "./sprite.svg": "./dist/sprite.svg",
     "./icons/*": "./dist/icons/*",
     "./file-types/*": "./dist/file-types/*"

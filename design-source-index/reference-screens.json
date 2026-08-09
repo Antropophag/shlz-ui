@@ -1,0 +1,418 @@
+{
+  "schemaVersion": 1,
+  "sourceInventory": "shlz-design-source/layouts/screen-layout-metrics.json",
+  "summary": {
+    "total": 34,
+    "serviceDesk": 24
+  },
+  "screens": [
+    {
+      "name": "Автоназначения",
+      "sourcePath": "shlz-design-source/raw/svg/Автоназначения.svg",
+      "sha256": "d81f0f5973a892c94ee88714483c97d9271fee49e302be2d4ae09fa3fc4da6fc",
+      "byteSize": 6694551,
+      "canvas": {
+        "width": 11660,
+        "height": 1805
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Дашборды",
+      "sourcePath": "shlz-design-source/raw/svg/Дашборды.svg",
+      "sha256": "7e2c9fd027470c1ba773783cdd132c1a0f5084c9a5da5211efe3f5e932b6b5ba",
+      "byteSize": 10079437,
+      "canvas": {
+        "width": 18020,
+        "height": 2384
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Детальная отчета",
+      "sourcePath": "shlz-design-source/raw/svg/Детальная отчета.svg",
+      "sha256": "c426aa8cc80e79a40cb9367c2d6685dd802939ec05fbdb59d97d6bd2c0b66315",
+      "byteSize": 7344060,
+      "canvas": {
+        "width": 6890,
+        "height": 2212
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Заявка на производство",
+      "sourcePath": "shlz-design-source/raw/svg/Заявка на производство.svg",
+      "sha256": "8756fb04115d0a089173ed97862758678c6a022c546fc7125eca2d8365348c7d",
+      "byteSize": 5839249,
+      "canvas": {
+        "width": 5300,
+        "height": 5130
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "История изменений",
+      "sourcePath": "shlz-design-source/raw/svg/История изменений.svg",
+      "sha256": "117fcd2da6e9212bb4f7526030d002e0a935be3ed272d713cf199c1fa2249d99",
+      "byteSize": 8341162,
+      "canvas": {
+        "width": 6890,
+        "height": 1680
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Календарь для начальника",
+      "sourcePath": "shlz-design-source/raw/svg/Календарь для начальника.svg",
+      "sha256": "f1f333c90049545ed02cc85d8791ce35298be141ef476cbf20353237a8d2b8de",
+      "byteSize": 6388316,
+      "canvas": {
+        "width": 8480,
+        "height": 1680
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Календарь и праздники",
+      "sourcePath": "shlz-design-source/raw/svg/Календарь и праздники.svg",
+      "sha256": "a2352f0f291778da17dc2cc1104db26224be717b744100041b37a59643637a73",
+      "byteSize": 10685943,
+      "canvas": {
+        "width": 21200,
+        "height": 2830
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Календарь",
+      "sourcePath": "shlz-design-source/raw/svg/Календарь.svg",
+      "sha256": "3e58e149069aa28fc17657f72e043a64c837057647c1840cfc8a4ad08b5686d6",
+      "byteSize": 10358706,
+      "canvas": {
+        "width": 11660,
+        "height": 2830
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Комментарии",
+      "sourcePath": "shlz-design-source/raw/svg/Комментарии.svg",
+      "sha256": "20e2dc809b8fa832cc73bd078abd57678c9614a70da7dbf376ab1a1f25458a88",
+      "byteSize": 10211710,
+      "canvas": {
+        "width": 8480,
+        "height": 2830
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Обращение по гарантийному обслуживанию",
+      "sourcePath": "shlz-design-source/raw/svg/Обращение по гарантийному обслуживанию.svg",
+      "sha256": "c2cba877b079f35f4fc32ca3b4ca223635175da47060de1d2b4d6cf2a157265f",
+      "byteSize": 27334266,
+      "canvas": {
+        "width": 27560,
+        "height": 5130
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Первичное обращение",
+      "sourcePath": "shlz-design-source/raw/svg/Первичное обращение.svg",
+      "sha256": "546546d43a137a2423c539f37261adea4ec36f92ff6b7984a59b0ed3ea1472d2",
+      "byteSize": 12835154,
+      "canvas": {
+        "width": 13250,
+        "height": 4552
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Планировщик для сотрудника",
+      "sourcePath": "shlz-design-source/raw/svg/Планировщик для сотрудника.svg",
+      "sha256": "fd681f4338fb2b4850e2516f3856fee6813e4faaaae9baedac562405a6412af5",
+      "byteSize": 16151082,
+      "canvas": {
+        "width": 14840,
+        "height": 2723
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Поставщики",
+      "sourcePath": "shlz-design-source/raw/svg/Поставщики.svg",
+      "sha256": "4b81bbd9a1472a01925572e8aa060eccdb5fb4b07f35bfff20fd9efe592b86b5",
+      "byteSize": 9032621,
+      "canvas": {
+        "width": 13250,
+        "height": 2904
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Редактирование дашборда",
+      "sourcePath": "shlz-design-source/raw/svg/Редактирование дашборда.svg",
+      "sha256": "dcf6a3c9ded13b250e95816748a956c6316fb1302860d29e61730469cc0eacf7",
+      "byteSize": 5190647,
+      "canvas": {
+        "width": 5300,
+        "height": 2654
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Создание отчета",
+      "sourcePath": "shlz-design-source/raw/svg/Создание отчета.svg",
+      "sha256": "1dcbab6c9e02ad8f3a603526a5431c68e9a42f52b241df116306b8cdc7e65d27",
+      "byteSize": 7430186,
+      "canvas": {
+        "width": 8480,
+        "height": 2116
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Сообщения",
+      "sourcePath": "shlz-design-source/raw/svg/Сообщения.svg",
+      "sha256": "d2445b0288302a24c3e31e6390b8378d883c79b97fd2375d6fe4afa4e07a4a5f",
+      "byteSize": 30670063,
+      "canvas": {
+        "width": 11690,
+        "height": 7430
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Список обращений",
+      "sourcePath": "shlz-design-source/raw/svg/Список обращений.svg",
+      "sha256": "8033eaa1f75392e679f53fa052cbfcd4e4caee9438878507218d36a43d14be44",
+      "byteSize": 27842380,
+      "canvas": {
+        "width": 11660,
+        "height": 9730
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Список отчетов",
+      "sourcePath": "shlz-design-source/raw/svg/Список отчетов.svg",
+      "sha256": "2804500dc0eb13dbb3b837c8d5e6c076dc2579b02febb8b6042977a76ec3e7b9",
+      "byteSize": 9868718,
+      "canvas": {
+        "width": 8480,
+        "height": 3980
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Сроки обработки обращений",
+      "sourcePath": "shlz-design-source/raw/svg/Сроки обработки обращений.svg",
+      "sha256": "bb7809df427ee0178f17269ba630fbb968919254ffced7fbec66e672c514e000",
+      "byteSize": 5840098,
+      "canvas": {
+        "width": 6890,
+        "height": 1805
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Уведомления для отчетов",
+      "sourcePath": "shlz-design-source/raw/svg/Уведомления для отчетов.svg",
+      "sha256": "9258d09d5c48a63f15c607f0395f8fa8666ea657203d45fac9e347bcbf8b7780",
+      "byteSize": 6926400,
+      "canvas": {
+        "width": 10070,
+        "height": 2076
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Управление категориями и полями",
+      "sourcePath": "shlz-design-source/raw/svg/Управление категориями и полями.svg",
+      "sha256": "14f1fa9adadd474e0e2f80c76c626ccad75976669d188643f4b54a7f862fdc77",
+      "byteSize": 13463251,
+      "canvas": {
+        "width": 21200,
+        "height": 5135
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Управление организациями",
+      "sourcePath": "shlz-design-source/raw/svg/Управление организациями.svg",
+      "sha256": "573cfaab8e67eaeae42ef8a9c3cdc23066d21e3b4606f3b44647e8b5415df556",
+      "byteSize": 9882827,
+      "canvas": {
+        "width": 11660,
+        "height": 2829
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Управление полями",
+      "sourcePath": "shlz-design-source/raw/svg/Управление полями.svg",
+      "sha256": "d5bb6de4e287bdf8e8ed10b71785a5ffb831871f55ed90446ba276c1837a159e",
+      "byteSize": 6832645,
+      "canvas": {
+        "width": 8480,
+        "height": 5135
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Управление статусами обращений",
+      "sourcePath": "shlz-design-source/raw/svg/Управление статусами обращений.svg",
+      "sha256": "5f2d64f12a6012ed5e242486362a8dcf29944da19815c92669441e81a29ad3d7",
+      "byteSize": 7628391,
+      "canvas": {
+        "width": 13250,
+        "height": 3930
+      },
+      "classification": "SERVICE_DESK_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Calendar",
+      "sourcePath": "shlz-design-source/raw/svg/Calendar.svg",
+      "sha256": "da5c97cd453930458634ec3317452dced33b8de41c418d744bf253ed75af8714",
+      "byteSize": 634359,
+      "canvas": {
+        "width": 2081,
+        "height": 2386
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Dashboard",
+      "sourcePath": "shlz-design-source/raw/svg/Dashboard.svg",
+      "sha256": "1cfca3af5e0ad0e0a25bff436a3b4031fda03de9880f3d110b491283bfec10a8",
+      "byteSize": 3013142,
+      "canvas": {
+        "width": 4366,
+        "height": 6357
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Detailed appeals",
+      "sourcePath": "shlz-design-source/raw/svg/Detailed appeals.svg",
+      "sha256": "f916402a452edfdb7eee603cc75dc8028e6cf7d28eda13d6058ba488b59830e7",
+      "byteSize": 912118,
+      "canvas": {
+        "width": 873,
+        "height": 4163
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Documents",
+      "sourcePath": "shlz-design-source/raw/svg/Documents.svg",
+      "sha256": "b2be2ccea150ae49fb8363eae648bede428cace071d9783ce30f15c9c338bfdb",
+      "byteSize": 1175217,
+      "canvas": {
+        "width": 700,
+        "height": 2269
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Form constructor",
+      "sourcePath": "shlz-design-source/raw/svg/Form constructor.svg",
+      "sha256": "516449d1f7780d22ace48ca27dbfdafb558e30919c1f6923570824e27385faec",
+      "byteSize": 262870,
+      "canvas": {
+        "width": 801,
+        "height": 1789
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "History of changes",
+      "sourcePath": "shlz-design-source/raw/svg/History of changes.svg",
+      "sha256": "83d8c9ab89fa7c3677ed6d4105a150f55676bcf732160892b06773d6d4ac0e76",
+      "byteSize": 516630,
+      "canvas": {
+        "width": 873,
+        "height": 1558
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Managing appeals",
+      "sourcePath": "shlz-design-source/raw/svg/Managing appeals.svg",
+      "sha256": "e04dd0e4fc986953be725bb586ab365dc6ee48f3ea35202d2ff56d089c72c512",
+      "byteSize": 149041,
+      "canvas": {
+        "width": 1456,
+        "height": 1020
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Messages",
+      "sourcePath": "shlz-design-source/raw/svg/Messages.svg",
+      "sha256": "b61167bf011d15e5956d409d6746b5440cf4417522f1f14d6d27084bfb4b5357",
+      "byteSize": 3006660,
+      "canvas": {
+        "width": 1504,
+        "height": 7405
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "Planner",
+      "sourcePath": "shlz-design-source/raw/svg/Planner.svg",
+      "sha256": "3f23135cbccf6cd8d1054feef90990d94ec647d8ef12de091ee6b76a022f2ed7",
+      "byteSize": 4457508,
+      "canvas": {
+        "width": 3646,
+        "height": 6729
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    },
+    {
+      "name": "shlz_guide_rail_layout",
+      "sourcePath": "shlz-design-source/raw/svg/shlz_guide_rail_layout.svg",
+      "sha256": "9ba21fa0d71aafa8604c31ad5d241191452885949fd8becec4a858d017e34173",
+      "byteSize": 19619,
+      "canvas": {
+        "width": 0,
+        "height": 0
+      },
+      "classification": "ADDITIONAL_REFERENCE",
+      "analysisPolicy": "Metadata inventory only; the complete large SVG was not semantically interpreted."
+    }
+  ]
+}

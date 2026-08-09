@@ -1,6 +1,9 @@
 @import url("@shlz/tokens/tokens.css");
 @import url("./foundation.css");
 @import url("./components/button.css");
+@import url("./components/link.css");
+@import url("./components/avatar.css");
+@import url("./components/table.css");
 @import url("./components/field.css");
 @import url("./components/choice.css");
 @import url("./components/status-badge.css");

@@ -60,9 +60,9 @@
       "groups": {
         "font": {
           "classification": "DECISION",
-          "confidence": "medium",
-          "source": "tokens/typography-recoverability.json",
-          "rationale": "The exact family is not recoverable because text is outlined. An explicit system sans stack prevents browser serif fallback."
+          "confidence": "high",
+          "source": "raw/typography-UI Kit – Basic elements.json and raw/typography-UI Kit – Interface elements.json",
+          "rationale": "Golos Text is a source-backed product family. The ordered runtime stack is an engineering decision because the repository contains no distributable font files or font package."
         },
         "border": { "classification": "DERIVED", "confidence": "medium" },
         "opacity": { "classification": "DECISION", "confidence": "low" },

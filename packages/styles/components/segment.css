@@ -35,6 +35,11 @@
   cursor: pointer;
 }
 
+.shlz-segment__icon {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
 .shlz-segment__input:checked + .shlz-segment__label {
   color: var(--shlz-semantic-color-action-primary);
   background: var(--shlz-semantic-color-surface-base);

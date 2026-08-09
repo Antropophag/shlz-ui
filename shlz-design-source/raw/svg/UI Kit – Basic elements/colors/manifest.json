@@ -1,0 +1,648 @@
+{
+  "schemaVersion": 1,
+  "source": "Figma / Colors / color row",
+  "exportedAt": "2026-08-08T19:39:54.841Z",
+  "count": 40,
+  "colors": [
+    {
+      "index": 1,
+      "name": "Dark blue",
+      "filename": "svg/Dark blue.svg",
+      "figmaNodeId": "956:65959",
+      "sourceNodeName": "color row",
+      "hex": "#0B1623",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #0B1623",
+        "Opacity: 100%",
+        "Dark blue"
+      ]
+    },
+    {
+      "index": 2,
+      "name": "Dark blue 50%",
+      "filename": "svg/Dark blue 50%.svg",
+      "figmaNodeId": "956:66054",
+      "sourceNodeName": "color row",
+      "hex": "#0B1623",
+      "opacity": "50%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #0B1623",
+        "Opacity: 50%",
+        "Dark blue 50%"
+      ]
+    },
+    {
+      "index": 3,
+      "name": "Dark blue 25%",
+      "filename": "svg/Dark blue 25%.svg",
+      "figmaNodeId": "956:66061",
+      "sourceNodeName": "color row",
+      "hex": "#0B1623",
+      "opacity": "25%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #0B1623",
+        "Opacity: 25%",
+        "Dark blue 25%"
+      ]
+    },
+    {
+      "index": 4,
+      "name": "Dark blue 10%",
+      "filename": "svg/Dark blue 10%.svg",
+      "figmaNodeId": "956:66068",
+      "sourceNodeName": "color row",
+      "hex": "#0B1623",
+      "opacity": "10%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #0B1623",
+        "Opacity: 10%",
+        "Dark blue 10%"
+      ]
+    },
+    {
+      "index": 5,
+      "name": "Blue 300",
+      "filename": "svg/Blue 300.svg",
+      "figmaNodeId": "956:66077",
+      "sourceNodeName": "color row",
+      "hex": "#162773",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #162773",
+        "Opacity: 100%",
+        "Blue 300"
+      ]
+    },
+    {
+      "index": 6,
+      "name": "Blue 200",
+      "filename": "svg/Blue 200.svg",
+      "figmaNodeId": "2505:32646",
+      "sourceNodeName": "color row",
+      "hex": "#253D98",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #253D98",
+        "Opacity: 100%",
+        "Blue 200"
+      ]
+    },
+    {
+      "index": 7,
+      "name": "Blue 200 15%",
+      "filename": "svg/Blue 200 15%.svg",
+      "figmaNodeId": "2505:32653",
+      "sourceNodeName": "color row",
+      "hex": "#253D98",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #253D98",
+        "Opacity: 15%",
+        "Blue 200 15%"
+      ]
+    },
+    {
+      "index": 8,
+      "name": "Blue 100",
+      "filename": "svg/Blue 100.svg",
+      "figmaNodeId": "956:66083",
+      "sourceNodeName": "color row",
+      "hex": "#DFE2F0",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #DFE2F0",
+        "Opacity: 100%",
+        "Blue 100"
+      ]
+    },
+    {
+      "index": 9,
+      "name": "Blue 50",
+      "filename": "svg/Blue 50.svg",
+      "figmaNodeId": "956:66089",
+      "sourceNodeName": "color row",
+      "hex": "#EEF0F4",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #EEF0F4",
+        "Opacity: 100%",
+        "Blue 50"
+      ]
+    },
+    {
+      "index": 10,
+      "name": "Gray 200",
+      "filename": "svg/Gray 200.svg",
+      "figmaNodeId": "956:66104",
+      "sourceNodeName": "color row",
+      "hex": "#939CA5",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #939CA5",
+        "Opacity: 100%",
+        "Gray 200"
+      ]
+    },
+    {
+      "index": 11,
+      "name": "Gray 100",
+      "filename": "svg/Gray 100.svg",
+      "figmaNodeId": "956:66110",
+      "sourceNodeName": "color row",
+      "hex": "#D1D8DF",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #D1D8DF",
+        "Opacity: 100%",
+        "Gray 100"
+      ]
+    },
+    {
+      "index": 12,
+      "name": "Gray 75",
+      "filename": "svg/Gray 75.svg",
+      "figmaNodeId": "956:66116",
+      "sourceNodeName": "color row",
+      "hex": "#E0E0E0",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #E0E0E0",
+        "Opacity: 100%",
+        "Gray 75"
+      ]
+    },
+    {
+      "index": 13,
+      "name": "Gray 50",
+      "filename": "svg/Gray 50.svg",
+      "figmaNodeId": "962:66124",
+      "sourceNodeName": "color row",
+      "hex": "#F5F5F5",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #F5F5F5",
+        "Opacity: 100%",
+        "Gray 50"
+      ]
+    },
+    {
+      "index": 14,
+      "name": "White",
+      "filename": "svg/White.svg",
+      "figmaNodeId": "962:66133",
+      "sourceNodeName": "color row",
+      "hex": "#FFFFFF",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #FFFFFF",
+        "Opacity: 100%",
+        "White"
+      ]
+    },
+    {
+      "index": 15,
+      "name": "White 15%",
+      "filename": "svg/White 15%.svg",
+      "figmaNodeId": "962:66139",
+      "sourceNodeName": "color row",
+      "hex": "#FFFFFF",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #FFFFFF",
+        "Opacity: 15%",
+        "White 15%"
+      ]
+    },
+    {
+      "index": 16,
+      "name": "White 10%",
+      "filename": "svg/White 10%.svg",
+      "figmaNodeId": "962:66145",
+      "sourceNodeName": "color row",
+      "hex": "#FFFFFF",
+      "opacity": "10%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #FFFFFF",
+        "Opacity: 10%",
+        "White 10%"
+      ]
+    },
+    {
+      "index": 17,
+      "name": "Primary",
+      "filename": "svg/Primary.svg",
+      "figmaNodeId": "962:66161",
+      "sourceNodeName": "color row",
+      "hex": "#F4F6F9",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #F4F6F9",
+        "Opacity: 100%",
+        "Primary"
+      ]
+    },
+    {
+      "index": 18,
+      "name": "Filter",
+      "filename": "svg/Filter.svg",
+      "figmaNodeId": "962:66167",
+      "sourceNodeName": "color row",
+      "hex": "#EEF0F4",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #EEF0F4",
+        "Opacity: 100%",
+        "Filter"
+      ]
+    },
+    {
+      "index": 19,
+      "name": "Secondary",
+      "filename": "svg/Secondary.svg",
+      "figmaNodeId": "962:66173",
+      "sourceNodeName": "color row",
+      "hex": "#DFE2F0",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #DFE2F0",
+        "Opacity: 100%",
+        "Secondary"
+      ]
+    },
+    {
+      "index": 20,
+      "name": "Red 100",
+      "filename": "svg/Red 100.svg",
+      "figmaNodeId": "962:66183",
+      "sourceNodeName": "color row",
+      "hex": "#CC1F1F",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #CC1F1F",
+        "Opacity: 100%",
+        "Red 100"
+      ]
+    },
+    {
+      "index": 21,
+      "name": "Red 100 15%",
+      "filename": "svg/Red 100 15%.svg",
+      "figmaNodeId": "2507:4461",
+      "sourceNodeName": "color row",
+      "hex": "#CC1F1F",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #CC1F1F",
+        "Opacity: 15%",
+        "Red 100 15%"
+      ]
+    },
+    {
+      "index": 22,
+      "name": "Red 50",
+      "filename": "svg/Red 50.svg",
+      "figmaNodeId": "2507:4468",
+      "sourceNodeName": "color row",
+      "hex": "#FBD5D5",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #FBD5D5",
+        "Opacity: 100%",
+        "Red 50"
+      ]
+    },
+    {
+      "index": 23,
+      "name": "Bright green",
+      "filename": "svg/Bright green.svg",
+      "figmaNodeId": "962:66228",
+      "sourceNodeName": "color row",
+      "hex": "#25983E",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #25983E",
+        "Opacity: 100%",
+        "Bright green"
+      ]
+    },
+    {
+      "index": 24,
+      "name": "Bright green 15%",
+      "filename": "svg/Bright green 15%.svg",
+      "figmaNodeId": "962:66235",
+      "sourceNodeName": "color row",
+      "hex": "#25983E",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #25983E",
+        "Opacity: 15%",
+        "Bright green 15%"
+      ]
+    },
+    {
+      "index": 25,
+      "name": "Green",
+      "filename": "svg/Green.svg",
+      "figmaNodeId": "962:66242",
+      "sourceNodeName": "color row",
+      "hex": "#57965C",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #57965C",
+        "Opacity: 100%",
+        "Green"
+      ]
+    },
+    {
+      "index": 26,
+      "name": "Green 15%",
+      "filename": "svg/Green 15%.svg",
+      "figmaNodeId": "962:66248",
+      "sourceNodeName": "color row",
+      "hex": "#57965C",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #57965C",
+        "Opacity: 15%",
+        "Green 15%"
+      ]
+    },
+    {
+      "index": 27,
+      "name": "Brown",
+      "filename": "svg/Brown.svg",
+      "figmaNodeId": "962:66255",
+      "sourceNodeName": "color row",
+      "hex": "#9B7E46",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #9B7E46",
+        "Opacity: 100%",
+        "Brown"
+      ]
+    },
+    {
+      "index": 28,
+      "name": "Brown 15%",
+      "filename": "svg/Brown 15%.svg",
+      "figmaNodeId": "962:66261",
+      "sourceNodeName": "color row",
+      "hex": "#9B7E46",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #9B7E46",
+        "Opacity: 15%",
+        "Brown 15%"
+      ]
+    },
+    {
+      "index": 29,
+      "name": "Orange",
+      "filename": "svg/Orange.svg",
+      "figmaNodeId": "1279:70990",
+      "sourceNodeName": "color row",
+      "hex": "#D47E2E",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #D47E2E",
+        "Opacity: 100%",
+        "Orange"
+      ]
+    },
+    {
+      "index": 30,
+      "name": "Orange 15%",
+      "filename": "svg/Orange 15%.svg",
+      "figmaNodeId": "1279:70996",
+      "sourceNodeName": "color row",
+      "hex": "#D47E2E",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #D47E2E",
+        "Opacity: 15%",
+        "Orange 15%"
+      ]
+    },
+    {
+      "index": 31,
+      "name": "Blue",
+      "filename": "svg/Blue.svg",
+      "figmaNodeId": "962:66268",
+      "sourceNodeName": "color row",
+      "hex": "#245B99",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #245B99",
+        "Opacity: 100%",
+        "Blue"
+      ]
+    },
+    {
+      "index": 32,
+      "name": "Blue 15%",
+      "filename": "svg/Blue 15%.svg",
+      "figmaNodeId": "1279:70983",
+      "sourceNodeName": "color row",
+      "hex": "#245B99",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #245B99",
+        "Opacity: 15%",
+        "Blue 15%"
+      ]
+    },
+    {
+      "index": 33,
+      "name": "Bright blue",
+      "filename": "svg/Bright blue.svg",
+      "figmaNodeId": "962:66274",
+      "sourceNodeName": "color row",
+      "hex": "#3D88DE",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #3D88DE",
+        "Opacity: 100%",
+        "Bright blue"
+      ]
+    },
+    {
+      "index": 34,
+      "name": "Bright blue 15%",
+      "filename": "svg/Bright blue 15%.svg",
+      "figmaNodeId": "962:66281",
+      "sourceNodeName": "color row",
+      "hex": "#3D88DE",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #3D88DE",
+        "Opacity: 15%",
+        "Bright blue 15%"
+      ]
+    },
+    {
+      "index": 35,
+      "name": "Turquoise",
+      "filename": "svg/Turquoise.svg",
+      "figmaNodeId": "962:66288",
+      "sourceNodeName": "color row",
+      "hex": "#4191B3",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #4191B3",
+        "Opacity: 100%",
+        "Turquoise"
+      ]
+    },
+    {
+      "index": 36,
+      "name": "Turquoise 15%",
+      "filename": "svg/Turquoise 15%.svg",
+      "figmaNodeId": "962:66295",
+      "sourceNodeName": "color row",
+      "hex": "#4191B3",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #4191B3",
+        "Opacity: 15%",
+        "Turquoise 15%"
+      ]
+    },
+    {
+      "index": 37,
+      "name": "Violet",
+      "filename": "svg/Violet.svg",
+      "figmaNodeId": "962:66302",
+      "sourceNodeName": "color row",
+      "hex": "#8131A7",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #8131A7",
+        "Opacity: 100%",
+        "Violet"
+      ]
+    },
+    {
+      "index": 38,
+      "name": "Violet 15%",
+      "filename": "svg/Violet 15%.svg",
+      "figmaNodeId": "962:66308",
+      "sourceNodeName": "color row",
+      "hex": "#8131A7",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #8131A7",
+        "Opacity: 15%",
+        "Violet 15%"
+      ]
+    },
+    {
+      "index": 39,
+      "name": "Pink",
+      "filename": "svg/Pink.svg",
+      "figmaNodeId": "962:66315",
+      "sourceNodeName": "color row",
+      "hex": "#A942A7",
+      "opacity": "100%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #A942A7",
+        "Opacity: 100%",
+        "Pink"
+      ]
+    },
+    {
+      "index": 40,
+      "name": "Pink 15%",
+      "filename": "svg/Pink 15%.svg",
+      "figmaNodeId": "962:66321",
+      "sourceNodeName": "color row",
+      "hex": "#A942A7",
+      "opacity": "15%",
+      "width": 707,
+      "height": 24,
+      "texts": [
+        "HEX: #A942A7",
+        "Opacity: 15%",
+        "Pink 15%"
+      ]
+    }
+  ]
+}

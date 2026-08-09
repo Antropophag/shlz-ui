@@ -1,29 +1,16 @@
-# Text input
+# Input
 
-## Purpose and contract
-
-Native `<input>` with optional, non-mandatory field wrapper. Supported sizes: 32 and 40 px; default, hover, focus, disabled, readonly and error.
+Input is a full field composition sourced from the `Input` Component Set: label, control, optional trailing action, and optional secondary actions. The native `<input>` is the interactive part, not the outer visual shell.
 
 ```html
-<div class="shlz-field">
-  <label class="shlz-field__label" for="title">Название</label>
-  <input
-    class="shlz-input"
-    id="title"
-    name="title"
-    aria-describedby="title-help"
-  />
-  <span class="shlz-field__message" id="title-help">Подсказка</span>
-</div>
+<label class="shlz-field">
+  <span class="shlz-field__label">Название</span>
+  <span class="shlz-field__control">
+    <input class="shlz-input" name="title" placeholder="Введите название" />
+  </span>
+</label>
 ```
 
-## Evidence matrix
+Use `shlz-field--medium`, wrapper state classes for static fixtures, and native `disabled`, `readonly`, focus, and value state in applications. Input source properties are broken, so the library does not claim parsed Size/State/Filled/Type axes; all 21 node IDs remain in source coverage.
 
-| Classification | Evidence                                                                                                                                                      |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| FACT           | `Select.svg` and `Input Number.svg`: 32/40 px pill input-like shells, white/subtle/muted fills, brand outline; `Textarea.svg`: brand and red 1.5 px outlines. |
-| DERIVED        | Shared text-entry geometry can style a plain text input without importing Select/Input Number behavior.                                                       |
-| DECISION       | Native `<input>`; `aria-invalid="true"` selects error visual; labels use `for`/`id`; `focus-visible` remains keyboard-usable.                                 |
-| UNKNOWN        | Canonical font metrics; success semantics; exact label/help spacing; autocomplete policy.                                                                     |
-
-Readonly and disabled remain native attributes. Error text should be referenced with `aria-describedby`; color alone is insufficient.
+See [form-controls-source-spec.md](./form-controls-source-spec.md).

@@ -71,3 +71,13 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+.shlz-icon {
+  display: inline-block;
+  flex: none;
+  inline-size: 1em;
+  block-size: 1em;
+  overflow: hidden;
+  color: inherit;
+  vertical-align: middle;
+}

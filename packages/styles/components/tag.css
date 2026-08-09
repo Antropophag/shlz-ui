@@ -25,6 +25,16 @@
   object-fit: cover;
 }
 
+.shlz-person-tag {
+  background: var(--shlz-semantic-color-surface-base);
+  border-color: var(--shlz-semantic-color-border-default);
+}
+
+.shlz-tag__icon {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
 .shlz-tag__remove {
   display: inline-grid;
   place-items: center;

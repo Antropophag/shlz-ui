@@ -1,0 +1,5124 @@
+[
+  {
+    "name": "add-documents",
+    "category": "interface",
+    "normalizedPath": "interface/add-documents.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Add documents.svg"
+    ],
+    "sourceNames": ["Add documents"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/add-documents.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "d249748bf0872533f80028d513423ec2ef1fe60d273a762fabb52ed24525b87b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Add documents.svg"
+        ],
+        "sourceNames": ["Add documents"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Add documents.svg",
+            "name": "Add documents",
+            "sha256": "a32339d955ceb02bd18da0355322c9d69b1ac5dc8934809d8624f134e105402f",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "ai-brain-network",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/ai-brain-network.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Ai Brain Network.svg"
+    ],
+    "sourceNames": ["Ai Brain Network"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/ai-brain-network.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "7194fd3d6bf4d3e9049e4e611e55bc35f252ef21690bee925e384a34fa55aa06",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Ai Brain Network.svg"
+        ],
+        "sourceNames": ["Ai Brain Network"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Ai Brain Network.svg",
+            "name": "Ai Brain Network",
+            "sha256": "7044d671b7bfdbe40bd4be1763a354eb05044b5e191fb2aad373d2560cd69861",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "align-center",
+    "category": "editor",
+    "normalizedPath": "editor/align-center.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align center.svg"
+    ],
+    "sourceNames": ["Align center"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/align-center.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "bfc10e3c6781d162a418452606f6cfaf0950ced1a31274cf0c80a55dc619aa6e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align center.svg"
+        ],
+        "sourceNames": ["Align center"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align center.svg",
+            "name": "Align center",
+            "sha256": "4b21d0b9766acd0bdc7b44ac31eb53d49955f10ed63c44661bc9df33626f2ea6",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "align-left",
+    "category": "interface",
+    "normalizedPath": "interface/align-left.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Align left.svg"
+    ],
+    "sourceNames": ["Align left"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "align-left-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/align-left.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "45eff75254cd2b909353eafda65864248518533ff0a4a7a8d62608eafca842b7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Align left.svg"
+        ],
+        "sourceNames": ["Align left"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Align left.svg",
+            "name": "Align left",
+            "sha256": "d7982d9e4d69c30a44918b5954103c2c870e98534ead86210e53c05b68e21f2b",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "align-left-editor",
+    "category": "editor",
+    "normalizedPath": "editor/align-left-editor.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align left.svg"
+    ],
+    "sourceNames": ["Align left"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "align-left-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/align-left-editor.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "498703d174161340b3833e7806aa1523f2e0d7d5a875b3d2f9756ce7207f1e29",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align left.svg"
+        ],
+        "sourceNames": ["Align left"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align left.svg",
+            "name": "Align left",
+            "sha256": "7be23db0cb865a1ad6f97c8e751f96585a7bedfca7c0af0c98878327502fac88",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "align-right",
+    "category": "editor",
+    "normalizedPath": "editor/align-right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align right.svg"
+    ],
+    "sourceNames": ["Align right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/align-right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "fa50452d6c0561f3ada17855c921cc198ee666d95f690ea9767a1dc4bb1d44cc",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align right.svg"
+        ],
+        "sourceNames": ["Align right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Align right.svg",
+            "name": "Align right",
+            "sha256": "d4ef9a89f8ec1164f92ffeb20b98ee1f46bba9ae6853bc8a7de2b38a6324917c",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "arrow-closed",
+    "category": "navigation",
+    "normalizedPath": "navigation/arrow-closed-20.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=24.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=24.svg"
+    ],
+    "sourceNames": [
+      "Type=Closed, State=Default, Size=20",
+      "Type=Closed, State=Hover, Size=20",
+      "Type=Closed, State=Default, Size=24",
+      "Type=Closed, State=Hover, Size=24"
+    ],
+    "size": { "width": 20, "height": 20 },
+    "viewBox": "0 0 20 20",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["default", "hover"],
+    "variants": [
+      {
+        "normalizedPath": "navigation/arrow-closed-20.svg",
+        "size": { "width": 20, "height": 20 },
+        "viewBox": "0 0 20 20",
+        "state": null,
+        "geometrySha256": "ca172bcff088b149f6b2b046e04f8057e3de3bb2500f2b3b09eb0e09eeffdd1d",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=20.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=20.svg"
+        ],
+        "sourceNames": [
+          "Type=Closed, State=Default, Size=20",
+          "Type=Closed, State=Hover, Size=20"
+        ],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=20.svg",
+            "name": "Type=Closed, State=Default, Size=20",
+            "sha256": "ac8b2e8736b3bf00b10b0fc515bf26a1de71e1d54717a49aec67a044eff34237",
+            "state": "default",
+            "declaredSize": 20,
+            "colors": ["#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=20.svg",
+            "name": "Type=Closed, State=Hover, Size=20",
+            "sha256": "c4323ea7629af8f8e172bdbf07aa9c68444f1a60f1d626f6d43ba2f0fe768172",
+            "state": "hover",
+            "declaredSize": 20,
+            "colors": ["#D1D8DF", "#0B1623"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "navigation/arrow-closed-24.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "f6fa89fd3f1fae79ec0548358db57fe62247b25a710c45b8d4eb2fba84842583",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=24.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=24.svg"
+        ],
+        "sourceNames": [
+          "Type=Closed, State=Default, Size=24",
+          "Type=Closed, State=Hover, Size=24"
+        ],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Default, Size=24.svg",
+            "name": "Type=Closed, State=Default, Size=24",
+            "sha256": "ef93b50e8f9b95de7ca729b4518cb7b37b8d6335ec7200379d9468de2093ca70",
+            "state": "default",
+            "declaredSize": 24,
+            "colors": ["#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Closed, State=Hover, Size=24.svg",
+            "name": "Type=Closed, State=Hover, Size=24",
+            "sha256": "e6dd338ed9c58c9c2388916b1fd738e504576d796faf16399208954bd29df3b6",
+            "state": "hover",
+            "declaredSize": 24,
+            "colors": ["#D1D8DF", "#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Default/Hover объединены: геометрия совпадает, состояние задаётся цветом."
+  },
+  {
+    "name": "arrow-down-md",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-down-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Down MD.svg"
+    ],
+    "sourceNames": ["Arrow Down MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-down-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "13e2d1a07eb5da1a9243cd3338504686bc5a85f55a0f2cc65584301126c1f2ff",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Down MD.svg"
+        ],
+        "sourceNames": ["Arrow Down MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Down MD.svg",
+            "name": "Arrow Down MD",
+            "sha256": "a9ab9b6e62a24e7a9e08fee0a69393c7f29e6baa22cd958d6cd1c52957e08e17",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "arrow-left-md",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-left-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow left MD.svg"
+    ],
+    "sourceNames": ["Arrow left MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-left-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9eaa3940bd7e57cbb121268a8edad06cb2f0b86afd166f677e73ff683531ad78",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow left MD.svg"
+        ],
+        "sourceNames": ["Arrow left MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow left MD.svg",
+            "name": "Arrow left MD",
+            "sha256": "a6be05c779df7d7dbd1d2e849ea7827d370b5db3933880fca5e16a3e49c90edf",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "arrow-opened",
+    "category": "navigation",
+    "normalizedPath": "navigation/arrow-opened-20.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=24.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=24.svg"
+    ],
+    "sourceNames": [
+      "Type=Opened, State=Default, Size=20",
+      "Type=Opened, State=Hover, Size=20",
+      "Type=Opened, State=Default, Size=24",
+      "Type=Opened, State=Hover, Size=24"
+    ],
+    "size": { "width": 20, "height": 20 },
+    "viewBox": "0 0 20 20",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["default", "hover"],
+    "variants": [
+      {
+        "normalizedPath": "navigation/arrow-opened-20.svg",
+        "size": { "width": 20, "height": 20 },
+        "viewBox": "0 0 20 20",
+        "state": null,
+        "geometrySha256": "39ec59fc301cdf6c686445cc2e540e078cba87b5e9c719c96261cc15bd207254",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=20.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=20.svg"
+        ],
+        "sourceNames": [
+          "Type=Opened, State=Default, Size=20",
+          "Type=Opened, State=Hover, Size=20"
+        ],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=20.svg",
+            "name": "Type=Opened, State=Default, Size=20",
+            "sha256": "f1af9f45b7872e55edb20fa879efc5ea2cbffa73e4994663630cfffd4b4c6fe5",
+            "state": "default",
+            "declaredSize": 20,
+            "colors": ["#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=20.svg",
+            "name": "Type=Opened, State=Hover, Size=20",
+            "sha256": "b5e1615cf81e9f7bbd217deb58b5fe8b9b2001af5dce3dc72f9541590a8d47ea",
+            "state": "hover",
+            "declaredSize": 20,
+            "colors": ["#D1D8DF", "#0B1623"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "navigation/arrow-opened-24.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "95e11c1f1d0433668494c31a3700a3b1c6dfcf39ffc563f95754daa205f00481",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=24.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=24.svg"
+        ],
+        "sourceNames": [
+          "Type=Opened, State=Default, Size=24",
+          "Type=Opened, State=Hover, Size=24"
+        ],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Default, Size=24.svg",
+            "name": "Type=Opened, State=Default, Size=24",
+            "sha256": "03bc517a55d8c28d061b46fcf2b7f0d9196d9c7314da5aa4edb5e858ba15092e",
+            "state": "default",
+            "declaredSize": 24,
+            "colors": ["#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/arrows/Type=Opened, State=Hover, Size=24.svg",
+            "name": "Type=Opened, State=Hover, Size=24",
+            "sha256": "fde160ecf73d267e72fab3a000824447a0266004422b0867c199281e0fe54ee7",
+            "state": "hover",
+            "declaredSize": 24,
+            "colors": ["#D1D8DF", "#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Default/Hover объединены: геометрия совпадает, состояние задаётся цветом."
+  },
+  {
+    "name": "arrow-right-md",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-right-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow right MD.svg"
+    ],
+    "sourceNames": ["Arrow right MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-right-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "37ee6b3f2e00155957dc66309434ace26bebd61611fb6a713e859fe6bc646d55",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow right MD.svg"
+        ],
+        "sourceNames": ["Arrow right MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow right MD.svg",
+            "name": "Arrow right MD",
+            "sha256": "569d6750c72a6ea28cad78e0cd4ba157c6cf135fcd8bc84c1d52d2a2dd26e11b",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "arrow-up-md",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-up-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Up MD.svg"
+    ],
+    "sourceNames": ["Arrow Up MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-up-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "435812cab3387d12fc405e5d909befac89fc685031d460f46a4013c049c7404b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Up MD.svg"
+        ],
+        "sourceNames": ["Arrow Up MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Arrow Up MD.svg",
+            "name": "Arrow Up MD",
+            "sha256": "faaf58a03c2c64a2e5a7c8e6eb2acec4bd0e18d69c3a6505b5c5fe93bf50c72d",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "arrows-diagonal-maximize-alt",
+    "category": "interface",
+    "normalizedPath": "interface/arrows-diagonal-maximize-alt.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/arrows diagonal maximize alt.svg"
+    ],
+    "sourceNames": ["arrows diagonal maximize alt"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrows-diagonal-maximize-alt.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8d67417e26d96ec0066e13c06e267834f60ec57a6b7a584719893ff4fca12750",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/arrows diagonal maximize alt.svg"
+        ],
+        "sourceNames": ["arrows diagonal maximize alt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/arrows diagonal maximize alt.svg",
+            "name": "arrows diagonal maximize alt",
+            "sha256": "d93d5272f1f5fd4319c017e21ad29d7700c1b8f5b91bf20f92aec98c1c97cced",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "bag",
+    "category": "interface",
+    "normalizedPath": "interface/bag.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Bag.svg"
+    ],
+    "sourceNames": ["Bag"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/bag.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "66fede77d46a1414c5a4d5f35cf54060dd5fa64dc025fc8b87f0739c75ab0200",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Bag.svg"
+        ],
+        "sourceNames": ["Bag"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Bag.svg",
+            "name": "Bag",
+            "sha256": "6647e815992606453d70c5e2ea00ba10e29b5de1b7fd72b6d6405885e859be96",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "bar-chart-square-plus",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/bar-chart-square-plus.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/bar chart square plus.svg"
+    ],
+    "sourceNames": ["bar chart square plus"],
+    "size": { "width": 24, "height": 25 },
+    "viewBox": "0 0 24 25",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/bar-chart-square-plus.svg",
+        "size": { "width": 24, "height": 25 },
+        "viewBox": "0 0 24 25",
+        "state": null,
+        "geometrySha256": "314328ae1a7a2d206726af376b23429d0d90bc8520475742c5450cb4a33795c4",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/bar chart square plus.svg"
+        ],
+        "sourceNames": ["bar chart square plus"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/bar chart square plus.svg",
+            "name": "bar chart square plus",
+            "sha256": "41006650d7945ad8284359bc92e1ad26290edc1d49aa5fa0c675d6ca603a7ed8",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "bold-type",
+    "category": "editor",
+    "normalizedPath": "editor/bold-type.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bold type.svg"
+    ],
+    "sourceNames": ["Bold type"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/bold-type.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "bf0f5733d7deba5648de20b6ca8c10e66b56a5c6683f65d464fa9cb2fb4b2b5c",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bold type.svg"
+        ],
+        "sourceNames": ["Bold type"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bold type.svg",
+            "name": "Bold type",
+            "sha256": "c4dd491c03dc091b348e30a0927901f8143241f8fae968637020288ed27e97b7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "book",
+    "category": "interface",
+    "normalizedPath": "interface/book.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Book.svg"
+    ],
+    "sourceNames": ["Book"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/book.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "15432e44e6dfb8d8f3a8a3c2b5aea3d1eaf588b00375eec7d656ea81de480cca",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Book.svg"
+        ],
+        "sourceNames": ["Book"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Book.svg",
+            "name": "Book",
+            "sha256": "84896f57ffcd68b0a439c55a7a6b0d9829f479ae0caf8f5739c5c33c6304505f",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "bulleted-list",
+    "category": "editor",
+    "normalizedPath": "editor/bulleted-list.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bulleted list.svg"
+    ],
+    "sourceNames": ["Bulleted list"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/bulleted-list.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8e1b11a6ecedc24cac3b10bc7ffbc352212487dd39e107b2fde4c7bb4a45d6ae",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bulleted list.svg"
+        ],
+        "sourceNames": ["Bulleted list"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Bulleted list.svg",
+            "name": "Bulleted list",
+            "sha256": "d65ec7894122643efa14f81f3aab48741359bb77b57a821bb429a938ce43010e",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "caret-up-down",
+    "category": "editor",
+    "normalizedPath": "editor/caret-up-down.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/CaretUpDown.svg"
+    ],
+    "sourceNames": ["CaretUpDown"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/caret-up-down.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2fe4b2de777840ac1ed92c26e3d56aa2966168eed8108709229bef98120b7f74",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/CaretUpDown.svg"
+        ],
+        "sourceNames": ["CaretUpDown"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/CaretUpDown.svg",
+            "name": "CaretUpDown",
+            "sha256": "0a57ce08d21b88b90349586d03af9f2d7bfc81d0f28aadfb4dce68ad80055e33",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "chat",
+    "category": "interface",
+    "normalizedPath": "interface/chat.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chat.svg"
+    ],
+    "sourceNames": ["Chat"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/chat.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8969bfbaa9a87954c2f305d8ca8f87074dc198d6ba41eeab657412eb23c04f8b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chat.svg"
+        ],
+        "sourceNames": ["Chat"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chat.svg",
+            "name": "Chat",
+            "sha256": "efb28342aa11733c44595f2664917829840f2be8e8b617a94a2eca27ded347f0",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "checkmark",
+    "category": "interface",
+    "normalizedPath": "interface/checkmark.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Checkmark.svg"
+    ],
+    "sourceNames": ["Checkmark"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/checkmark.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "83ef4e6526a4163e4b35ba52286f8e7f63a3e7ea2149def00ec3337b5a2c51ce",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Checkmark.svg"
+        ],
+        "sourceNames": ["Checkmark"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Checkmark.svg",
+            "name": "Checkmark",
+            "sha256": "c12cfc371f9d5c07c3db7f44b3c90f3be624f6c1231a753de349f545f8351704",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "chevron-left-duo",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/chevron-left-duo.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Left Duo.svg"
+    ],
+    "sourceNames": ["Chevron Left Duo"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/chevron-left-duo.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "c66e841ca03a3883c9f05a761ee52cf5eecf1cfa5a2e9c62095c86ebebb6f631",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Left Duo.svg"
+        ],
+        "sourceNames": ["Chevron Left Duo"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Left Duo.svg",
+            "name": "Chevron Left Duo",
+            "sha256": "4e2f401228f012b994b4e3ceb90eeec1bd8dcb98afc96c723b687e7b2686a2a1",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "chevron-left-md",
+    "category": "interface",
+    "normalizedPath": "interface/chevron-left-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Left MD.svg"
+    ],
+    "sourceNames": ["Chevron Left MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/chevron-left-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "21d71ec71ebd213a38a9f9ad2a4676b793f4249150893d2504324a9c424eaaa4",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Left MD.svg"
+        ],
+        "sourceNames": ["Chevron Left MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Left MD.svg",
+            "name": "Chevron Left MD",
+            "sha256": "b25af6fbb25de304308bf08d50069e4757ed3f4864cd4bae23b72167519b6f0a",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "chevron-right-duo",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/chevron-right-duo.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Right Duo.svg"
+    ],
+    "sourceNames": ["Chevron Right Duo"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/chevron-right-duo.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "ecd0aec3d9094080a02f79e753fa9f0dd190a6bf17fa2d856cf02a34389c8029",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Right Duo.svg"
+        ],
+        "sourceNames": ["Chevron Right Duo"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Chevron Right Duo.svg",
+            "name": "Chevron Right Duo",
+            "sha256": "80431dcb4f69044ba7dd5c608431e7a4397eea6388def133ce5e91d3e7f4ff96",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "chevron-right-md",
+    "category": "interface",
+    "normalizedPath": "interface/chevron-right-md.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Right MD.svg"
+    ],
+    "sourceNames": ["Chevron Right MD"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/chevron-right-md.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "ed1847b68b8ac30639d3f0a0125718848fc95d9e7eb719019f22caae2da12aef",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Right MD.svg"
+        ],
+        "sourceNames": ["Chevron Right MD"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Chevron Right MD.svg",
+            "name": "Chevron Right MD",
+            "sha256": "150011da93ad1a90f9a8e3ac7a6a9dc3f213d4404a5dc61187b1a197e1a496c1",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "circle-grid-interface",
+    "category": "interface",
+    "normalizedPath": "interface/circle-grid-interface.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Circle grid interface.svg"
+    ],
+    "sourceNames": ["Circle grid interface"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "circle-grid-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/circle-grid-interface.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0dce39ad0fdd8982556f1a09e816c8fcd33d943be68f74bfec799f44b7b126d6",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Circle grid interface.svg"
+        ],
+        "sourceNames": ["Circle grid interface"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Circle grid interface.svg",
+            "name": "Circle grid interface",
+            "sha256": "175d06c79c407f70935cf20a34f828c5caf7326e67daf4d7de6c883f266f3fe0",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "circle-grid-interface-sidebar",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/circle-grid-interface-sidebar.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Circle grid interface.svg"
+    ],
+    "sourceNames": ["Circle grid interface"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "circle-grid-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/circle-grid-interface-sidebar.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "ab639b569198362f6771d8510f1418ad3c3166bd555d8e7d4641f91c2ca0b004",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Circle grid interface.svg"
+        ],
+        "sourceNames": ["Circle grid interface"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Circle grid interface.svg",
+            "name": "Circle grid interface",
+            "sha256": "2777b4c5407983a6b2e550eb6472a7eb6e3f702e0c49e29de88fb85edf1d6d23",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "close-remove",
+    "category": "interface",
+    "normalizedPath": "interface/close-remove.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Close remove.svg"
+    ],
+    "sourceNames": ["Close remove"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/close-remove.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "f2f3de394cf09285bc8cd4411b19427f46efea80c35ee5e2781794782ed75807",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Close remove.svg"
+        ],
+        "sourceNames": ["Close remove"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Close remove.svg",
+            "name": "Close remove",
+            "sha256": "f2ce9e61e64e838996d66d4f34e48526bc490f575c8e45a9c62a0e28ed0d6ea9",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "cloud-refresh",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/cloud-refresh.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Cloud refresh.svg"
+    ],
+    "sourceNames": ["Cloud refresh"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/cloud-refresh.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "6620701f723da2414d3ef59f6fcbc13bd8c9a380ccff5a25a1e53576f1a53c72",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Cloud refresh.svg"
+        ],
+        "sourceNames": ["Cloud refresh"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Cloud refresh.svg",
+            "name": "Cloud refresh",
+            "sha256": "72542aff1c36e07c04ececb8b927346c19e784a69c66bbccd4e74c23ad9db2a0",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "cloud-upload",
+    "category": "interface",
+    "normalizedPath": "interface/cloud-upload.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Cloud upload.svg"
+    ],
+    "sourceNames": ["Cloud upload"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/cloud-upload.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "dbaacfee01d844e5bea38784dc7c744887a3ee263cf14a0880a333f5b0957031",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Cloud upload.svg"
+        ],
+        "sourceNames": ["Cloud upload"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Cloud upload.svg",
+            "name": "Cloud upload",
+            "sha256": "effe69e3943ea79f8635d8e1502cb1d91f878bddb1e3e27edf01b840b368d440",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "copy-2",
+    "category": "interface",
+    "normalizedPath": "interface/copy-2.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Copy 2.svg"
+    ],
+    "sourceNames": ["Copy 2"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/copy-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "3b9fcffd31dd871d9e07cda0632ecb86b4353cabe909e5396855cae964d7cd44",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Copy 2.svg"
+        ],
+        "sourceNames": ["Copy 2"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Copy 2.svg",
+            "name": "Copy 2",
+            "sha256": "992280084094737bd0331231feda384940841dce7ab8672fac94b93799446077",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "corner-left-down-circle",
+    "category": "interface",
+    "normalizedPath": "interface/corner-left-down-circle.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/corner left down Circle.svg"
+    ],
+    "sourceNames": ["corner left down Circle"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/corner-left-down-circle.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "868d9384f110b6d7002573674c834646394c7f65f89bd72ee2960a96750a2f87",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/corner left down Circle.svg"
+        ],
+        "sourceNames": ["corner left down Circle"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/corner left down Circle.svg",
+            "name": "corner left down Circle",
+            "sha256": "f0d4846974d7bc70dffcdb5b16f931d988d442bafd56e779b65df5866f52abc7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "data-set",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/data-set.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Data Set.svg"
+    ],
+    "sourceNames": ["Data Set"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/data-set.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "f038a2982a01f2ce8428e9be7ca81644f2b06638365abb1dcac071789480aa2b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Data Set.svg"
+        ],
+        "sourceNames": ["Data Set"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Data Set.svg",
+            "name": "Data Set",
+            "sha256": "f9bfec09d035340763d7775ff967457c815d6fd400cf6078761a6c9e46779a79",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "delete",
+    "category": "interface",
+    "normalizedPath": "interface/delete.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delete.svg"
+    ],
+    "sourceNames": ["Delete"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/delete.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "e52065df622d940c93d2124d2bf130062e66a58072ab5511c305983f52ccbcf1",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delete.svg"
+        ],
+        "sourceNames": ["Delete"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delete.svg",
+            "name": "Delete",
+            "sha256": "c7c907bf72fe418f873950f046b5cafefe051ddfd845582844f4f1ca92d6b35a",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "delete-contained",
+    "category": "actions",
+    "normalizedPath": "actions/delete-contained-20.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=20.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=24.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=24.svg"
+    ],
+    "sourceNames": [
+      "State=Default, Size=20",
+      "State=Hover, Size=20",
+      "State=Default, Size=24",
+      "State=Hover, Size=24"
+    ],
+    "size": { "width": 20, "height": 20 },
+    "viewBox": "0 0 20 20",
+    "monochrome": false,
+    "currentColor": true,
+    "paintPolicy": "currentColor-glyph-preserved-border",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["default", "hover"],
+    "variants": [
+      {
+        "normalizedPath": "actions/delete-contained-20.svg",
+        "size": { "width": 20, "height": 20 },
+        "viewBox": "0 0 20 20",
+        "state": null,
+        "geometrySha256": "2f4ca750d9425c1ec27610e56906160546501fe32d7bac9ba67d433b681a732d",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=20.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=20.svg"
+        ],
+        "sourceNames": ["State=Default, Size=20", "State=Hover, Size=20"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=20.svg",
+            "name": "State=Default, Size=20",
+            "sha256": "c39d255e693c066ebfef17421aa45f6fe4e18a08c88e8391204b3d89f801a867",
+            "state": "default",
+            "declaredSize": 20,
+            "colors": ["#D1D8DF", "#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=20.svg",
+            "name": "State=Hover, Size=20",
+            "sha256": "87bd8d1ef9c214614e129d03d97df1c4d3f8eaa6826919dfe623cdb5d9ffee43",
+            "state": "hover",
+            "declaredSize": 20,
+            "colors": ["#D1D8DF", "#939CA5"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "actions/delete-contained-24.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "105b44e20fdee7b6138b097c41ea3bec9a5260a300514e47c2ced411e80b95dd",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=24.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=24.svg"
+        ],
+        "sourceNames": ["State=Default, Size=24", "State=Hover, Size=24"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Default, Size=24.svg",
+            "name": "State=Default, Size=24",
+            "sha256": "d644c19a1dce193a740149cce1d5c82b31272e2159f1424ca95391ed2eaae222",
+            "state": "default",
+            "declaredSize": 24,
+            "colors": ["#D1D8DF", "#0B1623"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/icon with container/State=Hover, Size=24.svg",
+            "name": "State=Hover, Size=24",
+            "sha256": "55c97c8b7415603edd04303b10098238f69555d0b16be0bceeaf9558fe5a84f2",
+            "state": "hover",
+            "declaredSize": 24,
+            "colors": ["#D1D8DF", "#939CA5"]
+          }
+        ]
+      }
+    ],
+    "comment": "Default/Hover объединены: геометрия совпадает, состояние задаётся цветом."
+  },
+  {
+    "name": "delivery-4",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/delivery-4.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Delivery 4.svg"
+    ],
+    "sourceNames": ["Delivery 4"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/delivery-4.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9047de69f9336311462bc09790d47b3209353c643db38b8ff58881e0963acb57",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Delivery 4.svg"
+        ],
+        "sourceNames": ["Delivery 4"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Delivery 4.svg",
+            "name": "Delivery 4",
+            "sha256": "a3bd0bb873eb5e6a756cacd6bbec10977c58b03695e0908d4948a91d595e0f6e",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "delivery-box",
+    "category": "interface",
+    "normalizedPath": "interface/delivery-box.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delivery Box.svg"
+    ],
+    "sourceNames": ["Delivery Box"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/delivery-box.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "1d73e87243949c7f0573dd641db60af5a98600c47e33213a2fa043ca61e1f787",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delivery Box.svg"
+        ],
+        "sourceNames": ["Delivery Box"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Delivery Box.svg",
+            "name": "Delivery Box",
+            "sha256": "ac10407f5f58205bf9dd69cf361956741e1f41265fe8fcb7df10326b5042c996",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "docs",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/docs.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Docs.svg"
+    ],
+    "sourceNames": ["Docs"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/docs.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "1ba849acf8e4ff51f6b2a7e5030013baa9aa17ba6dab7e8aba7b51dac868ad25",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Docs.svg"
+        ],
+        "sourceNames": ["Docs"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Docs.svg",
+            "name": "Docs",
+            "sha256": "88915b75b8ce200c6f3c0bb83dce2b6f6189ffe1eac6ef4be58d464b25b31a99",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "document-badge-plus",
+    "category": "interface",
+    "normalizedPath": "interface/document-badge-plus.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Document Badge plus.svg"
+    ],
+    "sourceNames": ["Document Badge plus"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/document-badge-plus.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "fdfe3bcc2fac209ce878df213bfcd074c8837512c1991469ed657377c4479a23",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Document Badge plus.svg"
+        ],
+        "sourceNames": ["Document Badge plus"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Document Badge plus.svg",
+            "name": "Document Badge plus",
+            "sha256": "845ecad76f606647bbf5bc38dc672021ad65edf3f9e8d8914ef435bf97cea0e2",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "document-paper-2-lines",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/document-paper-2-lines.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Document paper 2 lines.svg"
+    ],
+    "sourceNames": ["Document paper 2 lines"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/document-paper-2-lines.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "47a3a161c013879ab7015aef8f713f5b81097eb180b9caa95e3fba36d9f7703d",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Document paper 2 lines.svg"
+        ],
+        "sourceNames": ["Document paper 2 lines"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Document paper 2 lines.svg",
+            "name": "Document paper 2 lines",
+            "sha256": "354e702c4865fd8689d00548923dd1fc792a0c1f82d06cba257e0d422284c1a2",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "down",
+    "category": "interface",
+    "normalizedPath": "interface/down.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/down.svg"
+    ],
+    "sourceNames": ["down"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/down.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "93f4a489434de352873fa9fac3f82c3c99da9c2bc1407c19660a75094fc685c5",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/down.svg"
+        ],
+        "sourceNames": ["down"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/down.svg",
+            "name": "down",
+            "sha256": "c949ea2886ba845742c140928d2d24029d72b19c6c3bdcccae0fdc600c61756a",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "down-scan",
+    "category": "interface",
+    "normalizedPath": "interface/down-scan.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Down Scan.svg"
+    ],
+    "sourceNames": ["Down Scan"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/down-scan.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "b77fece079efad9d04ff37040232d486a868efe91f15259a8a09c25f958a30a7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Down Scan.svg"
+        ],
+        "sourceNames": ["Down Scan"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Down Scan.svg",
+            "name": "Down Scan",
+            "sha256": "0c99c6bbe7e51b39e4e1d6b887f9c2fb0af1860f6a0ac4f68623880330d4dbef",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "download",
+    "category": "interface",
+    "normalizedPath": "interface/download.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Download.svg"
+    ],
+    "sourceNames": ["Download"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/download.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "082fea0cae507dc400868ddda5ee00597e5bb82834f019b8d72834573ce65843",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Download.svg"
+        ],
+        "sourceNames": ["Download"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Download.svg",
+            "name": "Download",
+            "sha256": "0521a0e688c860c2513b1af4ae2020df89dd3b9154c6cc9c734c74975ad4fe70",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "email-open-3",
+    "category": "interface",
+    "normalizedPath": "interface/email-open-3.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/email open 3.svg"
+    ],
+    "sourceNames": ["email open 3"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/email-open-3.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0cae8f6624656e25822c99e7525781b8b57bc2b728859fd2425524dd39fcaac4",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/email open 3.svg"
+        ],
+        "sourceNames": ["email open 3"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/email open 3.svg",
+            "name": "email open 3",
+            "sha256": "a5d846b951f5643abe545ce4659895a2881eb803609014e9aa137d8ffcbfbb55",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "external-link",
+    "category": "interface",
+    "normalizedPath": "interface/external-link.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/External link.svg"
+    ],
+    "sourceNames": ["External link"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/external-link.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0ca098ae2ec897830d58a8bd694c47a2f77aa76ab4e9f1585f7179a3dc39caea",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/External link.svg"
+        ],
+        "sourceNames": ["External link"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/External link.svg",
+            "name": "External link",
+            "sha256": "0c0761c0d96b17e6558a8677536426110899c4fd22f85e535671cb5e78bce9ea",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "eye",
+    "category": "interface",
+    "normalizedPath": "interface/eye.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Eye.svg"
+    ],
+    "sourceNames": ["Eye"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/eye.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "7270dea1dafa732cf62222c69321dd4079aab88ce97cae1369f7b03f9204c338",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Eye.svg"
+        ],
+        "sourceNames": ["Eye"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Eye.svg",
+            "name": "Eye",
+            "sha256": "c1a41c1375720c8a3a72ee09edef88b5b65943bea60b5264838de5135c62d8e3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file",
+    "category": "editor",
+    "normalizedPath": "editor/file.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/File.svg"
+    ],
+    "sourceNames": ["File"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/file.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "254c809cc9e0ec2e9132c41a4a9beaf62365cdf985c6c79724ea6b4be27e706c",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/File.svg"
+        ],
+        "sourceNames": ["File"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/File.svg",
+            "name": "File",
+            "sha256": "9f19639d6af7da32f6eae7f2f2b0ec68e717a7c4a8e37026079d251b3362a6f8",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-avi",
+    "category": "files",
+    "normalizedPath": "files/file-avi.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=AVI.svg"
+    ],
+    "sourceNames": ["Type=AVI"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-avi.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "0519fdb53275664c4cf5fccfedff384b8a97985c67752c241dd596501fb0654b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=AVI.svg"
+        ],
+        "sourceNames": ["Type=AVI"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=AVI.svg",
+            "name": "Type=AVI",
+            "sha256": "661e6391a2881aed7a40e0dcbb70446deadfdc6db50172b7c96055f3cbf897cb",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-csv",
+    "category": "files",
+    "normalizedPath": "files/file-csv.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=CSV.svg"
+    ],
+    "sourceNames": ["Type=CSV"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-csv.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "92c67805a814c2c5885bed7acda6fba7917edbda178b922d31f789435bc84895",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=CSV.svg"
+        ],
+        "sourceNames": ["Type=CSV"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=CSV.svg",
+            "name": "Type=CSV",
+            "sha256": "cb0288760361f23d29e9218d4993ec74907fd59d1744f81bb93d7f010bff823c",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-doc",
+    "category": "files",
+    "normalizedPath": "files/file-doc.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOC.svg"
+    ],
+    "sourceNames": ["Type=DOC"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-doc.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "afedf781708cf623c4224951d13f0c181b7f4f42b97e9bb8b6b827de66206209",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOC.svg"
+        ],
+        "sourceNames": ["Type=DOC"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOC.svg",
+            "name": "Type=DOC",
+            "sha256": "6f68bbc49a237bba76faa68ec80e43dd200ab5aa9c16ba2c685f422dd54b75b3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-docx",
+    "category": "files",
+    "normalizedPath": "files/file-docx.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOCX.svg"
+    ],
+    "sourceNames": ["Type=DOCX"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-docx.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "ab60ccf725051ab7fb90467da12ca4129a85cfd3840e79a32ddf8da1e52df2e2",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOCX.svg"
+        ],
+        "sourceNames": ["Type=DOCX"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOCX.svg",
+            "name": "Type=DOCX",
+            "sha256": "5059ebba93f39cdd633a25ae92937dc37e1b3e4f4297221f7b3f7dff3997bb5e",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-generic",
+    "category": "files",
+    "normalizedPath": "files/file-generic.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=File.svg"
+    ],
+    "sourceNames": ["Type=File"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-generic.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "bd13ba3341c853a6406c8bb03202165f5b66a8d14ff8b85f895cfa64215ae8d2",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=File.svg"
+        ],
+        "sourceNames": ["Type=File"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=File.svg",
+            "name": "Type=File",
+            "sha256": "881577a394f6290839d24825640b1ae3316fbf82c367478053ecd745ad057fa7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-img",
+    "category": "files",
+    "normalizedPath": "files/file-img.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=IMG.svg"
+    ],
+    "sourceNames": ["Type=IMG"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-img.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "1f01057a1168ce40ad69bb795f90439802a0e71fda84bbe78da54dc8f45d46a9",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=IMG.svg"
+        ],
+        "sourceNames": ["Type=IMG"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=IMG.svg",
+            "name": "Type=IMG",
+            "sha256": "3cf204fdc01af39b64d6d2ce83d6c301aa2d0b82537b60a14432d1afb3a31fa7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-mkv",
+    "category": "files",
+    "normalizedPath": "files/file-mkv.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MKV.svg"
+    ],
+    "sourceNames": ["Type=MKV"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-mkv.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "ea0d050414ce41c54ba085f90d52e0c1b30b987e968bf7588e7020c72441cf1d",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MKV.svg"
+        ],
+        "sourceNames": ["Type=MKV"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MKV.svg",
+            "name": "Type=MKV",
+            "sha256": "94f9aa12fb16cb2f4e531af0d124bef8e4d184ab79d9fd5d6146453f8d6f4190",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-mp3",
+    "category": "files",
+    "normalizedPath": "files/file-mp3.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP3.svg"
+    ],
+    "sourceNames": ["Type=MP3"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-mp3.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "57b50cd8c2fcc1becc0db874a96e0753604d3635df6196fbdecaa10cde94352e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP3.svg"
+        ],
+        "sourceNames": ["Type=MP3"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP3.svg",
+            "name": "Type=MP3",
+            "sha256": "c0b06a851569893e8bd8b142661edc1a28b77018c8358307e1b1cbd7ef45455d",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-mp4",
+    "category": "files",
+    "normalizedPath": "files/file-mp4.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP4.svg"
+    ],
+    "sourceNames": ["Type=MP4"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-mp4.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "e721cd8438c44e83eb6ecd3af3bc96a63fb989c691760987dcc09fbbfda5734e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP4.svg"
+        ],
+        "sourceNames": ["Type=MP4"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP4.svg",
+            "name": "Type=MP4",
+            "sha256": "03b10446f6a0303f1ef2b26a427e69b2b8312435ab6e2846225095269e1ff6eb",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-mpeg",
+    "category": "files",
+    "normalizedPath": "files/file-mpeg.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MPEG.svg"
+    ],
+    "sourceNames": ["Type=MPEG"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-mpeg.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "8fc8e1df258bd9d0a34e1a9f5951a7e2ddb60828a661ef4faefe888308e41d9f",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MPEG.svg"
+        ],
+        "sourceNames": ["Type=MPEG"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MPEG.svg",
+            "name": "Type=MPEG",
+            "sha256": "4afb7079c98474f28564dbdb5bd912697d252c016fce885ba1452391fb98005d",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-pdf",
+    "category": "files",
+    "normalizedPath": "files/file-pdf-gray.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF Gray.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF.svg"
+    ],
+    "sourceNames": ["Type=PDF Gray", "Type=PDF"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5", "#D92D20"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["gray", "default"],
+    "variants": [
+      {
+        "normalizedPath": "files/file-pdf-gray.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "498cb22fdc131b53eb7cd2571a27a75d763d9001bae5ca61e02c300f45ed2938",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF Gray.svg"
+        ],
+        "sourceNames": ["Type=PDF Gray"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF Gray.svg",
+            "name": "Type=PDF Gray",
+            "sha256": "b5f46b99464093b9ce1f28be8c01fb28029633e95b469f62e00e7d0161d003b7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "files/file-pdf-default.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "498cb22fdc131b53eb7cd2571a27a75d763d9001bae5ca61e02c300f45ed2938",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF.svg"
+        ],
+        "sourceNames": ["Type=PDF"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF.svg",
+            "name": "Type=PDF",
+            "sha256": "97e564168a005b67340870d42bdb828c8469fdb547bd6a22b9d8a97b18352a87",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#D92D20"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-png",
+    "category": "files",
+    "normalizedPath": "files/file-png.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PNG.svg"
+    ],
+    "sourceNames": ["Type=PNG"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-png.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "76d488ecb9af617316bf3776f1bfaf430b7cc233980f44b7bc52b28540b9ef5e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PNG.svg"
+        ],
+        "sourceNames": ["Type=PNG"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PNG.svg",
+            "name": "Type=PNG",
+            "sha256": "e8485606226e20f2033ccce7b82cf09271ca9d021fb829563576a42a84f7ec97",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-ppt",
+    "category": "files",
+    "normalizedPath": "files/file-ppt.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPT.svg"
+    ],
+    "sourceNames": ["Type=PPT"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-ppt.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "a69034d41bdd8fcf4db7b76da7f70985b67856c483bbd2a866272d27040b1cc8",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPT.svg"
+        ],
+        "sourceNames": ["Type=PPT"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPT.svg",
+            "name": "Type=PPT",
+            "sha256": "b8ccd39cf7e9f3d5fd27c9dd4a6de2560c497d9e46a61922cbd6efc9ef8dd63c",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-pptx",
+    "category": "files",
+    "normalizedPath": "files/file-pptx.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPTX.svg"
+    ],
+    "sourceNames": ["Type=PPTX"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-pptx.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "28faa9676872d19ca28c8c9b263c988238c7d81b18db20d01185878cda02b52b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPTX.svg"
+        ],
+        "sourceNames": ["Type=PPTX"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPTX.svg",
+            "name": "Type=PPTX",
+            "sha256": "6e6f34ad50d016f459c0662141f3a3430636aa30a1f4bcc792a92af9c5893df0",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-rar",
+    "category": "files",
+    "normalizedPath": "files/file-rar.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=RAR.svg"
+    ],
+    "sourceNames": ["Type=RAR"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-rar.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "a54b85a02847b784598e54ee91f57ac6a3a2b06960aa98edf3c38ef1ab5eebe2",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=RAR.svg"
+        ],
+        "sourceNames": ["Type=RAR"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=RAR.svg",
+            "name": "Type=RAR",
+            "sha256": "de2deb948dd46cc7cfda90528b38e3c245a907cf028feb16ce359011278bab46",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#414651"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-svg",
+    "category": "files",
+    "normalizedPath": "files/file-svg.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=SVG.svg"
+    ],
+    "sourceNames": ["Type=SVG"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-svg.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "3a3c86489abb299c8e8fa23a2f8cc2559e4e04328e675db058870769716591da",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=SVG.svg"
+        ],
+        "sourceNames": ["Type=SVG"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=SVG.svg",
+            "name": "Type=SVG",
+            "sha256": "211613da477dfa8f7ab47af42b8ad36ed24bc14f3632e5ff6361b9fb0cf2e0f8",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-txt",
+    "category": "files",
+    "normalizedPath": "files/file-txt.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=TXT.svg"
+    ],
+    "sourceNames": ["Type=TXT"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-txt.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "be4e407ed07150d67c728ddff6b9705de81dce25e0617be77d4f11f3374539d2",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=TXT.svg"
+        ],
+        "sourceNames": ["Type=TXT"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=TXT.svg",
+            "name": "Type=TXT",
+            "sha256": "27ab2b00c121c61be989e0ff619820e6c3dc0d918e62cfa2a306776d2daf5a85",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-type-icon",
+    "category": "interface",
+    "normalizedPath": "interface/file-type-icon.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/File type icon.svg"
+    ],
+    "sourceNames": ["File type icon"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/file-type-icon.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "86521ba626fb245097ad2659afec8bfc678457a839e85d467a3b6b9939d81baa",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/File type icon.svg"
+        ],
+        "sourceNames": ["File type icon"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/File type icon.svg",
+            "name": "File type icon",
+            "sha256": "b822e42899d3310373637f148c65902a944ad23d079a1397f8076129aa469661",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-xls",
+    "category": "files",
+    "normalizedPath": "files/file-xls.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLS.svg"
+    ],
+    "sourceNames": ["Type=XLS"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-xls.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "f109a4e7a1d6585ce478a413aef6ad4cf4173b8938a56003ddc37af43a562cc5",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLS.svg"
+        ],
+        "sourceNames": ["Type=XLS"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLS.svg",
+            "name": "Type=XLS",
+            "sha256": "42731fe907bb806a9408b5a4d586b282806434399da8b78d2f0d9ca37d654d0d",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-xlsx",
+    "category": "files",
+    "normalizedPath": "files/file-xlsx.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLSX.svg"
+    ],
+    "sourceNames": ["Type=XLSX"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-xlsx.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "d992c5da593ebef663809357d76175c232be5c0a0f5663c9491aca9a11c1ef87",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLSX.svg"
+        ],
+        "sourceNames": ["Type=XLSX"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLSX.svg",
+            "name": "Type=XLSX",
+            "sha256": "0c0f3edb18267f79c79c416ce037d680d12d28ff2f0a5eb03973fc844bc411ea",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "file-zip",
+    "category": "files",
+    "normalizedPath": "files/file-zip.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=ZIP.svg"
+    ],
+    "sourceNames": ["Type=ZIP"],
+    "size": { "width": 40, "height": 40 },
+    "viewBox": "0 0 40 40",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/file-zip.svg",
+        "size": { "width": 40, "height": 40 },
+        "viewBox": "0 0 40 40",
+        "state": null,
+        "geometrySha256": "38f7319d3308bb5061efe63a30c935315e16bb4ec217a7f06145298402117459",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=ZIP.svg"
+        ],
+        "sourceNames": ["Type=ZIP"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=ZIP.svg",
+            "name": "Type=ZIP",
+            "sha256": "1b7a05a71d5c4d944281bb310f5a9fde26a897df3b5e40e60d090044fac776b2",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#414651"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "filter",
+    "category": "interface",
+    "normalizedPath": "interface/filter.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Filter1.svg"
+    ],
+    "sourceNames": ["Filter1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/filter.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "faf304cade6d2c56523c8ca1ba4cf5fed5ab2ca80590c3b2a1d818cbc75941a3",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Filter1.svg"
+        ],
+        "sourceNames": ["Filter1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Filter1.svg",
+            "name": "Filter1",
+            "sha256": "ccb3d4fa326de38ecb0c45282e8a026cacd47fe9ae47745141c6649b6a8c6c62",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "flag",
+    "category": "interface",
+    "normalizedPath": "interface/flag.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag.svg"
+    ],
+    "sourceNames": ["Flag"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "flag-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/flag.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "1289ea727e708bc2bdff8287b91644070684381188bed4e71a9412d1defd596f",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag.svg"
+        ],
+        "sourceNames": ["Flag"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag.svg",
+            "name": "Flag",
+            "sha256": "2b46395a4320d8048648a33f216383c1a9d1a9321189145adbc0e0c4a33307ab",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "flag-alt",
+    "category": "interface",
+    "normalizedPath": "interface/flag-alt.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag-1.svg"
+    ],
+    "sourceNames": ["Flag-1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "flag-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/flag-alt.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "68f4594c250b64b20546dc04de617b4f0eed411d4234e13ed1a8f000f566701d",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag-1.svg"
+        ],
+        "sourceNames": ["Flag-1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flag-1.svg",
+            "name": "Flag-1",
+            "sha256": "69bc49198a71ac8427f151b48fb750be5e45f512cdf5a55d510ec0e2ad73f354",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "flagq-uncertain",
+    "category": "interface",
+    "normalizedPath": "interface/flagq-uncertain.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flagq.svg"
+    ],
+    "sourceNames": ["Flagq"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "flag-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/flagq-uncertain.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "107eae0ddab6af59e7466f87ef3ad4b8df2f137a1c1d48f08a558d69c95601c7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flagq.svg"
+        ],
+        "sourceNames": ["Flagq"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Flagq.svg",
+            "name": "Flagq",
+            "sha256": "a67f616de3251052a640c9e3c9002ed85dcf702fa4aef932f0565195b7aa5a39",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Назначение или различие glyph не подтверждено; имя намеренно консервативно."
+  },
+  {
+    "name": "folder-file-open",
+    "category": "interface",
+    "normalizedPath": "interface/folder-file-open.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Folder File Open.svg"
+    ],
+    "sourceNames": ["Folder File Open"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/folder-file-open.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9803c72bb8735d6aa8d55747abcd7177d3af57b18966c302455b68d59fa45f3c",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Folder File Open.svg"
+        ],
+        "sourceNames": ["Folder File Open"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Folder File Open.svg",
+            "name": "Folder File Open",
+            "sha256": "426c3b51d3948ab35db0e51413dcc506a1382cb6368ee4450dcd557e9829a3d1",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "gallery-view",
+    "category": "interface",
+    "normalizedPath": "interface/gallery-view.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Gallery view.svg"
+    ],
+    "sourceNames": ["Gallery view"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/gallery-view.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2a4bec4bf696489ca0617331b4fe196d705f087dc042795acfe90134b8fd9d11",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Gallery view.svg"
+        ],
+        "sourceNames": ["Gallery view"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Gallery view.svg",
+            "name": "Gallery view",
+            "sha256": "8769e550bdaffa327099e8cf216782231a2281d72bf568a21c32357f787ec7f3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "graph",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/graph.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Graph.svg"
+    ],
+    "sourceNames": ["Graph"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/graph.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "31d8c6bb5ab21a0affe011cd4138b49cecb8744b7c5fd98f1ae132d7839d2bf0",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Graph.svg"
+        ],
+        "sourceNames": ["Graph"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Graph.svg",
+            "name": "Graph",
+            "sha256": "2e31dd3d08547e5ed2ef137f17c7ee3d0cf14eeea2fe846c010a8526b4277276",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "grid-interface",
+    "category": "interface",
+    "normalizedPath": "interface/grid-interface.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Grid interface.svg"
+    ],
+    "sourceNames": ["Grid interface"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/grid-interface.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "7989f56b9a8edf8cc84269e0bf0b5dcaafeebafe53344ebed062e0e17944b111",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Grid interface.svg"
+        ],
+        "sourceNames": ["Grid interface"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Grid interface.svg",
+            "name": "Grid interface",
+            "sha256": "86a7ff2a9a2c133000d176f14bf36a7dd4c0779d45c847bfac036b42b2adb650",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "h1",
+    "category": "editor",
+    "normalizedPath": "editor/h1.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H1.svg"
+    ],
+    "sourceNames": ["H1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/h1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "3b89a9f220cf2d90ca46ef4cb6936adea8c3273264aa450dcd2b58030e2c553b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H1.svg"
+        ],
+        "sourceNames": ["H1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H1.svg",
+            "name": "H1",
+            "sha256": "94abe07063cf58a38baf9a74a67813abb3960e7949561cbc3a98fe407ed0e643",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "h2",
+    "category": "editor",
+    "normalizedPath": "editor/h2.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H2.svg"
+    ],
+    "sourceNames": ["H2"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/h2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "372f1e24416de91182f04d3c30bff955c8cda4cf867ec38275d587bafdfb6be7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H2.svg"
+        ],
+        "sourceNames": ["H2"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H2.svg",
+            "name": "H2",
+            "sha256": "93511125dd03e8897692fa813ec377a198b6ee5f46744d9bfaca07e62fccb443",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "h3",
+    "category": "editor",
+    "normalizedPath": "editor/h3.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H3.svg"
+    ],
+    "sourceNames": ["H3"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/h3.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "f31dc9fe9a4a500134c78d00da61008a5e1d9d039f7778eba46c54dbbe115c5b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H3.svg"
+        ],
+        "sourceNames": ["H3"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H3.svg",
+            "name": "H3",
+            "sha256": "25f3364a951e62206d51909b12945b8d1299bdcd9ffb5034ed1c23897175da25",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "h4",
+    "category": "editor",
+    "normalizedPath": "editor/h4.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H4.svg"
+    ],
+    "sourceNames": ["H4"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/h4.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "7ee15643d170199cd733c54ac533a9f53aa1722e5288d1359190ccfa3e13d43e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H4.svg"
+        ],
+        "sourceNames": ["H4"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H4.svg",
+            "name": "H4",
+            "sha256": "ace94bb2cfc98dd70996a56c8827c51ffe7dd62ffb0ef8d60658f8d31179d70d",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "h5",
+    "category": "editor",
+    "normalizedPath": "editor/h5.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H5.svg"
+    ],
+    "sourceNames": ["H5"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/h5.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8b796f422d7c58ab4f06bdc875b4f119475a15e269b31aaecdc6d928dde5d6e1",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H5.svg"
+        ],
+        "sourceNames": ["H5"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/H5.svg",
+            "name": "H5",
+            "sha256": "27c2fff9aecf5997ba25c47c313714212fd08279f65efdda90734c0e5b1bdae6",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "icon-20-uncertain",
+    "category": "interface",
+    "normalizedPath": "interface/icon-20-uncertain.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon20.svg"
+    ],
+    "sourceNames": ["Icon20"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/icon-20-uncertain.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0dad11ad9162b79e71510a2600d2fe63d9ac7b693d0a2e5c65c367770b352e98",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon20.svg"
+        ],
+        "sourceNames": ["Icon20"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon20.svg",
+            "name": "Icon20",
+            "sha256": "4e12693d41d7eccce61d62d8bf78bc1b13220c8fa1812eec70f3da8a89c1abd1",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Назначение или различие glyph не подтверждено; имя намеренно консервативно."
+  },
+  {
+    "name": "icon-32-uncertain",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/icon-32-uncertain.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Icon32.svg"
+    ],
+    "sourceNames": ["Icon32"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/icon-32-uncertain.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "96ecfe3b0db2f4b8ddb2bad93e88f1f6e54471956588afbdaeeb04444c58e4b1",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Icon32.svg"
+        ],
+        "sourceNames": ["Icon32"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Icon32.svg",
+            "name": "Icon32",
+            "sha256": "d2121bbd7ef568cf59621953f1d1f1eb6049bf12f55a0170941ac62648801188",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Назначение или различие glyph не подтверждено; имя намеренно консервативно."
+  },
+  {
+    "name": "icon-wrapper-16-uncertain",
+    "category": "interface",
+    "normalizedPath": "interface/icon-wrapper-16-uncertain.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 16.svg"
+    ],
+    "sourceNames": ["Icon-Wrapper 16"],
+    "size": { "width": 16, "height": 16 },
+    "viewBox": "0 0 16 16",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/icon-wrapper-16-uncertain.svg",
+        "size": { "width": 16, "height": 16 },
+        "viewBox": "0 0 16 16",
+        "state": null,
+        "geometrySha256": "de942988f03ba3cb4447bb31c8b323bc9239e7c057ee300db963139b4f108ed5",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 16.svg"
+        ],
+        "sourceNames": ["Icon-Wrapper 16"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 16.svg",
+            "name": "Icon-Wrapper 16",
+            "sha256": "178f7b6c9dbebeaf8b470b29b856a898a65bccb0694050b23be67597783813f4",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Назначение или различие glyph не подтверждено; имя намеренно консервативно."
+  },
+  {
+    "name": "icon-wrapper-24-uncertain",
+    "category": "interface",
+    "normalizedPath": "interface/icon-wrapper-24-uncertain.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 24.svg"
+    ],
+    "sourceNames": ["Icon-Wrapper 24"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/icon-wrapper-24-uncertain.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "82609381d2a3bd59dbf679fe082ed69d45c0aa965edcdf6bca735640cf0c85fd",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 24.svg"
+        ],
+        "sourceNames": ["Icon-Wrapper 24"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Icon-Wrapper 24.svg",
+            "name": "Icon-Wrapper 24",
+            "sha256": "b6a5b44ac3d4f0a14ff94dea76ca3cd8db0540c2582b7547206405fa833e1622",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": "Назначение или различие glyph не подтверждено; имя намеренно консервативно."
+  },
+  {
+    "name": "image",
+    "category": "editor",
+    "normalizedPath": "editor/image.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Image.svg"
+    ],
+    "sourceNames": ["Image"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/image.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2865e46eb7d91ee257db69103ea4fc71d086cddb4dad2b66d727023f0a7ab8d7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Image.svg"
+        ],
+        "sourceNames": ["Image"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Image.svg",
+            "name": "Image",
+            "sha256": "423d8dddb568882a5f7546f3fb82ef76812e598ef8cfd35731577f5ccf360019",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "info-circle",
+    "category": "interface",
+    "normalizedPath": "interface/info-circle.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/info circle.svg"
+    ],
+    "sourceNames": ["info circle"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/info-circle.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "a4989a91eae5b99a784077754f4139582e4b3f79126bc9f319e3b32986c74539",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/info circle.svg"
+        ],
+        "sourceNames": ["info circle"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/info circle.svg",
+            "name": "info circle",
+            "sha256": "5971dbe47927b156a38b3f82eb149e37f1ed85d40a4821f94a153423f4f2d6e5",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "italic",
+    "category": "editor",
+    "normalizedPath": "editor/italic.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Italic.svg"
+    ],
+    "sourceNames": ["Italic"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/italic.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "ec2bdf3f303ed083c3a9abc1e494c251a96a74f820df16a80e603d026dbcb65f",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Italic.svg"
+        ],
+        "sourceNames": ["Italic"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Italic.svg",
+            "name": "Italic",
+            "sha256": "05a9473f8b439b8c519761ea60c7f34893fd1f0268e8ee5145b01475d86b18c8",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "link",
+    "category": "interface",
+    "normalizedPath": "interface/link.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Link.svg"
+    ],
+    "sourceNames": ["Link"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/link.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0599c4aeeee6de838d685bb31cd36f2055e1417936974b46b8f37507fd7051ff",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Link.svg"
+        ],
+        "sourceNames": ["Link"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Link.svg",
+            "name": "Link",
+            "sha256": "86fa272a41d2e6cfeba0b2ec26fe2db80dc4fae564215d5aefc4db08dcdae1c9",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "list",
+    "category": "interface",
+    "normalizedPath": "interface/list.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/List.svg"
+    ],
+    "sourceNames": ["List"],
+    "size": { "width": 24, "height": 25 },
+    "viewBox": "0 0 24 25",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/list.svg",
+        "size": { "width": 24, "height": 25 },
+        "viewBox": "0 0 24 25",
+        "state": null,
+        "geometrySha256": "8cf2a65b03018b1ad99b4a763e0b6dcf31e49c92608b6b2b00b187ec1cc0d123",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/List.svg"
+        ],
+        "sourceNames": ["List"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/List.svg",
+            "name": "List",
+            "sha256": "960ab5944d01b997d5135a1244300e65c447bcb13a42803cde88db1febed47d3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "logout",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/logout.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Logout.svg"
+    ],
+    "sourceNames": ["Logout"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/logout.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "acb0601235d36836b1284068be2dbec96255059ef7c2a73af8703d0c38244364",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Logout.svg"
+        ],
+        "sourceNames": ["Logout"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Logout.svg",
+            "name": "Logout",
+            "sha256": "8da62104fb87cc3b51e918dad871dd1adcf4dc2273c8e46dd5301bad25074df8",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "loop-direction-repeat-circle-horizontal",
+    "category": "interface",
+    "normalizedPath": "interface/loop-direction-repeat-circle-horizontal.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Loop direction Repeat  Circle horizontal.svg"
+    ],
+    "sourceNames": ["Loop direction Repeat  Circle horizontal"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/loop-direction-repeat-circle-horizontal.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "c2af29782ad3cd3925577713bddee92972e0fc270f1af80584998a44c8e4497b",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Loop direction Repeat  Circle horizontal.svg"
+        ],
+        "sourceNames": ["Loop direction Repeat  Circle horizontal"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Loop direction Repeat  Circle horizontal.svg",
+            "name": "Loop direction Repeat  Circle horizontal",
+            "sha256": "1d674ca66bb4a056942a53d3ce898e6e612b8342ba397d5332172be4f6ddeefa",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "minus",
+    "category": "interface",
+    "normalizedPath": "interface/minus.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus.svg"
+    ],
+    "sourceNames": ["Minus"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "minus-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/minus.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2a55be8474daf57980d0127d0439de65c66d73b4078c8141473fcba1588a4db6",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus.svg"
+        ],
+        "sourceNames": ["Minus"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus.svg",
+            "name": "Minus",
+            "sha256": "3a3db5d677b51fc73584f1bcd51a382df76b0f57da005fcc89216911b8913ed3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "minus-alt",
+    "category": "interface",
+    "normalizedPath": "interface/minus-alt.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus-1.svg"
+    ],
+    "sourceNames": ["Minus-1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "minus-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/minus-alt.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "c35485173723577fcde421390a821886acb59d603811000e8ba9179b3b61e471",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus-1.svg"
+        ],
+        "sourceNames": ["Minus-1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Minus-1.svg",
+            "name": "Minus-1",
+            "sha256": "29b77ca63b5a83b428c516bfa7cb11b7df54f91f26fc47d2042da2a646637bcf",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "monotone-add",
+    "category": "editor",
+    "normalizedPath": "editor/monotone-add.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Monotone add.svg"
+    ],
+    "sourceNames": ["Monotone add"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/monotone-add.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "dd78a3731638043c030937492ceb04c4b09a4d870f3a6daa361d1c5f85669802",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Monotone add.svg"
+        ],
+        "sourceNames": ["Monotone add"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Monotone add.svg",
+            "name": "Monotone add",
+            "sha256": "fed76cff9a4c2068db74fbf15d87810d4be146d32dd6f50d02c378837d0b4f48",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "numbered-list",
+    "category": "editor",
+    "normalizedPath": "editor/numbered-list.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Numbered list.svg"
+    ],
+    "sourceNames": ["Numbered list"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/numbered-list.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "78713964f2e0cd0a7652f31d6198d38850c8c0d541cbe6e28c923b84a18da731",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Numbered list.svg"
+        ],
+        "sourceNames": ["Numbered list"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/Numbered list.svg",
+            "name": "Numbered list",
+            "sha256": "bdc19ffe661e648a612289d40d6e36a8f335f6f662418595b8902df1a63da5e7",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "paperclip",
+    "category": "interface",
+    "normalizedPath": "interface/paperclip.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/paperclip.svg"
+    ],
+    "sourceNames": ["paperclip"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/paperclip.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "84ff63fd0208ba919c8d0401e50351c021d5f7a8e359e35e7f3d292177016125",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/paperclip.svg"
+        ],
+        "sourceNames": ["paperclip"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/paperclip.svg",
+            "name": "paperclip",
+            "sha256": "a09c70a4fa9feb42033b36f9b04f22aae3ffd92aa6f78ea470fc0d1ba4b2b3ad",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "plus-alt-2",
+    "category": "interface",
+    "normalizedPath": "interface/plus-alt-2.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 2.svg"
+    ],
+    "sourceNames": ["Plus 2"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "plus-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/plus-alt-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0773eb0504a6e56d70338847fa08d89483c69cffabed3f44e357f8dc316005c1",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 2.svg"
+        ],
+        "sourceNames": ["Plus 2"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 2.svg",
+            "name": "Plus 2",
+            "sha256": "91e539e926e9b024de824b7d4a81296358946488a64f34ae0a52b5182901fcf6",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "plus-alt-4",
+    "category": "interface",
+    "normalizedPath": "interface/plus-alt-4.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 4.svg"
+    ],
+    "sourceNames": ["Plus 4"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "plus-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/plus-alt-4.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9dad30bb11082c07f95bedb8ad33cf9077440295ad619ae458ea120ddea82942",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 4.svg"
+        ],
+        "sourceNames": ["Plus 4"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Plus 4.svg",
+            "name": "Plus 4",
+            "sha256": "2651472695430e8344389b397c5a014bd20c7d0afa14b2ecfe73b644d9493c74",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "printer-2",
+    "category": "interface",
+    "normalizedPath": "interface/printer-2.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/printer 2.svg"
+    ],
+    "sourceNames": ["printer 2"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/printer-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8817013540deff04f7fe0b6543f100e21a6cedee63bf7031d382b865312612a5",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/printer 2.svg"
+        ],
+        "sourceNames": ["printer 2"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/printer 2.svg",
+            "name": "printer 2",
+            "sha256": "c3ef6325ea617f3405f791c001ac3768db8e22777ddcd5ab8311b9358c247535",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "priority",
+    "category": "status",
+    "normalizedPath": "status/priority-high.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Высокий.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Низкий.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Средний.svg"
+    ],
+    "sourceNames": [
+      "Property 1=Высокий",
+      "Property 1=Низкий",
+      "Property 1=Средний"
+    ],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["#CC1F1F", "#D5E5D6", "#57965C", "#45B64E"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["high", "low", "medium"],
+    "variants": [
+      {
+        "normalizedPath": "status/priority-high.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Высокий.svg"
+        ],
+        "sourceNames": ["Property 1=Высокий"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Высокий.svg",
+            "name": "Property 1=Высокий",
+            "sha256": "e76b1cf83f916192659e792de46a1d7f4a5c4a1cbe9621dfacb509a00cffbbcd",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#CC1F1F"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "status/priority-low.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Низкий.svg"
+        ],
+        "sourceNames": ["Property 1=Низкий"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Низкий.svg",
+            "name": "Property 1=Низкий",
+            "sha256": "d83dcf414b231a973d3fa6e0876662a76ae15a472403bd57e3830d4e18b323eb",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#D5E5D6", "#57965C", "#45B64E"]
+          }
+        ]
+      },
+      {
+        "normalizedPath": "status/priority-medium.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Средний.svg"
+        ],
+        "sourceNames": ["Property 1=Средний"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Средний.svg",
+            "name": "Property 1=Средний",
+            "sha256": "0d52bf9b6fa7d5b92f5689ad0b73f5c7392b1baca9401c68a7bf1df3dd8da0e9",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#45B64E", "#57965C"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "refresh-right",
+    "category": "interface",
+    "normalizedPath": "interface/refresh-right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Refresh right.svg"
+    ],
+    "sourceNames": ["Refresh right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/refresh-right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9c3bf87ecb618be99c8662144de887427d2c30b1277647d2065f4a76a80611e4",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Refresh right.svg"
+        ],
+        "sourceNames": ["Refresh right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Refresh right.svg",
+            "name": "Refresh right",
+            "sha256": "908df3cb652080cf18ecaf6d07303240bf1fa50d6fb8827ceb37b0673963bb44",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "reply-share-left",
+    "category": "interface",
+    "normalizedPath": "interface/reply-share-left.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share Left.svg"
+    ],
+    "sourceNames": ["Reply Share Left"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/reply-share-left.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "544cd227c644d7b248acd040416d757ad0d3e0e69ec014b9da4f0f6a86548094",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share Left.svg"
+        ],
+        "sourceNames": ["Reply Share Left"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share Left.svg",
+            "name": "Reply Share Left",
+            "sha256": "7cc10e9606efee8ee8cf3c4fa190ef9328be21e6ba686101bf09bf632ceae241",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "reply-share-right",
+    "category": "interface",
+    "normalizedPath": "interface/reply-share-right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share right.svg"
+    ],
+    "sourceNames": ["Reply Share right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/reply-share-right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "017924c01c80338ff2aac2e46d977629538daa6a8cf27a65ec55b0a3126cb9f1",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share right.svg"
+        ],
+        "sourceNames": ["Reply Share right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Reply Share right.svg",
+            "name": "Reply Share right",
+            "sha256": "81d7151dd9cd29683dcaa31d283fd14bdffc5158f3d7d097f35e66f4560339ef",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "right",
+    "category": "interface",
+    "normalizedPath": "interface/right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/right.svg"
+    ],
+    "sourceNames": ["right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "8143313b1f243bf3f7907540f8b14d2ca1d561fe58a2d14e6c8381bc5320b149",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/right.svg"
+        ],
+        "sourceNames": ["right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/right.svg",
+            "name": "right",
+            "sha256": "ed54c378a0d8f09cff95c176b82f84441b0c24f67193956c5118a3a5beaa1532",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "search",
+    "category": "interface",
+    "normalizedPath": "interface/search.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Search1.svg"
+    ],
+    "sourceNames": ["Search1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/search.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "9665f279bb01499312a5878c74b40fb8c7476881fa3ce45228a866ab1aa70e68",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Search1.svg"
+        ],
+        "sourceNames": ["Search1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Search1.svg",
+            "name": "Search1",
+            "sha256": "8e5c0aceaaaf7337af98702b3643d3ed29faff8f8717cdb5339b62656c83287a",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "setting",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/setting.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Setting.svg"
+    ],
+    "sourceNames": ["Setting"],
+    "size": { "width": 24, "height": 25 },
+    "viewBox": "0 0 24 25",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/setting.svg",
+        "size": { "width": 24, "height": 25 },
+        "viewBox": "0 0 24 25",
+        "state": null,
+        "geometrySha256": "5d127a87d5b97f2dfe137b81758ec0ac932d5c2c3ef16a6558aeaec3e1725146",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Setting.svg"
+        ],
+        "sourceNames": ["Setting"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/Setting.svg",
+            "name": "Setting",
+            "sha256": "37a75fcaf02846e9426a2579c942a50811be2f495077e19292db19d781cc10e5",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "setting-tool-circle",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/setting-tool-circle.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/setting tool circle.svg"
+    ],
+    "sourceNames": ["setting tool circle"],
+    "size": { "width": 24, "height": 25 },
+    "viewBox": "0 0 24 25",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/setting-tool-circle.svg",
+        "size": { "width": 24, "height": 25 },
+        "viewBox": "0 0 24 25",
+        "state": null,
+        "geometrySha256": "5d228f38643397ada89c0ab03d166e555063533fbfb3b34e1632636f131bb3b5",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/setting tool circle.svg"
+        ],
+        "sourceNames": ["setting tool circle"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/setting tool circle.svg",
+            "name": "setting tool circle",
+            "sha256": "2db192b0acd065ba4ce9c9013e54598f990978f9393c780406ba3647b60e0186",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "six-dot-grid",
+    "category": "interface",
+    "normalizedPath": "interface/six-dot-grid.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Default.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Hover.svg",
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Menu.svg"
+    ],
+    "sourceNames": ["State=Default", "State=Hover", "Menu"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": ["default", "hover"],
+    "variants": [
+      {
+        "normalizedPath": "interface/six-dot-grid.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "a236d8d513efddf3fe1a5cfd352af76473ad2f303fd097261234a38d9d93a966",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Default.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Hover.svg",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Menu.svg"
+        ],
+        "sourceNames": ["State=Default", "State=Hover", "Menu"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Default.svg",
+            "name": "State=Default",
+            "sha256": "6c2cc5fb67136a5d7c6e5573a82e20914653f5cd01cf900f395127abbea7adb2",
+            "state": "default",
+            "declaredSize": null,
+            "colors": ["#939CA5"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/drag & drop/State=Hover.svg",
+            "name": "State=Hover",
+            "sha256": "79daf4eb80ff17da2b978a41ef1849c5d466f1a1cc5fb63198247efeee20aeb3",
+            "state": "hover",
+            "declaredSize": null,
+            "colors": ["#D1D8DF"]
+          },
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Menu.svg",
+            "name": "Menu",
+            "sha256": "e6cf3b562a2607db8a969bb854e67043f4d55429cf1fed1a76f3132f866df248",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": "Одна точная геометрия экспортирована как drag & drop и Menu; нейтральное имя сохраняет семантическую неоднозначность."
+  },
+  {
+    "name": "star",
+    "category": "interface",
+    "normalizedPath": "interface/star.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Star.svg"
+    ],
+    "sourceNames": ["Star"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/star.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "bb21e9686ac00fa97d1a5fefeec4cee7f25bfaee7d07a78f8e8847de78585377",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Star.svg"
+        ],
+        "sourceNames": ["Star"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Star.svg",
+            "name": "Star",
+            "sha256": "378955d4adcc32f1b87702a4b0106690498c44c012297f56b06ec1974d891563",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "swap-right",
+    "category": "interface",
+    "normalizedPath": "interface/swap-right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/SwapRight.svg"
+    ],
+    "sourceNames": ["SwapRight"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/swap-right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "798ae95b465433af7a8370e9a9d337bd891c100c9a87bdb7ab3e863746905cc7",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/SwapRight.svg"
+        ],
+        "sourceNames": ["SwapRight"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/SwapRight.svg",
+            "name": "SwapRight",
+            "sha256": "33965694be39509bade4f51d6a711eba63feda9aa3eb2fc662935c728e1c16d6",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "underline",
+    "category": "editor",
+    "normalizedPath": "editor/underline.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/underline.svg"
+    ],
+    "sourceNames": ["underline"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "editor/underline.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "cb089047818079149b98286925cb3da3ba43883ee57d590c06fd74ee881441d8",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/underline.svg"
+        ],
+        "sourceNames": ["underline"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/text editor/underline.svg",
+            "name": "underline",
+            "sha256": "ea2f22aef966dba5abcfd33586eeb8c541e1216628a80147647176d3fc7c4c58",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "unsuccess-list",
+    "category": "interface",
+    "normalizedPath": "interface/unsuccess-list.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Unsuccess list.svg"
+    ],
+    "sourceNames": ["Unsuccess list"],
+    "size": { "width": 24, "height": 25 },
+    "viewBox": "0 0 24 25",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/unsuccess-list.svg",
+        "size": { "width": 24, "height": 25 },
+        "viewBox": "0 0 24 25",
+        "state": null,
+        "geometrySha256": "f50351db3fc00c2f76268ce3575467aff9331f70d4eb442d96d1cc180fd4d7fc",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Unsuccess list.svg"
+        ],
+        "sourceNames": ["Unsuccess list"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Unsuccess list.svg",
+            "name": "Unsuccess list",
+            "sha256": "fc580dcbc14b41f74b63f245fd4c20828c577bed00912f5658cb56e471c78f1c",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "up",
+    "category": "interface",
+    "normalizedPath": "interface/up.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/up.svg"
+    ],
+    "sourceNames": ["up"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/up.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "3f890731e93b5e598768c4949c4b5014e8f6d1bb15e1233725711ecb3b12f914",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/up.svg"
+        ],
+        "sourceNames": ["up"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/up.svg",
+            "name": "up",
+            "sha256": "8d252d8aac925ed6046ad8cde9ec8d52cd161087a13c879cd8f1df374439325e",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "update-right",
+    "category": "interface",
+    "normalizedPath": "interface/update-right.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Update right.svg"
+    ],
+    "sourceNames": ["Update right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/update-right.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "97668928ac043e51eb4f5da59d1da71d34dd06bd24b96e98b00d947f6f0539aa",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Update right.svg"
+        ],
+        "sourceNames": ["Update right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Update right.svg",
+            "name": "Update right",
+            "sha256": "2c958074deb8bf39f149f4db84de951ea618165c40d9149dc65fb5b61015c273",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "user",
+    "category": "interface",
+    "normalizedPath": "interface/user.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user.svg"
+    ],
+    "sourceNames": ["user"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "user-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/user.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "fd5e5570c60ba9536abd4a52f9a712f46ecad985c043620411a9237085954ee0",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user.svg"
+        ],
+        "sourceNames": ["user"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user.svg",
+            "name": "user",
+            "sha256": "65205f7881f58a4626c01684ca42b09d3e02bf1d69968c4ff4ec7d8fdb585251",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "user-1",
+    "category": "interface",
+    "normalizedPath": "interface/user-1.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user-1.svg"
+    ],
+    "sourceNames": ["user-1"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "user-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/user-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "aba928866dc354383d3a88d3500c229c00b9ab3c34126ba3638071a889986728",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user-1.svg"
+        ],
+        "sourceNames": ["user-1"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/user-1.svg",
+            "name": "user-1",
+            "sha256": "09bcac5e8738b02ff70483607312d6f8a8106f5fd5cf8667f10f048485875f24",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "user-sidebar",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/user-sidebar.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/user.svg"
+    ],
+    "sourceNames": ["user"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": "user-family",
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/user-sidebar.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "edbe6792b0aec0662c8f33bdebd0132e6eeef092e409982b99ee1ab42ef16b0e",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/user.svg"
+        ],
+        "sourceNames": ["user"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/sidebar/user.svg",
+            "name": "user",
+            "sha256": "a6c02232bd93c0854a8013596b7ec16bccbae4e5f69cba6248f5b5cd5860dcdf",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  },
+  {
+    "name": "vertical-mirror",
+    "category": "interface",
+    "normalizedPath": "interface/vertical-mirror.svg",
+    "sourceFigmaPaths": [
+      "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Vertical Mirror.svg"
+    ],
+    "sourceNames": ["Vertical Mirror"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/vertical-mirror.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0d127b3569de5ccb482dc2f48cf2f37eb8396b4a3e3dbbe81cfb255fae819568",
+        "sourcePaths": [
+          "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Vertical Mirror.svg"
+        ],
+        "sourceNames": ["Vertical Mirror"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/intarface/Vertical Mirror.svg",
+            "name": "Vertical Mirror",
+            "sha256": "47b26515456f206437e4f86db9ab0dacf02312a9dddcceff999908aa0b0fb3e3",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"]
+          }
+        ]
+      }
+    ],
+    "comment": null
+  }
+]

@@ -1,0 +1,1013 @@
+{
+  "schemaVersion": 1,
+  "summary": {
+    "reportedWarnings": 35,
+    "reportedErrors": 9,
+    "instancesSkipped": 47,
+    "indexedComponentWarnings": 35,
+    "indexedComponentErrors": 9,
+    "duplicateOrNearDuplicateNameGroups": 13
+  },
+  "extraction": {
+    "warnings": [
+      {
+        "component": "Input",
+        "figmaNodeId": "28:8864",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "componentSet",
+        "nodeId": "28:8864",
+        "nodeName": "Input",
+        "field": "componentPropertyDefinitions",
+        "message": "in get_componentPropertyDefinitions: Component set has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Default, Filled=False, Type=Default",
+        "figmaNodeId": "31:1497",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "31:1497",
+        "nodeName": "Size=Large, State=Default, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Default, Filled=False, Type=Advanced",
+        "figmaNodeId": "1267:96840",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "1267:96840",
+        "nodeName": "Size=Large, State=Default, Filled=False, Type=Advanced",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Default, Filled=False, Type=Advanced",
+        "figmaNodeId": "91:10724",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "91:10724",
+        "nodeName": "Size=Large, State=Default, Filled=False, Type=Advanced",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Hover, Filled=False, Type=Default",
+        "figmaNodeId": "51:1348",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "51:1348",
+        "nodeName": "Size=Large, State=Hover, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Hover, Filled=False, Type=Advanced",
+        "figmaNodeId": "1267:96901",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "1267:96901",
+        "nodeName": "Size=Large, State=Hover, Filled=False, Type=Advanced",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Default, Filled=False, Type=Default",
+        "figmaNodeId": "36:951",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:951",
+        "nodeName": "Size=Medium, State=Default, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Hover, Filled=False, Type=Default",
+        "figmaNodeId": "51:1356",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "51:1356",
+        "nodeName": "Size=Medium, State=Hover, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Focused, Filled=False, Type=Default",
+        "figmaNodeId": "31:1556",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "31:1556",
+        "nodeName": "Size=Large, State=Focused, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Focused, Filled=False, Type=Advanced",
+        "figmaNodeId": "1267:96909",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "1267:96909",
+        "nodeName": "Size=Large, State=Focused, Filled=False, Type=Advanced",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Focused, Filled=False, Type=Default",
+        "figmaNodeId": "36:977",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:977",
+        "nodeName": "Size=Medium, State=Focused, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Focused, Filled=True, Type=Default",
+        "figmaNodeId": "31:1649",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "31:1649",
+        "nodeName": "Size=Large, State=Focused, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Focused, Filled=True, Type=Advanced",
+        "figmaNodeId": "1267:96919",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "1267:96919",
+        "nodeName": "Size=Large, State=Focused, Filled=True, Type=Advanced",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Focused, Filled=True, Type=Default",
+        "figmaNodeId": "36:1009",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:1009",
+        "nodeName": "Size=Medium, State=Focused, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Default, Filled=True, Type=Default",
+        "figmaNodeId": "31:1706",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "31:1706",
+        "nodeName": "Size=Large, State=Default, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Hover, Filled=True, Type=Default",
+        "figmaNodeId": "51:1386",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "51:1386",
+        "nodeName": "Size=Large, State=Hover, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Default, Filled=True, Type=Default",
+        "figmaNodeId": "36:1033",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:1033",
+        "nodeName": "Size=Medium, State=Default, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Hover, Filled=True, Type=Default",
+        "figmaNodeId": "51:1409",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "51:1409",
+        "nodeName": "Size=Medium, State=Hover, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Disabled, Filled=True, Type=Default",
+        "figmaNodeId": "31:1740",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "31:1740",
+        "nodeName": "Size=Large, State=Disabled, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Disabled, Filled=True, Type=Default",
+        "figmaNodeId": "36:1053",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:1053",
+        "nodeName": "Size=Medium, State=Disabled, Filled=True, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Large, State=Disabled, Filled=False, Type=Default",
+        "figmaNodeId": "36:922",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:922",
+        "nodeName": "Size=Large, State=Disabled, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Input",
+        "variant": "Size=Medium, State=Disabled, Filled=False, Type=Default",
+        "figmaNodeId": "36:1073",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "36:1073",
+        "nodeName": "Size=Medium, State=Disabled, Filled=False, Type=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "figmaNodeId": "49:1046",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "componentSet",
+        "nodeId": "49:1046",
+        "nodeName": "Radio",
+        "field": "componentPropertyDefinitions",
+        "message": "in get_componentPropertyDefinitions: Component set has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Disabled, Label=True, Active=True",
+        "figmaNodeId": "49:1047",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1047",
+        "nodeName": "State=Disabled, Label=True, Active=True",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Disabled, Label=True, Active=True",
+        "figmaNodeId": "49:1055",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1055",
+        "nodeName": "State=Disabled, Label=True, Active=True",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Default, Label=True, Active=False",
+        "figmaNodeId": "49:1063",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1063",
+        "nodeName": "State=Default, Label=True, Active=False",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Default, Label=False, Active=False",
+        "figmaNodeId": "49:1066",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1066",
+        "nodeName": "State=Default, Label=False, Active=False",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Default, Label=True, Active=False",
+        "figmaNodeId": "49:1068",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1068",
+        "nodeName": "State=Default, Label=True, Active=False",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Default, Label=False, Active=False",
+        "figmaNodeId": "49:1071",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1071",
+        "nodeName": "State=Default, Label=False, Active=False",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Default, Label=False, Active=True",
+        "figmaNodeId": "49:1117",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1117",
+        "nodeName": "State=Default, Label=False, Active=True",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Radio",
+        "variant": "State=Disabled, Label=False, Active=True",
+        "figmaNodeId": "49:1118",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "variant",
+        "nodeId": "49:1118",
+        "nodeName": "State=Disabled, Label=False, Active=True",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Table Управление организациями",
+        "figmaNodeId": "805:74645",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "scope": "componentSet",
+        "nodeId": "805:74645",
+        "nodeName": "Table Управление организациями",
+        "field": "componentPropertyDefinitions",
+        "message": "in get_componentPropertyDefinitions: Component set has existing errors"
+      },
+      {
+        "component": "Table Управление организациями",
+        "variant": "State=Default",
+        "figmaNodeId": "805:75917",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "scope": "variant",
+        "nodeId": "805:75917",
+        "nodeName": "State=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Table Управление организациями",
+        "variant": "State=Default",
+        "figmaNodeId": "805:74552",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "scope": "variant",
+        "nodeId": "805:74552",
+        "nodeName": "State=Default",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      },
+      {
+        "component": "Table Управление организациями",
+        "variant": "State=Hover",
+        "figmaNodeId": "805:74633",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "scope": "variant",
+        "nodeId": "805:74633",
+        "nodeName": "State=Hover",
+        "field": "variantProperties",
+        "message": "in get_variantProperties: Component set for node has existing errors"
+      }
+    ],
+    "errors": [
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1681",
+        "nodeName": "Spacing=64",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1682",
+        "nodeName": "Spacing=56",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1683",
+        "nodeName": "Spacing=48",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1684",
+        "nodeName": "Spacing=40",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1685",
+        "nodeName": "Spacing=32",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1686",
+        "nodeName": "Spacing=24",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1687",
+        "nodeName": "Spacing=16",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "50:1688",
+        "nodeName": "Spacing=8",
+        "message": "Failed to export node. This node may not have any visible layers."
+      },
+      {
+        "component": "Spacing",
+        "figmaNodeId": "50:1680",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "scope": "svgExport",
+        "ownerId": "50:1680",
+        "nodeId": "263:25244",
+        "nodeName": "Spacing=4",
+        "message": "Failed to export node. This node may not have any visible layers."
+      }
+    ]
+  },
+  "archiveReportedCounts": [
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "counts": {
+        "componentSets": 40,
+        "standaloneComponents": 119,
+        "variants": 489,
+        "instancesSkipped": 37,
+        "sourceWarnings": 31,
+        "errors": 9
+      }
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "counts": {
+        "componentSets": 29,
+        "standaloneComponents": 7,
+        "variants": 141,
+        "instancesSkipped": 10,
+        "sourceWarnings": 4,
+        "errors": 0
+      }
+    }
+  ],
+  "duplicateOrNearDuplicateNames": [
+    {
+      "normalizedName": "file type icon",
+      "occurrences": [
+        {
+          "name": "File type icon",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "253:17470",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "File type icon"
+          ]
+        },
+        {
+          "name": "File type icon",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "1632:41030",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "File type icon"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "link",
+      "occurrences": [
+        {
+          "name": "Link",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "371:32614",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Link",
+            "Container",
+            "Frame 1171277888",
+            "Link"
+          ]
+        },
+        {
+          "name": "Link",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "438:32315",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Link"
+          ]
+        },
+        {
+          "name": "Link",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+          "figmaNodeId": "631:55362",
+          "hierarchyPath": [
+            "UI Kit – Interface elements",
+            "Messages",
+            "Container",
+            "Link"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "dropdown",
+      "occurrences": [
+        {
+          "name": "Dropdown",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "36:1106",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Select",
+            "Container",
+            "Frame 1171277888",
+            "Dropdown"
+          ]
+        },
+        {
+          "name": "Dropdown",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "45:1204",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Dropdown menu",
+            "Container",
+            "Dropdown"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "tab",
+      "occurrences": [
+        {
+          "name": "tab",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "52:3213",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Tabs",
+            "Container",
+            "tab"
+          ]
+        },
+        {
+          "name": "Tab",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "58:5374",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Tabs",
+            "Container",
+            "Frame 1171277893",
+            "Tab"
+          ]
+        },
+        {
+          "name": "Tab",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "185:15928",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Tabs",
+            "Container",
+            "Tab"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "menu item",
+      "occurrences": [
+        {
+          "name": "Menu item",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "43:769",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Dropdown menu",
+            "Container",
+            "Menu item"
+          ]
+        },
+        {
+          "name": "menu item",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+          "figmaNodeId": "23:7285",
+          "hierarchyPath": [
+            "UI Kit – Interface elements",
+            "Sidebar",
+            "Container",
+            "menu item"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "avatar",
+      "occurrences": [
+        {
+          "name": "Avatar",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "217:4864",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Avatar",
+            "Container",
+            "Avatar"
+          ]
+        },
+        {
+          "name": "Avatar",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+          "figmaNodeId": "52:2649",
+          "hierarchyPath": [
+            "UI Kit – Interface elements",
+            "Header",
+            "Container",
+            "Avatar"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "user",
+      "occurrences": [
+        {
+          "name": "user",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "158:46825",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "user"
+          ]
+        },
+        {
+          "name": "user",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "459:43557",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "user"
+          ]
+        },
+        {
+          "name": "user",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "1632:15678",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "user"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "circle grid interface",
+      "occurrences": [
+        {
+          "name": "Circle grid interface",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "159:46972",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Circle grid interface"
+          ]
+        },
+        {
+          "name": "Circle grid interface",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "1369:86543",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Circle grid interface"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "minus",
+      "occurrences": [
+        {
+          "name": "Minus",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "384:50659",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Minus"
+          ]
+        },
+        {
+          "name": "Minus",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "293:9768",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Minus"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "flag",
+      "occurrences": [
+        {
+          "name": "Flag",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "273:20077",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Flag"
+          ]
+        },
+        {
+          "name": "Flag",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "2390:77752",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Flag"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "align left",
+      "occurrences": [
+        {
+          "name": "Align left",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "1157:19249",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Align left"
+          ]
+        },
+        {
+          "name": "Align left",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "475:44744",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Icons",
+            "Container",
+            "Align left"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "picker-dropdown",
+      "occurrences": [
+        {
+          "name": "Picker-Dropdown",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "89:5792",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Date-Picker",
+            "Container",
+            "Picker-Dropdown"
+          ]
+        },
+        {
+          "name": "Picker-Dropdown",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "89:13142",
+          "hierarchyPath": [
+            "UI Kit – Basic elements",
+            "Date-Picker",
+            "Container",
+            "Picker-Dropdown"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    },
+    {
+      "normalizedName": "header",
+      "occurrences": [
+        {
+          "name": "Header",
+          "kind": "COMPONENT_SET",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+          "figmaNodeId": "1400:98679",
+          "hierarchyPath": [
+            "UI Kit – Interface elements",
+            "Form constructor",
+            "Container",
+            "Header"
+          ]
+        },
+        {
+          "name": "Header",
+          "kind": "COMPONENT",
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+          "figmaNodeId": "52:2655",
+          "hierarchyPath": [
+            "UI Kit – Interface elements",
+            "Header",
+            "Container",
+            "Header"
+          ]
+        }
+      ],
+      "classification": "AMBIGUOUS",
+      "note": "A repeated name does not establish geometric or semantic identity."
+    }
+  ],
+  "knownAmbiguities": [
+    {
+      "subject": "Typography semantic scale",
+      "classification": "UNKNOWN",
+      "detail": "Figma Plugin API recovers factual typography, but source provides no authoritative body/heading token names."
+    },
+    {
+      "subject": "Typography legacy evidence",
+      "classification": "SUPERSEDED",
+      "detail": "Typography names/content cannot be reliably recovered when Figma exported text as outlined paths. Numeric glyph geometry exists but is not a trustworthy font token source."
+    },
+    {
+      "subject": "Effects",
+      "classification": "OBSERVED",
+      "detail": "SVG filters exist, but no specialized named effects specification was found."
+    },
+    {
+      "subject": "Component behavior",
+      "classification": "UNKNOWN",
+      "detail": "Static SVG and extraction metadata do not prove runtime behavior or accessibility contracts."
+    },
+    {
+      "subject": "Standalone icon names",
+      "classification": "AMBIGUOUS",
+      "detail": "Uncertain normalized names: flagq-uncertain, icon-20-uncertain, icon-32-uncertain, icon-wrapper-16-uncertain, icon-wrapper-24-uncertain."
+    }
+  ],
+  "typography": [
+    {
+      "type": "FOREIGN_LEGACY_FAMILIES",
+      "classification": "OBSERVED",
+      "families": ["Roboto", "SF Pro Display", "Suisse Intl"]
+    },
+    {
+      "type": "MIXED_NODES",
+      "classification": "FACT",
+      "count": 15,
+      "note": "Segment typography is preserved; mixed nodes are not promoted to standalone styles."
+    },
+    {
+      "type": "TEXT_STYLE_SIGNATURE_CONFLICT",
+      "classification": "FACT",
+      "conflicts": []
+    },
+    {
+      "type": "LOCAL_OVERRIDES_OUTLIERS",
+      "classification": "OBSERVED",
+      "signatureIds": ["typography-034"],
+      "note": "Rare local overrides are retained in the inventory and are not promoted to product candidates."
+    },
+    {
+      "type": "SEMANTIC_SCALE",
+      "classification": "UNKNOWN",
+      "note": "Source facts do not provide authoritative semantic names such as body-sm or heading-lg."
+    }
+  ]
+}

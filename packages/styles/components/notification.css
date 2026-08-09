@@ -32,6 +32,17 @@
   background: transparent;
 }
 
+.shlz-notification__icon :is(img, .shlz-icon),
+.shlz-notification__close :is(img, .shlz-icon) {
+  inline-size: 16px;
+  block-size: 16px;
+}
+
+.shlz-notification:not(.shlz-notification--light)
+  :is(.shlz-notification__icon img, .shlz-notification__close img) {
+  filter: brightness(0) invert(1);
+}
+
 .shlz-notification__content {
   flex: 1 1 auto;
   min-inline-size: 0;
