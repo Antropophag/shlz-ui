@@ -53,7 +53,8 @@
 }
 
 .shlz-status--neutral {
-  color: var(--shlz-semantic-color-text-primary);
+  /* FACT: Status source variants use Gray 200 on Gray 50. */
+  color: var(--shlz-source-color-gray-gray-200);
   background: var(--shlz-semantic-color-surface-subtle);
 }
 
