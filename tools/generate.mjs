@@ -208,6 +208,7 @@ const styleSources = [
   "components/modal.css",
   "components/drawer.css",
   "components/file-row.css",
+  "components/document-row.css",
   "components/empty-state.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
