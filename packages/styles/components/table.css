@@ -8,7 +8,7 @@
   border-collapse: collapse;
   color: var(--shlz-semantic-color-text-primary);
   font-size: 14px;
-  line-height: 18px;
+  line-height: 20px;
 }
 
 .shlz-table__cell {
@@ -18,13 +18,13 @@
   text-align: start;
   vertical-align: middle;
   background: transparent;
-  border-block-end: 2px solid var(--shlz-semantic-color-border-default);
+  border-block-end: 1px solid var(--shlz-semantic-color-border-default);
 }
 
 .shlz-table__head .shlz-table__cell {
   color: var(--shlz-semantic-color-text-secondary);
   font-size: 12px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 18px;
   text-transform: uppercase;
 }

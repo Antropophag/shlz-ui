@@ -89,6 +89,17 @@ test("Table showcase remains a 50px coherent grid with bounded affordances", asy
   const table = page.locator("#table-demo .shlz-table");
   const rows = table.locator("tr");
   await expect(rows).toHaveCount(3);
+  await expect(table).toHaveCSS("font-size", "14px");
+  await expect(table).toHaveCSS("line-height", "20px");
+  const headerCell = table.locator("thead .shlz-table__cell").first();
+  await expect(headerCell).toHaveCSS("font-size", "12px");
+  await expect(headerCell).toHaveCSS("font-weight", "500");
+  await expect(headerCell).toHaveCSS("line-height", "18px");
+  await expect(headerCell).toHaveCSS("border-bottom-width", "1px");
+  await expect(table.locator("tbody .shlz-table__cell").first()).toHaveCSS(
+    "border-bottom-width",
+    "1px",
+  );
   for (const row of await rows.all()) {
     expect(
       await row.evaluate((node) => node.getBoundingClientRect().height),
