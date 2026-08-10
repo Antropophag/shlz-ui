@@ -88,6 +88,10 @@ test("status, badge, and diagnostics expose the source-backed contracts", async 
     "height",
     "30px",
   );
+  await expect(page.locator("#status-demo .shlz-status").first()).toHaveCSS(
+    "white-space",
+    "nowrap",
+  );
   const neutralStatus = page
     .locator("#status-demo .shlz-status--neutral")
     .first();

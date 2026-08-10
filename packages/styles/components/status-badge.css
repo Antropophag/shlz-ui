@@ -7,6 +7,7 @@
   padding-inline: 12px; /* Status.svg component geometry */
   font-size: 14px;
   line-height: 20px;
+  white-space: nowrap;
   color: var(--shlz-semantic-color-action-primary);
   background: var(--shlz-source-color-blue-blue-200-15);
   border-radius: var(--shlz-source-radius-max);
