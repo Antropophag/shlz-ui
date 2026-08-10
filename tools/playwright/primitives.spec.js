@@ -10,6 +10,7 @@ const isolateDocumentationSurface = (page) =>
     content: `
       .shlz-docs-sidebar { visibility: hidden !important; }
       [data-shlz-dropdown-scrollable-fixture] { display: none !important; }
+      #file-row-extension-demo { display: none !important; }
     `,
   });
 

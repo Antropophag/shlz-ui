@@ -19,7 +19,10 @@ test.beforeEach(async ({ page }) => {
     details.open = true;
   });
   await page.addStyleTag({
-    content: ".shlz-docs-sidebar { display: none !important; }",
+    content: `
+      .shlz-docs-sidebar { display: none !important; }
+      #file-row-extension-demo { display: none !important; }
+    `,
   });
 });
 

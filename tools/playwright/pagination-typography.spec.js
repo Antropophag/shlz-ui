@@ -42,6 +42,9 @@ test("Pagination uses the source Body 15 Regular contract in every numeric role"
 
 test("Pagination typography visual is pixel-exact", async ({ page }) => {
   await page.goto("/");
+  await page.addStyleTag({
+    content: "#file-row-extension-demo { display: none !important; }",
+  });
   await page.locator(".shlz-verification-harness").evaluate((details) => {
     details.open = true;
   });

@@ -18,6 +18,7 @@ const componentFiles = [
   "modal",
   "drawer",
   "file-row",
+  "document-row",
   "empty-state",
 ];
 
