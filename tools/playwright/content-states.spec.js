@@ -80,8 +80,16 @@ test("document row supports compact and metadata-rich fluid lists", async ({
   await expect(compact.locator(".shlz-document-row__meta")).toBeVisible();
   await expect(compact.locator(".shlz-document-row__modified")).toHaveCount(0);
 
+  const expectedHoverBackground = await page.evaluate(() => {
+    const probe = document.createElement("span");
+    probe.style.backgroundColor = "var(--shlz-source-color-background-primary)";
+    document.body.append(probe);
+    const value = globalThis.getComputedStyle(probe).backgroundColor;
+    probe.remove();
+    return value;
+  });
   await detailed.hover();
-  await expect(detailed).toHaveCSS("background-color", "rgb(244, 246, 249)");
+  await expect(detailed).toHaveCSS("background-color", expectedHoverBackground);
   await detailed.locator(".shlz-document-row__action").focus();
   await expect(detailed.locator(".shlz-document-row__action")).toBeFocused();
 
