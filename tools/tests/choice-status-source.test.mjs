@@ -112,5 +112,8 @@ test("production CSS owns native choice appearance and source geometry", async (
   assert.match(statusBadge, /--shlz-source-color-blue-blue-200-15/);
   assert.match(statusBadge, /--shlz-source-color-aditional-green-15/);
   assert.match(statusBadge, /222 117 61 \/ 15%/);
-  assert.match(statusBadge, /\.shlz-status[\s\S]*white-space: nowrap/);
+  assert.match(
+    statusBadge,
+    /\.shlz-status\s*\{[^}]*\bwhite-space\s*:\s*nowrap\b/,
+  );
 });
