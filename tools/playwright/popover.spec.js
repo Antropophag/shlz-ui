@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { fixtureUrl } from "./fixture-url.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -168,9 +169,7 @@ test("viewport edge has a visual baseline", async ({ page }) => {
 test("plain HTML consumes standalone CSS and bundled ESM behavior", async ({
   page,
 }) => {
-  await page.goto(
-    "/@fs/home/antropophag/code/shlz-ui/tools/fixtures/plain-html.html",
-  );
+  await page.goto(fixtureUrl("plain-html.html"));
   const trigger = page.getByRole("button", { name: "Подробнее" });
   await trigger.click();
   await expect(page.locator("#fixture-popover")).toBeVisible();

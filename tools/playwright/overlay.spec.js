@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { fixtureUrl } from "./fixture-url.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -230,9 +231,7 @@ test("modal, long content, drawer and nested floating visuals", async ({
 test("plain HTML consumes modal and drawer via standalone CSS and direct ESM", async ({
   page,
 }) => {
-  await page.goto(
-    "/@fs/home/antropophag/code/shlz-ui/tools/fixtures/plain-html.html",
-  );
+  await page.goto(fixtureUrl("plain-html.html"));
   const modalTrigger = page.getByRole("button", { name: "Открыть Modal" });
   await modalTrigger.click();
   await expect(page.locator("#fixture-modal")).toBeVisible();
