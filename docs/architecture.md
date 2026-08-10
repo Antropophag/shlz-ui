@@ -18,7 +18,7 @@ The `@shlz/styles` export is a generated standalone `dist/shlz.css`: token varia
 ## Compatibility boundaries
 
 - Global effects are limited to descendants of `.shlz-scope`; there is no element reset.
-- Typography uses inherited semantic role tokens and a root/subtree profile. Golos Text is the source-confirmed default; Fira Sans is an official compatibility profile. The repository does not embed production font binaries, so consumers self-host the chosen family and retain the explicit system-sans fallback.
+- [design-decision] Typography uses inherited semantic role tokens and a root/subtree profile. [observed] Golos Text is the source-confirmed default. [design-decision] Fira Sans is an official compatibility profile; the repository does not embed production font binaries, so consumers self-host the chosen family and retain the explicit system-sans fallback.
 - Native controls own their state and accessibility semantics; only components that truly require additional behavior belong in a future web layer.
 - Behavior controllers own only DOM synchronization, keyboard navigation and lifecycle teardown; applications own commands and business state.
 - Floating geometry is an internal dependency boundary. Consumers configure SHLZ placement attributes, not third-party middleware.

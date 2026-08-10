@@ -47,7 +47,7 @@ source family when it is installed by the consumer and degrades explicitly:
 
 `"Golos Text", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif`
 
-`semantic.typography` adds two family stacks, the source-used 400/500/600 weight
+[design-decision] `semantic.typography` adds two family stacks, the source-used 400/500/600 weight
 mapping, and a deliberately small set of reusable roles. The Golos values of
 those roles are aliases of existing component signatures; they do not replace
 component-specific source facts. `[data-shlz-font="fira"]` changes the inherited

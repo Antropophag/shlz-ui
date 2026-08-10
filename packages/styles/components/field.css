@@ -81,6 +81,7 @@
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   font-weight: var(--shlz-semantic-typography-weight-regular);
   line-height: var(--shlz-semantic-typography-role-field-value-line-height);
+  font-variant: normal;
 }
 
 .shlz-input::placeholder,

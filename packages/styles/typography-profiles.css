@@ -4,12 +4,13 @@
  */
 [data-shlz-font="golos"] {
   --shlz-semantic-font-family: var(--shlz-semantic-typography-family-golos);
-
-  font-family: var(--shlz-semantic-font-family);
 }
 
 [data-shlz-font="fira"] {
   --shlz-semantic-font-family: var(--shlz-semantic-typography-family-fira);
+}
 
+.shlz-scope[data-shlz-font],
+.shlz-scope [data-shlz-font] {
   font-family: var(--shlz-semantic-font-family);
 }
