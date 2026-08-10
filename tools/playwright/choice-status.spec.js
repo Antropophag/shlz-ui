@@ -88,6 +88,14 @@ test("status, badge, and diagnostics expose the source-backed contracts", async 
     "height",
     "30px",
   );
+  const neutralStatus = page
+    .locator("#status-demo .shlz-status--neutral")
+    .first();
+  await expect(neutralStatus).toHaveCSS("color", "rgb(147, 156, 165)");
+  await expect(neutralStatus).toHaveCSS(
+    "background-color",
+    "rgb(245, 245, 245)",
+  );
   await expect(page.locator("#badge-demo .shlz-badge").first()).toHaveCSS(
     "height",
     "16px",

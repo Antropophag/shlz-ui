@@ -10,6 +10,7 @@
 
 .shlz-empty-state__visual {
   display: grid;
+  flex: none;
   place-items: center;
   inline-size: 64px; /* FACT: Empty/Simple illustration is 64px wide. */
   block-size: 40px; /* FACT: Empty/Simple visual occupies about 64x40px. */
@@ -21,6 +22,45 @@
   display: block;
   max-inline-size: 100%;
   max-block-size: 100%;
+}
+
+.shlz-empty-state--simple {
+  inline-size: 220px;
+  block-size: 67px;
+}
+
+.shlz-empty-state--customize {
+  inline-size: 159px;
+  block-size: 136.507px;
+  justify-content: flex-start;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__visual {
+  inline-size: 159px;
+  block-size: 60px;
+  margin-block-end: 8px;
+  overflow: hidden;
+}
+
+.shlz-empty-state--basic {
+  inline-size: 167px;
+  block-size: 262px;
+  justify-content: flex-start;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__visual {
+  inline-size: 167px;
+  block-size: 131px;
+  margin-block-end: 16px;
+  overflow: hidden;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__visual img,
+.shlz-empty-state--basic .shlz-empty-state__visual img {
+  align-self: start;
+  inline-size: 100%;
+  max-inline-size: none;
+  max-block-size: none;
 }
 
 .shlz-empty-state__title,
@@ -53,4 +93,54 @@
   gap: 8px;
   justify-content: center;
   margin-block-start: 16px;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__title,
+.shlz-empty-state--basic .shlz-empty-state__title {
+  flex: none;
+  color: var(--shlz-semantic-color-text-primary);
+  white-space: nowrap;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__title {
+  font-size: 16px;
+  line-height: 20.8px;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__actions {
+  flex: none;
+  margin-block-start: 16px;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__actions .shlz-button {
+  inline-size: 131px;
+  block-size: 32px;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__title {
+  font-size: 18px;
+  line-height: 23.4px;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__description {
+  flex: none;
+  font-size: 16px;
+  line-height: 20.8px;
+  letter-spacing: -0.01em;
+}
+
+.shlz-empty-state--basic
+  .shlz-empty-state__title
+  + .shlz-empty-state__description {
+  margin-block-start: 8px;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__actions {
+  flex: none;
+  margin-block-start: 24px;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__actions .shlz-button {
+  inline-size: 142px;
+  block-size: 40px;
 }

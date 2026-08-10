@@ -9,6 +9,8 @@ Specialized Figma specification sheets outrank statistical inference from generi
 1. `source.*` — **FACT**: literal Figma grouping, naming and values. `Colors.svg` therefore remains `Dark Blue`, `Blue`, `Gray`, `White`, `Background`, and the source-spelled `Aditional`; it is not rewritten as brand/neutral scales.
 2. `semantic.*` — **DERIVED** or **DECISION** aliases. Color roles reference `source.color.*`; they never duplicate literal paints.
 
+`semantic.color.control.surface-default` names the resting and read-only form-control surface. Its default alias remains source `Gray 50 #F5F5F5`; consumers may override this role without changing unrelated subtle surfaces such as neutral statuses, disabled pagination, or tab hover.
+
 ## Exact source scales
 
 - Spacing (**FACT**, `Spacing.svg`): `4, 8, 16, 24, 32, 40, 48, 56, 64px`.

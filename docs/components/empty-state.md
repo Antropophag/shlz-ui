@@ -25,7 +25,7 @@ All regions are optional, though consumers should provide meaningful text. Actio
 
 ## Layout and responsiveness
 
-Content is centered and owns no surrounding surface, border, radius, or container padding. `Empty/Simple` uses a 64×40px visual, a 7.5px composition gap, and 15/19.5px subdued text. The root remains fluid so its container is consumer-owned. The source also contains richer `Empty/Customize` and `Empty/Basic` compositions, but they are not promoted to public variants in this wave.
+Content is centered and owns no surrounding surface, border, radius, or container padding. `--simple` is 220×67 with a 64×40 visual, 7.5px composition gap, and subdued 15/19.5 text. `--customize` is 159×136.507 with the 60px source illustration region, primary 16/20.8 title and a 131×32 medium action. `--basic` is 167×262 with a 131px illustration region, primary 18/23.4 title, subdued 16/20.8 description and a 142×40 action. Consumers may still use the unmodified fluid root for a custom composition.
 
 ## Accessibility
 

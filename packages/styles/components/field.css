@@ -47,7 +47,7 @@
   color: var(--shlz-source-color-dark-blue-dark-blue);
   padding-inline: 12px;
   overflow: hidden;
-  background: var(--shlz-source-color-gray-gray-50);
+  background: var(--shlz-semantic-color-control-surface-default);
   border: 1px solid transparent;
   border-radius: 20px;
 }
@@ -273,7 +273,7 @@
 }
 
 .shlz-field:has([readonly]) .shlz-field__control {
-  background: var(--shlz-source-color-gray-gray-50);
+  background: var(--shlz-semantic-color-control-surface-default);
 }
 
 /* Compatibility: the native element may still be used without the composition. */
@@ -282,7 +282,7 @@
 .shlz-select:not(.shlz-field__control .shlz-select) {
   min-block-size: 40px;
   padding-inline: 12px;
-  background: var(--shlz-source-color-gray-gray-50);
+  background: var(--shlz-semantic-color-control-surface-default);
   border-radius: 20px;
 }
 

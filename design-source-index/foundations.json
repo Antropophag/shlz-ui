@@ -1535,6 +1535,9 @@
             "muted": "{source.color.Blue.Blue 50}",
             "page": "{source.color.Background.Primary}"
           },
+          "control": {
+            "surface-default": "{source.color.Gray.Gray 50}"
+          },
           "border": {
             "default": "{source.color.Gray.Gray 100}"
           },

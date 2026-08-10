@@ -7,6 +7,7 @@ const files = () =>
     readFile("packages/styles/components/file-row.css", "utf8"),
     readFile("packages/styles/components/empty-state.css", "utf8"),
     readFile("apps/showcase/src/content-states.js", "utf8"),
+    readFile("packages/styles/components/document-row.css", "utf8"),
   ]);
 
 test("file row keeps primary and trailing actions as siblings", async () => {
@@ -46,13 +47,36 @@ test("file row has no accidental root activation target", async () => {
   assert.doesNotMatch(showcase, /data-shlz-file-row|onclick=/);
 });
 
+test("document row is an additive two-variant list composition", async () => {
+  const [fileRowCss, , showcase, documentRowCss] = await files();
+  assert.doesNotMatch(fileRowCss, /shlz-document-row|shlz-file-row--metadata/);
+  assert.match(documentRowCss, /\.shlz-document-row/);
+  assert.match(
+    documentRowCss,
+    /grid-template-columns: 48px minmax\(0, 1fr\) 40px/,
+  );
+  assert.match(documentRowCss, /\.shlz-document-row--compact/);
+  assert.match(showcase, /shlz-document-row__meta/);
+  assert.match(showcase, /shlz-document-row__modified/);
+  assert.match(showcase, /compact: true/);
+  for (const type of ["pdf-default", "docx", "xlsx"])
+    assert.match(showcase, new RegExp(`"${type}"`));
+  assert.doesNotMatch(showcase, /data-fixture-width/);
+});
+
 test("empty state regions are optional CSS composition", async () => {
   const [, css, showcase] = await files();
   for (const region of ["visual", "title", "description", "actions"])
     assert.match(css, new RegExp(`\\.shlz-empty-state__${region}`));
   assert.match(showcase, /shlz-empty-state__actions/);
-  assert.match(showcase, /<div class="shlz-empty-state"><span/);
+  assert.match(showcase, /class="shlz-empty-state shlz-empty-state--simple"/);
   assert.doesNotMatch(css, /min-inline-size:/);
   assert.doesNotMatch(css, /border:|border-radius:|background:/);
   assert.match(showcase, /viewBox="78 1 64 39"/);
+  for (const variant of ["simple", "customize", "basic"])
+    assert.match(css, new RegExp(`\\.shlz-empty-state--${variant}`));
+  assert.match(showcase, /data-empty-state-variant="customize"/);
+  assert.match(showcase, /data-empty-state-variant="basic"/);
+  assert.match(showcase, /empty-customize/);
+  assert.match(showcase, /empty-basic/);
 });

@@ -4992,6 +4992,87 @@
     ]
   },
   {
+    "component": "empty-customize",
+    "sourceFile": "UI Kit – Basic elements.zip · Empty-Customize",
+    "sourceArchive": "UI Kit – Basic elements.zip",
+    "sourceArchiveSha256": "1c468cc4c1246aabfd0932451dedd5126cce2d24597b3141b50f8437146e3cf8",
+    "sourceManifestPath": "components/Empty-Customize/manifest.json",
+    "sourceNodeId": "58:8307",
+    "sourceVariantCount": 1,
+    "sourceHasErrors": false,
+    "sourceSha256": "02c735492cb7a770003cd82c3445edb87541bd3a1aab884f5d3ddcd7f0a3fc88",
+    "references": [
+      {
+        "file": "empty-customize.svg",
+        "kind": "standalone-component",
+        "sourceOrder": 1,
+        "sourceNodeId": "58:8307",
+        "rawVariantName": "Empty/Customize",
+        "variantProperties": null,
+        "sourceWidth": 159,
+        "sourceHeight": 136.5073699951172,
+        "representative": true,
+        "cropViewBox": "complete component node",
+        "reason": "Exact Empty-Customize standalone component; no geometry or color transformation.",
+        "method": "byte-preserved SVG extracted from Full design-system ZIP"
+      }
+    ]
+  },
+  {
+    "component": "empty-basic",
+    "sourceFile": "UI Kit – Basic elements.zip · Empty-Basic",
+    "sourceArchive": "UI Kit – Basic elements.zip",
+    "sourceArchiveSha256": "1c468cc4c1246aabfd0932451dedd5126cce2d24597b3141b50f8437146e3cf8",
+    "sourceManifestPath": "components/Empty-Basic/manifest.json",
+    "sourceNodeId": "58:8366",
+    "sourceVariantCount": 1,
+    "sourceHasErrors": false,
+    "sourceSha256": "f71b3009cf70c9f34698fea33bd86f6159a02c4b07a310df151503b5dda008c7",
+    "references": [
+      {
+        "file": "empty-basic.svg",
+        "kind": "standalone-component",
+        "sourceOrder": 1,
+        "sourceNodeId": "58:8366",
+        "rawVariantName": "Empty/Basic",
+        "variantProperties": null,
+        "sourceWidth": 167,
+        "sourceHeight": 262,
+        "representative": true,
+        "cropViewBox": "complete component node",
+        "reason": "Exact Empty-Basic standalone component; no geometry or color transformation.",
+        "method": "byte-preserved SVG extracted from Full design-system ZIP"
+      }
+    ]
+  },
+  {
+    "component": "empty-simple",
+    "sourceFile": "UI Kit – Basic elements.zip · Empty-Simple",
+    "sourceArchive": "UI Kit – Basic elements.zip",
+    "sourceArchiveSha256": "1c468cc4c1246aabfd0932451dedd5126cce2d24597b3141b50f8437146e3cf8",
+    "sourceManifestPath": "components/Empty-Simple/manifest.json",
+    "sourceNodeId": "76:6246",
+    "sourceVariantCount": 1,
+    "sourceHasErrors": false,
+    "sourceSha256": "26aa2eb0196c2f2dcf95acdd2e962e887c45394be63371a7cdcb0ad56a9d130f",
+    "references": [
+      {
+        "file": "empty-simple.svg",
+        "kind": "standalone-component",
+        "sourceOrder": 1,
+        "sourceNodeId": "76:6246",
+        "rawVariantName": "Empty/Simple",
+        "variantProperties": null,
+        "sourceWidth": 220,
+        "sourceHeight": 67,
+        "representative": true,
+        "cropViewBox": "complete component node",
+        "reason": "Exact Empty-Simple standalone component; no geometry or color transformation.",
+        "method": "byte-preserved SVG extracted from Full design-system ZIP"
+      }
+    ]
+  },
+  {
     "component": "modal-basic",
     "sourceFile": "UI Kit – Basic elements.zip · .Modal-Basic(Legacy)",
     "sourceArchive": "UI Kit – Basic elements.zip",

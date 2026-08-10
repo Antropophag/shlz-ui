@@ -89,6 +89,20 @@ test("production fields use composition and exact Component Set references", asy
   assert.match(fidelity, /id: "select"/);
 });
 
+test("default control surfaces use a dedicated semantic token", async () => {
+  const tokens = JSON.parse(
+    await readFile("packages/tokens/tokens.json", "utf8"),
+  );
+  const css = await readFile("packages/styles/components/field.css", "utf8");
+
+  assert.equal(
+    tokens.semantic.color.control["surface-default"],
+    "{source.color.Gray.Gray 50}",
+  );
+  assert.match(css, /var\(--shlz-semantic-color-control-surface-default\)/);
+  assert.doesNotMatch(css, /var\(--shlz-source-color-gray-gray-50\)/);
+});
+
 test("showcase coverage and references include every form-control source node", async () => {
   const generated = JSON.parse(
     await readFile(

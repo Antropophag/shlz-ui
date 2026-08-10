@@ -525,8 +525,8 @@ const buttonDiagnostics = `
     <summary>Source &amp; fidelity details</summary>
     <div class="shlz-component-diagnostics__content">
       <p><span class="shlz-fidelity-rating">HIGH</span> <strong>Coverage:</strong> complete source sheet matrix. Source and production visual-state fixture are shown side by side.</p>
-      <div class="shlz-fidelity-columns"><section><h4>Source reference</h4><div class="shlz-reference-strip">${source("button")}</div></section><section><h4>Implementation</h4><div class="shlz-visual-fixture" inert aria-hidden="true">${buttonMatrix("primary")}</div></section></div>
-      <p class="shlz-fidelity-notes"><strong>Known deviations:</strong> Typography uses the documented system-sans DECISION.</p>
+      <div class="shlz-fidelity-columns"><section><h4>Source reference</h4><div class="shlz-reference-strip">${source("button")}</div></section><section><h4>Implementation</h4><div class="shlz-visual-fixture" inert aria-hidden="true">${buttonMatrix("primary")}${buttonMatrix()}${buttonMatrix("text")}</div></section></div>
+      <p class="shlz-fidelity-notes"><strong>Known deviations:</strong> Source fixed specimen widths remain content-owned; mode, size, typography and state paints follow the recovered contract.</p>
       <details class="shlz-source-inventory"><summary>Complete source inventory</summary><div><p><code>Buttons.svg</code> is retained as the lossless source-sheet reference. The generated manifest records its original viewBox, crop viewBox, SHA-256 and crop rationale.</p></div></details>
     </div>
   </details>`;
@@ -534,9 +534,9 @@ const buttonDiagnostics = `
 export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="button-demo">
     <header><h3>Button</h3><p>Запускает действие или подтверждает выбор.</p></header>
-    <section><h4>Types</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Primary</button><button class="shlz-button">Neutral</button></div></section>
+    <section><h4>Modes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Primary</button><button class="shlz-button">Secondary</button><button class="shlz-button shlz-button--text">Text</button></div></section>
     <section><h4>Sizes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Large</button><button class="shlz-button shlz-button--primary shlz-button--sm">Medium</button><button class="shlz-button shlz-button--primary shlz-button--xs">Small</button></div></section>
-    <section><h4>States</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Default</button><button class="shlz-button shlz-button--primary shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--primary shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--primary" disabled>Disabled</button></div></section>
+    <section data-shlz-button-source-matrix><h4>Mode × state matrix</h4><div class="shlz-control-matrix"><b>Mode</b><b>Default</b><b>Hover</b><b>Active</b><b>Disabled</b><span>Primary</span><button class="shlz-button shlz-button--primary">Default</button><button class="shlz-button shlz-button--primary shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--primary shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--primary" disabled>Disabled</button><span>Secondary</span><button class="shlz-button">Default</button><button class="shlz-button shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--visual-active">Active</button><button class="shlz-button" disabled>Disabled</button><span>Text</span><button class="shlz-button shlz-button--text">Default</button><button class="shlz-button shlz-button--text shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--text shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--text" disabled>Disabled</button></div><h4>Source-backed sizes and icon combinations</h4><div class="shlz-cluster" data-shlz-button-source-icons><button class="shlz-button shlz-button--primary">${icon("search", "shlz-button__icon")}Label</button><button class="shlz-button">Label${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--sm" data-shlz-button-source-size="medium">Medium</button><button class="shlz-button shlz-button--xs" data-shlz-button-source-size="small">Small</button><button class="shlz-button shlz-button--text shlz-button--icon" aria-label="Text icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Primary icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--icon shlz-button--sm" aria-label="Secondary icon medium">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--text shlz-button--icon shlz-button--sm" aria-label="Text icon medium">${icon("search", "shlz-button__icon")}</button></div></section>
     <section><h4>With icon</h4><div class="shlz-cluster" data-shlz-button-icons><button class="shlz-button shlz-button--primary">${icon("search", "shlz-button__icon")}Найти</button><button class="shlz-button shlz-button--primary">Найти${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Найти">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--primary shlz-button--visual-hover">${icon("search", "shlz-button__icon")}Hover</button><button class="shlz-button shlz-button--primary shlz-button--visual-active">${icon("search", "shlz-button__icon")}Active</button><button class="shlz-button shlz-button--primary" disabled>${icon("search", "shlz-button__icon")}Недоступно</button><button class="shlz-button">${icon("search", "shlz-button__icon")}Neutral</button><button class="shlz-button" disabled>${icon("search", "shlz-button__icon")}Disabled</button></div></section>
     ${buttonDiagnostics}
   </article>
@@ -620,20 +620,22 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="switch-demo">
     <header><h3>Switch</h3><p>Мгновенно включает или выключает настройку через checkbox с role=switch.</p></header>
-    <section><h4>States</h4>${stateMatrix({
-      columns: [
-        { label: "Off", state: "off" },
-        { label: "On", state: "on" },
-        { label: "Off disabled", state: "off-disabled" },
-        { label: "On disabled", state: "on-disabled" },
-      ],
-      rows: [
-        { label: "Medium", size: "medium" },
-        { label: "Small", size: "small" },
-      ],
-      render: (row, column) =>
-        switchInput({ size: row.size, state: column.state }),
-    })}</section>
+    <section data-shlz-switch-source-matrix><h4>Source size and state matrix</h4>${stateMatrix(
+      {
+        columns: [
+          { label: "Off", state: "off" },
+          { label: "On", state: "on" },
+          { label: "Off disabled", state: "off-disabled" },
+          { label: "On disabled", state: "on-disabled" },
+        ],
+        rows: [
+          { label: "Medium", size: "medium" },
+          { label: "Small", size: "small" },
+        ],
+        render: (row, column) =>
+          switchInput({ size: row.size, state: column.state }),
+      },
+    )}</section>
     <section><h4>With label</h4><div class="shlz-cluster">${switchInput({ state: "on", labelled: true })}${switchInput({ state: "off-disabled", labelled: true })}</div></section>
     ${switchDiagnostics}
   </article>
@@ -678,7 +680,6 @@ const implementations = {
   switch: `<div class="shlz-control-matrix"><b>Size</b><b>Off</b><b>On</b><b>Off disabled</b><b>On disabled</b>${[
     ["24×14", "sm"],
     ["38×20", ""],
-    ["52×30", "lg"],
   ]
     .map(
       ([label, size]) =>
