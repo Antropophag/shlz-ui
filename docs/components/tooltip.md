@@ -8,8 +8,10 @@ is the visual authority; interaction timing is an engineering decision.
 | Class    | Evidence / contract                                                                           |
 | -------- | --------------------------------------------------------------------------------------------- |
 | FACT     | Eight 100×37 surfaces use `#0B1623`, radius 8 and no shadow.                                  |
+| FACT     | The label sits in the surface with 8px padding.                                               |
 | FACT     | Top/bottom have start, center and end carets; left/right are centered.                        |
-| FACT     | Caret envelopes are 11.3137×5.655 px or the rotated equivalent.                               |
+| FACT     | Labels are Golos Text Regular 15px/130%, -1% letter spacing and white.                        |
+| FACT     | Carets are clipped halves of rotated 8×8 squares; visible envelopes are 11.3137×5.655 px.     |
 | DERIVED  | The sheet represents four placement sides and three alignments where shown.                   |
 | DECISION | Tooltip is `role="tooltip"`, non-interactive, and linked with `aria-describedby`.             |
 | DECISION | Hover/focus opens after 400 ms; leave/blur closes after 100 ms. Both delays are configurable. |
