@@ -48,6 +48,14 @@ test("Pagination typography visual is pixel-exact", async ({ page }) => {
   const implementation = page.locator(
     "#fidelity-pagination .shlz-visual-fixture",
   );
+  // Preserve the component fixture's raster phase when fractional source
+  // geometry is introduced earlier in the documentation flow.
+  await implementation.evaluate((element) => {
+    const spacer = document.createElement("span");
+    spacer.style.display = "block";
+    spacer.style.blockSize = "0.5px";
+    element.before(spacer);
+  });
   await implementation.scrollIntoViewIfNeeded();
   await expect(implementation).toHaveScreenshot("pagination-typography.png", {
     maxDiffPixels: 0,

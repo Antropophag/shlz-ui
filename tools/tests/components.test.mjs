@@ -166,3 +166,16 @@ test("interactive selectors include native states and keyboard focus", async () 
     assert.ok(css.includes(selector), `Missing ${selector} state`);
   }
 });
+
+test("Button retains the complete source-backed mode contract", async () => {
+  const css = await readFile("packages/styles/components/button.css", "utf8");
+  const showcase = await readFile("apps/showcase/src/fidelity.js", "utf8");
+  assert.match(css, /\.shlz-button--primary/);
+  assert.match(css, /\.shlz-button--text/);
+  assert.match(css, /font-size: 15px/);
+  assert.match(css, /line-height: 19\.5px/);
+  assert.match(css, /font-size: 14px/);
+  for (const state of [":hover", ":active", ":disabled"])
+    assert.match(css, new RegExp(`\\.shlz-button--text[\\s\\S]*${state}`));
+  assert.match(showcase, /data-shlz-button-source-matrix/);
+});

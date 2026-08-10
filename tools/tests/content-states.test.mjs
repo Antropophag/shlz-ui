@@ -51,8 +51,14 @@ test("empty state regions are optional CSS composition", async () => {
   for (const region of ["visual", "title", "description", "actions"])
     assert.match(css, new RegExp(`\\.shlz-empty-state__${region}`));
   assert.match(showcase, /shlz-empty-state__actions/);
-  assert.match(showcase, /<div class="shlz-empty-state"><span/);
+  assert.match(showcase, /class="shlz-empty-state shlz-empty-state--simple"/);
   assert.doesNotMatch(css, /min-inline-size:/);
   assert.doesNotMatch(css, /border:|border-radius:|background:/);
   assert.match(showcase, /viewBox="78 1 64 39"/);
+  for (const variant of ["simple", "customize", "basic"])
+    assert.match(css, new RegExp(`\\.shlz-empty-state--${variant}`));
+  assert.match(showcase, /data-empty-state-variant="customize"/);
+  assert.match(showcase, /data-empty-state-variant="basic"/);
+  assert.match(showcase, /empty-customize/);
+  assert.match(showcase, /empty-basic/);
 });

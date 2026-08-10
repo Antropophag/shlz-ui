@@ -31,7 +31,7 @@ const fileRow = (
   ${message ? `<span class="shlz-file-row__message">${message}</span>` : ""}
 </div>`;
 
-export const contentStatesMarkup = (iconUrl) => {
+export const contentStatesMarkup = (iconUrl, sourceReferenceUrl) => {
   const download = action("download", "Скачать файл", iconUrl);
   const remove = action("delete", "Удалить файл", iconUrl);
   const multiple = `${action("eye", "Просмотреть файл", iconUrl)}${download}`;
@@ -43,8 +43,9 @@ export const contentStatesMarkup = (iconUrl) => {
   ${fileRow("Очень длинное название корпоративного документа с приложениями и дополнениями.xlsx", iconUrl, { meta: "20 MB", actions: download, className: "shlz-file-row-example--long" })}
   ${fileRow("Протокол заседания.xlsx", iconUrl, { meta: "Обновлён 8 августа 2026", actions: multiple, className: "shlz-file-row-example--actions" })}
 </div></article>
-<article id="empty-state-demo" data-shlz-visual-addition><h3>Empty State</h3><div class="shlz-empty-state-examples">
-  <div class="shlz-empty-state"><span class="shlz-empty-state__visual">${emptySimpleVisual}</span><h4 class="shlz-empty-state__title">Ничего не найдено</h4></div>
-  <div class="shlz-empty-state"><span class="shlz-empty-state__visual">${emptySimpleVisual}</span><h4 class="shlz-empty-state__title">Документы не добавлены</h4><p class="shlz-empty-state__description">Добавьте первый документ, когда он будет готов.</p><div class="shlz-empty-state__actions"><button class="shlz-button shlz-button--primary" type="button">Добавить документ</button></div></div>
+<article id="empty-state-demo" data-shlz-visual-addition><h3>Empty State</h3><p>Three standalone source compositions exposed as variants of one Empty State primitive.</p><div class="shlz-empty-state-examples" data-shlz-empty-state-source-matrix>
+  <div class="shlz-empty-state shlz-empty-state--simple" data-empty-state-variant="simple"><span class="shlz-empty-state__visual">${emptySimpleVisual}</span><h4 class="shlz-empty-state__title">Ничего не найдено</h4></div>
+  <div class="shlz-empty-state shlz-empty-state--customize" data-empty-state-variant="customize"><span class="shlz-empty-state__visual" aria-hidden="true"><img src="${sourceReferenceUrl("empty-customize")}" alt=""></span><h4 class="shlz-empty-state__title">Ничего не найдено</h4><div class="shlz-empty-state__actions"><button class="shlz-button shlz-button--primary shlz-button--sm" type="button">Загрузить файл</button></div></div>
+  <div class="shlz-empty-state shlz-empty-state--basic" data-empty-state-variant="basic"><span class="shlz-empty-state__visual" aria-hidden="true"><img src="${sourceReferenceUrl("empty-basic")}" alt=""></span><h4 class="shlz-empty-state__title">Ничего не найдено</h4><p class="shlz-empty-state__description">Текст</p><div class="shlz-empty-state__actions"><button class="shlz-button shlz-button--primary" type="button">Загрузить файл</button></div></div>
 </div></article>`;
 };

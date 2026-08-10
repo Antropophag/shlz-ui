@@ -77,10 +77,10 @@ Fidelity: **PASS with source unknowns**. Visual coverage: no screenshot. Mutatio
 | Component | Area | Source | Actual | Result | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | Switch | Typography | label is not a switch-owned recoverable role | inherited | UNKNOWN | `switch.md`; `choice.css` |
-| Switch | Geometry/tokens | 24×14, 38×20, 52×30; white thumb; brand/neutral; disabled opacity .4 | 24×14 and 38×20 only; **52×30 missing**; paints/opacity match | FAIL | Switch source set; `choice.css` |
-| Switch | States/coverage | on/off × sizes, disabled-looking examples | On/off/disabled implemented for two sizes; large matrix absent | PARTIAL | `choice-status.spec.js` |
+| Switch | Geometry/tokens | Component Set `48:1166`: 24×14 and 38×20; white thumb; brand/neutral; disabled opacity .4 | Both source sizes and paints/opacity match; the previously reported 52×30 is clip/mask geometry, not a public variant | PASS | Switch source set; `choice.css` |
+| Switch | States/coverage | on/off × two sizes, disabled-looking examples | Complete eight-state rendered matrix with computed geometry and zero-diff component snapshot | PASS | `choice-status.spec.js`; `remediation-fidelity.spec.js` |
 
-Fidelity: **FAIL (P1)**. Visual coverage: computed checks cover only 24/38 sizes and no snapshot. Mutation `radius:0`: **NOT CAUGHT**.
+Fidelity: **PASS**. Visual coverage: component-specific computed checks and zero-diff snapshot. Controlled width mutation: **CAUGHT**.
 
 ### Status
 
@@ -307,28 +307,27 @@ Fidelity: **FAIL/PARTIAL (P1)**. Visual coverage: no snapshot, only optional-reg
 ## Summary
 
 1. **25 component families audited.** Snackbar is included under Notification; Badge Count/Dot under Badge.
-2. **8 fully source-faithful for all recoverable public visual contracts:** Input, Textarea, Pagination, Notification, Popover, Drawer, Avatar, Table. (Some still contain source-level UNKNOWN typography/behavior, which is not counted as drift.)
-3. **5 families have concrete implementation drift or omitted source contract:** Button, Switch, Tooltip, Link, Empty State.
-4. **11 families have incomplete state/variant/semantic coverage:** Button, Select, Switch, Status, Dropdown, Tooltip, Link, Avatar typography, File Row, Empty State, plus Modal/Drawer behavior relative to source remains UNKNOWN rather than source-proven.
-5. **17 families do not have reliable component-specific visual protection:** Input, Textarea, Select, Checkbox, Radio, Switch, Status, Badge, Tag, Person Tag, Segment, Dropdown, Tooltip, Modal, Link, File Row, Empty State.
+2. **9 fully source-faithful for all recoverable public visual contracts:** Input, Textarea, Switch, Pagination, Notification, Popover, Drawer, Avatar, Table. (Some still contain source-level UNKNOWN typography/behavior, which is not counted as drift.)
+3. **4 families have concrete implementation drift or omitted source contract:** Button, Tooltip, Link, Empty State.
+4. **10 families have incomplete state/variant/semantic coverage:** Button, Select, Status, Dropdown, Tooltip, Link, Avatar typography, File Row, Empty State, plus Modal/Drawer behavior relative to source remains UNKNOWN rather than source-proven.
+5. **16 families do not have reliable component-specific visual protection:** Input, Textarea, Select, Checkbox, Radio, Status, Badge, Tag, Person Tag, Segment, Dropdown, Tooltip, Modal, Link, File Row, Empty State.
 6. Most frequent defect classes: missing computed typography contracts; screenshots whose locator is much larger than the component; global 0.2% tolerance masking local diffs; node/mapping completeness tests mistaken for rendered fidelity; source variants intentionally narrowed without an explicit public fidelity status; live-state visuals under-covered.
 
 ### Top 10 by severity
 
-1. **P1 — Switch:** source 52×30 large size is absent from public CSS/API and tests.
-2. **P1 — Button:** authoritative Secondary/Text mode matrix is collapsed into primary plus one neutral default; no distinct Text contract.
-3. **P1 — Empty State:** two of three canonical source compositions (Customize/Basic) are not public.
-4. **P1 — Link:** typography is inherited and not contract-tested despite a fixed 32×21 source specimen and indexed typography.
-5. **P2 — Tooltip:** source caret envelope is approximated by an 8px rotated square; radius mutation survives visual tests.
-6. **P2 — Select coverage:** a destructive radius mutation survives its dedicated review screenshot.
-7. **P2 — Dropdown coverage:** radius mutation survives all three relevant screenshots.
-8. **P2 — Modal coverage:** removing the canonical 16px surface radius survives fidelity and page screenshots.
-9. **P2 — Tag/Person Tag/Segment coverage:** three dedicated representative captures all tolerate removal of canonical rounding.
-10. **P2 — Choice/Status/Badge/File Row/Empty State coverage:** no component-specific visual regression exists; current green checks are mostly dimensions/semantics.
+1. **P1 — Button:** authoritative Secondary/Text mode matrix is collapsed into primary plus one neutral default; no distinct Text contract.
+2. **P1 — Empty State:** two of three canonical source compositions (Customize/Basic) are not public.
+3. **P1 — Link:** typography is inherited and not contract-tested despite a fixed 32×21 source specimen and indexed typography.
+4. **P2 — Tooltip:** source caret envelope is approximated by an 8px rotated square; radius mutation survives visual tests.
+5. **P2 — Select coverage:** a destructive radius mutation survives its dedicated review screenshot.
+6. **P2 — Dropdown coverage:** radius mutation survives all three relevant screenshots.
+7. **P2 — Modal coverage:** removing the canonical 16px surface radius survives fidelity and page screenshots.
+8. **P2 — Tag/Person Tag/Segment coverage:** three dedicated representative captures all tolerate removal of canonical rounding.
+9. **P2 — Choice/Status/Badge/File Row/Empty State coverage:** no component-specific visual regression exists; current green checks are mostly dimensions/semantics.
 
 ### Green tests but not source-faithful
 
-The following cannot be called source-faithful merely because baseline is green: **Button, Switch, Tooltip, Link, Empty State** (implementation drift), and **Input, Textarea, Select, Checkbox, Radio, Status, Badge, Tag, Person Tag, Segment, Dropdown, Modal, File Row** (visual protection is insufficient to establish fidelity). Pagination is explicitly excluded from this list because it now checks the correct implementation locator, every numeric role's computed signature, and a zero-diff screenshot.
+The following cannot be called source-faithful merely because baseline is green: **Button, Tooltip, Link, Empty State** (implementation drift), and **Input, Textarea, Select, Checkbox, Radio, Status, Badge, Tag, Person Tag, Segment, Dropdown, Modal, File Row** (visual protection is insufficient to establish fidelity). Switch and Pagination are explicitly excluded from this list because they now check the correct implementation locator, critical computed contracts, and zero-diff screenshots.
 
 ## Cleanup verification
 

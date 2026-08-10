@@ -90,6 +90,13 @@ test("representative paint topologies remain visually stable", async ({
   await expect(fixture.locator(".shlz-icon-card")).toHaveCount(
     representativeIcons.length,
   );
+  // Empty State retains a source-exact fractional height. Normalize this
+  // detached diagnostic fixture to the baseline raster phase so unrelated
+  // document-flow additions cannot recolor currentColor antialiasing.
+  await fixture.evaluate((element) => {
+    element.style.marginBlockStart = "0.5px";
+    element.style.marginBlockEnd = "-0.5px";
+  });
   await expect(fixture).toHaveScreenshot("icon-catalog-representative.png", {
     animations: "disabled",
   });

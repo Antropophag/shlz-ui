@@ -226,6 +226,9 @@ const componentSetReferences = [
 ];
 
 const standaloneComponentReferences = [
+  ["empty-customize", "Empty-Customize"],
+  ["empty-basic", "Empty-Basic"],
+  ["empty-simple", "Empty-Simple"],
   ["modal-basic", ".Modal-Basic(Legacy)"],
   ["modal-info", "Modal-Info"],
   ["modal-success", "Modal-Success"],

@@ -106,7 +106,8 @@
 }
 
 .shlz-switch__input:disabled {
-  opacity: var(--shlz-semantic-opacity-disabled);
+  /* Switch Component Set disabled variants use root opacity 0.4. */
+  opacity: 0.4;
 }
 
 .shlz-checkbox:disabled,

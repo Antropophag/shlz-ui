@@ -48,7 +48,7 @@ The 1:1 alignment pass uses `HIGH`, `MEDIUM`, and `LOW` as review outcomes. `HIG
 | Textarea       | MEDIUM | HIGH    | Source geometry and default/hover/focus/error/disabled/readonly visuals                                                                                                 |
 | Checkbox       | MEDIUM | HIGH    | 16/20 px, unchecked/checked/indeterminate/disabled visuals                                                                                                              |
 | Radio          | MEDIUM | HIGH    | Default/selected/disabled/selected-disabled visuals                                                                                                                     |
-| Switch         | MEDIUM | HIGH    | 24×14, 38×20 and 52×30; off/on/disabled visuals                                                                                                                         |
+| Switch         | MEDIUM | HIGH    | Authoritative Component Set: 24×14 and 38×20; off/on/disabled visuals                                                                                                   |
 | Status / Badge | MEDIUM | HIGH    | All confirmed color families and both badge sizes                                                                                                                       |
 | Dropdown       | LOW    | MEDIUM  | 200/216 px families, 2–8 rows, icon/check/search/status/separator and unknown highlighted visual; heterogeneous lower-sheet compositions remain semantically unresolved |
 | Popover        | MEDIUM | HIGH    | Twelve 236×90 placement/alignment specimens                                                                                                                             |

@@ -29,12 +29,15 @@ test("empty state composes optional regions responsively", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 720 });
   await page.goto("/#empty-state-demo");
   const states = page.locator("#empty-state-demo .shlz-empty-state");
-  await expect(states).toHaveCount(2);
+  await expect(states).toHaveCount(3);
   await expect(states.nth(0).locator(".shlz-empty-state__actions")).toHaveCount(
     0,
   );
   await expect(
     states.nth(1).locator(".shlz-empty-state__actions"),
+  ).toBeVisible();
+  await expect(
+    states.nth(2).locator(".shlz-empty-state__actions"),
   ).toBeVisible();
   await expect(states.nth(0)).toHaveCSS("padding-left", "0px");
   await expect(states.nth(0).locator(".shlz-empty-state__visual")).toHaveCSS(
