@@ -43,9 +43,30 @@ test("Golos is default and profiles work on roots and subtrees", async ({
     "font-family",
     /Fira Sans/,
   );
-  expect(
-    await page.evaluate(() => document.fonts.check('16px "Fira Sans"')),
-  ).toBe(true);
+  const loadedFaces = await page.evaluate(async () => {
+    const latin = await document.fonts.load('400 16px "Fira Sans"', "SHLZ");
+    const cyrillic = await document.fonts.load(
+      '400 16px "Fira Sans"',
+      "Кириллица",
+    );
+    return {
+      latin: latin.map(({ family, status }) => ({ family, status })),
+      cyrillic: cyrillic.map(({ family, status }) => ({ family, status })),
+    };
+  });
+  for (const faces of [loadedFaces.latin, loadedFaces.cyrillic]) {
+    expect(faces).toContainEqual({ family: "Fira Sans", status: "loaded" });
+  }
+
+  await body.evaluate((node) => {
+    const drawer = document.createElement("dialog");
+    drawer.className = "shlz-drawer";
+    drawer.dataset.shlzFont = "fira";
+    node.append(drawer);
+  });
+  await expect(
+    body.locator("dialog.shlz-drawer[data-shlz-font='fira']"),
+  ).toHaveCSS("font-family", /Fira Sans/);
 });
 
 test("Fira keeps shared geometry and stress content unclipped", async ({

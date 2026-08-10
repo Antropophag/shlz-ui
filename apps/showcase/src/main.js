@@ -1,12 +1,5 @@
 import "@shlz/styles";
-import "@fontsource/fira-sans/cyrillic-400.css";
-import "@fontsource/fira-sans/cyrillic-500.css";
-import "@fontsource/fira-sans/cyrillic-600.css";
-import "@fontsource/fira-sans/cyrillic-700.css";
-import "@fontsource/fira-sans/latin-400.css";
-import "@fontsource/fira-sans/latin-500.css";
-import "@fontsource/fira-sans/latin-600.css";
-import "@fontsource/fira-sans/latin-700.css";
+import "./fira-sans.css";
 import "./showcase.css";
 import { fidelityMarkup, primaryComponentMarkup } from "./fidelity.js";
 import { wave3Markup } from "./wave3.js";
@@ -204,7 +197,7 @@ const typographyCompatibilityMarkup = `
     </div>
     <label class="shlz-field"><span class="shlz-field__label">Регистрация заявки на проведение испытаний</span><span class="shlz-field__control"><input class="shlz-input" value="Щербинский лифтостроительный завод"></span></label>
     <label class="shlz-field shlz-field--select"><span class="shlz-field__control"><select class="shlz-select"><option>Александр Александрович Александров</option></select></span></label>
-    <div class="shlz-tabs shlz-tabs--pill"><div class="shlz-tabs__list" role="tablist"><button class="shlz-tabs__tab" type="button" role="tab" aria-selected="true">ABCDEFGHIJKLMNOPQRSTUVWXYZ</button><button class="shlz-tabs__tab" type="button" role="tab" aria-selected="false">abcdefghijklmnopqrstuvwxyz</button></div></div>
+    <div class="shlz-tabs shlz-tabs--pill"><div class="shlz-tabs__list"><button class="shlz-tabs__tab" type="button">ABCDEFGHIJKLMNOPQRSTUVWXYZ</button><button class="shlz-tabs__tab" type="button">abcdefghijklmnopqrstuvwxyz</button></div></div>
     <nav class="shlz-pagination" aria-label="Typography pagination"><ul class="shlz-pagination__list"><li><span class="shlz-pagination__item">1</span></li><li><span class="shlz-pagination__item">2</span></li><li><span class="shlz-pagination__item">…</span></li><li><span class="shlz-pagination__item">99</span></li></ul></nav>
     <div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-type-stress__dropdown" role="menu"><button class="shlz-dropdown__item" role="menuitem">Регистрация заявки на проведение испытаний</button><button class="shlz-dropdown__item" role="menuitem">0123456789</button></div></div>
     <div class="shlz-table-wrap"><table class="shlz-table"><thead class="shlz-table__head"><tr class="shlz-table__row"><th class="shlz-table__cell">Заявитель</th><th class="shlz-table__cell">Статус</th><th class="shlz-table__cell shlz-table__cell--numeric">Номер</th><th class="shlz-table__cell">Действия</th></tr></thead><tbody><tr class="shlz-table__row"><td class="shlz-table__cell"><span class="shlz-table__truncate">Александр Александрович Александров</span></td><td class="shlz-table__cell"><span class="shlz-status shlz-status--red">Отклонено</span></td><td class="shlz-table__cell shlz-table__cell--numeric">0123456789</td><td class="shlz-table__cell"><button class="shlz-button shlz-button--sm">Открыть</button></td></tr></tbody></table></div>

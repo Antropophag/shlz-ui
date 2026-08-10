@@ -6,6 +6,7 @@ dialog.shlz-modal {
   overflow: visible;
   color: var(--shlz-semantic-color-text-primary);
   font: inherit;
+  font-family: var(--shlz-semantic-font-family);
   background: transparent;
   border: 0;
 }

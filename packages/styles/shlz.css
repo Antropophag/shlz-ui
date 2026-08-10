@@ -1,5 +1,4 @@
 @import url("@shlz/tokens/tokens.css");
-@import url("./typography-profiles.css");
 @import url("./foundation.css");
 @import url("./components/button.css");
 @import url("./components/link.css");
@@ -21,3 +20,4 @@
 @import url("./components/file-row.css");
 @import url("./components/document-row.css");
 @import url("./components/empty-state.css");
+@import url("./typography-profiles.css");

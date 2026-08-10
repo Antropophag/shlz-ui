@@ -189,7 +189,6 @@ await writeFile(
 );
 
 const styleSources = [
-  "typography-profiles.css",
   "foundation.css",
   "components/button.css",
   "components/link.css",
@@ -211,6 +210,7 @@ const styleSources = [
   "components/file-row.css",
   "components/document-row.css",
   "components/empty-state.css",
+  "typography-profiles.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
 await mkdir(path.join(styleRoot, "dist"), { recursive: true });
