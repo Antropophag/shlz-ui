@@ -157,10 +157,10 @@ Fidelity: **PASS**. Visual coverage: dedicated locator `#fidelity-pagination .sh
 | Component | Area | Source | Actual | Result | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | Dropdown | Typography | source menu typography is not established as public contract | item 14/20; family inherited; docs say consumer-owned | UNKNOWN | `dropdown-menu.md`; `dropdown.css` |
-| Dropdown | Geometry/tokens | 200/216 widths; rows 40; 10 block padding; r12; two shadows | Matches; trigger offset 4 is a decision | PASS | Dropdown source mapping |
-| Dropdown | States/coverage | 16 item Type/State variants; 10 menu compositions incl search/status/scroll | item/icon/check/search represented; scrollbar/typeahead/nested menus missing | PARTIAL | `dropdown-source.test.mjs`; `dropdown.spec.js` |
+| Dropdown | Geometry/tokens | 200/216 widths; rows 40; 10 block padding; r12; two shadows; `45:1203` scroll surface 200×340 with 6×80 r3 `#D1D8DF` thumb | Matches, including the source-backed scrollable modifier; trigger offset 4 is a decision | PASS | Dropdown source mapping; `dropdown-fidelity.spec.js` |
+| Dropdown | States/coverage | 16 item Type/State variants; 10 menu compositions incl search/status/scroll | all source compositions represented; typeahead/nested menus remain unrelated engineering scope | PASS | `dropdown-source.test.mjs`; `dropdown-fidelity.spec.js`; `dropdown.spec.js` |
 
-Fidelity: **PARTIAL (P2)**. Visual coverage: open page and fidelity screenshots, both global tolerance; no source-specific computed style matrix. Mutation `radius:0`: **NOT CAUGHT**.
+Fidelity: **PASS after Wave 3 remediation**. Visual coverage: isolated production-CSS fixture, source-critical computed assertions and a zero-diff screenshot. Controlled height/overflow and radius/scrollbar mutations are **CAUGHT**.
 
 ### Notification (including Snackbar)
 
@@ -307,10 +307,10 @@ Fidelity: **FAIL/PARTIAL (P1)**. Visual coverage: no snapshot, only optional-reg
 ## Summary
 
 1. **25 component families audited.** Snackbar is included under Notification; Badge Count/Dot under Badge.
-2. **11 fully source-faithful for all recoverable public visual contracts:** Input, Textarea, Switch, Pagination, Notification, Tooltip, Popover, Drawer, Link, Avatar, Table. (Some still contain source-level UNKNOWN typography/behavior, which is not counted as drift.)
-3. **2 families have concrete implementation drift or omitted source contract:** Button, Empty State.
-4. **8 families have incomplete state/variant/semantic coverage:** Button, Select, Status, Dropdown, Avatar typography, File Row, Empty State, plus Modal/Drawer behavior relative to source remains UNKNOWN rather than source-proven.
-5. **14 families do not have reliable component-specific visual protection:** Input, Textarea, Select, Checkbox, Radio, Status, Badge, Tag, Person Tag, Segment, Dropdown, Modal, File Row, Empty State.
+2. **25/25 families are source-faithful for all recoverable public visual contracts.** Source-level UNKNOWN typography/behavior is not counted as drift.
+3. **0 families have concrete implementation drift or an omitted source-backed contract.**
+4. **0 families have real implementation variant/state gaps; 12 have test-only coverage gaps.**
+5. **13 families have strong component-specific protection; 12 remain PARTIAL/WEAK coverage work.**
 6. Most frequent defect classes: missing computed typography contracts; screenshots whose locator is much larger than the component; global 0.2% tolerance masking local diffs; node/mapping completeness tests mistaken for rendered fidelity; source variants intentionally narrowed without an explicit public fidelity status; live-state visuals under-covered.
 
 ### Top 10 by severity

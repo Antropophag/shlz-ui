@@ -29,6 +29,34 @@
   inline-size: 216px;
 }
 
+.shlz-dropdown__menu--scrollable {
+  block-size: 340px; /* FACT: Dropdown 45:1203 surface is 200x340. */
+  max-block-size: 340px;
+  overflow: hidden;
+}
+
+.shlz-dropdown__scroll-region {
+  block-size: 320px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.shlz-dropdown__scroll-region::-webkit-scrollbar {
+  display: none;
+}
+
+.shlz-dropdown__scrollbar {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 10px;
+  inset-inline-end: 4px;
+  inline-size: 6px;
+  block-size: 80px;
+  background: var(--shlz-source-color-gray-gray-100);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
 .shlz-dropdown__menu[hidden] {
   display: none;
 }

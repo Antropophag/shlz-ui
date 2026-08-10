@@ -929,6 +929,15 @@ article {
   min-block-size: 360px;
 }
 
+#dropdown-scrollable-demo {
+  min-block-size: 420px;
+}
+
+#dropdown-scrollable-demo .shlz-dropdown__menu {
+  position: relative;
+  inset: auto;
+}
+
 #popover-demo {
   min-block-size: 560px;
 }

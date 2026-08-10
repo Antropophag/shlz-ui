@@ -9,7 +9,7 @@ test("dropdown keyboard navigation skips disabled items and restores focus", asy
   page,
 }) => {
   const trigger = page.getByRole("button", { name: "Действия" });
-  const menu = page.getByRole("menu", { name: "" });
+  const menu = page.locator("#showcase-actions");
 
   await trigger.focus();
   await page.keyboard.press("ArrowDown");

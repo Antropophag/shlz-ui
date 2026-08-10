@@ -1,6 +1,7 @@
 import { expect } from "@playwright/test";
 
-const ADDITIVE_SHOWCASE_SELECTOR = "[data-shlz-visual-addition]";
+const ADDITIVE_SHOWCASE_SELECTOR =
+  "[data-shlz-visual-addition], [data-shlz-dropdown-scrollable-fixture]";
 
 export const stabilizeShowcaseLayout = async (page) => {
   await page.evaluate((selector) => {

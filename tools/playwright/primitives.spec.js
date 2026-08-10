@@ -7,7 +7,10 @@ test.beforeEach(async ({ page }) => {
 
 const isolateDocumentationSurface = (page) =>
   page.addStyleTag({
-    content: ".shlz-docs-sidebar { visibility: hidden !important; }",
+    content: `
+      .shlz-docs-sidebar { visibility: hidden !important; }
+      [data-shlz-dropdown-scrollable-fixture] { display: none !important; }
+    `,
   });
 
 test("showcase primitives keep their visual contract", async ({ page }) => {

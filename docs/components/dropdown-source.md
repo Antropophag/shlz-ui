@@ -12,3 +12,13 @@ The menu retains 10px vertical padding, 12px radius and its local two-layer
 shadow. Visual icon slots use normalized assets. Runtime menu keyboard behavior
 is an engineering contract; product meanings of status/avatar rows remain
 consumer-owned.
+
+`Items=Srollbar` (`45:1203`, source spelling retained here) is the 200×340
+scrollable composition. Apply `.shlz-dropdown__menu--scrollable` to the existing
+menu, wrap its items in `.shlz-dropdown__scroll-region`, and add an `aria-hidden`
+`.shlz-dropdown__scrollbar`. It retains 40px rows and 10px vertical padding. The
+source exposes no painted track; its only scrollbar primitive is a 6×80px,
+radius-3 `#D1D8DF` thumb at the initial scroll position, inset 10px from the
+block start and 4px from the inline end. The inner region uses native scrolling
+with platform paint hidden; the explicit thumb makes the source visual
+deterministic across browsers.
