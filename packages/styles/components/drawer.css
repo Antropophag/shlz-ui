@@ -9,6 +9,7 @@ dialog.shlz-drawer {
   overflow: visible;
   color: var(--shlz-semantic-color-text-primary);
   font: inherit;
+  font-family: var(--shlz-semantic-font-family);
   background: transparent;
   border: 0;
 }
@@ -42,9 +43,9 @@ dialog.shlz-drawer::backdrop {
   flex: 1 1 auto;
   margin: 0;
   font: inherit;
-  font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
+  font-weight: var(--shlz-semantic-typography-weight-semibold);
+  font-size: var(--shlz-semantic-typography-role-overlay-title-size);
+  line-height: var(--shlz-semantic-typography-role-overlay-title-line-height);
 }
 
 .shlz-drawer__close {

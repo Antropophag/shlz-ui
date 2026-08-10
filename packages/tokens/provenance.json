@@ -64,6 +64,12 @@
           "source": "raw/typography-UI Kit – Basic elements.json and raw/typography-UI Kit – Interface elements.json",
           "rationale": "Golos Text is a source-backed product family. The ordered runtime stack is an engineering decision because the repository contains no distributable font files or font package."
         },
+        "typography": {
+          "classification": "DECISION",
+          "confidence": "high",
+          "source": "raw typography exports and component SVGs",
+          "rationale": "Golos remains the source-authoritative default. Fira Sans is an official compatibility profile. Shared role aliases preserve the existing source-derived Golos metrics and component geometry."
+        },
         "border": { "classification": "DERIVED", "confidence": "medium" },
         "opacity": { "classification": "DECISION", "confidence": "low" },
         "control": { "classification": "DERIVED", "confidence": "high" }

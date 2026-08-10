@@ -210,6 +210,7 @@ const styleSources = [
   "components/file-row.css",
   "components/document-row.css",
   "components/empty-state.css",
+  "typography-profiles.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });
 await mkdir(path.join(styleRoot, "dist"), { recursive: true });
