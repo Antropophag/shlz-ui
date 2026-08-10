@@ -13,7 +13,7 @@
     "generate:basic-icons": "node tools/normalize-basic-icons.mjs",
     "generate:source-index": "node tools/generate-design-source-index.mjs",
     "build": "npm run generate && npm run build --workspaces --if-present",
-    "test": "node --test tools/tests/*.test.mjs",
+    "test": "node --test --test-concurrency=1 tools/tests/*.test.mjs",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
     "lint": "eslint . && stylelint 'packages/**/*.css' 'apps/**/*.css' && prettier --check .",
