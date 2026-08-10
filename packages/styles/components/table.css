@@ -7,8 +7,8 @@
   border-spacing: 0;
   border-collapse: collapse;
   color: var(--shlz-semantic-color-text-primary);
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--shlz-semantic-typography-role-body-dense-size);
+  line-height: var(--shlz-semantic-typography-role-body-dense-line-height);
 }
 
 .shlz-table__cell {
@@ -23,9 +23,9 @@
 
 .shlz-table__head .shlz-table__cell {
   color: var(--shlz-semantic-color-text-secondary);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 18px;
+  font-size: var(--shlz-semantic-typography-role-data-heading-size);
+  font-weight: var(--shlz-semantic-typography-weight-medium);
+  line-height: var(--shlz-semantic-typography-role-data-heading-line-height);
   text-transform: uppercase;
 }
 
@@ -43,6 +43,18 @@
 .shlz-table__cell--priority {
   inline-size: 1%;
   text-align: center;
+  white-space: nowrap;
+}
+
+.shlz-table__cell--numeric {
+  font-variant-numeric: tabular-nums;
+}
+
+.shlz-table__truncate {
+  display: block;
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 

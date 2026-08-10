@@ -1,4 +1,12 @@
 import "@shlz/styles";
+import "@fontsource/fira-sans/cyrillic-400.css";
+import "@fontsource/fira-sans/cyrillic-500.css";
+import "@fontsource/fira-sans/cyrillic-600.css";
+import "@fontsource/fira-sans/cyrillic-700.css";
+import "@fontsource/fira-sans/latin-400.css";
+import "@fontsource/fira-sans/latin-500.css";
+import "@fontsource/fira-sans/latin-600.css";
+import "@fontsource/fira-sans/latin-700.css";
 import "./showcase.css";
 import { fidelityMarkup, primaryComponentMarkup } from "./fidelity.js";
 import { wave3Markup } from "./wave3.js";
@@ -183,7 +191,29 @@ const overlayDemos = `
 <dialog class="shlz-modal shlz-modal--compact" id="showcase-confirm" data-shlz-modal aria-labelledby="showcase-confirm-title"><form class="shlz-modal__surface" method="dialog"><div class="shlz-modal__body"><h2 class="shlz-modal__title" id="showcase-confirm-title">Подтвердить действие?</h2><p>Для confirm/cancel доступна нативная форма <code>method=&quot;dialog&quot;</code>.</p></div><footer class="shlz-modal__footer"><button class="shlz-button" value="cancel">Отмена</button><button class="shlz-button shlz-button--primary" value="confirm">Подтвердить</button></footer></form></dialog></article>
 <article id="drawer-demo"><h3>Drawer</h3><p><code>Drawer.svg</code> · <span class="shlz-evidence" data-kind="FACT">FACT · 420×900, 64/764/72 regions</span> <span class="shlz-evidence" data-kind="DECISION">DECISION · modal right-side native dialog</span></p><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-trigger="showcase-drawer">Открыть Drawer</button><dialog class="shlz-drawer" id="showcase-drawer" data-shlz-drawer data-shlz-drawer-backdrop-close aria-labelledby="showcase-drawer-title"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="showcase-drawer-title">Заголовок Drawer</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть">×</button></header><div class="shlz-drawer__body" data-drawer-scroll><div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Параметр</span><input class="shlz-input" autofocus></label><p>Drawer использует ту же native modal lifecycle, но независимую source-derived geometry.</p>${drawerLongContent}</div></div><footer class="shlz-drawer__footer"><button class="shlz-button" type="button" data-shlz-drawer-close>Отмена</button><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-close="apply">Применить</button></footer></div></dialog></article>`;
 
-app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p></header>
+const typographyCompatibilityMarkup = `
+<section id="typography-compatibility" class="shlz-major-section shlz-type-stress" data-shlz-visual-addition>
+  <h2>Typography profile compatibility</h2>
+  <p>Одинаковые production-компоненты и geometry; профиль меняет только наследуемую типографику.</p>
+  <div class="shlz-type-stress__samples" data-shlz-type-stress>
+    <div class="shlz-cluster">
+      <button class="shlz-button shlz-button--primary" type="button">В проведении испытаний отказано</button>
+      <span class="shlz-status shlz-status--red">Отклонено</span>
+      <span class="shlz-badge shlz-badge--count">0123456789</span>
+      <span class="shlz-tag">Требуют вашего внимания</span>
+    </div>
+    <label class="shlz-field"><span class="shlz-field__label">Регистрация заявки на проведение испытаний</span><span class="shlz-field__control"><input class="shlz-input" value="Щербинский лифтостроительный завод"></span></label>
+    <label class="shlz-field shlz-field--select"><span class="shlz-field__control"><select class="shlz-select"><option>Александр Александрович Александров</option></select></span></label>
+    <div class="shlz-tabs shlz-tabs--pill"><div class="shlz-tabs__list" role="tablist"><button class="shlz-tabs__tab" type="button" role="tab" aria-selected="true">ABCDEFGHIJKLMNOPQRSTUVWXYZ</button><button class="shlz-tabs__tab" type="button" role="tab" aria-selected="false">abcdefghijklmnopqrstuvwxyz</button></div></div>
+    <nav class="shlz-pagination" aria-label="Typography pagination"><ul class="shlz-pagination__list"><li><span class="shlz-pagination__item">1</span></li><li><span class="shlz-pagination__item">2</span></li><li><span class="shlz-pagination__item">…</span></li><li><span class="shlz-pagination__item">99</span></li></ul></nav>
+    <div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-type-stress__dropdown" role="menu"><button class="shlz-dropdown__item" role="menuitem">Регистрация заявки на проведение испытаний</button><button class="shlz-dropdown__item" role="menuitem">0123456789</button></div></div>
+    <div class="shlz-table-wrap"><table class="shlz-table"><thead class="shlz-table__head"><tr class="shlz-table__row"><th class="shlz-table__cell">Заявитель</th><th class="shlz-table__cell">Статус</th><th class="shlz-table__cell shlz-table__cell--numeric">Номер</th><th class="shlz-table__cell">Действия</th></tr></thead><tbody><tr class="shlz-table__row"><td class="shlz-table__cell"><span class="shlz-table__truncate">Александр Александрович Александров</span></td><td class="shlz-table__cell"><span class="shlz-status shlz-status--red">Отклонено</span></td><td class="shlz-table__cell shlz-table__cell--numeric">0123456789</td><td class="shlz-table__cell"><button class="shlz-button shlz-button--sm">Открыть</button></td></tr></tbody></table></div>
+    <div class="shlz-type-stress__rows"><div class="shlz-file-row"><div class="shlz-file-row__content"><span class="shlz-file-row__title">Очень длинное имя файла с результатами проведения испытаний и дополнительными материалами.pdf</span></div></div><div class="shlz-document-row"><div class="shlz-document-row__content"><a class="shlz-document-row__title" href="#typography-compatibility">Щербинский лифтостроительный завод — комплект документов для проведения испытаний</a><span class="shlz-document-row__meta">ABCDEFGHIJKLMNOPQRSTUVWXYZ · 0123456789</span></div></div></div>
+    <div class="shlz-empty-state shlz-empty-state--simple"><div class="shlz-empty-state__content"><h3 class="shlz-empty-state__title">Требуют вашего внимания</h3><p class="shlz-empty-state__description">Регистрация заявки на проведение испытаний</p></div></div>
+  </div>
+</section>`;
+
+app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p><fieldset class="shlz-font-switch" data-shlz-visual-addition><legend>Typography profile</legend><label><input type="radio" name="shlz-font-profile" value="golos" checked>Golos Text</label><label><input type="radio" name="shlz-font-profile" value="fira">Fira Sans</label></fieldset></header>
 <section id="source-spec" class="shlz-major-section"><p class="shlz-section-kicker">A. SOURCE SPEC</p><h2>Буквальная спецификация Figma ${sourceEvidence}</h2><p><code>Colors.svg</code>, <code>Spacing.svg</code> и human-verified Corner radius source. Имена, группы и значения не нормализованы в искусственные шкалы.</p>
 <div class="shlz-source-sheet"><h2>Colors</h2><div class="shlz-source-palette">${colors}</div></div>
 <div class="shlz-source-sheet shlz-source-sheet--split"><div><h2>Spacing</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Literal named source values.</p><div class="shlz-stack">${spaces}</div></div><div><h2>Corner radius</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Source labels, not a universal component mapping.</p><div class="shlz-radius-grid">${radii}</div></div></div>
@@ -217,10 +247,23 @@ ${contentStatesMarkup(showcaseIconUrl, sourceReferenceUrl)}
 ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition</h3><div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Заголовок</span><input class="shlz-input" value="Пример композиции"></label><label class="shlz-field"><span class="shlz-field__label">Описание</span><textarea class="shlz-textarea"></textarea></label><label class="shlz-choice"><input class="shlz-checkbox" type="checkbox" checked>Подтверждение</label><fieldset class="shlz-demo-fieldset"><legend>Вариант</legend><label class="shlz-choice"><input class="shlz-radio" type="radio" name="composition" checked>Первый</label><label class="shlz-choice"><input class="shlz-radio" type="radio" name="composition">Второй</label></fieldset><label class="shlz-switch"><input class="shlz-switch__input" type="checkbox" role="switch">Настройка</label><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Сохранить</button><button class="shlz-button">Отмена</button><span class="shlz-status shlz-status--green">Готово</span></div></div></article></section>
 <section><h2>Icons <span class="shlz-evidence" data-kind="FACT">FACT · normalized Basic Elements manifest</span></h2><p>${manifest.length} canonical logical icons. Compatibility aliases are shown as metadata and are not separate canonical icons.</p>${iconGroups}</section></section>
 <section id="fidelity" class="shlz-major-section"><p class="shlz-section-kicker">C. VISUAL FIDELITY</p><h2>Raw SVG source vs production implementation</h2><p>Левая колонка генерируется непосредственно из raw SVG через документированный viewBox crop; правая использует production DOM, classes, CSS и tokens. Интерактивные behavior demos находятся в Implementation выше.</p>${fidelityMarkup}</section>
-<article id="dropdown-scrollable-demo" data-shlz-dropdown-scrollable-fixture><h3>Dropdown · Items=Srollbar</h3><div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-dropdown__menu--scrollable" role="menu"><div class="shlz-dropdown__scroll-region">${Array.from({ length: 34 }, (_, index) => `<button class="shlz-dropdown__item" type="button" role="menuitem">${index + 1} menu item</button>`).join("")}</div><span class="shlz-dropdown__scrollbar" aria-hidden="true"></span></div></div></article>`;
+<article id="dropdown-scrollable-demo" data-shlz-dropdown-scrollable-fixture><h3>Dropdown · Items=Srollbar</h3><div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-dropdown__menu--scrollable" role="menu"><div class="shlz-dropdown__scroll-region">${Array.from({ length: 34 }, (_, index) => `<button class="shlz-dropdown__item" type="button" role="menuitem">${index + 1} menu item</button>`).join("")}</div><span class="shlz-dropdown__scrollbar" aria-hidden="true"></span></div></div></article>${typographyCompatibilityMarkup}`;
 
 for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
   checkbox.indeterminate = true;
+}
+
+for (const control of document.querySelectorAll('[name="shlz-font-profile"]')) {
+  control.addEventListener("change", () => {
+    document.body.dataset.shlzFont = control.value;
+    window.localStorage.setItem("shlz-font-profile", control.value);
+  });
+}
+const savedFontProfile = window.localStorage.getItem("shlz-font-profile");
+if (savedFontProfile === "fira") {
+  document.body.dataset.shlzFont = savedFontProfile;
+  document.querySelector('[name="shlz-font-profile"][value="fira"]').checked =
+    true;
 }
 
 const modalAutofocus = document.querySelector("#modal-autofocus");

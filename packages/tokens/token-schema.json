@@ -9,7 +9,14 @@
     },
     "semantic": {
       "type": "object",
-      "required": ["color", "font", "border", "opacity", "control"]
+      "required": [
+        "color",
+        "font",
+        "typography",
+        "border",
+        "opacity",
+        "control"
+      ]
     }
   },
   "additionalProperties": false

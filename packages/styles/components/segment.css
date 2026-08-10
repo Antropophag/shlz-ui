@@ -8,8 +8,8 @@
   border-radius: var(--shlz-source-radius-min);
   inline-size: max-content;
   max-inline-size: 100%;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--shlz-semantic-typography-role-compact-label-size);
+  line-height: var(--shlz-semantic-typography-role-compact-label-line-height);
 }
 
 .shlz-segment__option {
@@ -79,8 +79,8 @@
   padding-inline: 12px;
   color: var(--shlz-semantic-color-text-secondary);
   border-radius: 6px;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: var(--shlz-semantic-typography-role-compact-label-size);
+  line-height: var(--shlz-semantic-typography-role-compact-label-line-height);
 }
 
 .shlz-segment__item--selected {

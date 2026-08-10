@@ -1,0 +1,15 @@
+/*
+ * Typography profiles are inherited custom-property contracts.
+ * No attribute means the canonical Golos Text behavior remains unchanged.
+ */
+:where([data-shlz-font="golos"]) {
+  --shlz-semantic-font-family: var(--shlz-semantic-typography-family-golos);
+
+  font-family: var(--shlz-semantic-font-family);
+}
+
+:where([data-shlz-font="fira"]) {
+  --shlz-semantic-font-family: var(--shlz-semantic-typography-family-fira);
+
+  font-family: var(--shlz-semantic-font-family);
+}

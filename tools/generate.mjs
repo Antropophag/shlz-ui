@@ -189,6 +189,7 @@ await writeFile(
 );
 
 const styleSources = [
+  "typography-profiles.css",
   "foundation.css",
   "components/button.css",
   "components/link.css",

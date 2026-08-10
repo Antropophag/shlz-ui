@@ -73,8 +73,8 @@
   background: transparent;
   border: 0;
   font-family: inherit;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: var(--shlz-semantic-typography-role-body-dense-size);
+  line-height: var(--shlz-semantic-typography-role-body-dense-line-height);
   cursor: pointer;
 }
 
