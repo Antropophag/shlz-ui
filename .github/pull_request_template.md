@@ -8,7 +8,7 @@
 
 ## Source / reference
 
-Укажите источник, если изменение связано с дизайном:
+[design-decision] Укажите authoritative source, если изменение связано с дизайном:
 
 - Figma/source SVG (первичный authoritative source);
 - design-source inventory;

@@ -15,12 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
           cache: npm
@@ -44,8 +44,11 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: |
+          if ! git cat-file -e "${BASE_SHA}^{commit}" 2>/dev/null; then
+            BASE_SHA="$(git hash-object -t tree /dev/null)"
+          fi
           git diff --name-only --diff-filter=ACMR -z "$BASE_SHA" HEAD -- \
-            | xargs -0 -r npx prettier --check --ignore-unknown
+            | xargs -0 -r npx prettier --check --ignore-unknown --
 
       - name: Build packages and showcase
         run: npm run build
@@ -56,13 +59,12 @@ jobs:
   browser-tests:
     name: Browser and visual tests
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
         with:
           node-version: 22
           cache: npm
@@ -74,4 +76,5 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run browser and visual tests
+        continue-on-error: true
         run: npm run test:e2e

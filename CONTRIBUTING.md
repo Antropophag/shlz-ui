@@ -30,7 +30,7 @@ git worktree add -b fix/example ~/code/shlz-ui-fix-example origin/main
 
 PR должен быть небольшим, логически атомарным и не содержать unrelated cleanup. Понятные commit messages, например `fix(dropdown): restore scrollable source contract`, приветствуются, но Conventional Commits не являются обязательным gate.
 
-Если design-fidelity исправление основано на source data, укажите в PR authoritative source. Первичный источник истины — оригинальные SVG из `shlz-design-source/raw/svg/`; production-приложения могут служить контекстом проверки, но не источником визуального дизайна.
+[design-decision] Если design-fidelity исправление основано на source data, укажите в PR authoritative source. Первичный источник истины — оригинальные SVG из `shlz-design-source/raw/svg/`; production-приложения могут служить контекстом проверки, но не источником визуального дизайна.
 
 Перед PR выполните существующий набор проверок:
 
