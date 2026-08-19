@@ -83,6 +83,7 @@ test("documented components expose developer usage without mixing diagnostics", 
     "textarea",
     "checkbox",
     "radio",
+    "switch",
     "select",
   ]) {
     const component = page.locator(`#${name}-demo`);

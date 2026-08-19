@@ -41,6 +41,19 @@ const radioMarkup = `<fieldset>
   </label>
 </fieldset>`;
 
+const switchMarkup = `<label class="shlz-switch">
+  <input class="shlz-switch__input" type="checkbox" role="switch" name="alerts" value="enabled" />
+  <span>Уведомления</span>
+</label>`;
+
+const switchBehavior = `const control = document.querySelector('[name="alerts"]');
+
+if (control instanceof HTMLInputElement) {
+  control.addEventListener("change", () => {
+    // Persist control.checked in application code.
+  });
+}`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -351,6 +364,78 @@ export const componentDocumentation = {
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/choice-status-source.test.mjs"],
       ["Bundle contract tests", "tools/tests/components.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  switch: {
+    status: "Executable · Production example",
+    purpose:
+      "Native checkbox exposed as a switch for an on/off setting that takes effect immediately.",
+    use: [
+      "Turn one setting on or off when the product applies the change immediately.",
+      "Use a visible label that names the setting rather than narrating the current state.",
+    ],
+    avoid: [
+      "Use Checkbox when choices are reviewed and submitted together or when mixed state is required.",
+      "Do not use Switch for commands, mutually exclusive choices or a setting that cannot be changed immediately.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "switch-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "switch-html",
+        label: "HTML",
+        language: "html",
+        code: switchMarkup,
+      },
+      {
+        id: "switch-js",
+        label: "Application integration point",
+        language: "js",
+        code: switchBehavior,
+      },
+    ],
+    contract: [
+      [
+        "Label",
+        "Native label.shlz-switch wraps the input and visible setting name.",
+      ],
+      [
+        "State owner",
+        "Native input.shlz-switch__input[type=checkbox][role=switch].",
+      ],
+      ["Sizes", "Default Medium 38×20; add .shlz-switch__input--sm for 24×14."],
+      ["States", "Native checked, disabled and focus-visible."],
+      [
+        "Events",
+        "Listen to native change; application owns persistence and failure handling.",
+      ],
+    ],
+    accessibility:
+      "The wrapping label names the switch; role=switch exposes its checked state as on/off. Space toggles the focused native control. Keep the label stable when state changes and communicate persistence failures separately.",
+    limitations:
+      "No persistence, loading, optimistic-update or rollback behavior is shipped. Indeterminate is not a Switch state. Checked submits the configured string value and unchecked submits no entry.",
+    traceability: [
+      [
+        "Authoritative component set",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      ],
+      ["Source sheet", "shlz-design-source/raw/svg/Switch.svg"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/choice.css"],
+      ["Documentation", "docs/components/switch.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
       ["Browser tests", "tools/playwright/choice-status.spec.js"],
     ],
   },

@@ -628,6 +628,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="switch-demo">
     <header><h3>Switch</h3><p>Мгновенно включает или выключает настройку через checkbox с role=switch.</p></header>
+    ${renderComponentDocumentation("switch")}
     <section data-shlz-switch-source-matrix><h4>Source size and state matrix</h4>${stateMatrix(
       {
         columns: [

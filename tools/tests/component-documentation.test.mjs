@@ -17,6 +17,7 @@ test("documented components expose the validated component-page contract", async
     "textarea",
     "checkbox",
     "radio",
+    "switch",
     "select",
   ]);
 
@@ -119,6 +120,27 @@ test("Checkbox and Radio snippets keep native labeling and grouping", async () =
   assert.match(css, /\.shlz-checkbox--sm/);
   assert.match(css, /\.shlz-checkbox:indeterminate/);
   assert.match(css, /\.shlz-radio:checked/);
+});
+
+test("Switch snippet keeps native state and an application-owned change hook", async () => {
+  const css = await read("packages/styles/components/choice.css");
+  const html = componentDocumentation.switch.snippets.find(
+    ({ id }) => id === "switch-html",
+  ).code;
+  const js = componentDocumentation.switch.snippets.find(
+    ({ id }) => id === "switch-js",
+  ).code;
+
+  assert.match(html, /^<label class="shlz-switch">/);
+  assert.match(
+    html,
+    /class="shlz-switch__input" type="checkbox" role="switch" name="alerts" value="enabled"/,
+  );
+  assert.match(js, /addEventListener\("change"/);
+  assert.match(js, /control\.checked/);
+  assert.match(css, /--shlz-switch-width: 38px/);
+  assert.match(css, /--shlz-switch-width: 24px/);
+  assert.match(css, /prefers-reduced-motion: reduce/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {
