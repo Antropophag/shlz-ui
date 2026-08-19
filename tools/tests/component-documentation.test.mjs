@@ -18,6 +18,8 @@ test("documented components expose the validated component-page contract", async
     "checkbox",
     "radio",
     "switch",
+    "status",
+    "badge",
     "select",
   ]);
 
@@ -141,6 +143,28 @@ test("Switch snippet keeps native state and an application-owned change hook", a
   assert.match(css, /--shlz-switch-width: 38px/);
   assert.match(css, /--shlz-switch-width: 24px/);
   assert.match(css, /prefers-reduced-motion: reduce/);
+});
+
+test("Status and Badge snippets keep text-owned semantics", async () => {
+  const [css, foundation] = await Promise.all([
+    read("packages/styles/components/status-badge.css"),
+    read("packages/styles/foundation.css"),
+  ]);
+  const status = componentDocumentation.status.snippets.find(
+    ({ id }) => id === "status-html",
+  ).code;
+  const badge = componentDocumentation.badge.snippets.find(
+    ({ id }) => id === "badge-html",
+  ).code;
+
+  assert.match(status, /shlz-status shlz-status--green">Выполнено/);
+  assert.match(badge, /class="shlz-badge"/);
+  assert.match(badge, /shlz-visually-hidden/);
+  assert.match(badge, /непрочитанных уведомлений/);
+  assert.match(css, /\.shlz-status--green/);
+  assert.match(css, /\.shlz-badge--lg/);
+  assert.match(css, /\.shlz-badge-dot/);
+  assert.match(foundation, /\.shlz-visually-hidden/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

@@ -650,11 +650,13 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="status-demo">
     <header><h3>Status</h3><p>Визуальная метка состояния; продуктовый смысл задаёт consumer и не кодируется именем класса.</p></header>
+    ${renderComponentDocumentation("status")}
     <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue")}${status("Green", "green")}${status("Bright green", "bright-green")}${status("Orange", "orange")}${status("Blue pair", "source-blue")}${status("Violet", "purple")}${status("Turquoise", "cyan")}${status("Pink", "pink")}${status("Neutral", "neutral")}</div></section>
     ${statusDiagnostics}
   </article>
   <article class="shlz-api-component" id="badge-demo">
     <header><h3>Badge</h3><p>Компактный счётчик или dot-индикатор; это отдельное семейство, не Status.</p></header>
+    ${renderComponentDocumentation("badge")}
     <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true })}${badge("1", { color: "invert", single: true })}${badge("1", { color: "gray", single: true })}<span>Small · multiple</span>${badge("12")}${badge("12", { color: "invert" })}${badge("12", { color: "gray" })}<span>Medium</span>${badge("12", { size: "medium" })}${badge("12", { size: "medium", color: "invert" })}${badge("12", { size: "medium", color: "gray" })}</div></section>
     <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot"></span><span class="shlz-badge-dot shlz-badge-dot--neutral"></span></div></section>
     ${badgeDiagnostics}

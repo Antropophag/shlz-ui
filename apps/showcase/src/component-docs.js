@@ -54,6 +54,12 @@ if (control instanceof HTMLInputElement) {
   });
 }`;
 
+const statusMarkup = `<span class="shlz-status shlz-status--green">Выполнено</span>`;
+
+const badgeMarkup = `<span class="shlz-badge">
+  12<span class="shlz-visually-hidden"> непрочитанных уведомлений</span>
+</span>`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -433,6 +439,119 @@ export const componentDocumentation = {
       ["Tokens", "packages/tokens/tokens.json"],
       ["Styles", "packages/styles/components/choice.css"],
       ["Documentation", "docs/components/switch.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  status: {
+    status: "Executable · Production example",
+    purpose:
+      "Compact textual label for an application-defined business status.",
+    use: [
+      "Show a short persistent state label in a table, card or record summary.",
+      "Choose a paint modifier through one centrally documented product mapping.",
+    ],
+    avoid: [
+      "Use Badge for a compact count or dot indicator and Notification for transient feedback.",
+      "Do not infer or communicate meaning from color alone; modifier names are paint families, not business semantics.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "status-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "status-html",
+        label: "HTML",
+        language: "html",
+        code: statusMarkup,
+      },
+    ],
+    contract: [
+      ["Element", "Text-bearing span.shlz-status."],
+      [
+        "Paint modifiers",
+        "--green, --bright-green, --source-blue, --orange, --purple, --cyan, --pink and --neutral.",
+      ],
+      ["Semantics", "Visible text and consumer context own business meaning."],
+      ["Interaction", "None; Status is not a control."],
+    ],
+    accessibility:
+      "Status meaning must be present in text, not color alone. Keep the status in normal reading order. Dynamic changes that require announcement need a consumer-owned live-region pattern; the pill itself has no implicit live semantics.",
+    limitations:
+      "Modifier names describe source paint families, not approved mappings such as success/warning/error. No icon, dismiss, interactive, live-announcement or transition contract is shipped.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Status.svg"],
+      [
+        "Source component sets",
+        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      ],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/status-badge.css"],
+      ["Documentation", "docs/components/status.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  badge: {
+    status: "Executable · Production example",
+    purpose:
+      "Compact count or dot indicator that supplements a named parent item.",
+    use: [
+      "Show a short count beside a navigation item, tab, inbox or compact action.",
+      "Use a dot only when its meaning is supplied by the surrounding label or adjacent hidden text.",
+    ],
+    avoid: [
+      "Use Status for a textual business state and do not use Badge as the only label of a control.",
+      "Do not encode critical meaning only through the dot color or an unexplained number.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "badge-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      { id: "badge-html", label: "HTML", language: "html", code: badgeMarkup },
+    ],
+    contract: [
+      ["Count", "span.shlz-badge with visible consumer-owned text."],
+      ["Size", "Default 16px; add .shlz-badge--lg for 23px."],
+      ["Paint", ".shlz-badge--invert or .shlz-badge--neutral."],
+      [
+        "Single glyph",
+        "Add .shlz-badge--single for the source-backed compact width.",
+      ],
+      ["Dot", "span.shlz-badge-dot; optional --neutral paint."],
+    ],
+    accessibility:
+      "Give a count its noun/context through visible or visually hidden text. Decorative dots use aria-hidden=true; meaningful dots need adjacent text available to assistive technology. Badge has no implicit live-region behavior.",
+    limitations:
+      "No maximum-count, 99+, localization, animation or live-announcement policy is shipped. Text overflow and business meaning are consumer-owned; Badge is not interactive by itself.",
+    traceability: [
+      [
+        "Authoritative component sets",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      ],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/status-badge.css"],
+      ["Documentation", "docs/components/badge.md"],
       ["Showcase", "apps/showcase/src/fidelity.js"],
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/choice-status-source.test.mjs"],
