@@ -2,6 +2,8 @@ import references from "../generated/source-references/manifest.json";
 import { iconHref, iconViewBox } from "@shlz/icons";
 import spriteUrl from "@shlz/icons/sprite.svg?url";
 
+import { renderComponentDocumentation } from "./component-docs.js";
+
 const urls = import.meta.glob("../generated/source-references/*.svg", {
   eager: true,
   query: "?url",
@@ -534,6 +536,7 @@ const buttonDiagnostics = `
 export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="button-demo">
     <header><h3>Button</h3><p>Запускает действие или подтверждает выбор.</p></header>
+    ${renderComponentDocumentation("button")}
     <section><h4>Modes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Primary</button><button class="shlz-button">Secondary</button><button class="shlz-button shlz-button--text">Text</button></div></section>
     <section><h4>Sizes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Large</button><button class="shlz-button shlz-button--primary shlz-button--sm">Medium</button><button class="shlz-button shlz-button--primary shlz-button--xs">Small</button></div></section>
     <section data-shlz-button-source-matrix><h4>Mode × state matrix</h4><div class="shlz-control-matrix"><b>Mode</b><b>Default</b><b>Hover</b><b>Active</b><b>Disabled</b><span>Primary</span><button class="shlz-button shlz-button--primary">Default</button><button class="shlz-button shlz-button--primary shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--primary shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--primary" disabled>Disabled</button><span>Secondary</span><button class="shlz-button">Default</button><button class="shlz-button shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--visual-active">Active</button><button class="shlz-button" disabled>Disabled</button><span>Text</span><button class="shlz-button shlz-button--text">Default</button><button class="shlz-button shlz-button--text shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--text shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--text" disabled>Disabled</button></div><h4>Source-backed sizes and icon combinations</h4><div class="shlz-cluster" data-shlz-button-source-icons><button class="shlz-button shlz-button--primary">${icon("search", "shlz-button__icon")}Label</button><button class="shlz-button">Label${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--sm" data-shlz-button-source-size="medium">Medium</button><button class="shlz-button shlz-button--xs" data-shlz-button-source-size="small">Small</button><button class="shlz-button shlz-button--text shlz-button--icon" aria-label="Text icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Primary icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--icon shlz-button--sm" aria-label="Secondary icon medium">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--text shlz-button--icon shlz-button--sm" aria-label="Text icon medium">${icon("search", "shlz-button__icon")}</button></div></section>
@@ -563,7 +566,8 @@ export const primaryComponentMarkup = `
     })}
   </article>
   <article class="shlz-api-component" id="select-demo">
-    <header><h3>Select</h3><p>Выбор одного или нескольких значений; Dropdown остаётся отдельным menu family.</p></header>
+    <header><h3>Select</h3><p>Выбор одного значения; Dropdown menu остаётся отдельным семейством команд.</p></header>
+    ${renderComponentDocumentation("select")}
     <section><h4>Sizes and types</h4><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
     ${formDiagnostics({
       component: "select",

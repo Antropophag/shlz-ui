@@ -1,0 +1,102 @@
+import assert from "node:assert/strict";
+import { access, readFile } from "node:fs/promises";
+import test from "node:test";
+
+import {
+  componentDocumentation,
+  renderComponentDocumentation,
+} from "../../apps/showcase/src/component-docs.js";
+
+const read = (path) => readFile(path, "utf8");
+const normalize = (value) => value.replaceAll(/\s+/g, " ").trim();
+
+test("Button and Select documentation expose the validated component-page contract", async () => {
+  assert.deepEqual(Object.keys(componentDocumentation), ["button", "select"]);
+
+  for (const [name, docs] of Object.entries(componentDocumentation)) {
+    for (const field of [
+      "status",
+      "purpose",
+      "use",
+      "avoid",
+      "dependencies",
+      "snippets",
+      "contract",
+      "accessibility",
+      "limitations",
+      "traceability",
+    ]) {
+      assert.ok(docs[field]?.length, `${name}.${field} must be documented`);
+    }
+    const rendered = renderComponentDocumentation(name);
+    assert.match(rendered, new RegExp(`data-component-docs="${name}"`));
+    assert.match(rendered, /Developer usage/);
+    assert.match(rendered, /Copyable usage/);
+    assert.match(rendered, /Public contract/);
+    assert.match(rendered, /Accessibility/);
+    assert.match(rendered, /Limitations/);
+
+    for (const [, path] of docs.traceability) await access(path);
+
+    const markdown = await read(`docs/components/${name}.md`);
+    for (const snippet of docs.snippets) {
+      assert.ok(
+        normalize(markdown).includes(normalize(snippet.code)),
+        `${name} Markdown must contain the ${snippet.id} Showcase snippet`,
+      );
+    }
+  }
+});
+
+test("Button copyable markup uses only the shipped native CSS contract", async () => {
+  const css = await read("packages/styles/components/button.css");
+  const html = componentDocumentation.button.snippets.find(
+    ({ id }) => id === "button-html",
+  ).code;
+
+  assert.match(html, /<button/);
+  assert.match(html, /type="button"/);
+  assert.match(html, /class="shlz-button shlz-button--primary"/);
+  assert.doesNotMatch(html, /shlz-button--visual-/);
+  assert.match(css, /\.shlz-button--primary/);
+});
+
+test("Select copyable markup and initialization match production exports", async () => {
+  const [fieldCss, selectCss, behavior, packageJson] = await Promise.all([
+    read("packages/styles/components/field.css"),
+    read("packages/styles/components/select.css"),
+    read("packages/behaviors/src/select.ts"),
+    read("packages/behaviors/package.json").then(JSON.parse),
+  ]);
+  const html = componentDocumentation.select.snippets.find(
+    ({ id }) => id === "select-html",
+  ).code;
+  const js = componentDocumentation.select.snippets.find(
+    ({ id }) => id === "select-js",
+  ).code;
+
+  assert.match(
+    html,
+    /class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select/,
+  );
+  assert.match(html, /<label class="shlz-field__label" for="request-type"/);
+  assert.match(html, /<select class="shlz-select" id="request-type"/);
+  assert.match(html, /class="shlz-field__indicator" aria-hidden="true"/);
+  assert.match(html, /class="shlz-field__icon"/);
+  assert.match(fieldCss, /\.shlz-field--select \.shlz-field__control/);
+  assert.match(selectCss, /\.shlz-selectbox__trigger/);
+
+  assert.match(js, /from "@shlz\/behaviors\/select"/);
+  assert.match(js, /enhanceSelects\(\)/);
+  assert.match(
+    js,
+    /function destroySelects\(\) \{\s+for \(const controller of controllers\) controller\.destroy\(\);\s+\}/,
+  );
+  assert.doesNotMatch(
+    js,
+    /const controllers = enhanceSelects\(\);\s+for \(const controller/,
+  );
+  assert.ok(packageJson.exports["./select"]);
+  assert.match(behavior, /export function enhanceSelects/);
+  assert.match(behavior, /destroy\(\): void/);
+});
