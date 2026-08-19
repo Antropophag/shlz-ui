@@ -77,7 +77,14 @@ test("base single Select uses the shared interactive popup", async ({
 test("documented components expose developer usage without mixing diagnostics", async ({
   page,
 }) => {
-  for (const name of ["button", "input", "textarea", "select"]) {
+  for (const name of [
+    "button",
+    "input",
+    "textarea",
+    "checkbox",
+    "radio",
+    "select",
+  ]) {
     const component = page.locator(`#${name}-demo`);
     const docs = component.locator(`[data-component-docs="${name}"]`);
     await expect(docs).toBeVisible();

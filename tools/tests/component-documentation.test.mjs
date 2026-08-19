@@ -15,6 +15,8 @@ test("documented components expose the validated component-page contract", async
     "button",
     "input",
     "textarea",
+    "checkbox",
+    "radio",
     "select",
   ]);
 
@@ -91,6 +93,32 @@ test("Input and Textarea snippets preserve native field semantics", async () => 
   ]) {
     assert.ok(css.includes(selector), `${selector} must be shipped`);
   }
+});
+
+test("Checkbox and Radio snippets keep native labeling and grouping", async () => {
+  const css = await read("packages/styles/components/choice.css");
+  const checkbox = componentDocumentation.checkbox.snippets.find(
+    ({ id }) => id === "checkbox-html",
+  ).code;
+  const radio = componentDocumentation.radio.snippets.find(
+    ({ id }) => id === "radio-html",
+  ).code;
+
+  assert.match(checkbox, /^<label class="shlz-choice">/);
+  assert.match(
+    checkbox,
+    /<input class="shlz-checkbox" type="checkbox" name="notifications" value="yes"/,
+  );
+  assert.match(radio, /^<fieldset>/);
+  assert.match(radio, /<legend>Режим<\/legend>/);
+  assert.equal(radio.match(/name="mode"/g)?.length, 2);
+  assert.deepEqual(
+    [...radio.matchAll(/value="([^"]+)"/g)].map((match) => match[1]),
+    ["standard", "advanced"],
+  );
+  assert.match(css, /\.shlz-checkbox--sm/);
+  assert.match(css, /\.shlz-checkbox:indeterminate/);
+  assert.match(css, /\.shlz-radio:checked/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

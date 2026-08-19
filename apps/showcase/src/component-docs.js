@@ -24,6 +24,23 @@ const textareaMarkup = `<label class="shlz-field shlz-field--textarea">
   </span>
 </label>`;
 
+const checkboxMarkup = `<label class="shlz-choice">
+  <input class="shlz-checkbox" type="checkbox" name="notifications" value="yes" />
+  <span>Получать уведомления</span>
+</label>`;
+
+const radioMarkup = `<fieldset>
+  <legend>Режим</legend>
+  <label class="shlz-choice">
+    <input class="shlz-radio" type="radio" name="mode" value="standard" checked />
+    <span>Стандартный</span>
+  </label>
+  <label class="shlz-choice">
+    <input class="shlz-radio" type="radio" name="mode" value="advanced" />
+    <span>Расширенный</span>
+  </label>
+</fieldset>`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -229,6 +246,112 @@ export const componentDocumentation = {
       ["Showcase", "apps/showcase/src/fidelity.js"],
       ["Source tests", "tools/tests/form-controls-source.test.mjs"],
       ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  checkbox: {
+    status: "Executable · Production example",
+    purpose:
+      "Native independent boolean choice with source-backed checked and mixed visuals.",
+    use: [
+      "Turn an independent option on or off, or select multiple items in a list.",
+      "Use the native indeterminate property only for a real mixed parent/child state.",
+    ],
+    avoid: [
+      "Use Radio for exactly one choice from a visible set and Switch for an immediate setting change.",
+      "Do not use indeterminate as a third submitted value; form submission remains checked or unchecked.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "checkbox-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "checkbox-html",
+        label: "HTML",
+        language: "html",
+        code: checkboxMarkup,
+      },
+    ],
+    contract: [
+      ["Label", "Native label.shlz-choice wraps the input and visible text."],
+      ["Value owner", "Native input.shlz-checkbox[type=checkbox]."],
+      ["Sizes", "Default 20px; add .shlz-checkbox--sm for 16px."],
+      [
+        "States",
+        "Native checked, disabled, focus-visible and indeterminate property.",
+      ],
+      ["Events", "Native input/change events; application owns state."],
+    ],
+    accessibility:
+      "The wrapping label supplies the accessible name and enlarges the hit target. Space toggles the focused native checkbox. Set mixed state through element.indeterminate. Checked submits the configured string value; unchecked submits no entry, so the consumer maps presence/value to its boolean model.",
+    limitations:
+      "Indeterminate is a DOM property, not a persistent HTML attribute or third form value. Validation messaging, parent/child selection policy and bulk-selection behavior are consumer-owned.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Checkbox.svg"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/choice.css"],
+      ["Documentation", "docs/components/checkbox.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+      ["Bundle contract tests", "tools/tests/components.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  radio: {
+    status: "Executable · Production example",
+    purpose:
+      "Native mutually exclusive choice grouped by a shared name and visible group label.",
+    use: [
+      "Choose exactly one value from a small set whose options should remain visible for comparison.",
+      "Group related radios with fieldset/legend and one shared name.",
+    ],
+    avoid: [
+      "Use Checkbox for independent boolean choices and Select for a long compact option list.",
+      "Do not manage mutual exclusion with custom application state instead of the native name group.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "radio-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      { id: "radio-html", label: "HTML", language: "html", code: radioMarkup },
+    ],
+    contract: [
+      ["Group", "Native fieldset with a visible legend."],
+      ["Option label", "Native label.shlz-choice wraps each input and text."],
+      ["Value owner", "Native input.shlz-radio[type=radio]."],
+      ["Grouping", "Every option in one group shares the same non-empty name."],
+      ["States", "Native checked, disabled and focus-visible."],
+    ],
+    accessibility:
+      "Fieldset/legend provides the group name; each wrapping label names its option. Arrow keys move within the native same-name group and Space selects the focused option. DOM order should match visual order.",
+    limitations:
+      "Only each 20px radio option is styled. Fieldset/legend reset and group layout, validation messaging and dynamic option descriptions are consumer-owned; no custom behavior layer is provided.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Radio.svg"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/choice.css"],
+      ["Documentation", "docs/components/radio.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+      ["Bundle contract tests", "tools/tests/components.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
     ],
   },
   select: {

@@ -580,6 +580,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="checkbox-demo">
     <header><h3>Checkbox</h3><p>Независимый выбор с native checked, disabled и indeterminate state.</p></header>
+    ${renderComponentDocumentation("checkbox")}
     <section><h4>Large</h4>${stateMatrix({
       columns: [
         { label: "Unchecked", state: "" },
@@ -604,6 +605,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="radio-demo">
     <header><h3>Radio</h3><p>Единственный выбор внутри native radio group.</p></header>
+    ${renderComponentDocumentation("radio")}
     <section><h4>States</h4>${stateMatrix({
       columns: [
         { label: "Default", state: "" },
