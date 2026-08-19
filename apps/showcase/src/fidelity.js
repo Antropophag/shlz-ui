@@ -545,6 +545,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="input-demo">
     <header><h3>Input</h3><p>Однострочное поле для ввода коротких текстовых значений.</p></header>
+    ${renderComponentDocumentation("input")}
     <div class="shlz-api-size-switch" role="group" aria-label="Input size"><button class="shlz-button shlz-button--primary shlz-button--sm" type="button" data-shlz-input-size="large" aria-pressed="true">Large</button><button class="shlz-button shlz-button--sm" type="button" data-shlz-input-size="medium" aria-pressed="false">Medium</button></div>
     <section><h4>States</h4><div data-shlz-input-size-panel="large">${inputStateMatrix("large")}</div><div data-shlz-input-size-panel="medium" hidden>${inputStateMatrix("medium")}</div></section>
     ${formDiagnostics({
@@ -556,6 +557,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="textarea-demo">
     <header><h3>Textarea</h3><p>Многострочное поле для ввода развёрнутого текста.</p></header>
+    ${renderComponentDocumentation("textarea")}
     <section><h4>States</h4>${textareaStateMatrix()}</section>
     <section><h4>Counter</h4><div class="shlz-api-example">${textareaField({ filled: true, count: true })}</div></section>
     ${formDiagnostics({

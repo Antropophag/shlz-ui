@@ -10,8 +10,13 @@ import {
 const read = (path) => readFile(path, "utf8");
 const normalize = (value) => value.replaceAll(/\s+/g, " ").trim();
 
-test("Button and Select documentation expose the validated component-page contract", async () => {
-  assert.deepEqual(Object.keys(componentDocumentation), ["button", "select"]);
+test("documented components expose the validated component-page contract", async () => {
+  assert.deepEqual(Object.keys(componentDocumentation), [
+    "button",
+    "input",
+    "textarea",
+    "select",
+  ]);
 
   for (const [name, docs] of Object.entries(componentDocumentation)) {
     for (const field of [
@@ -59,6 +64,33 @@ test("Button copyable markup uses only the shipped native CSS contract", async (
   assert.match(html, /class="shlz-button shlz-button--primary"/);
   assert.doesNotMatch(html, /shlz-button--visual-/);
   assert.match(css, /\.shlz-button--primary/);
+});
+
+test("Input and Textarea snippets preserve native field semantics", async () => {
+  const css = await read("packages/styles/components/field.css");
+  const input = componentDocumentation.input.snippets.find(
+    ({ id }) => id === "input-html",
+  ).code;
+  const textarea = componentDocumentation.textarea.snippets.find(
+    ({ id }) => id === "textarea-html",
+  ).code;
+
+  assert.match(input, /^<label class="shlz-field">/);
+  assert.match(input, /<input class="shlz-input" type="text" name="title"/);
+  assert.doesNotMatch(input, /shlz-field--visual-/);
+  assert.match(textarea, /<label class="shlz-field shlz-field--textarea">/);
+  assert.match(textarea, /<textarea class="shlz-textarea" name="comment"/);
+  assert.doesNotMatch(textarea, /\srows=/);
+  assert.doesNotMatch(textarea, /shlz-field--visual-/);
+
+  for (const selector of [
+    ".shlz-field__control",
+    ".shlz-input",
+    ".shlz-textarea",
+    ".shlz-field--textarea",
+  ]) {
+    assert.ok(css.includes(selector), `${selector} must be shipped`);
+  }
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

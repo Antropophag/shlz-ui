@@ -10,6 +10,20 @@ const buttonMarkup = `<button class="shlz-button shlz-button--primary" type="but
   Сохранить
 </button>`;
 
+const inputMarkup = `<label class="shlz-field">
+  <span class="shlz-field__label">Название</span>
+  <span class="shlz-field__control">
+    <input class="shlz-input" type="text" name="title" placeholder="Введите название" />
+  </span>
+</label>`;
+
+const textareaMarkup = `<label class="shlz-field shlz-field--textarea">
+  <span class="shlz-field__label">Комментарий</span>
+  <span class="shlz-field__control">
+    <textarea class="shlz-textarea" name="comment"></textarea>
+  </span>
+</label>`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -83,6 +97,138 @@ export const componentDocumentation = {
       ["Showcase", "apps/showcase/src/fidelity.js"],
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Browser tests", "tools/playwright/primitives.spec.js"],
+    ],
+  },
+  input: {
+    status: "Executable · Production example",
+    purpose:
+      "Labeled single-line native input inside the source-backed SHLZ field composition.",
+    use: [
+      "Collect a short value whose meaning is expressed by a persistent visible label.",
+      "Use the native input type and attributes that match the data being collected.",
+    ],
+    avoid: [
+      "Use Textarea for multi-line content and Select/Radio for predefined choices.",
+      "Do not use visual-state helpers or the source-only Advanced specimens as application API.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "input-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "input-html",
+        label: "HTML",
+        language: "html",
+        code: inputMarkup,
+      },
+    ],
+    contract: [
+      ["Root", "Native label.shlz-field."],
+      ["Control shell", ".shlz-field__control."],
+      [
+        "Value owner",
+        "Native input.shlz-input; consumer owns type, name and validation.",
+      ],
+      [
+        "Secondary row",
+        ".shlz-field__secondary contains an optional .shlz-field__message.",
+      ],
+      ["Size", "Default 40px; add .shlz-field--medium for 32px."],
+      ["States", "Native focus, disabled, readonly and aria-invalid."],
+    ],
+    accessibility:
+      "The wrapping native label names the input. Browser focus, editing, disabled and readonly behavior remain native. Connect validation/help text with aria-describedby and use aria-invalid only when invalid.",
+    limitations:
+      "No masking, formatting, clear-button behavior or async-validation API is shipped. Advanced source nodes remain diagnostic because their product meaning is unresolved.",
+    traceability: [
+      [
+        "Authoritative component set",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      ],
+      ["Source specification", "docs/components/form-controls-source-spec.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/field.css"],
+      ["Documentation", "docs/components/input.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Source tests", "tools/tests/form-controls-source.test.mjs"],
+      ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  textarea: {
+    status: "Executable · Production example",
+    purpose:
+      "Labeled native multi-line input using the source-backed Textarea field geometry.",
+    use: [
+      "Collect comments, descriptions or other content expected to span multiple lines.",
+      "Use maxlength and a counter only when the product has a real length constraint.",
+    ],
+    avoid: [
+      "Use Input for short single-line values and a rich-text editor for formatted content.",
+      "Do not render a static counter that is not synchronized with the native value.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "textarea-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "textarea-html",
+        label: "HTML",
+        language: "html",
+        code: textareaMarkup,
+      },
+    ],
+    contract: [
+      ["Root", "Native label.shlz-field.shlz-field--textarea."],
+      [
+        "Value owner",
+        "Native textarea.shlz-textarea; consumer owns name and validation.",
+      ],
+      [
+        "Secondary row",
+        ".shlz-field__secondary may contain message and counter.",
+      ],
+      [
+        "Error",
+        "Set aria-invalid on textarea and connect message with aria-describedby.",
+      ],
+      [
+        "States",
+        "Native focus, disabled, readonly and value; source-backed error styling.",
+      ],
+    ],
+    accessibility:
+      "The wrapping native label names the textarea. Native editing, focus, disabled and readonly behavior remain browser-owned. Error/help text needs a stable id referenced by aria-describedby; counters do not replace an accessible constraint.",
+    limitations:
+      "The design system styles but does not update counters, auto-grow content, enforce business limits or announce remaining characters. The current fixed-height shell clips native vertical resizing, so resize is not a supported layout contract.",
+    traceability: [
+      [
+        "Authoritative component set",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      ],
+      ["Source sheet", "shlz-design-source/raw/svg/Textarea.svg"],
+      ["Source specification", "docs/components/form-controls-source-spec.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/field.css"],
+      ["Documentation", "docs/components/textarea.md"],
+      ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Source tests", "tools/tests/form-controls-source.test.mjs"],
+      ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
     ],
   },
   select: {

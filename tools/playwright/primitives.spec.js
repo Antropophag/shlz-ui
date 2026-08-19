@@ -74,10 +74,10 @@ test("base single Select uses the shared interactive popup", async ({
   await expect(trigger).toHaveText("Second option");
 });
 
-test("Button and Select expose developer usage without mixing diagnostics", async ({
+test("documented components expose developer usage without mixing diagnostics", async ({
   page,
 }) => {
-  for (const name of ["button", "select"]) {
+  for (const name of ["button", "input", "textarea", "select"]) {
     const component = page.locator(`#${name}-demo`);
     const docs = component.locator(`[data-component-docs="${name}"]`);
     await expect(docs).toBeVisible();
