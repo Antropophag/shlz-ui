@@ -22,7 +22,7 @@ Repository-wide classification also records native ownership and local alternati
 
 Authority is `Buttons.svg`. Source facts cover 40/32/26px sizes, primary/secondary/text, label/icon composition, default/hover/active/disabled paint, padding, 8px icon gap, pill radius and recovered typography. Native `<button>` owns pointer, Enter, Space, disabled, programmatic click and form type; SHLZ adds no controller. Browser evidence counts exactly one click for each pointer, Enter, Space and `.click()` activation and zero for disabled. Data Workspace filter/reset/apply/bulk actions and overlay actions remain application-owned consumers.
 
-Finding `button-narrow-content-overflow` (P2) was closed by a maximum inline constraint and emergency wrapping for long content; normal source geometry is unchanged. Focused evidence combines exact computed size/focus assertions with a local icon/state snapshot.
+Finding `button-narrow-content-overflow` (P2) was closed by a maximum inline constraint and emergency wrapping for long content; normal source geometry is unchanged. A post-review P1 regression, `button-primary-interaction-contrast`, exposed that the shared hover/active foreground overrode primary inverse text and produced blue text on blue fills. Primary hover and active now explicitly retain inverse text, proven through real pointer hover/press assertions. Focused evidence combines exact computed size/focus/state assertions with a local icon/state snapshot.
 
 ### Link — VERIFIED
 

@@ -54,6 +54,11 @@ test("Button preserves native activation, disabled and event ownership", async (
   await page.keyboard.press("Space");
   await button.evaluate((element) => element.click());
   await expect(button).toHaveAttribute("data-clicks", "4");
+  await button.hover();
+  await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
+  await page.mouse.down();
+  await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
+  await page.mouse.up();
 
   await disabled.evaluate((element) => {
     element.dataset.clicks = "0";

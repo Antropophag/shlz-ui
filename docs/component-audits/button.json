@@ -72,7 +72,7 @@
     "structural-contract": "pass: native button markup, shipped CSS classes and clean package consumption are exercised",
     "runtime-browser": "pass: pointer, Enter, Space and programmatic click each emit exactly one click; disabled emits none",
     "accessibility": "pass: native button role/name, focus-visible, disabled focus exclusion and absence of nested interactive content are browser-checked",
-    "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus",
+    "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus; browser assertions preserve inverse primary hover/active text",
     "consumer-integration": "pass: Data Workspace reset/apply/filter actions and overlay actions execute application-owned state/lifecycle",
     "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
   },
@@ -83,6 +83,14 @@
       "severity": "P2",
       "status": "resolved-wave3",
       "description": "Long labels could exceed a narrow component container because the inline-flex shell had no maximum inline constraint.",
+      "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
+      "tracking": "docs/component-audits/wave-3-report.md"
+    },
+    {
+      "id": "button-primary-interaction-contrast",
+      "severity": "P1",
+      "status": "resolved-wave3-review",
+      "description": "The shared Button hover/active color overrode primary inverse text, producing blue text on blue fills during real interaction.",
       "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
       "tracking": "docs/component-audits/wave-3-report.md"
     }

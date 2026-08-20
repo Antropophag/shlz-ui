@@ -382,7 +382,7 @@
         "structural-contract": "pass: native button markup, shipped CSS classes, documentation and clean package consumption are exercised",
         "runtime-browser": "pass: pointer, Enter, Space and programmatic activation each emit exactly one click; disabled emits none",
         "accessibility": "pass: native role/name, focus-visible, disabled focus exclusion and no nested interactive content are browser-checked",
-        "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus",
+        "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus; real hover/active assertions preserve inverse primary text",
         "consumer-integration": "pass: Data Workspace reset/apply/filter and overlay actions execute application-owned state/lifecycle",
         "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
       },
