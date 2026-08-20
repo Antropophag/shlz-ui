@@ -308,7 +308,7 @@ test("outside dismissal, Tab, disabled options and multiple instances remain saf
   await expect(secondTrigger).toHaveAttribute("aria-expanded", "false");
 
   const disabledTrigger = roots.nth(4).locator(".shlz-select__trigger");
-  await disabledTrigger.click({ force: true });
+  await disabledTrigger.evaluate((element) => element.click());
   await expect(disabledTrigger).toHaveAttribute("aria-expanded", "false");
 
   await firstTrigger.focus();
@@ -323,7 +323,7 @@ test("outside dismissal, Tab, disabled options and multiple instances remain saf
   const disabled = workspace.getByRole("option", { name: "Архивная" });
   await workspaceTrigger.click();
   await expect(disabled).toHaveAttribute("tabindex", "-1");
-  await disabled.click({ force: true });
+  await disabled.evaluate((element) => element.click());
   await expect(workspace.locator('input[type="hidden"]')).toHaveValue("");
   await expect(workspaceTrigger).toHaveAttribute("aria-expanded", "true");
 });
