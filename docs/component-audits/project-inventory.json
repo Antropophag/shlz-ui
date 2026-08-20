@@ -1,0 +1,1732 @@
+{
+  "schemaVersion": 2,
+  "baseline": {
+    "sha": "3c1f10ba51a8b341126183d3338d53b711420795",
+    "measuredAt": "2026-08-20",
+    "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
+  },
+  "measuredCountsContract": "measured_counts records DOM roots observed by the baseline census; occurrence arrays list repository surfaces and therefore are not cardinality-equivalent. Component audit manifests provide occurrence-level enumeration when a family enters verification.",
+  "statuses": ["UNAUDITED", "INVENTORIED", "VERIFIED", "FINDINGS"],
+  "evidenceLevels": [
+    "source-integrity",
+    "structural-contract",
+    "runtime-browser",
+    "accessibility",
+    "focused-visual",
+    "consumer-integration",
+    "responsive-content-stress"
+  ],
+  "families": [
+    {
+      "tests": [
+        "tools/tests/generators.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source tests",
+        "structural-contract": "generator/validation",
+        "runtime-browser": "broad foundation page",
+        "accessibility": "gap",
+        "focused-visual": "gap",
+        "consumer-integration": "package smoke",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Tokens",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Colors.svg",
+        "shlz-design-source/raw/svg/Spacing.svg"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/tokens/provenance.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["packages/styles/components/"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["color groups", "spacing scale", "radii", "effects"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/typography-profiles.test.mjs",
+        "tools/playwright/typography-profiles.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "structural extraction",
+        "structural-contract": "source tests",
+        "runtime-browser": "profile switching",
+        "accessibility": "gap",
+        "focused-visual": "one compatibility snapshot",
+        "consumer-integration": "Showcase only",
+        "responsive-content-stress": "long-content browser test"
+      },
+      "canonical_name": "Typography profiles",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+      ],
+      "production_implementation": ["packages/styles/typography-profiles.css"],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/fira-sans.css"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["Golos default", "Fira compatibility", "long content"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/basic-icons-normalization.test.mjs",
+        "tools/tests/generators.test.mjs",
+        "tools/playwright/icons.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "hash and paint tests",
+        "structural-contract": "sprite/API tests",
+        "runtime-browser": "catalog resolution",
+        "accessibility": "gap per use",
+        "focused-visual": "catalog snapshots, not every glyph",
+        "consumer-integration": "indirect",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Icons",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Icons.svg"],
+      "production_implementation": [
+        "packages/icons/normalized/",
+        "tools/generate.mjs"
+      ],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["packages/styles/components/", "apps/showcase/src/"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "16/20/24/40",
+        "currentColor",
+        "preserved color",
+        "default/hover icon families"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 1
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/components.test.mjs",
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source test",
+        "structural-contract": "CSS/source tests",
+        "runtime-browser": "native activation incidental",
+        "accessibility": "focus-only",
+        "focused-visual": "focused and broad snapshots",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Button",
+      "category": "actions-navigation",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Buttons.svg"],
+      "production_implementation": ["packages/styles/components/button.css"],
+      "behavior": [],
+      "docs": ["docs/components/button.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js",
+        "tools/fixtures/plain-html.html"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "small/medium/large",
+        "primary/secondary/text",
+        "label/icon",
+        "default/hover/active/disabled",
+        "focus"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 73,
+        "liveConsumers": 3,
+        "dataWorkspace": 3,
+        "inertDiagnostics": 48,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/form-controls-source.test.mjs",
+        "tools/playwright/primitives.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source matrix test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "incidental",
+        "accessibility": "native semantics only",
+        "focused-visual": "broad page only",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Input",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Select.svg",
+        "shlz-design-source/raw/svg/Input Number.svg"
+      ],
+      "production_implementation": ["packages/styles/components/field.css"],
+      "behavior": [],
+      "docs": ["docs/components/input.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "medium/large",
+        "empty/filled",
+        "default/hover/focus/disabled/error",
+        "number actions"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 50,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/form-controls-source.test.mjs",
+        "tools/playwright/fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "complete matrix test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "gap",
+        "accessibility": "native semantics only",
+        "focused-visual": "gap",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Textarea",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Textarea.svg"],
+      "production_implementation": ["packages/styles/components/field.css"],
+      "behavior": [],
+      "docs": ["docs/components/textarea.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "empty/filled",
+        "default/hover/focused/disabled/error",
+        "counter shown/hidden",
+        "long content"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 12,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 26,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/select-closed-shell.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "applicable/pass",
+        "structural-contract": "applicable/pass",
+        "runtime-browser": "applicable/pass",
+        "accessibility": "applicable/pass with tracked shared contrast deviation",
+        "focused-visual": "applicable/pass",
+        "consumer-integration": "applicable/pass",
+        "responsive-content-stress": "applicable/pass"
+      },
+      "canonical_name": "Select",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Select.svg",
+        "shlz-design-source/raw/svg/Dropdown menu.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/field.css",
+        "packages/behaviors/src/select.ts"
+      ],
+      "behavior": ["packages/behaviors/src/select.ts"],
+      "docs": ["docs/components/select.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "medium/large",
+        "default/hover/focus/disabled/opened/selected",
+        "long value",
+        "narrow viewport"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 7,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/primitives.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "matrix test",
+        "structural-contract": "CSS test",
+        "runtime-browser": "native state test",
+        "accessibility": "partial",
+        "focused-visual": "broad fixture",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Checkbox",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Checkbox.svg"],
+      "production_implementation": ["packages/styles/components/choice.css"],
+      "behavior": [],
+      "docs": ["docs/components/checkbox.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "medium/large",
+        "checked/unchecked/indeterminate",
+        "disabled",
+        "focus"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 8,
+        "liveConsumers": 4,
+        "dataWorkspace": 4,
+        "inertDiagnostics": 15,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "matrix test",
+        "structural-contract": "CSS test",
+        "runtime-browser": "native state test",
+        "accessibility": "partial",
+        "focused-visual": "broad fixture",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Radio",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Radio.svg"],
+      "production_implementation": ["packages/styles/components/choice.css"],
+      "behavior": [],
+      "docs": ["docs/components/radio.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["selected/unselected", "disabled", "focus"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 2,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 11,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "matrix test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "native checked test",
+        "accessibility": "partial",
+        "focused-visual": "focused snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Switch",
+      "category": "form-controls",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Switch.svg"],
+      "production_implementation": ["packages/styles/components/choice.css"],
+      "behavior": [],
+      "docs": ["docs/components/switch.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["small/medium", "on/off", "disabled", "label/no label"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 3,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-wave2.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "four-state test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "native link incidental",
+        "accessibility": "partial",
+        "focused-visual": "focused snapshot",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Link",
+      "category": "actions-navigation",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Link.svg"],
+      "production_implementation": ["packages/styles/components/link.css"],
+      "behavior": [],
+      "docs": ["docs/components/link.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["default/hover/pressed/disabled", "focus", "long content"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 4,
+        "liveConsumers": 3,
+        "dataWorkspace": 3,
+        "inertDiagnostics": 4,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/segment-source.test.mjs",
+        "tools/playwright/components-next.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "group/item tests",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "native radio test",
+        "accessibility": "partial",
+        "focused-visual": "representative snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Segment",
+      "category": "actions-navigation",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Segment.svg"],
+      "production_implementation": ["packages/styles/components/segment.css"],
+      "behavior": [],
+      "docs": ["docs/components/segment.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "small/medium/large",
+        "selected/unselected/disabled",
+        "icon/label",
+        "focus"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 3,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 6,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/tabs-source.test.mjs",
+        "tools/playwright/components-next.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "family test",
+        "structural-contract": "controller test",
+        "runtime-browser": "keyboard test",
+        "accessibility": "ARIA/roving tabindex test",
+        "focused-visual": "representative snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Tabs",
+      "category": "actions-navigation",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Tabs.svg"],
+      "production_implementation": [
+        "packages/styles/components/tabs.css",
+        "packages/behaviors/src/tabs.ts"
+      ],
+      "behavior": ["packages/behaviors/src/tabs.ts"],
+      "docs": ["docs/components/tabs.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "underline/pill/boxed",
+        "default/selected/hover/disabled",
+        "focus"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 4,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 3,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/pagination-source.test.mjs",
+        "tools/playwright/pagination-contract.spec.js",
+        "tools/playwright/pagination-typography.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source test",
+        "structural-contract": "docs/contract test",
+        "runtime-browser": "URL ownership test",
+        "accessibility": "native navigation test",
+        "focused-visual": "bounded visual comparison: 1,750-pixel absolute raster budget; computed typography assertions pass",
+        "consumer-integration": "dedicated Showcase consumer",
+        "responsive-content-stress": "narrow browser test"
+      },
+      "canonical_name": "Pagination",
+      "category": "actions-navigation",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Pagination.svg",
+        "shlz-design-source/raw/svg/Pagination (1).svg",
+        "shlz-design-source/raw/svg/Pagination (2).svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/pagination.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/pagination.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/pagination-consumer.js"
+      ],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "wide/compact",
+        "current/default/hover/pressed/disabled",
+        "boundary",
+        "narrow wrap",
+        "typography"
+      ],
+      "known_findings": [
+        {
+          "id": "pagination-typography-raster-drift",
+          "severity": "P2",
+          "status": "resolved-wave0",
+          "description": "Baseline snapshot differed by 1,722 stable glyph-edge pixels across eight local captures while the computed typography contract passed. The test now states that it is bounded visual evidence and uses a 1,750-pixel absolute budget; Playwright cannot classify the cause of every accepted pixel. The snapshot is unchanged.",
+          "evidence": "tools/playwright/pagination-typography.spec.js",
+          "tracking": "docs/repository-ui-inventory-2026-08-20.md"
+        }
+      ],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 3,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "matrix test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "not applicable: presentational",
+        "accessibility": "text-owned semantics partial",
+        "focused-visual": "broad fixture",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Status",
+      "category": "status-content",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Status.svg"],
+      "production_implementation": [
+        "packages/styles/components/status-badge.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/status.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["request statuses", "detail statuses", "color/text variants"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 13,
+        "liveConsumers": 3,
+        "dataWorkspace": 3,
+        "inertDiagnostics": 13,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "matrix test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "not applicable: presentational",
+        "accessibility": "gap",
+        "focused-visual": "broad fixture",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Badge",
+      "category": "status-content",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Bage.svg"],
+      "production_implementation": [
+        "packages/styles/components/status-badge.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/badge.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "count/dot",
+        "small/medium",
+        "blue/invert/gray",
+        "single/multiple digit"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 10,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 3,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/tag-source.test.mjs",
+        "tools/playwright/components-next.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "family test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "partial removal ownership",
+        "accessibility": "partial",
+        "focused-visual": "representative snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Tag",
+      "category": "status-content",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Tag.svg"],
+      "production_implementation": ["packages/styles/components/tag.css"],
+      "behavior": [],
+      "docs": ["docs/components/tag.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["filled/outlined", "removable", "long content"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 4,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/tag-source.test.mjs",
+        "tools/playwright/review.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "family separation test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "gap",
+        "accessibility": "partial",
+        "focused-visual": "focused review snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Person Tag",
+      "category": "status-content",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Tag.svg"],
+      "production_implementation": ["packages/styles/components/tag.css"],
+      "behavior": [],
+      "docs": ["docs/components/person-tag.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["default/closable", "avatar", "long name"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 2,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 2,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave3-source.test.mjs",
+        "tools/playwright/wave3.spec.js",
+        "tools/playwright/review.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "12-variant test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "not applicable: presentational",
+        "accessibility": "alt contract partial",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "partial"
+      },
+      "canonical_name": "Avatar",
+      "category": "status-content",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Avatar.svg"],
+      "production_implementation": ["packages/styles/components/avatar.css"],
+      "behavior": [],
+      "docs": ["docs/components/avatar.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["24/32/40/64", "image/text/icon", "broken/long content"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 14,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 8,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave3-source.test.mjs",
+        "tools/playwright/wave3.spec.js",
+        "tools/playwright/review.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "axes test",
+        "structural-contract": "CSS/docs",
+        "runtime-browser": "consumer search/sort",
+        "accessibility": "partial semantic table",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "Data Workspace",
+        "responsive-content-stress": "partial"
+      },
+      "canonical_name": "Table",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Table Cell.svg",
+        "shlz-design-source/raw/svg/Table.svg"
+      ],
+      "production_implementation": ["packages/styles/components/table.css"],
+      "behavior": [],
+      "docs": ["docs/components/table.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "header/row",
+        "49 cell variants",
+        "sort/filter",
+        "hover/pressed/typing",
+        "empty",
+        "narrow/long content"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 2,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 1,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source-derived structural test",
+        "structural-contract": "CSS/actions test",
+        "runtime-browser": "browser target test",
+        "accessibility": "partial",
+        "focused-visual": "geometry assertions, no focused snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "long filename test"
+      },
+      "canonical_name": "File Row",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
+      "production_implementation": ["packages/styles/components/file-row.css"],
+      "behavior": [],
+      "docs": ["docs/components/file-row.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "default/hover/error",
+        "upload/progress",
+        "long filename",
+        "independent actions"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 6,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "additive composition test",
+        "structural-contract": "CSS test",
+        "runtime-browser": "browser layout test",
+        "accessibility": "partial",
+        "focused-visual": "metadata-rich snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "fluid list test"
+      },
+      "canonical_name": "Document Row",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
+      "production_implementation": [
+        "packages/styles/components/document-row.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/document-row.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "compact/metadata-rich",
+        "default/hover",
+        "long title",
+        "narrow list"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 7,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "composition test",
+        "structural-contract": "CSS test",
+        "runtime-browser": "not applicable: composition",
+        "accessibility": "partial",
+        "focused-visual": "focused snapshot",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "browser test"
+      },
+      "canonical_name": "Empty State",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+      ],
+      "production_implementation": [
+        "packages/styles/components/empty-state.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/empty-state.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "simple/customize/basic",
+        "optional visual/description/actions",
+        "narrow"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 4,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/dropdown-source.test.mjs",
+        "tools/playwright/dropdown.spec.js",
+        "tools/playwright/dropdown-fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source tests",
+        "structural-contract": "controller tests",
+        "runtime-browser": "keyboard/dismiss tests",
+        "accessibility": "menu semantics partial",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "plain HTML only",
+        "responsive-content-stress": "scroll test"
+      },
+      "canonical_name": "Dropdown Menu",
+      "category": "floating-ui",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Dropdown menu.svg"],
+      "production_implementation": [
+        "packages/styles/components/dropdown.css",
+        "packages/behaviors/src/dropdown.ts"
+      ],
+      "behavior": ["packages/behaviors/src/dropdown.ts"],
+      "docs": ["docs/components/dropdown-menu.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "2-8/search/status/scrollbar items",
+        "default/hover/selected/disabled/red",
+        "keyboard/open/dismiss",
+        "long scroll"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 3,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 1
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/remediation-wave2.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "placement test",
+        "structural-contract": "CSS/controller",
+        "runtime-browser": "interaction test",
+        "accessibility": "describedby test",
+        "focused-visual": "placement snapshots",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Tooltip",
+      "category": "floating-ui",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Tooltip.svg"],
+      "production_implementation": [
+        "packages/styles/components/tooltip.css",
+        "packages/behaviors/src/tooltip.ts"
+      ],
+      "behavior": ["packages/behaviors/src/tooltip.ts"],
+      "docs": ["docs/components/tooltip.md"],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["8 placements", "hover/focus/Escape", "long text"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/popover.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "placement test",
+        "structural-contract": "controller/floating tests",
+        "runtime-browser": "complete lifecycle tests",
+        "accessibility": "keyboard order test",
+        "focused-visual": "placement snapshots",
+        "consumer-integration": "plain HTML",
+        "responsive-content-stress": "viewport edge test"
+      },
+      "canonical_name": "Popover",
+      "category": "floating-ui",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Popover.svg"],
+      "production_implementation": [
+        "packages/styles/components/popover.css",
+        "packages/behaviors/src/popover.ts"
+      ],
+      "behavior": ["packages/behaviors/src/popover.ts"],
+      "docs": ["docs/components/popover.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "tools/fixtures/plain-html.html"
+      ],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "12 placements",
+        "open/dismiss",
+        "edge/scroll/resize",
+        "interactive content"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 8,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "five-component test",
+        "structural-contract": "native dialog tests",
+        "runtime-browser": "lifecycle tests",
+        "accessibility": "focus/Escape tests",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "plain HTML",
+        "responsive-content-stress": "long content test"
+      },
+      "canonical_name": "Modal",
+      "category": "overlays",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Modal.svg"],
+      "production_implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "behavior": ["packages/behaviors/src/modal.ts"],
+      "docs": ["docs/components/modal.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "tools/fixtures/plain-html.html"
+      ],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "basic/info/success/warning/error",
+        "structured/compact",
+        "open/close/Escape/backdrop",
+        "long content",
+        "nested popover"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 2,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 1
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "tools/playwright/consumer-workspace.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "source region test",
+        "structural-contract": "native dialog tests",
+        "runtime-browser": "lifecycle tests",
+        "accessibility": "focus/Escape tests",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "Data Workspace/plain HTML",
+        "responsive-content-stress": "narrow test"
+      },
+      "canonical_name": "Drawer",
+      "category": "overlays",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Drawer.svg"],
+      "production_implementation": [
+        "packages/styles/components/drawer.css",
+        "packages/behaviors/src/drawer.ts"
+      ],
+      "behavior": ["packages/behaviors/src/drawer.ts"],
+      "docs": ["docs/components/drawer.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/consumer-workspace.js",
+        "tools/fixtures/plain-html.html"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "right/open/closed",
+        "dismissible/non-dismissible",
+        "long content",
+        "narrow viewport",
+        "nested Select"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 1
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/notification-source.test.mjs",
+        "tools/playwright/notification-contract.spec.js",
+        "tools/playwright/fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "three-variant test",
+        "structural-contract": "docs/source test",
+        "runtime-browser": "consumer lifecycle test",
+        "accessibility": "role/focus test",
+        "focused-visual": "focused snapshots",
+        "consumer-integration": "dedicated Showcase consumer",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Notification",
+      "category": "messaging",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Notification.svg"],
+      "production_implementation": [
+        "packages/styles/components/notification.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/components/notification.md"],
+      "executable_fixtures": [],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/notification-consumer.js"
+      ],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "default/error/with button",
+        "light/danger",
+        "close/action",
+        "focus return"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 2,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 10,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/notification-source.test.mjs",
+        "tools/playwright/fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "six-variant test",
+        "structural-contract": "CSS only",
+        "runtime-browser": "gap: countdown explicitly static",
+        "accessibility": "gap",
+        "focused-visual": "broad static matrix",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Snackbar",
+      "category": "messaging",
+      "implementation_status": "diagnostic-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Notification.svg"],
+      "production_implementation": [
+        "packages/styles/components/notification.css"
+      ],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["countdown 5/4/3/2/1/0", "loading", "close"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 6,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [],
+      "evidence": {
+        "source-integrity": "indexed source only",
+        "structural-contract": "gap",
+        "runtime-browser": "gap",
+        "accessibility": "gap",
+        "focused-visual": "gap",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Date Picker / Calendar",
+      "category": "form-controls",
+      "implementation_status": "source-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Date-Picker.svg",
+        "shlz-design-source/raw/svg/Calendar.svg"
+      ],
+      "production_implementation": [],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": [],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "medium/large",
+        "single/range",
+        "empty/filled",
+        "default/hover/focused/disabled",
+        "month cells/range/today"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": ["tools/playwright/showcase-navigation.spec.js"],
+      "evidence": {
+        "source-integrity": "indexed source only",
+        "structural-contract": "application-local CSS",
+        "runtime-browser": "sidebar keyboard test",
+        "accessibility": "partial",
+        "focused-visual": "page-level only",
+        "consumer-integration": "Showcase shell",
+        "responsive-content-stress": "two desktop viewports only"
+      },
+      "canonical_name": "Sidebar / Application Shell",
+      "category": "application-compositions",
+      "implementation_status": "application-local",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Sidebar.svg",
+        "shlz-design-source/raw/svg/Header.svg"
+      ],
+      "production_implementation": ["apps/showcase/src/showcase.css"],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/main.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "opened/closed sidebar",
+        "active/default menu item",
+        "header default/hover/typing/filled",
+        "desktop/narrow"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 1
+      }
+    },
+    {
+      "tests": [],
+      "evidence": {
+        "source-integrity": "raw SVG only",
+        "structural-contract": "gap",
+        "runtime-browser": "gap",
+        "accessibility": "gap",
+        "focused-visual": "gap",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Card compositions",
+      "category": "application-compositions",
+      "implementation_status": "source-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Card with button.svg",
+        "shlz-design-source/raw/svg/Reports card.svg",
+        "shlz-design-source/raw/svg/Cover.svg"
+      ],
+      "production_implementation": [],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": [],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["content/image/actions", "report/card/cover variants"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": ["tools/tests/content-states.test.mjs"],
+      "evidence": {
+        "source-integrity": "indexed source only",
+        "structural-contract": "partial via File/Document Row",
+        "runtime-browser": "partial",
+        "accessibility": "gap",
+        "focused-visual": "gap",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "partial"
+      },
+      "canonical_name": "Upload / Document compositions",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Documents.svg",
+        "shlz-design-source/raw/svg/Detailed appeals.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/file-row.css",
+        "packages/styles/components/document-row.css"
+      ],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "Document",
+        "Upload-Drag",
+        "Description Files",
+        "Small document",
+        "Attached Document",
+        "Drag and Drop Document"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 2
+      }
+    },
+    {
+      "tests": [],
+      "evidence": {
+        "source-integrity": "indexed source only",
+        "structural-contract": "gap",
+        "runtime-browser": "gap",
+        "accessibility": "gap",
+        "focused-visual": "gap",
+        "consumer-integration": "gap",
+        "responsive-content-stress": "gap"
+      },
+      "canonical_name": "Messaging / History / Planner compositions",
+      "category": "application-compositions",
+      "implementation_status": "source-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Messages.svg",
+        "shlz-design-source/raw/svg/History of changes.svg",
+        "shlz-design-source/raw/svg/Planner.svg"
+      ],
+      "production_implementation": [],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": [],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "history content",
+        "employees",
+        "events",
+        "text editor",
+        "messages",
+        "attachments"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": ["tools/playwright/consumer-workspace.spec.js"],
+      "evidence": {
+        "source-integrity": "indexed source only",
+        "structural-contract": "generic Table only",
+        "runtime-browser": "generic consumer only",
+        "accessibility": "gap per domain table",
+        "focused-visual": "gap",
+        "consumer-integration": "partial",
+        "responsive-content-stress": "partial"
+      },
+      "canonical_name": "Domain table compositions",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Managing appeals.svg",
+        "shlz-design-source/raw/svg/Form constructor.svg",
+        "shlz-design-source/raw/svg/Table.svg"
+      ],
+      "production_implementation": ["packages/styles/components/table.css"],
+      "behavior": [],
+      "docs": [],
+      "executable_fixtures": [],
+      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "appeals/statuses/organizations/profiles/categories/fields/assignment/dictionaries tables",
+        "header/row/hover/active/dots"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 9
+      }
+    }
+  ],
+  "unclassifiedSurfaces": [
+    "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
+    "Date Picker/Calendar has authoritative source scope but no reusable implementation or executable fixture.",
+    "Source-only messaging, history, planner, upload and domain-table compositions have not been promoted to reusable APIs.",
+    "Most non-Select executable Showcase roots lack stable data-component-audit-id classification.",
+    "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
+    "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."
+  ],
+  "contract": "docs/component-audits/manifest-contract.md",
+  "implementationStatuses": [
+    "reusable",
+    "composition-only",
+    "source-only",
+    "diagnostic-only",
+    "application-local",
+    "unsupported"
+  ]
+}

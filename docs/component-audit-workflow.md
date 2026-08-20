@@ -3,25 +3,32 @@
 This is the required, repeatable workflow before a UI component may be reported
 as fixed, complete, production-ready, review-ready, or a finished side quest.
 
-1. **Baseline:** record branch/head, diff scope, CI, review threads, and existing
+1. **Project inventory:** locate the family in
+   `docs/component-audits/project-inventory.json`, including its independent
+   implementation and audit statuses. Add newly discovered families first.
+2. **Baseline:** record branch/head, diff scope, CI, review threads, and existing
    failures.
-2. **Occurrences:** inventory the repository and classify executable fixtures,
+3. **Component manifest:** create or update the component-specific contract
+   described in `docs/component-audits/manifest-contract.md`.
+4. **Occurrences:** inventory the repository and classify executable fixtures,
    live consumers, inert diagnostics, and legacy/native substitutes in
    `docs/component-audits/<component>.json`.
-3. **Source:** inspect the authoritative original SVG. Classify claims as
+5. **Occurrence guard:** add stable audit IDs to this component's executable
+   roots and connect its focused browser spec to the shared guard.
+6. **Source:** inspect the authoritative original SVG. Classify claims as
    `source-fact`, `derived-pattern`, `repository-decision`, or `assumption`.
-4. **Contract:** record applicable sizes, states, content stress, keyboard,
+7. **Contract:** record applicable sizes, states, content stress, keyboard,
    focus, events, and unsupported modes. Default/closed is never a proxy for the
    whole component.
-5. **Implementation:** review styles, public API, lifecycle, accessibility, and
+8. **Implementation:** review styles, public API, lifecycle, accessibility, and
    every executable occurrence.
-6. **Consumer:** when a real application consumer exists, exercise at least one
+9. **Consumer:** when a real application consumer exists, exercise at least one
    in browser integration coverage. Data Workspace is a consumer, not gallery.
-7. **Evidence:** collect each applicable evidence level below.
-8. **Verify:** run relevant unit, lint, build, browser, and visual checks and
-   inspect focused snapshot changes.
-9. **Report:** give exact observed counts, scope, limitations, blockers, CI,
-   review-thread state, and a component-specific completion status.
+10. **Evidence:** collect each applicable evidence level below.
+11. **Verify:** run relevant unit, lint, build, browser, and visual checks and
+    inspect focused snapshot changes.
+12. **Report:** give exact observed counts, scope, limitations, blockers, CI,
+    review-thread state, and a component-specific completion status.
 
 ## Evidence hierarchy
 
@@ -38,6 +45,12 @@ Evidence levels prove different claims and cannot substitute for each other:
 
 Mark a level `not-applicable` only with a reason. Structural regexes never prove
 runtime behavior, and a broad page screenshot never proves component fidelity.
+Browser or visual failures are blocking CI evidence and must not be hidden by a
+green aggregate workflow.
+
+`INVENTORIED` is discovery state, not quality approval. Historical labels such
+as `done`, `source-migrated`, or `production-ready` never imply `VERIFIED`.
+Only the complete component gate may set `VERIFIED`.
 
 ## Pre-existing cross-component deviations
 

@@ -1,14 +1,12 @@
 import { expect, test } from "@playwright/test";
-import { readFile } from "node:fs/promises";
-import { fileURLToPath, URL } from "node:url";
+import { URL } from "node:url";
+import {
+  expectClassifiedComponentOccurrences,
+  readComponentAuditManifest,
+} from "./component-audit.js";
 
-const auditManifest = JSON.parse(
-  await readFile(
-    fileURLToPath(
-      new URL("../../docs/component-audits/select.json", import.meta.url),
-    ),
-    "utf8",
-  ),
+const auditManifest = await readComponentAuditManifest(
+  new URL("../../docs/component-audits/select.json", import.meta.url),
 );
 
 test.beforeEach(async ({ page }) => {
@@ -18,31 +16,10 @@ test.beforeEach(async ({ page }) => {
 test("every executable Showcase Select uses the reusable contract", async ({
   page,
 }) => {
-  const inventory = await page.evaluate((manifest) => {
-    const roots = [...document.querySelectorAll(manifest.rootSelector)];
-    const occurrences = roots.map((root) => root.dataset.componentAuditId);
-    const legacy = manifest.legacySelectors.flatMap((selector) =>
-      [...document.querySelectorAll(selector)].map((element) => ({
-        selector,
-        diagnostic: manifest.diagnosticBoundaries.some((boundary) =>
-          element.closest(boundary),
-        ),
-      })),
-    );
-    return {
-      occurrences,
-      unclassifiedLegacy: legacy.filter(({ diagnostic }) => !diagnostic),
-      diagnosticLegacy: legacy.filter(({ diagnostic }) => diagnostic).length,
-    };
-  }, auditManifest);
-
-  const expectedIds = auditManifest.occurrences.map(({ id }) => id).sort();
-  expect(inventory.occurrences.every(Boolean)).toBe(true);
-  expect(new Set(inventory.occurrences).size).toBe(
-    inventory.occurrences.length,
+  const inventory = await expectClassifiedComponentOccurrences(
+    page,
+    auditManifest,
   );
-  expect(inventory.occurrences.sort()).toEqual(expectedIds);
-  expect(inventory.unclassifiedLegacy).toEqual([]);
   expect(inventory.diagnosticLegacy).toBeGreaterThan(0);
 });
 
