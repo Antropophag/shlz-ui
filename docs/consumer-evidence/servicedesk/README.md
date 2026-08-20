@@ -70,3 +70,8 @@ They do not justify promoting application dimensions such as a 260px sidebar or
 No source binary or application implementation was imported into a public SHLZ
 UI package. `manifest.json` records hashes of the selected inspected evidence so
 a future review can verify that evidence set.
+
+The original delivered application is intentionally not vendored here. Hash
+verification therefore requires separately retained access to that delivery;
+the repository preserves provenance metadata, not a redistributable recovery
+copy of third-party/application source.

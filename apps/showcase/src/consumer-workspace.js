@@ -64,6 +64,7 @@ export const enhanceConsumerWorkspace = (scope = document) => {
   const rows = [...workspace.querySelectorAll("[data-workspace-row]")];
   const search = workspace.querySelector("[data-workspace-search]");
   const status = scope.querySelector("[data-workspace-status-filter]");
+  const filterDrawer = scope.querySelector("#workspace-filter-drawer");
   const table = workspace.querySelector(".shlz-table");
   const body = workspace.querySelector("[data-workspace-body]");
   const empty = workspace.querySelector("[data-workspace-empty]");
@@ -106,7 +107,7 @@ export const enhanceConsumerWorkspace = (scope = document) => {
     table.hidden = count === 0;
     updateSelection();
   };
-  const reset = () => {
+  const resetAll = () => {
     search.value = "";
     status.value = "";
     appliedStatus = "";
@@ -169,11 +170,18 @@ export const enhanceConsumerWorkspace = (scope = document) => {
   );
   scope
     .querySelector("[data-workspace-reset-filter]")
-    .addEventListener("click", reset, { signal });
+    .addEventListener("click", () => (status.value = ""), { signal });
+  filterDrawer.addEventListener(
+    "close",
+    () => {
+      status.value = appliedStatus;
+    },
+    { signal },
+  );
   workspace.querySelector("[data-workspace-reset]").addEventListener(
     "click",
     () => {
-      reset();
+      resetAll();
       search.focus();
     },
     { signal },

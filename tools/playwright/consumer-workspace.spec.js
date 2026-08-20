@@ -39,6 +39,38 @@ test("native status filter composes with Drawer and application state", async ({
   await expect(page.locator("[data-workspace-filter-count]")).toBeVisible();
 });
 
+test("filter draft is committed only by Apply", async ({ page }) => {
+  const trigger = page.getByRole("button", { name: /Фильтры/ });
+  const drawer = page.getByRole("dialog", { name: "Фильтры заявок" });
+  const status = drawer.getByRole("combobox", { name: "Статус" });
+  const search = page.getByRole("searchbox", { name: "Поиск по заявкам" });
+
+  await search.fill("SD");
+  await trigger.click();
+  await status.selectOption({ label: "Новая" });
+  await page.keyboard.press("Escape");
+  await expect(drawer).toBeHidden();
+  await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(3);
+
+  await trigger.click();
+  await expect(status).toHaveValue("");
+  await status.selectOption({ label: "В работе" });
+  await drawer.getByRole("button", { name: "Закрыть" }).click();
+  await trigger.click();
+  await expect(status).toHaveValue("");
+
+  await status.selectOption({ label: "В работе" });
+  await drawer.getByRole("button", { name: "Применить" }).click();
+  await trigger.click();
+  await expect(status).toHaveValue("В работе");
+  await drawer.getByRole("button", { name: "Сбросить" }).click();
+  await expect(status).toHaveValue("");
+  await expect(search).toHaveValue("SD");
+  await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(1);
+  await drawer.getByRole("button", { name: "Применить" }).click();
+  await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(3);
+});
+
 test("search, empty recovery and sort stay application-owned", async ({
   page,
 }) => {
@@ -96,4 +128,16 @@ test("selection, teardown and narrow containment remain explicit", async ({
     .locator(".shlz-table-wrap")
     .evaluate((element) => element.scrollWidth > element.clientWidth);
   expect(tableOverflow).toBe(true);
+});
+
+test("consumer workspace composition remains visually stable", async ({
+  page,
+}) => {
+  await page.evaluate(() => document.fonts.ready);
+  const workspace = page.locator("[data-consumer-workspace]");
+  await workspace.scrollIntoViewIfNeeded();
+  await expect(workspace).toHaveScreenshot("consumer-workspace.png", {
+    animations: "disabled",
+    caret: "hide",
+  });
 });
