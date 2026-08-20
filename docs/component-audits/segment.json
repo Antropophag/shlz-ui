@@ -1,0 +1,65 @@
+{
+  "component": "segment",
+  "authoritativeSource": "shlz-design-source/raw/svg/Segment.svg",
+  "referenceSources": [
+    "docs/components/segment-source.md",
+    "docs/components/segment.md"
+  ],
+  "implementation": ["packages/styles/components/segment.css"],
+  "behavior": null,
+  "docs": "docs/components/segment.md",
+  "rootSelector": "[data-component-audit-id^='segment-']",
+  "legacySelectors": [".shlz-segment"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "segment-showcase-choice", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["small-26", "medium-33", "large-41"],
+  "supportedStates": ["selected", "unselected", "focus-visible", "disabled"],
+  "contentStress": ["long-label", "icon-and-text", "narrow-container"],
+  "sourceClaims": [
+    {
+      "claim": "group and item source sets define three sizes, optional icons and selected/unselected/disabled item paint",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Segment.svg"
+    },
+    {
+      "claim": "group width is composition/content-driven rather than equal distribution",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Segment.svg"
+    },
+    {
+      "claim": "the executable SHLZ model is a native radio group; the library owns visuals and no behavior controller",
+      "classification": "repository-decision",
+      "evidence": "docs/components/segment.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/actions-navigation-wave3.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/actions-navigation-wave3.spec.js-snapshots/segment-focused-contract-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: primary Segment.svg group/item sets and their absent selected-disabled combination are recorded",
+    "structural-contract": "pass: executable roots use fieldset, legend, same-name radios and adjacent visual labels",
+    "runtime-browser": "pass: real pointer, Space and Arrow selection use native radio state with counters asserted per path; disabled forced-pointer, focus, Space and programmatic paths emit no events",
+    "accessibility": "pass: native radiogroup naming, mutual exclusion, focus order, real Space/Arrow movement and disabled focus exclusion are exercised",
+    "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
+    "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
+    "responsive-content-stress": "pass: long labels stay within a component-local narrow fixture without page-level inference"
+  },
+  "acceptedDeviations": [],
+  "findings": [
+    {
+      "id": "segment-fieldset-min-content-overflow",
+      "severity": "P2",
+      "status": "resolved-wave3",
+      "description": "The browser fieldset min-content floor allowed a medium Segment to exceed its narrow audited container.",
+      "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
+      "tracking": "docs/component-audits/wave-3-report.md"
+    }
+  ],
+  "knownLimitations": [
+    "navigation and command-group semantics are outside Segment",
+    "selection persistence is consumer-owned"
+  ]
+}

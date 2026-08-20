@@ -2,6 +2,40 @@ function tabsIn(tablist: HTMLElement): HTMLElement[] {
   return [...tablist.querySelectorAll<HTMLElement>(":scope > [role='tab']")];
 }
 
+const controllers = new WeakMap<HTMLElement, TabsController>();
+
+function isDisabled(tab: HTMLElement): boolean {
+  return (
+    tab.getAttribute("aria-disabled") === "true" ||
+    (tab as HTMLButtonElement).disabled
+  );
+}
+
+function validateRelationships(root: HTMLElement, tablist: HTMLElement): void {
+  const tabs = tabsIn(tablist);
+  const tree = root.getRootNode() as ParentNode;
+  for (const tab of tabs) {
+    const tabId = tab.id;
+    const panelId = tab.getAttribute("aria-controls");
+    if (!tabId || !panelId)
+      throw new TypeError("Every Tabs tab requires id and aria-controls.");
+    const panels = root.querySelectorAll<HTMLElement>(
+      `#${CSS.escape(panelId)}`,
+    );
+    const panel = panels[0];
+    if (
+      panels.length !== 1 ||
+      tree.querySelectorAll(`#${CSS.escape(tabId)}`).length !== 1 ||
+      tree.querySelectorAll(`#${CSS.escape(panelId)}`).length !== 1 ||
+      panel?.getAttribute("role") !== "tabpanel" ||
+      panel.getAttribute("aria-labelledby") !== tabId
+    )
+      throw new TypeError(
+        `Tabs relationship ${tabId || "<missing>"} -> ${panelId} must be unique and root-scoped.`,
+      );
+  }
+}
+
 export class TabsController {
   readonly root: HTMLElement;
   readonly tablist: HTMLElement;
@@ -16,19 +50,23 @@ export class TabsController {
       throw new TypeError(
         "Tabs requires a direct [role=tablist] with [role=tab] children.",
       );
+    validateRelationships(root, tablist);
     this.root = root;
     this.tablist = tablist;
+    controllers.get(root)?.destroy();
+    controllers.set(root, this);
     this.#initialize();
   }
 
   activate(tab: HTMLElement, { focus = false } = {}): void {
-    if (
-      this.#destroyed ||
-      tab.getAttribute("aria-disabled") === "true" ||
-      (tab as HTMLButtonElement).disabled
-    )
-      return;
-    for (const candidate of tabsIn(this.tablist)) {
+    if (this.#destroyed) return;
+    const tabs = tabsIn(this.tablist);
+    if (!tabs.includes(tab))
+      throw new TypeError(
+        "TabsController can only activate a tab owned by its root.",
+      );
+    if (isDisabled(tab)) return;
+    for (const candidate of tabs) {
       const selected = candidate === tab;
       candidate.setAttribute("aria-selected", String(selected));
       candidate.tabIndex = selected ? 0 : -1;
@@ -45,6 +83,7 @@ export class TabsController {
     if (!this.#destroyed) {
       this.#destroyed = true;
       this.#abort.abort();
+      if (controllers.get(this.root) === this) controllers.delete(this.root);
     }
   }
 
@@ -53,9 +92,8 @@ export class TabsController {
     const initial =
       tabs.find(
         (tab) =>
-          tab.getAttribute("aria-selected") === "true" &&
-          tab.getAttribute("aria-disabled") !== "true",
-      ) ?? tabs.find((tab) => tab.getAttribute("aria-disabled") !== "true");
+          tab.getAttribute("aria-selected") === "true" && !isDisabled(tab),
+      ) ?? tabs.find((tab) => !isDisabled(tab));
     if (initial) this.activate(initial);
     this.tablist.addEventListener(
       "click",
@@ -71,11 +109,7 @@ export class TabsController {
     this.tablist.addEventListener(
       "keydown",
       (event) => {
-        const enabled = tabsIn(this.tablist).filter(
-          (tab) =>
-            tab.getAttribute("aria-disabled") !== "true" &&
-            !(tab as HTMLButtonElement).disabled,
-        );
+        const enabled = tabsIn(this.tablist).filter((tab) => !isDisabled(tab));
         const current =
           event.target instanceof HTMLElement
             ? enabled.indexOf(event.target)
@@ -106,6 +140,6 @@ export class TabsController {
 
 export function enhanceTabs(scope: ParentNode = document): TabsController[] {
   return [...scope.querySelectorAll<HTMLElement>("[data-shlz-tabs]")].map(
-    (root) => new TabsController(root),
+    (root) => controllers.get(root) ?? new TabsController(root),
   );
 }

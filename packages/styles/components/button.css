@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   min-inline-size: var(--shlz-button-size);
+  max-inline-size: 100%;
   min-block-size: var(--shlz-button-size);
   padding: 0 var(--shlz-source-spacing-16);
   color: var(--shlz-semantic-color-text-primary);
@@ -18,6 +19,7 @@
   line-height: 19.5px;
   letter-spacing: -0.01em;
   text-decoration: none;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
@@ -52,12 +54,15 @@
 
 .shlz-button--primary:hover:not(:disabled),
 .shlz-button--primary.shlz-button--visual-hover {
+  color: var(--shlz-semantic-color-text-inverse);
+
   /* Buttons.svg FACT: primary hover is #425ba6; it is not a palette token. */
   background: #425ba6;
 }
 
 .shlz-button--primary:active:not(:disabled),
 .shlz-button--primary.shlz-button--visual-active {
+  color: var(--shlz-semantic-color-text-inverse);
   background: var(--shlz-source-color-blue-blue-300);
 }
 

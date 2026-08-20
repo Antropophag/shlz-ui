@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "316c5ae9b77090c3bec61ad326bcf4510224c8c0",
-    "measuredAt": "2026-08-20",
+    "sha": "f5b48fdd0a1f904c973d5477fa1eebf93c88464d",
+    "measuredAt": "2026-08-21",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
   "measuredCountsContract": "measured_counts records DOM roots observed by the baseline census; occurrence arrays list repository surfaces and therefore are not cardinality-equivalent. Component audit manifests provide occurrence-level enumeration when a family enters verification.",
@@ -374,35 +374,43 @@
       "tests": [
         "tools/tests/components.test.mjs",
         "tools/playwright/primitives.spec.js",
-        "tools/playwright/remediation-fidelity.spec.js"
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source test",
-        "structural-contract": "CSS/source tests",
-        "runtime-browser": "native activation incidental",
-        "accessibility": "focus-only",
-        "focused-visual": "focused and broad snapshots",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Buttons.svg mode, size, geometry, typography and state paint matrix remains directly source-tested",
+        "structural-contract": "pass: native button markup, shipped CSS classes, documentation and clean package consumption are exercised",
+        "runtime-browser": "pass: counters after pointer, Enter, Space and programmatic activation prove one click per path; real disabled pointer/keyboard and programmatic paths emit none",
+        "accessibility": "pass: native role/name, focus-visible, disabled focus exclusion and no nested interactive content are browser-checked",
+        "focused-visual": "pass: component-local snapshot plus real default/hover/pressed/focus-visible/disabled computed foreground/background assertions cover primary, secondary and text",
+        "consumer-integration": "pass: Data Workspace reset/apply/filter and overlay actions execute application-owned state/lifecycle",
+        "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
       },
       "canonical_name": "Button",
       "category": "actions-navigation",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Buttons.svg"],
       "production_implementation": ["packages/styles/components/button.css"],
       "behavior": [],
       "docs": ["docs/components/button.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/fidelity.js",
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/wave3.js",
+        "tools/fixtures/plain-html.html"
+      ],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js",
         "tools/fixtures/plain-html.html"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
-      "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
+      "legacy_native_implementations": ["native <button> ownership"],
+      "local_alternatives": [
+        "component-owned close, table affordance, dropdown item and field action buttons"
+      ],
       "scope": [
         "small/medium/large",
         "primary/secondary/text",
@@ -411,10 +419,12 @@
         "focus"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "loading and button-styled anchors are not public Button variants"
+      ],
       "measured_counts": {
-        "executableShowcase": 73,
-        "liveConsumers": 3,
+        "executableShowcase": 76,
+        "liveConsumers": 4,
         "dataWorkspace": 3,
         "inertDiagnostics": 48,
         "legacyNative": 0,
@@ -705,37 +715,42 @@
     {
       "tests": [
         "tools/tests/remediation-wave2-source.test.mjs",
-        "tools/playwright/remediation-wave2.spec.js"
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
       ],
       "evidence": {
-        "source-integrity": "four-state test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "native link incidental",
-        "accessibility": "partial",
-        "focused-visual": "focused snapshot",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Link.svg four-state typography and paint contract is directly asserted",
+        "structural-contract": "pass: navigation instances are native anchors with real href and unavailable text is a span",
+        "runtime-browser": "pass: Enter performs native URL navigation without a library command/controller layer",
+        "accessibility": "pass: native role/name, Tab focus and focus-visible execute; no div/span role=link substitute exists",
+        "focused-visual": "pass: component-local normal, real-focus and long-content states are captured",
+        "consumer-integration": "pass: three Data Workspace request IDs remain native in-page navigation links",
+        "responsive-content-stress": "pass: audited narrow link content stays within its component surface"
       },
       "canonical_name": "Link",
       "category": "actions-navigation",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Link.svg"],
       "production_implementation": ["packages/styles/components/link.css"],
       "behavior": [],
       "docs": ["docs/components/link.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/wave3.js"],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
-      "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
+      "legacy_native_implementations": ["native <a href> ownership"],
+      "local_alternatives": [
+        "document-row title anchors and Showcase sidebar anchors use their owning contracts"
+      ],
       "scope": ["default/hover/pressed/disabled", "focus", "long content"],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "visited, external-icon and download presentation are consumer-owned"
+      ],
       "measured_counts": {
         "executableShowcase": 4,
         "liveConsumers": 3,
@@ -748,31 +763,37 @@
     {
       "tests": [
         "tools/tests/segment-source.test.mjs",
-        "tools/playwright/components-next.spec.js"
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
       ],
       "evidence": {
-        "source-integrity": "group/item tests",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "native radio test",
-        "accessibility": "partial",
-        "focused-visual": "representative snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Segment.svg group/item sets, three sizes, icons and state combinations remain directly tested",
+        "structural-contract": "pass: fieldset, legend, same-name radios and adjacent visual labels define the executable model",
+        "runtime-browser": "pass: real pointer, Space and Arrow selection use native state with per-path input/change counters; disabled paths emit none",
+        "accessibility": "pass: named native radio group, mutual exclusion, real Space/Arrow focus movement and disabled focus exclusion are exercised",
+        "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
+        "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
+        "responsive-content-stress": "pass: the component-local narrow fixture checks bounds without page-overflow inference"
       },
       "canonical_name": "Segment",
       "category": "actions-navigation",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Segment.svg"],
       "production_implementation": ["packages/styles/components/segment.css"],
       "behavior": [],
       "docs": ["docs/components/segment.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/main.js",
+        "tools/fixtures/plain-html.html"
+      ],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
-      "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
+      "legacy_native_implementations": ["native radio group ownership"],
+      "local_alternatives": [
+        "static .shlz-segment__item source comparison model"
+      ],
       "scope": [
         "small/medium/large",
         "selected/unselected/disabled",
@@ -780,7 +801,9 @@
         "focus"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "no application consumer; navigation and command semantics are outside Segment"
+      ],
       "measured_counts": {
         "executableShowcase": 3,
         "liveConsumers": 0,
@@ -793,21 +816,22 @@
     {
       "tests": [
         "tools/tests/tabs-source.test.mjs",
-        "tools/playwright/components-next.spec.js"
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
       ],
       "evidence": {
-        "source-integrity": "family test",
-        "structural-contract": "controller test",
-        "runtime-browser": "keyboard test",
-        "accessibility": "ARIA/roving tabindex test",
-        "focused-visual": "representative snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: underline, pill and boxed source families retain exact state and height contracts",
+        "structural-contract": "pass: tablist/tab/tabpanel relationships and behavior exports are asserted",
+        "runtime-browser": "pass: real click updates selection/tabstop/panels; disabled click/programmatic paths are no-ops; arrows, Home/End, owned activation, replacement, repeat enhancement and teardown execute",
+        "accessibility": "pass: one selected/tab-stop tab, disabled pointer/programmatic exclusion, focus movement, detached-tree IDs and unique root-scoped ARIA IDs are checked",
+        "focused-visual": "pass: component-local active, inactive, real-focus and narrow long-label states are captured",
+        "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
+        "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
       },
       "canonical_name": "Tabs",
       "category": "actions-navigation",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Tabs.svg"],
       "production_implementation": [
         "packages/styles/components/tabs.css",
@@ -815,19 +839,28 @@
       ],
       "behavior": ["packages/behaviors/src/tabs.ts"],
       "docs": ["docs/components/tabs.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/main.js",
+        "tools/fixtures/plain-html.html"
+      ],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
-      "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
+      "legacy_native_implementations": [
+        "native button activation within ARIA Tabs"
+      ],
+      "local_alternatives": [
+        "static pill/boxed style matrices without data-shlz-tabs behavior"
+      ],
       "scope": [
         "underline/pill/boxed",
         "default/selected/hover/disabled",
         "focus"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "no application consumer; overflow/wrapping/routing remain consumer-owned"
+      ],
       "measured_counts": {
         "executableShowcase": 4,
         "liveConsumers": 0,
@@ -841,21 +874,22 @@
       "tests": [
         "tools/tests/pagination-source.test.mjs",
         "tools/playwright/pagination-contract.spec.js",
-        "tools/playwright/pagination-typography.spec.js"
+        "tools/playwright/pagination-typography.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source test",
-        "structural-contract": "docs/contract test",
-        "runtime-browser": "URL ownership test",
-        "accessibility": "native navigation test",
-        "focused-visual": "bounded visual comparison: 1,750-pixel absolute raster budget; computed typography assertions pass",
-        "consumer-integration": "dedicated Showcase consumer",
-        "responsive-content-stress": "narrow browser test"
+        "source-integrity": "pass: Pagination.svg primitive/composition split and exact 20-state matrix remain directly tested",
+        "structural-contract": "pass: named nav/list/native links, one current page, non-link boundaries and ellipsis are asserted",
+        "runtime-browser": "pass: URL-driven first/middle/last navigation updates results; trusted platform Ctrl/Meta click reaches a real href uncancelled and leaves the current page unchanged",
+        "accessibility": "pass: native link focus/order, real href, one aria-current and non-anchor disabled directions are browser-checked",
+        "focused-visual": "pass: first/middle/last/ellipsis evidence supplements the unchanged 1,750-pixel absolute typography raster budget and separate computed assertions",
+        "consumer-integration": "pass: URL-owned current page and result range execute across all three consumer pages",
+        "responsive-content-stress": "pass: 240px component-local list wraps without clipping, hidden scroll or automatic collapse"
       },
       "canonical_name": "Pagination",
       "category": "actions-navigation",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Pagination.svg",
         "shlz-design-source/raw/svg/Pagination (1).svg",
@@ -866,15 +900,22 @@
       ],
       "behavior": [],
       "docs": ["docs/components/pagination.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/main.js",
+        "tools/fixtures/plain-html.html"
+      ],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/pagination-consumer.js"
       ],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
-      "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "legacy_native_implementations": [
+        "native anchor navigation and non-anchor boundary ownership"
+      ],
+      "local_alternatives": [
+        "static typography pagination without navigation semantics"
+      ],
       "scope": [
         "wide/compact",
         "current/default/hover/pressed/disabled",
@@ -892,7 +933,9 @@
           "tracking": "docs/repository-ui-inventory-2026-08-20.md"
         }
       ],
-      "limitations": [],
+      "limitations": [
+        "no generator, router, totals model, automatic collapse or hidden horizontal scroll"
+      ],
       "measured_counts": {
         "executableShowcase": 3,
         "liveConsumers": 1,

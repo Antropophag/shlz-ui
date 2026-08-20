@@ -78,8 +78,19 @@ function destroyTabs() {
 - Tablist: direct child `[role=tablist]` with an accessible name.
 - Tabs: direct native buttons with `role=tab`, unique ids and `aria-controls`.
 - Panels: `role=tabpanel` with matching id, `aria-labelledby`, conditional `tabindex` and `hidden` state.
-- Enhancement: `enhanceTabs(scope?)` returns `TabsController[]`.
-- Lifecycle: `destroy()` removes behavior listeners; markup state remains as last activated.
+- Enhancement: `enhanceTabs(scope?)` returns one `TabsController` per root;
+  repeated enhancement reuses the live controller instead of adding listeners.
+- Validation: enhancement and direct construction throw `TypeError` when a tab
+  lacks `id` or `aria-controls`, an id is not unique in the root's tree, the
+  panel is outside the same root, or `aria-labelledby` does not match the tab
+  id. A validation error aborts enhancement of the remaining roots in that
+  call; roots enhanced earlier in the call retain their controller.
+- Programmatic activation: `activate(tab)` accepts only a direct tab owned by
+  the controller's tablist and throws `TypeError` for a foreign element.
+- Direct construction: constructing a replacement controller for an enhanced
+  root destroys the prior controller before taking ownership.
+- Lifecycle: `destroy()` removes behavior listeners and releases the root for a
+  future enhancement; markup state remains as last activated.
 - Visual families: default underline, `--pill` and `--boxed`.
 
 The Basic Elements extraction contains three separate Component Sets and one standalone composition. `tab` (`52:3213`) has four State variants at 116–117×61. `Tab` (`58:5374`) has four State variants at 68×40 with a 20px pill radius. `Tab` (`185:15928`) has six observed Select/State combinations at 74–75×39 with 10px top corners. `Tab group` (`52:3256`) is a 581×61 standalone composition. All 14 variants exported without warnings.

@@ -9,6 +9,11 @@ const manifestPaths = [
   "checkbox",
   "radio",
   "switch",
+  "button",
+  "link",
+  "segment",
+  "tabs",
+  "pagination",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 
@@ -171,8 +176,8 @@ test("audited component manifests are complete, traceable, and classification-dr
     );
     for (const [level, status] of Object.entries(manifest.evidence))
       assert.ok(
-        status === "applicable" || status.startsWith("not-applicable:"),
-        `${level} needs an applicability decision`,
+        status === "applicable" || /^(not-applicable|pass):\s*\S/.test(status),
+        `${level} needs an applicability or concrete evidence decision`,
       );
 
     for (const claim of manifest.sourceClaims)

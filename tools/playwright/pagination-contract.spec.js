@@ -53,6 +53,46 @@ test("consumer-owned URL selects the visible result and current page", async ({
   ).toHaveAttribute("aria-current", "page");
 });
 
+test("modified Pagination click remains an uncancelled native anchor event", async ({
+  page,
+}) => {
+  await page.goto("/?page=2#pagination-consumer");
+  const currentUrl = page.url();
+  const next = page
+    .locator("[data-pagination-consumer]")
+    .getByRole("link", { name: "Следующая страница" });
+  await expect(next).toHaveAttribute("href", "/?page=3#pagination-consumer");
+  await next.evaluate((element) => {
+    window.__paginationModifiedClick = null;
+    element.addEventListener(
+      "click",
+      (event) => {
+        globalThis.queueMicrotask(() => {
+          window.__paginationModifiedClick = {
+            ctrlKey: event.ctrlKey,
+            metaKey: event.metaKey,
+            defaultPrevented: event.defaultPrevented,
+            isTrusted: event.isTrusted,
+          };
+        });
+      },
+      { once: true },
+    );
+  });
+
+  const modifier = process.platform === "darwin" ? "Meta" : "Control";
+  await next.click({ modifiers: [modifier] });
+  await expect
+    .poll(() => page.evaluate(() => window.__paginationModifiedClick))
+    .toEqual({
+      ctrlKey: modifier === "Control",
+      metaKey: modifier === "Meta",
+      defaultPrevented: false,
+      isTrusted: true,
+    });
+  await expect(page).toHaveURL(currentUrl);
+});
+
 test("consumer boundary states are non-links", async ({ page }) => {
   await page.goto("/?page=1#pagination-consumer");
   const consumer = page.locator("[data-pagination-consumer]");
