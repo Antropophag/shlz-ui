@@ -1,5 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { stabilizeShowcaseLayout } from "./visual-harness.js";
+import {
+  hideDeveloperDocumentation,
+  stabilizeShowcaseLayout,
+} from "./visual-harness.js";
 
 test("file row exposes independent targets and source geometry", async ({
   page,
@@ -151,6 +154,7 @@ test("document row supports compact and metadata-rich fluid lists", async ({
 
 test("document row visual regression", async ({ page }) => {
   await page.goto("/#file-row-extension-demo");
+  await hideDeveloperDocumentation(page);
   const fixture = page.locator(".shlz-document-row-visual-fixture");
   const firstRow = fixture.locator(".shlz-document-row").first();
 

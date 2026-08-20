@@ -3,6 +3,13 @@ import { expect } from "@playwright/test";
 const ADDITIVE_SHOWCASE_SELECTOR =
   "[data-shlz-visual-addition], [data-shlz-dropdown-scrollable-fixture]";
 
+export const hideDeveloperDocumentation = (page) =>
+  page.evaluate(() => {
+    for (const panel of document.querySelectorAll(".shlz-developer-docs")) {
+      panel.hidden = true;
+    }
+  });
+
 export const stabilizeShowcaseLayout = async (page) => {
   await page.evaluate((selector) => {
     const additions = [...document.querySelectorAll(selector)];

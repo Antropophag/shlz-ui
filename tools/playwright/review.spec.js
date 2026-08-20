@@ -12,7 +12,6 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const [name, selector] of [
-  ["select", "#select-demo"],
   ["avatar", "#avatar-demo"],
   ["table", "#table-demo"],
   ["person-tag", "#tag-demo > section:nth-of-type(2)"],
@@ -26,6 +25,14 @@ for (const [name, selector] of [
     );
   });
 }
+
+test("production showcase review: select", async ({ page }) => {
+  await expectStableShowcaseScreenshot(
+    page,
+    page.locator("#select-demo > section").first(),
+    "review-select.png",
+  );
+});
 
 test("production showcase review: dropdown", async ({ page }) => {
   await stabilizeShowcaseLayout(page);
