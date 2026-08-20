@@ -95,6 +95,23 @@ test("Wave 1 project inventory cannot overclaim foundation evidence", async () =
     if (foundation.audit_status === "VERIFIED")
       assert.equal(foundation.known_findings.length, 0);
   }
+  for (const family of families) {
+    const manifestPath = `docs/foundation-audits/${family}.json`;
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
+    const records = foundations.filter(({ docs }) =>
+      docs.includes(manifestPath),
+    );
+    assert.equal(
+      records.length,
+      1,
+      `${manifestPath} must have exactly one inventory record`,
+    );
+    assert.equal(
+      records[0].audit_status,
+      manifest.status,
+      `${manifestPath} status must match its inventory record`,
+    );
+  }
 });
 
 test("source token layers preserve exact foundation facts", async () => {
