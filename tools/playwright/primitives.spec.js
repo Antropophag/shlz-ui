@@ -11,7 +11,7 @@ const isolateDocumentationSurface = async (page) => {
       .shlz-docs-sidebar { visibility: hidden !important; }
       [data-shlz-dropdown-scrollable-fixture] { display: none !important; }
       #file-row-extension-demo { display: none !important; }
-      .shlz-developer-docs { display: none !important; }
+      .shlz-developer-docs, [data-pagination-consumer] { display: none !important; }
       .shlz-select-fixture-label:is(p) { display: none !important; }
       [data-select-source-fixtures][hidden] { display: none !important; }
     `,

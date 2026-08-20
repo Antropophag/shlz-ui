@@ -5,7 +5,9 @@ const ADDITIVE_SHOWCASE_SELECTOR =
 
 export const hideDeveloperDocumentation = (page) =>
   page.evaluate(() => {
-    for (const panel of document.querySelectorAll(".shlz-developer-docs")) {
+    for (const panel of document.querySelectorAll(
+      ".shlz-developer-docs, [data-pagination-consumer]",
+    )) {
       panel.hidden = true;
     }
   });

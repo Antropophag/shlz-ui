@@ -212,6 +212,53 @@ const selectMarkup = `<div class="shlz-field shlz-field--select">
   </span>
 </div>`;
 
+const paginationMarkup = `<nav class="shlz-pagination" aria-label="Страницы заявок">
+  <ul class="shlz-pagination__list">
+    <li>
+      <a class="shlz-pagination__item" href="/requests?page=5" aria-label="Предыдущая страница">
+        <img class="shlz-pagination__icon" src="/assets/icons/arrow-left-md.svg" alt="" />
+      </a>
+    </li>
+    <li><a class="shlz-pagination__item" href="/requests?page=5">5</a></li>
+    <li><a class="shlz-pagination__item" href="/requests?page=6" aria-current="page">6</a></li>
+    <li><a class="shlz-pagination__item" href="/requests?page=7">7</a></li>
+    <li>
+      <a class="shlz-pagination__item" href="/requests?page=7" aria-label="Следующая страница">
+        <img class="shlz-pagination__icon" src="/assets/icons/arrow-right-md.svg" alt="" />
+      </a>
+    </li>
+  </ul>
+</nav>`;
+
+const paginationEllipsisMarkup = `<nav class="shlz-pagination" aria-label="Страницы результатов поиска">
+  <ul class="shlz-pagination__list">
+    <li><a class="shlz-pagination__item" href="/search?page=1">1</a></li>
+    <li><span class="shlz-pagination__item shlz-pagination__item--ellipsis" aria-hidden="true">…</span></li>
+    <li><a class="shlz-pagination__item" href="/search?page=5">5</a></li>
+    <li><a class="shlz-pagination__item" href="/search?page=6" aria-current="page">6</a></li>
+    <li><a class="shlz-pagination__item" href="/search?page=7">7</a></li>
+    <li><span class="shlz-pagination__item shlz-pagination__item--ellipsis" aria-hidden="true">…</span></li>
+    <li><a class="shlz-pagination__item" href="/search?page=42">42</a></li>
+  </ul>
+</nav>`;
+
+const paginationBoundaryMarkup = `<nav class="shlz-pagination" aria-label="Страницы архива">
+  <ul class="shlz-pagination__list">
+    <li>
+      <span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true" aria-label="Предыдущая страница">
+        <img class="shlz-pagination__icon" src="/assets/icons/arrow-left-md.svg" alt="" />
+      </span>
+    </li>
+    <li><a class="shlz-pagination__item" href="/archive?page=1" aria-current="page">1</a></li>
+    <li><a class="shlz-pagination__item" href="/archive?page=2">2</a></li>
+    <li>
+      <a class="shlz-pagination__item" href="/archive?page=2" aria-label="Следующая страница">
+        <img class="shlz-pagination__icon" src="/assets/icons/arrow-right-md.svg" alt="" />
+      </a>
+    </li>
+  </ul>
+</nav>`;
+
 export const componentDocumentation = {
   button: {
     status: "Executable · Production example",
@@ -870,6 +917,99 @@ export const componentDocumentation = {
         ["Browser tests", "tools/playwright/components-next.spec.js"],
       ],
     }),
+  },
+  pagination: {
+    status: "Executable · Production native-link examples",
+    purpose:
+      "Navigates between application-defined pages while preserving native URL and link behavior.",
+    use: [
+      "Navigate a finite, page-addressable result set whose destinations have real URLs.",
+      "Render a consumer-computed page window when direct access to nearby or boundary pages helps.",
+    ],
+    avoid: [
+      "Use a different application pattern when the total is unknown, the dataset is infinite or only sequential loading is possible.",
+      "Do not use Pagination as a router, page-window generator, data loader or client-state store.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/icons/icons/arrow-left-md.svg", "Required for Previous"],
+      ["@shlz/icons/icons/arrow-right-md.svg", "Required for Next"],
+      ["@shlz/behaviors", "Not required; no Pagination controller is shipped"],
+    ],
+    snippets: [
+      stylesheetSnippet("pagination"),
+      {
+        id: "pagination-html",
+        label: "Minimal HTML",
+        language: "html",
+        code: paginationMarkup,
+      },
+      {
+        id: "pagination-ellipsis-html",
+        label: "Consumer-computed window with ellipses",
+        language: "html",
+        code: paginationEllipsisMarkup,
+      },
+      {
+        id: "pagination-boundary-html",
+        label: "First-page boundary",
+        language: "html",
+        code: paginationBoundaryMarkup,
+      },
+    ],
+    contract: [
+      [
+        "Landmark",
+        "nav.shlz-pagination with a purpose-specific accessible name.",
+      ],
+      [
+        "List",
+        "ul.shlz-pagination__list with one li per item, in reading order.",
+      ],
+      [
+        "Destination",
+        "a.shlz-pagination__item with a consumer-generated href.",
+      ],
+      [
+        "Current page",
+        "Exactly one current destination uses aria-current=page.",
+      ],
+      [
+        "Previous / Next",
+        "Native links with explicit accessible names and decorative SHLZ icons.",
+      ],
+      [
+        "Unavailable",
+        "Non-link .shlz-pagination__item--disabled with aria-disabled=true.",
+      ],
+      [
+        "Ellipsis",
+        "Non-interactive .shlz-pagination__item--ellipsis with aria-hidden=true.",
+      ],
+      [
+        "Behavior",
+        "Browser-owned link navigation; no SHLZ events, state or lifecycle.",
+      ],
+    ],
+    accessibility:
+      "The named nav landmark and list expose the navigation group and order. Exactly one link uses aria-current=page. Previous and Next require destination-specific accessible names; their images use empty alt text. Only real destinations are focusable links. Tab and Shift+Tab move through links and Enter follows the focused href; no arrow-key interaction is implemented or promised. Focus-visible styling is shipped for anchors.",
+    limitations:
+      "There is no total-items input, total-pages model, page-window algorithm, unknown-total mode, responsive collapse, routing hook, loading state or data synchronization. The list wraps when space runs out; it does not clip or add horizontal scrolling, and long labels or very large windows can create multiple rows. The consumer must choose a suitably short window and re-render valid destinations/current state when totals change.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Pagination.svg"],
+      ["Source contract", "docs/components/pagination-source.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/pagination.css"],
+      ["Documentation", "docs/components/pagination.md"],
+      ["Showcase", "apps/showcase/src/main.js"],
+      ["Consumer validation", "apps/showcase/src/pagination-consumer.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/pagination-source.test.mjs"],
+      ["Bundle contract tests", "tools/tests/components.test.mjs"],
+      ["Browser tests", "tools/playwright/pagination-contract.spec.js"],
+      ["Visual tests", "tools/playwright/pagination-typography.spec.js"],
+    ],
   },
   select: {
     status: "Executable · Production native single-select",

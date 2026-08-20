@@ -9,7 +9,11 @@ import {
 
 const read = (path) => readFile(path, "utf8");
 const normalize = (value) =>
-  value.replaceAll(/\s+/g, " ").replaceAll(/\s+>/g, ">").trim();
+  value
+    .replaceAll(/\s+/g, " ")
+    .replaceAll(/\s+>/g, ">")
+    .replaceAll(/>\s+</g, "><")
+    .trim();
 
 test("documented components expose the validated component-page contract", async () => {
   assert.deepEqual(Object.keys(componentDocumentation), [
@@ -27,6 +31,7 @@ test("documented components expose the validated component-page contract", async
     "link",
     "avatar",
     "tabs",
+    "pagination",
     "select",
   ]);
 
@@ -345,4 +350,58 @@ test("Select copyable markup matches the shipped native-only contract", async ()
     false,
   );
   assert.equal(packageJson.exports["./select"], undefined);
+});
+
+test("Pagination snippets preserve native navigation and consumer ownership", async () => {
+  const [css, behaviors] = await Promise.all([
+    read("packages/styles/components/pagination.css"),
+    read("packages/behaviors/package.json").then(JSON.parse),
+  ]);
+  const snippets = Object.fromEntries(
+    componentDocumentation.pagination.snippets.map(({ id, code }) => [
+      id,
+      code,
+    ]),
+  );
+  const minimal = snippets["pagination-html"];
+  const ellipsis = snippets["pagination-ellipsis-html"];
+  const boundary = snippets["pagination-boundary-html"];
+
+  assert.match(minimal, /^<nav class="shlz-pagination" aria-label=/);
+  assert.equal(minimal.match(/<a class="shlz-pagination__item"/g)?.length, 5);
+  assert.equal(minimal.match(/href="[^"]+"/g)?.length, 5);
+  assert.equal(minimal.match(/aria-current="page"/g)?.length, 1);
+  assert.equal(
+    minimal.match(/aria-label="(?:Предыдущая|Следующая) страница"/g)?.length,
+    2,
+  );
+  assert.equal(
+    minimal.match(/class="shlz-pagination__icon"[^>]+alt=""/g)?.length,
+    2,
+  );
+  assert.doesNotMatch(minimal, /<button|data-shlz|addEventListener/);
+
+  assert.equal(ellipsis.match(/shlz-pagination__item--ellipsis/g)?.length, 2);
+  assert.equal(ellipsis.match(/aria-hidden="true"/g)?.length, 2);
+  assert.doesNotMatch(ellipsis, /<a[^>]+--ellipsis/);
+
+  assert.match(
+    boundary,
+    /<span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true"/,
+  );
+  assert.doesNotMatch(boundary, /<a[^>]+--disabled/);
+  assert.equal(boundary.match(/aria-current="page"/g)?.length, 1);
+
+  for (const selector of [
+    ".shlz-pagination__list",
+    ".shlz-pagination__item",
+    ".shlz-pagination__icon",
+    ".shlz-pagination__item--disabled",
+    ".shlz-pagination__item--ellipsis",
+  ]) {
+    assert.ok(css.includes(selector), `${selector} must be shipped`);
+  }
+  assert.match(css, /flex-wrap: wrap/);
+  assert.match(css, /a\.shlz-pagination__item:focus-visible/);
+  assert.equal(behaviors.exports["./pagination"], undefined);
 });
