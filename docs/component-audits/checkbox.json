@@ -1,0 +1,69 @@
+{
+  "component": "checkbox",
+  "authoritativeSource": "shlz-design-source/raw/svg/Checkbox.svg",
+  "referenceSources": [],
+  "implementation": ["packages/styles/components/choice.css"],
+  "behavior": null,
+  "docs": "docs/components/checkbox.md",
+  "rootSelector": "[data-component-audit-id^='checkbox-']",
+  "legacySelectors": [".shlz-checkbox"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "checkbox-medium-default", "kind": "executable-fixture" },
+    { "id": "checkbox-medium-checked", "kind": "executable-fixture" },
+    { "id": "checkbox-medium-mixed", "kind": "executable-fixture" },
+    { "id": "checkbox-medium-disabled", "kind": "executable-fixture" },
+    { "id": "checkbox-table-select-all", "kind": "live-consumer" },
+    { "id": "checkbox-table-alpha", "kind": "live-consumer" },
+    { "id": "checkbox-table-beta", "kind": "live-consumer" },
+    { "id": "checkbox-framework-composition", "kind": "executable-fixture" },
+    { "id": "checkbox-workspace-select-all", "kind": "live-consumer" },
+    { "id": "checkbox-workspace-sd-2418", "kind": "live-consumer" },
+    { "id": "checkbox-workspace-sd-2415", "kind": "live-consumer" },
+    { "id": "checkbox-workspace-sd-2409", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["large-20", "medium-16"],
+  "supportedStates": [
+    "unchecked",
+    "checked",
+    "indeterminate",
+    "disabled-unchecked",
+    "disabled-checked",
+    "hover",
+    "focus-visible"
+  ],
+  "contentStress": ["long-multiline-label", "narrow-viewport"],
+  "sourceClaims": [
+    {
+      "claim": "20px and 16px boxes, radii, check and mixed geometry, and state paints",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Checkbox.svg"
+    },
+    {
+      "claim": "native checkbox owns form state, label activation, Space, events and programmatic checked",
+      "classification": "repository-decision",
+      "evidence": "docs/components/checkbox.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/form-controls-wave2.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/form-controls-wave2.spec.js-snapshots/checkbox-focused-states-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "applicable",
+    "responsive-content-stress": "applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "indeterminate is a DOM property and not a third submitted form value"
+  ]
+}

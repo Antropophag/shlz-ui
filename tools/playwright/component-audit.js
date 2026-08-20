@@ -17,12 +17,15 @@ export const inspectComponentOccurrences = (page, manifest) =>
         diagnostic: contract.diagnosticBoundaries.some((boundary) =>
           element.closest(boundary),
         ),
+        classified: Boolean(element.closest("[data-component-audit-id]")),
       })),
     );
 
     return {
       occurrences,
-      unclassifiedLegacy: legacy.filter(({ diagnostic }) => !diagnostic),
+      unclassifiedLegacy: legacy.filter(
+        ({ diagnostic, classified }) => !diagnostic && !classified,
+      ),
       diagnosticLegacy: legacy.filter(({ diagnostic }) => diagnostic).length,
     };
   }, manifest);
