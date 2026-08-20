@@ -919,8 +919,10 @@ export const componentDocumentation = {
       ["Field styles", "packages/styles/components/field.css"],
       ["Documentation", "docs/components/select.md"],
       ["Showcase", "apps/showcase/src/fidelity.js"],
+      ["Consumer validation", "apps/showcase/src/consumer-workspace.js"],
       ["Source tests", "tools/tests/form-controls-source.test.mjs"],
       ["Browser tests", "tools/playwright/primitives.spec.js"],
+      ["Consumer browser tests", "tools/playwright/consumer-workspace.spec.js"],
     ],
   },
 };
