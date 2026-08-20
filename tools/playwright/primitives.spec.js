@@ -11,6 +11,7 @@ const isolateDocumentationSurface = (page) =>
       .shlz-docs-sidebar { visibility: hidden !important; }
       [data-shlz-dropdown-scrollable-fixture] { display: none !important; }
       #file-row-extension-demo { display: none !important; }
+      .shlz-developer-docs { display: none !important; }
     `,
   });
 

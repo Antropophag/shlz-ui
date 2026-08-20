@@ -1093,7 +1093,7 @@ export function renderComponentDocumentation(name) {
   if (!docs) throw new TypeError(`Unknown component documentation: ${name}`);
 
   return `
-    <details class="shlz-developer-docs" data-component-docs="${name}" open>
+    <details class="shlz-developer-docs" data-component-docs="${name}" data-shlz-visual-addition open>
       <summary>Developer usage</summary>
       <div class="shlz-developer-docs__body">
         <p><span class="shlz-developer-docs__status">${docs.status}</span> ${docs.purpose}</p>

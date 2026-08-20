@@ -47,6 +47,7 @@ test("documented components expose the validated component-page contract", async
     }
     const rendered = renderComponentDocumentation(name);
     assert.match(rendered, new RegExp(`data-component-docs="${name}"`));
+    assert.match(rendered, /data-shlz-visual-addition/);
     assert.match(rendered, /Developer usage/);
     assert.match(rendered, /Copyable usage/);
     assert.match(rendered, /Public contract/);
