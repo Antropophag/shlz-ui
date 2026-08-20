@@ -822,8 +822,8 @@
       "evidence": {
         "source-integrity": "pass: underline, pill and boxed source families retain exact state and height contracts",
         "structural-contract": "pass: tablist/tab/tabpanel relationships and behavior exports are asserted",
-        "runtime-browser": "pass: click, arrows, Home/End, programmatic activation, repeat enhancement, teardown and multiple roots execute",
-        "accessibility": "pass: one selected/tab-stop tab, disabled skip, focus movement and unique root-scoped ARIA IDs are checked",
+        "runtime-browser": "pass: click, arrows, Home/End, root-owned programmatic activation, direct-controller replacement, repeat enhancement and teardown execute",
+        "accessibility": "pass: one selected/tab-stop tab, disabled skip, focus movement, detached-tree IDs and unique root-scoped ARIA IDs are checked",
         "focused-visual": "pass: component-local active, inactive, real-focus and narrow long-label states are captured",
         "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
         "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"

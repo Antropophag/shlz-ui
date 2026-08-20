@@ -153,17 +153,19 @@ test("Tabs validates ARIA, skips disabled, is idempotent and tears down", async 
   await expect(second).toBeFocused();
 
   const error = await page.evaluate(() => {
+    const host = document.createElement("div");
     const malformed = document.createElement("div");
     malformed.dataset.shlzTabs = "";
     malformed.innerHTML = `<div role="tablist" aria-label="Broken"><button role="tab">Broken</button></div>`;
-    document.body.append(malformed);
+    host.append(malformed);
+    document.body.append(host);
     try {
-      window.__shlzEnhanceTabs(malformed.parentElement);
+      window.__shlzEnhanceTabs(host);
       return null;
     } catch (caught) {
       return caught instanceof TypeError ? caught.message : String(caught);
     } finally {
-      malformed.remove();
+      host.remove();
     }
   });
   expect(error).toContain("requires id and aria-controls");
@@ -271,6 +273,82 @@ test("Tabs rejects duplicate and cross-root ARIA without rebinding valid roots",
   await expect(alphaFirst).toBeFocused();
 });
 
+test("Tabs validates IDs within a detached tree", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const host = document.createElement("section");
+    host.innerHTML = `
+      <div data-shlz-tabs>
+        <div role="tablist" aria-label="Detached tabs">
+          <button id="detached-tab" role="tab" aria-controls="detached-panel">Detached tab</button>
+        </div>
+        <div id="detached-panel" role="tabpanel" aria-labelledby="detached-tab">Detached panel</div>
+      </div>`;
+    try {
+      const controllers = window.__shlzEnhanceTabs(host);
+      return { count: controllers.length, error: null };
+    } catch (error) {
+      return {
+        count: 0,
+        error: error instanceof Error ? error.message : String(error),
+      };
+    }
+  });
+  expect(result).toEqual({ count: 1, error: null });
+});
+
+test("direct TabsController construction replaces prior root ownership", async ({
+  page,
+}) => {
+  const root = page.locator("#tabs-demo [data-shlz-tabs]");
+  const replacementRegistered = await root.evaluate((element) => {
+    const current = window.__shlzEnhanceTabs(element.parentElement)[0];
+    const Replacement = current.constructor;
+    const replacement = new Replacement(element);
+    window.__directTabsReplacement = replacement;
+    return window.__shlzEnhanceTabs(element.parentElement)[0] === replacement;
+  });
+  expect(replacementRegistered).toBe(true);
+
+  await page.evaluate(() => window.__directTabsReplacement.destroy());
+  const first = root.getByRole("tab", { name: "Первый" });
+  await first.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(first).toBeFocused();
+});
+
+test("Tabs programmatic activation is root-owned", async ({ page }) => {
+  const result = await page.evaluate(() => {
+    const controller = window.__shlzEnhanceTabs(
+      document.querySelector("#tabs-demo"),
+    )[0];
+    const owned = controller.root.querySelector("#tab-two");
+    controller.activate(owned);
+    const selectedAfterOwned = owned.getAttribute("aria-selected");
+    const foreign = document.createElement("button");
+    foreign.setAttribute("role", "tab");
+    try {
+      controller.activate(foreign);
+      return { selectedAfterOwned, errorName: null, message: null };
+    } catch (error) {
+      return {
+        selectedAfterOwned,
+        errorName: error?.constructor?.name ?? null,
+        message: error instanceof Error ? error.message : String(error),
+      };
+    }
+  });
+  expect(result).toEqual({
+    selectedAfterOwned: "true",
+    errorName: "TypeError",
+    message: "TabsController can only activate a tab owned by its root.",
+  });
+  await expect(
+    page.locator(
+      "#tabs-demo [data-shlz-tabs] [role='tab'][aria-selected='true']",
+    ),
+  ).toHaveCount(1);
+});
+
 test("Pagination preserves native URL navigation at every boundary", async ({
   page,
 }) => {
@@ -298,6 +376,9 @@ test("Wave 3 responsive claims are component-local", async ({ page }) => {
     .locator("#typography-compatibility .shlz-button")
     .first();
   const longLink = page.locator("[data-workspace-body] .shlz-link").first();
+  const singleLineLinkHeight = await longLink.evaluate(
+    (element) => element.getBoundingClientRect().height,
+  );
   await longLink.evaluate((element) => {
     element.textContent =
       "SD-2418 — регистрация заявки на проведение испытаний";
@@ -348,7 +429,7 @@ test("Wave 3 responsive claims are component-local", async ({ page }) => {
     await longLink.evaluate(
       (element) => element.getBoundingClientRect().height,
     ),
-  ).toBeGreaterThan(21);
+  ).toBeGreaterThan(singleLineLinkHeight);
 });
 
 test("source-backed geometry and focus paint are computed independently", async ({

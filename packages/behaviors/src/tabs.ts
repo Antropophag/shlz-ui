@@ -13,6 +13,7 @@ function isDisabled(tab: HTMLElement): boolean {
 
 function validateRelationships(root: HTMLElement, tablist: HTMLElement): void {
   const tabs = tabsIn(tablist);
+  const tree = root.getRootNode() as ParentNode;
   for (const tab of tabs) {
     const tabId = tab.id;
     const panelId = tab.getAttribute("aria-controls");
@@ -24,8 +25,8 @@ function validateRelationships(root: HTMLElement, tablist: HTMLElement): void {
     const panel = panels[0];
     if (
       panels.length !== 1 ||
-      document.querySelectorAll(`#${CSS.escape(tabId)}`).length !== 1 ||
-      document.querySelectorAll(`#${CSS.escape(panelId)}`).length !== 1 ||
+      tree.querySelectorAll(`#${CSS.escape(tabId)}`).length !== 1 ||
+      tree.querySelectorAll(`#${CSS.escape(panelId)}`).length !== 1 ||
       panel?.getAttribute("role") !== "tabpanel" ||
       panel.getAttribute("aria-labelledby") !== tabId
     )
@@ -52,13 +53,20 @@ export class TabsController {
     validateRelationships(root, tablist);
     this.root = root;
     this.tablist = tablist;
+    controllers.get(root)?.destroy();
     controllers.set(root, this);
     this.#initialize();
   }
 
   activate(tab: HTMLElement, { focus = false } = {}): void {
-    if (this.#destroyed || isDisabled(tab)) return;
-    for (const candidate of tabsIn(this.tablist)) {
+    if (this.#destroyed) return;
+    const tabs = tabsIn(this.tablist);
+    if (!tabs.includes(tab))
+      throw new TypeError(
+        "TabsController can only activate a tab owned by its root.",
+      );
+    if (isDisabled(tab)) return;
+    for (const candidate of tabs) {
       const selected = candidate === tab;
       candidate.setAttribute("aria-selected", String(selected));
       candidate.tabIndex = selected ? 0 : -1;

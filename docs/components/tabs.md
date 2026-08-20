@@ -80,6 +80,15 @@ function destroyTabs() {
 - Panels: `role=tabpanel` with matching id, `aria-labelledby`, conditional `tabindex` and `hidden` state.
 - Enhancement: `enhanceTabs(scope?)` returns one `TabsController` per root;
   repeated enhancement reuses the live controller instead of adding listeners.
+- Validation: enhancement and direct construction throw `TypeError` when a tab
+  lacks `id` or `aria-controls`, an id is not unique in the root's tree, the
+  panel is outside the same root, or `aria-labelledby` does not match the tab
+  id. A validation error aborts enhancement of the remaining roots in that
+  call; roots enhanced earlier in the call retain their controller.
+- Programmatic activation: `activate(tab)` accepts only a direct tab owned by
+  the controller's tablist and throws `TypeError` for a foreign element.
+- Direct construction: constructing a replacement controller for an enhanced
+  root destroys the prior controller before taking ownership.
 - Lifecycle: `destroy()` removes behavior listeners and releases the root for a
   future enhancement; markup state remains as last activated.
 - Visual families: default underline, `--pill` and `--boxed`.

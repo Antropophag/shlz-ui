@@ -48,8 +48,8 @@
   "evidence": {
     "source-integrity": "pass: all three primary SVG families and their state geometry remain traced by source tests",
     "structural-contract": "pass: tablist/tab/tabpanel relationships and controller export are asserted",
-    "runtime-browser": "pass: click, ArrowLeft/Right, Home/End, programmatic activation, repeated enhancement, teardown and multiple instances execute in Chromium",
-    "accessibility": "pass: exactly one selected/tab-stop tab, disabled skip, focus movement and root-scoped unique ARIA relationships are checked",
+    "runtime-browser": "pass: click, ArrowLeft/Right, Home/End, root-owned programmatic activation, direct-controller replacement, repeated enhancement and teardown execute in Chromium",
+    "accessibility": "pass: exactly one selected/tab-stop tab, disabled skip, focus movement, detached-tree IDs and root-scoped unique ARIA relationships are checked",
     "focused-visual": "pass: component-local active, inactive, real focus and narrow long-label states are captured",
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
     "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
@@ -60,7 +60,7 @@
       "id": "tabs-controller-lifecycle-and-aria-validation",
       "severity": "P1",
       "status": "resolved-wave3",
-      "description": "Repeated enhancement created additional controllers, initial selection did not exclude native disabled, and malformed or cross-root ARIA relationships were accepted silently.",
+      "description": "Repeated or direct construction could leave competing controllers, initial selection did not exclude native disabled, document-scoped validation rejected detached roots, programmatic activation accepted foreign tabs, and malformed or cross-root ARIA relationships were accepted silently.",
       "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
       "tracking": "docs/component-audits/wave-3-report.md"
     }

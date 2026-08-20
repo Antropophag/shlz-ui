@@ -2,6 +2,8 @@
   "component": "pagination",
   "authoritativeSource": "shlz-design-source/raw/svg/Pagination.svg",
   "referenceSources": [
+    "shlz-design-source/raw/svg/Pagination (1).svg",
+    "shlz-design-source/raw/svg/Pagination (2).svg",
     "docs/components/pagination-source.md",
     "docs/components/pagination.md"
   ],
