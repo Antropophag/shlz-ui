@@ -1,6 +1,19 @@
 import { expect, test } from "@playwright/test";
 import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
+const expectImagesLoaded = async (images) => {
+  await images.evaluateAll((items) => {
+    for (const image of items) image.loading = "eager";
+  });
+  await expect
+    .poll(() =>
+      images.evaluateAll((items) =>
+        items.every((item) => item.complete && item.naturalWidth > 0),
+      ),
+    )
+    .toBe(true);
+};
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.locator(".shlz-verification-harness").evaluate((details) => {
@@ -18,14 +31,14 @@ test("every fidelity unit uses an SVG-derived source reference", async ({
   const units = page.locator(".shlz-fidelity-unit");
   // Seven primary migrated families own nested diagnostics in Implementation.
   await expect(units).toHaveCount(14);
+  await expectImagesLoaded(
+    units.locator(".shlz-reference img, .shlz-form-pair img"),
+  );
   for (const unit of await units.all()) {
+    await unit.scrollIntoViewIfNeeded();
     const images = unit.locator(".shlz-reference img, .shlz-form-pair img");
     expect(await images.count()).toBeGreaterThan(0);
-    expect(
-      await images.evaluateAll((items) =>
-        items.every((item) => item.complete && item.naturalWidth > 0),
-      ),
-    ).toBe(true);
+    await expectImagesLoaded(images);
   }
 });
 
@@ -53,6 +66,17 @@ test("source references render at their intrinsic one-to-one scale", async ({
   page,
 }) => {
   const images = page.locator(".shlz-reference img");
+  const changedImages = page.locator(
+    ".shlz-reference img, .shlz-form-pair img",
+  );
+  expect(
+    await changedImages.evaluateAll((items) =>
+      items.every(
+        (item) => item.loading === "lazy" && item.decoding === "async",
+      ),
+    ),
+  ).toBe(true);
+  await expectImagesLoaded(images);
   expect(
     await images.evaluateAll((items) =>
       items.every((item) => item.clientWidth === item.naturalWidth),

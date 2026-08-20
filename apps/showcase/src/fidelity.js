@@ -21,6 +21,8 @@ const iconUrl = (name) =>
 const icon = (name, className = "") =>
   `<svg class="shlz-icon${className ? ` ${className}` : ""}" viewBox="${iconViewBox(name)}" aria-hidden="true"><use href="${iconHref(spriteUrl, name)}"></use></svg>`;
 
+const sourceImageAttributes = () => 'loading="lazy" decoding="async"';
+
 const source = (...components) => {
   const selected = references.filter(({ component }) =>
     components.includes(component),
@@ -29,7 +31,7 @@ const source = (...components) => {
     .flatMap((reference) =>
       reference.references.map(
         (crop) =>
-          `<figure class="shlz-reference"><img src="${urlByFile[crop.file]}" alt="Source crop from ${reference.sourceFile}"><figcaption><code>${reference.sourceFile}</code> · crop <code>${crop.cropViewBox}</code><br>${crop.reason}</figcaption></figure>`,
+          `<figure class="shlz-reference"><img src="${urlByFile[crop.file]}" ${sourceImageAttributes()} alt="Source crop from ${reference.sourceFile}"><figcaption><code>${reference.sourceFile}</code> · crop <code>${crop.cropViewBox}</code><br>${crop.reason}</figcaption></figure>`,
       ),
     )
     .join("");
@@ -263,7 +265,7 @@ const sourceSet = (component) =>
 const sourceVariantImage = (component, order) => {
   const set = sourceSet(component);
   const variant = set.references.find((item) => item.sourceOrder === order);
-  return `<figure class="shlz-reference shlz-reference--variant"><img src="${urlByFile[variant.file]}" alt="${variant.rawVariantName}"><figcaption>#${variant.sourceOrder} · <code>${variant.sourceNodeId}</code></figcaption></figure>`;
+  return `<figure class="shlz-reference shlz-reference--variant"><img src="${urlByFile[variant.file]}" ${sourceImageAttributes()} alt="${variant.rawVariantName}"><figcaption>#${variant.sourceOrder} · <code>${variant.sourceNodeId}</code></figcaption></figure>`;
 };
 
 const sourceInventoryDetails = (components) =>
@@ -432,7 +434,7 @@ const representativePairs = (component, orders) => {
     .map(
       (variant) => `<article class="shlz-form-pair">
         <h5>${variant.rawVariantName}</h5>
-        <div><figure><span>Source</span><img src="${urlByFile[variant.file]}" alt="Figma source variant: ${variant.rawVariantName}"></figure><figure><span>Implementation</span><div inert aria-hidden="true">${fixtureForReference(component, variant)}</div></figure></div>
+        <div><figure><span>Source</span><img src="${urlByFile[variant.file]}" ${sourceImageAttributes()} alt="Figma source variant: ${variant.rawVariantName}"></figure><figure><span>Implementation</span><div inert aria-hidden="true">${fixtureForReference(component, variant)}</div></figure></div>
       </article>`,
     )
     .join("")}</div>`;
