@@ -33,13 +33,7 @@
     "filled",
     "placeholder"
   ],
-  "contentStress": [
-    "multiline",
-    "very-long-text",
-    "wrapping",
-    "overflow",
-    "narrow-viewport"
-  ],
+  "contentStress": ["multiline", "very-long-text", "wrapping"],
   "sourceClaims": [
     {
       "claim": "five states by filled and counter axes, 395px by approximately 58px shell",

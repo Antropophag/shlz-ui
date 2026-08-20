@@ -21,7 +21,7 @@
     "hover",
     "focus-visible"
   ],
-  "contentStress": ["long-multiline-label", "narrow-viewport"],
+  "contentStress": [],
   "sourceClaims": [
     {
       "claim": "20px outer circle, 10px dot, borders and disabled paints",
@@ -45,7 +45,7 @@
     "accessibility": "applicable",
     "focused-visual": "applicable",
     "consumer-integration": "not-applicable: no Data Workspace or application-owned Radio consumer exists",
-    "responsive-content-stress": "applicable"
+    "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
   },
   "acceptedDeviations": [],
   "findings": [],

@@ -21,7 +21,7 @@
     "disabled-on",
     "focus-visible"
   ],
-  "contentStress": ["long-multiline-label", "narrow-viewport"],
+  "contentStress": [],
   "sourceClaims": [
     {
       "claim": "track, thumb, offsets, paints and two-size state matrix",
@@ -32,11 +32,6 @@
       "claim": "native checkbox with role=switch owns focus, Space, checked and events",
       "classification": "repository-decision",
       "evidence": "docs/components/switch.md"
-    },
-    {
-      "claim": "120ms transition and reduced-motion removal",
-      "classification": "repository-decision",
-      "evidence": "packages/styles/components/choice.css"
     }
   ],
   "browserTests": ["tools/playwright/form-controls-wave2.spec.js"],
@@ -50,7 +45,7 @@
     "accessibility": "applicable",
     "focused-visual": "applicable",
     "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
-    "responsive-content-stress": "applicable"
+    "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
   },
   "acceptedDeviations": [],
   "findings": [],

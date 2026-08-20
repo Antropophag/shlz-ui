@@ -27,12 +27,7 @@
     "filled",
     "placeholder"
   ],
-  "contentStress": [
-    "long-value",
-    "long-placeholder",
-    "cyrillic-latin",
-    "narrow-viewport"
-  ],
+  "contentStress": ["long-value", "cyrillic-value", "narrow-viewport"],
   "sourceClaims": [
     {
       "claim": "large and medium shell geometry and field paints",

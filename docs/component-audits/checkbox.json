@@ -32,7 +32,7 @@
     "hover",
     "focus-visible"
   ],
-  "contentStress": ["long-multiline-label", "narrow-viewport"],
+  "contentStress": ["Data Workspace narrow-viewport containment"],
   "sourceClaims": [
     {
       "claim": "20px and 16px boxes, radii, check and mixed geometry, and state paints",

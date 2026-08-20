@@ -282,8 +282,6 @@ const componentAuditRoots = [
     "checkbox-table-beta",
   ],
   [".shlz-composition .shlz-checkbox", "checkbox-framework-composition"],
-  [".shlz-composition .shlz-radio:checked", "radio-framework-primary"],
-  [".shlz-composition .shlz-radio:not(:checked)", "radio-framework-secondary"],
   [".shlz-composition .shlz-switch__input", "switch-framework-composition"],
 ];
 for (const [selector, auditId] of componentAuditRoots) {
@@ -291,41 +289,76 @@ for (const [selector, auditId] of componentAuditRoots) {
   if (element) element.dataset.componentAuditId = auditId;
 }
 
-const componentAuditCollections = [
-  [
-    "#textarea-demo > section:has(h4) .shlz-textarea",
-    [
-      "textarea-default-empty",
-      "textarea-default-filled",
-      "textarea-visual-hover-empty",
-      "textarea-visual-hover-filled",
-      "textarea-visual-focus-empty",
-      "textarea-visual-focus-filled",
-      "textarea-error-empty",
-      "textarea-error-filled",
-      "textarea-disabled-empty",
-      "textarea-disabled-filled",
-      "textarea-counter",
-    ],
-  ],
-  [
-    "#checkbox-demo > section:has(h4) .shlz-checkbox--sm",
-    [
-      "checkbox-medium-default",
-      "checkbox-medium-checked",
-      "checkbox-medium-mixed",
-      "checkbox-medium-disabled",
-    ],
-  ],
-  [
-    "#switch-demo > section:has(h4) .shlz-switch__input:not([inert] .shlz-switch__input)",
-    ["switch-labelled-on", "switch-labelled-disabled"],
-  ],
-];
-for (const [selector, auditIds] of componentAuditCollections)
-  document.querySelectorAll(selector).forEach((element, index) => {
-    element.dataset.componentAuditId = auditIds[index];
-  });
+for (const textarea of document.querySelectorAll(
+  "#textarea-demo > section:has(h4) .shlz-textarea",
+)) {
+  const sectionLabel = textarea
+    .closest("section")
+    ?.querySelector("h5")?.textContent;
+  const state = {
+    Default: "default",
+    Hover: "visual-hover",
+    Focused: "visual-focus",
+    Error: "error",
+    Disabled: "disabled",
+  }[sectionLabel];
+  const auditId = state
+    ? `textarea-${state}-${textarea.value ? "filled" : "empty"}`
+    : textarea.closest("section")?.querySelector("h4")?.textContent ===
+        "Counter"
+      ? "textarea-counter"
+      : null;
+  if (!auditId) continue;
+  textarea.dataset.componentAuditId = auditId;
+  const message = textarea
+    .closest("label")
+    ?.querySelector(".shlz-field__message");
+  if (message) {
+    message.id = `${auditId}-message`;
+    textarea.setAttribute("aria-describedby", message.id);
+  }
+}
+
+const checkboxAuditIds = {
+  "checkbox default": "checkbox-medium-default",
+  "checkbox checked": "checkbox-medium-checked",
+  "checkbox mixed": "checkbox-medium-mixed",
+  "checkbox checked-disabled": "checkbox-medium-disabled",
+};
+for (const checkbox of document.querySelectorAll(
+  "#checkbox-demo > section:has(> h4) .shlz-checkbox--sm",
+)) {
+  if (
+    checkbox.closest("section")?.querySelector(":scope > h4")?.textContent !==
+    "Medium"
+  )
+    continue;
+  const auditId = checkboxAuditIds[checkbox.getAttribute("aria-label")];
+  if (auditId) checkbox.dataset.componentAuditId = auditId;
+}
+
+for (const radio of document.querySelectorAll(
+  ".shlz-composition .shlz-radio",
+)) {
+  const label = radio.closest("label")?.textContent.trim();
+  if (label === "Первый")
+    radio.dataset.componentAuditId = "radio-framework-primary";
+  if (label === "Второй")
+    radio.dataset.componentAuditId = "radio-framework-secondary";
+}
+
+for (const toggle of document.querySelectorAll(
+  "#switch-demo section:has(> h4) .shlz-switch__input",
+)) {
+  if (
+    toggle.closest("section")?.querySelector(":scope > h4")?.textContent !==
+    "With label"
+  )
+    continue;
+  toggle.dataset.componentAuditId = toggle.disabled
+    ? "switch-labelled-disabled"
+    : "switch-labelled-on";
+}
 
 for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
   checkbox.indeterminate = true;
