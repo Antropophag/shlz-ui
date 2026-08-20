@@ -315,42 +315,26 @@ test("Tabs snippet preserves the ARIA relationship and deferred behavior lifecyc
   assert.match(css, /\.shlz-tabs--boxed/);
 });
 
-test("Select copyable markup and initialization match production exports", async () => {
-  const [fieldCss, selectCss, behavior, packageJson] = await Promise.all([
+test("Select copyable markup matches the shipped native-only contract", async () => {
+  const [fieldCss, packageJson] = await Promise.all([
     read("packages/styles/components/field.css"),
-    read("packages/styles/components/select.css"),
-    read("packages/behaviors/src/select.ts"),
     read("packages/behaviors/package.json").then(JSON.parse),
   ]);
   const html = componentDocumentation.select.snippets.find(
     ({ id }) => id === "select-html",
   ).code;
-  const js = componentDocumentation.select.snippets.find(
-    ({ id }) => id === "select-js",
-  ).code;
-
   assert.match(
     html,
-    /class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select/,
+    /class="shlz-field shlz-field--select"/,
   );
   assert.match(html, /<label class="shlz-field__label" for="request-type"/);
   assert.match(html, /<select class="shlz-select" id="request-type"/);
   assert.match(html, /class="shlz-field__indicator" aria-hidden="true"/);
   assert.match(html, /class="shlz-field__icon"/);
   assert.match(fieldCss, /\.shlz-field--select \.shlz-field__control/);
-  assert.match(selectCss, /\.shlz-selectbox__trigger/);
-
-  assert.match(js, /from "@shlz\/behaviors\/select"/);
-  assert.match(js, /enhanceSelects\(\)/);
-  assert.match(
-    js,
-    /function destroySelects\(\) \{\s+for \(const controller of controllers\) controller\.destroy\(\);\s+\}/,
+  assert.equal(
+    componentDocumentation.select.snippets.some(({ language }) => language === "js"),
+    false,
   );
-  assert.doesNotMatch(
-    js,
-    /const controllers = enhanceSelects\(\);\s+for \(const controller/,
-  );
-  assert.ok(packageJson.exports["./select"]);
-  assert.match(behavior, /export function enhanceSelects/);
-  assert.match(behavior, /destroy\(\): void/);
+  assert.equal(packageJson.exports["./select"], undefined);
 });

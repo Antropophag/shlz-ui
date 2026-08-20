@@ -132,7 +132,7 @@ function destroyTabs() {
   for (const controller of controllers) controller.destroy();
 }`;
 
-const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
+const selectMarkup = `<div class="shlz-field shlz-field--select">
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
     <select class="shlz-select" id="request-type" name="requestType">
@@ -145,15 +145,6 @@ const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" 
     </span>
   </span>
 </div>`;
-
-const selectBehavior = `import { enhanceSelects } from "@shlz/behaviors/select";
-
-const controllers = enhanceSelects();
-
-// Connect this function to your page/application teardown lifecycle.
-function destroySelects() {
-  for (const controller of controllers) controller.destroy();
-}`;
 
 export const componentDocumentation = {
   button: {
@@ -1004,12 +995,12 @@ export const componentDocumentation = {
     ],
   },
   select: {
-    status: "Executable · Production single-select",
+    status: "Executable · Production native single-select",
     purpose:
-      "Single-choice field whose native select remains the form owner and no-JavaScript fallback.",
+      "Single-choice field whose native select owns value, form submission, popup and keyboard behavior.",
     use: [
       "Choose one value from a predefined list in a form.",
-      "Add the optional behavior when consistent popup rendering and keyboard typeahead are required.",
+      "Use the current contract when the platform-native popup is acceptable.",
     ],
     avoid: [
       "Do not use Select for commands; use Dropdown menu.",
@@ -1018,7 +1009,7 @@ export const componentDocumentation = {
     dependencies: [
       ["@shlz/styles/shlz.css", "Required"],
       ["@shlz/icons/icons/arrow-down-md.svg", "Required by this markup"],
-      ["@shlz/behaviors/select", "Optional progressive enhancement"],
+      ["@shlz/behaviors", "No Select behavior is exported"],
     ],
     snippets: [
       {
@@ -1033,31 +1024,18 @@ export const componentDocumentation = {
         language: "html",
         code: selectMarkup,
       },
-      {
-        id: "select-js",
-        label: "Optional behavior",
-        language: "js",
-        code: selectBehavior,
-      },
     ],
     contract: [
-      [
-        "Root",
-        ".shlz-field.shlz-field--select.shlz-selectbox[data-shlz-select]",
-      ],
+      ["Root", ".shlz-field.shlz-field--select"],
       ["Value owner", ".shlz-field__control > select.shlz-select"],
       ["Label", "Native label[for] connected to the select id."],
-      ["Enhancement", "enhanceSelects(scope?) returns SelectController[]."],
-      ["Events", "Selection dispatches bubbling native input and change."],
-      [
-        "Lifecycle",
-        "destroy() removes generated UI and restores native hidden/id state.",
-      ],
+      ["Events", "The native select emits its platform input/change events."],
+      ["Behavior", "Browser-owned; no SHLZ Select controller is shipped."],
     ],
     accessibility:
-      "Without JavaScript the labeled native select remains usable. Enhancement provides combobox/listbox semantics, disabled options and typeahead. Escape and option commit restore trigger focus; Tab and outside dismissal preserve the user's next focus target.",
+      "Keep the native label and select association. The browser owns popup semantics, disabled options, focus and keyboard interaction; do not replace them with a visual-only element. Error/help relationships remain application-owned native ARIA.",
     limitations:
-      "Only single-select is implemented. There is no readonly state for native select. The enhancer does not yet forward aria-invalid or aria-describedby from the native select to its generated trigger. Search, multiselect and status variants remain unsupported until separate contracts are approved.",
+      "Only native single-select is executable. Popup paint is platform-owned and is not a source-fidelity claim. There is no readonly state, SHLZ behavior controller, search, multiselect, status-chip, async-loading or virtualization contract. Those Showcase matrices remain source diagnostics until separate APIs are approved.",
     traceability: [
       [
         "Authoritative component set",
@@ -1067,11 +1045,9 @@ export const componentDocumentation = {
       ["Provenance", "packages/tokens/provenance.json"],
       ["Tokens", "packages/tokens/tokens.json"],
       ["Field styles", "packages/styles/components/field.css"],
-      ["Popup styles", "packages/styles/components/select.css"],
-      ["Behavior", "packages/behaviors/src/select.ts"],
       ["Documentation", "docs/components/select.md"],
       ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Contract tests", "tools/tests/select-behavior.test.mjs"],
+      ["Source tests", "tools/tests/form-controls-source.test.mjs"],
       ["Browser tests", "tools/playwright/primitives.spec.js"],
     ],
   },
