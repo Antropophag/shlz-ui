@@ -29,7 +29,7 @@ for (const [name, selector] of [
 test("production showcase review: select", async ({ page }) => {
   await expectStableShowcaseScreenshot(
     page,
-    page.locator("#select-demo > section").first(),
+    page.locator("#select-demo > [data-select-production-fixtures]"),
     "review-select.png",
   );
 });

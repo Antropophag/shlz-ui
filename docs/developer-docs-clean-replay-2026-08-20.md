@@ -25,16 +25,16 @@ No public component API, source mapping, token, or visual value was changed.
 
 ## Visual isolation
 
-Developer-documentation panels are additive Showcase content and are hidden only while component visual fixtures are captured. A shared `hideDeveloperDocumentation(page)` helper is used where tests perform direct screenshots outside the existing stabilization helper.
+Developer-documentation panels are additive Showcase content. A shared `hideDeveloperDocumentation(page)` helper isolates them in visual-fidelity suites and direct component captures outside the existing stabilization helper. Normal Showcase coverage separately requires the panels to remain visible.
 
-| Component | Forensic result | Clean-branch result | Action |
-| --- | --- | --- | --- |
-| Document Row | `INTRODUCED_BY_DOCS_BRANCH` | Pass | Hide additive docs before the existing fixture capture. |
-| Button | `INTRODUCED_BY_DOCS_BRANCH` | Pass | Hide additive docs before the source-backed fixture capture. |
-| Empty State | `PRE-EXISTING` | Pass | No duplicate fix or snapshot update; current main stabilization is retained. |
-| Select | `INTRODUCED_BY_DOCS_BRANCH` | Pass | Capture the first production fixture section rather than the surrounding article. |
+| Component    | Forensic result             | Clean-branch result | Action                                                                                                                                  |
+| ------------ | --------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| Document Row | `INTRODUCED_BY_DOCS_BRANCH` | Pass                | Hide additive docs before the existing fixture capture.                                                                                 |
+| Button       | `INTRODUCED_BY_DOCS_BRANCH` | Pass                | Hide additive docs before the source-backed fixture capture.                                                                            |
+| Empty State  | `PRE-EXISTING`              | Pass                | No duplicate fix or snapshot update; current main stabilization is retained.                                                            |
+| Select       | `INTRODUCED_BY_DOCS_BRANCH` | Pass                | Capture the explicitly labeled production native fixture section rather than the surrounding article or unsupported source diagnostics. |
 
-The Select snapshot changed because the former baseline represented the whole article, while the corrected baseline represents the component fixture. The same scoped image was generated independently on clean `origin/main` and on this branch; both files had SHA-256 `9fd30a6a50ff86dfd35dbaa36cb2d713c050e5d218b9f8b30253cc7570340cf9`.
+The Select snapshot first changed because the former baseline represented the whole article. The same initial scoped image was generated independently on clean `origin/main` and on this branch with SHA-256 `9fd30a6a50ff86dfd35dbaa36cb2d713c050e5d218b9f8b30253cc7570340cf9`. Independent review then required production and unsupported source specimens to be separated. The final baseline now represents only the explicitly labeled three-control production-native section and has SHA-256 `879c73fb42d4a0fa87787cb64b5aabe88bad8e43a80da41d9103222a57fbc098`.
 
 A full Chromium run exposed the same additive-layout coupling in Pagination typography and the Fira stress fixture. Both now use the same narrow isolation helper. This is test-boundary hardening, not screenshot masking: normal Showcase tests still require all developer-documentation panels to be visible.
 
@@ -70,6 +70,12 @@ It contains none of the following:
 - repository workflow/package-smoke/compatibility work;
 - files under `shlz-design-source/`.
 
+## Documentation model boundary
+
+The Markdown component template is the complete documentation contract. It includes explicit variants/states, composition, and source-interpretation sections. The current Showcase renderer is deliberately a pilot summary of the highest-value developer fields; it does not replace the Markdown pages and must not be treated as a complete machine-readable schema. Adding those three structured Showcase fields is tracked follow-up work, not a reason to invent a schema engine in this replay.
+
+Repository traceability links in branch previews target `main`; links for newly added files become live after merge. Local validation checks the referenced paths before that point.
+
 ## Recovery relationship
 
 The dirty shared working tree was not used as the replay base and was not cleaned. Its full-state checkpoint is documented in `docs/recovery-checkpoint-2026-08-20.md` in that shared tree; the external artifacts are at `/home/antropophag/recovery/shlz-ui-20260820T120831+0300/`.
@@ -93,4 +99,6 @@ No old branch, worktree, stash, untracked file, screenshot, snapshot, Takt file,
 
 ## Readiness
 
-Subject to independent final review, this branch is a PR candidate. The recommended next action is review/push of this branch as an isolated developer-documentation PR; recovery and cleanup should remain separate workstreams.
+Independent review found no P1. Its two P2 findings were fixed: Select production fixtures are now separated and labeled apart from unsupported source diagnostics, and the report explicitly defines the Showcase renderer as a pilot summary rather than the complete Markdown contract. Two P3 notes were also addressed in this report: visual-suite isolation scope is stated accurately, and branch-preview traceability timing is disclosed.
+
+The branch is a PR candidate after the final focused checks. The recommended next action is review/push of this branch as an isolated developer-documentation PR; recovery and cleanup should remain separate workstreams.

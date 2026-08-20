@@ -66,6 +66,15 @@ test("documented components expose the validated component-page contract", async
   }
 });
 
+test("Select separates production examples from unsupported source diagnostics", async () => {
+  const showcase = await read("apps/showcase/src/fidelity.js");
+  assert.match(showcase, /data-select-production-fixtures/);
+  assert.match(showcase, /Production native single-select/);
+  assert.match(showcase, /Executable · Production/);
+  assert.match(showcase, /data-select-source-fixtures/);
+  assert.match(showcase, /Source diagnostics · unsupported runtime/);
+});
+
 test("Button copyable markup uses only the shipped native CSS contract", async () => {
   const css = await read("packages/styles/components/button.css");
   const html = componentDocumentation.button.snippets.find(
