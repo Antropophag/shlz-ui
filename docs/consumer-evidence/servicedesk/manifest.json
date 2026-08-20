@@ -1,0 +1,20 @@
+{
+  "classification": "consumer-evidence-non-authoritative",
+  "auditedAt": "2026-08-20",
+  "sourceLabel": "delivered Windows Downloads folder: ЩЛЗ - фронт ServiceDesk",
+  "hashAlgorithm": "sha256",
+  "files": {
+    "package.json": "7ddc9a9ef916aa4aa639f210eb01008d2ce0c051f21b697daf314274598959b1",
+    "src/index.css": "bd449d68eb33d22cd6608c3a2e52229e5d0c81d10c4e2321294a71bb30ed7cc2",
+    "src/shared/config.ts": "4881a5b2d92d72f0d1e4ff72e929f3e2f3a288abc5da73b08d2e15cf91efc1db",
+    "src/shared/fonts.css": "a88fac43cb24d621faff1db86fedc80f97ec754e0f33e608eb13fad7c6a4a333",
+    "src/pages/applicationsList/ApplicationsList.tsx": "4ff4806ab61244e5a98009254d8366ae15e235d44d5a42069c636d22630b707a",
+    "src/entities/application/ui/applications-table.tsx": "b5f6cf9a9058ee3afa7b2f01413f4739e524fbfb82cd942a014cdfcb80e58853",
+    "src/entities/application/ui/table-settings.tsx": "7af755f37b18cacf48f02148883b0876d65e8468d0dbab6dce0fff9355116be1",
+    "src/features/applicationEditFrom/ui/application-edit-from.tsx": "7671c93cb7cb54c564e70399afa551fd2e4dbca7be06e070c4a211f5a48e2f24",
+    "src/features/applicationEditFrom/ui/form-control.tsx": "18da205106116aa8685dd151fa3da8a83880b3375ad3f5caef7cb70a04d5b67e",
+    "src/features/applicationEditFrom/ui/section.tsx": "945f7f47d95b32b2ae6620d35a8d20e965ac695e8d3947d3c338da09fb73870d",
+    "src/pages/application/Application.tsx": "b1e87c0708f3815d58922889aee0e7894348fa6a19b8de83eba74a44dfdaa170",
+    "src/layouts/main-layout.tsx": "0e5c61fddde13ec4dd4458c41bf25399be6e3da8f143b5e27ebb1b67da3999d0"
+  }
+}

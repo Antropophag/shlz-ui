@@ -113,6 +113,11 @@ Select composes inside Field, forms, Modal and Drawer. Dropdown menu is a separa
 command family. Search, async data and dependent-field policy belong to the
 application until separate reusable contracts are approved.
 
+The Showcase Data Workspace demonstrates a bounded application-owned status
+filter using this native contract. It is ServiceDesk-inspired consumer
+validation, not evidence that the delivered application uses the same option
+count or control implementation.
+
 ## Limitations
 
 - Native single-select only.
@@ -125,18 +130,19 @@ application until separate reusable contracts are approved.
 
 ## Traceability
 
-| Layer                       | Location                                                                                       |
-| --------------------------- | ---------------------------------------------------------------------------------------------- |
-| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`) |
-| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                        |
-| Source specification        | `docs/components/form-controls-source-spec.md`                                                 |
-| Provenance                  | `packages/tokens/provenance.json`                                                              |
-| Tokens                      | `packages/tokens/tokens.json`                                                                  |
-| Field styles                | `packages/styles/components/field.css`                                                         |
-| Behavior exports            | `packages/behaviors/package.json` (no Select subpath)                                          |
-| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                    |
-| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                    |
-| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`                       |
+| Layer                       | Location                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`)                          |
+| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                                                 |
+| Source specification        | `docs/components/form-controls-source-spec.md`                                                                          |
+| Provenance                  | `packages/tokens/provenance.json`                                                                                       |
+| Tokens                      | `packages/tokens/tokens.json`                                                                                           |
+| Field styles                | `packages/styles/components/field.css`                                                                                  |
+| Behavior exports            | `packages/behaviors/package.json` (no Select subpath)                                                                   |
+| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                                             |
+| Consumer validation         | `apps/showcase/src/consumer-workspace.js`                                                                               |
+| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                                             |
+| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`, `tools/playwright/consumer-workspace.spec.js` |
 
 ## Source interpretation
 
