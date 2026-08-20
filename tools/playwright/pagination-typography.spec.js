@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { hideDeveloperDocumentation } from "./visual-harness.js";
 
 const body15Regular = {
   fontFamily:
@@ -42,6 +43,7 @@ test("Pagination uses the source Body 15 Regular contract in every numeric role"
 
 test("Pagination typography visual is pixel-exact", async ({ page }) => {
   await page.goto("/");
+  await hideDeveloperDocumentation(page);
   await page.addStyleTag({
     content: "#file-row-extension-demo { display: none !important; }",
   });

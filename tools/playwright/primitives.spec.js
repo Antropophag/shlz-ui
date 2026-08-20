@@ -5,14 +5,51 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-const isolateDocumentationSurface = (page) =>
-  page.addStyleTag({
+const isolateDocumentationSurface = async (page) => {
+  await page.addStyleTag({
     content: `
       .shlz-docs-sidebar { visibility: hidden !important; }
       [data-shlz-dropdown-scrollable-fixture] { display: none !important; }
       #file-row-extension-demo { display: none !important; }
+      .shlz-developer-docs { display: none !important; }
+      .shlz-select-fixture-label:is(p) { display: none !important; }
+      [data-select-source-fixtures][hidden] { display: none !important; }
     `,
   });
+
+  await page.evaluate(() => {
+    const production = document.querySelector(
+      "#select-demo > [data-select-production-fixtures]",
+    );
+    const source = document.querySelector(
+      "#select-demo > [data-select-source-fixtures]",
+    );
+    const productionGrid = production?.querySelector(".shlz-component-grid");
+    const sourceGrid = source?.querySelector(".shlz-component-grid");
+    const heading = production?.querySelector("h4");
+    const productionFixtures = [...(productionGrid?.children ?? [])];
+    const sourceFixtures = [...(sourceGrid?.children ?? [])];
+
+    if (
+      !productionGrid ||
+      !source ||
+      !heading ||
+      productionFixtures.length !== 3 ||
+      sourceFixtures.length !== 3
+    ) {
+      throw new Error("Select legacy fixture normalization contract changed");
+    }
+
+    heading.textContent = "Sizes and types";
+    productionGrid.replaceChildren(
+      productionFixtures[0],
+      productionFixtures[1],
+      ...sourceFixtures,
+      productionFixtures[2],
+    );
+    source.hidden = true;
+  });
+};
 
 test("showcase primitives keep their visual contract", async ({ page }) => {
   await isolateDocumentationSurface(page);
@@ -48,6 +85,79 @@ test("source specification and fidelity surfaces are reviewable", async ({
     "font-family",
     /system-ui|-apple-system|Segoe UI/,
   );
+});
+
+test("base single Select keeps the shipped native-only contract", async ({
+  page,
+}) => {
+  const selectDemo = page.locator("#select-demo");
+  const selects = selectDemo
+    .locator(":scope > section")
+    .first()
+    .locator("select.shlz-select");
+
+  await expect(selects).toHaveCount(3);
+  await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
+  await expect(
+    selectDemo
+      .locator(":scope > section")
+      .first()
+      .locator("select.shlz-select:enabled"),
+  ).toHaveCount(2);
+  await expect(
+    selectDemo
+      .locator(":scope > section")
+      .first()
+      .locator("select.shlz-select:disabled"),
+  ).toHaveCount(1);
+  await selects.first().focus();
+  await expect(selects.first()).toBeFocused();
+  await expect(selectDemo.getByRole("listbox")).toHaveCount(0);
+});
+
+test("documented components expose developer usage without mixing diagnostics", async ({
+  page,
+}) => {
+  const documentedComponents = [
+    ["button", "button-demo"],
+    ["input", "input-demo"],
+    ["textarea", "textarea-demo"],
+    ["checkbox", "checkbox-demo"],
+    ["radio", "radio-demo"],
+    ["switch", "switch-demo"],
+    ["status", "status-demo"],
+    ["badge", "badge-demo"],
+    ["tag", "tag-demo"],
+    ["person-tag", "tag-demo"],
+    ["segment", "segment-demo"],
+    ["link", "link-demo"],
+    ["avatar", "avatar-demo"],
+    ["tabs", "tabs-demo"],
+    ["select", "select-demo"],
+  ];
+
+  for (const [name, hostId] of documentedComponents) {
+    const component = page.locator(`#${hostId}`);
+    const docs = component.locator(`[data-component-docs="${name}"]`);
+    await expect(docs).toBeVisible();
+    await expect(
+      docs.getByText(/Executable · Production/).first(),
+    ).toBeVisible();
+    await expect(
+      docs.getByRole("heading", { name: "Copyable usage" }),
+    ).toBeVisible();
+    await expect(
+      docs.getByRole("heading", { name: "Public contract" }),
+    ).toBeVisible();
+    await expect(
+      docs.getByRole("heading", { name: "Accessibility" }),
+    ).toBeVisible();
+    await expect(
+      docs.getByRole("heading", { name: "Limitations" }),
+    ).toBeVisible();
+    await expect(docs.locator("[data-shlz-snippet]")).not.toHaveCount(0);
+    await expect(docs.locator(".shlz-visual-fixture")).toHaveCount(0);
+  }
 });
 
 test("keyboard focus is visible", async ({ page }) => {

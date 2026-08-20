@@ -1,7 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { hideDeveloperDocumentation } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+  await hideDeveloperDocumentation(page);
   await page.addStyleTag({
     content: `
       .shlz-docs-sidebar { display: none !important; }

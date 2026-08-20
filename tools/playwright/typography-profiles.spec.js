@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { hideDeveloperDocumentation } from "./visual-harness.js";
 
 const fixedGeometrySelectors = [
   ".shlz-type-stress .shlz-input",
@@ -72,6 +73,7 @@ test("Golos is default and profiles work on roots and subtrees", async ({
 test("Fira keeps shared geometry and stress content unclipped", async ({
   page,
 }) => {
+  await hideDeveloperDocumentation(page);
   const golosGeometry = await dimensions(page, fixedGeometrySelectors);
   await page.getByLabel("Fira Sans").check();
   await page.evaluate(() => document.fonts.ready);

@@ -2,6 +2,8 @@ import references from "../generated/source-references/manifest.json";
 import { iconHref, iconViewBox } from "@shlz/icons";
 import spriteUrl from "@shlz/icons/sprite.svg?url";
 
+import { renderComponentDocumentation } from "./component-docs.js";
+
 const urls = import.meta.glob("../generated/source-references/*.svg", {
   eager: true,
   query: "?url",
@@ -534,6 +536,7 @@ const buttonDiagnostics = `
 export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="button-demo">
     <header><h3>Button</h3><p>Запускает действие или подтверждает выбор.</p></header>
+    ${renderComponentDocumentation("button")}
     <section><h4>Modes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Primary</button><button class="shlz-button">Secondary</button><button class="shlz-button shlz-button--text">Text</button></div></section>
     <section><h4>Sizes</h4><div class="shlz-cluster"><button class="shlz-button shlz-button--primary">Large</button><button class="shlz-button shlz-button--primary shlz-button--sm">Medium</button><button class="shlz-button shlz-button--primary shlz-button--xs">Small</button></div></section>
     <section data-shlz-button-source-matrix><h4>Mode × state matrix</h4><div class="shlz-control-matrix"><b>Mode</b><b>Default</b><b>Hover</b><b>Active</b><b>Disabled</b><span>Primary</span><button class="shlz-button shlz-button--primary">Default</button><button class="shlz-button shlz-button--primary shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--primary shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--primary" disabled>Disabled</button><span>Secondary</span><button class="shlz-button">Default</button><button class="shlz-button shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--visual-active">Active</button><button class="shlz-button" disabled>Disabled</button><span>Text</span><button class="shlz-button shlz-button--text">Default</button><button class="shlz-button shlz-button--text shlz-button--visual-hover">Hover</button><button class="shlz-button shlz-button--text shlz-button--visual-active">Active</button><button class="shlz-button shlz-button--text" disabled>Disabled</button></div><h4>Source-backed sizes and icon combinations</h4><div class="shlz-cluster" data-shlz-button-source-icons><button class="shlz-button shlz-button--primary">${icon("search", "shlz-button__icon")}Label</button><button class="shlz-button">Label${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--sm" data-shlz-button-source-size="medium">Medium</button><button class="shlz-button shlz-button--xs" data-shlz-button-source-size="small">Small</button><button class="shlz-button shlz-button--text shlz-button--icon" aria-label="Text icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--primary shlz-button--icon" aria-label="Primary icon large">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--icon shlz-button--sm" aria-label="Secondary icon medium">${icon("search", "shlz-button__icon")}</button><button class="shlz-button shlz-button--text shlz-button--icon shlz-button--sm" aria-label="Text icon medium">${icon("search", "shlz-button__icon")}</button></div></section>
@@ -542,6 +545,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="input-demo">
     <header><h3>Input</h3><p>Однострочное поле для ввода коротких текстовых значений.</p></header>
+    ${renderComponentDocumentation("input")}
     <div class="shlz-api-size-switch" role="group" aria-label="Input size"><button class="shlz-button shlz-button--primary shlz-button--sm" type="button" data-shlz-input-size="large" aria-pressed="true">Large</button><button class="shlz-button shlz-button--sm" type="button" data-shlz-input-size="medium" aria-pressed="false">Medium</button></div>
     <section><h4>States</h4><div data-shlz-input-size-panel="large">${inputStateMatrix("large")}</div><div data-shlz-input-size-panel="medium" hidden>${inputStateMatrix("medium")}</div></section>
     ${formDiagnostics({
@@ -553,6 +557,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="textarea-demo">
     <header><h3>Textarea</h3><p>Многострочное поле для ввода развёрнутого текста.</p></header>
+    ${renderComponentDocumentation("textarea")}
     <section><h4>States</h4>${textareaStateMatrix()}</section>
     <section><h4>Counter</h4><div class="shlz-api-example">${textareaField({ filled: true, count: true })}</div></section>
     ${formDiagnostics({
@@ -563,8 +568,10 @@ export const primaryComponentMarkup = `
     })}
   </article>
   <article class="shlz-api-component" id="select-demo">
-    <header><h3>Select</h3><p>Выбор одного или нескольких значений; Dropdown остаётся отдельным menu family.</p></header>
-    <section><h4>Sizes and types</h4><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
+    <header><h3>Select</h3><p>Выбор одного значения; Dropdown menu остаётся отдельным семейством команд.</p></header>
+    ${renderComponentDocumentation("select")}
+    <section data-select-production-fixtures><h4 class="shlz-select-fixture-label">Production native single-select</h4><p class="shlz-select-fixture-label">Executable · Production</p><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
+    <section data-select-source-fixtures><h4 class="shlz-select-fixture-label">Source diagnostics · unsupported runtime</h4><p class="shlz-select-fixture-label">Search, multiselect, and status specimens preserve source evidence; they are not production Select contracts.</p><div class="shlz-component-grid"><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div></div></section>
     ${formDiagnostics({
       component: "select",
       orders: [1, 16, 20, 39, 45, 52],
@@ -574,6 +581,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="checkbox-demo">
     <header><h3>Checkbox</h3><p>Независимый выбор с native checked, disabled и indeterminate state.</p></header>
+    ${renderComponentDocumentation("checkbox")}
     <section><h4>Large</h4>${stateMatrix({
       columns: [
         { label: "Unchecked", state: "" },
@@ -598,6 +606,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="radio-demo">
     <header><h3>Radio</h3><p>Единственный выбор внутри native radio group.</p></header>
+    ${renderComponentDocumentation("radio")}
     <section><h4>States</h4>${stateMatrix({
       columns: [
         { label: "Default", state: "" },
@@ -620,6 +629,7 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="switch-demo">
     <header><h3>Switch</h3><p>Мгновенно включает или выключает настройку через checkbox с role=switch.</p></header>
+    ${renderComponentDocumentation("switch")}
     <section data-shlz-switch-source-matrix><h4>Source size and state matrix</h4>${stateMatrix(
       {
         columns: [
@@ -641,11 +651,13 @@ export const primaryComponentMarkup = `
   </article>
   <article class="shlz-api-component" id="status-demo">
     <header><h3>Status</h3><p>Визуальная метка состояния; продуктовый смысл задаёт consumer и не кодируется именем класса.</p></header>
+    ${renderComponentDocumentation("status")}
     <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue")}${status("Green", "green")}${status("Bright green", "bright-green")}${status("Orange", "orange")}${status("Blue pair", "source-blue")}${status("Violet", "purple")}${status("Turquoise", "cyan")}${status("Pink", "pink")}${status("Neutral", "neutral")}</div></section>
     ${statusDiagnostics}
   </article>
   <article class="shlz-api-component" id="badge-demo">
     <header><h3>Badge</h3><p>Компактный счётчик или dot-индикатор; это отдельное семейство, не Status.</p></header>
+    ${renderComponentDocumentation("badge")}
     <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true })}${badge("1", { color: "invert", single: true })}${badge("1", { color: "gray", single: true })}<span>Small · multiple</span>${badge("12")}${badge("12", { color: "invert" })}${badge("12", { color: "gray" })}<span>Medium</span>${badge("12", { size: "medium" })}${badge("12", { size: "medium", color: "invert" })}${badge("12", { size: "medium", color: "gray" })}</div></section>
     <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot"></span><span class="shlz-badge-dot shlz-badge-dot--neutral"></span></div></section>
     ${badgeDiagnostics}

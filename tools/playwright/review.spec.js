@@ -12,10 +12,9 @@ test.beforeEach(async ({ page }) => {
 });
 
 for (const [name, selector] of [
-  ["select", "#select-demo"],
   ["avatar", "#avatar-demo"],
   ["table", "#table-demo"],
-  ["person-tag", "#tag-demo section:nth-of-type(2)"],
+  ["person-tag", "#tag-demo > section:nth-of-type(2)"],
   ["notification", "#notification-demo"],
 ]) {
   test(`production showcase review: ${name}`, async ({ page }) => {
@@ -26,6 +25,18 @@ for (const [name, selector] of [
     );
   });
 }
+
+test("production showcase review: select", async ({ page }) => {
+  const productionFixtures = page.locator(
+    "#select-demo > [data-select-production-fixtures]",
+  );
+  await expect(productionFixtures).toBeVisible();
+  await expectStableShowcaseScreenshot(
+    page,
+    productionFixtures,
+    "review-select.png",
+  );
+});
 
 test("production showcase review: dropdown", async ({ page }) => {
   await stabilizeShowcaseLayout(page);
