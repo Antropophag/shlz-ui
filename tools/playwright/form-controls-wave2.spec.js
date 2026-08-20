@@ -278,7 +278,7 @@ for (const [component, selector, name, focusSelector] of [
   });
 }
 
-test("Wave 2 controls contain long content in a narrow Fira subtree", async ({
+test("Input and Textarea contain audited long content at narrow Fira width", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 800 });
@@ -304,5 +304,33 @@ test("Wave 2 controls contain long content in a narrow Fira subtree", async ({
   expect(containment.fieldRight).toBeLessThanOrEqual(containment.viewportWidth);
   expect(containment.inputClientWidth).toBeLessThanOrEqual(
     containment.fieldWidth,
+  );
+
+  const textarea = page.locator(
+    "[data-component-audit-id='textarea-error-filled']",
+  );
+  await textarea.evaluate((element) => {
+    const field = element.closest(".shlz-field");
+    field.dataset.shlzFont = "fira";
+    field.style.width = "280px";
+  });
+  await textarea.fill(
+    "Очень длинное содержимое с переносом строк и Latin text ".repeat(10),
+  );
+  const textareaContainment = await textarea.evaluate((element) => {
+    const field = element.closest(".shlz-field");
+    const rect = field.getBoundingClientRect();
+    return {
+      fieldWidth: rect.width,
+      textareaScrollWidth: element.scrollWidth,
+      textareaClientWidth: element.clientWidth,
+    };
+  });
+  expect(textareaContainment.fieldWidth).toBe(280);
+  expect(textareaContainment.textareaClientWidth).toBeLessThanOrEqual(
+    textareaContainment.fieldWidth,
+  );
+  expect(textareaContainment.textareaScrollWidth).toBeLessThanOrEqual(
+    textareaContainment.textareaClientWidth,
   );
 });

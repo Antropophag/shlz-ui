@@ -479,7 +479,7 @@
       "evidence": {
         "source-integrity": "complete matrix test",
         "structural-contract": "CSS/docs",
-        "runtime-browser": "pass: native multiline value and programmatic content execute in Chromium",
+        "runtime-browser": "pass: native multiline value executes in Chromium",
         "accessibility": "pass: invalid and described error relationship are asserted concretely",
         "focused-visual": "pass: focused Textarea state matrix snapshot",
         "consumer-integration": "not-applicable: no application-owned live consumer exists",
@@ -629,11 +629,11 @@
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS test",
-        "runtime-browser": "pass: native exclusion, Arrow navigation, focus and programmatic checked execute in Chromium",
+        "runtime-browser": "pass: Tab entry, Arrow navigation, Space selection, exclusion, exact input/change counts and event-free programmatic checked execute in Chromium",
         "accessibility": "pass: same-name group, option labels and keyboard lifecycle are asserted",
         "focused-visual": "pass: focused Radio group snapshot",
         "consumer-integration": "not-applicable: no Data Workspace or application-owned Radio consumer exists",
-        "responsive-content-stress": "pass: group remains contained at narrow viewport"
+        "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
       },
       "canonical_name": "Radio",
       "category": "form-controls",
@@ -670,11 +670,11 @@
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS/docs",
-        "runtime-browser": "pass: native pointer/Space and programmatic checked lifecycle execute in Chromium",
+        "runtime-browser": "pass: native pointer/Space, exact input/change counts, event-free programmatic checked and disabled no-interaction lifecycle execute in Chromium",
         "accessibility": "pass: role=switch, stable visible name, focus and disabled semantics are asserted",
         "focused-visual": "pass: focused two-size Switch state snapshot",
         "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
-        "responsive-content-stress": "pass: labelled switch remains contained at narrow viewport"
+        "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
       },
       "canonical_name": "Switch",
       "category": "form-controls",
