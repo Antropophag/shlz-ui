@@ -23,6 +23,7 @@ test("documented components expose the validated component-page contract", async
     "badge",
     "tag",
     "person-tag",
+    "segment",
     "select",
   ]);
 
@@ -199,6 +200,36 @@ test("Tag families keep presentation and removal ownership separate", async () =
   assert.match(removal, /stateful app/);
   assert.match(css, /\.shlz-person-tag/);
   assert.match(css, /\.shlz-tag__remove:focus-visible/);
+});
+
+test("Segment snippet preserves native radio grouping and sibling styling", async () => {
+  const [css, foundation] = await Promise.all([
+    read("packages/styles/components/segment.css"),
+    read("packages/styles/foundation.css"),
+  ]);
+  const html = componentDocumentation.segment.snippets.find(
+    ({ id }) => id === "segment-html",
+  ).code;
+
+  assert.match(html, /^<fieldset class="shlz-segment">/);
+  assert.match(html, /<legend class="shlz-visually-hidden">Период<\/legend>/);
+  assert.equal(html.match(/name="period"/g)?.length, 2);
+  assert.equal(html.match(/\schecked/g)?.length, 1);
+  assert.deepEqual(
+    [...html.matchAll(/value="([^"]+)"/g)].map((match) => match[1]),
+    ["day", "week"],
+  );
+  assert.equal(html.match(/class="shlz-segment__label"/g)?.length, 2);
+  assert.equal(
+    html.match(
+      /<input(?:(?!<input)[\s\S])*?\/>\s*<span class="shlz-segment__label">/g,
+    )?.length,
+    2,
+  );
+  assert.match(css, /\.shlz-segment__input:checked \+ \.shlz-segment__label/);
+  assert.match(css, /\.shlz-segment--sm/);
+  assert.match(css, /\.shlz-segment--lg/);
+  assert.match(foundation, /\.shlz-visually-hidden/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

@@ -84,6 +84,18 @@ removeButton?.addEventListener("click", () => {
   removeButton.closest("[data-person-tag]")?.remove();
 });`;
 
+const segmentMarkup = `<fieldset class="shlz-segment">
+  <legend class="shlz-visually-hidden">Период</legend>
+  <label class="shlz-segment__option">
+    <input class="shlz-segment__input" type="radio" name="period" value="day" checked />
+    <span class="shlz-segment__label">День</span>
+  </label>
+  <label class="shlz-segment__option">
+    <input class="shlz-segment__input" type="radio" name="period" value="week" />
+    <span class="shlz-segment__label">Неделя</span>
+  </label>
+</fieldset>`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -710,6 +722,70 @@ export const componentDocumentation = {
       ["Showcase", "apps/showcase/src/main.js"],
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/tag-source.test.mjs"],
+      ["Browser tests", "tools/playwright/fidelity.spec.js"],
+    ],
+  },
+  segment: {
+    status: "Executable · Production radio-group example",
+    purpose:
+      "Compact single-choice control that keeps a small visible option set in one source-backed shell.",
+    use: [
+      "Choose exactly one value from a short set when compact side-by-side comparison helps.",
+      "Use one stable group label, shared radio name and unique value per option.",
+    ],
+    avoid: [
+      "Use Tabs for switching document panels/navigation and Select for a long or space-constrained list.",
+      "Do not apply the radio contract to links, commands or multi-selection.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "segment-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "segment-html",
+        label: "HTML",
+        language: "html",
+        code: segmentMarkup,
+      },
+    ],
+    contract: [
+      [
+        "Group",
+        "Native fieldset.shlz-segment with legend.shlz-visually-hidden.",
+      ],
+      ["Option", "label.shlz-segment__option."],
+      [
+        "State owner",
+        "Native input.shlz-segment__input[type=radio] sharing one name.",
+      ],
+      ["Visual label", ".shlz-segment__label immediately follows its input."],
+      [
+        "Sizes",
+        "Default Medium 33px; .shlz-segment--sm 26px; .shlz-segment--lg 41px.",
+      ],
+    ],
+    accessibility:
+      "A visually hidden legend inside the fixed shell names the group; any visible question belongs outside the fieldset. Native same-name radios own mutual exclusion, form data and Arrow/Space keyboard behavior. Keep DOM and visual order aligned and give every option a unique value.",
+    limitations:
+      "This contract is value selection, not tabs/navigation or a toggle-button toolbar. Selected+disabled is absent from source. Equal-width distribution, wrapping and responsive overflow policy are consumer-owned.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Segment.svg"],
+      ["Source specification", "docs/components/segment-source.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/segment.css"],
+      ["Documentation", "docs/components/segment.md"],
+      ["Showcase", "apps/showcase/src/main.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/segment-source.test.mjs"],
+      ["Bundle tests", "tools/tests/components.test.mjs"],
       ["Browser tests", "tools/playwright/fidelity.spec.js"],
     ],
   },
