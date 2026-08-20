@@ -8,7 +8,8 @@ import {
 } from "../../apps/showcase/src/component-docs.js";
 
 const read = (path) => readFile(path, "utf8");
-const normalize = (value) => value.replaceAll(/\s+/g, " ").trim();
+const normalize = (value) =>
+  value.replaceAll(/\s+/g, " ").replaceAll(/\s+>/g, ">").trim();
 
 test("documented components expose the validated component-page contract", async () => {
   assert.deepEqual(Object.keys(componentDocumentation), [
@@ -20,6 +21,8 @@ test("documented components expose the validated component-page contract", async
     "switch",
     "status",
     "badge",
+    "tag",
+    "person-tag",
     "select",
   ]);
 
@@ -165,6 +168,37 @@ test("Status and Badge snippets keep text-owned semantics", async () => {
   assert.match(css, /\.shlz-badge--lg/);
   assert.match(css, /\.shlz-badge-dot/);
   assert.match(foundation, /\.shlz-visually-hidden/);
+});
+
+test("Tag families keep presentation and removal ownership separate", async () => {
+  const css = await read("packages/styles/components/tag.css");
+  const tag = componentDocumentation.tag.snippets.find(
+    ({ id }) => id === "tag-html",
+  ).code;
+  const person = componentDocumentation["person-tag"].snippets.find(
+    ({ id }) => id === "person-tag-html",
+  ).code;
+  const closable = componentDocumentation["person-tag"].snippets.find(
+    ({ id }) => id === "person-tag-closable-html",
+  ).code;
+  const removal = componentDocumentation["person-tag"].snippets.find(
+    ({ id }) => id === "person-tag-js",
+  ).code;
+
+  assert.match(tag, /^<span class="shlz-tag shlz-tag--outlined">/);
+  assert.doesNotMatch(tag, /button|tabindex|role=/);
+  assert.match(person, /class="shlz-tag shlz-person-tag"/);
+  assert.match(person, /class="shlz-tag__avatar"[^>]+alt=""/);
+  assert.match(
+    closable,
+    /data-person-tag>[\s\S]*class="shlz-tag__remove" type="button" aria-label="Удалить Анну Петрову"/,
+  );
+  assert.match(closable, /close-remove\.svg" alt=""/);
+  assert.match(removal, /addEventListener\("click"/);
+  assert.match(removal, /closest\("\[data-person-tag\]"\)\?\.remove\(\)/);
+  assert.match(removal, /stateful app/);
+  assert.match(css, /\.shlz-person-tag/);
+  assert.match(css, /\.shlz-tag__remove:focus-visible/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

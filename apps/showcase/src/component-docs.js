@@ -60,6 +60,30 @@ const badgeMarkup = `<span class="shlz-badge">
   12<span class="shlz-visually-hidden"> непрочитанных уведомлений</span>
 </span>`;
 
+const tagMarkup = `<span class="shlz-tag shlz-tag--outlined">По гарантии</span>`;
+
+const personTagMarkup = `<span class="shlz-tag shlz-person-tag">
+  <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
+  Анна Петрова
+</span>`;
+
+const closablePersonTagMarkup = `<span class="shlz-tag shlz-person-tag" data-person-tag>
+  <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
+  Анна Петрова
+  <button class="shlz-tag__remove" type="button" aria-label="Удалить Анну Петрову">
+    <img class="shlz-tag__icon" src="/assets/icons/close-remove.svg" alt="" />
+  </button>
+</span>`;
+
+const personTagBehavior = `const removeButton = document.querySelector(
+  "[data-person-tag] .shlz-tag__remove",
+);
+
+removeButton?.addEventListener("click", () => {
+  // For a stateful app, update its source state and re-render instead.
+  removeButton.closest("[data-person-tag]")?.remove();
+});`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -556,6 +580,137 @@ export const componentDocumentation = {
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/choice-status-source.test.mjs"],
       ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  },
+  tag: {
+    status: "Executable · Production example",
+    purpose:
+      "Compact non-interactive metadata label in filled or outlined source-backed form.",
+    use: [
+      "Label an item with short secondary metadata or a category.",
+      "Use Person Tag, not generic Tag, when the content represents a person with avatar/removal structure.",
+    ],
+    avoid: [
+      "Use Status for a business state and Badge for a count/dot.",
+      "Do not make the presentation span clickable or encode semantic categories through unsupported colors.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "tag-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      { id: "tag-html", label: "HTML", language: "html", code: tagMarkup },
+    ],
+    contract: [
+      ["Element", "Text-bearing span.shlz-tag."],
+      ["Variants", "Default filled and .shlz-tag--outlined."],
+      [
+        "Semantics",
+        "Visible text owns meaning; Tag is presentation, not a control.",
+      ],
+      ["Interaction", "None for generic Tag."],
+    ],
+    accessibility:
+      "Use concise visible text and keep Tag out of the tab order. If a label needs an action, compose a separate correctly named control rather than adding click semantics to the span.",
+    limitations:
+      "No semantic colors, selection, disabled, removable or interactive generic-Tag contract. Content and category vocabulary are consumer-owned.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Tag.svg"],
+      ["Source specification", "docs/components/tag-source.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/tag.css"],
+      ["Documentation", "docs/components/tag.md"],
+      ["Showcase", "apps/showcase/src/main.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/tag-source.test.mjs"],
+      ["Browser tests", "tools/playwright/fidelity.spec.js"],
+    ],
+  },
+  "person-tag": {
+    status: "Executable · Production example",
+    purpose:
+      "Compact person identity label with a decorative avatar and optional removal control.",
+    use: [
+      "Show a selected or associated person when their visible name remains the primary identity text.",
+      "Use the closable source variant only when the consumer implements a real remove action.",
+    ],
+    avoid: [
+      "Do not use Person Tag as authentication identity, a profile link or a generic category label.",
+      "Do not render a close icon without a native button, accessible name and application handler.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/icons/icons/user.svg", "Required by this fallback example"],
+      [
+        "@shlz/icons/icons/close-remove.svg",
+        "Required by the closable example",
+      ],
+      ["@shlz/behaviors", "Not required; removal is consumer-owned"],
+    ],
+    snippets: [
+      {
+        id: "person-tag-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "person-tag-html",
+        label: "HTML",
+        language: "html",
+        code: personTagMarkup,
+      },
+      {
+        id: "person-tag-closable-html",
+        label: "Optional closable HTML",
+        language: "html",
+        code: closablePersonTagMarkup,
+      },
+      {
+        id: "person-tag-js",
+        label: "Standalone removal integration",
+        language: "js",
+        code: personTagBehavior,
+      },
+    ],
+    contract: [
+      ["Root", "span.shlz-tag.shlz-person-tag."],
+      [
+        "Avatar",
+        "img.shlz-tag__avatar; empty alt when the visible name repeats identity.",
+      ],
+      ["Name", "Visible text content."],
+      [
+        "Optional remove",
+        "Native button.shlz-tag__remove with a specific accessible name.",
+      ],
+      [
+        "Behavior",
+        "No removal controller; consumer handles activation and state.",
+      ],
+    ],
+    accessibility:
+      "The visible name identifies the person, so a repeated avatar uses empty alt. A remove button needs type=button and a specific label such as ‘Удалить Анну Петрову’; focus and activation remain native.",
+    limitations:
+      "No avatar loading/fallback, identity lookup, profile navigation, removal controller, disabled or pending-state behavior is shipped. The example removes standalone DOM; stateful apps must update their source state instead. Consumer-provided images require their own asset/privacy policy.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Tag.svg"],
+      ["Source specification", "docs/components/tag-source.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/tag.css"],
+      ["Documentation", "docs/components/person-tag.md"],
+      ["Showcase", "apps/showcase/src/main.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/tag-source.test.mjs"],
+      ["Browser tests", "tools/playwright/fidelity.spec.js"],
     ],
   },
   select: {
