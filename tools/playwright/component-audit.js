@@ -7,6 +7,9 @@ export const readComponentAuditManifest = async (manifestUrl) =>
 
 export const inspectComponentOccurrences = (page, manifest) =>
   page.evaluate((contract) => {
+    const classifiedIds = new Set(
+      contract.occurrences.map((occurrence) => occurrence.id),
+    );
     const roots = [...document.querySelectorAll(contract.rootSelector)];
     const occurrences = roots.map(
       (root) => root.dataset.componentAuditId ?? null,
@@ -17,7 +20,10 @@ export const inspectComponentOccurrences = (page, manifest) =>
         diagnostic: contract.diagnosticBoundaries.some((boundary) =>
           element.closest(boundary),
         ),
-        classified: Boolean(element.closest("[data-component-audit-id]")),
+        classified: classifiedIds.has(
+          element.closest("[data-component-audit-id]")?.dataset
+            .componentAuditId,
+        ),
       })),
     );
 

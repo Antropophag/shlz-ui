@@ -1,0 +1,62 @@
+{
+  "component": "link",
+  "authoritativeSource": "shlz-design-source/raw/svg/Link.svg",
+  "referenceSources": ["docs/components/link.md"],
+  "implementation": ["packages/styles/components/link.css"],
+  "behavior": null,
+  "docs": "docs/components/link.md",
+  "rootSelector": "[data-component-audit-id^='link-']",
+  "legacySelectors": [".shlz-link"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "link-showcase-contract", "kind": "executable-fixture" },
+    { "id": "link-workspace-request-navigation", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["16px-source"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "active",
+    "focus-visible",
+    "unavailable-text"
+  ],
+  "contentStress": ["long-label", "multiline", "narrow-container"],
+  "sourceClaims": [
+    {
+      "claim": "default, hover, pressed and disabled-looking paints use 16/21 typography",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Link.svg"
+    },
+    {
+      "claim": "navigation uses a native anchor with a real href; unavailable text is a non-anchor span",
+      "classification": "repository-decision",
+      "evidence": "docs/components/link.md"
+    },
+    {
+      "claim": "visited, external and download affordances are not styled public variants",
+      "classification": "assumption",
+      "evidence": "docs/components/link.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/actions-navigation-wave3.spec.js-snapshots/link-focused-contract-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Link.svg four-state typography and paint contract is asserted independently of generated references",
+    "structural-contract": "pass: executable navigation links are native anchors with non-empty href values",
+    "runtime-browser": "pass: Enter navigation updates the URL and native modifier/open-in-new-tab affordances remain unhandled by library JavaScript",
+    "accessibility": "pass: native role/name, Tab focus and visible focus are exercised; unavailable text has no href or fake role",
+    "focused-visual": "pass: component-local normal, real-focus and long multiline states are captured",
+    "consumer-integration": "pass: three Data Workspace request IDs remain native in-page navigation links",
+    "responsive-content-stress": "pass: a long link wraps inside its audited narrow surface without component overflow"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "visited, external-icon and download presentation are consumer-owned"
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "component": "tabs",
+  "authoritativeSource": "shlz-design-source/raw/svg/Tabs.svg",
+  "referenceSources": ["docs/components/tabs.md"],
+  "implementation": ["packages/styles/components/tabs.css"],
+  "behavior": "packages/behaviors/src/tabs.ts",
+  "docs": "docs/components/tabs.md",
+  "rootSelector": "[data-component-audit-id^='tabs-']",
+  "legacySelectors": [".shlz-tabs"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "tabs-showcase-contract", "kind": "executable-fixture" },
+    { "id": "tabs-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["underline-61", "pill-40", "boxed-39"],
+  "supportedStates": [
+    "active",
+    "inactive",
+    "hover",
+    "focus-visible",
+    "disabled"
+  ],
+  "contentStress": ["long-label", "narrow-container", "multiple-instances"],
+  "sourceClaims": [
+    {
+      "claim": "underline, pill and boxed are distinct source families with 61/40/39px geometry",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Tabs.svg"
+    },
+    {
+      "claim": "width is label/content-driven and source does not define a mobile collapse policy",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Tabs.svg"
+    },
+    {
+      "claim": "TabsController uses automatic activation with roving tabindex; consumers own overflow layout",
+      "classification": "repository-decision",
+      "evidence": "docs/components/tabs.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/components-next.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/actions-navigation-wave3.spec.js-snapshots/tabs-focused-contract-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: all three primary SVG families and their state geometry remain traced by source tests",
+    "structural-contract": "pass: tablist/tab/tabpanel relationships and controller export are asserted",
+    "runtime-browser": "pass: click, ArrowLeft/Right, Home/End, programmatic activation, repeated enhancement, teardown and multiple instances execute in Chromium",
+    "accessibility": "pass: exactly one selected/tab-stop tab, disabled skip, focus movement and root-scoped unique ARIA relationships are checked",
+    "focused-visual": "pass: component-local active, inactive, real focus and narrow long-label states are captured",
+    "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
+    "responsive-content-stress": "pass: baseline contract is explicit consumer-owned overflow; audited narrow fixture proves no accidental component clipping claim"
+  },
+  "acceptedDeviations": [],
+  "findings": [
+    {
+      "id": "tabs-controller-lifecycle-and-aria-validation",
+      "severity": "P1",
+      "status": "resolved-wave3",
+      "description": "Repeated enhancement created additional controllers, initial selection did not exclude native disabled, and malformed or cross-root ARIA relationships were accepted silently.",
+      "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
+      "tracking": "docs/component-audits/wave-3-report.md"
+    }
+  ],
+  "knownLimitations": [
+    "overflow, wrapping and responsive navigation policy are consumer-owned",
+    "pill and boxed Showcase matrices are static style fixtures without panels"
+  ]
+}

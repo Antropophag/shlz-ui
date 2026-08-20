@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   min-inline-size: var(--shlz-button-size);
+  max-inline-size: 100%;
   min-block-size: var(--shlz-button-size);
   padding: 0 var(--shlz-source-spacing-16);
   color: var(--shlz-semantic-color-text-primary);
@@ -18,6 +19,7 @@
   line-height: 19.5px;
   letter-spacing: -0.01em;
   text-decoration: none;
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 

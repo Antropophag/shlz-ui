@@ -1,0 +1,75 @@
+{
+  "component": "pagination",
+  "authoritativeSource": "shlz-design-source/raw/svg/Pagination.svg",
+  "referenceSources": [
+    "docs/components/pagination-source.md",
+    "docs/components/pagination.md"
+  ],
+  "implementation": ["packages/styles/components/pagination.css"],
+  "behavior": null,
+  "docs": "docs/components/pagination.md",
+  "rootSelector": "[data-component-audit-id^='pagination-']",
+  "legacySelectors": [".shlz-pagination"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "pagination-showcase-and-consumer", "kind": "live-consumer" },
+    { "id": "pagination-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["40px-item"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "pressed",
+    "current",
+    "disabled",
+    "ellipsis"
+  ],
+  "contentStress": [
+    "first-page",
+    "middle-page",
+    "last-page",
+    "short-window",
+    "ellipsis-window",
+    "narrow-wrap"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "five item types by four states produce 20 40x40 primitive variants",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Pagination.svg"
+    },
+    {
+      "claim": "the standalone composition demonstrates a window but does not define a generator",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Pagination.svg"
+    },
+    {
+      "claim": "native links own navigation while current page, totals, window, URL and router remain consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/components/pagination.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/pagination-contract.spec.js",
+    "tools/playwright/pagination-typography.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/actions-navigation-wave3.spec.js-snapshots/pagination-focused-contract-chromium-linux.png",
+    "tools/playwright/pagination-typography.spec.js-snapshots/pagination-typography-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Pagination.svg primitive/composition split and exact 20-state matrix remain source-tested",
+    "structural-contract": "pass: named nav/list/native-link markup, one current page, non-link boundaries and ellipsis are asserted",
+    "runtime-browser": "pass: URL-driven first/middle/last navigation updates consumer results without a library router/controller",
+    "accessibility": "pass: native link focus/order, real href, one aria-current and non-anchor disabled directions are browser-checked",
+    "focused-visual": "pass: first, middle, last and ellipsis component-local evidence supplements the unchanged bounded typography raster test",
+    "consumer-integration": "pass: URL-owned current page and result range execute across all three consumer pages",
+    "responsive-content-stress": "pass: 240px component-local list wraps without clipping, hidden scroll or automatic collapse"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no page-window generator, router, totals model, automatic collapse or hidden horizontal scrolling"
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "component": "button",
+  "authoritativeSource": "shlz-design-source/raw/svg/Buttons.svg",
+  "referenceSources": ["docs/components/button.md"],
+  "implementation": ["packages/styles/components/button.css"],
+  "behavior": null,
+  "docs": "docs/components/button.md",
+  "rootSelector": "[data-component-audit-id^='button-']",
+  "legacySelectors": [".shlz-button"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "button-showcase-contract", "kind": "executable-fixture" },
+    { "id": "button-input-size-switch", "kind": "executable-fixture" },
+    { "id": "button-table-actions", "kind": "executable-fixture" },
+    { "id": "button-dropdown-triggers", "kind": "executable-fixture" },
+    { "id": "button-popover-actions", "kind": "live-consumer" },
+    { "id": "button-tooltip-triggers", "kind": "live-consumer" },
+    { "id": "button-notification-consumer", "kind": "live-consumer" },
+    { "id": "button-modal-actions", "kind": "live-consumer" },
+    { "id": "button-drawer-actions", "kind": "live-consumer" },
+    { "id": "button-framework-composition", "kind": "executable-fixture" },
+    { "id": "button-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "button-typography-table", "kind": "content-stress-fixture" },
+    { "id": "button-workspace-filter-trigger", "kind": "live-consumer" },
+    { "id": "button-workspace-bulk-clear", "kind": "live-consumer" },
+    { "id": "button-workspace-empty-reset", "kind": "live-consumer" },
+    { "id": "button-workspace-drawer-actions", "kind": "live-consumer" },
+    { "id": "button-empty-state-actions", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["large-40", "medium-32", "small-26"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+  ],
+  "contentStress": [
+    "icon-leading",
+    "icon-trailing",
+    "icon-only",
+    "long-label",
+    "narrow-container"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "primary, secondary and text modes retain three sizes and four source paint rows",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "source specimen widths are content examples rather than fixed public widths",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "native button owns activation, form type, disabled and click semantics; the library adds no controller",
+      "classification": "repository-decision",
+      "evidence": "docs/components/button.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/overlay.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/actions-navigation-wave3.spec.js-snapshots/button-focused-contract-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Buttons.svg remains authoritative and source tests cover the complete mode, size and paint matrix",
+    "structural-contract": "pass: native button markup, shipped CSS classes and clean package consumption are exercised",
+    "runtime-browser": "pass: pointer, Enter, Space and programmatic click each emit exactly one click; disabled emits none",
+    "accessibility": "pass: native button role/name, focus-visible, disabled focus exclusion and absence of nested interactive content are browser-checked",
+    "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus",
+    "consumer-integration": "pass: Data Workspace reset/apply/filter actions and overlay actions execute application-owned state/lifecycle",
+    "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
+  },
+  "acceptedDeviations": [],
+  "findings": [
+    {
+      "id": "button-narrow-content-overflow",
+      "severity": "P2",
+      "status": "resolved-wave3",
+      "description": "Long labels could exceed a narrow component container because the inline-flex shell had no maximum inline constraint.",
+      "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
+      "tracking": "docs/component-audits/wave-3-report.md"
+    }
+  ],
+  "knownLimitations": [
+    "loading is not part of the public contract",
+    "button-styled anchors are not a supported Button variant"
+  ]
+}

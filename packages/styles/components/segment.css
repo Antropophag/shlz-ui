@@ -7,6 +7,7 @@
   border: 0;
   border-radius: var(--shlz-source-radius-min);
   inline-size: max-content;
+  min-inline-size: 0;
   max-inline-size: 100%;
   font-size: var(--shlz-semantic-typography-role-compact-label-size);
   line-height: var(--shlz-semantic-typography-role-compact-label-line-height);
@@ -15,6 +16,7 @@
 .shlz-segment__option {
   position: relative;
   display: inline-flex;
+  min-inline-size: 0;
 }
 
 .shlz-segment__input {
@@ -32,6 +34,7 @@
   min-block-size: 25px;
   padding-inline: 12px; /* Segment.svg component geometry */
   border-radius: 6px; /* Segment.svg component geometry, not source radius scale */
+  overflow-wrap: anywhere;
   cursor: pointer;
 }
 
