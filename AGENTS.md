@@ -103,3 +103,27 @@ Prefer small, reviewable architectural steps.
 Do not implement a large component library before the foundation, contracts and source interpretation are established.
 
 Do not modify unrelated files.
+
+## UI component completion
+
+Before declaring a UI component fixed, complete, production-ready, or ready for
+review:
+
+- inventory every occurrence of that component in the Showcase and in live
+  consumer fixtures;
+- distinguish executable/live surfaces from inert visual or source-diagnostic
+  matrices;
+- apply the supported production contract to every executable occurrence, not
+  only to one representative example;
+- verify all visible component details against the authoritative source,
+  including opened/expanded states, icons, affordances, focus, keyboard behavior
+  and consumer compositions;
+- add browser coverage for each materially different executable surface,
+  including at least one real consumer fixture when one exists;
+- report the exact occurrence counts, what was migrated, and what intentionally
+  remains diagnostic or unsupported.
+
+A passing representative fixture or source-regex test is not evidence that the
+component is complete across the repository. Do not close or present a component
+side quest as finished while an executable Showcase or consumer occurrence still
+uses the superseded contract.

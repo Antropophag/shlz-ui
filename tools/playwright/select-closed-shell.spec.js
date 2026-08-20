@@ -4,6 +4,34 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
+test("every executable Showcase Select uses the reusable contract", async ({
+  page,
+}) => {
+  await expect(
+    page.locator(
+      "#select-demo [data-select-production-fixtures] [data-shlz-select]",
+    ),
+  ).toHaveCount(6);
+  await expect(
+    page.locator("#workspace-filter-drawer [data-shlz-select]"),
+  ).toHaveCount(1);
+  await expect(
+    page.locator("#typography-compatibility [data-shlz-select]"),
+  ).toHaveCount(1);
+  await expect(
+    page.locator(
+      "#select-demo [data-select-production-fixtures] select, #workspace-filter-drawer select, #typography-compatibility select",
+    ),
+  ).toHaveCount(0);
+  const interactiveNativeSelects = await page
+    .locator("select")
+    .evaluateAll(
+      (selects) =>
+        selects.filter((select) => !select.closest("[inert]")).length,
+    );
+  expect(interactiveNativeSelects).toBe(0);
+});
+
 const productionField = (page, label) =>
   page
     .locator("#select-demo [data-select-production-fixtures] .shlz-field")
@@ -95,7 +123,7 @@ test("opened Select uses the SHLZ surface and emits one value change", async ({
   const sourceDiagnostics = page.locator(
     "#select-demo [data-select-source-fixtures]",
   );
-  const root = production.locator("[data-shlz-select]");
+  const root = production.locator("[data-shlz-select]").first();
   const trigger = root.locator(".shlz-select__trigger");
   const input = root.locator('input[type="hidden"]');
   await input.evaluate((element) => {
@@ -118,11 +146,11 @@ test("opened Select uses the SHLZ surface and emits one value change", async ({
     "transform",
     "matrix(-1, 0, 0, -1, 0, 0)",
   );
-  await root.locator('[role="option"][data-value="progress"]').click();
+  await root.locator('[role="option"][data-value="В работе"]').click();
   expect(await page.evaluate(() => window.__selectFixtureChanges)).toEqual([
-    "progress",
+    "В работе",
   ]);
-  await expect(input).toHaveValue("progress");
+  await expect(input).toHaveValue("В работе");
   await expect(trigger).toContainText("В работе");
   await expect(trigger).toBeFocused();
   await expect(root.locator(".shlz-select__listbox")).toBeHidden();
@@ -131,7 +159,7 @@ test("opened Select uses the SHLZ surface and emits one value change", async ({
 test("Select keyboard lifecycle opens, navigates, selects and restores focus", async ({
   page,
 }) => {
-  const root = page.locator("#select-demo [data-shlz-select]");
+  const root = page.locator("#select-demo [data-shlz-select]").first();
   const trigger = root.locator(".shlz-select__trigger");
   await trigger.focus();
   await page.keyboard.press("ArrowDown");
@@ -143,7 +171,7 @@ test("Select keyboard lifecycle opens, navigates, selects and restores focus", a
   await page.keyboard.press("Enter");
   await expect(root.locator('[role="option"]').first()).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(root.locator('input[type="hidden"]')).toHaveValue("new");
+  await expect(root.locator('input[type="hidden"]')).toHaveValue("Новая");
   await expect(trigger).toBeFocused();
 });
 

@@ -76,8 +76,8 @@ test("Select separates production examples from unsupported source diagnostics",
   const showcase = await read("apps/showcase/src/fidelity.js");
   assert.match(showcase, /data-select-production-fixtures/);
   assert.match(showcase, /Production single-select/);
-  assert.match(showcase, /Executable trigger, source chevron/);
-  assert.match(showcase, /SHLZ option surface/);
+  assert.match(showcase, /All six fixtures execute the same trigger/);
+  assert.match(showcase, /SHLZ option-surface contract/);
   assert.match(showcase, /data-select-source-fixtures/);
   assert.match(showcase, /Source diagnostics · unsupported runtime/);
   assert.match(showcase, /<details[^>]+data-select-source-fixtures/);

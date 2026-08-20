@@ -4,7 +4,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("native status filter composes with Drawer and application state", async ({
+test("SHLZ status filter composes with Drawer and application state", async ({
   page,
 }) => {
   const trigger = page.getByRole("button", { name: /Фильтры/ });
@@ -13,22 +13,24 @@ test("native status filter composes with Drawer and application state", async ({
   const drawer = page.getByRole("dialog", { name: "Фильтры заявок" });
   const status = drawer.getByRole("combobox", { name: "Статус" });
   await expect(drawer).toBeVisible();
-  await expect(status).toHaveJSProperty("tagName", "SELECT");
-  await expect(status.locator("option")).toHaveCount(5);
+  await expect(status).toHaveJSProperty("tagName", "BUTTON");
+  await status.click();
+  const listbox = drawer.getByRole("listbox", { name: "Статус" });
+  await expect(listbox).toBeVisible();
+  await expect(listbox.getByRole("option")).toHaveCount(5);
   await expect(
-    status.locator("option", { hasText: "Архивная" }),
-  ).toBeDisabled();
-  await expect(drawer.getByRole("listbox")).toHaveCount(0);
+    listbox.getByRole("option", { name: "Архивная" }),
+  ).toHaveAttribute("aria-disabled", "true");
 
   await page.evaluate(() => {
-    window.__workspaceNativeChanges = 0;
+    window.__workspaceSelectChanges = 0;
     document
       .querySelector("[data-workspace-status-filter]")
-      .addEventListener("change", () => window.__workspaceNativeChanges++);
+      .addEventListener("change", () => window.__workspaceSelectChanges++);
   });
-  await status.selectOption({ label: "В работе" });
+  await listbox.getByRole("option", { name: "В работе" }).click();
   await expect
-    .poll(() => page.evaluate(() => window.__workspaceNativeChanges))
+    .poll(() => page.evaluate(() => window.__workspaceSelectChanges))
     .toBe(1);
   await drawer.getByRole("button", { name: "Применить" }).click();
 
@@ -43,28 +45,33 @@ test("filter draft is committed only by Apply", async ({ page }) => {
   const trigger = page.getByRole("button", { name: /Фильтры/ });
   const drawer = page.getByRole("dialog", { name: "Фильтры заявок" });
   const status = drawer.getByRole("combobox", { name: "Статус" });
+  const statusValue = drawer.locator("[data-workspace-status-filter]");
   const search = page.getByRole("searchbox", { name: "Поиск по заявкам" });
 
   await search.fill("SD");
   await trigger.click();
-  await status.selectOption({ label: "Новая" });
+  const selectStatus = async (label) => {
+    await status.click();
+    await drawer.getByRole("option", { name: label, exact: true }).click();
+  };
+  await selectStatus("Новая");
   await page.keyboard.press("Escape");
   await expect(drawer).toBeHidden();
   await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(3);
 
   await trigger.click();
-  await expect(status).toHaveValue("");
-  await status.selectOption({ label: "В работе" });
+  await expect(statusValue).toHaveValue("");
+  await selectStatus("В работе");
   await drawer.getByRole("button", { name: "Закрыть" }).click();
   await trigger.click();
-  await expect(status).toHaveValue("");
+  await expect(statusValue).toHaveValue("");
 
-  await status.selectOption({ label: "В работе" });
+  await selectStatus("В работе");
   await drawer.getByRole("button", { name: "Применить" }).click();
   await trigger.click();
-  await expect(status).toHaveValue("В работе");
+  await expect(statusValue).toHaveValue("В работе");
   await drawer.getByRole("button", { name: "Сбросить" }).click();
-  await expect(status).toHaveValue("");
+  await expect(statusValue).toHaveValue("");
   await expect(search).toHaveValue("SD");
   await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(1);
   await drawer.getByRole("button", { name: "Применить" }).click();
@@ -147,4 +154,17 @@ test("consumer workspace composition remains visually stable", async ({
     animations: "disabled",
     caret: "hide",
   });
+});
+
+test("consumer workspace Select opened surface remains visually stable", async ({
+  page,
+}) => {
+  await page.getByRole("button", { name: /Фильтры/ }).click();
+  const drawer = page.getByRole("dialog", { name: "Фильтры заявок" });
+  await drawer.getByRole("combobox", { name: "Статус" }).click();
+  await expect(drawer.getByRole("listbox", { name: "Статус" })).toBeVisible();
+  await expect(drawer.locator(".shlz-drawer__surface")).toHaveScreenshot(
+    "consumer-workspace-select-open.png",
+    { animations: "disabled", caret: "hide" },
+  );
 });

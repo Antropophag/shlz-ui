@@ -148,10 +148,10 @@ Select composes inside Field, forms, Modal and Drawer. Dropdown menu is a separa
 command family. Search, async data and dependent-field policy belong to the
 application until separate reusable contracts are approved.
 
-The Showcase Data Workspace demonstrates a bounded application-owned status
-filter using a native control as separate consumer validation. It is ServiceDesk-inspired
-validation, not evidence that the delivered application uses the same option
-count or control implementation.
+The Showcase Data Workspace demonstrates the same reusable Select trigger,
+listbox and behavior inside a bounded application-owned status filter. It is
+ServiceDesk-inspired validation, not evidence that the delivered application
+uses the same option count or data.
 
 ## Limitations
 

@@ -57,34 +57,28 @@ test("base single Select exposes the shipped trigger and listbox contract", asyn
   page,
 }) => {
   const selectDemo = page.locator("#select-demo");
-  const selects = selectDemo
-    .locator(":scope > section")
-    .first()
+  const nativeSelects = selectDemo
+    .locator("[data-select-production-fixtures]")
     .locator("select.shlz-select");
 
-  await expect(selects).toHaveCount(5);
-  await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
-  await expect(
-    selectDemo
-      .locator(":scope > section")
-      .first()
-      .locator("select.shlz-select:enabled"),
-  ).toHaveCount(4);
-  await expect(
-    selectDemo
-      .locator(":scope > section")
-      .first()
-      .locator("select.shlz-select:disabled"),
-  ).toHaveCount(1);
-  const trigger = selectDemo.locator(
-    '[data-shlz-select] [aria-haspopup="listbox"]',
+  await expect(nativeSelects).toHaveCount(0);
+  const triggers = selectDemo.locator(
+    '[data-select-production-fixtures] [data-shlz-select] [aria-haspopup="listbox"]',
   );
-  await expect(trigger).toHaveCount(1);
-  await trigger.focus();
-  await expect(trigger).toBeFocused();
-  const listbox = selectDemo.locator('[role="listbox"]');
-  await expect(listbox).toHaveCount(1);
-  await expect(listbox).toBeHidden();
+  await expect(triggers).toHaveCount(6);
+  await expect(
+    selectDemo.locator(
+      '[data-select-production-fixtures] [data-shlz-select] [aria-haspopup="listbox"]:disabled',
+    ),
+  ).toHaveCount(1);
+  await triggers.first().focus();
+  await expect(triggers.first()).toBeFocused();
+  const listboxes = selectDemo.locator(
+    '[data-select-production-fixtures] [role="listbox"]',
+  );
+  await expect(listboxes).toHaveCount(6);
+  for (const listbox of await listboxes.all())
+    await expect(listbox).toBeHidden();
 });
 
 test("documented components expose developer usage without mixing diagnostics", async ({

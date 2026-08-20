@@ -120,6 +120,10 @@
   border-color: var(--shlz-source-color-blue-blue-200);
 }
 
+.shlz-select__trigger--selected {
+  color: var(--shlz-source-color-dark-blue-dark-blue);
+}
+
 .shlz-select__chevron {
   flex: 0 0 24px;
   inline-size: 24px;
@@ -170,6 +174,11 @@
 .shlz-select__option:is(:hover, :focus-visible, [aria-selected="true"]) {
   background: var(--shlz-semantic-color-surface-muted);
   outline: 0;
+}
+
+.shlz-select__option[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-select--placeholder {

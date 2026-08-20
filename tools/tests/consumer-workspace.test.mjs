@@ -4,20 +4,21 @@ import test from "node:test";
 
 const read = (path) => readFile(path, "utf8");
 
-test("consumer workspace may keep its native filter beside the reusable Select", async () => {
+test("consumer workspace uses the reusable Select contract", async () => {
   const [workspace, behaviorExports, behaviorPackage] = await Promise.all([
     read("apps/showcase/src/consumer-workspace.js"),
     read("packages/behaviors/src/index.ts"),
     read("packages/behaviors/package.json"),
   ]);
 
-  assert.match(workspace, /<select class="shlz-select"/);
+  assert.match(workspace, /data-shlz-select/);
+  assert.match(workspace, /role="combobox"/);
+  assert.match(workspace, /role="listbox"/);
   assert.match(workspace, /data-workspace-status-filter/);
   assert.match(workspace, /addEventListener\("input"/);
   assert.match(workspace, /addEventListener\(\s*"click"/);
   assert.match(workspace, /window\.AbortController/);
-  assert.doesNotMatch(workspace, /role="(?:combobox|listbox|option)"/);
-  assert.doesNotMatch(workspace, /enhanceSelect|SelectController/);
+  assert.match(workspace, /enhanceSelects/);
   assert.match(behaviorExports, /from "\.\/select/);
   assert.ok(JSON.parse(behaviorPackage).exports["./select"]);
 });

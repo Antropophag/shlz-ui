@@ -51,6 +51,30 @@ export class SelectController {
     controllers.delete(this.root);
   }
 
+  setValue(value: string, { emit = false } = {}): void {
+    const options = [
+      ...this.listbox.querySelectorAll<HTMLElement>(optionSelector),
+    ];
+    const selected = options.find((option) => option.dataset.value === value);
+    for (const option of options)
+      option.setAttribute("aria-selected", String(option === selected));
+    this.input.value = value;
+    this.trigger.classList.toggle(
+      "shlz-select__trigger--selected",
+      Boolean(value),
+    );
+    const valueNode = this.trigger.querySelector<HTMLElement>(
+      "[data-shlz-select-value]",
+    );
+    if (valueNode)
+      valueNode.textContent =
+        selected?.textContent?.trim() ?? valueNode.dataset.placeholder ?? "";
+    if (emit) {
+      this.input.dispatchEvent(new Event("input", { bubbles: true }));
+      this.input.dispatchEvent(new Event("change", { bubbles: true }));
+    }
+  }
+
   #initialize(): void {
     const { signal } = this.#abortController;
     this.close();
@@ -110,16 +134,8 @@ export class SelectController {
   }
 
   #select(option: HTMLElement): void {
-    for (const candidate of this.listbox.querySelectorAll(optionSelector))
-      candidate.setAttribute("aria-selected", String(candidate === option));
     const value = option.dataset.value ?? option.textContent?.trim() ?? "";
-    this.input.value = value;
-    const valueNode = this.trigger.querySelector<HTMLElement>(
-      "[data-shlz-select-value]",
-    );
-    if (valueNode) valueNode.textContent = option.textContent?.trim() ?? value;
-    this.input.dispatchEvent(new Event("input", { bubbles: true }));
-    this.input.dispatchEvent(new Event("change", { bubbles: true }));
+    this.setValue(value, { emit: true });
     this.close({ restoreFocus: true });
   }
 
