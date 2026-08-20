@@ -65,15 +65,15 @@ No `@shlz/behaviors/select` export exists in the current production package.
 
 ## Public HTML/API contract
 
-| Contract | Supported value |
-| --- | --- |
-| Root | `.shlz-field.shlz-field--select` |
-| Value owner | Direct `.shlz-field__control > select.shlz-select` |
-| Label | Native `label[for]` associated with the select `id` |
-| Indicator | `.shlz-field__indicator` with decorative content hidden from the accessibility tree |
-| Events | Platform-native `input`/`change` behavior |
-| Popup | Browser-owned; SHLZ does not style or control the opened list |
-| JavaScript | None required or exported for Select |
+| Contract    | Supported value                                                                     |
+| ----------- | ----------------------------------------------------------------------------------- |
+| Root        | `.shlz-field.shlz-field--select`                                                    |
+| Value owner | Direct `.shlz-field__control > select.shlz-select`                                  |
+| Label       | Native `label[for]` associated with the select `id`                                 |
+| Indicator   | `.shlz-field__indicator` with decorative content hidden from the accessibility tree |
+| Events      | Platform-native `input`/`change` behavior                                           |
+| Popup       | Browser-owned; SHLZ does not style or control the opened list                       |
+| JavaScript  | None required or exported for Select                                                |
 
 The application owns option data, validation, dependent fields, persistence and
 event handling.
@@ -125,18 +125,18 @@ application until separate reusable contracts are approved.
 
 ## Traceability
 
-| Layer | Location |
-| --- | --- |
+| Layer                       | Location                                                                                       |
+| --------------------------- | ---------------------------------------------------------------------------------------------- |
 | Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`) |
-| Source sheet | `shlz-design-source/raw/svg/Select.svg` |
-| Source specification | `docs/components/form-controls-source-spec.md` |
-| Provenance | `packages/tokens/provenance.json` |
-| Tokens | `packages/tokens/tokens.json` |
-| Field styles | `packages/styles/components/field.css` |
-| Behavior exports | `packages/behaviors/package.json` (no Select subpath) |
-| Showcase | `apps/showcase/src/fidelity.js#select-demo` |
-| Source tests | `tools/tests/form-controls-source.test.mjs` |
-| Browser/layout tests | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js` |
+| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                        |
+| Source specification        | `docs/components/form-controls-source-spec.md`                                                 |
+| Provenance                  | `packages/tokens/provenance.json`                                                              |
+| Tokens                      | `packages/tokens/tokens.json`                                                                  |
+| Field styles                | `packages/styles/components/field.css`                                                         |
+| Behavior exports            | `packages/behaviors/package.json` (no Select subpath)                                          |
+| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                    |
+| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                    |
+| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`                       |
 
 ## Source interpretation
 

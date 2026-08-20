@@ -323,17 +323,16 @@ test("Select copyable markup matches the shipped native-only contract", async ()
   const html = componentDocumentation.select.snippets.find(
     ({ id }) => id === "select-html",
   ).code;
-  assert.match(
-    html,
-    /class="shlz-field shlz-field--select"/,
-  );
+  assert.match(html, /class="shlz-field shlz-field--select"/);
   assert.match(html, /<label class="shlz-field__label" for="request-type"/);
   assert.match(html, /<select class="shlz-select" id="request-type"/);
   assert.match(html, /class="shlz-field__indicator" aria-hidden="true"/);
   assert.match(html, /class="shlz-field__icon"/);
   assert.match(fieldCss, /\.shlz-field--select \.shlz-field__control/);
   assert.equal(
-    componentDocumentation.select.snippets.some(({ language }) => language === "js"),
+    componentDocumentation.select.snippets.some(
+      ({ language }) => language === "js",
+    ),
     false,
   );
   assert.equal(packageJson.exports["./select"], undefined);
