@@ -56,6 +56,9 @@ jobs:
       - name: Validate source fidelity and package exports
         run: node tools/validate.mjs
 
+      - name: Verify packed packages from a clean consumer
+        run: npm run test:packages
+
   browser-tests:
     name: Browser and visual tests
     runs-on: ubuntu-latest
