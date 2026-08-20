@@ -133,6 +133,13 @@ test("selection, teardown and narrow containment remain explicit", async ({
 test("consumer workspace composition remains visually stable", async ({
   page,
 }) => {
+  await page.evaluate(() => {
+    for (const addition of document.querySelectorAll(
+      '[data-component-docs="pagination"], [data-pagination-consumer]',
+    )) {
+      addition.hidden = true;
+    }
+  });
   await page.evaluate(() => document.fonts.ready);
   const workspace = page.locator("[data-consumer-workspace]");
   await workspace.scrollIntoViewIfNeeded();
