@@ -169,6 +169,108 @@ test("Tabs validates ARIA, skips disabled, is idempotent and tears down", async 
   expect(error).toContain("requires id and aria-controls");
 });
 
+test("Tabs rejects duplicate and cross-root ARIA without rebinding valid roots", async ({
+  page,
+}) => {
+  const result = await page.evaluate(() => {
+    const host = document.createElement("section");
+    const validRoot = (name) => `
+      <div data-shlz-tabs data-test-tabs-root="${name}">
+        <div role="tablist" aria-label="${name}">
+          <button id="${name}-tab-a" role="tab" aria-controls="${name}-panel-a" aria-selected="true">${name} A</button>
+          <button id="${name}-tab-b" role="tab" aria-controls="${name}-panel-b">${name} B</button>
+        </div>
+        <div id="${name}-panel-a" role="tabpanel" aria-labelledby="${name}-tab-a">${name} panel A</div>
+        <div id="${name}-panel-b" role="tabpanel" aria-labelledby="${name}-tab-b" hidden>${name} panel B</div>
+      </div>`;
+    host.innerHTML = validRoot("alpha") + validRoot("beta");
+    document.body.append(host);
+    const initial = window.__shlzEnhanceTabs(host);
+
+    const malformedCases = [
+      {
+        name: "duplicate tab id",
+        markup: `<div data-shlz-tabs><div role="tablist"><button id="alpha-tab-a" role="tab" aria-controls="duplicate-tab-panel">Duplicate tab</button></div><div id="duplicate-tab-panel" role="tabpanel" aria-labelledby="alpha-tab-a"></div></div>`,
+      },
+      {
+        name: "duplicate panel id",
+        markup: `<div data-shlz-tabs><div role="tablist"><button id="duplicate-panel-tab" role="tab" aria-controls="alpha-panel-a">Duplicate panel</button></div><div id="alpha-panel-a" role="tabpanel" aria-labelledby="duplicate-panel-tab"></div></div>`,
+      },
+      {
+        name: "panel outside current root",
+        markup: `<div data-shlz-tabs><div role="tablist"><button id="outside-panel-tab" role="tab" aria-controls="outside-panel">Outside panel</button></div></div><div id="outside-panel" role="tabpanel" aria-labelledby="outside-panel-tab"></div>`,
+      },
+    ];
+    const errors = malformedCases.map(({ name, markup }) => {
+      const fixture = document.createElement("div");
+      fixture.innerHTML = markup;
+      host.append(fixture);
+      try {
+        window.__shlzEnhanceTabs(host);
+        return { name, errorName: null, message: null };
+      } catch (error) {
+        return {
+          name,
+          errorName: error?.constructor?.name ?? null,
+          message: error instanceof Error ? error.message : String(error),
+        };
+      } finally {
+        fixture.remove();
+      }
+    });
+    const afterErrors = window.__shlzEnhanceTabs(host);
+    return {
+      errors,
+      controllerCount: initial.length,
+      identitiesPreserved: afterErrors.every(
+        (controller, index) => controller === initial[index],
+      ),
+    };
+  });
+
+  expect(result.controllerCount).toBe(2);
+  expect(result.identitiesPreserved).toBe(true);
+  expect(result.errors).toEqual([
+    {
+      name: "duplicate tab id",
+      errorName: "TypeError",
+      message:
+        "Tabs relationship alpha-tab-a -> duplicate-tab-panel must be unique and root-scoped.",
+    },
+    {
+      name: "duplicate panel id",
+      errorName: "TypeError",
+      message:
+        "Tabs relationship duplicate-panel-tab -> alpha-panel-a must be unique and root-scoped.",
+    },
+    {
+      name: "panel outside current root",
+      errorName: "TypeError",
+      message:
+        "Tabs relationship outside-panel-tab -> outside-panel must be unique and root-scoped.",
+    },
+  ]);
+
+  const alphaFirst = page.getByRole("tab", { name: "alpha A" });
+  const alphaSecond = page.getByRole("tab", { name: "alpha B" });
+  const betaFirst = page.getByRole("tab", { name: "beta A" });
+  await alphaFirst.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(alphaSecond).toBeFocused();
+  await expect(betaFirst).toHaveAttribute("aria-selected", "true");
+
+  await page.evaluate(() => {
+    const host = document
+      .querySelector("[data-test-tabs-root='alpha']")
+      .closest("section");
+    for (const controller of window.__shlzEnhanceTabs(host))
+      controller.destroy();
+  });
+  await alphaFirst.focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(alphaFirst).toBeFocused();
+});
+
 test("Pagination preserves native URL navigation at every boundary", async ({
   page,
 }) => {
@@ -227,6 +329,8 @@ test("Wave 3 responsive claims are component-local", async ({ page }) => {
     ).toBeLessThanOrEqual(metrics.clientWidth + 1);
   }
 
+  // Tabs overflow/wrapping is consumer-owned. This narrow composition is
+  // integration evidence only; it is not a component responsive contract.
   const tabs = page.locator("#typography-compatibility .shlz-tabs");
   await tabs.evaluate((element) => {
     element.style.overflowX = "auto";
