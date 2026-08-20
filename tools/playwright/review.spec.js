@@ -15,7 +15,7 @@ for (const [name, selector] of [
   ["select", "#select-demo"],
   ["avatar", "#avatar-demo"],
   ["table", "#table-demo"],
-  ["person-tag", "#tag-demo section:nth-of-type(2)"],
+  ["person-tag", "#tag-demo > section:nth-of-type(2)"],
   ["notification", "#notification-demo"],
 ]) {
   test(`production showcase review: ${name}`, async ({ page }) => {
