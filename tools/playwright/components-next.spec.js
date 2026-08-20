@@ -101,10 +101,9 @@ test("CSS-only components retain native semantics", async ({ page }) => {
   const month = page.getByRole("radio", { name: "Месяц" });
   await month.check();
   await expect(month).toBeChecked();
-  await expect(page.locator("#notification-demo [role='status']")).toHaveCount(
-    1,
+  const notificationMatrices = page.locator(
+    "#notification-demo [data-notification-visual-matrix]",
   );
-  await expect(page.locator("#notification-demo [role='alert']")).toHaveCount(
-    1,
-  );
+  await expect(notificationMatrices.locator("[role='status']")).toHaveCount(1);
+  await expect(notificationMatrices.locator("[role='alert']")).toHaveCount(1);
 });
