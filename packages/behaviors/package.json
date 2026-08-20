@@ -14,6 +14,10 @@
       "types": "./dist/dropdown.d.ts",
       "import": "./dist/dropdown.js"
     },
+    "./select": {
+      "types": "./dist/select.d.ts",
+      "import": "./dist/select.js"
+    },
     "./popover": {
       "types": "./dist/popover.d.ts",
       "import": "./dist/popover.js"

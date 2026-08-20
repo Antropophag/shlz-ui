@@ -75,9 +75,9 @@ test("documented components expose the validated component-page contract", async
 test("Select separates production examples from unsupported source diagnostics", async () => {
   const showcase = await read("apps/showcase/src/fidelity.js");
   assert.match(showcase, /data-select-production-fixtures/);
-  assert.match(showcase, /Production native single-select/);
-  assert.match(showcase, /Executable closed-field states/);
-  assert.match(showcase, /opened option list remains browser-owned/);
+  assert.match(showcase, /Production single-select/);
+  assert.match(showcase, /Executable trigger, source chevron/);
+  assert.match(showcase, /SHLZ option surface/);
   assert.match(showcase, /data-select-source-fixtures/);
   assert.match(showcase, /Source diagnostics · unsupported runtime/);
   assert.match(showcase, /<details[^>]+data-select-source-fixtures/);
@@ -332,7 +332,7 @@ test("Tabs snippet preserves the ARIA relationship and deferred behavior lifecyc
   assert.match(css, /\.shlz-tabs--boxed/);
 });
 
-test("Select copyable markup matches the shipped native-only contract", async () => {
+test("Select copyable markup matches the shipped listbox contract", async () => {
   const [fieldCss, packageJson] = await Promise.all([
     read("packages/styles/components/field.css"),
     read("packages/behaviors/package.json").then(JSON.parse),
@@ -340,23 +340,18 @@ test("Select copyable markup matches the shipped native-only contract", async ()
   const html = componentDocumentation.select.snippets.find(
     ({ id }) => id === "select-html",
   ).code;
-  assert.match(html, /class="shlz-field shlz-field--select"/);
-  assert.match(html, /<label class="shlz-field__label" for="request-type"/);
-  assert.match(
-    html,
-    /<select class="shlz-select" id="request-type" name="requestType" required/,
-  );
-  assert.match(html, /<option value="">Выберите тип<\/option>/);
-  assert.match(html, /class="shlz-field__indicator" aria-hidden="true"/);
-  assert.match(html, /class="shlz-field__icon"/);
+  const js = componentDocumentation.select.snippets.find(
+    ({ id }) => id === "select-js",
+  ).code;
+  assert.match(html, /data-shlz-select/);
+  assert.match(html, /aria-haspopup="listbox"/);
+  assert.match(html, /role="listbox"/);
+  assert.match(html, /role="option"/);
+  assert.match(html, /class="shlz-select__chevron"/);
+  assert.match(html, /<input type="hidden" name="requestType"/);
   assert.match(fieldCss, /\.shlz-field--select \.shlz-field__control/);
-  assert.equal(
-    componentDocumentation.select.snippets.some(
-      ({ language }) => language === "js",
-    ),
-    false,
-  );
-  assert.equal(packageJson.exports["./select"], undefined);
+  assert.match(js, /enhanceSelects/);
+  assert.ok(packageJson.exports["./select"]);
 });
 
 test("Pagination snippets preserve native navigation and consumer ownership", async () => {

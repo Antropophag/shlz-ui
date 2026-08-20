@@ -222,19 +222,33 @@ function destroyTabs() {
   for (const controller of controllers) controller.destroy();
 }`;
 
-const selectMarkup = `<div class="shlz-field shlz-field--select">
-  <label class="shlz-field__label" for="request-type">Тип заявки</label>
-  <span class="shlz-field__control">
-    <select class="shlz-select" id="request-type" name="requestType" required>
-      <option value="">Выберите тип</option>
-      <option value="incident">Инцидент</option>
-      <option value="request">Запрос</option>
-    </select>
-    <span class="shlz-field__indicator" aria-hidden="true">
-      <img class="shlz-field__icon" src="/assets/icons/arrow-down-md.svg" alt="" />
-    </span>
-  </span>
+const selectMarkup = `<div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select>
+  <span class="shlz-field__label" id="request-type-label">Тип заявки</span>
+  <button class="shlz-field__control shlz-select__trigger" type="button"
+    role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="request-type-options"
+    aria-labelledby="request-type-label request-type-value">
+    <span id="request-type-value" data-shlz-select-value>Выберите тип</span>
+    <svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5" /></svg>
+  </button>
+  <div class="shlz-select__listbox" id="request-type-options" role="listbox" aria-labelledby="request-type-label" hidden>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="incident">
+      Инцидент
+    </button>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="request">
+      Запрос
+    </button>
+  </div>
+  <input type="hidden" name="requestType" value="" />
 </div>`;
+
+const selectBehavior = `import { enhanceSelects } from "@shlz/behaviors/select";
+
+const controllers = enhanceSelects();
+
+// Connect this function to your page/application teardown lifecycle.
+function destroySelects() {
+  for (const controller of controllers) controller.destroy();
+}`;
 
 const paginationPage = (href, page, current = false) =>
   `<a class="shlz-pagination__item" href="${href}"${current ? ' aria-current="page"' : ""}>${page}</a>`;
@@ -1149,12 +1163,12 @@ export const componentDocumentation = {
     }),
   },
   select: {
-    status: "Executable · Production native single-select",
+    status: "Executable · Production single-select",
     purpose:
-      "Single-choice field whose native select owns value, form submission, popup and keyboard behavior.",
+      "Single-choice field with a source-backed trigger and executable SHLZ listbox surface.",
     use: [
       "Choose one value from a predefined list in a form.",
-      "Use the current contract when the platform-native popup is acceptable.",
+      "Use the current contract when the option list must retain SHLZ visual fidelity.",
     ],
     avoid: [
       "Do not use Select for commands; use Dropdown menu.",
@@ -1162,8 +1176,7 @@ export const componentDocumentation = {
     ],
     dependencies: [
       ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/icons/icons/arrow-down-md.svg", "Required by this markup"],
-      ["@shlz/behaviors", "No Select behavior is exported"],
+      ["@shlz/behaviors/select", "Required for interaction"],
     ],
     snippets: [
       stylesheetSnippet("select"),
@@ -1173,18 +1186,24 @@ export const componentDocumentation = {
         language: "html",
         code: selectMarkup,
       },
+      {
+        id: "select-js",
+        label: "JavaScript",
+        language: "js",
+        code: selectBehavior,
+      },
     ],
     contract: [
       ["Root", ".shlz-field.shlz-field--select"],
-      ["Value owner", ".shlz-field__control > select.shlz-select"],
-      ["Label", "Native label[for] connected to the select id."],
-      ["Events", "The native select emits its platform input/change events."],
-      ["Behavior", "Browser-owned; no SHLZ Select controller is shipped."],
+      ["Value owner", "A named hidden input inside [data-shlz-select]."],
+      ["Label", "The trigger and listbox reference the visible label."],
+      ["Events", "The value owner emits one bubbling input and change event."],
+      ["Behavior", "SelectController owns disclosure, focus and selection."],
     ],
     accessibility:
-      "Keep the native label and select association. The browser owns popup semantics, disabled options, focus and keyboard interaction; do not replace them with a visual-only element. Error/help relationships remain application-owned native ARIA.",
+      "The button exposes combobox disclosure through aria-haspopup=listbox; the listbox owns option semantics and the hidden input owns form data. Escape restores trigger focus; Arrow/Home/End navigate options.",
     limitations:
-      "Only native single-select is executable. Popup paint is platform-owned and is not a source-fidelity claim. There is no readonly state, SHLZ behavior controller, search, multiselect, status-chip, async-loading or virtualization contract. Those Showcase matrices remain source diagnostics until separate APIs are approved.",
+      "Only single-select is executable. Search, multiselect, status-chip, async-loading and virtualization remain unsupported source diagnostics.",
     traceability: [
       [
         "Authoritative component set",

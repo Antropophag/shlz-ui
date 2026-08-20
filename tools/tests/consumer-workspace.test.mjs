@@ -4,7 +4,7 @@ import test from "node:test";
 
 const read = (path) => readFile(path, "utf8");
 
-test("consumer workspace keeps Select native and application-owned", async () => {
+test("consumer workspace may keep its native filter beside the reusable Select", async () => {
   const [workspace, behaviorExports, behaviorPackage] = await Promise.all([
     read("apps/showcase/src/consumer-workspace.js"),
     read("packages/behaviors/src/index.ts"),
@@ -18,8 +18,8 @@ test("consumer workspace keeps Select native and application-owned", async () =>
   assert.match(workspace, /window\.AbortController/);
   assert.doesNotMatch(workspace, /role="(?:combobox|listbox|option)"/);
   assert.doesNotMatch(workspace, /enhanceSelect|SelectController/);
-  assert.doesNotMatch(behaviorExports, /from "\.\/select/);
-  assert.equal(JSON.parse(behaviorPackage).exports["./select"], undefined);
+  assert.match(behaviorExports, /from "\.\/select/);
+  assert.ok(JSON.parse(behaviorPackage).exports["./select"]);
 });
 
 test("ServiceDesk evidence remains non-authoritative and verifiable", async () => {

@@ -25,6 +25,7 @@ import {
   enhanceDropdowns,
   enhanceModals,
   enhancePopovers,
+  enhanceSelects,
   enhanceTabs,
   enhanceTooltips,
 } from "@shlz/behaviors";
@@ -307,6 +308,8 @@ for (const button of document.querySelectorAll("[data-shlz-input-size]")) {
   });
 }
 enhanceDropdowns();
+window.__shlzSelectControllers = enhanceSelects();
+window.__shlzEnhanceSelects = enhanceSelects;
 window.__shlzModalControllers = enhanceModals();
 window.__shlzDrawerControllers = enhanceDrawers();
 window.__shlzPopoverControllers = enhancePopovers();

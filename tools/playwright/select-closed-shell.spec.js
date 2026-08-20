@@ -9,7 +9,7 @@ const productionField = (page, label) =>
     .locator("#select-demo [data-select-production-fixtures] .shlz-field")
     .filter({ hasText: label });
 
-test("closed native Select matches the source-backed size and paint contract", async ({
+test("Select trigger and chevron match the source-backed size and paint contract", async ({
   page,
 }) => {
   const placeholder = productionField(page, "Статус заявки").first();
@@ -39,9 +39,11 @@ test("closed native Select matches the source-backed size and paint contract", a
     "line-height",
     "15px",
   );
-  await expect(placeholder.locator("select")).toHaveCSS("font-size", "14px");
-  await expect(placeholder.locator("select")).toHaveCSS("line-height", "18px");
-  await expect(placeholder.locator("select")).toHaveCSS(
+  await expect(placeholder.locator(".shlz-select__trigger")).toHaveCSS(
+    "font-size",
+    "14px",
+  );
+  await expect(placeholder.locator(".shlz-select__trigger")).toHaveCSS(
     "color",
     "rgba(11, 22, 35, 0.25)",
   );
@@ -73,7 +75,7 @@ test("closed native Select matches the source-backed size and paint contract", a
 
   const trailingGeometry = await placeholder.evaluate((field) => {
     const control = field.querySelector(".shlz-field__control");
-    const indicator = field.querySelector(".shlz-field__indicator");
+    const indicator = field.querySelector(".shlz-select__chevron");
     const controlBox = control.getBoundingClientRect();
     const indicatorBox = indicator.getBoundingClientRect();
     return {
@@ -81,10 +83,10 @@ test("closed native Select matches the source-backed size and paint contract", a
       indicatorWidth: Math.round(indicatorBox.width),
     };
   });
-  expect(trailingGeometry).toEqual({ rightInset: 8, indicatorWidth: 20 });
+  expect(trailingGeometry).toEqual({ rightInset: 8, indicatorWidth: 24 });
 });
 
-test("production fixture is functional while unsupported families stay collapsed", async ({
+test("opened Select uses the SHLZ surface and emits one value change", async ({
   page,
 }) => {
   const production = page.locator(
@@ -93,8 +95,10 @@ test("production fixture is functional while unsupported families stay collapsed
   const sourceDiagnostics = page.locator(
     "#select-demo [data-select-source-fixtures]",
   );
-  const select = production.locator("select").first();
-  await select.evaluate((element) => {
+  const root = production.locator("[data-shlz-select]");
+  const trigger = root.locator(".shlz-select__trigger");
+  const input = root.locator('input[type="hidden"]');
+  await input.evaluate((element) => {
     window.__selectFixtureChanges = [];
     element.addEventListener("change", () => {
       window.__selectFixtureChanges.push(element.value);
@@ -103,14 +107,44 @@ test("production fixture is functional while unsupported families stay collapsed
 
   await expect(sourceDiagnostics).not.toHaveAttribute("open", "");
   await expect(sourceDiagnostics.locator(".shlz-component-grid")).toBeHidden();
-  await select.selectOption("example");
-  expect(await page.evaluate(() => window.__selectFixtureChanges)).toEqual([
-    "example",
-  ]);
-  await expect(select).toHaveValue("example");
-  expect(await select.evaluate((element) => element.checkValidity())).toBe(
-    true,
+  await page.evaluate(() => {
+    window.__shlzEnhanceSelects();
+    window.__shlzEnhanceSelects();
+  });
+  await trigger.click();
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+  await expect(root.locator(".shlz-select__listbox")).toBeVisible();
+  await expect(root.locator(".shlz-select__chevron")).toHaveCSS(
+    "transform",
+    "matrix(-1, 0, 0, -1, 0, 0)",
   );
+  await root.locator('[role="option"][data-value="progress"]').click();
+  expect(await page.evaluate(() => window.__selectFixtureChanges)).toEqual([
+    "progress",
+  ]);
+  await expect(input).toHaveValue("progress");
+  await expect(trigger).toContainText("В работе");
+  await expect(trigger).toBeFocused();
+  await expect(root.locator(".shlz-select__listbox")).toBeHidden();
+});
+
+test("Select keyboard lifecycle opens, navigates, selects and restores focus", async ({
+  page,
+}) => {
+  const root = page.locator("#select-demo [data-shlz-select]");
+  const trigger = root.locator(".shlz-select__trigger");
+  await trigger.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(root.locator('[role="option"]').first()).toBeFocused();
+  await page.keyboard.press("End");
+  await expect(root.locator('[role="option"]').last()).toBeFocused();
+  await page.keyboard.press("Escape");
+  await expect(trigger).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(root.locator('[role="option"]').first()).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(root.locator('input[type="hidden"]')).toHaveValue("new");
+  await expect(trigger).toBeFocused();
 });
 
 test("closed Select remains contained on a narrow viewport", async ({

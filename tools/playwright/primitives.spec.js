@@ -53,7 +53,7 @@ test("source specification and fidelity surfaces are reviewable", async ({
   );
 });
 
-test("base single Select keeps the shipped native-only contract", async ({
+test("base single Select exposes the shipped trigger and listbox contract", async ({
   page,
 }) => {
   const selectDemo = page.locator("#select-demo");
@@ -62,27 +62,29 @@ test("base single Select keeps the shipped native-only contract", async ({
     .first()
     .locator("select.shlz-select");
 
-  await expect(selects).toHaveCount(6);
+  await expect(selects).toHaveCount(5);
   await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
   await expect(
     selectDemo
       .locator(":scope > section")
       .first()
       .locator("select.shlz-select:enabled"),
-  ).toHaveCount(5);
+  ).toHaveCount(4);
   await expect(
     selectDemo
       .locator(":scope > section")
       .first()
       .locator("select.shlz-select:disabled"),
   ).toHaveCount(1);
-  await selects.first().focus();
-  await expect(selects.first()).toBeFocused();
-  await expect(selects.first()).toHaveJSProperty("required", true);
-  expect(
-    await selects.first().evaluate((select) => select.checkValidity()),
-  ).toBe(false);
-  await expect(selectDemo.getByRole("listbox")).toHaveCount(0);
+  const trigger = selectDemo.locator(
+    '[data-shlz-select] [aria-haspopup="listbox"]',
+  );
+  await expect(trigger).toHaveCount(1);
+  await trigger.focus();
+  await expect(trigger).toBeFocused();
+  const listbox = selectDemo.locator('[role="listbox"]');
+  await expect(listbox).toHaveCount(1);
+  await expect(listbox).toBeHidden();
 });
 
 test("documented components expose developer usage without mixing diagnostics", async ({
