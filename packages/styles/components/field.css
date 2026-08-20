@@ -22,10 +22,11 @@
 }
 
 .shlz-field--select .shlz-field__control {
-  /* FACT: Dropdown variants keep content and the trailing chevron 8px in. */
-  padding-inline: calc(
-    var(--shlz-source-spacing-8) - var(--shlz-semantic-border-width-default)
-  );
+  /* FACT: single Select text is 12px in; the 24px chevron stays 8px in. */
+  padding-inline: calc(12px - var(--shlz-semantic-border-width-default))
+    calc(
+      var(--shlz-source-spacing-8) - var(--shlz-semantic-border-width-default)
+    );
 }
 
 .shlz-field__label,
@@ -122,6 +123,13 @@
 
 .shlz-select__trigger--selected {
   color: var(--shlz-source-color-dark-blue-dark-blue);
+}
+
+.shlz-select__trigger > [data-shlz-select-value] {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .shlz-select__chevron {
@@ -355,6 +363,17 @@
 .shlz-field:has(:disabled) .shlz-field__action,
 .shlz-field--disabled .shlz-field__action {
   background: var(--shlz-source-color-gray-gray-100);
+}
+
+/* FACT: Select.svg keeps the label and shell opaque; only control content is 10%. */
+.shlz-field--select:has(.shlz-select__trigger:disabled)
+  :is(.shlz-field__label, .shlz-select__trigger) {
+  opacity: 1;
+}
+
+.shlz-select__trigger:disabled {
+  color: rgb(11 22 35 / 10%);
+  cursor: not-allowed;
 }
 
 .shlz-field:has([readonly]) .shlz-field__control {

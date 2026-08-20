@@ -72,6 +72,10 @@ test("Select trigger and chevron match the source-backed size and paint contract
     "14px",
   );
   await expect(placeholder.locator(".shlz-select__trigger")).toHaveCSS(
+    "line-height",
+    "18px",
+  );
+  await expect(placeholder.locator(".shlz-select__trigger")).toHaveCSS(
     "color",
     "rgba(11, 22, 35, 0.25)",
   );
@@ -90,7 +94,15 @@ test("Select trigger and chevron match the source-backed size and paint contract
   );
   await expect(disabled.locator(".shlz-field__control")).toHaveCSS(
     "opacity",
-    "0.5",
+    "1",
+  );
+  await expect(disabled.locator(".shlz-field__label")).toHaveCSS(
+    "opacity",
+    "1",
+  );
+  await expect(disabled.locator(".shlz-select__trigger")).toHaveCSS(
+    "color",
+    "rgba(11, 22, 35, 0.1)",
   );
   await expect(medium.locator(".shlz-field__control")).toHaveCSS(
     "height",
@@ -103,15 +115,81 @@ test("Select trigger and chevron match the source-backed size and paint contract
 
   const trailingGeometry = await placeholder.evaluate((field) => {
     const control = field.querySelector(".shlz-field__control");
+    const value = field.querySelector("[data-shlz-select-value]");
+    const label = field.querySelector(".shlz-field__label");
     const indicator = field.querySelector(".shlz-select__chevron");
     const controlBox = control.getBoundingClientRect();
+    const valueBox = value.getBoundingClientRect();
+    const labelBox = label.getBoundingClientRect();
     const indicatorBox = indicator.getBoundingClientRect();
     return {
+      labelGap: Math.round(controlBox.top - labelBox.bottom),
+      textInset: Math.round(valueBox.left - controlBox.left),
+      textCenterOffset: Math.round(
+        (valueBox.top + valueBox.bottom - controlBox.top - controlBox.bottom) /
+          2,
+      ),
       rightInset: Math.round(controlBox.right - indicatorBox.right),
       indicatorWidth: Math.round(indicatorBox.width),
     };
   });
-  expect(trailingGeometry).toEqual({ rightInset: 8, indicatorWidth: 24 });
+  expect(trailingGeometry).toEqual({
+    labelGap: 8,
+    textInset: 12,
+    textCenterOffset: 0,
+    rightInset: 8,
+    indicatorWidth: 24,
+  });
+
+  const mediumTextGeometry = await medium.evaluate((field) => {
+    const control = field.querySelector(".shlz-select__trigger");
+    const value = field.querySelector("[data-shlz-select-value]");
+    const controlBox = control.getBoundingClientRect();
+    const valueBox = value.getBoundingClientRect();
+    return {
+      textInset: Math.round(valueBox.left - controlBox.left),
+      textCenterOffset: Math.round(
+        (valueBox.top + valueBox.bottom - controlBox.top - controlBox.bottom) /
+          2,
+      ),
+    };
+  });
+  expect(mediumTextGeometry).toEqual({ textInset: 12, textCenterOffset: 0 });
+});
+
+test("selected and long Select values keep source text paint and one-line placement", async ({
+  page,
+}) => {
+  const selected = productionField(page, "Статус заявки").nth(1);
+  await expect(selected.locator(".shlz-select__trigger")).toHaveCSS(
+    "color",
+    "rgb(11, 22, 35)",
+  );
+
+  const typography = page.locator(
+    "#typography-compatibility [data-shlz-select]",
+  );
+  const geometry = await typography.evaluate((field) => {
+    const trigger = field.querySelector(".shlz-select__trigger");
+    const value = field.querySelector("[data-shlz-select-value]");
+    const triggerBox = trigger.getBoundingClientRect();
+    const valueBox = value.getBoundingClientRect();
+    const style = window.getComputedStyle(value);
+    return {
+      height: Math.round(valueBox.height),
+      textInset: Math.round(valueBox.left - triggerBox.left),
+      overflow: style.overflow,
+      textOverflow: style.textOverflow,
+      whiteSpace: style.whiteSpace,
+    };
+  });
+  expect(geometry).toEqual({
+    height: 18,
+    textInset: 12,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  });
 });
 
 test("opened Select uses the SHLZ surface and emits one value change", async ({
