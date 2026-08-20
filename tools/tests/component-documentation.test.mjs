@@ -24,6 +24,8 @@ test("documented components expose the validated component-page contract", async
     "tag",
     "person-tag",
     "segment",
+    "link",
+    "avatar",
     "select",
   ]);
 
@@ -230,6 +232,38 @@ test("Segment snippet preserves native radio grouping and sibling styling", asyn
   assert.match(css, /\.shlz-segment--sm/);
   assert.match(css, /\.shlz-segment--lg/);
   assert.match(foundation, /\.shlz-visually-hidden/);
+});
+
+test("Link and Avatar snippets preserve native semantics and shipped content contracts", async () => {
+  const [linkCss, avatarCss] = await Promise.all([
+    read("packages/styles/components/link.css"),
+    read("packages/styles/components/avatar.css"),
+  ]);
+  const link = componentDocumentation.link.snippets.find(
+    ({ id }) => id === "link-html",
+  ).code;
+  const avatarText = componentDocumentation.avatar.snippets.find(
+    ({ id }) => id === "avatar-text-html",
+  ).code;
+  const avatarImage = componentDocumentation.avatar.snippets.find(
+    ({ id }) => id === "avatar-image-html",
+  ).code;
+
+  assert.match(link, /^<a class="shlz-link" href="\/requests\/42">/);
+  assert.doesNotMatch(link, /--visual-|aria-disabled/);
+  assert.match(linkCss, /\.shlz-link:focus-visible/);
+  assert.match(linkCss, /\.shlz-link--disabled/);
+
+  assert.match(avatarText, /shlz-avatar shlz-avatar--32/);
+  assert.match(avatarText, /role="img" aria-label="Анна Петрова"/);
+  assert.match(avatarImage, /shlz-avatar shlz-avatar--40/);
+  assert.match(avatarImage, /class="shlz-avatar__image"/);
+  assert.match(avatarImage, /alt="Анна Петрова"/);
+  for (const size of [24, 32, 40, 64]) {
+    assert.match(avatarCss, new RegExp(`\\.shlz-avatar--${size}`));
+  }
+  assert.match(avatarCss, /\.shlz-avatar__image/);
+  assert.match(avatarCss, /\.shlz-avatar__icon/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

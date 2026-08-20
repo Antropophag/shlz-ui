@@ -96,6 +96,16 @@ const segmentMarkup = `<fieldset class="shlz-segment">
   </label>
 </fieldset>`;
 
+const linkMarkup = `<a class="shlz-link" href="/requests/42">Открыть заявку</a>`;
+
+const avatarMarkup = `<span class="shlz-avatar shlz-avatar--32" role="img" aria-label="Анна Петрова">
+  АП
+</span>`;
+
+const avatarImageMarkup = `<span class="shlz-avatar shlz-avatar--40">
+  <img class="shlz-avatar__image" src="/assets/avatars/anna.jpg" alt="Анна Петрова" />
+</span>`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -787,6 +797,118 @@ export const componentDocumentation = {
       ["Source tests", "tools/tests/segment-source.test.mjs"],
       ["Bundle tests", "tools/tests/components.test.mjs"],
       ["Browser tests", "tools/playwright/fidelity.spec.js"],
+    ],
+  },
+  link: {
+    status: "Executable · Production example",
+    purpose:
+      "Native text link with source-backed SHLZ typography and interaction paints.",
+    use: [
+      "Navigate to another resource, route or section.",
+      "Use destination-specific link text.",
+    ],
+    avoid: [
+      "Use Button for an action in the current interface.",
+      "Do not use diagnostic visual-state classes in application markup.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+    ],
+    snippets: [
+      {
+        id: "link-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      { id: "link-html", label: "HTML", language: "html", code: linkMarkup },
+    ],
+    contract: [
+      ["Element", "Native a.shlz-link with a real href."],
+      ["States", "Native hover, active and focus-visible."],
+      [
+        "Unavailable",
+        "span.shlz-link.shlz-link--disabled as non-interactive text.",
+      ],
+      ["Typography", "16px/21px regular text; content-sized width."],
+    ],
+    accessibility:
+      "Use a real anchor and href for navigation so browser keyboard, context-menu and link semantics remain available. Link text must describe its destination. An unavailable destination is styled non-interactive text, not a focusable or ARIA-disabled anchor.",
+    limitations:
+      "Visited, external-link and icon variants are not shipped contracts. The --visual-hover and --visual-pressed classes are diagnostic fixtures only. Client routing may intercept a native link but must preserve its href and standard semantics.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Link.svg"],
+      ["Evidence map", "docs/evidence-map.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/link.css"],
+      ["Documentation", "docs/components/link.md"],
+      ["Showcase", "apps/showcase/src/wave3.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/wave3-source.test.mjs"],
+      ["Browser tests", "tools/playwright/components-next.spec.js"],
+    ],
+  },
+  avatar: {
+    status: "Executable · Production examples",
+    purpose:
+      "Compact visual identity marker rendered as text, an image or an icon.",
+    use: [
+      "Identify a person or entity where adjacent context makes its role clear.",
+      "Use text initials or the icon fallback when a reliable image is unavailable.",
+    ],
+    avoid: [
+      "Do not make Avatar interactive by itself; use a separately designed link or button composition.",
+      "Do not use it as the only source of a person's name or status.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors", "Not required"],
+      ["Image or icon asset", "Consumer-owned for those content types"],
+    ],
+    snippets: [
+      {
+        id: "avatar-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      {
+        id: "avatar-text-html",
+        label: "Text fallback",
+        language: "html",
+        code: avatarMarkup,
+      },
+      {
+        id: "avatar-image-html",
+        label: "Image",
+        language: "html",
+        code: avatarImageMarkup,
+      },
+    ],
+    contract: [
+      ["Root", ".shlz-avatar with exactly one content representation."],
+      ["Sizes", "--24, --32, --40 and --64; default is 32px."],
+      ["Image", "img.shlz-avatar__image fills and crops the circle."],
+      ["Icon", ".shlz-avatar--icon with img.shlz-avatar__icon."],
+      ["Text", "Initials or another short text fallback inside the root."],
+    ],
+    accessibility:
+      'When Avatar is the only naming content, use role="img" with an accessible name on a text/icon root or give its image meaningful alt text. Prefer a decorative Avatar beside the visible full name; then use aria-hidden="true" on a text/icon root or alt="" on an image. Never encode status or identity through the picture alone.',
+    limitations:
+      "Badge, arbitrary shapes, 48px size, loading and fallback behavior are not shipped. Consumers must replace a failed image with text or icon markup; CSS alone does not provide that lifecycle. Image privacy, authorization and caching are application responsibilities.",
+    traceability: [
+      ["Authoritative source", "shlz-design-source/raw/svg/Avatar.svg"],
+      ["Evidence map", "docs/evidence-map.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/avatar.css"],
+      ["Documentation", "docs/components/avatar.md"],
+      ["Showcase", "apps/showcase/src/wave3.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/wave3-source.test.mjs"],
+      ["Browser tests", "tools/playwright/components-next.spec.js"],
     ],
   },
   select: {
