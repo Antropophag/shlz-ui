@@ -570,7 +570,7 @@ export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="select-demo">
     <header><h3>Select</h3><p>Выбор одного значения; Dropdown menu остаётся отдельным семейством команд.</p></header>
     ${renderComponentDocumentation("select")}
-    <section data-select-production-fixtures><h4>Production native single-select</h4><p><span class="shlz-doc-status">Executable · Production</span></p><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
+    <section data-select-production-fixtures><h4>Production native single-select</h4><p>Executable · Production</p><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
     <section data-select-source-fixtures><h4>Source diagnostics · unsupported runtime</h4><p>Search, multiselect, and status specimens preserve source evidence; they are not production Select contracts.</p><div class="shlz-component-grid"><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div></div></section>
     ${formDiagnostics({
       component: "select",
