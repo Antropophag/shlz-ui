@@ -1008,21 +1008,23 @@ export const componentDocumentation = {
       "The named nav landmark and list expose the navigation group and order. Exactly one link uses aria-current=page. Previous and Next require destination-specific accessible names; their images use empty alt text. Only real destinations are focusable links. Tab and Shift+Tab move through links and Enter follows the focused href; no arrow-key interaction is implemented or promised. Focus-visible styling is shipped for anchors.",
     limitations:
       "There is no total-items input, total-pages model, page-window algorithm, unknown-total mode, responsive collapse, routing hook, loading state or data synchronization. The list wraps when space runs out; it does not clip or add horizontal scrolling, and long labels or very large windows can create multiple rows. The consumer must choose a suitably short window and re-render valid destinations/current state when totals change.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Pagination.svg"],
-      ["Source contract", "docs/components/pagination-source.md"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/pagination.css"],
-      ["Documentation", "docs/components/pagination.md"],
-      ["Showcase", "apps/showcase/src/main.js"],
-      ["Consumer validation", "apps/showcase/src/pagination-consumer.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/pagination-source.test.mjs"],
-      ["Bundle contract tests", "tools/tests/components.test.mjs"],
-      ["Browser tests", "tools/playwright/pagination-contract.spec.js"],
-      ["Visual tests", "tools/playwright/pagination-typography.spec.js"],
-    ],
+    traceability: traceability({
+      authority: [
+        ["Authoritative source", "shlz-design-source/raw/svg/Pagination.svg"],
+      ],
+      evidence: [["Source contract", "docs/components/pagination-source.md"]],
+      styles: "packages/styles/components/pagination.css",
+      documentation: "docs/components/pagination.md",
+      showcase: "apps/showcase/src/main.js",
+      related: [
+        ["Consumer validation", "apps/showcase/src/pagination-consumer.js"],
+        ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+        ["Source tests", "tools/tests/pagination-source.test.mjs"],
+        ["Bundle contract tests", "tools/tests/components.test.mjs"],
+        ["Browser tests", "tools/playwright/pagination-contract.spec.js"],
+        ["Visual tests", "tools/playwright/pagination-typography.spec.js"],
+      ],
+    }),
   },
   select: {
     status: "Executable · Production native single-select",
