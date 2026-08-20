@@ -44,13 +44,13 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass",
-    "structural-contract": "pass",
-    "runtime-browser": "pass",
-    "accessibility": "pass",
-    "focused-visual": "pass",
-    "consumer-integration": "pass",
-    "responsive-content-stress": "pass"
+    "source-integrity": "pass: typography extraction classifies 2,193 raw text nodes into 36 merged signatures while retaining family, size, weight, line-height, and letter-spacing",
+    "structural-contract": "pass: source tests verify Golos as the default profile, Fira as compatibility-only, exact reusable roles, fallback stacks, and inherited profile switching",
+    "runtime-browser": "pass: browser tests load Latin and Cyrillic Fira faces and verify Golos/Fira switching on roots and subtrees without changing fixed component heights",
+    "accessibility": "not-applicable: metric fidelity, inheritance, font loading, and unclipped test content do not prove general text accessibility or component readability policy",
+    "focused-visual": "pass: the Fira compatibility snapshot and focused Pagination typography assertions cover representative role geometry",
+    "consumer-integration": "pass: field, Pagination, status, table, file-row, document-row, and Data Workspace fixtures exercise inherited typography profiles",
+    "responsive-content-stress": "pass: browser tests verify long Cyrillic/Latin stress content remains unclipped, intentional ellipsis remains active, and the table row stays 50px under Fira"
   },
   "findings": [],
   "limitations": [

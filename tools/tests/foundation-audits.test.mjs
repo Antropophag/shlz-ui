@@ -20,23 +20,42 @@ const evidenceLevels = [
   "consumer-integration",
   "responsive-content-stress",
 ];
+const evidenceValuePattern = /^(?:pass|not-applicable):\s+\S.{9,}$/;
+const placeholderPattern = /:\s*(?:gap|todo|tbd|unknown|placeholder)\b/i;
+
+const assertEvidenceContract = (evidence, context) => {
+  assert.deepEqual(
+    Object.keys(evidence).sort(),
+    [...evidenceLevels].sort(),
+    `${context} must classify every evidence level exactly once`,
+  );
+  for (const [level, value] of Object.entries(evidence)) {
+    assert.match(
+      value,
+      evidenceValuePattern,
+      `${context}.${level} must use "pass: <claim>" or "not-applicable: <reason>"`,
+    );
+    assert.doesNotMatch(
+      value,
+      placeholderPattern,
+      `${context}.${level} must not contain an unresolved placeholder`,
+    );
+  }
+};
 
 test("Wave 1 has a complete manifest for every foundation family", async () => {
   for (const family of families) {
-    const manifest = JSON.parse(
-      await readFile(`docs/foundation-audits/${family}.json`, "utf8"),
-    );
+    const manifestPath = `docs/foundation-audits/${family}.json`;
+    const manifestSource = await readFile(manifestPath, "utf8");
+    const manifest = JSON.parse(manifestSource);
     assert.equal(manifest.foundation, family);
     assert.ok(["VERIFIED", "FINDINGS"].includes(manifest.status));
-    assert.deepEqual(
-      Object.keys(manifest.evidence).sort(),
-      evidenceLevels.sort(),
-    );
-    for (const status of Object.values(manifest.evidence))
-      assert.ok(
-        status === "pass" ||
-          status.startsWith("pass:") ||
-          status.startsWith("not-applicable:"),
+    assertEvidenceContract(manifest.evidence, manifestPath);
+    for (const level of evidenceLevels)
+      assert.equal(
+        (manifestSource.match(new RegExp(`"${level}"\\s*:`, "g")) ?? []).length,
+        1,
+        `${manifestPath}.${level} must occur exactly once in source JSON`,
       );
     for (const path of [
       ...manifest.authoritativeSource,
@@ -57,6 +76,24 @@ test("Wave 1 has a complete manifest for every foundation family", async () => {
         ].includes(claim.classification),
       );
     if (manifest.status === "FINDINGS") assert.ok(manifest.findings.length);
+  }
+});
+
+test("Wave 1 project inventory cannot overclaim foundation evidence", async () => {
+  const inventory = JSON.parse(
+    await readFile("docs/component-audits/project-inventory.json", "utf8"),
+  );
+  const foundations = inventory.families.filter(
+    ({ category }) => category === "foundations",
+  );
+  assert.equal(foundations.length, families.length);
+  for (const foundation of foundations) {
+    assertEvidenceContract(
+      foundation.evidence,
+      `project-inventory.${foundation.canonical_name}`,
+    );
+    if (foundation.audit_status === "VERIFIED")
+      assert.equal(foundation.known_findings.length, 0);
   }
 });
 

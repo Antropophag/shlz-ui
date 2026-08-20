@@ -41,13 +41,13 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass",
-    "structural-contract": "pass",
-    "runtime-browser": "pass",
+    "source-integrity": "pass: overlay source tests trace offsets, blur, alpha, strokes, and multi-shadow composition to the owning component SVGs",
+    "structural-contract": "pass: production CSS retains distinct source-backed effect compositions and exposes no unsupported shared elevation token",
+    "runtime-browser": "pass: a focused browser assertion resolves the representative notification shadow to rgba(11, 22, 35, 0.1) 0px 4px 15px 0px",
     "accessibility": "not-applicable: audited effects do not carry meaning independently",
-    "focused-visual": "pass",
-    "consumer-integration": "pass",
-    "responsive-content-stress": "pass"
+    "focused-visual": "pass: focused overlay and notification snapshots exercise the distinct source-backed shadow and overlay compositions",
+    "consumer-integration": "pass: Showcase and Data Workspace exercise representative notification, field, popover, and modal effects",
+    "responsive-content-stress": "pass: browser tests cover narrow drawer and long modal surfaces without changing or clipping their audited overlay effects"
   },
   "findings": [],
   "limitations": [

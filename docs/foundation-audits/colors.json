@@ -43,12 +43,12 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass",
-    "structural-contract": "pass",
-    "runtime-browser": "pass",
-    "accessibility": "pass: representative text, state, border, and icon paints retain semantics; palette redesign is out of scope",
-    "focused-visual": "pass",
-    "consumer-integration": "pass",
+    "source-integrity": "pass: source tests retain all 40 named paints, including 16 explicit alpha values, without rounding or opaque conversion",
+    "structural-contract": "pass: all 11 semantic color aliases resolve to authored source paints and generated CSS contains no unresolved source alias",
+    "runtime-browser": "pass: focused browser assertions verify primary, alpha, text, surface, and notification-shadow paint outcomes",
+    "accessibility": "not-applicable: palette fidelity and representative paint application do not establish component contrast or WCAG compliance; those remain component and consumer audit claims",
+    "focused-visual": "pass: representative currentColor and preserved-paint icon snapshots exercise source-backed paint topology without palette substitution",
+    "consumer-integration": "pass: representative field, notification, icon, and Data Workspace surfaces consume published color variables or documented component-local source paints",
     "responsive-content-stress": "not-applicable: color claims do not change with viewport or content length"
   },
   "findings": [],

@@ -15,6 +15,13 @@ it does not attest the owning UI component.
 No P0, P1, P2, or P3 foundation findings remain. Wave 1 makes no production
 runtime change and does not change the design source.
 
+`VERIFIED` applies only to the concrete foundation claims named in each evidence
+cell. Every applicable level records the tested claim after `pass:`; every
+excluded level records its boundary after `not-applicable:`. In particular,
+source-backed palette, typography metrics, and icon geometry do not certify the
+contrast, readability, semantics, or accessibility of every consuming
+component. Those remain component and consumer audit responsibilities.
+
 The Impeccable integrity detector ran in degraded regex mode because its HTML
 parser modules are unavailable. Its only hit is the pre-existing 24px grid on
 the source-fidelity measurement canvas; this is an intended measurement surface

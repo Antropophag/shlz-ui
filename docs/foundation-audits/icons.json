@@ -48,12 +48,12 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass",
-    "structural-contract": "pass",
-    "runtime-browser": "pass",
-    "accessibility": "pass: decorative/semantic labeling remains consumer-owned and representative consumers are checked",
-    "focused-visual": "pass",
-    "consumer-integration": "pass",
+    "source-integrity": "pass: hash and element-level paint tests cover all 133 source SVGs and retain 119 logical glyphs, 125 emitted variants, and explicit uncertain names",
+    "structural-contract": "pass: tests verify 97 currentColor and 22 preserved-paint logical icons, unique canonical names, 42 explicit aliases, sprite symbols, runtime helpers, and package exports",
+    "runtime-browser": "pass: the icon catalog resolves all 119 canonical symbols to non-empty painted browser geometry",
+    "accessibility": "not-applicable: the icon package supplies geometry and paint but no semantic meaning; accessible names and decorative treatment remain consumer-level claims",
+    "focused-visual": "pass: a focused nine-icon snapshot covers representative currentColor, preserved-paint, container, state-family, and file-type topologies",
+    "consumer-integration": "pass: representative controls verify currentColor inheritance, preserved-paint assets are not recolored, and plain HTML consumes the published sprite/assets",
     "responsive-content-stress": "not-applicable: intrinsic icon geometry is viewport-independent"
   },
   "findings": [],
