@@ -51,28 +51,32 @@ test("source specification and fidelity surfaces are reviewable", async ({
   );
 });
 
-test("base single Select uses the shared interactive popup", async ({
+test("base single Select keeps the shipped native-only contract", async ({
   page,
 }) => {
   const selectDemo = page.locator("#select-demo");
   const selects = selectDemo
     .locator(":scope > section")
     .first()
-    .locator("[data-shlz-select]");
+    .locator("select.shlz-select");
 
   await expect(selects).toHaveCount(3);
-  await expect(selects.locator("select.shlz-select:visible")).toHaveCount(0);
-
-  const trigger = selects.first().getByRole("combobox");
-  await selects.first().locator(".shlz-field__label").click();
-  await expect(trigger).toBeFocused();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-  await trigger.click();
-  const listbox = selects.first().getByRole("listbox");
-  await expect(listbox).toBeVisible();
-  await expect(listbox.getByRole("option")).toHaveCount(4);
-  await listbox.getByRole("option", { name: "Second option" }).click();
-  await expect(trigger).toHaveText("Second option");
+  await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
+  await expect(
+    selectDemo
+      .locator(":scope > section")
+      .first()
+      .locator("select.shlz-select:enabled"),
+  ).toHaveCount(2);
+  await expect(
+    selectDemo
+      .locator(":scope > section")
+      .first()
+      .locator("select.shlz-select:disabled"),
+  ).toHaveCount(1);
+  await selects.first().focus();
+  await expect(selects.first()).toBeFocused();
+  await expect(selectDemo.getByRole("listbox")).toHaveCount(0);
 });
 
 test("documented components expose developer usage without mixing diagnostics", async ({
