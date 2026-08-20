@@ -28,8 +28,13 @@ test.beforeEach(async ({ page }) => {
 test("all Wave 3 executable and live roots are semantically classified", async ({
   page,
 }) => {
-  for (const manifest of Object.values(manifests))
-    await expectClassifiedComponentOccurrences(page, manifest);
+  for (const manifest of Object.values(manifests)) {
+    const inventory = await expectClassifiedComponentOccurrences(
+      page,
+      manifest,
+    );
+    expect(inventory.unclassifiedLegacy).toEqual([]);
+  }
 });
 
 test("Button preserves native activation, disabled and event ownership", async ({
@@ -290,6 +295,7 @@ for (const [name, locator, snapshot] of [
 ]) {
   test(`${name} focused visual contract`, async ({ page }) => {
     const surface = page.locator(locator).last();
+    await expect(surface).toBeVisible();
     if (name === "link") {
       const longLink = surface.locator("a.shlz-link").first();
       await longLink.evaluate((element) => {
