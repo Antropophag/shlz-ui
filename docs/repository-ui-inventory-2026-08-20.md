@@ -29,7 +29,7 @@ The machine-readable inventory is
 36 families/composition groups: 3 foundations, 27 reusable/public component
 families, and 6 source-only or application/domain composition groups. Closely
 coupled source variants are grouped where there is no independent repository
-contract; the `states` arrays preserve the future fidelity scope.
+contract; the `scope` arrays preserve the future fidelity scope.
 
 Counts came from the built Showcase DOM at 1440×900. `executableShowcase`
 excludes roots inside `[inert]` and Data Workspace; `dataWorkspace` is also a
@@ -47,7 +47,7 @@ is not `VERIFIED`. Every other former `done`, `source-migrated`, or
 - **P1 — shared Field contrast:** the Select audit records the pre-existing
   field label/placeholder contrast deviation and tracks it in issue #13. It is
   not fixed here and applies to the future Input/Textarea family audit.
-- **P2 — Pagination visual drift:** its former zero-pixel typography threshold
+- **Resolved in Wave 0 — Pagination visual drift:** its former zero-pixel typography threshold
   failed by 1,722 stable glyph-edge pixels across eight local captures. Wave 0
   replaces the area-relative tolerance with a 1,750-pixel absolute budget and
   does not describe the resulting comparison as pixel-exact.

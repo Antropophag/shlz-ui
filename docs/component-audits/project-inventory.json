@@ -5,6 +5,7 @@
     "measuredAt": "2026-08-20",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
+  "measuredCountsContract": "measured_counts records DOM roots observed by the baseline census; occurrence arrays list repository surfaces and therefore are not cardinality-equivalent. Component audit manifests provide occurrence-level enumeration when a family enters verification.",
   "statuses": ["UNAUDITED", "INVENTORIED", "VERIFIED", "FINDINGS"],
   "evidenceLevels": [
     "source-integrity",
@@ -128,7 +129,7 @@
       "authoritative_source": ["shlz-design-source/raw/svg/Icons.svg"],
       "production_implementation": [
         "packages/icons/normalized/",
-        "packages/icons/dist/sprite.svg"
+        "tools/generate.mjs"
       ],
       "behavior": [],
       "docs": [],
@@ -303,7 +304,10 @@
       }
     },
     {
-      "tests": ["docs/component-audits/select.json"],
+      "tests": [
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/select-closed-shell.spec.js"
+      ],
       "evidence": {
         "source-integrity": "applicable/pass",
         "structural-contract": "applicable/pass",
@@ -628,7 +632,7 @@
         "structural-contract": "docs/contract test",
         "runtime-browser": "URL ownership test",
         "accessibility": "native navigation test",
-        "focused-visual": "baseline failure: 1722 pixels",
+        "focused-visual": "bounded visual comparison: 1,750-pixel absolute raster budget; computed typography assertions pass",
         "consumer-integration": "dedicated Showcase consumer",
         "responsive-content-stress": "narrow browser test"
       },

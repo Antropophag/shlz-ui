@@ -28,11 +28,20 @@ const evidenceLevels = [
   "consumer-integration",
   "responsive-content-stress",
 ];
+const measuredCountFields = [
+  "executableShowcase",
+  "liveConsumers",
+  "dataWorkspace",
+  "inertDiagnostics",
+  "legacyNative",
+  "localAlternatives",
+];
 
 test("project inventory has one valid contract for every discovered family", async () => {
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
   assert.equal(inventory.schemaVersion, 2);
   assert.ok(inventory.baseline.sha);
+  assert.match(inventory.measuredCountsContract, /not cardinality-equivalent/);
   assert.deepEqual(new Set(inventory.statuses), auditStatuses);
   assert.deepEqual(
     new Set(inventory.implementationStatuses),
@@ -85,7 +94,14 @@ test("project inventory has one valid contract for every discovered family", asy
       evidenceLevels.sort(),
       `${family.canonical_name} must classify every evidence level`,
     );
-    assert.ok(family.measured_counts);
+    assert.deepEqual(
+      Object.keys(family.measured_counts).sort(),
+      measuredCountFields.sort(),
+      `${family.canonical_name} must provide every measured count`,
+    );
+    for (const count of Object.values(family.measured_counts)) {
+      assert.ok(Number.isInteger(count) && count >= 0);
+    }
     if (family.audit_status === "FINDINGS")
       assert.ok(
         family.known_findings.length > 0,
@@ -104,6 +120,7 @@ test("project inventory has one valid contract for every discovered family", asy
   const select = inventory.families.find(
     ({ canonical_name }) => canonical_name === "Select",
   );
+  assert.ok(select, "inventory must contain the Select family");
   assert.equal(select.audit_status, "VERIFIED");
   assert.equal(select.implementation_status, "reusable");
   for (const level of evidenceLevels)
