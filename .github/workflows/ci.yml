@@ -79,5 +79,4 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run browser and visual tests
-        continue-on-error: true
         run: npm run test:e2e
