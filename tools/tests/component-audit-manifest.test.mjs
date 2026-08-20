@@ -64,4 +64,20 @@ test("Select audit manifest is complete, traceable, and classification-driven", 
       ].includes(claim.classification),
       `Unknown source classification: ${claim.classification}`,
     );
+
+  for (const deviation of manifest.acceptedDeviations ?? []) {
+    assert.match(deviation.id, /^[a-z0-9-]+$/);
+    assert.match(deviation.severity, /^P[0-3]$/);
+    assert.ok(deviation.scope);
+    assert.equal(deviation.status, "accepted-for-this-pr");
+    assert.equal(deviation.introducedByThisChange, false);
+    assert.equal(deviation.worsenedByThisChange, false);
+    assert.ok(deviation.evidence);
+    assert.ok(deviation.reason);
+    assert.match(
+      deviation.tracking,
+      /^https:\/\/github\.com\/[^/]+\/[^/]+\/issues\/\d+$/,
+      `${deviation.id} needs a linked follow-up issue`,
+    );
+  }
 });

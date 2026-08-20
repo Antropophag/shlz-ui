@@ -69,11 +69,24 @@
     "consumer-integration": "applicable",
     "responsive-content-stress": "applicable"
   },
+  "acceptedDeviations": [
+    {
+      "id": "field-text-contrast",
+      "severity": "P1",
+      "scope": "cross-component-field-family",
+      "status": "accepted-for-this-pr",
+      "introducedByThisChange": false,
+      "worsenedByThisChange": false,
+      "evidence": "docs/components/select.md#accessibility",
+      "reason": "Resolution requires changing authoritative source-backed paint or the shared Field accessibility contract outside this Select PR scope.",
+      "tracking": "https://github.com/Antropophag/shlz-ui/issues/13"
+    }
+  ],
   "knownLimitations": [
     "single-select only",
     "requires JavaScript enhancement",
     "globally unique ARIA relationship IDs required",
-    "source label and placeholder paint is below WCAG 1.4.3 normal-text contrast",
+    "pre-existing Field-family label and placeholder contrast deviation accepted for this PR and tracked in issue #13",
     "no search, multiselect, status-chip, async loading, or virtualization"
   ]
 }

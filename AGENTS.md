@@ -121,6 +121,13 @@ finished side quest until the component completion gate in
 - report exact observed counts, scope, checks, limitations, blockers, CI, and
   unresolved review threads.
 
+A pre-existing cross-component finding may be accepted as non-blocking for a
+scoped component PR only when the PR neither introduced nor worsened it, the
+fix requires changing an authoritative source or shared contract outside the
+PR scope, and the severity, evidence, explicit disposition, and linked
+follow-up are recorded. A regression, scope-local fix, or untracked finding
+still blocks completion.
+
 Structural/source tests do not prove runtime behavior. A page-level screenshot
 does not prove component fidelity. Never combine completion statuses across
 components or side quests: finishing Notification says nothing about Select.

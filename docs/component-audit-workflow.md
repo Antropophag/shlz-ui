@@ -39,6 +39,23 @@ Evidence levels prove different claims and cannot substitute for each other:
 Mark a level `not-applicable` only with a reason. Structural regexes never prove
 runtime behavior, and a broad page screenshot never proves component fidelity.
 
+## Pre-existing cross-component deviations
+
+A finding may be accepted as non-blocking for a scoped component PR only when
+all of the following are true:
+
+- it existed before the PR and the PR neither introduced nor worsened it;
+- resolving it requires changing an authoritative source or shared
+  cross-component contract outside the PR scope;
+- its severity, scope, evidence, and explicit disposition are recorded in the
+  component audit manifest;
+- a linked follow-up tracks the shared-contract decision and implementation;
+- the final report distinguishes the accepted deviation from PR blockers.
+
+Regressions, scope-local fixes, untracked findings, and findings without an
+explicit acceptance remain blockers. Acceptance for one component PR does not
+silently accept the deviation for other work.
+
 ## Manifest and occurrence guard
 
 Each audited component has a small JSON manifest under
