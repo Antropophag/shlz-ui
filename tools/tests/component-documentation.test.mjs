@@ -389,6 +389,11 @@ test("Pagination snippets preserve native navigation and consumer ownership", as
     boundary,
     /<span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true"/,
   );
+  assert.match(
+    boundary,
+    /class="shlz-visually-hidden">Предыдущая страница недоступна<\/span>/,
+  );
+  assert.doesNotMatch(boundary, /aria-label="Предыдущая страница"/);
   assert.doesNotMatch(boundary, /<a[^>]+--disabled/);
   assert.equal(boundary.match(/aria-current="page"/g)?.length, 1);
 

@@ -135,13 +135,13 @@ cannot enter the tab order.
       <span
         class="shlz-pagination__item shlz-pagination__item--disabled"
         aria-disabled="true"
-        aria-label="Предыдущая страница"
       >
         <img
           class="shlz-pagination__icon"
           src="/assets/icons/arrow-left-md.svg"
           alt=""
         />
+        <span class="shlz-visually-hidden">Предыдущая страница недоступна</span>
       </span>
     </li>
     <li>
@@ -175,16 +175,16 @@ remains a real link.
 
 ## Public HTML contract
 
-| Part                  | Contract                                                                         |
-| --------------------- | -------------------------------------------------------------------------------- |
-| Landmark              | `nav.shlz-pagination` with a purpose-specific `aria-label` or `aria-labelledby`. |
-| List                  | `ul.shlz-pagination__list`; one `li` per item in visual and reading order.       |
-| Destination           | `a.shlz-pagination__item` with a consumer-generated `href`.                      |
-| Current page          | Exactly one destination link has `aria-current="page"`.                          |
-| Previous / Next       | Destination links with explicit accessible names and decorative SHLZ icons.      |
-| Unavailable direction | Non-link `.shlz-pagination__item--disabled[aria-disabled="true"]`.               |
-| Ellipsis              | Non-link `.shlz-pagination__item--ellipsis[aria-hidden="true"]`.                 |
-| Runtime               | Native link navigation. No SHLZ events, controller, state or lifecycle.          |
+| Part                  | Contract                                                                                                 |
+| --------------------- | -------------------------------------------------------------------------------------------------------- |
+| Landmark              | `nav.shlz-pagination` with a purpose-specific `aria-label` or `aria-labelledby`.                         |
+| List                  | `ul.shlz-pagination__list`; one `li` per item in visual and reading order.                               |
+| Destination           | `a.shlz-pagination__item` with a consumer-generated `href`.                                              |
+| Current page          | Exactly one destination link has `aria-current="page"`.                                                  |
+| Previous / Next       | Destination links with explicit accessible names and decorative SHLZ icons.                              |
+| Unavailable direction | Non-link `.shlz-pagination__item--disabled[aria-disabled="true"]` with visually hidden unavailable text. |
+| Ellipsis              | Non-link `.shlz-pagination__item--ellipsis[aria-hidden="true"]`.                                         |
+| Runtime               | Native link navigation. No SHLZ events, controller, state or lifecycle.                                  |
 
 ## Variants and states
 
@@ -209,8 +209,10 @@ remains a real link.
   `alt=""` because the link already has a name.
 - Ellipses are hidden from assistive technology because they neither identify a
   page nor perform an action.
-- Disabled directions are non-links. Do not keep an unusable anchor with a fake
-  `href`, click suppression or `tabindex` workaround.
+- Disabled directions are non-links with visually hidden text such as
+  “Предыдущая страница недоступна”. Do not keep an unusable anchor with a fake
+  `href`, click suppression or `tabindex` workaround; do not try to name a
+  generic span with `aria-label`.
 - Keyboard behavior is native: Tab and Shift+Tab traverse available links, Enter
   follows the focused link, and browser focus styling uses `:focus-visible`.
   Pagination implements no roving tabindex or Arrow/Home/End shortcuts.

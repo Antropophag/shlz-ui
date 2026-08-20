@@ -56,18 +56,26 @@ test("consumer-owned URL selects the visible result and current page", async ({
 test("consumer boundary states are non-links", async ({ page }) => {
   await page.goto("/?page=1#pagination-consumer");
   const consumer = page.locator("[data-pagination-consumer]");
-  const previous = consumer.locator('[aria-label="Предыдущая страница"]');
+  const previous = consumer.locator(".shlz-pagination__item--disabled");
   await expect(previous).toHaveJSProperty("tagName", "SPAN");
   await expect(previous).toHaveAttribute("aria-disabled", "true");
   await expect(previous).not.toHaveAttribute("href");
+  await expect(previous).not.toHaveAttribute("aria-label");
+  await expect(previous.locator(".shlz-visually-hidden")).toHaveText(
+    "Предыдущая страница недоступна",
+  );
 
   await page.goto("/?page=3#pagination-consumer");
   const next = page
     .locator("[data-pagination-consumer]")
-    .locator('[aria-label="Следующая страница"]');
+    .locator(".shlz-pagination__item--disabled");
   await expect(next).toHaveJSProperty("tagName", "SPAN");
   await expect(next).toHaveAttribute("aria-disabled", "true");
   await expect(next).not.toHaveAttribute("href");
+  await expect(next).not.toHaveAttribute("aria-label");
+  await expect(next.locator(".shlz-visually-hidden")).toHaveText(
+    "Следующая страница недоступна",
+  );
 });
 
 test("narrow Pagination wraps without clipping or horizontal overflow", async ({

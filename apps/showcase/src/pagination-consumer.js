@@ -20,7 +20,7 @@ export const paginationConsumerMarkup = (search, iconUrl) => {
     const icon = kind === "previous" ? "arrow-left-md" : "arrow-right-md";
     const content = `<img class="shlz-pagination__icon" src="${iconUrl(icon)}" alt="">`;
     return unavailable
-      ? `<li><span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true" aria-label="${label}">${content}</span></li>`
+      ? `<li><span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true">${content}<span class="shlz-visually-hidden">${label} недоступна</span></span></li>`
       : `<li><a class="shlz-pagination__item" href="/?page=${page}#pagination-consumer" aria-label="${label}">${content}</a></li>`;
   };
 

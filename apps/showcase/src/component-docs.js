@@ -219,7 +219,7 @@ const paginationEllipsis = () =>
 const paginationDirection = ({ href, label, icon, disabled = false }) => {
   const image = `<img class="shlz-pagination__icon" src="/assets/icons/${icon}.svg" alt="" />`;
   return disabled
-    ? `<span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true" aria-label="${label}">${image}</span>`
+    ? `<span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true">${image}<span class="shlz-visually-hidden">${label} недоступна</span></span>`
     : `<a class="shlz-pagination__item" href="${href}" aria-label="${label}">${image}</a>`;
 };
 const paginationNav = (
@@ -993,7 +993,7 @@ export const componentDocumentation = {
       ],
       [
         "Unavailable",
-        "Non-link .shlz-pagination__item--disabled with aria-disabled=true.",
+        "Non-link .shlz-pagination__item--disabled with aria-disabled=true and visually hidden unavailable text.",
       ],
       [
         "Ellipsis",
