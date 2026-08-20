@@ -6,6 +6,24 @@ const escapeHtml = (value) =>
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 
+const stylesheetSnippet = (id) => ({
+  id: `${id}-css`,
+  label: "Styles",
+  language: "html",
+  code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+});
+
+const cssOnlyUsage = (id, markup) => ({
+  dependencies: [
+    ["@shlz/styles/shlz.css", "Required"],
+    ["@shlz/behaviors", "Not required"],
+  ],
+  snippets: [
+    stylesheetSnippet(id),
+    { id: `${id}-html`, label: "HTML", language: "html", code: markup },
+  ],
+});
+
 const buttonMarkup = `<button class="shlz-button shlz-button--primary" type="button">
   Сохранить
 </button>`;
@@ -158,24 +176,7 @@ export const componentDocumentation = {
       "Do not use Button for navigation; use Link instead.",
       "Do not represent loading with disabled alone: loading is not yet a supported Button contract.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "button-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "button-html",
-        label: "HTML",
-        language: "html",
-        code: buttonMarkup,
-      },
-    ],
+    ...cssOnlyUsage("button", buttonMarkup),
     contract: [
       ["Element", "Native <button>; set type explicitly inside forms."],
       ["Modes", "Default neutral, --primary and --text."],
@@ -210,24 +211,7 @@ export const componentDocumentation = {
       "Use Textarea for multi-line content and Select/Radio for predefined choices.",
       "Do not use visual-state helpers or the source-only Advanced specimens as application API.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "input-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "input-html",
-        label: "HTML",
-        language: "html",
-        code: inputMarkup,
-      },
-    ],
+    ...cssOnlyUsage("input", inputMarkup),
     contract: [
       ["Root", "Native label.shlz-field."],
       ["Control shell", ".shlz-field__control."],
@@ -273,24 +257,7 @@ export const componentDocumentation = {
       "Use Input for short single-line values and a rich-text editor for formatted content.",
       "Do not render a static counter that is not synchronized with the native value.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "textarea-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "textarea-html",
-        label: "HTML",
-        language: "html",
-        code: textareaMarkup,
-      },
-    ],
+    ...cssOnlyUsage("textarea", textareaMarkup),
     contract: [
       ["Root", "Native label.shlz-field.shlz-field--textarea."],
       [
@@ -342,24 +309,7 @@ export const componentDocumentation = {
       "Use Radio for exactly one choice from a visible set and Switch for an immediate setting change.",
       "Do not use indeterminate as a third submitted value; form submission remains checked or unchecked.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "checkbox-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "checkbox-html",
-        label: "HTML",
-        language: "html",
-        code: checkboxMarkup,
-      },
-    ],
+    ...cssOnlyUsage("checkbox", checkboxMarkup),
     contract: [
       ["Label", "Native label.shlz-choice wraps the input and visible text."],
       ["Value owner", "Native input.shlz-checkbox[type=checkbox]."],
@@ -399,19 +349,7 @@ export const componentDocumentation = {
       "Use Checkbox for independent boolean choices and Select for a long compact option list.",
       "Do not manage mutual exclusion with custom application state instead of the native name group.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "radio-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      { id: "radio-html", label: "HTML", language: "html", code: radioMarkup },
-    ],
+    ...cssOnlyUsage("radio", radioMarkup),
     contract: [
       ["Group", "Native fieldset with a visible legend."],
       ["Option label", "Native label.shlz-choice wraps each input and text."],
@@ -453,12 +391,7 @@ export const componentDocumentation = {
       ["@shlz/behaviors", "Not required"],
     ],
     snippets: [
-      {
-        id: "switch-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
+      stylesheetSnippet("switch"),
       {
         id: "switch-html",
         label: "HTML",
@@ -520,24 +453,7 @@ export const componentDocumentation = {
       "Use Badge for a compact count or dot indicator and Notification for transient feedback.",
       "Do not infer or communicate meaning from color alone; modifier names are paint families, not business semantics.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "status-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "status-html",
-        label: "HTML",
-        language: "html",
-        code: statusMarkup,
-      },
-    ],
+    ...cssOnlyUsage("status", statusMarkup),
     contract: [
       ["Element", "Text-bearing span.shlz-status."],
       [
@@ -579,19 +495,7 @@ export const componentDocumentation = {
       "Use Status for a textual business state and do not use Badge as the only label of a control.",
       "Do not encode critical meaning only through the dot color or an unexplained number.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "badge-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      { id: "badge-html", label: "HTML", language: "html", code: badgeMarkup },
-    ],
+    ...cssOnlyUsage("badge", badgeMarkup),
     contract: [
       ["Count", "span.shlz-badge with visible consumer-owned text."],
       ["Size", "Default 16px; add .shlz-badge--lg for 23px."],
@@ -633,19 +537,7 @@ export const componentDocumentation = {
       "Use Status for a business state and Badge for a count/dot.",
       "Do not make the presentation span clickable or encode semantic categories through unsupported colors.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "tag-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      { id: "tag-html", label: "HTML", language: "html", code: tagMarkup },
-    ],
+    ...cssOnlyUsage("tag", tagMarkup),
     contract: [
       ["Element", "Text-bearing span.shlz-tag."],
       ["Variants", "Default filled and .shlz-tag--outlined."],
@@ -694,12 +586,7 @@ export const componentDocumentation = {
       ["@shlz/behaviors", "Not required; removal is consumer-owned"],
     ],
     snippets: [
-      {
-        id: "person-tag-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
+      stylesheetSnippet("person-tag"),
       {
         id: "person-tag-html",
         label: "HTML",
@@ -764,24 +651,7 @@ export const componentDocumentation = {
       "Use Tabs for switching document panels/navigation and Select for a long or space-constrained list.",
       "Do not apply the radio contract to links, commands or multi-selection.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "segment-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      {
-        id: "segment-html",
-        label: "HTML",
-        language: "html",
-        code: segmentMarkup,
-      },
-    ],
+    ...cssOnlyUsage("segment", segmentMarkup),
     contract: [
       [
         "Group",
@@ -828,19 +698,7 @@ export const componentDocumentation = {
       "Use Button for an action in the current interface.",
       "Do not use diagnostic visual-state classes in application markup.",
     ],
-    dependencies: [
-      ["@shlz/styles/shlz.css", "Required"],
-      ["@shlz/behaviors", "Not required"],
-    ],
-    snippets: [
-      {
-        id: "link-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
-      { id: "link-html", label: "HTML", language: "html", code: linkMarkup },
-    ],
+    ...cssOnlyUsage("link", linkMarkup),
     contract: [
       ["Element", "Native a.shlz-link with a real href."],
       ["States", "Native hover, active and focus-visible."],
@@ -885,12 +743,7 @@ export const componentDocumentation = {
       ["Image or icon asset", "Consumer-owned for those content types"],
     ],
     snippets: [
-      {
-        id: "avatar-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
+      stylesheetSnippet("avatar"),
       {
         id: "avatar-text-html",
         label: "Text fallback",
@@ -945,12 +798,7 @@ export const componentDocumentation = {
       ["@shlz/behaviors/tabs", "Required for activation and keyboard behavior"],
     ],
     snippets: [
-      {
-        id: "tabs-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
+      stylesheetSnippet("tabs"),
       { id: "tabs-html", label: "HTML", language: "html", code: tabsMarkup },
       { id: "tabs-js", label: "Behavior", language: "js", code: tabsBehavior },
     ],
@@ -1012,12 +860,7 @@ export const componentDocumentation = {
       ["@shlz/behaviors", "No Select behavior is exported"],
     ],
     snippets: [
-      {
-        id: "select-css",
-        label: "Styles",
-        language: "html",
-        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
-      },
+      stylesheetSnippet("select"),
       {
         id: "select-html",
         label: "HTML",
@@ -1056,11 +899,14 @@ export const componentDocumentation = {
 const list = (items) =>
   `<ul>${items.map((item) => `<li>${item}</li>`).join("")}</ul>`;
 
+const tableRow = ([name, value]) =>
+  `<tr><th scope="row"><code>${escapeHtml(name)}</code></th><td>${escapeHtml(value)}</td></tr>`;
+
 const table = (rows, label) => `
   <div class="shlz-table-wrap">
     <table class="shlz-developer-docs__table">
       <caption class="shlz-visually-hidden">${label}</caption>
-      <tbody>${rows.map(([name, value]) => `<tr><th scope="row"><code>${escapeHtml(name)}</code></th><td>${escapeHtml(value)}</td></tr>`).join("")}</tbody>
+      <tbody>${rows.map(tableRow).join("")}</tbody>
     </table>
   </div>`;
 

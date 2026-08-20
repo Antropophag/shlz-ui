@@ -27,9 +27,13 @@ for (const [name, selector] of [
 }
 
 test("production showcase review: select", async ({ page }) => {
+  const productionFixtures = page.locator(
+    "#select-demo > [data-select-production-fixtures]",
+  );
+  await expect(productionFixtures).toBeVisible();
   await expectStableShowcaseScreenshot(
     page,
-    page.locator("#select-demo > [data-select-production-fixtures]"),
+    productionFixtures,
     "review-select.png",
   );
 });
