@@ -168,9 +168,13 @@ test("Button real interaction paint matches every source-backed mode state", asy
     ).toMatchObject(await paint(visualActive));
     await page.mouse.up();
 
+    await page.mouse.move(0, 0);
     await page.keyboard.press("Tab");
     await live.focus();
     await expect(live).toBeFocused();
+    expect(await paint(live), `${mode} real focus-visible paint`).toMatchObject(
+      expectedPaint(states[0]),
+    );
     expect(
       await live.evaluate((element) => {
         const style = window.getComputedStyle(element);
