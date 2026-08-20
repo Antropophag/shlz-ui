@@ -1,0 +1,56 @@
+{
+  "foundation": "effects",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Select.svg",
+    "shlz-design-source/raw/svg/Popover.svg",
+    "shlz-design-source/raw/svg/Notification.svg",
+    "shlz-design-source/raw/svg/Modal.svg"
+  ],
+  "referenceSources": [
+    "shlz-design-source/tokens/filters-observed.json",
+    "shlz-design-source/tokens/strokes-observed.json",
+    "design-source-index/foundations.json"
+  ],
+  "derivedArtifacts": [],
+  "implementation": [
+    "packages/styles/components/field.css",
+    "packages/styles/components/popover.css",
+    "packages/styles/components/notification.css",
+    "packages/styles/components/modal.css"
+  ],
+  "consumers": [
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "Offsets, blur, alpha, strokes, and multi-shadow composition are retained per authoritative component source.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Wave 1 exposes no global elevation scale because the source does not establish one.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Nearly equal effects are not normalized across component families.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass",
+    "structural-contract": "pass",
+    "runtime-browser": "pass",
+    "accessibility": "not-applicable: audited effects do not carry meaning independently",
+    "focused-visual": "pass",
+    "consumer-integration": "pass",
+    "responsive-content-stress": "pass"
+  },
+  "findings": [],
+  "limitations": [
+    "Effects remain component-local; this manifest verifies the foundation boundary, not the components themselves."
+  ]
+}

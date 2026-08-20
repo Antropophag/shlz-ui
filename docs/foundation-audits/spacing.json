@@ -1,0 +1,50 @@
+{
+  "foundation": "spacing",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Spacing.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "derivedArtifacts": [
+    "design-source-index/foundations.json",
+    "shlz-design-source/tokens/spacing-candidates.json",
+    "packages/tokens/dist/tokens.css"
+  ],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/foundation.css"
+  ],
+  "consumers": [
+    "packages/styles/foundation.css",
+    "packages/styles/components/",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "The global scale is exactly 4/8/16/24/32/40/48/56/64px.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "A source spacing token is used only where its semantics are global.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Repeated component geometry remains local unless a global semantic contract is established.",
+      "evidence": "docs/token-methodology.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass",
+    "structural-contract": "pass",
+    "runtime-browser": "pass",
+    "accessibility": "not-applicable: no standalone semantic behavior",
+    "focused-visual": "pass",
+    "consumer-integration": "pass",
+    "responsive-content-stress": "pass"
+  },
+  "findings": [],
+  "limitations": []
+}

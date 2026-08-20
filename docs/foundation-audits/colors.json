@@ -1,0 +1,56 @@
+{
+  "foundation": "colors",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Colors.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "derivedArtifacts": [
+    "design-source-index/foundations.json",
+    "shlz-design-source/tokens/colors-observed.json",
+    "packages/tokens/dist/tokens.css"
+  ],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/foundation.css"
+  ],
+  "consumers": [
+    "packages/styles/components/button.css",
+    "packages/styles/components/field.css",
+    "packages/styles/components/status-badge.css",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "All 40 named colors preserve source spelling, RGB value, and alpha.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Text, surface, border, action, and status roles are semantic aliases.",
+      "evidence": "packages/tokens/provenance.json"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Component-local paints are retained when the source does not establish a global palette token.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "assumption",
+      "claim": "WCAG observations do not rewrite the source-backed palette in Wave 1.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass",
+    "structural-contract": "pass",
+    "runtime-browser": "pass",
+    "accessibility": "pass: representative text, state, border, and icon paints retain semantics; palette redesign is out of scope",
+    "focused-visual": "pass",
+    "consumer-integration": "pass",
+    "responsive-content-stress": "not-applicable: color claims do not change with viewport or content length"
+  },
+  "findings": [],
+  "limitations": []
+}

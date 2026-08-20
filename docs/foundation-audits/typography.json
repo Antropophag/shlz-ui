@@ -1,0 +1,59 @@
+{
+  "foundation": "typography",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+    "shlz-design-source/raw/typography-UI Kit – Interface elements.json"
+  ],
+  "referenceSources": ["design-source-index/typography.json"],
+  "derivedArtifacts": [
+    "packages/tokens/dist/tokens.css",
+    "packages/styles/dist/shlz.css"
+  ],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/typography-profiles.css",
+    "apps/showcase/src/fira-sans.css"
+  ],
+  "consumers": [
+    "packages/styles/components/field.css",
+    "packages/styles/components/pagination.css",
+    "packages/styles/components/table.css",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "Golos Text Regular/Medium/SemiBold is authoritative across 2,193 source text nodes.",
+      "evidence": "design-source-index/typography.json"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Fira Sans is a compatibility profile and does not redefine Figma truth or shared component geometry.",
+      "evidence": "docs/typography-profiles.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Reusable roles retain exact observed size, weight, line-height, and letter-spacing combinations.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "assumption",
+      "claim": "The fallback stack is engineering policy because the library does not distribute Golos font files.",
+      "evidence": "packages/tokens/provenance.json"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass",
+    "structural-contract": "pass",
+    "runtime-browser": "pass",
+    "accessibility": "pass",
+    "focused-visual": "pass",
+    "consumer-integration": "pass",
+    "responsive-content-stress": "pass"
+  },
+  "findings": [],
+  "limitations": [
+    "Consumers remain responsible for licensed Golos font delivery."
+  ]
+}

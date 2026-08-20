@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "3c1f10ba51a8b341126183d3338d53b711420795",
+    "sha": "6faefdb19a3053d7aed0362603d02ca40fa47103",
     "measuredAt": "2026-08-20",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -23,21 +23,24 @@
         "tools/playwright/foundation.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source tests",
-        "structural-contract": "generator/validation",
-        "runtime-browser": "broad foundation page",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "package smoke",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: exact source-layer facts and source hashes",
+        "structural-contract": "pass: generation, provenance, exports, determinism",
+        "runtime-browser": "pass: computed custom properties in representative surfaces",
+        "accessibility": "not-applicable: serialization has no independent semantics",
+        "focused-visual": "pass: focused foundation assertions",
+        "consumer-integration": "pass: styles bundle, plain HTML, package smoke",
+        "responsive-content-stress": "not-applicable: covered by consuming foundations"
       },
       "canonical_name": "Tokens",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Colors.svg",
-        "shlz-design-source/raw/svg/Spacing.svg"
+        "shlz-design-source/raw/svg/Spacing.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+        "shlz-design-source/raw/typography-UI Kit – Interface elements.json"
       ],
       "production_implementation": [
         "packages/tokens/tokens.json",
@@ -45,14 +48,19 @@
         "packages/styles/foundation.css"
       ],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/tokens.json"],
       "executable_fixtures": [],
       "live_consumers": ["packages/styles/components/"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
-      "scope": ["color groups", "spacing scale", "radii", "effects"],
+      "scope": [
+        "source and semantic layers",
+        "provenance",
+        "CSS generation",
+        "package exports"
+      ],
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
@@ -66,29 +74,235 @@
     },
     {
       "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: 40 named source paints with alpha",
+        "structural-contract": "pass: source and semantic alias layers",
+        "runtime-browser": "pass: text/surface/border/icon/state paints",
+        "accessibility": "pass: representative semantics; no palette redesign",
+        "focused-visual": "pass: foundation and icon snapshots",
+        "consumer-integration": "pass: components and Data Workspace",
+        "responsive-content-stress": "not-applicable: color claims are viewport-independent"
+      },
+      "canonical_name": "Colors",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Colors.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/colors.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": [
+        "packages/styles/components/",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "HEX/RGB/alpha",
+        "semantic aliases",
+        "text/surface/border/icon/state paints"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 2,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: nine exact values",
+        "structural-contract": "pass: generated CSS variables",
+        "runtime-browser": "pass: representative stack/cluster/surface",
+        "accessibility": "not-applicable: no standalone semantics",
+        "focused-visual": "pass: exact computed geometry",
+        "consumer-integration": "pass: package and Data Workspace consumers",
+        "responsive-content-stress": "pass: narrow and long-content consumers"
+      },
+      "canonical_name": "Spacing",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Spacing.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/spacing.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["packages/styles/components/"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "4/8/16/24/32/40/48/56/64px",
+        "global versus component geometry"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: five human-verified source labels",
+        "structural-contract": "pass: generated variables and no approximate pill token",
+        "runtime-browser": "pass: surface and pill consumers",
+        "accessibility": "not-applicable: shape has no standalone semantics",
+        "focused-visual": "pass: exact radius geometry",
+        "consumer-integration": "pass: representative component surfaces",
+        "responsive-content-stress": "not-applicable: bounded/pill geometry"
+      },
+      "canonical_name": "Radii",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/radii.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["packages/styles/components/"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["8/12/16/48/100px", "circles/pills", "component-local radii"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: effect and stroke observations traced to component SVGs",
+        "structural-contract": "pass: component-local effects intentionally not tokenized",
+        "runtime-browser": "pass: overlay and surface effects",
+        "accessibility": "not-applicable: effects carry no independent meaning",
+        "focused-visual": "pass: focused overlay/surface snapshots",
+        "consumer-integration": "pass: Showcase and Data Workspace",
+        "responsive-content-stress": "pass: narrow/long overlay surfaces"
+      },
+      "canonical_name": "Effects",
+      "category": "foundations",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Select.svg",
+        "shlz-design-source/raw/svg/Popover.svg",
+        "shlz-design-source/raw/svg/Notification.svg",
+        "shlz-design-source/raw/svg/Modal.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/field.css",
+        "packages/styles/components/popover.css",
+        "packages/styles/components/notification.css",
+        "packages/styles/components/modal.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/effects.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "shadows",
+        "overlays",
+        "opacity",
+        "strokes",
+        "no global elevation scale"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "Foundation boundary only; owning components are not audited here."
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
         "tools/tests/typography-profiles.test.mjs",
         "tools/playwright/typography-profiles.spec.js"
       ],
       "evidence": {
-        "source-integrity": "structural extraction",
-        "structural-contract": "source tests",
-        "runtime-browser": "profile switching",
-        "accessibility": "gap",
-        "focused-visual": "one compatibility snapshot",
-        "consumer-integration": "Showcase only",
-        "responsive-content-stress": "long-content browser test"
+        "source-integrity": "pass: 2,193 raw typography nodes classified",
+        "structural-contract": "pass: exact roles, weights, family stacks and inheritance",
+        "runtime-browser": "pass: root/subtree profile switching and font loading",
+        "accessibility": "pass: inheritance and readable representative roles",
+        "focused-visual": "pass: computed roles and Fira compatibility snapshot",
+        "consumer-integration": "pass: field, pagination, table and Data Workspace",
+        "responsive-content-stress": "pass: narrow and long Cyrillic/Latin content"
       },
       "canonical_name": "Typography profiles",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
-        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
-        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+        "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+        "shlz-design-source/raw/typography-UI Kit – Interface elements.json"
       ],
       "production_implementation": ["packages/styles/typography-profiles.css"],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/typography.json"],
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/fira-sans.css"],
       "data_workspace_consumers": [],
@@ -114,25 +328,25 @@
         "tools/playwright/icons.spec.js"
       ],
       "evidence": {
-        "source-integrity": "hash and paint tests",
-        "structural-contract": "sprite/API tests",
-        "runtime-browser": "catalog resolution",
-        "accessibility": "gap per use",
-        "focused-visual": "catalog snapshots, not every glyph",
-        "consumer-integration": "indirect",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: 133 source files with hashes and paint semantics",
+        "structural-contract": "pass: 119 logical icons, 125 variants, sprite/API/exports",
+        "runtime-browser": "pass: every canonical symbol resolves and paints",
+        "accessibility": "pass: consumer-owned labels checked on representative uses",
+        "focused-visual": "pass: representative currentColor/preserved-paint snapshot",
+        "consumer-integration": "pass: controls, Data Workspace and plain HTML",
+        "responsive-content-stress": "not-applicable: intrinsic glyph geometry is viewport-independent"
       },
       "canonical_name": "Icons",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Icons.svg"],
       "production_implementation": [
         "packages/icons/normalized/",
         "tools/generate.mjs"
       ],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/icons.json"],
       "executable_fixtures": [],
       "live_consumers": ["packages/styles/components/", "apps/showcase/src/"],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],

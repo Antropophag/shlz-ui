@@ -1,0 +1,63 @@
+{
+  "foundation": "icons",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Icons.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "referenceSources": [
+    "packages/icons/normalized/analysis.json",
+    "packages/icons/normalized/manifest.json"
+  ],
+  "derivedArtifacts": [
+    "packages/icons/normalized/",
+    "packages/icons/dist/manifest.json",
+    "packages/icons/dist/sprite.svg",
+    "packages/icons/dist/index.js"
+  ],
+  "implementation": [
+    "tools/normalize-basic-icons.mjs",
+    "tools/generate.mjs",
+    "packages/icons/compatibility-aliases.json"
+  ],
+  "consumers": [
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/consumer-workspace.js",
+    "tools/fixtures/plain-html.html"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "133 source SVGs map to 119 logical glyphs and 125 emitted variants without geometry or paint loss.",
+      "evidence": "packages/icons/normalized/analysis.json"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "97 logical monochrome icons use currentColor and 22 preserve source paint.",
+      "evidence": "docs/icon-methodology.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Explicit compatibility aliases preserve historical names without becoming canonical glyphs.",
+      "evidence": "packages/icons/compatibility-aliases.json"
+    },
+    {
+      "classification": "assumption",
+      "claim": "Uncertain source labels remain explicitly uncertain and are not silently merged.",
+      "evidence": "packages/icons/normalized/analysis.json"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass",
+    "structural-contract": "pass",
+    "runtime-browser": "pass",
+    "accessibility": "pass: decorative/semantic labeling remains consumer-owned and representative consumers are checked",
+    "focused-visual": "pass",
+    "consumer-integration": "pass",
+    "responsive-content-stress": "not-applicable: intrinsic icon geometry is viewport-independent"
+  },
+  "findings": [],
+  "limitations": [
+    "Consumer-specific accessible names remain the consumer contract."
+  ]
+}
