@@ -380,9 +380,9 @@
       "evidence": {
         "source-integrity": "pass: Buttons.svg mode, size, geometry, typography and state paint matrix remains directly source-tested",
         "structural-contract": "pass: native button markup, shipped CSS classes, documentation and clean package consumption are exercised",
-        "runtime-browser": "pass: pointer, Enter, Space and programmatic activation each emit exactly one click; disabled emits none",
+        "runtime-browser": "pass: counters after pointer, Enter, Space and programmatic activation prove one click per path; real disabled pointer/keyboard and programmatic paths emit none",
         "accessibility": "pass: native role/name, focus-visible, disabled focus exclusion and no nested interactive content are browser-checked",
-        "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus; real hover/active assertions preserve inverse primary text",
+        "focused-visual": "pass: component-local snapshot plus real default/hover/pressed/focus-visible/disabled computed foreground/background assertions cover primary, secondary and text",
         "consumer-integration": "pass: Data Workspace reset/apply/filter and overlay actions execute application-owned state/lifecycle",
         "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
       },
@@ -769,8 +769,8 @@
       "evidence": {
         "source-integrity": "pass: Segment.svg group/item sets, three sizes, icons and state combinations remain directly tested",
         "structural-contract": "pass: fieldset, legend, same-name radios and adjacent visual labels define the executable model",
-        "runtime-browser": "pass: pointer and Arrow selection use native radio state with exactly two input and two change events",
-        "accessibility": "pass: named native radio group, one checked option, focus movement and disabled exclusion are exercised",
+        "runtime-browser": "pass: real pointer, Space and Arrow selection use native state with per-path input/change counters; disabled paths emit none",
+        "accessibility": "pass: named native radio group, mutual exclusion, real Space/Arrow focus movement and disabled focus exclusion are exercised",
         "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
         "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
         "responsive-content-stress": "pass: the component-local narrow fixture checks bounds without page-overflow inference"
@@ -822,8 +822,8 @@
       "evidence": {
         "source-integrity": "pass: underline, pill and boxed source families retain exact state and height contracts",
         "structural-contract": "pass: tablist/tab/tabpanel relationships and behavior exports are asserted",
-        "runtime-browser": "pass: click, arrows, Home/End, root-owned programmatic activation, direct-controller replacement, repeat enhancement and teardown execute",
-        "accessibility": "pass: one selected/tab-stop tab, disabled skip, focus movement, detached-tree IDs and unique root-scoped ARIA IDs are checked",
+        "runtime-browser": "pass: real click updates selection/tabstop/panels; disabled click/programmatic paths are no-ops; arrows, Home/End, owned activation, replacement, repeat enhancement and teardown execute",
+        "accessibility": "pass: one selected/tab-stop tab, disabled pointer/programmatic exclusion, focus movement, detached-tree IDs and unique root-scoped ARIA IDs are checked",
         "focused-visual": "pass: component-local active, inactive, real-focus and narrow long-label states are captured",
         "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
         "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
@@ -880,7 +880,7 @@
       "evidence": {
         "source-integrity": "pass: Pagination.svg primitive/composition split and exact 20-state matrix remain directly tested",
         "structural-contract": "pass: named nav/list/native links, one current page, non-link boundaries and ellipsis are asserted",
-        "runtime-browser": "pass: URL-driven first/middle/last navigation updates results without a library router/controller",
+        "runtime-browser": "pass: URL-driven first/middle/last navigation updates results; trusted platform Ctrl/Meta click reaches a real href uncancelled and leaves the current page unchanged",
         "accessibility": "pass: native link focus/order, real href, one aria-current and non-anchor disabled directions are browser-checked",
         "focused-visual": "pass: first/middle/last/ellipsis evidence supplements the unchanged 1,750-pixel absolute typography raster budget and separate computed assertions",
         "consumer-integration": "pass: URL-owned current page and result range execute across all three consumer pages",

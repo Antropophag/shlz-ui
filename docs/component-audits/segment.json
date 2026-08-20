@@ -41,8 +41,8 @@
   "evidence": {
     "source-integrity": "pass: primary Segment.svg group/item sets and their absent selected-disabled combination are recorded",
     "structural-contract": "pass: executable roots use fieldset, legend, same-name radios and adjacent visual labels",
-    "runtime-browser": "pass: pointer, Space and Arrow selection use native radio state with exact input/change counts",
-    "accessibility": "pass: native radiogroup naming, one checked option, focus order, Arrow movement and disabled exclusion are exercised",
+    "runtime-browser": "pass: real pointer, Space and Arrow selection use native radio state with counters asserted per path; disabled forced-pointer, focus, Space and programmatic paths emit no events",
+    "accessibility": "pass: native radiogroup naming, mutual exclusion, focus order, real Space/Arrow movement and disabled focus exclusion are exercised",
     "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
     "responsive-content-stress": "pass: long labels stay within a component-local narrow fixture without page-level inference"

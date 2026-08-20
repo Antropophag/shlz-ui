@@ -70,9 +70,9 @@
   "evidence": {
     "source-integrity": "pass: Buttons.svg remains authoritative and source tests cover the complete mode, size and paint matrix",
     "structural-contract": "pass: native button markup, shipped CSS classes and clean package consumption are exercised",
-    "runtime-browser": "pass: pointer, Enter, Space and programmatic click each emit exactly one click; disabled emits none",
+    "runtime-browser": "pass: counters are asserted after pointer, Enter, Space and programmatic click to prove one event per path; forced pointer, focus exclusion, Enter, Space and programmatic disabled paths emit none",
     "accessibility": "pass: native button role/name, focus-visible, disabled focus exclusion and absence of nested interactive content are browser-checked",
-    "focused-visual": "pass: component-local snapshot covers primary, secondary, text, sizes, icons, disabled and real focus; browser assertions preserve inverse primary hover/active text",
+    "focused-visual": "pass: component-local snapshot covers modes, sizes, icons and disabled; real default/hover/pressed/focus-visible/disabled flows assert source-backed foreground/background for primary, secondary and text and hover/pressed equivalence with diagnostic fixtures",
     "consumer-integration": "pass: Data Workspace reset/apply/filter actions and overlay actions execute application-owned state/lifecycle",
     "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
   },

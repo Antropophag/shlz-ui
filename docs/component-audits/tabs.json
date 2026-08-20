@@ -48,8 +48,8 @@
   "evidence": {
     "source-integrity": "pass: all three primary SVG families and their state geometry remain traced by source tests",
     "structural-contract": "pass: tablist/tab/tabpanel relationships and controller export are asserted",
-    "runtime-browser": "pass: click, ArrowLeft/Right, Home/End, root-owned programmatic activation, direct-controller replacement, repeated enhancement and teardown execute in Chromium",
-    "accessibility": "pass: exactly one selected/tab-stop tab, disabled skip, focus movement, detached-tree IDs and root-scoped unique ARIA relationships are checked",
+    "runtime-browser": "pass: real click updates selection, roving tabindex and panel visibility; disabled forced-click/programmatic activation are no-ops; ArrowLeft/Right, Home/End, root-owned activation, replacement, repeated enhancement and teardown execute",
+    "accessibility": "pass: exactly one selected/tab-stop tab, disabled pointer/programmatic exclusion, focus movement, detached-tree IDs and root-scoped unique ARIA relationships are checked",
     "focused-visual": "pass: component-local active, inactive, real focus and narrow long-label states are captured",
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
     "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"

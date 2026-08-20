@@ -63,7 +63,7 @@
   "evidence": {
     "source-integrity": "pass: Pagination.svg primitive/composition split and exact 20-state matrix remain source-tested",
     "structural-contract": "pass: named nav/list/native-link markup, one current page, non-link boundaries and ellipsis are asserted",
-    "runtime-browser": "pass: URL-driven first/middle/last navigation updates consumer results without a library router/controller",
+    "runtime-browser": "pass: URL-driven first/middle/last navigation updates results; a platform-appropriate trusted Ctrl/Meta click reaches the native anchor uncancelled and leaves the current page unchanged without a library router/controller",
     "accessibility": "pass: native link focus/order, real href, one aria-current and non-anchor disabled directions are browser-checked",
     "focused-visual": "pass: first, middle, last and ellipsis component-local evidence supplements the unchanged bounded typography raster test",
     "consumer-integration": "pass: URL-owned current page and result range execute across all three consumer pages",
@@ -72,6 +72,7 @@
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
+    "headless Chromium does not reliably expose a new Page for modified clicks, so evidence proves an uncancelled trusted modifier event on a real href rather than claiming an observed new tab",
     "no page-window generator, router, totals model, automatic collapse or hidden horizontal scrolling"
   ]
 }

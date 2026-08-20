@@ -41,7 +41,9 @@ test("Button preserves native activation, disabled and event ownership", async (
   page,
 }) => {
   const button = page.locator("#button-demo .shlz-button--primary").first();
-  const disabled = page.locator("#button-demo .shlz-button:disabled").first();
+  const disabled = page
+    .locator("#button-demo .shlz-button--primary:disabled")
+    .first();
   await button.evaluate((element) => {
     element.dataset.clicks = "0";
     element.addEventListener("click", () => {
@@ -49,24 +51,29 @@ test("Button preserves native activation, disabled and event ownership", async (
     });
   });
   await button.click();
+  await expect(button).toHaveAttribute("data-clicks", "1");
   await button.focus();
   await page.keyboard.press("Enter");
+  await expect(button).toHaveAttribute("data-clicks", "2");
   await page.keyboard.press("Space");
+  await expect(button).toHaveAttribute("data-clicks", "3");
   await button.evaluate((element) => element.click());
   await expect(button).toHaveAttribute("data-clicks", "4");
-  await button.hover();
-  await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
-  await page.mouse.down();
-  await expect(button).toHaveCSS("color", "rgb(255, 255, 255)");
-  await page.mouse.up();
 
   await disabled.evaluate((element) => {
     element.dataset.clicks = "0";
     element.addEventListener("click", () => {
       element.dataset.clicks = String(Number(element.dataset.clicks) + 1);
     });
-    element.click();
   });
+  await disabled.click({ force: true });
+  await expect(disabled).toHaveAttribute("data-clicks", "0");
+  await disabled.focus();
+  await expect(disabled).not.toBeFocused();
+  await page.keyboard.press("Enter");
+  await page.keyboard.press("Space");
+  await expect(disabled).toHaveAttribute("data-clicks", "0");
+  await disabled.evaluate((element) => element.click());
   await expect(disabled).toHaveAttribute("data-clicks", "0");
   await expect(disabled).toBeDisabled();
   expect(
@@ -80,6 +87,108 @@ test("Button preserves native activation, disabled and event ownership", async (
     "type",
     "button",
   );
+});
+
+test("Button real interaction paint matches every source-backed mode state", async ({
+  page,
+}) => {
+  const matrix = page.locator("[data-shlz-button-source-matrix]");
+  const modes = {
+    primary: {
+      selector: ".shlz-button--primary",
+      states: [
+        ["rgb(255, 255, 255)", "rgb(37, 61, 152)"],
+        ["rgb(255, 255, 255)", "rgb(66, 91, 166)"],
+        ["rgb(255, 255, 255)", "rgb(22, 39, 115)"],
+        ["rgb(255, 255, 255)", "rgb(115, 131, 190)"],
+      ],
+    },
+    secondary: {
+      selector:
+        ".shlz-button:not(.shlz-button--primary):not(.shlz-button--text)",
+      states: [
+        ["rgb(11, 22, 35)", "rgb(238, 240, 244)"],
+        ["rgb(37, 61, 152)", "rgb(238, 240, 244)"],
+        ["rgb(22, 39, 115)", "rgb(223, 226, 240)"],
+        ["rgb(147, 156, 165)", "rgb(238, 240, 244)"],
+      ],
+    },
+    text: {
+      selector: ".shlz-button--text",
+      states: [
+        ["rgb(11, 22, 35)", "rgb(255, 255, 255)"],
+        ["rgb(37, 61, 152)", "rgb(238, 240, 244)"],
+        ["rgb(22, 39, 115)", "rgb(223, 226, 240)"],
+        ["rgb(147, 156, 165)", "rgb(255, 255, 255)"],
+      ],
+    },
+  };
+  const paint = (locator) =>
+    locator.evaluate((element) => {
+      const style = window.getComputedStyle(element);
+      return {
+        color: style.color,
+        backgroundColor: style.backgroundColor,
+      };
+    });
+
+  const expectedPaint = ([color, backgroundColor]) => ({
+    color,
+    backgroundColor,
+  });
+
+  for (const [mode, { selector, states }] of Object.entries(modes)) {
+    const fixtures = matrix.locator(selector);
+    const live = fixtures.nth(0);
+    const visualHover = fixtures.nth(1);
+    const visualActive = fixtures.nth(2);
+    const disabled = fixtures.nth(3);
+
+    await page.mouse.move(0, 0);
+    expect(await paint(live), `${mode} default`).toMatchObject(
+      expectedPaint(states[0]),
+    );
+
+    await live.hover();
+    expect(await paint(live), `${mode} real hover`).toMatchObject(
+      expectedPaint(states[1]),
+    );
+    expect(
+      await paint(live),
+      `${mode} hover fixture equivalence`,
+    ).toMatchObject(await paint(visualHover));
+
+    await page.mouse.down();
+    expect(await paint(live), `${mode} real active`).toMatchObject(
+      expectedPaint(states[2]),
+    );
+    expect(
+      await paint(live),
+      `${mode} active fixture equivalence`,
+    ).toMatchObject(await paint(visualActive));
+    await page.mouse.up();
+
+    await page.keyboard.press("Tab");
+    await live.focus();
+    await expect(live).toBeFocused();
+    expect(
+      await live.evaluate((element) => {
+        const style = window.getComputedStyle(element);
+        return {
+          outlineColor: style.outlineColor,
+          outlineStyle: style.outlineStyle,
+        };
+      }),
+      `${mode} real focus-visible`,
+    ).toEqual({
+      outlineColor: "rgb(37, 61, 152)",
+      outlineStyle: "solid",
+    });
+
+    expect(await paint(disabled), `${mode} disabled`).toMatchObject(
+      expectedPaint(states[3]),
+    );
+  }
 });
 
 test("Link remains native navigation and unavailable text is inert", async ({
@@ -112,17 +221,51 @@ test("Segment uses one native radio lifecycle without a controller", async ({
       element.addEventListener("change", () => window.__segmentEvents.change++);
     }
   });
-  await group.getByRole("radio", { name: "Месяц" }).check();
-  await page.keyboard.press("ArrowLeft");
-  await expect(group.getByRole("radio", { name: "Неделя" })).toBeChecked();
+  const month = group.getByRole("radio", { name: "Месяц" });
+  await month.click();
+  await expect(month).toBeChecked();
+  expect(await page.evaluate(() => window.__segmentEvents)).toEqual({
+    input: 1,
+    change: 1,
+  });
+  await page.evaluate(() => {
+    window.__segmentEvents = { input: 0, change: 0 };
+  });
+  const week = group.getByRole("radio", { name: "Неделя" });
+  await week.focus();
+  await page.keyboard.press("Space");
+  await expect(week).toBeChecked();
+  await expect(month).not.toBeChecked();
+  expect(await page.evaluate(() => window.__segmentEvents)).toEqual({
+    input: 1,
+    change: 1,
+  });
+  await month.focus();
+  await page.keyboard.press("Space");
+  await expect(month).toBeChecked();
+  await expect(week).not.toBeChecked();
   expect(await page.evaluate(() => window.__segmentEvents)).toEqual({
     input: 2,
     change: 2,
   });
+  await page.keyboard.press("ArrowLeft");
+  await expect(group.getByRole("radio", { name: "Неделя" })).toBeChecked();
+  expect(await page.evaluate(() => window.__segmentEvents)).toEqual({
+    input: 3,
+    change: 3,
+  });
   const disabled = group.getByRole("radio", { name: "Год" });
   await expect(disabled).toBeDisabled();
+  await disabled.click({ force: true });
+  await disabled.focus();
+  await expect(disabled).not.toBeFocused();
+  await page.keyboard.press("Space");
   await disabled.evaluate((element) => element.click());
   await expect(disabled).not.toBeChecked();
+  expect(await page.evaluate(() => window.__segmentEvents)).toEqual({
+    input: 3,
+    change: 3,
+  });
 });
 
 test("Tabs validates ARIA, skips disabled, is idempotent and tears down", async ({
@@ -135,6 +278,38 @@ test("Tabs validates ARIA, skips disabled, is idempotent and tears down", async 
   await expect(root.locator('[role="tab"][tabindex="0"]')).toHaveCount(1);
   const first = root.getByRole("tab", { name: "Первый" });
   const second = root.getByRole("tab", { name: "Второй" });
+  const disabled = root.getByRole("tab", { name: "Disabled" });
+  const firstPanel = root.getByRole("tabpanel", {
+    name: "Первый",
+    includeHidden: true,
+  });
+  const secondPanel = root.getByRole("tabpanel", {
+    name: "Второй",
+    includeHidden: true,
+  });
+
+  await second.click();
+  await expect(second).toHaveAttribute("aria-selected", "true");
+  await expect(second).toHaveAttribute("tabindex", "0");
+  await expect(first).toHaveAttribute("aria-selected", "false");
+  await expect(first).toHaveAttribute("tabindex", "-1");
+  await expect(secondPanel).toBeVisible();
+  await expect(firstPanel).toBeHidden();
+
+  await disabled.click({ force: true });
+  await expect(second).toHaveAttribute("aria-selected", "true");
+  await expect(secondPanel).toBeVisible();
+  await expect(firstPanel).toBeHidden();
+  await disabled.evaluate((element) => {
+    const controller = window.__shlzEnhanceTabs(
+      element.closest("[data-shlz-tabs]").parentElement,
+    )[0];
+    controller.activate(element);
+  });
+  await expect(second).toHaveAttribute("aria-selected", "true");
+  await expect(secondPanel).toBeVisible();
+  await expect(firstPanel).toBeHidden();
+
   await first.focus();
   await page.keyboard.press("End");
   await expect(second).toBeFocused();
