@@ -32,6 +32,7 @@ test("documented components expose the validated component-page contract", async
     "avatar",
     "tabs",
     "pagination",
+    "notification",
     "select",
   ]);
 
@@ -409,4 +410,43 @@ test("Pagination snippets preserve native navigation and consumer ownership", as
   assert.match(css, /flex-wrap: wrap/);
   assert.match(css, /a\.shlz-pagination__item:focus-visible/);
   assert.equal(behaviors.exports["./pagination"], undefined);
+});
+
+test("Notification snippets keep semantics and lifecycle application-owned", async () => {
+  const [css, behaviors] = await Promise.all([
+    read("packages/styles/components/notification.css"),
+    read("packages/behaviors/package.json").then(JSON.parse),
+  ]);
+  const snippets = Object.fromEntries(
+    componentDocumentation.notification.snippets.map(({ id, code }) => [
+      id,
+      code,
+    ]),
+  );
+
+  assert.match(snippets["notification-html"], /role="status"/);
+  assert.match(snippets["notification-html"], /data-notification-close/);
+  assert.match(
+    snippets["notification-html"],
+    /aria-label="Закрыть уведомление"/,
+  );
+  assert.match(snippets["notification-action-html"], /role="alert"/);
+  assert.match(
+    snippets["notification-action-html"],
+    /data-notification-action/,
+  );
+  assert.match(snippets["notification-js"], /addEventListener\("click"/);
+  assert.match(snippets["notification-js"], /notification\.remove\(\)/);
+  assert.match(snippets["notification-js"], /app:notification-action/);
+  assert.doesNotMatch(snippets["notification-js"], /setTimeout|setInterval/);
+
+  for (const selector of [
+    ".shlz-notification__content",
+    ".shlz-notification__title",
+    ".shlz-notification__action",
+    ".shlz-notification__close",
+  ]) {
+    assert.ok(css.includes(selector), `${selector} must be shipped`);
+  }
+  assert.equal(behaviors.exports["./notification"], undefined);
 });

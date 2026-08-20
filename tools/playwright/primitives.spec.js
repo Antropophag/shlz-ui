@@ -133,6 +133,7 @@ test("documented components expose developer usage without mixing diagnostics", 
     ["link", "link-demo"],
     ["avatar", "avatar-demo"],
     ["tabs", "tabs-demo"],
+    ["notification", "notification-demo"],
     ["select", "select-demo"],
   ];
 

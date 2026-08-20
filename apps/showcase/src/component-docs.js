@@ -126,6 +126,41 @@ const badgeMarkup = `<span class="shlz-badge">
   12<span class="shlz-visually-hidden"> непрочитанных уведомлений</span>
 </span>`;
 
+const notificationMarkup = `<div class="shlz-notification" role="status" data-notification>
+  <span class="shlz-notification__icon" aria-hidden="true">
+    <img src="/assets/icons/checkmark.svg" alt="" />
+  </span>
+  <div class="shlz-notification__content">
+    <p class="shlz-notification__title">Изменения сохранены</p>
+  </div>
+  <button class="shlz-notification__close" type="button" aria-label="Закрыть уведомление" data-notification-close>
+    <img src="/assets/icons/close-remove.svg" alt="" />
+  </button>
+</div>`;
+
+const notificationActionMarkup = `<div class="shlz-notification shlz-notification--danger" role="alert" data-notification>
+  <div class="shlz-notification__content">
+    <p class="shlz-notification__title">Не удалось сохранить изменения</p>
+  </div>
+  <button class="shlz-notification__action" type="button" data-notification-action>
+    Повторить
+  </button>
+</div>`;
+
+const notificationBehavior = `for (const notification of document.querySelectorAll("[data-notification]")) {
+  notification
+    .querySelector("[data-notification-close]")
+    ?.addEventListener("click", () => notification.remove());
+
+  notification
+    .querySelector("[data-notification-action]")
+    ?.addEventListener("click", () => {
+      notification.dispatchEvent(
+        new CustomEvent("app:notification-action", { bubbles: true }),
+      );
+    });
+}`;
+
 const tagMarkup = `<span class="shlz-tag shlz-tag--outlined">По гарантии</span>`;
 
 const personTagMarkup = `<span class="shlz-tag shlz-person-tag">
@@ -1023,6 +1058,99 @@ export const componentDocumentation = {
         ["Bundle contract tests", "tools/tests/components.test.mjs"],
         ["Browser tests", "tools/playwright/pagination-contract.spec.js"],
         ["Visual tests", "tools/playwright/pagination-typography.spec.js"],
+      ],
+    }),
+  },
+  notification: {
+    status: "Executable · Production static feedback surface",
+    purpose:
+      "Presents concise transient or contextual feedback while the application owns its lifecycle and business action.",
+    use: [
+      "Report the result or progress of an application action near the current workflow.",
+      "Use a visible title whose wording conveys meaning without relying on color or iconography.",
+    ],
+    avoid: [
+      "Use persistent inline content for validation or information that must remain available in context.",
+      "Do not assume the primitive provides placement, stacking, timers, a queue or announcement policy.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/icons/icons/checkmark.svg", "Required by the status example"],
+      ["@shlz/icons/icons/close-remove.svg", "Required by the close example"],
+      ["@shlz/behaviors", "Not required; lifecycle remains application-owned"],
+    ],
+    snippets: [
+      stylesheetSnippet("notification"),
+      {
+        id: "notification-html",
+        label: "Dismissible status HTML",
+        language: "html",
+        code: notificationMarkup,
+      },
+      {
+        id: "notification-action-html",
+        label: "Urgent action HTML",
+        language: "html",
+        code: notificationActionMarkup,
+      },
+      {
+        id: "notification-js",
+        label: "Application-owned integration",
+        language: "js",
+        code: notificationBehavior,
+      },
+    ],
+    contract: [
+      [
+        "Root",
+        ".shlz-notification; optional --danger or --light paint modifier.",
+      ],
+      [
+        "Content",
+        ".shlz-notification__content with title and optional message.",
+      ],
+      [
+        "Leading",
+        "Optional decorative .shlz-notification__icon or visual progress/countdown.",
+      ],
+      [
+        "Close",
+        "Native .shlz-notification__close button with an accessible name.",
+      ],
+      [
+        "Action",
+        "Native .shlz-notification__action button with visible action text.",
+      ],
+      [
+        "Lifecycle",
+        "Application-owned rendering, dismissal, focus follow-up and action handling.",
+      ],
+      [
+        "Behavior",
+        "No SHLZ controller, events, queue, timer or toast manager is shipped.",
+      ],
+    ],
+    accessibility:
+      "Choose live-region semantics from urgency and context: role=status is appropriate for many polite updates, role=alert only for genuinely urgent interruptions, and static content often needs neither. Put the full meaning in text. Name icon-only close buttons, keep decorative images empty, and ensure an action label describes its result. Do not repeatedly re-announce countdown numbers. When removal affects the task, the application owns a sensible focus destination.",
+    limitations:
+      "Placement, stacking, responsive collision handling, deduplication, maximum count, persistence, timeout, pause-on-hover/focus, countdown synchronization and auto-dismiss are not implemented. The progress and countdown classes are visual surfaces only. The example app:notification-action event is consumer code, not a library event contract. Applications must decide whether and when a message enters a live region before insertion.",
+    traceability: traceability({
+      authority: [
+        ["Authoritative source", "shlz-design-source/raw/svg/Notification.svg"],
+        [
+          "Authoritative snackbar source",
+          "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        ],
+      ],
+      evidence: [["Evidence map", "docs/evidence-map.md"]],
+      styles: "packages/styles/components/notification.css",
+      documentation: "docs/components/notification.md",
+      showcase: "apps/showcase/src/main.js",
+      related: [
+        ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+        ["Source tests", "tools/tests/notification-source.test.mjs"],
+        ["Bundle contract tests", "tools/tests/components.test.mjs"],
+        ["Browser tests", "tools/playwright/components-next.spec.js"],
       ],
     }),
   },
