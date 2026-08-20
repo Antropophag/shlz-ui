@@ -1,0 +1,68 @@
+{
+  "component": "textarea",
+  "authoritativeSource": "shlz-design-source/raw/svg/Textarea.svg",
+  "referenceSources": [],
+  "implementation": ["packages/styles/components/field.css"],
+  "behavior": null,
+  "docs": "docs/components/textarea.md",
+  "rootSelector": "[data-component-audit-id^='textarea-']",
+  "legacySelectors": [".shlz-textarea"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "textarea-default-empty", "kind": "executable-fixture" },
+    { "id": "textarea-default-filled", "kind": "executable-fixture" },
+    { "id": "textarea-visual-hover-empty", "kind": "executable-fixture" },
+    { "id": "textarea-visual-hover-filled", "kind": "executable-fixture" },
+    { "id": "textarea-visual-focus-empty", "kind": "executable-fixture" },
+    { "id": "textarea-visual-focus-filled", "kind": "executable-fixture" },
+    { "id": "textarea-error-empty", "kind": "executable-fixture" },
+    { "id": "textarea-error-filled", "kind": "executable-fixture" },
+    { "id": "textarea-disabled-empty", "kind": "executable-fixture" },
+    { "id": "textarea-disabled-filled", "kind": "executable-fixture" },
+    { "id": "textarea-counter", "kind": "content-stress-fixture" },
+    { "id": "textarea-framework-composition", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["58px source shell"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "readonly",
+    "error",
+    "filled",
+    "placeholder"
+  ],
+  "contentStress": ["multiline", "very-long-text", "wrapping"],
+  "sourceClaims": [
+    {
+      "claim": "five states by filled and counter axes, 395px by approximately 58px shell",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Textarea.svg"
+    },
+    {
+      "claim": "counter and validation text remain consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/components/textarea.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/form-controls-wave2.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/form-controls-wave2.spec.js-snapshots/textarea-focused-states-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "not-applicable: no application-owned live consumer exists",
+    "responsive-content-stress": "applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no library-owned counter, auto-grow, maxlength, or announcement controller",
+    "vertical resize is not a supported composition contract"
+  ]
+}

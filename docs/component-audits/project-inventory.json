@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "6faefdb19a3053d7aed0362603d02ca40fa47103",
+    "sha": "316c5ae9b77090c3bec61ad326bcf4510224c8c0",
     "measuredAt": "2026-08-20",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -424,29 +424,27 @@
     {
       "tests": [
         "tools/tests/form-controls-source.test.mjs",
-        "tools/playwright/primitives.spec.js"
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
       ],
       "evidence": {
         "source-integrity": "source matrix test",
         "structural-contract": "CSS/docs",
-        "runtime-browser": "incidental",
-        "accessibility": "native semantics only",
-        "focused-visual": "broad page only",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "gap"
+        "runtime-browser": "pass: native value, focus, input lifecycle, disabled and programmatic updates execute in Chromium",
+        "accessibility": "pass: visible label naming, focus and native disabled semantics are asserted",
+        "focused-visual": "pass: focused Input state matrix snapshot",
+        "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
+        "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"
       },
       "canonical_name": "Input",
       "category": "form-controls",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
-      "authoritative_source": [
-        "shlz-design-source/raw/svg/Select.svg",
-        "shlz-design-source/raw/svg/Input Number.svg"
-      ],
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Input Number.svg"],
       "production_implementation": ["packages/styles/components/field.css"],
       "behavior": [],
       "docs": ["docs/components/input.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js"
@@ -465,7 +463,7 @@
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 5,
-        "liveConsumers": 1,
+        "liveConsumers": 5,
         "dataWorkspace": 1,
         "inertDiagnostics": 50,
         "legacyNative": 0,
@@ -475,26 +473,27 @@
     {
       "tests": [
         "tools/tests/form-controls-source.test.mjs",
-        "tools/playwright/fidelity.spec.js"
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
       ],
       "evidence": {
         "source-integrity": "complete matrix test",
         "structural-contract": "CSS/docs",
-        "runtime-browser": "gap",
-        "accessibility": "native semantics only",
-        "focused-visual": "gap",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "runtime-browser": "pass: native multiline value executes in Chromium",
+        "accessibility": "pass: invalid and described error relationship are asserted concretely",
+        "focused-visual": "pass: focused Textarea state matrix snapshot",
+        "consumer-integration": "not-applicable: no application-owned live consumer exists",
+        "responsive-content-stress": "pass: long Cyrillic/Latin multiline content wraps without page overflow"
       },
       "canonical_name": "Textarea",
       "category": "form-controls",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Textarea.svg"],
       "production_implementation": ["packages/styles/components/field.css"],
       "behavior": [],
       "docs": ["docs/components/textarea.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
@@ -575,26 +574,27 @@
       "tests": [
         "tools/tests/choice-status-source.test.mjs",
         "tools/playwright/choice-status.spec.js",
-        "tools/playwright/primitives.spec.js"
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
       ],
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS test",
-        "runtime-browser": "native state test",
-        "accessibility": "partial",
-        "focused-visual": "broad fixture",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "gap"
+        "runtime-browser": "pass: pointer, Space, checked, mixed, programmatic and exact change count execute in Chromium",
+        "accessibility": "pass: native label/name, focus, disabled and mixed state semantics are asserted",
+        "focused-visual": "pass: focused Checkbox state snapshot",
+        "consumer-integration": "pass: Data Workspace row, select-all and clear lifecycle execute",
+        "responsive-content-stress": "pass: representative controls remain contained at narrow viewport"
       },
       "canonical_name": "Checkbox",
       "category": "form-controls",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Checkbox.svg"],
       "production_implementation": ["packages/styles/components/choice.css"],
       "behavior": [],
       "docs": ["docs/components/checkbox.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js"
@@ -623,26 +623,27 @@
     {
       "tests": [
         "tools/tests/choice-status-source.test.mjs",
-        "tools/playwright/choice-status.spec.js"
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
       ],
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS test",
-        "runtime-browser": "native state test",
-        "accessibility": "partial",
-        "focused-visual": "broad fixture",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "runtime-browser": "pass: Tab entry, Arrow navigation, Space selection, exclusion, exact input/change counts and event-free programmatic checked execute in Chromium",
+        "accessibility": "pass: same-name group, option labels and keyboard lifecycle are asserted",
+        "focused-visual": "pass: focused Radio group snapshot",
+        "consumer-integration": "not-applicable: no Data Workspace or application-owned Radio consumer exists",
+        "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
       },
       "canonical_name": "Radio",
       "category": "form-controls",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Radio.svg"],
       "production_implementation": ["packages/styles/components/choice.css"],
       "behavior": [],
       "docs": ["docs/components/radio.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
@@ -663,26 +664,27 @@
     {
       "tests": [
         "tools/tests/remediation-wave2-source.test.mjs",
-        "tools/playwright/remediation-fidelity.spec.js"
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
       ],
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS/docs",
-        "runtime-browser": "native checked test",
-        "accessibility": "partial",
-        "focused-visual": "focused snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "runtime-browser": "pass: native pointer/Space, exact input/change counts, event-free programmatic checked and disabled no-interaction lifecycle execute in Chromium",
+        "accessibility": "pass: role=switch, stable visible name, focus and disabled semantics are asserted",
+        "focused-visual": "pass: focused two-size Switch state snapshot",
+        "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
+        "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
       },
       "canonical_name": "Switch",
       "category": "form-controls",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Switch.svg"],
       "production_implementation": ["packages/styles/components/choice.css"],
       "behavior": [],
       "docs": ["docs/components/switch.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
@@ -695,7 +697,7 @@
         "executableShowcase": 3,
         "liveConsumers": 0,
         "dataWorkspace": 0,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 13,
         "legacyNative": 0,
         "localAlternatives": 0
       }

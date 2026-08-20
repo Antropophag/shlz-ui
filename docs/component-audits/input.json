@@ -1,0 +1,71 @@
+{
+  "component": "input",
+  "authoritativeSource": "shlz-design-source/raw/svg/Input Number.svg",
+  "referenceSources": ["docs/components/form-controls-source-spec.md"],
+  "implementation": ["packages/styles/components/field.css"],
+  "behavior": null,
+  "docs": "docs/components/input.md",
+  "rootSelector": "[data-component-audit-id^='input-']",
+  "legacySelectors": [".shlz-input"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "input-popover-value", "kind": "live-consumer" },
+    { "id": "input-modal-autofocus", "kind": "live-consumer" },
+    { "id": "input-drawer-parameter", "kind": "live-consumer" },
+    { "id": "input-framework-composition", "kind": "executable-fixture" },
+    { "id": "input-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "input-workspace-search", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["large", "medium"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "readonly",
+    "error",
+    "filled",
+    "placeholder"
+  ],
+  "contentStress": ["long-value", "cyrillic-value", "narrow-viewport"],
+  "sourceClaims": [
+    {
+      "claim": "large and medium shell geometry and field paints",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Input Number.svg"
+    },
+    {
+      "claim": "Input Number advanced nodes are diagnostic because their exported properties are broken",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Input Number.svg"
+    },
+    {
+      "claim": "native input owns value, form, focus, input and change behavior",
+      "classification": "repository-decision",
+      "evidence": "docs/components/input.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/form-controls-wave2.spec.js",
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/typography-profiles.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/form-controls-wave2.spec.js-snapshots/input-focused-states-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "applicable",
+    "responsive-content-stress": "applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no library-owned masking, clear action, formatting, autofill policy, or validation controller",
+    "advanced Input Number nodes remain diagnostics-only"
+  ]
+}

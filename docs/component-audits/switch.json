@@ -1,0 +1,55 @@
+{
+  "component": "switch",
+  "authoritativeSource": "shlz-design-source/raw/svg/Switch.svg",
+  "referenceSources": [],
+  "implementation": ["packages/styles/components/choice.css"],
+  "behavior": null,
+  "docs": "docs/components/switch.md",
+  "rootSelector": "[data-component-audit-id^='switch-']",
+  "legacySelectors": [".shlz-switch__input"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "switch-labelled-on", "kind": "executable-fixture" },
+    { "id": "switch-labelled-disabled", "kind": "executable-fixture" },
+    { "id": "switch-framework-composition", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["medium-38x20", "small-24x14"],
+  "supportedStates": [
+    "off",
+    "on",
+    "disabled-off",
+    "disabled-on",
+    "focus-visible"
+  ],
+  "contentStress": [],
+  "sourceClaims": [
+    {
+      "claim": "track, thumb, offsets, paints and two-size state matrix",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Switch.svg"
+    },
+    {
+      "claim": "native checkbox with role=switch owns focus, Space, checked and events",
+      "classification": "repository-decision",
+      "evidence": "docs/components/switch.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/form-controls-wave2.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/form-controls-wave2.spec.js-snapshots/switch-focused-states-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
+    "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "persistence, loading, rollback and failure messaging remain consumer-owned"
+  ]
+}

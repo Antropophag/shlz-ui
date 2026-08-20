@@ -262,6 +262,104 @@ ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition<
 <article id="dropdown-scrollable-demo" data-shlz-dropdown-scrollable-fixture><h3>Dropdown · Items=Srollbar</h3><div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-dropdown__menu--scrollable" role="menu"><div class="shlz-dropdown__scroll-region">${Array.from({ length: 34 }, (_, index) => `<button class="shlz-dropdown__item" type="button" role="menuitem">${index + 1} menu item</button>`).join("")}</div><span class="shlz-dropdown__scrollbar" aria-hidden="true"></span></div></div></article>${typographyCompatibilityMarkup}
 ${consumerWorkspaceMarkup(showcaseIconUrl)}`;
 
+const componentAuditRoots = [
+  ["#popover-value", "input-popover-value"],
+  ["#modal-autofocus", "input-modal-autofocus"],
+  ["#showcase-drawer input[autofocus]", "input-drawer-parameter"],
+  [".shlz-composition .shlz-input", "input-framework-composition"],
+  ["#typography-compatibility .shlz-input", "input-typography-stress"],
+  [".shlz-composition .shlz-textarea", "textarea-framework-composition"],
+  [
+    "#table-demo .shlz-checkbox[aria-label='Select all rows']",
+    "checkbox-table-select-all",
+  ],
+  [
+    "#table-demo .shlz-checkbox[aria-label='Select Alpha']",
+    "checkbox-table-alpha",
+  ],
+  [
+    "#table-demo .shlz-checkbox[aria-label='Select Beta']",
+    "checkbox-table-beta",
+  ],
+  [".shlz-composition .shlz-checkbox", "checkbox-framework-composition"],
+  [".shlz-composition .shlz-switch__input", "switch-framework-composition"],
+];
+for (const [selector, auditId] of componentAuditRoots) {
+  const element = document.querySelector(selector);
+  if (element) element.dataset.componentAuditId = auditId;
+}
+
+for (const textarea of document.querySelectorAll(
+  "#textarea-demo > section:has(h4) .shlz-textarea",
+)) {
+  const sectionLabel = textarea
+    .closest("section")
+    ?.querySelector("h5")?.textContent;
+  const state = {
+    Default: "default",
+    Hover: "visual-hover",
+    Focused: "visual-focus",
+    Error: "error",
+    Disabled: "disabled",
+  }[sectionLabel];
+  const auditId = state
+    ? `textarea-${state}-${textarea.value ? "filled" : "empty"}`
+    : textarea.closest("section")?.querySelector("h4")?.textContent ===
+        "Counter"
+      ? "textarea-counter"
+      : null;
+  if (!auditId) continue;
+  textarea.dataset.componentAuditId = auditId;
+  const message = textarea
+    .closest("label")
+    ?.querySelector(".shlz-field__message");
+  if (message) {
+    message.id = `${auditId}-message`;
+    textarea.setAttribute("aria-describedby", message.id);
+  }
+}
+
+const checkboxAuditIds = {
+  "checkbox default": "checkbox-medium-default",
+  "checkbox checked": "checkbox-medium-checked",
+  "checkbox mixed": "checkbox-medium-mixed",
+  "checkbox checked-disabled": "checkbox-medium-disabled",
+};
+for (const checkbox of document.querySelectorAll(
+  "#checkbox-demo > section:has(> h4) .shlz-checkbox--sm",
+)) {
+  if (
+    checkbox.closest("section")?.querySelector(":scope > h4")?.textContent !==
+    "Medium"
+  )
+    continue;
+  const auditId = checkboxAuditIds[checkbox.getAttribute("aria-label")];
+  if (auditId) checkbox.dataset.componentAuditId = auditId;
+}
+
+for (const radio of document.querySelectorAll(
+  ".shlz-composition .shlz-radio",
+)) {
+  const label = radio.closest("label")?.textContent.trim();
+  if (label === "Первый")
+    radio.dataset.componentAuditId = "radio-framework-primary";
+  if (label === "Второй")
+    radio.dataset.componentAuditId = "radio-framework-secondary";
+}
+
+for (const toggle of document.querySelectorAll(
+  "#switch-demo section:has(> h4) .shlz-switch__input",
+)) {
+  if (
+    toggle.closest("section")?.querySelector(":scope > h4")?.textContent !==
+    "With label"
+  )
+    continue;
+  toggle.dataset.componentAuditId = toggle.disabled
+    ? "switch-labelled-disabled"
+    : "switch-labelled-on";
+}
+
 for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
   checkbox.indeterminate = true;
 }

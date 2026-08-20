@@ -17,12 +17,15 @@ export const inspectComponentOccurrences = (page, manifest) =>
         diagnostic: contract.diagnosticBoundaries.some((boundary) =>
           element.closest(boundary),
         ),
+        classified: Boolean(element.closest("[data-component-audit-id]")),
       })),
     );
 
     return {
       occurrences,
-      unclassifiedLegacy: legacy.filter(({ diagnostic }) => !diagnostic),
+      unclassifiedLegacy: legacy.filter(
+        ({ diagnostic, classified }) => !diagnostic && !classified,
+      ),
       diagnosticLegacy: legacy.filter(({ diagnostic }) => diagnostic).length,
     };
   }, manifest);
@@ -31,12 +34,13 @@ export const expectClassifiedComponentOccurrences = async (page, manifest) => {
   const inventory = await inspectComponentOccurrences(page, manifest);
   const expectedIds = manifest.occurrences.map(({ id }) => id).sort();
 
-  expect(inventory.occurrences.every(Boolean)).toBe(true);
-  expect(new Set(inventory.occurrences).size).toBe(
+  const context = `${manifest.component}: ${JSON.stringify(inventory)}`;
+  expect(inventory.occurrences.every(Boolean), context).toBe(true);
+  expect(new Set(inventory.occurrences).size, context).toBe(
     inventory.occurrences.length,
   );
-  expect(inventory.occurrences.sort()).toEqual(expectedIds);
-  expect(inventory.unclassifiedLegacy).toEqual([]);
+  expect(inventory.occurrences.sort(), context).toEqual(expectedIds);
+  expect(inventory.unclassifiedLegacy, context).toEqual([]);
 
   return inventory;
 };

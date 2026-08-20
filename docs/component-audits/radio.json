@@ -1,0 +1,56 @@
+{
+  "component": "radio",
+  "authoritativeSource": "shlz-design-source/raw/svg/Radio.svg",
+  "referenceSources": [],
+  "implementation": ["packages/styles/components/choice.css"],
+  "behavior": null,
+  "docs": "docs/components/radio.md",
+  "rootSelector": "[data-component-audit-id^='radio-']",
+  "legacySelectors": [".shlz-radio"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "radio-framework-primary", "kind": "executable-fixture" },
+    { "id": "radio-framework-secondary", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["20px"],
+  "supportedStates": [
+    "unchecked",
+    "checked",
+    "disabled",
+    "disabled-checked",
+    "hover",
+    "focus-visible"
+  ],
+  "contentStress": [],
+  "sourceClaims": [
+    {
+      "claim": "20px outer circle, 10px dot, borders and disabled paints",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Radio.svg"
+    },
+    {
+      "claim": "native same-name group owns exclusion, Tab, Arrow keys, Space and events",
+      "classification": "repository-decision",
+      "evidence": "docs/components/radio.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/form-controls-wave2.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/form-controls-wave2.spec.js-snapshots/radio-focused-group-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "not-applicable: no Data Workspace or application-owned Radio consumer exists",
+    "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "group layout and fieldset styling remain consumer-owned",
+    "source variant names are duplicated and paint evidence resolves the states"
+  ]
+}
