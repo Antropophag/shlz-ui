@@ -30,6 +30,7 @@ test("all Wave 2 executable and live roots are classified", async ({
 }) => {
   for (const manifest of Object.values(manifests))
     await expectClassifiedComponentOccurrences(page, manifest);
+  expect(Object.keys(manifests)).toHaveLength(5);
 });
 
 test("Input keeps native value, events, focus, disabled and programmatic updates", async ({
@@ -56,10 +57,10 @@ test("Textarea remains native and relates error text without a library controlle
   page,
 }) => {
   const textarea = page.locator(
-    "[data-component-audit-id='textarea-error-filled'] textarea",
+    "[data-component-audit-id='textarea-error-filled']",
   );
   const message = page.locator(
-    "[data-component-audit-id='textarea-error-filled'] .shlz-field__message",
+    "label:has([data-component-audit-id='textarea-error-filled']) .shlz-field__message",
   );
   await textarea.evaluate((element) => {
     const message = element

@@ -135,13 +135,8 @@ const inputField = ({
   secondary = false,
 } = {}) =>
   `<label class="shlz-field${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}"><span class="shlz-field__label">Label</span><span class="shlz-field__control"><input class="shlz-input" ${state === "disabled" ? "disabled" : ""} ${filled ? 'value="Input"' : 'placeholder="Placeholder"'}>${advanced ? `<button class="shlz-field__action" type="button" tabindex="-1" aria-label="Clear"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>` : ""}</span>${secondary ? '<span class="shlz-field__advanced-actions"><button class="shlz-field__action" type="button">Action</button><button class="shlz-field__action" type="button">Action</button></span>' : ""}</label>`;
-const textareaField = ({
-  state = "",
-  filled = false,
-  count = false,
-  auditId = "",
-} = {}) =>
-  `<label class="shlz-field shlz-field--textarea${state ? ` shlz-field--${state}` : ""}"${auditId ? ` data-component-audit-id="${auditId}"` : ""}><span class="shlz-field__label">Label</span><span class="shlz-field__control"><textarea class="shlz-textarea" ${state === "disabled" ? "disabled" : ""} ${state === "error" ? 'aria-invalid="true"' : ""} placeholder="Placeholder">${filled ? "Input text" : ""}</textarea></span>${count || state === "error" ? `<span class="shlz-field__secondary">${state === "error" ? '<span class="shlz-field__message">Error message</span>' : ""}${count ? '<span class="shlz-field__counter">12 / 100</span>' : ""}</span>` : ""}</label>`;
+const textareaField = ({ state = "", filled = false, count = false } = {}) =>
+  `<label class="shlz-field shlz-field--textarea${state ? ` shlz-field--${state}` : ""}"><span class="shlz-field__label">Label</span><span class="shlz-field__control"><textarea class="shlz-textarea" ${state === "disabled" ? "disabled" : ""} ${state === "error" ? 'aria-invalid="true"' : ""} placeholder="Placeholder">${filled ? "Input text" : ""}</textarea></span>${count || state === "error" ? `<span class="shlz-field__secondary">${state === "error" ? '<span class="shlz-field__message">Error message</span>' : ""}${count ? '<span class="shlz-field__counter">12 / 100</span>' : ""}</span>` : ""}</label>`;
 const chevron = `<svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5"/></svg>`;
 const selectField = ({
   size = "large",
@@ -258,7 +253,6 @@ const choiceInput = ({
   size = "large",
   state = "",
   labelled = false,
-  auditId = "",
 }) => {
   const sizeClass = size === "medium" ? " shlz-checkbox--sm" : "";
   const attributes =
@@ -271,21 +265,16 @@ const choiceInput = ({
           : state === "checked-disabled"
             ? " checked disabled"
             : "";
-  const control = `<input class="shlz-${kind}${kind === "checkbox" ? sizeClass : ""}" type="${kind}"${labelled ? "" : ` aria-label="${kind} ${state || "default"}"`}${auditId ? ` data-component-audit-id="${auditId}"` : ""}${attributes}>`;
+  const control = `<input class="shlz-${kind}${kind === "checkbox" ? sizeClass : ""}" type="${kind}"${labelled ? "" : ` aria-label="${kind} ${state || "default"}"`}${attributes}>`;
   return labelled
     ? `<label class="shlz-choice">${control}<span>Label</span></label>`
     : control;
 };
 
-const switchInput = ({
-  size = "medium",
-  state = "off",
-  labelled = false,
-  auditId = "",
-}) => {
+const switchInput = ({ size = "medium", state = "off", labelled = false }) => {
   const attributes = state.includes("on") ? " checked" : "";
   const disabled = state.includes("disabled") ? " disabled" : "";
-  const control = `<input class="shlz-switch__input${size === "small" ? " shlz-switch__input--sm" : ""}" type="checkbox" role="switch"${labelled ? "" : ` aria-label="switch ${state}"`}${auditId ? ` data-component-audit-id="${auditId}"` : ""}${attributes}${disabled}>`;
+  const control = `<input class="shlz-switch__input${size === "small" ? " shlz-switch__input--sm" : ""}" type="checkbox" role="switch"${labelled ? "" : ` aria-label="switch ${state}"`}${attributes}${disabled}>`;
   return labelled
     ? `<label class="shlz-switch">${control}<span>Label</span></label>`
     : control;
@@ -456,7 +445,7 @@ const textareaStateMatrix = () =>
   ]
     .map(
       ({ label, state }) =>
-        `<section><h5>${label}</h5><div><span>Empty</span>${textareaField({ state, auditId: `textarea-${state || "default"}-empty` })}<span>Filled</span>${textareaField({ state, filled: true, auditId: `textarea-${state || "default"}-filled` })}</div></section>`,
+        `<section><h5>${label}</h5><div><span>Empty</span>${textareaField({ state })}<span>Filled</span>${textareaField({ state, filled: true })}</div></section>`,
     )
     .join("")}</div>`;
 
@@ -596,7 +585,7 @@ export const primaryComponentMarkup = `
     <header><h3>Textarea</h3><p>Многострочное поле для ввода развёрнутого текста.</p></header>
     ${renderComponentDocumentation("textarea")}
     <section><h4>States</h4>${textareaStateMatrix()}</section>
-    <section><h4>Counter</h4><div class="shlz-api-example">${textareaField({ filled: true, count: true, auditId: "textarea-counter" })}</div></section>
+    <section><h4>Counter</h4><div class="shlz-api-example">${textareaField({ filled: true, count: true })}</div></section>
     ${formDiagnostics({
       component: "textarea",
       orders: [1, 6, 8, 9, 10, 17],
@@ -638,7 +627,7 @@ export const primaryComponentMarkup = `
           labelled: row.labelled,
         }),
     })}</section>
-    <section><h4>Medium</h4><div class="shlz-cluster">${choiceInput({ kind: "checkbox", size: "medium", auditId: "checkbox-medium-default" })}${choiceInput({ kind: "checkbox", size: "medium", state: "checked", auditId: "checkbox-medium-checked" })}${choiceInput({ kind: "checkbox", size: "medium", state: "mixed", auditId: "checkbox-medium-mixed" })}${choiceInput({ kind: "checkbox", size: "medium", state: "checked-disabled", auditId: "checkbox-medium-disabled" })}</div></section>
+    <section><h4>Medium</h4><div class="shlz-cluster">${choiceInput({ kind: "checkbox", size: "medium" })}${choiceInput({ kind: "checkbox", size: "medium", state: "checked" })}${choiceInput({ kind: "checkbox", size: "medium", state: "mixed" })}${choiceInput({ kind: "checkbox", size: "medium", state: "checked-disabled" })}</div></section>
     ${checkboxDiagnostics}
   </article>
   <article class="shlz-api-component" id="radio-demo">
@@ -683,7 +672,7 @@ export const primaryComponentMarkup = `
           switchInput({ size: row.size, state: column.state }),
       },
     )}</section>
-    <section><h4>With label</h4><div class="shlz-cluster">${switchInput({ state: "on", labelled: true, auditId: "switch-labelled-on" })}${switchInput({ state: "off-disabled", labelled: true, auditId: "switch-labelled-disabled" })}</div></section>
+    <section><h4>With label</h4><div class="shlz-cluster">${switchInput({ state: "on", labelled: true })}${switchInput({ state: "off-disabled", labelled: true })}</div></section>
     ${switchDiagnostics}
   </article>
   <article class="shlz-api-component" id="status-demo">

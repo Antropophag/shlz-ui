@@ -291,6 +291,44 @@ for (const [selector, auditId] of componentAuditRoots)
     .querySelector(selector)
     ?.setAttribute("data-component-audit-id", auditId);
 
+const componentAuditCollections = [
+  [
+    "#textarea-demo > section:has(h4) .shlz-textarea",
+    [
+      "textarea-default-empty",
+      "textarea-default-filled",
+      "textarea-visual-hover-empty",
+      "textarea-visual-hover-filled",
+      "textarea-visual-focus-empty",
+      "textarea-visual-focus-filled",
+      "textarea-error-empty",
+      "textarea-error-filled",
+      "textarea-disabled-empty",
+      "textarea-disabled-filled",
+      "textarea-counter",
+    ],
+  ],
+  [
+    "#checkbox-demo > section:has(h4) .shlz-checkbox--sm",
+    [
+      "checkbox-medium-default",
+      "checkbox-medium-checked",
+      "checkbox-medium-mixed",
+      "checkbox-medium-disabled",
+    ],
+  ],
+  [
+    "#switch-demo > section:has(h4) .shlz-switch__input:not([inert] .shlz-switch__input)",
+    ["switch-labelled-on", "switch-labelled-disabled"],
+  ],
+];
+for (const [selector, auditIds] of componentAuditCollections)
+  document
+    .querySelectorAll(selector)
+    .forEach((element, index) =>
+      element.setAttribute("data-component-audit-id", auditIds[index]),
+    );
+
 for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
   checkbox.indeterminate = true;
 }
