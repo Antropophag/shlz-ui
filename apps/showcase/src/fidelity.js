@@ -13,7 +13,7 @@ const urlByFile = Object.fromEntries(
   Object.entries(urls).map(([file, url]) => [file.split("/").pop(), url]),
 );
 const iconUrls = import.meta.glob(
-  "../../../packages/icons/dist/icons/{arrow-down-md,arrow-left-md,arrow-right-md,search,close-remove,close,checkmark,user,filter,sort-asc}.svg",
+  "../../../packages/icons/dist/icons/{arrow-left-md,arrow-right-md,search,close-remove,close,checkmark,user,filter,sort-asc}.svg",
   { eager: true, query: "?url", import: "default" },
 );
 const iconUrl = (name) =>
@@ -137,6 +137,7 @@ const inputField = ({
   `<label class="shlz-field${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}"><span class="shlz-field__label">Label</span><span class="shlz-field__control"><input class="shlz-input" ${state === "disabled" ? "disabled" : ""} ${filled ? 'value="Input"' : 'placeholder="Placeholder"'}>${advanced ? `<button class="shlz-field__action" type="button" tabindex="-1" aria-label="Clear"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>` : ""}</span>${secondary ? '<span class="shlz-field__advanced-actions"><button class="shlz-field__action" type="button">Action</button><button class="shlz-field__action" type="button">Action</button></span>' : ""}</label>`;
 const textareaField = ({ state = "", filled = false, count = false } = {}) =>
   `<label class="shlz-field shlz-field--textarea${state ? ` shlz-field--${state}` : ""}"><span class="shlz-field__label">Label</span><span class="shlz-field__control"><textarea class="shlz-textarea" ${state === "disabled" ? "disabled" : ""} ${state === "error" ? 'aria-invalid="true"' : ""} placeholder="Placeholder">${filled ? "Input text" : ""}</textarea></span>${count || state === "error" ? `<span class="shlz-field__secondary">${state === "error" ? '<span class="shlz-field__message">Error message</span>' : ""}${count ? '<span class="shlz-field__counter">12 / 100</span>' : ""}</span>` : ""}</label>`;
+const chevron = `<svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5"/></svg>`;
 const selectField = ({
   size = "large",
   state = "",
@@ -144,8 +145,31 @@ const selectField = ({
   search = false,
   multiple = false,
   status = false,
+  label = "Label",
+  placeholder = "Placeholder",
+  value = "Selected option",
 } = {}) =>
-  `<label class="shlz-field shlz-field--select${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}${multiple ? " shlz-field--multiple" : ""}${status ? " shlz-field--status" : ""}"><span class="shlz-field__label">Label</span><span class="shlz-field__control">${multiple ? `${filled ? `<span class="shlz-field__chips"><span class="shlz-field__chip">Option 1${status ? "" : `<button class="shlz-field__chip-remove" type="button" tabindex="-1" aria-label="Remove Option 1"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>`}</span><span class="shlz-field__chip">${status ? "In progress" : `Option 2<button class="shlz-field__chip-remove" type="button" tabindex="-1" aria-label="Remove Option 2"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>`}</span></span><span class="shlz-field__indicator"><span class="shlz-field__count">3</span><img class="shlz-field__icon" src="${iconUrl("arrow-down-md")}" alt=""></span>` : `<span class="shlz-select shlz-select--placeholder">Placeholder</span><img class="shlz-field__icon" src="${iconUrl("arrow-down-md")}" alt="">`}` : status ? `${filled ? '<span class="shlz-field__chip">In progress</span>' : '<span class="shlz-select shlz-select--placeholder">Placeholder</span>'}<img class="shlz-field__icon" src="${iconUrl("arrow-down-md")}" alt="">` : search ? `<img class="shlz-field__icon" src="${iconUrl("search")}" alt=""><input class="shlz-input" ${state === "disabled" ? "disabled" : ""} ${filled ? 'value="Search text"' : 'placeholder="Search"'}>` : `<select class="shlz-select" ${state === "disabled" ? "disabled" : ""} aria-label="Label"><option value="" ${filled ? "" : "selected"}>${filled ? "Selected option" : "Placeholder"}</option></select><img class="shlz-field__icon" src="${iconUrl("arrow-down-md")}" alt="">`}</span></label>`;
+  `<label class="shlz-field shlz-field--select${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}${multiple ? " shlz-field--multiple" : ""}${status ? " shlz-field--status" : ""}"><span class="shlz-field__label">${label}</span><span class="shlz-field__control">${multiple ? `${filled ? `<span class="shlz-field__chips"><span class="shlz-field__chip">Option 1${status ? "" : `<button class="shlz-field__chip-remove" type="button" tabindex="-1" aria-label="Remove Option 1"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>`}</span><span class="shlz-field__chip">${status ? "In progress" : `Option 2<button class="shlz-field__chip-remove" type="button" tabindex="-1" aria-label="Remove Option 2"><img class="shlz-field__icon" src="${iconUrl("close-remove")}" alt=""></button>`}</span></span><span class="shlz-field__indicator"><span class="shlz-field__count">3</span>${chevron}</span>` : `<span class="shlz-select shlz-select--placeholder">${placeholder}</span>${chevron}`}` : status ? `${filled ? '<span class="shlz-field__chip">In progress</span>' : `<span class="shlz-select shlz-select--placeholder">${placeholder}</span>`}${chevron}` : search ? `<img class="shlz-field__icon" src="${iconUrl("search")}" alt=""><input class="shlz-input" ${state === "disabled" ? "disabled" : ""} ${filled ? 'value="Search text"' : 'placeholder="Search"'}>` : `<select class="shlz-select" ${state === "disabled" ? "disabled" : ""} ${filled ? "" : "required"}>${filled ? `<option value="selected" selected>${value}</option>` : `<option value="" selected>${placeholder}</option><option value="example">${value}</option>`}</select><span class="shlz-field__indicator" aria-hidden="true">${chevron}</span>`}</span></label>`;
+const executableSelect = ({
+  id,
+  label,
+  placeholder = "Выберите статус",
+  value = "",
+  state = "",
+  size = "large",
+  disabled = false,
+}) => `<div class="shlz-field shlz-field--select shlz-select-root${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}" data-shlz-select data-component-audit-id="${id}">
+  <span class="shlz-field__label" id="${id}-label">${label}</span>
+  <button class="shlz-field__control shlz-select__trigger${value ? " shlz-select__trigger--selected" : ""}" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="${id}-options" aria-labelledby="${id}-label ${id}-value"${disabled ? " disabled" : ""}><span id="${id}-value" data-shlz-select-value data-placeholder="${placeholder}">${value || placeholder}</span>${chevron}</button>
+  <div class="shlz-select__listbox" id="${id}-options" role="listbox" aria-labelledby="${id}-label" hidden>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="${value === "Новая"}" data-value="Новая">Новая</button>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="${value === "В работе"}" data-value="В работе">В работе</button>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="${value === "Ожидает ответа"}" data-value="Ожидает ответа">Ожидает ответа</button>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="${value === "Назначена"}" data-value="Назначена">Назначена</button>
+    <button class="shlz-select__option" type="button" role="option" aria-selected="${value === "Закрыта"}" data-value="Закрыта">Закрыта</button>
+  </div>
+  <input type="hidden" name="${id}" value="${value}">
+</div>`;
 
 const formSources = Object.fromEntries(
   ["input", "textarea", "select"].map((component) => [
@@ -572,13 +596,13 @@ export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="select-demo">
     <header><h3>Select</h3><p>Выбор одного значения; Dropdown menu остаётся отдельным семейством команд.</p></header>
     ${renderComponentDocumentation("select")}
-    <section data-select-production-fixtures><h4 class="shlz-select-fixture-label">Production native single-select</h4><p class="shlz-select-fixture-label">Executable · Production</p><div class="shlz-component-grid"><div>${selectField({ filled: true })}</div><div>${selectField({ size: "medium", filled: true })}</div><div>${selectField({ state: "disabled" })}</div></div></section>
-    <section data-select-source-fixtures><h4 class="shlz-select-fixture-label">Source diagnostics · unsupported runtime</h4><p class="shlz-select-fixture-label">Search, multiselect, and status specimens preserve source evidence; they are not production Select contracts.</p><div class="shlz-component-grid"><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div></div></section>
+    <section data-select-production-fixtures><h4 class="shlz-select-fixture-label">Production single-select</h4><p class="shlz-select-fixture-label">All six fixtures execute the same trigger, source chevron, and SHLZ option-surface contract.</p><div class="shlz-component-grid"><div>${executableSelect({ id: "request-status-empty", label: "Статус заявки" })}</div><div>${executableSelect({ id: "request-status-filled", label: "Статус заявки", value: "В работе" })}</div><div>${executableSelect({ id: "request-status-hover", label: "Наведение", state: "visual-hover", value: "Ожидает ответа" })}</div><div>${executableSelect({ id: "request-status-focus", label: "Фокус", state: "visual-focus", value: "Назначена" })}</div><div>${executableSelect({ id: "request-status-disabled", label: "Недоступно", value: "Закрыта", disabled: true })}</div><div>${executableSelect({ id: "request-status-medium", label: "Компактный размер", size: "medium", value: "В работе" })}</div></div></section>
+    <details class="shlz-component-diagnostics" data-select-source-fixtures><summary>Source diagnostics · unsupported runtime families</summary><div class="shlz-component-diagnostics__content"><p>Search, multiselect, and status specimens preserve source evidence; they are inert and are not production Select contracts.</p><div class="shlz-component-grid" inert aria-hidden="true"><div>${selectField({ search: true })}</div><div>${selectField({ multiple: true, filled: true })}</div><div>${selectField({ status: true, filled: true })}</div></div></div></details>
     ${formDiagnostics({
       component: "select",
       orders: [1, 16, 20, 39, 45, 52],
       deviations:
-        "Native single-select semantics are retained inside the source-backed control shell. Dropdown/menu families are documented separately.",
+        "The executable single-select uses the documented button/listbox controller and hidden form-value owner. Native specimens remain inert source diagnostics; Dropdown/menu families are documented separately.",
     })}
   </article>
   <article class="shlz-api-component" id="checkbox-demo">
@@ -789,7 +813,7 @@ export const fidelityMarkup = [
     sources: ["select"],
     fidelity: "MEDIUM",
     deviations:
-      "The source Component Set is named Dropdown. All 52 structured variants map to six web axes; multiselect chips are reusable DOM, while native select popup behavior is browser-owned and outside the source node.",
+      "The source Component Set is named Dropdown. All 52 structured variants remain mapped; the executable single-select composes its closed shell with a SHLZ listbox surface while search, multiselect and status remain diagnostic axes.",
   },
   {
     id: "checkbox",

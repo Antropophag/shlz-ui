@@ -103,3 +103,31 @@ Prefer small, reviewable architectural steps.
 Do not implement a large component library before the foundation, contracts and source interpretation are established.
 
 Do not modify unrelated files.
+
+## UI component completion gate
+
+Do not call a component fixed, complete, production-ready, review-ready, or a
+finished side quest until the component completion gate in
+`docs/component-audit-workflow.md` passes. In particular:
+
+- inventory repository-wide occurrences and classify executable fixtures, live
+  compositions, inert diagnostics, and legacy/native substitutes;
+- verify the authoritative source and record the applicable state, size, and
+  content-stress contract before implementation;
+- cover runtime, accessibility, focused visual fidelity, responsive/content
+  stress, and at least one real consumer when those levels apply;
+- update the machine-readable audit manifest and leave no unclassified or
+  unexplained implementation;
+- report exact observed counts, scope, checks, limitations, blockers, CI, and
+  unresolved review threads.
+
+A pre-existing cross-component finding may be accepted as non-blocking for a
+scoped component PR only when the PR neither introduced nor worsened it, the
+fix requires changing an authoritative source or shared contract outside the
+PR scope, and the severity, evidence, explicit disposition, and linked
+follow-up are recorded. A regression, scope-local fix, or untracked finding
+still blocks completion.
+
+Structural/source tests do not prove runtime behavior. A page-level screenshot
+does not prove component fidelity. Never combine completion statuses across
+components or side quests: finishing Notification says nothing about Select.

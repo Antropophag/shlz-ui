@@ -50,7 +50,18 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
   <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer aria-labelledby="workspace-filter-title">
     <form class="shlz-drawer__surface" method="dialog">
       <header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="workspace-filter-title">Фильтры заявок</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть"><img src="${iconUrl("close")}" alt=""></button></header>
-      <div class="shlz-drawer__body"><div class="shlz-field shlz-field--select"><label class="shlz-field__label" for="workspace-status-filter">Статус</label><span class="shlz-field__control"><select class="shlz-select" id="workspace-status-filter" data-workspace-status-filter><option value="">Все статусы</option><option>Новая</option><option>В работе</option><option>Требует внимания</option><option disabled>Архивная</option></select><span class="shlz-field__indicator" aria-hidden="true"><img class="shlz-field__icon" src="${iconUrl("arrow-down-md")}" alt=""></span></span></div></div>
+      <div class="shlz-drawer__body"><div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select data-component-audit-id="workspace-status">
+        <span class="shlz-field__label" id="workspace-status-label">Статус</span>
+        <button class="shlz-field__control shlz-select__trigger" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="workspace-status-options" aria-labelledby="workspace-status-label workspace-status-value"><span id="workspace-status-value" data-shlz-select-value data-placeholder="Все статусы">Все статусы</span><svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5"/></svg></button>
+        <div class="shlz-select__listbox" id="workspace-status-options" role="listbox" aria-labelledby="workspace-status-label" hidden>
+          <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="">Все статусы</button>
+          <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="Новая">Новая</button>
+          <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="В работе">В работе</button>
+          <button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="Требует внимания">Требует внимания</button>
+          <button class="shlz-select__option" type="button" role="option" aria-selected="false" aria-disabled="true" data-value="Архивная">Архивная</button>
+        </div>
+        <input type="hidden" name="status" value="" data-workspace-status-filter>
+      </div></div>
       <footer class="shlz-drawer__footer"><button class="shlz-button" type="button" data-workspace-reset-filter>Сбросить</button><button class="shlz-button shlz-button--primary" value="apply" data-workspace-apply-filter>Применить</button></footer>
     </form>
   </dialog>
@@ -65,6 +76,7 @@ export const enhanceConsumerWorkspace = (scope = document) => {
   const search = workspace.querySelector("[data-workspace-search]");
   const status = scope.querySelector("[data-workspace-status-filter]");
   const filterDrawer = scope.querySelector("#workspace-filter-drawer");
+  const statusController = enhanceSelects(filterDrawer)[0];
   const table = workspace.querySelector(".shlz-table");
   const body = workspace.querySelector("[data-workspace-body]");
   const empty = workspace.querySelector("[data-workspace-empty]");
@@ -109,7 +121,7 @@ export const enhanceConsumerWorkspace = (scope = document) => {
   };
   const resetAll = () => {
     search.value = "";
-    status.value = "";
+    statusController.setValue("");
     appliedStatus = "";
     filterCount.hidden = true;
     applyConditions();
@@ -170,11 +182,11 @@ export const enhanceConsumerWorkspace = (scope = document) => {
   );
   scope
     .querySelector("[data-workspace-reset-filter]")
-    .addEventListener("click", () => (status.value = ""), { signal });
+    .addEventListener("click", () => statusController.setValue(""), { signal });
   filterDrawer.addEventListener(
     "close",
     () => {
-      status.value = appliedStatus;
+      statusController.setValue(appliedStatus);
     },
     { signal },
   );
@@ -189,3 +201,4 @@ export const enhanceConsumerWorkspace = (scope = document) => {
 
   return { destroy: () => abortController.abort() };
 };
+import { enhanceSelects } from "@shlz/behaviors/select";

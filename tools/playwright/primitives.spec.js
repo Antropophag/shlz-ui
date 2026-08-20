@@ -13,41 +13,7 @@ const isolateDocumentationSurface = async (page) => {
       #file-row-extension-demo { display: none !important; }
       .shlz-developer-docs, [data-pagination-consumer] { display: none !important; }
       .shlz-select-fixture-label:is(p) { display: none !important; }
-      [data-select-source-fixtures][hidden] { display: none !important; }
     `,
-  });
-
-  await page.evaluate(() => {
-    const production = document.querySelector(
-      "#select-demo > [data-select-production-fixtures]",
-    );
-    const source = document.querySelector(
-      "#select-demo > [data-select-source-fixtures]",
-    );
-    const productionGrid = production?.querySelector(".shlz-component-grid");
-    const sourceGrid = source?.querySelector(".shlz-component-grid");
-    const heading = production?.querySelector("h4");
-    const productionFixtures = [...(productionGrid?.children ?? [])];
-    const sourceFixtures = [...(sourceGrid?.children ?? [])];
-
-    if (
-      !productionGrid ||
-      !source ||
-      !heading ||
-      productionFixtures.length !== 3 ||
-      sourceFixtures.length !== 3
-    ) {
-      throw new Error("Select legacy fixture normalization contract changed");
-    }
-
-    heading.textContent = "Sizes and types";
-    productionGrid.replaceChildren(
-      productionFixtures[0],
-      productionFixtures[1],
-      ...sourceFixtures,
-      productionFixtures[2],
-    );
-    source.hidden = true;
   });
 };
 
@@ -87,32 +53,32 @@ test("source specification and fidelity surfaces are reviewable", async ({
   );
 });
 
-test("base single Select keeps the shipped native-only contract", async ({
+test("base single Select exposes the shipped trigger and listbox contract", async ({
   page,
 }) => {
   const selectDemo = page.locator("#select-demo");
-  const selects = selectDemo
-    .locator(":scope > section")
-    .first()
+  const nativeSelects = selectDemo
+    .locator("[data-select-production-fixtures]")
     .locator("select.shlz-select");
 
-  await expect(selects).toHaveCount(3);
-  await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
+  await expect(nativeSelects).toHaveCount(0);
+  const triggers = selectDemo.locator(
+    '[data-select-production-fixtures] [data-shlz-select] [aria-haspopup="listbox"]',
+  );
+  await expect(triggers).toHaveCount(6);
   await expect(
-    selectDemo
-      .locator(":scope > section")
-      .first()
-      .locator("select.shlz-select:enabled"),
-  ).toHaveCount(2);
-  await expect(
-    selectDemo
-      .locator(":scope > section")
-      .first()
-      .locator("select.shlz-select:disabled"),
+    selectDemo.locator(
+      '[data-select-production-fixtures] [data-shlz-select] [aria-haspopup="listbox"]:disabled',
+    ),
   ).toHaveCount(1);
-  await selects.first().focus();
-  await expect(selects.first()).toBeFocused();
-  await expect(selectDemo.getByRole("listbox")).toHaveCount(0);
+  await triggers.first().focus();
+  await expect(triggers.first()).toBeFocused();
+  const listboxes = selectDemo.locator(
+    '[data-select-production-fixtures] [role="listbox"]',
+  );
+  await expect(listboxes).toHaveCount(6);
+  for (const listbox of await listboxes.all())
+    await expect(listbox).toBeHidden();
 });
 
 test("documented components expose developer usage without mixing diagnostics", async ({

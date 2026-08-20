@@ -25,6 +25,7 @@ import {
   enhanceDropdowns,
   enhanceModals,
   enhancePopovers,
+  enhanceSelects,
   enhanceTabs,
   enhanceTooltips,
 } from "@shlz/behaviors";
@@ -195,6 +196,13 @@ const overlayDemos = `
 <dialog class="shlz-modal shlz-modal--compact" id="showcase-confirm" data-shlz-modal aria-labelledby="showcase-confirm-title"><form class="shlz-modal__surface" method="dialog"><div class="shlz-modal__body"><h2 class="shlz-modal__title" id="showcase-confirm-title">Подтвердить действие?</h2><p>Для confirm/cancel доступна нативная форма <code>method=&quot;dialog&quot;</code>.</p></div><footer class="shlz-modal__footer"><button class="shlz-button" value="cancel">Отмена</button><button class="shlz-button shlz-button--primary" value="confirm">Подтвердить</button></footer></form></dialog></article>
 <article id="drawer-demo"><h3>Drawer</h3><p><code>Drawer.svg</code> · <span class="shlz-evidence" data-kind="FACT">FACT · 420×900, 64/764/72 regions</span> <span class="shlz-evidence" data-kind="DECISION">DECISION · modal right-side native dialog</span></p><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-trigger="showcase-drawer">Открыть Drawer</button><dialog class="shlz-drawer" id="showcase-drawer" data-shlz-drawer data-shlz-drawer-backdrop-close aria-labelledby="showcase-drawer-title"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="showcase-drawer-title">Заголовок Drawer</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть">×</button></header><div class="shlz-drawer__body" data-drawer-scroll><div class="shlz-stack"><label class="shlz-field"><span class="shlz-field__label">Параметр</span><input class="shlz-input" autofocus></label><p>Drawer использует ту же native modal lifecycle, но независимую source-derived geometry.</p>${drawerLongContent}</div></div><footer class="shlz-drawer__footer"><button class="shlz-button" type="button" data-shlz-drawer-close>Отмена</button><button class="shlz-button shlz-button--primary" type="button" data-shlz-drawer-close="apply">Применить</button></footer></div></dialog></article>`;
 
+const typographySelectMarkup = `<div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select data-component-audit-id="typography-assignee">
+  <span class="shlz-field__label" id="typography-select-label">Ответственный</span>
+  <button class="shlz-field__control shlz-select__trigger shlz-select__trigger--selected" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="typography-select-options" aria-labelledby="typography-select-label typography-select-value"><span id="typography-select-value" data-shlz-select-value data-placeholder="Выберите ответственного">Александр Александрович Александров</span><svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5"/></svg></button>
+  <div class="shlz-select__listbox" id="typography-select-options" role="listbox" aria-labelledby="typography-select-label" hidden><button class="shlz-select__option" type="button" role="option" aria-selected="true" data-value="Александр Александрович Александров">Александр Александрович Александров</button><button class="shlz-select__option" type="button" role="option" aria-selected="false" data-value="Мария Петрова">Мария Петрова</button></div>
+  <input type="hidden" name="typography-assignee" value="Александр Александрович Александров">
+</div>`;
+
 const typographyCompatibilityMarkup = `
 <section id="typography-compatibility" class="shlz-major-section shlz-type-stress" data-shlz-visual-addition>
   <h2>Typography profile compatibility</h2>
@@ -207,7 +215,7 @@ const typographyCompatibilityMarkup = `
       <span class="shlz-tag">Требуют вашего внимания</span>
     </div>
     <label class="shlz-field"><span class="shlz-field__label">Регистрация заявки на проведение испытаний</span><span class="shlz-field__control"><input class="shlz-input" value="Щербинский лифтостроительный завод"></span></label>
-    <label class="shlz-field shlz-field--select"><span class="shlz-field__control"><select class="shlz-select"><option>Александр Александрович Александров</option></select></span></label>
+    ${typographySelectMarkup}
     <div class="shlz-tabs shlz-tabs--pill"><div class="shlz-tabs__list"><button class="shlz-tabs__tab" type="button">ABCDEFGHIJKLMNOPQRSTUVWXYZ</button><button class="shlz-tabs__tab" type="button">abcdefghijklmnopqrstuvwxyz</button></div></div>
     <nav class="shlz-pagination" aria-label="Typography pagination"><ul class="shlz-pagination__list"><li><span class="shlz-pagination__item">1</span></li><li><span class="shlz-pagination__item">2</span></li><li><span class="shlz-pagination__item">…</span></li><li><span class="shlz-pagination__item">99</span></li></ul></nav>
     <div class="shlz-dropdown"><div class="shlz-dropdown__menu shlz-type-stress__dropdown" role="menu"><button class="shlz-dropdown__item" role="menuitem">Регистрация заявки на проведение испытаний</button><button class="shlz-dropdown__item" role="menuitem">0123456789</button></div></div>
@@ -307,6 +315,8 @@ for (const button of document.querySelectorAll("[data-shlz-input-size]")) {
   });
 }
 enhanceDropdowns();
+window.__shlzSelectControllers = enhanceSelects();
+window.__shlzEnhanceSelects = enhanceSelects;
 window.__shlzModalControllers = enhanceModals();
 window.__shlzDrawerControllers = enhanceDrawers();
 window.__shlzPopoverControllers = enhancePopovers();

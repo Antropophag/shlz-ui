@@ -1460,6 +1460,12 @@ article {
     padding: var(--shlz-source-spacing-16);
   }
 
+  #select-demo
+    :is([data-select-production-fixtures], [data-select-source-fixtures])
+    .shlz-component-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .shlz-popover-lab,
   .shlz-popover-scenarios {
     grid-template-columns: 1fr 1fr;

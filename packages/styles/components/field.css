@@ -22,10 +22,11 @@
 }
 
 .shlz-field--select .shlz-field__control {
-  /* FACT: Dropdown variants keep content and the trailing chevron 8px in. */
-  padding-inline: calc(
-    var(--shlz-source-spacing-8) - var(--shlz-semantic-border-width-default)
-  );
+  /* FACT: single Select text is 12px in; the 24px chevron stays 8px in. */
+  padding-inline: calc(12px - var(--shlz-semantic-border-width-default))
+    calc(
+      var(--shlz-source-spacing-8) - var(--shlz-semantic-border-width-default)
+    );
 }
 
 .shlz-field__label,
@@ -98,6 +99,94 @@
 .shlz-select {
   appearance: none;
   cursor: pointer;
+}
+
+.shlz-select-root {
+  position: relative;
+}
+
+.shlz-select__trigger {
+  inline-size: 100%;
+  justify-content: space-between;
+  color: var(--shlz-source-color-dark-blue-dark-blue-25);
+  font: inherit;
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  line-height: var(--shlz-semantic-typography-role-field-value-line-height);
+  text-align: start;
+  cursor: pointer;
+}
+
+.shlz-select__trigger[aria-expanded="true"] {
+  background: var(--shlz-source-color-blue-blue-50);
+  border-color: var(--shlz-source-color-blue-blue-200);
+}
+
+.shlz-select__trigger--selected {
+  color: var(--shlz-source-color-dark-blue-dark-blue);
+}
+
+.shlz-select__trigger > [data-shlz-select-value] {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.shlz-select__chevron {
+  flex: 0 0 24px;
+  inline-size: 24px;
+  block-size: 24px;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 120ms ease-out;
+}
+
+.shlz-select__trigger[aria-expanded="true"] .shlz-select__chevron {
+  transform: rotate(180deg);
+}
+
+.shlz-select__listbox {
+  position: absolute;
+  z-index: 20;
+  inset-block-start: calc(100% + var(--shlz-source-spacing-4));
+  inset-inline: 0;
+  padding-block: 10px;
+  background: var(--shlz-semantic-color-surface-base);
+  border-radius: var(--shlz-source-radius-regular);
+  box-shadow:
+    0 4px 15px rgb(11 22 35 / 10%),
+    0 1px 1.5px rgb(11 22 35 / 8%);
+}
+
+.shlz-select__listbox[hidden] {
+  display: none;
+}
+
+.shlz-select__option {
+  display: flex;
+  inline-size: 100%;
+  min-block-size: 40px;
+  padding-inline: var(--shlz-source-spacing-16);
+  align-items: center;
+  color: var(--shlz-semantic-color-text-primary);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.shlz-select__option:is(:hover, :focus-visible, [aria-selected="true"]) {
+  background: var(--shlz-semantic-color-surface-muted);
+  outline: 0;
+}
+
+.shlz-select__option[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: var(--shlz-semantic-opacity-disabled);
 }
 
 .shlz-select--placeholder {
@@ -274,6 +363,17 @@
 .shlz-field:has(:disabled) .shlz-field__action,
 .shlz-field--disabled .shlz-field__action {
   background: var(--shlz-source-color-gray-gray-100);
+}
+
+/* FACT: Select.svg keeps the label and shell opaque; only control content is 10%. */
+.shlz-field--select:has(.shlz-select__trigger:disabled)
+  :is(.shlz-field__label, .shlz-select__trigger) {
+  opacity: 1;
+}
+
+.shlz-select__trigger:disabled {
+  color: rgb(11 22 35 / 10%);
+  cursor: not-allowed;
 }
 
 .shlz-field:has([readonly]) .shlz-field__control {
