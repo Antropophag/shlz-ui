@@ -1,3 +1,5 @@
+import { notificationBehaviorSnippet } from "./notification-consumer.js";
+
 const repositoryBase = "https://github.com/Antropophag/shlz-ui/blob/main/";
 
 const escapeHtml = (value) =>
@@ -126,7 +128,8 @@ const badgeMarkup = `<span class="shlz-badge">
   12<span class="shlz-visually-hidden"> непрочитанных уведомлений</span>
 </span>`;
 
-const notificationMarkup = `<div class="shlz-notification" role="status" data-notification>
+const notificationMarkup = `<button id="notification-focus-return" type="button">Продолжить работу</button>
+<div class="shlz-notification" role="status" data-notification data-notification-focus-return="notification-focus-return">
   <span class="shlz-notification__icon" aria-hidden="true">
     <img src="/assets/icons/checkmark.svg" alt="" />
   </span>
@@ -138,28 +141,14 @@ const notificationMarkup = `<div class="shlz-notification" role="status" data-no
   </button>
 </div>`;
 
-const notificationActionMarkup = `<div class="shlz-notification shlz-notification--danger" role="alert" data-notification>
+const notificationActionMarkup = `<div class="shlz-notification shlz-notification--danger" role="alert" data-notification data-notification-focus-return="notification-focus-return">
   <div class="shlz-notification__content">
     <p class="shlz-notification__title">Не удалось сохранить изменения</p>
   </div>
-  <button class="shlz-notification__action" type="button" data-notification-action>
+  <button class="shlz-notification__action" type="button" data-notification-action="retry-save">
     Повторить
   </button>
 </div>`;
-
-const notificationBehavior = `for (const notification of document.querySelectorAll("[data-notification]")) {
-  notification
-    .querySelector("[data-notification-close]")
-    ?.addEventListener("click", () => notification.remove());
-
-  notification
-    .querySelector("[data-notification-action]")
-    ?.addEventListener("click", () => {
-      notification.dispatchEvent(
-        new CustomEvent("app:notification-action", { bubbles: true }),
-      );
-    });
-}`;
 
 const tagMarkup = `<span class="shlz-tag shlz-tag--outlined">По гарантии</span>`;
 
@@ -1097,7 +1086,7 @@ export const componentDocumentation = {
         id: "notification-js",
         label: "Application-owned integration",
         language: "js",
-        code: notificationBehavior,
+        code: notificationBehaviorSnippet,
       },
     ],
     contract: [
@@ -1123,7 +1112,7 @@ export const componentDocumentation = {
       ],
       [
         "Lifecycle",
-        "Application-owned rendering, dismissal, focus follow-up and action handling.",
+        "Application-owned rendering and action handling; data-notification-focus-return must name a safe focus-target id before dismissal.",
       ],
       [
         "Behavior",
@@ -1133,7 +1122,7 @@ export const componentDocumentation = {
     accessibility:
       "Choose live-region semantics from urgency and context: role=status is appropriate for many polite updates, role=alert only for genuinely urgent interruptions, and static content often needs neither. Put the full meaning in text. Name icon-only close buttons, keep decorative images empty, and ensure an action label describes its result. Do not repeatedly re-announce countdown numbers. When removal affects the task, the application owns a sensible focus destination.",
     limitations:
-      "Placement, stacking, responsive collision handling, deduplication, maximum count, persistence, timeout, pause-on-hover/focus, countdown synchronization and auto-dismiss are not implemented. The progress and countdown classes are visual surfaces only. The example app:notification-action event is consumer code, not a library event contract. Applications must decide whether and when a message enters a live region before insertion.",
+      "Placement, stacking, responsive collision handling, deduplication, maximum count, persistence, timeout, pause-on-hover/focus, countdown synchronization and auto-dismiss are not implemented. The progress and countdown classes are visual surfaces only. The example app:notification-action event is consumer code, not a library event contract. Its published example payload is detail: { action }, it bubbles from the notification root, and repeated enhancement is idempotent. Applications must decide whether and when a message enters a live region before insertion.",
     traceability: traceability({
       authority: [
         ["Authoritative source", "shlz-design-source/raw/svg/Notification.svg"],
@@ -1151,6 +1140,11 @@ export const componentDocumentation = {
         ["Source tests", "tools/tests/notification-source.test.mjs"],
         ["Bundle contract tests", "tools/tests/components.test.mjs"],
         ["Browser tests", "tools/playwright/components-next.spec.js"],
+        ["Documentation browser tests", "tools/playwright/primitives.spec.js"],
+        [
+          "Runtime contract tests",
+          "tools/playwright/notification-contract.spec.js",
+        ],
       ],
     }),
   },

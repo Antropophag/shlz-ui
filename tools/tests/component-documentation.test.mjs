@@ -428,16 +428,26 @@ test("Notification snippets keep semantics and lifecycle application-owned", asy
   assert.match(snippets["notification-html"], /data-notification-close/);
   assert.match(
     snippets["notification-html"],
+    /data-notification-focus-return="notification-focus-return"/,
+  );
+  assert.match(
+    snippets["notification-html"],
     /aria-label="Закрыть уведомление"/,
   );
   assert.match(snippets["notification-action-html"], /role="alert"/);
   assert.match(
     snippets["notification-action-html"],
-    /data-notification-action/,
+    /data-notification-action="retry-save"/,
   );
   assert.match(snippets["notification-js"], /addEventListener\("click"/);
   assert.match(snippets["notification-js"], /notification\.remove\(\)/);
+  assert.match(snippets["notification-js"], /focusReturn\.focus\(\)/);
+  assert.match(snippets["notification-js"], /document\.getElementById/);
+  assert.match(snippets["notification-js"], /new WeakSet\(\)/);
+  assert.match(snippets["notification-js"], /enhancedNotifications\.has/);
   assert.match(snippets["notification-js"], /app:notification-action/);
+  assert.match(snippets["notification-js"], /bubbles: true/);
+  assert.match(snippets["notification-js"], /detail: \{ action \}/);
   assert.doesNotMatch(snippets["notification-js"], /setTimeout|setInterval/);
 
   for (const selector of [
