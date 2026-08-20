@@ -50,7 +50,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
   <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer aria-labelledby="workspace-filter-title">
     <form class="shlz-drawer__surface" method="dialog">
       <header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="workspace-filter-title">Фильтры заявок</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть"><img src="${iconUrl("close")}" alt=""></button></header>
-      <div class="shlz-drawer__body"><div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select>
+      <div class="shlz-drawer__body"><div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select data-component-audit-id="workspace-status">
         <span class="shlz-field__label" id="workspace-status-label">Статус</span>
         <button class="shlz-field__control shlz-select__trigger" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="workspace-status-options" aria-labelledby="workspace-status-label workspace-status-value"><span id="workspace-status-value" data-shlz-select-value data-placeholder="Все статусы">Все статусы</span><svg class="shlz-select__chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8.5 12 15.5 19 8.5"/></svg></button>
         <div class="shlz-select__listbox" id="workspace-status-options" role="listbox" aria-labelledby="workspace-status-label" hidden>

@@ -1203,7 +1203,7 @@ export const componentDocumentation = {
     accessibility:
       "The button exposes combobox disclosure through aria-haspopup=listbox; the listbox owns option semantics and the hidden input owns form data. Escape restores trigger focus; Arrow/Home/End navigate options.",
     limitations:
-      "Only single-select is executable. Search, multiselect, status-chip, async-loading and virtualization remain unsupported source diagnostics.",
+      "Only single-select is executable, and ARIA relationship IDs must be globally unique. Search, multiselect, status-chip, async-loading and virtualization remain unsupported source diagnostics.",
     traceability: [
       [
         "Authoritative component set",
@@ -1214,6 +1214,8 @@ export const componentDocumentation = {
       ["Tokens", "packages/tokens/tokens.json"],
       ["Field styles", "packages/styles/components/field.css"],
       ["Documentation", "docs/components/select.md"],
+      ["Audit manifest", "docs/component-audits/select.json"],
+      ["Audit workflow", "docs/component-audit-workflow.md"],
       ["Showcase", "apps/showcase/src/fidelity.js"],
       ["Consumer validation", "apps/showcase/src/consumer-workspace.js"],
       ["Source tests", "tools/tests/form-controls-source.test.mjs"],
@@ -1223,6 +1225,10 @@ export const componentDocumentation = {
         "tools/playwright/select-closed-shell.spec.js",
       ],
       ["Consumer browser tests", "tools/playwright/consumer-workspace.spec.js"],
+      [
+        "Typography stress tests",
+        "tools/playwright/typography-profiles.spec.js",
+      ],
     ],
   },
 };

@@ -183,7 +183,9 @@ test("filled multiselect preserves source trailing geometry under pressure", asy
     .first();
   const control = field.locator(".shlz-field__control");
   const count = field.locator(".shlz-field__count");
-  const chevron = field.locator(".shlz-field__indicator > .shlz-field__icon");
+  const chevron = field.locator(
+    ".shlz-field__indicator > .shlz-select__chevron",
+  );
   await expect(field.locator(".shlz-field__chip-remove")).toHaveCount(2);
   await expect(control).toHaveCSS("overflow", "hidden");
   expect(
@@ -196,7 +198,7 @@ test("filled multiselect preserves source trailing geometry under pressure", asy
       .querySelector(".shlz-field__count")
       .getBoundingClientRect();
     const iconBox = indicator
-      .querySelector(":scope > .shlz-field__icon")
+      .querySelector(":scope > .shlz-select__chevron")
       .getBoundingClientRect();
     return {
       rightInset: controlBox.right - iconBox.right,

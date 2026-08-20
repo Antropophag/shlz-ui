@@ -1,0 +1,79 @@
+{
+  "component": "select",
+  "authoritativeSource": "shlz-design-source/raw/svg/Select.svg",
+  "referenceSources": ["shlz-design-source/raw/svg/Dropdown menu.svg"],
+  "implementation": [
+    "packages/styles/components/field.css",
+    "packages/behaviors/src/select.ts"
+  ],
+  "behavior": "packages/behaviors/src/select.ts",
+  "docs": "docs/components/select.md",
+  "rootSelector": "[data-shlz-select]",
+  "legacySelectors": ["select"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    { "id": "request-status-empty", "kind": "executable-fixture" },
+    { "id": "request-status-filled", "kind": "executable-fixture" },
+    { "id": "request-status-hover", "kind": "executable-fixture" },
+    { "id": "request-status-focus", "kind": "executable-fixture" },
+    { "id": "request-status-disabled", "kind": "executable-fixture" },
+    { "id": "request-status-medium", "kind": "executable-fixture" },
+    { "id": "workspace-status", "kind": "live-consumer" },
+    { "id": "typography-assignee", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["large", "medium"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "focus",
+    "disabled",
+    "opened",
+    "selected"
+  ],
+  "contentStress": ["long-value-ellipsis", "narrow-viewport"],
+  "sourceClaims": [
+    {
+      "claim": "closed shell geometry, typography, paint, states, and chevron",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Select.svg"
+    },
+    {
+      "claim": "opened option surface reuses Dropdown menu geometry and effects",
+      "classification": "repository-decision",
+      "evidence": "shlz-design-source/raw/svg/Dropdown menu.svg"
+    },
+    {
+      "claim": "button/listbox controller, hidden input, and emitted events",
+      "classification": "repository-decision",
+      "evidence": "docs/components/select.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/select-closed-shell.spec.js",
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/primitives.spec.js",
+    "tools/playwright/review.spec.js",
+    "tools/playwright/typography-profiles.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/review.spec.js-snapshots/review-select-chromium-linux.png",
+    "tools/playwright/consumer-workspace.spec.js-snapshots/consumer-workspace-select-open-chromium-linux.png",
+    "tools/playwright/typography-profiles.spec.js-snapshots/typography-fira-compatibility-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "applicable",
+    "structural-contract": "applicable",
+    "runtime-browser": "applicable",
+    "accessibility": "applicable",
+    "focused-visual": "applicable",
+    "consumer-integration": "applicable",
+    "responsive-content-stress": "applicable"
+  },
+  "knownLimitations": [
+    "single-select only",
+    "requires JavaScript enhancement",
+    "globally unique ARIA relationship IDs required",
+    "source label and placeholder paint is below WCAG 1.4.3 normal-text contrast",
+    "no search, multiselect, status-chip, async loading, or virtualization"
+  ]
+}

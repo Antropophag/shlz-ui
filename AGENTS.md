@@ -104,26 +104,23 @@ Do not implement a large component library before the foundation, contracts and 
 
 Do not modify unrelated files.
 
-## UI component completion
+## UI component completion gate
 
-Before declaring a UI component fixed, complete, production-ready, or ready for
-review:
+Do not call a component fixed, complete, production-ready, review-ready, or a
+finished side quest until the component completion gate in
+`docs/component-audit-workflow.md` passes. In particular:
 
-- inventory every occurrence of that component in the Showcase and in live
-  consumer fixtures;
-- distinguish executable/live surfaces from inert visual or source-diagnostic
-  matrices;
-- apply the supported production contract to every executable occurrence, not
-  only to one representative example;
-- verify all visible component details against the authoritative source,
-  including opened/expanded states, icons, affordances, focus, keyboard behavior
-  and consumer compositions;
-- add browser coverage for each materially different executable surface,
-  including at least one real consumer fixture when one exists;
-- report the exact occurrence counts, what was migrated, and what intentionally
-  remains diagnostic or unsupported.
+- inventory repository-wide occurrences and classify executable fixtures, live
+  compositions, inert diagnostics, and legacy/native substitutes;
+- verify the authoritative source and record the applicable state, size, and
+  content-stress contract before implementation;
+- cover runtime, accessibility, focused visual fidelity, responsive/content
+  stress, and at least one real consumer when those levels apply;
+- update the machine-readable audit manifest and leave no unclassified or
+  unexplained implementation;
+- report exact observed counts, scope, checks, limitations, blockers, CI, and
+  unresolved review threads.
 
-A passing representative fixture or source-regex test is not evidence that the
-component is complete across the repository. Do not close or present a component
-side quest as finished while an executable Showcase or consumer occurrence still
-uses the superseded contract.
+Structural/source tests do not prove runtime behavior. A page-level screenshot
+does not prove component fidelity. Never combine completion statuses across
+components or side quests: finishing Notification says nothing about Select.

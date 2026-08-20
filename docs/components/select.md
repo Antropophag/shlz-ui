@@ -115,6 +115,12 @@ function destroySelects() {
 The application owns option data, validation, dependent fields, persistence and
 event handling.
 
+Every `id` referenced by `aria-controls` or `aria-labelledby` must be globally
+unique in the document. Initialization rejects missing, cross-root or duplicate
+relationships instead of binding a Select to another instance's listbox.
+`setValue()` accepts only a `data-value` present in the listbox; represent an
+empty value with an explicit option whose `data-value` is an empty string.
+
 ## Variants and states
 
 - Supported sizes: default large 40px and `.shlz-field--medium` 32px.
@@ -141,6 +147,10 @@ trigger focus; Tab closes without trapping focus.
 - Decorative arrow content must stay out of the accessibility tree.
 - Connect validation/help text with ARIA attributes in application code.
 - Do not remove listbox/option roles or the controller's focus lifecycle.
+- The source label (`#939CA5` on white, approximately 2.79:1) and placeholder
+  (25% dark blue on `#F5F5F5`, approximately 1.73:1) do not meet WCAG 1.4.3
+  for normal text. They remain source-faithful in this PR and require an
+  explicit cross-Field design/accessibility decision before production release.
 
 ## Composition
 
@@ -157,6 +167,10 @@ uses the same option count or data.
 
 - Single-select only.
 - The component requires JavaScript enhancement.
+- ARIA relationship IDs must be globally unique, including when server-rendered
+  fragments or repeated fixtures are composed on one page.
+- Source label and placeholder paint is below WCAG normal-text contrast; see
+  Accessibility above.
 - No search, multiselect, status-chip, async-loading or virtualization API.
 - No read-only semantic state exists in the current Select contract.
 - Source matrices for unsupported variants are collapsed diagnostics, not
@@ -164,19 +178,21 @@ uses the same option count or data.
 
 ## Traceability
 
-| Layer                       | Location                                                                                                                                                                |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`)                                                                          |
-| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                                                                                                 |
-| Source specification        | `docs/components/form-controls-source-spec.md`                                                                                                                          |
-| Provenance                  | `packages/tokens/provenance.json`                                                                                                                                       |
-| Tokens                      | `packages/tokens/tokens.json`                                                                                                                                           |
-| Field styles                | `packages/styles/components/field.css`                                                                                                                                  |
-| Behavior exports            | `packages/behaviors/src/select.ts`, `@shlz/behaviors/select`                                                                                                            |
-| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                                                                                             |
-| Consumer validation         | `apps/showcase/src/consumer-workspace.js`                                                                                                                               |
-| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                                                                                             |
-| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`, `tools/playwright/select-closed-shell.spec.js`, `tools/playwright/consumer-workspace.spec.js` |
+| Layer                       | Location                                                                                                                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`)                                                                                                                          |
+| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                                                                                                                                                 |
+| Option-surface reference    | `shlz-design-source/raw/svg/Dropdown menu.svg`                                                                                                                                                                          |
+| Source specification        | `docs/components/form-controls-source-spec.md`                                                                                                                                                                          |
+| Audit manifest/workflow     | `docs/component-audits/select.json`, `docs/component-audit-workflow.md`                                                                                                                                                 |
+| Provenance                  | `packages/tokens/provenance.json`                                                                                                                                                                                       |
+| Tokens                      | `packages/tokens/tokens.json`                                                                                                                                                                                           |
+| Field styles                | `packages/styles/components/field.css`                                                                                                                                                                                  |
+| Behavior exports            | `packages/behaviors/src/select.ts`, `@shlz/behaviors/select`                                                                                                                                                            |
+| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                                                                                                                                             |
+| Consumer validation         | `apps/showcase/src/consumer-workspace.js`                                                                                                                                                                               |
+| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                                                                                                                                             |
+| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`, `tools/playwright/select-closed-shell.spec.js`, `tools/playwright/consumer-workspace.spec.js`, `tools/playwright/typography-profiles.spec.js` |
 
 ## Source interpretation
 

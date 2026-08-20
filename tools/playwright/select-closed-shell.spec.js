@@ -1,4 +1,9 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
+
+const auditManifest = JSON.parse(
+  await readFile("docs/component-audits/select.json", "utf8"),
+);
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
@@ -7,29 +12,32 @@ test.beforeEach(async ({ page }) => {
 test("every executable Showcase Select uses the reusable contract", async ({
   page,
 }) => {
-  await expect(
-    page.locator(
-      "#select-demo [data-select-production-fixtures] [data-shlz-select]",
-    ),
-  ).toHaveCount(6);
-  await expect(
-    page.locator("#workspace-filter-drawer [data-shlz-select]"),
-  ).toHaveCount(1);
-  await expect(
-    page.locator("#typography-compatibility [data-shlz-select]"),
-  ).toHaveCount(1);
-  await expect(
-    page.locator(
-      "#select-demo [data-select-production-fixtures] select, #workspace-filter-drawer select, #typography-compatibility select",
-    ),
-  ).toHaveCount(0);
-  const interactiveNativeSelects = await page
-    .locator("select")
-    .evaluateAll(
-      (selects) =>
-        selects.filter((select) => !select.closest("[inert]")).length,
+  const inventory = await page.evaluate((manifest) => {
+    const roots = [...document.querySelectorAll(manifest.rootSelector)];
+    const occurrences = roots.map((root) => root.dataset.componentAuditId);
+    const legacy = manifest.legacySelectors.flatMap((selector) =>
+      [...document.querySelectorAll(selector)].map((element) => ({
+        selector,
+        diagnostic: manifest.diagnosticBoundaries.some((boundary) =>
+          element.closest(boundary),
+        ),
+      })),
     );
-  expect(interactiveNativeSelects).toBe(0);
+    return {
+      occurrences,
+      unclassifiedLegacy: legacy.filter(({ diagnostic }) => !diagnostic),
+      diagnosticLegacy: legacy.filter(({ diagnostic }) => diagnostic).length,
+    };
+  }, auditManifest);
+
+  const expectedIds = auditManifest.occurrences.map(({ id }) => id).sort();
+  expect(inventory.occurrences.every(Boolean)).toBe(true);
+  expect(new Set(inventory.occurrences).size).toBe(
+    inventory.occurrences.length,
+  );
+  expect(inventory.occurrences.sort()).toEqual(expectedIds);
+  expect(inventory.unclassifiedLegacy).toEqual([]);
+  expect(inventory.diagnosticLegacy).toBeGreaterThan(0);
 });
 
 const productionField = (page, label) =>
@@ -220,6 +228,22 @@ test("opened Select uses the SHLZ surface and emits one value change", async ({
   await trigger.click();
   await expect(trigger).toHaveAttribute("aria-expanded", "true");
   await expect(root.locator(".shlz-select__listbox")).toBeVisible();
+  await expect(root.locator(".shlz-select__listbox")).toHaveCSS(
+    "border-radius",
+    "12px",
+  );
+  await expect(root.locator(".shlz-select__listbox")).toHaveCSS(
+    "padding-top",
+    "10px",
+  );
+  await expect(root.locator(".shlz-select__option").first()).toHaveCSS(
+    "min-height",
+    "40px",
+  );
+  await expect(root.locator(".shlz-select__option").first()).toHaveCSS(
+    "padding-left",
+    "16px",
+  );
   await expect(root.locator(".shlz-select__chevron")).toHaveCSS(
     "transform",
     "matrix(-1, 0, 0, -1, 0, 0)",
@@ -240,10 +264,16 @@ test("Select keyboard lifecycle opens, navigates, selects and restores focus", a
   const root = page.locator("#select-demo [data-shlz-select]").first();
   const trigger = root.locator(".shlz-select__trigger");
   await trigger.focus();
-  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowUp");
   await expect(root.locator('[role="option"]').first()).toBeFocused();
   await page.keyboard.press("End");
   await expect(root.locator('[role="option"]').last()).toBeFocused();
+  await page.keyboard.press("Home");
+  await expect(root.locator('[role="option"]').first()).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(root.locator('[role="option"]').nth(1)).toBeFocused();
+  await page.keyboard.press("ArrowUp");
+  await expect(root.locator('[role="option"]').first()).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(trigger).toBeFocused();
   await page.keyboard.press("Enter");
@@ -251,6 +281,114 @@ test("Select keyboard lifecycle opens, navigates, selects and restores focus", a
   await page.keyboard.press("Enter");
   await expect(root.locator('input[type="hidden"]')).toHaveValue("Новая");
   await expect(trigger).toBeFocused();
+  await page.keyboard.press(" ");
+  await expect(root.locator('[role="option"]').first()).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press(" ");
+  await expect(root.locator('input[type="hidden"]')).toHaveValue("В работе");
+  await expect(trigger).toBeFocused();
+});
+
+test("outside dismissal, Tab, disabled options and multiple instances remain safe", async ({
+  page,
+}) => {
+  const roots = page.locator(
+    "#select-demo [data-select-production-fixtures] [data-shlz-select]",
+  );
+  const first = roots.nth(0);
+  const second = roots.nth(1);
+  const firstTrigger = first.locator(".shlz-select__trigger");
+  const secondTrigger = second.locator(".shlz-select__trigger");
+
+  await firstTrigger.click();
+  await secondTrigger.click();
+  await expect(firstTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(secondTrigger).toHaveAttribute("aria-expanded", "true");
+  await page.locator("#select-demo h3").click();
+  await expect(secondTrigger).toHaveAttribute("aria-expanded", "false");
+
+  const disabledTrigger = roots.nth(4).locator(".shlz-select__trigger");
+  await disabledTrigger.click({ force: true });
+  await expect(disabledTrigger).toHaveAttribute("aria-expanded", "false");
+
+  await firstTrigger.focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("Tab");
+  await expect(firstTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(secondTrigger).toBeFocused();
+
+  await page.getByRole("button", { name: /Фильтры/ }).click();
+  const workspace = page.locator("#workspace-filter-drawer [data-shlz-select]");
+  const workspaceTrigger = workspace.locator(".shlz-select__trigger");
+  const disabled = workspace.getByRole("option", { name: "Архивная" });
+  await workspaceTrigger.click();
+  await expect(disabled).toHaveAttribute("tabindex", "-1");
+  await disabled.click({ force: true });
+  await expect(workspace.locator('input[type="hidden"]')).toHaveValue("");
+  await expect(workspaceTrigger).toHaveAttribute("aria-expanded", "true");
+});
+
+test("events, setValue, teardown and ARIA relationship integrity are deterministic", async ({
+  page,
+}) => {
+  const root = page.locator('[data-component-audit-id="request-status-empty"]');
+  const trigger = root.locator(".shlz-select__trigger");
+  const input = root.locator('input[type="hidden"]');
+  await input.evaluate((element) => {
+    window.__selectEvents = [];
+    for (const type of ["input", "change"])
+      element.addEventListener(type, (event) => {
+        window.__selectEvents.push({
+          type: event.type,
+          bubbles: event.bubbles,
+          targetMatches: event.target === element,
+        });
+      });
+  });
+  await page.evaluate(() => {
+    const controller = window.__shlzSelectControllers.find(
+      ({ root }) => root.dataset.componentAuditId === "request-status-empty",
+    );
+    controller.setValue("В работе", { emit: true });
+  });
+  expect(await page.evaluate(() => window.__selectEvents)).toEqual([
+    { type: "input", bubbles: true, targetMatches: true },
+    { type: "change", bubbles: true, targetMatches: true },
+  ]);
+  await expect(input).toHaveValue("В работе");
+  await expect(trigger).toContainText("В работе");
+
+  await trigger.click();
+  await page.evaluate(() => {
+    const controller = window.__shlzSelectControllers.find(
+      ({ root }) => root.dataset.componentAuditId === "request-status-empty",
+    );
+    controller.destroy();
+  });
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await trigger.click();
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await page.evaluate(() => window.__shlzEnhanceSelects());
+  await trigger.click();
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+  const duplicateError = await page.evaluate(() => {
+    const original = document.querySelector(
+      '[data-component-audit-id="request-status-filled"]',
+    );
+    const host = document.createElement("div");
+    host.append(original.cloneNode(true));
+    document.body.append(host);
+    try {
+      window.__shlzEnhanceSelects(host);
+      return null;
+    } catch (error) {
+      return error.message;
+    } finally {
+      host.remove();
+    }
+  });
+  expect(duplicateError).toContain("globally unique ARIA relationship IDs");
 });
 
 test("closed Select remains contained on a narrow viewport", async ({

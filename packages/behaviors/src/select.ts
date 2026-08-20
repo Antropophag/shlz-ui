@@ -9,18 +9,49 @@ export class SelectController {
   readonly listbox: HTMLElement;
   readonly input: HTMLInputElement;
 
-  #abortController = new AbortController();
+  readonly #abortController = new AbortController();
 
   constructor(root: HTMLElement) {
     const trigger = root.querySelector<HTMLButtonElement>(
       'button[aria-haspopup="listbox"][aria-controls]',
     );
     const listboxId = trigger?.getAttribute("aria-controls");
-    const listbox = listboxId ? document.getElementById(listboxId) : null;
+    const listbox = listboxId
+      ? [...root.querySelectorAll<HTMLElement>("[id]")].find(
+          (element) => element.id === listboxId,
+        )
+      : null;
     const input = root.querySelector<HTMLInputElement>('input[type="hidden"]');
-    if (!trigger || !listbox || !input || !root.contains(listbox))
+    const ownerDocument = root.ownerDocument;
+    const triggerLabelIds =
+      trigger?.getAttribute("aria-labelledby")?.split(/\s+/).filter(Boolean) ??
+      [];
+    const listboxLabelIds =
+      listbox?.getAttribute("aria-labelledby")?.split(/\s+/).filter(Boolean) ??
+      [];
+    const labelledIds = new Set([...triggerLabelIds, ...listboxLabelIds]);
+    const relationshipIds = new Set(
+      [listboxId, ...labelledIds].filter((id): id is string => Boolean(id)),
+    );
+    const documentIds = [
+      ...ownerDocument.querySelectorAll<HTMLElement>("[id]"),
+    ];
+    const hasUniqueRelationships = [...relationshipIds].every((id) => {
+      const matches = documentIds.filter((element) => element.id === id);
+      return matches.length === 1 && root.contains(matches[0]);
+    });
+    if (
+      !trigger ||
+      !listbox ||
+      !input ||
+      !root.contains(listbox) ||
+      !listbox.matches('[role="listbox"]') ||
+      triggerLabelIds.length === 0 ||
+      listboxLabelIds.length === 0 ||
+      !hasUniqueRelationships
+    )
       throw new TypeError(
-        "Select requires a listbox trigger, its contained listbox, and a hidden form input.",
+        "Select requires globally unique ARIA relationship IDs, a contained listbox, and a hidden form input.",
       );
     this.root = root;
     this.trigger = trigger;
@@ -47,6 +78,7 @@ export class SelectController {
   }
 
   destroy(): void {
+    this.close();
     this.#abortController.abort();
     controllers.delete(this.root);
   }
@@ -56,6 +88,8 @@ export class SelectController {
       ...this.listbox.querySelectorAll<HTMLElement>(optionSelector),
     ];
     const selected = options.find((option) => option.dataset.value === value);
+    if (!selected)
+      throw new RangeError(`Select has no option with value "${value}".`);
     for (const option of options)
       option.setAttribute("aria-selected", String(option === selected));
     this.input.value = value;
@@ -78,7 +112,10 @@ export class SelectController {
   #initialize(): void {
     const { signal } = this.#abortController;
     this.close();
-    for (const option of this.#options()) option.tabIndex = -1;
+    for (const option of this.listbox.querySelectorAll<HTMLElement>(
+      optionSelector,
+    ))
+      option.tabIndex = -1;
     this.trigger.addEventListener(
       "click",
       () => (this.expanded ? this.close() : this.open(false)),
@@ -128,8 +165,10 @@ export class SelectController {
   }
 
   #selected(): HTMLElement | null {
-    return this.listbox.querySelector<HTMLElement>(
-      `${optionSelector}[aria-selected="true"]`,
+    return (
+      this.#options().find(
+        (option) => option.getAttribute("aria-selected") === "true",
+      ) ?? null
     );
   }
 

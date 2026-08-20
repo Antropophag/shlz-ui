@@ -158,7 +158,7 @@ const executableSelect = ({
   state = "",
   size = "large",
   disabled = false,
-}) => `<div class="shlz-field shlz-field--select shlz-select-root${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}" data-shlz-select>
+}) => `<div class="shlz-field shlz-field--select shlz-select-root${size === "medium" ? " shlz-field--medium" : ""}${state ? ` shlz-field--${state}` : ""}" data-shlz-select data-component-audit-id="${id}">
   <span class="shlz-field__label" id="${id}-label">${label}</span>
   <button class="shlz-field__control shlz-select__trigger${value ? " shlz-select__trigger--selected" : ""}" type="button" role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-controls="${id}-options" aria-labelledby="${id}-label ${id}-value"${disabled ? " disabled" : ""}><span id="${id}-value" data-shlz-select-value data-placeholder="${placeholder}">${value || placeholder}</span>${chevron}</button>
   <div class="shlz-select__listbox" id="${id}-options" role="listbox" aria-labelledby="${id}-label" hidden>

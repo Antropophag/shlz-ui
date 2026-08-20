@@ -70,6 +70,11 @@ test("filter draft is committed only by Apply", async ({ page }) => {
   await drawer.getByRole("button", { name: "Применить" }).click();
   await trigger.click();
   await expect(statusValue).toHaveValue("В работе");
+  await expect(status).toContainText("В работе");
+  await drawer.getByRole("button", { name: "Закрыть" }).click();
+  await trigger.click();
+  await expect(statusValue).toHaveValue("В работе");
+  await expect(status).toContainText("В работе");
   await drawer.getByRole("button", { name: "Сбросить" }).click();
   await expect(statusValue).toHaveValue("");
   await expect(search).toHaveValue("SD");
