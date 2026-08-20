@@ -106,6 +106,32 @@ const avatarImageMarkup = `<span class="shlz-avatar shlz-avatar--40">
   <img class="shlz-avatar__image" src="/assets/avatars/anna.jpg" alt="Анна Петрова" />
 </span>`;
 
+const tabsMarkup = `<div class="shlz-tabs" data-shlz-tabs>
+  <div class="shlz-tabs__list" role="tablist" aria-label="Карточка заявки">
+    <button class="shlz-tabs__tab" id="details-tab" type="button" role="tab" aria-selected="true" aria-controls="details-panel">
+      Детали
+    </button>
+    <button class="shlz-tabs__tab" id="history-tab" type="button" role="tab" aria-selected="false" aria-controls="history-panel" tabindex="-1">
+      История
+    </button>
+  </div>
+  <div class="shlz-tabs__panel" id="details-panel" role="tabpanel" aria-labelledby="details-tab" tabindex="0">
+    Содержимое заявки
+  </div>
+  <div class="shlz-tabs__panel" id="history-panel" role="tabpanel" aria-labelledby="history-tab" tabindex="0" hidden>
+    История изменений
+  </div>
+</div>`;
+
+const tabsBehavior = `import { enhanceTabs } from "@shlz/behaviors/tabs";
+
+const controllers = enhanceTabs();
+
+// Connect this function to your page/application teardown lifecycle.
+function destroyTabs() {
+  for (const controller of controllers) controller.destroy();
+}`;
+
 const selectMarkup = `<div class="shlz-field shlz-field--select shlz-selectbox" data-shlz-select>
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
@@ -908,6 +934,72 @@ export const componentDocumentation = {
       ["Showcase", "apps/showcase/src/wave3.js"],
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/wave3-source.test.mjs"],
+      ["Browser tests", "tools/playwright/components-next.spec.js"],
+    ],
+  },
+  tabs: {
+    status: "Executable · Production example",
+    purpose:
+      "Switches between related content panels without leaving the current context.",
+    use: [
+      "Organize peer sections of one workspace when users need only one panel at a time.",
+      "Keep tab labels short and stable, and preserve panel state when the product requires it.",
+    ],
+    avoid: [
+      "Use Link/navigation when each destination is a separate route or page.",
+      "Use Segment for choosing a form value; it is not a tablist.",
+    ],
+    dependencies: [
+      ["@shlz/styles/shlz.css", "Required"],
+      ["@shlz/behaviors/tabs", "Required for activation and keyboard behavior"],
+    ],
+    snippets: [
+      {
+        id: "tabs-css",
+        label: "Styles",
+        language: "html",
+        code: '<link rel="stylesheet" href="/assets/shlz.css" />',
+      },
+      { id: "tabs-html", label: "HTML", language: "html", code: tabsMarkup },
+      { id: "tabs-js", label: "Behavior", language: "js", code: tabsBehavior },
+    ],
+    contract: [
+      ["Root", ".shlz-tabs[data-shlz-tabs]."],
+      ["Tablist", "Direct child [role=tablist] with an accessible name."],
+      [
+        "Tabs",
+        "Direct native buttons with role=tab, unique ids and aria-controls.",
+      ],
+      [
+        "Panels",
+        "role=tabpanel with matching id, aria-labelledby, conditional tabindex and hidden state.",
+      ],
+      ["Enhancement", "enhanceTabs(scope?) returns TabsController[]."],
+      [
+        "Lifecycle",
+        "destroy() removes behavior listeners; markup state remains as last activated.",
+      ],
+      ["Visual families", "Default underline, --pill and --boxed."],
+    ],
+    accessibility:
+      "The behavior implements automatic activation with roving tabindex. Arrow Left/Right wrap through enabled tabs; Home/End select the first/last enabled tab. Click activates the clicked tab and leaves native button focus behavior intact. Native disabled or aria-disabled tabs are skipped during keyboard navigation. Each controlled panel must remain inside its Tabs root; make a panel focusable when its first content is not.",
+    limitations:
+      "Tabs do not manage URL routing, lazy loading, persistence, dynamic insertion or overflow. The current keyboard contract is horizontal only and does not interpret aria-orientation. Destroy stops listeners but does not restore the initial selected/hidden/tabindex values. Icon tabs are absent from the source contract.",
+    traceability: [
+      [
+        "Authoritative component archive",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      ],
+      ["Evidence map", "docs/evidence-map.md"],
+      ["Provenance", "packages/tokens/provenance.json"],
+      ["Tokens", "packages/tokens/tokens.json"],
+      ["Styles", "packages/styles/components/tabs.css"],
+      ["Behavior", "packages/behaviors/src/tabs.ts"],
+      ["Documentation", "docs/components/tabs.md"],
+      ["Showcase", "apps/showcase/src/main.js"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/tabs-source.test.mjs"],
+      ["Behavior contract tests", "tools/tests/components.test.mjs"],
       ["Browser tests", "tools/playwright/components-next.spec.js"],
     ],
   },

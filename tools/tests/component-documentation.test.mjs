@@ -26,6 +26,7 @@ test("documented components expose the validated component-page contract", async
     "segment",
     "link",
     "avatar",
+    "tabs",
     "select",
   ]);
 
@@ -264,6 +265,53 @@ test("Link and Avatar snippets preserve native semantics and shipped content con
   }
   assert.match(avatarCss, /\.shlz-avatar__image/);
   assert.match(avatarCss, /\.shlz-avatar__icon/);
+});
+
+test("Tabs snippet preserves the ARIA relationship and deferred behavior lifecycle", async () => {
+  const [css, behavior, packageJson] = await Promise.all([
+    read("packages/styles/components/tabs.css"),
+    read("packages/behaviors/src/tabs.ts"),
+    read("packages/behaviors/package.json").then(JSON.parse),
+  ]);
+  const html = componentDocumentation.tabs.snippets.find(
+    ({ id }) => id === "tabs-html",
+  ).code;
+  const js = componentDocumentation.tabs.snippets.find(
+    ({ id }) => id === "tabs-js",
+  ).code;
+
+  assert.match(html, /^<div class="shlz-tabs" data-shlz-tabs>/);
+  assert.match(html, /role="tablist" aria-label="Карточка заявки"/);
+  assert.equal(html.match(/role="tab"/g)?.length, 2);
+  assert.match(
+    html,
+    /id="details-tab"[^>]+aria-selected="true"[^>]+aria-controls="details-panel"/,
+  );
+  assert.match(
+    html,
+    /id="history-tab"[^>]+aria-selected="false"[^>]+aria-controls="history-panel"[^>]+tabindex="-1"/,
+  );
+  assert.equal(html.match(/role="tabpanel"/g)?.length, 2);
+  assert.match(
+    html,
+    /id="details-panel" role="tabpanel" aria-labelledby="details-tab" tabindex="0"/,
+  );
+  assert.match(
+    html,
+    /id="history-panel" role="tabpanel" aria-labelledby="history-tab" tabindex="0" hidden/,
+  );
+  assert.equal(html.match(/aria-selected="true"/g)?.length, 1);
+  assert.equal(html.match(/tabindex="-1"/g)?.length, 1);
+
+  assert.match(js, /from "@shlz\/behaviors\/tabs"/);
+  assert.match(js, /const controllers = enhanceTabs\(\)/);
+  assert.match(js, /function destroyTabs\(\)[\s\S]+controller\.destroy\(\)/);
+  assert.doesNotMatch(js, /enhanceTabs\(\);\s+for \(const controller/);
+  assert.ok(packageJson.exports["./tabs"]);
+  assert.match(behavior, /export function enhanceTabs/);
+  assert.match(behavior, /ArrowLeft/);
+  assert.match(css, /\.shlz-tabs--pill/);
+  assert.match(css, /\.shlz-tabs--boxed/);
 });
 
 test("Select copyable markup and initialization match production exports", async () => {

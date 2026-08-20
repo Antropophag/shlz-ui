@@ -260,6 +260,10 @@ if (savedFontProfile === "fira") {
     true;
 }
 
+document
+  .querySelector("#tabs-demo > h3")
+  ?.insertAdjacentHTML("afterend", renderComponentDocumentation("tabs"));
+
 const modalAutofocus = document.querySelector("#modal-autofocus");
 const modalInputControl = document.createElement("span");
 modalInputControl.className = "shlz-field__control";
