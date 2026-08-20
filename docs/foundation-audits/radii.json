@@ -1,0 +1,48 @@
+{
+  "foundation": "radii",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "referenceSources": [
+    "shlz-design-source/tokens/radii-observed.json",
+    "design-source-index/foundations.json"
+  ],
+  "derivedArtifacts": ["packages/tokens/dist/tokens.css"],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/foundation.css"
+  ],
+  "consumers": [
+    "packages/styles/foundation.css",
+    "packages/styles/components/"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "Min 8, Regular 12, Medium 16, Large 48, and Max 100px are human-verified source labels and values.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Max 100px is the documented pill alias; component circles and exact local radii remain local geometry.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "No 9999px approximation is promoted as a foundation token.",
+      "evidence": "docs/token-methodology.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass: source reconciliation retains the five human-verified labels at 8/12/16/48/100px",
+    "structural-contract": "pass: generation emits all five radius variables and the production scan rejects approximate 999/9999px pill radii",
+    "runtime-browser": "pass: focused browser assertions resolve Regular to 12px, Max to 100px, and preserve the Select consumer's component-local 20px radius",
+    "accessibility": "not-applicable: radius values define shape but no standalone accessibility behavior",
+    "focused-visual": "pass: exact computed radii distinguish the global named values from component-specific geometry",
+    "consumer-integration": "pass: representative surface and field consumers resolve published radii without replacing component-local circle or pill geometry",
+    "responsive-content-stress": "not-applicable: audited radius values do not vary with viewport or content length"
+  },
+  "findings": [],
+  "limitations": []
+}

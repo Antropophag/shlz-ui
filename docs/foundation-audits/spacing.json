@@ -1,0 +1,50 @@
+{
+  "foundation": "spacing",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Spacing.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "derivedArtifacts": [
+    "design-source-index/foundations.json",
+    "shlz-design-source/tokens/spacing-candidates.json",
+    "packages/tokens/dist/tokens.css"
+  ],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/foundation.css"
+  ],
+  "consumers": [
+    "packages/styles/foundation.css",
+    "packages/styles/components/",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "The global scale is exactly 4/8/16/24/32/40/48/56/64px.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "A source spacing token is used only where its semantics are global.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Repeated component geometry remains local unless a global semantic contract is established.",
+      "evidence": "docs/token-methodology.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass: source tests retain exactly the nine-value 4/8/16/24/32/40/48/56/64px scale",
+    "structural-contract": "pass: generation emits one resolved CSS custom property for every authored spacing value",
+    "runtime-browser": "pass: a focused browser assertion resolves the representative stack gap to the authored 16px value",
+    "accessibility": "not-applicable: the spacing scale defines values but no standalone accessibility behavior",
+    "focused-visual": "pass: exact computed geometry verifies the representative 16px stack spacing without relying on a broad screenshot",
+    "consumer-integration": "pass: representative stack and Data Workspace compositions consume the published spacing layer while component-specific geometry remains local",
+    "responsive-content-stress": "not-applicable: the global spacing values are viewport-independent; responsive layout behavior belongs to consuming components"
+  },
+  "findings": [],
+  "limitations": []
+}

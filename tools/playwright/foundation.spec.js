@@ -58,3 +58,54 @@ test("migrated showcase families remain present after reconciliation", async ({
   });
   await expect(page.locator("#fidelity-select"), "select").toBeVisible();
 });
+
+test("foundation tokens resolve exactly in representative production consumers", async ({
+  page,
+}) => {
+  await page.goto("/");
+
+  const values = await page.evaluate(() => {
+    const root = window.getComputedStyle(document.documentElement);
+    const body = window.getComputedStyle(document.querySelector(".shlz-scope"));
+    const control = window.getComputedStyle(
+      document.querySelector(".shlz-field__control"),
+    );
+    const stack = window.getComputedStyle(
+      document.querySelector(".shlz-stack"),
+    );
+    const notification = window.getComputedStyle(
+      document.querySelector(".shlz-notification"),
+    );
+    return {
+      primary: root
+        .getPropertyValue("--shlz-source-color-dark-blue-dark-blue")
+        .trim(),
+      alpha: root
+        .getPropertyValue("--shlz-source-color-dark-blue-dark-blue-10")
+        .trim(),
+      spacing: root.getPropertyValue("--shlz-source-spacing-16").trim(),
+      radius: root.getPropertyValue("--shlz-source-radius-regular").trim(),
+      maxRadius: root.getPropertyValue("--shlz-source-radius-max").trim(),
+      surfaceColor: body.color,
+      surfaceBackground: body.backgroundColor,
+      stackGap: stack.gap,
+      controlHeight: control.height,
+      controlRadius: control.borderRadius,
+      notificationShadow: notification.boxShadow,
+    };
+  });
+
+  expect(values).toEqual({
+    primary: "#0B1623",
+    alpha: "rgb(11 22 35 / 10%)",
+    spacing: "16px",
+    radius: "12px",
+    maxRadius: "100px",
+    surfaceColor: "rgb(11, 22, 35)",
+    surfaceBackground: "rgb(255, 255, 255)",
+    stackGap: "16px",
+    controlHeight: "40px",
+    controlRadius: "20px",
+    notificationShadow: "rgba(11, 22, 35, 0.1) 0px 4px 15px 0px",
+  });
+});

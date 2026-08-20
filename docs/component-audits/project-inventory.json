@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "3c1f10ba51a8b341126183d3338d53b711420795",
+    "sha": "6faefdb19a3053d7aed0362603d02ca40fa47103",
     "measuredAt": "2026-08-20",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -23,21 +23,24 @@
         "tools/playwright/foundation.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source tests",
-        "structural-contract": "generator/validation",
-        "runtime-browser": "broad foundation page",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "package smoke",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: source hashes validate and the authored layer retains exactly 40 colors, nine spacing values, and five radii",
+        "structural-contract": "pass: generated JSON equals authored JSON, aliases resolve, CSS generation is complete, and exports pass clean-consumer smoke",
+        "runtime-browser": "pass: focused assertions resolve representative source and semantic custom properties to expected computed values",
+        "accessibility": "not-applicable: serialization has no independent semantics",
+        "focused-visual": "pass: exact computed-style assertions cover representative color, spacing, radius, control-size, and shadow outcomes",
+        "consumer-integration": "pass: generated styles, plain HTML, and clean-package smoke consume the published token outputs",
+        "responsive-content-stress": "not-applicable: token serialization is viewport-independent; responsive behavior belongs to consumers"
       },
       "canonical_name": "Tokens",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Colors.svg",
-        "shlz-design-source/raw/svg/Spacing.svg"
+        "shlz-design-source/raw/svg/Spacing.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+        "shlz-design-source/raw/typography-UI Kit – Interface elements.json"
       ],
       "production_implementation": [
         "packages/tokens/tokens.json",
@@ -45,14 +48,19 @@
         "packages/styles/foundation.css"
       ],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/tokens.json"],
       "executable_fixtures": [],
       "live_consumers": ["packages/styles/components/"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
-      "scope": ["color groups", "spacing scale", "radii", "effects"],
+      "scope": [
+        "source and semantic layers",
+        "provenance",
+        "CSS generation",
+        "package exports"
+      ],
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
@@ -66,29 +74,235 @@
     },
     {
       "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: all 40 named source paints, including 16 alpha values, are retained without rounding or opaque conversion",
+        "structural-contract": "pass: all 11 semantic color aliases resolve to source paints and generated CSS has no unresolved alias",
+        "runtime-browser": "pass: focused assertions verify primary, alpha, text, surface, and notification-shadow paint outcomes",
+        "accessibility": "not-applicable: palette fidelity does not establish component contrast or WCAG compliance; those are component and consumer claims",
+        "focused-visual": "pass: representative currentColor and preserved-paint snapshots exercise source-backed paint topology",
+        "consumer-integration": "pass: representative field, notification, icon, and Data Workspace surfaces consume published or documented source paints",
+        "responsive-content-stress": "not-applicable: color claims are viewport-independent"
+      },
+      "canonical_name": "Colors",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Colors.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/colors.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": [
+        "packages/styles/components/",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "HEX/RGB/alpha",
+        "semantic aliases",
+        "text/surface/border/icon/state paints"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 2,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: source tests retain exactly the nine-value 4/8/16/24/32/40/48/56/64px scale",
+        "structural-contract": "pass: generation emits one resolved CSS custom property for every authored spacing value",
+        "runtime-browser": "pass: a focused assertion resolves the representative stack gap to the authored 16px value",
+        "accessibility": "not-applicable: no standalone semantics",
+        "focused-visual": "pass: exact computed geometry verifies representative 16px stack spacing without a broad screenshot",
+        "consumer-integration": "pass: representative stack and Data Workspace compositions consume the spacing layer while local geometry stays local",
+        "responsive-content-stress": "not-applicable: global spacing values are viewport-independent; responsive layout belongs to components"
+      },
+      "canonical_name": "Spacing",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Spacing.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/spacing.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["packages/styles/components/"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "4/8/16/24/32/40/48/56/64px",
+        "global versus component geometry"
+      ],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: source reconciliation retains the five human-verified labels at 8/12/16/48/100px",
+        "structural-contract": "pass: generation emits all five radius variables and production scan rejects approximate 999/9999px pills",
+        "runtime-browser": "pass: focused assertions resolve Regular 12px, Max 100px, and the Select consumer's local 20px radius",
+        "accessibility": "not-applicable: shape has no standalone semantics",
+        "focused-visual": "pass: exact computed radii distinguish global named values from component-specific geometry",
+        "consumer-integration": "pass: representative surface and field consumers resolve published radii without replacing local geometry",
+        "responsive-content-stress": "not-applicable: audited radius values do not vary with viewport or content length"
+      },
+      "canonical_name": "Radii",
+      "category": "foundations",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
+      "production_implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/radii.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["packages/styles/components/"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["8/12/16/48/100px", "circles/pills", "component-local radii"],
+      "known_findings": [],
+      "limitations": [],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: overlay source tests trace offsets, blur, alpha, strokes, and multi-shadow composition to owning SVGs",
+        "structural-contract": "pass: production CSS retains distinct effect compositions and exposes no unsupported shared elevation token",
+        "runtime-browser": "pass: focused assertion resolves the notification shadow to rgba(11, 22, 35, 0.1) 0px 4px 15px 0px",
+        "accessibility": "not-applicable: effects carry no independent meaning",
+        "focused-visual": "pass: focused overlay and notification snapshots exercise distinct source-backed effect compositions",
+        "consumer-integration": "pass: Showcase and Data Workspace exercise representative notification, field, popover, and modal effects",
+        "responsive-content-stress": "pass: narrow drawer and long modal tests retain audited overlay effects without clipping"
+      },
+      "canonical_name": "Effects",
+      "category": "foundations",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Select.svg",
+        "shlz-design-source/raw/svg/Popover.svg",
+        "shlz-design-source/raw/svg/Notification.svg",
+        "shlz-design-source/raw/svg/Modal.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/field.css",
+        "packages/styles/components/popover.css",
+        "packages/styles/components/notification.css",
+        "packages/styles/components/modal.css"
+      ],
+      "behavior": [],
+      "docs": ["docs/foundation-audits/effects.json"],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "shadows",
+        "overlays",
+        "opacity",
+        "strokes",
+        "no global elevation scale"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "Foundation boundary only; owning components are not audited here."
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
         "tools/tests/typography-profiles.test.mjs",
         "tools/playwright/typography-profiles.spec.js"
       ],
       "evidence": {
-        "source-integrity": "structural extraction",
-        "structural-contract": "source tests",
-        "runtime-browser": "profile switching",
-        "accessibility": "gap",
-        "focused-visual": "one compatibility snapshot",
-        "consumer-integration": "Showcase only",
-        "responsive-content-stress": "long-content browser test"
+        "source-integrity": "pass: extraction classifies 2,193 raw text nodes into 36 signatures while retaining all typography metrics",
+        "structural-contract": "pass: tests verify Golos default, Fira compatibility, exact roles, fallback stacks, and inheritance",
+        "runtime-browser": "pass: tests load Latin/Cyrillic Fira and switch root/subtree profiles without changing fixed heights",
+        "accessibility": "not-applicable: metric fidelity, inheritance, font loading, and unclipped fixtures do not prove general text accessibility",
+        "focused-visual": "pass: Fira compatibility snapshot and focused Pagination assertions cover representative role geometry",
+        "consumer-integration": "pass: field, Pagination, status, table, file/document rows, and Data Workspace exercise inherited profiles",
+        "responsive-content-stress": "pass: long Cyrillic/Latin content stays unclipped, ellipsis remains active, and table rows stay 50px under Fira"
       },
       "canonical_name": "Typography profiles",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
-        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
-        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+        "shlz-design-source/raw/typography-UI Kit – Basic elements.json",
+        "shlz-design-source/raw/typography-UI Kit – Interface elements.json"
       ],
       "production_implementation": ["packages/styles/typography-profiles.css"],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/typography.json"],
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/fira-sans.css"],
       "data_workspace_consumers": [],
@@ -114,25 +328,25 @@
         "tools/playwright/icons.spec.js"
       ],
       "evidence": {
-        "source-integrity": "hash and paint tests",
-        "structural-contract": "sprite/API tests",
-        "runtime-browser": "catalog resolution",
-        "accessibility": "gap per use",
-        "focused-visual": "catalog snapshots, not every glyph",
-        "consumer-integration": "indirect",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: hash and paint tests cover 133 source SVGs and retain 119 logical glyphs, 125 variants, and uncertain names",
+        "structural-contract": "pass: tests verify currentColor/preserved-paint counts, aliases, sprite, runtime helpers, and exports",
+        "runtime-browser": "pass: the catalog resolves all 119 canonical symbols to non-empty painted browser geometry",
+        "accessibility": "not-applicable: the package supplies geometry and paint; semantic meaning and accessible names remain consumer claims",
+        "focused-visual": "pass: focused nine-icon snapshot covers currentColor, preserved-paint, container, state, and file-type topologies",
+        "consumer-integration": "pass: controls verify currentColor inheritance, preserved paints stay intact, and plain HTML consumes published assets",
+        "responsive-content-stress": "not-applicable: intrinsic glyph geometry is viewport-independent"
       },
       "canonical_name": "Icons",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Icons.svg"],
       "production_implementation": [
         "packages/icons/normalized/",
         "tools/generate.mjs"
       ],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/foundation-audits/icons.json"],
       "executable_fixtures": [],
       "live_consumers": ["packages/styles/components/", "apps/showcase/src/"],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],

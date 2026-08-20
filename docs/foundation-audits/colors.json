@@ -1,0 +1,56 @@
+{
+  "foundation": "colors",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Colors.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "derivedArtifacts": [
+    "design-source-index/foundations.json",
+    "shlz-design-source/tokens/colors-observed.json",
+    "packages/tokens/dist/tokens.css"
+  ],
+  "implementation": [
+    "packages/tokens/tokens.json",
+    "packages/styles/foundation.css"
+  ],
+  "consumers": [
+    "packages/styles/components/button.css",
+    "packages/styles/components/field.css",
+    "packages/styles/components/status-badge.css",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "All 40 named colors preserve source spelling, RGB value, and alpha.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Text, surface, border, action, and status roles are semantic aliases.",
+      "evidence": "packages/tokens/provenance.json"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Component-local paints are retained when the source does not establish a global palette token.",
+      "evidence": "docs/foundation-reconciliation.md"
+    },
+    {
+      "classification": "assumption",
+      "claim": "WCAG observations do not rewrite the source-backed palette in Wave 1.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass: source tests retain all 40 named paints, including 16 explicit alpha values, without rounding or opaque conversion",
+    "structural-contract": "pass: all 11 semantic color aliases resolve to authored source paints and generated CSS contains no unresolved source alias",
+    "runtime-browser": "pass: focused browser assertions verify primary, alpha, text, surface, and notification-shadow paint outcomes",
+    "accessibility": "not-applicable: palette fidelity and representative paint application do not establish component contrast or WCAG compliance; those remain component and consumer audit claims",
+    "focused-visual": "pass: representative currentColor and preserved-paint icon snapshots exercise source-backed paint topology without palette substitution",
+    "consumer-integration": "pass: representative field, notification, icon, and Data Workspace surfaces consume published color variables or documented component-local source paints",
+    "responsive-content-stress": "not-applicable: color claims do not change with viewport or content length"
+  },
+  "findings": [],
+  "limitations": []
+}

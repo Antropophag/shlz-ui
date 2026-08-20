@@ -1,0 +1,63 @@
+{
+  "foundation": "icons",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Icons.svg",
+    "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+  ],
+  "referenceSources": [
+    "packages/icons/normalized/analysis.json",
+    "packages/icons/normalized/manifest.json"
+  ],
+  "derivedArtifacts": [
+    "packages/icons/normalized/",
+    "packages/icons/dist/manifest.json",
+    "packages/icons/dist/sprite.svg",
+    "packages/icons/dist/index.js"
+  ],
+  "implementation": [
+    "tools/normalize-basic-icons.mjs",
+    "tools/generate.mjs",
+    "packages/icons/compatibility-aliases.json"
+  ],
+  "consumers": [
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/consumer-workspace.js",
+    "tools/fixtures/plain-html.html"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "133 source SVGs map to 119 logical glyphs and 125 emitted variants without geometry or paint loss.",
+      "evidence": "packages/icons/normalized/analysis.json"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "97 logical monochrome icons use currentColor and 22 preserve source paint.",
+      "evidence": "docs/icon-methodology.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Explicit compatibility aliases preserve historical names without becoming canonical glyphs.",
+      "evidence": "packages/icons/compatibility-aliases.json"
+    },
+    {
+      "classification": "assumption",
+      "claim": "Uncertain source labels remain explicitly uncertain and are not silently merged.",
+      "evidence": "packages/icons/normalized/analysis.json"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass: hash and element-level paint tests cover all 133 source SVGs and retain 119 logical glyphs, 125 emitted variants, and explicit uncertain names",
+    "structural-contract": "pass: tests verify 97 currentColor and 22 preserved-paint logical icons, unique canonical names, 42 explicit aliases, sprite symbols, runtime helpers, and package exports",
+    "runtime-browser": "pass: the icon catalog resolves all 119 canonical symbols to non-empty painted browser geometry",
+    "accessibility": "not-applicable: the icon package supplies geometry and paint but no semantic meaning; accessible names and decorative treatment remain consumer-level claims",
+    "focused-visual": "pass: a focused nine-icon snapshot covers representative currentColor, preserved-paint, container, state-family, and file-type topologies",
+    "consumer-integration": "pass: representative controls verify currentColor inheritance, preserved-paint assets are not recolored, and plain HTML consumes the published sprite/assets",
+    "responsive-content-stress": "not-applicable: intrinsic icon geometry is viewport-independent"
+  },
+  "findings": [],
+  "limitations": [
+    "Consumer-specific accessible names remain the consumer contract."
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "foundation": "effects",
+  "status": "VERIFIED",
+  "authoritativeSource": [
+    "shlz-design-source/raw/svg/Select.svg",
+    "shlz-design-source/raw/svg/Popover.svg",
+    "shlz-design-source/raw/svg/Notification.svg",
+    "shlz-design-source/raw/svg/Modal.svg"
+  ],
+  "referenceSources": [
+    "shlz-design-source/tokens/filters-observed.json",
+    "shlz-design-source/tokens/strokes-observed.json",
+    "design-source-index/foundations.json"
+  ],
+  "derivedArtifacts": [],
+  "implementation": [
+    "packages/styles/components/field.css",
+    "packages/styles/components/popover.css",
+    "packages/styles/components/notification.css",
+    "packages/styles/components/modal.css"
+  ],
+  "consumers": [
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/consumer-workspace.js"
+  ],
+  "sourceClaims": [
+    {
+      "classification": "source-fact",
+      "claim": "Offsets, blur, alpha, strokes, and multi-shadow composition are retained per authoritative component source.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Wave 1 exposes no global elevation scale because the source does not establish one.",
+      "evidence": "docs/token-methodology.md"
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "Nearly equal effects are not normalized across component families.",
+      "evidence": "docs/foundation-audits/wave-1-report.md"
+    }
+  ],
+  "evidence": {
+    "source-integrity": "pass: overlay source tests trace offsets, blur, alpha, strokes, and multi-shadow composition to the owning component SVGs",
+    "structural-contract": "pass: production CSS retains distinct source-backed effect compositions and exposes no unsupported shared elevation token",
+    "runtime-browser": "pass: a focused browser assertion resolves the representative notification shadow to rgba(11, 22, 35, 0.1) 0px 4px 15px 0px",
+    "accessibility": "not-applicable: audited effects do not carry meaning independently",
+    "focused-visual": "pass: focused overlay and notification snapshots exercise the distinct source-backed shadow and overlay compositions",
+    "consumer-integration": "pass: Showcase and Data Workspace exercise representative notification, field, popover, and modal effects",
+    "responsive-content-stress": "pass: browser tests cover narrow drawer and long modal surfaces without changing or clipping their audited overlay effects"
+  },
+  "findings": [],
+  "limitations": [
+    "Effects remain component-local; this manifest verifies the foundation boundary, not the components themselves."
+  ]
+}
