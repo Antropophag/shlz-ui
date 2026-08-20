@@ -104,7 +104,7 @@ function destroySelects() {
 
 | Contract    | Supported value                                                   |
 | ----------- | ----------------------------------------------------------------- |
-| Root        | `.shlz-field.shlz-field--select`                                  |
+| Root        | `.shlz-field.shlz-field--select[data-shlz-select]`                |
 | Value owner | Named hidden input inside `[data-shlz-select]`                    |
 | Label       | Visible label referenced by trigger and listbox                   |
 | Indicator   | Source chevron; decorative and hidden from the accessibility tree |

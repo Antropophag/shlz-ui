@@ -1194,7 +1194,7 @@ export const componentDocumentation = {
       },
     ],
     contract: [
-      ["Root", ".shlz-field.shlz-field--select"],
+      ["Root", ".shlz-field.shlz-field--select[data-shlz-select]"],
       ["Value owner", "A named hidden input inside [data-shlz-select]."],
       ["Label", "The trigger and listbox reference the visible label."],
       ["Events", "The value owner emits one bubbling input and change event."],

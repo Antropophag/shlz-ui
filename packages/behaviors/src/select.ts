@@ -124,6 +124,11 @@ export class SelectController {
     this.trigger.addEventListener(
       "keydown",
       (event) => {
+        if (this.expanded && (event.key === "Escape" || event.key === "Tab")) {
+          if (event.key === "Escape") event.preventDefault();
+          this.close({ restoreFocus: event.key === "Escape" });
+          return;
+        }
         if (["ArrowDown", "ArrowUp", "Enter", " "].includes(event.key)) {
           event.preventDefault();
           this.open(true);
@@ -193,11 +198,17 @@ export class SelectController {
       return;
     }
     const options = this.#options();
-    const current = options.indexOf(document.activeElement as HTMLElement);
+    const current = options.indexOf(
+      this.root.ownerDocument.activeElement as HTMLElement,
+    );
     let next: number | undefined;
-    if (event.key === "ArrowDown") next = (current + 1) % options.length;
+    if (event.key === "ArrowDown")
+      next = current < 0 ? 0 : (current + 1) % options.length;
     if (event.key === "ArrowUp")
-      next = (current - 1 + options.length) % options.length;
+      next =
+        current < 0
+          ? options.length - 1
+          : (current - 1 + options.length) % options.length;
     if (event.key === "Home") next = 0;
     if (event.key === "End") next = options.length - 1;
     if (next === undefined || options.length === 0) return;

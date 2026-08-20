@@ -1,8 +1,14 @@
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
+import { fileURLToPath, URL } from "node:url";
 
 const auditManifest = JSON.parse(
-  await readFile("docs/component-audits/select.json", "utf8"),
+  await readFile(
+    fileURLToPath(
+      new URL("../../docs/component-audits/select.json", import.meta.url),
+    ),
+    "utf8",
+  ),
 );
 
 test.beforeEach(async ({ page }) => {
@@ -307,6 +313,16 @@ test("outside dismissal, Tab, disabled options and multiple instances remain saf
   await page.locator("#select-demo h3").click();
   await expect(secondTrigger).toHaveAttribute("aria-expanded", "false");
 
+  await firstTrigger.click();
+  await page.keyboard.press("Escape");
+  await expect(firstTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(firstTrigger).toBeFocused();
+
+  await firstTrigger.click();
+  await page.keyboard.press("Tab");
+  await expect(firstTrigger).toHaveAttribute("aria-expanded", "false");
+  await expect(secondTrigger).toBeFocused();
+
   const disabledTrigger = roots.nth(4).locator(".shlz-select__trigger");
   await disabledTrigger.evaluate((element) => element.click());
   await expect(disabledTrigger).toHaveAttribute("aria-expanded", "false");
@@ -326,6 +342,16 @@ test("outside dismissal, Tab, disabled options and multiple instances remain saf
   await disabled.evaluate((element) => element.click());
   await expect(workspace.locator('input[type="hidden"]')).toHaveValue("");
   await expect(workspaceTrigger).toHaveAttribute("aria-expanded", "true");
+  await disabled.focus();
+  await page.keyboard.press("ArrowUp");
+  await expect(
+    workspace.getByRole("option", { name: "Требует внимания" }),
+  ).toBeFocused();
+  await disabled.focus();
+  await page.keyboard.press("ArrowDown");
+  await expect(
+    workspace.getByRole("option", { name: "Все статусы" }),
+  ).toBeFocused();
 });
 
 test("events, setValue, teardown and ARIA relationship integrity are deterministic", async ({

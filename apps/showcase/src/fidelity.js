@@ -602,7 +602,7 @@ export const primaryComponentMarkup = `
       component: "select",
       orders: [1, 16, 20, 39, 45, 52],
       deviations:
-        "Native single-select semantics are retained inside the source-backed control shell. Dropdown/menu families are documented separately.",
+        "The executable single-select uses the documented button/listbox controller and hidden form-value owner. Native specimens remain inert source diagnostics; Dropdown/menu families are documented separately.",
     })}
   </article>
   <article class="shlz-api-component" id="checkbox-demo">
