@@ -24,6 +24,50 @@ const cssOnlyUsage = (id, markup) => ({
   ],
 });
 
+const traceability = ({
+  authority,
+  styles,
+  documentation,
+  showcase,
+  related,
+}) => [
+  ...authority,
+  ["Provenance", "packages/tokens/provenance.json"],
+  ["Tokens", "packages/tokens/tokens.json"],
+  ["Styles", styles],
+  ["Documentation", documentation],
+  ["Showcase", showcase],
+  ...related,
+];
+
+const choiceTraceability = (name, source) =>
+  traceability({
+    authority: [["Authoritative source", source]],
+    styles: "packages/styles/components/choice.css",
+    documentation: `docs/components/${name}.md`,
+    showcase: "apps/showcase/src/fidelity.js",
+    related: [
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+      ["Bundle contract tests", "tools/tests/components.test.mjs"],
+      ["Browser tests", "tools/playwright/choice-status.spec.js"],
+    ],
+  });
+
+const wave3Traceability = (name, source) =>
+  traceability({
+    authority: [["Authoritative source", source]],
+    styles: `packages/styles/components/${name}.css`,
+    documentation: `docs/components/${name}.md`,
+    showcase: "apps/showcase/src/wave3.js",
+    related: [
+      ["Evidence map", "docs/evidence-map.md"],
+      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+      ["Source tests", "tools/tests/wave3-source.test.mjs"],
+      ["Browser tests", "tools/playwright/components-next.spec.js"],
+    ],
+  });
+
 const buttonMarkup = `<button class="shlz-button shlz-button--primary" type="button">
   Сохранить
 </button>`;
@@ -188,16 +232,18 @@ export const componentDocumentation = {
       "Native keyboard activation and disabled semantics remain browser-owned. Icon-only controls require aria-label or equivalent visible text.",
     limitations:
       "Loading and read-only are not public Button states. Visual-state helper classes belong to diagnostics and must not be used as application state.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Buttons.svg"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/button.css"],
-      ["Documentation", "docs/components/button.md"],
-      ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Browser tests", "tools/playwright/primitives.spec.js"],
-    ],
+    traceability: traceability({
+      authority: [
+        ["Authoritative source", "shlz-design-source/raw/svg/Buttons.svg"],
+      ],
+      styles: "packages/styles/components/button.css",
+      documentation: "docs/components/button.md",
+      showcase: "apps/showcase/src/fidelity.js",
+      related: [
+        ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+        ["Browser tests", "tools/playwright/primitives.spec.js"],
+      ],
+    }),
   },
   input: {
     status: "Executable · Production example",
@@ -230,20 +276,25 @@ export const componentDocumentation = {
       "The wrapping native label names the input. Browser focus, editing, disabled and readonly behavior remain native. Connect validation/help text with aria-describedby and use aria-invalid only when invalid.",
     limitations:
       "No masking, formatting, clear-button behavior or async-validation API is shipped. Advanced source nodes remain diagnostic because their product meaning is unresolved.",
-    traceability: [
-      [
-        "Authoritative component set",
-        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+    traceability: traceability({
+      authority: [
+        [
+          "Authoritative component set",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        ],
       ],
-      ["Source specification", "docs/components/form-controls-source-spec.md"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/field.css"],
-      ["Documentation", "docs/components/input.md"],
-      ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Source tests", "tools/tests/form-controls-source.test.mjs"],
-      ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
-    ],
+      styles: "packages/styles/components/field.css",
+      documentation: "docs/components/input.md",
+      showcase: "apps/showcase/src/fidelity.js",
+      related: [
+        [
+          "Source specification",
+          "docs/components/form-controls-source-spec.md",
+        ],
+        ["Source tests", "tools/tests/form-controls-source.test.mjs"],
+        ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
+      ],
+    }),
   },
   textarea: {
     status: "Executable · Production example",
@@ -324,18 +375,10 @@ export const componentDocumentation = {
       "The wrapping label supplies the accessible name and enlarges the hit target. Space toggles the focused native checkbox. Set mixed state through element.indeterminate. Checked submits the configured string value; unchecked submits no entry, so the consumer maps presence/value to its boolean model.",
     limitations:
       "Indeterminate is a DOM property, not a persistent HTML attribute or third form value. Validation messaging, parent/child selection policy and bulk-selection behavior are consumer-owned.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Checkbox.svg"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/choice.css"],
-      ["Documentation", "docs/components/checkbox.md"],
-      ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
-      ["Bundle contract tests", "tools/tests/components.test.mjs"],
-      ["Browser tests", "tools/playwright/choice-status.spec.js"],
-    ],
+    traceability: choiceTraceability(
+      "checkbox",
+      "shlz-design-source/raw/svg/Checkbox.svg",
+    ),
   },
   radio: {
     status: "Executable · Production example",
@@ -361,18 +404,10 @@ export const componentDocumentation = {
       "Fieldset/legend provides the group name; each wrapping label names its option. Arrow keys move within the native same-name group and Space selects the focused option. DOM order should match visual order.",
     limitations:
       "Only each 20px radio option is styled. Fieldset/legend reset and group layout, validation messaging and dynamic option descriptions are consumer-owned; no custom behavior layer is provided.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Radio.svg"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/choice.css"],
-      ["Documentation", "docs/components/radio.md"],
-      ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
-      ["Bundle contract tests", "tools/tests/components.test.mjs"],
-      ["Browser tests", "tools/playwright/choice-status.spec.js"],
-    ],
+    traceability: choiceTraceability(
+      "radio",
+      "shlz-design-source/raw/svg/Radio.svg",
+    ),
   },
   switch: {
     status: "Executable · Production example",
@@ -510,20 +545,22 @@ export const componentDocumentation = {
       "Give a count its noun/context through visible or visually hidden text. Decorative dots use aria-hidden=true; meaningful dots need adjacent text available to assistive technology. Badge has no implicit live-region behavior.",
     limitations:
       "No maximum-count, 99+, localization, animation or live-announcement policy is shipped. Text overflow and business meaning are consumer-owned; Badge is not interactive by itself.",
-    traceability: [
-      [
-        "Authoritative component sets",
-        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+    traceability: traceability({
+      authority: [
+        [
+          "Authoritative component sets",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        ],
       ],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/status-badge.css"],
-      ["Documentation", "docs/components/badge.md"],
-      ["Showcase", "apps/showcase/src/fidelity.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/choice-status-source.test.mjs"],
-      ["Browser tests", "tools/playwright/choice-status.spec.js"],
-    ],
+      styles: "packages/styles/components/status-badge.css",
+      documentation: "docs/components/badge.md",
+      showcase: "apps/showcase/src/fidelity.js",
+      related: [
+        ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+        ["Source tests", "tools/tests/choice-status-source.test.mjs"],
+        ["Browser tests", "tools/playwright/choice-status.spec.js"],
+      ],
+    }),
   },
   tag: {
     status: "Executable · Production example",
@@ -712,18 +749,10 @@ export const componentDocumentation = {
       "Use a real anchor and href for navigation so browser keyboard, context-menu and link semantics remain available. Link text must describe its destination. An unavailable destination is styled non-interactive text, not a focusable or ARIA-disabled anchor.",
     limitations:
       "Visited, external-link and icon variants are not shipped contracts. The --visual-hover and --visual-pressed classes are diagnostic fixtures only. Client routing may intercept a native link but must preserve its href and standard semantics.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Link.svg"],
-      ["Evidence map", "docs/evidence-map.md"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/link.css"],
-      ["Documentation", "docs/components/link.md"],
-      ["Showcase", "apps/showcase/src/wave3.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/wave3-source.test.mjs"],
-      ["Browser tests", "tools/playwright/components-next.spec.js"],
-    ],
+    traceability: wave3Traceability(
+      "link",
+      "shlz-design-source/raw/svg/Link.svg",
+    ),
   },
   avatar: {
     status: "Executable · Production examples",
@@ -768,18 +797,10 @@ export const componentDocumentation = {
       'When Avatar is the only naming content, use role="img" with an accessible name on a text/icon root or give its image meaningful alt text. Prefer a decorative Avatar beside the visible full name; then use aria-hidden="true" on a text/icon root or alt="" on an image. Never encode status or identity through the picture alone.',
     limitations:
       "Badge, arbitrary shapes, 48px size, loading and fallback behavior are not shipped. Consumers must replace a failed image with text or icon markup; CSS alone does not provide that lifecycle. Image privacy, authorization and caching are application responsibilities.",
-    traceability: [
-      ["Authoritative source", "shlz-design-source/raw/svg/Avatar.svg"],
-      ["Evidence map", "docs/evidence-map.md"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/avatar.css"],
-      ["Documentation", "docs/components/avatar.md"],
-      ["Showcase", "apps/showcase/src/wave3.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/wave3-source.test.mjs"],
-      ["Browser tests", "tools/playwright/components-next.spec.js"],
-    ],
+    traceability: wave3Traceability(
+      "avatar",
+      "shlz-design-source/raw/svg/Avatar.svg",
+    ),
   },
   tabs: {
     status: "Executable · Production example",
@@ -824,23 +845,25 @@ export const componentDocumentation = {
       "The behavior implements automatic activation with roving tabindex. Arrow Left/Right wrap through enabled tabs; Home/End select the first/last enabled tab. Click activates the clicked tab and leaves native button focus behavior intact. Native disabled or aria-disabled tabs are skipped during keyboard navigation. Each controlled panel must remain inside its Tabs root; make a panel focusable when its first content is not.",
     limitations:
       "Tabs do not manage URL routing, lazy loading, persistence, dynamic insertion or overflow. The current keyboard contract is horizontal only and does not interpret aria-orientation. Destroy stops listeners but does not restore the initial selected/hidden/tabindex values. Icon tabs are absent from the source contract.",
-    traceability: [
-      [
-        "Authoritative component archive",
-        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+    traceability: traceability({
+      authority: [
+        [
+          "Authoritative component archive",
+          "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        ],
       ],
-      ["Evidence map", "docs/evidence-map.md"],
-      ["Provenance", "packages/tokens/provenance.json"],
-      ["Tokens", "packages/tokens/tokens.json"],
-      ["Styles", "packages/styles/components/tabs.css"],
-      ["Behavior", "packages/behaviors/src/tabs.ts"],
-      ["Documentation", "docs/components/tabs.md"],
-      ["Showcase", "apps/showcase/src/main.js"],
-      ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
-      ["Source tests", "tools/tests/tabs-source.test.mjs"],
-      ["Behavior contract tests", "tools/tests/components.test.mjs"],
-      ["Browser tests", "tools/playwright/components-next.spec.js"],
-    ],
+      styles: "packages/styles/components/tabs.css",
+      documentation: "docs/components/tabs.md",
+      showcase: "apps/showcase/src/main.js",
+      related: [
+        ["Evidence map", "docs/evidence-map.md"],
+        ["Behavior", "packages/behaviors/src/tabs.ts"],
+        ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
+        ["Source tests", "tools/tests/tabs-source.test.mjs"],
+        ["Behavior contract tests", "tools/tests/components.test.mjs"],
+        ["Browser tests", "tools/playwright/components-next.spec.js"],
+      ],
+    }),
   },
   select: {
     status: "Executable · Production native single-select",
