@@ -212,52 +212,65 @@ const selectMarkup = `<div class="shlz-field shlz-field--select">
   </span>
 </div>`;
 
-const paginationMarkup = `<nav class="shlz-pagination" aria-label="Страницы заявок">
+const paginationPage = (href, page, current = false) =>
+  `<a class="shlz-pagination__item" href="${href}"${current ? ' aria-current="page"' : ""}>${page}</a>`;
+const paginationEllipsis = () =>
+  '<span class="shlz-pagination__item shlz-pagination__item--ellipsis" aria-hidden="true">…</span>';
+const paginationDirection = ({ href, label, icon, disabled = false }) => {
+  const image = `<img class="shlz-pagination__icon" src="/assets/icons/${icon}.svg" alt="" />`;
+  return disabled
+    ? `<span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true" aria-label="${label}">${image}</span>`
+    : `<a class="shlz-pagination__item" href="${href}" aria-label="${label}">${image}</a>`;
+};
+const paginationNav = (
+  label,
+  items,
+) => `<nav class="shlz-pagination" aria-label="${label}">
   <ul class="shlz-pagination__list">
-    <li>
-      <a class="shlz-pagination__item" href="/requests?page=5" aria-label="Предыдущая страница">
-        <img class="shlz-pagination__icon" src="/assets/icons/arrow-left-md.svg" alt="" />
-      </a>
-    </li>
-    <li><a class="shlz-pagination__item" href="/requests?page=5">5</a></li>
-    <li><a class="shlz-pagination__item" href="/requests?page=6" aria-current="page">6</a></li>
-    <li><a class="shlz-pagination__item" href="/requests?page=7">7</a></li>
-    <li>
-      <a class="shlz-pagination__item" href="/requests?page=7" aria-label="Следующая страница">
-        <img class="shlz-pagination__icon" src="/assets/icons/arrow-right-md.svg" alt="" />
-      </a>
-    </li>
+    ${items.map((item) => `<li>${item}</li>`).join("\n    ")}
   </ul>
 </nav>`;
 
-const paginationEllipsisMarkup = `<nav class="shlz-pagination" aria-label="Страницы результатов поиска">
-  <ul class="shlz-pagination__list">
-    <li><a class="shlz-pagination__item" href="/search?page=1">1</a></li>
-    <li><span class="shlz-pagination__item shlz-pagination__item--ellipsis" aria-hidden="true">…</span></li>
-    <li><a class="shlz-pagination__item" href="/search?page=5">5</a></li>
-    <li><a class="shlz-pagination__item" href="/search?page=6" aria-current="page">6</a></li>
-    <li><a class="shlz-pagination__item" href="/search?page=7">7</a></li>
-    <li><span class="shlz-pagination__item shlz-pagination__item--ellipsis" aria-hidden="true">…</span></li>
-    <li><a class="shlz-pagination__item" href="/search?page=42">42</a></li>
-  </ul>
-</nav>`;
+const paginationMarkup = paginationNav("Страницы заявок", [
+  paginationDirection({
+    href: "/requests?page=5",
+    label: "Предыдущая страница",
+    icon: "arrow-left-md",
+  }),
+  paginationPage("/requests?page=5", 5),
+  paginationPage("/requests?page=6", 6, true),
+  paginationPage("/requests?page=7", 7),
+  paginationDirection({
+    href: "/requests?page=7",
+    label: "Следующая страница",
+    icon: "arrow-right-md",
+  }),
+]);
 
-const paginationBoundaryMarkup = `<nav class="shlz-pagination" aria-label="Страницы архива">
-  <ul class="shlz-pagination__list">
-    <li>
-      <span class="shlz-pagination__item shlz-pagination__item--disabled" aria-disabled="true" aria-label="Предыдущая страница">
-        <img class="shlz-pagination__icon" src="/assets/icons/arrow-left-md.svg" alt="" />
-      </span>
-    </li>
-    <li><a class="shlz-pagination__item" href="/archive?page=1" aria-current="page">1</a></li>
-    <li><a class="shlz-pagination__item" href="/archive?page=2">2</a></li>
-    <li>
-      <a class="shlz-pagination__item" href="/archive?page=2" aria-label="Следующая страница">
-        <img class="shlz-pagination__icon" src="/assets/icons/arrow-right-md.svg" alt="" />
-      </a>
-    </li>
-  </ul>
-</nav>`;
+const paginationEllipsisMarkup = paginationNav("Страницы результатов поиска", [
+  paginationPage("/search?page=1", 1),
+  paginationEllipsis(),
+  paginationPage("/search?page=5", 5),
+  paginationPage("/search?page=6", 6, true),
+  paginationPage("/search?page=7", 7),
+  paginationEllipsis(),
+  paginationPage("/search?page=42", 42),
+]);
+
+const paginationBoundaryMarkup = paginationNav("Страницы архива", [
+  paginationDirection({
+    label: "Предыдущая страница",
+    icon: "arrow-left-md",
+    disabled: true,
+  }),
+  paginationPage("/archive?page=1", 1, true),
+  paginationPage("/archive?page=2", 2),
+  paginationDirection({
+    href: "/archive?page=2",
+    label: "Следующая страница",
+    icon: "arrow-right-md",
+  }),
+]);
 
 export const componentDocumentation = {
   button: {
