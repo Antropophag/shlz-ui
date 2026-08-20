@@ -286,10 +286,10 @@ const componentAuditRoots = [
   [".shlz-composition .shlz-radio:not(:checked)", "radio-framework-secondary"],
   [".shlz-composition .shlz-switch__input", "switch-framework-composition"],
 ];
-for (const [selector, auditId] of componentAuditRoots)
-  document
-    .querySelector(selector)
-    ?.setAttribute("data-component-audit-id", auditId);
+for (const [selector, auditId] of componentAuditRoots) {
+  const element = document.querySelector(selector);
+  if (element) element.dataset.componentAuditId = auditId;
+}
 
 const componentAuditCollections = [
   [
@@ -323,11 +323,9 @@ const componentAuditCollections = [
   ],
 ];
 for (const [selector, auditIds] of componentAuditCollections)
-  document
-    .querySelectorAll(selector)
-    .forEach((element, index) =>
-      element.setAttribute("data-component-audit-id", auditIds[index]),
-    );
+  document.querySelectorAll(selector).forEach((element, index) => {
+    element.dataset.componentAuditId = auditIds[index];
+  });
 
 for (const checkbox of document.querySelectorAll("[data-shlz-indeterminate]")) {
   checkbox.indeterminate = true;
