@@ -26,15 +26,19 @@ const cssOnlyUsage = (id, markup) => ({
 
 const traceability = ({
   authority,
+  evidence = [],
   styles,
+  behavior = [],
   documentation,
   showcase,
   related,
 }) => [
   ...authority,
+  ...evidence,
   ["Provenance", "packages/tokens/provenance.json"],
   ["Tokens", "packages/tokens/tokens.json"],
   ["Styles", styles],
+  ...behavior,
   ["Documentation", documentation],
   ["Showcase", showcase],
   ...related,
@@ -57,11 +61,11 @@ const choiceTraceability = (name, source) =>
 const wave3Traceability = (name, source) =>
   traceability({
     authority: [["Authoritative source", source]],
+    evidence: [["Evidence map", "docs/evidence-map.md"]],
     styles: `packages/styles/components/${name}.css`,
     documentation: `docs/components/${name}.md`,
     showcase: "apps/showcase/src/wave3.js",
     related: [
-      ["Evidence map", "docs/evidence-map.md"],
       ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
       ["Source tests", "tools/tests/wave3-source.test.mjs"],
       ["Browser tests", "tools/playwright/components-next.spec.js"],
@@ -284,13 +288,15 @@ export const componentDocumentation = {
         ],
       ],
       styles: "packages/styles/components/field.css",
-      documentation: "docs/components/input.md",
-      showcase: "apps/showcase/src/fidelity.js",
-      related: [
+      evidence: [
         [
           "Source specification",
           "docs/components/form-controls-source-spec.md",
         ],
+      ],
+      documentation: "docs/components/input.md",
+      showcase: "apps/showcase/src/fidelity.js",
+      related: [
         ["Source tests", "tools/tests/form-controls-source.test.mjs"],
         ["Browser layout smoke", "tools/playwright/choice-status.spec.js"],
       ],
@@ -853,11 +859,11 @@ export const componentDocumentation = {
         ],
       ],
       styles: "packages/styles/components/tabs.css",
+      evidence: [["Evidence map", "docs/evidence-map.md"]],
+      behavior: [["Behavior", "packages/behaviors/src/tabs.ts"]],
       documentation: "docs/components/tabs.md",
       showcase: "apps/showcase/src/main.js",
       related: [
-        ["Evidence map", "docs/evidence-map.md"],
-        ["Behavior", "packages/behaviors/src/tabs.ts"],
         ["Snippet tests", "tools/tests/component-documentation.test.mjs"],
         ["Source tests", "tools/tests/tabs-source.test.mjs"],
         ["Behavior contract tests", "tools/tests/components.test.mjs"],
