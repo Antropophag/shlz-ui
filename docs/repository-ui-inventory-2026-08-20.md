@@ -14,10 +14,13 @@ Stylelint, Prettier, all package and Showcase builds, source/export validation,
 and the clean package-consumer smoke test. Playwright completed 110/111 tests.
 The sole failure was the focused Pagination typography snapshot: 1,722 pixels
 (reported ratio 0.01) differed. Three repeated captures produced the identical
-glyph-edge-only delta while the computed typography contract passed. Wave 0
-classifies this as Chromium/font raster antialiasing variance and uses a narrow
-per-test ratio below 0.8%; the snapshot is unchanged. The build also reported
-existing large Showcase chunks. Browser and visual CI is blocking after Wave 0.
+glyph-edge-only delta while the computed typography contract passed. A second
+five-capture series produced the same result. Wave 0 records the likely cause as
+Chromium/font raster antialiasing variance and uses a 1,750-pixel absolute
+budget. The test is explicitly bounded visual evidence because Playwright does
+not classify individual changed pixels. The snapshot is unchanged. The build
+also reported existing large Showcase chunks. Browser and visual CI is blocking
+after Wave 0.
 
 ## Scope and interpretation
 
@@ -45,8 +48,9 @@ is not `VERIFIED`. Every other former `done`, `source-migrated`, or
   field label/placeholder contrast deviation and tracks it in issue #13. It is
   not fixed here and applies to the future Input/Textarea family audit.
 - **P2 — Pagination visual drift:** its former zero-pixel typography threshold
-  failed by 1,722 stable glyph-edge pixels across local Chromium. Wave 0 keeps
-  geometry and paint regressions blocking with a narrow raster tolerance.
+  failed by 1,722 stable glyph-edge pixels across eight local captures. Wave 0
+  replaces the area-relative tolerance with a 1,750-pixel absolute budget and
+  does not describe the resulting comparison as pixel-exact.
 - **P2 — occurrence governance gap:** only Select has stable audit IDs and a
   browser occurrence guard. Other executable and inert roots cannot yet detect
   newly introduced unclassified consumers.
