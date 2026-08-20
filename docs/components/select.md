@@ -47,7 +47,7 @@ No `@shlz/behaviors/select` export exists in the current production package.
 <div class="shlz-field shlz-field--select">
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
-    <select class="shlz-select" id="request-type" name="requestType">
+    <select class="shlz-select" id="request-type" name="requestType" required>
       <option value="">Выберите тип</option>
       <option value="incident">Инцидент</option>
       <option value="request">Запрос</option>
@@ -82,6 +82,10 @@ event handling.
 
 - Supported sizes: default large 40px and `.shlz-field--medium` 32px.
 - Supported value states: placeholder/empty and selected value.
+- The copyable required example uses an empty first option so native `:invalid`
+  exposes the source-backed placeholder color. Optional selects must either
+  start with a real value or let the application toggle
+  `.shlz-select--placeholder` while the empty option is selected.
 - Native disabled state is supported.
 - Error styling may be composed through native `aria-invalid="true"` or
   `.shlz-field--error`; the application owns message text and its ARIA
@@ -125,24 +129,24 @@ count or control implementation.
 - Popup visual fidelity is not claimed because the platform renders it.
 - No search, multiselect, status-chip, async-loading or virtualization API.
 - No read-only semantic state exists for native Select.
-- Source matrices for unsupported variants are diagnostics, not copyable
-  production examples.
+- Source matrices for unsupported variants are collapsed diagnostics, not
+  copyable production examples or controls that imply shipped behavior.
 
 ## Traceability
 
-| Layer                       | Location                                                                                                                |
-| --------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`)                          |
-| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                                                 |
-| Source specification        | `docs/components/form-controls-source-spec.md`                                                                          |
-| Provenance                  | `packages/tokens/provenance.json`                                                                                       |
-| Tokens                      | `packages/tokens/tokens.json`                                                                                           |
-| Field styles                | `packages/styles/components/field.css`                                                                                  |
-| Behavior exports            | `packages/behaviors/package.json` (no Select subpath)                                                                   |
-| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                                             |
-| Consumer validation         | `apps/showcase/src/consumer-workspace.js`                                                                               |
-| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                                             |
-| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`, `tools/playwright/consumer-workspace.spec.js` |
+| Layer                       | Location                                                                                                                                                                |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Authoritative component set | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, Component Set `Dropdown` (`36:1106`)                                                                          |
+| Source sheet                | `shlz-design-source/raw/svg/Select.svg`                                                                                                                                 |
+| Source specification        | `docs/components/form-controls-source-spec.md`                                                                                                                          |
+| Provenance                  | `packages/tokens/provenance.json`                                                                                                                                       |
+| Tokens                      | `packages/tokens/tokens.json`                                                                                                                                           |
+| Field styles                | `packages/styles/components/field.css`                                                                                                                                  |
+| Behavior exports            | `packages/behaviors/package.json` (no Select subpath)                                                                                                                   |
+| Showcase                    | `apps/showcase/src/fidelity.js#select-demo`                                                                                                                             |
+| Consumer validation         | `apps/showcase/src/consumer-workspace.js`                                                                                                                               |
+| Source tests                | `tools/tests/form-controls-source.test.mjs`                                                                                                                             |
+| Browser/layout tests        | `tools/playwright/primitives.spec.js`, `tools/playwright/review.spec.js`, `tools/playwright/select-closed-shell.spec.js`, `tools/playwright/consumer-workspace.spec.js` |
 
 ## Source interpretation
 

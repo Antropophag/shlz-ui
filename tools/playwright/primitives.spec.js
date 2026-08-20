@@ -13,41 +13,7 @@ const isolateDocumentationSurface = async (page) => {
       #file-row-extension-demo { display: none !important; }
       .shlz-developer-docs, [data-pagination-consumer] { display: none !important; }
       .shlz-select-fixture-label:is(p) { display: none !important; }
-      [data-select-source-fixtures][hidden] { display: none !important; }
     `,
-  });
-
-  await page.evaluate(() => {
-    const production = document.querySelector(
-      "#select-demo > [data-select-production-fixtures]",
-    );
-    const source = document.querySelector(
-      "#select-demo > [data-select-source-fixtures]",
-    );
-    const productionGrid = production?.querySelector(".shlz-component-grid");
-    const sourceGrid = source?.querySelector(".shlz-component-grid");
-    const heading = production?.querySelector("h4");
-    const productionFixtures = [...(productionGrid?.children ?? [])];
-    const sourceFixtures = [...(sourceGrid?.children ?? [])];
-
-    if (
-      !productionGrid ||
-      !source ||
-      !heading ||
-      productionFixtures.length !== 3 ||
-      sourceFixtures.length !== 3
-    ) {
-      throw new Error("Select legacy fixture normalization contract changed");
-    }
-
-    heading.textContent = "Sizes and types";
-    productionGrid.replaceChildren(
-      productionFixtures[0],
-      productionFixtures[1],
-      ...sourceFixtures,
-      productionFixtures[2],
-    );
-    source.hidden = true;
   });
 };
 
@@ -96,14 +62,14 @@ test("base single Select keeps the shipped native-only contract", async ({
     .first()
     .locator("select.shlz-select");
 
-  await expect(selects).toHaveCount(3);
+  await expect(selects).toHaveCount(6);
   await expect(selects.first()).toHaveJSProperty("tagName", "SELECT");
   await expect(
     selectDemo
       .locator(":scope > section")
       .first()
       .locator("select.shlz-select:enabled"),
-  ).toHaveCount(2);
+  ).toHaveCount(5);
   await expect(
     selectDemo
       .locator(":scope > section")
@@ -112,6 +78,10 @@ test("base single Select keeps the shipped native-only contract", async ({
   ).toHaveCount(1);
   await selects.first().focus();
   await expect(selects.first()).toBeFocused();
+  await expect(selects.first()).toHaveJSProperty("required", true);
+  expect(
+    await selects.first().evaluate((select) => select.checkValidity()),
+  ).toBe(false);
   await expect(selectDemo.getByRole("listbox")).toHaveCount(0);
 });
 

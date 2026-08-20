@@ -76,9 +76,11 @@ test("Select separates production examples from unsupported source diagnostics",
   const showcase = await read("apps/showcase/src/fidelity.js");
   assert.match(showcase, /data-select-production-fixtures/);
   assert.match(showcase, /Production native single-select/);
-  assert.match(showcase, /Executable · Production/);
+  assert.match(showcase, /Executable closed-field states/);
+  assert.match(showcase, /opened option list remains browser-owned/);
   assert.match(showcase, /data-select-source-fixtures/);
   assert.match(showcase, /Source diagnostics · unsupported runtime/);
+  assert.match(showcase, /<details[^>]+data-select-source-fixtures/);
 });
 
 test("Button copyable markup uses only the shipped native CSS contract", async () => {
@@ -340,7 +342,11 @@ test("Select copyable markup matches the shipped native-only contract", async ()
   ).code;
   assert.match(html, /class="shlz-field shlz-field--select"/);
   assert.match(html, /<label class="shlz-field__label" for="request-type"/);
-  assert.match(html, /<select class="shlz-select" id="request-type"/);
+  assert.match(
+    html,
+    /<select class="shlz-select" id="request-type" name="requestType" required/,
+  );
+  assert.match(html, /<option value="">Выберите тип<\/option>/);
   assert.match(html, /class="shlz-field__indicator" aria-hidden="true"/);
   assert.match(html, /class="shlz-field__icon"/);
   assert.match(fieldCss, /\.shlz-field--select \.shlz-field__control/);

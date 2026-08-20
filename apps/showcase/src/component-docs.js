@@ -225,7 +225,7 @@ function destroyTabs() {
 const selectMarkup = `<div class="shlz-field shlz-field--select">
   <label class="shlz-field__label" for="request-type">Тип заявки</label>
   <span class="shlz-field__control">
-    <select class="shlz-select" id="request-type" name="requestType">
+    <select class="shlz-select" id="request-type" name="requestType" required>
       <option value="">Выберите тип</option>
       <option value="incident">Инцидент</option>
       <option value="request">Запрос</option>
@@ -1199,6 +1199,10 @@ export const componentDocumentation = {
       ["Consumer validation", "apps/showcase/src/consumer-workspace.js"],
       ["Source tests", "tools/tests/form-controls-source.test.mjs"],
       ["Browser tests", "tools/playwright/primitives.spec.js"],
+      [
+        "Closed-shell fidelity tests",
+        "tools/playwright/select-closed-shell.spec.js",
+      ],
       ["Consumer browser tests", "tools/playwright/consumer-workspace.spec.js"],
     ],
   },
