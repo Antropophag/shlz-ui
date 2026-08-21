@@ -94,7 +94,10 @@ test("CSS-only components retain native semantics", async ({ page }) => {
     pagination.locator('[aria-disabled="true"]'),
   ).not.toHaveAttribute("href");
 
-  const remove = page.getByRole("button", { name: "Удалить Анну Петрову" });
+  const remove = page.getByRole("button", {
+    name: "Удалить Анну Петрову",
+    exact: true,
+  });
   await remove.focus();
   await expect(remove).toBeFocused();
 

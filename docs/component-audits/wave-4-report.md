@@ -7,10 +7,10 @@ Baseline: `9b46c9edd4502863ee0da15d7a3bb887839635d7` (merged PR #18). Branch: `a
 | Family     | Executable/content roots | Live roots | Data Workspace | Inert diagnostics | Result   |
 | ---------- | -----------------------: | ---------: | -------------: | ----------------: | -------- |
 | Status     |                       12 |          4 |              3 |                13 | VERIFIED |
-| Badge      |                       12 |          0 |              0 |                 4 | VERIFIED |
-| Tag        |                        3 |          0 |              0 |                 2 | VERIFIED |
+| Badge      |                       12 |          0 |              0 |                 3 | VERIFIED |
+| Tag        |                        3 |          0 |              0 |                 4 | VERIFIED |
 | Person Tag |                        2 |          1 |              0 |                 2 | VERIFIED |
-| Avatar     |                       13 |          2 |              0 |                 8 | VERIFIED |
+| Avatar     |                       15 |          2 |              0 |                 8 | VERIFIED |
 
 Counts are observed DOM roots, not acceptance thresholds. The component manifests enumerate 16 Status, 12 Badge, 3 Tag, 3 Person Tag and 15 Avatar audit IDs. The shared occurrence guard fails on missing, duplicate or newly unclassified executable roots and on diagnostic-census drift; `#fidelity`, `.shlz-component-diagnostics` and `[inert]` are explicit diagnostic boundaries.
 
