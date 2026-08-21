@@ -71,7 +71,7 @@
         "pass: real filter, apply/reset, sort, selection and empty-result flows execute through application-owned mechanisms"
       ]
     },
-    "materialStates": ["filtered", "sorted", "empty-result"],
+    "materialStates": ["filtered", "sorted", "selected", "empty-result"],
     "browserTest": "tools/playwright/data-content-wave5.spec.js",
     "manualStateWalk": "pass: filter apply/reset, sort, row selection, empty recovery, nested focus and narrow overflow inspected"
   },

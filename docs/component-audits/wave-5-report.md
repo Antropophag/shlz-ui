@@ -36,7 +36,7 @@ Empty State has no implicit alert/status/live-region semantics. Source-specific 
 
 Data Workspace proves draft/apply/reset filtering, rendered rows, sort state, selection/teardown, empty recovery, Status/Link/Checkbox/Button composition and narrow horizontal overflow. Its behavior is not attributed to Table.
 
-Material ledgers are exact: Table `row-hover`; File Row `row-hover`; Document Row `row-hover` and `row-focus-within`; Empty State empty with concrete N/A reasons; domain composition `filtered`, `sorted`, `empty-result` as application-owned runtime states with independent-paint N/A. Fake hover fixtures remain static evidence only.
+Material ledgers are exact: Table `row-hover`; File Row `row-hover`; Document Row `row-hover` and `row-focus-within`; Empty State empty with concrete N/A reasons; domain composition `filtered`, `sorted`, `selected`, `empty-result` as application-owned runtime states with independent-paint N/A. Fake hover fixtures remain static evidence only. Real hover/focus-within assertions resolve and compare the exact source-backed CSS-token paint.
 
 The alpha-aware contrast guard passes meaningful Table body, File Row filename and Document Row title pairs. Exact Empty/Simple subdued title paint measures about 2.79:1 on white; `empty-state-simple-source-contrast` records this source-backed P3 deviation. Source fidelity and contrast are separate claims, so no source-backed color was changed. No P0/P1/P2 Wave 5 finding remains.
 
