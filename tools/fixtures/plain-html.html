@@ -29,7 +29,11 @@
       Создать
     </button>
     <span class="shlz-status shlz-status--green">Активен</span>
-    <div class="shlz-dropdown" data-shlz-dropdown>
+    <div
+      class="shlz-dropdown"
+      data-shlz-dropdown
+      data-component-audit-id="dropdown-plain-html-consumer"
+    >
       <button
         class="shlz-button"
         type="button"
@@ -63,7 +67,13 @@
     >
       Подробнее
     </button>
-    <div class="shlz-popover" id="fixture-popover" data-shlz-popover hidden>
+    <div
+      class="shlz-popover"
+      id="fixture-popover"
+      data-shlz-popover
+      data-component-audit-id="popover-plain-html-consumer"
+      hidden
+    >
       <span class="shlz-popover__arrow" aria-hidden="true"></span>
       <div class="shlz-popover__header">Заголовок</div>
       <div class="shlz-popover__body">Plain HTML + direct ESM import.</div>
@@ -81,6 +91,7 @@
       id="fixture-tooltip"
       role="tooltip"
       data-shlz-tooltip
+      data-component-audit-id="tooltip-plain-html-consumer"
       hidden
     >
       Подсказка<span class="shlz-tooltip__arrow" aria-hidden="true"></span>

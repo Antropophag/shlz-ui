@@ -81,6 +81,11 @@ import { enhanceDropdowns } from "@shlz/behaviors";
 enhanceDropdowns();
 ```
 
+Enhancement is idempotent per root. Repeating `enhanceDropdowns(scope)` returns
+the existing controller; direct construction replaces and destroys prior root
+ownership. `destroy()` closes the menu, removes listeners, and permits a later
+enhancement to create a fresh controller.
+
 ## Accessibility
 
 The controller moves focus into the menu on keyboard/open activation, skips

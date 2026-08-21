@@ -33,6 +33,11 @@
   padding: 12px var(--shlz-source-spacing-16); /* Popover.svg geometry */
 }
 
+.shlz-popover__body--fluid {
+  block-size: auto;
+  min-block-size: 50px;
+}
+
 .shlz-popover__arrow {
   position: absolute;
   inline-size: 10px;

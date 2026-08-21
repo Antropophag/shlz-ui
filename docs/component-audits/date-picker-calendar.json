@@ -1,0 +1,82 @@
+{
+  "component": "date-picker-calendar",
+  "authoritativeSource": "shlz-design-source/raw/svg/Date-Picker.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Calendar.svg",
+    "design-source-index/components.json"
+  ],
+  "implementation": [],
+  "behavior": null,
+  "docs": null,
+  "rootSelector": "[data-component-audit-id^='date-picker-calendar-']",
+  "legacySelectors": [
+    "input[type='date']",
+    ".shlz-calendar",
+    ".shlz-date-picker",
+    "[data-shlz-calendar]",
+    "[data-shlz-date-picker]"
+  ],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [],
+  "supportedSizes": ["source-only: Date-Picker Large 250x63 and Medium 250x55"],
+  "supportedStates": [
+    "source-only: default, hover, focused, focused-filled, disabled, filled, ranged"
+  ],
+  "contentStress": [
+    "not-applicable: no production or executable Calendar contract exists"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Date-Picker is a 20-variant source Component Set with Size, State, Filled and Ranged axes",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Date-Picker.svg"
+    },
+    {
+      "claim": "Calendar is a separate source composition containing month navigation, weekday and day-cell visuals",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Calendar.svg"
+    },
+    {
+      "claim": "the repository does not promote either source into a reusable component without a separately designed date-domain and interaction API",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/wave-6-report.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/interaction-evidence-wave6.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: raw Date-Picker and Calendar sources are present, indexed and unchanged",
+    "structural-contract": "not-applicable: repository census found no production CSS, export, controller, docs, Showcase root, application-local picker or native date input",
+    "runtime-browser": "not-applicable: source-only family has no runtime contract or programmatic API",
+    "accessibility": "not-applicable: no production semantics or keyboard model is claimed",
+    "focused-visual": "not-applicable: source-only SVG composition is not a production component fidelity target",
+    "consumer-integration": "not-applicable: no consumer implementation exists",
+    "responsive-content-stress": "not-applicable: locale, viewport, month transition and form integration require a future scoped implementation"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source index records the static Date-Picker axes and Calendar composition without runtime claims"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: no executable Calendar or Date Picker exists"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: locale, timezone, parsing, navigation, selection, validation and events have no library API"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/interaction-evidence-wave6.spec.js",
+    "manualStateWalk": "not-applicable: no executable surface exists; the source-only repository census was inspected instead"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "Date Picker and Calendar remain source-only; reusable implementation requires a separate scoped PR"
+  ]
+}

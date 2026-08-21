@@ -5,6 +5,12 @@ import {
   readFloatingPlacement,
   readNonNegativeNumber,
 } from "./internal/floating.js";
+import {
+  isActiveFloating,
+  setActiveFloating,
+} from "./internal/active-floating.js";
+
+const controllers = new WeakMap<HTMLButtonElement, PopoverController>();
 
 export class PopoverController {
   readonly trigger: HTMLButtonElement;
@@ -34,6 +40,8 @@ export class PopoverController {
 
     this.trigger = trigger;
     this.popover = popover as HTMLElement;
+    controllers.get(trigger)?.destroy();
+    controllers.set(trigger, this);
     this.#initialize();
   }
 
@@ -45,6 +53,7 @@ export class PopoverController {
     if (this.#destroyed || this.trigger.disabled || this.expanded) return;
     this.trigger.setAttribute("aria-expanded", "true");
     this.popover.hidden = false;
+    setActiveFloating(this.trigger.ownerDocument, this, true);
     this.#cleanupPositioning = observeFloating(
       this.trigger,
       this.popover,
@@ -58,6 +67,7 @@ export class PopoverController {
     this.#cleanupPositioning = undefined;
     this.trigger.setAttribute("aria-expanded", "false");
     this.popover.hidden = true;
+    setActiveFloating(this.trigger.ownerDocument, this, false);
     if (restoreFocus) this.trigger.focus();
   }
 
@@ -87,6 +97,8 @@ export class PopoverController {
     this.close();
     this.#destroyed = true;
     this.#abortController.abort();
+    if (controllers.get(this.trigger) === this)
+      controllers.delete(this.trigger);
   }
 
   #initialize(): void {
@@ -112,7 +124,11 @@ export class PopoverController {
     this.trigger.ownerDocument.addEventListener(
       "keydown",
       (event) => {
-        if (event.key === "Escape" && this.expanded) {
+        if (
+          event.key === "Escape" &&
+          this.expanded &&
+          isActiveFloating(this.trigger.ownerDocument, this)
+        ) {
           event.preventDefault();
           this.close({ restoreFocus: true });
         }
@@ -136,5 +152,7 @@ export function enhancePopovers(
     ...scope.querySelectorAll<HTMLButtonElement>(
       "button[data-shlz-popover-trigger]",
     ),
-  ].map((trigger) => new PopoverController(trigger));
+  ].map(
+    (trigger) => controllers.get(trigger) ?? new PopoverController(trigger),
+  );
 }

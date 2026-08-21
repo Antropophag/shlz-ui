@@ -67,6 +67,10 @@ floating container is the stable primitive. `hidden` remains authoritative, so
 a consumer can render the surface and control visibility without the
 controller.
 
+The source-default body is 50px high. Content-stress consumers that intentionally
+need a taller surface opt into `.shlz-popover__body--fluid`; this does not change
+the default 236×90 source shell.
+
 Supported preferred placements are `top`, `top-start`, `top-end`, `bottom`,
 `bottom-start`, `bottom-end`, `left`, `left-start`, `left-end`, `right`,
 `right-start`, and `right-end`. Set an optional non-negative pixel distance with
@@ -85,6 +89,13 @@ controllers[0].destroy();
 `open()`, `close()`, `toggle()`, `updatePosition()` and `destroy()` form the
 public behavior contract. A descendant marked `data-shlz-popover-close` closes
 the surface and restores trigger focus.
+
+Enhancement is idempotent per trigger. Direct construction replaces prior
+trigger ownership. If consumers programmatically leave multiple Popovers open,
+only the most recently opened surface owns Escape; another Escape can then
+close the previously active surface. Outside pointer dismissal still applies
+independently to every surface whose trigger and panel do not contain the
+pointer target.
 
 ## Behavior and positioning
 

@@ -24,6 +24,10 @@ const manifestPaths = [
   "document-row",
   "empty-state",
   "domain-table-compositions",
+  "dropdown-menu",
+  "tooltip",
+  "popover",
+  "date-picker-calendar",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 
@@ -309,7 +313,10 @@ test("audited component manifests are complete, traceable, and classification-dr
     for (const state of manifest.interactionEvidence.materialStates) {
       assert.match(state, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     }
-    assert.match(manifest.interactionEvidence.manualStateWalk, /^pass:\s*\S.+/);
+    assert.match(
+      manifest.interactionEvidence.manualStateWalk,
+      /^(?:pass|not-applicable):\s*\S.+/,
+    );
 
     for (const claim of manifest.sourceClaims)
       assert.ok(

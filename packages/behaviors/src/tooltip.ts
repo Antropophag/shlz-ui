@@ -4,6 +4,12 @@ import {
   readFloatingPlacement,
   readNonNegativeNumber,
 } from "./internal/floating.js";
+import {
+  isActiveFloating,
+  setActiveFloating,
+} from "./internal/active-floating.js";
+
+const controllers = new WeakMap<HTMLElement, TooltipController>();
 
 function describedBy(
   trigger: HTMLElement,
@@ -42,6 +48,8 @@ export class TooltipController {
     }
     this.trigger = trigger;
     this.tooltip = tooltip;
+    controllers.get(trigger)?.destroy();
+    controllers.set(trigger, this);
     this.#initialize();
   }
 
@@ -66,6 +74,7 @@ export class TooltipController {
     this.#clearTimers();
     describedBy(this.trigger, this.tooltip.id, true);
     this.tooltip.hidden = false;
+    setActiveFloating(this.trigger.ownerDocument, this, true);
     this.#positionCleanup = observeFloating(
       this.trigger,
       this.tooltip,
@@ -80,6 +89,7 @@ export class TooltipController {
     this.#positionCleanup = undefined;
     this.tooltip.hidden = true;
     describedBy(this.trigger, this.tooltip.id, false);
+    setActiveFloating(this.trigger.ownerDocument, this, false);
   }
 
   async updatePosition(): Promise<void> {
@@ -99,6 +109,8 @@ export class TooltipController {
     this.close();
     this.#destroyed = true;
     this.#abort.abort();
+    if (controllers.get(this.trigger) === this)
+      controllers.delete(this.trigger);
   }
 
   #scheduleOpen(): void {
@@ -172,7 +184,11 @@ export class TooltipController {
     this.trigger.ownerDocument.addEventListener(
       "keydown",
       (event) => {
-        if (event.key === "Escape" && this.expanded) {
+        if (
+          event.key === "Escape" &&
+          this.expanded &&
+          isActiveFloating(this.trigger.ownerDocument, this)
+        ) {
           event.preventDefault();
           this.close();
         }
@@ -187,5 +203,7 @@ export function enhanceTooltips(
 ): TooltipController[] {
   return [
     ...scope.querySelectorAll<HTMLElement>("[data-shlz-tooltip-trigger]"),
-  ].map((trigger) => new TooltipController(trigger));
+  ].map(
+    (trigger) => controllers.get(trigger) ?? new TooltipController(trigger),
+  );
 }
