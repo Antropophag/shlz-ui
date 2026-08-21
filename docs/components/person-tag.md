@@ -38,7 +38,7 @@ No behavior package is provided. Serve the chosen icon/image as an application a
 ```html
 <span class="shlz-tag shlz-person-tag">
   <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
-  Анна Петрова
+  <span class="shlz-person-tag__label">Анна Петрова</span>
 </span>
 ```
 
@@ -46,21 +46,21 @@ The empty image `alt` is intentional because the adjacent visible name already i
 
 ## Public HTML contract
 
-| Contract        | Supported value                                                        |
-| --------------- | ---------------------------------------------------------------------- |
-| Root            | `span.shlz-tag.shlz-person-tag`                                        |
-| Avatar          | `img.shlz-tag__avatar`; empty `alt` when visible text repeats identity |
-| Name            | Visible text content                                                   |
-| Optional remove | Native `button.shlz-tag__remove[type="button"]`                        |
-| Remove icon     | Decorative `.shlz-tag__icon` inside the named button                   |
-| Behavior        | No removal controller; consumer handles activation and state           |
+| Contract        | Supported value                                                                                                           |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Root            | `span.shlz-tag.shlz-person-tag`                                                                                           |
+| Avatar          | `img.shlz-tag__avatar`; empty `alt` when visible text repeats identity                                                    |
+| Name wrapper    | Required `.shlz-person-tag__label`; owns bounded ellipsis while its visible person name remains the primary identity text |
+| Optional remove | Native `button.shlz-tag__remove[type="button"]`                                                                           |
+| Remove icon     | Decorative `.shlz-tag__icon` inside the named button                                                                      |
+| Behavior        | No removal controller; consumer handles activation and state                                                              |
 
 Closable composition:
 
 ```html
 <span class="shlz-tag shlz-person-tag" data-person-tag>
   <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
-  Анна Петрова
+  <span class="shlz-person-tag__label">Анна Петрова</span>
   <button
     class="shlz-tag__remove"
     type="button"
@@ -89,9 +89,10 @@ removeButton?.addEventListener("click", () => {
 ## Variants and states
 
 - Default 193×30 source composition and Closable 213×30 source composition.
-- Production width remains content-driven; source specimen widths are not enums.
+- Production width remains content-driven up to the available `max-inline-size`; source specimen widths are not enums.
+- Long names ellipsize through the required `.shlz-person-tag__label` wrapper while Avatar and the optional remove action retain fixed geometry.
 - Remove hover/focus-visible belongs to the nested native button.
-- No selected, disabled, loading, pending-removal or error state is defined.
+- The Person Tag root has no selected, disabled, loading, pending-removal or error state. The optional native remove button supports its native `disabled` state when removal is unavailable.
 
 ## Accessibility
 

@@ -44,6 +44,11 @@
       "claim": "Avatar shell and removal lifecycle remain composed rather than duplicated",
       "classification": "repository-decision",
       "evidence": "docs/components/person-tag.md"
+    },
+    {
+      "claim": "the required .shlz-person-tag__label wrapper owns bounded name ellipsis while adjacent identity/action geometry remains fixed",
+      "classification": "repository-decision",
+      "evidence": "docs/components/person-tag.md"
     }
   ],
   "browserTests": ["tools/playwright/status-identity-wave4.spec.js"],

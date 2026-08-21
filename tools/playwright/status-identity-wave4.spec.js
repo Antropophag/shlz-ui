@@ -103,6 +103,15 @@ test("Person Tag removal is native, exact and consumer-owned", async ({
 test("identity and label content remains component-bounded", async ({
   page,
 }) => {
+  const personTagRoots = page.locator(
+    "[data-component-audit-id^='person-tag-']",
+  );
+  await expect(personTagRoots).toHaveCount(3);
+  for (let index = 0; index < 3; index++)
+    await expect(
+      personTagRoots.nth(index).locator(":scope > .shlz-person-tag__label"),
+    ).toHaveCount(1);
+
   const person = page.locator(
     "[data-component-audit-id='person-tag-content-stress']",
   );

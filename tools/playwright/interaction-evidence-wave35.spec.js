@@ -144,7 +144,7 @@ test("Wave 4 binds non-interactive N/A ledgers and real Person Tag action paint"
   await verifyPaintState("person-tag", "remove-hover", remove, {
     backgroundColor: "rgba(11, 22, 35, 0.08)",
   });
-  await remove.focus();
+  await keyboardFocus(page, remove);
   await verifyPaintState("person-tag", "remove-focus-visible", remove, {
     outlineColor: "rgb(37, 61, 152)",
     outlineStyle: "solid",
