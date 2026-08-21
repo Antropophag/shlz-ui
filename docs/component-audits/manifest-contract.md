@@ -25,7 +25,9 @@ Required fields:
 
 - `component`, `authoritativeSource`, `referenceSources`, `implementation`;
 - `rootSelector`, `legacySelectors`, and `diagnosticBoundaries`;
-- `diagnosticOccurrenceCount`, the observed inert diagnostic-root census;
+- `diagnosticOccurrenceCount`, the observed inert diagnostic-root census for
+  Wave 4 and later census-enabled manifests (earlier verified manifests retain
+  their versioned contract until separately re-audited);
 - `occurrences`, `supportedSizes`, `supportedStates`, and `contentStress`;
 - `sourceClaims`, `browserTests`, `visualSnapshots`, and all evidence levels;
 - `interactionEvidence.types.staticVisual`, `.realInteractionVisual`, and
