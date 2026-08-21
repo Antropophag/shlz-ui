@@ -25,7 +25,10 @@ const fileRow = (
     state = "",
     message = "",
   } = {},
-) => `<div class="shlz-file-row${state === "hover" ? " shlz-file-row--visual-hover" : ""}${className ? ` ${className}` : ""}" data-component-audit-id="${auditId}"${state === "error" ? ' aria-invalid="true"' : ""}>
+) => {
+  const stateClass = state === "hover" ? " shlz-file-row--visual-hover" : "";
+  const additionalClass = className ? ` ${className}` : "";
+  return `<div class="shlz-file-row${stateClass}${additionalClass}" data-component-audit-id="${auditId}"${state === "error" ? ' aria-invalid="true"' : ""}>
   <span class="shlz-file-row__visual" aria-hidden="true">${icon("file-xlsx", "", iconUrl)}</span>
   <span class="shlz-file-row__content">
     ${primary ? `<a class="shlz-file-row__primary" href="#file-row-demo" title="${title}">${title}</a>` : `<span class="shlz-file-row__title" title="${title}">${title}</span>`}
@@ -34,6 +37,7 @@ const fileRow = (
   ${actions ? `<span class="shlz-file-row__actions">${actions}</span>` : ""}
   ${message ? `<span class="shlz-file-row__message">${message}</span>` : ""}
 </div>`;
+};
 
 const documentRow = (
   title,
