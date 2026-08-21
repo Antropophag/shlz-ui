@@ -20,10 +20,12 @@ export const inspectComponentOccurrences = (page, manifest) =>
         diagnostic: contract.diagnosticBoundaries.some((boundary) =>
           element.closest(boundary),
         ),
-        classified: classifiedIds.has(
-          element.closest("[data-component-audit-id]")?.dataset
-            .componentAuditId,
-        ),
+        classified: (() => {
+          for (let node = element; node; node = node.parentElement) {
+            if (classifiedIds.has(node.dataset.componentAuditId)) return true;
+          }
+          return false;
+        })(),
       })),
     );
 

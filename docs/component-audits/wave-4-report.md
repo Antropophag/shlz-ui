@@ -7,8 +7,8 @@ Baseline: `9b46c9edd4502863ee0da15d7a3bb887839635d7` (merged PR #18). Branch: `a
 | Family     | Executable/content roots | Live roots | Data Workspace | Inert diagnostics | Result   |
 | ---------- | -----------------------: | ---------: | -------------: | ----------------: | -------- |
 | Status     |                       12 |          4 |              3 |                13 | VERIFIED |
-| Badge      |                       12 |          0 |              0 |                 3 | VERIFIED |
-| Tag        |                        3 |          0 |              0 |                 4 | VERIFIED |
+| Badge      |                       12 |          0 |              0 |                 4 | VERIFIED |
+| Tag        |                        3 |          0 |              0 |                 2 | VERIFIED |
 | Person Tag |                        2 |          1 |              0 |                 2 | VERIFIED |
 | Avatar     |                       15 |          2 |              0 |                 8 | VERIFIED |
 

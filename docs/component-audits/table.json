@@ -1,0 +1,85 @@
+{
+  "component": "table",
+  "authoritativeSource": "shlz-design-source/raw/svg/Table Cell.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Table.svg",
+    "docs/components/table.md"
+  ],
+  "implementation": ["packages/styles/components/table.css"],
+  "behavior": null,
+  "docs": "docs/components/table.md",
+  "rootSelector": "[data-component-audit-id^='table-']",
+  "legacySelectors": [".shlz-table"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 1,
+  "occurrences": [
+    { "id": "table-showcase-mixed", "kind": "executable-fixture" },
+    { "id": "table-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "table-workspace-requests", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["50px-row", "content-driven-width"],
+  "supportedStates": ["default", "row-hover", "cell-pressed", "typing"],
+  "contentStress": [
+    "long-header",
+    "long-body",
+    "numeric",
+    "action-cell",
+    "narrow-overflow-wrapper"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Table Cell contains 49 source variants with 50px ordinary cell geometry",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Table Cell.svg"
+    },
+    {
+      "claim": "Table composes source cells into domain examples without defining sorting or selection behavior",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Table.svg"
+    },
+    {
+      "claim": "the public primitive preserves native table markup and leaves data operations to consumers",
+      "classification": "repository-decision",
+      "evidence": "docs/components/table.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/data-content-wave5.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: raw Table Cell and Table remain unchanged and source axes are checked independently of old snapshots",
+    "structural-contract": "pass: every public Table root is classified and native table sections and scoped headings are asserted",
+    "runtime-browser": "not-applicable: Table ships no sorting, filtering, pagination, selection, loading or data controller",
+    "accessibility": "pass: captions, native sections, scoped headers and unmodified cell semantics are verified in executable consumers",
+    "focused-visual": "pass: computed 50px geometry, divider, numeric alignment and real row-hover paint are asserted",
+    "consumer-integration": "pass: Data Workspace composes Table while application code owns filtering, sorting, selection and empty data",
+    "responsive-content-stress": "pass: a narrow viewport proves horizontal overflow belongs to the Table wrapper while the table remains wider"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source and diagnostic pressed/typing cells remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: locator.hover() on a real body row produces the source-backed muted row paint"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: row hover changes paint only; nested controls and application data operations retain their own ownership"
+      ]
+    },
+    "materialStates": ["row-hover"],
+    "browserTest": "tools/playwright/data-content-wave5.spec.js",
+    "manualStateWalk": "pass: real row hover, nested focus visibility, long text, numeric alignment and narrow wrapper overflow inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "responsive cards, sticky headers, resizing, virtualization and data operations are unsupported or consumer-owned"
+  ]
+}

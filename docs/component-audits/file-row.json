@@ -1,0 +1,91 @@
+{
+  "component": "file-row",
+  "authoritativeSource": "shlz-design-source/raw/svg/Documents.svg",
+  "referenceSources": ["docs/components/file-row.md"],
+  "implementation": ["packages/styles/components/file-row.css"],
+  "behavior": null,
+  "docs": "docs/components/file-row.md",
+  "rootSelector": "[data-component-audit-id^='file-row-']",
+  "legacySelectors": [".shlz-file-row"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "file-row-showcase-default", "kind": "executable-fixture" },
+    { "id": "file-row-showcase-hover", "kind": "executable-fixture" },
+    { "id": "file-row-showcase-error", "kind": "executable-fixture" },
+    { "id": "file-row-content-stress-long", "kind": "content-stress-fixture" },
+    {
+      "id": "file-row-content-stress-actions",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "file-row-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": [
+    "55px-body",
+    "73px-error-composition",
+    "container-driven-width"
+  ],
+  "supportedStates": ["default", "hover", "error"],
+  "contentStress": [
+    "long-filename",
+    "long-extension",
+    "no-extension",
+    "multiple-metadata",
+    "fixed-icon",
+    "fixed-actions",
+    "narrow-container"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Document specimens establish 55px body, 38px file visual, 12px radius and default/hover/error paint",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg"
+    },
+    {
+      "claim": "width is container-driven rather than a public specimen-width enum",
+      "classification": "repository-decision",
+      "evidence": "docs/components/file-row.md"
+    },
+    {
+      "claim": "the filename and independent native actions own activation; the row root is inert",
+      "classification": "repository-decision",
+      "evidence": "docs/components/file-row.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/data-content-wave5.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: Documents.svg is traced directly for geometry and paint rather than relying on prior source tests",
+    "structural-contract": "pass: all six roots are classified and keep visual, content and trailing actions as siblings",
+    "runtime-browser": "not-applicable: File Row has no controller or root activation; native links and buttons own their behavior",
+    "accessibility": "pass: root stays inert, decorative file visuals are hidden and filename/action targets retain meaningful native names",
+    "focused-visual": "pass: computed body/icon/action geometry, truncation and real hover paint are asserted",
+    "consumer-integration": "not-applicable: no real application consumer exists in this repository; executable and stress fixtures are not relabeled as consumers",
+    "responsive-content-stress": "pass: long and extensionless names truncate while the fixed visual and trailing action area remain contained"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: forced hover and error fixtures are retained only as static source comparisons"
+      ],
+      "realInteractionVisual": [
+        "pass: locator.hover() on a linked File Row produces the source-backed background paint"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: File Row delegates navigation and actions to nested native Link/Button elements"
+      ]
+    },
+    "materialStates": ["row-hover"],
+    "browserTest": "tools/playwright/data-content-wave5.spec.js",
+    "manualStateWalk": "pass: row hover, filename Tab focus, action focus, long/no-extension names and narrow containment inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "upload progress, preview and whole-row activation are not public File Row behavior"
+  ]
+}

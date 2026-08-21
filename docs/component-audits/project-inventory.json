@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "9b46c9edd4502863ee0da15d7a3bb887839635d7",
+    "sha": "170494b030800276524162418572c241b092e4c7",
     "measuredAt": "2026-08-21",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -1053,7 +1053,7 @@
         "executableShowcase": 12,
         "liveConsumers": 0,
         "dataWorkspace": 0,
-        "inertDiagnostics": 3,
+        "inertDiagnostics": 4,
         "legacyNative": 0,
         "localAlternatives": 0
       }
@@ -1095,7 +1095,7 @@
         "executableShowcase": 3,
         "liveConsumers": 0,
         "dataWorkspace": 0,
-        "inertDiagnostics": 4,
+        "inertDiagnostics": 2,
         "legacyNative": 0,
         "localAlternatives": 0
       }
@@ -1191,21 +1191,22 @@
       "tests": [
         "tools/tests/wave3-source.test.mjs",
         "tools/playwright/wave3.spec.js",
-        "tools/playwright/review.spec.js"
+        "tools/playwright/review.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
       ],
       "evidence": {
-        "source-integrity": "axes test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "consumer search/sort",
-        "accessibility": "partial semantic table",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "partial"
+        "source-integrity": "pass: raw Table Cell and Table authority is traced separately from historical tests",
+        "structural-contract": "pass: native table roots and every executable occurrence are guarded",
+        "runtime-browser": "not-applicable: data operations are consumer-owned",
+        "accessibility": "pass: captions, native sections and scoped headings are asserted",
+        "focused-visual": "pass: computed cell geometry, divider, numeric alignment and real hover paint",
+        "consumer-integration": "pass: Data Workspace application state composes the primitive",
+        "responsive-content-stress": "pass: narrow wrapper proves real horizontal overflow"
       },
       "canonical_name": "Table",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Table Cell.svg",
         "shlz-design-source/raw/svg/Table.svg"
@@ -1213,15 +1214,21 @@
       "production_implementation": ["packages/styles/components/table.css"],
       "behavior": [],
       "docs": ["docs/components/table.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/wave3.js",
+        "apps/showcase/src/main.js"
+      ],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js"],
       "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "local_alternatives": [
+        "apps/showcase/src/component-docs.js#developer-contract-table",
+        "apps/showcase/src/main.js#foundation-evidence-tables"
+      ],
       "scope": [
         "header/row",
         "49 cell variants",
@@ -1238,33 +1245,34 @@
         "dataWorkspace": 1,
         "inertDiagnostics": 1,
         "legacyNative": 0,
-        "localAlternatives": 0
+        "localAlternatives": 3
       }
     },
     {
       "tests": [
         "tools/tests/content-states.test.mjs",
-        "tools/playwright/content-states.spec.js"
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source-derived structural test",
-        "structural-contract": "CSS/actions test",
-        "runtime-browser": "browser target test",
-        "accessibility": "partial",
-        "focused-visual": "geometry assertions, no focused snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "long filename test"
+        "source-integrity": "pass: Documents.svg directly establishes geometry and states",
+        "structural-contract": "pass: six stable roots keep independent native targets",
+        "runtime-browser": "not-applicable: nested links/buttons own behavior",
+        "accessibility": "pass: inert root, hidden decoration and named native targets",
+        "focused-visual": "pass: computed geometry, truncation and real hover paint",
+        "consumer-integration": "not-applicable: no real application consumer exists",
+        "responsive-content-stress": "pass: long/no-extension names and fixed visual/actions remain bounded"
       },
       "canonical_name": "File Row",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
       "production_implementation": ["packages/styles/components/file-row.css"],
       "behavior": [],
       "docs": ["docs/components/file-row.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "executable_fixtures": ["apps/showcase/src/content-states.js"],
+      "live_consumers": [],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
@@ -1289,29 +1297,30 @@
     {
       "tests": [
         "tools/tests/content-states.test.mjs",
-        "tools/playwright/content-states.spec.js"
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
       ],
       "evidence": {
-        "source-integrity": "additive composition test",
-        "structural-contract": "CSS test",
-        "runtime-browser": "browser layout test",
-        "accessibility": "partial",
-        "focused-visual": "metadata-rich snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "fluid list test"
+        "source-integrity": "pass: source-derived signatures are separated from extension decisions",
+        "structural-contract": "pass: seven stable roots cover compact and metadata-rich variants",
+        "runtime-browser": "not-applicable: nested links/buttons own behavior",
+        "accessibility": "pass: inert root and meaningful native nested targets",
+        "focused-visual": "pass: computed columns, real hover/focus paint and focused snapshot",
+        "consumer-integration": "not-applicable: no real application consumer exists",
+        "responsive-content-stress": "pass: long Cyrillic/Latin content remains bounded at 230px"
       },
       "canonical_name": "Document Row",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
       "production_implementation": [
         "packages/styles/components/document-row.css"
       ],
       "behavior": [],
       "docs": ["docs/components/document-row.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "executable_fixtures": ["apps/showcase/src/content-states.js"],
+      "live_consumers": [],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
@@ -1337,21 +1346,22 @@
       "tests": [
         "tools/tests/content-states.test.mjs",
         "tools/playwright/content-states.spec.js",
-        "tools/playwright/remediation-fidelity.spec.js"
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
       ],
       "evidence": {
-        "source-integrity": "composition test",
-        "structural-contract": "CSS test",
-        "runtime-browser": "not applicable: composition",
-        "accessibility": "partial",
-        "focused-visual": "focused snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "browser test"
+        "source-integrity": "pass: Simple, Customize and Basic source compositions are distinct",
+        "structural-contract": "pass: five stable roots cover source and fluid composition",
+        "runtime-browser": "not-applicable: consumer owns empty-data lifecycle",
+        "accessibility": "pass: no implicit live role and native nested actions",
+        "focused-visual": "pass: computed variant geometry and typography",
+        "consumer-integration": "pass: Data Workspace zero-result and reset flow",
+        "responsive-content-stress": "pass: long content and action remain bounded"
       },
       "canonical_name": "Empty State",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
       ],
@@ -1360,9 +1370,9 @@
       ],
       "behavior": [],
       "docs": ["docs/components/empty-state.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/content-states.js"],
-      "data_workspace_consumers": [],
+      "executable_fixtures": ["apps/showcase/src/content-states.js"],
+      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
@@ -1371,12 +1381,21 @@
         "optional visual/description/actions",
         "narrow"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "empty-state-simple-source-contrast",
+          "severity": "P3",
+          "status": "documented-source-backed-deviation",
+          "description": "Exact Empty/Simple title paint is about 2.79:1 on white.",
+          "evidence": "tools/playwright/data-content-wave5.spec.js",
+          "tracking": "docs/component-audits/wave-5-report.md"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 4,
-        "liveConsumers": 0,
-        "dataWorkspace": 0,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
         "inertDiagnostics": 0,
         "legacyNative": 0,
         "localAlternatives": 0
@@ -1956,28 +1975,34 @@
       }
     },
     {
-      "tests": ["tools/playwright/consumer-workspace.spec.js"],
+      "tests": [
+        "tools/playwright/consumer-workspace.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
+      ],
       "evidence": {
-        "source-integrity": "indexed source only",
-        "structural-contract": "generic Table only",
-        "runtime-browser": "generic consumer only",
-        "accessibility": "gap per domain table",
-        "focused-visual": "gap",
-        "consumer-integration": "partial",
-        "responsive-content-stress": "partial"
+        "source-integrity": "pass: domain examples remain references over Table authority",
+        "structural-contract": "pass: one live composition reuses public primitives without a new API",
+        "runtime-browser": "pass: application filter/sort/selection/empty flows",
+        "accessibility": "pass: native table and nested primitive semantics preserved",
+        "focused-visual": "pass: focused workspace composition plus component-local Table evidence",
+        "consumer-integration": "pass: Data Workspace is exercised as live application state",
+        "responsive-content-stress": "pass: realistic data and narrow wrapper overflow"
       },
       "canonical_name": "Domain table compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Managing appeals.svg",
         "shlz-design-source/raw/svg/Form constructor.svg",
         "shlz-design-source/raw/svg/Table.svg"
       ],
-      "production_implementation": ["packages/styles/components/table.css"],
-      "behavior": [],
-      "docs": [],
+      "production_implementation": [
+        "packages/styles/components/table.css",
+        "apps/showcase/src/consumer-workspace.js"
+      ],
+      "behavior": ["apps/showcase/src/consumer-workspace.js"],
+      "docs": ["docs/components/table.md"],
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
@@ -2003,8 +2028,7 @@
   "unclassifiedSurfaces": [
     "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
     "Date Picker/Calendar has authoritative source scope but no reusable implementation or executable fixture.",
-    "Source-only messaging, history, planner, upload and domain-table compositions have not been promoted to reusable APIs.",
-    "Most non-Select executable Showcase roots lack stable data-component-audit-id classification.",
+    "Source-only messaging, history, planner and upload families have not been promoted to reusable APIs.",
     "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
     "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."
   ],
