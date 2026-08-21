@@ -313,13 +313,30 @@ const sourceBackedDiagnostics = ({
 const comparison = (component, order, implementation) =>
   `<div class="shlz-choice-comparison"><section><h5>Source</h5>${sourceVariantImage(component, order)}</section><section><h5>Implementation</h5><div class="shlz-choice-comparison__fixture" inert aria-hidden="true">${implementation}</div></section></div>`;
 
-const status = (label, kind = "", auditId = "") =>
-  `<span class="shlz-status${kind ? ` shlz-status--${kind}` : ""}"${auditId ? ` data-component-audit-id="${auditId}"` : ""}>${label}</span>`;
+const auditIdAttribute = (auditId) =>
+  auditId ? ` data-component-audit-id="${auditId}"` : "";
+const status = (label, kind = "", auditId = "") => {
+  const kindClass = kind ? ` shlz-status--${kind}` : "";
+  return `<span class="shlz-status${kindClass}"${auditIdAttribute(auditId)}>${label}</span>`;
+};
 const badge = (
   label,
   { size = "small", color = "blue", single = false, auditId = "" } = {},
-) =>
-  `<span class="shlz-badge${size === "medium" ? " shlz-badge--lg" : ""}${color === "invert" ? " shlz-badge--invert" : color === "gray" ? " shlz-badge--neutral" : ""}${single ? " shlz-badge--single" : ""}"${auditId ? ` data-component-audit-id="${auditId}"` : ""}>${label}</span>`;
+) => {
+  const classes = [
+    "shlz-badge",
+    size === "medium" ? "shlz-badge--lg" : "",
+    color === "invert"
+      ? "shlz-badge--invert"
+      : color === "gray"
+        ? "shlz-badge--neutral"
+        : "",
+    single ? "shlz-badge--single" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return `<span class="${classes}"${auditIdAttribute(auditId)}>${label}</span>`;
+};
 
 const checkboxDiagnostics = sourceBackedDiagnostics({
   components: ["checkbox"],

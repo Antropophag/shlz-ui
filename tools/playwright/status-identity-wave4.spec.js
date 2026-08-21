@@ -24,6 +24,7 @@ test.beforeEach(async ({ page }) => page.goto("/"));
 test("all Wave 4 executable and live roots are semantically classified", async ({
   page,
 }) => {
+  expect(components).toHaveLength(5);
   for (const component of components)
     await expectClassifiedComponentOccurrences(page, manifests[component]);
 });
@@ -89,7 +90,12 @@ test("Person Tag removal is native, exact and consumer-owned", async ({
   await disabled.evaluate((element) =>
     element.addEventListener("click", () => window.__wave4DisabledClicks++),
   );
-  await disabled.click({ force: true });
+  const disabledBox = await disabled.boundingBox();
+  expect(disabledBox).not.toBeNull();
+  await page.mouse.click(
+    disabledBox.x + disabledBox.width / 2,
+    disabledBox.y + disabledBox.height / 2,
+  );
   await expect(disabled).toBeAttached();
   expect(await page.evaluate(() => window.__wave4DisabledClicks)).toBe(0);
 });

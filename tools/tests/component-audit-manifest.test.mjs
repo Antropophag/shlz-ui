@@ -169,12 +169,16 @@ test("audited component manifests are complete, traceable, and classification-dr
     assert.ok(manifest.rootSelector);
     assert.ok(manifest.legacySelectors.length);
     assert.ok(manifest.diagnosticBoundaries.length);
-    if (diagnosticCensusComponents.has(manifest.component))
+    if (diagnosticCensusComponents.has(manifest.component)) {
       assert.ok(
-        Number.isInteger(manifest.diagnosticOccurrenceCount) &&
-          manifest.diagnosticOccurrenceCount >= 0,
-        `${manifest.component} needs a diagnostic occurrence census`,
+        Number.isInteger(manifest.diagnosticOccurrenceCount),
+        `${manifest.component} needs an integer diagnostic occurrence census`,
       );
+      assert.ok(
+        manifest.diagnosticOccurrenceCount >= 0,
+        `${manifest.component} needs a non-negative diagnostic occurrence census`,
+      );
+    }
 
     const ids = manifest.occurrences.map(({ id }) => id);
     assert.equal(new Set(ids).size, ids.length, "audit IDs must be unique");
