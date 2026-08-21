@@ -323,14 +323,13 @@ const badge = (
   label,
   { size = "small", color = "blue", single = false, auditId = "" } = {},
 ) => {
+  let colorClass = "";
+  if (color === "invert") colorClass = "shlz-badge--invert";
+  if (color === "gray") colorClass = "shlz-badge--neutral";
   const classes = [
     "shlz-badge",
     size === "medium" ? "shlz-badge--lg" : "",
-    color === "invert"
-      ? "shlz-badge--invert"
-      : color === "gray"
-        ? "shlz-badge--neutral"
-        : "",
+    colorClass,
     single ? "shlz-badge--single" : "",
   ]
     .filter(Boolean)
