@@ -58,6 +58,7 @@ test.beforeEach(async ({ page }) => page.goto("/"));
 test("all Wave 5 executable, stress and live roots are classified", async ({
   page,
 }) => {
+  expect(Object.keys(manifests).sort()).toEqual([...components].sort());
   for (const component of components)
     await expectClassifiedComponentOccurrences(page, manifests[component]);
 });
