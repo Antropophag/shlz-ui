@@ -14,7 +14,7 @@
   min-inline-size: var(--shlz-semantic-control-height-medium);
   block-size: var(--shlz-semantic-control-height-medium);
   padding-inline: var(--shlz-source-spacing-8);
-  color: var(--shlz-semantic-color-text-primary);
+  color: var(--shlz-semantic-color-text-secondary);
   text-decoration: none;
   background: var(--shlz-semantic-color-surface-base);
   border: var(--shlz-semantic-border-width-default) solid
@@ -33,21 +33,18 @@
   color: inherit;
 }
 
+.shlz-pagination a.shlz-pagination__item:hover,
 .shlz-pagination__item--visual-hover {
   color: var(--shlz-semantic-color-action-primary);
 }
 
+.shlz-pagination a.shlz-pagination__item:active,
 .shlz-pagination__item--visual-pressed {
   color: var(--shlz-semantic-color-action-primary);
-  background: var(--shlz-source-color-gray-gray-100);
-  border-color: var(--shlz-source-color-gray-gray-100);
+  background: var(--shlz-source-color-blue-blue-100);
+  border-color: var(--shlz-source-color-blue-blue-100);
 }
 
-.shlz-pagination a.shlz-pagination__item:hover {
-  background: var(--shlz-semantic-color-surface-muted);
-}
-
-.shlz-pagination a.shlz-pagination__item:active,
 .shlz-pagination__item[aria-current="page"] {
   color: var(--shlz-semantic-color-action-primary);
   background: var(--shlz-source-color-blue-blue-100);
@@ -60,8 +57,9 @@
 }
 
 .shlz-pagination__item--disabled {
-  color: var(--shlz-semantic-color-text-secondary);
-  background: var(--shlz-semantic-color-surface-subtle);
+  color: var(--shlz-source-color-blue-blue-50);
+  background: var(--shlz-semantic-color-surface-base);
+  border-color: var(--shlz-source-color-blue-blue-50);
 }
 
 .shlz-pagination__item--ellipsis {

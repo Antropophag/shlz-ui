@@ -51,13 +51,35 @@
     "tools/playwright/form-controls-wave2.spec.js-snapshots/textarea-focused-states-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
+    "source-integrity": "pass: Textarea.svg complete state by filled by counter matrix remains source-tested",
+    "structural-contract": "pass: native textarea markup, field composition, documentation and package CSS are asserted",
+    "runtime-browser": "pass: native multiline editing and value ownership execute in Chromium",
+    "accessibility": "pass: invalid and described error relationships plus keyboard focus are asserted",
+    "focused-visual": "pass: real default, hover, keyboard focus, invalid and disabled computed shell paint supplement the focused snapshot",
     "consumer-integration": "not-applicable: no application-owned live consumer exists",
-    "responsive-content-stress": "applicable"
+    "responsive-content-stress": "pass: long Cyrillic and Latin multiline content wraps in the audited narrow surface"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: forced hover/focus rows and focused screenshot remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: a real textarea hover and keyboard focus flow asserts computed background and border paint"
+      ],
+      "runtimeBehavior": [
+        "pass: native multiline editing and error-description behavior execute independently"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "hover",
+      "focus-visible",
+      "disabled",
+      "invalid"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover, Tab focus, disabled, invalid and narrow multiline surfaces inspected"
   },
   "acceptedDeviations": [],
   "findings": [],

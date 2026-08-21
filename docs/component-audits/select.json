@@ -61,13 +61,37 @@
     "tools/playwright/typography-profiles.spec.js-snapshots/typography-fira-compatibility-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
-    "consumer-integration": "applicable",
-    "responsive-content-stress": "applicable"
+    "source-integrity": "pass: Select.svg closed shell and Dropdown menu reference contracts remain source-tested",
+    "structural-contract": "pass: trigger, listbox, option, hidden input and documentation contracts are asserted",
+    "runtime-browser": "pass: open, keyboard navigation, selection, dismissal, events and controller lifecycle execute in Chromium",
+    "accessibility": "pass: listbox relationships, focus movement, selected and disabled semantics execute with the tracked field contrast deviation",
+    "focused-visual": "pass: real closed, hover, keyboard focus, opened, option hover/selected and disabled computed paint is asserted",
+    "consumer-integration": "pass: Data Workspace status selection drives application-owned filtering",
+    "responsive-content-stress": "pass: long selected value and narrow closed shell remain contained"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: Select source matrices and closed/open screenshots remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: one real trigger and option flow asserts closed, hover, focus-visible, opened, selected and disabled computed paint"
+      ],
+      "runtimeBehavior": [
+        "pass: open, keyboard selection, events, dismissal and lifecycle execute independently"
+      ]
+    },
+    "materialStates": [
+      "closed-default",
+      "hover",
+      "focus-visible",
+      "opened",
+      "option-hover",
+      "option-selected",
+      "disabled"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover, Tab focus, open/select keyboard flow, disabled and narrow long-value surfaces inspected"
   },
   "acceptedDeviations": [
     {

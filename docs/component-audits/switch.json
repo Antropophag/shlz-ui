@@ -39,13 +39,35 @@
     "tools/playwright/form-controls-wave2.spec.js-snapshots/switch-focused-states-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
+    "source-integrity": "pass: Switch.svg two-size track, thumb, offset and disabled matrix remains source-tested",
+    "structural-contract": "pass: native checkbox role=switch markup and CSS-owned track/thumb geometry are asserted",
+    "runtime-browser": "pass: pointer, Space, exact events, programmatic checked and disabled paths execute in Chromium",
+    "accessibility": "pass: switch role/name, keyboard focus and disabled semantics execute in Chromium",
+    "focused-visual": "pass: real off, on, keyboard focus and disabled off/on computed track/thumb paint supplements the snapshot",
     "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
     "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: two-size source matrix and focused screenshot cover static switch states"
+      ],
+      "realInteractionVisual": [
+        "pass: real off, on, keyboard focus and disabled off/on flows assert computed track/thumb paint and offset"
+      ],
+      "runtimeBehavior": [
+        "pass: pointer, Space, events, checked property and disabled behavior execute independently"
+      ]
+    },
+    "materialStates": [
+      "off",
+      "on",
+      "focus-visible",
+      "disabled-off",
+      "disabled-on"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover/toggle, Tab/Space and disabled off/on surfaces inspected"
   },
   "acceptedDeviations": [],
   "findings": [],

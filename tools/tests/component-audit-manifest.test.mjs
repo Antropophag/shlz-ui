@@ -48,6 +48,13 @@ const measuredCountFields = [
   "legacyNative",
   "localAlternatives",
 ];
+const interactionEvidenceTypes = [
+  "staticVisual",
+  "realInteractionVisual",
+  "runtimeBehavior",
+];
+const interactionBrowserTest =
+  "tools/playwright/interaction-evidence-wave35.spec.js";
 
 test("project inventory has one valid contract for every discovered family", async () => {
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
@@ -55,6 +62,11 @@ test("project inventory has one valid contract for every discovered family", asy
   assert.ok(inventory.baseline.sha);
   assert.match(inventory.measuredCountsContract, /not cardinality-equivalent/);
   assert.deepEqual(new Set(inventory.statuses), auditStatuses);
+  assert.deepEqual(inventory.interactionEvidenceTypes, [
+    "static-visual",
+    "real-interaction-visual",
+    "runtime-behavior",
+  ]);
   assert.deepEqual(
     new Set(inventory.implementationStatuses),
     implementationStatuses,
@@ -174,11 +186,60 @@ test("audited component manifests are complete, traceable, and classification-dr
       Object.keys(manifest.evidence).sort(),
       evidenceLevels.sort(),
     );
-    for (const [level, status] of Object.entries(manifest.evidence))
-      assert.ok(
-        status === "applicable" || /^(not-applicable|pass):\s*\S/.test(status),
-        `${level} needs an applicability or concrete evidence decision`,
+    for (const [level, status] of Object.entries(manifest.evidence)) {
+      assert.match(
+        status,
+        /^(not-applicable|pass):\s*\S/,
+        `${level} needs a pass claim or not-applicable reason`,
       );
+      assert.doesNotMatch(
+        status,
+        /^(?:pass|not-applicable):\s*(?:applicable|pass|n\/?a|none)$/i,
+        `${level} needs a concrete claim or not-applicable reason`,
+      );
+    }
+
+    assert.deepEqual(
+      Object.keys(manifest.interactionEvidence.types).sort(),
+      interactionEvidenceTypes.sort(),
+      `${manifest.component} must separate all interaction evidence types`,
+    );
+    for (const [type, claims] of Object.entries(
+      manifest.interactionEvidence.types,
+    )) {
+      assert.ok(claims.length, `${manifest.component}.${type} needs claims`);
+      for (const claim of claims) {
+        assert.match(claim, /^pass:\s*\S.+/);
+        if (type === "realInteractionVisual")
+          assert.doesNotMatch(claim, /fake|selector presence/i);
+      }
+    }
+    assert.ok(manifest.interactionEvidence.materialStates.length);
+    assert.equal(
+      manifest.interactionEvidence.browserTest,
+      interactionBrowserTest,
+    );
+    await access(manifest.interactionEvidence.browserTest);
+    const interactionBrowserSource = await readFile(
+      manifest.interactionEvidence.browserTest,
+      "utf8",
+    );
+    assert.ok(
+      interactionBrowserSource.includes(
+        `expectMaterialStates("${manifest.component}"`,
+      ),
+      `${manifest.component} must bind its declaration to an executable state assertion`,
+    );
+    assert.ok(
+      new RegExp(`verifyPaintState\\(\\s*["']${manifest.component}["']`).test(
+        interactionBrowserSource,
+      ),
+      `${manifest.component} must bind computed paint to its executable state ledger`,
+    );
+    for (const state of manifest.interactionEvidence.materialStates) {
+      assert.match(state, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+    }
+    assert.match(manifest.interactionEvidence.manualStateWalk, /^pass:\s*\S.+/);
 
     for (const claim of manifest.sourceClaims)
       assert.ok(

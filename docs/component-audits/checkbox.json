@@ -53,13 +53,36 @@
     "tools/playwright/form-controls-wave2.spec.js-snapshots/checkbox-focused-states-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
-    "consumer-integration": "applicable",
-    "responsive-content-stress": "applicable"
+    "source-integrity": "pass: Checkbox.svg size, check, mixed and disabled paint matrix remains source-tested",
+    "structural-contract": "pass: native checkbox markup and CSS-owned box/check geometry are asserted",
+    "runtime-browser": "pass: pointer, Space, checked, mixed, programmatic and exact event paths execute in Chromium",
+    "accessibility": "pass: labels, keyboard focus, disabled and mixed semantics execute in Chromium",
+    "focused-visual": "pass: real unchecked, checked, mixed, focus-visible and disabled computed paint supplements the focused snapshot",
+    "consumer-integration": "pass: Data Workspace row, select-all and clear selection lifecycle executes",
+    "responsive-content-stress": "pass: representative controls remain contained at the audited narrow viewport"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source matrix and focused screenshot cover static checkbox states"
+      ],
+      "realInteractionVisual": [
+        "pass: real hover, checked, mixed, keyboard focus and disabled flows assert computed box paint"
+      ],
+      "runtimeBehavior": [
+        "pass: pointer, Space, events, mixed property and disabled behavior execute independently"
+      ]
+    },
+    "materialStates": [
+      "unchecked",
+      "checked",
+      "indeterminate",
+      "focus-visible",
+      "disabled-unchecked",
+      "disabled-checked"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover, pointer toggle, Tab/Space, mixed, disabled and narrow consumer surfaces inspected"
   },
   "acceptedDeviations": [],
   "findings": [],

@@ -54,6 +54,28 @@
     "consumer-integration": "pass: three Data Workspace request IDs remain native in-page navigation links",
     "responsive-content-stress": "pass: a long link wraps inside its audited narrow surface without component overflow"
   },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: four-state source row, fake hover/pressed classes and focused screenshot remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: one native anchor executes real hover, pointer-down active and keyboard focus computed paint assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: native Enter navigation and unavailable non-anchor semantics execute independently"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "hover",
+      "active",
+      "focus-visible",
+      "unavailable-text"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover/down, Tab/Enter, unavailable text and narrow multiline link surfaces inspected"
+  },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [

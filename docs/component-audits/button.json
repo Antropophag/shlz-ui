@@ -76,6 +76,38 @@
     "consumer-integration": "pass: Data Workspace reset/apply/filter actions and overlay actions execute application-owned state/lifecycle",
     "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
   },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: mode/state matrix, fake hover/active classes and focused screenshot remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: Primary, Secondary and Text each execute real hover, pointer-down active and keyboard focus computed paint assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: pointer, Enter, Space, programmatic click and disabled event paths execute independently"
+      ]
+    },
+    "materialStates": [
+      "primary-default",
+      "primary-hover",
+      "primary-active",
+      "primary-focus-visible",
+      "primary-disabled",
+      "secondary-default",
+      "secondary-hover",
+      "secondary-active",
+      "secondary-focus-visible",
+      "secondary-disabled",
+      "text-default",
+      "text-hover",
+      "text-active",
+      "text-focus-visible",
+      "text-disabled"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: Primary, Secondary and Text pointer hover/down, Tab/Enter/Space, disabled and narrow long-label surfaces inspected"
+  },
   "acceptedDeviations": [],
   "findings": [
     {

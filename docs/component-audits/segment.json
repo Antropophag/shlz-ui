@@ -47,6 +47,22 @@
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
     "responsive-content-stress": "pass: long labels stay within a component-local narrow fixture without page-level inference"
   },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: three-size source matrix and focused screenshot remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: selected, unselected, keyboard focus and disabled label computed paint execute on native radios"
+      ],
+      "runtimeBehavior": [
+        "pass: pointer, Space, Arrow, exact events and disabled paths execute independently"
+      ]
+    },
+    "materialStates": ["selected", "unselected", "focus-visible", "disabled"],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer selection, Tab/Arrow/Space, disabled and narrow long-label/icon surfaces inspected"
+  },
   "acceptedDeviations": [],
   "findings": [
     {
