@@ -14,6 +14,11 @@ const manifestPaths = [
   "segment",
   "tabs",
   "pagination",
+  "status",
+  "badge",
+  "tag",
+  "person-tag",
+  "avatar",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 
@@ -55,6 +60,13 @@ const interactionEvidenceTypes = [
 ];
 const interactionBrowserTest =
   "tools/playwright/interaction-evidence-wave35.spec.js";
+const diagnosticCensusComponents = new Set([
+  "status",
+  "badge",
+  "tag",
+  "person-tag",
+  "avatar",
+]);
 
 test("project inventory has one valid contract for every discovered family", async () => {
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
@@ -157,6 +169,16 @@ test("audited component manifests are complete, traceable, and classification-dr
     assert.ok(manifest.rootSelector);
     assert.ok(manifest.legacySelectors.length);
     assert.ok(manifest.diagnosticBoundaries.length);
+    if (diagnosticCensusComponents.has(manifest.component)) {
+      assert.ok(
+        Number.isInteger(manifest.diagnosticOccurrenceCount),
+        `${manifest.component} needs an integer diagnostic occurrence census`,
+      );
+      assert.ok(
+        manifest.diagnosticOccurrenceCount >= 0,
+        `${manifest.component} needs a non-negative diagnostic occurrence census`,
+      );
+    }
 
     const ids = manifest.occurrences.map(({ id }) => id);
     assert.equal(new Set(ids).size, ids.length, "audit IDs must be unique");
@@ -209,12 +231,31 @@ test("audited component manifests are complete, traceable, and classification-dr
     )) {
       assert.ok(claims.length, `${manifest.component}.${type} needs claims`);
       for (const claim of claims) {
-        assert.match(claim, /^pass:\s*\S.+/);
+        assert.match(claim, /^(?:pass|not-applicable):\s*\S.+/);
         if (type === "realInteractionVisual")
           assert.doesNotMatch(claim, /fake|selector presence/i);
       }
     }
-    assert.ok(manifest.interactionEvidence.materialStates.length);
+    const realInteractionApplicable =
+      manifest.interactionEvidence.types.realInteractionVisual.some((claim) =>
+        claim.startsWith("pass:"),
+      );
+    const runtimeApplicable =
+      manifest.interactionEvidence.types.runtimeBehavior.some((claim) =>
+        claim.startsWith("pass:"),
+      );
+    if (realInteractionApplicable || runtimeApplicable) {
+      assert.ok(
+        manifest.interactionEvidence.materialStates.length,
+        `${manifest.component} needs material states when interaction evidence is applicable`,
+      );
+    } else {
+      assert.deepEqual(
+        manifest.interactionEvidence.materialStates,
+        [],
+        `${manifest.component} must not invent material states for non-interactive ownership`,
+      );
+    }
     assert.equal(
       manifest.interactionEvidence.browserTest,
       interactionBrowserTest,
@@ -230,12 +271,13 @@ test("audited component manifests are complete, traceable, and classification-dr
       ),
       `${manifest.component} must bind its declaration to an executable state assertion`,
     );
-    assert.ok(
-      new RegExp(`verifyPaintState\\(\\s*["']${manifest.component}["']`).test(
-        interactionBrowserSource,
-      ),
-      `${manifest.component} must bind computed paint to its executable state ledger`,
-    );
+    if (realInteractionApplicable)
+      assert.ok(
+        new RegExp(`verifyPaintState\\(\\s*["']${manifest.component}["']`).test(
+          interactionBrowserSource,
+        ),
+        `${manifest.component} must bind computed paint to its executable state ledger`,
+      );
     for (const state of manifest.interactionEvidence.materialStates) {
       assert.match(state, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
     }

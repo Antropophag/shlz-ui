@@ -1,0 +1,88 @@
+{
+  "component": "badge",
+  "authoritativeSource": "shlz-design-source/raw/svg/Bage.svg",
+  "referenceSources": ["docs/components/badge.md"],
+  "implementation": ["packages/styles/components/status-badge.css"],
+  "behavior": null,
+  "docs": "docs/components/badge.md",
+  "rootSelector": "[data-component-audit-id^='badge-']",
+  "legacySelectors": [".shlz-badge", ".shlz-badge-dot"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 4,
+  "occurrences": [
+    { "id": "badge-showcase-small-blue-single", "kind": "executable-fixture" },
+    {
+      "id": "badge-showcase-small-invert-single",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "badge-showcase-small-neutral-single",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "badge-showcase-small-blue-multiple",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "badge-showcase-small-invert-multiple",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "badge-showcase-small-neutral-multiple",
+      "kind": "executable-fixture"
+    },
+    { "id": "badge-showcase-medium-blue", "kind": "executable-fixture" },
+    { "id": "badge-showcase-medium-invert", "kind": "executable-fixture" },
+    { "id": "badge-showcase-medium-neutral", "kind": "executable-fixture" },
+    { "id": "badge-showcase-dot-blue", "kind": "executable-fixture" },
+    { "id": "badge-showcase-dot-neutral", "kind": "executable-fixture" },
+    { "id": "badge-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["count-16", "count-23", "dot-10"],
+  "supportedStates": ["blue", "invert", "neutral", "dot-blue", "dot-neutral"],
+  "contentStress": ["one-digit", "two-digit", "three-plus-digits"],
+  "sourceClaims": [
+    {
+      "claim": "Badge-Count and Badge-Dot remain distinct source sets with exact size/paint variants",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Bage.svg"
+    },
+    {
+      "claim": "count context, caps and formatting remain consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/components/badge.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/status-identity-wave4.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: all count and dot source variants remain independently traceable",
+    "structural-contract": "pass: shared guard classifies every executable Badge root",
+    "runtime-browser": "not-applicable: Badge has no interaction or controller",
+    "accessibility": "pass: count context and decorative-dot ownership are browser-checked",
+    "focused-visual": "pass: size/content/paint matrix uses component-local computed assertions",
+    "consumer-integration": "not-applicable: no live Badge consumer exists in the repository",
+    "responsive-content-stress": "pass: one, two and three-plus digit source-supported samples retain geometry"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: count/dot matrix is static visual evidence only"],
+      "realInteractionVisual": [
+        "not-applicable: Badge is a static count or dot with no interactive paint states"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: Badge exposes no action, event, navigation or controller behavior"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: count sizes, digit pressure, dot variants and parent naming guidance inspected; interaction is not applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": ["no maximum-count or localization policy"]
+}

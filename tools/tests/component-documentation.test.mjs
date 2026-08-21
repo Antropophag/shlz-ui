@@ -211,15 +211,20 @@ test("Tag families keep presentation and removal ownership separate", async () =
   assert.doesNotMatch(tag, /button|tabindex|role=/);
   assert.match(person, /class="shlz-tag shlz-person-tag"/);
   assert.match(person, /class="shlz-tag__avatar"[^>]+alt=""/);
+  assert.match(person, /class="shlz-person-tag__label">Анна Петрова<\/span>/);
   assert.match(
     closable,
-    /data-person-tag>[\s\S]*class="shlz-tag__remove" type="button" aria-label="Удалить Анну Петрову"/,
+    /data-person-tag>[\s\S]*class="shlz-person-tag__label">Анна Петрова<\/span>[\s\S]*class="shlz-tag__remove" type="button" aria-label="Удалить Анну Петрову"/,
   );
   assert.match(closable, /close-remove\.svg" alt=""/);
   assert.match(removal, /addEventListener\("click"/);
   assert.match(removal, /closest\("\[data-person-tag\]"\)\?\.remove\(\)/);
   assert.match(removal, /stateful app/);
   assert.match(css, /\.shlz-person-tag/);
+  assert.match(
+    css,
+    /\.shlz-person-tag__label\s*{[^}]*overflow: hidden;[^}]*min-inline-size: 0;[^}]*text-overflow: ellipsis;[^}]*white-space: nowrap;/s,
+  );
   assert.match(css, /\.shlz-tag__remove:focus-visible/);
 });
 

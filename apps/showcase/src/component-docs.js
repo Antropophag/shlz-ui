@@ -154,12 +154,12 @@ const tagMarkup = `<span class="shlz-tag shlz-tag--outlined">По гаранти
 
 const personTagMarkup = `<span class="shlz-tag shlz-person-tag">
   <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
-  Анна Петрова
+  <span class="shlz-person-tag__label">Анна Петрова</span>
 </span>`;
 
 const closablePersonTagMarkup = `<span class="shlz-tag shlz-person-tag" data-person-tag>
   <img class="shlz-tag__avatar" src="/assets/icons/user.svg" alt="" />
-  Анна Петрова
+  <span class="shlz-person-tag__label">Анна Петрова</span>
   <button class="shlz-tag__remove" type="button" aria-label="Удалить Анну Петрову">
     <img class="shlz-tag__icon" src="/assets/icons/close-remove.svg" alt="" />
   </button>
@@ -753,7 +753,10 @@ export const componentDocumentation = {
         "Avatar",
         "img.shlz-tag__avatar; empty alt when the visible name repeats identity.",
       ],
-      ["Name", "Visible text content."],
+      [
+        "Name wrapper",
+        "Required .shlz-person-tag__label; visible person name remains the primary identity text and ellipsizes within available width.",
+      ],
       [
         "Optional remove",
         "Native button.shlz-tag__remove with a specific accessible name.",
@@ -766,7 +769,7 @@ export const componentDocumentation = {
     accessibility:
       "The visible name identifies the person, so a repeated avatar uses empty alt. A remove button needs type=button and a specific label such as ‘Удалить Анну Петрову’; focus and activation remain native.",
     limitations:
-      "No avatar loading/fallback, identity lookup, profile navigation, removal controller, disabled or pending-state behavior is shipped. The example removes standalone DOM; stateful apps must update their source state instead. Consumer-provided images require their own asset/privacy policy.",
+      "No avatar loading/fallback, identity lookup, profile navigation, removal controller or root disabled/pending state is shipped. The optional native remove button supports disabled when removal is unavailable. The example removes standalone DOM; stateful apps must update their source state instead. Consumer-provided images require their own asset/privacy policy.",
     traceability: [
       ["Authoritative source", "shlz-design-source/raw/svg/Tag.svg"],
       ["Source specification", "docs/components/tag-source.md"],

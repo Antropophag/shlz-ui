@@ -1,0 +1,90 @@
+{
+  "component": "avatar",
+  "authoritativeSource": "shlz-design-source/raw/svg/Avatar.svg",
+  "referenceSources": ["docs/components/avatar.md"],
+  "implementation": ["packages/styles/components/avatar.css"],
+  "behavior": null,
+  "docs": "docs/components/avatar.md",
+  "rootSelector": "[data-component-audit-id^='avatar-']",
+  "legacySelectors": [".shlz-avatar"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 8,
+  "occurrences": [
+    { "id": "avatar-showcase-24-text", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-24-image", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-24-icon", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-32-text", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-32-image", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-32-icon", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-40-text", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-40-image", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-40-icon", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-64-text", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-64-image", "kind": "executable-fixture" },
+    { "id": "avatar-showcase-64-icon", "kind": "executable-fixture" },
+    { "id": "avatar-table-alpha", "kind": "live-consumer" },
+    { "id": "avatar-table-beta", "kind": "live-consumer" },
+    { "id": "avatar-person-tag-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["24", "32", "40", "64"],
+  "supportedStates": ["text", "image", "icon"],
+  "contentStress": [
+    "fixed-geometry",
+    "image-crop",
+    "non-shrinking",
+    "initials"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Avatar is four circle sizes by image, text and icon content",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Avatar.svg"
+    },
+    {
+      "claim": "initial generation and failed-image replacement are consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/components/avatar.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/status-identity-wave4.spec.js",
+    "tools/playwright/wave3.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/review.spec.js-snapshots/review-avatar-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: all twelve source variants retain exact size/content axes",
+    "structural-contract": "pass: shared guard classifies matrix and table consumers",
+    "runtime-browser": "not-applicable: Avatar ships no loader, fallback controller or interaction",
+    "accessibility": "pass: standalone text roots are named while adjacent/repeated images are decorative",
+    "focused-visual": "pass: image, initials and icon sizes/crop are asserted component-locally",
+    "consumer-integration": "pass: table compositions preserve presentation-only ownership",
+    "responsive-content-stress": "pass: flex pressure cannot shrink/deform geometry and object-fit remains cover"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: twelve-cell source matrix and focused snapshot remain static visual evidence"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: Avatar is a visual identity primitive with no interactive paint states"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: Avatar exposes no action, event, navigation, loader or controller behavior"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: image, initials, icon, four sizes, crop and flex-pressure surfaces inspected; interaction is not applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no automatic initials generation or broken-image loader"
+  ]
+}

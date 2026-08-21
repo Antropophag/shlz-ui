@@ -1,0 +1,91 @@
+{
+  "component": "person-tag",
+  "authoritativeSource": "shlz-design-source/raw/svg/Tag.svg",
+  "referenceSources": ["docs/components/person-tag.md"],
+  "implementation": ["packages/styles/components/tag.css"],
+  "behavior": null,
+  "docs": "docs/components/person-tag.md",
+  "rootSelector": "[data-component-audit-id^='person-tag-']",
+  "legacySelectors": [".shlz-person-tag"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 2,
+  "occurrences": [
+    { "id": "person-tag-showcase-static", "kind": "executable-fixture" },
+    { "id": "person-tag-showcase-removable", "kind": "live-consumer" },
+    { "id": "person-tag-content-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["30"],
+  "supportedStates": [
+    "default",
+    "removable",
+    "remove-hover",
+    "remove-active",
+    "remove-focus-visible",
+    "remove-disabled"
+  ],
+  "contentStress": [
+    "image",
+    "initials-fallback",
+    "long-cyrillic-name",
+    "narrow-container",
+    "optional-action"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Person tag has Default and Closable source variants with avatar and optional action",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Tag.svg"
+    },
+    {
+      "claim": "Avatar shell and removal lifecycle remain composed rather than duplicated",
+      "classification": "repository-decision",
+      "evidence": "docs/components/person-tag.md"
+    },
+    {
+      "claim": "the required .shlz-person-tag__label wrapper owns bounded name ellipsis while adjacent identity/action geometry remains fixed",
+      "classification": "repository-decision",
+      "evidence": "docs/components/person-tag.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/status-identity-wave4.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: Default and Closable structures retain source geometry",
+    "structural-contract": "pass: stable IDs classify static, live-removable and stress roots",
+    "runtime-browser": "pass: native remove button fires one click for pointer, Enter and Space, removes consumer state, and disabled emits no click",
+    "accessibility": "pass: decorative avatar avoids duplicate naming and remove names the person",
+    "focused-visual": "pass: image, initials, long-name, action and disabled paint are computed locally",
+    "consumer-integration": "pass: Showcase removable Person Tag updates real DOM state",
+    "responsive-content-stress": "pass: label ellipsizes while avatar/action remain fixed in a narrow root"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: Default/Closable source matrix remains static evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real remove hover, pointer-down active, keyboard focus-visible and disabled computed paint are asserted"
+      ],
+      "runtimeBehavior": [
+        "pass: pointer, Enter and Space each emit exactly one native click; disabled emits none and removal updates consumer state"
+      ]
+    },
+    "materialStates": [
+      "remove-hover",
+      "remove-active",
+      "remove-focus-visible",
+      "remove-disabled"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: remove pointer hover/down, Tab focus, Enter, Space, disabled and narrow long-name surfaces inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "post-removal focus, identity lookup and image loading are consumer-owned"
+  ]
+}

@@ -313,13 +313,29 @@ const sourceBackedDiagnostics = ({
 const comparison = (component, order, implementation) =>
   `<div class="shlz-choice-comparison"><section><h5>Source</h5>${sourceVariantImage(component, order)}</section><section><h5>Implementation</h5><div class="shlz-choice-comparison__fixture" inert aria-hidden="true">${implementation}</div></section></div>`;
 
-const status = (label, kind = "") =>
-  `<span class="shlz-status${kind ? ` shlz-status--${kind}` : ""}">${label}</span>`;
+const auditIdAttribute = (auditId) =>
+  auditId ? ` data-component-audit-id="${auditId}"` : "";
+const status = (label, kind = "", auditId = "") => {
+  const kindClass = kind ? ` shlz-status--${kind}` : "";
+  return `<span class="shlz-status${kindClass}"${auditIdAttribute(auditId)}>${label}</span>`;
+};
 const badge = (
   label,
-  { size = "small", color = "blue", single = false } = {},
-) =>
-  `<span class="shlz-badge${size === "medium" ? " shlz-badge--lg" : ""}${color === "invert" ? " shlz-badge--invert" : color === "gray" ? " shlz-badge--neutral" : ""}${single ? " shlz-badge--single" : ""}">${label}</span>`;
+  { size = "small", color = "blue", single = false, auditId = "" } = {},
+) => {
+  let colorClass = "";
+  if (color === "invert") colorClass = "shlz-badge--invert";
+  if (color === "gray") colorClass = "shlz-badge--neutral";
+  const classes = [
+    "shlz-badge",
+    size === "medium" ? "shlz-badge--lg" : "",
+    colorClass,
+    single ? "shlz-badge--single" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return `<span class="${classes}"${auditIdAttribute(auditId)}>${label}</span>`;
+};
 
 const checkboxDiagnostics = sourceBackedDiagnostics({
   components: ["checkbox"],
@@ -678,14 +694,14 @@ export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="status-demo">
     <header><h3>Status</h3><p>Визуальная метка состояния; продуктовый смысл задаёт consumer и не кодируется именем класса.</p></header>
     ${renderComponentDocumentation("status")}
-    <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue")}${status("Green", "green")}${status("Bright green", "bright-green")}${status("Orange", "orange")}${status("Blue pair", "source-blue")}${status("Violet", "purple")}${status("Turquoise", "cyan")}${status("Pink", "pink")}${status("Neutral", "neutral")}</div></section>
+    <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue", "", "status-showcase-blue")}${status("Green", "green", "status-showcase-green")}${status("Bright green", "bright-green", "status-showcase-bright-green")}${status("Orange", "orange", "status-showcase-orange")}${status("Blue pair", "source-blue", "status-showcase-source-blue")}${status("Violet", "purple", "status-showcase-purple")}${status("Turquoise", "cyan", "status-showcase-cyan")}${status("Pink", "pink", "status-showcase-pink")}${status("Neutral", "neutral", "status-showcase-neutral")}</div></section>
     ${statusDiagnostics}
   </article>
   <article class="shlz-api-component" id="badge-demo">
     <header><h3>Badge</h3><p>Компактный счётчик или dot-индикатор; это отдельное семейство, не Status.</p></header>
     ${renderComponentDocumentation("badge")}
-    <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true })}${badge("1", { color: "invert", single: true })}${badge("1", { color: "gray", single: true })}<span>Small · multiple</span>${badge("12")}${badge("12", { color: "invert" })}${badge("12", { color: "gray" })}<span>Medium</span>${badge("12", { size: "medium" })}${badge("12", { size: "medium", color: "invert" })}${badge("12", { size: "medium", color: "gray" })}</div></section>
-    <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot"></span><span class="shlz-badge-dot shlz-badge-dot--neutral"></span></div></section>
+    <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true, auditId: "badge-showcase-small-blue-single" })}${badge("1", { color: "invert", single: true, auditId: "badge-showcase-small-invert-single" })}${badge("1", { color: "gray", single: true, auditId: "badge-showcase-small-neutral-single" })}<span>Small · multiple</span>${badge("12", { auditId: "badge-showcase-small-blue-multiple" })}${badge("12", { color: "invert", auditId: "badge-showcase-small-invert-multiple" })}${badge("12", { color: "gray", auditId: "badge-showcase-small-neutral-multiple" })}<span>Medium</span>${badge("12", { size: "medium", auditId: "badge-showcase-medium-blue" })}${badge("12", { size: "medium", color: "invert", auditId: "badge-showcase-medium-invert" })}${badge("12", { size: "medium", color: "gray", auditId: "badge-showcase-medium-neutral" })}</div></section>
+    <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot" data-component-audit-id="badge-showcase-dot-blue" aria-hidden="true"></span><span class="shlz-badge-dot shlz-badge-dot--neutral" data-component-audit-id="badge-showcase-dot-neutral" aria-hidden="true"></span></div></section>
     ${badgeDiagnostics}
   </article>`;
 
@@ -758,7 +774,7 @@ const implementations = {
     .join(
       "",
     )}</div><div><p class="shlz-visual-matrix__label">Group</p><div class="shlz-pagination__group">${paginationItem(icon("arrow-left-md", "shlz-pagination__icon"), "disabled")}${paginationItem("1", "visual-pressed")}${paginationItem("2")}${paginationItem("3")}${paginationItem("…", "ellipsis")}${paginationItem("8")}${paginationItem(icon("arrow-right-md", "shlz-pagination__icon"))}</div></div><div class="shlz-pagination__group"><span class="shlz-pagination__summary">1–20 из 289</span><span class="shlz-pagination__page-size-label">Показывать по:</span>${paginationItem("20", "visual-pressed")}${paginationItem("50")}${paginationItem("80")}</div></div>`,
-  tag: `<div class="shlz-visual-matrix"><div class="shlz-visual-row"><span class="shlz-tag">По гарантии</span><span class="shlz-tag shlz-tag--outlined">По гарантии</span></div><div class="shlz-visual-row"><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}Александр Васильев</span><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}Александр Васильев<button class="shlz-tag__remove" aria-label="Remove">${icon("close-remove", "shlz-tag__icon")}</button></span></div></div>`,
+  tag: `<div class="shlz-visual-matrix"><div class="shlz-visual-row"><span class="shlz-tag">По гарантии</span><span class="shlz-tag shlz-tag--outlined">По гарантии</span></div><div class="shlz-visual-row"><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}<span class="shlz-person-tag__label">Александр Васильев</span></span><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}<span class="shlz-person-tag__label">Александр Васильев</span><button class="shlz-tag__remove" type="button" aria-label="Remove">${icon("close-remove", "shlz-tag__icon")}</button></span></div></div>`,
   segment: `<div class="shlz-visual-matrix"><div><p class="shlz-visual-matrix__label">Segmented-Group · text</p><div class="shlz-visual-matrix">${segmentGroup("sm")}${segmentGroup()}${segmentGroup("lg")}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Group · icon slots</p><div class="shlz-visual-matrix">${segmentGroup("sm", true)}${segmentGroup("", true)}${segmentGroup("lg", true)}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Item matrix · state meaning UNKNOWN</p><div class="shlz-segment-item-matrix">${["sm", "", "lg"].flatMap((size) => ["", "disabled", "selected"].map((state) => `<span class="shlz-segment__item${state ? ` shlz-segment__item--${state}` : ""}${size ? ` shlz-segment__item--${size}` : ""}">Daily</span>`)).join("")}</div></div></div>`,
   notification: `<div class="shlz-notification-matrix">${notification("", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`)}${notification("shlz-notification--danger", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`)}${notification("", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", '<button class="shlz-notification__action">Удалить</button>')}${[5, 4, 3, 2, 1, 0].map((n) => notification("", snackbarCountdown(n), "Сообщение отправлено", '<button class="shlz-notification__action">Отменить</button>')).join("")}${notification("", '<span class="shlz-notification__leading-progress" style="--shlz-progress:.72"></span>', "Сообщение отправляется", '<button class="shlz-notification__action">Отменить</button>')}</div>`,
   modal: `<div class="shlz-modal-matrix"><div class="shlz-modal__surface shlz-modal__surface--structured"><header class="shlz-modal__header"><h3 class="shlz-modal__title">Basic Modal</h3><button class="shlz-modal__close" aria-label="Close">×</button></header><div class="shlz-modal__body"><div class="shlz-modal__source-slot"></div></div><footer class="shlz-modal__footer"><button class="shlz-button shlz-button--sm">Cancel</button><button class="shlz-button shlz-button--primary shlz-button--sm">Done</button></footer></div>${compactModal("info", "This is some info")}${compactModal("success", "Some task has completed!")}${compactModal("warning", "This is a warning message")}${compactModal("error", "This is an error message")}</div>`,

@@ -1,0 +1,68 @@
+{
+  "component": "tag",
+  "authoritativeSource": "shlz-design-source/raw/svg/Tag.svg",
+  "referenceSources": ["docs/components/tag.md"],
+  "implementation": ["packages/styles/components/tag.css"],
+  "behavior": null,
+  "docs": "docs/components/tag.md",
+  "rootSelector": "[data-component-audit-id^='tag-']",
+  "legacySelectors": [".shlz-tag:not(.shlz-person-tag)"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 2,
+  "occurrences": [
+    { "id": "tag-showcase-filled", "kind": "executable-fixture" },
+    { "id": "tag-showcase-outlined", "kind": "executable-fixture" },
+    { "id": "tag-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["30"],
+  "supportedStates": ["filled", "outlined"],
+  "contentStress": ["long-label", "narrow-container"],
+  "sourceClaims": [
+    {
+      "claim": "generic Tag exposes only Filled and Stroke at 30px",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Tag.svg"
+    },
+    {
+      "claim": "Tag remains a non-interactive entity/category label",
+      "classification": "repository-decision",
+      "evidence": "docs/components/tag.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/status-identity-wave4.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: both generic Tag source variants are mapped",
+    "structural-contract": "pass: shared guard separates generic Tag from Person Tag",
+    "runtime-browser": "not-applicable: generic Tag is not removable or clickable",
+    "accessibility": "pass: visible text owns meaning and the root is absent from tab order",
+    "focused-visual": "pass: filled and outlined computed geometry/paint are component-local",
+    "consumer-integration": "not-applicable: no live generic Tag consumer exists",
+    "responsive-content-stress": "pass: long label remains bounded by its narrow consumer container"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: filled/outlined matrix is static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: generic Tag is display-only and has no hover, focus, active or disabled interaction contract"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: generic Tag exposes no action, event, navigation or controller behavior"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: filled, outlined, long label and narrow container inspected; pointer/keyboard interaction is not applicable"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no selected, disabled, icon, removal or whole-tag click contract"
+  ]
+}

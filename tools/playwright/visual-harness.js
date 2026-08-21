@@ -17,7 +17,10 @@ export const stabilizeShowcaseLayout = async (page) => {
     const additions = [...document.querySelectorAll(selector)];
     const additionIds = new Set(additions.map(({ id }) => id).filter(Boolean));
 
-    for (const addition of additions) addition.hidden = true;
+    for (const addition of additions) {
+      addition.hidden = true;
+      addition.style.setProperty("display", "none", "important");
+    }
     for (const link of document.querySelectorAll(
       ".shlz-docs-sidebar a[href^='#']",
     )) {
