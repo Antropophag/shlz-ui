@@ -69,8 +69,49 @@
     "consumer-integration": "pass: URL-owned current page and result range execute across all three consumer pages",
     "responsive-content-stress": "pass: 240px component-local list wraps without clipping, hidden scroll or automatic collapse"
   },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: 20-state matrix, fake hover/pressed items and bounded snapshots remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: numeric and direction links execute real hover, pointer-down active and keyboard focus computed paint assertions alongside current and disabled boundaries"
+      ],
+      "runtimeBehavior": [
+        "pass: native URL navigation, modifier click and consumer-owned current page behavior execute independently"
+      ]
+    },
+    "materialStates": [
+      "page-default",
+      "page-hover",
+      "page-active",
+      "focus-visible",
+      "current",
+      "previous-next-hover",
+      "disabled-boundary"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: numeric and Previous/Next pointer hover/down, Tab/Enter, current, disabled boundaries and narrow wrap inspected"
+  },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "pagination-real-static-state-divergence",
+      "severity": "P2",
+      "status": "resolved-wave35",
+      "description": "Real and fake hover/pressed paint diverged, while enabled Default, Pressed and Disabled foreground/background/border values also differed from the authoritative Pagination Btn variants.",
+      "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
+      "tracking": "docs/component-audits/wave-35-interaction-evidence-report.md"
+    },
+    {
+      "id": "pagination-default-source-contrast",
+      "severity": "P3",
+      "status": "documented-wave35",
+      "description": "The source-backed enabled Default foreground #939CA5 on white is below the 4.5:1 normal-text emergency threshold; exact source fidelity is retained without automatic recoloring.",
+      "evidence": "shlz-design-source/raw/svg/Pagination.svg",
+      "tracking": "docs/component-audits/wave-35-interaction-evidence-report.md"
+    }
+  ],
   "knownLimitations": [
     "headless Chromium does not reliably expose a new Page for modified clicks, so evidence proves an uncancelled trusted modifier event on a real href rather than claiming an observed new tab",
     "no page-window generator, router, totals model, automatic collapse or hidden horizontal scrolling"

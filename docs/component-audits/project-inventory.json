@@ -1,12 +1,17 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "f5b48fdd0a1f904c973d5477fa1eebf93c88464d",
+    "sha": "f5d7f3279565ea2136f75018f24f7ca4318d983d",
     "measuredAt": "2026-08-21",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
   "measuredCountsContract": "measured_counts records DOM roots observed by the baseline census; occurrence arrays list repository surfaces and therefore are not cardinality-equivalent. Component audit manifests provide occurrence-level enumeration when a family enters verification.",
   "statuses": ["UNAUDITED", "INVENTORIED", "VERIFIED", "FINDINGS"],
+  "interactionEvidenceTypes": [
+    "static-visual",
+    "real-interaction-visual",
+    "runtime-behavior"
+  ],
   "evidenceLevels": [
     "source-integrity",
     "structural-contract",
@@ -928,7 +933,7 @@
           "id": "pagination-typography-raster-drift",
           "severity": "P2",
           "status": "resolved-wave0",
-          "description": "Baseline snapshot differed by 1,722 stable glyph-edge pixels across eight local captures while the computed typography contract passed. The test now states that it is bounded visual evidence and uses a 1,750-pixel absolute budget; Playwright cannot classify the cause of every accepted pixel. The snapshot is unchanged.",
+          "description": "Baseline snapshot differed by 1,722 stable glyph-edge pixels across eight local captures while the computed typography contract passed. The test states that it is bounded visual evidence and uses a 1,750-pixel absolute budget; Playwright cannot classify the cause of every accepted pixel. Wave 3.5 intentionally updated this raster only after visual review of the separate source-backed Pagination paint correction; the typography budget and contract are unchanged.",
           "evidence": "tools/playwright/pagination-typography.spec.js",
           "tracking": "docs/repository-ui-inventory-2026-08-20.md"
         }

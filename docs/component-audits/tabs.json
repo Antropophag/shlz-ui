@@ -54,6 +54,33 @@
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
     "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
   },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: three-family matrix, fake hover tab and focused screenshot remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: active, inactive real hover, keyboard focus and disabled computed tab paint execute in Chromium"
+      ],
+      "runtimeBehavior": [
+        "pass: click, keyboard activation, focus movement, panels and controller lifecycle execute independently"
+      ]
+    },
+    "materialStates": [
+      "underline-active",
+      "underline-hover",
+      "pill-active",
+      "pill-hover",
+      "boxed-active",
+      "boxed-hover",
+      "focus-visible",
+      "underline-disabled",
+      "pill-disabled",
+      "boxed-disabled"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover/click, Tab/Arrow/Home/End, disabled and narrow long-label surfaces inspected"
+  },
   "acceptedDeviations": [],
   "findings": [
     {
@@ -63,6 +90,14 @@
       "description": "Repeated or direct construction could leave competing controllers, initial selection did not exclude native disabled, document-scoped validation rejected detached roots, programmatic activation accepted foreign tabs, and malformed or cross-root ARIA relationships were accepted silently.",
       "evidence": "tools/playwright/actions-navigation-wave3.spec.js",
       "tracking": "docs/component-audits/wave-3-report.md"
+    },
+    {
+      "id": "tabs-real-hover-static-divergence",
+      "severity": "P2",
+      "status": "resolved-wave35",
+      "description": "Real hover and the static helper diverged, a generic hover contract erased the three source-family paints, active underline/pill paint was source-inaccurate, and disabled foreground/surface/border paint was incomplete across underline, pill and boxed families.",
+      "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
+      "tracking": "docs/component-audits/wave-35-interaction-evidence-report.md"
     }
   ],
   "knownLimitations": [

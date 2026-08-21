@@ -39,13 +39,35 @@
     "tools/playwright/form-controls-wave2.spec.js-snapshots/radio-focused-group-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
+    "source-integrity": "pass: Radio.svg outer circle, dot and disabled paint matrix remains source-tested",
+    "structural-contract": "pass: native same-name radio markup and CSS-owned geometry are asserted",
+    "runtime-browser": "pass: Tab, Arrow, Space, exclusion and exact input/change paths execute in Chromium",
+    "accessibility": "pass: grouped labels, keyboard movement, focus-visible and disabled semantics are asserted",
+    "focused-visual": "pass: real checked, unchecked, keyboard focus and source-unknown neutral hover computed paint supplements the snapshot",
     "consumer-integration": "not-applicable: no Data Workspace or application-owned Radio consumer exists",
     "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source matrix and focused group screenshot cover static radio states"
+      ],
+      "realInteractionVisual": [
+        "pass: real hover, checked, unchecked and keyboard focus flows assert computed circle and dot paint"
+      ],
+      "runtimeBehavior": [
+        "pass: Tab, Arrow, Space, mutual exclusion and exact events execute independently"
+      ]
+    },
+    "materialStates": [
+      "unchecked",
+      "checked",
+      "focus-visible",
+      "disabled-unchecked",
+      "disabled-checked"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover/select, Tab/Arrow/Space and disabled radio surfaces inspected"
   },
   "acceptedDeviations": [],
   "findings": [],

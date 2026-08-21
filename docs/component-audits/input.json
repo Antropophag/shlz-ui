@@ -54,13 +54,35 @@
     "tools/playwright/form-controls-wave2.spec.js-snapshots/input-focused-states-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "applicable",
-    "structural-contract": "applicable",
-    "runtime-browser": "applicable",
-    "accessibility": "applicable",
-    "focused-visual": "applicable",
-    "consumer-integration": "applicable",
-    "responsive-content-stress": "applicable"
+    "source-integrity": "pass: Input Number.svg and the classified large/medium field matrix remain source-tested",
+    "structural-contract": "pass: native input markup, field composition, documentation and package CSS are asserted",
+    "runtime-browser": "pass: native value, input/change lifecycle, disabled state and programmatic updates execute in Chromium",
+    "accessibility": "pass: visible naming, keyboard focus and native disabled semantics execute in Chromium",
+    "focused-visual": "pass: real default, hover and keyboard focus computed shell paint plus the focused matrix snapshot are asserted",
+    "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
+    "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source matrix and focused screenshot cover forced field paint states"
+      ],
+      "realInteractionVisual": [
+        "pass: a real input hover and keyboard focus flow asserts computed background and border paint"
+      ],
+      "runtimeBehavior": [
+        "pass: native edit, input/change, focus, disabled and programmatic value paths execute independently"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "hover",
+      "focus-visible",
+      "disabled",
+      "invalid"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: pointer hover, Tab focus, disabled, invalid and narrow long-value surfaces inspected"
   },
   "acceptedDeviations": [],
   "findings": [],

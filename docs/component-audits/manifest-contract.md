@@ -26,13 +26,26 @@ Required fields:
 - `component`, `authoritativeSource`, `referenceSources`, `implementation`;
 - `rootSelector`, `legacySelectors`, and `diagnosticBoundaries`;
 - `occurrences`, `supportedSizes`, `supportedStates`, and `contentStress`;
-- `sourceClaims`, `browserTests`, `visualSnapshots`, and all evidence levels.
+- `sourceClaims`, `browserTests`, `visualSnapshots`, and all evidence levels;
+- `interactionEvidence.types.staticVisual`, `.realInteractionVisual`, and
+  `.runtimeBehavior`, plus `materialStates`, `browserTest`, and
+  `manualStateWalk` for every interactive family.
 
 `behavior`, `docs`, `acceptedDeviations`, `findings`, and `knownLimitations` are
 optional when they do not apply. Absence must use an empty array or `null` where
-the contract allows it. An evidence level uses `applicable` while the audit is
-in progress, or `not-applicable: <reason>` when the claim genuinely does not
-apply. Evidence is not marked as passed merely because a test file exists.
+the contract allows it. A completed manifest uses `pass: <specific claim>` or
+`not-applicable: <specific reason>`; bare `applicable`, generic `pass`, empty
+reasons, and automatic passes for unsupported states are invalid. Evidence is
+not marked as passed merely because a test file exists.
+
+Each interaction evidence claim is a concrete `pass:` statement. Static fake
+states and screenshots belong only to `staticVisual`. A
+`realInteractionVisual` claim names real browser interaction and is backed by
+the one focused executable spec recorded in `browserTest`; it must cover all
+declared `materialStates`. Event, navigation, focus movement, selection, and
+controller claims belong to `runtimeBehavior` and do not prove computed paint.
+The manual state walk records the surfaces actually inspected; it supplements
+but cannot replace executable evidence.
 
 Occurrence kinds are `executable-fixture`, `content-stress-fixture`, and
 `live-consumer`. Every executable root receives a unique stable
