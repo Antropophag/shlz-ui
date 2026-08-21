@@ -19,6 +19,7 @@ export class DropdownController {
   readonly menu: HTMLElement;
 
   #abortController = new AbortController();
+  #destroyed = false;
 
   constructor(root: HTMLElement) {
     const trigger = root.querySelector<HTMLButtonElement>(
@@ -46,7 +47,7 @@ export class DropdownController {
   }
 
   open(focus: "first" | "last" | false = false): void {
-    if (this.trigger.disabled) return;
+    if (this.#destroyed || this.trigger.disabled) return;
     this.trigger.setAttribute("aria-expanded", "true");
     this.menu.hidden = false;
     setActiveFloating(this.trigger.ownerDocument, this, true);
@@ -57,6 +58,7 @@ export class DropdownController {
   }
 
   close({ restoreFocus = false } = {}): void {
+    if (this.#destroyed) return;
     this.trigger.setAttribute("aria-expanded", "false");
     this.menu.hidden = true;
     setActiveFloating(this.trigger.ownerDocument, this, false);
@@ -64,14 +66,17 @@ export class DropdownController {
   }
 
   toggle(): void {
+    if (this.#destroyed) return;
     if (this.expanded) this.close();
     else this.open();
   }
 
   destroy(): void {
+    if (this.#destroyed || controllers.get(this.root) !== this) return;
     this.close();
+    this.#destroyed = true;
     this.#abortController.abort();
-    if (controllers.get(this.root) === this) controllers.delete(this.root);
+    controllers.delete(this.root);
   }
 
   #initialize(): void {

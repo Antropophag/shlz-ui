@@ -107,6 +107,8 @@ export class TooltipController {
   destroy(): void {
     if (this.#destroyed) return;
     this.close();
+    this.#clearTimers();
+    setActiveFloating(this.trigger.ownerDocument, this, false);
     this.#destroyed = true;
     this.#abort.abort();
     if (controllers.get(this.trigger) === this)

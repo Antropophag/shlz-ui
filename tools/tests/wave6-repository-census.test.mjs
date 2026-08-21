@@ -8,12 +8,15 @@ const executableExtensions = new Set([
   ".html",
   ".js",
   ".jsx",
+  ".mjs",
+  ".cjs",
   ".ts",
+  ".tsx",
   ".vue",
   ".php",
 ]);
 const wave6Markup =
-  /shlz-(?:dropdown|tooltip|popover|calendar|date-picker)|data-shlz-(?:tooltip|popover|calendar|date-picker)(?:-trigger)?|type\s*=\s*["']date["']|title\s*=/;
+  /shlz-(?:dropdown|tooltip|popover|calendar|date-picker)|data-shlz-(?:tooltip|popover|calendar|date-picker)(?:-trigger)?|type\s*=\s*["']date["']|\stitle\s*=\s*["']/;
 const classifiedFiles = new Set([
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/content-states.js",
@@ -43,7 +46,17 @@ test("Wave 6 repository census rejects new unclassified executable markup", asyn
     if (wave6Markup.test(await readFile(path, "utf8")))
       matches.push(relative(".", path));
   }
-  assert.deepEqual(new Set(matches), classifiedFiles);
+  const found = new Set(matches);
+  assert.deepEqual(
+    [...found].filter((path) => !classifiedFiles.has(path)),
+    [],
+    "unclassified Wave 6 markup found",
+  );
+  assert.deepEqual(
+    [...classifiedFiles].filter((path) => !found.has(path)),
+    [],
+    "classified file no longer contains Wave 6 markup",
+  );
 
   const showcase = await readFile("apps/showcase/src/main.js", "utf8");
   const fixture = await readFile("tools/fixtures/plain-html.html", "utf8");

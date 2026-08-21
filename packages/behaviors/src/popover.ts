@@ -95,6 +95,7 @@ export class PopoverController {
   destroy(): void {
     if (this.#destroyed) return;
     this.close();
+    setActiveFloating(this.trigger.ownerDocument, this, false);
     this.#destroyed = true;
     this.#abortController.abort();
     if (controllers.get(this.trigger) === this)

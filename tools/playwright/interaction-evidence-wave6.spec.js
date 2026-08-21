@@ -252,7 +252,10 @@ test("Dropdown binds real paint, keyboard, scroll, dismissal and lifecycle", asy
       const stayedClosed = previous.menu.hidden;
       const replacement = window.__shlzEnhanceDropdowns()[0];
       window.__shlzDropdownControllers[0] = replacement;
-      return stayedClosed && previous !== replacement;
+      previous.open();
+      previous.close();
+      previous.destroy();
+      return stayedClosed && previous !== replacement && !replacement.expanded;
     }),
   ).toBe(true);
   await trigger.click();
@@ -380,6 +383,7 @@ test("Popover binds real surface paint to isolated dismissal and focus ownership
   await expect(page.locator("#popover-value")).toBeFocused();
   await page.keyboard.press("Tab");
   const close = page.locator("#popover-interactive [data-shlz-popover-close]");
+  await expect(close).toBeFocused();
   await page.keyboard.press("Space");
   await verifyMaterialState("popover", "explicit-close-focus", async () => {
     await expect(page.locator("#popover-interactive")).toBeHidden();
@@ -501,8 +505,9 @@ test("Popover binds real surface paint to isolated dismissal and focus ownership
     controller.popover.remove();
     controller.open();
     controller.close();
+    const closedAfterDetach = controller.popover.hidden;
     controller.destroy();
-    return true;
+    return closedAfterDetach;
   });
   expect(detached).toBe(true);
 
