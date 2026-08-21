@@ -99,9 +99,11 @@ test("Table preserves native semantics, source geometry and ownership", async ({
     );
   });
 
-  const numeric = page.locator(
-    "[data-component-audit-id='table-typography-stress'] tbody .shlz-table__cell--numeric",
-  );
+  const numeric = page
+    .locator(
+      "[data-component-audit-id='table-typography-stress'] tbody .shlz-table__cell--numeric",
+    )
+    .first();
   await expect(numeric).toHaveCSS("text-align", "end");
   await expect(numeric).toHaveCSS("font-variant-numeric", /tabular-nums/);
   expectMaterialStates("table");
@@ -251,7 +253,9 @@ test("Empty State preserves source variants and presentation semantics", async (
   for (const [variant, [width, height, titleSize]] of Object.entries(
     expected,
   )) {
-    const root = page.locator(`[data-empty-state-variant='${variant}']`);
+    const root = page.locator(
+      `[data-component-audit-id='empty-state-showcase-${variant}'][data-empty-state-variant='${variant}']`,
+    );
     await expect(root).toHaveCSS("width", width);
     await expect(root).toHaveCSS("height", height);
     await expect(root.locator(".shlz-empty-state__title")).toHaveCSS(
