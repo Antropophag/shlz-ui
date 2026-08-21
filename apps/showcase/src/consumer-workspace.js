@@ -17,7 +17,7 @@ const row = ({ id, title, status }) => `
     <td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать заявку ${id}" data-workspace-select data-component-audit-id="checkbox-workspace-${id.toLowerCase()}"></td>
     <td class="shlz-table__cell"><a class="shlz-link" href="#consumer-workspace">${id}</a></td>
     <td class="shlz-table__cell" data-workspace-title>${title}</td>
-    <td class="shlz-table__cell"><span class="shlz-status">${status}</span></td>
+    <td class="shlz-table__cell"><span class="shlz-status" data-component-audit-id="status-workspace-${id.toLowerCase()}">${status}</span></td>
   </tr>`;
 
 export const consumerWorkspaceMarkup = (iconUrl) => `

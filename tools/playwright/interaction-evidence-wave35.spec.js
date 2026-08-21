@@ -15,6 +15,11 @@ const manifests = Object.fromEntries(
       "segment",
       "tabs",
       "pagination",
+      "status",
+      "badge",
+      "tag",
+      "person-tag",
+      "avatar",
     ].map(async (component) => [
       component,
       await readComponentAuditManifest(
@@ -129,6 +134,105 @@ test("contrast guard applies normal and large-text thresholds", () => {
     3.95,
     1,
   );
+});
+
+test("Wave 4 binds non-interactive defaults and real Person Tag action paint", async ({
+  page,
+}) => {
+  await verifyPaintState(
+    "status",
+    "default-paint",
+    page.locator("[data-component-audit-id='status-showcase-blue']"),
+    { color: "rgb(37, 61, 152)", backgroundColor: "rgba(37, 61, 152, 0.15)" },
+  );
+  await verifyPaintState(
+    "badge",
+    "default-paint",
+    page.locator(
+      "[data-component-audit-id='badge-showcase-small-blue-single']",
+    ),
+    { color: "rgb(255, 255, 255)", backgroundColor: "rgb(37, 61, 152)" },
+  );
+  await verifyPaintState(
+    "tag",
+    "default-paint",
+    page.locator("[data-component-audit-id='tag-showcase-filled']"),
+    { color: "rgb(11, 22, 35)", backgroundColor: "rgb(238, 240, 244)" },
+  );
+  await verifyPaintState(
+    "avatar",
+    "default-paint",
+    page.locator("[data-component-audit-id='avatar-showcase-32-text']"),
+    { color: "rgb(37, 61, 152)", backgroundColor: "rgb(223, 226, 240)" },
+  );
+
+  const remove = page.locator("[data-person-tag-remove]");
+  await remove.hover();
+  await verifyPaintState("person-tag", "remove-hover", remove, {
+    backgroundColor: "rgba(11, 22, 35, 0.08)",
+  });
+  await remove.focus();
+  await verifyPaintState("person-tag", "remove-focus-visible", remove, {
+    outlineColor: "rgb(37, 61, 152)",
+    outlineStyle: "solid",
+  });
+  await remove.hover();
+  await page.mouse.down();
+  await verifyPaintState("person-tag", "remove-active", remove, {
+    backgroundColor: "rgba(11, 22, 35, 0.14)",
+  });
+  await page.mouse.up();
+  const disabled = page.locator(
+    "[data-component-audit-id='person-tag-content-stress'] .shlz-tag__remove",
+  );
+  await verifyPaintState("person-tag", "remove-disabled", disabled, {
+    opacity: "0.4",
+  });
+  expectMaterialStates("status");
+  expectMaterialStates("badge");
+  expectMaterialStates("tag");
+  expectMaterialStates("person-tag");
+  expectMaterialStates("avatar");
+});
+
+test("Wave 4 contrast ledger separates source fidelity from threshold results", async ({
+  page,
+}) => {
+  for (const [id, label] of [
+    ["badge-showcase-small-blue-single", "Badge count"],
+    ["tag-showcase-filled", "Tag label"],
+    ["person-tag-showcase-static", "Person Tag label"],
+    ["avatar-showcase-32-text", "Avatar initials"],
+  ])
+    await expectContrast(
+      page.locator(`[data-component-audit-id='${id}']`),
+      label,
+    );
+
+  const belowThreshold = [];
+  const statuses = page.locator(
+    "[data-component-audit-id^='status-showcase-']",
+  );
+  for (let index = 0; index < (await statuses.count()); index++) {
+    const item = statuses.nth(index);
+    const { id, color, backgroundColor } = await item.evaluate((element) => {
+      const style = window.getComputedStyle(element);
+      return {
+        id: element.dataset.componentAuditId,
+        color: style.color,
+        backgroundColor: style.backgroundColor,
+      };
+    });
+    if (contrast(color, backgroundColor) < 4.5) belowThreshold.push(id);
+  }
+  expect(belowThreshold).toEqual([
+    "status-showcase-green",
+    "status-showcase-bright-green",
+    "status-showcase-orange",
+    "status-showcase-cyan",
+    "status-showcase-pink",
+    "status-showcase-neutral",
+  ]);
 });
 
 const keyboardFocus = async (page, locator) => {

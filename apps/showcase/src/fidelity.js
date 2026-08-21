@@ -313,13 +313,13 @@ const sourceBackedDiagnostics = ({
 const comparison = (component, order, implementation) =>
   `<div class="shlz-choice-comparison"><section><h5>Source</h5>${sourceVariantImage(component, order)}</section><section><h5>Implementation</h5><div class="shlz-choice-comparison__fixture" inert aria-hidden="true">${implementation}</div></section></div>`;
 
-const status = (label, kind = "") =>
-  `<span class="shlz-status${kind ? ` shlz-status--${kind}` : ""}">${label}</span>`;
+const status = (label, kind = "", auditId = "") =>
+  `<span class="shlz-status${kind ? ` shlz-status--${kind}` : ""}"${auditId ? ` data-component-audit-id="${auditId}"` : ""}>${label}</span>`;
 const badge = (
   label,
-  { size = "small", color = "blue", single = false } = {},
+  { size = "small", color = "blue", single = false, auditId = "" } = {},
 ) =>
-  `<span class="shlz-badge${size === "medium" ? " shlz-badge--lg" : ""}${color === "invert" ? " shlz-badge--invert" : color === "gray" ? " shlz-badge--neutral" : ""}${single ? " shlz-badge--single" : ""}">${label}</span>`;
+  `<span class="shlz-badge${size === "medium" ? " shlz-badge--lg" : ""}${color === "invert" ? " shlz-badge--invert" : color === "gray" ? " shlz-badge--neutral" : ""}${single ? " shlz-badge--single" : ""}"${auditId ? ` data-component-audit-id="${auditId}"` : ""}>${label}</span>`;
 
 const checkboxDiagnostics = sourceBackedDiagnostics({
   components: ["checkbox"],
@@ -678,14 +678,14 @@ export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="status-demo">
     <header><h3>Status</h3><p>Визуальная метка состояния; продуктовый смысл задаёт consumer и не кодируется именем класса.</p></header>
     ${renderComponentDocumentation("status")}
-    <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue")}${status("Green", "green")}${status("Bright green", "bright-green")}${status("Orange", "orange")}${status("Blue pair", "source-blue")}${status("Violet", "purple")}${status("Turquoise", "cyan")}${status("Pink", "pink")}${status("Neutral", "neutral")}</div></section>
+    <section><h4>Source paint families</h4><div class="shlz-cluster">${status("Blue", "", "status-showcase-blue")}${status("Green", "green", "status-showcase-green")}${status("Bright green", "bright-green", "status-showcase-bright-green")}${status("Orange", "orange", "status-showcase-orange")}${status("Blue pair", "source-blue", "status-showcase-source-blue")}${status("Violet", "purple", "status-showcase-purple")}${status("Turquoise", "cyan", "status-showcase-cyan")}${status("Pink", "pink", "status-showcase-pink")}${status("Neutral", "neutral", "status-showcase-neutral")}</div></section>
     ${statusDiagnostics}
   </article>
   <article class="shlz-api-component" id="badge-demo">
     <header><h3>Badge</h3><p>Компактный счётчик или dot-индикатор; это отдельное семейство, не Status.</p></header>
     ${renderComponentDocumentation("badge")}
-    <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true })}${badge("1", { color: "invert", single: true })}${badge("1", { color: "gray", single: true })}<span>Small · multiple</span>${badge("12")}${badge("12", { color: "invert" })}${badge("12", { color: "gray" })}<span>Medium</span>${badge("12", { size: "medium" })}${badge("12", { size: "medium", color: "invert" })}${badge("12", { size: "medium", color: "gray" })}</div></section>
-    <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot"></span><span class="shlz-badge-dot shlz-badge-dot--neutral"></span></div></section>
+    <section><h4>Count</h4><div class="shlz-control-matrix shlz-badge-matrix"><b>Size</b><b>Blue</b><b>Blue invert</b><b>Gray</b><span>Small</span>${badge("1", { single: true, auditId: "badge-showcase-small-blue-single" })}${badge("1", { color: "invert", single: true, auditId: "badge-showcase-small-invert-single" })}${badge("1", { color: "gray", single: true, auditId: "badge-showcase-small-neutral-single" })}<span>Small · multiple</span>${badge("12", { auditId: "badge-showcase-small-blue-multiple" })}${badge("12", { color: "invert", auditId: "badge-showcase-small-invert-multiple" })}${badge("12", { color: "gray", auditId: "badge-showcase-small-neutral-multiple" })}<span>Medium</span>${badge("12", { size: "medium", auditId: "badge-showcase-medium-blue" })}${badge("12", { size: "medium", color: "invert", auditId: "badge-showcase-medium-invert" })}${badge("12", { size: "medium", color: "gray", auditId: "badge-showcase-medium-neutral" })}</div></section>
+    <section><h4>Dot</h4><div class="shlz-cluster"><span class="shlz-badge-dot" data-component-audit-id="badge-showcase-dot-blue" aria-hidden="true"></span><span class="shlz-badge-dot shlz-badge-dot--neutral" data-component-audit-id="badge-showcase-dot-neutral" aria-hidden="true"></span></div></section>
     ${badgeDiagnostics}
   </article>`;
 

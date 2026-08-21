@@ -14,6 +14,11 @@ const manifestPaths = [
   "segment",
   "tabs",
   "pagination",
+  "status",
+  "badge",
+  "tag",
+  "person-tag",
+  "avatar",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

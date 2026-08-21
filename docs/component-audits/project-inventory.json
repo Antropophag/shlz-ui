@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "f5d7f3279565ea2136f75018f24f7ca4318d983d",
+    "sha": "9b46c9edd4502863ee0da15d7a3bb887839635d7",
     "measuredAt": "2026-08-21",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -953,42 +953,56 @@
     {
       "tests": [
         "tools/tests/choice-status-source.test.mjs",
-        "tools/playwright/choice-status.spec.js"
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
       ],
       "evidence": {
-        "source-integrity": "matrix test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "not applicable: presentational",
-        "accessibility": "text-owned semantics partial",
-        "focused-visual": "broad fixture",
-        "consumer-integration": "Data Workspace",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: raw Status.svg geometry and paint families are asserted without semantic renaming",
+        "structural-contract": "pass: occurrence guard classifies all executable and live roots",
+        "runtime-browser": "not-applicable: static Status has no behavior; consumer rendering owns updates",
+        "accessibility": "pass: text owns meaning and no implicit role=status is applied",
+        "focused-visual": "pass: computed source-paint matrix is component-local",
+        "consumer-integration": "pass: three Data Workspace states filter and rerender without stale classes",
+        "responsive-content-stress": "pass: long label and narrow table-cell behavior are asserted"
       },
       "canonical_name": "Status",
       "category": "status-content",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Status.svg"],
       "production_implementation": [
         "packages/styles/components/status-badge.css"
       ],
       "behavior": [],
       "docs": ["docs/components/status.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/fidelity.js",
+        "apps/showcase/src/wave3.js"
+      ],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-status"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["request statuses", "detail statuses", "color/text variants"],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "status-source-paint-contrast",
+          "severity": "P3",
+          "status": "documented-source-backed-deviation",
+          "description": "Six exact source paint pairs are below 4.5:1 for normal text; visible text preserves meaning and source paint was not silently recolored.",
+          "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
+          "tracking": "docs/component-audits/wave-4-report.md"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 13,
-        "liveConsumers": 3,
+        "executableShowcase": 12,
+        "liveConsumers": 4,
         "dataWorkspace": 3,
         "inertDiagnostics": 13,
         "legacyNative": 0,
@@ -998,31 +1012,33 @@
     {
       "tests": [
         "tools/tests/choice-status-source.test.mjs",
-        "tools/playwright/choice-status.spec.js"
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
       ],
       "evidence": {
-        "source-integrity": "matrix test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "not applicable: presentational",
-        "accessibility": "gap",
-        "focused-visual": "broad fixture",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Badge-Count and Badge-Dot matrices remain separate and complete",
+        "structural-contract": "pass: occurrence guard classifies all executable roots",
+        "runtime-browser": "not-applicable: Badge is a static count/dot marker",
+        "accessibility": "pass: count context and decorative dot ownership are verified",
+        "focused-visual": "pass: computed size/content/paint matrix is component-local",
+        "consumer-integration": "not-applicable: no live Badge consumer exists",
+        "responsive-content-stress": "pass: one, two and three-plus digit samples retain source geometry"
       },
       "canonical_name": "Badge",
       "category": "status-content",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Bage.svg"],
       "production_implementation": [
         "packages/styles/components/status-badge.css"
       ],
       "behavior": [],
       "docs": ["docs/components/badge.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": ["apps/showcase/src/fidelity.js"],
+      "live_consumers": [],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-status"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
@@ -1034,7 +1050,7 @@
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 10,
+        "executableShowcase": 12,
         "liveConsumers": 0,
         "dataWorkspace": 0,
         "inertDiagnostics": 3,
@@ -1045,36 +1061,38 @@
     {
       "tests": [
         "tools/tests/tag-source.test.mjs",
-        "tools/playwright/components-next.spec.js"
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
       ],
       "evidence": {
-        "source-integrity": "family test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "partial removal ownership",
-        "accessibility": "partial",
-        "focused-visual": "representative snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Filled and Stroke remain the complete generic Tag source contract",
+        "structural-contract": "pass: guard separates Tag from Person Tag occurrences",
+        "runtime-browser": "not-applicable: generic Tag is display-only",
+        "accessibility": "pass: visible text owns meaning and Tag is unfocusable",
+        "focused-visual": "pass: filled/outlined geometry and paint are computed locally",
+        "consumer-integration": "not-applicable: no live generic Tag consumer exists",
+        "responsive-content-stress": "pass: long label remains bounded in a narrow container"
       },
       "canonical_name": "Tag",
       "category": "status-content",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Tag.svg"],
       "production_implementation": ["packages/styles/components/tag.css"],
       "behavior": [],
       "docs": ["docs/components/tag.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": ["apps/showcase/src/main.js#tag-demo"],
+      "live_consumers": [],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-tag"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["filled/outlined", "removable", "long content"],
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 5,
+        "executableShowcase": 3,
         "liveConsumers": 0,
         "dataWorkspace": 0,
         "inertDiagnostics": 4,
@@ -1085,29 +1103,33 @@
     {
       "tests": [
         "tools/tests/tag-source.test.mjs",
-        "tools/playwright/review.spec.js"
+        "tools/playwright/review.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
       ],
       "evidence": {
-        "source-integrity": "family separation test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "gap",
-        "accessibility": "partial",
-        "focused-visual": "focused review snapshot",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: Default and Closable source structures remain distinct from generic Tag",
+        "structural-contract": "pass: guard classifies static, removable and stress roots",
+        "runtime-browser": "pass: pointer, Enter and Space remove once; disabled emits no action",
+        "accessibility": "pass: repeated avatar is decorative and remove names the person",
+        "focused-visual": "pass: real hover/active/focus-visible/disabled action paint is computed",
+        "consumer-integration": "pass: Showcase state is actually removed by the consumer action",
+        "responsive-content-stress": "pass: long Cyrillic name ellipsizes without shrinking identity/action geometry"
       },
       "canonical_name": "Person Tag",
       "category": "status-content",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Tag.svg"],
       "production_implementation": ["packages/styles/components/tag.css"],
       "behavior": [],
       "docs": ["docs/components/person-tag.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": ["apps/showcase/src/main.js#tag-demo"],
+      "live_consumers": [
+        "apps/showcase/src/main.js#person-tag-showcase-removable"
+      ],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-tag"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["default/closable", "avatar", "long name"],
@@ -1115,7 +1137,7 @@
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 2,
-        "liveConsumers": 0,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
         "inertDiagnostics": 2,
         "legacyNative": 0,
@@ -1126,37 +1148,39 @@
       "tests": [
         "tools/tests/wave3-source.test.mjs",
         "tools/playwright/wave3.spec.js",
-        "tools/playwright/review.spec.js"
+        "tools/playwright/review.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
       ],
       "evidence": {
-        "source-integrity": "12-variant test",
-        "structural-contract": "CSS/docs",
-        "runtime-browser": "not applicable: presentational",
-        "accessibility": "alt contract partial",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "partial"
+        "source-integrity": "pass: four sizes by image/text/icon retain all twelve source variants",
+        "structural-contract": "pass: guard classifies matrix and table roots",
+        "runtime-browser": "not-applicable: Avatar ships no loader or interaction",
+        "accessibility": "pass: standalone and adjacent identity contexts use distinct naming ownership",
+        "focused-visual": "pass: exact sizes, crop and paint are asserted component-locally",
+        "consumer-integration": "pass: table consumers keep Avatar presentation-only",
+        "responsive-content-stress": "pass: fixed geometry cannot shrink and image crop remains cover"
       },
       "canonical_name": "Avatar",
       "category": "status-content",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Avatar.svg"],
       "production_implementation": ["packages/styles/components/avatar.css"],
       "behavior": [],
       "docs": ["docs/components/avatar.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": ["apps/showcase/src/wave3.js#avatar-demo"],
+      "live_consumers": ["apps/showcase/src/wave3.js#table-demo"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-avatar"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["24/32/40/64", "image/text/icon", "broken/long content"],
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 14,
-        "liveConsumers": 0,
+        "executableShowcase": 15,
+        "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 8,
         "legacyNative": 0,

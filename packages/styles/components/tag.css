@@ -26,8 +26,16 @@
 }
 
 .shlz-person-tag {
+  max-inline-size: 100%;
   background: var(--shlz-semantic-color-surface-base);
   border-color: var(--shlz-semantic-color-border-default);
+}
+
+.shlz-person-tag__label {
+  overflow: hidden;
+  min-inline-size: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .shlz-tag__icon {
@@ -58,4 +66,13 @@
 .shlz-tag__remove:focus-visible {
   outline: 2px solid var(--shlz-semantic-color-action-primary);
   outline-offset: 1px;
+}
+
+.shlz-tag__remove:active {
+  background: rgb(11 22 35 / 14%);
+}
+
+.shlz-tag__remove:disabled {
+  cursor: default;
+  opacity: 0.4;
 }

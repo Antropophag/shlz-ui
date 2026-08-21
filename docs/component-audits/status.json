@@ -1,0 +1,107 @@
+{
+  "component": "status",
+  "authoritativeSource": "shlz-design-source/raw/svg/Status.svg",
+  "referenceSources": ["docs/components/status.md"],
+  "implementation": ["packages/styles/components/status-badge.css"],
+  "behavior": null,
+  "docs": "docs/components/status.md",
+  "rootSelector": "[data-component-audit-id^='status-']",
+  "legacySelectors": [".shlz-status"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "occurrences": [
+    { "id": "status-showcase-blue", "kind": "executable-fixture" },
+    { "id": "status-showcase-green", "kind": "executable-fixture" },
+    { "id": "status-showcase-bright-green", "kind": "executable-fixture" },
+    { "id": "status-showcase-orange", "kind": "executable-fixture" },
+    { "id": "status-showcase-source-blue", "kind": "executable-fixture" },
+    { "id": "status-showcase-purple", "kind": "executable-fixture" },
+    { "id": "status-showcase-cyan", "kind": "executable-fixture" },
+    { "id": "status-showcase-pink", "kind": "executable-fixture" },
+    { "id": "status-showcase-neutral", "kind": "executable-fixture" },
+    { "id": "status-workspace-sd-2418", "kind": "live-consumer" },
+    { "id": "status-workspace-sd-2415", "kind": "live-consumer" },
+    { "id": "status-workspace-sd-2409", "kind": "live-consumer" },
+    { "id": "status-table-alpha", "kind": "executable-fixture" },
+    { "id": "status-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "status-typography-table", "kind": "content-stress-fixture" },
+    { "id": "status-framework-composition", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["30"],
+  "supportedStates": [
+    "blue",
+    "green",
+    "bright-green",
+    "source-blue",
+    "orange",
+    "purple",
+    "cyan",
+    "pink",
+    "neutral"
+  ],
+  "contentStress": ["long-label", "narrow-table-cell"],
+  "sourceClaims": [
+    {
+      "claim": "Status.svg fixes 30px pill geometry and observed paint pairs",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Status.svg"
+    },
+    {
+      "claim": "repeated pairs form reusable paint families without universal meanings",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Status.svg"
+    },
+    {
+      "claim": "visible text and consumer context own meaning; role=status is not implicit",
+      "classification": "repository-decision",
+      "evidence": "docs/components/status.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/status-identity-wave4.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: raw Status.svg geometry and paint families are asserted without semantic renaming",
+    "structural-contract": "pass: shared guard classifies every executable and live Status root",
+    "runtime-browser": "not-applicable: Status is a static textual primitive and application rendering owns changes",
+    "accessibility": "pass: labels remain unfocusable text without implicit live-region semantics or color-only meaning",
+    "focused-visual": "pass: component-local computed paint matrix covers all public modifiers",
+    "consumer-integration": "pass: Data Workspace filtering preserves state-to-label rendering across rerenders",
+    "responsive-content-stress": "pass: long text remains component-bounded in a narrow table cell"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source paint matrix is static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: non-interactive Status default computed paint is verified; hover/focus/active are not material states"
+      ],
+      "runtimeBehavior": [
+        "pass: non-interactive ownership is asserted by absence of role, tabindex and control descendants"
+      ]
+    },
+    "materialStates": ["default-paint"],
+    "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
+    "manualStateWalk": "pass: paint matrix, long label, narrow table cell and Data Workspace filtering inspected; pointer/keyboard states are not meaningful"
+  },
+  "acceptedDeviations": [],
+  "findings": [
+    {
+      "id": "status-source-paint-contrast",
+      "severity": "P3",
+      "status": "documented-source-backed-deviation",
+      "description": "Six exact source paint pairs are below the 4.5:1 normal-text threshold; text still states meaning and Wave 4 does not recolor source authority.",
+      "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
+      "tracking": "docs/component-audits/wave-4-report.md"
+    }
+  ],
+  "knownLimitations": [
+    "domain status-to-paint mapping and live announcements are consumer-owned"
+  ]
+}
