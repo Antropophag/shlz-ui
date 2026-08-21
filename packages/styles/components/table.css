@@ -48,6 +48,7 @@
 
 .shlz-table__cell--numeric {
   font-variant-numeric: tabular-nums;
+  text-align: end;
 }
 
 .shlz-table__truncate {

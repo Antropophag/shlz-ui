@@ -1,0 +1,93 @@
+{
+  "component": "empty-state",
+  "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+  "referenceSources": ["docs/components/empty-state.md"],
+  "implementation": ["packages/styles/components/empty-state.css"],
+  "behavior": null,
+  "docs": "docs/components/empty-state.md",
+  "rootSelector": "[data-component-audit-id^='empty-state-']",
+  "legacySelectors": [".shlz-empty-state"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "empty-state-showcase-simple", "kind": "executable-fixture" },
+    { "id": "empty-state-showcase-customize", "kind": "executable-fixture" },
+    { "id": "empty-state-showcase-basic", "kind": "executable-fixture" },
+    { "id": "empty-state-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "empty-state-workspace-no-results", "kind": "live-consumer" }
+  ],
+  "supportedSizes": [
+    "simple-220x67",
+    "customize-159x136.507",
+    "basic-167x262",
+    "fluid-composition"
+  ],
+  "supportedStates": ["simple", "customize", "basic", "consumer-composed"],
+  "contentStress": [
+    "long-title",
+    "long-description",
+    "narrow-container",
+    "native-action"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Simple, Customize and Basic are three distinct source compositions with source-specific typography and geometry",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+    },
+    {
+      "claim": "optional regions generalize the source compositions without owning application empty-data state",
+      "classification": "repository-decision",
+      "evidence": "docs/components/empty-state.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/data-content-wave5.spec.js",
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/remediation-fidelity.spec.js"
+  ],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: three source variants and their distinct typography/geometry are checked against extracted source references",
+    "structural-contract": "pass: all five roots are classified and optional visual/title/description/action regions remain composable",
+    "runtime-browser": "not-applicable: Empty State owns no loading, retry, announcement or visibility controller",
+    "accessibility": "pass: no gratuitous alert/status role is added, heading level remains consumer-owned and nested actions stay native",
+    "focused-visual": "pass: computed variant geometry and source-specific typography are asserted without broad snapshot substitution",
+    "consumer-integration": "pass: Data Workspace renders Empty State for an application-owned zero-result condition and reset recovers rows",
+    "responsive-content-stress": "pass: long title/description and action remain contained in a narrow fluid composition"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: Simple, Customize and Basic source matrices are static composition evidence"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: Empty State has no root hover, focus, active or disabled interaction contract"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: empty-data lifecycle and nested Button/Link behavior are consumer or nested-family owned"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/data-content-wave5.spec.js",
+    "manualStateWalk": "pass: all source variants, long title/description, narrow container and nested action focus integration inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [
+    {
+      "id": "empty-state-simple-source-contrast",
+      "severity": "P3",
+      "status": "documented-source-backed-deviation",
+      "description": "The exact subdued Empty/Simple title paint measures about 2.79:1 on white, below the 4.5:1 normal-text threshold; Wave 5 preserves source authority rather than silently recoloring it.",
+      "evidence": "tools/playwright/data-content-wave5.spec.js",
+      "tracking": "docs/component-audits/wave-5-report.md"
+    }
+  ],
+  "knownLimitations": [
+    "dynamic announcements are consumer-owned and are not implied by ordinary empty presentation"
+  ]
+}

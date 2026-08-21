@@ -29,7 +29,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
     <header class="shlz-consumer-workspace__header">
       <div><h3>Заявки ServiceDesk</h3><p>Поиск, фильтрация и групповые действия.</p></div>
     </header>
-    <div class="shlz-consumer-workspace__body">
+    <div class="shlz-consumer-workspace__body" data-component-audit-id="domain-table-workspace-requests">
       <div class="shlz-consumer-workspace__toolbar">
         <label class="shlz-field shlz-consumer-workspace__search" data-component-audit-id="input-workspace-search"><span class="shlz-field__label">Поиск по заявкам</span><span class="shlz-field__control"><input class="shlz-input" type="search" placeholder="Номер, тема или статус" data-workspace-search></span></label>
         <button class="shlz-button" type="button" data-shlz-drawer-trigger="workspace-filter-drawer"><img src="${iconUrl("filter")}" alt="">Фильтры <span data-workspace-filter-count hidden>1</span></button>
@@ -37,13 +37,13 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
       <div class="shlz-consumer-workspace__bulk" data-workspace-bulk hidden aria-live="polite"><strong><span data-workspace-selected-count>0</span> выбрано</strong><button class="shlz-button shlz-button--sm" type="button" data-workspace-clear>Снять выбор</button></div>
       <p class="shlz-consumer-workspace__results" aria-live="polite">Найдено: <span data-workspace-result-count>${records.length}</span></p>
       <div class="shlz-table-wrap">
-        <table class="shlz-table"><caption class="shlz-visually-hidden">Заявки ServiceDesk</caption><thead class="shlz-table__head"><tr>
+        <table class="shlz-table" data-component-audit-id="table-workspace-requests"><caption class="shlz-visually-hidden">Заявки ServiceDesk</caption><thead class="shlz-table__head"><tr>
           <th class="shlz-table__cell shlz-table__cell--check" scope="col"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать все видимые заявки" data-workspace-select-all data-component-audit-id="checkbox-workspace-select-all"></th>
           <th class="shlz-table__cell" scope="col">Номер</th>
           <th class="shlz-table__cell" scope="col" aria-sort="none"><button class="shlz-table__affordance" type="button" data-workspace-sort>Тема <span class="shlz-visually-hidden">Сортировать</span></button></th>
           <th class="shlz-table__cell" scope="col">Статус</th>
         </tr></thead><tbody data-workspace-body>${records.map(row).join("")}</tbody></table>
-        <div class="shlz-consumer-workspace__empty" data-workspace-empty hidden><h4>Заявки не найдены</h4><p>Измените запрос или сбросьте фильтр.</p><button class="shlz-button" type="button" data-workspace-reset>Сбросить условия</button></div>
+        <div class="shlz-consumer-workspace__empty shlz-empty-state" data-workspace-empty data-component-audit-id="empty-state-workspace-no-results" hidden><h4 class="shlz-empty-state__title">Заявки не найдены</h4><p class="shlz-empty-state__description">Измените запрос или сбросьте фильтр.</p><div class="shlz-empty-state__actions"><button class="shlz-button" type="button" data-workspace-reset>Сбросить условия</button></div></div>
       </div>
     </div>
   </article>

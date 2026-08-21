@@ -1,0 +1,98 @@
+{
+  "component": "document-row",
+  "authoritativeSource": "shlz-design-source/raw/svg/Documents.svg",
+  "referenceSources": [
+    "docs/components/document-row.md",
+    "docs/components/file-row.md"
+  ],
+  "implementation": ["packages/styles/components/document-row.css"],
+  "behavior": null,
+  "docs": "docs/components/document-row.md",
+  "rootSelector": "[data-component-audit-id^='document-row-']",
+  "legacySelectors": [".shlz-document-row"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "document-row-showcase-pdf", "kind": "executable-fixture" },
+    {
+      "id": "document-row-content-stress-long",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "document-row-showcase-xlsx", "kind": "executable-fixture" },
+    { "id": "document-row-showcase-compact-pdf", "kind": "executable-fixture" },
+    {
+      "id": "document-row-showcase-compact-docx",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "document-row-showcase-compact-xlsx",
+      "kind": "executable-fixture"
+    },
+    { "id": "document-row-typography-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["compact", "metadata-rich", "fluid-width"],
+  "supportedStates": ["default", "hover", "focus-within"],
+  "contentStress": [
+    "long-cyrillic-title",
+    "long-latin-title",
+    "metadata",
+    "fixed-icon",
+    "fixed-action",
+    "narrow-parent"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "title and metadata signatures reuse observed Documents typography and canonical file assets",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg"
+    },
+    {
+      "claim": "Document Row is a separate SHLZ extension with compact and metadata-rich list compositions",
+      "classification": "repository-decision",
+      "evidence": "docs/components/document-row.md"
+    },
+    {
+      "claim": "title link and trailing action own activation; the root is not clickable",
+      "classification": "repository-decision",
+      "evidence": "docs/components/document-row.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/data-content-wave5.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/content-states.spec.js-snapshots/document-row-metadata-rich-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: source-derived typography/assets are separated from the extension's repository-owned column geometry",
+    "structural-contract": "pass: all seven roots are classified and compact/metadata-rich variants keep a stable three-column composition",
+    "runtime-browser": "not-applicable: navigation and download remain native nested Link/Button behavior with no row controller",
+    "accessibility": "pass: native title links and named actions remain siblings, decorative icons are hidden and no root role/tabindex is added",
+    "focused-visual": "pass: computed column/action geometry, truncation and real hover/focus-within paint are asserted with a focused list snapshot",
+    "consumer-integration": "not-applicable: no real application consumer exists in this repository; Showcase remains an executable contract fixture",
+    "responsive-content-stress": "pass: long Cyrillic/Latin content remains bounded at 230px without uncontrolled horizontal overflow"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: metadata-rich snapshot documents composition geometry only"
+      ],
+      "realInteractionVisual": [
+        "pass: real row hover and native title focus produce the documented background/focus-within paint"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: Document Row delegates navigation and actions to native nested elements"
+      ]
+    },
+    "materialStates": ["row-hover", "row-focus-within"],
+    "browserTest": "tools/playwright/data-content-wave5.spec.js",
+    "manualStateWalk": "pass: hover, title/action Tab focus, compact/default content and 230px long-title stress inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "Document Row is a repository extension, not a literal standalone source component"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "component": "domain-table-compositions",
+  "authoritativeSource": "shlz-design-source/raw/svg/Table.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Managing appeals.svg",
+    "shlz-design-source/raw/svg/Form constructor.svg",
+    "docs/components/table.md"
+  ],
+  "implementation": [
+    "apps/showcase/src/consumer-workspace.js",
+    "packages/styles/components/table.css"
+  ],
+  "behavior": "apps/showcase/src/consumer-workspace.js",
+  "docs": "docs/components/table.md",
+  "rootSelector": "[data-component-audit-id^='domain-table-']",
+  "legacySelectors": [".shlz-consumer-workspace .shlz-table"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "domain-table-workspace-requests", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["consumer-defined-columns"],
+  "supportedStates": ["filtered", "sorted", "selected", "empty-result"],
+  "contentStress": [
+    "long-production-values",
+    "empty-dataset",
+    "narrow-wide-table",
+    "row-actions"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "source files show multiple domain-specific tables composed from shared Table cells",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Table.svg"
+    },
+    {
+      "claim": "domain tables remain consumer/application compositions rather than a new public controller or component",
+      "classification": "repository-decision",
+      "evidence": "docs/components/table.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/data-content-wave5.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/consumer-workspace.spec.js-snapshots/consumer-workspace-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: domain examples are reference compositions and do not override Table Cell as primitive authority",
+    "structural-contract": "pass: the single executable domain composition is classified and reuses public Table, Status, Link, Button and Checkbox primitives",
+    "runtime-browser": "pass: Data Workspace application code proves draft/apply/reset filtering, sorting, selection teardown and empty recovery",
+    "accessibility": "pass: composition preserves native Table headings/caption and names of nested controls and links",
+    "focused-visual": "pass: Data Workspace has focused composition evidence while Table geometry is asserted component-locally",
+    "consumer-integration": "pass: Data Workspace is exercised as live application state rather than a gallery screenshot",
+    "responsive-content-stress": "pass: narrow viewport creates overflow on the Table wrapper and realistic long values remain tabular"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: the focused workspace snapshot documents composition only"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: domain composition defines no independent paint state; nested primitives own their interaction paint"
+      ],
+      "runtimeBehavior": [
+        "pass: real filter, apply/reset, sort, selection and empty-result flows execute through application-owned mechanisms"
+      ]
+    },
+    "materialStates": ["filtered", "sorted", "selected", "empty-result"],
+    "browserTest": "tools/playwright/data-content-wave5.spec.js",
+    "manualStateWalk": "pass: filter apply/reset, sort, row selection, empty recovery, nested focus and narrow overflow inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "nine source-observed domain table layouts remain application-local references and are not promoted to public API"
+  ]
+}

@@ -19,6 +19,11 @@ const manifestPaths = [
   "tag",
   "person-tag",
   "avatar",
+  "table",
+  "file-row",
+  "document-row",
+  "empty-state",
+  "domain-table-compositions",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 
@@ -60,13 +65,9 @@ const interactionEvidenceTypes = [
 ];
 const interactionBrowserTest =
   "tools/playwright/interaction-evidence-wave35.spec.js";
-const diagnosticCensusComponents = new Set([
-  "status",
-  "badge",
-  "tag",
-  "person-tag",
-  "avatar",
-]);
+const diagnosticCensusStart = manifestPaths.indexOf(
+  "docs/component-audits/status.json",
+);
 
 test("project inventory has one valid contract for every discovered family", async () => {
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
@@ -169,7 +170,7 @@ test("audited component manifests are complete, traceable, and classification-dr
     assert.ok(manifest.rootSelector);
     assert.ok(manifest.legacySelectors.length);
     assert.ok(manifest.diagnosticBoundaries.length);
-    if (diagnosticCensusComponents.has(manifest.component)) {
+    if (manifestPaths.indexOf(manifestPath) >= diagnosticCensusStart) {
       assert.ok(
         Number.isInteger(manifest.diagnosticOccurrenceCount),
         `${manifest.component} needs an integer diagnostic occurrence census`,
@@ -256,22 +257,49 @@ test("audited component manifests are complete, traceable, and classification-dr
         `${manifest.component} must not invent material states for non-interactive ownership`,
       );
     }
-    assert.equal(
-      manifest.interactionEvidence.browserTest,
-      interactionBrowserTest,
-    );
+    if (manifest.interactionEvidence.browserTest !== interactionBrowserTest)
+      assert.ok(
+        manifest.browserTests.includes(
+          manifest.interactionEvidence.browserTest,
+        ),
+        `${manifest.component} interaction spec must be part of browserTests`,
+      );
     await access(manifest.interactionEvidence.browserTest);
     const interactionBrowserSource = await readFile(
       manifest.interactionEvidence.browserTest,
       "utf8",
     );
-    assert.ok(
-      interactionBrowserSource.includes(
-        `expectMaterialStates("${manifest.component}"`,
-      ),
-      `${manifest.component} must bind its declaration to an executable state assertion`,
-    );
-    if (realInteractionApplicable)
+    if (manifest.interactionEvidence.browserTest === interactionBrowserTest) {
+      assert.ok(
+        interactionBrowserSource.includes(
+          `expectMaterialStates("${manifest.component}"`,
+        ),
+        `${manifest.component} must bind its declaration to an executable state assertion`,
+      );
+    } else {
+      assert.doesNotMatch(
+        interactionBrowserSource,
+        /expectedMaterialStates/,
+        `${manifest.component} focused spec must not duplicate the manifest ledger`,
+      );
+      assert.ok(
+        new RegExp(
+          `expectMaterialStates\\(\\s*["']${manifest.component}["']\\s*\\)`,
+        ).test(interactionBrowserSource),
+        `${manifest.component} focused spec must exact-match its executed state ledger`,
+      );
+      for (const state of manifest.interactionEvidence.materialStates)
+        assert.ok(
+          new RegExp(
+            `verifyMaterialState\\(\\s*["']${manifest.component}["']\\s*,\\s*["']${state}["']`,
+          ).test(interactionBrowserSource),
+          `${manifest.component} must record ${state} only after its executable assertion`,
+        );
+    }
+    if (
+      realInteractionApplicable &&
+      manifest.interactionEvidence.browserTest === interactionBrowserTest
+    )
       assert.ok(
         new RegExp(`verifyPaintState\\(\\s*["']${manifest.component}["']`).test(
           interactionBrowserSource,

@@ -8,6 +8,10 @@
   text-align: center;
 }
 
+.shlz-empty-state[hidden] {
+  display: none;
+}
+
 .shlz-empty-state__visual {
   display: grid;
   flex: none;
