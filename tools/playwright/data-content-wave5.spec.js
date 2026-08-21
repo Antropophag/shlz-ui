@@ -24,17 +24,23 @@ const manifests = Object.fromEntries(
     ]),
   ),
 );
-const expectedMaterialStates = {
-  table: ["row-hover"],
-  "file-row": ["row-hover"],
-  "document-row": ["row-hover", "row-focus-within"],
-  "empty-state": [],
-  "domain-table-compositions": [
-    "filtered",
-    "sorted",
-    "selected",
-    "empty-result",
-  ],
+const verifiedMaterialStates = new Map();
+
+const verifyMaterialState = async (component, state, assertion) => {
+  await assertion();
+  const states = verifiedMaterialStates.get(component) ?? new Set();
+  states.add(state);
+  verifiedMaterialStates.set(component, states);
+};
+
+const expectMaterialStates = (component) => {
+  expect(
+    [...(verifiedMaterialStates.get(component) ?? [])].sort(),
+    `Wave 5 executed material states: ${component}`,
+  ).toEqual(
+    [...manifests[component].interactionEvidence.materialStates].sort(),
+  );
+  verifiedMaterialStates.delete(component);
 };
 
 const resolveColorToken = (page, token) =>
@@ -54,10 +60,6 @@ test("all Wave 5 executable, stress and live roots are classified", async ({
 }) => {
   for (const component of components)
     await expectClassifiedComponentOccurrences(page, manifests[component]);
-  for (const component of components)
-    expect(manifests[component].interactionEvidence.materialStates).toEqual(
-      expectedMaterialStates[component],
-    );
 });
 
 test("Table preserves native semantics, source geometry and ownership", async ({
@@ -85,20 +87,23 @@ test("Table preserves native semantics, source geometry and ownership", async ({
   const before = await cell.evaluate(
     (element) => window.getComputedStyle(element).backgroundColor,
   );
-  await row.hover();
-  const after = await cell.evaluate(
-    (element) => window.getComputedStyle(element).backgroundColor,
-  );
-  expect(after).not.toBe(before);
-  expect(after).toBe(
-    await resolveColorToken(page, "--shlz-semantic-color-surface-muted"),
-  );
+  await verifyMaterialState("table", "row-hover", async () => {
+    await row.hover();
+    const after = await cell.evaluate(
+      (element) => window.getComputedStyle(element).backgroundColor,
+    );
+    expect(after).not.toBe(before);
+    expect(after).toBe(
+      await resolveColorToken(page, "--shlz-semantic-color-surface-muted"),
+    );
+  });
 
   const numeric = page.locator(
     "[data-component-audit-id='table-typography-stress'] tbody .shlz-table__cell--numeric",
   );
   await expect(numeric).toHaveCSS("text-align", "end");
   await expect(numeric).toHaveCSS("font-variant-numeric", /tabular-nums/);
+  expectMaterialStates("table");
 });
 
 test("Table wrapper owns real narrow horizontal overflow", async ({ page }) => {
@@ -137,14 +142,16 @@ test("File Row keeps an inert root, real hover and bounded native targets", asyn
   const before = await row.evaluate(
     (element) => window.getComputedStyle(element).backgroundColor,
   );
-  await row.hover();
-  const after = await row.evaluate(
-    (element) => window.getComputedStyle(element).backgroundColor,
-  );
-  expect(after).not.toBe(before);
-  expect(after).toBe(
-    await resolveColorToken(page, "--shlz-source-color-background-primary"),
-  );
+  await verifyMaterialState("file-row", "row-hover", async () => {
+    await row.hover();
+    const after = await row.evaluate(
+      (element) => window.getComputedStyle(element).backgroundColor,
+    );
+    expect(after).not.toBe(before);
+    expect(after).toBe(
+      await resolveColorToken(page, "--shlz-source-color-background-primary"),
+    );
+  });
   await expect(row.locator(".shlz-file-row__primary")).toHaveJSProperty(
     "tagName",
     "A",
@@ -171,6 +178,7 @@ test("File Row keeps an inert root, real hover and bounded native targets", asyn
   expect(metrics.visualWidth).toBe(38);
   expect(metrics.actionsWidth).toBeGreaterThanOrEqual(64);
   expect(metrics.titleOverflow).toBe("ellipsis");
+  expectMaterialStates("file-row");
 });
 
 test("Document Row remains distinct, native and contained", async ({
@@ -190,21 +198,25 @@ test("Document Row remains distinct, native and contained", async ({
   const before = await row.evaluate(
     (element) => window.getComputedStyle(element).backgroundColor,
   );
-  await row.hover();
-  const hoverPaint = await row.evaluate(
-    (element) => window.getComputedStyle(element).backgroundColor,
-  );
   const expectedInteractionPaint = await resolveColorToken(
     page,
     "--shlz-source-color-background-primary",
   );
-  expect(hoverPaint).not.toBe(before);
-  expect(hoverPaint).toBe(expectedInteractionPaint);
+  await verifyMaterialState("document-row", "row-hover", async () => {
+    await row.hover();
+    const hoverPaint = await row.evaluate(
+      (element) => window.getComputedStyle(element).backgroundColor,
+    );
+    expect(hoverPaint).not.toBe(before);
+    expect(hoverPaint).toBe(expectedInteractionPaint);
+  });
   const link = row.locator(".shlz-document-row__title");
   await expect(link).toHaveJSProperty("tagName", "A");
-  await link.focus();
-  await expect(link).toBeFocused();
-  await expect(row).toHaveCSS("background-color", expectedInteractionPaint);
+  await verifyMaterialState("document-row", "row-focus-within", async () => {
+    await link.focus();
+    await expect(link).toBeFocused();
+    await expect(row).toHaveCSS("background-color", expectedInteractionPaint);
+  });
   const metrics = await row.evaluate((element) => ({
     clientWidth: element.clientWidth,
     scrollWidth: element.scrollWidth,
@@ -217,6 +229,7 @@ test("Document Row remains distinct, native and contained", async ({
   expect(metrics.scrollWidth).toBe(metrics.clientWidth);
   expect(metrics.actionWidth).toBe(40);
   expect(metrics.titleOverflow).toBe("ellipsis");
+  expectMaterialStates("document-row");
 });
 
 test("Empty State preserves source variants and presentation semantics", async ({
@@ -254,6 +267,7 @@ test("Empty State preserves source variants and presentation semantics", async (
     "tagName",
     "BUTTON",
   );
+  expectMaterialStates("empty-state");
 });
 
 test("Data Workspace is a consumer composition, not a public DomainTable", async ({
@@ -269,26 +283,71 @@ test("Data Workspace is a consumer composition, not a public DomainTable", async
     domain.locator("[class*='DomainTable'], [data-domain-table-controller]"),
   ).toHaveCount(0);
 
-  await domain
-    .getByRole("checkbox", { name: "Выбрать заявку SD-2418" })
-    .check();
-  const bulkSelection = domain.locator("[data-workspace-bulk]");
-  await expect(bulkSelection).toBeVisible();
-  await expect(
-    bulkSelection.locator("[data-workspace-selected-count]"),
-  ).toHaveText("1");
-  await bulkSelection.getByRole("button", { name: "Снять выбор" }).click();
-  await expect(bulkSelection).toBeHidden();
-
   const search = domain.getByRole("searchbox", { name: "Поиск по заявкам" });
-  await search.fill("отсутствующая заявка");
-  await expect(
-    domain.locator(
-      "[data-component-audit-id='empty-state-workspace-no-results']",
-    ),
-  ).toBeVisible();
-  await domain.getByRole("button", { name: "Сбросить условия" }).click();
+  await verifyMaterialState(
+    "domain-table-compositions",
+    "filtered",
+    async () => {
+      await search.fill("спецификации");
+      await expect(domain.locator("[data-workspace-row]:visible")).toHaveCount(
+        1,
+      );
+      await expect(domain.getByRole("link", { name: "SD-2409" })).toBeVisible();
+    },
+  );
+  await search.fill("");
   await expect(domain.locator("[data-workspace-row]:visible")).toHaveCount(3);
+
+  await verifyMaterialState("domain-table-compositions", "sorted", async () => {
+    const titleHeader = domain.getByRole("columnheader", { name: /Тема/ });
+    const titleCells = domain.locator("[data-workspace-title]");
+    const before = await titleCells.allTextContents();
+    await domain.getByRole("button", { name: /Тема/ }).click();
+    await expect(titleHeader).toHaveAttribute("aria-sort", "descending");
+    const after = await titleCells.allTextContents();
+    expect(after).not.toEqual(before);
+    expect(after).toEqual(
+      [...before].sort((left, right) => right.localeCompare(left, "ru")),
+    );
+  });
+
+  await verifyMaterialState(
+    "domain-table-compositions",
+    "selected",
+    async () => {
+      await domain
+        .getByRole("checkbox", { name: "Выбрать заявку SD-2418" })
+        .check();
+      const bulkSelection = domain.locator("[data-workspace-bulk]");
+      await expect(bulkSelection).toBeVisible();
+      await expect(
+        bulkSelection.locator("[data-workspace-selected-count]"),
+      ).toHaveText("1");
+      await bulkSelection.getByRole("button", { name: "Снять выбор" }).click();
+      await expect(bulkSelection).toBeHidden();
+    },
+  );
+
+  await verifyMaterialState(
+    "domain-table-compositions",
+    "empty-result",
+    async () => {
+      await search.fill("отсутствующая заявка");
+      await expect(
+        domain.locator(
+          "[data-component-audit-id='empty-state-workspace-no-results']",
+        ),
+      ).toBeVisible();
+      await expect(
+        domain.locator("[data-component-audit-id='table-workspace-requests']"),
+      ).toBeHidden();
+      await domain.getByRole("button", { name: "Сбросить условия" }).click();
+      await expect(domain.locator("[data-workspace-row]:visible")).toHaveCount(
+        3,
+      );
+    },
+  );
+  expectMaterialStates("domain-table-compositions");
 });
 
 test("Wave 5 meaningful text pairs pass the alpha-aware contrast guard", async ({

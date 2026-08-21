@@ -277,14 +277,23 @@ test("audited component manifests are complete, traceable, and classification-dr
         `${manifest.component} must bind its declaration to an executable state assertion`,
       );
     } else {
+      assert.doesNotMatch(
+        interactionBrowserSource,
+        /expectedMaterialStates/,
+        `${manifest.component} focused spec must not duplicate the manifest ledger`,
+      );
       assert.ok(
-        interactionBrowserSource.includes(manifest.component),
-        `${manifest.component} must be named by its focused interaction spec`,
+        new RegExp(
+          `expectMaterialStates\\(\\s*["']${manifest.component}["']\\s*\\)`,
+        ).test(interactionBrowserSource),
+        `${manifest.component} focused spec must exact-match its executed state ledger`,
       );
       for (const state of manifest.interactionEvidence.materialStates)
         assert.ok(
-          interactionBrowserSource.includes(state),
-          `${manifest.component} must bind ${state} to executable evidence`,
+          new RegExp(
+            `verifyMaterialState\\(\\s*["']${manifest.component}["']\\s*,\\s*["']${state}["']`,
+          ).test(interactionBrowserSource),
+          `${manifest.component} must record ${state} only after its executable assertion`,
         );
     }
     if (
