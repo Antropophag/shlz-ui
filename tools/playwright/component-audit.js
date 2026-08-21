@@ -47,6 +47,10 @@ export const expectClassifiedComponentOccurrences = async (page, manifest) => {
   );
   expect(inventory.occurrences.sort(), context).toEqual(expectedIds);
   expect(inventory.unclassifiedLegacy, context).toEqual([]);
+  if (Number.isInteger(manifest.diagnosticOccurrenceCount))
+    expect(inventory.diagnosticLegacy, context).toBe(
+      manifest.diagnosticOccurrenceCount,
+    );
 
   return inventory;
 };

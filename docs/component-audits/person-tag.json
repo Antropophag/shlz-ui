@@ -12,6 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
+  "diagnosticOccurrenceCount": 2,
   "occurrences": [
     { "id": "person-tag-showcase-static", "kind": "executable-fixture" },
     { "id": "person-tag-showcase-removable", "kind": "live-consumer" },
@@ -50,7 +51,7 @@
   "evidence": {
     "source-integrity": "pass: Default and Closable structures retain source geometry",
     "structural-contract": "pass: stable IDs classify static, live-removable and stress roots",
-    "runtime-browser": "pass: native remove button fires one click, removes consumer state and does not activate a parent",
+    "runtime-browser": "pass: native remove button fires one click for pointer, Enter and Space, removes consumer state, and disabled emits no click",
     "accessibility": "pass: decorative avatar avoids duplicate naming and remove names the person",
     "focused-visual": "pass: image, initials, long-name, action and disabled paint are computed locally",
     "consumer-integration": "pass: Showcase removable Person Tag updates real DOM state",

@@ -7,12 +7,12 @@ Baseline: `9b46c9edd4502863ee0da15d7a3bb887839635d7` (merged PR #18). Branch: `a
 | Family     | Executable/content roots | Live roots | Data Workspace | Inert diagnostics | Result   |
 | ---------- | -----------------------: | ---------: | -------------: | ----------------: | -------- |
 | Status     |                       12 |          4 |              3 |                13 | VERIFIED |
-| Badge      |                       12 |          0 |              0 |                 3 | VERIFIED |
+| Badge      |                       12 |          0 |              0 |                 4 | VERIFIED |
 | Tag        |                        3 |          0 |              0 |                 2 | VERIFIED |
 | Person Tag |                        2 |          1 |              0 |                 2 | VERIFIED |
 | Avatar     |                       13 |          2 |              0 |                 8 | VERIFIED |
 
-Counts are observed DOM roots, not acceptance thresholds. The component manifests enumerate 16 Status, 12 Badge, 3 Tag, 3 Person Tag and 15 Avatar audit IDs. The shared occurrence guard fails on missing, duplicate or newly unclassified executable roots; `#fidelity`, `.shlz-component-diagnostics` and `[inert]` are explicit diagnostic boundaries.
+Counts are observed DOM roots, not acceptance thresholds. The component manifests enumerate 16 Status, 12 Badge, 3 Tag, 3 Person Tag and 15 Avatar audit IDs. The shared occurrence guard fails on missing, duplicate or newly unclassified executable roots and on diagnostic-census drift; `#fidelity`, `.shlz-component-diagnostics` and `[inert]` are explicit diagnostic boundaries.
 
 ## Authority and boundaries
 
@@ -27,7 +27,7 @@ These are repository decisions where stated. Exact dimensions, variants and pain
 ## Evidence
 
 - `status-identity-wave4.spec.js` binds the five manifests to repository-wide occurrences, native semantics, exact Person Tag activation, Data Workspace composition, image/initial ownership and component-local stress.
-- `interaction-evidence-wave35.spec.js` binds each manifest material-state ledger to computed paint. Status, Badge, Tag and Avatar correctly declare only non-interactive default paint. Person Tag proves real hover, pointer-down active, keyboard focus-visible and disabled paint.
+- `interaction-evidence-wave35.spec.js` binds each manifest material-state ledger to computed paint. Status, Badge, Tag and Avatar use honest empty ledgers with concrete real-interaction/runtime N/A reasons; their default paint stays static evidence. Person Tag proves real hover, pointer-down active, keyboard focus-visible and disabled paint.
 - Person Tag pointer click, Enter and Space each cause exactly one native click/removal. Disabled remains inert. The consumer owns state removal; no behavior package/controller was added.
 - Long Cyrillic identity ellipsizes at 180px while Avatar/action remain fixed. Avatar sizes remain 24/32/40/64px and images retain `object-fit: cover`. Status remains a one-line label in narrow table context; Badge covers one, two and three-plus digits.
 - Logical icons remain inherited presentation: remove paint follows its Button, status has no invented icon, and no Icons foundation change was required.

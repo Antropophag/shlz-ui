@@ -136,36 +136,9 @@ test("contrast guard applies normal and large-text thresholds", () => {
   );
 });
 
-test("Wave 4 binds non-interactive defaults and real Person Tag action paint", async ({
+test("Wave 4 binds non-interactive N/A ledgers and real Person Tag action paint", async ({
   page,
 }) => {
-  await verifyPaintState(
-    "status",
-    "default-paint",
-    page.locator("[data-component-audit-id='status-showcase-blue']"),
-    { color: "rgb(37, 61, 152)", backgroundColor: "rgba(37, 61, 152, 0.15)" },
-  );
-  await verifyPaintState(
-    "badge",
-    "default-paint",
-    page.locator(
-      "[data-component-audit-id='badge-showcase-small-blue-single']",
-    ),
-    { color: "rgb(255, 255, 255)", backgroundColor: "rgb(37, 61, 152)" },
-  );
-  await verifyPaintState(
-    "tag",
-    "default-paint",
-    page.locator("[data-component-audit-id='tag-showcase-filled']"),
-    { color: "rgb(11, 22, 35)", backgroundColor: "rgb(238, 240, 244)" },
-  );
-  await verifyPaintState(
-    "avatar",
-    "default-paint",
-    page.locator("[data-component-audit-id='avatar-showcase-32-text']"),
-    { color: "rgb(37, 61, 152)", backgroundColor: "rgb(223, 226, 240)" },
-  );
-
   const remove = page.locator("[data-person-tag-remove]");
   await remove.hover();
   await verifyPaintState("person-tag", "remove-hover", remove, {

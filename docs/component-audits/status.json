@@ -12,6 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
+  "diagnosticOccurrenceCount": 13,
   "occurrences": [
     { "id": "status-showcase-blue", "kind": "executable-fixture" },
     { "id": "status-showcase-green", "kind": "executable-fixture" },
@@ -71,7 +72,7 @@
     "runtime-browser": "not-applicable: Status is a static textual primitive and application rendering owns changes",
     "accessibility": "pass: labels remain unfocusable text without implicit live-region semantics or color-only meaning",
     "focused-visual": "pass: component-local computed paint matrix covers all public modifiers",
-    "consumer-integration": "pass: Data Workspace filtering preserves state-to-label rendering across rerenders",
+    "consumer-integration": "pass: Data Workspace filters rows by visible status text while Status paint remains intentionally consumer-neutral",
     "responsive-content-stress": "pass: long text remains component-bounded in a narrow table cell"
   },
   "interactionEvidence": {
@@ -80,13 +81,13 @@
         "pass: source paint matrix is static visual evidence only"
       ],
       "realInteractionVisual": [
-        "pass: non-interactive Status default computed paint is verified; hover/focus/active are not material states"
+        "not-applicable: Status is static text with no hover, focus, active or disabled interaction contract"
       ],
       "runtimeBehavior": [
-        "pass: non-interactive ownership is asserted by absence of role, tabindex and control descendants"
+        "not-applicable: Status exposes no action, event, navigation or controller behavior"
       ]
     },
-    "materialStates": ["default-paint"],
+    "materialStates": [],
     "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
     "manualStateWalk": "pass: paint matrix, long label, narrow table cell and Data Workspace filtering inspected; pointer/keyboard states are not meaningful"
   },

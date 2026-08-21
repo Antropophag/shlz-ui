@@ -12,6 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
+  "diagnosticOccurrenceCount": 8,
   "occurrences": [
     { "id": "avatar-showcase-24-text", "kind": "executable-fixture" },
     { "id": "avatar-showcase-24-image", "kind": "executable-fixture" },
@@ -71,13 +72,13 @@
         "pass: twelve-cell source matrix and focused snapshot remain static visual evidence"
       ],
       "realInteractionVisual": [
-        "pass: non-interactive Avatar default computed paint and geometry are verified; no interaction states exist"
+        "not-applicable: Avatar is a visual identity primitive with no interactive paint states"
       ],
       "runtimeBehavior": [
-        "pass: absence of tabindex and interactive descendants proves presentation-only ownership"
+        "not-applicable: Avatar exposes no action, event, navigation, loader or controller behavior"
       ]
     },
-    "materialStates": ["default-paint"],
+    "materialStates": [],
     "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
     "manualStateWalk": "pass: image, initials, icon, four sizes, crop and flex-pressure surfaces inspected; interaction is not applicable"
   },

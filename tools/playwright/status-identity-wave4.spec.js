@@ -53,38 +53,45 @@ test("Status and Badge remain static text/count primitives", async ({
 test("Person Tag removal is native, exact and consumer-owned", async ({
   page,
 }) => {
-  const root = page.locator("[data-person-tag-consumer]");
-  const remove = root.getByRole("button", { name: "Удалить Анну Петрову" });
-  await expect(remove).toHaveAttribute("type", "button");
-  let clicks = 0;
-  await remove.evaluate((element) =>
-    element.addEventListener("click", () => window.__wave4Clicks++),
-  );
-  await page.evaluate(() => (window.__wave4Clicks = 0));
-  await remove.focus();
-  await page.keyboard.press("Enter");
-  await expect(root).toHaveCount(0);
-  clicks = await page.evaluate(() => window.__wave4Clicks);
-  expect(clicks).toBe(1);
+  const exercise = async (activate) => {
+    const root = page.locator("[data-person-tag-consumer]");
+    const remove = root.getByRole("button", { name: "Удалить Анну Петрову" });
+    await expect(remove).toHaveAttribute("type", "button");
+    await page.evaluate(() => {
+      window.__wave4Clicks = 0;
+      const target = document.querySelector("[data-person-tag-remove]");
+      target.addEventListener("click", () => window.__wave4Clicks++);
+    });
+    await expect(root).not.toHaveAttribute("role", /.+/);
+    await expect(root).not.toHaveAttribute("tabindex", /.+/);
+    await activate(remove);
+    await expect(root).toHaveCount(0);
+    await expect.poll(() => page.evaluate(() => window.__wave4Clicks)).toBe(1);
+  };
 
+  await exercise((remove) => remove.click());
   await page.reload();
-  const pointerRoot = page.locator("[data-person-tag-consumer]");
-  await pointerRoot.getByRole("button").click();
-  await expect(pointerRoot).toHaveCount(0);
-
+  await exercise(async (remove) => {
+    await remove.focus();
+    await page.keyboard.press("Enter");
+  });
   await page.reload();
-  const spaceRoot = page.locator("[data-person-tag-consumer]");
-  const spaceRemove = spaceRoot.getByRole("button");
-  await spaceRemove.focus();
-  await page.keyboard.press("Space");
-  await expect(spaceRoot).toHaveCount(0);
+  await exercise(async (remove) => {
+    await remove.focus();
+    await page.keyboard.press("Space");
+  });
 
   const disabled = page.locator(
     "[data-component-audit-id='person-tag-content-stress'] button",
   );
   await expect(disabled).toBeDisabled();
+  await page.evaluate(() => (window.__wave4DisabledClicks = 0));
+  await disabled.evaluate((element) =>
+    element.addEventListener("click", () => window.__wave4DisabledClicks++),
+  );
   await disabled.click({ force: true });
   await expect(disabled).toBeAttached();
+  expect(await page.evaluate(() => window.__wave4DisabledClicks)).toBe(0);
 });
 
 test("identity and label content remains component-bounded", async ({
@@ -119,6 +126,29 @@ test("identity and label content remains component-bounded", async ({
     element.textContent = "Очень длинное состояние заявки";
   });
   await expect(status).toHaveCSS("white-space", "nowrap");
+
+  const oneDigit = page.locator(
+    "[data-component-audit-id='badge-showcase-small-blue-single']",
+  );
+  const twoDigits = page.locator(
+    "[data-component-audit-id='badge-showcase-small-blue-multiple']",
+  );
+  const manyDigits = page.locator(
+    "[data-component-audit-id='badge-typography-stress']",
+  );
+  await expect(oneDigit).toHaveCSS("height", "16px");
+  await expect(oneDigit).toHaveCSS("min-width", "16px");
+  await expect(twoDigits).toHaveCSS("height", "16px");
+  await expect(twoDigits).toHaveCSS("min-width", "29px");
+  const badgeMetrics = await manyDigits.evaluate((element) => ({
+    clientWidth: element.clientWidth,
+    scrollWidth: element.scrollWidth,
+    height: element.getBoundingClientRect().height,
+  }));
+  expect(badgeMetrics.scrollWidth).toBeLessThanOrEqual(
+    badgeMetrics.clientWidth,
+  );
+  expect(badgeMetrics.height).toBe(16);
 
   for (const size of [24, 32, 40, 64]) {
     const image = page.locator(

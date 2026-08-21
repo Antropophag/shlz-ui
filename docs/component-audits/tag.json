@@ -12,6 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
+  "diagnosticOccurrenceCount": 2,
   "occurrences": [
     { "id": "tag-showcase-filled", "kind": "executable-fixture" },
     { "id": "tag-showcase-outlined", "kind": "executable-fixture" },
@@ -49,13 +50,13 @@
         "pass: filled/outlined matrix is static visual evidence only"
       ],
       "realInteractionVisual": [
-        "pass: non-interactive Tag default computed paint is verified; no hover/focus/active contract exists"
+        "not-applicable: generic Tag is display-only and has no hover, focus, active or disabled interaction contract"
       ],
       "runtimeBehavior": [
-        "pass: absence of role, tabindex and buttons proves display-only ownership"
+        "not-applicable: generic Tag exposes no action, event, navigation or controller behavior"
       ]
     },
-    "materialStates": ["default-paint"],
+    "materialStates": [],
     "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
     "manualStateWalk": "pass: filled, outlined, long label and narrow container inspected; pointer/keyboard interaction is not applicable"
   },

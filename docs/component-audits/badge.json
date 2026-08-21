@@ -12,6 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
+  "diagnosticOccurrenceCount": 4,
   "occurrences": [
     { "id": "badge-showcase-small-blue-single", "kind": "executable-fixture" },
     {
@@ -71,13 +72,13 @@
     "types": {
       "staticVisual": ["pass: count/dot matrix is static visual evidence only"],
       "realInteractionVisual": [
-        "pass: non-interactive Badge default computed paint is verified; no interactive material states exist"
+        "not-applicable: Badge is a static count or dot with no interactive paint states"
       ],
       "runtimeBehavior": [
-        "pass: absence of role, tabindex and nested controls proves presentational ownership"
+        "not-applicable: Badge exposes no action, event, navigation or controller behavior"
       ]
     },
-    "materialStates": ["default-paint"],
+    "materialStates": [],
     "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
     "manualStateWalk": "pass: count sizes, digit pressure, dot variants and parent naming guidance inspected; interaction is not applicable"
   },

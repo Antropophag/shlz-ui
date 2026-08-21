@@ -25,6 +25,7 @@ Required fields:
 
 - `component`, `authoritativeSource`, `referenceSources`, `implementation`;
 - `rootSelector`, `legacySelectors`, and `diagnosticBoundaries`;
+- `diagnosticOccurrenceCount`, the observed inert diagnostic-root census;
 - `occurrences`, `supportedSizes`, `supportedStates`, and `contentStress`;
 - `sourceClaims`, `browserTests`, `visualSnapshots`, and all evidence levels;
 - `interactionEvidence.types.staticVisual`, `.realInteractionVisual`, and
@@ -38,11 +39,15 @@ the contract allows it. A completed manifest uses `pass: <specific claim>` or
 reasons, and automatic passes for unsupported states are invalid. Evidence is
 not marked as passed merely because a test file exists.
 
-Each interaction evidence claim is a concrete `pass:` statement. Static fake
+Each applicable interaction evidence claim is a concrete `pass:` statement;
+non-interactive families use a concrete `not-applicable:` reason for real
+interaction visual and runtime behavior. Static fake
 states and screenshots belong only to `staticVisual`. A
 `realInteractionVisual` claim names real browser interaction and is backed by
 the one focused executable spec recorded in `browserTest`; it must cover all
-declared `materialStates`. Event, navigation, focus movement, selection, and
+declared `materialStates`. Non-interactive families declare an empty material
+state ledger instead of inventing a default interaction state. Event,
+navigation, focus movement, selection, and
 controller claims belong to `runtimeBehavior` and do not prove computed paint.
 The manual state walk records the surfaces actually inspected; it supplements
 but cannot replace executable evidence.
@@ -67,7 +72,9 @@ PR. A `FINDINGS` project status is invalid without at least one finding.
 4. Assert any component-specific diagnostic or legacy expectations after the
    shared guard returns its observed inventory.
 
-The guard compares discovered IDs with the manifest set, rejects missing and
-duplicate IDs, and rejects unclassified legacy/native roots. It never compares
-against an absolute count, so adding a legitimate consumer requires an explicit
-manifest classification rather than changing a threshold.
+The guard compares discovered executable IDs with the manifest set, rejects
+missing and duplicate IDs, and rejects unclassified legacy/native roots. It
+also compares inert diagnostic roots with their recorded census, so a new
+diagnostic occurrence requires explicit reclassification. It never uses an
+absolute executable count: adding a legitimate consumer requires a stable ID
+and manifest classification rather than changing a threshold.
