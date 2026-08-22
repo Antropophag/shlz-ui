@@ -1,31 +1,21 @@
 {
-  "completedPacket": "integration-eval",
-  "completedPackets": [
-    "contracts",
-    "planner-context",
-    "validation-telemetry",
-    "integration-eval"
-  ],
+  "completedPacket": "independent-review",
   "changed": [
-    "OpenSpec harness contracts",
-    "deterministic harness CLI and tests",
-    "execution/validation policy pointers and package scripts"
+    "atomic multi-session state and dependency handoffs",
+    "target-derived validation ledger and review lifecycle",
+    "path/deletion-safe evidence fingerprinting"
   ],
   "provenChecks": [
-    "9 focused harness tests pass",
-    "OpenSpec integration check passes",
-    "strict change validation passes"
+    "16 focused harness tests pass",
+    "Standards and Spec re-review pass",
+    "full pre-review repository check passed: 98 Node and 193 browser tests"
   ],
   "settledDecisions": [
-    "OpenSpec is normative; docs/exec-plans is operational state",
-    "v1 is operator-driven with an official SDK adapter seam",
-    "missing runtime token usage remains unavailable"
+    "all six initial review findings and deletion edge case are resolved",
+    "review context is fixed-diff plus known findings",
+    "browser suite was not invalidated by harness-only remediation"
   ],
-  "unresolvedFindings": [
-    "install dependencies, run aggregate checks, then independent review"
-  ],
-  "nextPacket": "independent-review",
-  "invalidatedAssumptions": [
-    "App Server automation is not the smallest supported v1"
-  ]
+  "unresolvedFindings": [],
+  "nextPacket": null,
+  "invalidatedAssumptions": ["a string deletion sentinel was collision-safe"]
 }
