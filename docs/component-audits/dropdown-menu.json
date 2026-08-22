@@ -1,0 +1,112 @@
+{
+  "component": "dropdown-menu",
+  "authoritativeSource": "shlz-design-source/raw/svg/Dropdown menu.svg",
+  "referenceSources": [
+    "docs/components/dropdown-menu.md",
+    "docs/components/dropdown-source.md"
+  ],
+  "implementation": ["packages/styles/components/dropdown.css"],
+  "behavior": "packages/behaviors/src/dropdown.ts",
+  "docs": "docs/components/dropdown-menu.md",
+  "rootSelector": "[data-component-audit-id^='dropdown-']",
+  "legacySelectors": [".shlz-dropdown"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 10,
+  "occurrences": [
+    { "id": "dropdown-showcase-actions", "kind": "executable-fixture" },
+    { "id": "dropdown-showcase-search", "kind": "executable-fixture" },
+    { "id": "dropdown-modal-consumer", "kind": "live-consumer" },
+    { "id": "dropdown-scrollable-stress", "kind": "content-stress-fixture" },
+    { "id": "dropdown-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "dropdown-plain-html-consumer", "kind": "live-consumer" }
+  ],
+  "supportedSizes": [
+    "200px-menu",
+    "216px-wide-menu",
+    "40px-item",
+    "340px-scrollable"
+  ],
+  "supportedStates": [
+    "closed",
+    "opened",
+    "item-hover",
+    "item-active",
+    "item-focus-visible",
+    "item-disabled",
+    "scroll-boundary"
+  ],
+  "contentStress": [
+    "long-item",
+    "many-items",
+    "scrollable",
+    "narrow-viewport",
+    "modal-containing-block"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "menu surfaces are predominantly 200px wide with a separate 216px family and 40px rows",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Dropdown menu.svg"
+    },
+    {
+      "claim": "the 340px composition contains a real 320px scroll region and a decorative source-backed 6 by 80 scrollbar",
+      "classification": "repository-decision",
+      "evidence": "docs/components/dropdown-source.md"
+    },
+    {
+      "claim": "menu semantics are limited to command sets with native button menuitems",
+      "classification": "repository-decision",
+      "evidence": "docs/components/dropdown-menu.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/interaction-evidence-wave6.spec.js",
+    "tools/playwright/dropdown.spec.js",
+    "tools/playwright/dropdown-fidelity.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/dropdown.spec.js-snapshots/dropdown-open-chromium-linux.png",
+    "tools/playwright/dropdown-fidelity.spec.js-snapshots/dropdown-scrollable-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Dropdown menu remains unchanged and source matrix counts and scrollable geometry are asserted",
+    "structural-contract": "pass: every executable root and static alternative is classified without conflating Select or generic navigation",
+    "runtime-browser": "pass: native trigger and menuitems prove open, toggle, arrows, Home, End, activation, outside pointer, Escape, reinitialization and teardown",
+    "accessibility": "pass: command items use native buttons with the complete menu keyboard model and disabled exclusion",
+    "focused-visual": "pass: opened shell and real item hover, active, focus-visible and disabled computed paint match the documented contract",
+    "consumer-integration": "pass: modal composition and plain HTML direct-ESM fixture consume the same reusable contract",
+    "responsive-content-stress": "pass: long and many-item fixtures prove bounded width, real overflow, scrolling and narrow containment"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source matrices and visual-highlight helpers remain static evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real browser open, hover, pointer-down, keyboard focus and disabled item states produce asserted computed geometry and paint"
+      ],
+      "runtimeBehavior": [
+        "pass: keyboard navigation, exact native activation, outside/Escape dismissal, focus restoration, scroll retention, idempotent enhancement and destroy execute in Chromium"
+      ]
+    },
+    "materialStates": [
+      "opened",
+      "item-hover",
+      "item-active",
+      "item-focus-visible",
+      "item-disabled",
+      "scroll-boundary"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave6.spec.js",
+    "manualStateWalk": "pass: pointer hover/down, Tab, ArrowUp/Down, Home/End, Enter/Space, Escape, outside pointer, disabled, reopen, destroy/reinit and narrow scrolling inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "viewport collision, submenus, typeahead and menuitemcheckbox/menuitemradio are unsupported"
+  ]
+}

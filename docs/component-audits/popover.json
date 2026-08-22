@@ -1,0 +1,110 @@
+{
+  "component": "popover",
+  "authoritativeSource": "shlz-design-source/raw/svg/Popover.svg",
+  "referenceSources": [
+    "docs/components/popover.md",
+    "docs/adr/0006-floating-positioning-engine.md"
+  ],
+  "implementation": ["packages/styles/components/popover.css"],
+  "behavior": "packages/behaviors/src/popover.ts",
+  "docs": "docs/components/popover.md",
+  "rootSelector": "[data-component-audit-id^='popover-']",
+  "legacySelectors": [".shlz-popover"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 12,
+  "occurrences": [
+    { "id": "popover-showcase-bottom", "kind": "executable-fixture" },
+    { "id": "popover-showcase-top", "kind": "executable-fixture" },
+    { "id": "popover-showcase-left", "kind": "executable-fixture" },
+    { "id": "popover-showcase-right", "kind": "executable-fixture" },
+    { "id": "popover-showcase-interactive", "kind": "live-consumer" },
+    { "id": "popover-edge-stress", "kind": "content-stress-fixture" },
+    { "id": "popover-scroll-stress", "kind": "content-stress-fixture" },
+    { "id": "popover-modal-consumer", "kind": "live-consumer" },
+    { "id": "popover-plain-html-consumer", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["236x90-source-surface", "viewport-bounded-width"],
+  "supportedStates": [
+    "closed",
+    "opened",
+    "trigger-focus",
+    "explicit-close-focus",
+    "escape-close",
+    "outside-close"
+  ],
+  "contentStress": [
+    "interactive-content",
+    "long-content",
+    "edge-anchor",
+    "narrow-viewport",
+    "scroll-anchor",
+    "modal-top-layer"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "twelve 236 by 90 surfaces cover four sides by three arrow alignments with radius 12 and two shadow layers",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Popover.svg"
+    },
+    {
+      "claim": "opening is a non-modal disclosure that leaves focus on the trigger and permits native controls in document order",
+      "classification": "repository-decision",
+      "evidence": "docs/components/popover.md"
+    },
+    {
+      "claim": "floating placement owns offset, flip, shift and viewport padding without DOM relocation",
+      "classification": "repository-decision",
+      "evidence": "docs/adr/0006-floating-positioning-engine.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/interaction-evidence-wave6.spec.js",
+    "tools/playwright/popover.spec.js",
+    "tools/playwright/overlay.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/popover.spec.js-snapshots/popover-bottom-chromium-linux.png",
+    "tools/playwright/popover.spec.js-snapshots/popover-top-chromium-linux.png",
+    "tools/playwright/popover.spec.js-snapshots/popover-edge-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Popover and all twelve placement variants remain unchanged and traceable",
+    "structural-contract": "pass: every executable panel is classified separately from Dropdown, Tooltip, Modal and diagnostic cards",
+    "runtime-browser": "pass: click and keyboard activation, toggle, outside pointer, Escape, explicit close, multiple surfaces, destroy/reinit and idempotent enhancement execute",
+    "accessibility": "pass: native trigger owns aria-expanded and aria-controls without fake dialog or modal semantics; nested controls remain native",
+    "focused-visual": "pass: real opened surface and trigger focus produce computed source-backed geometry, surface, radius and shadow evidence",
+    "consumer-integration": "pass: interactive, modal-nested and plain HTML direct-ESM consumers exercise the reusable contract",
+    "responsive-content-stress": "pass: edge, narrow and scrolling-anchor scenarios remain shifted, unclipped and correctly stacked"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: twelve source placements and focused snapshots remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real trigger activation opens the surface before source-backed geometry, radius, shadow and focus paint are asserted"
+      ],
+      "runtimeBehavior": [
+        "pass: toggle, outside, Escape, explicit close, native Tab order, latest-surface isolation, idempotent enhancement and destroy execute in Chromium"
+      ]
+    },
+    "materialStates": [
+      "opened",
+      "trigger-focus",
+      "explicit-close-focus",
+      "escape-close",
+      "outside-close"
+    ],
+    "browserTest": "tools/playwright/interaction-evidence-wave6.spec.js",
+    "manualStateWalk": "pass: trigger hover/focus, click, Enter/Space, nested Tab order, explicit close, Escape, outside pointer, reopen, destroy/reinit and narrow edge placement inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "focus entry is consumer-owned; focus trap, portals and nested popover trees are unsupported"
+  ]
+}

@@ -1,6 +1,11 @@
 import { listenForOutsidePointer } from "./internal/dismissal.js";
+import {
+  claimActiveFloatingEscape,
+  setActiveFloating,
+} from "./internal/active-floating.js";
 
 const itemSelector = '[role="menuitem"]';
+const controllers = new WeakMap<HTMLElement, DropdownController>();
 
 function isAvailable(item: HTMLElement): boolean {
   return !(
@@ -14,6 +19,7 @@ export class DropdownController {
   readonly menu: HTMLElement;
 
   #abortController = new AbortController();
+  #destroyed = false;
 
   constructor(root: HTMLElement) {
     const trigger = root.querySelector<HTMLButtonElement>(
@@ -31,6 +37,8 @@ export class DropdownController {
     this.root = root;
     this.trigger = trigger;
     this.menu = menu;
+    controllers.get(root)?.destroy();
+    controllers.set(root, this);
     this.#initialize();
   }
 
@@ -39,9 +47,10 @@ export class DropdownController {
   }
 
   open(focus: "first" | "last" | false = false): void {
-    if (this.trigger.disabled) return;
+    if (this.#destroyed || this.trigger.disabled) return;
     this.trigger.setAttribute("aria-expanded", "true");
     this.menu.hidden = false;
+    setActiveFloating(this.trigger.ownerDocument, this, true);
     if (focus) {
       const items = this.#items();
       items[focus === "first" ? 0 : items.length - 1]?.focus();
@@ -49,18 +58,25 @@ export class DropdownController {
   }
 
   close({ restoreFocus = false } = {}): void {
+    if (this.#destroyed) return;
     this.trigger.setAttribute("aria-expanded", "false");
     this.menu.hidden = true;
+    setActiveFloating(this.trigger.ownerDocument, this, false);
     if (restoreFocus) this.trigger.focus();
   }
 
   toggle(): void {
+    if (this.#destroyed) return;
     if (this.expanded) this.close();
     else this.open();
   }
 
   destroy(): void {
+    if (this.#destroyed || controllers.get(this.root) !== this) return;
+    this.close();
+    this.#destroyed = true;
     this.#abortController.abort();
+    controllers.delete(this.root);
   }
 
   #initialize(): void {
@@ -85,8 +101,12 @@ export class DropdownController {
         if (event.key === "ArrowDown" || event.key === "ArrowUp") {
           event.preventDefault();
           this.open(event.key === "ArrowDown" ? "first" : "last");
-        } else if (event.key === "Escape" && this.expanded) {
+        } else if (
+          this.expanded &&
+          claimActiveFloatingEscape(this.trigger.ownerDocument, this, event)
+        ) {
           event.preventDefault();
+          event.stopPropagation();
           this.close({ restoreFocus: true });
         }
       },
@@ -129,8 +149,9 @@ export class DropdownController {
       this.close();
       return;
     }
-    if (event.key === "Escape") {
+    if (claimActiveFloatingEscape(this.trigger.ownerDocument, this, event)) {
       event.preventDefault();
+      event.stopPropagation();
       this.close({ restoreFocus: true });
       return;
     }
@@ -153,6 +174,6 @@ export function enhanceDropdowns(
   scope: ParentNode = document,
 ): DropdownController[] {
   return [...scope.querySelectorAll<HTMLElement>("[data-shlz-dropdown]")].map(
-    (root) => new DropdownController(root),
+    (root) => controllers.get(root) ?? new DropdownController(root),
   );
 }

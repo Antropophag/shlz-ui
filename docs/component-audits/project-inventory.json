@@ -1,7 +1,7 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "170494b030800276524162418572c241b092e4c7",
+    "sha": "e893a7eb473d4c655a641ab984ed4c7b842d1723",
     "measuredAt": "2026-08-21",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
@@ -1405,21 +1405,22 @@
       "tests": [
         "tools/tests/dropdown-source.test.mjs",
         "tools/playwright/dropdown.spec.js",
-        "tools/playwright/dropdown-fidelity.spec.js"
+        "tools/playwright/dropdown-fidelity.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source tests",
-        "structural-contract": "controller tests",
-        "runtime-browser": "keyboard/dismiss tests",
-        "accessibility": "menu semantics partial",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "plain HTML only",
-        "responsive-content-stress": "scroll test"
+        "source-integrity": "pass: raw source matrix and scrollable geometry remain exact",
+        "structural-contract": "pass: command menus are classified separately from Select and local alternatives",
+        "runtime-browser": "pass: strict ledger covers open, keyboard, activation, dismissal, idempotence and teardown",
+        "accessibility": "pass: native command items implement menu focus movement and disabled exclusion",
+        "focused-visual": "pass: real opened, hover, active, focus-visible and disabled computed states are asserted",
+        "consumer-integration": "pass: modal and plain HTML consumers use the reusable contract",
+        "responsive-content-stress": "pass: long, narrow and real scroll overflow remain bounded"
       },
       "canonical_name": "Dropdown Menu",
       "category": "floating-ui",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Dropdown menu.svg"],
       "production_implementation": [
         "packages/styles/components/dropdown.css",
@@ -1427,12 +1428,20 @@
       ],
       "behavior": ["packages/behaviors/src/dropdown.ts"],
       "docs": ["docs/components/dropdown-menu.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": [
+        "apps/showcase/src/main.js#dropdown-demo",
+        "apps/showcase/src/main.js#dropdown-scrollable-demo"
+      ],
+      "live_consumers": [
+        "apps/showcase/src/main.js#showcase-modal",
+        "tools/fixtures/plain-html.html"
+      ],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "local_alternatives": [
+        "apps/showcase/src/wave3.js#.shlz-table__dropdown"
+      ],
       "scope": [
         "2-8/search/status/scrollbar items",
         "default/hover/selected/disabled/red",
@@ -1440,10 +1449,12 @@
         "long scroll"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "collision placement, submenus, typeahead and checkbox/radio menu patterns are unsupported"
+      ],
       "measured_counts": {
-        "executableShowcase": 3,
-        "liveConsumers": 0,
+        "executableShowcase": 4,
+        "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,
         "legacyNative": 0,
@@ -1454,21 +1465,22 @@
       "tests": [
         "tools/tests/remediation-wave2-source.test.mjs",
         "tools/playwright/components-next.spec.js",
-        "tools/playwright/remediation-wave2.spec.js"
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
       ],
       "evidence": {
-        "source-integrity": "placement test",
-        "structural-contract": "CSS/controller",
-        "runtime-browser": "interaction test",
-        "accessibility": "describedby test",
-        "focused-visual": "placement snapshots",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: all eight raw placement variants remain exact",
+        "structural-contract": "pass: short non-interactive descriptions are classified apart from title attributes and Popovers",
+        "runtime-browser": "pass: strict ledger covers focus, hover, blur, Escape, reopen, idempotence and teardown",
+        "accessibility": "pass: role tooltip and visible-only unique aria-describedby lifecycle are executable",
+        "focused-visual": "pass: real focus/hover visibility, geometry and paint match the source",
+        "consumer-integration": "pass: modal and plain HTML consumers use the reusable contract",
+        "responsive-content-stress": "pass: multiline edge content shifts inside a narrow viewport"
       },
       "canonical_name": "Tooltip",
       "category": "floating-ui",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Tooltip.svg"],
       "production_implementation": [
         "packages/styles/components/tooltip.css",
@@ -1476,18 +1488,23 @@
       ],
       "behavior": ["packages/behaviors/src/tooltip.ts"],
       "docs": ["docs/components/tooltip.md"],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "executable_fixtures": ["apps/showcase/src/main.js#tooltip-demo"],
+      "live_consumers": [
+        "apps/showcase/src/main.js#showcase-modal",
+        "tools/fixtures/plain-html.html"
+      ],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["8 placements", "hover/focus/Escape", "long text"],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "touch-only activation and interactive tooltip content are unsupported"
+      ],
       "measured_counts": {
         "executableShowcase": 5,
-        "liveConsumers": 0,
+        "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,
         "legacyNative": 0,
@@ -1497,21 +1514,22 @@
     {
       "tests": [
         "tools/tests/overlay-source.test.mjs",
-        "tools/playwright/popover.spec.js"
+        "tools/playwright/popover.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
       ],
       "evidence": {
-        "source-integrity": "placement test",
-        "structural-contract": "controller/floating tests",
-        "runtime-browser": "complete lifecycle tests",
-        "accessibility": "keyboard order test",
-        "focused-visual": "placement snapshots",
-        "consumer-integration": "plain HTML",
-        "responsive-content-stress": "viewport edge test"
+        "source-integrity": "pass: all twelve raw placement variants remain exact",
+        "structural-contract": "pass: non-modal anchored panels are classified apart from Dropdown, Tooltip and Modal",
+        "runtime-browser": "pass: strict ledger covers activation, toggle, explicit/outside/Escape dismissal, isolation, idempotence and teardown",
+        "accessibility": "pass: native trigger relationships and nested control order execute without fake modal semantics",
+        "focused-visual": "pass: real opened geometry, source surface and trigger focus are computed",
+        "consumer-integration": "pass: interactive, modal-nested and plain HTML consumers use the reusable contract",
+        "responsive-content-stress": "pass: long, narrow, edge and scrolling-anchor cases stay placed and unclipped"
       },
       "canonical_name": "Popover",
       "category": "floating-ui",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Popover.svg"],
       "production_implementation": [
         "packages/styles/components/popover.css",
@@ -1519,7 +1537,7 @@
       ],
       "behavior": ["packages/behaviors/src/popover.ts"],
       "docs": ["docs/components/popover.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/main.js#popover-demo"],
       "live_consumers": [
         "apps/showcase/src/main.js",
         "tools/fixtures/plain-html.html"
@@ -1535,10 +1553,12 @@
         "interactive content"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "focus entry is consumer-owned; focus traps, portals and nested popover trees are unsupported"
+      ],
       "measured_counts": {
         "executableShowcase": 8,
-        "liveConsumers": 0,
+        "liveConsumers": 3,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,
         "legacyNative": 0,
@@ -1745,27 +1765,27 @@
       }
     },
     {
-      "tests": [],
+      "tests": ["tools/playwright/interaction-evidence-wave6.spec.js"],
       "evidence": {
-        "source-integrity": "indexed source only",
-        "structural-contract": "gap",
-        "runtime-browser": "gap",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: raw Date-Picker and Calendar sources are indexed and unchanged",
+        "structural-contract": "not-applicable: census found no production implementation, docs or native substitute",
+        "runtime-browser": "not-applicable: source-only family exposes no behavior or API",
+        "accessibility": "not-applicable: no production semantic or keyboard model is claimed",
+        "focused-visual": "not-applicable: source-only sheets are not production fidelity fixtures",
+        "consumer-integration": "not-applicable: repository contains no consumer implementation",
+        "responsive-content-stress": "not-applicable: locale, viewport and month transition require a future implementation"
       },
       "canonical_name": "Date Picker / Calendar",
       "category": "form-controls",
       "implementation_status": "source-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Date-Picker.svg",
         "shlz-design-source/raw/svg/Calendar.svg"
       ],
       "production_implementation": [],
       "behavior": [],
-      "docs": [],
+      "docs": ["docs/component-audits/wave-6-report.md"],
       "executable_fixtures": [],
       "live_consumers": [],
       "data_workspace_consumers": [],
@@ -1780,7 +1800,9 @@
         "month cells/range/today"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "source-only: reusable Date Picker or Calendar requires a separate scoped API and behavior PR"
+      ],
       "measured_counts": {
         "executableShowcase": 0,
         "liveConsumers": 0,

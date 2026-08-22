@@ -19,6 +19,11 @@
   pointer-events: auto; /* DECISION: bridges the visual trigger/surface gap without interactive content. */
 }
 
+.shlz-tooltip--multiline {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
 .shlz-tooltip[hidden] {
   display: none;
 }

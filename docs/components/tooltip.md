@@ -38,7 +38,17 @@ Use `data-shlz-tooltip-placement` and optional non-negative
 `data-shlz-tooltip-offset` on the trigger. The controller exposes `open()`,
 `close()`, `updatePosition()` and `destroy()`.
 
+The source-default surface keeps one short line. Use
+`.shlz-tooltip--multiline` only for longer descriptions that must wrap within
+the documented viewport-bounded maximum width.
+
 The surface never receives focus and must not contain controls. Pointer
 entering the surface cancels a pending close only to bridge the visual gap; it
 does not make the tooltip interactive. Escape closes immediately. Touch-only
 activation and rich content are outside this contract.
+
+Enhancement is idempotent per trigger. When more than one Tooltip has been
+opened programmatically, only the most recently opened visible Tooltip owns
+Escape; unrelated visible instances are not closed by that keystroke.
+`destroy()` removes listeners, positioning observation and the description
+relationship, then permits a fresh enhancement.

@@ -83,6 +83,7 @@
 }
 
 .shlz-dropdown__item:hover,
+.shlz-dropdown__item:active,
 .shlz-dropdown__item:focus-visible,
 .shlz-dropdown__item[aria-current="true"] {
   background: var(--shlz-semantic-color-surface-muted);

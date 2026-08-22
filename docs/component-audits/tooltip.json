@@ -1,0 +1,89 @@
+{
+  "component": "tooltip",
+  "authoritativeSource": "shlz-design-source/raw/svg/Tooltip.svg",
+  "referenceSources": ["docs/components/tooltip.md"],
+  "implementation": ["packages/styles/components/tooltip.css"],
+  "behavior": "packages/behaviors/src/tooltip.ts",
+  "docs": "docs/components/tooltip.md",
+  "rootSelector": "[data-component-audit-id^='tooltip-']",
+  "legacySelectors": [".shlz-tooltip"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 8,
+  "occurrences": [
+    { "id": "tooltip-showcase-top", "kind": "executable-fixture" },
+    { "id": "tooltip-showcase-bottom-start", "kind": "executable-fixture" },
+    { "id": "tooltip-showcase-left", "kind": "executable-fixture" },
+    { "id": "tooltip-showcase-right", "kind": "executable-fixture" },
+    { "id": "tooltip-edge-stress", "kind": "content-stress-fixture" },
+    { "id": "tooltip-modal-consumer", "kind": "live-consumer" },
+    { "id": "tooltip-plain-html-consumer", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["100x37-source-surface", "280px-content-maximum"],
+  "supportedStates": [
+    "hidden",
+    "focus-open",
+    "hover-open",
+    "escaped",
+    "reopened"
+  ],
+  "contentStress": [
+    "long-multiline",
+    "edge-trigger",
+    "narrow-viewport",
+    "modal-top-layer"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "eight placements use a 100 by 37 dark surface, radius 8, white 15px text and no shadow",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Tooltip.svg"
+    },
+    {
+      "claim": "hover and keyboard focus share delayed non-interactive description behavior",
+      "classification": "repository-decision",
+      "evidence": "docs/components/tooltip.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/interaction-evidence-wave6.spec.js",
+    "tools/playwright/components-next.spec.js",
+    "tools/playwright/remediation-wave2.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/components-next.spec.js-snapshots/tooltip-placements-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Tooltip and all eight placement variants remain unchanged and traceable",
+    "structural-contract": "pass: executable tooltips are classified separately from title attributes and interactive Popovers",
+    "runtime-browser": "pass: pointer and keyboard focus open, blur and Escape close, reopen works, active ownership is isolated, enhancement is idempotent and destroy removes behavior",
+    "accessibility": "pass: role tooltip remains non-focusable and non-interactive while aria-describedby is unique and present only while visible",
+    "focused-visual": "pass: real focus-open visibility, geometry, opacity, surface and text paint are computed against source facts",
+    "consumer-integration": "pass: modal composition and plain HTML direct-ESM fixture consume the reusable tooltip contract",
+    "responsive-content-stress": "pass: long text, edge placement and narrow viewport remain shifted within the viewport"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: eight placement matrix and snapshots remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: keyboard focus and pointer hover create the visible tooltip before computed source-backed paint and geometry are asserted"
+      ],
+      "runtimeBehavior": [
+        "pass: aria-describedby lifecycle, blur, Escape, reopen, latest-surface ownership, idempotent enhancement and destroy execute in Chromium"
+      ]
+    },
+    "materialStates": ["focus-open", "hover-open", "escaped", "reopened"],
+    "browserTest": "tools/playwright/interaction-evidence-wave6.spec.js",
+    "manualStateWalk": "pass: hover, pointer leave, Tab focus, blur, Escape, reopen, destroy/reinit, long copy and narrow edge placement inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "touch-only activation and interactive tooltip content are unsupported"
+  ]
+}

@@ -51,15 +51,21 @@ test("popover behavior keeps native ownership and delegates positioning", async 
   assert.doesNotMatch(source, /customElements|Vue|innerHTML/);
 });
 
-test("popover and tooltip share only floating geometry infrastructure", async () => {
-  const floating = await readFile(
-    "packages/behaviors/src/internal/floating.ts",
-    "utf8",
-  );
-  const tooltip = await readFile("packages/behaviors/src/tooltip.ts", "utf8");
+test("floating controllers share bounded geometry and Escape ownership", async () => {
+  const [floating, active, dropdown, popover, tooltip] = await Promise.all([
+    readFile("packages/behaviors/src/internal/floating.ts", "utf8"),
+    readFile("packages/behaviors/src/internal/active-floating.ts", "utf8"),
+    readFile("packages/behaviors/src/dropdown.ts", "utf8"),
+    readFile("packages/behaviors/src/popover.ts", "utf8"),
+    readFile("packages/behaviors/src/tooltip.ts", "utf8"),
+  ]);
   assert.match(floating, /autoUpdate/);
   assert.match(floating, /flip/);
   assert.match(floating, /shift/);
+  assert.match(active, /WeakSet<Event>/);
+  assert.match(active, /claimActiveFloatingEscape/);
+  for (const controller of [dropdown, popover, tooltip])
+    assert.match(controller, /\bclaimActiveFloatingEscape\s*\(/);
   assert.match(tooltip, /role='tooltip'/);
   assert.match(tooltip, /aria-describedby/);
   assert.match(tooltip, /pointerenter/);
