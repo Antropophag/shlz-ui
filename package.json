@@ -17,8 +17,9 @@
     "test:packages": "node tools/package-consumer-smoke.mjs",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
+    "check:openspec": "node tools/check-openspec.mjs",
     "lint": "eslint . && stylelint 'packages/**/*.css' 'apps/**/*.css' && prettier --check .",
-    "check": "npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs && npm run test:packages && npm run test:e2e",
+    "check": "npm run check:openspec && npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs && npm run test:packages && npm run test:e2e",
     "format": "prettier --write ."
   },
   "devDependencies": {
