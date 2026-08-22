@@ -291,8 +291,12 @@ export function assertRouteConformance(
     throw new Error("discovered route surface requires changedFiles");
   if (!Array.isArray(actualChangedFiles))
     throw new Error("route conformance requires actual changed files");
-  const declaredFiles = [...new Set(discovered.changedFiles)].sort();
-  const actualFiles = [...new Set(actualChangedFiles)].sort();
+  const declaredFiles = [...new Set(discovered.changedFiles)].sort((a, b) =>
+    a.localeCompare(b),
+  );
+  const actualFiles = [...new Set(actualChangedFiles)].sort((a, b) =>
+    a.localeCompare(b),
+  );
   if (JSON.stringify(declaredFiles) !== JSON.stringify(actualFiles))
     throw new Error(
       "discovered changed-file set does not match actual target-relevant diff",
