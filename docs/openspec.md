@@ -20,7 +20,7 @@ The installed core profile exposes these repo-local skills:
 - `$openspec-sync-specs` — merge delta specs into living specs without archiving;
 - `$openspec-archive-change` — archive a completed change after verification.
 
-Use the generated skill's own syntax and prompts. The integration lives in `.agents/skills/openspec-*` and is maintained with the OpenSpec CLI, not by hand.
+Use the generated skill's own syntax and prompts. The integration lives in `.agents/skills/openspec-*`. This repository hardens generated archive/sync integrity and Markdown metadata locally; review those small patches whenever `openspec update` refreshes the upstream files.
 
 ## CLI checks
 

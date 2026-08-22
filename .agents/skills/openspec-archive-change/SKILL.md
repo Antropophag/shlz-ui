@@ -70,21 +70,24 @@ Archive a completed change in the experimental workflow.
 
    **If any artifacts are neither `done` nor `skipped`** (skipped artifacts satisfy the requirement - the change declares skip_specs):
    - Display warning listing incomplete artifacts
-   - Ask the user to confirm they want to proceed
-   - Proceed if user confirms
+   - Stop without syncing or archiving; the incomplete artifacts must be completed first
 
 3. **Check task completion status**
 
-   Read the tasks file (typically `tasks.md`) to check for incomplete tasks.
-
-   Count tasks marked with `- [ ]` (incomplete) vs `- [x]` (complete).
+   Run `openspec instructions apply --change "<name>" --json` with the same
+   selected-root flags. This resolves the schema's apply tracking contract
+   instead of assuming `tasks.md`. Use its parsed `tasks` and `progress` as the
+   completion source, and its `contextFiles` artifact-id mapping when reporting
+   the concrete tracked artifact paths.
 
    **If incomplete tasks found:**
    - Display warning showing count of incomplete tasks
-   - Ask the user to confirm they want to proceed
-   - Proceed if user confirms
+   - Stop without syncing or archiving; the tasks must be completed first
 
-   **If no tasks file exists:** Proceed without task-related warning.
+   **If apply instructions are blocked, invalid, or expose no tracked task
+   output:** Proceed without a task-related warning only when status marks the
+   corresponding artifact `skipped`; otherwise stop and report that task
+   completion could not be established.
 
 4. **Assess delta spec sync state**
 
@@ -129,6 +132,14 @@ Archive a completed change in the experimental workflow.
 
 5. **Perform the archive**
 
+   Validate the active change before creating the archive directory or moving
+   anything:
+   ```bash
+   openspec validate "<name>" --type change
+   ```
+   Keep the selected `--store <id>` flag on this command. If validation exits
+   non-zero, report the failure and stop with `changeRoot` untouched.
+
    Create an `archive` directory under `planningHome.changesDir` if it doesn't exist:
    ```bash
    mkdir -p "<planningHome.changesDir>/archive"
@@ -151,7 +162,7 @@ Archive a completed change in the experimental workflow.
    - Schema that was used
    - Archive location
    - Whether specs were synced (if applicable)
-   - Note about any warnings (incomplete artifacts/tasks)
+   - Confirmation that all artifacts, tasks, and change validation passed
 
 **Output On Success**
 
@@ -163,13 +174,13 @@ Archive a completed change in the experimental workflow.
 **Archived to:** the archive path derived from `planningHome.changesDir`/<target-name>/
 **Specs:** <"✓ Synced to main specs" only if the step 4 verification passed; otherwise "No delta specs" or "Sync skipped">
 
-<"All artifacts complete. All tasks complete." — or, if archived with warnings, list them instead (e.g. "Archived with 2 incomplete tasks")>
+All artifacts complete. All tasks complete. Change validation passed.
 ```
 
 **Guardrails**
 - Announce the selected change; prompt for selection when it is ambiguous
+- Stop on incomplete artifacts, incomplete or missing tracked tasks, or failed change validation
 - Use artifact graph (openspec status --json) for completion checking
-- Don't block archive on warnings - just inform and confirm
 - Preserve .openspec.yaml when moving to archive (it moves with the directory)
 - Show clear summary of what happened
 - If sync is requested, run the `openspec-sync-specs` workflow inline (agent-driven)

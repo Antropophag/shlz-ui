@@ -74,6 +74,11 @@ This is an **agent-driven** operation - you will read delta specs and directly e
 
 4. **For each delta spec, apply changes to main specs**
 
+   Before the first write, capture a reversible snapshot of every selected main
+   spec path: preserve the exact bytes of existing files and record which paths
+   did not exist. Keep this snapshot outside the specs tree until validation
+   succeeds. It covers every path this run may create, modify, or delete.
+
    Before the first main-spec write, obtain one current specs-rule snapshot:
    - If archive invoked this workflow inline and supplied a valid snapshot from
      `openspec instructions specs --change "<name>" --json`, reuse it and do not
@@ -152,7 +157,11 @@ This is an **agent-driven** operation - you will read delta specs and directly e
 5. **Validate updated main specs**
 
    Run `openspec validate --specs` with the same selected-root flags used earlier.
-   If validation fails, report the problems and do not claim the sync succeeded.
+   If validation fails, restore every existing file byte-for-byte from the
+   snapshot and remove every file created by this run, then verify the specs tree
+   matches its pre-sync state. Report the validation problems and restoration
+   result; do not claim the sync succeeded. Discard the snapshot only after
+   validation succeeds or restoration is verified.
 
 6. **Show summary**
 
@@ -250,6 +259,7 @@ Main specs are now updated. The change remains active - archive when implementat
 
 **Guardrails**
 - Read both delta and main specs before making changes
+- Snapshot every affected main-spec path before writing and restore the complete pre-sync state on validation failure
 - Preserve existing content not mentioned in delta
 - Never copy a delta file into a main spec as-is - merge its content so the main spec keeps the Main Spec Format Reference structure, with no delta operation headers
 - If something is unclear, ask for clarification
