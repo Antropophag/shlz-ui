@@ -5,6 +5,8 @@
     "version": 1,
     "intent": "Опубликуй showcase этого проекта на GitHub Pages.",
     "route": "direct",
+    "openSpecChange": "showcase-publishing",
+    "requiredDecisions": ["release-policy", "public-url"],
     "materialSignals": {
       "newCapability": true,
       "publishingOrRelease": true,

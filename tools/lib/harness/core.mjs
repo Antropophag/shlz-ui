@@ -122,6 +122,32 @@ export function evaluateRouteEligibility(assessment) {
     materialSignals.length || unresolvedMaterialSignals.length
       ? "open-spec"
       : "direct";
+  if (assessment.route === "open-spec") {
+    if (
+      typeof assessment.openSpecChange !== "string" ||
+      !assessment.openSpecChange ||
+      !Array.isArray(assessment.requiredDecisions) ||
+      assessment.requiredDecisions.some((id) => typeof id !== "string" || !id)
+    )
+      return {
+        eligible: false,
+        selectedRoute: "open-spec",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason:
+          "open-spec route requires change linkage and required decision identities",
+      };
+    if (requiredRoute !== "open-spec")
+      return {
+        eligible: false,
+        selectedRoute: "open-spec",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "route evidence does not establish OpenSpec impact",
+      };
+  }
   if (assessment.route === "direct") {
     if (
       !assessment.directEvidence ||
@@ -167,12 +193,12 @@ function assertExecutionState(execution) {
     throw new Error(
       `implementation is on default branch ${execution.defaultBranch}; mutation forbidden until redirected to a task branch`,
     );
-  if (execution.baseCurrent !== true)
+  if (execution.baseCurrent !== true || execution.startedAtCurrentBase !== true)
     throw new Error(
       "implementation branch must start from current origin/default branch",
     );
-  if (execution.initialTreeClean !== true)
-    throw new Error("implementation branch must start from a clean tree");
+  if (!Array.isArray(execution.preImplementationChanges))
+    throw new Error("execution state requires preImplementationChanges");
 }
 
 export function assertImplementationPreflight(
@@ -188,6 +214,24 @@ export function assertImplementationPreflight(
   if (assessment.route === "open-spec") {
     if (!requirementsState)
       throw new Error("open-spec implementation requires readiness state");
+    if (requirementsState.route !== "open-spec")
+      throw new Error(
+        "open-spec assessment requires open-spec readiness state",
+      );
+    if (requirementsState.intent !== assessment.intent)
+      throw new Error("requirements intent does not match route assessment");
+    if (requirementsState.openSpec?.change !== assessment.openSpecChange)
+      throw new Error(
+        "requirements OpenSpec change does not match route assessment",
+      );
+    const decisionIds = new Set(
+      requirementsState.decisions.map(({ id }) => id),
+    );
+    const missing = assessment.requiredDecisions.filter(
+      (id) => !decisionIds.has(id),
+    );
+    if (missing.length)
+      throw new Error(`required decisions are missing: ${missing.join(", ")}`);
     const status = requirementsStatus(requirementsState);
     if (!status.readyForPlanning)
       throw new Error(
@@ -195,10 +239,29 @@ export function assertImplementationPreflight(
       );
   }
   assertExecutionState(execution);
+  const allowedPlanningPrefixes =
+    assessment.route === "open-spec"
+      ? [
+          `openspec/changes/${assessment.openSpecChange}/`,
+          `docs/exec-plans/active/${assessment.openSpecChange}/`,
+        ]
+      : [];
+  const unexpectedChanges = execution.preImplementationChanges.filter(
+    (file) =>
+      !allowedPlanningPrefixes.some((prefix) => file.startsWith(prefix)),
+  );
+  if (unexpectedChanges.length)
+    throw new Error(
+      `implementation did not start from a clean task state: ${unexpectedChanges.join(", ")}`,
+    );
   return { allowed: true, route: assessment.route };
 }
 
-export function assertRouteConformance(assessment, discovered) {
+export function assertRouteConformance(
+  assessment,
+  discovered,
+  actualChangedFiles,
+) {
   const initial = evaluateRouteEligibility(assessment);
   if (!initial.eligible)
     throw new Error("initial route is not eligible; re-route required");
@@ -206,6 +269,14 @@ export function assertRouteConformance(assessment, discovered) {
     throw new Error("discovered route surface version must be 1");
   if (!Array.isArray(discovered.changedFiles))
     throw new Error("discovered route surface requires changedFiles");
+  if (!Array.isArray(actualChangedFiles))
+    throw new Error("route conformance requires actual changed files");
+  const declaredFiles = [...new Set(discovered.changedFiles)].sort();
+  const actualFiles = [...new Set(actualChangedFiles)].sort();
+  if (JSON.stringify(declaredFiles) !== JSON.stringify(actualFiles))
+    throw new Error(
+      "discovered changed-file set does not match actual target-relevant diff",
+    );
   validateSignalSet(discovered.materialSignals, "discovered route surface");
   const material = materialSignalNames.filter(
     (name) => discovered.materialSignals[name] !== false,
@@ -224,15 +295,20 @@ export function assertRouteConformance(assessment, discovered) {
 export function assertImplementationDelivery(delivery) {
   if (!delivery || typeof delivery !== "object")
     throw new Error("implementation delivery evidence is required");
-  if (delivery.currentBranch === delivery.defaultBranch)
+  const actual = delivery.actual;
+  if (!actual || typeof actual !== "object")
+    throw new Error(
+      "implementation delivery requires actual repository evidence",
+    );
+  if (actual.currentBranch === delivery.defaultBranch)
     throw new Error(
       `implementation cannot complete on default branch ${delivery.defaultBranch}`,
     );
-  if (delivery.pushBranch === delivery.defaultBranch)
+  if (actual.pushBranch === delivery.defaultBranch)
     throw new Error(
       `direct push to default branch ${delivery.defaultBranch} is forbidden`,
     );
-  if (delivery.pushBranch !== delivery.currentBranch)
+  if (actual.pushBranch !== actual.currentBranch)
     throw new Error("implementation must push its current task branch");
   if (
     typeof delivery.pullRequestUrl !== "string" ||
@@ -243,7 +319,22 @@ export function assertImplementationDelivery(delivery) {
     throw new Error(
       "implementation completion requires a GitHub pull request URL",
     );
-  if (delivery.pullRequestBase !== delivery.defaultBranch)
+  if (
+    !delivery.pullRequestUrl.startsWith(
+      `https://github.com/${actual.repository}/pull/`,
+    )
+  )
+    throw new Error(`pull request does not belong to ${actual.repository}`);
+  if (
+    actual.pullRequest?.url !== delivery.pullRequestUrl ||
+    actual.pullRequest?.state !== "OPEN"
+  )
+    throw new Error(
+      "delivery evidence does not identify the actual open pull request",
+    );
+  if (actual.pullRequest.headRefName !== actual.currentBranch)
+    throw new Error("pull request head does not match the current task branch");
+  if (actual.pullRequest.baseRefName !== delivery.defaultBranch)
     throw new Error("pull request must target the default branch");
   return { allowed: true, pullRequestUrl: delivery.pullRequestUrl };
 }
@@ -253,18 +344,64 @@ export async function gitImplementationState(
   { defaultBranch = "main", baseRef = "origin/main" } = {},
 ) {
   const options = { cwd: repoRoot };
-  const [{ stdout: branch }, { stdout: head }, { stdout: base }] =
-    await Promise.all([
-      exec("git", ["branch", "--show-current"], options),
-      exec("git", ["rev-parse", "HEAD"], options),
-      exec("git", ["rev-parse", baseRef], options),
-    ]);
+  const [
+    { stdout: branch },
+    { stdout: head },
+    { stdout: base },
+    { stdout: mergeBase },
+    { stdout: status },
+  ] = await Promise.all([
+    exec("git", ["branch", "--show-current"], options),
+    exec("git", ["rev-parse", "HEAD"], options),
+    exec("git", ["rev-parse", baseRef], options),
+    exec("git", ["merge-base", "HEAD", baseRef], options),
+    exec("git", ["status", "--porcelain=v1"], options),
+  ]);
+  const preImplementationChanges = status.trim()
+    ? status
+        .trimEnd()
+        .split("\n")
+        .map((line) => line.slice(3).split(" -> ").at(-1))
+    : [];
   return {
     currentBranch: branch.trim(),
     defaultBranch,
     baseCurrent: head.trim() === base.trim(),
-    initialTreeClean: head.trim() === base.trim(),
+    startedAtCurrentBase: mergeBase.trim() === base.trim(),
+    preImplementationChanges,
     baseRef,
+  };
+}
+
+export async function gitDeliveryState(repoRoot, pullRequestUrl) {
+  const options = { cwd: repoRoot };
+  const [branch, upstream, repository, pullRequest] = await Promise.all([
+    exec("git", ["branch", "--show-current"], options),
+    exec(
+      "git",
+      ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"],
+      options,
+    ),
+    exec("gh", ["repo", "view", "--json", "nameWithOwner"], options),
+    exec(
+      "gh",
+      [
+        "pr",
+        "view",
+        pullRequestUrl,
+        "--json",
+        "url,headRefName,baseRefName,state",
+      ],
+      options,
+    ),
+  ]);
+  const [pushRemote, ...pushParts] = upstream.stdout.trim().split("/");
+  return {
+    repository: JSON.parse(repository.stdout).nameWithOwner,
+    currentBranch: branch.stdout.trim(),
+    pushRemote,
+    pushBranch: pushParts.join("/"),
+    pullRequest: JSON.parse(pullRequest.stdout),
   };
 }
 

@@ -1,7 +1,9 @@
 {
   "version": 1,
-  "intent": "Harden repo-local routing and implementation delivery after the GitHub Pages bypass incident.",
+  "intent": "Harden repo-local routing so direct execution is positively proven, material discovered surfaces re-route, and implementation uses a task branch and PR.",
   "route": "open-spec",
+  "openSpecChange": "harden-harness-route-eligibility",
+  "requiredDecisions": ["route-contract", "delivery-contract"],
   "materialSignals": {
     "newCapability": true,
     "publishingOrRelease": false,

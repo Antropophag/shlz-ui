@@ -7,6 +7,12 @@
     "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
     "docs/openspec.md",
     "docs/requirements-elicitation.md",
+    "openspec/changes/harden-harness-route-eligibility/.openspec.yaml",
+    "openspec/changes/harden-harness-route-eligibility/design.md",
+    "openspec/changes/harden-harness-route-eligibility/proposal.md",
+    "openspec/changes/harden-harness-route-eligibility/specs/harness/requirements-readiness/spec.md",
+    "openspec/changes/harden-harness-route-eligibility/specs/harness/route-eligibility/spec.md",
+    "openspec/changes/harden-harness-route-eligibility/tasks.md",
     "tools/harness.mjs",
     "tools/lib/harness/core.mjs",
     "tools/tests/harness.test.mjs"

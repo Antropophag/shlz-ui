@@ -11,7 +11,7 @@ Brownfield contracts are added incrementally when a capability is changed or del
 
 ## Impact routing
 
-Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work. Record a compact version 1 route assessment with every closed-set material signal set to `true`, `false`, or `unknown`, then run `npm run harness -- route-check <assessment>` before implementation. The harness validates semantic evidence supplied by the agent; it does not infer intent from keywords.
+Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work. Record a compact version 1 route assessment with every closed-set material signal set to `true`, `false`, or `unknown`, then run `npm run harness -- route-check <assessment>` before implementation. OpenSpec assessments also bind the change name and every material decision identity the requirements state must contain. The harness validates semantic evidence supplied by the agent; it does not infer intent from keywords.
 
 Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, resolve requirements through `docs/requirements-elicitation.md`; after synthesis and authorization, use `docs/agent-execution.md` for execution sizing and orchestration.
 
@@ -19,7 +19,7 @@ Impact routing decides whether contracts need OpenSpec. It does not decide how m
 
 Use the direct workflow only when positive evidence establishes that the change is local, reversible, behavior-preserving, free of external effects and contract changes, and has no material ambiguity:
 
-`inspect → route-check → branch preflight → implement → route-conformance → relevant validation → delivery-check → PR`
+`inspect → route-check → branch preflight → implement → route-conformance → relevant validation → PR → delivery-check`
 
 Typical cases include replacing or recoloring an existing asset, fixing a typo or formatting, correcting documentation without changing a contract, an obvious local fix whose contract is unchanged, and mechanical workflow maintenance that preserves triggers, permissions, and external behavior. Direct does not require `requirements.json`, but it does require positive route evidence. If any material signal is true or unknown, or discovery/diff reveals contract or external-effect impact, reclassify before implementation or completion.
 
@@ -46,7 +46,7 @@ npm run harness -- implementation-preflight <route-assessment> \
   [--requirements <requirements-state>] --default main --base origin/main
 ```
 
-The current branch must be a task branch created from the clean current base. For OpenSpec, readiness and authorization must also pass. Planning artifacts may exist in the working tree; preflight proves that the branch HEAD started at the current base before implementation commits.
+Fetch first so `origin/main` is current. The current branch must be a task branch whose merge base and pre-implementation HEAD are that base. For OpenSpec, readiness, authorization, intent/change linkage, required decision identities, and the absence of pre-existing changes outside that change's planning roots must also pass. Direct preflight permits no pre-existing changes.
 
 OpenSpec tasks describe executable outcomes, not individual assertions. Keep acceptance detail in specs/tests. More than 12 tasks, or several independently verifiable components/shared seams, requires an explicit regroup/decomposition check in the execution plan; one OpenSpec change may span multiple packets and sessions.
 

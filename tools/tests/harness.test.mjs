@@ -101,6 +101,16 @@ test("direct eligibility is positive, narrow, and conservative", () => {
     ).eligible,
     false,
   );
+  assert.equal(
+    evaluateRouteEligibility({
+      ...directAssessment(),
+      route: "open-spec",
+      directEvidence: undefined,
+      openSpecChange: "unnecessary-spec",
+      requiredDecisions: [],
+    }).eligible,
+    false,
+  );
 });
 
 test("fully determined contract work routes to OpenSpec without interview", () => {
@@ -108,12 +118,17 @@ test("fully determined contract work routes to OpenSpec without interview", () =
     intent: "Add a fully specified public contract",
     route: "open-spec",
     directEvidence: undefined,
+    openSpecChange: "add-capability",
+    requiredDecisions: [],
     materialSignals: {
       ...directAssessment().materialSignals,
       publicContract: true,
     },
   });
-  const state = requirementsState({ decisions: [] });
+  const state = requirementsState({
+    intent: assessment.intent,
+    decisions: [],
+  });
   assert.deepEqual(evaluateRouteEligibility(assessment), {
     eligible: true,
     selectedRoute: "open-spec",
@@ -126,7 +141,8 @@ test("fully determined contract work routes to OpenSpec without interview", () =
       currentBranch: "feat/public-contract",
       defaultBranch: "main",
       baseCurrent: true,
-      initialTreeClean: true,
+      startedAtCurrentBase: true,
+      preImplementationChanges: [],
     }),
   );
 });
@@ -165,10 +181,30 @@ test("exact GitHub Pages intent is non-direct and blocks mutation on owned decis
           currentBranch: "feat/pages",
           defaultBranch: "main",
           baseCurrent: true,
-          initialTreeClean: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
         },
       ),
     /requirements are not ready.*release-policy, public-url/,
+  );
+  const unrelatedReady = requirementsState({
+    intent: fixture.intent,
+    openSpec: { change: "showcase-publishing", status: "synthesized" },
+  });
+  assert.throws(
+    () =>
+      assertImplementationPreflight(
+        { ...fixture.routeAssessment, route: "open-spec" },
+        unrelatedReady,
+        {
+          currentBranch: "feat/pages",
+          defaultBranch: "main",
+          baseCurrent: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
+        },
+      ),
+    /required decisions are missing: release-policy, public-url/,
   );
   assert.equal(
     fixture.expectedBeforeDecisionResolution.implementationMutations,
@@ -179,24 +215,45 @@ test("exact GitHub Pages intent is non-direct and blocks mutation on owned decis
 test("direct completion re-routes on material discovered surface but not harmless workflow maintenance", () => {
   assert.throws(
     () =>
-      assertRouteConformance(directAssessment(), {
-        version: 1,
-        changedFiles: [".github/workflows/pages.yml"],
-        materialSignals: {
-          ...directAssessment().materialSignals,
-          publishingOrRelease: true,
-          deploymentSemantics: true,
-          permissionsOrSecurity: true,
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [".github/workflows/pages.yml"],
+          materialSignals: {
+            ...directAssessment().materialSignals,
+            publishingOrRelease: true,
+            deploymentSemantics: true,
+            permissionsOrSecurity: true,
+          },
         },
-      }),
+        [".github/workflows/pages.yml"],
+      ),
     /direct route no longer conforms.*re-route required/,
   );
   assert.doesNotThrow(() =>
-    assertRouteConformance(directAssessment(), {
-      version: 1,
-      changedFiles: [".github/workflows/ci.yml"],
-      materialSignals: directAssessment().materialSignals,
-    }),
+    assertRouteConformance(
+      directAssessment(),
+      {
+        version: 1,
+        changedFiles: [".github/workflows/ci.yml"],
+        materialSignals: directAssessment().materialSignals,
+      },
+      [".github/workflows/ci.yml"],
+    ),
+  );
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [],
+          materialSignals: directAssessment().materialSignals,
+        },
+        [".github/workflows/pages.yml"],
+      ),
+    /does not match actual target-relevant diff/,
   );
 });
 
@@ -207,30 +264,62 @@ test("implementation preflight and delivery enforce task branch to PR", () => {
         currentBranch: "main",
         defaultBranch: "main",
         baseCurrent: true,
-        initialTreeClean: true,
+        startedAtCurrentBase: true,
+        preImplementationChanges: [],
       }),
     /default branch main.*mutation forbidden/,
   );
   assert.throws(
     () =>
       assertImplementationDelivery({
-        currentBranch: "feat/guard",
         defaultBranch: "main",
-        pushRemote: "origin",
-        pushBranch: "main",
         pullRequestUrl: null,
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "main",
+        },
       }),
     /direct push to default branch main is forbidden/,
   );
   assert.doesNotThrow(() =>
     assertImplementationDelivery({
-      currentBranch: "feat/guard",
       defaultBranch: "main",
-      pushRemote: "origin",
-      pushBranch: "feat/guard",
       pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
-      pullRequestBase: "main",
+      actual: {
+        repository: "Antropophag/shlz-ui",
+        currentBranch: "feat/guard",
+        pushRemote: "origin",
+        pushBranch: "feat/guard",
+        pullRequest: {
+          url: "https://github.com/Antropophag/shlz-ui/pull/29",
+          headRefName: "feat/guard",
+          baseRefName: "main",
+          state: "OPEN",
+        },
+      },
     }),
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery({
+        defaultBranch: "main",
+        pullRequestUrl: "https://github.com/other/repo/pull/1",
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "feat/guard",
+          pullRequest: {
+            url: "https://github.com/other/repo/pull/1",
+            headRefName: "feat/guard",
+            baseRefName: "main",
+            state: "OPEN",
+          },
+        },
+      }),
+    /pull request does not belong to Antropophag\/shlz-ui/,
   );
 });
 

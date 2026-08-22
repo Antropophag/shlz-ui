@@ -13,6 +13,7 @@ import {
   createReviewState,
   fingerprintFiles,
   gitEvidence,
+  gitDeliveryState,
   gitImplementationState,
   pausePacket,
   readJson,
@@ -118,16 +119,33 @@ switch (command) {
     break;
   }
   case "route-conformance":
+    {
+      const evidence = await gitEvidence(
+        repoRoot,
+        option("--base") ?? "origin/main",
+      );
+      const targetRelevantFiles = evidence.changedFiles.filter(
+        (file) => !file.startsWith("docs/exec-plans/active/"),
+      );
+      output(
+        assertRouteConformance(
+          await readJson(absolute(args[0])),
+          await readJson(absolute(args[1])),
+          targetRelevantFiles,
+        ),
+      );
+    }
+    break;
+  case "delivery-check": {
+    const delivery = await readJson(absolute(args[0]));
     output(
-      assertRouteConformance(
-        await readJson(absolute(args[0])),
-        await readJson(absolute(args[1])),
-      ),
+      assertImplementationDelivery({
+        ...delivery,
+        actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
+      }),
     );
     break;
-  case "delivery-check":
-    output(assertImplementationDelivery(await readJson(absolute(args[0]))));
-    break;
+  }
   case "plan": {
     const requirementsPath = option("--requirements");
     const plan = createPlan(

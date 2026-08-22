@@ -37,15 +37,15 @@ Read the returned contracts, implementation paths, tests, evidence, and current 
 
 ## Route conformance and delivery
 
-Before completing direct work, inspect the target-relevant diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. Run:
+Before completing direct work, inspect the target-relevant diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. The CLI derives the actual Git diff from the fixed base, excludes only operational active-plan state, and rejects an incomplete or stale declared file set. Run:
 
 ```bash
-npm run harness -- route-conformance <route-assessment> <discovered-surface>
+npm run harness -- route-conformance <route-assessment> <discovered-surface> --base origin/main
 ```
 
 If deployment/publishing/release automation, permissions, public contracts, destructive effects, or another material/unknown signal appears, completion is blocked and the work returns to requirements/OpenSpec. A workflow pathname is an inspection trigger, not a keyword verdict: affirmatively behavior-preserving workflow text/format maintenance remains direct.
 
-Normal successful implementation then pushes only its current task branch, creates a PR targeting `main`, and validates compact delivery evidence:
+Normal successful implementation then pushes only its current task branch, creates a PR targeting `main`, and validates compact delivery evidence against the actual upstream, repository, and open PR returned by Git and GitHub:
 
 ```bash
 npm run harness -- delivery-check <delivery-evidence>
