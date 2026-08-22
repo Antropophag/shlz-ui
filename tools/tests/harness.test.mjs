@@ -268,14 +268,19 @@ test("agent routing preserves inspect-first readiness and apply re-entry", async
     ].map((file) => readFile(path.join(root, file), "utf8")),
   );
   assert.match(agents, /requirements-elicitation\.md/);
+  assert.match(agents, /generated OpenSpec skills/);
+  assert.match(agents, /Explicit pre-authorization/);
   assert.match(protocol, /no unresolved blocking user-owned decisions/);
   assert.match(protocol, /repo-owned/);
   assert.match(protocol, /agent-owned/);
   assert.match(protocol, /user-owned/);
-  assert.match(propose, /pre-authorized/);
-  assert.match(propose, /skip interview/);
-  assert.match(apply, /harness pause/);
-  assert.match(update, /without asking the same decision again/);
+  assert.match(protocol, /harness -- pause/);
+  assert.match(protocol, /delegated/);
+  for (const generatedSkill of [propose, apply, update])
+    assert.doesNotMatch(
+      generatedSkill,
+      /requirements-elicitation|pre-authorized|harness pause|without asking the same decision again/,
+    );
 });
 
 test("requirements smoke matrix covers all ten routes deterministically", async () => {
