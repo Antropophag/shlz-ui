@@ -106,6 +106,8 @@ Do not modify unrelated files.
 
 Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
 
+After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
+
 ## UI component completion gate
 
 Do not call a component fixed, complete, production-ready, review-ready, or a
