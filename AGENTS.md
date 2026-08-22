@@ -106,9 +106,11 @@ Do not modify unrelated files.
 
 Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
 
+For short, ambiguous, or substantial intents, use the inspect-first requirements readiness protocol in `docs/requirements-elicitation.md` before OpenSpec synthesis or execution planning. Ask only unresolved blocking user-owned decisions; fully determined and direct work skips interview.
+
 After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
 
-For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` before implementation. Keep OpenSpec normative; store only plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
+For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` after requirements readiness and OpenSpec synthesis. Keep OpenSpec normative; store only minimal requirements provenance plus plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
 
 ## UI component completion gate
 

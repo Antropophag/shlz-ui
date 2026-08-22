@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "intent": "Add interview-first requirements readiness before adaptive execution planning",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "architecture-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user", "ref": "initial-request" }
+    },
+    {
+      "id": "implementation-authorization",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user", "ref": "apply-request" }
+    }
+  ],
+  "openSpec": {
+    "change": "requirements-elicitation-harness",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "approved",
+    "provenance": { "kind": "user", "ref": "apply-request" }
+  }
+}

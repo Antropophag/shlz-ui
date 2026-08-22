@@ -1,8 +1,10 @@
 # Adaptive agent execution
 
-Use this workflow after initial discovery and OpenSpec impact routing:
+Use this workflow after initial discovery, impact routing, requirements readiness, and OpenSpec synthesis/authorization:
 
-`request → discovery → impact routing → execution planning → orchestration → implementation → integration → evaluation → final validation`
+`request → discovery → impact routing → requirements readiness → OpenSpec → authorization → execution planning → orchestration → implementation → integration → evaluation → final validation`
+
+For requirements-gated work, `plan` receives the validated state described in `docs/requirements-elicitation.md`. Planning is downstream of the readiness gate; direct S work remains lightweight.
 
 ## Size before implementation
 

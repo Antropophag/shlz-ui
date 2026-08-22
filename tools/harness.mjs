@@ -19,6 +19,7 @@ import {
   recordEvent,
   recordReview,
   recordValidation,
+  requirementsStatus,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -93,11 +94,19 @@ const output = (value) =>
 
 switch (command) {
   case "plan": {
-    const plan = createPlan(await readJson(absolute(args[0])), config);
+    const requirementsPath = option("--requirements");
+    const plan = createPlan(
+      await readJson(absolute(args[0])),
+      config,
+      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+    );
     await writeJson(statePath(args[1]), plan);
     output(plan);
     break;
   }
+  case "requirements-check":
+    output(requirementsStatus(await readJson(absolute(args[0]))));
+    break;
   case "plan-check":
     output(validatePlan(await readJson(absolute(args[0])), config));
     break;
@@ -263,6 +272,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <requirements-check|plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
     );
 }

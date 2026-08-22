@@ -43,6 +43,28 @@ const requiredPacketFields = [
   "implementationOutcomes",
   "preferredExecutionMode",
 ];
+const decisionOwners = new Set(["repo", "agent", "user"]);
+const decisionStatuses = new Set(["unresolved", "resolved", "delegated"]);
+const authorizationStatuses = new Set([
+  "approval-required",
+  "pre-authorized",
+  "approved",
+]);
+const allowedRequirementsFields = new Set([
+  "version",
+  "intent",
+  "route",
+  "decisions",
+  "openSpec",
+  "authorization",
+]);
+const allowedDecisionFields = new Set([
+  "id",
+  "owner",
+  "status",
+  "blocking",
+  "provenance",
+]);
 
 export const readJson = async (file) =>
   JSON.parse(await readFile(file, "utf8"));
@@ -52,6 +74,111 @@ export const writeJson = async (file, value) => {
   await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`);
   await rename(temporary, file);
 };
+
+function assertProvenance(value, label) {
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value) ||
+    typeof value.kind !== "string" ||
+    value.kind.length === 0 ||
+    typeof value.ref !== "string" ||
+    value.ref.length === 0 ||
+    Object.keys(value).some((key) => !["kind", "ref"].includes(key))
+  )
+    throw new Error(`${label} requires compact kind/ref provenance`);
+}
+
+export function validateRequirementsState(state) {
+  if (!state || typeof state !== "object" || Array.isArray(state))
+    throw new Error("requirements state must be an object");
+  for (const key of Object.keys(state))
+    if (!allowedRequirementsFields.has(key))
+      throw new Error(`requirements field ${key} is not allowed`);
+  if (state.version !== 1) throw new Error("requirements version must be 1");
+  if (typeof state.intent !== "string" || state.intent.length === 0)
+    throw new Error("requirements state requires intent");
+  if (!new Set(["direct", "open-spec"]).has(state.route))
+    throw new Error("requirements route must be direct or open-spec");
+  if (!Array.isArray(state.decisions))
+    throw new Error("requirements decisions must be an array");
+  const ids = new Set();
+  for (const decision of state.decisions) {
+    for (const key of Object.keys(decision))
+      if (!allowedDecisionFields.has(key))
+        throw new Error(`decision field ${key} is not allowed`);
+    if (typeof decision.id !== "string" || decision.id.length === 0)
+      throw new Error("decision requires id");
+    if (ids.has(decision.id))
+      throw new Error(`duplicate decision ${decision.id}`);
+    ids.add(decision.id);
+    if (!decisionOwners.has(decision.owner))
+      throw new Error(`decision ${decision.id} has invalid owner`);
+    if (!decisionStatuses.has(decision.status))
+      throw new Error(`decision ${decision.id} has invalid status`);
+    if (typeof decision.blocking !== "boolean")
+      throw new Error(`decision ${decision.id} blocking must be boolean`);
+    assertProvenance(decision.provenance, `decision ${decision.id}`);
+    if (decision.status === "delegated" && decision.owner !== "agent")
+      throw new Error(`delegated decision ${decision.id} must be agent-owned`);
+    if (
+      decision.status === "delegated" &&
+      decision.provenance.kind !== "user-delegation"
+    )
+      throw new Error(
+        `delegated decision ${decision.id} requires user-delegation provenance`,
+      );
+  }
+  if (state.route === "open-spec") {
+    if (
+      !state.openSpec ||
+      typeof state.openSpec.change !== "string" ||
+      !new Set(["pending", "synthesized"]).has(state.openSpec.status) ||
+      Object.keys(state.openSpec).some(
+        (key) => !["change", "status"].includes(key),
+      )
+    )
+      throw new Error("open-spec route requires compact OpenSpec linkage");
+    if (
+      !state.authorization ||
+      !authorizationStatuses.has(state.authorization.status)
+    )
+      throw new Error("open-spec route requires execution authorization");
+    assertProvenance(state.authorization.provenance, "authorization");
+    if (
+      Object.keys(state.authorization).some(
+        (key) => !["status", "provenance"].includes(key),
+      )
+    )
+      throw new Error("authorization contains unsupported fields");
+  }
+  return state;
+}
+
+export function requirementsStatus(state) {
+  validateRequirementsState(state);
+  const unresolvedBlocking = state.decisions
+    .filter(
+      (decision) =>
+        decision.owner === "user" &&
+        decision.blocking &&
+        decision.status === "unresolved",
+    )
+    .map(({ id }) => id);
+  const readyForSpec = unresolvedBlocking.length === 0;
+  const authorized = ["pre-authorized", "approved"].includes(
+    state.authorization?.status,
+  );
+  return {
+    route: state.route,
+    unresolvedBlocking,
+    readyForSpec,
+    readyForPlanning:
+      state.route === "direct" ||
+      (readyForSpec && state.openSpec.status === "synthesized" && authorized),
+    authorization: state.authorization?.status ?? "not-required",
+  };
+}
 
 export function classify(assessment, config) {
   const contributions = {};
@@ -138,13 +265,22 @@ export function validatePlan(plan, config) {
   return plan;
 }
 
-export function createPlan(assessment, config) {
+export function createPlan(assessment, config, requirementsState = null) {
   if (
     !assessment.id ||
     !Array.isArray(assessment.workUnits) ||
     assessment.workUnits.length === 0
   )
     throw new Error("assessment requires id and semantic workUnits");
+  if (assessment.requirementsGate === "required") {
+    if (!requirementsState)
+      throw new Error("requirements-gated assessment requires readiness state");
+    const status = requirementsStatus(requirementsState);
+    if (!status.readyForPlanning)
+      throw new Error(
+        `requirements are not ready for planning: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+      );
+  }
   const classification = classify(assessment, config);
   const regroupRequired =
     (assessment.openSpecTaskCount ?? 0) > config.sizing.taskRegroupThreshold ||

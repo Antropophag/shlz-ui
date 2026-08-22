@@ -13,7 +13,7 @@ Brownfield contracts are added incrementally when a capability is changed or del
 
 Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work.
 
-Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, use `docs/agent-execution.md` for execution sizing and orchestration.
+Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, resolve requirements through `docs/requirements-elicitation.md`; after synthesis and authorization, use `docs/agent-execution.md` for execution sizing and orchestration.
 
 ### Trivial or implementation-only
 
@@ -34,6 +34,8 @@ Create only artifacts required by the resolved OpenSpec schema. Keep OpenSpec as
 ### Architectural or ambiguous
 
 Use the full OpenSpec lifecycle for substantial new capabilities or components, package or token architecture, cross-component behavior, new interaction models, ambiguous requirements, and changes requiring an explicit design decision. Inspect first when classification is uncertain; do not create an OpenSpec change merely because the repository supports OpenSpec.
+
+Before proposing, classify material decisions as repo-owned, agent-owned, or user-owned using `docs/requirements-elicitation.md`. Repository facts and safe implementation choices do not become questions. OpenSpec creation waits only for unresolved blocking user-owned decisions; a fully specified contract change proceeds without interview.
 
 OpenSpec tasks describe executable outcomes, not individual assertions. Keep acceptance detail in specs/tests. More than 12 tasks, or several independently verifiable components/shared seams, requires an explicit regroup/decomposition check in the execution plan; one OpenSpec change may span multiple packets and sessions.
 
