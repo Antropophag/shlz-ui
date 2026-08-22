@@ -1,7 +1,7 @@
 # Wave 7 Modal and Drawer overlay audit
 
 - Baseline: `0cbc128a565769192421850801727e083a7c78a8`.
-- Final revision: the unmerged PR head; its immutable SHA and CI state are recorded in PR metadata because a commit cannot contain its own hash.
+- Reviewed implementation revision: `ef0d1c86b953f6e134f33b24516269eeb9d6aeb6` (audited range `0cbc128...ef0d1c8`). The following report-only revision records that immutable implementation SHA without changing audited code.
 - Baseline working tree: only the approved Wave 7 OpenSpec artifacts were untracked.
 - Baseline checks: 87/87 Node tests and 12/12 Chromium overlay tests passed. The baseline branch had no open PR or review thread.
 - Source hashes: Modal `62b0686f4ea17ecb8bb0bf25fe9020ee3a1512728e4271fd6fc734595e2b7fed`; Drawer `a7ff3b75584ad5782bb2e3b2bc6b2dd62baec589c32edb334d619a65dbf49e8e`. Both remain unchanged.
@@ -37,7 +37,7 @@ Final local validation results:
 - `npm run build` and `node tools/validate.mjs` — all workspaces build; 68 source SVGs, three token groups, 119 canonical icons, and 42 aliases validate;
 - `npm run test:packages` — four packed packages install and execute from a clean project;
 - `npx playwright test tools/playwright/overlay.spec.js --project=chromium` — 25/25 focused overlay tests pass;
-- `npm run test:e2e` — 188/188 Chromium tests pass, including Wave 6, Data Workspace, plain HTML, accessibility, responsive/content stress, and focused visual snapshots;
+- `npm run test:e2e` — 190/190 Chromium tests pass, including Wave 6, Data Workspace, plain HTML, accessibility, responsive/content stress, and focused visual snapshots;
 - `git diff --check` and final raw SVG SHA-256 comparison — pass with no source diff.
 
-The first two-axis review of implementation commit `236d387` reported three Standards and six Spec findings. All were resolved in the follow-up diff: stale-owner deletion became identity-conditional; exact census/report claims were corrected; Drawer nested composition, second Escape, lifecycle isolation, pointer gesture reset, plain-HTML teardown, and Data Workspace stress evidence were added. No material scope creep was found. GitHub CI and review threads are pending PR creation; the unmerged PR head is the final SHA authority and will carry their current state.
+The first two-axis review of implementation commit `236d387` reported three Standards and six Spec findings. Follow-up review left one report and three partial spec findings; all are resolved in the audited implementation through `ef0d1c8`: stale-owner deletion is identity-conditional; exact census/report claims are corrected; Modal and Drawer nested reopen/second-Escape/teardown, two-Drawer isolation, pointer gesture reset, plain-HTML teardown, and Data Workspace stress evidence execute. No material scope creep was found. GitHub CI and review threads are pending PR creation; the unmerged PR head carries their current state.
