@@ -38,6 +38,7 @@ const requiredPacketFields = [
   "focusedValidation",
   "outputs",
   "handoff",
+  "implementationOutcomes",
   "preferredExecutionMode",
 ];
 
@@ -107,11 +108,20 @@ export function validatePlan(plan, config) {
       "focusedValidation",
       "outputs",
       "handoff",
+      "implementationOutcomes",
     ])
       if (!Array.isArray(packet[field]))
         throw new Error(`packet ${packet.id} ${field} must be an array`);
     if (!modes.has(packet.preferredExecutionMode))
       throw new Error(`packet ${packet.id} has invalid execution mode`);
+    if (
+      config.sizing.decompositionRequired.includes(plan.classification.size) &&
+      (packet.implementationOutcomes.length < 3 ||
+        packet.implementationOutcomes.length > 7)
+    )
+      throw new Error(
+        `packet ${packet.id} requires 3-7 implementation outcomes`,
+      );
   }
   assertAcyclic(plan.packets);
   if (
@@ -197,7 +207,7 @@ async function walk(root, directory = "") {
   return files;
 }
 
-export async function contextIndex(plan, packetId, repoRoot, handoff = null) {
+export async function contextIndex(plan, packetId, repoRoot, state = null) {
   validatePlan(plan, { sizing: { decompositionRequired: [] } });
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
@@ -212,10 +222,11 @@ export async function contextIndex(plan, packetId, repoRoot, handoff = null) {
   const missingPatterns = packet.contextSources.filter(
     (pattern) => !allFiles.some((file) => matchesPattern(file, pattern)),
   );
-  const dependencyHandoffs =
-    handoff?.completedPacket &&
-    packet.dependencies.includes(handoff.completedPacket)
-      ? [handoff]
+  const dependencyHandoffs = state?.handoffs
+    ? packet.dependencies.map((id) => state.handoffs[id]).filter(Boolean)
+    : state?.completedPacket &&
+        packet.dependencies.includes(state.completedPacket)
+      ? [state]
       : [];
   return {
     packet,
@@ -226,15 +237,20 @@ export async function contextIndex(plan, packetId, repoRoot, handoff = null) {
   };
 }
 
-export function readyPackets(plan, handoff = null) {
+export function readyPackets(plan, state = null) {
   const completed = new Set(
-    handoff?.completedPackets ??
-      (handoff?.completedPacket ? [handoff.completedPacket] : []),
+    state?.packets
+      ? Object.entries(state.packets)
+          .filter(([, value]) => value.status === "completed")
+          .map(([id]) => id)
+      : (state?.completedPackets ??
+          (state?.completedPacket ? [state.completedPacket] : [])),
   );
   return plan.packets
     .filter(
       (packet) =>
         !completed.has(packet.id) &&
+        (!state?.packets || state.packets[packet.id]?.status === "pending") &&
         packet.dependencies.every((id) => completed.has(id)),
     )
     .map(({ id, objective, preferredExecutionMode }) => ({
@@ -270,6 +286,19 @@ export function validateHandoff(value, plan) {
     if (!(key in value)) throw new Error(`handoff missing ${key}`);
   if (!plan.packets.some(({ id }) => id === value.completedPacket))
     throw new Error("handoff completedPacket is unknown");
+  if (
+    value.completedPackets !== undefined &&
+    (!Array.isArray(value.completedPackets) ||
+      value.completedPackets.some(
+        (id) => !plan.packets.some((packet) => packet.id === id),
+      ))
+  )
+    throw new Error("handoff completedPackets must contain known packet ids");
+  if (
+    value.nextPacket !== null &&
+    !plan.packets.some(({ id }) => id === value.nextPacket)
+  )
+    throw new Error("handoff nextPacket is unknown");
   for (const key of [
     "changed",
     "provenChecks",
@@ -282,6 +311,38 @@ export function validateHandoff(value, plan) {
   return value;
 }
 
+export function createExecutionState(plan) {
+  return {
+    version: 1,
+    planId: plan.id,
+    packets: Object.fromEntries(
+      plan.packets.map(({ id }) => [id, { status: "pending" }]),
+    ),
+    handoffs: {},
+  };
+}
+
+export function claimPacket(plan, state, packetId, session) {
+  if (!session) throw new Error("claim requires session");
+  if (!readyPackets(plan, state).some(({ id }) => id === packetId))
+    throw new Error(`packet ${packetId} is not ready or already claimed`);
+  state.packets[packetId] = { status: "claimed", session };
+  return state;
+}
+
+export function completePacket(plan, state, handoff) {
+  validateHandoff(handoff, plan);
+  const current = state.packets[handoff.completedPacket];
+  if (current?.status !== "claimed")
+    throw new Error(`packet ${handoff.completedPacket} must be claimed first`);
+  state.packets[handoff.completedPacket] = {
+    ...current,
+    status: "completed",
+  };
+  state.handoffs[handoff.completedPacket] = handoff;
+  return state;
+}
+
 export function affectedValidation(files, config) {
   const selected = new Set();
   for (const rule of config.validationRules)
@@ -291,6 +352,7 @@ export function affectedValidation(files, config) {
       )
     )
       for (const target of rule.targets) selected.add(target);
+  if (files.length > 0 && selected.size === 0) selected.add("full");
   return [...selected]
     .map((id) => ({ id, ...config.validationTargets[id] }))
     .sort((a, b) => a.level - b.level || a.id.localeCompare(b.id));
@@ -301,6 +363,18 @@ export function fingerprint(files, contentsByFile = {}) {
   for (const file of [...files].sort())
     hash.update(`${file}\0${contentsByFile[file] ?? ""}\0`);
   return hash.digest("hex");
+}
+
+export async function fingerprintFiles(files, repoRoot) {
+  const contents = Object.fromEntries(
+    await Promise.all(
+      files.map(async (file) => [
+        file,
+        await readFile(path.join(repoRoot, file)),
+      ]),
+    ),
+  );
+  return fingerprint(files, contents);
 }
 
 export function assertValidationRun(
@@ -320,6 +394,67 @@ export function assertValidationRun(
     throw new Error(
       `expensive target ${target} already passed for this fingerprint; --reason is required`,
     );
+}
+
+export async function recordValidation(
+  { target, files, outcome, reason, packet, session },
+  ledger,
+  config,
+  repoRoot,
+) {
+  if (!files.length || !["pass", "fail"].includes(outcome))
+    throw new Error("validation record requires files and pass/fail outcome");
+  const currentFingerprint = await fingerprintFiles(files, repoRoot);
+  assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
+  ledger.push({
+    target,
+    files: [...files].sort(),
+    fingerprint: currentFingerprint,
+    outcome,
+    reason: reason ?? null,
+    packet,
+    session,
+    recordedAt: new Date().toISOString(),
+  });
+  return ledger;
+}
+
+export function createReviewState(base) {
+  if (!base) throw new Error("review base is required");
+  return { version: 1, base, passes: [], findings: [] };
+}
+
+export function recordReview(state, { axis, head, findings }) {
+  if (
+    !["Standards", "Spec"].includes(axis) ||
+    !head ||
+    !Array.isArray(findings)
+  )
+    throw new Error(
+      "review record requires Standards/Spec axis, head, and findings",
+    );
+  const pass = state.passes.length + 1;
+  state.passes.push({ pass, axis, head });
+  for (const finding of findings)
+    state.findings.push({
+      ...finding,
+      axis,
+      introducedPass: pass,
+      status: finding.status ?? "open",
+    });
+  return state;
+}
+
+export function reviewContext(state) {
+  const lastHead = state.passes.at(-1)?.head ?? null;
+  return {
+    diff: lastHead ? `${lastHead}..HEAD` : `${state.base}...HEAD`,
+    base: state.base,
+    unresolvedFindings: state.findings.filter(
+      ({ status }) => status !== "resolved",
+    ),
+    discovery: "fixed-diff-and-known-findings-only",
+  };
 }
 
 export async function recordEvent(file, event) {

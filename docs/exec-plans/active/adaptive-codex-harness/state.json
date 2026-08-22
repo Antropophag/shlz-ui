@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "planId": "adaptive-codex-harness",
+  "packets": {
+    "contracts": { "status": "completed", "session": "root-1" },
+    "planner-context": { "status": "completed", "session": "root-1" },
+    "validation-telemetry": { "status": "completed", "session": "root-1" },
+    "integration-eval": { "status": "completed", "session": "root-1" },
+    "independent-review": { "status": "claimed", "session": "review-agents-1" }
+  },
+  "handoffs": {
+    "contracts": {
+      "completedPacket": "contracts",
+      "changed": ["OpenSpec artifacts"],
+      "provenChecks": ["strict validation"],
+      "settledDecisions": ["operator-driven v1"],
+      "unresolvedFindings": [],
+      "nextPacket": "planner-context",
+      "invalidatedAssumptions": ["App Server daemon is required"]
+    },
+    "planner-context": {
+      "completedPacket": "planner-context",
+      "changed": ["planner, context and state interfaces"],
+      "provenChecks": ["focused planner tests"],
+      "settledDecisions": ["declared semantic grouping"],
+      "unresolvedFindings": [],
+      "nextPacket": "validation-telemetry",
+      "invalidatedAssumptions": []
+    },
+    "validation-telemetry": {
+      "completedPacket": "validation-telemetry",
+      "changed": ["validation, evidence and telemetry interfaces"],
+      "provenChecks": ["focused routing tests"],
+      "settledDecisions": ["runtime usage is optional"],
+      "unresolvedFindings": [],
+      "nextPacket": "integration-eval",
+      "invalidatedAssumptions": []
+    },
+    "integration-eval": {
+      "completedPacket": "integration-eval",
+      "changed": ["docs, scripts and Wave 7 fixture"],
+      "provenChecks": ["98 Node and 193 browser tests"],
+      "settledDecisions": ["component gates remain independent"],
+      "unresolvedFindings": ["review remediation"],
+      "nextPacket": "independent-review",
+      "invalidatedAssumptions": []
+    }
+  }
+}

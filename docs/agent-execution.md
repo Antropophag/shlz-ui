@@ -22,8 +22,9 @@ A packet is one cognitive outcome with a small interface: objective, scope/non-g
 At session start:
 
 ```bash
-npm run harness -- ready docs/exec-plans/active/<change>/plan.json --handoff docs/exec-plans/active/<change>/handoff.json
-npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --handoff docs/exec-plans/active/<change>/handoff.json
+npm run harness -- ready docs/exec-plans/active/<change>/plan.json --state docs/exec-plans/active/<change>/state.json
+npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-plans/active/<change>/state.json <packet-id> --session <session-id>
+npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
@@ -34,7 +35,7 @@ Fresh context is preferred at implementation → independent review, subsystem c
 
 ## Durable handoff
 
-OpenSpec owns requirements, Git owns code state, tests own executable evidence, and the execution plan owns dependency/progress state. A handoff contains only completed packet(s), changed areas, proven checks, settled decisions, unresolved findings/risks, next packet, and invalidated assumptions. Never paste chat transcripts or long spec summaries.
+OpenSpec owns requirements, Git owns code state, tests own executable evidence, and the execution state owns atomic claims, dependency progress, and per-packet handoffs. A handoff contains only its completed packet, changed areas, proven checks, settled decisions, unresolved findings/risks, next packet, and invalidated assumptions. Never paste chat transcripts or long spec summaries.
 
 ## Multi-session v1
 

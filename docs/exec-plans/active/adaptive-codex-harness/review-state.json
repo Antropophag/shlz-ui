@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "base": "origin/main",
+  "passes": [
+    { "pass": 1, "axis": "Standards", "head": "73204a3" },
+    { "pass": 2, "axis": "Spec", "head": "73204a3" }
+  ],
+  "findings": [
+    {
+      "id": "VAL-1",
+      "severity": "P1",
+      "summary": "validation ledger trusted a caller fingerprint and could not record results",
+      "axis": "Standards+Spec",
+      "introducedPass": 1,
+      "status": "remediated"
+    },
+    {
+      "id": "PATH-1",
+      "severity": "P1",
+      "summary": "mutable CLI paths could escape the repository",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "remediated"
+    },
+    {
+      "id": "STATE-1",
+      "severity": "P1",
+      "summary": "packet claiming and dependency-join handoffs were incomplete",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "remediated"
+    },
+    {
+      "id": "REVIEW-1",
+      "severity": "P1",
+      "summary": "review state and remediation context were not executable",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "remediated"
+    },
+    {
+      "id": "AFFECTED-1",
+      "severity": "P2",
+      "summary": "unmatched implementation scope returned no validation",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "remediated"
+    },
+    {
+      "id": "OUTCOMES-1",
+      "severity": "P2",
+      "summary": "per-packet outcome granularity was not represented",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "remediated"
+    }
+  ]
+}

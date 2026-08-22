@@ -59,6 +59,11 @@
       "focusedValidation": ["audit-manifest", "modal-unit"],
       "outputs": ["source/census contract"],
       "handoff": ["settled source facts and unknowns"],
+      "implementationOutcomes": [
+        "source authority recorded",
+        "occurrences classified",
+        "normative contracts executable"
+      ],
       "preferredExecutionMode": "fresh-session",
       "status": "pending"
     },
@@ -79,6 +84,11 @@
       "focusedValidation": ["modal-browser", "drawer-browser"],
       "outputs": ["shared lifecycle regression evidence"],
       "handoff": ["settled lifecycle invariants"],
+      "implementationOutcomes": [
+        "single ownership",
+        "cycle-local state",
+        "idempotent teardown"
+      ],
       "preferredExecutionMode": "fresh-session",
       "status": "pending"
     },
@@ -102,6 +112,11 @@
       "focusedValidation": ["modal-unit", "modal-browser"],
       "outputs": ["Modal evidence"],
       "handoff": ["Modal findings and proven states"],
+      "implementationOutcomes": [
+        "Modal runtime contract",
+        "Modal focused evidence",
+        "Modal independent disposition"
+      ],
       "preferredExecutionMode": "isolated-subagent",
       "status": "pending"
     },
@@ -129,6 +144,11 @@
       "focusedValidation": ["drawer-browser"],
       "outputs": ["Drawer/consumer evidence"],
       "handoff": ["Drawer findings and proven states"],
+      "implementationOutcomes": [
+        "Drawer runtime contract",
+        "consumer integration",
+        "Drawer independent disposition"
+      ],
       "preferredExecutionMode": "isolated-subagent",
       "status": "pending"
     },
@@ -147,6 +167,11 @@
       "focusedValidation": ["overlay-integration"],
       "outputs": ["cross-component regression evidence"],
       "handoff": ["integration findings"],
+      "implementationOutcomes": [
+        "nested visibility",
+        "Escape precedence",
+        "Wave 6 regressions"
+      ],
       "preferredExecutionMode": "fresh-session",
       "status": "pending"
     },
@@ -169,6 +194,11 @@
       "focusedValidation": ["audit-manifest", "full"],
       "outputs": ["independent dispositions and dynamic evidence"],
       "handoff": ["unresolved findings only"],
+      "implementationOutcomes": [
+        "aggregate evidence",
+        "two-axis review",
+        "component-specific certification"
+      ],
       "preferredExecutionMode": "fresh-session",
       "status": "pending"
     }

@@ -1,15 +1,24 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import path from "node:path";
 import test from "node:test";
+import { promisify } from "node:util";
 import {
   affectedValidation,
   assertValidationRun,
+  claimPacket,
+  completePacket,
   classify,
   contextIndex,
+  createExecutionState,
   createPlan,
+  createReviewState,
   matchesPattern,
   readyPackets,
+  recordReview,
+  recordValidation,
+  reviewContext,
   summarizeEvents,
   gitEvidence,
   validateHandoff,
@@ -22,6 +31,7 @@ const load = async (file) =>
 const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
+const exec = promisify(execFile);
 
 test("Wave 7 is large before implementation and decomposes along semantic seams", () => {
   const plan = createPlan(wave7, config);
@@ -124,6 +134,42 @@ test("fresh sessions derive ready packets and validate structured handoff", () =
     () => validateHandoff({ ...handoff, chatTranscript: "huge" }, plan),
     /not allowed/,
   );
+  assert.throws(
+    () => validateHandoff({ ...handoff, completedPackets: ["unknown"] }, plan),
+    /known packet ids/,
+  );
+});
+
+test("claims are exclusive and dependency joins receive every direct handoff", async () => {
+  const plan = createPlan(wave7, config);
+  const state = createExecutionState(plan);
+  claimPacket(plan, state, "discovery-contracts", "session-a");
+  assert.throws(
+    () => claimPacket(plan, state, "discovery-contracts", "session-b"),
+    /not ready or already claimed/,
+  );
+  const complete = (id, nextPacket) =>
+    completePacket(plan, state, {
+      completedPacket: id,
+      changed: [id],
+      provenChecks: ["focused"],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket,
+      invalidatedAssumptions: [],
+    });
+  complete("discovery-contracts", "shared-native-dialog");
+  claimPacket(plan, state, "shared-native-dialog", "session-b");
+  complete("shared-native-dialog", "modal");
+  claimPacket(plan, state, "modal", "session-c");
+  complete("modal", "nested-integration");
+  claimPacket(plan, state, "drawer", "session-d");
+  complete("drawer", "nested-integration");
+  const index = await contextIndex(plan, "nested-integration", root, state);
+  assert.deepEqual(
+    index.dependencyHandoffs.map(({ completedPacket }) => completedPacket),
+    ["modal", "drawer"],
+  );
 });
 
 test("affected validation routes docs, component, shared seam, and manifest changes", () => {
@@ -156,6 +202,12 @@ test("affected validation routes docs, component, shared seam, and manifest chan
     !affectedValidation(["docs/exec-plans/README.md"], config).some(
       ({ command }) => command.includes("playwright"),
     ),
+  );
+  assert.deepEqual(
+    affectedValidation(["packages/tokens/src/new-contract.ts"], config).map(
+      ({ id }) => id,
+    ),
+    ["full"],
   );
 });
 
@@ -190,6 +242,45 @@ test("expensive successful reruns require an invalidation reason", () => {
       config,
     ),
   );
+});
+
+test("validation records compute fingerprints and durably enforce invalidation", async () => {
+  const ledger = [];
+  const request = {
+    target: "full-browser",
+    files: ["tools/harness.mjs"],
+    outcome: "pass",
+    packet: "integration",
+    session: "s1",
+  };
+  await recordValidation(request, ledger, config, root);
+  assert.match(ledger[0].fingerprint, /^[0-9a-f]{64}$/);
+  await assert.rejects(
+    recordValidation(request, ledger, config, root),
+    /reason is required/,
+  );
+  await recordValidation(
+    { ...request, reason: "substantive remediation" },
+    ledger,
+    config,
+    root,
+  );
+  assert.equal(ledger.at(-1).reason, "substantive remediation");
+});
+
+test("review state reuses the remediation diff and unresolved findings", () => {
+  const state = createReviewState("origin/main");
+  recordReview(state, {
+    axis: "Standards",
+    head: "abc123",
+    findings: [{ id: "F1", severity: "P1", summary: "ledger missing" }],
+  });
+  assert.deepEqual(reviewContext(state), {
+    diff: "abc123..HEAD",
+    base: "origin/main",
+    unresolvedFindings: [state.findings[0]],
+    discovery: "fixed-diff-and-known-findings-only",
+  });
 });
 
 test("telemetry reports actual observations and never invents unavailable usage", () => {
@@ -258,4 +349,13 @@ test("dynamic Git evidence includes tracked and untracked working-tree files", a
   assert.ok(evidence.changedFiles.includes("tools/tests/harness.test.mjs"));
   assert.equal(evidence.mutatesRepository, false);
   assert.match(evidence.currentHead, /^[0-9a-f]{40}$/);
+});
+
+test("CLI rejects repository path escapes", async () => {
+  await assert.rejects(
+    exec("node", ["tools/harness.mjs", "plan-check", "../outside.json"], {
+      cwd: root,
+    }),
+    /path escapes repository/,
+  );
 });

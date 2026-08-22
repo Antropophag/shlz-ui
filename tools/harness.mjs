@@ -5,12 +5,20 @@ import { fileURLToPath } from "node:url";
 import {
   affectedValidation,
   assertValidationRun,
+  claimPacket,
+  completePacket,
   contextIndex,
+  createExecutionState,
   createPlan,
+  createReviewState,
+  fingerprintFiles,
   gitEvidence,
   readJson,
   readyPackets,
   recordEvent,
+  recordReview,
+  recordValidation,
+  reviewContext,
   summarizeEvents,
   validateHandoff,
   validatePlan,
@@ -25,7 +33,31 @@ const config = await readJson(
   path.join(repoRoot, "docs/exec-plans/config.json"),
 );
 const [command, ...args] = process.argv.slice(2);
-const absolute = (file) => path.resolve(repoRoot, file);
+const stateRoot = path.join(repoRoot, "docs/exec-plans");
+const within = (root, target) =>
+  target === root || target.startsWith(`${root}${path.sep}`);
+const absolute = (file) => {
+  const target = path.resolve(repoRoot, file);
+  if (!within(repoRoot, target))
+    throw new Error(`path escapes repository: ${file}`);
+  return target;
+};
+const statePath = (file) => {
+  const target = absolute(file);
+  if (!within(stateRoot, target))
+    throw new Error(
+      `mutable harness state must stay under docs/exec-plans: ${file}`,
+    );
+  return target;
+};
+const readJsonOr = async (file, fallback) => {
+  try {
+    return await readJson(file);
+  } catch (error) {
+    if (error.code === "ENOENT") return fallback;
+    throw error;
+  }
+};
 const option = (name) => {
   const index = args.indexOf(name);
   return index === -1 ? null : args[index + 1];
@@ -36,7 +68,7 @@ const output = (value) =>
 switch (command) {
   case "plan": {
     const plan = createPlan(await readJson(absolute(args[0])), config);
-    await writeJson(absolute(args[1]), plan);
+    await writeJson(statePath(args[1]), plan);
     output(plan);
     break;
   }
@@ -45,7 +77,7 @@ switch (command) {
     break;
   case "context": {
     const plan = await readJson(absolute(args[0]));
-    const handoffPath = option("--handoff");
+    const handoffPath = option("--state") ?? option("--handoff");
     output(
       await contextIndex(
         plan,
@@ -57,7 +89,7 @@ switch (command) {
     break;
   }
   case "ready": {
-    const handoffPath = option("--handoff");
+    const handoffPath = option("--state") ?? option("--handoff");
     output(
       readyPackets(
         await readJson(absolute(args[0])),
@@ -69,7 +101,7 @@ switch (command) {
   case "handoff-write": {
     const plan = await readJson(absolute(args[0]));
     const value = validateHandoff(await readJson(absolute(args[1])), plan);
-    await writeJson(absolute(args[2]), value);
+    await writeJson(statePath(args[2]), value);
     output(value);
     break;
   }
@@ -78,10 +110,11 @@ switch (command) {
     break;
   case "validation-check": {
     const ledger = await readJson(absolute(args[1]));
+    const files = option("--files")?.split(",").filter(Boolean) ?? [];
     assertValidationRun(
       {
         target: args[0],
-        currentFingerprint: option("--fingerprint"),
+        currentFingerprint: await fingerprintFiles(files, repoRoot),
         reason: option("--reason"),
       },
       ledger,
@@ -90,9 +123,80 @@ switch (command) {
     output({ allowed: true });
     break;
   }
+  case "validation-record": {
+    const ledgerPath = statePath(args[0]);
+    const ledger = await readJsonOr(ledgerPath, []);
+    await recordValidation(
+      {
+        target: args[1],
+        files: option("--files")?.split(",").filter(Boolean) ?? [],
+        outcome: option("--outcome"),
+        reason: option("--reason"),
+        packet: option("--packet"),
+        session: option("--session"),
+      },
+      ledger,
+      config,
+      repoRoot,
+    );
+    await writeJson(ledgerPath, ledger);
+    output(ledger.at(-1));
+    break;
+  }
+  case "state-init": {
+    const state = createExecutionState(await readJson(absolute(args[0])));
+    await writeJson(statePath(args[1]), state);
+    output(state);
+    break;
+  }
+  case "claim": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const state = claimPacket(
+      plan,
+      await readJson(target),
+      args[2],
+      option("--session"),
+    );
+    await writeJson(target, state);
+    output(state.packets[args[2]]);
+    break;
+  }
+  case "complete": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const state = completePacket(
+      plan,
+      await readJson(target),
+      await readJson(absolute(args[2])),
+    );
+    await writeJson(target, state);
+    output(state.packets);
+    break;
+  }
+  case "review-init": {
+    const state = createReviewState(args[1]);
+    await writeJson(statePath(args[0]), state);
+    output(state);
+    break;
+  }
+  case "review-record": {
+    const target = statePath(args[0]);
+    const state = recordReview(await readJson(target), {
+      axis: option("--axis"),
+      head: option("--head"),
+      findings: await readJson(absolute(option("--findings"))),
+    });
+    await writeJson(target, state);
+    output(reviewContext(state));
+    break;
+  }
+  case "review-context":
+    output(reviewContext(await readJson(absolute(args[0]))));
+    break;
   case "telemetry-record": {
     const event = JSON.parse(option("--event"));
-    await recordEvent(absolute(args[0]), event);
+    await recordEvent(statePath(args[0]), event);
     output({ recorded: true, type: event.type });
     break;
   }
@@ -108,6 +212,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <plan|plan-check|context|ready|handoff-write|affected|validation-check|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|telemetry-record|telemetry-summary|evidence> ...",
     );
 }
