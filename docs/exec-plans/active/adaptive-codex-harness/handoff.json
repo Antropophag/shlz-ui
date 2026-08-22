@@ -1,0 +1,31 @@
+{
+  "completedPacket": "integration-eval",
+  "completedPackets": [
+    "contracts",
+    "planner-context",
+    "validation-telemetry",
+    "integration-eval"
+  ],
+  "changed": [
+    "OpenSpec harness contracts",
+    "deterministic harness CLI and tests",
+    "execution/validation policy pointers and package scripts"
+  ],
+  "provenChecks": [
+    "9 focused harness tests pass",
+    "OpenSpec integration check passes",
+    "strict change validation passes"
+  ],
+  "settledDecisions": [
+    "OpenSpec is normative; docs/exec-plans is operational state",
+    "v1 is operator-driven with an official SDK adapter seam",
+    "missing runtime token usage remains unavailable"
+  ],
+  "unresolvedFindings": [
+    "install dependencies, run aggregate checks, then independent review"
+  ],
+  "nextPacket": "independent-review",
+  "invalidatedAssumptions": [
+    "App Server automation is not the smallest supported v1"
+  ]
+}

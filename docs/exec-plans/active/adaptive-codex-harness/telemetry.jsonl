@@ -1,0 +1,5 @@
+{"at":"2026-08-22T17:58:37.093Z","type":"context-read","packet":"integration-eval","session":"root-1","agent":"root","phase":"implementation","path":"docs/exec-plans/config.json","outputBytes":0}
+{"at":"2026-08-22T17:58:37.171Z","type":"context-read","packet":"integration-eval","session":"root-1","agent":"root","phase":"implementation","path":"docs/exec-plans/config.json","outputBytes":0}
+{"at":"2026-08-22T17:58:37.252Z","type":"command","packet":"integration-eval","session":"root-1","agent":"root","phase":"validation","command":"npm run check:focused","outputBytes":3180}
+{"at":"2026-08-22T17:58:37.356Z","type":"validation","packet":"integration-eval","session":"root-1","agent":"root","phase":"validation","target":"check:focused","level":"focused","outcome":"pass"}
+{"at":"2026-08-22T18:09:40.737Z","type":"validation","packet":"integration-eval","session":"root-1","agent":"root","phase":"final-validation","target":"npm run check","level":"full","outcome":"pass"}

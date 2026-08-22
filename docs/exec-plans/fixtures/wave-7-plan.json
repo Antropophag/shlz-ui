@@ -1,0 +1,176 @@
+{
+  "version": 1,
+  "id": "wave-7-modal-drawer-overlays-retrospective",
+  "baseline": "410e81747243fb07d773af0bf2f048db2ebb0d1a",
+  "classification": {
+    "size": "XL",
+    "score": 59,
+    "contributions": {
+      "independentWorkUnits": 12,
+      "sharedSeams": 3,
+      "contracts": 6,
+      "consumerIntegrations": 4,
+      "evidenceLevels": 7,
+      "architectureAmbiguity": 6,
+      "changedScope": 6,
+      "reviewRisk": 6,
+      "contextGrowthRisk": 9
+    },
+    "kind": "routing-heuristic-not-token-forecast"
+  },
+  "regroupCheck": {
+    "required": true,
+    "openSpecTaskCount": 31
+  },
+  "contextPolicy": {
+    "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
+    "decomposeSignal": 100000,
+    "semanticBoundaries": [
+      "implementation-to-independent-review",
+      "subsystem-change",
+      "major-replan",
+      "irrelevant-output-accumulation"
+    ]
+  },
+  "packets": [
+    {
+      "id": "discovery-contracts",
+      "objective": "Freeze source, census, and normative overlay contracts",
+      "scope": [
+        "Modal/Drawer source and occurrence census",
+        "three OpenSpec capabilities"
+      ],
+      "nonGoals": ["implementation correction"],
+      "dependencies": [],
+      "contracts": [
+        "openspec/changes/wave-7-modal-drawer-overlays/specs/overlays/**"
+      ],
+      "contextSources": [
+        "openspec/changes/wave-7-modal-drawer-overlays/{proposal,design}.md",
+        "shlz-design-source/raw/svg/{Modal,Drawer}.svg"
+      ],
+      "implementationSurface": [
+        "docs/component-audits/{modal,drawer}.json",
+        "tools/tests/{overlay-source,wave7-repository-census}.test.mjs"
+      ],
+      "focusedValidation": ["audit-manifest", "modal-unit"],
+      "outputs": ["source/census contract"],
+      "handoff": ["settled source facts and unknowns"],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "shared-native-dialog",
+      "objective": "Make the proven shared native-dialog lifecycle safe",
+      "scope": ["ownership, teardown, opener/backdrop state"],
+      "nonGoals": ["public overlay manager"],
+      "dependencies": ["discovery-contracts"],
+      "contracts": ["overlays/modal", "overlays/drawer"],
+      "contextSources": [
+        "packages/behaviors/src/internal/native-dialog.ts",
+        "packages/behaviors/src/{modal,drawer}.ts"
+      ],
+      "implementationSurface": [
+        "packages/behaviors/src/internal/native-dialog.ts"
+      ],
+      "focusedValidation": ["modal-browser", "drawer-browser"],
+      "outputs": ["shared lifecycle regression evidence"],
+      "handoff": ["settled lifecycle invariants"],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "modal",
+      "objective": "Implement and prove the Modal contract independently",
+      "scope": ["Modal runtime, accessibility, visual and stress states"],
+      "nonGoals": ["Drawer certification"],
+      "dependencies": ["shared-native-dialog"],
+      "contracts": ["overlays/modal"],
+      "contextSources": [
+        "packages/behaviors/src/modal.ts",
+        "packages/styles/components/modal.css",
+        "docs/component-audits/modal.json"
+      ],
+      "implementationSurface": [
+        "packages/behaviors/src/modal.ts",
+        "packages/styles/components/modal.css",
+        "tools/playwright/overlay.spec.js"
+      ],
+      "focusedValidation": ["modal-unit", "modal-browser"],
+      "outputs": ["Modal evidence"],
+      "handoff": ["Modal findings and proven states"],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    },
+    {
+      "id": "drawer",
+      "objective": "Implement and prove Drawer plus its real consumer independently",
+      "scope": [
+        "Drawer runtime, accessibility, visual/stress and Data Workspace"
+      ],
+      "nonGoals": ["Modal certification"],
+      "dependencies": ["shared-native-dialog"],
+      "contracts": ["overlays/drawer"],
+      "contextSources": [
+        "packages/behaviors/src/drawer.ts",
+        "packages/styles/components/drawer.css",
+        "apps/showcase/src/consumer-workspace.js",
+        "docs/component-audits/drawer.json"
+      ],
+      "implementationSurface": [
+        "packages/behaviors/src/drawer.ts",
+        "packages/styles/components/drawer.css",
+        "apps/showcase/src/consumer-workspace.js",
+        "tools/playwright/overlay.spec.js"
+      ],
+      "focusedValidation": ["drawer-browser"],
+      "outputs": ["Drawer/consumer evidence"],
+      "handoff": ["Drawer findings and proven states"],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    },
+    {
+      "id": "nested-integration",
+      "objective": "Prove Modal/Drawer composition with Wave 6 surfaces",
+      "scope": ["Escape precedence and nested lifecycle"],
+      "nonGoals": ["redesign Wave 6"],
+      "dependencies": ["modal", "drawer"],
+      "contracts": ["overlays/composition"],
+      "contextSources": [
+        "tools/playwright/overlay.spec.js",
+        "tools/playwright/{dropdown,popover,interaction-evidence-wave6}.spec.js"
+      ],
+      "implementationSurface": ["tools/playwright/overlay.spec.js"],
+      "focusedValidation": ["overlay-integration"],
+      "outputs": ["cross-component regression evidence"],
+      "handoff": ["integration findings"],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "certification-review",
+      "objective": "Integrate evidence and independently review the fixed diff",
+      "scope": ["component-specific gates, reports, Standards and Spec review"],
+      "nonGoals": ["new implementation scope"],
+      "dependencies": ["nested-integration"],
+      "contracts": ["component completion gate", "three Wave 7 specs"],
+      "contextSources": [
+        "docs/component-audit-workflow.md",
+        "docs/component-audits/{modal,drawer}.json",
+        "openspec/changes/wave-7-modal-drawer-overlays/tasks.md"
+      ],
+      "implementationSurface": [
+        "docs/component-audits/**",
+        "openspec/changes/wave-7-modal-drawer-overlays/**"
+      ],
+      "focusedValidation": ["audit-manifest", "full"],
+      "outputs": ["independent dispositions and dynamic evidence"],
+      "handoff": ["unresolved findings only"],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    }
+  ]
+}
