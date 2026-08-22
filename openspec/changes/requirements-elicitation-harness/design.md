@@ -68,6 +68,6 @@ Machine fixtures cover the ten required routes and state transitions. The GitHub
 
 1. Add readiness contracts, fixtures, and core validation without changing existing plan fixtures.
 2. Require a ready authorization-linked state only for new assessments declaring the requirements gate; preserve v1 plans and direct routes.
-3. Update routing docs and repo-local skills to invoke the gate before planning and to re-enter it from apply.
+3. Update the repo-owned `AGENTS.md` → protocol integration to invoke the gate around generated OpenSpec artifact mechanics, and protect that seam with a regeneration check.
 4. Dogfood the change's own assessment/packets, then run focused, affected, review, and final validation.
 5. Roll back by removing the new commands/state fields and restoring the prior pointers; existing OpenSpec and v1 execution plans remain readable.

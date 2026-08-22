@@ -136,6 +136,26 @@ try {
         `${skill} unexpectedly owns repository policy after update`,
       );
   }
+
+  const doctorProtectedFiles = [
+    "AGENTS.md",
+    "docs/requirements-elicitation.md",
+    ...upstreamManagedSkills.map((skill) => `.agents/skills/${skill}/SKILL.md`),
+  ];
+  const beforeDoctor = await Promise.all(
+    doctorProtectedFiles.map((file) => readFile(path.join(upgradeRoot, file))),
+  );
+  await exec("openspec", ["doctor", "--json"], {
+    cwd: upgradeRoot,
+    maxBuffer: 10 * 1024 * 1024,
+    timeout: 30_000,
+  });
+  const afterDoctor = await Promise.all(
+    doctorProtectedFiles.map((file) => readFile(path.join(upgradeRoot, file))),
+  );
+  for (const [index, file] of doctorProtectedFiles.entries())
+    if (!beforeDoctor[index].equals(afterDoctor[index]))
+      throw new Error(`OpenSpec doctor unexpectedly modified ${file}`);
 } finally {
   await rm(upgradeRoot, { recursive: true, force: true });
 }

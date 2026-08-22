@@ -60,7 +60,7 @@ The installed core profile exposes these repo-local skills:
 - `$openspec-sync-specs` — merge delta specs into living specs without archiving;
 - `$openspec-archive-change` — archive a completed change after verification.
 
-Use the generated skill's own syntax and artifact mechanics. Requirements and authorization integration is repo-owned by `AGENTS.md` and `docs/requirements-elicitation.md`; `openspec update` owns and may replace `.agents/skills/openspec-{propose,apply-change,update-change}/SKILL.md`. Keep repository policy out of those generated files. `npm run check:openspec` force-updates a disposable copy to prove the stable integration survives regeneration and fails if repo policy drifts back into upstream-managed output.
+Use the generated skill's own syntax and artifact mechanics. Requirements and authorization integration is repo-owned by `AGENTS.md` and `docs/requirements-elicitation.md`; `openspec update` owns and may replace `.agents/skills/openspec-{propose,apply-change,update-change}/SKILL.md`. Keep repository policy out of those generated files. In OpenSpec 1.10.0, `update` is the repository regeneration command; the CLI has no `install` command, package installation/upgrading does not itself rewrite repository files, and `doctor` is diagnostic. `npm run check:openspec` force-updates a disposable copy to prove the stable integration survives regeneration, byte-checks that `doctor` does not mutate the protected seam, and fails if repo policy drifts back into upstream-managed output.
 
 Archive/sync integrity and Markdown metadata still have narrow local patches in their generated skills; review those patches whenever OpenSpec refreshes them.
 
