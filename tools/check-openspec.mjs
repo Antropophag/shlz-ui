@@ -1,8 +1,14 @@
 import { execFile } from "node:child_process";
-import { access, readFile } from "node:fs/promises";
+import { readFile, stat } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
+const repoRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+);
 const requiredSkills = [
   "openspec-apply-change",
   "openspec-archive-change",
@@ -13,10 +19,17 @@ const requiredSkills = [
 ];
 
 async function openspec(...args) {
-  return exec("openspec", args, { maxBuffer: 10 * 1024 * 1024 });
+  return exec("openspec", args, {
+    cwd: repoRoot,
+    maxBuffer: 10 * 1024 * 1024,
+    timeout: 30_000,
+  });
 }
 
-const config = await readFile("openspec/config.yaml", "utf8");
+const config = await readFile(
+  path.join(repoRoot, "openspec/config.yaml"),
+  "utf8",
+);
 if (!/^schema:\s*spec-driven\s*$/m.test(config)) {
   throw new Error("openspec/config.yaml must select the spec-driven schema");
 }
@@ -39,7 +52,12 @@ for (const artifact of ["proposal", "specs", "design", "tasks"]) {
 }
 
 for (const skill of requiredSkills) {
-  await access(`.agents/skills/${skill}/SKILL.md`);
+  const skillFile = path.join(repoRoot, ".agents/skills", skill, "SKILL.md");
+  const skillFileStats = await stat(skillFile);
+  if (!skillFileStats.isFile()) {
+    throw new Error(`${skillFile} must be a regular file`);
+  }
+  await readFile(skillFile);
 }
 
 const { stdout: doctorOutput } = await openspec("doctor", "--json");
