@@ -1,4 +1,5 @@
 shlz-design-source/
+.agents/skills/openspec-*/
 packages/tokens/dist/
 packages/icons/dist/
 package-lock.json

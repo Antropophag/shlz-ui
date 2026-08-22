@@ -1,0 +1,35 @@
+schema: spec-driven
+
+context: |
+  SHLZ UI is a framework-neutral UI and design-system repository.
+  shlz-design-source/ is the authoritative design source and changes only in a separately approved source-update task. design-source-index/ and other generated references are derived, not authority.
+  Existing tests, snapshots, and audit statuses are evidence, not authority by themselves. Prefer native HTML semantics.
+  Keep library-owned and consumer-owned behavior explicit. Public interface changes require spec/design justification; preserve backward compatibility unless an approved change says otherwise.
+  docs/component-audits/ is the audit/evidence layer, not an automatic source of OpenSpec behavioral contracts.
+  The user owns the GitHub PR merge decision; agents stop before merge.
+
+rules:
+  proposal:
+    - State the problem or motivation, scope, and non-goals.
+    - Identify affected contracts or components, compatibility impact, dependencies or prerequisites, and known risks.
+    - State what is intentionally outside the change.
+  specs:
+    - Describe observable system behavior rather than implementation details, with verifiable WHEN/THEN or Given/When/Then scenarios.
+    - Separate library-owned and consumer-owned behavior where ownership matters.
+    - Claim only behavior and interfaces this change will implement; do not infer runtime behavior from design source without evidence.
+  design:
+    - When design is applicable, cover ownership seams, architectural decisions, alternatives and tradeoffs, public interface impact, compatibility or migration, and the testing/evidence strategy.
+    - Justify shared abstractions and introduce substantial infrastructure only when its need is demonstrated.
+  tasks:
+    - Use ordered, concrete implementation steps, including separate validation, regression/evidence, and final review/verification work.
+    - Exclude unrelated cleanup and mark a task complete only after its implementation and checks actually pass.
+
+operations:
+  apply:
+    guidance:
+      - Implement only the approved change scope; surface additional refactors or features instead of hiding them in the change.
+      - Preserve repository source authority and verify the result before reporting completion.
+  archive:
+    guidance:
+      - Archive only after tasks are complete and verification/review reflects the implemented state.
+      - Keep delta specs aligned with actual behavior; OpenSpec archive is not GitHub merge, which remains the user's decision.
