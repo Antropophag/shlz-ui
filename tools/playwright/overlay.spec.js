@@ -442,7 +442,12 @@ test("destroy while open completes close cleanup before listener teardown", asyn
     expanded: "false",
     openerFocused: true,
   });
-  await page.waitForTimeout(0);
+  await page.evaluate(
+    () =>
+      new Promise((resolve) =>
+        globalThis.requestAnimationFrame(() => resolve()),
+      ),
+  );
   await expect(trigger).toHaveAttribute("aria-expanded", "false");
   await expect(trigger).toBeFocused();
   await expect(dialog).toBeHidden();
