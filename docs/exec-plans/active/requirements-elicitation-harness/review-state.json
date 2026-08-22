@@ -21,7 +21,8 @@
       "file": ".agents/skills/openspec-propose/SKILL.md",
       "axis": "Standards",
       "introducedPass": 1,
-      "status": "open"
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
     },
     {
       "id": "STD-2",
@@ -30,7 +31,8 @@
       "file": ".agents/skills/openspec-propose/SKILL.md",
       "axis": "Standards",
       "introducedPass": 1,
-      "status": "open"
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
     },
     {
       "id": "SPEC-1",
@@ -39,7 +41,8 @@
       "file": "tools/lib/harness/core.mjs",
       "axis": "Spec",
       "introducedPass": 2,
-      "status": "open"
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
     },
     {
       "id": "SPEC-2",
@@ -48,7 +51,8 @@
       "file": "tools/lib/harness/core.mjs",
       "axis": "Spec",
       "introducedPass": 2,
-      "status": "open"
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
     },
     {
       "id": "SPEC-3",
@@ -57,7 +61,8 @@
       "file": "tools/tests/harness.test.mjs",
       "axis": "Spec",
       "introducedPass": 2,
-      "status": "open"
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
     }
   ]
 }

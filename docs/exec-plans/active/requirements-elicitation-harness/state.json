@@ -28,9 +28,7 @@
         "tools/tests/harness.test.mjs",
         "openspec/changes/requirements-elicitation-harness/tasks.md"
       ],
-      "provenChecks": [
-        "npm run test:harness: 21/21 pass"
-      ],
+      "provenChecks": ["npm run test:harness: 21/21 pass"],
       "settledDecisions": [
         "Requirements state version 1 permits only compact intent, route, decisions, OpenSpec linkage, and authorization provenance",
         "Planning guard is opt-in through assessment.requirementsGate for backward-compatible direct and v1 flows"
