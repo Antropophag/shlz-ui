@@ -47,7 +47,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
       </div>
     </div>
   </article>
-  <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer aria-labelledby="workspace-filter-title">
+  <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer data-component-audit-id="drawer-data-workspace" aria-labelledby="workspace-filter-title">
     <form class="shlz-drawer__surface" method="dialog">
       <header class="shlz-drawer__header"><h2 class="shlz-drawer__title" id="workspace-filter-title">Фильтры заявок</h2><button class="shlz-drawer__close" type="button" data-shlz-drawer-close aria-label="Закрыть"><img src="${iconUrl("close")}" alt=""></button></header>
       <div class="shlz-drawer__body"><div class="shlz-field shlz-field--select shlz-select-root" data-shlz-select data-component-audit-id="workspace-status">

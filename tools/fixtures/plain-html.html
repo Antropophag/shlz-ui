@@ -186,6 +186,7 @@
       class="shlz-modal"
       id="fixture-modal"
       data-shlz-modal
+      data-component-audit-id="modal-plain-html"
       aria-labelledby="fixture-modal-title"
     >
       <div class="shlz-modal__surface">
@@ -216,6 +217,7 @@
       class="shlz-drawer"
       id="fixture-drawer"
       data-shlz-drawer
+      data-component-audit-id="drawer-plain-html"
       aria-labelledby="fixture-drawer-title"
     >
       <div class="shlz-drawer__surface">
@@ -243,8 +245,8 @@
         enhanceTooltips,
       } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
-      enhanceModals();
-      enhanceDrawers();
+      window.__fixtureModalControllers = enhanceModals();
+      window.__fixtureDrawerControllers = enhanceDrawers();
       enhancePopovers();
       enhanceTabs();
       enhanceTooltips();

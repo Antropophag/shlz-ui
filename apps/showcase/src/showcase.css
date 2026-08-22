@@ -802,6 +802,11 @@ section {
   justify-items: start;
 }
 
+.shlz-wave7-material-trigger {
+  position: fixed;
+  inset-inline-start: -10000px;
+}
+
 .shlz-visual-fixture .shlz-dropdown__menu {
   position: relative;
   inset: auto;

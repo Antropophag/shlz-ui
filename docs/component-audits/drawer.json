@@ -1,0 +1,109 @@
+{
+  "component": "drawer",
+  "authoritativeSource": "shlz-design-source/raw/svg/Drawer.svg",
+  "referenceSources": [
+    "docs/components/drawer.md",
+    "docs/adr/0007-native-dialog-overlays.md"
+  ],
+  "implementation": [
+    "packages/styles/components/drawer.css",
+    "packages/behaviors/src/drawer.ts"
+  ],
+  "behavior": "packages/behaviors/src/drawer.ts",
+  "docs": "docs/components/drawer.md",
+  "rootSelector": "[data-component-audit-id^='drawer-']",
+  "legacySelectors": ["dialog[data-shlz-drawer]", ".shlz-drawer__surface"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 1,
+  "occurrences": [
+    { "id": "drawer-showcase", "kind": "content-stress-fixture" },
+    { "id": "drawer-data-workspace", "kind": "live-consumer" },
+    { "id": "drawer-plain-html", "kind": "live-consumer" }
+  ],
+  "supportedSizes": [
+    "420x900-source-surface",
+    "420px-desktop-width",
+    "sub-420px-viewport-fit"
+  ],
+  "supportedStates": [
+    "closed",
+    "open",
+    "dismissible",
+    "non-dismissible",
+    "focus-visible",
+    "long-content",
+    "narrow-viewport"
+  ],
+  "contentStress": [
+    "long-body",
+    "narrow-viewport",
+    "data-workspace-state",
+    "nested-wave-6-surface"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Drawer.svg contains one standalone zero-variant Sidebar/Drawer component at 420 by 900",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Drawer.svg"
+    },
+    {
+      "claim": "right attachment, modal behavior, attached-edge radii, backdrop and narrow full-width fit are bounded repository decisions",
+      "classification": "repository-decision",
+      "evidence": "docs/adr/0007-native-dialog-overlays.md"
+    },
+    {
+      "claim": "non-modal and left, top or bottom placements are not established by the isolated source",
+      "classification": "assumption",
+      "evidence": "docs/components/drawer.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/overlay.spec.js",
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/fidelity.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/overlay.spec.js-snapshots/drawer-chromium-linux.png",
+    "tools/playwright/overlay.spec.js-snapshots/drawer-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Drawer hash, sole name, dimensions, zero variants, regions, effects, warnings and generated reference are asserted",
+    "structural-contract": "pass: Showcase, Data Workspace and plain HTML roots plus one inert diagnostic surface are classified as right-side modal Drawer",
+    "runtime-browser": "pass: native open, close, return values, Escape, backdrop policy, repeated enhancement and teardown execute in Chromium",
+    "accessibility": "pass: accessible naming, native focus containment, background inertness and eligible opener restoration execute",
+    "focused-visual": "pass: focused real-open and narrow snapshots plus computed right-edge geometry and focus paint pass",
+    "consumer-integration": "pass: Data Workspace retains application-owned filters and plain HTML consumes standalone CSS plus direct ESM",
+    "responsive-content-stress": "pass: body-owned overflow, stable regions, 420px desktop width and sub-420px viewport fit execute"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: the lossless Drawer source reference remains static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real native open and focus precede computed right-edge, width, paint and narrow-layout assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: modal open, close, Escape, backdrop policy, focus, Data Workspace state, idempotence and teardown execute"
+      ]
+    },
+    "materialStates": [
+      "dismissible-open",
+      "non-dismissible-open",
+      "focus-visible",
+      "long-content",
+      "narrow-layout"
+    ],
+    "browserTest": "tools/playwright/overlay.spec.js",
+    "manualStateWalk": "pass: pointer open/close/backdrop/drag, Tab and Shift+Tab, focus-visible, Escape precedence, explicit actions, long/narrow content, stale opener, repeated open, nested Wave 6 surfaces and Data Workspace inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "Drawer is modal-only and right-side-only; nested/concurrent modal overlays, portals and application workflow ownership are unsupported"
+  ]
+}

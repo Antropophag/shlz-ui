@@ -1,0 +1,128 @@
+{
+  "component": "modal",
+  "authoritativeSource": "shlz-design-source/raw/svg/Modal.svg",
+  "referenceSources": [
+    "docs/components/modal.md",
+    "docs/adr/0007-native-dialog-overlays.md"
+  ],
+  "implementation": [
+    "packages/styles/components/modal.css",
+    "packages/behaviors/src/modal.ts"
+  ],
+  "behavior": "packages/behaviors/src/modal.ts",
+  "docs": "docs/components/modal.md",
+  "rootSelector": "[data-component-audit-id^='modal-']",
+  "legacySelectors": ["dialog[data-shlz-modal]", ".shlz-modal__surface"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 5,
+  "occurrences": [
+    { "id": "modal-showcase-structured", "kind": "content-stress-fixture" },
+    { "id": "modal-showcase-compact", "kind": "executable-fixture" },
+    { "id": "modal-showcase-success", "kind": "executable-fixture" },
+    { "id": "modal-showcase-warning", "kind": "executable-fixture" },
+    { "id": "modal-showcase-error", "kind": "executable-fixture" },
+    { "id": "modal-plain-html", "kind": "live-consumer" }
+  ],
+  "supportedSizes": [
+    "572x196-source-structured",
+    "416x165-source-compact",
+    "viewport-bounded"
+  ],
+  "supportedStates": [
+    "closed",
+    "open",
+    "focus-visible",
+    "dismissible",
+    "non-dismissible",
+    "long-content",
+    "narrow-viewport"
+  ],
+  "contentStress": [
+    "long-body",
+    "narrow-viewport",
+    "nested-dropdown",
+    "nested-tooltip",
+    "nested-popover"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Modal.svg contains five standalone zero-variant components named Basic (Legacy), Info, Success, Warning and Error",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Modal.svg"
+    },
+    {
+      "claim": "native modal semantics, opt-in backdrop dismissal and eligible opener restoration are behavior decisions",
+      "classification": "repository-decision",
+      "evidence": "docs/adr/0007-native-dialog-overlays.md"
+    },
+    {
+      "claim": "the 417px Warning specimen does not establish another public size",
+      "classification": "derived-pattern",
+      "evidence": "docs/components/modal.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/overlay.spec.js",
+    "tools/playwright/fidelity.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/overlay.spec.js-snapshots/modal-chromium-linux.png",
+    "tools/playwright/overlay.spec.js-snapshots/modal-long-content-chromium-linux.png",
+    "tools/playwright/overlay.spec.js-snapshots/modal-nested-popover-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Modal hash, five names, dimensions, zero variants, geometry, effects, warnings and five generated references are asserted",
+    "structural-contract": "pass: five executable Showcase Modal roots, one plain HTML live consumer and five inert diagnostic surfaces are classified without a generic Overlay interface",
+    "runtime-browser": "pass: native open, close, return values, backdrop gestures, Escape precedence, repeated enhancement and teardown execute in Chromium",
+    "accessibility": "pass: accessible names, explicit and native fallback focus, containment, background inertness and eligible opener restoration execute; compact secondary-text source deviation is measured and tracked",
+    "focused-visual": "pass: focused real-open, long-content and nested-popover snapshots plus computed source geometry pass",
+    "consumer-integration": "pass: Showcase and direct-ESM plain HTML consume the same framework-neutral Modal interface",
+    "responsive-content-stress": "pass: long content owns body scroll and narrow Modal remains viewport-bounded with stable regions"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: five lossless source references remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real native open and keyboard focus precede computed geometry, paint and focus-visible assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: open, all close paths, focus, backdrop gesture, nested Escape, reopen, idempotence and destroy execute"
+      ]
+    },
+    "materialStates": [
+      "basic-open",
+      "info-open",
+      "success-open",
+      "warning-open",
+      "error-open",
+      "focus-visible",
+      "long-content",
+      "narrow-layout"
+    ],
+    "browserTest": "tools/playwright/overlay.spec.js",
+    "manualStateWalk": "pass: pointer open/close/backdrop/drag, Tab and Shift+Tab, focus-visible, Escape precedence, explicit/form actions, long/narrow content, stale opener, repeated open and nested Wave 6 surfaces inspected"
+  },
+  "acceptedDeviations": [
+    {
+      "id": "modal-compact-secondary-contrast",
+      "severity": "P1",
+      "scope": "compact Info, Success, Warning and Error secondary body text",
+      "status": "accepted-for-this-pr",
+      "introducedByThisChange": false,
+      "worsenedByThisChange": false,
+      "evidence": "real open computed contrast is approximately 2.79:1 against the source-backed surface in tools/playwright/overlay.spec.js",
+      "reason": "Wave 7 preserves Modal.svg authority; resolving the source-backed paint requires a separately approved source or shared text-color contract decision",
+      "tracking": "https://github.com/Antropophag/shlz-ui/issues/25"
+    }
+  ],
+  "findings": [],
+  "knownLimitations": [
+    "arbitrary nested or concurrent modal overlays, portals and a public generic overlay manager are unsupported"
+  ]
+}

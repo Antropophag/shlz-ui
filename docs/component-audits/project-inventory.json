@@ -1571,18 +1571,18 @@
         "tools/playwright/overlay.spec.js"
       ],
       "evidence": {
-        "source-integrity": "five-component test",
-        "structural-contract": "native dialog tests",
-        "runtime-browser": "lifecycle tests",
-        "accessibility": "focus/Escape tests",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "plain HTML",
-        "responsive-content-stress": "long content test"
+        "source-integrity": "pass: raw hash and exact five-component zero-variant census remain traceable",
+        "structural-contract": "pass: five Showcase roots, one plain HTML consumer and five inert diagnostic surfaces are classified",
+        "runtime-browser": "pass: native lifecycle, dismissal, return values, nested Escape, idempotence and teardown execute",
+        "accessibility": "pass: naming, focus ownership, containment, inertness and eligible restoration execute",
+        "focused-visual": "pass: source states, real open, focus-visible, long-content and nested snapshots/computed geometry pass",
+        "consumer-integration": "pass: Showcase and plain HTML direct ESM consume the reusable contract",
+        "responsive-content-stress": "pass: viewport bounds, local scrolling and stable regions pass"
       },
       "canonical_name": "Modal",
       "category": "overlays",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Modal.svg"],
       "production_implementation": [
         "packages/styles/components/modal.css",
@@ -1590,13 +1590,10 @@
       ],
       "behavior": ["packages/behaviors/src/modal.ts"],
       "docs": ["docs/components/modal.md"],
-      "executable_fixtures": [],
-      "live_consumers": [
-        "apps/showcase/src/main.js",
-        "tools/fixtures/plain-html.html"
-      ],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
+      "live_consumers": ["tools/fixtures/plain-html.html"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
@@ -1607,14 +1604,16 @@
         "nested popover"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "arbitrary nested or concurrent modal overlays and portals are unsupported"
+      ],
       "measured_counts": {
-        "executableShowcase": 2,
-        "liveConsumers": 0,
+        "executableShowcase": 5,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 5,
         "legacyNative": 0,
-        "localAlternatives": 1
+        "localAlternatives": 0
       }
     },
     {
@@ -1624,18 +1623,18 @@
         "tools/playwright/consumer-workspace.spec.js"
       ],
       "evidence": {
-        "source-integrity": "source region test",
-        "structural-contract": "native dialog tests",
-        "runtime-browser": "lifecycle tests",
-        "accessibility": "focus/Escape tests",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "Data Workspace/plain HTML",
-        "responsive-content-stress": "narrow test"
+        "source-integrity": "pass: raw hash and exact sole 420 by 900 zero-variant census remain traceable",
+        "structural-contract": "pass: Showcase, Data Workspace, plain HTML and one inert diagnostic surface are classified",
+        "runtime-browser": "pass: native lifecycle, dismissal, return values, nested Escape, idempotence and teardown execute",
+        "accessibility": "pass: naming, modal focus containment, inertness and eligible restoration execute",
+        "focused-visual": "pass: real open, focus-visible and narrow snapshots/computed right-edge geometry pass",
+        "consumer-integration": "pass: Data Workspace state and plain HTML direct ESM consume the reusable contract",
+        "responsive-content-stress": "pass: 420px desktop width, sub-420px fit, body scroll and stable regions pass"
       },
       "canonical_name": "Drawer",
       "category": "overlays",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Drawer.svg"],
       "production_implementation": [
         "packages/styles/components/drawer.css",
@@ -1643,14 +1642,13 @@
       ],
       "behavior": ["packages/behaviors/src/drawer.ts"],
       "docs": ["docs/components/drawer.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/main.js"],
       "live_consumers": [
-        "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js",
         "tools/fixtures/plain-html.html"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/fidelity.js"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
@@ -1661,14 +1659,16 @@
         "nested Select"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "Drawer is modal-only and right-side-only; other placements and portals are unsupported"
+      ],
       "measured_counts": {
         "executableShowcase": 1,
-        "liveConsumers": 1,
+        "liveConsumers": 2,
         "dataWorkspace": 1,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 1,
         "legacyNative": 0,
-        "localAlternatives": 1
+        "localAlternatives": 0
       }
     },
     {
