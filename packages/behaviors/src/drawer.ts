@@ -35,7 +35,8 @@ export class DrawerController {
 
   destroy(): void {
     this.#binding.destroy();
-    drawerControllers.delete(this.dialog);
+    if (drawerControllers.get(this.dialog) === this)
+      drawerControllers.delete(this.dialog);
   }
 }
 

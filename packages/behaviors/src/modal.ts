@@ -33,7 +33,8 @@ export class ModalController {
 
   destroy(): void {
     this.#binding.destroy();
-    modalControllers.delete(this.dialog);
+    if (modalControllers.get(this.dialog) === this)
+      modalControllers.delete(this.dialog);
   }
 }
 

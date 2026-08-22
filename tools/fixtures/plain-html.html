@@ -245,8 +245,8 @@
         enhanceTooltips,
       } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
-      enhanceModals();
-      enhanceDrawers();
+      window.__fixtureModalControllers = enhanceModals();
+      window.__fixtureDrawerControllers = enhanceDrawers();
       enhancePopovers();
       enhanceTabs();
       enhanceTooltips();

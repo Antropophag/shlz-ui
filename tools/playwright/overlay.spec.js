@@ -32,6 +32,41 @@ const expectMaterialStates = (component) => {
     [...manifests[component].interactionEvidence.materialStates].sort(),
   );
 };
+const textContrast = (locator) =>
+  locator.evaluate((element) => {
+    const parse = (value) =>
+      value
+        .match(/[\d.]+/g)
+        .map(Number)
+        .slice(0, 3);
+    const luminance = (channels) =>
+      channels
+        .map((channel) => {
+          const normalized = channel / 255;
+          return normalized <= 0.04045
+            ? normalized / 12.92
+            : ((normalized + 0.055) / 1.055) ** 2.4;
+        })
+        .reduce(
+          (sum, channel, index) =>
+            sum + channel * [0.2126, 0.7152, 0.0722][index],
+          0,
+        );
+    const foreground = luminance(
+      parse(globalThis.getComputedStyle(element).color),
+    );
+    const background = luminance(
+      parse(
+        globalThis.getComputedStyle(
+          element.closest(".shlz-modal__surface, .shlz-drawer__surface"),
+        ).backgroundColor,
+      ),
+    );
+    return (
+      (Math.max(foreground, background) + 0.05) /
+      (Math.min(foreground, background) + 0.05)
+    );
+  });
 const verifyModalStatus = async (page, state, color) => {
   await page
     .getByRole("button", { name: state, exact: true })
@@ -42,6 +77,8 @@ const verifyModalStatus = async (page, state, color) => {
     "color",
     color,
   );
+  expect(await textContrast(dialog.locator("h2"))).toBeGreaterThanOrEqual(4.5);
+  expect(await textContrast(dialog.locator("p"))).toBeCloseTo(2.79, 1);
   await page.keyboard.press("Escape");
 };
 const expectOccurrenceSubset = async (page, component, ids, diagnostics) =>
@@ -312,6 +349,38 @@ test("modal body scrolls while header and footer remain fixed", async ({
   expect((await footer.boundingBox()).y).toBeCloseTo(before.footer.y, 0);
 });
 
+test("modal native fallback focus and backdrop gesture state stay cycle-local", async ({
+  page,
+}) => {
+  const confirmTrigger = page.getByRole("button", { name: "Подтверждение" });
+  await confirmTrigger.click();
+  const confirm = page.locator("#showcase-confirm");
+  await expect(confirm).toBeVisible();
+  expect(
+    await confirm.evaluate((dialog) => dialog.contains(document.activeElement)),
+  ).toBe(true);
+  await page.keyboard.press("Escape");
+
+  const { dialog } = await openModal(page);
+  const surface = dialog.locator(".shlz-modal__surface");
+  const box = await surface.boundingBox();
+  await page.mouse.move(box.x + 12, box.y + 12);
+  await page.mouse.down();
+  await page.mouse.move(box.x - 12, box.y + 12);
+  await page.mouse.up();
+  await expect(dialog).toBeVisible();
+
+  await page.mouse.move(box.x - 12, box.y + 12);
+  await page.mouse.down();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await page.evaluate(() => window.__shlzEnhanceModals()[0].open());
+  await expect(dialog).toBeVisible();
+  await page.mouse.up();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+});
+
 test("destroy removes modal trigger behavior", async ({ page }) => {
   const trigger = page.getByRole("button", { name: "Открыть Modal" });
   await trigger.scrollIntoViewIfNeeded();
@@ -376,6 +445,103 @@ test("repeated drawer enhancement has one owner and isolated teardown", async ({
   await page.evaluate(() => window.__wave7RepeatedDrawer.destroy());
   await trigger.click();
   await expect(page.locator("#showcase-drawer")).toBeHidden();
+});
+
+test("stale destroy cannot delete a newer Modal or Drawer owner", async ({
+  page,
+}) => {
+  const result = await page.evaluate(() => {
+    const staleModal = window.__shlzModalControllers[0];
+    staleModal.destroy();
+    const currentModal = window.__shlzEnhanceModals()[0];
+    staleModal.destroy();
+    const repeatedModal = window.__shlzEnhanceModals()[0];
+
+    const staleDrawer = window.__shlzDrawerControllers[0];
+    staleDrawer.destroy();
+    const currentDrawer = window.__shlzEnhanceDrawers()[0];
+    staleDrawer.destroy();
+    const repeatedDrawer = window.__shlzEnhanceDrawers()[0];
+    return {
+      modal: currentModal === repeatedModal,
+      drawer: currentDrawer === repeatedDrawer,
+    };
+  });
+  expect(result).toEqual({ modal: true, drawer: true });
+});
+
+test("overlay instances isolate triggers, return values and stale openers", async ({
+  page,
+}) => {
+  const modal = page.locator("#showcase-modal");
+  const modalTrigger = page.getByRole("button", { name: "Открыть Modal" });
+  await modalTrigger.click();
+  await modal.getByRole("button", { name: "Сохранить" }).click();
+  await expect(modal).toHaveJSProperty("returnValue", "save");
+  await modalTrigger.click();
+  await expect(modal).toHaveJSProperty("returnValue", "");
+  await page.keyboard.press("Escape");
+
+  await page
+    .getByRole("button", { name: "success", exact: true })
+    .evaluate((button) => button.click());
+  const success = page.locator("#showcase-success");
+  await expect(success).toBeVisible();
+  await expect(modal).toBeHidden();
+  await expect(modalTrigger).toHaveAttribute("aria-expanded", "false");
+  await page.keyboard.press("Escape");
+
+  const staleResults = await page.evaluate(async () => {
+    const controller = window.__shlzEnhanceModals()[0];
+    const disconnected = document.createElement("button");
+    document.body.append(disconnected);
+    disconnected.focus();
+    controller.open(disconnected);
+    disconnected.remove();
+    controller.close();
+
+    const disabled = document.createElement("button");
+    document.body.append(disabled);
+    disabled.focus();
+    controller.open(disabled);
+    disabled.disabled = true;
+    controller.close();
+    await new Promise((resolve) => globalThis.requestAnimationFrame(resolve));
+    const disabledFocused = document.activeElement === disabled;
+    disabled.remove();
+    return {
+      disconnectedFocused: document.activeElement === disconnected,
+      disabledFocused,
+    };
+  });
+  expect(staleResults).toEqual({
+    disconnectedFocused: false,
+    disabledFocused: false,
+  });
+});
+
+test("Data Workspace Drawer owns modal focus and stress geometry, not filter state", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 360, height: 320 });
+  const trigger = page.getByRole("button", { name: /Фильтры/ });
+  await trigger.click();
+  const drawer = page.locator("#workspace-filter-drawer");
+  await expect(drawer).toBeVisible();
+  expect(
+    await drawer.evaluate((element) =>
+      element.contains(document.activeElement),
+    ),
+  ).toBe(true);
+  expect((await drawer.boundingBox()).width).toBe(360);
+  const body = drawer.locator(".shlz-drawer__body");
+  expect(
+    await body.evaluate(
+      (element) => element.scrollHeight >= element.clientHeight,
+    ),
+  ).toBe(true);
+  await drawer.getByRole("button", { name: "Закрыть" }).click();
+  await expect(trigger).toBeFocused();
 });
 
 test("drawer is a right-side modal with native focus and scrolling", async ({
@@ -452,6 +618,41 @@ for (const [name, selector] of [
   });
 }
 
+for (const [name, selector] of [
+  ["Dropdown внутри Modal", "#modal-menu"],
+  ["Tooltip внутри Modal", "#modal-tooltip"],
+  ["Popover внутри Modal", "#modal-popover"],
+]) {
+  test(`${name} composes inside Drawer and preserves one-layer Escape`, async ({
+    page,
+  }) => {
+    const { dialog } = await openDrawer(page);
+    await page.evaluate((nestedName) => {
+      const modal = document.querySelector("#showcase-modal");
+      const drawerBody = document.querySelector(
+        "#showcase-drawer .shlz-drawer__body",
+      );
+      const trigger = [...modal.querySelectorAll("button")].find(
+        (button) => button.textContent.trim() === nestedName,
+      );
+      const controlled =
+        trigger.getAttribute("aria-controls") ??
+        trigger.dataset.shlzTooltipTrigger;
+      drawerBody.append(trigger, document.getElementById(controlled));
+    }, name);
+    const trigger = dialog.getByRole("button", { name });
+    if (name.startsWith("Tooltip")) await trigger.focus();
+    else await trigger.click();
+    const floating = page.locator(selector);
+    await expect(floating).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(floating).toBeHidden();
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+  });
+}
+
 test("modal, long content, drawer and nested floating visuals", async ({
   page,
 }) => {
@@ -488,5 +689,11 @@ test("plain HTML consumes modal and drawer via standalone CSS and direct ESM", a
 
   const drawerTrigger = page.getByRole("button", { name: "Открыть Drawer" });
   await drawerTrigger.click();
-  await expect(page.locator("#fixture-drawer")).toBeVisible();
+  const drawer = page.locator("#fixture-drawer");
+  await expect(drawer).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(drawerTrigger).toBeFocused();
+  await page.evaluate(() => window.__fixtureDrawerControllers[0].destroy());
+  await drawerTrigger.click();
+  await expect(drawer).toBeHidden();
 });

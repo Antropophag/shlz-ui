@@ -20,8 +20,24 @@ Drawer independently passes the same seven levels. Its ledger covers dismissible
 
 Focused snapshots were inspected. A temporary background shift caused by visible audit triggers was rejected rather than accepted as a new baseline; the triggers were removed from layout and existing component snapshots remain unchanged. No source-backed image changed.
 
+One pre-existing source-backed P1 deviation is accepted for this PR: compact Modal secondary text measures approximately 2.79:1 rather than the 4.5:1 emergency guard. Wave 7 neither introduced nor worsened it and does not silently recolor the authority; [issue #25](https://github.com/Antropophag/shlz-ui/issues/25) tracks the required source/shared-contract decision.
+
 Manual Chromium walks covered pointer open/explicit close/backdrop/outside drag, Tab/Shift+Tab and focus-visible, Escape and nested-surface precedence, native form values, long/narrow content, stale/aria-disabled opener handling, repeated enhancement/reopen/teardown, nested Dropdown/Tooltip/Popover, plain HTML, and Data Workspace.
 
 ## Limitations, CI, and review
 
-The current harness supports Chromium only, so no cross-engine claim is made. The build retains its pre-existing Vite chunk-size warning. There are no accepted deviations or unresolved component findings. Exact final commands, commit SHA, GitHub checks, and review-thread state are recorded in the PR description.
+The current harness supports Chromium only, so no cross-engine claim is made. The build retains its pre-existing Vite chunk-size warning.
+
+Final local validation results:
+
+- `npm run check:openspec` — pass, OpenSpec 1.10.0 harness healthy;
+- `openspec validate wave-7-modal-drawer-overlays --strict` — pass;
+- `npm test` — 87/87 pass;
+- `npm run lint` — ESLint, Stylelint, and Prettier pass;
+- `npm run build` and `node tools/validate.mjs` — all workspaces build; 68 source SVGs, three token groups, 119 canonical icons, and 42 aliases validate;
+- `npm run test:packages` — four packed packages install and execute from a clean project;
+- `npx playwright test tools/playwright/overlay.spec.js --project=chromium` — 25/25 focused overlay tests pass;
+- `npm run test:e2e` — 188/188 Chromium tests pass, including Wave 6, Data Workspace, plain HTML, accessibility, responsive/content stress, and focused visual snapshots;
+- `git diff --check` and final raw SVG SHA-256 comparison — pass with no source diff.
+
+The first two-axis review of implementation commit `236d387` reported three Standards and six Spec findings. All were resolved in the follow-up diff: stale-owner deletion became identity-conditional; exact census/report claims were corrected; Drawer nested composition, second Escape, lifecycle isolation, pointer gesture reset, plain-HTML teardown, and Data Workspace stress evidence were added. No material scope creep was found. GitHub CI and review threads are pending PR creation; the unmerged PR head is the final SHA authority and will carry their current state.
