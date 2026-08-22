@@ -16,12 +16,13 @@ const executableExtensions = new Set([
   ".php",
 ]);
 const wave7Markup =
-  /shlz-(?:modal|drawer)|data-shlz-(?:modal|drawer)|<dialog(?:\s|>)/;
+  /shlz-(?:modal|drawer)|data-shlz-(?:modal|drawer)|<dialog(?:\s|>)|HTMLDialogElement|showModal\s*\(/;
 const classifiedFiles = new Set([
   "apps/showcase/src/consumer-workspace.js",
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/main.js",
   "packages/behaviors/src/drawer.ts",
+  "packages/behaviors/src/internal/native-dialog.ts",
   "packages/behaviors/src/modal.ts",
   "tools/fixtures/plain-html.html",
 ]);
@@ -36,6 +37,12 @@ const auditIdsByFile = new Map([
 
 const unclassifiedPaths = (found) =>
   [...found].filter((path) => !classifiedFiles.has(path));
+const matchingPaths = (sources) =>
+  new Set(
+    sources
+      .filter(({ source }) => wave7Markup.test(source))
+      .map(({ path }) => path),
+  );
 
 async function executableFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -51,12 +58,13 @@ async function executableFiles(directory) {
 
 test("Wave 7 repository census rejects unclassified executable overlay markup", async () => {
   const files = (await Promise.all(roots.map(executableFiles))).flat();
-  const matches = [];
-  for (const path of files) {
-    if (wave7Markup.test(await readFile(path, "utf8")))
-      matches.push(relative(".", path));
-  }
-  const found = new Set(matches);
+  const sources = await Promise.all(
+    files.map(async (path) => ({
+      path: relative(".", path),
+      source: await readFile(path, "utf8"),
+    })),
+  );
+  const found = matchingPaths(sources);
   assert.deepEqual(
     unclassifiedPaths(found),
     [],
@@ -82,10 +90,12 @@ test("Wave 7 repository census rejects unclassified executable overlay markup", 
 });
 
 test("Wave 7 repository census fails for a third unclassified consumer", () => {
-  assert.deepEqual(
-    unclassifiedPaths(
-      new Set([...classifiedFiles, "apps/third-consumer/modal.php"]),
-    ),
-    ["apps/third-consumer/modal.php"],
-  );
+  const found = matchingPaths([
+    {
+      path: "apps/third-consumer/modal.php",
+      source:
+        '<dialog data-shlz-modal aria-labelledby="title"><h2 id="title">Third consumer</h2></dialog>',
+    },
+  ]);
+  assert.deepEqual(unclassifiedPaths(found), ["apps/third-consumer/modal.php"]);
 });
