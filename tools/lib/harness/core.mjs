@@ -385,7 +385,9 @@ function workflowConstructs(surface) {
     const directGrant = normalized.match(
       /^(contents|pages|id-token|packages|deployments):\s*write\b/,
     );
-    const inlinePermissions = /^permissions:\s*\{.*\}\s*$/.test(normalized);
+    const inlinePermissions = /^permissions:\s*\{.*\}(?:\s+#.*)?$/.test(
+      normalized,
+    );
     const grants = directGrant
       ? [directGrant[1]]
       : inlinePermissions
@@ -400,6 +402,7 @@ function workflowConstructs(surface) {
         direction: line.direction,
         key: `permission:${line.indent}:${grant}:write`,
         signals: ["permissionsOrSecurity"],
+        alwaysMaterial: true,
       });
     if (
       /^uses:\s*(actions\/(configure-pages|upload-pages-artifact|deploy-pages|create-release)|softprops\/action-gh-release)@/.test(
@@ -430,7 +433,7 @@ function changedWorkflowConstructSignals(surface) {
   }
   const signals = new Set();
   for (const construct of constructs)
-    if (counts.get(construct.key) !== 0)
+    if (construct.alwaysMaterial || counts.get(construct.key) !== 0)
       construct.signals.forEach((signal) => signals.add(signal));
   return signals;
 }

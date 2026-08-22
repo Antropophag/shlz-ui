@@ -279,6 +279,7 @@ test("direct completion re-routes on material discovered surface but not harmles
     "+permissions: write-all",
     "+    contents: write",
     "+permissions: { pages: write, id-token: write }",
+    "+permissions: { pages: write, id-token: write } # deploy",
   ])
     assert.throws(
       () =>
@@ -299,24 +300,6 @@ test("direct completion re-routes on material discovered surface but not harmles
         ),
       /deterministic risk floor.*permissionsOrSecurity.*re-route required/,
     );
-  assert.doesNotThrow(() =>
-    assertRouteConformance(
-      directAssessment(),
-      {
-        version: 1,
-        changedFiles: [".github/workflows/ci.yml"],
-        materialSignals: directAssessment().materialSignals,
-      },
-      [
-        {
-          path: ".github/workflows/ci.yml",
-          status: "modified",
-          patch:
-            "-    pages: write\n-    contents: read\n+    contents: read\n+    pages: write",
-        },
-      ],
-    ),
-  );
   for (const harmlessText of [
     "+name: Documents pages: write behavior",
     '+run: echo "contents: write"',
@@ -352,6 +335,26 @@ test("direct completion re-routes on material discovered surface but not harmles
             path: ".github/workflows/ci.yml",
             status: "modified",
             patch: "-    contents: write\n+contents: write",
+          },
+        ],
+      ),
+    /deterministic risk floor.*permissionsOrSecurity.*re-route required/,
+  );
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [".github/workflows/ci.yml"],
+          materialSignals: directAssessment().materialSignals,
+        },
+        [
+          {
+            path: ".github/workflows/ci.yml",
+            status: "modified",
+            patch:
+              "@@ -4,3 +4,2 @@ jobs:\n-    contents: write\n@@ -12,2 +11,3 @@ other-job:\n+    contents: write",
           },
         ],
       ),
