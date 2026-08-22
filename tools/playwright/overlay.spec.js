@@ -742,6 +742,11 @@ for (const [name, selector] of [
     await page.keyboard.press("Escape");
     await expect(floating).toBeHidden();
     await expect(dialog).toBeVisible();
+    await expect
+      .poll(() =>
+        dialog.evaluate((element) => element.contains(document.activeElement)),
+      )
+      .toBe(true);
     if (name.startsWith("Popover")) {
       await floating.evaluate((element) => {
         const button = document.createElement("button");
