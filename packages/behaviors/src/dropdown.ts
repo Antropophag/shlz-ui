@@ -1,6 +1,6 @@
 import { listenForOutsidePointer } from "./internal/dismissal.js";
 import {
-  isActiveFloating,
+  claimActiveFloatingEscape,
   setActiveFloating,
 } from "./internal/active-floating.js";
 
@@ -102,9 +102,8 @@ export class DropdownController {
           event.preventDefault();
           this.open(event.key === "ArrowDown" ? "first" : "last");
         } else if (
-          event.key === "Escape" &&
           this.expanded &&
-          isActiveFloating(this.trigger.ownerDocument, this)
+          claimActiveFloatingEscape(this.trigger.ownerDocument, this, event)
         ) {
           event.preventDefault();
           event.stopPropagation();
@@ -150,10 +149,7 @@ export class DropdownController {
       this.close();
       return;
     }
-    if (
-      event.key === "Escape" &&
-      isActiveFloating(this.trigger.ownerDocument, this)
-    ) {
+    if (claimActiveFloatingEscape(this.trigger.ownerDocument, this, event)) {
       event.preventDefault();
       event.stopPropagation();
       this.close({ restoreFocus: true });

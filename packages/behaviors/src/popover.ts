@@ -6,7 +6,7 @@ import {
   readNonNegativeNumber,
 } from "./internal/floating.js";
 import {
-  isActiveFloating,
+  claimActiveFloatingEscape,
   setActiveFloating,
 } from "./internal/active-floating.js";
 
@@ -126,9 +126,8 @@ export class PopoverController {
       "keydown",
       (event) => {
         if (
-          event.key === "Escape" &&
           this.expanded &&
-          isActiveFloating(this.trigger.ownerDocument, this)
+          claimActiveFloatingEscape(this.trigger.ownerDocument, this, event)
         ) {
           event.preventDefault();
           this.close({ restoreFocus: true });

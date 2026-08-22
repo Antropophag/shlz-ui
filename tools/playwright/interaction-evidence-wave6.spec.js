@@ -141,6 +141,100 @@ test("all Wave 6 executable, consumer, stress and absence roots are classified",
   }
 });
 
+test("one Escape closes exactly one top surface independent of registration order", async ({
+  page,
+}) => {
+  const bottom = page.locator("#popover-bottom");
+  const top = page.locator("#popover-top");
+  const bottomTrigger = page.getByRole("button", {
+    name: "Bottom",
+    exact: true,
+  });
+  const topTrigger = page.getByRole("button", { name: "Top", exact: true });
+
+  await page.evaluate(() => {
+    window.__shlzPopoverControllers[0].open();
+    window.__shlzPopoverControllers[1].open();
+  });
+  await expect(bottom).toBeVisible();
+  await expect(top).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(top).toBeHidden();
+  await expect(topTrigger).toBeFocused();
+  await expect(bottom).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(bottom).toBeHidden();
+  await expect(bottomTrigger).toBeFocused();
+
+  await page.evaluate(() => {
+    window.__shlzPopoverControllers[1].open();
+    window.__shlzPopoverControllers[0].open();
+  });
+  await expect(top).toBeVisible();
+  await expect(bottom).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(bottom).toBeHidden();
+  await expect(bottomTrigger).toBeFocused();
+  await expect(top).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(top).toBeHidden();
+  await expect(topTrigger).toBeFocused();
+
+  const tooltipTrigger = page.getByRole("button", { name: "Tooltip top" });
+  const tooltip = page.locator("#tooltip-top");
+  await page.evaluate(() => {
+    const tooltipController = window.__shlzTooltipControllers.find(
+      (controller) => controller.tooltip.id === "tooltip-top",
+    );
+    tooltipController.open();
+    window.__shlzPopoverControllers[0].open();
+  });
+  await expect(tooltip).toBeVisible();
+  await expect(bottom).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(bottom).toBeHidden();
+  await expect(bottomTrigger).toBeFocused();
+  await expect(tooltip).toBeVisible();
+  await expect(tooltipTrigger).toHaveAttribute(
+    "aria-describedby",
+    "tooltip-top",
+  );
+  await page.keyboard.press("Escape");
+  await expect(tooltip).toBeHidden();
+  await expect(tooltipTrigger).not.toHaveAttribute("aria-describedby");
+
+  const reversedRegistration = await page.evaluate(() => {
+    const originals = window.__shlzPopoverControllers.filter(({ popover }) =>
+      ["popover-bottom", "popover-top"].includes(popover.id),
+    );
+    for (const controller of originals) controller.destroy();
+    const bottomTriggerElement = originals.find(
+      ({ popover }) => popover.id === "popover-bottom",
+    ).trigger;
+    const topTriggerElement = originals.find(
+      ({ popover }) => popover.id === "popover-top",
+    ).trigger;
+    topTriggerElement.after(bottomTriggerElement);
+    window.__shlzPopoverControllers = window.__shlzEnhancePopovers();
+    const reordered = window.__shlzPopoverControllers.filter(({ popover }) =>
+      ["popover-bottom", "popover-top"].includes(popover.id),
+    );
+    reordered.find(({ popover }) => popover.id === "popover-bottom").open();
+    reordered.find(({ popover }) => popover.id === "popover-top").open();
+    return reordered.map(({ popover }) => popover.id);
+  });
+  expect(reversedRegistration).toEqual(["popover-top", "popover-bottom"]);
+  await expect(top).toBeVisible();
+  await expect(bottom).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(top).toBeHidden();
+  await expect(topTrigger).toBeFocused();
+  await expect(bottom).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(bottom).toBeHidden();
+  await expect(bottomTrigger).toBeFocused();
+});
+
 test("Dropdown binds real paint, keyboard, scroll, dismissal and lifecycle", async ({
   page,
 }) => {
