@@ -63,7 +63,7 @@ For substantial, ambiguous, or contract-affecting work, the workflow SHALL estab
 
 ### Requirement: OpenSpec remains normative
 
-The workflow SHALL synthesize resolved requirements into OpenSpec artifacts before apply. Persisted interview state MUST contain only the intent, decision identity and status, owner, source/provenance, blocking status, OpenSpec linkage, and execution authorization needed for deterministic guards and fresh-session recovery; it MUST NOT duplicate normative acceptance content.
+The workflow SHALL synthesize resolved requirements into OpenSpec artifacts before apply. OpenSpec SHALL remain the sole normative workflow source. Persisted `requirements.json` MUST be operational gate and recovery state only and MAY contain only its schema version, monotonic revision, route, intent, decision identity and status, owner, source/provenance, blocking status, OpenSpec linkage, and execution authorization needed for deterministic guards and fresh-session recovery; it MUST NOT duplicate normative requirements or acceptance content.
 
 #### Scenario: Fresh session restores readiness
 

@@ -29,7 +29,7 @@ Use OpenSpec when component behavior, a public API, DOM or accessibility behavio
 
 `explore → propose/update → specs/design/tasks → apply → validate → sync/archive`
 
-Create only artifacts required by the resolved OpenSpec schema. Keep OpenSpec as the sole workflow state instead of mirroring it in another format.
+Create only artifacts required by the resolved OpenSpec schema. OpenSpec is the sole normative workflow source; for requirements-gated work, `requirements.json` contains only the operational gate and recovery state defined by `docs/requirements-elicitation.md`, never mirrored requirements or acceptance content.
 
 ### Architectural or ambiguous
 
