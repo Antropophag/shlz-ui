@@ -379,18 +379,26 @@ function workflowConstructs(surface) {
     if (/^permissions:\s*write-all\b/.test(normalized))
       constructs.push({
         direction: line.direction,
-        key: "permissions:write-all",
+        key: `permissions:${line.indent}:write-all`,
         signals: ["permissionsOrSecurity"],
       });
-    const grants = [
-      ...normalized.matchAll(
-        /\b(contents|pages|id-token|packages|deployments)\s*:\s*write\b/g,
-      ),
-    ].map((match) => match[1]);
+    const directGrant = normalized.match(
+      /^(contents|pages|id-token|packages|deployments):\s*write\b/,
+    );
+    const inlinePermissions = /^permissions:\s*\{.*\}\s*$/.test(normalized);
+    const grants = directGrant
+      ? [directGrant[1]]
+      : inlinePermissions
+        ? [
+            ...normalized.matchAll(
+              /\b(contents|pages|id-token|packages|deployments)\s*:\s*write\b/g,
+            ),
+          ].map((match) => match[1])
+        : [];
     for (const grant of grants)
       constructs.push({
         direction: line.direction,
-        key: `permission:${grant}:write`,
+        key: `permission:${line.indent}:${grant}:write`,
         signals: ["permissionsOrSecurity"],
       });
     if (
