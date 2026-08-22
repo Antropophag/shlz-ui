@@ -17,7 +17,7 @@ Plan and handoff fields are validated by the CLI. `preferredExecutionMode` is on
 npm run harness -- state-init <plan> <state>
 npm run harness -- claim <plan> <state> <packet> --session <id>
 npm run harness -- complete <plan> <state> <handoff-input>
-npm run harness -- validation-record <ledger> <target> --files a,b --outcome pass --packet <id> --session <id>
+npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
 ```
 
 The context bands in `config.json` are initial hypotheses. Actual token/context data is accepted only with an explicit trustworthy source such as App Server `thread/tokenUsage/updated`; otherwise file reads, repeated reads, command count, and output bytes remain labeled proxies.

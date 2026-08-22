@@ -33,49 +33,96 @@
     "docs": {
       "level": 1,
       "command": "npx prettier --check --ignore-unknown",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": ["AGENTS.md", "docs/**"]
     },
     "openspec": {
       "level": 1,
       "command": "npm run check:openspec",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": ["openspec/**", ".agents/skills/**"]
     },
     "harness": {
       "level": 1,
       "command": "npm run test:harness",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/harness.test.mjs",
+        "docs/exec-plans/**"
+      ]
     },
     "audit-manifest": {
       "level": 1,
       "command": "node --test tools/tests/component-audit-manifest.test.mjs",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": [
+        "docs/component-audits/**",
+        "tools/tests/component-audit-manifest.test.mjs"
+      ]
     },
     "modal-unit": {
       "level": 1,
       "command": "node --test tools/tests/overlay-source.test.mjs",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": [
+        "packages/behaviors/src/{modal,internal/native-dialog}.ts",
+        "packages/styles/components/modal.css",
+        "tools/tests/overlay-source.test.mjs"
+      ]
     },
     "modal-browser": {
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Modal",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": [
+        "packages/behaviors/src/{modal,internal/native-dialog}.ts",
+        "packages/styles/components/modal.css",
+        "apps/showcase/**",
+        "tools/playwright/overlay.spec.js"
+      ]
     },
     "drawer-browser": {
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Drawer",
-      "expensive": false
+      "expensive": false,
+      "fingerprintPatterns": [
+        "packages/behaviors/src/{drawer,internal/native-dialog}.ts",
+        "packages/styles/components/drawer.css",
+        "apps/showcase/**",
+        "tools/playwright/{overlay,consumer-workspace}.spec.js"
+      ]
     },
     "overlay-integration": {
       "level": 3,
       "command": "playwright test tools/playwright/overlay.spec.js",
-      "expensive": true
+      "expensive": true,
+      "fingerprintPatterns": [
+        "packages/behaviors/src/{modal,drawer,internal/native-dialog}.ts",
+        "packages/styles/components/{modal,drawer}.css",
+        "apps/showcase/**",
+        "tools/playwright/overlay.spec.js"
+      ]
     },
     "full-browser": {
       "level": 4,
       "command": "npm run test:e2e",
-      "expensive": true
+      "expensive": true,
+      "fingerprintPatterns": [
+        "apps/**",
+        "packages/**",
+        "tools/playwright/**",
+        "playwright.config.*",
+        "package*.json"
+      ]
     },
-    "full": { "level": 4, "command": "npm run check", "expensive": true }
+    "full": {
+      "level": 4,
+      "command": "npm run check",
+      "expensive": true,
+      "fingerprintPatterns": ["**"]
+    }
   },
   "validationRules": [
     { "patterns": ["AGENTS.md", "docs/**/*.md"], "targets": ["docs"] },

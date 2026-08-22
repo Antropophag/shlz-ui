@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFile } from "node:fs/promises";
+import { open, readFile, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -15,10 +15,12 @@ import {
   gitEvidence,
   readJson,
   readyPackets,
+  relevantValidationFiles,
   recordEvent,
   recordReview,
   recordValidation,
   reviewContext,
+  resolveReviewFindings,
   summarizeEvents,
   validateHandoff,
   validatePlan,
@@ -56,6 +58,25 @@ const readJsonOr = async (file, fallback) => {
   } catch (error) {
     if (error.code === "ENOENT") return fallback;
     throw error;
+  }
+};
+const withStateLock = async (target, operation) => {
+  const lockPath = `${target}.lock`;
+  let lock;
+  try {
+    lock = await open(lockPath, "wx");
+  } catch (error) {
+    if (error.code === "EEXIST")
+      throw new Error(
+        `state is already being updated: ${path.relative(repoRoot, target)}`,
+      );
+    throw error;
+  }
+  try {
+    return await operation();
+  } finally {
+    await lock.close();
+    await unlink(lockPath);
   }
 };
 const option = (name) => {
@@ -110,7 +131,12 @@ switch (command) {
     break;
   case "validation-check": {
     const ledger = await readJson(absolute(args[1]));
-    const files = option("--files")?.split(",").filter(Boolean) ?? [];
+    const changed = await gitEvidence(repoRoot, option("--base"));
+    const files = relevantValidationFiles(
+      changed.changedFiles,
+      args[0],
+      config,
+    );
     assertValidationRun(
       {
         target: args[0],
@@ -126,10 +152,11 @@ switch (command) {
   case "validation-record": {
     const ledgerPath = statePath(args[0]);
     const ledger = await readJsonOr(ledgerPath, []);
+    const changed = await gitEvidence(repoRoot, option("--base"));
     await recordValidation(
       {
         target: args[1],
-        files: option("--files")?.split(",").filter(Boolean) ?? [],
+        files: relevantValidationFiles(changed.changedFiles, args[1], config),
         outcome: option("--outcome"),
         reason: option("--reason"),
         packet: option("--packet"),
@@ -152,25 +179,31 @@ switch (command) {
   case "claim": {
     const plan = await readJson(absolute(args[0]));
     const target = statePath(args[1]);
-    const state = claimPacket(
-      plan,
-      await readJson(target),
-      args[2],
-      option("--session"),
-    );
-    await writeJson(target, state);
+    const state = await withStateLock(target, async () => {
+      const next = claimPacket(
+        plan,
+        await readJson(target),
+        args[2],
+        option("--session"),
+      );
+      await writeJson(target, next);
+      return next;
+    });
     output(state.packets[args[2]]);
     break;
   }
   case "complete": {
     const plan = await readJson(absolute(args[0]));
     const target = statePath(args[1]);
-    const state = completePacket(
-      plan,
-      await readJson(target),
-      await readJson(absolute(args[2])),
-    );
-    await writeJson(target, state);
+    const state = await withStateLock(target, async () => {
+      const next = completePacket(
+        plan,
+        await readJson(target),
+        await readJson(absolute(args[2])),
+      );
+      await writeJson(target, next);
+      return next;
+    });
     output(state.packets);
     break;
   }
@@ -194,6 +227,17 @@ switch (command) {
   case "review-context":
     output(reviewContext(await readJson(absolute(args[0]))));
     break;
+  case "review-resolve": {
+    const target = statePath(args[0]);
+    const state = resolveReviewFindings(
+      await readJson(target),
+      option("--ids")?.split(",").filter(Boolean) ?? [],
+      option("--head"),
+    );
+    await writeJson(target, state);
+    output(reviewContext(state));
+    break;
+  }
   case "telemetry-record": {
     const event = JSON.parse(option("--event"));
     await recordEvent(statePath(args[0]), event);
@@ -212,6 +256,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
     );
 }

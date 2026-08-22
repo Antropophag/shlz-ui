@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, unlink, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import path from "node:path";
 import test from "node:test";
@@ -16,9 +16,11 @@ import {
   createReviewState,
   matchesPattern,
   readyPackets,
+  relevantValidationFiles,
   recordReview,
   recordValidation,
   reviewContext,
+  resolveReviewFindings,
   summarizeEvents,
   gitEvidence,
   validateHandoff,
@@ -211,6 +213,30 @@ test("affected validation routes docs, component, shared seam, and manifest chan
   );
 });
 
+test("validation targets derive their own relevant changed-file set", () => {
+  assert.deepEqual(
+    relevantValidationFiles(
+      [
+        "docs/agent-execution.md",
+        "tools/harness.mjs",
+        "packages/behaviors/src/modal.ts",
+      ],
+      "harness",
+      config,
+    ),
+    ["tools/harness.mjs"],
+  );
+  assert.throws(
+    () =>
+      relevantValidationFiles(
+        ["docs/agent-execution.md"],
+        "full-browser",
+        config,
+      ),
+    /no changed files are relevant/,
+  );
+});
+
 test("expensive successful reruns require an invalidation reason", () => {
   const ledger = [
     { target: "full-browser", fingerprint: "same", outcome: "pass" },
@@ -266,6 +292,14 @@ test("validation records compute fingerprints and durably enforce invalidation",
     root,
   );
   assert.equal(ledger.at(-1).reason, "substantive remediation");
+  const deletedLedger = [];
+  await recordValidation(
+    { ...request, target: "full", files: ["tools/deleted-fixture.mjs"] },
+    deletedLedger,
+    config,
+    root,
+  );
+  assert.match(deletedLedger[0].fingerprint, /^[0-9a-f]{64}$/);
   await assert.rejects(
     recordValidation(
       { ...request, files: ["../outside"] },
@@ -290,6 +324,8 @@ test("review state reuses the remediation diff and unresolved findings", () => {
     unresolvedFindings: [state.findings[0]],
     discovery: "fixed-diff-and-known-findings-only",
   });
+  resolveReviewFindings(state, ["F1"], "def456");
+  assert.deepEqual(reviewContext(state).unresolvedFindings, []);
 });
 
 test("telemetry reports actual observations and never invents unavailable usage", () => {
@@ -367,4 +403,30 @@ test("CLI rejects repository path escapes", async () => {
     }),
     /path escapes repository/,
   );
+});
+
+test("CLI state lock rejects a concurrent packet update", async () => {
+  const state = "docs/exec-plans/active/adaptive-codex-harness/state.json";
+  const lock = path.join(root, `${state}.lock`);
+  await writeFile(lock, "held");
+  try {
+    await assert.rejects(
+      exec(
+        "node",
+        [
+          "tools/harness.mjs",
+          "claim",
+          "docs/exec-plans/active/adaptive-codex-harness/plan.json",
+          state,
+          "independent-review",
+          "--session",
+          "racing-session",
+        ],
+        { cwd: root },
+      ),
+      /state is already being updated/,
+    );
+  } finally {
+    await unlink(lock);
+  }
 });

@@ -4,7 +4,9 @@ import {
   appendFile,
   mkdir,
   readFile,
+  realpath,
   readdir,
+  rename,
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
@@ -46,7 +48,9 @@ export const readJson = async (file) =>
   JSON.parse(await readFile(file, "utf8"));
 export const writeJson = async (file, value) => {
   await mkdir(path.dirname(file), { recursive: true });
-  await writeFile(file, `${JSON.stringify(value, null, 2)}\n`);
+  const temporary = `${file}.${process.pid}.tmp`;
+  await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`);
+  await rename(temporary, file);
 };
 
 export function classify(assessment, config) {
@@ -358,6 +362,21 @@ export function affectedValidation(files, config) {
     .sort((a, b) => a.level - b.level || a.id.localeCompare(b.id));
 }
 
+export function relevantValidationFiles(files, target, config) {
+  const definition = config.validationTargets[target];
+  if (!definition) throw new Error(`unknown validation target ${target}`);
+  const relevant = files.filter((file) =>
+    definition.fingerprintPatterns.some((pattern) =>
+      matchesPattern(file, pattern),
+    ),
+  );
+  if (relevant.length === 0)
+    throw new Error(
+      `no changed files are relevant to validation target ${target}`,
+    );
+  return relevant;
+}
+
 export function fingerprint(files, contentsByFile = {}) {
   const hash = createHash("sha256");
   for (const file of [...files].sort())
@@ -366,13 +385,28 @@ export function fingerprint(files, contentsByFile = {}) {
 }
 
 export async function fingerprintFiles(files, repoRoot) {
+  const realRoot = await realpath(repoRoot);
   const contents = Object.fromEntries(
     await Promise.all(
       files.map(async (file) => {
         const target = path.resolve(repoRoot, file);
         if (target !== repoRoot && !target.startsWith(`${repoRoot}${path.sep}`))
           throw new Error(`validation file escapes repository: ${file}`);
-        return [file, await readFile(target)];
+        let realTarget;
+        try {
+          realTarget = await realpath(target);
+        } catch (error) {
+          if (error.code === "ENOENT") return [file, "<deleted>"];
+          throw error;
+        }
+        if (
+          realTarget !== realRoot &&
+          !realTarget.startsWith(`${realRoot}${path.sep}`)
+        )
+          throw new Error(
+            `validation file resolves outside repository: ${file}`,
+          );
+        return [file, await readFile(realTarget)];
       }),
     ),
   );
@@ -457,6 +491,21 @@ export function reviewContext(state) {
     ),
     discovery: "fixed-diff-and-known-findings-only",
   };
+}
+
+export function resolveReviewFindings(state, ids, head) {
+  if (!ids.length || !head)
+    throw new Error("review resolution requires ids and head");
+  const selected = new Set(ids);
+  for (const finding of state.findings)
+    if (selected.has(finding.id)) {
+      finding.status = "resolved";
+      finding.resolvedAtHead = head;
+      selected.delete(finding.id);
+    }
+  if (selected.size)
+    throw new Error(`unknown review findings: ${[...selected].join(",")}`);
+  return state;
 }
 
 export async function recordEvent(file, event) {
