@@ -661,9 +661,31 @@ for (const [name, selector] of [
     expect(floatingBox.x + floatingBox.width).toBeLessThanOrEqual(
       viewport.width - 8,
     );
+    if (name.startsWith("Popover")) {
+      await floating.evaluate((element) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Действие Popover";
+        element.append(button);
+      });
+      await floating.getByRole("button", { name: "Действие Popover" }).click();
+      await expect(dialog).toBeVisible();
+      await expect
+        .poll(() =>
+          dialog.evaluate((element) =>
+            element.contains(document.activeElement),
+          ),
+        )
+        .toBe(true);
+    }
     await page.keyboard.press("Escape");
     await expect(floating).toBeHidden();
     await expect(dialog).toBeVisible();
+    await expect
+      .poll(() =>
+        dialog.evaluate((element) => element.contains(document.activeElement)),
+      )
+      .toBe(true);
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
 
@@ -720,6 +742,49 @@ for (const [name, selector] of [
     await page.keyboard.press("Escape");
     await expect(floating).toBeHidden();
     await expect(dialog).toBeVisible();
+    if (name.startsWith("Popover")) {
+      await floating.evaluate((element) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.textContent = "Действие Drawer Popover";
+        element.append(button);
+      });
+      await trigger.click();
+      await floating
+        .getByRole("button", { name: "Действие Drawer Popover" })
+        .click();
+      await expect(dialog).toBeVisible();
+      await page.keyboard.press("Escape");
+      await expect(floating).toBeHidden();
+    }
+    await trigger.click();
+    await expect(floating).toBeVisible();
+    await page.keyboard.press("Escape");
+    const idempotent = await page.evaluate((nestedName) => {
+      const controllers = nestedName.startsWith("Dropdown")
+        ? window.__shlzDropdownControllers
+        : nestedName.startsWith("Tooltip")
+          ? window.__shlzTooltipControllers
+          : window.__shlzPopoverControllers;
+      const enhance = nestedName.startsWith("Dropdown")
+        ? window.__shlzEnhanceDropdowns
+        : nestedName.startsWith("Tooltip")
+          ? window.__shlzEnhanceTooltips
+          : window.__shlzEnhancePopovers;
+      const current = controllers.find((item) =>
+        (item.trigger ?? item.root).textContent.includes(nestedName),
+      );
+      const repeated = enhance().find((item) =>
+        (item.trigger ?? item.root).textContent.includes(nestedName),
+      );
+      current.destroy();
+      return current === repeated;
+    }, name);
+    expect(idempotent).toBe(true);
+    if (name.startsWith("Tooltip")) await trigger.focus();
+    else await trigger.click();
+    await expect(floating).toBeHidden();
+    await expect(dialog).toBeVisible();
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
   });
@@ -758,6 +823,9 @@ test("plain HTML consumes modal and drawer via standalone CSS and direct ESM", a
   await expect(page.locator("#fixture-modal")).toBeVisible();
   await page.keyboard.press("Escape");
   await expect(modalTrigger).toBeFocused();
+  await page.evaluate(() => window.__fixtureModalControllers[0].destroy());
+  await modalTrigger.click();
+  await expect(page.locator("#fixture-modal")).toBeHidden();
 
   const drawerTrigger = page.getByRole("button", { name: "Открыть Drawer" });
   await drawerTrigger.click();

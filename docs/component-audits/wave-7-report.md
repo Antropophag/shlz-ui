@@ -36,7 +36,7 @@ Final local validation results:
 - `npm run lint` — ESLint, Stylelint, and Prettier pass;
 - `npm run build` and `node tools/validate.mjs` — all workspaces build; 68 source SVGs, three token groups, 119 canonical icons, and 42 aliases validate;
 - `npm run test:packages` — four packed packages install and execute from a clean project;
-- `npx playwright test tools/playwright/overlay.spec.js --project=chromium` — 25/25 focused overlay tests pass;
+- `npx playwright test tools/playwright/overlay.spec.js --project=chromium` — 27/27 focused overlay tests pass;
 - `npm run test:e2e` — 190/190 Chromium tests pass, including Wave 6, Data Workspace, plain HTML, accessibility, responsive/content stress, and focused visual snapshots;
 - `git diff --check` and final raw SVG SHA-256 comparison — pass with no source diff.
 
