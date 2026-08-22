@@ -365,12 +365,66 @@ function dedicatedWorkflowChanged(surface) {
   const normalized = (direction) =>
     lines
       .filter((line) => line.direction === direction)
-      .map(({ text }) => text)
-      .sort((a, b) => a.localeCompare(b));
+      .map(({ indent, text }) => `${indent}:${text}`);
   return (
     JSON.stringify(normalized("removed")) !==
     JSON.stringify(normalized("added"))
   );
+}
+
+function workflowConstructs(surface) {
+  const constructs = [];
+  for (const line of changedPatchLines(surface.patch)) {
+    const normalized = line.text.replace(/\s+/g, " ");
+    if (/^permissions:\s*write-all\b/.test(normalized))
+      constructs.push({
+        direction: line.direction,
+        key: "permissions:write-all",
+        signals: ["permissionsOrSecurity"],
+      });
+    const grants = [
+      ...normalized.matchAll(
+        /\b(contents|pages|id-token|packages|deployments)\s*:\s*write\b/g,
+      ),
+    ].map((match) => match[1]);
+    for (const grant of grants)
+      constructs.push({
+        direction: line.direction,
+        key: `permission:${grant}:write`,
+        signals: ["permissionsOrSecurity"],
+      });
+    if (
+      /^uses:\s*(actions\/(configure-pages|upload-pages-artifact|deploy-pages|create-release)|softprops\/action-gh-release)@/.test(
+        normalized,
+      )
+    )
+      constructs.push({
+        direction: line.direction,
+        key: normalized,
+        signals: ["publishingOrRelease", "externalAutomation"],
+      });
+    if (/^run:\s*npm publish\b/.test(normalized))
+      constructs.push({
+        direction: line.direction,
+        key: normalized,
+        signals: ["publishingOrRelease", "externalAutomation"],
+      });
+  }
+  return constructs;
+}
+
+function changedWorkflowConstructSignals(surface) {
+  const constructs = workflowConstructs(surface);
+  const counts = new Map();
+  for (const { direction, key } of constructs) {
+    const delta = direction === "added" ? 1 : -1;
+    counts.set(key, (counts.get(key) ?? 0) + delta);
+  }
+  const signals = new Set();
+  for (const construct of constructs)
+    if (counts.get(construct.key) !== 0)
+      construct.signals.forEach((signal) => signals.add(signal));
+  return signals;
 }
 
 export function deterministicRouteRiskFloor(surfaces) {
@@ -384,19 +438,9 @@ export function deterministicRouteRiskFloor(surfaces) {
       signals.add("publicUrlOrDomain");
     }
     if (!/^\.github\/workflows\/[^/]+\.ya?ml$/.test(surface.path)) continue;
-    for (const { text } of changedPatchLines(surface.patch)) {
-      if (/^(pages|id-token|packages|deployments):\s*write\b/.test(text))
-        signals.add("permissionsOrSecurity");
-      if (
-        /^uses:\s*(actions\/(configure-pages|upload-pages-artifact|deploy-pages|create-release)|softprops\/action-gh-release)@/.test(
-          text,
-        ) ||
-        /^run:\s*npm publish\b/.test(text)
-      ) {
-        signals.add("publishingOrRelease");
-        signals.add("externalAutomation");
-      }
-    }
+    changedWorkflowConstructSignals(surface).forEach((signal) =>
+      signals.add(signal),
+    );
   }
   return [...signals].sort((a, b) => a.localeCompare(b));
 }
@@ -1354,9 +1398,15 @@ export async function gitEvidence(repoRoot, base) {
 
 export async function gitRouteSurfaces(repoRoot, base, files) {
   const options = { cwd: repoRoot, maxBuffer: 10 * 1024 * 1024 };
+  const { stdout: mergeBase } = await exec(
+    "git",
+    ["merge-base", base, "HEAD"],
+    options,
+  );
+  const diffBase = mergeBase.trim();
   const { stdout: rawStatuses } = await exec(
     "git",
-    ["diff", "--name-status", base, "--"],
+    ["diff", "--name-status", diffBase, "--"],
     options,
   );
   const statuses = new Map();
@@ -1377,7 +1427,7 @@ export async function gitRouteSurfaces(repoRoot, base, files) {
       const status = statuses.get(file) ?? "added";
       const { stdout: trackedPatch } = await exec(
         "git",
-        ["diff", "--unified=0", "--no-color", base, "--", file],
+        ["diff", "--unified=0", "--no-color", diffBase, "--", file],
         options,
       );
       let patch = trackedPatch;
