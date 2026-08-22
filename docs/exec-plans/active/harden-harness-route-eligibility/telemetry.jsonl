@@ -2,3 +2,4 @@
 {"at":"2026-08-22T20:05:47.216Z","type":"remediation","packet":"review-delivery","session":"root-review-20260822","agent":"root","phase":"remediation"}
 {"at":"2026-08-22T20:09:53.086Z","type":"review","packet":"review-delivery","session":"root-review-20260822","agent":"standards-review","phase":"targeted-re-review"}
 {"at":"2026-08-22T20:09:53.278Z","type":"review","packet":"review-delivery","session":"root-review-20260822","agent":"spec-review","phase":"targeted-re-review"}
+{"at":"2026-08-22T20:12:29.571Z","type":"validation","packet":"review-delivery","session":"root-review-20260822","agent":"root","phase":"ci-remediation","level":"focused","invalidationReason":"CI changed-files formatting failure on operational JSON"}

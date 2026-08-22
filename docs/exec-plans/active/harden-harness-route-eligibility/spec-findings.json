@@ -1,5 +1,17 @@
 [
-  { "id": "SPEC-1", "severity": "high", "summary": "Pages preflight is not bound to required decision identities" },
-  { "id": "SPEC-2", "severity": "high", "summary": "conformance is not tied to the actual changed-file set" },
-  { "id": "SPEC-3", "severity": "medium", "summary": "branch cleanliness is inferred only from HEAD equality" }
+  {
+    "id": "SPEC-1",
+    "severity": "high",
+    "summary": "Pages preflight is not bound to required decision identities"
+  },
+  {
+    "id": "SPEC-2",
+    "severity": "high",
+    "summary": "conformance is not tied to the actual changed-file set"
+  },
+  {
+    "id": "SPEC-3",
+    "severity": "medium",
+    "summary": "branch cleanliness is inferred only from HEAD equality"
+  }
 ]
