@@ -441,6 +441,31 @@ drawerInputControl.className = "shlz-field__control";
 drawerAutofocus.before(drawerInputControl);
 drawerInputControl.append(drawerAutofocus);
 
+for (const [selector, auditId] of [
+  ["#showcase-modal", "modal-showcase-structured"],
+  ["#showcase-confirm", "modal-showcase-compact"],
+  ["#showcase-drawer", "drawer-showcase"],
+  ["#workspace-filter-drawer", "drawer-data-workspace"],
+]) {
+  document
+    .querySelector(selector)
+    ?.setAttribute("data-component-audit-id", auditId);
+}
+document
+  .querySelector("#showcase-confirm .shlz-modal__surface")
+  ?.classList.add("shlz-modal__surface--compact", "shlz-modal__surface--info");
+document
+  .querySelector("#modal-demo")
+  ?.insertAdjacentHTML(
+    "beforeend",
+    ["success", "warning", "error"]
+      .map(
+        (state) =>
+          `<button class="shlz-button shlz-button--sm shlz-wave7-material-trigger" type="button" data-shlz-modal-trigger="showcase-${state}">${state}</button><dialog class="shlz-modal shlz-modal--compact" id="showcase-${state}" data-shlz-modal data-component-audit-id="modal-showcase-${state}" aria-labelledby="showcase-${state}-title"><div class="shlz-modal__surface shlz-modal__surface--compact shlz-modal__surface--${state}"><div class="shlz-modal__compact-content"><span class="shlz-modal__variant-icon" aria-hidden="true">i</span><div class="shlz-modal__compact-copy"><h2 id="showcase-${state}-title">${state}</h2><p>Some contents...</p></div></div><div class="shlz-modal__compact-actions"><button class="shlz-button shlz-button--sm" type="button" data-shlz-modal-close>Cancel</button><button class="shlz-button shlz-button--primary shlz-button--sm" type="button" data-shlz-modal-close="done">Done</button></div></div></dialog>`,
+      )
+      .join(""),
+  );
+
 for (const button of document.querySelectorAll("[data-shlz-input-size]")) {
   button.addEventListener("click", () => {
     const selectedSize = button.dataset.shlzInputSize;
@@ -463,7 +488,9 @@ window.__shlzDropdownControllers = enhanceDropdowns();
 window.__shlzSelectControllers = enhanceSelects();
 window.__shlzEnhanceSelects = enhanceSelects;
 window.__shlzModalControllers = enhanceModals();
+window.__shlzEnhanceModals = enhanceModals;
 window.__shlzDrawerControllers = enhanceDrawers();
+window.__shlzEnhanceDrawers = enhanceDrawers;
 window.__shlzPopoverControllers = enhancePopovers();
 window.__shlzTooltipControllers = enhanceTooltips();
 window.__shlzEnhancePopovers = enhancePopovers;

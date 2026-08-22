@@ -28,6 +28,8 @@ const manifestPaths = [
   "tooltip",
   "popover",
   "date-picker-calendar",
+  "modal",
+  "drawer",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

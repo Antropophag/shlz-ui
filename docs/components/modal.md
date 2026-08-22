@@ -80,6 +80,11 @@ controller listens to the native `close` lifecycle to synchronize
 `aria-expanded` and restore the initiating focus when it is still available.
 It does not mirror `open` into a private state machine.
 
+Repeated `enhanceModals()` calls return the existing controller for each live
+dialog. `destroy()` is idempotent, closes an open dialog, removes owned
+listeners, and clears the private ownership entry so a later enhancement starts
+a fresh lifecycle.
+
 ## Accessibility
 
 - Supply an accessible name through `aria-labelledby` or `aria-label`.
@@ -102,6 +107,7 @@ Dropdown, Tooltip and Popover remain visible and receive the first Escape when
 opened inside the dialog top layer.
 
 The source does not define backdrop styling or responsive rules. The shipped
-backdrop and viewport-safe width are DECISIONs. The compact visual modifier
-only establishes the confirmed width; it does not guess names or semantics for
-the four outlined compact variants.
+backdrop and viewport-safe width are DECISIONs. Compact source names are
+material appearances for fidelity evidence, not a public semantic status or
+workflow API. Arbitrary Modal-in-Modal, concurrent modal, portal, and
+nested-popover-tree compositions are unsupported.

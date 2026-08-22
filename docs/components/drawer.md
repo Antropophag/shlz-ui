@@ -76,6 +76,10 @@ Matching `button[data-shlz-drawer-trigger]` and descendant
 composition as Modal. Optional `data-shlz-drawer-backdrop-close` enables
 outside-pointer dismissal.
 
+Repeated `enhanceDrawers()` calls retain one private owner per live dialog;
+idempotent destroy clears listeners and cycle-local opener, return-value, and
+backdrop gesture state without taking ownership of application data.
+
 ## Semantic and accessibility model
 
 The implemented Drawer is modal supplementary task UI and therefore uses
@@ -97,3 +101,5 @@ Right-edge attachment, zero radii on the attached edge, backdrop appearance and
 mobile full-width layout are DECISIONs. The isolated source specimen has four
 16 px corners and does not identify an edge. Non-modal drawers and other
 placements remain UNKNOWN and unsupported.
+Drawer-in-Modal, Modal-in-Drawer, concurrent modal drawers, portals, non-modal
+drawers, and left/top/bottom placement remain explicit non-goals.

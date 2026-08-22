@@ -50,7 +50,9 @@ document scroll lock, z-index manager or overlay stack.
   consumer exists, so a generic focus framework was not extracted.
 - `internal/native-dialog` is the proven common lifecycle composition for Modal
   and Drawer. It is deliberately a function, not an OverlayController or base
-  class, and it delegates modal mechanics to the browser.
+  class, and it delegates modal mechanics to the browser. Each public family
+  keeps a private weak ownership registry so repeated enhancement returns one
+  controller; destroy clears that owner and all cycle-local state.
 
 ## Distribution
 

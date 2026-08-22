@@ -3,6 +3,8 @@ import {
   type NativeDialogBinding,
 } from "./internal/native-dialog.js";
 
+const drawerControllers = new WeakMap<HTMLDialogElement, DrawerController>();
+
 export class DrawerController {
   readonly dialog: HTMLDialogElement;
   #binding: NativeDialogBinding;
@@ -33,6 +35,7 @@ export class DrawerController {
 
   destroy(): void {
     this.#binding.destroy();
+    drawerControllers.delete(this.dialog);
   }
 }
 
@@ -41,5 +44,11 @@ export function enhanceDrawers(
 ): DrawerController[] {
   return [
     ...scope.querySelectorAll<HTMLDialogElement>("dialog[data-shlz-drawer]"),
-  ].map((dialog) => new DrawerController(dialog));
+  ].map((dialog) => {
+    const existing = drawerControllers.get(dialog);
+    if (existing) return existing;
+    const controller = new DrawerController(dialog);
+    drawerControllers.set(dialog, controller);
+    return controller;
+  });
 }

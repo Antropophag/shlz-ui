@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { createHash } from "node:crypto";
 
 const components = async () =>
   JSON.parse(await readFile("design-source-index/components.json", "utf8"))
@@ -66,12 +67,35 @@ test("Modal remains five standalone source components and Drawer remains one", a
     ],
   );
   assert.ok(modal.every(({ variants }) => variants.length === 0));
+  assert.ok(
+    modal.every(
+      ({ propertyDefinitions }) =>
+        Object.keys(propertyDefinitions).length === 0,
+    ),
+  );
+  assert.ok(
+    modal.every(({ extractionWarnings }) => extractionWarnings.length === 0),
+  );
 
   const drawer = source.find(({ name }) => name === "Sidebar/Drawer");
   assert.equal(drawer.kind, "COMPONENT");
   assert.deepEqual(drawer.dimensions, { width: 420, height: 900 });
   assert.deepEqual(drawer.propertyDefinitions, {});
   assert.equal(drawer.variants.length, 0);
+  assert.equal(drawer.extractionWarnings.length, 0);
+
+  const hash = async (path) =>
+    createHash("sha256")
+      .update(await readFile(path))
+      .digest("hex");
+  assert.equal(
+    await hash("shlz-design-source/raw/svg/Modal.svg"),
+    "62b0686f4ea17ecb8bb0bf25fe9020ee3a1512728e4271fd6fc734595e2b7fed",
+  );
+  assert.equal(
+    await hash("shlz-design-source/raw/svg/Drawer.svg"),
+    "a7ff3b75584ad5782bb2e3b2bc6b2dd62baec589c32edb334d619a65dbf49e8e",
+  );
 });
 
 test("overlay production CSS retains component-local source geometry and effects", async () => {

@@ -1,8 +1,198 @@
 import { expect, test } from "@playwright/test";
 import { fixtureUrl } from "./fixture-url.js";
+import {
+  expectClassifiedComponentOccurrences,
+  readComponentAuditManifest,
+} from "./component-audit.js";
+
+const manifests = {
+  modal: await readComponentAuditManifest(
+    new globalThis.URL(
+      "../../docs/component-audits/modal.json",
+      import.meta.url,
+    ),
+  ),
+  drawer: await readComponentAuditManifest(
+    new globalThis.URL(
+      "../../docs/component-audits/drawer.json",
+      import.meta.url,
+    ),
+  ),
+};
+const executedStates = new Map([
+  ["modal", new Set()],
+  ["drawer", new Set()],
+]);
+const verifyMaterialState = async (component, state, assertion) => {
+  await assertion();
+  executedStates.get(component).add(state);
+};
+const expectMaterialStates = (component) => {
+  expect([...executedStates.get(component)].sort()).toEqual(
+    [...manifests[component].interactionEvidence.materialStates].sort(),
+  );
+};
+const verifyModalStatus = async (page, state, color) => {
+  await page
+    .getByRole("button", { name: state, exact: true })
+    .evaluate((button) => button.click());
+  const dialog = page.locator(`#showcase-${state}`);
+  await expect(dialog).toBeVisible();
+  await expect(dialog.locator(".shlz-modal__variant-icon")).toHaveCSS(
+    "color",
+    color,
+  );
+  await page.keyboard.press("Escape");
+};
+const expectOccurrenceSubset = async (page, component, ids, diagnostics) =>
+  expectClassifiedComponentOccurrences(page, {
+    ...manifests[component],
+    occurrences: manifests[component].occurrences.filter(({ id }) =>
+      ids.includes(id),
+    ),
+    diagnosticOccurrenceCount: diagnostics,
+  });
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+});
+
+test("Modal and Drawer occurrence guards classify Showcase and plain HTML roots", async ({
+  page,
+}) => {
+  await expectOccurrenceSubset(
+    page,
+    "modal",
+    manifests.modal.occurrences
+      .map(({ id }) => id)
+      .filter((id) => id !== "modal-plain-html"),
+    5,
+  );
+  await expectOccurrenceSubset(
+    page,
+    "drawer",
+    ["drawer-showcase", "drawer-data-workspace"],
+    1,
+  );
+  await page.goto(fixtureUrl("plain-html.html"));
+  await expectOccurrenceSubset(page, "modal", ["modal-plain-html"], 0);
+  await expectOccurrenceSubset(page, "drawer", ["drawer-plain-html"], 0);
+});
+
+test("overlay occurrence guard detects an unclassified native root", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    const dialog = document.createElement("dialog");
+    dialog.dataset.shlzModal = "";
+    dialog.innerHTML = '<div class="shlz-modal__surface"></div>';
+    document.body.append(dialog);
+  });
+  await expect(
+    expectOccurrenceSubset(
+      page,
+      "modal",
+      manifests.modal.occurrences
+        .map(({ id }) => id)
+        .filter((id) => id !== "modal-plain-html"),
+      5,
+    ),
+  ).rejects.toThrow();
+});
+
+test("Modal and Drawer execute their strict material-state ledgers", async ({
+  page,
+}) => {
+  await verifyMaterialState("modal", "basic-open", async () => {
+    const { dialog } = await openModal(page);
+    await expect(dialog.locator(".shlz-modal__surface")).toHaveCSS(
+      "border-radius",
+      "16px",
+    );
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("modal", "info-open", async () => {
+    await page.getByRole("button", { name: "Подтверждение" }).click();
+    await expect(page.locator("#showcase-confirm")).toBeVisible();
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("modal", "success-open", () =>
+    verifyModalStatus(page, "success", "rgb(37, 152, 62)"),
+  );
+  await verifyMaterialState("modal", "warning-open", () =>
+    verifyModalStatus(page, "warning", "rgb(212, 126, 46)"),
+  );
+  await verifyMaterialState("modal", "error-open", () =>
+    verifyModalStatus(page, "error", "rgb(204, 31, 31)"),
+  );
+  await verifyMaterialState("modal", "focus-visible", async () => {
+    const { dialog } = await openModal(page);
+    await page.keyboard.press("Shift+Tab");
+    const close = dialog.getByRole("button", { name: "Закрыть" });
+    await expect(close).toBeFocused();
+    await expect(close).toHaveCSS("outline-style", "solid");
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("modal", "long-content", async () => {
+    const { dialog } = await openModal(page);
+    const body = dialog.locator(".shlz-modal__body");
+    await body.evaluate(
+      (element) => (element.scrollTop = element.scrollHeight),
+    );
+    await expect
+      .poll(() => body.evaluate((element) => element.scrollTop))
+      .toBeGreaterThan(0);
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("modal", "narrow-layout", async () => {
+    await page.setViewportSize({ width: 360, height: 640 });
+    const { dialog } = await openModal(page);
+    expect((await dialog.boundingBox()).width).toBeLessThanOrEqual(344);
+    await page.keyboard.press("Escape");
+    await page.setViewportSize({ width: 1440, height: 1000 });
+  });
+  expectMaterialStates("modal");
+
+  await verifyMaterialState("drawer", "dismissible-open", async () => {
+    const { dialog } = await openDrawer(page);
+    await expect(dialog).toHaveAttribute("data-shlz-drawer-backdrop-close", "");
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("drawer", "non-dismissible-open", async () => {
+    await page.getByRole("button", { name: /Фильтры/ }).click();
+    const dialog = page.locator("#workspace-filter-drawer");
+    await expect(dialog).not.toHaveAttribute(
+      "data-shlz-drawer-backdrop-close",
+      "",
+    );
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("drawer", "focus-visible", async () => {
+    const { dialog } = await openDrawer(page);
+    await page.keyboard.press("Shift+Tab");
+    const close = dialog.getByRole("button", { name: "Закрыть" });
+    await expect(close).toBeFocused();
+    await expect(close).toHaveCSS("outline-style", "solid");
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("drawer", "long-content", async () => {
+    const { dialog } = await openDrawer(page);
+    const body = dialog.locator(".shlz-drawer__body");
+    await body.evaluate(
+      (element) => (element.scrollTop = element.scrollHeight),
+    );
+    await expect
+      .poll(() => body.evaluate((element) => element.scrollTop))
+      .toBeGreaterThan(0);
+    await page.keyboard.press("Escape");
+  });
+  await verifyMaterialState("drawer", "narrow-layout", async () => {
+    await page.setViewportSize({ width: 390, height: 700 });
+    const { dialog } = await openDrawer(page);
+    expect((await dialog.boundingBox()).width).toBe(390);
+    await page.keyboard.press("Escape");
+  });
+  expectMaterialStates("drawer");
 });
 
 async function openModal(page) {
@@ -128,6 +318,64 @@ test("destroy removes modal trigger behavior", async ({ page }) => {
   await page.evaluate(() => window.__shlzModalControllers[0].destroy());
   await trigger.click();
   await expect(page.locator("#showcase-modal")).toBeHidden();
+});
+
+test("repeated modal enhancement keeps one owner and one teardown", async ({
+  page,
+}) => {
+  const trigger = page.getByRole("button", { name: "Открыть Modal" });
+  await trigger.scrollIntoViewIfNeeded();
+  const sameOwner = await page.evaluate(() => {
+    const first = window.__shlzModalControllers[0];
+    const repeated = window.__shlzEnhanceModals()[0];
+    window.__wave7RepeatedModal = repeated;
+    return first === repeated;
+  });
+  expect(sameOwner).toBe(true);
+
+  await page.evaluate(() => window.__wave7RepeatedModal.destroy());
+  await trigger.click();
+  await expect(page.locator("#showcase-modal")).toBeHidden();
+});
+
+test("modal reopen uses only the current eligible opener", async ({ page }) => {
+  const dialog = page.locator("#showcase-modal");
+  const first = page.getByRole("button", { name: "Открыть Modal" });
+  const second = page.getByRole("button", { name: "Подтверждение" });
+  await first.click();
+  await first.evaluate((button) =>
+    button.setAttribute("aria-disabled", "true"),
+  );
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(first).not.toBeFocused();
+
+  await page.evaluate(() => {
+    const trigger = document.querySelector(
+      '[data-shlz-modal-trigger="showcase-confirm"]',
+    );
+    window.__shlzModalControllers[0].open(trigger);
+  });
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(second).toBeFocused();
+});
+
+test("repeated drawer enhancement has one owner and isolated teardown", async ({
+  page,
+}) => {
+  const trigger = page.getByRole("button", { name: "Открыть Drawer" });
+  const sameOwner = await page.evaluate(() => {
+    window.__shlzEnhanceDrawers = window.__shlzEnhanceDrawers ?? (() => []);
+    const first = window.__shlzDrawerControllers[0];
+    const repeated = window.__shlzEnhanceDrawers()[0];
+    if (repeated) window.__wave7RepeatedDrawer = repeated;
+    return first === repeated;
+  });
+  expect(sameOwner).toBe(true);
+  await page.evaluate(() => window.__wave7RepeatedDrawer.destroy());
+  await trigger.click();
+  await expect(page.locator("#showcase-drawer")).toBeHidden();
 });
 
 test("drawer is a right-side modal with native focus and scrolling", async ({

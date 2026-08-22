@@ -56,6 +56,10 @@ export function bindNativeDialog(
   let backdropPointerStartedOutside = false;
   let destroyed = false;
 
+  const resetCycleState = (): void => {
+    backdropPointerStartedOutside = false;
+  };
+
   const syncTriggers = (expanded: boolean): void => {
     for (const trigger of triggers) {
       trigger.setAttribute("aria-controls", dialog.id);
@@ -65,6 +69,8 @@ export function bindNativeDialog(
 
   const open = (trigger?: HTMLElement): void => {
     if (destroyed || dialog.open) return;
+    resetCycleState();
+    dialog.returnValue = "";
     const active = dialog.ownerDocument.activeElement;
     returnFocusTo =
       trigger ??
@@ -125,17 +131,25 @@ export function bindNativeDialog(
     { signal: abort.signal },
   );
 
+  dialog.addEventListener("cancel", resetCycleState, { signal: abort.signal });
+
   dialog.addEventListener(
     "close",
     () => {
+      resetCycleState();
       syncTriggers(false);
       const focusTarget = returnFocusTo;
       returnFocusTo = null;
-      if (
+      const focusTargetIsEligible =
         focusTarget?.isConnected &&
-        !focusTarget.matches(":disabled, [aria-disabled='true']")
-      ) {
+        !focusTarget.matches(":disabled, [aria-disabled='true']");
+      if (focusTargetIsEligible) {
         focusTarget.focus();
+      } else if (
+        focusTarget &&
+        dialog.ownerDocument.activeElement === focusTarget
+      ) {
+        focusTarget.blur();
       }
     },
     { signal: abort.signal },
@@ -150,6 +164,8 @@ export function bindNativeDialog(
       if (destroyed) return;
       if (dialog.open) close();
       destroyed = true;
+      resetCycleState();
+      returnFocusTo = null;
       abort.abort();
     },
   };

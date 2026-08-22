@@ -3,6 +3,8 @@ import {
   type NativeDialogBinding,
 } from "./internal/native-dialog.js";
 
+const modalControllers = new WeakMap<HTMLDialogElement, ModalController>();
+
 export class ModalController {
   readonly dialog: HTMLDialogElement;
   #binding: NativeDialogBinding;
@@ -31,11 +33,18 @@ export class ModalController {
 
   destroy(): void {
     this.#binding.destroy();
+    modalControllers.delete(this.dialog);
   }
 }
 
 export function enhanceModals(scope: ParentNode = document): ModalController[] {
   return [
     ...scope.querySelectorAll<HTMLDialogElement>("dialog[data-shlz-modal]"),
-  ].map((dialog) => new ModalController(dialog));
+  ].map((dialog) => {
+    const existing = modalControllers.get(dialog);
+    if (existing) return existing;
+    const controller = new ModalController(dialog);
+    modalControllers.set(dialog, controller);
+    return controller;
+  });
 }
