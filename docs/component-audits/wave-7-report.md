@@ -1,6 +1,6 @@
 # Wave 7 Modal and Drawer overlay audit
 
-- Baseline: `0cbc128a565769192421850801727e083a7c78a8`.
+- Baseline: `0cbc1286046186d60b5b4dad93931756528f2ea9`.
 - Reviewed implementation revision: `ef0d1c86b953f6e134f33b24516269eeb9d6aeb6` (audited range `0cbc128...ef0d1c8`). The following report-only revision records that immutable implementation SHA without changing audited code.
 - Baseline working tree: only the approved Wave 7 OpenSpec artifacts were untracked.
 - Baseline checks: 87/87 Node tests and 12/12 Chromium overlay tests passed. The baseline branch had no open PR or review thread.
