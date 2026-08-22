@@ -105,7 +105,7 @@ For requirements-gated changes, read and enforce `docs/requirements-elicitation.
    - A task needs work beyond what the spec and tasks describe, or you are tempted to drop, narrow, defer, or accept exceptions to specified behavior to make it fit → surface the added scope and ask; do not absorb it silently
    - Error or blocker encountered → report and wait for guidance
    - User interrupts
-   - Implementation reveals a new material user-owned ambiguity or scope expansion → pause the affected packet, return to requirements/OpenSpec update, and resume only after readiness and authorization pass
+   - Implementation reveals a new material user-owned ambiguity or scope expansion → persist `harness pause` for the affected packet, return to requirements/OpenSpec update, and use `harness resume` only after readiness and authorization pass
 
 7. **On completion or pause, show status**
 

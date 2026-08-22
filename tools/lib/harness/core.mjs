@@ -180,6 +180,24 @@ export function requirementsStatus(state) {
   };
 }
 
+function assertPlanRequirements(subject, requirementsState) {
+  if (subject.requirementsGate !== "required") return;
+  if (!requirementsState)
+    throw new Error("requirements-gated work requires readiness state");
+  const expectedChange = subject.openSpecChange;
+  if (!expectedChange)
+    throw new Error("requirements-gated work requires openSpecChange");
+  if (requirementsState.openSpec?.change !== expectedChange)
+    throw new Error(
+      `requirements state links ${requirementsState.openSpec?.change ?? "no change"}, expected ${expectedChange}`,
+    );
+  const status = requirementsStatus(requirementsState);
+  if (!status.readyForPlanning)
+    throw new Error(
+      `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+    );
+}
+
 export function classify(assessment, config) {
   const contributions = {};
   let score = 0;
@@ -224,6 +242,12 @@ export function validatePlan(plan, config) {
     throw new Error("plan requires id and packets");
   if (!plan.classification?.size)
     throw new Error("plan requires classification.size");
+  if (
+    plan.requirementsGate === "required" &&
+    (typeof plan.openSpecChange !== "string" ||
+      plan.openSpecChange.length === 0)
+  )
+    throw new Error("requirements-gated plan requires openSpecChange");
   const ids = new Set();
   for (const packet of plan.packets) {
     for (const field of requiredPacketFields)
@@ -272,15 +296,7 @@ export function createPlan(assessment, config, requirementsState = null) {
     assessment.workUnits.length === 0
   )
     throw new Error("assessment requires id and semantic workUnits");
-  if (assessment.requirementsGate === "required") {
-    if (!requirementsState)
-      throw new Error("requirements-gated assessment requires readiness state");
-    const status = requirementsStatus(requirementsState);
-    if (!status.readyForPlanning)
-      throw new Error(
-        `requirements are not ready for planning: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
-      );
-  }
+  assertPlanRequirements(assessment, requirementsState);
   const classification = classify(assessment, config);
   const regroupRequired =
     (assessment.openSpecTaskCount ?? 0) > config.sizing.taskRegroupThreshold ||
@@ -290,6 +306,12 @@ export function createPlan(assessment, config, requirementsState = null) {
     version: 1,
     id: assessment.id,
     baseline: assessment.baseline ?? null,
+    ...(assessment.requirementsGate === "required"
+      ? {
+          requirementsGate: "required",
+          openSpecChange: assessment.openSpecChange,
+        }
+      : {}),
     classification,
     regroupCheck: {
       required: regroupRequired,
@@ -465,7 +487,14 @@ export function createExecutionState(plan) {
   };
 }
 
-export function claimPacket(plan, state, packetId, session) {
+export function claimPacket(
+  plan,
+  state,
+  packetId,
+  session,
+  requirementsState = null,
+) {
+  assertPlanRequirements(plan, requirementsState);
   if (!session) throw new Error("claim requires session");
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready or already claimed`);
@@ -473,7 +502,49 @@ export function claimPacket(plan, state, packetId, session) {
   return state;
 }
 
-export function completePacket(plan, state, handoff) {
+export function pausePacket(plan, state, packetId, requirementsState) {
+  if (plan.requirementsGate !== "required")
+    throw new Error("only requirements-gated plans can pause for requirements");
+  if (requirementsState.openSpec?.change !== plan.openSpecChange)
+    throw new Error(
+      "requirements state does not match the plan OpenSpec change",
+    );
+  const readiness = requirementsStatus(requirementsState);
+  if (readiness.readyForPlanning)
+    throw new Error("packet pause requires a closed requirements gate");
+  const current = state.packets[packetId];
+  if (current?.status !== "claimed")
+    throw new Error(`packet ${packetId} must be claimed before pause`);
+  state.packets[packetId] = { ...current, status: "paused" };
+  return state;
+}
+
+export function resumePacket(
+  plan,
+  state,
+  packetId,
+  session,
+  requirementsState,
+) {
+  assertPlanRequirements(plan, requirementsState);
+  if (!session) throw new Error("resume requires session");
+  const current = state.packets[packetId];
+  if (current?.status !== "paused")
+    throw new Error(`packet ${packetId} must be paused before resume`);
+  const completed = new Set(
+    Object.entries(state.packets)
+      .filter(([, value]) => value.status === "completed")
+      .map(([id]) => id),
+  );
+  const packet = plan.packets.find(({ id }) => id === packetId);
+  if (!packet.dependencies.every((id) => completed.has(id)))
+    throw new Error(`packet ${packetId} dependencies are not complete`);
+  state.packets[packetId] = { status: "claimed", session };
+  return state;
+}
+
+export function completePacket(plan, state, handoff, requirementsState = null) {
+  assertPlanRequirements(plan, requirementsState);
   validateHandoff(handoff, plan);
   const current = state.packets[handoff.completedPacket];
   if (current?.status !== "claimed")

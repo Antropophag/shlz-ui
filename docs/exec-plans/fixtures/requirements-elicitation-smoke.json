@@ -52,6 +52,32 @@
           "provenance": { "kind": "default", "ref": "policy" }
         }
       },
+      "resolvedState": {
+        "version": 1,
+        "intent": "Add a new publishing capability",
+        "route": "open-spec",
+        "decisions": [
+          {
+            "id": "publishing-policy",
+            "owner": "user",
+            "status": "resolved",
+            "blocking": true,
+            "provenance": { "kind": "user", "ref": "interview:round-1" }
+          }
+        ],
+        "openSpec": { "change": "publish-capability", "status": "pending" },
+        "authorization": {
+          "status": "approval-required",
+          "provenance": { "kind": "default", "ref": "policy" }
+        }
+      },
+      "expectedOpenSpec": {
+        "capability": "publish-capability",
+        "requirements": [
+          "Encode the resolved publishing policy as observable behavior",
+          "Validate the public contract before execution planning"
+        ]
+      },
       "expected": {
         "interview": true,
         "readyForSpec": false,

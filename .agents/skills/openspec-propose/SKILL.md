@@ -22,7 +22,7 @@ I'll create a change with the artifacts your schema defines. With the default sp
 
 `<capability-path>` is the spec directory relative to `specs/` (for example, `user-auth` or `identity/user-auth`). Preserve an existing capability's full path and follow the project's established organization for new capabilities.
 
-When the user is ready to implement, they must start the apply workflow explicitly.
+Without explicit pre-authorization, the user starts the apply workflow after approving the specification summary.
 
 ---
 
@@ -147,6 +147,6 @@ After completing all artifacts, summarize:
 - Treat planning as the default boundary. Cross it only when `docs/requirements-elicitation.md` produces durable, validated `pre-authorized` state from explicit user language
 - Create every artifact the apply phase transitively depends on, not just the ids listed in `apply.requires`
 - Always read dependency artifacts before creating a new one - re-read from disk, not from conversation memory (files may have changed since you last saw them)
-- Ask about ambiguities that would materially change scope, externally observable behavior, compatibility, or acceptance criteria; for minor details, make reasonable assumptions and record them
+- Ask only unresolved blocking user-owned ambiguities identified by `docs/requirements-elicitation.md`; resolve repo-owned and agent-owned decisions without questions
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next

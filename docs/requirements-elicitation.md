@@ -35,7 +35,7 @@ The version 1 state contains only:
 
 Store acceptance criteria and resolved answers in OpenSpec, not this state. Use `unresolved`, `resolved`, or `delegated` decision status; delegated decisions are agent-owned with `user-delegation` provenance.
 
-An assessment that declares `"requirementsGate": "required"` must pass its state to planning:
+An assessment that declares `"requirementsGate": "required"` also records `"openSpecChange": "<change>"` and must pass the matching state to planning:
 
 ```bash
 npm run harness -- plan <assessment> <plan> --requirements <requirements-state>
@@ -60,3 +60,12 @@ When implementation exposes new material user-owned ambiguity or scope expansion
 5. Restore `synthesized`, re-check requirements, and resume the packet only when authorization is ready.
 
 Keep completed handoffs unless the revised OpenSpec invalidates a recorded assumption; record any invalidation explicitly.
+
+For a guarded execution plan, persist the pause and resume through the existing execution state:
+
+```bash
+npm run harness -- pause <plan> <state> <packet> --requirements <blocked-requirements-state>
+npm run harness -- resume <plan> <state> <packet> --session <session> --requirements <ready-requirements-state>
+```
+
+Guarded `claim`, `resume`, and `complete` commands require the matching ready requirements state. This prevents another packet or fresh session from bypassing a newly closed gate.

@@ -29,6 +29,8 @@ npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-pla
 npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
 
+For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`.
+
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 
 The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, use labeled proxies: repeated reads, command/output volume, phase changes, and irrelevant-output accumulation. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.

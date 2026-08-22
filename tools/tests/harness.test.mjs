@@ -15,11 +15,13 @@ import {
   createPlan,
   createReviewState,
   matchesPattern,
+  pausePacket,
   readyPackets,
   relevantValidationFiles,
   recordReview,
   recordValidation,
   requirementsStatus,
+  resumePacket,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -148,7 +150,11 @@ test("delegation transfers ownership once and retains provenance", () => {
 });
 
 test("requirements-gated plans require synthesis and execution authorization", () => {
-  const assessment = { ...clone(wave7), requirementsGate: "required" };
+  const assessment = {
+    ...clone(wave7),
+    requirementsGate: "required",
+    openSpecChange: "add-capability",
+  };
   assert.throws(
     () => createPlan(assessment, config),
     /requires readiness state/,
@@ -165,12 +171,82 @@ test("requirements-gated plans require synthesis and execution authorization", (
           },
         }),
       ),
-    /not ready for planning: approval-required/,
+    /not ready: approval-required/,
+  );
+  assert.throws(
+    () =>
+      createPlan(
+        { ...assessment, openSpecChange: "different-change" },
+        config,
+        requirementsState(),
+      ),
+    /links add-capability, expected different-change/,
   );
   assert.doesNotThrow(() =>
     createPlan(assessment, config, requirementsState()),
   );
   assert.doesNotThrow(() => createPlan(wave7, config));
+});
+
+test("apply-time ambiguity durably pauses and gates packet resume", () => {
+  const assessment = {
+    ...clone(wave7),
+    requirementsGate: "required",
+    openSpecChange: "add-capability",
+  };
+  const ready = requirementsState();
+  const plan = createPlan(assessment, config, ready);
+  const state = createExecutionState(plan);
+  claimPacket(plan, state, "discovery-contracts", "session-a", ready);
+  const blocked = requirementsState({
+    decisions: [
+      {
+        id: "new-public-choice",
+        owner: "user",
+        status: "unresolved",
+        blocking: true,
+        provenance: { kind: "apply", ref: "packet:discovery-contracts" },
+      },
+    ],
+    openSpec: { change: "add-capability", status: "pending" },
+    authorization: {
+      status: "approval-required",
+      provenance: {
+        kind: "scope-expansion",
+        ref: "packet:discovery-contracts",
+      },
+    },
+  });
+  pausePacket(plan, state, "discovery-contracts", blocked);
+  assert.equal(state.packets["discovery-contracts"].status, "paused");
+  assert.throws(
+    () =>
+      resumePacket(plan, state, "discovery-contracts", "session-b", blocked),
+    /requirements are not ready/,
+  );
+  assert.throws(
+    () =>
+      completePacket(
+        plan,
+        state,
+        {
+          completedPacket: "discovery-contracts",
+          changed: [],
+          provenChecks: [],
+          settledDecisions: [],
+          unresolvedFindings: [],
+          nextPacket: "shared-native-dialog",
+          invalidatedAssumptions: [],
+        },
+        blocked,
+      ),
+    /requirements are not ready/,
+  );
+  resumePacket(plan, state, "discovery-contracts", "session-b", ready);
+  assert.deepEqual(state.packets["discovery-contracts"], {
+    status: "claimed",
+    session: "session-b",
+  });
 });
 
 test("agent routing preserves inspect-first readiness and apply re-entry", async () => {
@@ -190,7 +266,7 @@ test("agent routing preserves inspect-first readiness and apply re-entry", async
   assert.match(protocol, /user-owned/);
   assert.match(propose, /pre-authorized/);
   assert.match(propose, /skip interview/);
-  assert.match(apply, /pause the affected packet/);
+  assert.match(apply, /harness pause/);
   assert.match(update, /without asking the same decision again/);
 });
 
@@ -249,6 +325,23 @@ test("requirements smoke matrix covers all ten routes deterministically", async 
     provenance: { kind: "user", ref: "approval:updated-spec" },
   };
   assert.equal(requirementsStatus(reentry).readyForPlanning, true);
+
+  const shortIntent = fixture.scenarios.find(
+    ({ id }) => id === "short-new-capability",
+  );
+  assert.ok(shortIntent.resolvedState);
+  assert.equal(
+    requirementsStatus(shortIntent.resolvedState).readyForPlanning,
+    false,
+  );
+  assert.equal(
+    requirementsStatus(shortIntent.resolvedState).readyForSpec,
+    true,
+  );
+  assert.equal(shortIntent.expectedOpenSpec.capability, "publish-capability");
+  const synthesized = clone(shortIntent.resolvedState);
+  synthesized.openSpec.status = "synthesized";
+  assert.equal(requirementsStatus(synthesized).readyForSpec, true);
 });
 
 test("GitHub Pages retrospective separates facts, decisions, and spec without implementation", async () => {
