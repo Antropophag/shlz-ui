@@ -245,6 +245,43 @@ test("direct completion re-routes on material discovered surface but not harmles
         {
           version: 1,
           changedFiles: [".github/workflows/pages.yml"],
+          materialSignals: directAssessment().materialSignals,
+        },
+        [
+          {
+            path: ".github/workflows/pages.yml",
+            status: "added",
+            patch:
+              "+name: Deploy Pages\n+jobs:\n+  deploy:\n+    uses: actions/deploy-pages@v4",
+          },
+        ],
+      ),
+    /deterministic risk floor.*publishingOrRelease.*re-route required/,
+  );
+  assert.doesNotThrow(() =>
+    assertRouteConformance(
+      directAssessment(),
+      {
+        version: 1,
+        changedFiles: [".github/workflows/ci.yml"],
+        materialSignals: directAssessment().materialSignals,
+      },
+      [
+        {
+          path: ".github/workflows/ci.yml",
+          status: "modified",
+          patch: "-name: CI\n+name: CI checks\n+# clarify display label",
+        },
+      ],
+    ),
+  );
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [".github/workflows/pages.yml"],
           materialSignals: {
             ...directAssessment().materialSignals,
             publishingOrRelease: true,

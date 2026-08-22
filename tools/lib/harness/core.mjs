@@ -277,11 +277,7 @@ export function assertImplementationPreflight(
   return { allowed: true, route: assessment.route };
 }
 
-export function assertRouteConformance(
-  assessment,
-  discovered,
-  actualChangedFiles,
-) {
+export function assertRouteConformance(assessment, discovered, actualSurfaces) {
   const initial = evaluateRouteEligibility(assessment);
   if (!initial.eligible)
     throw new Error("initial route is not eligible; re-route required");
@@ -289,31 +285,120 @@ export function assertRouteConformance(
     throw new Error("discovered route surface version must be 1");
   if (!Array.isArray(discovered.changedFiles))
     throw new Error("discovered route surface requires changedFiles");
-  if (!Array.isArray(actualChangedFiles))
-    throw new Error("route conformance requires actual changed files");
+  if (!Array.isArray(actualSurfaces))
+    throw new Error("route conformance requires actual changed surfaces");
+  const surfaces = actualSurfaces.map((surface) =>
+    typeof surface === "string"
+      ? { path: surface, status: "modified", patch: "" }
+      : surface,
+  );
+  for (const surface of surfaces)
+    if (
+      !surface ||
+      typeof surface.path !== "string" ||
+      !["added", "modified", "deleted", "renamed"].includes(surface.status) ||
+      typeof surface.patch !== "string"
+    )
+      throw new Error("actual changed surface has invalid path/status/patch");
   const declaredFiles = [...new Set(discovered.changedFiles)].sort((a, b) =>
     a.localeCompare(b),
   );
-  const actualFiles = [...new Set(actualChangedFiles)].sort((a, b) =>
-    a.localeCompare(b),
+  const actualFiles = [...new Set(surfaces.map(({ path }) => path))].sort(
+    (a, b) => a.localeCompare(b),
   );
   if (JSON.stringify(declaredFiles) !== JSON.stringify(actualFiles))
     throw new Error(
       "discovered changed-file set does not match actual target-relevant diff",
     );
   validateSignalSet(discovered.materialSignals, "discovered route surface");
-  const material = materialSignalNames.filter(
+  const agentMaterial = materialSignalNames.filter(
     (name) => discovered.materialSignals[name] !== false,
   );
+  const deterministicFloor = deterministicRouteRiskFloor(surfaces);
+  const material = [...new Set([...agentMaterial, ...deterministicFloor])];
   if (assessment.route === "direct" && material.length)
     throw new Error(
-      `direct route no longer conforms (${material.join(", ")}); re-route required`,
+      deterministicFloor.length
+        ? `deterministic risk floor (${deterministicFloor.join(", ")}) makes direct route non-conformant; re-route required`
+        : `direct route no longer conforms (${material.join(", ")}); re-route required`,
     );
   return {
     allowed: true,
     route: assessment.route,
     changedFiles: discovered.changedFiles,
+    deterministicFloor,
   };
+}
+
+const dedicatedWorkflowSignals = {
+  ".github/workflows/pages.yml": [
+    "publishingOrRelease",
+    "deploymentSemantics",
+    "externalAutomation",
+  ],
+  ".github/workflows/release.yml": [
+    "publishingOrRelease",
+    "externalAutomation",
+  ],
+};
+
+function changedPatchLines(patch) {
+  return patch
+    .split("\n")
+    .filter((line) => /^[+-]/.test(line) && !/^\+\+\+|^---/.test(line))
+    .map((line) => {
+      const content = line.replace(/^[+-]/, "");
+      return {
+        direction: line.startsWith("-") ? "removed" : "added",
+        indent: content.length - content.trimStart().length,
+        text: content.trim(),
+      };
+    })
+    .filter(({ text }) => text && !text.startsWith("#"));
+}
+
+function dedicatedWorkflowChanged(surface) {
+  if (surface.status !== "modified") return true;
+  const lines = changedPatchLines(surface.patch).filter(
+    ({ indent, text }) => !(indent === 0 && /^(name|run-name):/.test(text)),
+  );
+  const normalized = (direction) =>
+    lines
+      .filter((line) => line.direction === direction)
+      .map(({ text }) => text)
+      .sort((a, b) => a.localeCompare(b));
+  return (
+    JSON.stringify(normalized("removed")) !==
+    JSON.stringify(normalized("added"))
+  );
+}
+
+export function deterministicRouteRiskFloor(surfaces) {
+  const signals = new Set();
+  for (const surface of surfaces) {
+    const dedicatedSignals = dedicatedWorkflowSignals[surface.path];
+    if (dedicatedSignals && dedicatedWorkflowChanged(surface))
+      dedicatedSignals.forEach((signal) => signals.add(signal));
+    if (surface.path === "apps/showcase/public/CNAME") {
+      signals.add("publishingOrRelease");
+      signals.add("publicUrlOrDomain");
+    }
+    if (!/^\.github\/workflows\/[^/]+\.ya?ml$/.test(surface.path)) continue;
+    for (const { text } of changedPatchLines(surface.patch)) {
+      if (/^(pages|id-token|packages|deployments):\s*write\b/.test(text))
+        signals.add("permissionsOrSecurity");
+      if (
+        /^uses:\s*(actions\/(configure-pages|upload-pages-artifact|deploy-pages|create-release)|softprops\/action-gh-release)@/.test(
+          text,
+        ) ||
+        /^run:\s*npm publish\b/.test(text)
+      ) {
+        signals.add("publishingOrRelease");
+        signals.add("externalAutomation");
+      }
+    }
+  }
+  return [...signals].sort((a, b) => a.localeCompare(b));
 }
 
 export function assertImplementationDelivery(delivery) {
@@ -1265,4 +1350,45 @@ export async function gitEvidence(repoRoot, base) {
     collectedAt: new Date().toISOString(),
     mutatesRepository: false,
   };
+}
+
+export async function gitRouteSurfaces(repoRoot, base, files) {
+  const options = { cwd: repoRoot, maxBuffer: 10 * 1024 * 1024 };
+  const { stdout: rawStatuses } = await exec(
+    "git",
+    ["diff", "--name-status", base, "--"],
+    options,
+  );
+  const statuses = new Map();
+  for (const line of rawStatuses.trim().split("\n").filter(Boolean)) {
+    const [rawStatus, ...paths] = line.split("\t");
+    const file = paths.at(-1);
+    const status = rawStatus.startsWith("A")
+      ? "added"
+      : rawStatus.startsWith("D")
+        ? "deleted"
+        : rawStatus.startsWith("R")
+          ? "renamed"
+          : "modified";
+    statuses.set(file, status);
+  }
+  return Promise.all(
+    files.map(async (file) => {
+      const status = statuses.get(file) ?? "added";
+      const { stdout: trackedPatch } = await exec(
+        "git",
+        ["diff", "--unified=0", "--no-color", base, "--", file],
+        options,
+      );
+      let patch = trackedPatch;
+      if (status === "added" && !patch) {
+        const content = await readFile(path.join(repoRoot, file), "utf8");
+        patch = content
+          .split("\n")
+          .map((line) => `+${line}`)
+          .join("\n");
+      }
+      return { path: file, status, patch };
+    }),
+  );
 }

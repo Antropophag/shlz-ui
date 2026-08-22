@@ -17,3 +17,9 @@
 
 - [x] 4.1 Run focused harness tests, strict OpenSpec validation, and affected validation once at the stabilized fingerprint; record results in execution state
 - [x] 4.2 Run diff-scoped Standards and Spec review, remediate valid findings in one batch, run targeted re-review and any required aggregate validation, then create a PR without merging
+
+## 5. Deterministic Risk Floor Follow-up
+
+- [x] 5.1 Add a red regression proving a newly created `.github/workflows/pages.yml` blocks direct completion even when every agent material signal is false, plus a harmless CI maintenance control
+- [x] 5.2 Implement the minimal explicit content-aware deterministic risk floor and verify it can only raise effective material signals
+- [ ] 5.3 Run focused harness validation and targeted Standards/Spec re-review, then update PR #29 without merging

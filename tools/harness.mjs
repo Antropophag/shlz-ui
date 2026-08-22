@@ -15,6 +15,7 @@ import {
   gitEvidence,
   gitDeliveryState,
   gitImplementationState,
+  gitRouteSurfaces,
   pausePacket,
   readJson,
   readyPackets,
@@ -131,7 +132,11 @@ switch (command) {
         assertRouteConformance(
           await readJson(absolute(args[0])),
           await readJson(absolute(args[1])),
-          targetRelevantFiles,
+          await gitRouteSurfaces(
+            repoRoot,
+            option("--base") ?? "origin/main",
+            targetRelevantFiles,
+          ),
         ),
       );
     }

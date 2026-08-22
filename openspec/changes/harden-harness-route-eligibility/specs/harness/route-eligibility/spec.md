@@ -37,6 +37,8 @@ Before the first repository implementation mutation, the workflow SHALL evaluate
 
 Before direct work can complete, the workflow SHALL evaluate the target-relevant changed-file and semantic diff surface against the route evidence. A material surface incompatible with direct MUST block completion and require requirements/OpenSpec re-routing; path presence alone MUST NOT make harmless maintenance material.
 
+The workflow SHALL derive a deterministic material-risk floor from a small explicit set of implementation surfaces whose semantics are unambiguous. Agent-supplied discovery MAY raise material risk but MUST NOT lower this floor by reporting a known material signal as false. The floor MUST use change status and narrow semantic diff/content evidence where path alone does not prove a material change; it MUST NOT become a generic keyword or path classifier.
+
 #### Scenario: Deployment surface discovered on direct route
 
 - **WHEN** direct work creates or materially changes deployment, publishing, Pages, CNAME, release automation, deployment triggers, or write/id-token permissions
@@ -46,6 +48,16 @@ Before direct work can complete, the workflow SHALL evaluate the target-relevant
 
 - **WHEN** a workflow diff only corrects behavior-preserving text or formatting and semantic evidence confirms triggers, permissions, and external behavior are unchanged
 - **THEN** route conformance permits direct completion
+
+#### Scenario: Pages workflow creation cannot suppress material risk
+
+- **WHEN** direct work creates `.github/workflows/pages.yml` while agent-supplied material signals are all false
+- **THEN** the deterministic floor identifies publishing/deployment automation and route conformance rejects completion with re-route required
+
+#### Scenario: Harmless CI workflow maintenance stays below the floor
+
+- **WHEN** an existing CI workflow changes only comments, display text, or formatting and does not add or change a known deployment, release, public-domain, or write-permission construct
+- **THEN** the deterministic floor adds no material signal and does not independently escalate the direct route
 
 ### Requirement: Implementation delivery uses a task branch and pull request
 

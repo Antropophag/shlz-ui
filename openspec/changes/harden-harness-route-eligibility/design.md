@@ -31,7 +31,9 @@ A preflight command validates route eligibility, requires ready requirements for
 
 ### 3. Conformance uses change-aware semantic evidence
 
-A completion guard accepts the original assessment and a discovered-surface record tied to changed files/diff inspection. Sensitive paths are conservative evidence, but escalation depends on declared semantic change categories; a workflow file alone is not proof of deployment semantics. Any newly material or unknown category incompatible with direct returns a deterministic re-route error.
+A completion guard accepts the original assessment and a discovered-surface record tied to changed files/diff inspection. Before combining agent signals, the CLI derives a deterministic risk floor from an explicit table of high-confidence surfaces: creation/deletion of dedicated Pages/release workflows, CNAME changes, and changed workflow constructs that directly grant write/id-token permissions or invoke known publish/deploy actions. For existing general CI workflows, comments, display text, and formatting do not raise the floor unless one of those exact semantic constructs changes. Any newly material or unknown category incompatible with direct returns a deterministic re-route error.
+
+The agent may raise risk above the floor but cannot set a floor signal back to false. A broad path/keyword classifier and general YAML workflow engine were rejected: the former over-routes harmless maintenance, while the latter exceeds the narrow repo-owned seam.
 
 ### 4. Delivery state is a narrow completion invariant
 
@@ -44,7 +46,7 @@ Extend the GitHub Pages fixture with route-assessment input and expected guard r
 ## Risks / Trade-offs
 
 - **[Agent falsely asserts all direct invariants]** → Closed-set evidence, unknown-is-material handling, post-diff re-evaluation, and agent-facing mandatory preflight reduce—but cannot eliminate—dishonest input.
-- **[Path heuristics over-escalate CI maintenance]** → Treat paths as inspection triggers; require semantic surface classification and test harmless maintenance.
+- **[Deterministic mappings over-escalate CI maintenance]** → Reserve the floor for dedicated surfaces and exact changed semantic constructs; test harmless comment/display maintenance separately.
 - **[Local guard is bypassed entirely]** → Document server-side residual risk and recommend admin-enforced PR reviews separately; do not silently alter settings.
 - **[Operational state becomes a second spec]** → Keep normative behavior in OpenSpec; route/discovery records contain only guard evidence and status.
 
