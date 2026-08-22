@@ -1,0 +1,20 @@
+[
+  {
+    "id": "SPEC-1",
+    "severity": "high",
+    "summary": "Apply-time readiness cannot deterministically pause or gate an existing execution plan",
+    "file": "tools/lib/harness/core.mjs"
+  },
+  {
+    "id": "SPEC-2",
+    "severity": "medium",
+    "summary": "Planning accepts requirements state linked to another OpenSpec change",
+    "file": "tools/lib/harness/core.mjs"
+  },
+  {
+    "id": "SPEC-3",
+    "severity": "medium",
+    "summary": "Short-intent smoke stops before interview-to-synthesis transition",
+    "file": "tools/tests/harness.test.mjs"
+  }
+]

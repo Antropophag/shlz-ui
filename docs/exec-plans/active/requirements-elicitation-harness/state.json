@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "planId": "requirements-elicitation-harness",
+  "packets": {
+    "readiness-core": {
+      "status": "completed",
+      "session": "apply-1"
+    },
+    "agent-routing": {
+      "status": "completed",
+      "session": "apply-1"
+    },
+    "fixtures-evaluation": {
+      "status": "completed",
+      "session": "apply-1"
+    },
+    "review-pr": {
+      "status": "completed",
+      "session": "review-1"
+    }
+  },
+  "handoffs": {
+    "readiness-core": {
+      "completedPacket": "readiness-core",
+      "changed": [
+        "tools/lib/harness/core.mjs",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "openspec/changes/requirements-elicitation-harness/tasks.md"
+      ],
+      "provenChecks": ["npm run test:harness: 21/21 pass"],
+      "settledDecisions": [
+        "Requirements state version 1 permits only compact intent, route, decisions, OpenSpec linkage, and authorization provenance",
+        "Planning guard is opt-in through assessment.requirementsGate for backward-compatible direct and v1 flows"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "agent-routing",
+      "invalidatedAssumptions": []
+    },
+    "agent-routing": {
+      "completedPacket": "agent-routing",
+      "changed": [
+        "AGENTS.md",
+        "docs/requirements-elicitation.md",
+        "docs/openspec.md",
+        "docs/skill-routing.md",
+        "docs/agent-execution.md",
+        ".agents/skills/openspec-propose/SKILL.md",
+        ".agents/skills/openspec-apply-change/SKILL.md",
+        ".agents/skills/openspec-update-change/SKILL.md",
+        "tools/tests/harness.test.mjs"
+      ],
+      "provenChecks": [
+        "npm run test:harness: 22/22 pass",
+        "npm run check:openspec: pass"
+      ],
+      "settledDecisions": [
+        "docs/requirements-elicitation.md is the single operational protocol reached through concise pointers",
+        "Default proposal stops for approval; validated explicit pre-authorization permits same-turn adaptive planning/apply",
+        "Apply-time material ambiguity pauses only the affected packet and re-enters requirements/OpenSpec"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "fixtures-evaluation",
+      "invalidatedAssumptions": []
+    },
+    "fixtures-evaluation": {
+      "completedPacket": "fixtures-evaluation",
+      "changed": [
+        "docs/exec-plans/fixtures/requirements-elicitation-smoke.json",
+        "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+        "docs/exec-plans/active/requirements-elicitation-harness/requirements.json",
+        "tools/tests/harness.test.mjs",
+        "docs/exec-plans/active/requirements-elicitation-harness/validation-ledger.json"
+      ],
+      "provenChecks": [
+        "requirements-check: readyForPlanning true for current approved change",
+        "npm run test:harness: 25/25 pass",
+        "npm run check:openspec: pass",
+        "openspec validate requirements-elicitation-harness --strict: pass",
+        "affected docs/harness/openspec validation recorded pass"
+      ],
+      "settledDecisions": [
+        "Smoke matrix contains exactly ten required routes",
+        "GitHub Pages fixture asks only release-policy and public-URL decisions after repository inspection",
+        "GitHub Pages fixture is non-executable and forbidden deployment paths remain unchanged"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "review-pr",
+      "invalidatedAssumptions": []
+    },
+    "review-pr": {
+      "completedPacket": "review-pr",
+      "changed": [
+        "diff-scoped remediation for five review findings",
+        "review and validation operational evidence",
+        "OpenSpec task completion"
+      ],
+      "provenChecks": [
+        "Standards review: 2 findings resolved; targeted re-review clean",
+        "Spec review: 3 findings resolved; targeted re-review clean",
+        "npm run check: 115/115 Node tests and 193/193 Playwright tests pass",
+        "PR https://github.com/Antropophag/shlz-ui/pull/28 created and not merged"
+      ],
+      "settledDecisions": [
+        "Guarded execution binds a monotonic requirements revision so stale snapshots cannot resume work",
+        "All required tasks are implemented and review findings are closed"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": []
+    }
+  }
+}

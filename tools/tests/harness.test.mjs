@@ -15,10 +15,13 @@ import {
   createPlan,
   createReviewState,
   matchesPattern,
+  pausePacket,
   readyPackets,
   relevantValidationFiles,
   recordReview,
   recordValidation,
+  requirementsStatus,
+  resumePacket,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -26,6 +29,7 @@ import {
   fingerprint,
   validateHandoff,
   validatePlan,
+  validateRequirementsState,
 } from "../lib/harness/core.mjs";
 
 const root = process.cwd();
@@ -76,6 +80,311 @@ test("classification bands are configurable and honest", () => {
   tuned.sizing.bands.M = 1;
   assessment.signals.sharedSeams = 1;
   assert.equal(classify(assessment, tuned).size, "M");
+});
+
+const requirementsState = (overrides = {}) => ({
+  version: 1,
+  intent: "Add a substantial capability",
+  route: "open-spec",
+  decisions: [],
+  openSpec: { change: "add-capability", status: "synthesized" },
+  authorization: {
+    status: "pre-authorized",
+    provenance: { kind: "user", ref: "request:1" },
+  },
+  ...overrides,
+});
+
+test("requirements state rejects unresolved blockers and normative payloads", () => {
+  const blocked = requirementsState({
+    revision: 2,
+    decisions: [
+      {
+        id: "public-scope",
+        owner: "user",
+        status: "unresolved",
+        blocking: true,
+        provenance: { kind: "inspection", ref: "repo:none" },
+      },
+    ],
+  });
+  assert.deepEqual(requirementsStatus(blocked).unresolvedBlocking, [
+    "public-scope",
+  ]);
+  assert.equal(requirementsStatus(blocked).readyForPlanning, false);
+  assert.throws(
+    () =>
+      validateRequirementsState({
+        ...blocked,
+        answers: { "public-scope": "ship everything" },
+      }),
+    /requirements field answers is not allowed/,
+  );
+});
+
+test("delegation transfers ownership once and retains provenance", () => {
+  const delegated = requirementsState({
+    decisions: [
+      {
+        id: "presentation-choice",
+        owner: "agent",
+        status: "delegated",
+        blocking: true,
+        provenance: { kind: "user-delegation", ref: "reply:2" },
+      },
+    ],
+  });
+  assert.equal(requirementsStatus(delegated).readyForPlanning, true);
+  assert.throws(
+    () =>
+      validateRequirementsState({
+        ...delegated,
+        decisions: [
+          {
+            ...delegated.decisions[0],
+            owner: "user",
+          },
+        ],
+      }),
+    /must be agent-owned/,
+  );
+});
+
+test("requirements-gated plans require synthesis and execution authorization", () => {
+  const assessment = {
+    ...clone(wave7),
+    requirementsGate: "required",
+    openSpecChange: "add-capability",
+  };
+  assert.throws(
+    () => createPlan(assessment, config),
+    /requires readiness state/,
+  );
+  assert.throws(
+    () =>
+      createPlan(
+        assessment,
+        config,
+        requirementsState({
+          authorization: {
+            status: "approval-required",
+            provenance: { kind: "default", ref: "policy" },
+          },
+        }),
+      ),
+    /not ready: approval-required/,
+  );
+  assert.throws(
+    () =>
+      createPlan(
+        { ...assessment, openSpecChange: "different-change" },
+        config,
+        requirementsState(),
+      ),
+    /links add-capability, expected different-change/,
+  );
+  assert.doesNotThrow(() =>
+    createPlan(assessment, config, requirementsState()),
+  );
+  assert.doesNotThrow(() => createPlan(wave7, config));
+});
+
+test("apply-time ambiguity durably pauses and gates packet resume", () => {
+  const assessment = {
+    ...clone(wave7),
+    requirementsGate: "required",
+    openSpecChange: "add-capability",
+  };
+  const ready = requirementsState();
+  const plan = createPlan(assessment, config, ready);
+  const state = createExecutionState(plan);
+  claimPacket(plan, state, "discovery-contracts", "session-a", ready);
+  const blocked = requirementsState({
+    revision: 2,
+    decisions: [
+      {
+        id: "new-public-choice",
+        owner: "user",
+        status: "unresolved",
+        blocking: true,
+        provenance: { kind: "apply", ref: "packet:discovery-contracts" },
+      },
+    ],
+    openSpec: { change: "add-capability", status: "pending" },
+    authorization: {
+      status: "approval-required",
+      provenance: {
+        kind: "scope-expansion",
+        ref: "packet:discovery-contracts",
+      },
+    },
+  });
+  pausePacket(plan, state, "discovery-contracts", blocked);
+  assert.equal(state.packets["discovery-contracts"].status, "paused");
+  assert.throws(
+    () =>
+      resumePacket(plan, state, "discovery-contracts", "session-b", blocked),
+    /requirements are not ready/,
+  );
+  assert.throws(
+    () =>
+      completePacket(
+        plan,
+        state,
+        {
+          completedPacket: "discovery-contracts",
+          changed: [],
+          provenChecks: [],
+          settledDecisions: [],
+          unresolvedFindings: [],
+          nextPacket: "shared-native-dialog",
+          invalidatedAssumptions: [],
+        },
+        blocked,
+      ),
+    /requirements are not ready/,
+  );
+  assert.throws(
+    () => resumePacket(plan, state, "discovery-contracts", "session-b", ready),
+    /revision 1 is stale; expected at least 2/,
+  );
+  const updated = requirementsState({ revision: 2 });
+  resumePacket(plan, state, "discovery-contracts", "session-b", updated);
+  assert.deepEqual(state.packets["discovery-contracts"], {
+    status: "claimed",
+    session: "session-b",
+    requirementsRevision: 2,
+  });
+});
+
+test("agent routing preserves inspect-first readiness and apply re-entry", async () => {
+  const [agents, protocol, propose, apply, update] = await Promise.all(
+    [
+      "AGENTS.md",
+      "docs/requirements-elicitation.md",
+      ".agents/skills/openspec-propose/SKILL.md",
+      ".agents/skills/openspec-apply-change/SKILL.md",
+      ".agents/skills/openspec-update-change/SKILL.md",
+    ].map((file) => readFile(path.join(root, file), "utf8")),
+  );
+  assert.match(agents, /requirements-elicitation\.md/);
+  assert.match(agents, /generated OpenSpec skills/);
+  assert.match(agents, /Explicit pre-authorization/);
+  assert.match(protocol, /no unresolved blocking user-owned decisions/);
+  assert.match(protocol, /repo-owned/);
+  assert.match(protocol, /agent-owned/);
+  assert.match(protocol, /user-owned/);
+  assert.match(protocol, /harness -- pause/);
+  assert.match(protocol, /delegated/);
+  for (const generatedSkill of [propose, apply, update])
+    assert.doesNotMatch(
+      generatedSkill,
+      /requirements-elicitation|pre-authorized|harness pause|without asking the same decision again/,
+    );
+});
+
+test("requirements smoke matrix covers all ten routes deterministically", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/requirements-elicitation-smoke.json",
+  );
+  assert.equal(fixture.scenarios.length, 10);
+  assert.deepEqual(
+    fixture.scenarios.map(({ id }) => id),
+    [
+      "trivial-direct",
+      "complete-contract",
+      "short-new-capability",
+      "repo-owned-answer",
+      "user-owned-blocker",
+      "delegated-decision",
+      "explicit-preauthorization",
+      "default-approval-stop",
+      "apply-reentry",
+      "fresh-session-recovery",
+    ],
+  );
+  for (const scenario of fixture.scenarios.filter(({ state }) => state)) {
+    const status = requirementsStatus(scenario.state);
+    assert.equal(
+      status.readyForSpec,
+      scenario.expected.readyForSpec,
+      scenario.id,
+    );
+    assert.equal(
+      status.readyForPlanning,
+      scenario.expected.readyForPlanning,
+      scenario.id,
+    );
+    assert.equal(
+      status.unresolvedBlocking.length > 0,
+      scenario.expected.interview,
+      scenario.id,
+    );
+  }
+  assert.equal(fixture.scenarios[0].expected.stateRequired, false);
+
+  const reentry = clone(
+    fixture.scenarios.find(({ id }) => id === "apply-reentry").state,
+  );
+  reentry.decisions[0] = {
+    ...reentry.decisions[0],
+    owner: "agent",
+    status: "delegated",
+    provenance: { kind: "user-delegation", ref: "reply:decide-yourself" },
+  };
+  reentry.openSpec.status = "synthesized";
+  reentry.authorization = {
+    status: "approved",
+    provenance: { kind: "user", ref: "approval:updated-spec" },
+  };
+  assert.equal(requirementsStatus(reentry).readyForPlanning, true);
+
+  const shortIntent = fixture.scenarios.find(
+    ({ id }) => id === "short-new-capability",
+  );
+  assert.ok(shortIntent.resolvedState);
+  assert.equal(
+    requirementsStatus(shortIntent.resolvedState).readyForPlanning,
+    false,
+  );
+  assert.equal(
+    requirementsStatus(shortIntent.resolvedState).readyForSpec,
+    true,
+  );
+  assert.equal(shortIntent.expectedOpenSpec.capability, "publish-capability");
+  const synthesized = clone(shortIntent.resolvedState);
+  synthesized.openSpec.status = "synthesized";
+  assert.equal(requirementsStatus(synthesized).readyForSpec, true);
+});
+
+test("GitHub Pages retrospective separates facts, decisions, and spec without implementation", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+  );
+  assert.equal(fixture.nonExecutable, true);
+  assert.equal(fixture.repoOwnedFacts.length, 5);
+  assert.equal(fixture.userOwnedQuestions.length, 2);
+  assert.ok(fixture.expectedOpenSpec.requirements.length >= 4);
+  const evidence = await gitEvidence(root, "origin/main");
+  for (const forbidden of fixture.forbiddenImplementationPaths)
+    assert.ok(!evidence.changedFiles.includes(forbidden), forbidden);
+});
+
+test("fresh-session requirements state is recoverable through the CLI", async () => {
+  const file =
+    "docs/exec-plans/active/requirements-elicitation-harness/requirements.json";
+  const { stdout } = await exec(
+    "node",
+    ["tools/harness.mjs", "requirements-check", file],
+    { cwd: root },
+  );
+  assert.deepEqual(JSON.parse(stdout), {
+    route: "open-spec",
+    unresolvedBlocking: [],
+    readyForSpec: true,
+    readyForPlanning: true,
+    authorization: "approved",
+  });
 });
 
 test("plan contract rejects missing fields, cycles, and undecomposed large work", () => {

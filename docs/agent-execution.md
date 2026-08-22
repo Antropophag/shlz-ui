@@ -1,8 +1,10 @@
 # Adaptive agent execution
 
-Use this workflow after initial discovery and OpenSpec impact routing:
+Use this workflow after initial discovery, impact routing, requirements readiness, and OpenSpec synthesis/authorization:
 
-`request → discovery → impact routing → execution planning → orchestration → implementation → integration → evaluation → final validation`
+`request → discovery → impact routing → requirements readiness → OpenSpec → authorization → execution planning → orchestration → implementation → integration → evaluation → final validation`
+
+For requirements-gated work, `plan` receives the validated state described in `docs/requirements-elicitation.md`. Planning is downstream of the readiness gate; direct S work remains lightweight.
 
 ## Size before implementation
 
@@ -26,6 +28,8 @@ npm run harness -- ready docs/exec-plans/active/<change>/plan.json --state docs/
 npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-plans/active/<change>/state.json <packet-id> --session <session-id>
 npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
+
+For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 

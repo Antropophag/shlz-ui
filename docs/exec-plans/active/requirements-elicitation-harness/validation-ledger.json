@@ -1,0 +1,101 @@
+[
+  {
+    "target": "docs",
+    "files": [
+      "AGENTS.md",
+      "docs/agent-execution.md",
+      "docs/exec-plans/active/requirements-elicitation-harness/assessment.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/handoff-agent-routing.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/handoff-readiness-core.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/plan.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/requirements.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/state.json",
+      "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+      "docs/exec-plans/fixtures/requirements-elicitation-smoke.json",
+      "docs/openspec.md",
+      "docs/requirements-elicitation.md",
+      "docs/skill-routing.md"
+    ],
+    "fingerprint": "566b3679778b13b2f5cc888bb5c727e0c6cf5781d9c736fbe76e037d6c440753",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "fixtures-evaluation",
+    "session": "apply-1",
+    "recordedAt": "2026-08-22T18:53:43.190Z"
+  },
+  {
+    "target": "harness",
+    "files": [
+      "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+      "docs/exec-plans/fixtures/requirements-elicitation-smoke.json",
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "fingerprint": "be2f54a11e6c64e03288cbdd5c95e967082690689979911480adef4d4cc2c311",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "fixtures-evaluation",
+    "session": "apply-1",
+    "recordedAt": "2026-08-22T18:53:43.433Z"
+  },
+  {
+    "target": "openspec",
+    "files": [
+      ".agents/skills/openspec-apply-change/SKILL.md",
+      ".agents/skills/openspec-propose/SKILL.md",
+      ".agents/skills/openspec-update-change/SKILL.md",
+      "openspec/changes/requirements-elicitation-harness/.openspec.yaml",
+      "openspec/changes/requirements-elicitation-harness/design.md",
+      "openspec/changes/requirements-elicitation-harness/proposal.md",
+      "openspec/changes/requirements-elicitation-harness/specs/harness/requirements-readiness/spec.md",
+      "openspec/changes/requirements-elicitation-harness/tasks.md"
+    ],
+    "fingerprint": "9747fad03e98c592562e4298cd0a76b17bbdff149592275b22987e3ad50d6870",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "fixtures-evaluation",
+    "session": "apply-1",
+    "recordedAt": "2026-08-22T18:53:43.658Z"
+  },
+  {
+    "target": "full",
+    "files": [
+      ".agents/skills/openspec-apply-change/SKILL.md",
+      ".agents/skills/openspec-propose/SKILL.md",
+      ".agents/skills/openspec-update-change/SKILL.md",
+      "AGENTS.md",
+      "docs/agent-execution.md",
+      "docs/exec-plans/active/requirements-elicitation-harness/assessment.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/handoff-agent-routing.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/handoff-fixtures-evaluation.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/handoff-readiness-core.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/plan.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/requirements.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/review-state.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/spec-findings.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/standards-findings.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/state.json",
+      "docs/exec-plans/active/requirements-elicitation-harness/validation-ledger.json",
+      "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+      "docs/exec-plans/fixtures/requirements-elicitation-smoke.json",
+      "docs/openspec.md",
+      "docs/requirements-elicitation.md",
+      "docs/skill-routing.md",
+      "openspec/changes/requirements-elicitation-harness/.openspec.yaml",
+      "openspec/changes/requirements-elicitation-harness/design.md",
+      "openspec/changes/requirements-elicitation-harness/proposal.md",
+      "openspec/changes/requirements-elicitation-harness/specs/harness/requirements-readiness/spec.md",
+      "openspec/changes/requirements-elicitation-harness/tasks.md",
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "fingerprint": "5c07e5e2aa1552e87717035cdbcb7a4af7e69adfb8239c9909194d835a35b550",
+    "outcome": "pass",
+    "reason": "final post-remediation aggregate validation",
+    "packet": "review-pr",
+    "session": "review-1",
+    "recordedAt": "2026-08-22T19:11:46.354Z"
+  }
+]

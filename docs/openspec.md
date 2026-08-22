@@ -13,7 +13,7 @@ Brownfield contracts are added incrementally when a capability is changed or del
 
 Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work.
 
-Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, use `docs/agent-execution.md` for execution sizing and orchestration.
+Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, resolve requirements through `docs/requirements-elicitation.md`; after synthesis and authorization, use `docs/agent-execution.md` for execution sizing and orchestration.
 
 ### Trivial or implementation-only
 
@@ -29,11 +29,13 @@ Use OpenSpec when component behavior, a public API, DOM or accessibility behavio
 
 `explore → propose/update → specs/design/tasks → apply → validate → sync/archive`
 
-Create only artifacts required by the resolved OpenSpec schema. Keep OpenSpec as the sole workflow state instead of mirroring it in another format.
+Create only artifacts required by the resolved OpenSpec schema. OpenSpec is the sole normative workflow source; for requirements-gated work, `requirements.json` contains only the operational gate and recovery state defined by `docs/requirements-elicitation.md`, never mirrored requirements or acceptance content.
 
 ### Architectural or ambiguous
 
 Use the full OpenSpec lifecycle for substantial new capabilities or components, package or token architecture, cross-component behavior, new interaction models, ambiguous requirements, and changes requiring an explicit design decision. Inspect first when classification is uncertain; do not create an OpenSpec change merely because the repository supports OpenSpec.
+
+Before proposing, classify material decisions as repo-owned, agent-owned, or user-owned using `docs/requirements-elicitation.md`. Repository facts and safe implementation choices do not become questions. OpenSpec creation waits only for unresolved blocking user-owned decisions; a fully specified contract change proceeds without interview.
 
 OpenSpec tasks describe executable outcomes, not individual assertions. Keep acceptance detail in specs/tests. More than 12 tasks, or several independently verifiable components/shared seams, requires an explicit regroup/decomposition check in the execution plan; one OpenSpec change may span multiple packets and sessions.
 
@@ -58,7 +60,9 @@ The installed core profile exposes these repo-local skills:
 - `$openspec-sync-specs` — merge delta specs into living specs without archiving;
 - `$openspec-archive-change` — archive a completed change after verification.
 
-Use the generated skill's own syntax and prompts. The integration lives in `.agents/skills/openspec-*`. This repository hardens generated archive/sync integrity and Markdown metadata locally; review those small patches whenever `openspec update` refreshes the upstream files.
+Use the generated skill's own syntax and artifact mechanics. Requirements and authorization integration is repo-owned by `AGENTS.md` and `docs/requirements-elicitation.md`; `openspec update` owns and may replace `.agents/skills/openspec-{propose,apply-change,update-change}/SKILL.md`. Keep repository policy out of those generated files. In OpenSpec 1.10.0, `update` is the repository regeneration command; the CLI has no `install` command, package installation/upgrading does not itself rewrite repository files, and `doctor` is diagnostic. `npm run check:openspec` force-updates a disposable copy to prove the stable integration survives regeneration, byte-checks that `doctor` does not mutate the protected seam, and fails if repo policy drifts back into upstream-managed output.
+
+Archive/sync integrity and Markdown metadata still have narrow local patches in their generated skills; review those patches whenever OpenSpec refreshes them.
 
 ## CLI checks
 

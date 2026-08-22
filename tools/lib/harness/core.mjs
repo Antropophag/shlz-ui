@@ -43,6 +43,29 @@ const requiredPacketFields = [
   "implementationOutcomes",
   "preferredExecutionMode",
 ];
+const decisionOwners = new Set(["repo", "agent", "user"]);
+const decisionStatuses = new Set(["unresolved", "resolved", "delegated"]);
+const authorizationStatuses = new Set([
+  "approval-required",
+  "pre-authorized",
+  "approved",
+]);
+const allowedRequirementsFields = new Set([
+  "version",
+  "revision",
+  "intent",
+  "route",
+  "decisions",
+  "openSpec",
+  "authorization",
+]);
+const allowedDecisionFields = new Set([
+  "id",
+  "owner",
+  "status",
+  "blocking",
+  "provenance",
+]);
 
 export const readJson = async (file) =>
   JSON.parse(await readFile(file, "utf8"));
@@ -52,6 +75,144 @@ export const writeJson = async (file, value) => {
   await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`);
   await rename(temporary, file);
 };
+
+function assertProvenance(value, label) {
+  if (
+    !value ||
+    typeof value !== "object" ||
+    Array.isArray(value) ||
+    typeof value.kind !== "string" ||
+    value.kind.length === 0 ||
+    typeof value.ref !== "string" ||
+    value.ref.length === 0 ||
+    Object.keys(value).some((key) => !["kind", "ref"].includes(key))
+  )
+    throw new Error(`${label} requires compact kind/ref provenance`);
+}
+
+export function validateRequirementsState(state) {
+  if (!state || typeof state !== "object" || Array.isArray(state))
+    throw new Error("requirements state must be an object");
+  for (const key of Object.keys(state))
+    if (!allowedRequirementsFields.has(key))
+      throw new Error(`requirements field ${key} is not allowed`);
+  if (state.version !== 1) throw new Error("requirements version must be 1");
+  if (
+    state.revision !== undefined &&
+    (!Number.isInteger(state.revision) || state.revision < 1)
+  )
+    throw new Error("requirements revision must be a positive integer");
+  if (typeof state.intent !== "string" || state.intent.length === 0)
+    throw new Error("requirements state requires intent");
+  if (!new Set(["direct", "open-spec"]).has(state.route))
+    throw new Error("requirements route must be direct or open-spec");
+  if (!Array.isArray(state.decisions))
+    throw new Error("requirements decisions must be an array");
+  const ids = new Set();
+  for (const decision of state.decisions) {
+    for (const key of Object.keys(decision))
+      if (!allowedDecisionFields.has(key))
+        throw new Error(`decision field ${key} is not allowed`);
+    if (typeof decision.id !== "string" || decision.id.length === 0)
+      throw new Error("decision requires id");
+    if (ids.has(decision.id))
+      throw new Error(`duplicate decision ${decision.id}`);
+    ids.add(decision.id);
+    if (!decisionOwners.has(decision.owner))
+      throw new Error(`decision ${decision.id} has invalid owner`);
+    if (!decisionStatuses.has(decision.status))
+      throw new Error(`decision ${decision.id} has invalid status`);
+    if (typeof decision.blocking !== "boolean")
+      throw new Error(`decision ${decision.id} blocking must be boolean`);
+    assertProvenance(decision.provenance, `decision ${decision.id}`);
+    if (decision.status === "delegated" && decision.owner !== "agent")
+      throw new Error(`delegated decision ${decision.id} must be agent-owned`);
+    if (
+      decision.status === "delegated" &&
+      decision.provenance.kind !== "user-delegation"
+    )
+      throw new Error(
+        `delegated decision ${decision.id} requires user-delegation provenance`,
+      );
+  }
+  if (state.route === "open-spec") {
+    if (
+      !state.openSpec ||
+      typeof state.openSpec.change !== "string" ||
+      !new Set(["pending", "synthesized"]).has(state.openSpec.status) ||
+      Object.keys(state.openSpec).some(
+        (key) => !["change", "status"].includes(key),
+      )
+    )
+      throw new Error("open-spec route requires compact OpenSpec linkage");
+    if (
+      !state.authorization ||
+      !authorizationStatuses.has(state.authorization.status)
+    )
+      throw new Error("open-spec route requires execution authorization");
+    assertProvenance(state.authorization.provenance, "authorization");
+    if (
+      Object.keys(state.authorization).some(
+        (key) => !["status", "provenance"].includes(key),
+      )
+    )
+      throw new Error("authorization contains unsupported fields");
+  }
+  return state;
+}
+
+export function requirementsStatus(state) {
+  validateRequirementsState(state);
+  const unresolvedBlocking = state.decisions
+    .filter(
+      (decision) =>
+        decision.owner === "user" &&
+        decision.blocking &&
+        decision.status === "unresolved",
+    )
+    .map(({ id }) => id);
+  const readyForSpec = unresolvedBlocking.length === 0;
+  const authorized = ["pre-authorized", "approved"].includes(
+    state.authorization?.status,
+  );
+  return {
+    route: state.route,
+    unresolvedBlocking,
+    readyForSpec,
+    readyForPlanning:
+      state.route === "direct" ||
+      (readyForSpec && state.openSpec.status === "synthesized" && authorized),
+    authorization: state.authorization?.status ?? "not-required",
+  };
+}
+
+const requirementsRevision = (state) => state.revision ?? 1;
+
+function assertPlanRequirements(
+  subject,
+  requirementsState,
+  minimumRevision = subject.requirementsRevision ?? 1,
+) {
+  if (subject.requirementsGate !== "required") return;
+  if (!requirementsState)
+    throw new Error("requirements-gated work requires readiness state");
+  const expectedChange = subject.openSpecChange;
+  if (!expectedChange)
+    throw new Error("requirements-gated work requires openSpecChange");
+  if (requirementsState.openSpec?.change !== expectedChange)
+    throw new Error(
+      `requirements state links ${requirementsState.openSpec?.change ?? "no change"}, expected ${expectedChange}`,
+    );
+  if (requirementsRevision(requirementsState) < minimumRevision)
+    throw new Error(
+      `requirements revision ${requirementsRevision(requirementsState)} is stale; expected at least ${minimumRevision}`,
+    );
+  const status = requirementsStatus(requirementsState);
+  if (!status.readyForPlanning)
+    throw new Error(
+      `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+    );
+}
 
 export function classify(assessment, config) {
   const contributions = {};
@@ -97,6 +258,18 @@ export function validatePlan(plan, config) {
     throw new Error("plan requires id and packets");
   if (!plan.classification?.size)
     throw new Error("plan requires classification.size");
+  if (
+    plan.requirementsGate === "required" &&
+    (typeof plan.openSpecChange !== "string" ||
+      plan.openSpecChange.length === 0)
+  )
+    throw new Error("requirements-gated plan requires openSpecChange");
+  if (
+    plan.requirementsGate === "required" &&
+    (!Number.isInteger(plan.requirementsRevision) ||
+      plan.requirementsRevision < 1)
+  )
+    throw new Error("requirements-gated plan requires requirementsRevision");
   const ids = new Set();
   for (const packet of plan.packets) {
     for (const field of requiredPacketFields)
@@ -138,13 +311,14 @@ export function validatePlan(plan, config) {
   return plan;
 }
 
-export function createPlan(assessment, config) {
+export function createPlan(assessment, config, requirementsState = null) {
   if (
     !assessment.id ||
     !Array.isArray(assessment.workUnits) ||
     assessment.workUnits.length === 0
   )
     throw new Error("assessment requires id and semantic workUnits");
+  assertPlanRequirements(assessment, requirementsState);
   const classification = classify(assessment, config);
   const regroupRequired =
     (assessment.openSpecTaskCount ?? 0) > config.sizing.taskRegroupThreshold ||
@@ -154,6 +328,13 @@ export function createPlan(assessment, config) {
     version: 1,
     id: assessment.id,
     baseline: assessment.baseline ?? null,
+    ...(assessment.requirementsGate === "required"
+      ? {
+          requirementsGate: "required",
+          openSpecChange: assessment.openSpecChange,
+          requirementsRevision: requirementsRevision(requirementsState),
+        }
+      : {}),
     classification,
     regroupCheck: {
       required: regroupRequired,
@@ -322,6 +503,9 @@ export function createExecutionState(plan) {
   return {
     version: 1,
     planId: plan.id,
+    ...(plan.requirementsGate === "required"
+      ? { requirementsRevision: plan.requirementsRevision }
+      : {}),
     packets: Object.fromEntries(
       plan.packets.map(({ id }) => [id, { status: "pending" }]),
     ),
@@ -329,7 +513,18 @@ export function createExecutionState(plan) {
   };
 }
 
-export function claimPacket(plan, state, packetId, session) {
+export function claimPacket(
+  plan,
+  state,
+  packetId,
+  session,
+  requirementsState = null,
+) {
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
   if (!session) throw new Error("claim requires session");
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready or already claimed`);
@@ -337,7 +532,73 @@ export function claimPacket(plan, state, packetId, session) {
   return state;
 }
 
-export function completePacket(plan, state, handoff) {
+export function pausePacket(plan, state, packetId, requirementsState) {
+  if (plan.requirementsGate !== "required")
+    throw new Error("only requirements-gated plans can pause for requirements");
+  if (requirementsState.openSpec?.change !== plan.openSpecChange)
+    throw new Error(
+      "requirements state does not match the plan OpenSpec change",
+    );
+  const readiness = requirementsStatus(requirementsState);
+  if (readiness.readyForPlanning)
+    throw new Error("packet pause requires a closed requirements gate");
+  const current = state.packets[packetId];
+  if (current?.status !== "claimed")
+    throw new Error(`packet ${packetId} must be claimed before pause`);
+  const nextRevision = requirementsRevision(requirementsState);
+  const currentRevision =
+    state.requirementsRevision ?? plan.requirementsRevision;
+  if (nextRevision <= currentRevision)
+    throw new Error(
+      `requirements pause requires a revision newer than ${currentRevision}`,
+    );
+  state.requirementsRevision = nextRevision;
+  state.packets[packetId] = {
+    ...current,
+    status: "paused",
+    requirementsRevision: nextRevision,
+  };
+  return state;
+}
+
+export function resumePacket(
+  plan,
+  state,
+  packetId,
+  session,
+  requirementsState,
+) {
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
+  if (!session) throw new Error("resume requires session");
+  const current = state.packets[packetId];
+  if (current?.status !== "paused")
+    throw new Error(`packet ${packetId} must be paused before resume`);
+  const completed = new Set(
+    Object.entries(state.packets)
+      .filter(([, value]) => value.status === "completed")
+      .map(([id]) => id),
+  );
+  const packet = plan.packets.find(({ id }) => id === packetId);
+  if (!packet.dependencies.every((id) => completed.has(id)))
+    throw new Error(`packet ${packetId} dependencies are not complete`);
+  state.packets[packetId] = {
+    status: "claimed",
+    session,
+    requirementsRevision: state.requirementsRevision,
+  };
+  return state;
+}
+
+export function completePacket(plan, state, handoff, requirementsState = null) {
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
   validateHandoff(handoff, plan);
   const current = state.packets[handoff.completedPacket];
   if (current?.status !== "claimed")

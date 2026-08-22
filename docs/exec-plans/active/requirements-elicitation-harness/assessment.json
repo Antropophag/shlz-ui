@@ -1,0 +1,152 @@
+{
+  "id": "requirements-elicitation-harness",
+  "baseline": "1d61d11ab1475f53661d72f37f6db46c8042e80a",
+  "signals": {
+    "independentWorkUnits": 6,
+    "sharedSeams": 2,
+    "contracts": 2,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 2,
+    "changedScope": 3,
+    "reviewRisk": 3,
+    "contextGrowthRisk": 3
+  },
+  "openSpecTaskCount": 8,
+  "workUnits": [
+    {
+      "id": "readiness-core",
+      "group": "readiness-core",
+      "objective": "Implement deterministic requirements readiness and authorization guards",
+      "scope": [
+        "requirements state contract",
+        "ownership/status validation",
+        "planning gate"
+      ],
+      "nonGoals": ["question-quality inference", "generic workflow engine"],
+      "dependencies": [],
+      "contracts": ["harness/requirements-readiness"],
+      "contextSources": [
+        "openspec/changes/requirements-elicitation-harness/**",
+        "tools/{harness.mjs,lib/harness/**,tests/harness.test.mjs}",
+        "docs/exec-plans/config.json"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/harness.test.mjs"
+      ],
+      "focusedValidation": ["harness"],
+      "outputs": ["versioned readiness state", "deterministic plan guard"],
+      "handoff": ["state interface", "compatibility behavior"],
+      "implementationOutcomes": [
+        "state validation",
+        "readiness status",
+        "planning gate"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "agent-routing",
+      "group": "agent-routing",
+      "objective": "Integrate inspect-first elicitation and authorization with repo-local routing",
+      "scope": [
+        "AGENTS pointer",
+        "requirements protocol",
+        "OpenSpec propose/apply guidance"
+      ],
+      "nonGoals": ["second normative spec", "unconditional interview"],
+      "dependencies": ["readiness-core"],
+      "contracts": [
+        "harness/requirements-readiness",
+        "docs/openspec.md",
+        "docs/skill-routing.md"
+      ],
+      "contextSources": [
+        "AGENTS.md",
+        "docs/{openspec,skill-routing,agent-execution}.md",
+        ".agents/skills/openspec-{propose,apply-change,update-change}/SKILL.md"
+      ],
+      "implementationSurface": [
+        "AGENTS.md",
+        "docs/**",
+        ".agents/skills/openspec-*/SKILL.md",
+        "tools/tests/**"
+      ],
+      "focusedValidation": ["openspec", "harness", "docs"],
+      "outputs": ["intent-to-execution protocol", "apply re-entry guidance"],
+      "handoff": ["routing semantics", "authorization semantics"],
+      "implementationOutcomes": [
+        "ownership protocol",
+        "proposal authorization",
+        "apply re-entry"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "fixtures-evaluation",
+      "group": "fixtures-evaluation",
+      "objective": "Prove required regression routes and the GitHub Pages retrospective fixture",
+      "scope": [
+        "ten smoke scenarios",
+        "fresh-session recovery",
+        "non-executable publishing fixture"
+      ],
+      "nonGoals": ["GitHub Pages implementation", "external publishing"],
+      "dependencies": ["readiness-core", "agent-routing"],
+      "contracts": ["harness/requirements-readiness"],
+      "contextSources": [
+        "docs/exec-plans/fixtures/**",
+        "tools/tests/harness.test.mjs",
+        "apps/showcase/package.json",
+        "package.json",
+        ".github/**"
+      ],
+      "implementationSurface": [
+        "docs/exec-plans/fixtures/**",
+        "tools/tests/**",
+        "docs/**"
+      ],
+      "focusedValidation": ["harness", "openspec", "docs"],
+      "outputs": [
+        "ten route evaluations",
+        "GitHub Pages expected-spec fixture"
+      ],
+      "handoff": ["observed counts", "known limitations"],
+      "implementationOutcomes": [
+        "smoke matrix",
+        "publishing retrospective",
+        "affected validation"
+      ],
+      "preferredExecutionMode": "continue"
+    },
+    {
+      "id": "review-pr",
+      "group": "review-pr",
+      "objective": "Review, remediate, validate, and publish the implementation PR",
+      "scope": [
+        "fixed-base Standards review",
+        "fixed-base Spec review",
+        "final validation",
+        "PR"
+      ],
+      "nonGoals": ["merge", "repository-wide unrelated cleanup"],
+      "dependencies": ["fixtures-evaluation"],
+      "contracts": ["openspec/changes/requirements-elicitation-harness/**"],
+      "contextSources": [
+        "openspec/changes/requirements-elicitation-harness/**",
+        "docs/exec-plans/active/requirements-elicitation-harness/**"
+      ],
+      "implementationSurface": ["valid diff-scoped remediation only"],
+      "focusedValidation": ["harness", "openspec", "full"],
+      "outputs": ["review dispositions", "validation evidence", "unmerged PR"],
+      "handoff": ["limitations", "PR URL"],
+      "implementationOutcomes": [
+        "Standards review",
+        "Spec review",
+        "final validation and PR"
+      ],
+      "preferredExecutionMode": "isolated-subagent"
+    }
+  ]
+}

@@ -13,12 +13,15 @@ import {
   createReviewState,
   fingerprintFiles,
   gitEvidence,
+  pausePacket,
   readJson,
   readyPackets,
   relevantValidationFiles,
   recordEvent,
   recordReview,
   recordValidation,
+  requirementsStatus,
+  resumePacket,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -93,11 +96,19 @@ const output = (value) =>
 
 switch (command) {
   case "plan": {
-    const plan = createPlan(await readJson(absolute(args[0])), config);
+    const requirementsPath = option("--requirements");
+    const plan = createPlan(
+      await readJson(absolute(args[0])),
+      config,
+      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+    );
     await writeJson(statePath(args[1]), plan);
     output(plan);
     break;
   }
+  case "requirements-check":
+    output(requirementsStatus(await readJson(absolute(args[0]))));
+    break;
   case "plan-check":
     output(validatePlan(await readJson(absolute(args[0])), config));
     break;
@@ -190,6 +201,9 @@ switch (command) {
         await readJson(target),
         args[2],
         option("--session"),
+        option("--requirements")
+          ? await readJson(absolute(option("--requirements")))
+          : null,
       );
       await writeJson(target, next);
       return next;
@@ -205,11 +219,53 @@ switch (command) {
         plan,
         await readJson(target),
         await readJson(absolute(args[2])),
+        option("--requirements")
+          ? await readJson(absolute(option("--requirements")))
+          : null,
       );
       await writeJson(target, next);
       return next;
     });
     output(state.packets);
+    break;
+  }
+  case "pause": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const requirementsPath = option("--requirements");
+    if (!requirementsPath)
+      throw new Error("pause requires --requirements <state>");
+    const state = await withStateLock(target, async () => {
+      const next = pausePacket(
+        plan,
+        await readJson(target),
+        args[2],
+        await readJson(absolute(requirementsPath)),
+      );
+      await writeJson(target, next);
+      return next;
+    });
+    output(state.packets[args[2]]);
+    break;
+  }
+  case "resume": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const requirementsPath = option("--requirements");
+    if (!requirementsPath)
+      throw new Error("resume requires --requirements <state>");
+    const state = await withStateLock(target, async () => {
+      const next = resumePacket(
+        plan,
+        await readJson(target),
+        args[2],
+        option("--session"),
+        await readJson(absolute(requirementsPath)),
+      );
+      await writeJson(target, next);
+      return next;
+    });
+    output(state.packets[args[2]]);
     break;
   }
   case "review-init": {
@@ -263,6 +319,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <plan|plan-check|context|ready|state-init|claim|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
     );
 }

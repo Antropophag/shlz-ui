@@ -1,0 +1,68 @@
+{
+  "version": 1,
+  "base": "origin/main",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "c1792eb7523138da8e918ce1c9130cd6543c1c36"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "c1792eb7523138da8e918ce1c9130cd6543c1c36"
+    }
+  ],
+  "findings": [
+    {
+      "id": "STD-1",
+      "severity": "medium",
+      "summary": "Stale mandatory second apply request contradicts pre-authorization",
+      "file": ".agents/skills/openspec-propose/SKILL.md",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
+    },
+    {
+      "id": "STD-2",
+      "severity": "medium",
+      "summary": "Generic ambiguity guard can ask repo-owned questions",
+      "file": ".agents/skills/openspec-propose/SKILL.md",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
+    },
+    {
+      "id": "SPEC-1",
+      "severity": "high",
+      "summary": "Apply-time readiness cannot deterministically pause or gate an existing execution plan",
+      "file": "tools/lib/harness/core.mjs",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
+    },
+    {
+      "id": "SPEC-2",
+      "severity": "medium",
+      "summary": "Planning accepts requirements state linked to another OpenSpec change",
+      "file": "tools/lib/harness/core.mjs",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
+    },
+    {
+      "id": "SPEC-3",
+      "severity": "medium",
+      "summary": "Short-intent smoke stops before interview-to-synthesis transition",
+      "file": "tools/tests/harness.test.mjs",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "5b417fcd757b9afb864cd31eac440e0d9916e290"
+    }
+  ]
+}
