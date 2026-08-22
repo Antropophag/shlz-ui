@@ -592,6 +592,55 @@ test("drawer close, backdrop, narrow viewport and destroy remain native", async 
   await expect(opened.dialog).toBeHidden();
 });
 
+test("Drawer backdrop drag and stale gesture reset match Modal", async ({
+  page,
+}) => {
+  const { dialog } = await openDrawer(page);
+  const surface = dialog.locator(".shlz-drawer__surface");
+  const box = await surface.boundingBox();
+  await page.mouse.move(box.x + 12, box.y + 12);
+  await page.mouse.down();
+  await page.mouse.move(box.x - 12, box.y + 12);
+  await page.mouse.up();
+  await expect(dialog).toBeVisible();
+
+  await page.mouse.move(box.x - 12, box.y + 12);
+  await page.mouse.down();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await page.evaluate(() => window.__shlzEnhanceDrawers()[0].open());
+  await expect(dialog).toBeVisible();
+  await page.mouse.up();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+});
+
+test("two Drawer instances isolate ARIA, return value and current opener", async ({
+  page,
+}) => {
+  const showcaseTrigger = page.getByRole("button", { name: "Открыть Drawer" });
+  const workspaceTrigger = page.getByRole("button", { name: /Фильтры/ });
+  const showcase = page.locator("#showcase-drawer");
+  const workspace = page.locator("#workspace-filter-drawer");
+
+  await showcaseTrigger.click();
+  await showcase.getByRole("button", { name: "Применить" }).click();
+  await expect(showcase).toHaveJSProperty("returnValue", "apply");
+  await expect(showcaseTrigger).toBeFocused();
+  await expect(workspaceTrigger).toHaveAttribute("aria-expanded", "false");
+
+  await workspaceTrigger.click();
+  await expect(workspace).toBeVisible();
+  await expect(showcase).toBeHidden();
+  await expect(showcaseTrigger).toHaveAttribute("aria-expanded", "false");
+  await workspace.getByRole("button", { name: "Закрыть" }).click();
+  await expect(workspaceTrigger).toBeFocused();
+
+  await showcaseTrigger.click();
+  await expect(showcase).toHaveJSProperty("returnValue", "");
+  await page.keyboard.press("Escape");
+});
+
 for (const [name, selector] of [
   ["Dropdown внутри Modal", "#modal-menu"],
   ["Tooltip внутри Modal", "#modal-tooltip"],
@@ -613,6 +662,29 @@ for (const [name, selector] of [
       viewport.width - 8,
     );
     await page.keyboard.press("Escape");
+    await expect(floating).toBeHidden();
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+
+    await openModal(page);
+    if (name.startsWith("Tooltip")) await trigger.focus();
+    else await trigger.click();
+    await expect(floating).toBeVisible();
+    await page.keyboard.press("Escape");
+    await page.evaluate((nestedName) => {
+      const collections = nestedName.startsWith("Dropdown")
+        ? [window.__shlzDropdownControllers]
+        : nestedName.startsWith("Tooltip")
+          ? [window.__shlzTooltipControllers]
+          : [window.__shlzPopoverControllers];
+      const controller = collections[0].find((item) =>
+        (item.trigger ?? item.root).textContent.includes(nestedName),
+      );
+      controller.destroy();
+    }, name);
+    if (name.startsWith("Tooltip")) await trigger.focus();
+    else await trigger.click();
     await expect(floating).toBeHidden();
     await expect(dialog).toBeVisible();
   });
