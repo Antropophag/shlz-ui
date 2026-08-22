@@ -61,7 +61,7 @@ Machine fixtures cover the ten required routes and state transitions. The GitHub
 - **[Agents classify ownership inconsistently]** → Define narrow ownership rules, require provenance, and test representative fixtures without pretending the harness can prove semantic quality.
 - **[Operational state duplicates requirements]** → Constrain schema fields and reject free-form normative answer payloads; link to OpenSpec after synthesis.
 - **[New guard burdens direct work]** → Require readiness state only for routes explicitly marked as requirements-gated; keep direct assessment/implementation unchanged.
-- **[Generated OpenSpec skill refresh overwrites local behavior]** → Keep the normative protocol in a repo doc with short skill pointers and cover the local hardening with contract tests.
+- **[Generated OpenSpec skill refresh overwrites local behavior]** → Keep requirements/authorization policy in the repo-owned `AGENTS.md` → protocol pointer, keep upstream-managed propose/apply/update skills pristine, and simulate a force update in the deterministic OpenSpec check.
 - **[Pre-authorization becomes implicit]** → Accept it only from explicit user language and retain provenance in durable state.
 
 ## Migration Plan

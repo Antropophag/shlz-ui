@@ -75,6 +75,11 @@ The workflow SHALL synthesize resolved requirements into OpenSpec artifacts befo
 - **WHEN** resolved answers have been synthesized into OpenSpec
 - **THEN** later planning and apply read normative behavior from OpenSpec while the operational state retains only provenance and gate status
 
+#### Scenario: Generated OpenSpec skills are regenerated
+
+- **WHEN** an OpenSpec update or reinstall refreshes upstream-managed workflow skills
+- **THEN** the repo-owned requirements and authorization integration remains authoritative and a deterministic check detects policy copied into or lost from the generated-skill seam
+
 ### Requirement: Execution authorization is explicit
 
 Substantial or new capability work SHALL default to a compact specification summary and an approval stop before apply. A request that explicitly pre-authorizes implementation after readiness and specification SHALL permit automatic transition into adaptive planning and apply. Authorization MUST be durable and attributable.

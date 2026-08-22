@@ -106,7 +106,7 @@ Do not modify unrelated files.
 
 Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
 
-For short, ambiguous, or substantial intents, use the inspect-first requirements readiness protocol in `docs/requirements-elicitation.md` before OpenSpec synthesis or execution planning. Ask only unresolved blocking user-owned decisions; fully determined and direct work skips interview.
+Requirements integration: for short, ambiguous, or substantial intents and for material ambiguity discovered during apply, use the repo-owned protocol in `docs/requirements-elicitation.md`. It surrounds the generated OpenSpec skills and controls inspection, interview, authorization, and apply re-entry; those generated skills provide artifact mechanics only. Fully determined and direct work skips interview. Explicit pre-authorization recorded by the protocol controls over a generated skill's default planning stop.
 
 After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
 

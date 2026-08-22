@@ -17,3 +17,4 @@
 
 - [x] 4.1 Run affected validation and strict OpenSpec checks, recording exact results in the execution validation ledger.
 - [x] 4.2 Run diff-scoped Standards and Spec review from the fixed `origin/main` baseline, remediate valid findings, re-run required validation, and create a PR without merging it.
+- [x] 4.3 Move requirements/authorization semantics out of upstream-managed propose/apply/update skills and verify a disposable `openspec update --force` cannot silently remove the repo-owned integration.

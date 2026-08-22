@@ -60,7 +60,9 @@ The installed core profile exposes these repo-local skills:
 - `$openspec-sync-specs` — merge delta specs into living specs without archiving;
 - `$openspec-archive-change` — archive a completed change after verification.
 
-Use the generated skill's own syntax and prompts. The integration lives in `.agents/skills/openspec-*`. This repository hardens generated archive/sync integrity and Markdown metadata locally; review those small patches whenever `openspec update` refreshes the upstream files.
+Use the generated skill's own syntax and artifact mechanics. Requirements and authorization integration is repo-owned by `AGENTS.md` and `docs/requirements-elicitation.md`; `openspec update` owns and may replace `.agents/skills/openspec-{propose,apply-change,update-change}/SKILL.md`. Keep repository policy out of those generated files. `npm run check:openspec` force-updates a disposable copy to prove the stable integration survives regeneration and fails if repo policy drifts back into upstream-managed output.
+
+Archive/sync integrity and Markdown metadata still have narrow local patches in their generated skills; review those patches whenever OpenSpec refreshes them.
 
 ## CLI checks
 

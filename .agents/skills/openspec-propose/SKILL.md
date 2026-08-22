@@ -12,7 +12,7 @@ metadata:
 
 Propose a new change - create the change and generate all artifacts in one step.
 
-**Requirements and authorization boundary**: Before proposal work, follow `docs/requirements-elicitation.md`. Planning remains the default boundary. Continue into adaptive planning/apply in the same response only when durable requirements state is ready and records explicit `pre-authorized` execution; otherwise show the summary and stop for approval.
+**Planning boundary**: This workflow creates planning artifacts only. The user request that selected or triggered this workflow authorizes planning only, even if it asks to build or fix something. Do not edit project code. After the planning artifacts are complete, stop. Do not start implementation in the same response, even if the initial request asks for it. Wait for a new user request after the artifacts are presented; then start the apply workflow.
 
 I'll create a change with the artifacts your schema defines. With the default spec-driven schema that is:
 - proposal.md (what & why)
@@ -22,7 +22,7 @@ I'll create a change with the artifacts your schema defines. With the default sp
 
 `<capability-path>` is the spec directory relative to `specs/` (for example, `user-auth` or `identity/user-auth`). Preserve an existing capability's full path and follow the project's established organization for new capabilities.
 
-Without explicit pre-authorization, the user starts the apply workflow after approving the specification summary.
+When the user is ready to implement, they must start the apply workflow explicitly.
 
 ---
 
@@ -32,16 +32,16 @@ Without explicit pre-authorization, the user starts the apply workflow after app
 
 **Steps**
 
-1. **Inspect, establish readiness, and understand the request**
+1. **Understand the request and clarify material ambiguity**
 
    If no clear input is provided, ask the user (open-ended, no preset options):
    > "What change do you want to work on? Describe what you want to build or fix."
 
-   Inspect repository authority and follow `docs/requirements-elicitation.md` before questions. From the resolved description, derive a kebab-case name (e.g., "add user authentication" → `add-user-auth`).
+   From their description, derive a kebab-case name (e.g., "add user authentication" → `add-user-auth`).
 
    **IMPORTANT**: Do NOT proceed without understanding what the user wants to build.
 
-   Ask only unresolved blocking user-owned questions. Resolve repo-owned facts through inspection and agent-owned implementation choices independently. Treat explicit delegation as agent-owned with provenance. If no blocking user-owned decision remains, skip interview.
+   If the request contains ambiguity that would materially affect scope, externally observable behavior, compatibility, or acceptance criteria, ask the user before creating the change. For minor details, make a reasonable assumption and record it in the planning artifacts.
 
 2. **Determine the workflow schema**
 
@@ -116,12 +116,10 @@ Without explicit pre-authorization, the user starts the apply workflow after app
       - Ask the user to clarify
       - Then continue with creation
 
-6. **Validate readiness, then stop or continue by authorization**
+6. **Show final status**
    ```bash
    openspec status --change "<name>"
    ```
-
-   Link the validated artifacts from requirements state as `synthesized` and run `requirements-check`. If authorization is `approval-required`, show a compact specification summary and stop. If it is `pre-authorized`, continue through `docs/agent-execution.md` and the apply workflow without requesting a second approval.
 
 **Output**
 
@@ -129,8 +127,7 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions, plus any conditional artifact you skipped and why
 - What's ready: "All artifacts needed for implementation are ready."
-- For default authorization: prompt to approve apply.
-- For explicit pre-authorization: state that readiness passed and continue into adaptive planning/apply.
+- Prompt: "The artifacts are ready for review. When you are ready, run `$openspec-apply-change (Codex) or /openspec-apply-change (other agents)` or ask me to apply this change."
 
 **Artifact Creation Guidelines**
 
@@ -144,9 +141,9 @@ After completing all artifacts, summarize:
   - These guide what you write, but should never appear in the output
 
 **Guardrails**
-- Treat planning as the default boundary. Cross it only when `docs/requirements-elicitation.md` produces durable, validated `pre-authorized` state from explicit user language
+- The request that invoked this workflow authorizes planning only. Any implementation or apply instruction in that request does not carry forward. Do NOT implement the change, start the apply workflow, or edit project code during this workflow. After presenting the artifacts, stop and wait for a new user request to start the apply workflow
 - Create every artifact the apply phase transitively depends on, not just the ids listed in `apply.requires`
 - Always read dependency artifacts before creating a new one - re-read from disk, not from conversation memory (files may have changed since you last saw them)
-- Ask only unresolved blocking user-owned ambiguities identified by `docs/requirements-elicitation.md`; resolve repo-owned and agent-owned decisions without questions
+- Ask about ambiguities that would materially change scope, externally observable behavior, compatibility, or acceptance criteria; for minor details, make reasonable assumptions and record them
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next
