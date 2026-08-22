@@ -66,6 +66,207 @@ const allowedDecisionFields = new Set([
   "blocking",
   "provenance",
 ]);
+const materialSignalNames = [
+  "newCapability",
+  "publishingOrRelease",
+  "externalEffects",
+  "publicUrlOrDomain",
+  "deploymentSemantics",
+  "permissionsOrSecurity",
+  "destructiveOrIrreversible",
+  "externalAutomation",
+  "publicContract",
+  "materialAmbiguity",
+];
+const directEvidenceNames = [
+  "behaviorPreserving",
+  "local",
+  "reversible",
+  "noExternalEffects",
+  "noContractChange",
+  "ambiguityResolved",
+];
+
+function validateSignalSet(signals, label) {
+  if (!signals || typeof signals !== "object" || Array.isArray(signals))
+    throw new Error(`${label} requires materialSignals`);
+  const unsupported = Object.keys(signals).filter(
+    (name) => !materialSignalNames.includes(name),
+  );
+  if (unsupported.length)
+    throw new Error(
+      `${label} has unsupported material signals: ${unsupported.join(", ")}`,
+    );
+  for (const name of materialSignalNames)
+    if (![true, false, "unknown"].includes(signals[name]))
+      throw new Error(
+        `${label} material signal ${name} must be true, false, or unknown`,
+      );
+}
+
+export function evaluateRouteEligibility(assessment) {
+  if (!assessment || assessment.version !== 1)
+    throw new Error("route assessment version must be 1");
+  if (typeof assessment.intent !== "string" || !assessment.intent.trim())
+    throw new Error("route assessment requires intent");
+  if (!["direct", "open-spec"].includes(assessment.route))
+    throw new Error("route assessment must select direct or open-spec");
+  validateSignalSet(assessment.materialSignals, "route assessment");
+  const materialSignals = materialSignalNames.filter(
+    (name) => assessment.materialSignals[name] === true,
+  );
+  const unresolvedMaterialSignals = materialSignalNames.filter(
+    (name) => assessment.materialSignals[name] === "unknown",
+  );
+  const requiredRoute =
+    materialSignals.length || unresolvedMaterialSignals.length
+      ? "open-spec"
+      : "direct";
+  if (assessment.route === "direct") {
+    if (
+      !assessment.directEvidence ||
+      typeof assessment.directEvidence !== "object" ||
+      directEvidenceNames.some(
+        (name) => assessment.directEvidence[name] !== true,
+      )
+    )
+      return {
+        eligible: false,
+        selectedRoute: "direct",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "direct route requires every positive eligibility assertion",
+      };
+    if (requiredRoute !== "direct")
+      return {
+        eligible: false,
+        selectedRoute: "direct",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "material or unknown state cannot use direct",
+      };
+  }
+  return {
+    eligible: true,
+    selectedRoute: assessment.route,
+    requiredRoute,
+    materialSignals,
+    unresolvedMaterialSignals,
+  };
+}
+
+function assertExecutionState(execution) {
+  if (!execution || typeof execution !== "object")
+    throw new Error("implementation preflight requires execution state");
+  for (const field of ["currentBranch", "defaultBranch"])
+    if (typeof execution[field] !== "string" || !execution[field])
+      throw new Error(`execution state requires ${field}`);
+  if (execution.currentBranch === execution.defaultBranch)
+    throw new Error(
+      `implementation is on default branch ${execution.defaultBranch}; mutation forbidden until redirected to a task branch`,
+    );
+  if (execution.baseCurrent !== true)
+    throw new Error(
+      "implementation branch must start from current origin/default branch",
+    );
+  if (execution.initialTreeClean !== true)
+    throw new Error("implementation branch must start from a clean tree");
+}
+
+export function assertImplementationPreflight(
+  assessment,
+  requirementsState,
+  execution,
+) {
+  const eligibility = evaluateRouteEligibility(assessment);
+  if (!eligibility.eligible)
+    throw new Error(
+      `route is not eligible: ${eligibility.reason}; required route ${eligibility.requiredRoute}`,
+    );
+  if (assessment.route === "open-spec") {
+    if (!requirementsState)
+      throw new Error("open-spec implementation requires readiness state");
+    const status = requirementsStatus(requirementsState);
+    if (!status.readyForPlanning)
+      throw new Error(
+        `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+      );
+  }
+  assertExecutionState(execution);
+  return { allowed: true, route: assessment.route };
+}
+
+export function assertRouteConformance(assessment, discovered) {
+  const initial = evaluateRouteEligibility(assessment);
+  if (!initial.eligible)
+    throw new Error("initial route is not eligible; re-route required");
+  if (!discovered || discovered.version !== 1)
+    throw new Error("discovered route surface version must be 1");
+  if (!Array.isArray(discovered.changedFiles))
+    throw new Error("discovered route surface requires changedFiles");
+  validateSignalSet(discovered.materialSignals, "discovered route surface");
+  const material = materialSignalNames.filter(
+    (name) => discovered.materialSignals[name] !== false,
+  );
+  if (assessment.route === "direct" && material.length)
+    throw new Error(
+      `direct route no longer conforms (${material.join(", ")}); re-route required`,
+    );
+  return {
+    allowed: true,
+    route: assessment.route,
+    changedFiles: discovered.changedFiles,
+  };
+}
+
+export function assertImplementationDelivery(delivery) {
+  if (!delivery || typeof delivery !== "object")
+    throw new Error("implementation delivery evidence is required");
+  if (delivery.currentBranch === delivery.defaultBranch)
+    throw new Error(
+      `implementation cannot complete on default branch ${delivery.defaultBranch}`,
+    );
+  if (delivery.pushBranch === delivery.defaultBranch)
+    throw new Error(
+      `direct push to default branch ${delivery.defaultBranch} is forbidden`,
+    );
+  if (delivery.pushBranch !== delivery.currentBranch)
+    throw new Error("implementation must push its current task branch");
+  if (
+    typeof delivery.pullRequestUrl !== "string" ||
+    !/^https:\/\/github\.com\/[^/]+\/[^/]+\/pull\/\d+$/.test(
+      delivery.pullRequestUrl,
+    )
+  )
+    throw new Error(
+      "implementation completion requires a GitHub pull request URL",
+    );
+  if (delivery.pullRequestBase !== delivery.defaultBranch)
+    throw new Error("pull request must target the default branch");
+  return { allowed: true, pullRequestUrl: delivery.pullRequestUrl };
+}
+
+export async function gitImplementationState(
+  repoRoot,
+  { defaultBranch = "main", baseRef = "origin/main" } = {},
+) {
+  const options = { cwd: repoRoot };
+  const [{ stdout: branch }, { stdout: head }, { stdout: base }] =
+    await Promise.all([
+      exec("git", ["branch", "--show-current"], options),
+      exec("git", ["rev-parse", "HEAD"], options),
+      exec("git", ["rev-parse", baseRef], options),
+    ]);
+  return {
+    currentBranch: branch.trim(),
+    defaultBranch,
+    baseCurrent: head.trim() === base.trim(),
+    initialTreeClean: head.trim() === base.trim(),
+    baseRef,
+  };
+}
 
 export const readJson = async (file) =>
   JSON.parse(await readFile(file, "utf8"));

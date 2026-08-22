@@ -13,6 +13,7 @@ import {
   createReviewState,
   fingerprintFiles,
   gitEvidence,
+  gitImplementationState,
   pausePacket,
   readJson,
   readyPackets,
@@ -21,6 +22,10 @@ import {
   recordReview,
   recordValidation,
   requirementsStatus,
+  assertImplementationDelivery,
+  assertImplementationPreflight,
+  assertRouteConformance,
+  evaluateRouteEligibility,
   resumePacket,
   reviewContext,
   resolveReviewFindings,
@@ -95,6 +100,34 @@ const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
 
 switch (command) {
+  case "route-check":
+    output(evaluateRouteEligibility(await readJson(absolute(args[0]))));
+    break;
+  case "implementation-preflight": {
+    const requirementsPath = option("--requirements");
+    output(
+      assertImplementationPreflight(
+        await readJson(absolute(args[0])),
+        requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+        await gitImplementationState(repoRoot, {
+          defaultBranch: option("--default") ?? "main",
+          baseRef: option("--base") ?? "origin/main",
+        }),
+      ),
+    );
+    break;
+  }
+  case "route-conformance":
+    output(
+      assertRouteConformance(
+        await readJson(absolute(args[0])),
+        await readJson(absolute(args[1])),
+      ),
+    );
+    break;
+  case "delivery-check":
+    output(assertImplementationDelivery(await readJson(absolute(args[0]))));
+    break;
   case "plan": {
     const requirementsPath = option("--requirements");
     const plan = createPlan(
@@ -319,6 +352,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
     );
 }

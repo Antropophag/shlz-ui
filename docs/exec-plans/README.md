@@ -11,6 +11,8 @@ OpenSpec is the normative contract. Git is implementation state, tests are execu
 5. End a packet with `complete`; the state retains one structured handoff per packet, so dependency joins receive every direct handoff without chat history.
 6. Record compact observed events with `telemetry-record`, then use `telemetry-summary` for calibration. Never estimate missing runtime tokens.
 
+Before implementation, `route-check` validates semantic route evidence and `implementation-preflight` composes it with requirements readiness and the real task-branch/base state. Before completion, `route-conformance` checks discovered semantic surface and `delivery-check` requires task-branch push plus a PR targeting the default branch. Route/discovery JSON is operational guard evidence, not normative requirements; OpenSpec remains authoritative.
+
 Plan and handoff fields are validated by the CLI. `preferredExecutionMode` is one of `continue`, `fresh-session`, `isolated-subagent`, or `parallelizable-subagent`; it is routing advice, not an automatic launcher. Parallel packets must have disjoint implementation surfaces.
 
 ```bash

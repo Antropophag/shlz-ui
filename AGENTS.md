@@ -104,13 +104,15 @@ Do not implement a large component library before the foundation, contracts and 
 
 Do not modify unrelated files.
 
-Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
+Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Direct is a positively proven narrow route, not a fallback. Before the first implementation mutation, run the repo-owned route and execution preflight described there; unknown or material state routes through requirements/OpenSpec. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
 
 Requirements integration: for short, ambiguous, or substantial intents and for material ambiguity discovered during apply, use the repo-owned protocol in `docs/requirements-elicitation.md`. It surrounds the generated OpenSpec skills and controls inspection, interview, authorization, and apply re-entry; those generated skills provide artifact mechanics only. Fully determined and direct work skips interview. Explicit pre-authorization recorded by the protocol controls over a generated skill's default planning stop.
 
 After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
 
 For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` after requirements readiness and OpenSpec synthesis. Keep OpenSpec normative; store only minimal requirements provenance plus plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
+
+Normal implementation starts from a clean current `origin/main` on a task branch/worktree and ends with validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, run the post-discovery route-conformance and delivery guards in `docs/agent-execution.md`; material scope discovered on a direct route requires re-routing before completion.
 
 ## UI component completion gate
 

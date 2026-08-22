@@ -11,17 +11,17 @@ Brownfield contracts are added incrementally when a capability is changed or del
 
 ## Impact routing
 
-Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work.
+Inspect the request and affected code before choosing a workflow. OpenSpec is selected by change impact, not by the presence of implementation work. Record a compact version 1 route assessment with every closed-set material signal set to `true`, `false`, or `unknown`, then run `npm run harness -- route-check <assessment>` before implementation. The harness validates semantic evidence supplied by the agent; it does not infer intent from keywords.
 
 Impact routing decides whether contracts need OpenSpec. It does not decide how many sessions or packets are needed. After routing, resolve requirements through `docs/requirements-elicitation.md`; after synthesis and authorization, use `docs/agent-execution.md` for execution sizing and orchestration.
 
 ### Trivial or implementation-only
 
-Use the direct workflow when the change preserves observable behavior, public APIs, accessibility and DOM/component contracts, design-system semantics, and architecture:
+Use the direct workflow only when positive evidence establishes that the change is local, reversible, behavior-preserving, free of external effects and contract changes, and has no material ambiguity:
 
-`inspect → implement → relevant validation → PR`
+`inspect → route-check → branch preflight → implement → route-conformance → relevant validation → delivery-check → PR`
 
-Typical cases include replacing or recoloring an existing asset, fixing a typo or formatting, correcting documentation without changing a contract, and an obvious local fix whose contract is unchanged. If inspection reveals contract impact, reclassify before implementation.
+Typical cases include replacing or recoloring an existing asset, fixing a typo or formatting, correcting documentation without changing a contract, an obvious local fix whose contract is unchanged, and mechanical workflow maintenance that preserves triggers, permissions, and external behavior. Direct does not require `requirements.json`, but it does require positive route evidence. If any material signal is true or unknown, or discovery/diff reveals contract or external-effect impact, reclassify before implementation or completion.
 
 ### Contract-affecting
 
@@ -35,7 +35,18 @@ Create only artifacts required by the resolved OpenSpec schema. OpenSpec is the 
 
 Use the full OpenSpec lifecycle for substantial new capabilities or components, package or token architecture, cross-component behavior, new interaction models, ambiguous requirements, and changes requiring an explicit design decision. Inspect first when classification is uncertain; do not create an OpenSpec change merely because the repository supports OpenSpec.
 
+New capability, publishing/deployment/release behavior, external effects, public URL/domain, CI/CD deployment semantics, permissions/auth/security, destructive or irreversible action, new externally observable automation, public/component/API contract change, and unresolved material ambiguity are material signals. They exclude direct or remain `unknown` until inspection resolves them; they are semantic categories, not a keyword list.
+
 Before proposing, classify material decisions as repo-owned, agent-owned, or user-owned using `docs/requirements-elicitation.md`. Repository facts and safe implementation choices do not become questions. OpenSpec creation waits only for unresolved blocking user-owned decisions; a fully specified contract change proceeds without interview.
+
+Before the first implementation mutation on either route, run:
+
+```bash
+npm run harness -- implementation-preflight <route-assessment> \
+  [--requirements <requirements-state>] --default main --base origin/main
+```
+
+The current branch must be a task branch created from the clean current base. For OpenSpec, readiness and authorization must also pass. Planning artifacts may exist in the working tree; preflight proves that the branch HEAD started at the current base before implementation commits.
 
 OpenSpec tasks describe executable outcomes, not individual assertions. Keep acceptance detail in specs/tests. More than 12 tasks, or several independently verifiable components/shared seams, requires an explicit regroup/decomposition check in the execution plan; one OpenSpec change may span multiple packets and sessions.
 

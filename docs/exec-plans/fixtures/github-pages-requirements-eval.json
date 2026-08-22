@@ -1,6 +1,60 @@
 {
   "version": 1,
-  "intent": "Publish the showcase as GitHub Pages for this project",
+  "intent": "Опубликуй showcase этого проекта на GitHub Pages.",
+  "routeAssessment": {
+    "version": 1,
+    "intent": "Опубликуй showcase этого проекта на GitHub Pages.",
+    "route": "direct",
+    "materialSignals": {
+      "newCapability": true,
+      "publishingOrRelease": true,
+      "externalEffects": true,
+      "publicUrlOrDomain": true,
+      "deploymentSemantics": true,
+      "permissionsOrSecurity": true,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": true,
+      "publicContract": true,
+      "materialAmbiguity": true
+    }
+  },
+  "requirementsState": {
+    "version": 1,
+    "revision": 1,
+    "intent": "Опубликуй showcase этого проекта на GitHub Pages.",
+    "route": "open-spec",
+    "decisions": [
+      {
+        "id": "release-policy",
+        "owner": "user",
+        "status": "unresolved",
+        "blocking": true,
+        "provenance": {
+          "kind": "fixture",
+          "ref": "userOwnedQuestions:release-policy"
+        }
+      },
+      {
+        "id": "public-url",
+        "owner": "user",
+        "status": "unresolved",
+        "blocking": true,
+        "provenance": {
+          "kind": "fixture",
+          "ref": "userOwnedQuestions:public-url"
+        }
+      }
+    ],
+    "openSpec": { "change": "showcase-publishing", "status": "pending" },
+    "authorization": {
+      "status": "approval-required",
+      "provenance": { "kind": "default", "ref": "substantial-new-capability" }
+    }
+  },
+  "expectedBeforeDecisionResolution": {
+    "implementationMutations": 0,
+    "directAllowed": false
+  },
   "nonExecutable": true,
   "repoOwnedFacts": [
     {

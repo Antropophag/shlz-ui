@@ -1,0 +1,68 @@
+{
+  "id": "harden-harness-route-eligibility",
+  "baseline": "a9b0d30c20ccd255be50f972297b49c4ed81bc19",
+  "requirementsGate": "required",
+  "openSpecChange": "harden-harness-route-eligibility",
+  "signals": {
+    "independentWorkUnits": 4,
+    "sharedSeams": 2,
+    "contracts": 2,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 2,
+    "changedScope": 3,
+    "reviewRisk": 3,
+    "contextGrowthRisk": 3
+  },
+  "openSpecTaskCount": 8,
+  "workUnits": [
+    {
+      "id": "route-guards",
+      "group": "route-guards",
+      "objective": "Lock the incident down and implement pre-mutation, post-diff, and delivery guards",
+      "scope": ["route evidence", "requirements composition", "git/PR invariants", "focused regressions"],
+      "nonGoals": ["natural-language keyword classifier", "GitHub settings mutation", "Pages changes"],
+      "dependencies": [],
+      "contracts": ["harness/route-eligibility", "harness/requirements-readiness"],
+      "contextSources": ["openspec/changes/harden-harness-route-eligibility/**", "tools/{harness.mjs,lib/harness/**,tests/harness.test.mjs}", "docs/exec-plans/fixtures/github-pages-requirements-eval.json"],
+      "implementationSurface": ["tools/harness.mjs", "tools/lib/harness/core.mjs", "tools/tests/harness.test.mjs", "docs/exec-plans/fixtures/github-pages-requirements-eval.json"],
+      "focusedValidation": ["harness"],
+      "outputs": ["red-green incident regressions", "deterministic guard interface"],
+      "handoff": ["guard schema", "observed regression counts"],
+      "implementationOutcomes": ["positive direct eligibility", "post-diff conformance", "branch and PR safety"],
+      "preferredExecutionMode": "continue"
+    },
+    {
+      "id": "workflow-integration",
+      "group": "workflow-integration",
+      "objective": "Integrate mandatory guards into repo-owned agent workflow",
+      "scope": ["routing", "requirements", "adaptive execution", "agent instructions"],
+      "nonGoals": ["generated OpenSpec skill edits", "automatic session adapter", "sizing calibration fix"],
+      "dependencies": ["route-guards"],
+      "contracts": ["harness/route-eligibility", "repo-owned OpenSpec integration"],
+      "contextSources": ["AGENTS.md", "docs/{openspec,requirements-elicitation,agent-execution,validation-workflow}.md", "openspec/changes/harden-harness-route-eligibility/**"],
+      "implementationSurface": ["AGENTS.md", "docs/openspec.md", "docs/requirements-elicitation.md", "docs/agent-execution.md", "docs/exec-plans/**"],
+      "focusedValidation": ["harness", "openspec", "docs"],
+      "outputs": ["unbypassable workflow pointers", "upgrade-safe integration"],
+      "handoff": ["routing architecture", "residual risks"],
+      "implementationOutcomes": ["preflight ordering", "conformance ordering", "branch-to-PR completion flow"],
+      "preferredExecutionMode": "continue"
+    },
+    {
+      "id": "review-delivery",
+      "group": "review-delivery",
+      "objective": "Validate, independently review, remediate once, and create the unmerged PR",
+      "scope": ["affected checks", "Standards review", "Spec review", "targeted re-review", "PR"],
+      "nonGoals": ["merge", "branch protection changes", "repository-wide rediscovery"],
+      "dependencies": ["workflow-integration"],
+      "contracts": ["openspec/changes/harden-harness-route-eligibility/**"],
+      "contextSources": ["openspec/changes/harden-harness-route-eligibility/**", "docs/exec-plans/active/harden-harness-route-eligibility/**"],
+      "implementationSurface": ["valid diff-scoped remediation only"],
+      "focusedValidation": ["harness", "openspec", "affected", "full if selected"],
+      "outputs": ["review dispositions", "validation evidence", "unmerged PR"],
+      "handoff": ["CI state", "PR URL", "residual risks"],
+      "implementationOutcomes": ["Standards and Spec review", "single remediation batch and re-review", "branch-to-PR delivery"],
+      "preferredExecutionMode": "isolated-subagent"
+    }
+  ]
+}
