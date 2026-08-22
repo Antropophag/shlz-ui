@@ -188,7 +188,7 @@ function globRegex(pattern) {
       source += ".*";
       index += 1;
     } else if (pattern[index] === "*") source += "[^/]*";
-    else source += pattern[index].replace(/[.+^$()|[\]\\]/g, "\\$&");
+    else source += pattern[index].replace(/[.+^$()|[\]\\]/g, String.raw`\$&`);
   }
   return new RegExp(`^${source}$`);
 }
@@ -222,7 +222,7 @@ export async function contextIndex(plan, packetId, repoRoot, state = null) {
         allFiles.filter((file) => matchesPattern(file, pattern)),
       ),
     ),
-  ].sort();
+  ].sort((a, b) => a.localeCompare(b));
   const missingPatterns = packet.contextSources.filter(
     (pattern) => !allFiles.some((file) => matchesPattern(file, pattern)),
   );
@@ -265,7 +265,7 @@ export function readyPackets(plan, state = null) {
 }
 
 export function validateHandoff(value, plan) {
-  const allowed = [
+  const allowed = new Set([
     "completedPacket",
     "completedPackets",
     "changed",
@@ -274,9 +274,9 @@ export function validateHandoff(value, plan) {
     "unresolvedFindings",
     "nextPacket",
     "invalidatedAssumptions",
-  ];
+  ]);
   for (const key of Object.keys(value))
-    if (!allowed.includes(key))
+    if (!allowed.has(key))
       throw new Error(`handoff field ${key} is not allowed`);
   for (const key of [
     "completedPacket",
@@ -379,7 +379,7 @@ export function relevantValidationFiles(files, target, config) {
 
 export function fingerprint(files, contentsByFile = {}) {
   const hash = createHash("sha256");
-  for (const file of [...files].sort()) {
+  for (const file of [...files].sort((a, b) => a.localeCompare(b))) {
     const content = contentsByFile[file] ?? "";
     hash.update(`${file}\0`);
     if (content?.state === "deleted") hash.update("deleted\0");
@@ -424,7 +424,7 @@ export function assertValidationRun(
 ) {
   const definition = config.validationTargets[target];
   if (!definition) throw new Error(`unknown validation target ${target}`);
-  const duplicate = ledger.find(
+  const duplicate = ledger.some(
     (entry) =>
       entry.target === target &&
       entry.fingerprint === currentFingerprint &&
@@ -448,7 +448,7 @@ export async function recordValidation(
   assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
   ledger.push({
     target,
-    files: [...files].sort(),
+    files: [...files].sort((a, b) => a.localeCompare(b)),
     fingerprint: currentFingerprint,
     outcome,
     reason: reason ?? null,
@@ -616,7 +616,7 @@ export async function gitEvidence(repoRoot, base) {
     currentHead: head.trim(),
     changedFiles: [
       ...new Set([...trackedFiles, ...modifiedFiles, ...untrackedFiles]),
-    ].sort(),
+    ].sort((a, b) => a.localeCompare(b)),
     workingTree,
     collectedAt: new Date().toISOString(),
     mutatesRepository: false,
