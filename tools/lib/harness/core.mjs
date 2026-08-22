@@ -52,6 +52,7 @@ const authorizationStatuses = new Set([
 ]);
 const allowedRequirementsFields = new Set([
   "version",
+  "revision",
   "intent",
   "route",
   "decisions",
@@ -96,6 +97,11 @@ export function validateRequirementsState(state) {
     if (!allowedRequirementsFields.has(key))
       throw new Error(`requirements field ${key} is not allowed`);
   if (state.version !== 1) throw new Error("requirements version must be 1");
+  if (
+    state.revision !== undefined &&
+    (!Number.isInteger(state.revision) || state.revision < 1)
+  )
+    throw new Error("requirements revision must be a positive integer");
   if (typeof state.intent !== "string" || state.intent.length === 0)
     throw new Error("requirements state requires intent");
   if (!new Set(["direct", "open-spec"]).has(state.route))
@@ -180,7 +186,13 @@ export function requirementsStatus(state) {
   };
 }
 
-function assertPlanRequirements(subject, requirementsState) {
+const requirementsRevision = (state) => state.revision ?? 1;
+
+function assertPlanRequirements(
+  subject,
+  requirementsState,
+  minimumRevision = subject.requirementsRevision ?? 1,
+) {
   if (subject.requirementsGate !== "required") return;
   if (!requirementsState)
     throw new Error("requirements-gated work requires readiness state");
@@ -190,6 +202,10 @@ function assertPlanRequirements(subject, requirementsState) {
   if (requirementsState.openSpec?.change !== expectedChange)
     throw new Error(
       `requirements state links ${requirementsState.openSpec?.change ?? "no change"}, expected ${expectedChange}`,
+    );
+  if (requirementsRevision(requirementsState) < minimumRevision)
+    throw new Error(
+      `requirements revision ${requirementsRevision(requirementsState)} is stale; expected at least ${minimumRevision}`,
     );
   const status = requirementsStatus(requirementsState);
   if (!status.readyForPlanning)
@@ -248,6 +264,12 @@ export function validatePlan(plan, config) {
       plan.openSpecChange.length === 0)
   )
     throw new Error("requirements-gated plan requires openSpecChange");
+  if (
+    plan.requirementsGate === "required" &&
+    (!Number.isInteger(plan.requirementsRevision) ||
+      plan.requirementsRevision < 1)
+  )
+    throw new Error("requirements-gated plan requires requirementsRevision");
   const ids = new Set();
   for (const packet of plan.packets) {
     for (const field of requiredPacketFields)
@@ -310,6 +332,7 @@ export function createPlan(assessment, config, requirementsState = null) {
       ? {
           requirementsGate: "required",
           openSpecChange: assessment.openSpecChange,
+          requirementsRevision: requirementsRevision(requirementsState),
         }
       : {}),
     classification,
@@ -480,6 +503,9 @@ export function createExecutionState(plan) {
   return {
     version: 1,
     planId: plan.id,
+    ...(plan.requirementsGate === "required"
+      ? { requirementsRevision: plan.requirementsRevision }
+      : {}),
     packets: Object.fromEntries(
       plan.packets.map(({ id }) => [id, { status: "pending" }]),
     ),
@@ -494,7 +520,11 @@ export function claimPacket(
   session,
   requirementsState = null,
 ) {
-  assertPlanRequirements(plan, requirementsState);
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
   if (!session) throw new Error("claim requires session");
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready or already claimed`);
@@ -515,7 +545,19 @@ export function pausePacket(plan, state, packetId, requirementsState) {
   const current = state.packets[packetId];
   if (current?.status !== "claimed")
     throw new Error(`packet ${packetId} must be claimed before pause`);
-  state.packets[packetId] = { ...current, status: "paused" };
+  const nextRevision = requirementsRevision(requirementsState);
+  const currentRevision =
+    state.requirementsRevision ?? plan.requirementsRevision;
+  if (nextRevision <= currentRevision)
+    throw new Error(
+      `requirements pause requires a revision newer than ${currentRevision}`,
+    );
+  state.requirementsRevision = nextRevision;
+  state.packets[packetId] = {
+    ...current,
+    status: "paused",
+    requirementsRevision: nextRevision,
+  };
   return state;
 }
 
@@ -526,7 +568,11 @@ export function resumePacket(
   session,
   requirementsState,
 ) {
-  assertPlanRequirements(plan, requirementsState);
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
   if (!session) throw new Error("resume requires session");
   const current = state.packets[packetId];
   if (current?.status !== "paused")
@@ -539,12 +585,20 @@ export function resumePacket(
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet.dependencies.every((id) => completed.has(id)))
     throw new Error(`packet ${packetId} dependencies are not complete`);
-  state.packets[packetId] = { status: "claimed", session };
+  state.packets[packetId] = {
+    status: "claimed",
+    session,
+    requirementsRevision: state.requirementsRevision,
+  };
   return state;
 }
 
 export function completePacket(plan, state, handoff, requirementsState = null) {
-  assertPlanRequirements(plan, requirementsState);
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
   validateHandoff(handoff, plan);
   const current = state.packets[handoff.completedPacket];
   if (current?.status !== "claimed")

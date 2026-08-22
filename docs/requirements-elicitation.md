@@ -28,7 +28,7 @@ npm run harness -- requirements-check docs/exec-plans/active/<work>/requirements
 
 The version 1 state contains only:
 
-- `intent` and the selected `direct` or `open-spec` route;
+- `intent`, a monotonic operational `revision`, and the selected `direct` or `open-spec` route;
 - decisions with `id`, `owner`, `status`, `blocking`, and compact `{ kind, ref }` provenance;
 - compact OpenSpec `{ change, status }` linkage;
 - execution authorization status and provenance.
@@ -68,4 +68,4 @@ npm run harness -- pause <plan> <state> <packet> --requirements <blocked-require
 npm run harness -- resume <plan> <state> <packet> --session <session> --requirements <ready-requirements-state>
 ```
 
-Guarded `claim`, `resume`, and `complete` commands require the matching ready requirements state. This prevents another packet or fresh session from bypassing a newly closed gate.
+Increment `revision` when apply records a new ambiguity. The pause binds that revision into execution state; guarded `claim`, `resume`, and `complete` commands require a matching ready state at least that new. This prevents another packet or fresh session from bypassing a newly closed gate with a stale snapshot.

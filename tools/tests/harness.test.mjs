@@ -97,6 +97,7 @@ const requirementsState = (overrides = {}) => ({
 
 test("requirements state rejects unresolved blockers and normative payloads", () => {
   const blocked = requirementsState({
+    revision: 2,
     decisions: [
       {
         id: "public-scope",
@@ -199,6 +200,7 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
   const state = createExecutionState(plan);
   claimPacket(plan, state, "discovery-contracts", "session-a", ready);
   const blocked = requirementsState({
+    revision: 2,
     decisions: [
       {
         id: "new-public-choice",
@@ -242,10 +244,16 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
       ),
     /requirements are not ready/,
   );
-  resumePacket(plan, state, "discovery-contracts", "session-b", ready);
+  assert.throws(
+    () => resumePacket(plan, state, "discovery-contracts", "session-b", ready),
+    /revision 1 is stale; expected at least 2/,
+  );
+  const updated = requirementsState({ revision: 2 });
+  resumePacket(plan, state, "discovery-contracts", "session-b", updated);
   assert.deepEqual(state.packets["discovery-contracts"], {
     status: "claimed",
     session: "session-b",
+    requirementsRevision: 2,
   });
 });
 

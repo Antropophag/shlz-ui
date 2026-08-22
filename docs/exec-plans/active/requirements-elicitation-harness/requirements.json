@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "revision": 1,
   "intent": "Add interview-first requirements readiness before adaptive execution planning",
   "route": "open-spec",
   "decisions": [
