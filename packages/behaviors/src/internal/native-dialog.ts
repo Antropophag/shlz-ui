@@ -53,11 +53,12 @@ export function bindNativeDialog(
   const abort = new AbortController();
   const triggers = matchingTriggers(dialog, options.triggerAttribute);
   let returnFocusTo: HTMLElement | null = null;
-  let backdropPointerStartedOutside = false;
+  let backdropPointerId: number | null = null;
+  let closeCleanupRequired = false;
   let destroyed = false;
 
   const resetCycleState = (): void => {
-    backdropPointerStartedOutside = false;
+    backdropPointerId = null;
   };
 
   const syncTriggers = (expanded: boolean): void => {
@@ -70,6 +71,7 @@ export function bindNativeDialog(
   const open = (trigger?: HTMLElement): void => {
     if (destroyed || dialog.open) return;
     resetCycleState();
+    closeCleanupRequired = true;
     dialog.returnValue = "";
     const active = dialog.ownerDocument.activeElement;
     returnFocusTo =
@@ -81,10 +83,31 @@ export function bindNativeDialog(
     syncTriggers(true);
   };
 
+  const completeCloseCleanup = (): void => {
+    if (!closeCleanupRequired) return;
+    closeCleanupRequired = false;
+    resetCycleState();
+    syncTriggers(false);
+    const focusTarget = returnFocusTo;
+    returnFocusTo = null;
+    const focusTargetIsEligible =
+      focusTarget?.isConnected &&
+      !focusTarget.matches(":disabled, [aria-disabled='true']");
+    if (focusTargetIsEligible) {
+      focusTarget.focus();
+    } else if (
+      focusTarget &&
+      dialog.ownerDocument.activeElement === focusTarget
+    ) {
+      focusTarget.blur();
+    }
+  };
+
   const close = (returnValue?: string): void => {
     if (!dialog.open) return;
     if (returnValue === undefined) dialog.close();
     else dialog.close(returnValue);
+    completeCloseCleanup();
   };
 
   for (const trigger of triggers) {
@@ -113,8 +136,10 @@ export function bindNativeDialog(
   dialog.addEventListener(
     "pointerdown",
     (event) => {
-      backdropPointerStartedOutside =
-        event.target === dialog && pointIsOutside(surface, event);
+      backdropPointerId =
+        event.target === dialog && pointIsOutside(surface, event)
+          ? event.pointerId
+          : null;
     },
     { signal: abort.signal },
   );
@@ -125,35 +150,26 @@ export function bindNativeDialog(
       const mayDismiss = dialog.hasAttribute(options.backdropCloseAttribute);
       const endedOutside =
         event.target === dialog && pointIsOutside(surface, event);
-      if (mayDismiss && backdropPointerStartedOutside && endedOutside) close();
-      backdropPointerStartedOutside = false;
+      const completesBackdropGesture = backdropPointerId === event.pointerId;
+      backdropPointerId = null;
+      if (mayDismiss && completesBackdropGesture && endedOutside) close();
+    },
+    { signal: abort.signal },
+  );
+
+  dialog.addEventListener(
+    "pointercancel",
+    (event) => {
+      if (backdropPointerId === event.pointerId) backdropPointerId = null;
     },
     { signal: abort.signal },
   );
 
   dialog.addEventListener("cancel", resetCycleState, { signal: abort.signal });
 
-  dialog.addEventListener(
-    "close",
-    () => {
-      resetCycleState();
-      syncTriggers(false);
-      const focusTarget = returnFocusTo;
-      returnFocusTo = null;
-      const focusTargetIsEligible =
-        focusTarget?.isConnected &&
-        !focusTarget.matches(":disabled, [aria-disabled='true']");
-      if (focusTargetIsEligible) {
-        focusTarget.focus();
-      } else if (
-        focusTarget &&
-        dialog.ownerDocument.activeElement === focusTarget
-      ) {
-        focusTarget.blur();
-      }
-    },
-    { signal: abort.signal },
-  );
+  dialog.addEventListener("close", completeCloseCleanup, {
+    signal: abort.signal,
+  });
 
   syncTriggers(dialog.open);
 
@@ -162,8 +178,8 @@ export function bindNativeDialog(
     close,
     destroy() {
       if (destroyed) return;
-      if (dialog.open) close();
       destroyed = true;
+      if (dialog.open) close();
       resetCycleState();
       returnFocusTo = null;
       abort.abort();

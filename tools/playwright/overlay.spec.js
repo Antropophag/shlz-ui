@@ -381,12 +381,71 @@ test("modal native fallback focus and backdrop gesture state stay cycle-local", 
   await page.keyboard.press("Escape");
 });
 
+test("modal backdrop dismissal requires one uncancelled pointer gesture", async ({
+  page,
+}) => {
+  const { dialog } = await openModal(page);
+  const surface = dialog.locator(".shlz-modal__surface");
+  const box = await surface.boundingBox();
+  const point = { x: box.x - 12, y: box.y + 12 };
+  const dispatch = (type, pointerId) =>
+    dialog.dispatchEvent(type, {
+      pointerId,
+      clientX: point.x,
+      clientY: point.y,
+    });
+
+  await dispatch("pointerdown", 41);
+  await dispatch("pointerup", 42);
+  await expect(dialog).toBeVisible();
+
+  await dispatch("pointerdown", 43);
+  await dispatch("pointercancel", 43);
+  await dispatch("pointerup", 43);
+  await expect(dialog).toBeVisible();
+
+  await dispatch("pointerdown", 44);
+  await dispatch("pointerup", 44);
+  await expect(dialog).toBeHidden();
+});
+
 test("destroy removes modal trigger behavior", async ({ page }) => {
   const trigger = page.getByRole("button", { name: "Открыть Modal" });
   await trigger.scrollIntoViewIfNeeded();
   await page.evaluate(() => window.__shlzModalControllers[0].destroy());
   await trigger.click();
   await expect(page.locator("#showcase-modal")).toBeHidden();
+});
+
+test("destroy while open completes close cleanup before listener teardown", async ({
+  page,
+}) => {
+  const trigger = page.getByRole("button", { name: "Открыть Modal" });
+  const dialog = page.locator("#showcase-modal");
+  await trigger.click();
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
+
+  const state = await page.evaluate(() => {
+    window.__shlzModalControllers[0].destroy();
+    return {
+      open: document.querySelector("#showcase-modal").open,
+      expanded: document
+        .querySelector('[data-shlz-modal-trigger="showcase-modal"]')
+        .getAttribute("aria-expanded"),
+      openerFocused:
+        document.activeElement ===
+        document.querySelector('[data-shlz-modal-trigger="showcase-modal"]'),
+    };
+  });
+  expect(state).toEqual({
+    open: false,
+    expanded: "false",
+    openerFocused: true,
+  });
+  await page.waitForTimeout(0);
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  await expect(trigger).toBeFocused();
+  await expect(dialog).toBeHidden();
 });
 
 test("repeated modal enhancement keeps one owner and one teardown", async ({
@@ -435,10 +494,9 @@ test("repeated drawer enhancement has one owner and isolated teardown", async ({
 }) => {
   const trigger = page.getByRole("button", { name: "Открыть Drawer" });
   const sameOwner = await page.evaluate(() => {
-    window.__shlzEnhanceDrawers = window.__shlzEnhanceDrawers ?? (() => []);
     const first = window.__shlzDrawerControllers[0];
     const repeated = window.__shlzEnhanceDrawers()[0];
-    if (repeated) window.__wave7RepeatedDrawer = repeated;
+    window.__wave7RepeatedDrawer = repeated;
     return first === repeated;
   });
   expect(sameOwner).toBe(true);
@@ -496,28 +554,90 @@ test("overlay instances isolate triggers, return values and stale openers", asyn
     const disconnected = document.createElement("button");
     document.body.append(disconnected);
     disconnected.focus();
+    let disconnectedFocusCalls = 0;
+    disconnected.focus = () => {
+      disconnectedFocusCalls += 1;
+    };
     controller.open(disconnected);
     disconnected.remove();
     controller.close();
+    await new Promise((resolve) => globalThis.requestAnimationFrame(resolve));
 
     const disabled = document.createElement("button");
     document.body.append(disabled);
     disabled.focus();
+    let disabledFocusCalls = 0;
+    disabled.focus = () => {
+      disabledFocusCalls += 1;
+    };
     controller.open(disabled);
     disabled.disabled = true;
     controller.close();
     await new Promise((resolve) => globalThis.requestAnimationFrame(resolve));
     const disabledFocused = document.activeElement === disabled;
     disabled.remove();
+
+    const ariaDisabled = document.createElement("button");
+    document.body.append(ariaDisabled);
+    ariaDisabled.focus();
+    let ariaDisabledFocusCalls = 0;
+    ariaDisabled.focus = () => {
+      ariaDisabledFocusCalls += 1;
+    };
+    controller.open(ariaDisabled);
+    ariaDisabled.setAttribute("aria-disabled", "true");
+    controller.close();
+    await new Promise((resolve) => globalThis.requestAnimationFrame(resolve));
+    const ariaDisabledFocused = document.activeElement === ariaDisabled;
+    ariaDisabled.remove();
+
     return {
-      disconnectedFocused: document.activeElement === disconnected,
+      disconnectedFocusCalls,
+      disabledFocusCalls,
+      ariaDisabledFocusCalls,
       disabledFocused,
+      ariaDisabledFocused,
+      dialogOpen: document.querySelector("#showcase-modal").open,
     };
   });
   expect(staleResults).toEqual({
-    disconnectedFocused: false,
+    disconnectedFocusCalls: 0,
+    disabledFocusCalls: 0,
+    ariaDisabledFocusCalls: 0,
     disabledFocused: false,
+    ariaDisabledFocused: false,
+    dialogOpen: false,
   });
+});
+
+test("off-screen material triggers are excluded from sequential focus", async ({
+  page,
+}) => {
+  const triggers = page.locator(".shlz-wave7-material-trigger");
+  await expect(triggers).toHaveCount(3);
+  for (const trigger of await triggers.all()) {
+    await expect(trigger).toHaveAttribute("tabindex", "-1");
+  }
+
+  const previousFocusable = await triggers.first().evaluateHandle((trigger) => {
+    const elements = [...document.querySelectorAll("*")];
+    for (let index = elements.indexOf(trigger) - 1; index >= 0; index -= 1) {
+      const candidate = elements[index];
+      if (
+        candidate instanceof globalThis.HTMLElement &&
+        candidate.tabIndex >= 0
+      )
+        return candidate;
+    }
+    return null;
+  });
+  await previousFocusable.asElement().focus();
+  await page.keyboard.press("Tab");
+  expect(
+    await triggers.evaluateAll((elements) =>
+      elements.every((element) => element !== document.activeElement),
+    ),
+  ).toBe(true);
 });
 
 test("Data Workspace Drawer owns modal focus and stress geometry, not filter state", async ({
@@ -598,6 +718,21 @@ test("Drawer backdrop drag and stale gesture reset match Modal", async ({
   const { dialog } = await openDrawer(page);
   const surface = dialog.locator(".shlz-drawer__surface");
   const box = await surface.boundingBox();
+  const point = { x: box.x - 12, y: box.y + 12 };
+  const dispatch = (type, pointerId) =>
+    dialog.dispatchEvent(type, {
+      pointerId,
+      clientX: point.x,
+      clientY: point.y,
+    });
+  await dispatch("pointerdown", 51);
+  await dispatch("pointerup", 52);
+  await expect(dialog).toBeVisible();
+  await dispatch("pointerdown", 53);
+  await dispatch("pointercancel", 53);
+  await dispatch("pointerup", 53);
+  await expect(dialog).toBeVisible();
+
   await page.mouse.move(box.x + 12, box.y + 12);
   await page.mouse.down();
   await page.mouse.move(box.x - 12, box.y + 12);
