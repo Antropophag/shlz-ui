@@ -1,7 +1,7 @@
 # Wave 7 Modal and Drawer overlay audit
 
 - Baseline: `0cbc1286046186d60b5b4dad93931756528f2ea9`.
-- Reviewed implementation revision: `4182df18c721c112389f8268406f44a9346e09b7` (audited range `0cbc128...4182df1`). The following report-only revision records that immutable implementation SHA without changing audited code.
+- Reviewed implementation revision: `f0f49a836278a60b070ae60d68428de06c8b94ae` (audited range `0cbc128...f0f49a8`). The following report-only revision records that immutable implementation SHA without changing audited code.
 - Baseline working tree: only the approved Wave 7 OpenSpec artifacts were untracked.
 - Baseline checks: 87/87 Node tests and 12/12 Chromium overlay tests passed. The baseline branch had no open PR or review thread.
 - Source hashes: Modal `62b0686f4ea17ecb8bb0bf25fe9020ee3a1512728e4271fd6fc734595e2b7fed`; Drawer `a7ff3b75584ad5782bb2e3b2bc6b2dd62baec589c32edb334d619a65dbf49e8e`. Both remain unchanged.
@@ -32,7 +32,7 @@ Final local validation results:
 
 - `npm run check:openspec` — pass, OpenSpec 1.10.0 harness healthy;
 - `openspec validate wave-7-modal-drawer-overlays --strict` — pass;
-- `npm test` — 87/87 pass;
+- `npm test` — 89/89 pass, including the positive and negative Wave 7 repository census;
 - `npm run lint` — ESLint, Stylelint, and Prettier pass;
 - `npm run build` and `node tools/validate.mjs` — all workspaces build; 68 source SVGs, three token groups, 119 canonical icons, and 42 aliases validate;
 - `npm run test:packages` — four packed packages install and execute from a clean project;
@@ -40,4 +40,4 @@ Final local validation results:
 - `npm run test:e2e` — the pre-remediation completion run passed 190/190 Chromium tests; it was intentionally not repeated locally after the focused remediation, and final-head full regression is delegated to PR CI;
 - `git diff --check` and final raw SVG SHA-256 comparison — pass with no source diff.
 
-The first two-axis review of implementation commit `236d387` reported three Standards and six Spec findings. Follow-up review left one report and three partial spec findings; those were resolved before PR creation. CodeRabbit review against `main` then reported pointer-identity/cancellation, destroy-while-open cleanup, stale-opener evidence, off-screen trigger navigation, and two maintainability findings. All still-valid findings are resolved through `4182df1`; focused red/green evidence and final local Standards/Spec re-review pass without public API expansion or material scope creep. The unmerged PR carries final external CI and thread state.
+The first two-axis review of implementation commit `236d387` reported three Standards and six Spec findings. Follow-up review left one report and three partial spec findings; those were resolved before PR creation. CodeRabbit review against `main` then reported pointer-identity/cancellation, destroy-while-open cleanup, stale-opener evidence, off-screen trigger navigation, and two maintainability findings. All still-valid CodeRabbit findings are resolved through `4182df1`; focused red/green evidence and final local Standards/Spec re-review pass without public API expansion or material scope creep. Review `5000630685` subsequently found the DOM-only occurrence guard lacked a repository-wide executable census; `f0f49a8` adds the positive/negative structural guard and exact classified-file/audit-ID evidence. The unmerged PR carries final external CI and thread state.
