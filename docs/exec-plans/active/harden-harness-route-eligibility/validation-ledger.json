@@ -1,0 +1,61 @@
+[
+  {
+    "target": "harness",
+    "files": [
+      "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+      "docs/exec-plans/README.md",
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "fingerprint": "7093536148c60c7e4e7d3d5ee1e1b725aa995b1de4ba4ebe0d10a65452fbca40",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "workflow-integration",
+    "session": "root-20260822",
+    "recordedAt": "2026-08-22T19:58:12.895Z"
+  },
+  {
+    "target": "openspec",
+    "files": [
+      "openspec/changes/harden-harness-route-eligibility/.openspec.yaml",
+      "openspec/changes/harden-harness-route-eligibility/design.md",
+      "openspec/changes/harden-harness-route-eligibility/proposal.md",
+      "openspec/changes/harden-harness-route-eligibility/specs/harness/requirements-readiness/spec.md",
+      "openspec/changes/harden-harness-route-eligibility/specs/harness/route-eligibility/spec.md",
+      "openspec/changes/harden-harness-route-eligibility/tasks.md"
+    ],
+    "fingerprint": "abccb9e8f03fd9ee2281fd739f66122dfcfa3479f071182d1ebc180d92bb0aec",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "workflow-integration",
+    "session": "root-20260822",
+    "recordedAt": "2026-08-22T19:58:13.109Z"
+  },
+  {
+    "target": "docs",
+    "files": [
+      "AGENTS.md",
+      "docs/agent-execution.md",
+      "docs/exec-plans/active/harden-harness-route-eligibility/assessment.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/discovered-surface.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/handoff-route-guards.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/handoff-workflow-integration.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/plan.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/requirements.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/route-assessment.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/state.json",
+      "docs/exec-plans/active/harden-harness-route-eligibility/validation-ledger.json",
+      "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+      "docs/exec-plans/README.md",
+      "docs/openspec.md",
+      "docs/requirements-elicitation.md"
+    ],
+    "fingerprint": "23defda2b30cb71396857838a1b38058f51e9a95f1041c5fb5aa4bbe6c1057db",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "workflow-integration",
+    "session": "root-20260822",
+    "recordedAt": "2026-08-22T19:58:13.494Z"
+  }
+]

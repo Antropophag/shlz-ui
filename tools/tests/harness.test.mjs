@@ -21,6 +21,10 @@ import {
   recordReview,
   recordValidation,
   requirementsStatus,
+  assertImplementationDelivery,
+  assertImplementationPreflight,
+  assertRouteConformance,
+  evaluateRouteEligibility,
   resumePacket,
   reviewContext,
   resolveReviewFindings,
@@ -39,6 +43,339 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+
+const directAssessment = (overrides = {}) => ({
+  version: 1,
+  intent: "Fix a local typo",
+  route: "direct",
+  directEvidence: {
+    behaviorPreserving: true,
+    local: true,
+    reversible: true,
+    noExternalEffects: true,
+    noContractChange: true,
+    ambiguityResolved: true,
+  },
+  materialSignals: {
+    newCapability: false,
+    publishingOrRelease: false,
+    externalEffects: false,
+    publicUrlOrDomain: false,
+    deploymentSemantics: false,
+    permissionsOrSecurity: false,
+    destructiveOrIrreversible: false,
+    externalAutomation: false,
+    publicContract: false,
+    materialAmbiguity: false,
+  },
+  ...overrides,
+});
+
+test("direct eligibility is positive, narrow, and conservative", () => {
+  assert.equal(evaluateRouteEligibility(directAssessment()).eligible, true);
+  assert.equal(
+    evaluateRouteEligibility(
+      directAssessment({ intent: "Mechanical implementation-only refactor" }),
+    ).eligible,
+    true,
+  );
+  assert.equal(
+    evaluateRouteEligibility(
+      directAssessment({
+        materialSignals: {
+          ...directAssessment().materialSignals,
+          publicContract: true,
+        },
+      }),
+    ).requiredRoute,
+    "open-spec",
+  );
+  assert.equal(
+    evaluateRouteEligibility(
+      directAssessment({
+        materialSignals: {
+          ...directAssessment().materialSignals,
+          externalEffects: "unknown",
+        },
+      }),
+    ).eligible,
+    false,
+  );
+  assert.equal(
+    evaluateRouteEligibility({
+      ...directAssessment(),
+      route: "open-spec",
+      directEvidence: undefined,
+      openSpecChange: "unnecessary-spec",
+      requiredDecisions: [],
+    }).eligible,
+    false,
+  );
+});
+
+test("fully determined contract work routes to OpenSpec without interview", () => {
+  const assessment = directAssessment({
+    intent: "Add a fully specified public contract",
+    route: "open-spec",
+    directEvidence: undefined,
+    openSpecChange: "add-capability",
+    requiredDecisions: [],
+    materialSignals: {
+      ...directAssessment().materialSignals,
+      publicContract: true,
+    },
+  });
+  const state = requirementsState({
+    intent: assessment.intent,
+    decisions: [],
+  });
+  assert.deepEqual(evaluateRouteEligibility(assessment), {
+    eligible: true,
+    selectedRoute: "open-spec",
+    requiredRoute: "open-spec",
+    materialSignals: ["publicContract"],
+    unresolvedMaterialSignals: [],
+  });
+  assert.doesNotThrow(() =>
+    assertImplementationPreflight(assessment, state, {
+      currentBranch: "feat/public-contract",
+      defaultBranch: "main",
+      baseCurrent: true,
+      startedAtCurrentBase: true,
+      preImplementationChanges: [],
+    }),
+  );
+});
+
+test("exact GitHub Pages intent is non-direct and blocks mutation on owned decisions", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/github-pages-requirements-eval.json",
+  );
+  assert.equal(
+    fixture.intent,
+    "Опубликуй showcase этого проекта на GitHub Pages.",
+  );
+  assert.equal(
+    evaluateRouteEligibility(fixture.routeAssessment).eligible,
+    false,
+  );
+  assert.equal(
+    evaluateRouteEligibility(fixture.routeAssessment).requiredRoute,
+    "open-spec",
+  );
+  assert.deepEqual(
+    fixture.requirementsState.decisions
+      .filter(
+        ({ owner, status, blocking }) =>
+          owner === "user" && status === "unresolved" && blocking,
+      )
+      .map(({ id }) => id),
+    ["release-policy", "public-url"],
+  );
+  assert.throws(
+    () =>
+      assertImplementationPreflight(
+        { ...fixture.routeAssessment, route: "open-spec" },
+        fixture.requirementsState,
+        {
+          currentBranch: "feat/pages",
+          defaultBranch: "main",
+          baseCurrent: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
+        },
+      ),
+    /requirements are not ready.*release-policy, public-url/,
+  );
+  const unrelatedReady = requirementsState({
+    intent: fixture.intent,
+    openSpec: { change: "showcase-publishing", status: "synthesized" },
+  });
+  assert.throws(
+    () =>
+      assertImplementationPreflight(
+        { ...fixture.routeAssessment, route: "open-spec" },
+        unrelatedReady,
+        {
+          currentBranch: "feat/pages",
+          defaultBranch: "main",
+          baseCurrent: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
+        },
+      ),
+    /required decisions are missing: release-policy, public-url/,
+  );
+  const wrongOwnership = requirementsState({
+    intent: fixture.intent,
+    decisions: fixture.requirementsState.decisions.map((decision) => ({
+      ...decision,
+      owner: "repo",
+      status: "resolved",
+      blocking: false,
+    })),
+    openSpec: { change: "showcase-publishing", status: "synthesized" },
+  });
+  assert.throws(
+    () =>
+      assertImplementationPreflight(
+        { ...fixture.routeAssessment, route: "open-spec" },
+        wrongOwnership,
+        {
+          currentBranch: "feat/pages",
+          defaultBranch: "main",
+          baseCurrent: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
+        },
+      ),
+    /required decision ownership does not match: release-policy, public-url/,
+  );
+  assert.equal(
+    fixture.expectedBeforeDecisionResolution.implementationMutations,
+    0,
+  );
+});
+
+test("direct completion re-routes on material discovered surface but not harmless workflow maintenance", () => {
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [".github/workflows/pages.yml"],
+          materialSignals: {
+            ...directAssessment().materialSignals,
+            publishingOrRelease: true,
+            deploymentSemantics: true,
+            permissionsOrSecurity: true,
+          },
+        },
+        [".github/workflows/pages.yml"],
+      ),
+    /direct route no longer conforms.*re-route required/,
+  );
+  assert.doesNotThrow(() =>
+    assertRouteConformance(
+      directAssessment(),
+      {
+        version: 1,
+        changedFiles: [".github/workflows/ci.yml"],
+        materialSignals: directAssessment().materialSignals,
+      },
+      [".github/workflows/ci.yml"],
+    ),
+  );
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [],
+          materialSignals: directAssessment().materialSignals,
+        },
+        [".github/workflows/pages.yml"],
+      ),
+    /does not match actual target-relevant diff/,
+  );
+});
+
+test("implementation preflight and delivery enforce task branch to PR", () => {
+  assert.throws(
+    () =>
+      assertImplementationPreflight(directAssessment(), null, {
+        currentBranch: "main",
+        defaultBranch: "main",
+        baseCurrent: true,
+        startedAtCurrentBase: true,
+        preImplementationChanges: [],
+      }),
+    /default branch main.*mutation forbidden/,
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery({
+        defaultBranch: "main",
+        pullRequestUrl: null,
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "main",
+        },
+      }),
+    /direct push to default branch main is forbidden/,
+  );
+  assert.doesNotThrow(() =>
+    assertImplementationDelivery({
+      defaultBranch: "main",
+      pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
+      actual: {
+        repository: "Antropophag/shlz-ui",
+        currentBranch: "feat/guard",
+        pushRemote: "origin",
+        pushBranch: "feat/guard",
+        localHead: "abc",
+        upstreamHead: "abc",
+        pullRequest: {
+          url: "https://github.com/Antropophag/shlz-ui/pull/29",
+          headRefName: "feat/guard",
+          headRefOid: "abc",
+          baseRefName: "main",
+          state: "OPEN",
+        },
+      },
+    }),
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery({
+        defaultBranch: "main",
+        pullRequestUrl: "https://github.com/other/repo/pull/1",
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "feat/guard",
+          localHead: "abc",
+          upstreamHead: "abc",
+          pullRequest: {
+            url: "https://github.com/other/repo/pull/1",
+            headRefName: "feat/guard",
+            headRefOid: "abc",
+            baseRefName: "main",
+            state: "OPEN",
+          },
+        },
+      }),
+    /pull request does not belong to Antropophag\/shlz-ui/,
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery({
+        defaultBranch: "main",
+        pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "feat/guard",
+          localHead: "new",
+          upstreamHead: "old",
+          pullRequest: {
+            url: "https://github.com/Antropophag/shlz-ui/pull/29",
+            headRefName: "feat/guard",
+            headRefOid: "old",
+            baseRefName: "main",
+            state: "OPEN",
+          },
+        },
+      }),
+    /not fully pushed to the pull request/,
+  );
+});
 
 test("Wave 7 is large before implementation and decomposes along semantic seams", () => {
   const plan = createPlan(wave7, config);
@@ -257,25 +594,37 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
   });
 });
 
-test("agent routing preserves inspect-first readiness and apply re-entry", async () => {
-  const [agents, protocol, propose, apply, update] = await Promise.all(
-    [
-      "AGENTS.md",
-      "docs/requirements-elicitation.md",
-      ".agents/skills/openspec-propose/SKILL.md",
-      ".agents/skills/openspec-apply-change/SKILL.md",
-      ".agents/skills/openspec-update-change/SKILL.md",
-    ].map((file) => readFile(path.join(root, file), "utf8")),
-  );
+test("agent routing preserves eligibility, readiness, conformance, and apply re-entry", async () => {
+  const [agents, routing, protocol, execution, propose, apply, update] =
+    await Promise.all(
+      [
+        "AGENTS.md",
+        "docs/openspec.md",
+        "docs/requirements-elicitation.md",
+        "docs/agent-execution.md",
+        ".agents/skills/openspec-propose/SKILL.md",
+        ".agents/skills/openspec-apply-change/SKILL.md",
+        ".agents/skills/openspec-update-change/SKILL.md",
+      ].map((file) => readFile(path.join(root, file), "utf8")),
+    );
   assert.match(agents, /requirements-elicitation\.md/);
   assert.match(agents, /generated OpenSpec skills/);
   assert.match(agents, /Explicit pre-authorization/);
+  assert.match(agents, /positively proven narrow route/);
+  assert.match(
+    agents,
+    /Never commit or push implementation directly to `main`/,
+  );
+  assert.match(routing, /harness -- route-check/);
+  assert.match(routing, /harness -- implementation-preflight/);
   assert.match(protocol, /no unresolved blocking user-owned decisions/);
   assert.match(protocol, /repo-owned/);
   assert.match(protocol, /agent-owned/);
   assert.match(protocol, /user-owned/);
   assert.match(protocol, /harness -- pause/);
   assert.match(protocol, /delegated/);
+  assert.match(execution, /harness -- route-conformance/);
+  assert.match(execution, /harness -- delivery-check/);
   for (const generatedSkill of [propose, apply, update])
     assert.doesNotMatch(
       generatedSkill,

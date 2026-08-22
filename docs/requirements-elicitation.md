@@ -1,10 +1,10 @@
 # Requirements readiness
 
-Use this layer after initial repository inspection and impact routing, before OpenSpec synthesis and adaptive execution planning:
+Use this layer after initial repository inspection and positive route eligibility, before OpenSpec synthesis and adaptive execution planning:
 
-`request → inspect → impact route → decision ownership → targeted interview → readiness → OpenSpec → authorization → execution planning`
+`request → inspect → route eligibility → decision ownership → targeted interview → readiness → OpenSpec → authorization → branch preflight → execution planning`
 
-Direct behavior-preserving work exits after impact routing. A complete contract-affecting request skips questions but still follows OpenSpec. A short or ambiguous substantial intent enters the decision loop below.
+Direct behavior-preserving work exits only after `route-check` positively accepts it. A complete contract-affecting request skips questions but still follows OpenSpec. A short or ambiguous substantial intent enters the decision loop below. Material or unknown state never defaults to direct.
 
 ## Inspect, then assign ownership
 
@@ -42,6 +42,8 @@ npm run harness -- plan <assessment> <plan> --requirements <requirements-state>
 ```
 
 The harness permits planning only after the readiness gate, OpenSpec status is `synthesized`, and authorization is `pre-authorized` or `approved`.
+
+Before implementation mutation, compose that readiness result with the route assessment and task-branch state using `implementation-preflight`. A publishing or deployment intent with unresolved release policy, public URL, permissions, or other user-owned choices therefore cannot mutate the repository even if an earlier semantic step mislabeled it implementation-only.
 
 ## OpenSpec synthesis and authorization
 
