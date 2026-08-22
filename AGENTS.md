@@ -104,6 +104,8 @@ Do not implement a large component library before the foundation, contracts and 
 
 Do not modify unrelated files.
 
+Before implementation, classify the change impact using the OpenSpec routing rules in `docs/openspec.md`. Inspect first when impact is uncertain; repository support for OpenSpec alone does not require creating a change.
+
 ## UI component completion gate
 
 Do not call a component fixed, complete, production-ready, review-ready, or a
