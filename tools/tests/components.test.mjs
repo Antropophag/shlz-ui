@@ -65,7 +65,7 @@ test("floating controllers share bounded geometry and Escape ownership", async (
   assert.match(active, /WeakSet<Event>/);
   assert.match(active, /claimActiveFloatingEscape/);
   for (const controller of [dropdown, popover, tooltip])
-    assert.match(controller, /claimActiveFloatingEscape/);
+    assert.match(controller, /\bclaimActiveFloatingEscape\s*\(/);
   assert.match(tooltip, /role='tooltip'/);
   assert.match(tooltip, /aria-describedby/);
   assert.match(tooltip, /pointerenter/);
