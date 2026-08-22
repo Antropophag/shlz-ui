@@ -117,6 +117,7 @@ test.beforeEach(async ({ page }) => {
 test("all Wave 6 executable, consumer, stress and absence roots are classified", async ({
   page,
 }) => {
+  expect(componentNames).toHaveLength(4);
   for (const component of componentNames) {
     const manifest = manifests[component];
     const showcaseIds = manifest.occurrences
