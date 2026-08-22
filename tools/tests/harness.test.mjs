@@ -23,6 +23,7 @@ import {
   resolveReviewFindings,
   summarizeEvents,
   gitEvidence,
+  fingerprint,
   validateHandoff,
   validatePlan,
 } from "../lib/harness/core.mjs";
@@ -300,6 +301,10 @@ test("validation records compute fingerprints and durably enforce invalidation",
     root,
   );
   assert.match(deletedLedger[0].fingerprint, /^[0-9a-f]{64}$/);
+  assert.notEqual(
+    fingerprint(["x"], { x: "<deleted>" }),
+    fingerprint(["x"], { x: { state: "deleted" } }),
+  );
   await assert.rejects(
     recordValidation(
       { ...request, files: ["../outside"] },

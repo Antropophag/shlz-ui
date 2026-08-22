@@ -379,8 +379,12 @@ export function relevantValidationFiles(files, target, config) {
 
 export function fingerprint(files, contentsByFile = {}) {
   const hash = createHash("sha256");
-  for (const file of [...files].sort())
-    hash.update(`${file}\0${contentsByFile[file] ?? ""}\0`);
+  for (const file of [...files].sort()) {
+    const content = contentsByFile[file] ?? "";
+    hash.update(`${file}\0`);
+    if (content?.state === "deleted") hash.update("deleted\0");
+    else hash.update(`present\0${content}\0`);
+  }
   return hash.digest("hex");
 }
 
@@ -396,7 +400,7 @@ export async function fingerprintFiles(files, repoRoot) {
         try {
           realTarget = await realpath(target);
         } catch (error) {
-          if (error.code === "ENOENT") return [file, "<deleted>"];
+          if (error.code === "ENOENT") return [file, { state: "deleted" }];
           throw error;
         }
         if (
