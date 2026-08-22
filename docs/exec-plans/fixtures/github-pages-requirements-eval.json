@@ -6,7 +6,10 @@
     "intent": "Опубликуй showcase этого проекта на GitHub Pages.",
     "route": "direct",
     "openSpecChange": "showcase-publishing",
-    "requiredDecisions": ["release-policy", "public-url"],
+    "requiredDecisions": [
+      { "id": "release-policy", "owner": "user", "blocking": true },
+      { "id": "public-url", "owner": "user", "blocking": true }
+    ],
     "materialSignals": {
       "newCapability": true,
       "publishingOrRelease": true,

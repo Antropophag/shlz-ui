@@ -206,6 +206,31 @@ test("exact GitHub Pages intent is non-direct and blocks mutation on owned decis
       ),
     /required decisions are missing: release-policy, public-url/,
   );
+  const wrongOwnership = requirementsState({
+    intent: fixture.intent,
+    decisions: fixture.requirementsState.decisions.map((decision) => ({
+      ...decision,
+      owner: "repo",
+      status: "resolved",
+      blocking: false,
+    })),
+    openSpec: { change: "showcase-publishing", status: "synthesized" },
+  });
+  assert.throws(
+    () =>
+      assertImplementationPreflight(
+        { ...fixture.routeAssessment, route: "open-spec" },
+        wrongOwnership,
+        {
+          currentBranch: "feat/pages",
+          defaultBranch: "main",
+          baseCurrent: true,
+          startedAtCurrentBase: true,
+          preImplementationChanges: [],
+        },
+      ),
+    /required decision ownership does not match: release-policy, public-url/,
+  );
   assert.equal(
     fixture.expectedBeforeDecisionResolution.implementationMutations,
     0,
@@ -292,9 +317,12 @@ test("implementation preflight and delivery enforce task branch to PR", () => {
         currentBranch: "feat/guard",
         pushRemote: "origin",
         pushBranch: "feat/guard",
+        localHead: "abc",
+        upstreamHead: "abc",
         pullRequest: {
           url: "https://github.com/Antropophag/shlz-ui/pull/29",
           headRefName: "feat/guard",
+          headRefOid: "abc",
           baseRefName: "main",
           state: "OPEN",
         },
@@ -311,15 +339,41 @@ test("implementation preflight and delivery enforce task branch to PR", () => {
           currentBranch: "feat/guard",
           pushRemote: "origin",
           pushBranch: "feat/guard",
+          localHead: "abc",
+          upstreamHead: "abc",
           pullRequest: {
             url: "https://github.com/other/repo/pull/1",
             headRefName: "feat/guard",
+            headRefOid: "abc",
             baseRefName: "main",
             state: "OPEN",
           },
         },
       }),
     /pull request does not belong to Antropophag\/shlz-ui/,
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery({
+        defaultBranch: "main",
+        pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
+        actual: {
+          repository: "Antropophag/shlz-ui",
+          currentBranch: "feat/guard",
+          pushRemote: "origin",
+          pushBranch: "feat/guard",
+          localHead: "new",
+          upstreamHead: "old",
+          pullRequest: {
+            url: "https://github.com/Antropophag/shlz-ui/pull/29",
+            headRefName: "feat/guard",
+            headRefOid: "old",
+            baseRefName: "main",
+            state: "OPEN",
+          },
+        },
+      }),
+    /not fully pushed to the pull request/,
   );
 });
 

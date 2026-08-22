@@ -127,7 +127,17 @@ export function evaluateRouteEligibility(assessment) {
       typeof assessment.openSpecChange !== "string" ||
       !assessment.openSpecChange ||
       !Array.isArray(assessment.requiredDecisions) ||
-      assessment.requiredDecisions.some((id) => typeof id !== "string" || !id)
+      assessment.requiredDecisions.some(
+        (decision) =>
+          !decision ||
+          typeof decision.id !== "string" ||
+          !decision.id ||
+          !decisionOwners.has(decision.owner) ||
+          typeof decision.blocking !== "boolean" ||
+          Object.keys(decision).some(
+            (key) => !["id", "owner", "blocking"].includes(key),
+          ),
+      )
     )
       return {
         eligible: false,
@@ -224,14 +234,24 @@ export function assertImplementationPreflight(
       throw new Error(
         "requirements OpenSpec change does not match route assessment",
       );
-    const decisionIds = new Set(
-      requirementsState.decisions.map(({ id }) => id),
+    const decisionsById = new Map(
+      requirementsState.decisions.map((decision) => [decision.id, decision]),
     );
-    const missing = assessment.requiredDecisions.filter(
-      (id) => !decisionIds.has(id),
-    );
+    const missing = assessment.requiredDecisions
+      .filter(({ id }) => !decisionsById.has(id))
+      .map(({ id }) => id);
     if (missing.length)
       throw new Error(`required decisions are missing: ${missing.join(", ")}`);
+    const mismatched = assessment.requiredDecisions
+      .filter(({ id, owner, blocking }) => {
+        const actual = decisionsById.get(id);
+        return actual.owner !== owner || actual.blocking !== blocking;
+      })
+      .map(({ id }) => id);
+    if (mismatched.length)
+      throw new Error(
+        `required decision ownership does not match: ${mismatched.join(", ")}`,
+      );
     const status = requirementsStatus(requirementsState);
     if (!status.readyForPlanning)
       throw new Error(
@@ -334,6 +354,13 @@ export function assertImplementationDelivery(delivery) {
     );
   if (actual.pullRequest.headRefName !== actual.currentBranch)
     throw new Error("pull request head does not match the current task branch");
+  if (
+    actual.localHead !== actual.upstreamHead ||
+    actual.localHead !== actual.pullRequest.headRefOid
+  )
+    throw new Error(
+      "current task branch is not fully pushed to the pull request",
+    );
   if (actual.pullRequest.baseRefName !== delivery.defaultBranch)
     throw new Error("pull request must target the default branch");
   return { allowed: true, pullRequestUrl: delivery.pullRequestUrl };
@@ -375,32 +402,37 @@ export async function gitImplementationState(
 
 export async function gitDeliveryState(repoRoot, pullRequestUrl) {
   const options = { cwd: repoRoot };
-  const [branch, upstream, repository, pullRequest] = await Promise.all([
-    exec("git", ["branch", "--show-current"], options),
-    exec(
-      "git",
-      ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"],
-      options,
-    ),
-    exec("gh", ["repo", "view", "--json", "nameWithOwner"], options),
-    exec(
-      "gh",
-      [
-        "pr",
-        "view",
-        pullRequestUrl,
-        "--json",
-        "url,headRefName,baseRefName,state",
-      ],
-      options,
-    ),
-  ]);
+  const [branch, upstream, localHead, upstreamHead, repository, pullRequest] =
+    await Promise.all([
+      exec("git", ["branch", "--show-current"], options),
+      exec(
+        "git",
+        ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"],
+        options,
+      ),
+      exec("git", ["rev-parse", "HEAD"], options),
+      exec("git", ["rev-parse", "@{upstream}"], options),
+      exec("gh", ["repo", "view", "--json", "nameWithOwner"], options),
+      exec(
+        "gh",
+        [
+          "pr",
+          "view",
+          pullRequestUrl,
+          "--json",
+          "url,headRefName,headRefOid,baseRefName,state",
+        ],
+        options,
+      ),
+    ]);
   const [pushRemote, ...pushParts] = upstream.stdout.trim().split("/");
   return {
     repository: JSON.parse(repository.stdout).nameWithOwner,
     currentBranch: branch.stdout.trim(),
     pushRemote,
     pushBranch: pushParts.join("/"),
+    localHead: localHead.stdout.trim(),
+    upstreamHead: upstreamHead.stdout.trim(),
     pullRequest: JSON.parse(pullRequest.stdout),
   };
 }
