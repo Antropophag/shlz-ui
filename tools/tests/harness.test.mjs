@@ -266,6 +266,15 @@ test("validation records compute fingerprints and durably enforce invalidation",
     root,
   );
   assert.equal(ledger.at(-1).reason, "substantive remediation");
+  await assert.rejects(
+    recordValidation(
+      { ...request, files: ["../outside"] },
+      ledger,
+      config,
+      root,
+    ),
+    /escapes repository/,
+  );
 });
 
 test("review state reuses the remediation diff and unresolved findings", () => {

@@ -368,10 +368,12 @@ export function fingerprint(files, contentsByFile = {}) {
 export async function fingerprintFiles(files, repoRoot) {
   const contents = Object.fromEntries(
     await Promise.all(
-      files.map(async (file) => [
-        file,
-        await readFile(path.join(repoRoot, file)),
-      ]),
+      files.map(async (file) => {
+        const target = path.resolve(repoRoot, file);
+        if (target !== repoRoot && !target.startsWith(`${repoRoot}${path.sep}`))
+          throw new Error(`validation file escapes repository: ${file}`);
+        return [file, await readFile(target)];
+      }),
     ),
   );
   return fingerprint(files, contents);
