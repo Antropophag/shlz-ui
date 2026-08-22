@@ -95,6 +95,8 @@ function assertAcyclic(packets) {
 export function validatePlan(plan, config) {
   if (!plan.id || !Array.isArray(plan.packets) || plan.packets.length === 0)
     throw new Error("plan requires id and packets");
+  if (!plan.classification?.size)
+    throw new Error("plan requires classification.size");
   const ids = new Set();
   for (const packet of plan.packets) {
     for (const field of requiredPacketFields)
@@ -254,7 +256,8 @@ export function readyPackets(plan, state = null) {
     .filter(
       (packet) =>
         !completed.has(packet.id) &&
-        (!state?.packets || state.packets[packet.id]?.status === "pending") &&
+        (!state?.packets ||
+          (state.packets[packet.id]?.status ?? "pending") === "pending") &&
         packet.dependencies.every((id) => completed.has(id)),
     )
     .map(({ id, objective, preferredExecutionMode }) => ({
@@ -365,10 +368,14 @@ export function affectedValidation(files, config) {
 export function relevantValidationFiles(files, target, config) {
   const definition = config.validationTargets[target];
   if (!definition) throw new Error(`unknown validation target ${target}`);
-  const relevant = files.filter((file) =>
-    definition.fingerprintPatterns.some((pattern) =>
-      matchesPattern(file, pattern),
-    ),
+  const relevant = files.filter(
+    (file) =>
+      definition.fingerprintPatterns.some((pattern) =>
+        matchesPattern(file, pattern),
+      ) &&
+      !(definition.fingerprintIgnorePatterns ?? []).some((pattern) =>
+        matchesPattern(file, pattern),
+      ),
   );
   if (relevant.length === 0)
     throw new Error(
@@ -593,6 +600,8 @@ export function summarizeEvents(events) {
 }
 
 export async function gitEvidence(repoRoot, base) {
+  if (typeof base !== "string" || !base.trim())
+    throw new Error("git evidence requires a base revision");
   const options = { cwd: repoRoot, maxBuffer: 10 * 1024 * 1024 };
   const [
     { stdout: head },

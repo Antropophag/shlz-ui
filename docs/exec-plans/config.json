@@ -51,7 +51,8 @@
         "tools/lib/harness/**",
         "tools/tests/harness.test.mjs",
         "docs/exec-plans/**"
-      ]
+      ],
+      "fingerprintIgnorePatterns": ["docs/exec-plans/active/**"]
     },
     "audit-manifest": {
       "level": 1,
@@ -75,7 +76,7 @@
     "modal-browser": {
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Modal",
-      "expensive": false,
+      "expensive": true,
       "fingerprintPatterns": [
         "packages/behaviors/src/{modal,internal/native-dialog}.ts",
         "packages/styles/components/modal.css",
@@ -86,7 +87,7 @@
     "drawer-browser": {
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Drawer",
-      "expensive": false,
+      "expensive": true,
       "fingerprintPatterns": [
         "packages/behaviors/src/{drawer,internal/native-dialog}.ts",
         "packages/styles/components/drawer.css",
@@ -164,6 +165,14 @@
         "drawer-browser",
         "overlay-integration"
       ]
+    },
+    {
+      "patterns": ["apps/showcase/src/consumer-workspace.js"],
+      "targets": ["drawer-browser"]
+    },
+    {
+      "patterns": ["tools/playwright/overlay.spec.js"],
+      "targets": ["overlay-integration"]
     }
   ]
 }

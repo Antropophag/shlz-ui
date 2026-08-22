@@ -23,7 +23,7 @@ Official Codex documentation establishes stable thread start/resume/fork primiti
 
 ### 1. Use `docs/exec-plans/` for operational state behind one CLI seam
 
-Tracked execution plans belong under `docs/exec-plans/active/<change>/`: `assessment.json`, generated `plan.json`, compact `handoff.json`, validation ledger, and telemetry JSONL. Configuration/schema documentation lives at `docs/exec-plans/`. This is distinct from normative OpenSpec and historical component evidence, visible in PR review, and accessible to fresh sessions without hidden local state.
+Tracked execution plans belong under `docs/exec-plans/active/<change>/`: `assessment.json`, generated `plan.json`, atomic claim/progress `state.json`, compact `handoff.json`, `validation-ledger.json`, `review-state.json`, and telemetry JSONL. Configuration/schema documentation lives at `docs/exec-plans/`. This is distinct from normative OpenSpec and historical component evidence, visible in PR review, and accessible to fresh sessions without hidden local state.
 
 The external interface is `node tools/harness.mjs <command>` plus thin package-script aliases. Internally it may use focused modules, but callers learn one command family and one plan contract. Alternative locations were `openspec/changes/` (rejected because operational session state is not normative acceptance) and a hidden `.codex/` directory (rejected because state must be repo-native and tool-agnostic).
 

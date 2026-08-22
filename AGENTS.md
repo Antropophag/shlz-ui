@@ -108,7 +108,7 @@ Before implementation, classify the change impact using the OpenSpec routing rul
 
 After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
 
-For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` before implementation. Keep OpenSpec normative; store only packet, handoff, validation, and telemetry state under `docs/exec-plans/`.
+For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` before implementation. Keep OpenSpec normative; store only plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
 
 ## UI component completion gate
 

@@ -80,6 +80,12 @@ test("classification bands are configurable and honest", () => {
 
 test("plan contract rejects missing fields, cycles, and undecomposed large work", () => {
   const plan = createPlan(wave7, config);
+  const unclassified = clone(plan);
+  delete unclassified.classification;
+  assert.throws(
+    () => validatePlan(unclassified, config),
+    /requires classification\.size/,
+  );
   const missing = clone(plan);
   delete missing.packets[0].nonGoals;
   assert.throws(() => validatePlan(missing, config), /missing nonGoals/);
@@ -175,6 +181,16 @@ test("claims are exclusive and dependency joins receive every direct handoff", a
   );
 });
 
+test("packets added after state initialization are pending by default", () => {
+  const plan = createPlan(wave7, config);
+  const state = createExecutionState(plan);
+  delete state.packets["discovery-contracts"];
+  assert.deepEqual(
+    readyPackets(plan, state).map(({ id }) => id),
+    ["discovery-contracts"],
+  );
+});
+
 test("affected validation routes docs, component, shared seam, and manifest changes", () => {
   assert.deepEqual(
     affectedValidation(["docs/exec-plans/README.md"], config).map(
@@ -212,6 +228,18 @@ test("affected validation routes docs, component, shared seam, and manifest chan
     ),
     ["full"],
   );
+  assert.deepEqual(
+    affectedValidation(["apps/showcase/src/consumer-workspace.js"], config).map(
+      ({ id }) => id,
+    ),
+    ["drawer-browser"],
+  );
+  assert.deepEqual(
+    affectedValidation(["tools/playwright/overlay.spec.js"], config).map(
+      ({ id }) => id,
+    ),
+    ["overlay-integration"],
+  );
 });
 
 test("validation targets derive their own relevant changed-file set", () => {
@@ -235,6 +263,17 @@ test("validation targets derive their own relevant changed-file set", () => {
         config,
       ),
     /no changed files are relevant/,
+  );
+  assert.deepEqual(
+    relevantValidationFiles(
+      [
+        "tools/harness.mjs",
+        "docs/exec-plans/active/adaptive-codex-harness/validation-ledger.json",
+      ],
+      "harness",
+      config,
+    ),
+    ["tools/harness.mjs"],
   );
 });
 
@@ -262,12 +301,14 @@ test("expensive successful reruns require an invalidation reason", () => {
       config,
     ),
   );
-  assert.doesNotThrow(() =>
-    assertValidationRun(
-      { target: "modal-browser", currentFingerprint: "same" },
-      ledger,
-      config,
-    ),
+  assert.throws(
+    () =>
+      assertValidationRun(
+        { target: "modal-browser", currentFingerprint: "same" },
+        [{ target: "modal-browser", fingerprint: "same", outcome: "pass" }],
+        config,
+      ),
+    /reason is required/,
   );
 });
 
@@ -392,6 +433,7 @@ test("glob matching supports root docs, recursive paths, and brace sets", () => 
 });
 
 test("dynamic Git evidence includes tracked and untracked working-tree files", async () => {
+  await assert.rejects(gitEvidence(root), /requires a base revision/);
   const evidence = await gitEvidence(
     root,
     "410e81747243fb07d773af0bf2f048db2ebb0d1a",
@@ -407,6 +449,15 @@ test("CLI rejects repository path escapes", async () => {
       cwd: root,
     }),
     /path escapes repository/,
+  );
+});
+
+test("CLI reports a missing telemetry event flag", async () => {
+  await assert.rejects(
+    exec("node", ["tools/harness.mjs", "telemetry-record", "missing.jsonl"], {
+      cwd: root,
+    }),
+    /requires --event <json>/,
   );
 });
 
@@ -429,7 +480,7 @@ test("CLI state lock rejects a concurrent packet update", async () => {
         ],
         { cwd: root },
       ),
-      /state is already being updated/,
+      /state is already being updated:.*state\.json; lock .*state\.json\.lock \(held\)/,
     );
   } finally {
     await unlink(lock);

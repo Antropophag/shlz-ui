@@ -66,17 +66,22 @@ const withStateLock = async (target, operation) => {
   try {
     lock = await open(lockPath, "wx");
   } catch (error) {
-    if (error.code === "EEXIST")
-      throw new Error(
-        `state is already being updated: ${path.relative(repoRoot, target)}`,
+    if (error.code === "EEXIST") {
+      const owner = await readFile(lockPath, "utf8").catch(
+        () => "unknown owner",
       );
+      throw new Error(
+        `state is already being updated: ${path.relative(repoRoot, target)}; lock ${path.relative(repoRoot, lockPath)} (${owner.trim() || "unknown owner"}) may be removed if its process stopped`,
+      );
+    }
     throw error;
   }
+  await lock.write(`${process.pid} ${new Date().toISOString()}\n`);
   try {
     return await operation();
   } finally {
-    await lock.close();
-    await unlink(lockPath);
+    await lock.close().catch(() => {});
+    await unlink(lockPath).catch(() => {});
   }
 };
 const option = (name) => {
@@ -130,7 +135,7 @@ switch (command) {
     output(affectedValidation(args, config));
     break;
   case "validation-check": {
-    const ledger = await readJson(absolute(args[1]));
+    const ledger = await readJsonOr(absolute(args[1]), []);
     const changed = await gitEvidence(repoRoot, option("--base"));
     const files = relevantValidationFiles(
       changed.changedFiles,
@@ -239,7 +244,9 @@ switch (command) {
     break;
   }
   case "telemetry-record": {
-    const event = JSON.parse(option("--event"));
+    const raw = option("--event");
+    if (!raw) throw new Error("telemetry-record requires --event <json>");
+    const event = JSON.parse(raw);
     await recordEvent(statePath(args[0]), event);
     output({ recorded: true, type: event.type });
     break;

@@ -1,6 +1,6 @@
 # Adaptive execution plans
 
-OpenSpec is the normative contract. Git is implementation state, tests are executable evidence, and this directory stores only operational packet/dependency/handoff state for substantial work.
+OpenSpec is the normative contract. Git is implementation state, tests are executable evidence, and this directory stores only operational plan, packet/dependency, claim, handoff, validation, review, and telemetry state for substantial work.
 
 ## Operator flow
 
