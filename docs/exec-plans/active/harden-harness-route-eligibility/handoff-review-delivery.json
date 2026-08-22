@@ -1,0 +1,23 @@
+{
+  "completedPacket": "review-delivery",
+  "changed": [
+    "review-bound requirements, diff, branch, upstream, repository, and PR guards",
+    "unmerged PR 29"
+  ],
+  "provenChecks": [
+    "harness 31/31 pass",
+    "OpenSpec strict 4/4 pass",
+    "OpenSpec regeneration check pass",
+    "affected docs check pass",
+    "Standards and Spec targeted re-review closed 8/8 findings"
+  ],
+  "settledDecisions": [
+    "local HEAD, upstream, and PR head OID must match",
+    "required decision identity includes owner and blocking status"
+  ],
+  "unresolvedFindings": [
+    "server protection has enforce_admins false and zero required approvals"
+  ],
+  "nextPacket": null,
+  "invalidatedAssumptions": []
+}

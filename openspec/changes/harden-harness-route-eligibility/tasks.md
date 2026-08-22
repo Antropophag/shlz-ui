@@ -16,4 +16,4 @@
 ## 4. Validation and Delivery
 
 - [x] 4.1 Run focused harness tests, strict OpenSpec validation, and affected validation once at the stabilized fingerprint; record results in execution state
-- [ ] 4.2 Run diff-scoped Standards and Spec review, remediate valid findings in one batch, run targeted re-review and any required aggregate validation, then create a PR without merging
+- [x] 4.2 Run diff-scoped Standards and Spec review, remediate valid findings in one batch, run targeted re-review and any required aggregate validation, then create a PR without merging
