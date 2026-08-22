@@ -24,4 +24,4 @@
 
 ## 7. Integration, review, and delivery
 
-- [ ] 7.1 Run focused then final repository validation, perform diff-scoped Standards and Spec review, remediate valid findings in one batch, re-review only the remediation/current diff, verify `shlz-design-source/` is unchanged, and create the unmerged PR.
+- [x] 7.1 Run focused then final repository validation, perform diff-scoped Standards and Spec review, remediate valid findings in one batch, re-review only the remediation/current diff, verify `shlz-design-source/` is unchanged, and create the unmerged PR.
