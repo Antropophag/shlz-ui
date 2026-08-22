@@ -1,0 +1,41 @@
+[
+  {
+    "target": "harness",
+    "files": [
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "fingerprint": "9c1b779cd8c588a8edca74187c0b5f6477b076e06815898d74e02915acd7fa2a",
+    "outcome": "pass",
+    "reason": null,
+    "packet": "independent-review",
+    "session": "review-agents-1",
+    "recordedAt": "2026-08-22T18:15:48.684Z"
+  },
+  {
+    "target": "harness",
+    "files": [
+      "docs/exec-plans/README.md",
+      "docs/exec-plans/active/adaptive-codex-harness/handoff.json",
+      "docs/exec-plans/active/adaptive-codex-harness/plan.json",
+      "docs/exec-plans/active/adaptive-codex-harness/review-state.json",
+      "docs/exec-plans/active/adaptive-codex-harness/state.json",
+      "docs/exec-plans/active/adaptive-codex-harness/telemetry.jsonl",
+      "docs/exec-plans/active/adaptive-codex-harness/validation-ledger.json",
+      "docs/exec-plans/config.json",
+      "docs/exec-plans/fixtures/adaptive-harness-assessment.json",
+      "docs/exec-plans/fixtures/wave-7-assessment.json",
+      "docs/exec-plans/fixtures/wave-7-plan.json",
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "fingerprint": "b1a501040418a5eb39a62a9eb4c5145ebfe86708c2eb52a5fe7de64c6c4b6158",
+    "outcome": "pass",
+    "reason": "substantive harness remediation changed deterministic runtime inputs",
+    "packet": "independent-review",
+    "session": "review-agents-1",
+    "recordedAt": "2026-08-22T18:19:29.631Z"
+  }
+]

@@ -2,9 +2,11 @@
 
 OpenSpec impact routing and engineering skill routing answer different questions. First use `docs/openspec.md` to choose the direct or OpenSpec workflow. Then choose the smallest set of skills that materially improves the task:
 
-`task → impact routing → direct/OpenSpec workflow → applicable skills → implementation → validation/review`
+`task → discovery → impact routing → execution planning → applicable skills/orchestration → implementation → integration → evaluation → final validation`
 
 Skills supplement the selected workflow; they do not create parallel workflow state or replace OpenSpec artifacts.
+
+Execution packets are also not skills or OpenSpec artifacts. Use `docs/agent-execution.md` to keep each skill invocation/session scoped to the current packet and its direct dependencies.
 
 ## Task routes
 
