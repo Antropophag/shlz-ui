@@ -1,0 +1,24 @@
+{
+  "completedPacket": "dogfood-review-delivery",
+  "claimId": "final-audit-20260823",
+  "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba",
+  "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0",
+  "changed": [],
+  "provenChecks": [
+    "physical runtime thread 01a02f6d-b2e3-7922-9498-2ca7de5e9fa7 completed",
+    "npm run test:harness: 46/46 pass in worker",
+    "openspec validate execution-context-isolation --strict: pass in worker",
+    "worker modified no files"
+  ],
+  "settledDecisions": [
+    "final audit was physically distinct and adapter-bound",
+    "Wave 8 before/after evidence is honest but not a like-for-like performance comparison"
+  ],
+  "unresolvedFindings": [
+    "use an immutable review-state base and persist targeted passes",
+    "escalate timed-out workers beyond SIGTERM",
+    "retain failure evidence across retry"
+  ],
+  "nextPacket": null,
+  "invalidatedAssumptions": []
+}

@@ -1514,6 +1514,16 @@ export function retryWorkerPacket(state, packetId) {
   state.packets[packetId] = {
     status: "pending",
     attempts: (current.attempts ?? 0) + 1,
+    attemptHistory: [
+      ...(current.attemptHistory ?? []),
+      {
+        claimId: current.claimId ?? null,
+        briefDigest: current.briefDigest ?? null,
+        execution: current.execution ?? null,
+        launch: current.launch ?? null,
+        failure: current.failure ?? null,
+      },
+    ],
   };
   return state;
 }

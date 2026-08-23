@@ -1083,6 +1083,11 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
   assert.equal(state.handoffs["shared-native-dialog"], undefined);
   retryWorkerPacket(state, "shared-native-dialog");
   assert.equal(state.packets["shared-native-dialog"].status, "pending");
+  assert.equal(
+    state.packets["shared-native-dialog"].attemptHistory[0].failure
+      .terminalStatus,
+    "invalid-worker-report",
+  );
   const retryBrief = createWorkerBrief(plan, state, "shared-native-dialog", {
     baseline: executionBaseline,
     claimId: "claim-retry",

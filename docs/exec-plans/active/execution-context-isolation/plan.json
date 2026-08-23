@@ -195,13 +195,12 @@
     },
     {
       "id": "dogfood-review-delivery",
-      "objective": "Physically dogfood isolation, independently review the implementation, and deliver an unmerged PR",
+      "objective": "Independently audit the completed isolation implementation and its Wave 8 evidence; report findings without modifying files, pushing, or creating a PR",
       "scope": [
-        "live read-only worker",
         "Wave 8 before/after evidence",
-        "validation",
-        "independent review",
-        "PR delivery"
+        "isolation contract",
+        "failure and recovery semantics",
+        "read-only independent review"
       ],
       "nonGoals": [
         "PR merge",
@@ -216,32 +215,22 @@
         "tools/lib/harness/**",
         "tools/tests/harness.test.mjs"
       ],
-      "implementationSurface": [
-        "docs/exec-plans/active/execution-context-isolation/",
-        "openspec/changes/execution-context-isolation/tasks.md"
-      ],
+      "implementationSurface": [],
       "focusedValidation": [
-        "npm run check",
-        "openspec validate --all --strict"
+        "npm run test:harness",
+        "openspec validate execution-context-isolation --strict"
       ],
-      "outputs": [
-        "runtime dogfood evidence",
-        "review state",
-        "delivery evidence",
-        "unmerged PR"
-      ],
+      "outputs": ["independent final audit report", "runtime identity proof"],
       "handoff": [
         "runtime identity proof or exact limitation",
         "before/after telemetry",
-        "review findings",
-        "PR URL"
+        "review findings"
       ],
       "implementationOutcomes": [
         "fresh context is physically evidenced when available",
         "Wave 8 regression passes",
-        "full validation passes",
-        "independent review is distinct",
-        "delivery guard passes"
+        "independent review is physically distinct",
+        "no files are modified"
       ],
       "preferredExecutionMode": "isolated-subagent",
       "status": "pending"

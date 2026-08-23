@@ -62,7 +62,37 @@
       }
     },
     "dogfood-review-delivery": {
-      "status": "pending"
+      "status": "completed",
+      "session": "final-audit-worker",
+      "claimId": "final-audit-20260823",
+      "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {
+        "telemetry-operator": "96066ee5168d9e9fec103aa53468ce777d7e846cc28f8db65d1f0c168c1b3cde"
+      },
+      "packetDigest": "153483e9e952206624a0f5b0a9b38ffd6e6cc33900383793ccb6feeeef7e12b8",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+        "launchId": "b6fccd8c-e10c-4895-9d37-61f6bd686582",
+        "startedAt": "2026-08-23T16:21:53.117Z",
+        "evidenceDigest": "f499018ed8c29d481550703babe00504963109111eca29cdaeca52ec29b2449d"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "b6fccd8c-e10c-4895-9d37-61f6bd686582",
+        "usage": {
+          "input_tokens": 281263,
+          "cached_input_tokens": 242176,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3167,
+          "reasoning_output_tokens": 615
+        },
+        "workerReport": "Independent audit completed read-only. The implementation is not ready for final completion: two lifecycle defects and two review-evidence defects remain.\n\n## Standards\n\n- **P1 — Mutable review baseline.** [review-state.json](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/exec-plans/active/execution-context-isolation/review-state.json:3) records `origin/main`, not the immutable execution baseline. This can silently change the reviewed diff and violates the fixed-base review contract.\n\n- **P1 — Findings resolved without recorded re-review.** [review-state.json](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/exec-plans/active/execution-context-isolation/review-state.json:38) marks `POLICY-1`, `RECOVERY-1`, and `REPORT-1` resolved at `d10b482`, but recorded review passes stop at `a05f135`. The required targeted re-review is not persisted.\n\n- Non-blocking judgment call: [core.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/core.mjs) shows possible Divergent Change, but currently serves as the repository’s central harness-contract module.\n\n## Spec\n\n- **P1 — Timed-out workers can remain stuck in `launching`.** [codex-worker.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/codex-worker.mjs:60) sends `SIGTERM` on timeout but waits indefinitely for `close`, with no escalation or secondary deadline. A child ignoring `SIGTERM` prevents durable failure/retry handling required by the lifecycle specification.\n\n- **P2 — Retry erases failure evidence.** [core.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/core.mjs:1510) replaces the failed claim with only `status: \"pending\"` and `attempts`. Runtime status, launch identity, and failure evidence are lost, contrary to the durable recovery contract.\n\nNo scope creep was found. Runtime identity parsing, fail-closed behavior, duplicate identity rejection, report-bound completion, and Wave 8 guard behavior otherwise match the specification.\n\n## Validation and evidence\n\n- `npm run test:harness`: **46/46 passed**, 0 failures.\n- `openspec validate execution-context-isolation --strict`: **passed**.\n- Wave 8 regression and existing failure/recovery tests passed.\n- HEAD remained `16910ab0be025791991855f2dba192e413877f8f`.\n- Worktree status was unchanged; no files were modified.\n\nWave 8 dogfood evidence records fresh-worker runtime ID `01a02f6a-6efb-7e42-a35c-5ec16f8e9151` and 38,156 tokens. The before case records XL/four packets, all logically labeled `root-wave8`, approximately 592K tokens, and no physical identity. This proves enforcement and live fresh-worker capability, but it is not a like-for-like performance comparison because the after case is one bounded read-only packet.\n\nFinal-review identity has an exact limitation: `/root/standards_audit`, `/root/spec_audit`, and `/root/evidence_audit` prove distinct delegated task contexts, but no runtime-issued UUID is exposed or bound to claim `final-audit-20260823`. Physical distinctness of this final review therefore remains unproven until the root orchestrator binds adapter-issued runtime evidence.\n\nSummary: **Standards: 2 blocking findings. Spec: 1 P1 and 1 P2.**",
+        "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0"
+      }
     }
   },
   "handoffs": {
@@ -141,6 +171,30 @@
         "fresh contexts still produced high total input, so context relevance remains a first-class measurement"
       ],
       "nextPacket": "dogfood-review-delivery",
+      "invalidatedAssumptions": []
+    },
+    "dogfood-review-delivery": {
+      "completedPacket": "dogfood-review-delivery",
+      "claimId": "final-audit-20260823",
+      "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba",
+      "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0",
+      "changed": [],
+      "provenChecks": [
+        "physical runtime thread 01a02f6d-b2e3-7922-9498-2ca7de5e9fa7 completed",
+        "npm run test:harness: 46/46 pass in worker",
+        "openspec validate execution-context-isolation --strict: pass in worker",
+        "worker modified no files"
+      ],
+      "settledDecisions": [
+        "final audit was physically distinct and adapter-bound",
+        "Wave 8 before/after evidence is honest but not a like-for-like performance comparison"
+      ],
+      "unresolvedFindings": [
+        "use an immutable review-state base and persist targeted passes",
+        "escalate timed-out workers beyond SIGTERM",
+        "retain failure evidence across retry"
+      ],
+      "nextPacket": null,
       "invalidatedAssumptions": []
     }
   }

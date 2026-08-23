@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "planId": "execution-context-isolation",
+  "packet": {
+    "contextSources": [
+      "docs/exec-plans/active/execution-context-isolation/**",
+      "openspec/changes/execution-context-isolation/**",
+      "tools/lib/harness/**",
+      "tools/tests/harness.test.mjs"
+    ],
+    "contracts": ["docs/validation-workflow.md", "docs/agent-execution.md"],
+    "dependencies": ["telemetry-operator"],
+    "focusedValidation": [
+      "npm run test:harness",
+      "openspec validate execution-context-isolation --strict"
+    ],
+    "handoff": [
+      "runtime identity proof or exact limitation",
+      "before/after telemetry",
+      "review findings"
+    ],
+    "id": "dogfood-review-delivery",
+    "implementationOutcomes": [
+      "fresh context is physically evidenced when available",
+      "Wave 8 regression passes",
+      "independent review is physically distinct",
+      "no files are modified"
+    ],
+    "implementationSurface": [],
+    "nonGoals": [
+      "PR merge",
+      "runtime feature installation",
+      "unrelated remediation"
+    ],
+    "objective": "Independently audit the completed isolation implementation and its Wave 8 evidence; report findings without modifying files, pushing, or creating a PR",
+    "outputs": ["independent final audit report", "runtime identity proof"],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "Wave 8 before/after evidence",
+      "isolation contract",
+      "failure and recovery semantics",
+      "read-only independent review"
+    ]
+  },
+  "claimId": "final-audit-20260823",
+  "baseline": {
+    "branch": "feat/execution-context-isolation",
+    "commit": "53936615ea50fcd58117b084c5b601556fc01dd2",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "execution-context-isolation"
+  },
+  "dependencyDigests": {
+    "telemetry-operator": "96066ee5168d9e9fec103aa53468ce777d7e846cc28f8db65d1f0c168c1b3cde"
+  },
+  "packetDigest": "153483e9e952206624a0f5b0a9b38ffd6e6cc33900383793ccb6feeeef7e12b8",
+  "contextIndex": [
+    "docs/exec-plans/active/execution-context-isolation/**",
+    "openspec/changes/execution-context-isolation/**",
+    "tools/lib/harness/**",
+    "tools/tests/harness.test.mjs"
+  ],
+  "allowedImplementationSurface": [],
+  "focusedValidation": [
+    "npm run test:harness",
+    "openspec validate execution-context-isolation --strict"
+  ],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba"
+}

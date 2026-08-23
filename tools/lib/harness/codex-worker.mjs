@@ -57,18 +57,22 @@ const defaultRun = ({ command, args, cwd, input, timeoutMs }) =>
     let stdout = "";
     let stderr = "";
     let timedOut = false;
+    let killTimer;
     const timer = setTimeout(() => {
       timedOut = true;
       child.kill("SIGTERM");
+      killTimer = setTimeout(() => child.kill("SIGKILL"), 5_000);
     }, timeoutMs);
     child.stdout.setEncoding("utf8").on("data", (chunk) => (stdout += chunk));
     child.stderr.setEncoding("utf8").on("data", (chunk) => (stderr += chunk));
     child.once("error", (error) => {
       clearTimeout(timer);
+      clearTimeout(killTimer);
       reject(error);
     });
     child.once("close", (code, signal) => {
       clearTimeout(timer);
+      clearTimeout(killTimer);
       resolve({ code, signal, stdout, stderr, timedOut });
     });
     child.stdin.end(input);
