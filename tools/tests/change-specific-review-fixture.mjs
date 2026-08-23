@@ -34,6 +34,7 @@ const runProbe = async (targetRoot) =>
 let knownBad;
 let reviewed;
 let runError;
+const cleanupErrors = [];
 try {
   await exec("git", ["worktree", "add", "--detach", badRoot, knownBadRevision]);
   [knownBad, reviewed] = await Promise.all([runProbe(badRoot), runProbe(".")]);
@@ -44,11 +45,25 @@ try {
     .then(({ stdout: value }) => value)
     .catch(() => null);
   if (status === null || status.trim())
-    throw new Error("change-specific fixture could not clean its worktree");
-  await exec("git", ["worktree", "remove", badRoot]);
-  await exec("git", ["worktree", "prune"]);
+    cleanupErrors.push(
+      new Error("change-specific fixture could not clean its worktree"),
+    );
+  else
+    await exec("git", ["worktree", "remove", badRoot]).catch((error) =>
+      cleanupErrors.push(error),
+    );
+  await exec("git", ["worktree", "prune"]).catch((error) =>
+    cleanupErrors.push(error),
+  );
 }
+if (runError && cleanupErrors.length)
+  throw new AggregateError(
+    [runError, ...cleanupErrors],
+    "fixture and cleanup failed",
+  );
 if (runError) throw runError;
+if (cleanupErrors.length)
+  throw new AggregateError(cleanupErrors, "fixture cleanup failed");
 const concerns = {
   "marked-contracts-require-manifest": "state-machine",
   "manifest-sources-are-grounded": "persistence",
