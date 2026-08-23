@@ -1084,7 +1084,7 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
   retryWorkerPacket(state, "shared-native-dialog");
   assert.equal(state.packets["shared-native-dialog"].status, "pending");
   assert.equal(
-    state.packets["shared-native-dialog"].attemptHistory[0].failure
+    state.packets["shared-native-dialog"].attemptHistory.at(-1).failure
       .terminalStatus,
     "invalid-worker-report",
   );
@@ -1093,6 +1093,11 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
     claimId: "claim-retry",
   });
   reserve(plan, state, "shared-native-dialog", retryBrief, "worker-retry");
+  assert.equal(
+    state.packets["shared-native-dialog"].attemptHistory.at(-1).failure
+      .terminalStatus,
+    "invalid-worker-report",
+  );
   recordWorkerAttempt(
     plan,
     state,

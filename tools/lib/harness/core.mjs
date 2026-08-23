@@ -1358,6 +1358,7 @@ export function recordWorkerAttempt(
       valueDigest(dependencySnapshot(packet, state))
   ) {
     state.packets[packetId] = {
+      ...reserved,
       status: "failed",
       retryable: true,
       claimId: brief.claimId,
@@ -1398,6 +1399,7 @@ export function recordWorkerAttempt(
       return state;
     }
     state.packets[packetId] = {
+      ...reserved,
       status: "failed",
       retryable: true,
       claimId: brief.claimId,
@@ -1420,6 +1422,7 @@ export function recordWorkerAttempt(
     (!workerReportDigest || result.workerReportDigest !== workerReportDigest)
   ) {
     state.packets[packetId] = {
+      ...reserved,
       status: "failed",
       retryable: true,
       claimId: brief.claimId,
@@ -1495,6 +1498,7 @@ export function reserveWorkerPacket(
   )
     throw new Error("worker brief is invalid or stale");
   state.packets[packetId] = {
+    attemptHistory: state.packets[packetId]?.attemptHistory ?? [],
     status: "launching",
     session,
     claimId: brief.claimId,
