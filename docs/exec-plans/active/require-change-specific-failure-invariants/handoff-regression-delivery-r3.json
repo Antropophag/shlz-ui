@@ -1,0 +1,28 @@
+{
+  "completedPacket": "regression-delivery",
+  "changed": [
+    "PR 33 historical regression and current-change dogfood evidence",
+    "workflow integration and delivery lifecycle documentation",
+    "independent Standards and Spec review remediation"
+  ],
+  "provenChecks": [
+    "58 focused harness tests pass",
+    "historical PR 33 fixture fails four runtime invariants on known-bad and passes them on immutable known-good",
+    "baseline plus six current-change invariants discriminate",
+    "independent Standards and Spec reviews pass",
+    "route conformance passes"
+  ],
+  "settledDecisions": [
+    "four of eight PR 33 findings belong to executable runtime proof",
+    "revision 2 delivery is superseded-invalid and preserved",
+    "PR 34 remains open and unmerged"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": null,
+  "invalidatedAssumptions": [
+    "root-session delivery can substitute for a guarded fresh-session packet"
+  ],
+  "claimId": "regression-delivery-r3",
+  "briefDigest": "67451b214ca2d21430075a66731daae091e41935dda0d8bbb2d5b077705aa4ff",
+  "workerReportDigest": "f15341d9a344a99330c8532b0a2ab30c09a6dd73aa56260fe7ea2dbc55929aa7"
+}
