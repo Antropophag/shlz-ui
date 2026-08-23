@@ -8,6 +8,7 @@
       "semanticRoute": "direct",
       "size": "S",
       "baselineKind": "mainline",
+      "expectedEscalation": "reroute-required",
       "expectedStrategy": {
         "semanticRoute": "direct",
         "specification": "none",
@@ -22,6 +23,7 @@
       "semanticRoute": "direct",
       "size": "M",
       "baselineKind": "mainline",
+      "expectedEscalation": "reroute-required",
       "expectedStrategy": {
         "semanticRoute": "direct",
         "specification": "none",
@@ -36,6 +38,7 @@
       "semanticRoute": "direct",
       "size": "S",
       "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
       "expectedStrategy": {
         "semanticRoute": "direct",
         "specification": "none",
@@ -50,6 +53,7 @@
       "semanticRoute": "direct",
       "size": "S",
       "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
       "expectedStrategy": {
         "semanticRoute": "direct",
         "specification": "none",
@@ -64,6 +68,7 @@
       "semanticRoute": "direct",
       "size": "S",
       "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
       "expectedStrategy": {
         "semanticRoute": "direct",
         "specification": "none",
@@ -79,6 +84,7 @@
       "materialSignal": "publicContract",
       "size": "S",
       "baselineKind": "mainline",
+      "expectedEscalation": "route-retained",
       "expectedStrategy": {
         "semanticRoute": "open-spec",
         "specification": "requirements-and-open-spec",

@@ -25,7 +25,7 @@ The harness SHALL represent semantic impact and specification need independently
 
 ### Requirement: Execution uses a verified immutable episode baseline
 
-Every implementation episode SHALL start clean on a non-default task branch and bind route conformance, affected validation, and diff review to an immutable baseline. A new task branch baseline MUST be the current `origin/main`; an existing-pull-request baseline MUST be the verified current pushed head of that branch's open pull request targeting the default branch. Baseline kind SHALL describe provenance only and MUST NOT create a review-tool-specific semantic route.
+Every implementation episode SHALL start clean on a non-default task branch and bind route conformance, affected validation, and diff review to a persisted immutable baseline. A new task branch baseline MUST be the current `origin/main`; an existing-pull-request baseline MUST be the verified current pushed head of that branch's open pull request targeting the default branch. When an existing-PR material follow-up requires planning artifacts, synthesis SHALL be committed and pushed before implementation preflight so the verified PR head remains clean. Baseline kind SHALL describe provenance only and MUST NOT create a review-tool-specific semantic route.
 
 #### Scenario: New task branch
 

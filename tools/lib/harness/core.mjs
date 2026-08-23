@@ -206,6 +206,10 @@ function assertExecutionState(execution) {
   if (!Array.isArray(execution.preImplementationChanges))
     throw new Error("execution state requires preImplementationChanges");
   if (execution.baselineKind === "existing-pull-request") {
+    if (execution.preImplementationChanges.length)
+      throw new Error(
+        "existing pull-request baseline requires a clean working tree",
+      );
     const pullRequest = execution.pullRequest;
     if (!pullRequest || pullRequest.state !== "OPEN")
       throw new Error(
@@ -267,13 +271,17 @@ export function assertExecutionBaselineState(baseline, actual) {
 }
 
 export function evaluateExecutionStrategy({
-  semanticRoute,
-  size,
+  eligibility,
+  classification,
   contextGrowthUncertain = false,
   reviewRisk = false,
 }) {
+  if (!eligibility?.eligible)
+    throw new Error("execution strategy requires eligible semantic routing");
+  const semanticRoute = eligibility.selectedRoute;
+  const size = classification?.size;
   if (!new Set(["direct", "open-spec"]).has(semanticRoute))
-    throw new Error("execution strategy requires a semantic route");
+    throw new Error("execution strategy requires a selected semantic route");
   if (!new Set(["S", "M", "L", "XL"]).has(size))
     throw new Error("execution strategy requires S, M, L, or XL size");
   const material = semanticRoute === "open-spec";

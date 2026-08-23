@@ -110,6 +110,11 @@ switch (command) {
     break;
   case "implementation-preflight": {
     const requirementsPath = option("--requirements");
+    const outputPath = option("--out");
+    if (!outputPath)
+      throw new Error(
+        "implementation-preflight requires --out <execution-baseline>",
+      );
     const result = assertImplementationPreflight(
       await readJson(absolute(args[0])),
       requirementsPath ? await readJson(absolute(requirementsPath)) : null,
@@ -119,23 +124,25 @@ switch (command) {
         pullRequestUrl: option("--pull-request"),
       }),
     );
-    const outputPath = option("--out");
-    if (outputPath) await writeJson(statePath(outputPath), result.baseline);
+    await writeJson(statePath(outputPath), result.baseline);
     output(result);
     break;
   }
   case "route-conformance":
     {
       const executionPath = option("--execution");
-      const baseline = executionPath
-        ? validateExecutionBaseline(await readJson(absolute(executionPath)))
-        : null;
-      if (baseline)
-        assertExecutionBaselineState(
-          baseline,
-          await gitExecutionBaselineState(repoRoot, baseline),
+      if (!executionPath)
+        throw new Error(
+          "route-conformance requires --execution <execution-baseline>",
         );
-      const base = baseline?.commit ?? option("--base") ?? "origin/main";
+      const baseline = validateExecutionBaseline(
+        await readJson(absolute(executionPath)),
+      );
+      assertExecutionBaselineState(
+        baseline,
+        await gitExecutionBaselineState(repoRoot, baseline),
+      );
+      const base = baseline.commit;
       const evidence = await gitEvidence(repoRoot, base);
       const targetRelevantFiles = evidence.changedFiles.filter(
         (file) => !file.startsWith("docs/exec-plans/active/"),

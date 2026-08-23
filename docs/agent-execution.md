@@ -6,7 +6,7 @@ Use this workflow after initial discovery, impact routing, requirements readines
 
 For requirements-gated work, `plan` receives the validated state described in `docs/requirements-elicitation.md`. Planning is downstream of the readiness gate; direct S work remains lightweight.
 
-Implementation is also downstream of `implementation-preflight`: work runs on a non-default task branch and records an immutable execution-episode baseline. New work starts at current `origin/main`; a bounded existing-PR follow-up may start at its verified clean, fully pushed open-PR head. Planning files do not weaken either invariant. Never commit or push implementation directly to `main`.
+Implementation is also downstream of `implementation-preflight`: work runs on a non-default task branch and records an immutable execution-episode baseline. New work starts at current `origin/main`; a bounded existing-PR follow-up may start at its verified clean, fully pushed open-PR head. Material follow-up planning is synthesized, committed, and pushed before that head is fixed as the implementation baseline. Planning files do not weaken either invariant. Never commit or push implementation directly to `main`.
 
 Keep four decisions orthogonal:
 

@@ -177,21 +177,37 @@ test("execution strategy keeps semantics, specification, size, orchestration, an
               [scenario.materialSignal]: true,
             },
           };
-    assert.equal(
-      evaluateRouteEligibility(assessment).eligible,
-      true,
-      scenario.id,
-    );
+    const eligibility = evaluateRouteEligibility(assessment);
+    assert.equal(eligibility.eligible, true, scenario.id);
     assert.deepEqual(
       evaluateExecutionStrategy({
-        semanticRoute: scenario.semanticRoute,
-        size: scenario.size,
+        eligibility,
+        classification: { size: scenario.size },
         contextGrowthUncertain: scenario.contextGrowthUncertain ?? false,
         reviewRisk: scenario.reviewRisk ?? false,
       }),
       scenario.expectedStrategy,
       scenario.id,
     );
+    const discovered = {
+      version: 1,
+      changedFiles: ["local.js"],
+      materialSignals: {
+        ...directAssessment().materialSignals,
+        publicContract: true,
+      },
+    };
+    if (scenario.expectedEscalation === "reroute-required")
+      assert.throws(
+        () => assertRouteConformance(assessment, discovered, ["local.js"]),
+        /re-route required/,
+        scenario.id,
+      );
+    else
+      assert.doesNotThrow(
+        () => assertRouteConformance(assessment, discovered, ["local.js"]),
+        scenario.id,
+      );
   }
   assert.equal(fixture.pr30.observed.parentChangedFiles, 32);
   assert.equal(fixture.pr30.observed.followupChangedFiles, 2);
@@ -248,6 +264,7 @@ test("implementation preflight supports a verified immutable existing-PR episode
     /different task branch/,
   );
   for (const invalid of [
+    { preImplementationChanges: ["openspec/changes/example/design.md"] },
     { upstreamHead: "b".repeat(40) },
     { pullRequest: { ...execution.pullRequest, state: "CLOSED" } },
     { pullRequest: { ...execution.pullRequest, baseRefName: "release" } },
@@ -261,6 +278,34 @@ test("implementation preflight supports a verified immutable existing-PR episode
         }),
       /existing pull-request baseline|existing pull request/,
     );
+});
+
+test("CLI requires persisted execution baselines for preflight and conformance", async () => {
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "implementation-preflight",
+        "docs/exec-plans/active/decouple-harness-routing/route-assessment.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --out/,
+  );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "route-conformance",
+        "docs/exec-plans/active/decouple-harness-routing/route-assessment.json",
+        "docs/exec-plans/active/decouple-harness-routing/discovered-surface.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --execution/,
+  );
 });
 
 test("exact GitHub Pages intent is non-direct and blocks mutation on owned decisions", async () => {
