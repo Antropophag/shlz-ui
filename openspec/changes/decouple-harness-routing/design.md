@@ -60,4 +60,4 @@ One machine-readable matrix records representative inputs and expected outputs. 
 
 ## Migration Plan
 
-Add failing evaluation/preflight regressions, implement the baseline record and scoped conformance interface, update the routing/execution/validation pointers, and run focused harness/OpenSpec checks plus diff-scoped review. Existing default `origin/main` command usage remains compatible; existing plan and requirements schemas remain readable. Deliver on a new task branch through an unmerged PR.
+Add failing evaluation/preflight regressions, implement the baseline record and scoped conformance interface, update the routing/execution/validation pointers, and run focused harness/OpenSpec checks plus diff-scoped review. Existing preflight callers migrate by adding `--out <execution-baseline>` and conformance callers replace `--base` with `--execution <execution-baseline>`; making persistence mandatory is an intentional repo-local CLI contract change. Existing plan and requirements schemas remain readable. Deliver on a new task branch through an unmerged PR.
