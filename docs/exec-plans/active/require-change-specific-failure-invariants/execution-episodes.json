@@ -32,7 +32,7 @@
       "requirementsRevision": 3,
       "plan": "docs/exec-plans/active/require-change-specific-failure-invariants/plan-r3.json",
       "state": "docs/exec-plans/active/require-change-specific-failure-invariants/state-r3-remediation.json",
-      "status": "active",
+      "status": "completed",
       "supersedes": "revision-3-final",
       "reason": "replays the mandatory graph after independent review rejected incomplete contract digest and unvalidated delivery handoffs"
     }
