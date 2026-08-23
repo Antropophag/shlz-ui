@@ -1237,11 +1237,18 @@ test("post-launch recording failures leave a retryable durable state", () => {
     state,
     "shared-native-dialog",
     new Error("duplicate runtime evidence"),
-    { launchId: "launch-recording-failed", evidenceDigest: "e".repeat(64) },
+    {
+      launchId: "launch-recording-failed",
+      evidence: {
+        runtimeId: "runtime-recording-failed",
+        evidenceDigest: "e".repeat(64),
+      },
+    },
   );
   assert.deepEqual(state.packets["shared-native-dialog"].failure, {
     terminalStatus: "recording-failed",
     launchId: "launch-recording-failed",
+    runtimeId: "runtime-recording-failed",
     evidenceDigest: "e".repeat(64),
     reason: "duplicate runtime evidence",
   });

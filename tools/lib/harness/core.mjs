@@ -1547,7 +1547,8 @@ export function failWorkerReservation(state, packetId, error, result = null) {
     failure: {
       terminalStatus: "recording-failed",
       launchId: result?.launchId ?? null,
-      evidenceDigest: result?.evidenceDigest ?? null,
+      runtimeId: result?.evidence?.runtimeId ?? null,
+      evidenceDigest: result?.evidence?.evidenceDigest ?? null,
       reason: error instanceof Error ? error.message : String(error),
     },
   };
