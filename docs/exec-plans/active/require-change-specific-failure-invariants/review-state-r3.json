@@ -14,11 +14,7 @@
     }
   ],
   "findings": [],
-  "failurePathConcerns": [
-    "state-machine",
-    "persistence",
-    "subprocess"
-  ],
+  "failurePathConcerns": ["state-machine", "persistence", "subprocess"],
   "changeFailureInvariants": {
     "change": "require-change-specific-failure-invariants",
     "contractDigest": "43d9da3f53f0286b33bdfbced9969148afe88bfe390be69c5bc6cef5e027a229",
@@ -70,10 +66,7 @@
     "version": 1
   },
   "failurePathProof": {
-    "command": [
-      "node",
-      "tools/tests/change-specific-review-fixture.mjs"
-    ],
+    "command": ["node", "tools/tests/change-specific-review-fixture.mjs"],
     "contractDigest": "43d9da3f53f0286b33bdfbced9969148afe88bfe390be69c5bc6cef5e027a229",
     "invariants": [
       {

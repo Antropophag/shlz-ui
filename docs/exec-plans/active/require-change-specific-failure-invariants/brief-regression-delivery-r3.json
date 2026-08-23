@@ -12,20 +12,9 @@
       "harness/change-specific-failure-invariants",
       "delivery guards"
     ],
-    "dependencies": [
-      "contract-proof"
-    ],
-    "focusedValidation": [
-      "harness",
-      "openspec",
-      "affected",
-      "two-axis review"
-    ],
-    "handoff": [
-      "caught/not-caught rationale",
-      "validation evidence",
-      "PR URL"
-    ],
+    "dependencies": ["contract-proof"],
+    "focusedValidation": ["harness", "openspec", "affected", "two-axis review"],
+    "handoff": ["caught/not-caught rationale", "validation evidence", "PR URL"],
     "id": "regression-delivery",
     "implementationOutcomes": [
       "regression sensitivity",
@@ -37,11 +26,7 @@
       "docs/**",
       "openspec/changes/require-change-specific-failure-invariants/**"
     ],
-    "nonGoals": [
-      "modify PR #33",
-      "merge",
-      "generated skill edits"
-    ],
+    "nonGoals": ["modify PR #33", "merge", "generated skill edits"],
     "objective": "Prove PR #33 coverage, integrate workflow guidance, independently review, and deliver an unmerged PR",
     "outputs": [
       "eight-finding classification with four runtime invariants",
@@ -84,12 +69,7 @@
     "docs/**",
     "openspec/changes/require-change-specific-failure-invariants/**"
   ],
-  "focusedValidation": [
-    "harness",
-    "openspec",
-    "affected",
-    "two-axis review"
-  ],
+  "focusedValidation": ["harness", "openspec", "affected", "two-axis review"],
   "lifecycle": {
     "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
     "pause": "pause through a newer requirements revision on material ambiguity",
