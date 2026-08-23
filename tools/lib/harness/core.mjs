@@ -559,6 +559,20 @@ export function deterministicRouteRiskFloor(surfaces) {
   return [...signals].sort((a, b) => a.localeCompare(b));
 }
 
+const incompleteDeliveryPackets = (plan, state) =>
+  plan.packets
+    .filter(({ id }) => {
+      if (state.packets?.[id]?.status !== "completed") return true;
+      try {
+        return (
+          validateHandoff(state.handoffs?.[id], plan).completedPacket !== id
+        );
+      } catch {
+        return true;
+      }
+    })
+    .map(({ id }) => id);
+
 export function assertImplementationDelivery(delivery, execution = null) {
   if (!delivery || typeof delivery !== "object")
     throw new Error("implementation delivery evidence is required");
@@ -592,12 +606,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       throw new Error(
         `delivery execution state has unknown packets: ${unknown.join(", ")}`,
       );
-    const incomplete = plan.packets
-      .filter(
-        ({ id }) =>
-          state.packets?.[id]?.status !== "completed" || !state.handoffs?.[id],
-      )
-      .map(({ id }) => id);
+    const incomplete = incompleteDeliveryPackets(plan, state);
     if (incomplete.length)
       throw new Error(
         `delivery requires completed mandatory packets: ${incomplete.join(", ")}`,
@@ -1973,9 +1982,26 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
     const text = await readFile(file, "utf8");
     const lines = text.split(/\r?\n/);
     let requirement = null;
+    let requirementContract = null;
     for (let index = 0; index < lines.length; index += 1) {
       const requirementMatch = lines[index].match(/^### Requirement: (.+)$/);
-      if (requirementMatch) requirement = requirementMatch[1];
+      if (requirementMatch) {
+        requirement = requirementMatch[1];
+        const sectionEnd = lines.findIndex(
+          (line, candidate) =>
+            candidate > index && /^### Requirement:/.test(line),
+        );
+        const contractEnd = lines.findIndex(
+          (line, candidate) =>
+            candidate > index &&
+            (sectionEnd === -1 || candidate < sectionEnd) &&
+            (failureInvariantMarker.test(line) || /^#### Scenario:/.test(line)),
+        );
+        requirementContract = lines
+          .slice(index, contractEnd === -1 ? sectionEnd : contractEnd)
+          .join("\n")
+          .trim();
+      }
       const marker = lines[index].match(failureInvariantMarker);
       if (!marker) continue;
       let scenarioIndex = index + 1;
@@ -2008,7 +2034,10 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
         requirement,
         scenario: scenarioMatch[1],
         spec: path.relative(repoRoot, file).split(path.sep).join("/"),
-        contract: lines.slice(scenarioIndex, blockEnd).join("\n").trim(),
+        contract: {
+          requirement: requirementContract,
+          scenario: lines.slice(scenarioIndex, blockEnd).join("\n").trim(),
+        },
       });
     }
   }

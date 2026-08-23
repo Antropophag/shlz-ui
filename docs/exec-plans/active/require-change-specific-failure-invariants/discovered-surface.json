@@ -12,6 +12,7 @@
     "openspec/changes/require-change-specific-failure-invariants/tasks.md",
     "tools/harness.mjs",
     "tools/lib/harness/core.mjs",
+    "tools/tests/change-specific-review-behavior-probe.mjs",
     "tools/tests/change-specific-review-fixture.mjs",
     "tools/tests/harness.test.mjs",
     "tools/tests/pr33-change-invariant-fixture.mjs",

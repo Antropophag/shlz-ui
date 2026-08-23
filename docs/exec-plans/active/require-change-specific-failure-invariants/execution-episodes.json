@@ -15,8 +15,26 @@
       "requirementsRevision": 3,
       "plan": "docs/exec-plans/active/require-change-specific-failure-invariants/plan-r3.json",
       "state": "docs/exec-plans/active/require-change-specific-failure-invariants/state-r3.json",
-      "status": "completed",
+      "status": "superseded-after-ci-remediation",
       "supersedes": "revision-2"
+    },
+    {
+      "id": "revision-3-final",
+      "requirementsRevision": 3,
+      "plan": "docs/exec-plans/active/require-change-specific-failure-invariants/plan-r3.json",
+      "state": "docs/exec-plans/active/require-change-specific-failure-invariants/state-r3-final.json",
+      "status": "superseded-blocked-by-independent-review",
+      "supersedes": "revision-3",
+      "reason": "replays the mandatory graph after CI-driven probe path validation changed the reviewed head"
+    },
+    {
+      "id": "revision-3-remediation",
+      "requirementsRevision": 3,
+      "plan": "docs/exec-plans/active/require-change-specific-failure-invariants/plan-r3.json",
+      "state": "docs/exec-plans/active/require-change-specific-failure-invariants/state-r3-remediation.json",
+      "status": "active",
+      "supersedes": "revision-3-final",
+      "reason": "replays the mandatory graph after independent review rejected incomplete contract digest and unvalidated delivery handoffs"
     }
   ]
 }

@@ -1635,6 +1635,19 @@ test("delivery rejects an incomplete mandatory packet graph", () => {
       }),
     /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
   );
+  for (const { id } of plan.packets) {
+    state.packets[id] = { status: "completed" };
+    state.handoffs[id] = {};
+  }
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        requirementsState: ready,
+      }),
+    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+  );
 });
 
 test("agent routing preserves eligibility, readiness, conformance, and apply re-entry", async () => {
@@ -2343,7 +2356,7 @@ test("material review requires baseline and current-change red-green proof", asy
   );
 });
 
-test("contract identity is unique and only cited contract edits change the binding", async () => {
+test("contract identity includes requirement prose and cited scenarios", async () => {
   const temporaryRoot = await mkdtemp(
     path.join(tmpdir(), "shlz-contract-binding-"),
   );
@@ -2396,7 +2409,7 @@ ${detail}
       manifest,
       temporaryRoot,
     );
-    assert.equal(first.contractDigest, second.contractDigest);
+    assert.notEqual(first.contractDigest, second.contractDigest);
     await writeFile(
       specPath,
       spec("Changed requirement text.", "the cited scenario digest changes"),

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "planId": "require-change-specific-failure-invariants",
+  "requirementsRevision": 3,
+  "packets": {
+    "contract-proof": {
+      "status": "completed",
+      "session": "root-r3-remediation-contract-proof"
+    },
+    "regression-delivery": {
+      "status": "pending"
+    }
+  },
+  "handoffs": {
+    "contract-proof": {
+      "completedPacket": "contract-proof",
+      "changed": [
+        "contract digest now includes Requirement prose and cited Scenario content",
+        "delivery validates every stored handoff against the current plan"
+      ],
+      "provenChecks": [
+        "requirement-prose mutation changes contract digest",
+        "completed packets with empty handoffs are rejected",
+        "59 focused harness tests pass",
+        "lint and strict OpenSpec validation pass"
+      ],
+      "settledDecisions": [
+        "truthy handoff presence is not execution evidence",
+        "the cited contract includes Requirement prose as well as Scenario behavior"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "regression-delivery",
+      "invalidatedAssumptions": [
+        "scenario-only digest covers the normative contract",
+        "packet completion plus an arbitrary handoff object is sufficient for delivery"
+      ]
+    }
+  }
+}
