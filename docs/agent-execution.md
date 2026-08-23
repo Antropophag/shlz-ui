@@ -76,7 +76,7 @@ Normal successful implementation then pushes only its current task branch, creat
 npm run harness -- delivery-check <delivery-evidence>
 ```
 
-The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings.
+The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings. For material state-machine, persistence, or subprocess changes, executable review derives change-specific failure invariants from marked scenarios in the current OpenSpec delta and proves them alongside the fixed baseline; see `docs/validation-workflow.md`.
 
 The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, keep usage and peak active context `unavailable`; use labeled proxies such as repeated/unique reads, repeated discovery commands, command/output volume, phase changes, handoff bytes, and irrelevant-output accumulation. Context relevance is only the observed ratio of explicitly classified reads, never a semantic quality score. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.
 

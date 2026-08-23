@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "intent": "Require executable review of material state-machine, persistence, and subprocess changes to prove change-specific failure invariants derived from the current OpenSpec contracts in addition to baseline invariants.",
+  "route": "open-spec",
+  "openSpecChange": "require-change-specific-failure-invariants",
+  "requiredDecisions": [
+    {
+      "id": "invariant-derivation-contract",
+      "owner": "user",
+      "blocking": true
+    },
+    { "id": "pr33-regression-fixture", "owner": "user", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

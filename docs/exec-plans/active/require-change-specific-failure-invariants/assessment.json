@@ -1,0 +1,105 @@
+{
+  "id": "require-change-specific-failure-invariants",
+  "baseline": "e36668b2a933cf9d97ea2657cef6ee7ca202f322",
+  "requirementsGate": "required",
+  "openSpecChange": "require-change-specific-failure-invariants",
+  "signals": {
+    "independentWorkUnits": 2,
+    "sharedSeams": 2,
+    "contracts": 1,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 1,
+    "changedScope": 2,
+    "reviewRisk": 3,
+    "contextGrowthRisk": 2
+  },
+  "openSpecTaskCount": 8,
+  "workUnits": [
+    {
+      "id": "contract-proof",
+      "group": "contract-proof",
+      "objective": "Implement contract-grounded manifest parsing, review-state binding, and union proof enforcement",
+      "scope": [
+        "delta contract parsing",
+        "review state and CLI",
+        "focused unit tests"
+      ],
+      "nonGoals": ["semantic inference from prose", "direct S review changes"],
+      "dependencies": [],
+      "contracts": ["harness/change-specific-failure-invariants"],
+      "contextSources": [
+        "openspec/changes/require-change-specific-failure-invariants/**",
+        "tools/{harness.mjs,lib/harness/core.mjs,tests/harness.test.mjs}"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/core.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "focusedValidation": ["harness", "openspec"],
+      "outputs": [
+        "validated manifest",
+        "contract-bound proof",
+        "compatibility tests"
+      ],
+      "handoff": ["public CLI contract", "proof schema", "focused checks"],
+      "implementationOutcomes": [
+        "grounded invariant coverage",
+        "stale proof rejection",
+        "union discrimination"
+      ],
+      "preferredExecutionMode": "continue"
+    },
+    {
+      "id": "regression-delivery",
+      "group": "regression-delivery",
+      "objective": "Prove PR #33 coverage, integrate workflow guidance, independently review, and deliver an unmerged PR",
+      "scope": [
+        "PR #33 fixture",
+        "agent-facing docs",
+        "dogfood evidence",
+        "review and PR"
+      ],
+      "nonGoals": ["modify PR #33", "merge", "generated skill edits"],
+      "dependencies": ["contract-proof"],
+      "contracts": [
+        "harness/change-specific-failure-invariants",
+        "delivery guards"
+      ],
+      "contextSources": [
+        "docs/validation-workflow.md",
+        "docs/agent-execution.md",
+        "docs/exec-plans/fixtures/**",
+        "PR #33 review comments"
+      ],
+      "implementationSurface": [
+        "tools/tests/**",
+        "docs/**",
+        "openspec/changes/require-change-specific-failure-invariants/**"
+      ],
+      "focusedValidation": [
+        "harness",
+        "openspec",
+        "affected",
+        "two-axis review"
+      ],
+      "outputs": [
+        "seven-finding classification",
+        "historical red/green proof",
+        "unmerged PR"
+      ],
+      "handoff": [
+        "caught/not-caught rationale",
+        "validation evidence",
+        "PR URL"
+      ],
+      "implementationOutcomes": [
+        "regression sensitivity",
+        "workflow integration",
+        "guarded delivery"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    }
+  ]
+}

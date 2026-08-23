@@ -1890,7 +1890,148 @@ const failurePathInvariants = new Map([
   ["terminal-events-have-defined-precedence", "subprocess"],
 ]);
 
-export function createReviewState(base, concerns = []) {
+const failureInvariantMarker =
+  /^<!-- failure-invariant: ([a-z0-9]+(?:-[a-z0-9]+)*) concern=(state-machine|persistence|subprocess) -->$/;
+
+export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
+  if (
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(change ?? "") ||
+    !manifest ||
+    manifest.version !== 1 ||
+    manifest.change !== change ||
+    !Array.isArray(manifest.invariants) ||
+    !manifest.invariants.length
+  )
+    throw new Error("change-specific failure invariant manifest is invalid");
+  const changeRoot = path.resolve(repoRoot, "openspec/changes", change);
+  const specsRoot = path.join(changeRoot, "specs");
+  const resolvedRoot = path.resolve(repoRoot);
+  if (
+    changeRoot !== resolvedRoot &&
+    !changeRoot.startsWith(`${resolvedRoot}${path.sep}`)
+  )
+    throw new Error(
+      "change-specific failure invariant change escapes repository",
+    );
+  let files;
+  try {
+    files = (await readdir(specsRoot, { recursive: true, withFileTypes: true }))
+      .filter((entry) => entry.isFile() && entry.name === "spec.md")
+      .map((entry) => path.join(entry.parentPath, entry.name))
+      .sort((a, b) => a.localeCompare(b));
+  } catch (error) {
+    if (error.code === "ENOENT")
+      throw new Error(`OpenSpec change has no delta specs: ${change}`);
+    throw error;
+  }
+  const sources = new Map();
+  const identities = new Set();
+  const specContents = [];
+  for (const file of files) {
+    const text = await readFile(file, "utf8");
+    specContents.push({
+      spec: path.relative(repoRoot, file).split(path.sep).join("/"),
+      text,
+    });
+    const lines = text.split(/\r?\n/);
+    let requirement = null;
+    for (let index = 0; index < lines.length; index += 1) {
+      const requirementMatch = lines[index].match(/^### Requirement: (.+)$/);
+      if (requirementMatch) requirement = requirementMatch[1];
+      const marker = lines[index].match(failureInvariantMarker);
+      if (!marker) continue;
+      let scenarioIndex = index + 1;
+      while (lines[scenarioIndex] === "") scenarioIndex += 1;
+      const scenarioMatch = lines[scenarioIndex]?.match(
+        /^#### Scenario: (.+)$/,
+      );
+      if (!requirement || !scenarioMatch)
+        throw new Error(
+          `failure invariant marker is not adjacent to a scenario: ${path.relative(repoRoot, file)}:${index + 1}`,
+        );
+      const [, id, concern] = marker;
+      if (sources.has(id))
+        throw new Error(`duplicate failure invariant marker: ${id}`);
+      const identity = `${requirement}\0${scenarioMatch[1]}`;
+      if (identities.has(identity))
+        throw new Error(
+          `duplicate failure invariant contract identity: ${requirement} / ${scenarioMatch[1]}`,
+        );
+      identities.add(identity);
+      const end = lines.findIndex(
+        (line, candidate) =>
+          candidate > scenarioIndex &&
+          /^(### Requirement:|#### Scenario:)/.test(line),
+      );
+      const blockEnd = end === -1 ? lines.length : end;
+      sources.set(id, {
+        id,
+        concern,
+        requirement,
+        scenario: scenarioMatch[1],
+        spec: path.relative(repoRoot, file).split(path.sep).join("/"),
+        contract: lines.slice(scenarioIndex, blockEnd).join("\n").trim(),
+      });
+    }
+  }
+  const ids = new Set();
+  const normalized = manifest.invariants.map((item) => {
+    if (
+      !item ||
+      typeof item.id !== "string" ||
+      ids.has(item.id) ||
+      !failurePathConcerns.has(item.concern) ||
+      typeof item.requirement !== "string" ||
+      typeof item.scenario !== "string"
+    )
+      throw new Error("change-specific failure invariant entry is invalid");
+    ids.add(item.id);
+    const source = sources.get(item.id);
+    if (
+      !source ||
+      source.concern !== item.concern ||
+      source.requirement !== item.requirement ||
+      source.scenario !== item.scenario
+    )
+      throw new Error(
+        `change-specific failure invariant is ungrounded: ${item.id}`,
+      );
+    return {
+      id: source.id,
+      concern: source.concern,
+      requirement: source.requirement,
+      scenario: source.scenario,
+      spec: source.spec,
+    };
+  });
+  const uncovered = [...sources.keys()].filter((id) => !ids.has(id));
+  if (uncovered.length)
+    throw new Error(
+      `change-specific failure invariants do not cover: ${uncovered.join(", ")}`,
+    );
+  const extra = [...ids].filter((id) => !sources.has(id));
+  if (extra.length)
+    throw new Error(
+      `change-specific failure invariants are ungrounded: ${extra.join(", ")}`,
+    );
+  const contractDigest = valueDigest({
+    sources: [...sources.values()].map(({ contract, ...source }) => ({
+      ...source,
+      contract,
+    })),
+    specs: specContents,
+  });
+  const binding = {
+    version: 1,
+    change,
+    invariants: stableValue(normalized),
+    contractDigest,
+  };
+  binding.manifestDigest = valueDigest(binding);
+  return binding;
+}
+
+export function createReviewState(base, concerns = [], changeBinding = null) {
   if (!base) throw new Error("review base is required");
   if (
     !Array.isArray(concerns) ||
@@ -1904,6 +2045,9 @@ export function createReviewState(base, concerns = []) {
     passes: [],
     findings: [],
     ...(concerns.length ? { failurePathConcerns: concerns } : {}),
+    ...(changeBinding
+      ? { changeFailureInvariants: stableValue(changeBinding) }
+      : {}),
   };
 }
 
@@ -1915,10 +2059,14 @@ export const failurePathResultDigest = (proof) =>
     reviewedHead: proof.reviewedHead,
     invariants: proof.invariants,
     command: proof.command,
+    openSpecChange: proof.openSpecChange,
+    manifestDigest: proof.manifestDigest,
+    contractDigest: proof.contractDigest,
   });
 
 export function recordFailurePathProof(state, proof) {
   const concerns = state.failurePathConcerns ?? [];
+  const changeBinding = state.changeFailureInvariants ?? null;
   if (!concerns.length)
     throw new Error("review does not require a failure-path proof");
   if (
@@ -1934,17 +2082,28 @@ export function recordFailurePathProof(state, proof) {
     !/^[0-9a-f]{40}$/.test(proof.reviewedHead ?? "") ||
     proof.knownBadRevision === proof.reviewedHead ||
     !Array.isArray(proof.invariants) ||
-    !proof.invariants.length
+    !proof.invariants.length ||
+    (changeBinding &&
+      (proof.openSpecChange !== changeBinding.change ||
+        proof.manifestDigest !== changeBinding.manifestDigest ||
+        proof.contractDigest !== changeBinding.contractDigest))
   )
     throw new Error("failure-path proof contract is invalid");
   const covered = new Set();
   const ids = new Set();
+  const expected = new Map(
+    [...failurePathInvariants].filter(([, concern]) =>
+      concerns.includes(concern),
+    ),
+  );
+  for (const invariant of changeBinding?.invariants ?? [])
+    expected.set(`${changeBinding.change}/${invariant.id}`, invariant.concern);
   for (const invariant of proof.invariants) {
     if (
       typeof invariant.id !== "string" ||
       !invariant.id ||
       ids.has(invariant.id) ||
-      failurePathInvariants.get(invariant.id) !== invariant.concern ||
+      expected.get(invariant.id) !== invariant.concern ||
       !concerns.includes(invariant.concern) ||
       invariant.knownBad !== "fail" ||
       invariant.reviewedHead !== "pass"
@@ -1956,9 +2115,7 @@ export function recordFailurePathProof(state, proof) {
     covered.add(invariant.concern);
   }
   const missing = concerns.filter((concern) => !covered.has(concern));
-  const missingInvariants = [...failurePathInvariants].filter(
-    ([id, concern]) => concerns.includes(concern) && !ids.has(id),
-  );
+  const missingInvariants = [...expected].filter(([id]) => !ids.has(id));
   if (missing.length || missingInvariants.length)
     throw new Error(
       `failure-path proof does not cover: ${[
@@ -2039,6 +2196,14 @@ export function reviewContext(state) {
       concerns: state.failurePathConcerns ?? [],
       complete: Boolean(state.failurePathProof),
       degradation: state.failurePathDegradation ?? null,
+      ...(state.changeFailureInvariants
+        ? {
+            change: state.changeFailureInvariants.change,
+            manifestDigest: state.changeFailureInvariants.manifestDigest,
+            contractDigest: state.changeFailureInvariants.contractDigest,
+            invariants: state.changeFailureInvariants.invariants,
+          }
+        : {}),
     },
     discovery: "fixed-diff-and-known-findings-only",
   };
