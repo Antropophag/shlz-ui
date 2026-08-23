@@ -38,6 +38,26 @@ test("Notification raw authority preserves its exact sheet and three variants", 
       { name: "Type=Error", node: "89:17206", width: 384, height: 58 },
     ],
   );
+  const references = JSON.parse(
+    await readFile("apps/showcase/generated/source-references/manifest.json"),
+  ).find(({ component }) => component === "notification");
+  assert.equal(references.sourceSha256, sha256(sheet));
+  assert.equal(references.references.length, 1);
+  const reference = await readFile(
+    `apps/showcase/generated/source-references/${references.references[0].file}`,
+    "utf8",
+  );
+  const expected = sheet
+    .toString("utf8")
+    .replace(
+      '<svg width="584" height="1802" viewBox="0 0 584 1802"',
+      '<svg width="584" height="1342" viewBox="0 460 584 1342"',
+    );
+  assert.equal(
+    reference,
+    expected,
+    "Notification crop must only change root viewport",
+  );
 });
 
 test("Snackbar raw authority preserves six exact countdown frames", async () => {

@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 import { fixtureUrl } from "./fixture-url.js";
 import {
   expectClassifiedComponentOccurrences,
@@ -19,14 +20,21 @@ const manifests = {
     ),
   ),
 };
-const expectedContours = [
-  "M32 46C41.3888 46 49 38.3888 49 29C49 19.6112 41.3888 12 32 12C22.6112 12 15 19.6112 15 29C15 38.3888 22.6112 46 32 46ZM32 49C43.0457 49 52 40.0457 52 29C52 17.9543 43.0457 9 32 9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49Z",
-  "M49 29C49 38.3888 41.3888 46 32 46C22.6112 46 15 38.3888 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49C43.0457 49 52 40.0457 52 29C52 26.3477 51.4837 23.8161 50.5462 21.5L47.9109 23C48.6148 24.8658 49 26.8879 49 29Z",
-  "M44.6402 44.5L42.955 42C39.9963 44.4958 36.1738 46 32 46C22.6112 46 15 38.3888 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49C36.7945 49 41.195 47.3129 44.6402 44.5Z",
-  "M17.7171 43L20 41.0416C16.9114 37.9636 15 33.705 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 34.4509 14.1806 39.3925 17.7171 43Z",
-  "M15.294 18L17.7171 19.7767C20.7454 15.0969 26.011 12 32 12V9C25.0179 9 18.8715 12.5778 15.294 18Z",
-  "M31.2632 9.01332L31.4172 12.0098C31.6106 12.0033 31.8049 12 32 12V9C31.7533 9 31.5077 9.00447 31.2632 9.01332Z",
-];
+const sourceSnackbarFrames = await Promise.all(
+  Array.from({ length: 6 }, async (_, index) => {
+    const source = await readFile(
+      new globalThis.URL(
+        `../../apps/showcase/generated/source-references/snackbar-${index + 1}.svg`,
+        import.meta.url,
+      ),
+      "utf8",
+    );
+    const [, contour] = source.match(
+      /<path fill-rule="evenodd" clip-rule="evenodd" d="([^"]+)" fill="white"\/>/,
+    );
+    return { contour, number: String(5 - index) };
+  }),
+);
 const executedStates = new Map([
   ["notification", new Set()],
   ["snackbar", new Set()],
@@ -124,8 +132,17 @@ test("Notification exact source geometry, paint and application lifecycle execut
   await verifyMaterialState("notification", "error", () =>
     expect(danger).toBeVisible(),
   );
+  await page.locator(".shlz-verification-harness > summary").click();
+  const withButton = page
+    .locator("#fidelity-notification .shlz-notification-matrix")
+    .locator(":scope > .shlz-notification")
+    .nth(2);
+  await expect(withButton).toHaveCSS("background-color", "rgb(11, 22, 35)");
+  await expect(
+    withButton.locator("button", { hasText: "Удалить" }),
+  ).toBeVisible();
   await verifyMaterialState("notification", "with-button", () =>
-    expect(danger.getByRole("button")).toBeVisible(),
+    expect(withButton).toBeVisible(),
   );
   await expect(dismissible).toHaveScreenshot("notification-default.png");
   await expect(danger).toHaveScreenshot("notification-error-action.png");
@@ -134,6 +151,8 @@ test("Notification exact source geometry, paint and application lifecycle execut
     name: "Закрыть уведомление",
   });
   await close.focus();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Shift+Tab");
   await expect(close).toBeFocused();
   await expect(close).toHaveCSS("outline-style", "solid");
   await verifyMaterialState("notification", "focus-visible", () =>
@@ -201,7 +220,31 @@ test("Snackbar preserves all six exact static contours without timer semantics",
     await countdowns
       .locator("path")
       .evaluateAll((paths) => paths.map((path) => path.getAttribute("d"))),
-  ).toEqual(expectedContours);
+  ).toEqual(sourceSnackbarFrames.map(({ contour }) => contour));
+  const frameEvidence = await countdowns.evaluateAll((items) =>
+    items.map((item) => {
+      const svg = item.querySelector("svg");
+      const path = item.querySelector("path");
+      const numeral = item.querySelector("span");
+      const bounds = svg.getBoundingClientRect();
+      return {
+        numeral: numeral.textContent,
+        svgWidth: bounds.width,
+        svgHeight: bounds.height,
+        pathFill: globalThis.getComputedStyle(path).fill,
+        color: globalThis.getComputedStyle(item).color,
+      };
+    }),
+  );
+  expect(frameEvidence).toEqual(
+    sourceSnackbarFrames.map(({ number }) => ({
+      numeral: number,
+      svgWidth: 64,
+      svgHeight: 58,
+      pathFill: "rgb(255, 255, 255)",
+      color: "rgb(255, 255, 255)",
+    })),
+  );
   await verifyMaterialState("snackbar", "number-5", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='5']"),
@@ -331,18 +374,54 @@ test("Notification and Snackbar survive narrow, long and text-scaled content", a
     ).toBeVisible(),
   );
   await page.evaluate(() => {
-    document.documentElement.style.zoom = "2";
+    const roots = [
+      document.querySelector(
+        "[data-component-audit-id='notification-content-stress']",
+      ),
+      document.querySelector(
+        "[data-component-audit-id='snackbar-content-stress']",
+      ),
+    ];
+    document.body.replaceChildren(...roots);
   });
-  for (const id of ["notification-content-stress", "snackbar-content-stress"])
+  await page.addStyleTag({
+    content:
+      ".shlz-notification { font-size: 28px !important; line-height: 36px !important; }",
+  });
+  for (const id of ["notification-content-stress", "snackbar-content-stress"]) {
+    const root = page.locator(`[data-component-audit-id='${id}']`);
+    const metrics = await root.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const children = [...element.children].map((child) => {
+        const childBounds = child.getBoundingClientRect();
+        return {
+          visible: childBounds.width > 0 && childBounds.height > 0,
+          inside:
+            childBounds.left >= bounds.left &&
+            childBounds.right <= bounds.right + 1 &&
+            childBounds.top >= bounds.top &&
+            childBounds.bottom <= bounds.bottom + 1,
+        };
+      });
+      return {
+        fontSize: globalThis.getComputedStyle(element).fontSize,
+        height: bounds.height,
+        children,
+      };
+    });
+    expect(metrics.fontSize).toBe("28px");
+    expect(metrics.height).toBeGreaterThan(116);
     expect(
-      await page
-        .locator(`[data-component-audit-id='${id}']`)
-        .evaluate(
-          (element) =>
-            element.scrollWidth <=
-            Math.ceil(element.getBoundingClientRect().width),
-        ),
+      metrics.children.every(({ visible, inside }) => visible && inside),
     ).toBe(true);
+  }
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth,
+    ),
+  ).toBe(true);
   await verifyMaterialState("notification", "text-scale", () =>
     expect(
       page.locator("[data-component-audit-id='notification-content-stress']"),

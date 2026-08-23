@@ -22,6 +22,7 @@ const classifiedFiles = new Set([
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/main.js",
   "apps/showcase/src/notification-consumer.js",
+  "apps/showcase/src/snackbar-contours.js",
   "tools/fixtures/plain-html.html",
 ]);
 const auditIdsByFile = new Map([

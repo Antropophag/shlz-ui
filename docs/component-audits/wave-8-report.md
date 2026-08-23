@@ -19,7 +19,7 @@ Notification independently passes source integrity, structural contract, Chromiu
 
 Snackbar independently passes the same seven evidence levels. Its ledger covers all six exact static contours, real action hover/active/focus-visible, native disabled, stable accessible content, long/narrow/text-scaled content, and one live Showcase consumer. Waiting does not advance the frames: no timer, lifecycle controller, repeated countdown announcement, or SHLZ event is introduced.
 
-Five focused snapshots were generated and manually inspected. The first pass exposed a high-content radius defect caused by `radius-max=100px`, an intra-word action wrap, and a missing contour in the stress fixture. The final source-backed implementation uses radius 29, normal word wrapping, and the exact Number=0 contour; the second bounded snapshot pass shows no remaining clipping or unexplained change.
+Five focused snapshots were generated and manually inspected. The first pass exposed a high-content radius defect caused by `radius-max=100px`, an intra-word action wrap, and a missing contour in the stress fixture. The final source-backed implementation uses radius 29, normal word wrapping, and the exact Number=0 contour; the second bounded snapshot pass shows no remaining clipping or unexplained change. A canonical framework-neutral contour module now supplies both Showcase surfaces, while browser expectations are independently extracted from the lossless raw-derived SVG references.
 
 Manual Chromium walks cover pointer hover/down, Tab/focus-visible, Enter/Space, disabled actions, Notification close/focus return, all six Snackbar frames, long localized content, 320px viewport, and 200 percent text scaling. Cross-engine certification is not claimed because the current harness runs Chromium only.
 
@@ -32,11 +32,13 @@ Focused source/manifest/census Node checks pass 6/6. Focused Notification contra
 - `npm run lint` — ESLint, Stylelint and Prettier pass;
 - `npm run build` and `node tools/validate.mjs` — all workspaces build; 68 source SVGs, three token groups, 119 canonical icons and 42 aliases validate;
 - `npm run test:packages` — four packed packages install and execute from a clean project;
-- `npm run test:e2e` — 199/200 on the pre-approval broad snapshot, with every component/runtime/a11y/fidelity test passing; the sole expected broad Showcase height change was manually reviewed, updated, and then passed twice in focused reruns;
+- `npm run test:e2e` — 200/200 pass on the stabilized fingerprint after the broad Showcase snapshot was manually reviewed and accepted;
 - `git diff --check`, raw source hash comparison and no-diff check under `shlz-design-source/` — pass.
 
 Impeccable technical audit after remediation scores Accessibility 4/4, Performance 4/4, Theming 4/4, Responsive 4/4, and Implementation Integrity 4/4 (20/20). Its only mechanical advisory is a pre-existing Showcase decorative grid background outside the Wave 8 diff; it is not a component finding. Positive evidence includes native controls, no new runtime dependency, source tokens/paints, bounded responsive growth, exact contour assets, and independent occurrence/state ledgers.
 
-Two-axis review, final implementation SHA, PR URL, GitHub CI and review-thread state are recorded here before delivery; until those fields are populated neither component is reported as delivered or review-ready.
+Two-axis review initially found five spec-evidence gaps and two standards concerns. Remediation added a lossless Notification crop comparison, independent dark `With button` evidence, complete six-frame Snackbar numeral/geometry/paint checks, component-isolated 200 percent text scaling with page-overflow assertions, the final 200/200 regression run, and canonical contour ownership. The reviewers found no scope creep; a post-remediation re-review is required before delivery.
+
+Final implementation SHA, PR URL, GitHub CI and review-thread state are recorded here before delivery; until those fields are populated neither component is reported as delivered or review-ready.
 
 No accepted deviation or open component finding is currently recorded. The existing Vite chunk-size warning is repository-wide and Wave 8 neither introduces nor worsens it.
