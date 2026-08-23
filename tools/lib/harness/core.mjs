@@ -381,6 +381,7 @@ function workflowConstructs(surface) {
         direction: line.direction,
         key: `permissions:${line.indent}:write-all`,
         signals: ["permissionsOrSecurity"],
+        alwaysMaterial: true,
       });
     const directGrant = normalized.match(
       /^(contents|pages|id-token|packages|deployments):\s*write\b/,

@@ -354,6 +354,26 @@ test("direct completion re-routes on material discovered surface but not harmles
             path: ".github/workflows/ci.yml",
             status: "modified",
             patch:
+              "@@ -4,3 +4,2 @@ jobs:\n-    permissions: write-all\n@@ -12,2 +11,3 @@ other-job:\n+    permissions: write-all",
+          },
+        ],
+      ),
+    /deterministic risk floor.*permissionsOrSecurity.*re-route required/,
+  );
+  assert.throws(
+    () =>
+      assertRouteConformance(
+        directAssessment(),
+        {
+          version: 1,
+          changedFiles: [".github/workflows/ci.yml"],
+          materialSignals: directAssessment().materialSignals,
+        },
+        [
+          {
+            path: ".github/workflows/ci.yml",
+            status: "modified",
+            patch:
               "@@ -4,3 +4,2 @@ jobs:\n-    contents: write\n@@ -12,2 +11,3 @@ other-job:\n+    contents: write",
           },
         ],
