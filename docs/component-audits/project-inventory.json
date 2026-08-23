@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
   "baseline": {
-    "sha": "e893a7eb473d4c655a641ab984ed4c7b842d1723",
-    "measuredAt": "2026-08-21",
+    "sha": "b0be221855bf7a16181a797d39387cc77f3ae626",
+    "measuredAt": "2026-08-23",
     "countMethod": "Built Showcase DOM census at 1440x900; executable excludes [inert] and Data Workspace roots. Counts are observations, not acceptance thresholds."
   },
   "measuredCountsContract": "measured_counts records DOM roots observed by the baseline census; occurrence arrays list repository surfaces and therefore are not cardinality-equivalent. Component audit manifests provide occurrence-level enumeration when a family enters verification.",
@@ -1675,34 +1675,42 @@
       "tests": [
         "tools/tests/notification-source.test.mjs",
         "tools/playwright/notification-contract.spec.js",
-        "tools/playwright/fidelity.spec.js"
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/notification-snackbar-wave8.spec.js",
+        "tools/tests/wave8-repository-census.test.mjs"
       ],
       "evidence": {
-        "source-integrity": "three-variant test",
-        "structural-contract": "docs/source test",
-        "runtime-browser": "consumer lifecycle test",
-        "accessibility": "role/focus test",
-        "focused-visual": "focused snapshots",
-        "consumer-integration": "dedicated Showcase consumer",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: raw SVG hash and exact three Type names, nodes, dimensions, extraction health and references are asserted",
+        "structural-contract": "pass: repository and DOM guards classify three Showcase roots, one plain HTML root and six inert diagnostics",
+        "runtime-browser": "pass: application-owned close, focus return and action execute once without a library controller",
+        "accessibility": "pass: semantics, text, named close, keyboard focus-visible and native disabled action execute",
+        "focused-visual": "pass: default, error/action and narrow content snapshots plus exact computed geometry and paint pass",
+        "consumer-integration": "pass: Showcase and plain HTML consume the framework-neutral CSS primitive",
+        "responsive-content-stress": "pass: long title/message/action, 320px viewport and 200 percent text scale remain usable"
       },
       "canonical_name": "Notification",
       "category": "messaging",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Notification.svg"],
       "production_implementation": [
         "packages/styles/components/notification.css"
       ],
       "behavior": [],
       "docs": ["docs/components/notification.md"],
-      "executable_fixtures": [],
+      "executable_fixtures": [
+        "apps/showcase/src/notification-consumer.js#notification-content-stress"
+      ],
       "live_consumers": [
         "apps/showcase/src/main.js",
-        "apps/showcase/src/notification-consumer.js"
+        "apps/showcase/src/notification-consumer.js",
+        "tools/fixtures/plain-html.html"
       ],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": [
+        "apps/showcase/src/main.js#notification-static-matrix",
+        "apps/showcase/src/fidelity.js#notification-source-matrix"
+      ],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
@@ -1712,12 +1720,14 @@
         "focus return"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "placement, stacking, urgency, live-region policy, queue, timing, persistence, dismissal and focus recovery remain consumer-owned"
+      ],
       "measured_counts": {
-        "executableShowcase": 5,
-        "liveConsumers": 2,
+        "executableShowcase": 3,
+        "liveConsumers": 3,
         "dataWorkspace": 0,
-        "inertDiagnostics": 10,
+        "inertDiagnostics": 6,
         "legacyNative": 0,
         "localAlternatives": 0
       }
@@ -1725,41 +1735,58 @@
     {
       "tests": [
         "tools/tests/notification-source.test.mjs",
-        "tools/playwright/fidelity.spec.js"
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/notification-snackbar-wave8.spec.js",
+        "tools/tests/wave8-repository-census.test.mjs"
       ],
       "evidence": {
-        "source-integrity": "six-variant test",
-        "structural-contract": "CSS only",
-        "runtime-browser": "gap: countdown explicitly static",
-        "accessibility": "gap",
-        "focused-visual": "broad static matrix",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: raw ZIP hash, exact six Number names/nodes/dimensions and byte-preserved exports are asserted",
+        "structural-contract": "pass: repository and DOM guards classify two Showcase roots and seven inert diagnostics",
+        "runtime-browser": "pass: native application action executes once while timer, stepping and auto-dismiss remain absent",
+        "accessibility": "pass: stable text, decorative countdown, keyboard focus-visible and native disabled action execute",
+        "focused-visual": "pass: all six exact contours and representative countdown/content snapshots pass independently",
+        "consumer-integration": "pass: executable Showcase Snackbar owns action and lifecycle outside the library",
+        "responsive-content-stress": "pass: long message/action, 320px viewport and 200 percent text scale remain usable"
       },
       "canonical_name": "Snackbar",
       "category": "messaging",
-      "implementation_status": "diagnostic-only",
-      "audit_status": "INVENTORIED",
-      "authoritative_source": ["shlz-design-source/raw/svg/Notification.svg"],
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
       "production_implementation": [
         "packages/styles/components/notification.css"
       ],
       "behavior": [],
-      "docs": [],
-      "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "docs": ["docs/components/notification.md"],
+      "executable_fixtures": [
+        "apps/showcase/src/notification-consumer.js#snackbar-content-stress"
+      ],
+      "live_consumers": ["apps/showcase/src/notification-consumer.js"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": [
+        "apps/showcase/src/main.js#snackbar-static-matrix",
+        "apps/showcase/src/fidelity.js#snackbar-source-matrix"
+      ],
       "legacy_native_implementations": [],
       "local_alternatives": [],
-      "scope": ["countdown 5/4/3/2/1/0", "loading", "close"],
+      "scope": [
+        "countdown 5/4/3/2/1/0",
+        "action",
+        "focus-visible",
+        "disabled",
+        "long/narrow content"
+      ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "no timer, animation, auto-dismiss, pause, queue, placement, persistence, synchronization, callback or live-region policy"
+      ],
       "measured_counts": {
-        "executableShowcase": 0,
-        "liveConsumers": 0,
+        "executableShowcase": 2,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
-        "inertDiagnostics": 6,
+        "inertDiagnostics": 7,
         "legacyNative": 0,
         "localAlternatives": 0
       }

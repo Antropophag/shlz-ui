@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "id": "wave-8-notification-snackbar",
+  "baseline": "b0be221855bf7a16181a797d39387cc77f3ae626",
+  "requirementsGate": "required",
+  "openSpecChange": "wave-8-notification-snackbar",
+  "requirementsRevision": 1,
+  "classification": {
+    "size": "XL",
+    "score": 53,
+    "contributions": {
+      "independentWorkUnits": 8,
+      "sharedSeams": 6,
+      "contracts": 4,
+      "consumerIntegrations": 4,
+      "evidenceLevels": 7,
+      "architectureAmbiguity": 3,
+      "changedScope": 6,
+      "reviewRisk": 6,
+      "contextGrowthRisk": 9
+    },
+    "kind": "routing-heuristic-not-token-forecast"
+  },
+  "regroupCheck": {
+    "required": true,
+    "openSpecTaskCount": 10
+  },
+  "contextPolicy": {
+    "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
+    "decomposeSignal": 100000,
+    "semanticBoundaries": [
+      "implementation-to-independent-review",
+      "subsystem-change",
+      "major-replan",
+      "irrelevant-output-accumulation"
+    ]
+  },
+  "packets": [
+    {
+      "id": "source-census",
+      "objective": "Lock authoritative source, provenance, baseline, and repository-wide occurrence census",
+      "scope": [
+        "raw source hashes",
+        "variant geometry and contours",
+        "baseline",
+        "occurrence inventory"
+      ],
+      "nonGoals": ["source modification", "runtime inference"],
+      "dependencies": [],
+      "contracts": ["messaging/notification", "messaging/snackbar"],
+      "contextSources": [
+        "shlz-design-source/raw/svg/Notification.svg",
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "openspec/changes/wave-8-notification-snackbar/**"
+      ],
+      "implementationSurface": [
+        "tools/tests/notification-source.test.mjs",
+        "docs/component-audits/**",
+        "docs/components/notification-source.md"
+      ],
+      "focusedValidation": [
+        "source integrity",
+        "manifest and occurrence tests"
+      ],
+      "outputs": [
+        "exact source contract",
+        "independent manifests",
+        "classified census"
+      ],
+      "handoff": ["hashes", "variant ledger", "observed counts"],
+      "implementationOutcomes": [
+        "baseline and immutable source hashes",
+        "exact three-plus-six variant fidelity",
+        "independent manifests and repository-wide occurrence guards"
+      ],
+      "preferredExecutionMode": "continue",
+      "status": "pending"
+    },
+    {
+      "id": "notification",
+      "objective": "Close Notification's implementation and evidence gate independently",
+      "scope": [
+        "styles",
+        "docs",
+        "Showcase and plain HTML",
+        "runtime/a11y/visual/stress evidence"
+      ],
+      "nonGoals": ["toast manager", "timer", "library lifecycle"],
+      "dependencies": ["source-census"],
+      "contracts": ["messaging/notification"],
+      "contextSources": [
+        "openspec/changes/wave-8-notification-snackbar/specs/messaging/notification/spec.md",
+        "packages/styles/components/notification.css",
+        "docs/components/notification.md"
+      ],
+      "implementationSurface": [
+        "packages/styles/components/notification.css",
+        "apps/showcase/src/**",
+        "tools/fixtures/plain-html.html",
+        "tools/playwright/**",
+        "docs/components/notification.md"
+      ],
+      "focusedValidation": [
+        "Notification source",
+        "Notification browser",
+        "focused snapshots"
+      ],
+      "outputs": ["verified Notification contract and evidence"],
+      "handoff": ["material states", "checks", "limitations"],
+      "implementationOutcomes": [
+        "compatible Notification public surface",
+        "real browser interaction and accessibility ledger",
+        "focused visual and responsive consumer evidence"
+      ],
+      "preferredExecutionMode": "continue",
+      "status": "pending"
+    },
+    {
+      "id": "snackbar",
+      "objective": "Close Snackbar's implementation and evidence gate independently",
+      "scope": [
+        "exact countdown presentation",
+        "accessible consumer fixture",
+        "runtime action and stress evidence"
+      ],
+      "nonGoals": ["countdown timer", "auto-dismiss", "announcement cadence"],
+      "dependencies": ["source-census"],
+      "contracts": ["messaging/snackbar"],
+      "contextSources": [
+        "openspec/changes/wave-8-notification-snackbar/specs/messaging/snackbar/spec.md",
+        "packages/styles/components/notification.css",
+        "apps/showcase/src/fidelity.js"
+      ],
+      "implementationSurface": [
+        "packages/styles/components/notification.css",
+        "apps/showcase/src/**",
+        "tools/playwright/**",
+        "docs/components/notification.md"
+      ],
+      "focusedValidation": [
+        "Snackbar source",
+        "Snackbar browser",
+        "focused snapshots"
+      ],
+      "outputs": ["verified Snackbar contract and evidence"],
+      "handoff": ["six-frame ledger", "checks", "limitations"],
+      "implementationOutcomes": [
+        "explicit accessible Snackbar surface",
+        "six exact static countdown frames without timer semantics",
+        "real action and responsive consumer evidence"
+      ],
+      "preferredExecutionMode": "continue",
+      "status": "pending"
+    },
+    {
+      "id": "integration-delivery",
+      "objective": "Integrate, fully validate, independently review, report, and open the unmerged green PR",
+      "scope": [
+        "full regression",
+        "manual walk",
+        "audit report",
+        "two-axis review",
+        "PR checks"
+      ],
+      "nonGoals": ["merge", "branch protection mutation", "unrelated cleanup"],
+      "dependencies": ["notification", "snackbar"],
+      "contracts": [
+        "messaging/notification",
+        "messaging/snackbar",
+        "component completion gate"
+      ],
+      "contextSources": [
+        "openspec/changes/wave-8-notification-snackbar/**",
+        "docs/component-audits/notification.json",
+        "docs/component-audits/snackbar.json"
+      ],
+      "implementationSurface": [
+        "diff-scoped remediation",
+        "docs/component-audits/wave-8-report.md",
+        "docs/exec-plans/active/wave-8-notification-snackbar/**"
+      ],
+      "focusedValidation": [
+        "OpenSpec",
+        "lint/build/packages",
+        "full Chromium",
+        "source hashes",
+        "delivery guards"
+      ],
+      "outputs": [
+        "review dispositions",
+        "validation evidence",
+        "unmerged green PR"
+      ],
+      "handoff": ["PR URL", "CI and review state", "residual limitations"],
+      "implementationOutcomes": [
+        "complete local and CI validation",
+        "independent Standards and Spec review",
+        "unmerged green pull request and Wave 8 report"
+      ],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    }
+  ]
+}

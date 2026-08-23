@@ -1,0 +1,103 @@
+{
+  "component": "snackbar",
+  "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+  "referenceSources": ["docs/components/notification-source.md"],
+  "implementation": ["packages/styles/components/notification.css"],
+  "behavior": null,
+  "docs": "docs/components/notification.md",
+  "rootSelector": "[data-component-audit-id^='snackbar-']",
+  "legacySelectors": [".shlz-snackbar"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 7,
+  "occurrences": [
+    { "id": "snackbar-showcase-action", "kind": "live-consumer" },
+    { "id": "snackbar-content-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["384x58-source-minimum", "container-bounded"],
+  "supportedStates": [
+    "number-5",
+    "number-4",
+    "number-3",
+    "number-2",
+    "number-1",
+    "number-0",
+    "focus-visible",
+    "disabled",
+    "long-content",
+    "narrow-viewport"
+  ],
+  "contentStress": [
+    "long-message",
+    "long-action",
+    "320px-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Snackbar has exactly six 384x58 Number variants 5 through 0 with source-specific white contour paths",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+    },
+    {
+      "claim": "duration, stepping, animation, pause, removal, action handling and announcement cadence remain consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/components/notification-source.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/notification-snackbar-wave8.spec.js",
+    "tools/playwright/fidelity.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/snackbar-number-5-chromium-linux.png",
+    "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/snackbar-content-stress-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Basic elements archive hash, exact six Number names/nodes/dimensions, extraction health and byte-preserved references are asserted",
+    "structural-contract": "pass: live, stress and seven inert diagnostic roots are independently classified by repository and DOM guards",
+    "runtime-browser": "pass: native action activation is application-owned and executes once while no timer, auto-dismiss or library controller runs",
+    "accessibility": "pass: stable text, decorative countdown, native action, keyboard focus-visible and disabled behavior are exercised",
+    "focused-visual": "pass: every numeral and exact contour path plus representative action/countdown snapshots are checked independently",
+    "consumer-integration": "pass: the executable Showcase consumer owns action and lifecycle without promoting its event to SHLZ API",
+    "responsive-content-stress": "pass: long localized message/action, 320px viewport and 200 percent text grow without clipping or page overflow"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: six exact Number frames are static visual evidence and do not prove countdown runtime"
+      ],
+      "realInteractionVisual": [
+        "pass: real hover, pointer-down, focus-visible and native disabled action states precede computed assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: native consumer-owned action executes once; timer, stepping, pause and auto-dismiss remain explicitly absent"
+      ]
+    },
+    "materialStates": [
+      "number-5",
+      "number-4",
+      "number-3",
+      "number-2",
+      "number-1",
+      "number-0",
+      "hover",
+      "active",
+      "focus-visible",
+      "disabled",
+      "long-content",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/notification-snackbar-wave8.spec.js",
+    "manualStateWalk": "pass: six frames, pointer hover/down, Tab/focus-visible, Enter/Space, disabled, stable announcement content, narrow/long content and text scaling inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no timer, animation, auto-dismiss, pause, queue, placement, persistence, synchronization, callback or live-region policy"
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Audit and implement independently verified Notification and Snackbar contracts in Wave 8, then deliver an unmerged green PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "component-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Wave 8 Notification and Snackbar complete audit and implementation"
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md and shlz-design-source/raw/svg authorities"
+      }
+    },
+    {
+      "id": "lifecycle-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/components/notification.md and raw static source limitations"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "open PR with green checks and do not merge"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "wave-8-notification-snackbar",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit implementation and PR authorization after autonomous requirements discovery"
+    }
+  }
+}

@@ -121,6 +121,7 @@ The required `data-notification-focus-return` value must name the `id` of a safe
 | Contract  | Supported value                                                                                                                |
 | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | Root      | `.shlz-notification`; optional `--danger` or `--light` paint modifier                                                          |
+| Snackbar  | `.shlz-notification.shlz-snackbar`; exact Number frame is decorative presentation, not a timer                                 |
 | Content   | `.shlz-notification__content` with title and optional message                                                                  |
 | Leading   | Optional decorative icon or visual progress/countdown                                                                          |
 | Close     | Native `.shlz-notification__close` button with an accessible name                                                              |
@@ -141,6 +142,8 @@ The required `data-notification-focus-return` value must name the `id` of a safe
 
 The source confirms a 384×58 notification/snackbar surface, danger and light paint, action, close, leading progress and countdown compositions. Progress and countdown classes are visual surfaces only. Applications own placement, stacking, deduplication, maximum count, persistence, timeout, pause behavior, countdown synchronization, removal and focus recovery. Showcase separates an executable consumer fixture from static source-fidelity matrices; controls in the static matrices illustrate appearance only.
 
+Snackbar's public presentation composes `.shlz-snackbar` with `.shlz-notification__source-countdown`. The six authoritative Number frames use the exact exported SVG contour paths; the numeral and contour are `aria-hidden` in the reusable example so an application-controlled countdown does not repeatedly announce them. The stable message and visible native action remain accessible. Rendering one frame never starts a timer or implies that frames advance once per second.
+
 ## Limitations
 
 - No placement container, responsive collision handling, queue, timer or toast manager.
@@ -150,22 +153,23 @@ The source confirms a 384×58 notification/snackbar surface, danger and light pa
 
 ## Traceability
 
-| Layer                       | Location                                                     |
-| --------------------------- | ------------------------------------------------------------ |
-| Authoritative source        | `shlz-design-source/raw/svg/Notification.svg`                |
-| Snackbar source             | `shlz-design-source/raw/svg/UI Kit – Interface elements.zip` |
-| Evidence map                | `docs/evidence-map.md`                                       |
-| Provenance                  | `packages/tokens/provenance.json`                            |
-| Tokens                      | `packages/tokens/tokens.json`                                |
-| Styles                      | `packages/styles/components/notification.css`                |
-| Documentation               | `docs/components/notification.md`                            |
-| Showcase                    | `apps/showcase/src/main.js`                                  |
-| Snippet tests               | `tools/tests/component-documentation.test.mjs`               |
-| Source tests                | `tools/tests/notification-source.test.mjs`                   |
-| Bundle contract tests       | `tools/tests/components.test.mjs`                            |
-| Browser tests               | `tools/playwright/components-next.spec.js`                   |
-| Documentation browser tests | `tools/playwright/primitives.spec.js`                        |
-| Runtime contract tests      | `tools/playwright/notification-contract.spec.js`             |
+| Layer                       | Location                                                 |
+| --------------------------- | -------------------------------------------------------- |
+| Authoritative source        | `shlz-design-source/raw/svg/Notification.svg`            |
+| Snackbar source             | `shlz-design-source/raw/svg/UI Kit – Basic elements.zip` |
+| Evidence map                | `docs/evidence-map.md`                                   |
+| Provenance                  | `packages/tokens/provenance.json`                        |
+| Tokens                      | `packages/tokens/tokens.json`                            |
+| Styles                      | `packages/styles/components/notification.css`            |
+| Documentation               | `docs/components/notification.md`                        |
+| Showcase                    | `apps/showcase/src/main.js`                              |
+| Snippet tests               | `tools/tests/component-documentation.test.mjs`           |
+| Source tests                | `tools/tests/notification-source.test.mjs`               |
+| Bundle contract tests       | `tools/tests/components.test.mjs`                        |
+| Browser tests               | `tools/playwright/components-next.spec.js`               |
+| Documentation browser tests | `tools/playwright/primitives.spec.js`                    |
+| Runtime contract tests      | `tools/playwright/notification-contract.spec.js`         |
+| Wave 8 completion gate      | `tools/playwright/notification-snackbar-wave8.spec.js`   |
 
 ## Source interpretation
 
