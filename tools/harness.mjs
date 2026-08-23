@@ -206,11 +206,48 @@ switch (command) {
     break;
   case "delivery-check": {
     const delivery = await readJson(absolute(args[0]));
+    const planPath = option("--plan");
+    const executionStatePath = option("--state");
+    const directPath = option("--direct");
+    if (Boolean(planPath) !== Boolean(executionStatePath))
+      throw new Error("delivery-check requires both --plan and --state");
+    if (!planPath && !directPath)
+      throw new Error(
+        "delivery-check requires --plan <plan> --state <state> or --direct <route-assessment>",
+      );
+    if (planPath && directPath)
+      throw new Error(
+        "delivery-check cannot combine execution and direct evidence",
+      );
+    let execution = null;
+    if (planPath) {
+      const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const requirementsPath = option("--requirements");
+      if (plan.requirementsGate === "required" && !requirementsPath)
+        throw new Error(
+          "requirements-gated delivery-check requires --requirements <state>",
+        );
+      execution = {
+        plan,
+        state: await readJson(absolute(executionStatePath)),
+        requirementsState: requirementsPath
+          ? await readJson(absolute(requirementsPath))
+          : null,
+      };
+    } else {
+      const direct = await readJson(absolute(directPath));
+      const eligibility = evaluateRouteEligibility(direct);
+      if (direct.route !== "direct" || !eligibility.allowed)
+        throw new Error("delivery direct evidence is not positively eligible");
+    }
     output(
-      assertImplementationDelivery({
-        ...delivery,
-        actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
-      }),
+      assertImplementationDelivery(
+        {
+          ...delivery,
+          actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
+        },
+        execution,
+      ),
     );
     break;
   }

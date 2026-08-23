@@ -14,16 +14,17 @@
     "reviewRisk": 3,
     "contextGrowthRisk": 2
   },
-  "openSpecTaskCount": 8,
+  "openSpecTaskCount": 9,
   "workUnits": [
     {
       "id": "contract-proof",
       "group": "contract-proof",
-      "objective": "Implement contract-grounded manifest parsing, review-state binding, and union proof enforcement",
+      "objective": "Implement contract-grounded proof enforcement and requirements-bound execution lifecycle gates",
       "scope": [
         "delta contract parsing",
         "review state and CLI",
-        "focused unit tests"
+        "focused unit tests",
+        "stale-plan and packet-graph delivery gates"
       ],
       "nonGoals": ["semantic inference from prose", "direct S review changes"],
       "dependencies": [],
@@ -41,13 +42,15 @@
       "outputs": [
         "validated manifest",
         "contract-bound proof",
-        "compatibility tests"
+        "compatibility tests",
+        "execution lifecycle regression tests"
       ],
       "handoff": ["public CLI contract", "proof schema", "focused checks"],
       "implementationOutcomes": [
         "grounded invariant coverage",
         "stale proof rejection",
-        "union discrimination"
+        "union discrimination",
+        "revision-bound lifecycle enforcement"
       ],
       "preferredExecutionMode": "continue"
     },
@@ -85,7 +88,7 @@
         "two-axis review"
       ],
       "outputs": [
-        "seven-finding classification",
+        "eight-finding classification with four runtime invariants",
         "historical red/green proof",
         "unmerged PR"
       ],

@@ -55,12 +55,19 @@ The timeout probe runs the known-good handler through a temporary time-compresse
 
 Version 1 state without concerns remains valid. Concern-bearing initialization without change metadata is rejected only for newly initialized reviews; stored PR #33-era states can still be read and reported. This avoids pretending old evidence was contract-derived while keeping diagnostics usable.
 
+### 6. Execution delivery is bound to the current plan
+
+Requirements-gated lifecycle commands require `plan.requirementsRevision`, execution-state revision, and the supplied ready requirements revision to agree. A re-entry therefore requires a revised plan before claim, resume, worker launch, or completion can proceed. Delivery validation receives the plan and execution state and rejects unknown, non-completed, or missing mandatory packets.
+
+Keeping delivery as a Git/PR-only check was rejected because it allowed an L/enforced plan to publish completion while a required fresh-session packet remained pending. Silently rewriting state was rejected because durable claims, worker identity, and handoffs are the evidence that the packet actually ran.
+
 ## Risks / Trade-offs
 
 - **[Markers drift from scenario prose]** → Validate exact heading adjacency and digest cited blocks so edits stale the proof.
 - **[Agent writes a weak executable oracle]** → Require known-bad/red and reviewed-head/green discrimination; PR #33 fixture demonstrates branch-sensitive probes.
 - **[Historical commits become unavailable]** → Keep the fixture fail-closed with an actionable revision error; do not silently substitute current files.
 - **[Manifest ceremony expands low-risk review]** → Activate only for the existing closed concern set and leave `none` unchanged.
+- **[Old callers omit execution evidence at delivery]** → Require plan/state inputs for delivery-check and fail with an actionable error; delivery is terminal, so permissive compatibility would preserve the bypass.
 - **[Markdown parser accepts ambiguous headings]** → Use strict line-oriented heading and marker rules, rejecting duplicate Requirement/Scenario identities.
 
 ## Migration Plan

@@ -31,6 +31,12 @@
       "concern": "persistence",
       "requirement": "Executable proof discriminates every required invariant",
       "scenario": "Contracts change after proof"
+    },
+    {
+      "id": "stale-plan-or-pending-packet-blocks-delivery",
+      "concern": "state-machine",
+      "requirement": "Delivery preserves the guarded execution lifecycle",
+      "scenario": "Requirements or delivery bypasses the execution plan"
     }
   ]
 }

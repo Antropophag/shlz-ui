@@ -559,7 +559,7 @@ export function deterministicRouteRiskFloor(surfaces) {
   return [...signals].sort((a, b) => a.localeCompare(b));
 }
 
-export function assertImplementationDelivery(delivery) {
+export function assertImplementationDelivery(delivery, execution = null) {
   if (!delivery || typeof delivery !== "object")
     throw new Error("implementation delivery evidence is required");
   const actual = delivery.actual;
@@ -567,6 +567,42 @@ export function assertImplementationDelivery(delivery) {
     throw new Error(
       "implementation delivery requires actual repository evidence",
     );
+  if (execution) {
+    const { plan, state, requirementsState = null } = execution;
+    if (!plan || !state)
+      throw new Error("delivery execution evidence requires plan and state");
+    if (state.planId !== plan.id)
+      throw new Error("delivery execution state belongs to a different plan");
+    if (plan.requirementsGate === "required") {
+      assertPlanRequirements(
+        plan,
+        requirementsState,
+        state.requirementsRevision ?? plan.requirementsRevision,
+      );
+      if (state.requirementsRevision !== plan.requirementsRevision)
+        throw new Error(
+          `delivery execution state revision ${state.requirementsRevision ?? "missing"} does not match plan revision ${plan.requirementsRevision}`,
+        );
+    }
+    const planIds = new Set(plan.packets.map(({ id }) => id));
+    const unknown = Object.keys(state.packets ?? {}).filter(
+      (id) => !planIds.has(id),
+    );
+    if (unknown.length)
+      throw new Error(
+        `delivery execution state has unknown packets: ${unknown.join(", ")}`,
+      );
+    const incomplete = plan.packets
+      .filter(
+        ({ id }) =>
+          state.packets?.[id]?.status !== "completed" || !state.handoffs?.[id],
+      )
+      .map(({ id }) => id);
+    if (incomplete.length)
+      throw new Error(
+        `delivery requires completed mandatory packets: ${incomplete.join(", ")}`,
+      );
+  }
   if (actual.currentBranch === delivery.defaultBranch)
     throw new Error(
       `implementation cannot complete on default branch ${delivery.defaultBranch}`,
@@ -879,6 +915,13 @@ function assertPlanRequirements(
   if (!status.readyForPlanning)
     throw new Error(
       `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+    );
+  if (
+    Number.isInteger(subject.requirementsRevision) &&
+    subject.requirementsRevision !== requirementsRevision(requirementsState)
+  )
+    throw new Error(
+      `execution plan revision ${subject.requirementsRevision} is stale; expected ${requirementsRevision(requirementsState)}`,
     );
 }
 

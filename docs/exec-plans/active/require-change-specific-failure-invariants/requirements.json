@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 2,
+  "revision": 3,
   "intent": "Require executable review of material state-machine, persistence, and subprocess changes to prove change-specific failure invariants derived from the current OpenSpec contracts in addition to baseline invariants.",
   "route": "open-spec",
   "decisions": [
@@ -42,6 +42,16 @@
       "provenance": {
         "kind": "user-prompt",
         "ref": "classification 7-to-4 accepted as correction; preserve immutable known-bad and known-good PR 33 revisions"
+      }
+    },
+    {
+      "id": "execution-lifecycle-consistency",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "require current-plan guarded packet completion before delivery after requirements re-entry"
       }
     }
   ],

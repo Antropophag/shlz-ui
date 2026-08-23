@@ -31,7 +31,7 @@ const checks = [
     concern: "state-machine",
     pass:
       cli.includes("material review-init requires --change") &&
-      (spec.match(/<!-- failure-invariant:/g) ?? []).length === 5,
+      (spec.match(/<!-- failure-invariant:/g) ?? []).length === 6,
     knownBadPass: badCore.includes("loadChangeFailureInvariants"),
   },
   {
@@ -69,6 +69,17 @@ const checks = [
     knownBadPass: badCore.includes(
       "proof.contractDigest !== changeBinding.contractDigest",
     ),
+  },
+  {
+    id: "stale-plan-or-pending-packet-blocks-delivery",
+    concern: "state-machine",
+    pass:
+      core.includes("execution plan revision") &&
+      core.includes("delivery requires completed mandatory packets") &&
+      cli.includes("delivery-check requires --plan <plan> --state <state>"),
+    knownBadPass:
+      badCore.includes("execution plan revision") &&
+      badCore.includes("delivery requires completed mandatory packets"),
   },
 ];
 baseline.invariants.push(

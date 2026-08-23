@@ -74,3 +74,14 @@ Reviews without applicable material failure concerns SHALL retain the existing r
 
 - **WHEN** review is initialized with no failure-path concerns
 - **THEN** it can complete through the existing Standards and Spec review path without a change-specific invariant manifest
+
+### Requirement: Delivery preserves the guarded execution lifecycle
+
+For a requirements-gated execution plan, the harness SHALL reject claim, resume, worker execution, packet completion, or delivery when the plan revision is older than the ready requirements state or execution state. Delivery MUST remain incomplete until every packet declared by the current plan has a completed execution-state record and handoff.
+
+<!-- failure-invariant: stale-plan-or-pending-packet-blocks-delivery concern=state-machine -->
+
+#### Scenario: Requirements or delivery bypasses the execution plan
+
+- **WHEN** requirements re-entry advances the revision without revising the plan, or delivery is attempted while a mandatory packet is pending, claimed, paused, or missing
+- **THEN** the harness rejects the lifecycle operation or delivery and identifies the stale plan or incomplete packet

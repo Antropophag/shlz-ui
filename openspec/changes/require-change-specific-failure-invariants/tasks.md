@@ -7,6 +7,7 @@
 
 - [x] 2.1 Bind proof digest and staleness checks to the OpenSpec change, manifest digest, cited contract digest, and namespaced invariant results; verify mutation tests fail on every stale or incomplete binding.
 - [x] 2.2 Require red/green discrimination for the union of baseline and change-specific invariants before two-axis completion, and verify baseline-only proof is rejected for an applicable manifested review.
+- [x] 2.3 Bind guarded lifecycle and delivery to the current requirements revision, plan, and completed mandatory packet set; verify regression tests reject stale plans and pending/missing packet delivery.
 
 ## 3. PR #33 regression fixture
 
@@ -16,4 +17,4 @@
 ## 4. Workflow integration and delivery
 
 - [x] 4.1 Update agent-facing validation/execution guidance and dogfood this change's own marked contracts through the new manifest/proof path; verify focused harness tests and strict OpenSpec validation pass.
-- [x] 4.2 Run affected validation, route conformance, independent Standards/Spec review with bounded remediation and targeted re-review, then pass delivery guards and open a separate unmerged PR.
+- [ ] 4.2 Run affected validation, route conformance, independent Standards/Spec review with bounded remediation and targeted re-review, then pass delivery guards and leave the separate PR unmerged.

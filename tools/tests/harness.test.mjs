@@ -330,6 +330,18 @@ test("CLI requires persisted execution baselines for preflight and conformance",
     ),
     /requires --execution/,
   );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "delivery-check",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/delivery-evidence.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --plan <plan> --state <state> or --direct <route-assessment>/,
+  );
 });
 
 test("exact GitHub Pages intent is non-direct and blocks mutation on owned decisions", async () => {
@@ -1569,12 +1581,60 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
     /revision 1 is stale; expected at least 2/,
   );
   const updated = requirementsState({ revision: 2 });
+  assert.throws(
+    () =>
+      resumePacket(plan, state, "discovery-contracts", "session-b", updated),
+    /execution plan revision 1 is stale; expected 2/,
+  );
+  plan.requirementsRevision = 2;
   resumePacket(plan, state, "discovery-contracts", "session-b", updated);
   assert.deepEqual(state.packets["discovery-contracts"], {
     status: "claimed",
     session: "session-b",
     requirementsRevision: 2,
   });
+});
+
+test("delivery rejects an incomplete mandatory packet graph", () => {
+  const ready = requirementsState();
+  const plan = createPlan(
+    {
+      ...clone(wave7),
+      requirementsGate: "required",
+      openSpecChange: "add-capability",
+    },
+    config,
+    ready,
+  );
+  const state = createExecutionState(plan);
+  const delivery = {
+    defaultBranch: "main",
+    pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
+    actual: {
+      repository: "Antropophag/shlz-ui",
+      currentBranch: "feat/guard",
+      pushRemote: "origin",
+      pushBranch: "feat/guard",
+      localHead: "abc",
+      upstreamHead: "abc",
+      pullRequest: {
+        url: "https://github.com/Antropophag/shlz-ui/pull/29",
+        headRefName: "feat/guard",
+        headRefOid: "abc",
+        baseRefName: "main",
+        state: "OPEN",
+      },
+    },
+  };
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        requirementsState: ready,
+      }),
+    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+  );
 });
 
 test("agent routing preserves eligibility, readiness, conformance, and apply re-entry", async () => {
@@ -2156,7 +2216,7 @@ test("change-specific failure invariants are grounded in marked delta scenarios"
     manifest,
     root,
   );
-  assert.equal(binding.invariants.length, 5);
+  assert.equal(binding.invariants.length, 6);
   assert.match(binding.manifestDigest, /^[0-9a-f]{64}$/);
   assert.match(binding.contractDigest, /^[0-9a-f]{64}$/);
   await assert.rejects(
@@ -2455,7 +2515,7 @@ test("review-init CLI requires and records current-change invariant bindings", a
       recorded.changeFailureInvariants.change,
       "require-change-specific-failure-invariants",
     );
-    assert.equal(recorded.changeFailureInvariants.invariants.length, 5);
+    assert.equal(recorded.changeFailureInvariants.invariants.length, 6);
   } finally {
     await unlink(state).catch(() => {});
   }
