@@ -25,6 +25,7 @@ import {
   recordEvent,
   recordReview,
   recordValidation,
+  reserveWorkerPacket,
   recordWorkerAttempt,
   requirementsStatus,
   assertImplementationDelivery,
@@ -41,6 +42,7 @@ import {
   validateExecutionBaseline,
   validatePlan,
   writeJson,
+  workerTelemetryEvents,
 } from "./lib/harness/core.mjs";
 import {
   launchCodexWorker,
@@ -311,7 +313,7 @@ switch (command) {
     const requirementsState = option("--requirements")
       ? await readJson(absolute(option("--requirements")))
       : null;
-    const state = await withStateLock(target, async () => {
+    const prepared = await withStateLock(target, async () => {
       const current = await readJson(target);
       const brief = createWorkerBrief(plan, current, args[2], {
         baseline: await readJson(absolute(baselinePath)),
@@ -319,12 +321,28 @@ switch (command) {
         claimId,
       });
       await writeJson(statePath(briefPath), brief);
-      const result = await launchCodexWorker({ brief, cwd: repoRoot });
-      recordWorkerAttempt(
+      reserveWorkerPacket(
         plan,
         current,
         args[2],
         brief,
+        session,
+        requirementsState,
+      );
+      await writeJson(target, current);
+      return { brief };
+    });
+    const result = await launchCodexWorker({
+      brief: prepared.brief,
+      cwd: repoRoot,
+    });
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      recordWorkerAttempt(
+        plan,
+        current,
+        args[2],
+        prepared.brief,
         result,
         session,
         requirementsState,
@@ -348,7 +366,6 @@ switch (command) {
   }
   case "claim": {
     const plan = await readJson(absolute(args[0]));
-    const executionEvidencePath = option("--execution-evidence");
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = claimPacket(
@@ -359,9 +376,7 @@ switch (command) {
         option("--requirements")
           ? await readJson(absolute(option("--requirements")))
           : null,
-        executionEvidencePath
-          ? await readJson(absolute(executionEvidencePath))
-          : null,
+        null,
       );
       await writeJson(target, next);
       return next;
@@ -468,6 +483,13 @@ switch (command) {
     output({ recorded: true, type: event.type });
     break;
   }
+  case "telemetry-import-workers": {
+    const events = workerTelemetryEvents(await readJson(absolute(args[1])));
+    for (const event of events)
+      await recordEvent(statePath(args[0]), event, { trustedRuntime: true });
+    output({ recorded: events.length });
+    break;
+  }
   case "telemetry-summary": {
     const text = await readFile(absolute(args[0]), "utf8");
     output(
@@ -480,6 +502,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-import-workers|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

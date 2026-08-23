@@ -40,7 +40,7 @@ npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-pla
 npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
 
-Guarded packets use the runtime adapter rather than a caller-selected label. The root probes capability, launches one bounded worker, and leaves the resulting claim for that worker's validated handoff:
+Guarded packets use the runtime adapter rather than a caller-selected label. The root reserves the claim atomically, releases the state lock, launches one bounded worker, then binds its runtime identity before accepting the worker's durable handoff:
 
 ```bash
 npm run harness -- worker-probe
@@ -55,7 +55,7 @@ The lifecycle is root orchestration → fresh worker → durable handoff → dep
 
 Selection remains proportional: S continues inline; coherent M continues unless it crosses a semantic or context-pressure boundary; L declares decomposition and isolation; XL re-checks coherence and uses bounded isolated packets. A small follow-up remains a separate execution episode with its own immutable baseline—its size is assessed from that delta, not inherited from the parent PR.
 
-For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`.
+For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`; resuming a guarded packet returns it to pending so a fresh `worker-run` must re-attest the updated revision.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 

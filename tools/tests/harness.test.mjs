@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
-import { readFile, unlink, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, unlink, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
+import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
@@ -18,7 +19,9 @@ import {
   matchesPattern,
   pausePacket,
   readyPackets,
+  recordEvent,
   recordWorkerAttempt,
+  reserveWorkerPacket,
   relevantValidationFiles,
   recordReview,
   recordValidation,
@@ -861,6 +864,9 @@ const fakeCodexRun =
         }
       : { code: exitCode, stdout: jsonl, stderr: "", timedOut: false };
 
+const reserve = (plan, state, packetId, brief, session) =>
+  reserveWorkerPacket(plan, state, packetId, brief, session);
+
 test("codex exec adapter probes capability and derives identity/status/usage only from JSONL", async () => {
   assert.equal(
     (await probeCodexExec({ run: fakeCodexRun("", { help: false }) }))
@@ -914,12 +920,71 @@ test("bounded worker briefs are immutable and exclude parent context", () => {
   assert.match(brief.briefDigest, /^[0-9a-f]{64}$/);
 });
 
+test("public telemetry cannot forge physical boundaries or runtime usage", async () => {
+  const directory = await mkdtemp(
+    path.join(tmpdir(), "shlz-harness-telemetry-"),
+  );
+  const file = path.join(directory, "telemetry.jsonl");
+  try {
+    await assert.rejects(
+      recordEvent(file, {
+        type: "execution-boundary",
+        packet: "notification",
+        session: "forged-session",
+        agent: "worker",
+        phase: "implementation",
+        runtimeId: "forged-runtime",
+        executionSource: "codex-exec-jsonl",
+      }),
+      /must be imported from adapter-bound execution state/,
+    );
+    await assert.rejects(
+      recordEvent(file, {
+        type: "usage",
+        packet: "notification",
+        session: "forged-session",
+        agent: "worker",
+        phase: "implementation",
+        tokens: 1,
+        usageSource: "caller-asserted",
+      }),
+      /must be imported from adapter-bound execution state/,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
+test("guarded packet resume returns to pending for a new worker context", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const packetId = "shared-native-dialog";
+  state.requirementsRevision = 2;
+  state.packets[packetId] = {
+    status: "paused",
+    session: "old-runtime",
+    requirementsRevision: 2,
+  };
+  resumePacket(
+    plan,
+    state,
+    packetId,
+    "caller-session-must-not-be-used",
+    requirementsState({ revision: 2 }),
+  );
+  assert.deepEqual(state.packets[packetId], {
+    status: "pending",
+    requirementsRevision: 2,
+    attempts: 1,
+  });
+});
+
 test("worker lifecycle fails closed, retries, and never unlocks dependents on partial completion", () => {
   const { plan, state } = guardedWorkerFixture();
   const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
     baseline: executionBaseline,
     claimId: "claim-failed",
   });
+  reserve(plan, state, "shared-native-dialog", brief, "worker-failed");
   recordWorkerAttempt(
     plan,
     state,
@@ -941,6 +1006,7 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
     baseline: executionBaseline,
     claimId: "claim-retry",
   });
+  reserve(plan, state, "shared-native-dialog", retryBrief, "worker-retry");
   recordWorkerAttempt(
     plan,
     state,
@@ -971,6 +1037,7 @@ test("worker attempts reject stale briefs and record only declared unavailable f
       baseline: executionBaseline,
       claimId: "claim-stale",
     });
+    reserve(plan, state, "shared-native-dialog", brief, "root");
     plan.packets
       .find(({ id }) => id === "shared-native-dialog")
       .scope.push("new-contract");
@@ -994,6 +1061,7 @@ test("worker attempts reject stale briefs and record only declared unavailable f
       baseline: executionBaseline,
       claimId: "claim-degraded",
     });
+    reserve(plan, state, "shared-native-dialog", brief, "root");
     recordWorkerAttempt(
       plan,
       state,
@@ -1020,6 +1088,7 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
       baseline: executionBaseline,
       claimId: "claim-ok",
     });
+    reserve(plan, state, "shared-native-dialog", brief, "worker-ok");
     recordWorkerAttempt(
       plan,
       state,
@@ -1221,6 +1290,11 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
     ...clone(wave7),
     requirementsGate: "required",
     openSpecChange: "add-capability",
+    executionIsolation: {
+      version: 1,
+      enforced: false,
+      unavailableFallback: "stop",
+    },
   };
   const ready = requirementsState();
   const plan = createPlan(assessment, config, ready);
@@ -1428,6 +1502,12 @@ test("fresh-session requirements state is recoverable through the CLI", async ()
 
 test("plan contract rejects missing fields, cycles, and undecomposed large work", () => {
   const plan = createPlan(wave7, config);
+  const unguarded = clone(plan);
+  delete unguarded.executionIsolation;
+  assert.throws(
+    () => validatePlan(unguarded, config),
+    /requires an executionIsolation policy/,
+  );
   const unclassified = clone(plan);
   delete unclassified.classification;
   assert.throws(
@@ -1499,6 +1579,7 @@ test("fresh sessions derive ready packets and validate structured handoff", () =
 
 test("claims are exclusive and dependency joins receive every direct handoff", async () => {
   const plan = createPlan(wave7, config);
+  plan.executionIsolation.enforced = false;
   const state = createExecutionState(plan);
   claimPacket(plan, state, "discovery-contracts", "session-a");
   assert.throws(

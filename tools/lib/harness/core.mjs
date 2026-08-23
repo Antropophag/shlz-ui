@@ -971,6 +971,14 @@ export function validatePlan(plan, config) {
       );
   }
   assertAcyclic(plan.packets);
+  if (
+    plan.version >= 2 &&
+    ["L", "XL"].includes(plan.classification.size) &&
+    !plan.executionIsolation
+  )
+    throw new Error(
+      `${plan.classification.size} plan requires an executionIsolation policy`,
+    );
   if (plan.executionIsolation !== undefined) {
     const isolation = plan.executionIsolation;
     if (
@@ -1012,7 +1020,7 @@ export function createPlan(assessment, config, requirementsState = null) {
     assessment.signals.independentWorkUnits > 1 ||
     assessment.signals.sharedSeams > 0;
   const plan = {
-    version: 1,
+    version: 2,
     id: assessment.id,
     baseline: assessment.baseline ?? null,
     ...(assessment.requirementsGate === "required"
@@ -1028,8 +1036,16 @@ export function createPlan(assessment, config, requirementsState = null) {
       openSpecTaskCount: assessment.openSpecTaskCount ?? null,
     },
     contextPolicy: config.context,
-    ...(assessment.executionIsolation
-      ? { executionIsolation: { ...assessment.executionIsolation } }
+    ...(["L", "XL"].includes(classification.size) ||
+    assessment.executionIsolation
+      ? {
+          executionIsolation: {
+            version: 1,
+            enforced: ["L", "XL"].includes(classification.size),
+            unavailableFallback: "stop",
+            ...assessment.executionIsolation,
+          },
+        }
       : {}),
     packets: assessment.workUnits.map((workUnit) => {
       const packet = { ...workUnit };
@@ -1244,6 +1260,13 @@ const dependencySnapshot = (packet, state) =>
     }),
   );
 
+const packetContractDigest = (packet) =>
+  valueDigest(
+    Object.fromEntries(
+      requiredPacketFields.map((field) => [field, packet[field]]),
+    ),
+  );
+
 export function createWorkerBrief(
   plan,
   state,
@@ -1279,11 +1302,7 @@ export function createWorkerBrief(
       openSpecChange: plan.openSpecChange ?? null,
     },
     dependencyDigests: dependencySnapshot(packet, state),
-    packetDigest: valueDigest(
-      Object.fromEntries(
-        requiredPacketFields.map((field) => [field, packet[field]]),
-      ),
-    ),
+    packetDigest: packetContractDigest(packet),
     contextIndex: [...packet.contextSources],
     allowedImplementationSurface: [...packet.implementationSurface],
     focusedValidation: [...packet.focusedValidation],
@@ -1314,18 +1333,18 @@ export function recordWorkerAttempt(
     requirementsState,
     state.requirementsRevision ?? plan.requirementsRevision,
   );
-  if (!readyPackets(plan, state).some(({ id }) => id === packetId))
-    throw new Error(`packet ${packetId} is not ready for this worker attempt`);
+  const reserved = state.packets[packetId];
+  if (
+    reserved?.status !== "launching" ||
+    reserved.claimId !== brief.claimId ||
+    reserved.briefDigest !== brief.briefDigest
+  )
+    throw new Error(`packet ${packetId} does not have this worker reservation`);
   const { briefDigest, ...briefBody } = brief;
   if (brief.packet.id !== packetId || briefDigest !== valueDigest(briefBody))
     throw new Error("worker brief digest is invalid");
   if (
-    brief.packetDigest !==
-      valueDigest(
-        Object.fromEntries(
-          requiredPacketFields.map((field) => [field, packet[field]]),
-        ),
-      ) ||
+    brief.packetDigest !== packetContractDigest(packet) ||
     brief.requirements.revision !==
       (state.requirementsRevision ?? plan.requirementsRevision ?? null) ||
     valueDigest(brief.dependencyDigests) !==
@@ -1372,16 +1391,20 @@ export function recordWorkerAttempt(
     };
     return state;
   }
-  claimPacket(
-    plan,
-    state,
-    packetId,
-    session,
-    requirementsState,
-    result.evidence,
+  const execution = validateExecutionEvidence(result.evidence);
+  const duplicate = Object.entries(state.packets).find(
+    ([id, value]) =>
+      id !== packetId && value.execution?.runtimeId === execution.runtimeId,
   );
+  if (duplicate)
+    throw new Error(
+      `guarded execution ${execution.runtimeId} is already bound to packet ${duplicate[0]}`,
+    );
   state.packets[packetId] = {
-    ...state.packets[packetId],
+    ...reserved,
+    status: "claimed",
+    session,
+    execution,
     claimId: brief.claimId,
     briefDigest: brief.briefDigest,
     baselineDigest: brief.baselineDigest,
@@ -1398,6 +1421,47 @@ export function recordWorkerAttempt(
     state.packets[packetId].status = "failed";
     state.packets[packetId].retryable = true;
   }
+  return state;
+}
+
+export function reserveWorkerPacket(
+  plan,
+  state,
+  packetId,
+  brief,
+  session,
+  requirementsState = null,
+) {
+  const packet = plan.packets.find(({ id }) => id === packetId);
+  if (!packet) throw new Error(`unknown packet ${packetId}`);
+  assertPlanRequirements(
+    plan,
+    requirementsState,
+    state.requirementsRevision ?? plan.requirementsRevision,
+  );
+  if (!guardedModes.has(packet.preferredExecutionMode))
+    throw new Error(`packet ${packetId} does not require a worker`);
+  if (!readyPackets(plan, state).some(({ id }) => id === packetId))
+    throw new Error(`packet ${packetId} is not ready for reservation`);
+  const { briefDigest, ...briefBody } = brief;
+  if (
+    brief.packet.id !== packetId ||
+    briefDigest !== valueDigest(briefBody) ||
+    brief.packetDigest !== packetContractDigest(packet) ||
+    valueDigest(brief.dependencyDigests) !==
+      valueDigest(dependencySnapshot(packet, state))
+  )
+    throw new Error("worker brief is invalid or stale");
+  state.packets[packetId] = {
+    status: "launching",
+    session,
+    claimId: brief.claimId,
+    briefDigest,
+    baselineDigest: brief.baselineDigest,
+    dependencyDigests: brief.dependencyDigests,
+    packetDigest: brief.packetDigest,
+    requirementsRevision: brief.requirements.revision,
+  };
   return state;
 }
 
@@ -1525,6 +1589,17 @@ export function resumePacket(
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet.dependencies.every((id) => completed.has(id)))
     throw new Error(`packet ${packetId} dependencies are not complete`);
+  if (
+    plan.executionIsolation?.enforced &&
+    guardedModes.has(packet.preferredExecutionMode)
+  ) {
+    state.packets[packetId] = {
+      status: "pending",
+      requirementsRevision: state.requirementsRevision,
+      attempts: (current.attempts ?? 0) + 1,
+    };
+    return state;
+  }
   state.packets[packetId] = {
     status: "claimed",
     session,
@@ -1561,14 +1636,7 @@ export function completePacket(
       throw new Error(
         "worker completion rejected because its baseline is stale",
       );
-    if (
-      current.packetDigest !==
-      valueDigest(
-        Object.fromEntries(
-          requiredPacketFields.map((field) => [field, packet[field]]),
-        ),
-      )
-    )
+    if (current.packetDigest !== packetContractDigest(packet))
       throw new Error(
         "worker completion rejected because its packet contract is stale",
       );
@@ -1772,13 +1840,26 @@ export function resolveReviewFindings(state, ids, head) {
   return state;
 }
 
-export async function recordEvent(file, event) {
+export async function recordEvent(
+  file,
+  event,
+  { trustedRuntime = false } = {},
+) {
   if (!eventTypes.has(event.type))
     throw new Error(`unknown telemetry event ${event.type}`);
   if (!event.packet || !event.session || !event.agent || !event.phase)
     throw new Error("telemetry requires packet/session/agent/phase");
   if (("tokens" in event || "contextTokens" in event) && !event.usageSource)
     throw new Error("token/context usage requires usageSource");
+  if (
+    !trustedRuntime &&
+    (event.type === "execution-boundary" ||
+      "tokens" in event ||
+      "contextTokens" in event)
+  )
+    throw new Error(
+      "runtime identity and usage must be imported from adapter-bound execution state",
+    );
   if (
     event.type === "execution-boundary" &&
     (event.executionSource !== "codex-exec-jsonl" ||
@@ -1793,6 +1874,35 @@ export async function recordEvent(file, event) {
     file,
     `${JSON.stringify({ at: new Date().toISOString(), ...event })}\n`,
   );
+}
+
+export function workerTelemetryEvents(state) {
+  const events = [];
+  for (const [packet, value] of Object.entries(state.packets ?? {})) {
+    if (value.execution?.source !== "codex-exec-jsonl") continue;
+    const base = {
+      packet,
+      session: value.session,
+      agent: "codex-worker",
+      phase: value.status === "completed" ? "completed" : "execution",
+    };
+    events.push({
+      ...base,
+      type: "execution-boundary",
+      executionSource: "codex-exec-jsonl",
+      runtimeId: value.execution.runtimeId,
+    });
+    const usage = value.launch?.usage;
+    if (usage)
+      events.push({
+        ...base,
+        type: "usage",
+        usageSource: "codex-exec-jsonl:turn.completed",
+        tokens: (usage.input_tokens ?? 0) + (usage.output_tokens ?? 0),
+        contextTokens: usage.input_tokens,
+      });
+  }
+  return events;
 }
 
 export function summarizeEvents(events) {

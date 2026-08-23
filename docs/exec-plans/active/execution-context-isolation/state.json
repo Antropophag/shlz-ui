@@ -17,6 +17,17 @@
         "launchId": "bootstrap-worker-adapter-20260823",
         "startedAt": "2026-08-23T18:35:00+03:00",
         "evidenceDigest": "cdf8fbdd04f16a59c6d39fb8e2ab81cbbb3974b8a95a3f73480f0f497a2df3a0"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "bootstrap-worker-adapter-20260823",
+        "usage": {
+          "input_tokens": 1659568,
+          "cached_input_tokens": 1565952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 13224,
+          "reasoning_output_tokens": 2336
+        }
       }
     },
     "telemetry-operator": {

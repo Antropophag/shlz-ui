@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "id": "execution-context-isolation",
   "baseline": "origin/main@5393661",
   "requirementsGate": "required",

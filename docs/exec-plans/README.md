@@ -9,7 +9,7 @@ OpenSpec is the normative contract. Git is implementation state, tests are execu
 3. Initialize `state.json` once. Use `claim` only for `continue` packets; use `worker-run` for guarded packets so runtime-issued identity, not a session label, binds the claim. Run `context <plan> <packet> --state <state>`; read only the returned sources needed for the phase.
 4. Implement and use `affected` before validation. `validation-record` computes the relevant-file fingerprint and appends the result; an identical successful expensive rerun requires `--reason`.
 5. End a packet with `complete`; the state retains one structured handoff per packet, so dependency joins receive every direct handoff without chat history.
-6. Record compact observed events with `telemetry-record`, then use `telemetry-summary` for calibration. Never estimate missing runtime tokens.
+6. Record ordinary observed events with `telemetry-record`; import runtime boundaries and usage from adapter-bound state with `telemetry-import-workers <telemetry> <state>`, then use `telemetry-summary` for calibration. Never estimate missing runtime tokens.
 
 Before implementation, `route-check` validates semantic route evidence and `implementation-preflight --out <execution-baseline>` binds it to requirements intent/change/decision ownership/readiness plus either current-main task-branch state or a verified existing open-PR head. Before completion, `route-conformance --execution <execution-baseline>` binds discovered semantic surface to that episode diff and `delivery-check` queries Git/GitHub to require local HEAD, the task-branch upstream, and the open PR head to be the same commit targeting the default branch. Baseline kind is provenance, not a semantic lane. Route/discovery JSON is operational guard evidence, not normative requirements; OpenSpec remains authoritative.
 
@@ -22,6 +22,7 @@ npm run harness -- worker-probe
 npm run harness -- worker-brief <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --out <brief>
 npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --session <label> --brief-out <brief>
 npm run harness -- worker-retry <state> <packet>
+npm run harness -- telemetry-import-workers <telemetry> <state>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
 ```
