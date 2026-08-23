@@ -6,4 +6,4 @@
 ## 2. Proportionate Workflow
 
 - [x] 2.1 Update execution/review guidance to explain guarantees, common-mode independence, capability degradation, and external diversity triggers; verify direct S examples remain unchanged.
-- [ ] 2.2 Dogfood the proof on this harness change, run strict OpenSpec and harness validation, independently review the fixed diff, and create an unmerged PR.
+- [x] 2.2 Dogfood the proof on this harness change, run strict OpenSpec and harness validation, independently review the fixed diff, and create an unmerged PR.
