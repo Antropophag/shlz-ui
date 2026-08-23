@@ -31,7 +31,12 @@ try {
     `${JSON.stringify({ version: 1, reviewBase, knownBadRevision, reviewedHead, invariants })}\n`,
   );
 } finally {
-  await exec("git", ["worktree", "remove", "--force", badRoot]).catch(() => {});
+  const status = await exec("git", ["-C", badRoot, "status", "--porcelain"])
+    .then(({ stdout }) => stdout)
+    .catch(() => null);
+  if (status?.trim())
+    throw new Error(`failure-path fixture left changes in ${badRoot}`);
+  if (status !== null) await exec("git", ["worktree", "remove", badRoot]);
   await exec("git", ["worktree", "prune"]);
-  await rm(badRoot, { recursive: true, force: true });
+  if (status === null) await rm(badRoot, { recursive: true, force: true });
 }

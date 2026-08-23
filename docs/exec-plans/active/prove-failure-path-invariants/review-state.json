@@ -1,18 +1,95 @@
 {
   "version": 1,
   "base": "6c1b997ac08f8bbfb734d349660e66d56d1976e8",
-  "passes": [],
-  "findings": [],
-  "failurePathConcerns": [
-    "state-machine",
-    "persistence",
-    "subprocess"
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "fc5fa758acb3e5988d6f7f0204f03edeac28eb2b"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "fc5fa758acb3e5988d6f7f0204f03edeac28eb2b"
+    }
   ],
+  "findings": [
+    {
+      "id": "BIND-1",
+      "severity": "P1",
+      "summary": "proof was not bound to review base and head",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "BEHAVIOR-1",
+      "severity": "P1",
+      "summary": "fixture matched source text instead of executing failure behavior",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "INVARIANT-1",
+      "severity": "P1",
+      "summary": "free-form invariant identities allowed incomplete coverage",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "DEGRADE-1",
+      "severity": "P2",
+      "summary": "proof capability failure was not persisted",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-BIND-1",
+      "severity": "P1",
+      "summary": "proof revisions were not causally bound to the reviewed diff",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-EXEC-1",
+      "severity": "P1",
+      "summary": "PR 32 fixture did not execute specified failure paths",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-DIGEST-1",
+      "severity": "P1",
+      "summary": "proof output had no verified result digest",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-DEGRADE-1",
+      "severity": "P2",
+      "summary": "capability degradation had no durable state",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-APPLICABILITY-1",
+      "severity": "P2",
+      "summary": "applicability could be omitted without an explicit assessment",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    }
+  ],
+  "failurePathConcerns": ["state-machine", "persistence", "subprocess"],
   "failurePathProof": {
-    "command": [
-      "node",
-      "tools/tests/pr32-failure-path-fixture.mjs"
-    ],
+    "command": ["node", "tools/tests/pr32-failure-path-fixture.mjs"],
     "invariants": [
       {
         "concern": "state-machine",
@@ -52,7 +129,9 @@
       }
     ],
     "knownBadRevision": "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c",
-    "reviewedHead": "fc5fa758acb3e5988d6f7f0204f03edeac28eb2b",
+    "resultDigest": "74107589c83db2be78227a28ec20b583162683da2fa7b432d6f2ce66ad8c2163",
+    "reviewBase": "6c1b997ac08f8bbfb734d349660e66d56d1976e8",
+    "reviewedHead": "7c7f7e901aa9f7b66884aee9e508bcd53502b71b",
     "version": 1
   }
 }

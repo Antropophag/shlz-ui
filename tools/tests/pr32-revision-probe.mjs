@@ -149,15 +149,15 @@ await check("stdin-failure-settles-once", "subprocess", async () => {
   if (typeof worker.defaultRun !== "function") return false;
   try {
     await worker.defaultRun({
-      command: `missing-pr32-probe-${process.pid}`,
-      args: [],
+      command: process.execPath,
+      args: [path.resolve("tools/tests/fixtures/early-exit-worker.mjs")],
       cwd: root,
-      input: "probe",
-      timeoutMs: 100,
+      input: "x".repeat(16 * 1024 * 1024),
+      timeoutMs: 2_000,
     });
     return false;
   } catch (error) {
-    return error.code === "ENOENT";
+    return new Set(["EPIPE", "ERR_STREAM_DESTROYED"]).has(error.code);
   }
 });
 await check(

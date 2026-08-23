@@ -1,0 +1,27 @@
+[
+  {
+    "id": "SPEC-BIND-1",
+    "severity": "P1",
+    "summary": "proof revisions were not causally bound to the reviewed diff"
+  },
+  {
+    "id": "SPEC-EXEC-1",
+    "severity": "P1",
+    "summary": "PR 32 fixture did not execute specified failure paths"
+  },
+  {
+    "id": "SPEC-DIGEST-1",
+    "severity": "P1",
+    "summary": "proof output had no verified result digest"
+  },
+  {
+    "id": "SPEC-DEGRADE-1",
+    "severity": "P2",
+    "summary": "capability degradation had no durable state"
+  },
+  {
+    "id": "SPEC-APPLICABILITY-1",
+    "severity": "P2",
+    "summary": "applicability could be omitted without an explicit assessment"
+  }
+]

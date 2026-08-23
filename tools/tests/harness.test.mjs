@@ -22,6 +22,7 @@ import {
   pausePacket,
   readyPackets,
   recordEvent,
+  recordFailurePathDegradation,
   recordFailurePathProof,
   recordWorkerAttempt,
   reserveWorkerPacket,
@@ -2039,8 +2040,8 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
   const proof = {
     ...observed,
     command: definition.command,
-    resultDigest: failurePathResultDigest(observed),
   };
+  proof.resultDigest = failurePathResultDigest(proof);
   const concerns = ["state-machine", "persistence", "subprocess"];
   const state = createReviewState(
     "53936615ea50fcd58117b084c5b601556fc01dd2",
@@ -2048,19 +2049,20 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
   );
   recordReview(state, {
     axis: "Standards",
-    head: proof.reviewedHead,
+    head: "stale-head",
     findings: [],
   });
   assert.throws(
     () =>
       recordReview(state, {
         axis: "Spec",
-        head: proof.reviewedHead,
+        head: "stale-head",
         findings: [],
       }),
     /requires executable failure-path proof/,
   );
   recordFailurePathProof(state, proof);
+  assert.deepEqual(state.passes, []);
   recordReview(state, {
     axis: "Spec",
     head: proof.reviewedHead,
@@ -2101,6 +2103,20 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
         ),
       /invalid|discriminate|does not cover/,
     );
+});
+
+test("failure-path capability degradation is durable and blocks proof completion", () => {
+  const state = createReviewState("origin/main", ["subprocess"]);
+  recordFailurePathDegradation(
+    state,
+    "independent-method",
+    "reviewer cannot inject the stream boundary",
+  );
+  assert.equal(
+    reviewContext(state).failurePathProof.degradation.capability,
+    "independent-method",
+  );
+  assert.equal(reviewContext(state).failurePathProof.complete, false);
 });
 
 test("failure-path proof stays off the cheap review path", () => {

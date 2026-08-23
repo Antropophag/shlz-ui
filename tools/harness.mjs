@@ -26,6 +26,7 @@ import {
   readyPackets,
   relevantValidationFiles,
   recordEvent,
+  recordFailurePathDegradation,
   recordFailurePathProof,
   recordReview,
   recordValidation,
@@ -512,12 +513,23 @@ switch (command) {
       await writeJson(target, current);
       throw error;
     }
-    const resultDigest = failurePathResultDigest(observed);
-    const state = recordFailurePathProof(await readJson(target), {
+    const proof = {
       ...observed,
       command: definition.command,
-      resultDigest,
-    });
+    };
+    proof.resultDigest = failurePathResultDigest(proof);
+    const state = recordFailurePathProof(await readJson(target), proof);
+    await writeJson(target, state);
+    output(reviewContext(state));
+    break;
+  }
+  case "review-degrade": {
+    const target = statePath(args[0]);
+    const state = recordFailurePathDegradation(
+      await readJson(target),
+      option("--capability"),
+      option("--reason"),
+    );
     await writeJson(target, state);
     output(reviewContext(state));
     break;

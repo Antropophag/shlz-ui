@@ -1914,6 +1914,7 @@ export const failurePathResultDigest = (proof) =>
     knownBadRevision: proof.knownBadRevision,
     reviewedHead: proof.reviewedHead,
     invariants: proof.invariants,
+    command: proof.command,
   });
 
 export function recordFailurePathProof(state, proof) {
@@ -1965,8 +1966,25 @@ export function recordFailurePathProof(state, proof) {
         ...missingInvariants.map(([id]) => id),
       ].join(", ")}`,
     );
+  if (state.passes.some(({ head }) => head !== proof.reviewedHead))
+    state.passes = [];
   delete state.failurePathDegradation;
   state.failurePathProof = stableValue(proof);
+  return state;
+}
+
+export function recordFailurePathDegradation(state, capability, reason) {
+  if (!state.failurePathConcerns?.length)
+    throw new Error("review does not require failure-path capability");
+  if (!new Set(["execution", "independent-method"]).has(capability) || !reason)
+    throw new Error("failure-path degradation requires capability and reason");
+  state.failurePathDegradation = {
+    status: "unavailable",
+    capability,
+    reason,
+    recordedAt: new Date().toISOString(),
+  };
+  delete state.failurePathProof;
   return state;
 }
 
