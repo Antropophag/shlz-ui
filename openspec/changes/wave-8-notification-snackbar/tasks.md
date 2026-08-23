@@ -21,4 +21,4 @@
 ## 5. Integration, review, and delivery
 
 - [x] 5.1 Run source integrity, OpenSpec, lint, build, package, full browser, accessibility, visual and regression validation plus manual state walks; record exact counts, snapshot disposition, limitations, CI, and independent component statuses in the Wave 8 report
-- [ ] 5.2 Run two-axis Standards and Spec review against `origin/main`, remediate every scope-local finding, rerun affected checks, complete route-conformance/delivery guards, push the task branch, open an unmerged PR, and verify required GitHub checks are green
+- [x] 5.2 Run two-axis Standards and Spec review against `origin/main`, remediate every scope-local finding, rerun affected checks, complete route-conformance/delivery guards, push the task branch, open an unmerged PR, and verify required GitHub checks are green

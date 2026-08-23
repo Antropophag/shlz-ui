@@ -63,6 +63,9 @@ test.beforeEach(async ({ page }) => {
 test("independent occurrence guards classify Showcase, diagnostics and plain HTML", async ({
   page,
 }) => {
+  await expect(
+    page.locator("[data-component-audit-id^='notification-']"),
+  ).toHaveCount(3);
   await expectClassifiedComponentOccurrences(
     page,
     subset(
@@ -275,7 +278,8 @@ test("Snackbar preserves all six exact static contours without timer semantics",
       fixture.locator(".shlz-snackbar [data-snackbar-number='0']"),
     ).toHaveCount(1),
   );
-  await page.waitForTimeout(1100);
+  const stableUntil = Date.now() + 1100;
+  await expect.poll(() => Date.now()).toBeGreaterThanOrEqual(stableUntil);
   expect(
     await countdowns.evaluateAll((items) =>
       items.map((item) => item.dataset.snackbarNumber),

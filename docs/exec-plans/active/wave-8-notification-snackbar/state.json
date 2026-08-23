@@ -16,7 +16,7 @@
       "session": "root-wave8"
     },
     "integration-delivery": {
-      "status": "claimed",
+      "status": "completed",
       "session": "root-wave8"
     }
   },
@@ -83,6 +83,29 @@
       "unresolvedFindings": [],
       "nextPacket": "integration-delivery",
       "invalidatedAssumptions": []
+    },
+    "integration-delivery": {
+      "completedPacket": "integration-delivery",
+      "changed": [
+        "review remediation and canonical Snackbar contour ownership",
+        "final Wave 8 evidence and delivery record",
+        "open PR 30 targeting main"
+      ],
+      "provenChecks": [
+        "Node tests 123/123 and Chromium E2E 200/200 pass",
+        "build, lint, package smoke, OpenSpec and delivery guard pass",
+        "Standards and Spec re-review report no remaining findings",
+        "GitHub required, browser/visual and SonarCloud checks pass"
+      ],
+      "settledDecisions": [
+        "Notification and Snackbar are independently VERIFIED",
+        "PR remains unmerged for owner review"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": [
+        "initial focused rerun was insufficient; final full E2E passed 200/200"
+      ]
     }
   }
 }
