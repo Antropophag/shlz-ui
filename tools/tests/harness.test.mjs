@@ -22,6 +22,8 @@ import {
   pausePacket,
   readyPackets,
   recordEvent,
+  recordFailurePathDegradation,
+  recordFailurePathProof,
   recordWorkerAttempt,
   reserveWorkerPacket,
   relevantValidationFiles,
@@ -34,6 +36,7 @@ import {
   assertRouteConformance,
   evaluateExecutionStrategy,
   evaluateRouteEligibility,
+  failurePathResultDigest,
   resumePacket,
   retryWorkerPacket,
   reviewContext,
@@ -2006,10 +2009,149 @@ test("review state reuses the remediation diff and unresolved findings", () => {
     diff: "abc123..HEAD",
     base: "origin/main",
     unresolvedFindings: [state.findings[0]],
+    failurePathProof: {
+      required: false,
+      concerns: [],
+      complete: false,
+      degradation: null,
+    },
     discovery: "fixed-diff-and-known-findings-only",
   });
   resolveReviewFindings(state, ["F1"], "def456");
   assert.deepEqual(reviewContext(state).unresolvedFindings, []);
+});
+
+test("PR 32 failure-path fixture makes material review prove discriminating invariants", async () => {
+  const definition = await load(
+    "docs/exec-plans/fixtures/pr32-failure-path-proof.json",
+  );
+  const { stdout } = await exec(
+    definition.command[0],
+    definition.command.slice(1),
+    {
+      cwd: root,
+      env: {
+        ...process.env,
+        SHLZ_REVIEW_BASE: "53936615ea50fcd58117b084c5b601556fc01dd2",
+      },
+    },
+  );
+  const observed = JSON.parse(stdout);
+  const proof = {
+    ...observed,
+    command: definition.command,
+  };
+  proof.resultDigest = failurePathResultDigest(proof);
+  const concerns = ["state-machine", "persistence", "subprocess"];
+  const state = createReviewState(
+    "53936615ea50fcd58117b084c5b601556fc01dd2",
+    concerns,
+  );
+  recordReview(state, {
+    axis: "Standards",
+    head: "stale-head",
+    findings: [
+      {
+        id: "STALE-1",
+        severity: "P1",
+        summary: "finding from the superseded head",
+      },
+    ],
+  });
+  assert.throws(
+    () =>
+      recordReview(state, {
+        axis: "Spec",
+        head: "stale-head",
+        findings: [],
+      }),
+    /requires executable failure-path proof/,
+  );
+  recordFailurePathProof(state, proof);
+  assert.deepEqual(state.passes, []);
+  assert.equal(state.findings[0].introducedPass, null);
+  recordReview(state, {
+    axis: "Spec",
+    head: proof.reviewedHead,
+    findings: [],
+  });
+  assert.throws(
+    () =>
+      recordReview(state, { axis: "Standards", head: "stale", findings: [] }),
+    /stale for the reviewed head/,
+  );
+  assert.deepEqual(reviewContext(state).failurePathProof, {
+    required: true,
+    concerns,
+    complete: true,
+    degradation: null,
+  });
+
+  const mutationCases = [
+    [
+      (value) => ({ ...value, reviewedHead: value.knownBadRevision }),
+      /contract is invalid/,
+    ],
+    [
+      (value) => ({
+        ...value,
+        invariants: value.invariants.map((item, index) =>
+          index === 0 ? { ...item, knownBad: "pass" } : item,
+        ),
+      }),
+      /must discriminate/,
+    ],
+    [
+      (value) => ({
+        ...value,
+        invariants: value.invariants.filter(
+          ({ concern }) => concern !== "subprocess",
+        ),
+      }),
+      /does not cover/,
+    ],
+  ];
+  for (const [mutate, expected] of mutationCases) {
+    const mutated = mutate(JSON.parse(JSON.stringify(proof)));
+    mutated.resultDigest = failurePathResultDigest(mutated);
+    assert.throws(
+      () =>
+        recordFailurePathProof(
+          createReviewState(proof.reviewBase, concerns),
+          mutated,
+        ),
+      expected,
+    );
+  }
+});
+
+test("failure-path capability degradation is durable and blocks proof completion", () => {
+  const state = createReviewState("origin/main", ["subprocess"]);
+  recordFailurePathDegradation(
+    state,
+    "independent-method",
+    "reviewer cannot inject the stream boundary",
+  );
+  assert.equal(
+    reviewContext(state).failurePathProof.degradation.capability,
+    "independent-method",
+  );
+  assert.equal(reviewContext(state).failurePathProof.complete, false);
+});
+
+test("failure-path proof stays off the cheap review path", () => {
+  assert.deepEqual(reviewContext(createReviewState("origin/main")), {
+    diff: "origin/main...HEAD",
+    base: "origin/main",
+    unresolvedFindings: [],
+    failurePathProof: {
+      required: false,
+      concerns: [],
+      complete: false,
+      degradation: null,
+    },
+    discovery: "fixed-diff-and-known-findings-only",
+  });
 });
 
 test("telemetry reports actual observations and never invents unavailable usage", () => {

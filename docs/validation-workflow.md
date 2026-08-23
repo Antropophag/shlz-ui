@@ -20,6 +20,8 @@ After focused validation, inspect the complete target diff from the execution-ep
 
 Use `review-init`, `review-record`, `review-context`, and `review-resolve` to persist the fixed base, reviewed head, axes, findings, and dispositions. After a pass, `review-context` returns `<last-reviewed-head>..HEAD` plus unresolved findings, which is the complete re-review working set; resolve ids only after the targeted re-review confirms closure.
 
+When the material diff changes a state machine, persisted recovery, or a subprocess/stream boundary, initialize the same review with `--failure-path-concerns state-machine,persistence,subprocess` as applicable. Before treating its two axes as complete, run a focused failure-path fixture and record it with `review-proof --proof <result>`. A valid proof names executable invariants and discriminates a known-bad revision from the reviewed head; physical reviewer separation, green happy-path tests, prose handoffs, and a third PASS do not supply that guarantee. If the fixture or an independent failure-path method is unavailable, keep review incomplete and seek external diversity only when it can supply the missing method or environment. Direct S target-diff review and stateless changes skip this branch.
+
 For GitHub follow-ups, load actionable unresolved threads only. Route verified findings by their bounded delta, never by review author. Exclude resolved discussion, walkthroughs, release/billing messages, and duplicate bot summaries from active context. P0/P1 defects remain blocking regardless of budget.
 
 ## Evidence and telemetry

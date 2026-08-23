@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "changedFiles": [
+    "docs/agent-execution.md",
+    "docs/exec-plans/fixtures/pr32-failure-path-proof.json",
+    "docs/validation-workflow.md",
+    "openspec/changes/prove-failure-path-invariants/.openspec.yaml",
+    "openspec/changes/prove-failure-path-invariants/design.md",
+    "openspec/changes/prove-failure-path-invariants/proposal.md",
+    "openspec/changes/prove-failure-path-invariants/specs/harness/failure-path-proof/spec.md",
+    "openspec/changes/prove-failure-path-invariants/tasks.md",
+    "tools/harness.mjs",
+    "tools/lib/harness/codex-worker.mjs",
+    "tools/lib/harness/core.mjs",
+    "tools/tests/fixtures/early-exit-worker.mjs",
+    "tools/tests/harness.test.mjs",
+    "tools/tests/pr32-failure-path-fixture.mjs",
+    "tools/tests/pr32-revision-probe.mjs"
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

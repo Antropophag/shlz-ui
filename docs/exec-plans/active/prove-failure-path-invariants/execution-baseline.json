@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "6c1b997ac08f8bbfb734d349660e66d56d1976e8",
+  "branch": "fix/harness-failure-path-review",
+  "defaultBranch": "main"
+}

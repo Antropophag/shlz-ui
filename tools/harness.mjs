@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import { open, readFile, unlink } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 import {
   affectedValidation,
   assertValidationRun,
@@ -24,6 +26,8 @@ import {
   readyPackets,
   relevantValidationFiles,
   recordEvent,
+  recordFailurePathDegradation,
+  recordFailurePathProof,
   recordReview,
   recordValidation,
   reserveWorkerPacket,
@@ -34,6 +38,7 @@ import {
   assertExecutionBaselineState,
   assertRouteConformance,
   evaluateRouteEligibility,
+  failurePathResultDigest,
   resumePacket,
   reviewContext,
   resolveReviewFindings,
@@ -113,6 +118,7 @@ const option = (name) => {
 };
 const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+const exec = promisify(execFile);
 
 switch (command) {
   case "route-check":
@@ -461,19 +467,91 @@ switch (command) {
     break;
   }
   case "review-init": {
-    const state = createReviewState(args[1]);
+    const failurePathOption = option("--failure-path-concerns");
+    if (!failurePathOption)
+      throw new Error(
+        "review-init requires --failure-path-concerns <list|none>",
+      );
+    const state = createReviewState(
+      args[1],
+      failurePathOption === "none"
+        ? []
+        : failurePathOption.split(",").filter(Boolean),
+    );
     await writeJson(statePath(args[0]), state);
     output(state);
     break;
   }
+  case "review-proof": {
+    const target = statePath(args[0]);
+    const definition = await readJson(absolute(option("--proof")));
+    if (
+      !Array.isArray(definition.command) ||
+      !definition.command.length ||
+      definition.command.some((part) => typeof part !== "string" || !part)
+    )
+      throw new Error("review proof requires a command array");
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      let observed;
+      try {
+        const { stdout } = await exec(
+          definition.command[0],
+          definition.command.slice(1),
+          {
+            cwd: repoRoot,
+            env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
+            maxBuffer: 10 * 1024 * 1024,
+            timeout: 10 * 60 * 1000,
+            killSignal: "SIGKILL",
+          },
+        );
+        observed = JSON.parse(stdout);
+      } catch (error) {
+        await writeJson(
+          target,
+          recordFailurePathDegradation(current, "execution", error.message),
+        );
+        throw error;
+      }
+      const proof = {
+        ...observed,
+        command: definition.command,
+      };
+      proof.resultDigest = failurePathResultDigest(proof);
+      const next = recordFailurePathProof(current, proof);
+      await writeJson(target, next);
+      return next;
+    });
+    output(reviewContext(state));
+    break;
+  }
+  case "review-degrade": {
+    const target = statePath(args[0]);
+    const state = await withStateLock(target, async () => {
+      const next = recordFailurePathDegradation(
+        await readJson(target),
+        option("--capability"),
+        option("--reason"),
+      );
+      await writeJson(target, next);
+      return next;
+    });
+    output(reviewContext(state));
+    break;
+  }
   case "review-record": {
     const target = statePath(args[0]);
-    const state = recordReview(await readJson(target), {
-      axis: option("--axis"),
-      head: option("--head"),
-      findings: await readJson(absolute(option("--findings"))),
+    const findings = await readJson(absolute(option("--findings")));
+    const state = await withStateLock(target, async () => {
+      const next = recordReview(await readJson(target), {
+        axis: option("--axis"),
+        head: option("--head"),
+        findings,
+      });
+      await writeJson(target, next);
+      return next;
     });
-    await writeJson(target, state);
     output(reviewContext(state));
     break;
   }
@@ -482,12 +560,15 @@ switch (command) {
     break;
   case "review-resolve": {
     const target = statePath(args[0]);
-    const state = resolveReviewFindings(
-      await readJson(target),
-      option("--ids")?.split(",").filter(Boolean) ?? [],
-      option("--head"),
-    );
-    await writeJson(target, state);
+    const state = await withStateLock(target, async () => {
+      const next = resolveReviewFindings(
+        await readJson(target),
+        option("--ids")?.split(",").filter(Boolean) ?? [],
+        option("--head"),
+      );
+      await writeJson(target, next);
+      return next;
+    });
     output(reviewContext(state));
     break;
   }

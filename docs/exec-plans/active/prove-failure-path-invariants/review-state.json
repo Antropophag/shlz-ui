@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "base": "6c1b997ac08f8bbfb734d349660e66d56d1976e8",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    }
+  ],
+  "findings": [
+    {
+      "id": "BIND-1",
+      "severity": "P1",
+      "summary": "proof was not bound to review base and head",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "BEHAVIOR-1",
+      "severity": "P1",
+      "summary": "fixture matched source text instead of executing failure behavior",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "INVARIANT-1",
+      "severity": "P1",
+      "summary": "free-form invariant identities allowed incomplete coverage",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "DEGRADE-1",
+      "severity": "P2",
+      "summary": "proof capability failure was not persisted",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "SPEC-BIND-1",
+      "severity": "P1",
+      "summary": "proof revisions were not causally bound to the reviewed diff",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "SPEC-EXEC-1",
+      "severity": "P1",
+      "summary": "PR 32 fixture did not execute specified failure paths",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "SPEC-DIGEST-1",
+      "severity": "P1",
+      "summary": "proof output had no verified result digest",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "SPEC-DEGRADE-1",
+      "severity": "P2",
+      "summary": "capability degradation had no durable state",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    },
+    {
+      "id": "SPEC-APPLICABILITY-1",
+      "severity": "P2",
+      "summary": "applicability could be omitted without an explicit assessment",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "resolved",
+      "resolvedAtHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1"
+    }
+  ],
+  "failurePathConcerns": ["state-machine", "persistence", "subprocess"],
+  "failurePathProof": {
+    "command": ["node", "tools/tests/pr32-failure-path-fixture.mjs"],
+    "invariants": [
+      {
+        "concern": "state-machine",
+        "id": "launch-recording-is-recoverable",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "state-machine",
+        "id": "declared-fallback-can-complete",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "retry-state-is-monotonic",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "subprocess",
+        "id": "stdin-failure-settles-once",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "subprocess",
+        "id": "terminal-events-have-defined-precedence",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "persisted-completions-are-report-bound",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      }
+    ],
+    "knownBadRevision": "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c",
+    "resultDigest": "2f5b84fb2885508e258bfdb898d79612138fd556ae7e4503300174b63dbc1894",
+    "reviewBase": "6c1b997ac08f8bbfb734d349660e66d56d1976e8",
+    "reviewedHead": "fbe88ada45d87884d5783f2a242c39fb90c897d1",
+    "version": 1
+  }
+}

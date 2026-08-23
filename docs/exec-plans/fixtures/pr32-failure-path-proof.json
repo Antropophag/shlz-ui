@@ -1,0 +1,4 @@
+{
+  "version": 1,
+  "command": ["node", "tools/tests/pr32-failure-path-fixture.mjs"]
+}

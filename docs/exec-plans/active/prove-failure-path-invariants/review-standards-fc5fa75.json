@@ -1,0 +1,22 @@
+[
+  {
+    "id": "BIND-1",
+    "severity": "P1",
+    "summary": "proof was not bound to review base and head"
+  },
+  {
+    "id": "BEHAVIOR-1",
+    "severity": "P1",
+    "summary": "fixture matched source text instead of executing failure behavior"
+  },
+  {
+    "id": "INVARIANT-1",
+    "severity": "P1",
+    "summary": "free-form invariant identities allowed incomplete coverage"
+  },
+  {
+    "id": "DEGRADE-1",
+    "severity": "P2",
+    "summary": "proof capability failure was not persisted"
+  }
+]

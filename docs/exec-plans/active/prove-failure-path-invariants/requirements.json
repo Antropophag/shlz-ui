@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Require proportionate executable failure-path evidence for material stateful or external-boundary harness reviews.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "proof-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "independently choose and implement the minimal durable harness improvement"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "create but do not merge the PR"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "prove-failure-path-invariants",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit request to propose, choose, implement, dogfood, and prove"
+    }
+  }
+}

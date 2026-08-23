@@ -82,6 +82,8 @@ The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100
 
 Fresh context is preferred at implementation → independent review, subsystem changes, major replans, and after noisy tool output. Independent two-axis review applies to material work and M/L/XL or explicitly review-risky work. Direct S work uses complete target-diff inspection without creating review state solely for ceremony. Use isolated subagents for bounded independent analysis/review. Use parallel writing only for declared disjoint surfaces and bounded concurrency.
 
+Physical separation proves context independence, not method independence. For material state-machine, persistence, or subprocess/stream changes, the existing independent review also needs the conditional executable failure-path proof in `docs/validation-workflow.md`. Missing proof execution or an independent failure-path method is review capability degradation; external diversity is useful when it supplies that missing capability, not as an unconditional extra vote.
+
 ## Durable handoff
 
 OpenSpec owns requirements, Git owns code state, tests own executable evidence, and the execution state owns atomic claims, dependency progress, and per-packet handoffs. A handoff contains only its completed packet, changed areas, proven checks, settled decisions, unresolved findings/risks, next packet, and invalidated assumptions. Never paste chat transcripts or long spec summaries.
