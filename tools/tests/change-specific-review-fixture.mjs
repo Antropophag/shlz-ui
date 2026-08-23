@@ -1,8 +1,9 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, rm } from "node:fs/promises";
+import { mkdir, mkdtemp } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
+import { createHistoricalWorktreeManager } from "./historical-worktree-fixture.mjs";
 
 const exec = promisify(execFile);
 const change = "require-change-specific-failure-invariants";
@@ -23,7 +24,10 @@ const badRoot = await mkdtemp(path.join(parent, "shlz-change-invariants-bad-"));
 const probe = path.resolve(
   "tools/tests/change-specific-review-behavior-probe.mjs",
 );
-const addedWorktrees = new Set();
+const worktrees = createHistoricalWorktreeManager(
+  exec,
+  "change-specific fixture",
+);
 const runProbe = async (targetRoot) =>
   JSON.parse(
     (
@@ -32,45 +36,17 @@ const runProbe = async (targetRoot) =>
       })
     ).stdout,
   );
-const addHistoricalWorktree = async (targetRoot, revision) => {
-  try {
-    await exec("git", ["worktree", "add", "--detach", targetRoot, revision], {
-      maxBuffer: 10 * 1024 * 1024,
-    });
-    addedWorktrees.add(targetRoot);
-  } catch (error) {
-    throw new Error(
-      `historical revision ${revision} is unavailable; fetch full history before running this proof`,
-      { cause: error },
-    );
-  }
-};
 let knownBad;
 let reviewed;
 let runError;
 const cleanupErrors = [];
 try {
-  await addHistoricalWorktree(badRoot, knownBadRevision);
+  await worktrees.add(badRoot, knownBadRevision);
   [knownBad, reviewed] = await Promise.all([runProbe(badRoot), runProbe(".")]);
 } catch (error) {
   runError = error;
 } finally {
-  if (addedWorktrees.has(badRoot)) {
-    const status = await exec("git", ["-C", badRoot, "status", "--porcelain"])
-      .then(({ stdout: value }) => value)
-      .catch(() => null);
-    if (status === null || status.trim())
-      cleanupErrors.push(
-        new Error("change-specific fixture could not clean its worktree"),
-      );
-    else
-      await exec("git", ["worktree", "remove", badRoot]).catch((error) =>
-        cleanupErrors.push(error),
-      );
-  } else await rm(badRoot, { recursive: true, force: true });
-  await exec("git", ["worktree", "prune"]).catch((error) =>
-    cleanupErrors.push(error),
-  );
+  cleanupErrors.push(...(await worktrees.cleanup([badRoot])));
 }
 if (runError && cleanupErrors.length)
   throw new AggregateError(
