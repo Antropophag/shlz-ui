@@ -16,4 +16,4 @@
 ## 4. Workflow integration and delivery
 
 - [x] 4.1 Update agent-facing validation/execution guidance and dogfood this change's own marked contracts through the new manifest/proof path; verify focused harness tests and strict OpenSpec validation pass.
-- [ ] 4.2 Run affected validation, route conformance, independent Standards/Spec review with bounded remediation and targeted re-review, then pass delivery guards and open a separate unmerged PR.
+- [x] 4.2 Run affected validation, route conformance, independent Standards/Spec review with bounded remediation and targeted re-review, then pass delivery guards and open a separate unmerged PR.
