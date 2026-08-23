@@ -831,6 +831,7 @@ test("new L and XL plans cannot disable enforced isolation", () => {
   };
   const plan = createPlan(assessment, config);
   assert.equal(plan.executionIsolation.enforced, true);
+  assert.equal(plan.executionIsolation.unavailableFallback, "stop");
   const disabled = clone(plan);
   disabled.executionIsolation.enforced = false;
   assert.throws(
@@ -893,6 +894,10 @@ test("codex exec adapter probes capability and derives identity/status/usage onl
   const jsonl = [
     JSON.stringify({ type: "thread.started", thread_id: "runtime-42" }),
     JSON.stringify({
+      type: "item.completed",
+      item: { type: "agent_message", text: "bounded worker report" },
+    }),
+    JSON.stringify({
       type: "turn.completed",
       usage: { input_tokens: 12, output_tokens: 3 },
     }),
@@ -910,6 +915,8 @@ test("codex exec adapter probes capability and derives identity/status/usage onl
   });
   assert.equal(result.terminalStatus, "completed");
   assert.equal(result.evidence.runtimeId, "runtime-42");
+  assert.equal(result.workerReport, "bounded worker report");
+  assert.match(result.workerReportDigest, /^[0-9a-f]{64}$/);
   assert.match(result.evidence.evidenceDigest, /^[0-9a-f]{64}$/);
   const unattested = await launchCodexWorker({
     brief: {},
@@ -1069,21 +1076,25 @@ test("worker attempts reject stale briefs and record only declared unavailable f
     plan.packets
       .find(({ id }) => id === "shared-native-dialog")
       .scope.push("new-contract");
-    assert.throws(
-      () =>
-        recordWorkerAttempt(
-          plan,
-          state,
-          "shared-native-dialog",
-          brief,
-          { terminalStatus: "unavailable" },
-          "root",
-        ),
-      /brief is stale/,
+    recordWorkerAttempt(
+      plan,
+      state,
+      "shared-native-dialog",
+      brief,
+      { terminalStatus: "unavailable", launchId: "stale-launch" },
+      "root",
     );
+    assert.equal(state.packets["shared-native-dialog"].status, "failed");
+    assert.equal(
+      state.packets["shared-native-dialog"].failure.terminalStatus,
+      "stale-brief",
+    );
+    retryWorkerPacket(state, "shared-native-dialog");
+    assert.equal(state.packets["shared-native-dialog"].status, "pending");
   }
   {
     const { plan, state } = guardedWorkerFixture();
+    plan.classification.size = "M";
     plan.executionIsolation.unavailableFallback = "continue";
     const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
       baseline: executionBaseline,
@@ -1133,6 +1144,8 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
           startedAt: "2026-08-23T00:00:00.000Z",
           evidenceDigest: "d".repeat(64),
         },
+        workerReport: "bounded completed work report",
+        workerReportDigest: "e".repeat(64),
       },
       "worker-ok",
     );
@@ -1146,6 +1159,7 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
       invalidatedAssumptions: [],
       claimId: brief.claimId,
       briefDigest: brief.briefDigest,
+      workerReportDigest: "e".repeat(64),
     };
     return { plan, state, handoff };
   };

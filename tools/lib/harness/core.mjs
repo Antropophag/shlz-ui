@@ -1041,11 +1041,13 @@ export function createPlan(assessment, config, requirementsState = null) {
       ? {
           executionIsolation: {
             version: 1,
-            unavailableFallback: "stop",
             ...assessment.executionIsolation,
             enforced: ["L", "XL"].includes(classification.size)
               ? true
               : assessment.executionIsolation?.enforced === true,
+            unavailableFallback: ["L", "XL"].includes(classification.size)
+              ? "stop"
+              : (assessment.executionIsolation?.unavailableFallback ?? "stop"),
           },
         }
       : {}),
@@ -1168,6 +1170,7 @@ export function validateHandoff(value, plan) {
     "invalidatedAssumptions",
     "claimId",
     "briefDigest",
+    "workerReportDigest",
   ]);
   for (const key of Object.keys(value))
     if (!allowed.has(key))
@@ -1206,7 +1209,7 @@ export function validateHandoff(value, plan) {
   ])
     if (!Array.isArray(value[key]))
       throw new Error(`handoff ${key} must be an array`);
-  for (const key of ["claimId", "briefDigest"])
+  for (const key of ["claimId", "briefDigest", "workerReportDigest"])
     if (
       value[key] !== undefined &&
       (typeof value[key] !== "string" || value[key].length === 0)
@@ -1351,8 +1354,20 @@ export function recordWorkerAttempt(
       (state.requirementsRevision ?? plan.requirementsRevision ?? null) ||
     valueDigest(brief.dependencyDigests) !==
       valueDigest(dependencySnapshot(packet, state))
-  )
-    throw new Error("worker brief is stale and must be regenerated");
+  ) {
+    state.packets[packetId] = {
+      status: "failed",
+      retryable: true,
+      claimId: brief.claimId,
+      briefDigest: brief.briefDigest,
+      failure: {
+        terminalStatus: "stale-brief",
+        launchId: result?.launchId ?? null,
+        reason: "requirements, packet contract, or dependency handoff changed",
+      },
+    };
+    return state;
+  }
   if (
     !result?.evidence ||
     result.terminalStatus === "unavailable" ||
@@ -1417,6 +1432,8 @@ export function recordWorkerAttempt(
       terminalStatus: result.terminalStatus,
       launchId: result.launchId,
       usage: result.usage ?? null,
+      workerReport: result.workerReport ?? null,
+      workerReportDigest: result.workerReportDigest ?? null,
     },
   };
   if (result.terminalStatus !== "completed") {
@@ -1663,6 +1680,14 @@ export function completePacket(
     )
       throw new Error(
         "worker completion does not match the active claim and brief",
+      );
+    if (
+      !current.launch?.workerReport ||
+      !current.launch.workerReportDigest ||
+      handoff.workerReportDigest !== current.launch.workerReportDigest
+    )
+      throw new Error(
+        "worker completion requires the adapter-bound worker report digest",
       );
   }
   state.packets[handoff.completedPacket] = {

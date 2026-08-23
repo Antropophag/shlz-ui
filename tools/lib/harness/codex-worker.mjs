@@ -28,11 +28,21 @@ export function parseCodexExecJsonl(stdout) {
   const failed = events.find((event) =>
     ["turn.failed", "error"].includes(event?.type),
   );
+  const workerReport = events
+    .filter(
+      (event) =>
+        event?.type === "item.completed" &&
+        event.item?.type === "agent_message" &&
+        typeof event.item.text === "string" &&
+        event.item.text.trim(),
+    )
+    .at(-1)?.item.text;
   const usage = completed?.usage ?? null;
   return {
     runtimeId,
     terminalStatus: failed ? "failed" : completed ? "completed" : "incomplete",
     usage,
+    workerReport: workerReport ?? null,
     events,
   };
 }
@@ -156,5 +166,9 @@ export async function launchCodexWorker({
     exitCode: raw.code,
     evidence,
     usage: parsed.usage,
+    workerReport: parsed.workerReport,
+    workerReportDigest: parsed.workerReport
+      ? digest(parsed.workerReport)
+      : null,
   };
 }
