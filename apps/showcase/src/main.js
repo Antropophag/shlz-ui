@@ -491,6 +491,16 @@ window.__shlzConsumerWorkspace = enhanceConsumerWorkspace();
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 
+const notificationVisualMatrices = [
+  ...document.querySelectorAll(
+    "#notification-demo [data-notification-visual-matrix]",
+  ),
+];
+for (const matrix of notificationVisualMatrices) matrix.inert = true;
+notificationVisualMatrices[1]
+  ?.querySelector(".shlz-notification")
+  ?.classList.add("shlz-snackbar");
+
 document
   .querySelector("[data-component-audit-id='person-tag-content-stress']")
   ?.setAttribute("data-shlz-visual-addition", "");

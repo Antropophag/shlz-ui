@@ -3,6 +3,7 @@ import { iconHref, iconViewBox } from "@shlz/icons";
 import spriteUrl from "@shlz/icons/sprite.svg?url";
 
 import { renderComponentDocumentation } from "./component-docs.js";
+import { snackbarCountdown } from "./snackbar-contours.js";
 
 const urls = import.meta.glob("../generated/source-references/*.svg", {
   eager: true,
@@ -100,16 +101,6 @@ const popover = (placement, align = "center") =>
   `<div class="shlz-popover shlz-static-popover" data-static-placement="${placement}" data-static-align="${align}"><div class="shlz-popover__header">Заголовок</div><div class="shlz-popover__body">Текст Popover</div><span class="shlz-popover__arrow"></span></div>`;
 const notification = (kind, leading, title, trailing) =>
   `<div class="shlz-notification ${kind}">${leading}<div class="shlz-notification__content"><p class="shlz-notification__title">${title}</p></div>${trailing}</div>`;
-const snackbarProgressPaths = {
-  5: "M32 46C41.3888 46 49 38.3888 49 29C49 19.6112 41.3888 12 32 12C22.6112 12 15 19.6112 15 29C15 38.3888 22.6112 46 32 46ZM32 49C43.0457 49 52 40.0457 52 29C52 17.9543 43.0457 9 32 9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49Z",
-  4: "M49 29C49 38.3888 41.3888 46 32 46C22.6112 46 15 38.3888 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49C43.0457 49 52 40.0457 52 29C52 26.3477 51.4837 23.8161 50.5462 21.5L47.9109 23C48.6148 24.8658 49 26.8879 49 29Z",
-  3: "M44.6402 44.5L42.955 42C39.9963 44.4958 36.1738 46 32 46C22.6112 46 15 38.3888 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 40.0457 20.9543 49 32 49C36.7945 49 41.195 47.3129 44.6402 44.5Z",
-  2: "M17.7171 43L20 41.0416C16.9114 37.9636 15 33.705 15 29C15 19.6112 22.6112 12 32 12V9C20.9543 9 12 17.9543 12 29C12 34.4509 14.1806 39.3925 17.7171 43Z",
-  1: "M15.294 18L17.7171 19.7767C20.7454 15.0969 26.011 12 32 12V9C25.0179 9 18.8715 12.5778 15.294 18Z",
-  0: "M31.2632 9.01332L31.4172 12.0098C31.6106 12.0033 31.8049 12 32 12V9C31.7533 9 31.5077 9.00447 31.2632 9.01332Z",
-};
-const snackbarCountdown = (number) =>
-  `<span class="shlz-notification__source-countdown" data-snackbar-number="${number}"><svg viewBox="0 0 64 58" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="${snackbarProgressPaths[number]}" fill="currentColor"></path></svg><span>${number}</span></span>`;
 const paginationItem = (content, state = "") =>
   `<span class="shlz-pagination__item${state ? ` shlz-pagination__item--${state}` : ""}">${content}</span>`;
 const segmentGroup = (size = "", icons = false) =>
@@ -713,6 +704,41 @@ const formFidelityUnit = ({ id, title, orders, deviations }) => `
     <p class="shlz-fidelity-notes"><strong>Known deviations:</strong> ${deviations}</p>
   </article>`;
 
+const notificationMatrix = [
+  notification(
+    "",
+    `<span class="shlz-notification__icon">${icon("checkmark")}</span>`,
+    "Notification Title",
+    `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`,
+  ),
+  notification(
+    "shlz-notification--danger",
+    `<span class="shlz-notification__icon">${icon("checkmark")}</span>`,
+    "Notification Title",
+    `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`,
+  ),
+  notification(
+    "",
+    `<span class="shlz-notification__icon">${icon("checkmark")}</span>`,
+    "Notification Title",
+    '<button class="shlz-notification__action">Удалить</button>',
+  ),
+  ...[5, 4, 3, 2, 1, 0].map((number) =>
+    notification(
+      "shlz-snackbar",
+      snackbarCountdown(number),
+      "Сообщение отправлено",
+      '<button class="shlz-notification__action">Отменить</button>',
+    ),
+  ),
+  notification(
+    "",
+    '<span class="shlz-notification__leading-progress" style="--shlz-progress:.72"></span>',
+    "Сообщение отправляется",
+    '<button class="shlz-notification__action">Отменить</button>',
+  ),
+].join("");
+
 const implementations = {
   link: `<div class="shlz-cluster"><a class="shlz-link">Link</a><a class="shlz-link shlz-link--visual-hover">Link</a><a class="shlz-link shlz-link--visual-pressed">Link</a><span class="shlz-link shlz-link--disabled">Link</span></div>`,
   avatar: `<div class="shlz-cluster">${[24, 32, 40, 64].flatMap((size) => [`<span class="shlz-avatar shlz-avatar--${size}">U</span>`, `<span class="shlz-avatar shlz-avatar--${size} shlz-avatar--icon">${icon("user", "shlz-avatar__icon")}</span>`]).join("")}</div>`,
@@ -776,7 +802,7 @@ const implementations = {
     )}</div><div><p class="shlz-visual-matrix__label">Group</p><div class="shlz-pagination__group">${paginationItem(icon("arrow-left-md", "shlz-pagination__icon"), "disabled")}${paginationItem("1", "visual-pressed")}${paginationItem("2")}${paginationItem("3")}${paginationItem("…", "ellipsis")}${paginationItem("8")}${paginationItem(icon("arrow-right-md", "shlz-pagination__icon"))}</div></div><div class="shlz-pagination__group"><span class="shlz-pagination__summary">1–20 из 289</span><span class="shlz-pagination__page-size-label">Показывать по:</span>${paginationItem("20", "visual-pressed")}${paginationItem("50")}${paginationItem("80")}</div></div>`,
   tag: `<div class="shlz-visual-matrix"><div class="shlz-visual-row"><span class="shlz-tag">По гарантии</span><span class="shlz-tag shlz-tag--outlined">По гарантии</span></div><div class="shlz-visual-row"><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}<span class="shlz-person-tag__label">Александр Васильев</span></span><span class="shlz-tag shlz-person-tag">${icon("user", "shlz-tag__avatar")}<span class="shlz-person-tag__label">Александр Васильев</span><button class="shlz-tag__remove" type="button" aria-label="Remove">${icon("close-remove", "shlz-tag__icon")}</button></span></div></div>`,
   segment: `<div class="shlz-visual-matrix"><div><p class="shlz-visual-matrix__label">Segmented-Group · text</p><div class="shlz-visual-matrix">${segmentGroup("sm")}${segmentGroup()}${segmentGroup("lg")}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Group · icon slots</p><div class="shlz-visual-matrix">${segmentGroup("sm", true)}${segmentGroup("", true)}${segmentGroup("lg", true)}</div></div><div><p class="shlz-visual-matrix__label">Segmented-Item matrix · state meaning UNKNOWN</p><div class="shlz-segment-item-matrix">${["sm", "", "lg"].flatMap((size) => ["", "disabled", "selected"].map((state) => `<span class="shlz-segment__item${state ? ` shlz-segment__item--${state}` : ""}${size ? ` shlz-segment__item--${size}` : ""}">Daily</span>`)).join("")}</div></div></div>`,
-  notification: `<div class="shlz-notification-matrix">${notification("", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`)}${notification("shlz-notification--danger", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", `<button class="shlz-notification__close" aria-label="Close">${icon("close")}</button>`)}${notification("", `<span class="shlz-notification__icon">${icon("checkmark")}</span>`, "Notification Title", '<button class="shlz-notification__action">Удалить</button>')}${[5, 4, 3, 2, 1, 0].map((n) => notification("", snackbarCountdown(n), "Сообщение отправлено", '<button class="shlz-notification__action">Отменить</button>')).join("")}${notification("", '<span class="shlz-notification__leading-progress" style="--shlz-progress:.72"></span>', "Сообщение отправляется", '<button class="shlz-notification__action">Отменить</button>')}</div>`,
+  notification: `<div class="shlz-notification-matrix">${notificationMatrix}</div>`,
   modal: `<div class="shlz-modal-matrix"><div class="shlz-modal__surface shlz-modal__surface--structured"><header class="shlz-modal__header"><h3 class="shlz-modal__title">Basic Modal</h3><button class="shlz-modal__close" aria-label="Close">×</button></header><div class="shlz-modal__body"><div class="shlz-modal__source-slot"></div></div><footer class="shlz-modal__footer"><button class="shlz-button shlz-button--sm">Cancel</button><button class="shlz-button shlz-button--primary shlz-button--sm">Done</button></footer></div>${compactModal("info", "This is some info")}${compactModal("success", "Some task has completed!")}${compactModal("warning", "This is a warning message")}${compactModal("error", "This is an error message")}</div>`,
   drawer: `<div class="shlz-static-backdrop shlz-static-backdrop--drawer"><div class="shlz-drawer__surface"><header class="shlz-drawer__header"><h3 class="shlz-drawer__title">Drawer Title</h3><button class="shlz-drawer__close" aria-label="Close">×</button></header><div class="shlz-drawer__body"><div class="shlz-drawer__source-slot"></div></div><footer class="shlz-drawer__footer"><button class="shlz-button">Назад</button><button class="shlz-button shlz-button--primary">Сохранить</button></footer></div></div>`,
 };

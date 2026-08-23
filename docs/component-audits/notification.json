@@ -1,0 +1,102 @@
+{
+  "component": "notification",
+  "authoritativeSource": "shlz-design-source/raw/svg/Notification.svg",
+  "referenceSources": ["docs/components/notification-source.md"],
+  "implementation": ["packages/styles/components/notification.css"],
+  "behavior": null,
+  "docs": "docs/components/notification.md",
+  "rootSelector": "[data-component-audit-id^='notification-']",
+  "legacySelectors": [".shlz-notification:not(.shlz-snackbar)"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 6,
+  "occurrences": [
+    { "id": "notification-showcase-dismissible", "kind": "live-consumer" },
+    { "id": "notification-showcase-action", "kind": "live-consumer" },
+    { "id": "notification-content-stress", "kind": "content-stress-fixture" },
+    { "id": "notification-plain-html", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["384x58-source-minimum", "container-bounded"],
+  "supportedStates": [
+    "default",
+    "error",
+    "with-button",
+    "light",
+    "focus-visible",
+    "disabled",
+    "long-content",
+    "narrow-viewport"
+  ],
+  "contentStress": [
+    "long-title",
+    "long-message",
+    "long-action",
+    "320px-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Notification has exactly Default, With button and Error Type variants at 384x58 with radius 29",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Notification.svg"
+    },
+    {
+      "claim": "native semantics and application-owned placement, lifecycle, actions and focus recovery form the reusable boundary",
+      "classification": "repository-decision",
+      "evidence": "docs/components/notification.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/notification-snackbar-wave8.spec.js",
+    "tools/playwright/fidelity.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/notification-default-chromium-linux.png",
+    "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/notification-error-action-chromium-linux.png",
+    "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/notification-content-stress-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Notification hash and exact three-variant names, nodes, dimensions, extraction health and references are asserted",
+    "structural-contract": "pass: Showcase, content-stress, plain-HTML and inert diagnostic roots are independently classified by repository and DOM guards",
+    "runtime-browser": "pass: application-owned close, eligible focus recovery and action activation execute once without a library controller",
+    "accessibility": "pass: status/alert choice, complete text, named close, native disabled action, keyboard order and focus-visible are exercised",
+    "focused-visual": "pass: exact default/error/action geometry and paint plus representative focused snapshots are component-local",
+    "consumer-integration": "pass: executable Showcase integration and framework-neutral plain HTML consume the shared styles",
+    "responsive-content-stress": "pass: long title/message/action, 320px viewport and 200 percent text grow without clipping or page overflow"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: three source variants and diagnostic snapshots remain static visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: real hover, pointer-down, focus-visible and native disabled states precede computed paint and focus assertions"
+      ],
+      "runtimeBehavior": [
+        "pass: application-owned close/focus recovery and action activation execute once; the library exposes no controller"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "error",
+      "with-button",
+      "hover",
+      "active",
+      "focus-visible",
+      "disabled",
+      "long-content",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/notification-snackbar-wave8.spec.js",
+    "manualStateWalk": "pass: default/error/action, pointer hover/down, Tab/focus-visible, Enter/Space, disabled, close/focus return, narrow/long content and text scaling inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "placement, stacking, urgency, live-region policy, queue, timing, persistence, dismissal and focus recovery remain consumer-owned"
+  ]
+}

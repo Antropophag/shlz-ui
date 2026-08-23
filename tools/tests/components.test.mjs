@@ -146,7 +146,10 @@ test("plain HTML fixture keeps accessibility-critical native contracts", async (
     /shlz-tag__remove"[\s\S]*?type="button"[\s\S]*?aria-label=/,
   );
   assert.match(html, /shlz-segment__input" type="radio" name=/);
-  assert.match(html, /shlz-notification" role="status"/);
+  assert.match(
+    html,
+    /class="shlz-notification"[\s\S]*?role="status"[\s\S]*?data-component-audit-id="notification-plain-html"/,
+  );
   assert.match(html, /<dialog[\s\S]+data-shlz-modal/);
   assert.match(html, /<dialog[\s\S]+data-shlz-drawer/);
   assert.match(html, /enhanceModals\(\)/);

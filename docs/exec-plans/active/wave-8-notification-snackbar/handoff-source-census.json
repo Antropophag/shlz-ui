@@ -1,0 +1,22 @@
+{
+  "completedPacket": "source-census",
+  "changed": [
+    "raw source and provenance checks",
+    "Notification and Snackbar manifests",
+    "repository and built-DOM occurrence guards"
+  ],
+  "provenChecks": [
+    "focused Node source/manifest/census: 6/6 pass",
+    "focused Chromium occurrence and component evidence: 7/7 pass"
+  ],
+  "settledDecisions": [
+    "Snackbar authority is Basic elements ZIP",
+    "three Notification and six Snackbar variants are exact",
+    "timing and lifecycle remain consumer-owned"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "notification",
+  "invalidatedAssumptions": [
+    "radius-max was not equivalent to source radius 29 under tall content stress"
+  ]
+}

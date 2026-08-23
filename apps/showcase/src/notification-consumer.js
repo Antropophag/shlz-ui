@@ -1,3 +1,5 @@
+import { snackbarCountdown } from "./snackbar-contours.js";
+
 const enhancedNotifications = new WeakSet();
 const enhancedFixtures = new WeakSet();
 
@@ -75,7 +77,7 @@ export const notificationConsumerMarkup = (iconUrl) => `
       Продолжить работу
     </button>
     <div class="shlz-stack">
-      <div class="shlz-notification" role="status" data-notification data-notification-focus-return="notification-consumer-return">
+      <div class="shlz-notification" role="status" data-notification data-notification-focus-return="notification-consumer-return" data-component-audit-id="notification-showcase-dismissible">
         <span class="shlz-notification__icon" aria-hidden="true">
           <img src="${iconUrl("checkmark")}" alt="">
         </span>
@@ -86,13 +88,30 @@ export const notificationConsumerMarkup = (iconUrl) => `
           <img src="${iconUrl("close-remove")}" alt="">
         </button>
       </div>
-      <div class="shlz-notification shlz-notification--danger" role="alert" data-notification data-notification-focus-return="notification-consumer-return">
+      <div class="shlz-notification shlz-notification--danger" role="alert" data-notification data-notification-focus-return="notification-consumer-return" data-component-audit-id="notification-showcase-action">
         <div class="shlz-notification__content">
           <p class="shlz-notification__title">Не удалось сохранить изменения</p>
         </div>
         <button class="shlz-notification__action" type="button" data-notification-action="retry-save">
           Повторить
         </button>
+      </div>
+      <div class="shlz-notification" data-component-audit-id="notification-content-stress">
+        <div class="shlz-notification__content">
+          <p class="shlz-notification__title">Результат синхронизации большого набора корпоративных документов</p>
+          <p class="shlz-notification__message">Подробное описание остаётся читаемым при узком viewport и увеличенном тексте.</p>
+        </div>
+        <button class="shlz-notification__action" type="button" disabled>Запустить синхронизацию снова</button>
+      </div>
+      <div class="shlz-notification shlz-snackbar" data-notification data-snackbar data-component-audit-id="snackbar-showcase-action">
+        ${snackbarCountdown(5)}
+        <div class="shlz-notification__content"><p class="shlz-notification__title">Сообщение отправлено</p></div>
+        <button class="shlz-notification__action" type="button" data-notification-action="undo-send">Отменить</button>
+      </div>
+      <div class="shlz-notification shlz-snackbar" data-component-audit-id="snackbar-content-stress">
+        ${snackbarCountdown(0)}
+        <div class="shlz-notification__content"><p class="shlz-notification__title">Корпоративное сообщение с длинным локализованным названием отправлено</p></div>
+        <button class="shlz-notification__action" type="button" disabled>Отменить отправку сообщения</button>
       </div>
     </div>
     <p data-notification-action-result aria-live="polite">Действие ещё не запрошено.</p>
