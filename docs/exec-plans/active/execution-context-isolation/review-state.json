@@ -12,7 +12,10 @@
     { "pass": 4, "axis": "Spec", "head": "d10b482" },
     { "pass": 5, "axis": "Standards", "head": "16910ab" },
     { "pass": 5, "axis": "Spec", "head": "16910ab" },
-    { "pass": 6, "axis": "Physical final audit", "head": "16910ab" }
+    { "pass": 6, "axis": "Physical final audit", "head": "16910ab" },
+    { "pass": 7, "axis": "Physical remediation audit", "head": "6c2212e" },
+    { "pass": 8, "axis": "Standards", "head": "6c2212e" },
+    { "pass": 8, "axis": "Spec", "head": "6c2212e" }
   ],
   "findings": [
     {

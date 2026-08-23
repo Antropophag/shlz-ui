@@ -27,6 +27,17 @@
     "repeatedDiscoveryCommands": 0,
     "contextRelevance": "unavailable"
   },
+  "allTrustedDogfood": {
+    "physicalBoundaries": 3,
+    "runtimeIds": [
+      "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+      "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+      "01a02f72-d6cc-7f63-aceb-eee23b9304d9"
+    ],
+    "actualInputPlusOutputTokens": 654259,
+    "peakActiveContextProxyTokens": 328718,
+    "note": "Includes two broader independent audits; use the focused dogfood for the bounded Wave 8 regression, not as a like-for-like total-token forecast."
+  },
   "interpretation": [
     "The focused worker proves a physical fresh thread and a bounded active-context proxy; it does not estimate the unknown Wave 8 pre-change peak.",
     "Fresh contexts do not guarantee lower total tokens: two earlier broad implementation workers used 1672792 and 1367427 input-plus-output tokens, so brief quality and read discipline remain material.",

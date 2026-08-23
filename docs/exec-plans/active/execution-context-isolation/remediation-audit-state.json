@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "planId": "execution-isolation-remediation-audit",
+  "packets": {
+    "remediation-audit": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "remediation-audit-worker",
+      "claimId": "remediation-audit-20260823",
+      "briefDigest": "c03f6e85d7753979143e01e19b7741cf4c87f5fb85becbdbad489d421d41aa00",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {},
+      "packetDigest": "1b66f834e8bfbc7e872aeaf5e815f142693515e7e0d4e09fdcd8680337fb9b93",
+      "requirementsRevision": null,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f72-d6cc-7f63-aceb-eee23b9304d9",
+        "launchId": "440361d8-c15a-4467-8de6-5f465f3c5d2b",
+        "startedAt": "2026-08-23T16:27:29.968Z",
+        "evidenceDigest": "1997dd3153ff6194e0e61867484bbb3f73ad41d3a842de7feaca461511eebb9e"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "440361d8-c15a-4467-8de6-5f465f3c5d2b",
+        "usage": {
+          "input_tokens": 328718,
+          "cached_input_tokens": 286976,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2955,
+          "reasoning_output_tokens": 697
+        },
+        "workerReport": "BLOCKED — durable review evidence is stale.\n\n## Standards\n\n[review-state.json](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/exec-plans/active/execution-context-isolation/review-state.json:13) records review passes only through `16910ab`, while current `HEAD` is `6c2212e`. Commits `6d656c0` and `6c2212e` therefore lack recorded final two-axis review, contrary to [agent-execution.md](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/agent-execution.md:83).\n\nNo implementation smells or other standards findings.\n\n## Spec\n\nSame P1 blocker: durable evidence does not demonstrate that independent review consumed the final fixed-base diff, as required by the independent-review scenario in the [OpenSpec contract](/home/antropophag/code/shlz-ui-execution-context-isolation/openspec/changes/execution-context-isolation/specs/harness/execution-context-isolation/spec.md:80).\n\nOtherwise verified:\n\n- Timeout escalates `SIGTERM` to `SIGKILL`.\n- Complete retry-attempt history is preserved.\n- Review baseline is immutably pinned to `53936615…`.\n- `npm run test:harness`: 46/46 passed.\n- Strict OpenSpec validation: passed.\n- Files modified by this audit: none.\n- Runtime identity: unavailable to this subprocess; pending root-orchestrator binding per packet lifecycle.",
+        "workerReportDigest": "0ac81666d69b268de3ea9a28ebaab1c5ba22a6b77d54daded20fc61a5c168ba6"
+      }
+    }
+  },
+  "handoffs": {
+    "remediation-audit": {
+      "completedPacket": "remediation-audit",
+      "claimId": "remediation-audit-20260823",
+      "briefDigest": "c03f6e85d7753979143e01e19b7741cf4c87f5fb85becbdbad489d421d41aa00",
+      "workerReportDigest": "0ac81666d69b268de3ea9a28ebaab1c5ba22a6b77d54daded20fc61a5c168ba6",
+      "changed": [],
+      "provenChecks": [
+        "physical runtime thread 01a02f72-d6cc-7f63-aceb-eee23b9304d9 completed",
+        "worker verified timeout SIGTERM to SIGKILL escalation",
+        "worker verified complete retry-attempt history preservation",
+        "npm run test:harness: 46/46 pass",
+        "openspec strict validation: pass",
+        "subsequent fixed-base Standards and Spec passes: PASS"
+      ],
+      "settledDecisions": [
+        "the worker's only blocker was missing review-state coverage of its final head",
+        "two subsequent independent fixed-base passes closed that evidence gap"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": []
+    }
+  }
+}
