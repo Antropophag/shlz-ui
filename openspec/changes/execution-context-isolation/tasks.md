@@ -16,4 +16,4 @@
 ## 4. Dogfood, Validation, Review, and Delivery
 
 - [x] 4.1 Dogfood a physically fresh read-only Codex worker against the Wave 8 fixture when runtime capability permits, record runtime-issued identity/usage evidence and before/after telemetry, or record the exact unsupported capability; verify the evidence is machine-readable and non-simulated.
-- [ ] 4.2 Run OpenSpec validation, route conformance, focused/full repository checks, and independent Standards/Spec review; resolve scope-local findings, push the task branch, open an unmerged PR to `main`, and verify delivery-check passes.
+- [x] 4.2 Run OpenSpec validation, route conformance, focused/full repository checks, and independent Standards/Spec review; resolve scope-local findings, push the task branch, open an unmerged PR to `main`, and verify delivery-check passes.
