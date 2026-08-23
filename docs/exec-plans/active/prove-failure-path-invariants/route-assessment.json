@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "intent": "Require proportionate executable failure-path evidence for material stateful or external-boundary harness reviews.",
+  "route": "open-spec",
+  "openSpecChange": "prove-failure-path-invariants",
+  "requiredDecisions": [
+    { "id": "proof-contract", "owner": "user", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

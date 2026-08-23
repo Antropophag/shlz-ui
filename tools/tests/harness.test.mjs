@@ -22,6 +22,7 @@ import {
   pausePacket,
   readyPackets,
   recordEvent,
+  recordFailurePathProof,
   recordWorkerAttempt,
   reserveWorkerPacket,
   relevantValidationFiles,
@@ -2006,10 +2007,76 @@ test("review state reuses the remediation diff and unresolved findings", () => {
     diff: "abc123..HEAD",
     base: "origin/main",
     unresolvedFindings: [state.findings[0]],
+    failurePathProof: { required: false, concerns: [], complete: false },
     discovery: "fixed-diff-and-known-findings-only",
   });
   resolveReviewFindings(state, ["F1"], "def456");
   assert.deepEqual(reviewContext(state).unresolvedFindings, []);
+});
+
+test("PR 32 failure-path fixture makes material review prove discriminating invariants", async () => {
+  const definition = await load(
+    "docs/exec-plans/fixtures/pr32-failure-path-proof.json",
+  );
+  const { stdout } = await exec(
+    definition.command[0],
+    definition.command.slice(1),
+    {
+      cwd: root,
+    },
+  );
+  const proof = { ...JSON.parse(stdout), command: definition.command };
+  const concerns = ["state-machine", "persistence", "subprocess"];
+  const state = createReviewState(
+    "53936615ea50fcd58117b084c5b601556fc01dd2",
+    concerns,
+  );
+  recordReview(state, { axis: "Standards", head: "head-1", findings: [] });
+  assert.throws(
+    () => recordReview(state, { axis: "Spec", head: "head-1", findings: [] }),
+    /requires executable failure-path proof/,
+  );
+  recordFailurePathProof(state, proof);
+  recordReview(state, { axis: "Spec", head: "head-1", findings: [] });
+  assert.deepEqual(reviewContext(state).failurePathProof, {
+    required: true,
+    concerns,
+    complete: true,
+  });
+
+  for (const mutate of [
+    (value) => ({ ...value, reviewedHead: value.knownBadRevision }),
+    (value) => ({
+      ...value,
+      invariants: value.invariants.map((item, index) =>
+        index === 0 ? { ...item, knownBad: "pass" } : item,
+      ),
+    }),
+    (value) => ({
+      ...value,
+      invariants: value.invariants.filter(
+        ({ concern }) => concern !== "subprocess",
+      ),
+    }),
+  ])
+    assert.throws(
+      () =>
+        recordFailurePathProof(
+          createReviewState("base", concerns),
+          mutate(structuredClone(proof)),
+        ),
+      /invalid|discriminate|does not cover/,
+    );
+});
+
+test("failure-path proof stays off the cheap review path", () => {
+  assert.deepEqual(reviewContext(createReviewState("origin/main")), {
+    diff: "origin/main...HEAD",
+    base: "origin/main",
+    unresolvedFindings: [],
+    failurePathProof: { required: false, concerns: [], complete: false },
+    discovery: "fixed-diff-and-known-findings-only",
+  });
 });
 
 test("telemetry reports actual observations and never invents unavailable usage", () => {

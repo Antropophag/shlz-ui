@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 import { open, readFile, unlink } from "node:fs/promises";
+import { execFile } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 import {
   affectedValidation,
   assertValidationRun,
@@ -24,6 +26,7 @@ import {
   readyPackets,
   relevantValidationFiles,
   recordEvent,
+  recordFailurePathProof,
   recordReview,
   recordValidation,
   reserveWorkerPacket,
@@ -113,6 +116,7 @@ const option = (name) => {
 };
 const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+const exec = promisify(execFile);
 
 switch (command) {
   case "route-check":
@@ -461,9 +465,38 @@ switch (command) {
     break;
   }
   case "review-init": {
-    const state = createReviewState(args[1]);
+    const state = createReviewState(
+      args[1],
+      option("--failure-path-concerns")?.split(",").filter(Boolean) ?? [],
+    );
     await writeJson(statePath(args[0]), state);
     output(state);
+    break;
+  }
+  case "review-proof": {
+    const target = statePath(args[0]);
+    const definition = await readJson(absolute(option("--proof")));
+    if (
+      !Array.isArray(definition.command) ||
+      !definition.command.length ||
+      definition.command.some((part) => typeof part !== "string" || !part)
+    )
+      throw new Error("review proof requires a command array");
+    const { stdout } = await exec(
+      definition.command[0],
+      definition.command.slice(1),
+      {
+        cwd: repoRoot,
+        maxBuffer: 10 * 1024 * 1024,
+      },
+    );
+    const observed = JSON.parse(stdout);
+    const state = recordFailurePathProof(await readJson(target), {
+      ...observed,
+      command: definition.command,
+    });
+    await writeJson(target, state);
+    output(reviewContext(state));
     break;
   }
   case "review-record": {

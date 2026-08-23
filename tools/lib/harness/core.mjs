@@ -1876,9 +1876,68 @@ export async function recordValidation(
   return ledger;
 }
 
-export function createReviewState(base) {
+const failurePathConcerns = new Set([
+  "state-machine",
+  "persistence",
+  "subprocess",
+]);
+
+export function createReviewState(base, concerns = []) {
   if (!base) throw new Error("review base is required");
-  return { version: 1, base, passes: [], findings: [] };
+  if (
+    !Array.isArray(concerns) ||
+    new Set(concerns).size !== concerns.length ||
+    concerns.some((concern) => !failurePathConcerns.has(concern))
+  )
+    throw new Error("review failure-path concerns are invalid");
+  return {
+    version: 1,
+    base,
+    passes: [],
+    findings: [],
+    ...(concerns.length ? { failurePathConcerns: concerns } : {}),
+  };
+}
+
+export function recordFailurePathProof(state, proof) {
+  const concerns = state.failurePathConcerns ?? [];
+  if (!concerns.length)
+    throw new Error("review does not require a failure-path proof");
+  if (
+    !proof ||
+    proof.version !== 1 ||
+    !Array.isArray(proof.command) ||
+    !proof.command.length ||
+    proof.command.some((part) => typeof part !== "string" || !part) ||
+    !/^[0-9a-f]{40}$/.test(proof.knownBadRevision ?? "") ||
+    !/^[0-9a-f]{40}$/.test(proof.reviewedHead ?? "") ||
+    proof.knownBadRevision === proof.reviewedHead ||
+    !Array.isArray(proof.invariants) ||
+    !proof.invariants.length
+  )
+    throw new Error("failure-path proof contract is invalid");
+  const covered = new Set();
+  const ids = new Set();
+  for (const invariant of proof.invariants) {
+    if (
+      typeof invariant.id !== "string" ||
+      !invariant.id ||
+      ids.has(invariant.id) ||
+      !concerns.includes(invariant.concern) ||
+      invariant.knownBad !== "fail" ||
+      invariant.reviewedHead !== "pass"
+    )
+      throw new Error(
+        "failure-path proof must discriminate known-bad and reviewed revisions",
+      );
+    ids.add(invariant.id);
+    covered.add(invariant.concern);
+  }
+  const missing = concerns.filter((concern) => !covered.has(concern));
+  if (missing.length)
+    throw new Error(`failure-path proof does not cover: ${missing.join(", ")}`);
+  state.failurePathProof = stableValue(proof);
+  return state;
 }
 
 export function recordReview(state, { axis, head, findings }) {
@@ -1889,6 +1948,16 @@ export function recordReview(state, { axis, head, findings }) {
   )
     throw new Error(
       "review record requires Standards/Spec axis, head, and findings",
+    );
+  const completesAxes =
+    new Set([...state.passes.map((pass) => pass.axis), axis]).size === 2;
+  if (
+    completesAxes &&
+    state.failurePathConcerns?.length &&
+    !state.failurePathProof
+  )
+    throw new Error(
+      "independent review requires executable failure-path proof",
     );
   const pass = state.passes.length + 1;
   state.passes.push({ pass, axis, head });
@@ -1910,6 +1979,11 @@ export function reviewContext(state) {
     unresolvedFindings: state.findings.filter(
       ({ status }) => status !== "resolved",
     ),
+    failurePathProof: {
+      required: (state.failurePathConcerns?.length ?? 0) > 0,
+      concerns: state.failurePathConcerns ?? [],
+      complete: Boolean(state.failurePathProof),
+    },
     discovery: "fixed-diff-and-known-findings-only",
   };
 }
