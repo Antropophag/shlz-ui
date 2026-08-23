@@ -1,0 +1,2 @@
+{"at":"2026-08-23T16:18:40.383Z","packet":"wave-8-read-only-proof","session":"wave8-final-dogfood","agent":"codex-worker","phase":"execution","type":"execution-boundary","executionSource":"codex-exec-jsonl","runtimeId":"01a02f6a-6efb-7e42-a35c-5ec16f8e9151"}
+{"at":"2026-08-23T16:18:40.389Z","packet":"wave-8-read-only-proof","session":"wave8-final-dogfood","agent":"codex-worker","phase":"execution","type":"usage","usageSource":"codex-exec-jsonl:turn.completed","tokens":38156,"contextTokens":37546}

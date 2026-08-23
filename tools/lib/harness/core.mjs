@@ -974,7 +974,9 @@ export function validatePlan(plan, config) {
   if (
     plan.version >= 2 &&
     ["L", "XL"].includes(plan.classification.size) &&
-    (!plan.executionIsolation || plan.executionIsolation.enforced !== true)
+    (!plan.executionIsolation ||
+      plan.executionIsolation.enforced !== true ||
+      plan.executionIsolation.unavailableFallback !== "stop")
   )
     throw new Error(
       `${plan.classification.size} plan requires an executionIsolation policy`,
@@ -1409,6 +1411,27 @@ export function recordWorkerAttempt(
     return state;
   }
   const execution = validateExecutionEvidence(result.evidence);
+  const workerReportDigest =
+    typeof result.workerReport === "string" && result.workerReport.trim()
+      ? createHash("sha256").update(result.workerReport).digest("hex")
+      : null;
+  if (
+    result.terminalStatus === "completed" &&
+    (!workerReportDigest || result.workerReportDigest !== workerReportDigest)
+  ) {
+    state.packets[packetId] = {
+      status: "failed",
+      retryable: true,
+      claimId: brief.claimId,
+      briefDigest: brief.briefDigest,
+      failure: {
+        terminalStatus: "invalid-worker-report",
+        launchId: result.launchId ?? null,
+        reason: "completed worker did not produce a digest-bound final report",
+      },
+    };
+    return state;
+  }
   const duplicate = Object.entries(state.packets).find(
     ([id, value]) =>
       id !== packetId && value.execution?.runtimeId === execution.runtimeId,
@@ -1433,7 +1456,7 @@ export function recordWorkerAttempt(
       launchId: result.launchId,
       usage: result.usage ?? null,
       workerReport: result.workerReport ?? null,
-      workerReportDigest: result.workerReportDigest ?? null,
+      workerReportDigest,
     },
   };
   if (result.terminalStatus !== "completed") {

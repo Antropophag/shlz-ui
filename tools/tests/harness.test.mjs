@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { mkdtemp, readFile, rm, unlink, writeFile } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { tmpdir } from "node:os";
@@ -838,6 +839,12 @@ test("new L and XL plans cannot disable enforced isolation", () => {
     () => validatePlan(disabled, config),
     /requires an executionIsolation policy/,
   );
+  const degraded = clone(plan);
+  degraded.executionIsolation.unavailableFallback = "continue";
+  assert.throws(
+    () => validatePlan(degraded, config),
+    /requires an executionIsolation policy/,
+  );
 });
 
 const guardedWorkerFixture = () => {
@@ -1034,6 +1041,45 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
   );
   assert.equal(state.packets["shared-native-dialog"].status, "failed");
   assert.deepEqual(readyPackets(plan, state), []);
+
+  retryWorkerPacket(state, "shared-native-dialog");
+  const reportlessBrief = createWorkerBrief(
+    plan,
+    state,
+    "shared-native-dialog",
+    { baseline: executionBaseline, claimId: "claim-reportless" },
+  );
+  reserve(
+    plan,
+    state,
+    "shared-native-dialog",
+    reportlessBrief,
+    "worker-reportless",
+  );
+  recordWorkerAttempt(
+    plan,
+    state,
+    "shared-native-dialog",
+    reportlessBrief,
+    {
+      launchId: "launch-reportless",
+      terminalStatus: "completed",
+      evidence: {
+        version: 1,
+        source: "codex-exec-jsonl",
+        runtimeId: "runtime-reportless",
+        launchId: "launch-reportless",
+        startedAt: "2026-08-23T00:00:00.000Z",
+        evidenceDigest: "f".repeat(64),
+      },
+    },
+    "worker-reportless",
+  );
+  assert.equal(state.packets["shared-native-dialog"].status, "failed");
+  assert.equal(
+    state.packets["shared-native-dialog"].failure.terminalStatus,
+    "invalid-worker-report",
+  );
   assert.equal(state.handoffs["shared-native-dialog"], undefined);
   retryWorkerPacket(state, "shared-native-dialog");
   assert.equal(state.packets["shared-native-dialog"].status, "pending");
@@ -1128,6 +1174,10 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
       claimId: "claim-ok",
     });
     reserve(plan, state, "shared-native-dialog", brief, "worker-ok");
+    const workerReport = "bounded completed work report";
+    const workerReportDigest = createHash("sha256")
+      .update(workerReport)
+      .digest("hex");
     recordWorkerAttempt(
       plan,
       state,
@@ -1144,8 +1194,8 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
           startedAt: "2026-08-23T00:00:00.000Z",
           evidenceDigest: "d".repeat(64),
         },
-        workerReport: "bounded completed work report",
-        workerReportDigest: "e".repeat(64),
+        workerReport,
+        workerReportDigest,
       },
       "worker-ok",
     );
@@ -1159,7 +1209,7 @@ test("guarded completion binds claim, brief, baseline, dependency handoff, and p
       invalidatedAssumptions: [],
       claimId: brief.claimId,
       briefDigest: brief.briefDigest,
-      workerReportDigest: "e".repeat(64),
+      workerReportDigest,
     };
     return { plan, state, handoff };
   };

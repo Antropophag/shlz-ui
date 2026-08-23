@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "fixture": "wave-8-execution-isolation",
+  "before": {
+    "classification": "XL",
+    "packetCount": 4,
+    "physicalBoundaries": 0,
+    "logicalSessions": ["root-wave8"],
+    "approximateTotalUsageTokens": 592000,
+    "remainingContextPercent": 53,
+    "peakActiveContext": "unavailable"
+  },
+  "afterFocusedDogfood": {
+    "executionSource": "codex-exec-jsonl",
+    "runtimeId": "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+    "physicalBoundaries": 1,
+    "actualInputTokens": 37546,
+    "actualOutputTokens": 610,
+    "actualReasoningOutputTokens": 220,
+    "actualInputPlusOutputTokens": 38156,
+    "peakActiveContextProxyTokens": 37546,
+    "briefBytes": 2311,
+    "handoffBytes": 962,
+    "workerReportDigest": "d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c",
+    "targetFileChanges": 0,
+    "repeatedReads": 0,
+    "repeatedDiscoveryCommands": 0,
+    "contextRelevance": "unavailable"
+  },
+  "interpretation": [
+    "The focused worker proves a physical fresh thread and a bounded active-context proxy; it does not estimate the unknown Wave 8 pre-change peak.",
+    "Fresh contexts do not guarantee lower total tokens: two earlier broad implementation workers used 1672792 and 1367427 input-plus-output tokens, so brief quality and read discipline remain material.",
+    "Read relevance is unavailable because Codex JSONL did not expose classified file-read events; the harness does not invent that metric."
+  ]
+}

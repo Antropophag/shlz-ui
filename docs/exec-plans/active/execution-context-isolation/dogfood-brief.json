@@ -27,7 +27,7 @@
     "preferredExecutionMode": "fresh-session",
     "scope": ["Wave 8 regression fixture read"]
   },
-  "claimId": "wave8-dogfood-20260823",
+  "claimId": "wave8-final-dogfood-20260823",
   "baseline": {
     "branch": "feat/execution-context-isolation",
     "commit": "53936615ea50fcd58117b084c5b601556fc01dd2",
@@ -46,9 +46,9 @@
   "allowedImplementationSurface": [],
   "focusedValidation": ["git status remains unchanged"],
   "lifecycle": {
-    "completion": "write a validated durable handoff and complete the same claim",
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
     "pause": "pause through a newer requirements revision on material ambiguity",
     "failure": "report partial work; never fabricate completion"
   },
-  "briefDigest": "fec544262dd1b59c961b18acffde6b5c21eb3fa7199f3d897463874ce6faa4bf"
+  "briefDigest": "b22c25dbd36fb4ad5bb8f3aefb9ae6f34d40bb58cd1fd556af5b34e1414c6494"
 }

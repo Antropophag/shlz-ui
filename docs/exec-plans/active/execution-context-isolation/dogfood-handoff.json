@@ -1,11 +1,13 @@
 {
   "completedPacket": "wave-8-read-only-proof",
-  "claimId": "wave8-dogfood-20260823",
-  "briefDigest": "fec544262dd1b59c961b18acffde6b5c21eb3fa7199f3d897463874ce6faa4bf",
+  "claimId": "wave8-final-dogfood-20260823",
+  "briefDigest": "b22c25dbd36fb4ad5bb8f3aefb9ae6f34d40bb58cd1fd556af5b34e1414c6494",
+  "workerReportDigest": "d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c",
   "changed": [],
   "provenChecks": [
-    "physical runtime thread 01a02f51-6c3e-7431-a8b2-db40070f9d7a completed",
-    "runtime usage: 37397 input, 357 output, 136 reasoning tokens",
+    "physical runtime thread 01a02f6a-6efb-7e42-a35c-5ec16f8e9151 completed",
+    "runtime usage: 37546 input, 610 output, 220 reasoning tokens",
+    "adapter-bound worker report digest d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c",
     "worktree target diff unchanged by read-only worker"
   ],
   "settledDecisions": [
