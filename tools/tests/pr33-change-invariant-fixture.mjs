@@ -17,7 +17,8 @@ const probe = path.resolve("tools/tests/pr33-review-behavior-probe.mjs");
 const runProbe = async (targetRoot) =>
   JSON.parse(
     (
-      await exec(process.execPath, [probe, targetRoot], {
+      await exec(process.execPath, [probe], {
+        cwd: targetRoot,
         maxBuffer: 10 * 1024 * 1024,
       })
     ).stdout,

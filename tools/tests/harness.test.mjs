@@ -2485,6 +2485,24 @@ test("PR 33 CodeRabbit fixture executes four dynamic findings and classifies the
   );
 });
 
+test("PR 33 behavior probe rejects a non-worktree cwd before file access", async () => {
+  const target = await mkdtemp(path.join(tmpdir(), "pr33-probe-outside-"));
+  try {
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [path.join(root, "tools/tests/pr33-review-behavior-probe.mjs")],
+        {
+          cwd: target,
+        },
+      ),
+      /not a git repository|canonical Git worktree root/,
+    );
+  } finally {
+    await rm(target, { recursive: true, force: true });
+  }
+});
+
 test("review-init CLI requires and records current-change invariant bindings", async () => {
   const relativeState = `docs/exec-plans/review-manifest-test-${process.pid}.json`;
   const state = path.join(root, relativeState);

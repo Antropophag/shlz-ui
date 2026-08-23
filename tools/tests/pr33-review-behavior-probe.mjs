@@ -1,11 +1,16 @@
 import { execFile } from "node:child_process";
-import { readFile, unlink, writeFile } from "node:fs/promises";
+import { readFile, realpath, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
-const targetRoot = path.resolve(process.argv[2]);
+const targetRoot = await realpath(process.cwd());
+const gitRoot = await exec("git", ["rev-parse", "--show-toplevel"], {
+  cwd: targetRoot,
+}).then(({ stdout }) => realpath(stdout.trim()));
+if ((await gitRoot) !== targetRoot)
+  throw new Error("PR 33 probe cwd must be a canonical Git worktree root");
 const core = await import(
   pathToFileURL(path.join(targetRoot, "tools/lib/harness/core.mjs"))
 );
