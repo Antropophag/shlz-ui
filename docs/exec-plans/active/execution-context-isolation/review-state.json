@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "base": "53936615ea50fcd58117b084c5b601556fc01dd2",
+  "passes": [
+    { "pass": 1, "axis": "Standards", "head": "5cc8714" },
+    { "pass": 1, "axis": "Spec", "head": "5cc8714" },
+    { "pass": 2, "axis": "Standards", "head": "e326e0a" },
+    { "pass": 2, "axis": "Spec", "head": "e326e0a" },
+    { "pass": 3, "axis": "Standards", "head": "a05f135" },
+    { "pass": 3, "axis": "Spec", "head": "a05f135" },
+    { "pass": 4, "axis": "Standards", "head": "d10b482" },
+    { "pass": 4, "axis": "Spec", "head": "d10b482" },
+    { "pass": 5, "axis": "Standards", "head": "16910ab" },
+    { "pass": 5, "axis": "Spec", "head": "16910ab" },
+    { "pass": 6, "axis": "Physical final audit", "head": "16910ab" },
+    { "pass": 7, "axis": "Physical remediation audit", "head": "6c2212e" },
+    { "pass": 8, "axis": "Standards", "head": "6c2212e" },
+    { "pass": 8, "axis": "Spec", "head": "6c2212e" },
+    { "pass": 9, "axis": "Standards", "head": "b3f7a03" },
+    { "pass": 9, "axis": "Spec", "head": "b3f7a03" }
+  ],
+  "findings": [
+    {
+      "id": "ATTEST-1",
+      "severity": "P1",
+      "axis": "Standards+Spec",
+      "summary": "caller-authored claim evidence could forge physical isolation",
+      "status": "resolved",
+      "resolvedAtHead": "e326e0a"
+    },
+    {
+      "id": "RESERVE-1",
+      "severity": "P1",
+      "axis": "Standards+Spec",
+      "summary": "worker launch was not reserved before subprocess execution",
+      "status": "resolved",
+      "resolvedAtHead": "e326e0a"
+    },
+    {
+      "id": "TELEMETRY-1",
+      "severity": "P1",
+      "axis": "Standards+Spec",
+      "summary": "caller-selected state could be imported as trusted runtime telemetry",
+      "status": "resolved",
+      "resolvedAtHead": "a05f135"
+    },
+    {
+      "id": "POLICY-1",
+      "severity": "P1",
+      "axis": "Standards+Spec",
+      "summary": "new L/XL plans could disable or degrade enforced isolation",
+      "status": "resolved",
+      "resolvedAtHead": "d10b482"
+    },
+    {
+      "id": "RECOVERY-1",
+      "severity": "P1",
+      "axis": "Standards+Spec",
+      "summary": "launch exceptions and stale briefs could strand a launching reservation",
+      "status": "resolved",
+      "resolvedAtHead": "d10b482"
+    },
+    {
+      "id": "REPORT-1",
+      "severity": "P2",
+      "axis": "Spec",
+      "summary": "durable handoff was not bound to worker-produced completion content",
+      "status": "resolved",
+      "resolvedAtHead": "d10b482"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "planId": "wave-8-isolation-dogfood",
+  "packets": {
+    "wave-8-read-only-proof": {
+      "status": "completed",
+      "session": "wave8-final-dogfood",
+      "claimId": "wave8-final-dogfood-20260823",
+      "briefDigest": "b22c25dbd36fb4ad5bb8f3aefb9ae6f34d40bb58cd1fd556af5b34e1414c6494",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {},
+      "packetDigest": "9ee4acdb05a19bd5e654abd075bc320d5e1a58df8618eb66fba5e34f0f6d9891",
+      "requirementsRevision": null,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+        "launchId": "355d2ef9-1c2c-4673-b0a6-f950e8ef48db",
+        "startedAt": "2026-08-23T16:18:18.843Z",
+        "evidenceDigest": "d1ad9f48ee9a04717b8785e9d6d531539784352c9537b7e5ac7aadcfc2fe25ea"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "355d2ef9-1c2c-4673-b0a6-f950e8ef48db",
+        "usage": {
+          "input_tokens": 37546,
+          "cached_input_tokens": 32256,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 610,
+          "reasoning_output_tokens": 220
+        },
+        "workerReport": "- Classification: `XL`\n- Packet count: `4`\n- Pre-change logical session: `root-wave8` for all packets\n- Approximate usage: `592,000` tokens\n- Expected post-change guard: guarded packets require distinct runtime evidence; label-only claims are rejected, and unavailable evidence must `stop`\n\nRuntime: Bash PID `355536` in the repository workspace. Git status was unchanged by the read.",
+        "workerReportDigest": "d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c"
+      }
+    }
+  },
+  "handoffs": {
+    "wave-8-read-only-proof": {
+      "completedPacket": "wave-8-read-only-proof",
+      "claimId": "wave8-final-dogfood-20260823",
+      "briefDigest": "b22c25dbd36fb4ad5bb8f3aefb9ae6f34d40bb58cd1fd556af5b34e1414c6494",
+      "workerReportDigest": "d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c",
+      "changed": [],
+      "provenChecks": [
+        "physical runtime thread 01a02f6a-6efb-7e42-a35c-5ec16f8e9151 completed",
+        "runtime usage: 37546 input, 610 output, 220 reasoning tokens",
+        "adapter-bound worker report digest d734633819658d45e8d7f645f26c966c2cbe3dec773de36efc54ac2aa4566a6c",
+        "worktree target diff unchanged by read-only worker"
+      ],
+      "settledDecisions": [
+        "Wave 8 is XL with four packets",
+        "pre-change logical session was root-wave8 for all packets",
+        "pre-change usage was approximately 592000 tokens",
+        "post-change guarded packets require distinct runtime evidence"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": []
+    }
+  }
+}

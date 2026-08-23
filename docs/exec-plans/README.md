@@ -6,26 +6,32 @@ OpenSpec is the normative contract. Git is implementation state, tests are execu
 
 1. Record observable sizing signals and semantic work units in `assessment.json`.
 2. Run `npm run harness -- plan <assessment> <plan>` and inspect the classification/contributions.
-3. Initialize `state.json` once, then atomically `claim` one ready packet per session. Run `context <plan> <packet> --state <state>`; read only the returned sources needed for the phase.
+3. Initialize `state.json` once. Use `claim` only for `continue` packets; use `worker-run` for guarded packets so runtime-issued identity, not a session label, binds the claim. Run `context <plan> <packet> --state <state>`; read only the returned sources needed for the phase.
 4. Implement and use `affected` before validation. `validation-record` computes the relevant-file fingerprint and appends the result; an identical successful expensive rerun requires `--reason`.
 5. End a packet with `complete`; the state retains one structured handoff per packet, so dependency joins receive every direct handoff without chat history.
-6. Record compact observed events with `telemetry-record`, then use `telemetry-summary` for calibration. Never estimate missing runtime tokens.
+6. Record ordinary observed events with `telemetry-record`; pass `--telemetry-out <telemetry>` to `worker-run` so that command appends runtime boundaries and usage directly from its adapter result, then use `telemetry-summary` for calibration. Never import runtime proof from a caller-selected state file or estimate missing tokens.
 
 Before implementation, `route-check` validates semantic route evidence and `implementation-preflight --out <execution-baseline>` binds it to requirements intent/change/decision ownership/readiness plus either current-main task-branch state or a verified existing open-PR head. Before completion, `route-conformance --execution <execution-baseline>` binds discovered semantic surface to that episode diff and `delivery-check` queries Git/GitHub to require local HEAD, the task-branch upstream, and the open PR head to be the same commit targeting the default branch. Baseline kind is provenance, not a semantic lane. Route/discovery JSON is operational guard evidence, not normative requirements; OpenSpec remains authoritative.
 
-Plan and handoff fields are validated by the CLI. `preferredExecutionMode` is one of `continue`, `fresh-session`, `isolated-subagent`, or `parallelizable-subagent`; it is routing advice, not an automatic launcher. Parallel packets must have disjoint implementation surfaces.
+Plan and handoff fields are validated by the CLI. `preferredExecutionMode` is one of `continue`, `fresh-session`, `isolated-subagent`, or `parallelizable-subagent`. An enforced plan guards the latter three with runtime evidence; parallel packets must also have disjoint implementation surfaces.
 
 ```bash
 npm run harness -- state-init <plan> <state>
 npm run harness -- claim <plan> <state> <packet> --session <id>
-npm run harness -- complete <plan> <state> <handoff-input>
+npm run harness -- worker-probe
+npm run harness -- worker-brief <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --out <brief>
+npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --session <label> --brief-out <brief> --telemetry-out <telemetry>
+npm run harness -- worker-retry <state> <packet>
+npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
 ```
 
-The context bands in `config.json` are initial hypotheses. Actual token/context data is accepted only with an explicit trustworthy source such as App Server `thread/tokenUsage/updated`; otherwise file reads, repeated reads, command count, and output bytes remain labeled proxies.
+The operator lifecycle is root reservation → worker subprocess and final report → adapter-bound claim/report digest → root-validated durable handoff → dependent worker → independent review. The worker cannot complete while its launch is only reserved; after subprocess exit the root binds the runtime identity and final agent message, then a matching report digest is required in the compact handoff. S defaults to `continue`; coherent M stays inline until a meaningful phase or pressure transition; L/XL plans declare enforced, fail-closed isolated packet graphs. Bounded follow-ups remain separate episodes with a new baseline and sizing assessment.
 
-## Multi-session capability
+Telemetry keeps logical labels separate from `codex-exec-jsonl` runtime identities. It summarizes physical boundaries, total tokens and peak active context when runtime-supplied, unique/repeated reads, repeated discovery commands, handoff bytes, and an observational relevance ratio for explicitly classified reads. Missing runtime values remain `unavailable`; caller labels and estimates never become proof.
 
-Codex App Server supports thread start/resume/fork, compaction, and usage events, while official guidance recommends the Codex SDK for automated jobs. V1 therefore uses a deterministic operator flow and leaves a stable adapter seam at the plan/event interfaces. It does not ship authentication, approvals, model selection, cancellation, or a daemon disguised as orchestration.
+## Compatibility
+
+Historical plans without `executionIsolation` remain readable and retain advisory behavior. New enforced plans require attested guarded claims; an unavailable adapter stops unless `unavailableFallback: "continue"` was declared in advance, in which case state records the explicit degradation. No migration rewrites historical state.
 
 Active plans live in `docs/exec-plans/active/<change>/`. Fixtures live in `docs/exec-plans/fixtures/`; telemetry JSONL should be summarized rather than loaded into normal packet context.

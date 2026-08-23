@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "fixture": "Wave 8",
+  "classification": "XL",
+  "packets": [
+    "source-census",
+    "notification",
+    "snackbar",
+    "integration-delivery"
+  ],
+  "preferredExecutionModes": [
+    "continue",
+    "fresh-session",
+    "fresh-session",
+    "isolated-subagent"
+  ],
+  "before": {
+    "logicalSessions": ["root-wave8", "root-wave8", "root-wave8", "root-wave8"],
+    "runtimeExecutionIds": [],
+    "physicalIsolationProven": false,
+    "approximateTotalUsageTokens": 592000,
+    "remainingContextPercent": 53
+  },
+  "expectedAfter": {
+    "rootMayClaimAllPacketsWithLabelsOnly": false,
+    "guardedPacketsRequireDistinctRuntimeEvidence": true,
+    "unavailableFallback": "stop"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "source": "codex-exec-jsonl",
+  "runtimeId": "01a02f44-cd98-7910-8549-68f1dce27279",
+  "launchId": "bootstrap-worker-adapter-20260823",
+  "startedAt": "2026-08-23T18:35:00+03:00",
+  "evidenceDigest": "cdf8fbdd04f16a59c6d39fb8e2ab81cbbb3974b8a95a3f73480f0f497a2df3a0",
+  "terminalStatus": "completed",
+  "workerReport": "Worker adapter packet completed. Added the codex exec JSONL adapter, immutable digest-bound briefs, and guarded retry/failure/staleness lifecycle. Focused harness and strict OpenSpec validation passed.",
+  "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1",
+  "usage": {
+    "inputTokens": 1659568,
+    "cachedInputTokens": 1565952,
+    "outputTokens": 13224,
+    "reasoningOutputTokens": 2336
+  },
+  "evidenceScope": "digest covers the observed thread.started and turn.completed JSONL boundary events"
+}

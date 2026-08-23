@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "53936615ea50fcd58117b084c5b601556fc01dd2",
+  "branch": "feat/execution-context-isolation",
+  "defaultBranch": "main"
+}

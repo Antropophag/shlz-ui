@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "scenarios": [
+    {
+      "id": "s-single-continuation",
+      "size": "S",
+      "packets": 1,
+      "modes": ["continue"],
+      "expectedEnforced": false
+    },
+    {
+      "id": "m-coherent-continuation",
+      "size": "M",
+      "packets": 1,
+      "modes": ["continue"],
+      "expectedEnforced": false
+    },
+    {
+      "id": "m-review-transition",
+      "size": "M",
+      "packets": 2,
+      "modes": ["continue", "fresh-session"],
+      "expectedEnforced": false
+    },
+    {
+      "id": "l-decomposed",
+      "size": "L",
+      "packets": 2,
+      "modes": ["continue", "fresh-session"],
+      "expectedEnforced": true
+    }
+  ]
+}

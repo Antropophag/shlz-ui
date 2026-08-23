@@ -1,0 +1,220 @@
+{
+  "version": 1,
+  "planId": "execution-context-isolation",
+  "requirementsRevision": 1,
+  "packets": {
+    "contract-regression": {
+      "status": "completed",
+      "session": "root-bootstrap-20260823"
+    },
+    "worker-adapter": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "worker-adapter-bootstrap",
+      "claimId": "bootstrap-worker-adapter-20260823",
+      "briefDigest": "163b4b1f7f7c1384420842b018c0ff1ef1a963657a129c7cab656d4a19210e83",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {
+        "contract-regression": "27fb173bce0a46b8a987c18a166cc118c53b2608d7c8d4c477823c95c14f882d"
+      },
+      "packetDigest": "60be2c09c554fbe7e28ad831d7abf30f3a71a419a6d926ccc60844798ddb51de",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f44-cd98-7910-8549-68f1dce27279",
+        "launchId": "bootstrap-worker-adapter-20260823",
+        "startedAt": "2026-08-23T18:35:00+03:00",
+        "evidenceDigest": "cdf8fbdd04f16a59c6d39fb8e2ab81cbbb3974b8a95a3f73480f0f497a2df3a0"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "bootstrap-worker-adapter-20260823",
+        "usage": {
+          "input_tokens": 1659568,
+          "cached_input_tokens": 1565952,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 13224,
+          "reasoning_output_tokens": 2336
+        },
+        "workerReport": "Worker adapter packet completed. Added the codex exec JSONL adapter, immutable digest-bound briefs, and guarded retry/failure/staleness lifecycle. Focused harness and strict OpenSpec validation passed.",
+        "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1"
+      }
+    },
+    "telemetry-operator": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "telemetry-operator-worker",
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f4b-7742-72c2-98ea-bb59e609c146",
+        "launchId": "telemetry-operator-20260823",
+        "startedAt": "2026-08-23T15:44:29.601Z",
+        "evidenceDigest": "0e6ed0dbca44355012269c46cda71bb640300fd14fa20a30cb47366c102d728b"
+      },
+      "claimId": "telemetry-operator-20260823",
+      "briefDigest": "aaa3b4fe305d1288e757baae75279119ae5f6b02b31190b0266bf2e1c0402743",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {
+        "worker-adapter": "f0aad8f14607266bfb1d914419e92844aba8d2f37da7753350d3d55d673ccdc8"
+      },
+      "packetDigest": "9c2bd367441192968e8f6815b718cfda4640701824d9268ae6a2dfda0aee606a",
+      "requirementsRevision": 1,
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "telemetry-operator-20260823",
+        "usage": {
+          "input_tokens": 1356900,
+          "cached_input_tokens": 1267200,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10527,
+          "reasoning_output_tokens": 1926
+        },
+        "workerReport": "Telemetry operator packet completed. Added guarded worker CLI commands, runtime-bound telemetry, and S/M/L/XL operator documentation. Focused harness, formatting, and strict OpenSpec validation passed.",
+        "workerReportDigest": "24cf5675b434f99b02de0c1a6a19c7b02ffe06fbc2002c6371e62abeeee92ac1"
+      }
+    },
+    "dogfood-review-delivery": {
+      "status": "completed",
+      "session": "final-audit-worker",
+      "claimId": "final-audit-20260823",
+      "attemptHistory": [],
+      "briefDigest": "8c678e008f7bc1dbd0397141d520db1f31f76000f8ee00ead1349f62f0aced9b",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {
+        "telemetry-operator": "4efa106787a8dbcdebbdf9437e7dc73795671b51ab68a78c4b57847cfdb71a50"
+      },
+      "packetDigest": "153483e9e952206624a0f5b0a9b38ffd6e6cc33900383793ccb6feeeef7e12b8",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+        "launchId": "b6fccd8c-e10c-4895-9d37-61f6bd686582",
+        "startedAt": "2026-08-23T16:21:53.117Z",
+        "evidenceDigest": "f499018ed8c29d481550703babe00504963109111eca29cdaeca52ec29b2449d"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "b6fccd8c-e10c-4895-9d37-61f6bd686582",
+        "usage": {
+          "input_tokens": 281263,
+          "cached_input_tokens": 242176,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3167,
+          "reasoning_output_tokens": 615
+        },
+        "workerReport": "Independent audit completed read-only. The implementation is not ready for final completion: two lifecycle defects and two review-evidence defects remain.\n\n## Standards\n\n- **P1 — Mutable review baseline.** [review-state.json](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/exec-plans/active/execution-context-isolation/review-state.json:3) records `origin/main`, not the immutable execution baseline. This can silently change the reviewed diff and violates the fixed-base review contract.\n\n- **P1 — Findings resolved without recorded re-review.** [review-state.json](/home/antropophag/code/shlz-ui-execution-context-isolation/docs/exec-plans/active/execution-context-isolation/review-state.json:38) marks `POLICY-1`, `RECOVERY-1`, and `REPORT-1` resolved at `d10b482`, but recorded review passes stop at `a05f135`. The required targeted re-review is not persisted.\n\n- Non-blocking judgment call: [core.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/core.mjs) shows possible Divergent Change, but currently serves as the repository’s central harness-contract module.\n\n## Spec\n\n- **P1 — Timed-out workers can remain stuck in `launching`.** [codex-worker.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/codex-worker.mjs:60) sends `SIGTERM` on timeout but waits indefinitely for `close`, with no escalation or secondary deadline. A child ignoring `SIGTERM` prevents durable failure/retry handling required by the lifecycle specification.\n\n- **P2 — Retry erases failure evidence.** [core.mjs](/home/antropophag/code/shlz-ui-execution-context-isolation/tools/lib/harness/core.mjs:1510) replaces the failed claim with only `status: \"pending\"` and `attempts`. Runtime status, launch identity, and failure evidence are lost, contrary to the durable recovery contract.\n\nNo scope creep was found. Runtime identity parsing, fail-closed behavior, duplicate identity rejection, report-bound completion, and Wave 8 guard behavior otherwise match the specification.\n\n## Validation and evidence\n\n- `npm run test:harness`: **46/46 passed**, 0 failures.\n- `openspec validate execution-context-isolation --strict`: **passed**.\n- Wave 8 regression and existing failure/recovery tests passed.\n- HEAD remained `16910ab0be025791991855f2dba192e413877f8f`.\n- Worktree status was unchanged; no files were modified.\n\nWave 8 dogfood evidence records fresh-worker runtime ID `01a02f6a-6efb-7e42-a35c-5ec16f8e9151` and 38,156 tokens. The before case records XL/four packets, all logically labeled `root-wave8`, approximately 592K tokens, and no physical identity. This proves enforcement and live fresh-worker capability, but it is not a like-for-like performance comparison because the after case is one bounded read-only packet.\n\nFinal-review identity has an exact limitation: `/root/standards_audit`, `/root/spec_audit`, and `/root/evidence_audit` prove distinct delegated task contexts, but no runtime-issued UUID is exposed or bound to claim `final-audit-20260823`. Physical distinctness of this final review therefore remains unproven until the root orchestrator binds adapter-issued runtime evidence.\n\nSummary: **Standards: 2 blocking findings. Spec: 1 P1 and 1 P2.**",
+        "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0"
+      }
+    }
+  },
+  "handoffs": {
+    "contract-regression": {
+      "completedPacket": "contract-regression",
+      "changed": [
+        "added explicit executionIsolation plan policy",
+        "guarded claims now require Codex JSONL runtime evidence",
+        "added Wave 8 and S/M/L regression fixtures"
+      ],
+      "provenChecks": [
+        "npm run test:harness: 36/36 pass",
+        "Wave 8 root-wave8 label-only guarded claim is rejected"
+      ],
+      "settledDecisions": [
+        "legacy plans without executionIsolation remain readable",
+        "new L/XL guarded plans use unavailableFallback=stop",
+        "logical session labels are never physical proof"
+      ],
+      "unresolvedFindings": [
+        "runtime adapter must derive evidence from actual codex exec JSONL rather than caller construction"
+      ],
+      "nextPacket": "worker-adapter",
+      "invalidatedAssumptions": []
+    },
+    "worker-adapter": {
+      "completedPacket": "worker-adapter",
+      "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1",
+      "claimId": "bootstrap-worker-adapter-20260823",
+      "briefDigest": "163b4b1f7f7c1384420842b018c0ff1ef1a963657a129c7cab656d4a19210e83",
+      "changed": [
+        "added codex exec JSONL capability and launch adapter",
+        "added immutable digest-bound worker briefs",
+        "added guarded claim/completion and retry/failure/staleness lifecycle"
+      ],
+      "provenChecks": [
+        "npm run test:harness: 41/41 pass",
+        "openspec validate execution-context-isolation --strict: pass",
+        "physical worker thread 01a02f44-cd98-7910-8549-68f1dce27279 completed"
+      ],
+      "settledDecisions": [
+        "runtime identity derives only from codex exec JSONL",
+        "unavailable isolation fails closed unless continue is explicitly authorized",
+        "worker completion binds baseline, revision, dependencies, packet digest, claim and brief"
+      ],
+      "unresolvedFindings": [
+        "CLI launcher orchestration and relevance telemetry remain for telemetry-operator",
+        "fresh worker used 1659568 input tokens, demonstrating that broad reads can erase isolation savings",
+        "full lint waits for installed workspace dependencies"
+      ],
+      "nextPacket": "telemetry-operator",
+      "invalidatedAssumptions": [
+        "fresh context alone reduces total token usage"
+      ]
+    },
+    "telemetry-operator": {
+      "completedPacket": "telemetry-operator",
+      "claimId": "telemetry-operator-20260823",
+      "briefDigest": "aaa3b4fe305d1288e757baae75279119ae5f6b02b31190b0266bf2e1c0402743",
+      "workerReportDigest": "24cf5675b434f99b02de0c1a6a19c7b02ffe06fbc2002c6371e62abeeee92ac1",
+      "changed": [
+        "added worker-probe, worker-brief, worker-run and worker-retry commands",
+        "added physical boundary, peak context, read/relevance and handoff telemetry",
+        "documented guarded lifecycle and S/M/L/XL selection"
+      ],
+      "provenChecks": [
+        "npm run test:harness: 43/43 pass",
+        "prettier focused check: pass",
+        "openspec strict validation: pass",
+        "adapter-launched thread 01a02f4b-7742-72c2-98ea-bb59e609c146 completed"
+      ],
+      "settledDecisions": [
+        "worker-run is the guarded packet entry point",
+        "physical boundaries require distinct runtime IDs",
+        "S and coherent M continue; L/XL guarded plans enforce isolation",
+        "bounded execution episodes remain a separate follow-up baseline mechanism"
+      ],
+      "unresolvedFindings": [
+        "adapter buffers JSONL until completion; streaming heartbeat is deferred because it is not required for correctness",
+        "fresh contexts still produced high total input, so context relevance remains a first-class measurement"
+      ],
+      "nextPacket": "dogfood-review-delivery",
+      "invalidatedAssumptions": []
+    },
+    "dogfood-review-delivery": {
+      "completedPacket": "dogfood-review-delivery",
+      "claimId": "final-audit-20260823",
+      "briefDigest": "8c678e008f7bc1dbd0397141d520db1f31f76000f8ee00ead1349f62f0aced9b",
+      "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0",
+      "changed": [],
+      "provenChecks": [
+        "physical runtime thread 01a02f6d-b2e3-7922-9498-2ca7de5e9fa7 completed",
+        "npm run test:harness: 46/46 pass in worker",
+        "openspec validate execution-context-isolation --strict: pass in worker",
+        "worker modified no files"
+      ],
+      "settledDecisions": [
+        "final audit was physically distinct and adapter-bound",
+        "Wave 8 before/after evidence is honest but not a like-for-like performance comparison"
+      ],
+      "unresolvedFindings": [
+        "use an immutable review-state base and persist targeted passes",
+        "escalate timed-out workers beyond SIGTERM",
+        "retain failure evidence across retry"
+      ],
+      "nextPacket": null,
+      "invalidatedAssumptions": []
+    }
+  }
+}

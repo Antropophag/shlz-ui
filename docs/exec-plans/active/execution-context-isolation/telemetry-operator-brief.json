@@ -1,0 +1,92 @@
+{
+  "version": 1,
+  "planId": "execution-context-isolation",
+  "packet": {
+    "contextSources": [
+      "tools/lib/harness/core.mjs",
+      "tools/harness.mjs",
+      "tools/tests/harness.test.mjs",
+      "docs/agent-execution.md",
+      "docs/exec-plans/README.md"
+    ],
+    "contracts": ["docs/agent-execution.md", "docs/exec-plans/README.md"],
+    "dependencies": ["worker-adapter"],
+    "focusedValidation": ["npm run test:harness", "npm run check:docs"],
+    "handoff": [
+      "telemetry fields",
+      "CLI examples",
+      "legacy/migration behavior"
+    ],
+    "id": "telemetry-operator",
+    "implementationOutcomes": [
+      "labels differ from runtime proof",
+      "peak context and handoff bytes summarize",
+      "context relevance stays observational",
+      "S/M/L/XL operator rules are explicit",
+      "bounded episodes remain separate"
+    ],
+    "implementationSurface": [
+      "tools/lib/harness/",
+      "tools/harness.mjs",
+      "tools/tests/harness.test.mjs",
+      "docs/agent-execution.md",
+      "docs/exec-plans/README.md"
+    ],
+    "nonGoals": [
+      "new orchestration platform",
+      "new sizing bands",
+      "bounded episode redesign"
+    ],
+    "objective": "Integrate trustworthy isolation telemetry and the operator lifecycle into CLI and documentation",
+    "outputs": [
+      "physical-boundary telemetry",
+      "operator commands",
+      "lifecycle documentation"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "telemetry summaries",
+      "CLI commands",
+      "agent execution docs",
+      "migration guidance"
+    ]
+  },
+  "claimId": "telemetry-operator-20260823",
+  "baseline": {
+    "branch": "feat/execution-context-isolation",
+    "commit": "53936615ea50fcd58117b084c5b601556fc01dd2",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "execution-context-isolation"
+  },
+  "dependencyDigests": {
+    "worker-adapter": "cdb44390868ba79f4bd65ca8a01a33c2dd7a43e04cb95d47549a1b4737471516"
+  },
+  "packetDigest": "9c2bd367441192968e8f6815b718cfda4640701824d9268ae6a2dfda0aee606a",
+  "contextIndex": [
+    "tools/lib/harness/core.mjs",
+    "tools/harness.mjs",
+    "tools/tests/harness.test.mjs",
+    "docs/agent-execution.md",
+    "docs/exec-plans/README.md"
+  ],
+  "allowedImplementationSurface": [
+    "tools/lib/harness/",
+    "tools/harness.mjs",
+    "tools/tests/harness.test.mjs",
+    "docs/agent-execution.md",
+    "docs/exec-plans/README.md"
+  ],
+  "focusedValidation": ["npm run test:harness", "npm run check:docs"],
+  "lifecycle": {
+    "completion": "write a validated durable handoff and complete the same claim",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "98b4889dd83dcdb12adba89f4b71f86e7bf7862649747549e03575f165a84ca1"
+}
