@@ -350,6 +350,14 @@ switch (command) {
       await writeJson(target, current);
       return { packet: current.packets[args[2]], result };
     });
+    const telemetryPath = option("--telemetry-out");
+    if (telemetryPath)
+      for (const event of workerTelemetryEvents({
+        packets: { [args[2]]: state.packet },
+      }))
+        await recordEvent(statePath(telemetryPath), event, {
+          trustedRuntime: true,
+        });
     output(state);
     break;
   }
@@ -483,13 +491,6 @@ switch (command) {
     output({ recorded: true, type: event.type });
     break;
   }
-  case "telemetry-import-workers": {
-    const events = workerTelemetryEvents(await readJson(absolute(args[1])));
-    for (const event of events)
-      await recordEvent(statePath(args[0]), event, { trustedRuntime: true });
-    output({ recorded: events.length });
-    break;
-  }
   case "telemetry-summary": {
     const text = await readFile(absolute(args[0]), "utf8");
     output(
@@ -502,6 +503,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-import-workers|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

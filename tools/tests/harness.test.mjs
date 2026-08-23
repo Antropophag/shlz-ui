@@ -822,6 +822,23 @@ test("S and coherent M plans do not acquire isolation ceremony", async () => {
   );
 });
 
+test("new L and XL plans cannot disable enforced isolation", () => {
+  const assessment = clone(wave7);
+  assessment.executionIsolation = {
+    version: 1,
+    enforced: false,
+    unavailableFallback: "continue",
+  };
+  const plan = createPlan(assessment, config);
+  assert.equal(plan.executionIsolation.enforced, true);
+  const disabled = clone(plan);
+  disabled.executionIsolation.enforced = false;
+  assert.throws(
+    () => validatePlan(disabled, config),
+    /requires an executionIsolation policy/,
+  );
+});
+
 const guardedWorkerFixture = () => {
   const assessment = clone(wave7);
   assessment.workUnits[0].preferredExecutionMode = "continue";
@@ -901,6 +918,17 @@ test("codex exec adapter probes capability and derives identity/status/usage onl
   });
   assert.equal(unattested.terminalStatus, "unattested");
   assert.equal(unattested.evidence, undefined);
+  const launchFailure = await launchCodexWorker({
+    brief: {},
+    cwd: root,
+    run: async ({ args }) => {
+      if (args.includes("--help"))
+        return { code: 0, stdout: "Usage: codex exec --json", stderr: "" };
+      throw new Error("spawn failed");
+    },
+  });
+  assert.equal(launchFailure.terminalStatus, "launch-failed");
+  assert.equal(launchFailure.evidence, undefined);
 });
 
 test("bounded worker briefs are immutable and exclude parent context", () => {
@@ -1298,6 +1326,8 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
   };
   const ready = requirementsState();
   const plan = createPlan(assessment, config, ready);
+  plan.version = 1;
+  plan.executionIsolation.enforced = false;
   const state = createExecutionState(plan);
   claimPacket(plan, state, "discovery-contracts", "session-a", ready);
   const blocked = requirementsState({
@@ -1579,6 +1609,7 @@ test("fresh sessions derive ready packets and validate structured handoff", () =
 
 test("claims are exclusive and dependency joins receive every direct handoff", async () => {
   const plan = createPlan(wave7, config);
+  plan.version = 1;
   plan.executionIsolation.enforced = false;
   const state = createExecutionState(plan);
   claimPacket(plan, state, "discovery-contracts", "session-a");

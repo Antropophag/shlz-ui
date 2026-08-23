@@ -88,6 +88,6 @@ OpenSpec owns requirements, Git owns code state, tests own executable evidence, 
 
 ## Multi-session v1
 
-This repository ships an operator-driven `codex exec --json` adapter, not an App Server daemon. Runtime-issued thread identity proves a physical boundary; logical session labels remain display metadata. Legacy plans without `executionIsolation` remain readable and advisory. New guarded plans fail closed when runtime attestation is unavailable unless their policy explicitly authorizes `continue` degradation.
+This repository ships an operator-driven `codex exec --json` adapter, not an App Server daemon. Runtime-issued thread identity proves a physical boundary; logical session labels remain display metadata. `worker-run --telemetry-out` records identity and usage directly from the just-completed adapter result; arbitrary state files cannot be imported as runtime proof. Legacy plans without `executionIsolation` remain readable and advisory. New L/XL plans enforce isolation and fail closed when runtime attestation is unavailable; smaller explicitly guarded plans may pre-authorize `continue` degradation.
 
 See `docs/validation-workflow.md` for affected checks/reviews and `docs/exec-plans/README.md` for commands and telemetry.

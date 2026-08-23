@@ -110,13 +110,23 @@ export async function launchCodexWorker({
   const capability = await probeCodexExec({ run, cwd, command });
   if (!capability.available)
     return { capability, launchId, terminalStatus: "unavailable" };
-  const raw = await run({
-    command,
-    args: ["exec", "--json", "-"],
-    cwd,
-    input: `${JSON.stringify(brief)}\n`,
-    timeoutMs,
-  });
+  let raw;
+  try {
+    raw = await run({
+      command,
+      args: ["exec", "--json", "-"],
+      cwd,
+      input: `${JSON.stringify(brief)}\n`,
+      timeoutMs,
+    });
+  } catch (error) {
+    return {
+      capability,
+      launchId,
+      terminalStatus: "launch-failed",
+      error: error.message,
+    };
+  }
   let parsed;
   try {
     parsed = parseCodexExecJsonl(raw.stdout ?? "");

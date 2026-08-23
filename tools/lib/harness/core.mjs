@@ -974,7 +974,7 @@ export function validatePlan(plan, config) {
   if (
     plan.version >= 2 &&
     ["L", "XL"].includes(plan.classification.size) &&
-    !plan.executionIsolation
+    (!plan.executionIsolation || plan.executionIsolation.enforced !== true)
   )
     throw new Error(
       `${plan.classification.size} plan requires an executionIsolation policy`,
@@ -1041,9 +1041,11 @@ export function createPlan(assessment, config, requirementsState = null) {
       ? {
           executionIsolation: {
             version: 1,
-            enforced: ["L", "XL"].includes(classification.size),
             unavailableFallback: "stop",
             ...assessment.executionIsolation,
+            enforced: ["L", "XL"].includes(classification.size)
+              ? true
+              : assessment.executionIsolation?.enforced === true,
           },
         }
       : {}),
@@ -1308,7 +1310,7 @@ export function createWorkerBrief(
     focusedValidation: [...packet.focusedValidation],
     lifecycle: {
       completion:
-        "write a validated durable handoff and complete the same claim",
+        "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
       pause:
         "pause through a newer requirements revision on material ambiguity",
       failure: "report partial work; never fabricate completion",
