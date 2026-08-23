@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "intent": "Harden repo-local routing so direct execution is positively proven, material discovered surfaces re-route, and implementation uses a task branch and PR.",
+  "route": "open-spec",
+  "openSpecChange": "harden-harness-route-eligibility",
+  "requiredDecisions": [
+    { "id": "route-contract", "owner": "user", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

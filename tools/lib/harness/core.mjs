@@ -66,6 +66,521 @@ const allowedDecisionFields = new Set([
   "blocking",
   "provenance",
 ]);
+const materialSignalNames = [
+  "newCapability",
+  "publishingOrRelease",
+  "externalEffects",
+  "publicUrlOrDomain",
+  "deploymentSemantics",
+  "permissionsOrSecurity",
+  "destructiveOrIrreversible",
+  "externalAutomation",
+  "publicContract",
+  "materialAmbiguity",
+];
+const directEvidenceNames = [
+  "behaviorPreserving",
+  "local",
+  "reversible",
+  "noExternalEffects",
+  "noContractChange",
+  "ambiguityResolved",
+];
+
+function validateSignalSet(signals, label) {
+  if (!signals || typeof signals !== "object" || Array.isArray(signals))
+    throw new Error(`${label} requires materialSignals`);
+  const unsupported = Object.keys(signals).filter(
+    (name) => !materialSignalNames.includes(name),
+  );
+  if (unsupported.length)
+    throw new Error(
+      `${label} has unsupported material signals: ${unsupported.join(", ")}`,
+    );
+  for (const name of materialSignalNames)
+    if (![true, false, "unknown"].includes(signals[name]))
+      throw new Error(
+        `${label} material signal ${name} must be true, false, or unknown`,
+      );
+}
+
+export function evaluateRouteEligibility(assessment) {
+  if (!assessment || assessment.version !== 1)
+    throw new Error("route assessment version must be 1");
+  if (typeof assessment.intent !== "string" || !assessment.intent.trim())
+    throw new Error("route assessment requires intent");
+  if (!["direct", "open-spec"].includes(assessment.route))
+    throw new Error("route assessment must select direct or open-spec");
+  validateSignalSet(assessment.materialSignals, "route assessment");
+  const materialSignals = materialSignalNames.filter(
+    (name) => assessment.materialSignals[name] === true,
+  );
+  const unresolvedMaterialSignals = materialSignalNames.filter(
+    (name) => assessment.materialSignals[name] === "unknown",
+  );
+  const requiredRoute =
+    materialSignals.length || unresolvedMaterialSignals.length
+      ? "open-spec"
+      : "direct";
+  if (assessment.route === "open-spec") {
+    if (
+      typeof assessment.openSpecChange !== "string" ||
+      !assessment.openSpecChange ||
+      !Array.isArray(assessment.requiredDecisions) ||
+      assessment.requiredDecisions.some(
+        (decision) =>
+          !decision ||
+          typeof decision.id !== "string" ||
+          !decision.id ||
+          !decisionOwners.has(decision.owner) ||
+          typeof decision.blocking !== "boolean" ||
+          Object.keys(decision).some(
+            (key) => !["id", "owner", "blocking"].includes(key),
+          ),
+      )
+    )
+      return {
+        eligible: false,
+        selectedRoute: "open-spec",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason:
+          "open-spec route requires change linkage and required decision identities",
+      };
+    if (requiredRoute !== "open-spec")
+      return {
+        eligible: false,
+        selectedRoute: "open-spec",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "route evidence does not establish OpenSpec impact",
+      };
+  }
+  if (assessment.route === "direct") {
+    if (
+      !assessment.directEvidence ||
+      typeof assessment.directEvidence !== "object" ||
+      directEvidenceNames.some(
+        (name) => assessment.directEvidence[name] !== true,
+      )
+    )
+      return {
+        eligible: false,
+        selectedRoute: "direct",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "direct route requires every positive eligibility assertion",
+      };
+    if (requiredRoute !== "direct")
+      return {
+        eligible: false,
+        selectedRoute: "direct",
+        requiredRoute,
+        materialSignals,
+        unresolvedMaterialSignals,
+        reason: "material or unknown state cannot use direct",
+      };
+  }
+  return {
+    eligible: true,
+    selectedRoute: assessment.route,
+    requiredRoute,
+    materialSignals,
+    unresolvedMaterialSignals,
+  };
+}
+
+function assertExecutionState(execution) {
+  if (!execution || typeof execution !== "object")
+    throw new Error("implementation preflight requires execution state");
+  for (const field of ["currentBranch", "defaultBranch"])
+    if (typeof execution[field] !== "string" || !execution[field])
+      throw new Error(`execution state requires ${field}`);
+  if (execution.currentBranch === execution.defaultBranch)
+    throw new Error(
+      `implementation is on default branch ${execution.defaultBranch}; mutation forbidden until redirected to a task branch`,
+    );
+  if (execution.baseCurrent !== true || execution.startedAtCurrentBase !== true)
+    throw new Error(
+      "implementation branch must start from current origin/default branch",
+    );
+  if (!Array.isArray(execution.preImplementationChanges))
+    throw new Error("execution state requires preImplementationChanges");
+}
+
+export function assertImplementationPreflight(
+  assessment,
+  requirementsState,
+  execution,
+) {
+  const eligibility = evaluateRouteEligibility(assessment);
+  if (!eligibility.eligible)
+    throw new Error(
+      `route is not eligible: ${eligibility.reason}; required route ${eligibility.requiredRoute}`,
+    );
+  if (assessment.route === "open-spec") {
+    if (!requirementsState)
+      throw new Error("open-spec implementation requires readiness state");
+    if (requirementsState.route !== "open-spec")
+      throw new Error(
+        "open-spec assessment requires open-spec readiness state",
+      );
+    if (requirementsState.intent !== assessment.intent)
+      throw new Error("requirements intent does not match route assessment");
+    if (requirementsState.openSpec?.change !== assessment.openSpecChange)
+      throw new Error(
+        "requirements OpenSpec change does not match route assessment",
+      );
+    const decisionsById = new Map(
+      requirementsState.decisions.map((decision) => [decision.id, decision]),
+    );
+    const missing = assessment.requiredDecisions
+      .filter(({ id }) => !decisionsById.has(id))
+      .map(({ id }) => id);
+    if (missing.length)
+      throw new Error(`required decisions are missing: ${missing.join(", ")}`);
+    const mismatched = assessment.requiredDecisions
+      .filter(({ id, owner, blocking }) => {
+        const actual = decisionsById.get(id);
+        return actual.owner !== owner || actual.blocking !== blocking;
+      })
+      .map(({ id }) => id);
+    if (mismatched.length)
+      throw new Error(
+        `required decision ownership does not match: ${mismatched.join(", ")}`,
+      );
+    const status = requirementsStatus(requirementsState);
+    if (!status.readyForPlanning)
+      throw new Error(
+        `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+      );
+  }
+  assertExecutionState(execution);
+  const allowedPlanningPrefixes =
+    assessment.route === "open-spec"
+      ? [
+          `openspec/changes/${assessment.openSpecChange}/`,
+          `docs/exec-plans/active/${assessment.openSpecChange}/`,
+        ]
+      : [];
+  const unexpectedChanges = execution.preImplementationChanges.filter(
+    (file) =>
+      !allowedPlanningPrefixes.some((prefix) => file.startsWith(prefix)),
+  );
+  if (unexpectedChanges.length)
+    throw new Error(
+      `implementation did not start from a clean task state: ${unexpectedChanges.join(", ")}`,
+    );
+  return { allowed: true, route: assessment.route };
+}
+
+export function assertRouteConformance(assessment, discovered, actualSurfaces) {
+  const initial = evaluateRouteEligibility(assessment);
+  if (!initial.eligible)
+    throw new Error("initial route is not eligible; re-route required");
+  if (!discovered || discovered.version !== 1)
+    throw new Error("discovered route surface version must be 1");
+  if (!Array.isArray(discovered.changedFiles))
+    throw new Error("discovered route surface requires changedFiles");
+  if (!Array.isArray(actualSurfaces))
+    throw new Error("route conformance requires actual changed surfaces");
+  const surfaces = actualSurfaces.map((surface) =>
+    typeof surface === "string"
+      ? { path: surface, status: "modified", patch: "" }
+      : surface,
+  );
+  for (const surface of surfaces)
+    if (
+      !surface ||
+      typeof surface.path !== "string" ||
+      !["added", "modified", "deleted", "renamed"].includes(surface.status) ||
+      typeof surface.patch !== "string"
+    )
+      throw new Error("actual changed surface has invalid path/status/patch");
+  const declaredFiles = [...new Set(discovered.changedFiles)].sort((a, b) =>
+    a.localeCompare(b),
+  );
+  const actualFiles = [...new Set(surfaces.map(({ path }) => path))].sort(
+    (a, b) => a.localeCompare(b),
+  );
+  if (JSON.stringify(declaredFiles) !== JSON.stringify(actualFiles))
+    throw new Error(
+      "discovered changed-file set does not match actual target-relevant diff",
+    );
+  validateSignalSet(discovered.materialSignals, "discovered route surface");
+  const agentMaterial = materialSignalNames.filter(
+    (name) => discovered.materialSignals[name] !== false,
+  );
+  const deterministicFloor = deterministicRouteRiskFloor(surfaces);
+  const material = [...new Set([...agentMaterial, ...deterministicFloor])];
+  if (assessment.route === "direct" && material.length)
+    throw new Error(
+      deterministicFloor.length
+        ? `deterministic risk floor (${deterministicFloor.join(", ")}) makes direct route non-conformant; re-route required`
+        : `direct route no longer conforms (${material.join(", ")}); re-route required`,
+    );
+  return {
+    allowed: true,
+    route: assessment.route,
+    changedFiles: discovered.changedFiles,
+    deterministicFloor,
+  };
+}
+
+const dedicatedWorkflowSignals = {
+  ".github/workflows/pages.yml": [
+    "publishingOrRelease",
+    "deploymentSemantics",
+    "externalAutomation",
+  ],
+  ".github/workflows/release.yml": [
+    "publishingOrRelease",
+    "externalAutomation",
+  ],
+};
+
+function changedPatchLines(patch) {
+  return patch
+    .split("\n")
+    .filter((line) => /^[+-]/.test(line) && !/^\+\+\+|^---/.test(line))
+    .map((line) => {
+      const content = line.replace(/^[+-]/, "");
+      return {
+        direction: line.startsWith("-") ? "removed" : "added",
+        indent: content.length - content.trimStart().length,
+        text: content.trim(),
+      };
+    })
+    .filter(({ text }) => text && !text.startsWith("#"));
+}
+
+function dedicatedWorkflowChanged(surface) {
+  if (surface.status !== "modified") return true;
+  const lines = changedPatchLines(surface.patch).filter(
+    ({ indent, text }) => !(indent === 0 && /^(name|run-name):/.test(text)),
+  );
+  const normalized = (direction) =>
+    lines
+      .filter((line) => line.direction === direction)
+      .map(({ indent, text }) => `${indent}:${text}`);
+  return (
+    JSON.stringify(normalized("removed")) !==
+    JSON.stringify(normalized("added"))
+  );
+}
+
+function workflowConstructs(surface) {
+  const constructs = [];
+  for (const line of changedPatchLines(surface.patch)) {
+    const normalized = line.text.replace(/\s+/g, " ");
+    if (/^permissions:\s*write-all\b/.test(normalized))
+      constructs.push({
+        direction: line.direction,
+        key: `permissions:${line.indent}:write-all`,
+        signals: ["permissionsOrSecurity"],
+        alwaysMaterial: true,
+      });
+    const directGrant = normalized.match(
+      /^(contents|pages|id-token|packages|deployments):\s*write\b/,
+    );
+    const inlinePermissions = /^permissions:\s*\{.*\}(?:\s+#.*)?$/.test(
+      normalized,
+    );
+    const grants = directGrant
+      ? [directGrant[1]]
+      : inlinePermissions
+        ? [
+            ...normalized.matchAll(
+              /\b(contents|pages|id-token|packages|deployments)\s*:\s*write\b/g,
+            ),
+          ].map((match) => match[1])
+        : [];
+    for (const grant of grants)
+      constructs.push({
+        direction: line.direction,
+        key: `permission:${line.indent}:${grant}:write`,
+        signals: ["permissionsOrSecurity"],
+        alwaysMaterial: true,
+      });
+    if (
+      /^uses:\s*(actions\/(configure-pages|upload-pages-artifact|deploy-pages|create-release)|softprops\/action-gh-release)@/.test(
+        normalized,
+      )
+    )
+      constructs.push({
+        direction: line.direction,
+        key: normalized,
+        signals: ["publishingOrRelease", "externalAutomation"],
+      });
+    if (/^run:\s*npm publish\b/.test(normalized))
+      constructs.push({
+        direction: line.direction,
+        key: normalized,
+        signals: ["publishingOrRelease", "externalAutomation"],
+      });
+  }
+  return constructs;
+}
+
+function changedWorkflowConstructSignals(surface) {
+  const constructs = workflowConstructs(surface);
+  const counts = new Map();
+  for (const { direction, key } of constructs) {
+    const delta = direction === "added" ? 1 : -1;
+    counts.set(key, (counts.get(key) ?? 0) + delta);
+  }
+  const signals = new Set();
+  for (const construct of constructs)
+    if (construct.alwaysMaterial || counts.get(construct.key) !== 0)
+      construct.signals.forEach((signal) => signals.add(signal));
+  return signals;
+}
+
+export function deterministicRouteRiskFloor(surfaces) {
+  const signals = new Set();
+  for (const surface of surfaces) {
+    const dedicatedSignals = dedicatedWorkflowSignals[surface.path];
+    if (dedicatedSignals && dedicatedWorkflowChanged(surface))
+      dedicatedSignals.forEach((signal) => signals.add(signal));
+    if (surface.path === "apps/showcase/public/CNAME") {
+      signals.add("publishingOrRelease");
+      signals.add("publicUrlOrDomain");
+    }
+    if (!/^\.github\/workflows\/[^/]+\.ya?ml$/.test(surface.path)) continue;
+    changedWorkflowConstructSignals(surface).forEach((signal) =>
+      signals.add(signal),
+    );
+  }
+  return [...signals].sort((a, b) => a.localeCompare(b));
+}
+
+export function assertImplementationDelivery(delivery) {
+  if (!delivery || typeof delivery !== "object")
+    throw new Error("implementation delivery evidence is required");
+  const actual = delivery.actual;
+  if (!actual || typeof actual !== "object")
+    throw new Error(
+      "implementation delivery requires actual repository evidence",
+    );
+  if (actual.currentBranch === delivery.defaultBranch)
+    throw new Error(
+      `implementation cannot complete on default branch ${delivery.defaultBranch}`,
+    );
+  if (actual.pushBranch === delivery.defaultBranch)
+    throw new Error(
+      `direct push to default branch ${delivery.defaultBranch} is forbidden`,
+    );
+  if (actual.pushBranch !== actual.currentBranch)
+    throw new Error("implementation must push its current task branch");
+  if (
+    typeof delivery.pullRequestUrl !== "string" ||
+    !/^https:\/\/github\.com\/[^/]+\/[^/]+\/pull\/\d+$/.test(
+      delivery.pullRequestUrl,
+    )
+  )
+    throw new Error(
+      "implementation completion requires a GitHub pull request URL",
+    );
+  if (
+    !delivery.pullRequestUrl.startsWith(
+      `https://github.com/${actual.repository}/pull/`,
+    )
+  )
+    throw new Error(`pull request does not belong to ${actual.repository}`);
+  if (
+    actual.pullRequest?.url !== delivery.pullRequestUrl ||
+    actual.pullRequest?.state !== "OPEN"
+  )
+    throw new Error(
+      "delivery evidence does not identify the actual open pull request",
+    );
+  if (actual.pullRequest.headRefName !== actual.currentBranch)
+    throw new Error("pull request head does not match the current task branch");
+  if (
+    actual.localHead !== actual.upstreamHead ||
+    actual.localHead !== actual.pullRequest.headRefOid
+  )
+    throw new Error(
+      "current task branch is not fully pushed to the pull request",
+    );
+  if (actual.pullRequest.baseRefName !== delivery.defaultBranch)
+    throw new Error("pull request must target the default branch");
+  return { allowed: true, pullRequestUrl: delivery.pullRequestUrl };
+}
+
+export async function gitImplementationState(
+  repoRoot,
+  { defaultBranch = "main", baseRef = "origin/main" } = {},
+) {
+  const options = { cwd: repoRoot };
+  const [
+    { stdout: branch },
+    { stdout: head },
+    { stdout: base },
+    { stdout: mergeBase },
+    { stdout: status },
+  ] = await Promise.all([
+    exec("git", ["branch", "--show-current"], options),
+    exec("git", ["rev-parse", "HEAD"], options),
+    exec("git", ["rev-parse", baseRef], options),
+    exec("git", ["merge-base", "HEAD", baseRef], options),
+    exec("git", ["status", "--porcelain=v1"], options),
+  ]);
+  const preImplementationChanges = status.trim()
+    ? status
+        .trimEnd()
+        .split("\n")
+        .map((line) => line.slice(3).split(" -> ").at(-1))
+    : [];
+  return {
+    currentBranch: branch.trim(),
+    defaultBranch,
+    baseCurrent: head.trim() === base.trim(),
+    startedAtCurrentBase: mergeBase.trim() === base.trim(),
+    preImplementationChanges,
+    baseRef,
+  };
+}
+
+export async function gitDeliveryState(repoRoot, pullRequestUrl) {
+  const options = { cwd: repoRoot };
+  const [branch, upstream, localHead, upstreamHead, repository, pullRequest] =
+    await Promise.all([
+      exec("git", ["branch", "--show-current"], options),
+      exec(
+        "git",
+        ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{upstream}"],
+        options,
+      ),
+      exec("git", ["rev-parse", "HEAD"], options),
+      exec("git", ["rev-parse", "@{upstream}"], options),
+      exec("gh", ["repo", "view", "--json", "nameWithOwner"], options),
+      exec(
+        "gh",
+        [
+          "pr",
+          "view",
+          pullRequestUrl,
+          "--json",
+          "url,headRefName,headRefOid,baseRefName,state",
+        ],
+        options,
+      ),
+    ]);
+  const [pushRemote, ...pushParts] = upstream.stdout.trim().split("/");
+  return {
+    repository: JSON.parse(repository.stdout).nameWithOwner,
+    currentBranch: branch.stdout.trim(),
+    pushRemote,
+    pushBranch: pushParts.join("/"),
+    localHead: localHead.stdout.trim(),
+    upstreamHead: upstreamHead.stdout.trim(),
+    pullRequest: JSON.parse(pullRequest.stdout),
+  };
+}
 
 export const readJson = async (file) =>
   JSON.parse(await readFile(file, "utf8"));
@@ -891,4 +1406,51 @@ export async function gitEvidence(repoRoot, base) {
     collectedAt: new Date().toISOString(),
     mutatesRepository: false,
   };
+}
+
+export async function gitRouteSurfaces(repoRoot, base, files) {
+  const options = { cwd: repoRoot, maxBuffer: 10 * 1024 * 1024 };
+  const { stdout: mergeBase } = await exec(
+    "git",
+    ["merge-base", base, "HEAD"],
+    options,
+  );
+  const diffBase = mergeBase.trim();
+  const { stdout: rawStatuses } = await exec(
+    "git",
+    ["diff", "--name-status", diffBase, "--"],
+    options,
+  );
+  const statuses = new Map();
+  for (const line of rawStatuses.trim().split("\n").filter(Boolean)) {
+    const [rawStatus, ...paths] = line.split("\t");
+    const file = paths.at(-1);
+    const status = rawStatus.startsWith("A")
+      ? "added"
+      : rawStatus.startsWith("D")
+        ? "deleted"
+        : rawStatus.startsWith("R")
+          ? "renamed"
+          : "modified";
+    statuses.set(file, status);
+  }
+  return Promise.all(
+    files.map(async (file) => {
+      const status = statuses.get(file) ?? "added";
+      const { stdout: trackedPatch } = await exec(
+        "git",
+        ["diff", "--unified=0", "--no-color", diffBase, "--", file],
+        options,
+      );
+      let patch = trackedPatch;
+      if (status === "added" && !patch) {
+        const content = await readFile(path.join(repoRoot, file), "utf8");
+        patch = content
+          .split("\n")
+          .map((line) => `+${line}`)
+          .join("\n");
+      }
+      return { path: file, status, patch };
+    }),
+  );
 }

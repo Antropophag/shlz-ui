@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Harden repo-local routing so direct execution is positively proven, material discovered surfaces re-route, and implementation uses a task branch and PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "route-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "two-layer protection and regression requirements"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "branch to PR; no merge or settings mutation"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "harden-harness-route-eligibility",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit pre-authorization after requirements and OpenSpec"
+    }
+  }
+}

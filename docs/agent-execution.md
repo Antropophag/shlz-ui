@@ -6,6 +6,8 @@ Use this workflow after initial discovery, impact routing, requirements readines
 
 For requirements-gated work, `plan` receives the validated state described in `docs/requirements-elicitation.md`. Planning is downstream of the readiness gate; direct S work remains lightweight.
 
+Implementation is also downstream of `implementation-preflight`: work must run on a non-default task branch whose HEAD started at the current `origin/main`. Planning files do not weaken that branch invariant. Never commit or push implementation directly to `main`.
+
 ## Size before implementation
 
 Record observable signals in an assessment; do not predict an exact token bill. `npm run harness -- plan <assessment.json> <plan.json>` reports the contribution of independent work units, shared seams, contracts, consumers, evidence, ambiguity, scope, review risk, and context-growth risk.
@@ -32,6 +34,24 @@ npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id>
 For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
+
+## Route conformance and delivery
+
+Before completing direct work, inspect the target-relevant diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. The CLI derives the actual Git diff from the fixed base, excludes only operational active-plan state, and rejects an incomplete or stale declared file set. Run:
+
+```bash
+npm run harness -- route-conformance <route-assessment> <discovered-surface> --base origin/main
+```
+
+If deployment/publishing/release automation, permissions, public contracts, destructive effects, or another material/unknown signal appears, completion is blocked and the work returns to requirements/OpenSpec. A workflow pathname is an inspection trigger, not a keyword verdict: affirmatively behavior-preserving workflow text/format maintenance remains direct.
+
+Normal successful implementation then pushes only its current task branch, creates a PR targeting `main`, and validates compact delivery evidence against the actual upstream, repository, and open PR returned by Git and GitHub:
+
+```bash
+npm run harness -- delivery-check <delivery-evidence>
+```
+
+The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings.
 
 The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, use labeled proxies: repeated reads, command/output volume, phase changes, and irrelevant-output accumulation. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.
 
