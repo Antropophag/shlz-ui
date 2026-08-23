@@ -22,4 +22,4 @@
 
 - [x] 5.1 Add a red regression proving a newly created `.github/workflows/pages.yml` blocks direct completion even when every agent material signal is false, plus a harmless CI maintenance control
 - [x] 5.2 Implement the minimal explicit content-aware deterministic risk floor and verify it can only raise effective material signals
-- [ ] 5.3 Run focused harness validation and targeted Standards/Spec re-review, then update PR #29 without merging
+- [x] 5.3 Run focused harness validation and targeted Standards/Spec re-review, then update PR #29 without merging
