@@ -117,28 +117,14 @@ try {
       ),
     ),
   );
-  let observed = JSON.parse(await readFile(absolute("concurrent-state")));
-  for (const id of ["F1", "F2"])
-    if (
-      observed.findings.find((finding) => finding.id === id).status !==
-      "resolved"
-    )
-      await runHarness([
-        "review-resolve",
-        relative("concurrent-state"),
-        "--ids",
-        id,
-        "--head",
-        "head",
-      ]);
-  observed = JSON.parse(await readFile(absolute("concurrent-state")));
+  const observed = JSON.parse(await readFile(absolute("concurrent-state")));
+  const resolvedCount = ["F1", "F2"].filter(
+    (id) =>
+      observed.findings.find((finding) => finding.id === id).status ===
+      "resolved",
+  ).length;
   results["review-state-updates-serialize"] =
-    settled.includes(false) &&
-    ["F1", "F2"].every(
-      (id) =>
-        observed.findings.find((finding) => finding.id === id).status ===
-        "resolved",
-    );
+    resolvedCount > 0 && resolvedCount === settled.filter(Boolean).length;
 
   const timeoutState = core.createReviewState("origin/main", ["subprocess"]);
   await write("timeout-state", timeoutState);
