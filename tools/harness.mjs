@@ -37,6 +37,7 @@ import {
   assertExecutionBaselineState,
   assertRouteConformance,
   evaluateRouteEligibility,
+  failurePathResultDigest,
   resumePacket,
   reviewContext,
   resolveReviewFindings,
@@ -465,9 +466,16 @@ switch (command) {
     break;
   }
   case "review-init": {
+    const failurePathOption = option("--failure-path-concerns");
+    if (!failurePathOption)
+      throw new Error(
+        "review-init requires --failure-path-concerns <list|none>",
+      );
     const state = createReviewState(
       args[1],
-      option("--failure-path-concerns")?.split(",").filter(Boolean) ?? [],
+      failurePathOption === "none"
+        ? []
+        : failurePathOption.split(",").filter(Boolean),
     );
     await writeJson(statePath(args[0]), state);
     output(state);
@@ -482,18 +490,33 @@ switch (command) {
       definition.command.some((part) => typeof part !== "string" || !part)
     )
       throw new Error("review proof requires a command array");
-    const { stdout } = await exec(
-      definition.command[0],
-      definition.command.slice(1),
-      {
-        cwd: repoRoot,
-        maxBuffer: 10 * 1024 * 1024,
-      },
-    );
-    const observed = JSON.parse(stdout);
+    const current = await readJson(target);
+    let observed;
+    try {
+      const { stdout } = await exec(
+        definition.command[0],
+        definition.command.slice(1),
+        {
+          cwd: repoRoot,
+          env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
+          maxBuffer: 10 * 1024 * 1024,
+        },
+      );
+      observed = JSON.parse(stdout);
+    } catch (error) {
+      current.failurePathDegradation = {
+        status: "unavailable",
+        reason: error.message,
+        recordedAt: new Date().toISOString(),
+      };
+      await writeJson(target, current);
+      throw error;
+    }
+    const resultDigest = failurePathResultDigest(observed);
     const state = recordFailurePathProof(await readJson(target), {
       ...observed,
       command: definition.command,
+      resultDigest,
     });
     await writeJson(target, state);
     output(reviewContext(state));

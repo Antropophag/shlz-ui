@@ -35,6 +35,7 @@ import {
   assertRouteConformance,
   evaluateExecutionStrategy,
   evaluateRouteEligibility,
+  failurePathResultDigest,
   resumePacket,
   retryWorkerPacket,
   reviewContext,
@@ -2007,7 +2008,12 @@ test("review state reuses the remediation diff and unresolved findings", () => {
     diff: "abc123..HEAD",
     base: "origin/main",
     unresolvedFindings: [state.findings[0]],
-    failurePathProof: { required: false, concerns: [], complete: false },
+    failurePathProof: {
+      required: false,
+      concerns: [],
+      complete: false,
+      degradation: null,
+    },
     discovery: "fixed-diff-and-known-findings-only",
   });
   resolveReviewFindings(state, ["F1"], "def456");
@@ -2023,25 +2029,53 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
     definition.command.slice(1),
     {
       cwd: root,
+      env: {
+        ...process.env,
+        SHLZ_REVIEW_BASE: "53936615ea50fcd58117b084c5b601556fc01dd2",
+      },
     },
   );
-  const proof = { ...JSON.parse(stdout), command: definition.command };
+  const observed = JSON.parse(stdout);
+  const proof = {
+    ...observed,
+    command: definition.command,
+    resultDigest: failurePathResultDigest(observed),
+  };
   const concerns = ["state-machine", "persistence", "subprocess"];
   const state = createReviewState(
     "53936615ea50fcd58117b084c5b601556fc01dd2",
     concerns,
   );
-  recordReview(state, { axis: "Standards", head: "head-1", findings: [] });
+  recordReview(state, {
+    axis: "Standards",
+    head: proof.reviewedHead,
+    findings: [],
+  });
   assert.throws(
-    () => recordReview(state, { axis: "Spec", head: "head-1", findings: [] }),
+    () =>
+      recordReview(state, {
+        axis: "Spec",
+        head: proof.reviewedHead,
+        findings: [],
+      }),
     /requires executable failure-path proof/,
   );
   recordFailurePathProof(state, proof);
-  recordReview(state, { axis: "Spec", head: "head-1", findings: [] });
+  recordReview(state, {
+    axis: "Spec",
+    head: proof.reviewedHead,
+    findings: [],
+  });
+  assert.throws(
+    () =>
+      recordReview(state, { axis: "Standards", head: "stale", findings: [] }),
+    /stale for the reviewed head/,
+  );
   assert.deepEqual(reviewContext(state).failurePathProof, {
     required: true,
     concerns,
     complete: true,
+    degradation: null,
   });
 
   for (const mutate of [
@@ -2062,7 +2096,7 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
     assert.throws(
       () =>
         recordFailurePathProof(
-          createReviewState("base", concerns),
+          createReviewState(proof.reviewBase, concerns),
           mutate(structuredClone(proof)),
         ),
       /invalid|discriminate|does not cover/,
@@ -2074,7 +2108,12 @@ test("failure-path proof stays off the cheap review path", () => {
     diff: "origin/main...HEAD",
     base: "origin/main",
     unresolvedFindings: [],
-    failurePathProof: { required: false, concerns: [], complete: false },
+    failurePathProof: {
+      required: false,
+      concerns: [],
+      complete: false,
+      degradation: null,
+    },
     discovery: "fixed-diff-and-known-findings-only",
   });
 });

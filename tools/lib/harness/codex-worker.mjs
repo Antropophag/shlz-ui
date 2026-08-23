@@ -50,7 +50,7 @@ export function parseCodexExecJsonl(stdout) {
   };
 }
 
-const defaultRun = ({ command, args, cwd, input, timeoutMs }) =>
+export const defaultRun = ({ command, args, cwd, input, timeoutMs }) =>
   new Promise((resolve, reject) => {
     const child = spawn(command, args, {
       cwd,

@@ -1881,6 +1881,14 @@ const failurePathConcerns = new Set([
   "persistence",
   "subprocess",
 ]);
+const failurePathInvariants = new Map([
+  ["launch-recording-is-recoverable", "state-machine"],
+  ["declared-fallback-can-complete", "state-machine"],
+  ["retry-state-is-monotonic", "persistence"],
+  ["persisted-completions-are-report-bound", "persistence"],
+  ["stdin-failure-settles-once", "subprocess"],
+  ["terminal-events-have-defined-precedence", "subprocess"],
+]);
 
 export function createReviewState(base, concerns = []) {
   if (!base) throw new Error("review base is required");
@@ -1899,6 +1907,15 @@ export function createReviewState(base, concerns = []) {
   };
 }
 
+export const failurePathResultDigest = (proof) =>
+  valueDigest({
+    version: proof.version,
+    reviewBase: proof.reviewBase,
+    knownBadRevision: proof.knownBadRevision,
+    reviewedHead: proof.reviewedHead,
+    invariants: proof.invariants,
+  });
+
 export function recordFailurePathProof(state, proof) {
   const concerns = state.failurePathConcerns ?? [];
   if (!concerns.length)
@@ -1909,6 +1926,9 @@ export function recordFailurePathProof(state, proof) {
     !Array.isArray(proof.command) ||
     !proof.command.length ||
     proof.command.some((part) => typeof part !== "string" || !part) ||
+    proof.reviewBase !== state.base ||
+    !/^[0-9a-f]{64}$/.test(proof.resultDigest ?? "") ||
+    proof.resultDigest !== failurePathResultDigest(proof) ||
     !/^[0-9a-f]{40}$/.test(proof.knownBadRevision ?? "") ||
     !/^[0-9a-f]{40}$/.test(proof.reviewedHead ?? "") ||
     proof.knownBadRevision === proof.reviewedHead ||
@@ -1923,6 +1943,7 @@ export function recordFailurePathProof(state, proof) {
       typeof invariant.id !== "string" ||
       !invariant.id ||
       ids.has(invariant.id) ||
+      failurePathInvariants.get(invariant.id) !== invariant.concern ||
       !concerns.includes(invariant.concern) ||
       invariant.knownBad !== "fail" ||
       invariant.reviewedHead !== "pass"
@@ -1934,8 +1955,17 @@ export function recordFailurePathProof(state, proof) {
     covered.add(invariant.concern);
   }
   const missing = concerns.filter((concern) => !covered.has(concern));
-  if (missing.length)
-    throw new Error(`failure-path proof does not cover: ${missing.join(", ")}`);
+  const missingInvariants = [...failurePathInvariants].filter(
+    ([id, concern]) => concerns.includes(concern) && !ids.has(id),
+  );
+  if (missing.length || missingInvariants.length)
+    throw new Error(
+      `failure-path proof does not cover: ${[
+        ...missing,
+        ...missingInvariants.map(([id]) => id),
+      ].join(", ")}`,
+    );
+  delete state.failurePathDegradation;
   state.failurePathProof = stableValue(proof);
   return state;
 }
@@ -1959,6 +1989,8 @@ export function recordReview(state, { axis, head, findings }) {
     throw new Error(
       "independent review requires executable failure-path proof",
     );
+  if (state.failurePathProof && head !== state.failurePathProof.reviewedHead)
+    throw new Error("failure-path proof is stale for the reviewed head");
   const pass = state.passes.length + 1;
   state.passes.push({ pass, axis, head });
   for (const finding of findings)
@@ -1983,6 +2015,7 @@ export function reviewContext(state) {
       required: (state.failurePathConcerns?.length ?? 0) > 0,
       concerns: state.failurePathConcerns ?? [],
       complete: Boolean(state.failurePathProof),
+      degradation: state.failurePathDegradation ?? null,
     },
     discovery: "fixed-diff-and-known-findings-only",
   };
