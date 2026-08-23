@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
-const root = path.resolve(process.argv[2]);
+const root = process.cwd();
 const core = await import(
   pathToFileURL(path.join(root, "tools/lib/harness/core.mjs"))
 );

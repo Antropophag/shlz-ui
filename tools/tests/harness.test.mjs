@@ -2050,7 +2050,13 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
   recordReview(state, {
     axis: "Standards",
     head: "stale-head",
-    findings: [],
+    findings: [
+      {
+        id: "STALE-1",
+        severity: "P1",
+        summary: "finding from the superseded head",
+      },
+    ],
   });
   assert.throws(
     () =>
@@ -2063,6 +2069,7 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
   );
   recordFailurePathProof(state, proof);
   assert.deepEqual(state.passes, []);
+  assert.equal(state.findings[0].introducedPass, null);
   recordReview(state, {
     axis: "Spec",
     head: proof.reviewedHead,
@@ -2080,29 +2087,42 @@ test("PR 32 failure-path fixture makes material review prove discriminating inva
     degradation: null,
   });
 
-  for (const mutate of [
-    (value) => ({ ...value, reviewedHead: value.knownBadRevision }),
-    (value) => ({
-      ...value,
-      invariants: value.invariants.map((item, index) =>
-        index === 0 ? { ...item, knownBad: "pass" } : item,
-      ),
-    }),
-    (value) => ({
-      ...value,
-      invariants: value.invariants.filter(
-        ({ concern }) => concern !== "subprocess",
-      ),
-    }),
-  ])
+  const mutationCases = [
+    [
+      (value) => ({ ...value, reviewedHead: value.knownBadRevision }),
+      /contract is invalid/,
+    ],
+    [
+      (value) => ({
+        ...value,
+        invariants: value.invariants.map((item, index) =>
+          index === 0 ? { ...item, knownBad: "pass" } : item,
+        ),
+      }),
+      /must discriminate/,
+    ],
+    [
+      (value) => ({
+        ...value,
+        invariants: value.invariants.filter(
+          ({ concern }) => concern !== "subprocess",
+        ),
+      }),
+      /does not cover/,
+    ],
+  ];
+  for (const [mutate, expected] of mutationCases) {
+    const mutated = mutate(JSON.parse(JSON.stringify(proof)));
+    mutated.resultDigest = failurePathResultDigest(mutated);
     assert.throws(
       () =>
         recordFailurePathProof(
           createReviewState(proof.reviewBase, concerns),
-          mutate(structuredClone(proof)),
+          mutated,
         ),
-      /invalid|discriminate|does not cover/,
+      expected,
     );
+  }
 });
 
 test("failure-path capability degradation is durable and blocks proof completion", () => {

@@ -1966,8 +1966,13 @@ export function recordFailurePathProof(state, proof) {
         ...missingInvariants.map(([id]) => id),
       ].join(", ")}`,
     );
-  if (state.passes.some(({ head }) => head !== proof.reviewedHead))
+  if (state.passes.some(({ head }) => head !== proof.reviewedHead)) {
+    const invalidated = new Set(state.passes.map(({ pass }) => pass));
     state.passes = [];
+    for (const finding of state.findings)
+      if (invalidated.has(finding.introducedPass))
+        finding.introducedPass = null;
+  }
   delete state.failurePathDegradation;
   state.failurePathProof = stableValue(proof);
   return state;

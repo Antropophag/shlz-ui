@@ -491,57 +491,67 @@ switch (command) {
       definition.command.some((part) => typeof part !== "string" || !part)
     )
       throw new Error("review proof requires a command array");
-    const current = await readJson(target);
-    let observed;
-    try {
-      const { stdout } = await exec(
-        definition.command[0],
-        definition.command.slice(1),
-        {
-          cwd: repoRoot,
-          env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
-          maxBuffer: 10 * 1024 * 1024,
-        },
-      );
-      observed = JSON.parse(stdout);
-    } catch (error) {
-      current.failurePathDegradation = {
-        status: "unavailable",
-        reason: error.message,
-        recordedAt: new Date().toISOString(),
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      let observed;
+      try {
+        const { stdout } = await exec(
+          definition.command[0],
+          definition.command.slice(1),
+          {
+            cwd: repoRoot,
+            env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
+            maxBuffer: 10 * 1024 * 1024,
+            timeout: 10 * 60 * 1000,
+            killSignal: "SIGKILL",
+          },
+        );
+        observed = JSON.parse(stdout);
+      } catch (error) {
+        await writeJson(
+          target,
+          recordFailurePathDegradation(current, "execution", error.message),
+        );
+        throw error;
+      }
+      const proof = {
+        ...observed,
+        command: definition.command,
       };
-      await writeJson(target, current);
-      throw error;
-    }
-    const proof = {
-      ...observed,
-      command: definition.command,
-    };
-    proof.resultDigest = failurePathResultDigest(proof);
-    const state = recordFailurePathProof(await readJson(target), proof);
-    await writeJson(target, state);
+      proof.resultDigest = failurePathResultDigest(proof);
+      const next = recordFailurePathProof(current, proof);
+      await writeJson(target, next);
+      return next;
+    });
     output(reviewContext(state));
     break;
   }
   case "review-degrade": {
     const target = statePath(args[0]);
-    const state = recordFailurePathDegradation(
-      await readJson(target),
-      option("--capability"),
-      option("--reason"),
-    );
-    await writeJson(target, state);
+    const state = await withStateLock(target, async () => {
+      const next = recordFailurePathDegradation(
+        await readJson(target),
+        option("--capability"),
+        option("--reason"),
+      );
+      await writeJson(target, next);
+      return next;
+    });
     output(reviewContext(state));
     break;
   }
   case "review-record": {
     const target = statePath(args[0]);
-    const state = recordReview(await readJson(target), {
-      axis: option("--axis"),
-      head: option("--head"),
-      findings: await readJson(absolute(option("--findings"))),
+    const findings = await readJson(absolute(option("--findings")));
+    const state = await withStateLock(target, async () => {
+      const next = recordReview(await readJson(target), {
+        axis: option("--axis"),
+        head: option("--head"),
+        findings,
+      });
+      await writeJson(target, next);
+      return next;
     });
-    await writeJson(target, state);
     output(reviewContext(state));
     break;
   }
@@ -550,12 +560,15 @@ switch (command) {
     break;
   case "review-resolve": {
     const target = statePath(args[0]);
-    const state = resolveReviewFindings(
-      await readJson(target),
-      option("--ids")?.split(",").filter(Boolean) ?? [],
-      option("--head"),
-    );
-    await writeJson(target, state);
+    const state = await withStateLock(target, async () => {
+      const next = resolveReviewFindings(
+        await readJson(target),
+        option("--ids")?.split(",").filter(Boolean) ?? [],
+        option("--head"),
+      );
+      await writeJson(target, next);
+      return next;
+    });
     output(reviewContext(state));
     break;
   }
