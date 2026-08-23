@@ -27,7 +27,9 @@
           "cache_write_input_tokens": 0,
           "output_tokens": 13224,
           "reasoning_output_tokens": 2336
-        }
+        },
+        "workerReport": "Worker adapter packet completed. Added the codex exec JSONL adapter, immutable digest-bound briefs, and guarded retry/failure/staleness lifecycle. Focused harness and strict OpenSpec validation passed.",
+        "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1"
       }
     },
     "telemetry-operator": {
@@ -58,7 +60,9 @@
           "cache_write_input_tokens": 0,
           "output_tokens": 10527,
           "reasoning_output_tokens": 1926
-        }
+        },
+        "workerReport": "Telemetry operator packet completed. Added guarded worker CLI commands, runtime-bound telemetry, and S/M/L/XL operator documentation. Focused harness, formatting, and strict OpenSpec validation passed.",
+        "workerReportDigest": "24cf5675b434f99b02de0c1a6a19c7b02ffe06fbc2002c6371e62abeeee92ac1"
       }
     },
     "dogfood-review-delivery": {
@@ -120,6 +124,7 @@
     },
     "worker-adapter": {
       "completedPacket": "worker-adapter",
+      "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1",
       "changed": [
         "added codex exec JSONL capability and launch adapter",
         "added immutable digest-bound worker briefs",
@@ -149,6 +154,7 @@
       "completedPacket": "telemetry-operator",
       "claimId": "telemetry-operator-20260823",
       "briefDigest": "98b4889dd83dcdb12adba89f4b71f86e7bf7862649747549e03575f165a84ca1",
+      "workerReportDigest": "24cf5675b434f99b02de0c1a6a19c7b02ffe06fbc2002c6371e62abeeee92ac1",
       "changed": [
         "added worker-probe, worker-brief, worker-run and worker-retry commands",
         "added physical boundary, peak context, read/relevance and handoff telemetry",

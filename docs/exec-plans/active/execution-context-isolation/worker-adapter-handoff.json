@@ -1,5 +1,6 @@
 {
   "completedPacket": "worker-adapter",
+  "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1",
   "changed": [
     "added codex exec JSONL capability and launch adapter",
     "added immutable digest-bound worker briefs",

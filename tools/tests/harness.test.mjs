@@ -15,6 +15,7 @@ import {
   contextIndex,
   createExecutionState,
   createWorkerBrief,
+  failWorkerReservation,
   createPlan,
   createReviewState,
   matchesPattern,
@@ -943,6 +944,33 @@ test("codex exec adapter probes capability and derives identity/status/usage onl
   });
   assert.equal(launchFailure.terminalStatus, "launch-failed");
   assert.equal(launchFailure.evidence, undefined);
+
+  const reconnectThenComplete = parseCodexExecJsonl(
+    [
+      JSON.stringify({
+        type: "thread.started",
+        thread_id: "runtime-reconnect",
+      }),
+      JSON.stringify({ type: "error", message: "reconnecting" }),
+      JSON.stringify({
+        type: "item.completed",
+        item: { item_type: "assistant_message", text: "legacy report" },
+      }),
+      JSON.stringify({ type: "turn.completed", usage: {} }),
+    ].join("\n"),
+  );
+  assert.equal(reconnectThenComplete.terminalStatus, "completed");
+  assert.equal(reconnectThenComplete.workerReport, "legacy report");
+  assert.equal(
+    parseCodexExecJsonl(
+      [
+        JSON.stringify({ type: "thread.started", thread_id: "runtime-failed" }),
+        JSON.stringify({ type: "turn.completed", usage: {} }),
+        JSON.stringify({ type: "turn.failed" }),
+      ].join("\n"),
+    ).terminalStatus,
+    "failed",
+  );
 });
 
 test("bounded worker briefs are immutable and exclude parent context", () => {
@@ -1093,6 +1121,7 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
     claimId: "claim-retry",
   });
   reserve(plan, state, "shared-native-dialog", retryBrief, "worker-retry");
+  assert.equal(state.packets["shared-native-dialog"].attempts, 2);
   assert.equal(
     state.packets["shared-native-dialog"].attemptHistory.at(-1).failure
       .terminalStatus,
@@ -1173,7 +1202,52 @@ test("worker attempts reject stale briefs and record only declared unavailable f
       mode: "continue",
       reason: "codex executable is unavailable",
     });
+    const handoff = {
+      completedPacket: "shared-native-dialog",
+      changed: [],
+      provenChecks: ["declared fallback remained explicit"],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: "modal",
+      invalidatedAssumptions: [],
+      claimId: brief.claimId,
+      briefDigest: brief.briefDigest,
+    };
+    completePacket(plan, state, handoff, null, {
+      baseline: executionBaseline,
+    });
+    assert.equal(state.packets["shared-native-dialog"].status, "completed");
   }
+});
+
+test("post-launch recording failures leave a retryable durable state", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-recording-failed",
+  });
+  reserve(
+    plan,
+    state,
+    "shared-native-dialog",
+    brief,
+    "worker-recording-failed",
+  );
+  failWorkerReservation(
+    state,
+    "shared-native-dialog",
+    new Error("duplicate runtime evidence"),
+    { launchId: "launch-recording-failed", evidenceDigest: "e".repeat(64) },
+  );
+  assert.deepEqual(state.packets["shared-native-dialog"].failure, {
+    terminalStatus: "recording-failed",
+    launchId: "launch-recording-failed",
+    evidenceDigest: "e".repeat(64),
+    reason: "duplicate runtime evidence",
+  });
+  assert.equal(state.packets["shared-native-dialog"].retryable, true);
+  retryWorkerPacket(state, "shared-native-dialog");
+  assert.equal(state.packets["shared-native-dialog"].status, "pending");
 });
 
 test("guarded completion binds claim, brief, baseline, dependency handoff, and packet contract", () => {

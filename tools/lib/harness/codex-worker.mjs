@@ -25,22 +25,25 @@ export function parseCodexExecJsonl(stdout) {
       "codex exec JSONL did not attest a runtime thread identity",
     );
   const completed = events.find((event) => event?.type === "turn.completed");
-  const failed = events.find((event) =>
-    ["turn.failed", "error"].includes(event?.type),
-  );
-  const workerReport = events
-    .filter(
-      (event) =>
-        event?.type === "item.completed" &&
-        event.item?.type === "agent_message" &&
-        typeof event.item.text === "string" &&
-        event.item.text.trim(),
-    )
-    .at(-1)?.item.text;
+  const turnFailed = events.some((event) => event?.type === "turn.failed");
+  const streamError = events.some((event) => event?.type === "error");
+  const workerReport = events.findLast(
+    (event) =>
+      event?.type === "item.completed" &&
+      ["agent_message", "assistant_message"].includes(
+        event.item?.type ?? event.item?.item_type,
+      ) &&
+      typeof event.item.text === "string" &&
+      event.item.text.trim(),
+  )?.item.text;
+  let terminalStatus = "incomplete";
+  if (turnFailed) terminalStatus = "failed";
+  else if (completed) terminalStatus = "completed";
+  else if (streamError) terminalStatus = "failed";
   const usage = completed?.usage ?? null;
   return {
     runtimeId,
-    terminalStatus: failed ? "failed" : completed ? "completed" : "incomplete",
+    terminalStatus,
     usage,
     workerReport: workerReport ?? null,
     events,
@@ -58,6 +61,14 @@ const defaultRun = ({ command, args, cwd, input, timeoutMs }) =>
     let stderr = "";
     let timedOut = false;
     let killTimer;
+    let settled = false;
+    const settle = (callback, value) => {
+      if (settled) return;
+      settled = true;
+      clearTimeout(timer);
+      clearTimeout(killTimer);
+      callback(value);
+    };
     const timer = setTimeout(() => {
       timedOut = true;
       child.kill("SIGTERM");
@@ -65,15 +76,13 @@ const defaultRun = ({ command, args, cwd, input, timeoutMs }) =>
     }, timeoutMs);
     child.stdout.setEncoding("utf8").on("data", (chunk) => (stdout += chunk));
     child.stderr.setEncoding("utf8").on("data", (chunk) => (stderr += chunk));
-    child.once("error", (error) => {
-      clearTimeout(timer);
-      clearTimeout(killTimer);
-      reject(error);
-    });
-    child.once("close", (code, signal) => {
-      clearTimeout(timer);
-      clearTimeout(killTimer);
-      resolve({ code, signal, stdout, stderr, timedOut });
+    child.once("error", (error) => settle(reject, error));
+    child.once("close", (code, signal) =>
+      settle(resolve, { code, signal, stdout, stderr, timedOut }),
+    );
+    child.stdin.once("error", (error) => {
+      child.kill("SIGTERM");
+      settle(reject, error);
     });
     child.stdin.end(input);
   });

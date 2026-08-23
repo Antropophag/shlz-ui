@@ -12,6 +12,7 @@ import {
   createPlan,
   createReviewState,
   createWorkerBrief,
+  failWorkerReservation,
   fingerprintFiles,
   gitEvidence,
   gitDeliveryState,
@@ -338,18 +339,25 @@ switch (command) {
     });
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
-      recordWorkerAttempt(
-        plan,
-        current,
-        args[2],
-        prepared.brief,
-        result,
-        session,
-        requirementsState,
-      );
+      let recordingError = null;
+      try {
+        recordWorkerAttempt(
+          plan,
+          current,
+          args[2],
+          prepared.brief,
+          result,
+          session,
+          requirementsState,
+        );
+      } catch (error) {
+        failWorkerReservation(current, args[2], error, result);
+        recordingError = error;
+      }
       await writeJson(target, current);
-      return { packet: current.packets[args[2]], result };
+      return { packet: current.packets[args[2]], result, recordingError };
     });
+    if (state.recordingError) throw state.recordingError;
     const telemetryPath = option("--telemetry-out");
     if (telemetryPath)
       for (const event of workerTelemetryEvents({

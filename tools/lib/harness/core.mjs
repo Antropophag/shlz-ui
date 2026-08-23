@@ -1239,7 +1239,7 @@ const stableValue = (value) => {
   if (value && typeof value === "object")
     return Object.fromEntries(
       Object.entries(value)
-        .sort(([left], [right]) => left.localeCompare(right))
+        .sort(([left], [right]) => (left < right ? -1 : left > right ? 1 : 0))
         .map(([key, item]) => [key, stableValue(item)]),
     );
   return value;
@@ -1381,6 +1381,7 @@ export function recordWorkerAttempt(
       plan.executionIsolation?.unavailableFallback === "continue"
     ) {
       state.packets[packetId] = {
+        ...reserved,
         status: "claimed",
         session,
         claimId: brief.claimId,
@@ -1499,6 +1500,9 @@ export function reserveWorkerPacket(
     throw new Error("worker brief is invalid or stale");
   state.packets[packetId] = {
     attemptHistory: state.packets[packetId]?.attemptHistory ?? [],
+    ...(state.packets[packetId]?.attempts !== undefined
+      ? { attempts: state.packets[packetId].attempts }
+      : {}),
     status: "launching",
     session,
     claimId: brief.claimId,
@@ -1528,6 +1532,24 @@ export function retryWorkerPacket(state, packetId) {
         failure: current.failure ?? null,
       },
     ],
+  };
+  return state;
+}
+
+export function failWorkerReservation(state, packetId, error, result = null) {
+  const current = state.packets[packetId];
+  if (current?.status !== "launching")
+    throw new Error(`packet ${packetId} does not have a worker reservation`);
+  state.packets[packetId] = {
+    ...current,
+    status: "failed",
+    retryable: true,
+    failure: {
+      terminalStatus: "recording-failed",
+      launchId: result?.launchId ?? null,
+      evidenceDigest: result?.evidenceDigest ?? null,
+      reason: error instanceof Error ? error.message : String(error),
+    },
   };
   return state;
 }
@@ -1718,14 +1740,16 @@ export function completePacket(
       throw new Error(
         "worker completion does not match the active claim and brief",
       );
-    if (
-      !current.launch?.workerReport ||
-      !current.launch.workerReportDigest ||
-      handoff.workerReportDigest !== current.launch.workerReportDigest
-    )
-      throw new Error(
-        "worker completion requires the adapter-bound worker report digest",
-      );
+    if (current.execution?.source === "codex-exec-jsonl") {
+      if (
+        !current.launch?.workerReport ||
+        !current.launch.workerReportDigest ||
+        handoff.workerReportDigest !== current.launch.workerReportDigest
+      )
+        throw new Error(
+          "worker completion requires the adapter-bound worker report digest",
+        );
+    }
   }
   state.packets[handoff.completedPacket] = {
     ...current,
