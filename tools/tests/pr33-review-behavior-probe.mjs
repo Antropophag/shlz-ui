@@ -1,6 +1,13 @@
 import { execFile } from "node:child_process";
-import { readFile, realpath, unlink, writeFile } from "node:fs/promises";
+import {
+  access,
+  readFile,
+  realpath,
+  unlink,
+  writeFile,
+} from "node:fs/promises";
 import path from "node:path";
+import { setTimeout as delay } from "node:timers/promises";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 
@@ -23,11 +30,23 @@ const acceleratedHarness = path.join(
 const harnessSource = await readFile(originalHarness, "utf8");
 const timeoutNeedle = "timeout: 10 * 60 * 1000";
 const timeoutMatches = harnessSource.split(timeoutNeedle).length - 1;
-const harness = timeoutMatches === 1 ? acceleratedHarness : originalHarness;
-if (timeoutMatches === 1) {
+const lockWrite =
+  "  await lock.write(`${process.pid} ${new Date().toISOString()}\\n`);";
+const lockNeedle = `${lockWrite}\n  try {`;
+const lockMatches = harnessSource.split(lockNeedle).length - 1;
+const harness =
+  timeoutMatches === 1 && lockMatches === 1
+    ? acceleratedHarness
+    : originalHarness;
+if (harness === acceleratedHarness) {
   await writeFile(
     acceleratedHarness,
-    harnessSource.replace(timeoutNeedle, "timeout: 25"),
+    harnessSource
+      .replace(timeoutNeedle, "timeout: 25")
+      .replace(
+        lockNeedle,
+        `${lockWrite}\n  await new Promise((resolve) => setTimeout(resolve, 100));\n  try {`,
+      ),
   );
 }
 const relative = (name) =>
@@ -45,6 +64,20 @@ const runHarness = (args, options = {}) =>
     ...options,
   });
 const results = {};
+const waitForFile = async (file, timeoutMs = 2000) => {
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    if (
+      await access(file).then(
+        () => true,
+        () => false,
+      )
+    )
+      return true;
+    await delay(1);
+  }
+  return false;
+};
 
 try {
   const provenance = core.createReviewState("origin/main", ["persistence"]);
@@ -102,29 +135,36 @@ try {
     })),
   });
   await write("concurrent-state", concurrent);
-  const settled = await Promise.all(
-    ["F1", "F2"].map((id) =>
-      runHarness([
-        "review-resolve",
-        relative("concurrent-state"),
-        "--ids",
-        id,
-        "--head",
-        "head",
-      ]).then(
-        () => true,
-        () => false,
-      ),
-    ),
+  const resolveFinding = (id) =>
+    runHarness([
+      "review-resolve",
+      relative("concurrent-state"),
+      "--ids",
+      id,
+      "--head",
+      "head",
+    ]).then(
+      () => true,
+      () => false,
+    );
+  const first = resolveFinding("F1");
+  const lockObserved = await waitForFile(
+    `${absolute("concurrent-state")}.lock`,
   );
+  const second = lockObserved ? resolveFinding("F2") : Promise.resolve(false);
+  const settled = await Promise.all([first, second]);
+  if (lockObserved)
+    for (const [index, id] of ["F1", "F2"].entries())
+      if (!settled[index]) await resolveFinding(id);
   const observed = JSON.parse(await readFile(absolute("concurrent-state")));
-  const resolvedCount = ["F1", "F2"].filter(
-    (id) =>
-      observed.findings.find((finding) => finding.id === id).status ===
-      "resolved",
-  ).length;
   results["review-state-updates-serialize"] =
-    resolvedCount > 0 && resolvedCount === settled.filter(Boolean).length;
+    lockObserved &&
+    settled.filter(Boolean).length === 1 &&
+    ["F1", "F2"].every(
+      (id) =>
+        observed.findings.find((finding) => finding.id === id).status ===
+        "resolved",
+    );
 
   const timeoutState = core.createReviewState("origin/main", ["subprocess"]);
   await write("timeout-state", timeoutState);

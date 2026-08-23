@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp } from "node:fs/promises";
+import { mkdir, mkdtemp, rm } from "node:fs/promises";
 import { homedir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
@@ -14,6 +14,7 @@ await mkdir(parent, { recursive: true });
 const badRoot = await mkdtemp(path.join(parent, "shlz-pr33-invariants-"));
 const goodRoot = await mkdtemp(path.join(parent, "shlz-pr33-known-good-"));
 const probe = path.resolve("tools/tests/pr33-review-behavior-probe.mjs");
+const addedWorktrees = new Set();
 const runProbe = async (targetRoot) =>
   JSON.parse(
     (
@@ -23,14 +24,27 @@ const runProbe = async (targetRoot) =>
       })
     ).stdout,
   );
+const addHistoricalWorktree = async (targetRoot, revision) => {
+  try {
+    await exec("git", ["worktree", "add", "--detach", targetRoot, revision], {
+      maxBuffer: 10 * 1024 * 1024,
+    });
+    addedWorktrees.add(targetRoot);
+  } catch (error) {
+    throw new Error(
+      `historical revision ${revision} is unavailable; fetch full history before running this proof`,
+      { cause: error },
+    );
+  }
+};
 
 let runError;
 const cleanupErrors = [];
 let knownBad;
 let reviewed;
 try {
-  await exec("git", ["worktree", "add", "--detach", badRoot, knownBadRevision]);
-  await exec("git", ["worktree", "add", "--detach", goodRoot, reviewedHead]);
+  await addHistoricalWorktree(badRoot, knownBadRevision);
+  await addHistoricalWorktree(goodRoot, reviewedHead);
   [knownBad, reviewed] = await Promise.all([
     runProbe(badRoot),
     runProbe(goodRoot),
@@ -39,6 +53,10 @@ try {
   runError = error;
 } finally {
   for (const worktree of [badRoot, goodRoot]) {
+    if (!addedWorktrees.has(worktree)) {
+      await rm(worktree, { recursive: true, force: true });
+      continue;
+    }
     const status = await exec("git", ["-C", worktree, "status", "--porcelain"])
       .then(({ stdout }) => stdout)
       .catch(() => null);
@@ -54,8 +72,13 @@ try {
   }
   await exec("git", ["worktree", "prune"]);
 }
-if (cleanupErrors.length) throw new Error(cleanupErrors.join("; "));
+if (runError && cleanupErrors.length)
+  throw new AggregateError(
+    [runError, ...cleanupErrors.map((message) => new Error(message))],
+    "fixture and cleanup failed",
+  );
 if (runError) throw runError;
+if (cleanupErrors.length) throw new Error(cleanupErrors.join("; "));
 
 const concern = {
   "review-state-updates-serialize": "persistence",

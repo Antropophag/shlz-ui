@@ -1,0 +1,128 @@
+{
+  "version": 1,
+  "base": "e36668b2a933cf9d97ea2657cef6ee7ca202f322",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "9cb291e8bd991fb4014fe88e142fcdd67b02b9ec"
+    }
+  ],
+  "findings": [
+    {
+      "id": "CR-3839422189",
+      "severity": "P1",
+      "summary": "derived plan and route assessment may be stale against current requirements",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422193",
+      "severity": "P1",
+      "summary": "loadChangeFailureInvariants exceeds the configured cognitive-complexity limit",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422194",
+      "severity": "P1",
+      "summary": "recursive readdir and Dirent.parentPath exceed the declared Node 20.0 floor",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422197",
+      "severity": "P2",
+      "summary": "historical revision failures lack an actionable capability error",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422204",
+      "severity": "P1",
+      "summary": "the marked-contract red-green oracle compares asymmetric artifacts",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422206",
+      "severity": "P2",
+      "summary": "PR 33 proof test does not bind emitted invariant identities and concerns to inventory",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422209",
+      "severity": "P2",
+      "summary": "repo-local CLI probes lack process-exit cleanup",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "CR-3839422216",
+      "severity": "P2",
+      "summary": "concurrency regression oracle relies on incidental process timing",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    }
+  ],
+  "failurePathConcerns": ["state-machine", "persistence", "subprocess"],
+  "changeFailureInvariants": {
+    "change": "require-change-specific-failure-invariants",
+    "contractDigest": "e914cbb719ac0ed74d42de5bfbc4a52aff7254683a08ebef170116bdafb7d326",
+    "invariants": [
+      {
+        "concern": "state-machine",
+        "id": "marked-contracts-require-manifest",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Current delta contains material failure contracts",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "manifest-sources-are-grounded",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Manifest points outside the current change",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "marked-contract-coverage-is-complete",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Applicable scenario is omitted",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "state-machine",
+        "id": "change-specific-results-discriminate",
+        "requirement": "Executable proof discriminates every required invariant",
+        "scenario": "Baseline passes but change-specific invariant does not discriminate",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "contract-edits-stale-proof",
+        "requirement": "Executable proof discriminates every required invariant",
+        "scenario": "Contracts change after proof",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "state-machine",
+        "id": "stale-plan-or-pending-packet-blocks-delivery",
+        "requirement": "Delivery preserves the guarded execution lifecycle",
+        "scenario": "Requirements or delivery bypasses the execution plan",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      }
+    ],
+    "manifestDigest": "0c90f2d66ff83228e66073f44fef97b4e24ad081f22c538e0ab83d805eed190f",
+    "version": 1
+  }
+}

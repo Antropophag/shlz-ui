@@ -1945,7 +1945,7 @@ const failurePathInvariants = new Map([
 const failureInvariantMarker =
   /^<!-- failure-invariant: ([a-z0-9]+(?:-[a-z0-9]+)*) concern=(state-machine|persistence|subprocess) -->$/;
 
-export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
+function assertFailureInvariantManifest(change, manifest) {
   if (
     !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(change ?? "") ||
     !manifest ||
@@ -1955,92 +1955,88 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
     !manifest.invariants.length
   )
     throw new Error("change-specific failure invariant manifest is invalid");
-  const changeRoot = path.resolve(repoRoot, "openspec/changes", change);
-  const specsRoot = path.join(changeRoot, "specs");
-  const resolvedRoot = path.resolve(repoRoot);
-  if (
-    changeRoot !== resolvedRoot &&
-    !changeRoot.startsWith(`${resolvedRoot}${path.sep}`)
-  )
-    throw new Error(
-      "change-specific failure invariant change escapes repository",
-    );
-  let files;
-  try {
-    files = (await readdir(specsRoot, { recursive: true, withFileTypes: true }))
-      .filter((entry) => entry.isFile() && entry.name === "spec.md")
-      .map((entry) => path.join(entry.parentPath, entry.name))
-      .sort((a, b) => a.localeCompare(b));
-  } catch (error) {
-    if (error.code === "ENOENT")
-      throw new Error(`OpenSpec change has no delta specs: ${change}`);
-    throw error;
+}
+
+async function findDeltaSpecFiles(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...(await findDeltaSpecFiles(target)));
+    else if (entry.isFile() && entry.name === "spec.md") files.push(target);
   }
-  const sources = new Map();
-  const identities = new Set();
-  for (const file of files) {
-    const text = await readFile(file, "utf8");
-    const lines = text.split(/\r?\n/);
-    let requirement = null;
-    let requirementContract = null;
-    for (let index = 0; index < lines.length; index += 1) {
-      const requirementMatch = lines[index].match(/^### Requirement: (.+)$/);
-      if (requirementMatch) {
-        requirement = requirementMatch[1];
-        const sectionEnd = lines.findIndex(
-          (line, candidate) =>
-            candidate > index && /^### Requirement:/.test(line),
-        );
-        const contractEnd = lines.findIndex(
-          (line, candidate) =>
-            candidate > index &&
-            (sectionEnd === -1 || candidate < sectionEnd) &&
-            (failureInvariantMarker.test(line) || /^#### Scenario:/.test(line)),
-        );
-        requirementContract = lines
-          .slice(index, contractEnd === -1 ? sectionEnd : contractEnd)
-          .join("\n")
-          .trim();
-      }
-      const marker = lines[index].match(failureInvariantMarker);
-      if (!marker) continue;
-      let scenarioIndex = index + 1;
-      while (lines[scenarioIndex] === "") scenarioIndex += 1;
-      const scenarioMatch = lines[scenarioIndex]?.match(
-        /^#### Scenario: (.+)$/,
-      );
-      if (!requirement || !scenarioMatch)
-        throw new Error(
-          `failure invariant marker is not adjacent to a scenario: ${path.relative(repoRoot, file)}:${index + 1}`,
-        );
-      const [, id, concern] = marker;
-      if (sources.has(id))
-        throw new Error(`duplicate failure invariant marker: ${id}`);
-      const identity = `${requirement}\0${scenarioMatch[1]}`;
-      if (identities.has(identity))
-        throw new Error(
-          `duplicate failure invariant contract identity: ${requirement} / ${scenarioMatch[1]}`,
-        );
-      identities.add(identity);
-      const end = lines.findIndex(
+  return files;
+}
+
+function parseFailureInvariantSources(
+  text,
+  file,
+  repoRoot,
+  sources,
+  identities,
+) {
+  const lines = text.split(/\r?\n/);
+  let requirement = null;
+  let requirementContract = null;
+  for (let index = 0; index < lines.length; index += 1) {
+    const requirementMatch = lines[index].match(/^### Requirement: (.+)$/);
+    if (requirementMatch) {
+      requirement = requirementMatch[1];
+      const sectionEnd = lines.findIndex(
         (line, candidate) =>
-          candidate > scenarioIndex &&
-          /^(### Requirement:|#### Scenario:)/.test(line),
+          candidate > index && /^### Requirement:/.test(line),
       );
-      const blockEnd = end === -1 ? lines.length : end;
-      sources.set(id, {
-        id,
-        concern,
-        requirement,
-        scenario: scenarioMatch[1],
-        spec: path.relative(repoRoot, file).split(path.sep).join("/"),
-        contract: {
-          requirement: requirementContract,
-          scenario: lines.slice(scenarioIndex, blockEnd).join("\n").trim(),
-        },
-      });
+      const contractEnd = lines.findIndex(
+        (line, candidate) =>
+          candidate > index &&
+          (sectionEnd === -1 || candidate < sectionEnd) &&
+          (failureInvariantMarker.test(line) || /^#### Scenario:/.test(line)),
+      );
+      requirementContract = lines
+        .slice(index, contractEnd === -1 ? sectionEnd : contractEnd)
+        .join("\n")
+        .trim();
     }
+    const marker = lines[index].match(failureInvariantMarker);
+    if (!marker) continue;
+    let scenarioIndex = index + 1;
+    while (lines[scenarioIndex] === "") scenarioIndex += 1;
+    const scenarioMatch = lines[scenarioIndex]?.match(/^#### Scenario: (.+)$/);
+    if (!requirement || !scenarioMatch)
+      throw new Error(
+        `failure invariant marker is not adjacent to a scenario: ${path.relative(repoRoot, file)}:${index + 1}`,
+      );
+    const [, id, concern] = marker;
+    if (sources.has(id))
+      throw new Error(`duplicate failure invariant marker: ${id}`);
+    const identity = `${requirement}\0${scenarioMatch[1]}`;
+    if (identities.has(identity))
+      throw new Error(
+        `duplicate failure invariant contract identity: ${requirement} / ${scenarioMatch[1]}`,
+      );
+    identities.add(identity);
+    const end = lines.findIndex(
+      (line, candidate) =>
+        candidate > scenarioIndex &&
+        /^(### Requirement:|#### Scenario:)/.test(line),
+    );
+    sources.set(id, {
+      id,
+      concern,
+      requirement,
+      scenario: scenarioMatch[1],
+      spec: path.relative(repoRoot, file).split(path.sep).join("/"),
+      contract: {
+        requirement: requirementContract,
+        scenario: lines
+          .slice(scenarioIndex, end === -1 ? lines.length : end)
+          .join("\n")
+          .trim(),
+      },
+    });
   }
+}
+
+function normalizeFailureInvariantManifest(manifest, sources) {
   const ids = new Set();
   const normalized = manifest.invariants.map((item) => {
     if (
@@ -2076,11 +2072,43 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
     throw new Error(
       `change-specific failure invariants do not cover: ${uncovered.join(", ")}`,
     );
-  const extra = [...ids].filter((id) => !sources.has(id));
-  if (extra.length)
+  return normalized;
+}
+
+export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
+  assertFailureInvariantManifest(change, manifest);
+  const changeRoot = path.resolve(repoRoot, "openspec/changes", change);
+  const specsRoot = path.join(changeRoot, "specs");
+  const resolvedRoot = path.resolve(repoRoot);
+  if (
+    changeRoot !== resolvedRoot &&
+    !changeRoot.startsWith(`${resolvedRoot}${path.sep}`)
+  )
     throw new Error(
-      `change-specific failure invariants are ungrounded: ${extra.join(", ")}`,
+      "change-specific failure invariant change escapes repository",
     );
+  let files;
+  try {
+    files = (await findDeltaSpecFiles(specsRoot)).sort((a, b) =>
+      a.localeCompare(b),
+    );
+  } catch (error) {
+    if (error.code === "ENOENT")
+      throw new Error(`OpenSpec change has no delta specs: ${change}`);
+    throw error;
+  }
+  const sources = new Map();
+  const identities = new Set();
+  for (const file of files) {
+    parseFailureInvariantSources(
+      await readFile(file, "utf8"),
+      file,
+      repoRoot,
+      sources,
+      identities,
+    );
+  }
+  const normalized = normalizeFailureInvariantManifest(manifest, sources);
   const contractDigest = valueDigest({
     sources: [...sources.values()].map(({ contract, ...source }) => ({
       ...source,

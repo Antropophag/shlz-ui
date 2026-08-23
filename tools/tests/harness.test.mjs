@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
+import { rmSync } from "node:fs";
 import {
   mkdir,
   mkdtemp,
@@ -70,6 +71,14 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+const registerExitCleanup = (paths) => {
+  const cleanup = () => {
+    for (const target of paths)
+      rmSync(target, { recursive: true, force: true });
+  };
+  process.once("exit", cleanup);
+  return () => process.removeListener("exit", cleanup);
+};
 const oid = "a".repeat(40);
 const mainlineExecution = (overrides = {}) => ({
   currentBranch: "feat/task",
@@ -2485,6 +2494,18 @@ test("PR 33 CodeRabbit fixture executes four dynamic findings and classifies the
   );
   const observed = JSON.parse(stdout);
   assert.equal(observed.invariants.length, 4);
+  assert.deepEqual(
+    observed.invariants
+      .map(({ id, concern }) => ({ id, concern }))
+      .sort((left, right) => left.id.localeCompare(right.id)),
+    inventory.findings
+      .filter(
+        ({ classification }) =>
+          classification === "change-specific-failure-invariant",
+      )
+      .map(({ id, concern }) => ({ id, concern }))
+      .sort((left, right) => left.id.localeCompare(right.id)),
+  );
   assert.ok(
     observed.invariants.every(
       ({ knownBad, reviewedHead }) =>
@@ -2519,6 +2540,7 @@ test("PR 33 behavior probe rejects a non-worktree cwd before file access", async
 test("review-init CLI requires and records current-change invariant bindings", async () => {
   const relativeState = `docs/exec-plans/review-manifest-test-${process.pid}.json`;
   const state = path.join(root, relativeState);
+  const unregisterExitCleanup = registerExitCleanup([state]);
   try {
     await assert.rejects(
       exec(
@@ -2559,6 +2581,7 @@ test("review-init CLI requires and records current-change invariant bindings", a
     assert.equal(recorded.changeFailureInvariants.invariants.length, 6);
   } finally {
     await unlink(state).catch(() => {});
+    unregisterExitCleanup();
   }
 });
 
@@ -2573,6 +2596,12 @@ test("review-proof reloads changed contracts and durably invalidates stale proof
   const manifestPath = path.join(root, relativeManifest);
   const proofPath = path.join(root, relativeProof);
   const specPath = path.join(specRoot, "spec.md");
+  const unregisterExitCleanup = registerExitCleanup([
+    changeRoot,
+    statePath,
+    manifestPath,
+    proofPath,
+  ]);
   const spec = (detail, outcome = "stale proof is removed") => `## Purpose
 
 This temporary delta verifies review-time contract freshness behavior.
@@ -2660,6 +2689,7 @@ ${detail}
       ),
     );
     await rm(changeRoot, { recursive: true, force: true });
+    unregisterExitCleanup();
   }
 });
 

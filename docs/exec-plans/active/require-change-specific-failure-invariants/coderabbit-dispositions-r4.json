@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "pullRequest": 34,
+  "reviewedHead": "9cb291e8bd991fb4014fe88e142fcdd67b02b9ec",
+  "findings": [
+    {
+      "id": "CR-3839422189",
+      "disposition": "invalid-current-head",
+      "reason": "The commented plan.json is a superseded revision-1 execution episode. The active lifecycle is explicitly bound to plan-r3.json and requirements revision 3; rewriting the historical file to revision 2 would now be stale and would corrupt episode provenance.",
+      "evidence": [
+        "docs/exec-plans/active/require-change-specific-failure-invariants/plan-r3.json",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/requirements.json",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/execution-episodes.json"
+      ]
+    },
+    {
+      "id": "CR-3839422193",
+      "disposition": "fixed",
+      "reason": "File discovery, contract parsing, and manifest normalization are separated from the orchestration entry point.",
+      "evidence": ["tools/lib/harness/core.mjs"]
+    },
+    {
+      "id": "CR-3839422194",
+      "disposition": "fixed",
+      "reason": "Delta specs are discovered by a recursive walker built from non-recursive readdir calls and no Dirent.parentPath dependency.",
+      "evidence": ["tools/lib/harness/core.mjs", "tools/tests/harness.test.mjs"]
+    },
+    {
+      "id": "CR-3839422197",
+      "disposition": "fixed-after-outdated",
+      "reason": "The fixture now uses detached worktrees instead of git show, but the capability concern remained valid; both historical fixtures now wrap unavailable revisions with an actionable full-history message and a 10 MiB buffer.",
+      "evidence": [
+        "tools/tests/change-specific-review-fixture.mjs",
+        "tools/tests/pr33-change-invariant-fixture.mjs"
+      ]
+    },
+    {
+      "id": "CR-3839422204",
+      "disposition": "outdated-already-fixed",
+      "reason": "Current HEAD runs the same behavior probe against detached known-bad and reviewed worktrees and maps the same invariant IDs on both sides; it no longer compares CLI/spec text with a core-module symbol.",
+      "evidence": [
+        "tools/tests/change-specific-review-fixture.mjs",
+        "tools/tests/change-specific-review-behavior-probe.mjs"
+      ]
+    },
+    {
+      "id": "CR-3839422206",
+      "disposition": "fixed",
+      "reason": "The harness test now compares every emitted runtime invariant ID and concern with the classified inventory before accepting red/green status.",
+      "evidence": ["tools/tests/harness.test.mjs"]
+    },
+    {
+      "id": "CR-3839422209",
+      "disposition": "fixed",
+      "reason": "Repo-local CLI probes retain finally cleanup and now register synchronous process-exit cleanup for state, manifest, proof, and temporary OpenSpec roots. SIGKILL cannot run user-space cleanup and remains outside the claim.",
+      "evidence": ["tools/tests/harness.test.mjs"]
+    },
+    {
+      "id": "CR-3839422216",
+      "disposition": "fixed-after-outdated",
+      "reason": "The historical probe uses a uniqueness-checked temporary harness substitution to hold the acquired state lock, observes that lock before launching the contender, retries the rejected update, and requires both findings to be resolved. Known-bad never acquires the lock on review-resolve.",
+      "evidence": ["tools/tests/pr33-review-behavior-probe.mjs"]
+    }
+  ]
+}
