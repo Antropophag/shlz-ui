@@ -94,7 +94,9 @@ test("Snackbar raw authority preserves six exact countdown frames", async () => 
   assert.equal(references.sourceArchiveSha256, sha256(archiveBytes));
 
   for (const [index, variant] of manifest.variants.entries()) {
-    const source = await unzip(`components/Snackbar/${variant.filename}`);
+    const source = await unzip(
+      `components/Snackbar/variants/${variant.safeFilename}`,
+    );
     const reference = await readFile(
       `apps/showcase/generated/source-references/${references.references[index].file}`,
       "utf8",

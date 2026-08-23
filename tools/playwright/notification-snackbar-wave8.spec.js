@@ -35,19 +35,75 @@ const sourceSnackbarFrames = await Promise.all(
     return { contour, number: String(5 - index) };
   }),
 );
-const executedStates = new Map([
-  ["notification", new Set()],
-  ["snackbar", new Set()],
-]);
-const verifyMaterialState = async (component, state, assertion) => {
-  await assertion();
-  executedStates.get(component).add(state);
+const materialStateOwnership = {
+  notification: {
+    source: ["default", "error", "with-button", "focus-visible"],
+    interaction: ["hover", "active", "disabled"],
+    stress: ["long-content", "narrow-layout", "text-scale"],
+  },
+  snackbar: {
+    source: [
+      "number-5",
+      "number-4",
+      "number-3",
+      "number-2",
+      "number-1",
+      "number-0",
+    ],
+    interaction: ["hover", "active", "focus-visible", "disabled"],
+    stress: ["long-content", "narrow-layout", "text-scale"],
+  },
 };
-const expectMaterialStates = (component) => {
-  expect([...executedStates.get(component)].sort()).toEqual(
-    [...manifests[component].interactionEvidence.materialStates].sort(),
-  );
+const createMaterialStateTracker = (component, expectedStates) => {
+  const executedStates = new Set();
+  return {
+    verifyMaterialState: async (owner, state, assertion) => {
+      expect(owner).toBe(component);
+      await assertion();
+      executedStates.add(state);
+    },
+    expectMaterialStates: (owner) => {
+      expect(owner).toBe(component);
+      expect([...executedStates].sort()).toEqual([...expectedStates].sort());
+    },
+  };
 };
+const textContrast = (locator) =>
+  locator.evaluate((element) => {
+    const parse = (value) => {
+      const channels = value.match(/[\d.]+/g).map(Number);
+      return [channels[0], channels[1], channels[2], channels[3] ?? 1];
+    };
+    const composite = (foreground, background) => {
+      const [red, green, blue, alpha] = foreground;
+      return [
+        red * alpha + background[0] * (1 - alpha),
+        green * alpha + background[1] * (1 - alpha),
+        blue * alpha + background[2] * (1 - alpha),
+      ];
+    };
+    const luminance = (channels) => {
+      const linear = channels.map((channel) => {
+        const normalized = channel / 255;
+        return normalized <= 0.04045
+          ? normalized / 12.92
+          : ((normalized + 0.055) / 1.055) ** 2.4;
+      });
+      return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
+    };
+    const foreground = parse(globalThis.getComputedStyle(element).color);
+    let background = [255, 255, 255];
+    const layers = [];
+    for (let node = element; node; node = node.parentElement)
+      layers.push(parse(globalThis.getComputedStyle(node).backgroundColor));
+    for (const layer of layers.reverse())
+      background = composite(layer, background);
+    const values = [
+      luminance(composite(foreground, background)),
+      luminance(background),
+    ].sort((a, b) => b - a);
+    return (values[0] + 0.05) / (values[1] + 0.05);
+  });
 const subset = (component, ids, diagnostics) => ({
   ...manifests[component],
   occurrences: manifests[component].occurrences.filter(({ id }) =>
@@ -58,6 +114,15 @@ const subset = (component, ids, diagnostics) => ({
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
+});
+
+test("material state ownership covers each independent manifest", () => {
+  for (const component of ["notification", "snackbar"]) {
+    const ownedStates = Object.values(materialStateOwnership[component]).flat();
+    expect([...ownedStates].sort()).toEqual(
+      [...manifests[component].interactionEvidence.materialStates].sort(),
+    );
+  }
 });
 
 test("independent occurrence guards classify Showcase, diagnostics and plain HTML", async ({
@@ -117,6 +182,10 @@ test("occurrence guards reject an unclassified Notification and Snackbar", async
 test("Notification exact source geometry, paint and application lifecycle execute", async ({
   page,
 }) => {
+  const materialStates = createMaterialStateTracker(
+    "notification",
+    materialStateOwnership.notification.source,
+  );
   const fixture = page.locator("[data-notification-consumer]");
   const dismissible = fixture.locator(
     "[data-component-audit-id='notification-showcase-dismissible']",
@@ -129,10 +198,10 @@ test("Notification exact source geometry, paint and application lifecycle execut
   await expect(dismissible).toHaveCSS("border-radius", "29px");
   await expect(dismissible).toHaveCSS("background-color", "rgb(11, 22, 35)");
   await expect(danger).toHaveCSS("background-color", "rgb(204, 31, 31)");
-  await verifyMaterialState("notification", "default", () =>
+  await materialStates.verifyMaterialState("notification", "default", () =>
     expect(dismissible).toBeVisible(),
   );
-  await verifyMaterialState("notification", "error", () =>
+  await materialStates.verifyMaterialState("notification", "error", () =>
     expect(danger).toBeVisible(),
   );
   await page.locator(".shlz-verification-harness > summary").click();
@@ -144,7 +213,7 @@ test("Notification exact source geometry, paint and application lifecycle execut
   await expect(
     withButton.locator("button", { hasText: "Удалить" }),
   ).toBeVisible();
-  await verifyMaterialState("notification", "with-button", () =>
+  await materialStates.verifyMaterialState("notification", "with-button", () =>
     expect(withButton).toBeVisible(),
   );
   await expect(dismissible).toHaveScreenshot("notification-default.png");
@@ -158,19 +227,26 @@ test("Notification exact source geometry, paint and application lifecycle execut
   await page.keyboard.press("Shift+Tab");
   await expect(close).toBeFocused();
   await expect(close).toHaveCSS("outline-style", "solid");
-  await verifyMaterialState("notification", "focus-visible", () =>
-    expect(close).toBeFocused(),
+  await materialStates.verifyMaterialState(
+    "notification",
+    "focus-visible",
+    () => expect(close).toBeFocused(),
   );
   await close.click();
   await expect(dismissible).toHaveCount(0);
   await expect(
     fixture.getByRole("button", { name: "Продолжить работу" }),
   ).toBeFocused();
+  materialStates.expectMaterialStates("notification");
 });
 
 test("Notification real native interaction and disabled states remain accessible", async ({
   page,
 }) => {
+  const materialStates = createMaterialStateTracker(
+    "notification",
+    materialStateOwnership.notification.interaction,
+  );
   const action = page.locator(
     "[data-component-audit-id='notification-showcase-action'] .shlz-notification__action",
   );
@@ -179,14 +255,16 @@ test("Notification real native interaction and disabled states remain accessible
   );
   await action.hover();
   await expect(action).toHaveCSS("background-color", base);
-  await verifyMaterialState("notification", "hover", () =>
+  expect(await textContrast(action)).toBeGreaterThanOrEqual(4.5);
+  await materialStates.verifyMaterialState("notification", "hover", () =>
     expect(action).toHaveCSS("background-color", base),
   );
   const box = await action.boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
   await expect(action).toHaveCSS("background-color", base);
-  await verifyMaterialState("notification", "active", () =>
+  expect(await textContrast(action)).toBeGreaterThanOrEqual(4.5);
+  await materialStates.verifyMaterialState("notification", "active", () =>
     expect(action).toHaveCSS("background-color", base),
   );
   await page.mouse.up();
@@ -199,16 +277,21 @@ test("Notification real native interaction and disabled states remain accessible
     "[data-component-audit-id='notification-content-stress'] button",
   );
   await expect(disabled).toBeDisabled();
-  await verifyMaterialState("notification", "disabled", () =>
+  await materialStates.verifyMaterialState("notification", "disabled", () =>
     expect(disabled).toBeDisabled(),
   );
   await disabled.evaluate((element) => element.focus());
   await expect(disabled).not.toBeFocused();
+  materialStates.expectMaterialStates("notification");
 });
 
 test("Snackbar preserves all six exact static contours without timer semantics", async ({
   page,
 }) => {
+  const materialStates = createMaterialStateTracker(
+    "snackbar",
+    materialStateOwnership.snackbar.source,
+  );
   const fixture = page.locator("#fidelity-notification");
   const countdowns = fixture.locator(
     ".shlz-snackbar .shlz-notification__source-countdown",
@@ -248,32 +331,32 @@ test("Snackbar preserves all six exact static contours without timer semantics",
       color: "rgb(255, 255, 255)",
     })),
   );
-  await verifyMaterialState("snackbar", "number-5", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-5", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='5']"),
     ).toHaveCount(1),
   );
-  await verifyMaterialState("snackbar", "number-4", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-4", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='4']"),
     ).toHaveCount(1),
   );
-  await verifyMaterialState("snackbar", "number-3", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-3", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='3']"),
     ).toHaveCount(1),
   );
-  await verifyMaterialState("snackbar", "number-2", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-2", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='2']"),
     ).toHaveCount(1),
   );
-  await verifyMaterialState("snackbar", "number-1", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-1", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='1']"),
     ).toHaveCount(1),
   );
-  await verifyMaterialState("snackbar", "number-0", () =>
+  await materialStates.verifyMaterialState("snackbar", "number-0", () =>
     expect(
       fixture.locator(".shlz-snackbar [data-snackbar-number='0']"),
     ).toHaveCount(1),
@@ -289,11 +372,16 @@ test("Snackbar preserves all six exact static contours without timer semantics",
   await expect(fixture.locator(".shlz-snackbar").first()).toHaveScreenshot(
     "snackbar-number-5.png",
   );
+  materialStates.expectMaterialStates("snackbar");
 });
 
 test("Snackbar real action states execute once and countdown stays decorative", async ({
   page,
 }) => {
+  const materialStates = createMaterialStateTracker(
+    "snackbar",
+    materialStateOwnership.snackbar.interaction,
+  );
   const snackbar = page.locator(
     "[data-component-audit-id='snackbar-showcase-action']",
   );
@@ -307,14 +395,16 @@ test("Snackbar real action states execute once and countdown stays decorative", 
   );
   await action.hover();
   await expect(action).toHaveCSS("background-color", base);
-  await verifyMaterialState("snackbar", "hover", () =>
+  expect(await textContrast(action)).toBeGreaterThanOrEqual(4.5);
+  await materialStates.verifyMaterialState("snackbar", "hover", () =>
     expect(action).toHaveCSS("background-color", base),
   );
   const box = await action.boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down();
   await expect(action).toHaveCSS("background-color", base);
-  await verifyMaterialState("snackbar", "active", () =>
+  expect(await textContrast(action)).toBeGreaterThanOrEqual(4.5);
+  await materialStates.verifyMaterialState("snackbar", "active", () =>
     expect(action).toHaveCSS("background-color", base),
   );
   await page.mouse.up();
@@ -322,7 +412,7 @@ test("Snackbar real action states execute once and countdown stays decorative", 
   await page.keyboard.press("Tab");
   await page.keyboard.press("Shift+Tab");
   await expect(action).toHaveCSS("outline-style", "solid");
-  await verifyMaterialState("snackbar", "focus-visible", () =>
+  await materialStates.verifyMaterialState("snackbar", "focus-visible", () =>
     expect(action).toBeFocused(),
   );
   await action.press("Space");
@@ -333,92 +423,58 @@ test("Snackbar real action states execute once and countdown stays decorative", 
     "[data-component-audit-id='snackbar-content-stress'] button",
   );
   await expect(disabled).toBeDisabled();
-  await verifyMaterialState("snackbar", "disabled", () =>
+  await materialStates.verifyMaterialState("snackbar", "disabled", () =>
     expect(disabled).toBeDisabled(),
   );
+  materialStates.expectMaterialStates("snackbar");
 });
 
-test("Notification and Snackbar survive narrow, long and text-scaled content", async ({
-  page,
-}) => {
+const verifyContentStress = async (page, id) => {
   await page.setViewportSize({ width: 320, height: 900 });
-  for (const id of ["notification-content-stress", "snackbar-content-stress"]) {
-    const root = page.locator(`[data-component-audit-id='${id}']`);
-    await expect(root).toBeVisible();
-    const metrics = await root.evaluate((element) => ({
-      width: element.getBoundingClientRect().width,
-      height: element.getBoundingClientRect().height,
-      scrollWidth: element.scrollWidth,
-      right: element.getBoundingClientRect().right,
-    }));
-    expect(metrics.width).toBeLessThanOrEqual(288);
-    expect(metrics.height).toBeGreaterThan(58);
-    expect(metrics.scrollWidth).toBeLessThanOrEqual(Math.ceil(metrics.width));
-    expect(metrics.right).toBeLessThanOrEqual(320);
-    await expect(root).toHaveScreenshot(`${id}-narrow.png`);
-  }
-  await verifyMaterialState("notification", "long-content", () =>
-    expect(
-      page.locator("[data-component-audit-id='notification-content-stress']"),
-    ).toBeVisible(),
+  const root = page.locator(`[data-component-audit-id='${id}']`);
+  await expect(root).toBeVisible();
+  const narrowMetrics = await root.evaluate((element) => ({
+    width: element.getBoundingClientRect().width,
+    height: element.getBoundingClientRect().height,
+    scrollWidth: element.scrollWidth,
+    right: element.getBoundingClientRect().right,
+  }));
+  expect(narrowMetrics.width).toBeLessThanOrEqual(288);
+  expect(narrowMetrics.height).toBeGreaterThan(58);
+  expect(narrowMetrics.scrollWidth).toBeLessThanOrEqual(
+    Math.ceil(narrowMetrics.width),
   );
-  await verifyMaterialState("notification", "narrow-layout", () =>
-    expect(
-      page.locator("[data-component-audit-id='notification-content-stress']"),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("snackbar", "long-content", () =>
-    expect(
-      page.locator("[data-component-audit-id='snackbar-content-stress']"),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("snackbar", "narrow-layout", () =>
-    expect(
-      page.locator("[data-component-audit-id='snackbar-content-stress']"),
-    ).toBeVisible(),
-  );
-  await page.evaluate(() => {
-    const roots = [
-      document.querySelector(
-        "[data-component-audit-id='notification-content-stress']",
-      ),
-      document.querySelector(
-        "[data-component-audit-id='snackbar-content-stress']",
-      ),
-    ];
-    document.body.replaceChildren(...roots);
-  });
+  expect(narrowMetrics.right).toBeLessThanOrEqual(320);
+  await expect(root).toHaveScreenshot(`${id}-narrow.png`);
+  await root.evaluate((element) => document.body.replaceChildren(element));
   await page.addStyleTag({
     content:
       ".shlz-notification { font-size: 28px !important; line-height: 36px !important; }",
   });
-  for (const id of ["notification-content-stress", "snackbar-content-stress"]) {
-    const root = page.locator(`[data-component-audit-id='${id}']`);
-    const metrics = await root.evaluate((element) => {
-      const bounds = element.getBoundingClientRect();
-      const children = [...element.children].map((child) => {
-        const childBounds = child.getBoundingClientRect();
-        return {
-          visible: childBounds.width > 0 && childBounds.height > 0,
-          inside:
-            childBounds.left >= bounds.left &&
-            childBounds.right <= bounds.right + 1 &&
-            childBounds.top >= bounds.top &&
-            childBounds.bottom <= bounds.bottom + 1,
-        };
-      });
+  const scaledMetrics = await root.evaluate((element) => {
+    const bounds = element.getBoundingClientRect();
+    const children = [...element.children].map((child) => {
+      const childBounds = child.getBoundingClientRect();
       return {
-        fontSize: globalThis.getComputedStyle(element).fontSize,
-        height: bounds.height,
-        children,
+        visible: childBounds.width > 0 && childBounds.height > 0,
+        inside:
+          childBounds.left >= bounds.left &&
+          childBounds.right <= bounds.right + 1 &&
+          childBounds.top >= bounds.top &&
+          childBounds.bottom <= bounds.bottom + 1,
       };
     });
-    expect(metrics.fontSize).toBe("28px");
-    expect(metrics.height).toBeGreaterThan(116);
-    expect(
-      metrics.children.every(({ visible, inside }) => visible && inside),
-    ).toBe(true);
-  }
+    return {
+      fontSize: globalThis.getComputedStyle(element).fontSize,
+      height: bounds.height,
+      children,
+    };
+  });
+  expect(scaledMetrics.fontSize).toBe("28px");
+  expect(scaledMetrics.height).toBeGreaterThan(116);
+  expect(
+    scaledMetrics.children.every(({ visible, inside }) => visible && inside),
+  ).toBe(true);
   expect(
     await page.evaluate(
       () =>
@@ -426,16 +482,47 @@ test("Notification and Snackbar survive narrow, long and text-scaled content", a
         document.documentElement.clientWidth,
     ),
   ).toBe(true);
-  await verifyMaterialState("notification", "text-scale", () =>
-    expect(
-      page.locator("[data-component-audit-id='notification-content-stress']"),
-    ).toBeVisible(),
+  return root;
+};
+
+test("Notification survives narrow, long and text-scaled content", async ({
+  page,
+}) => {
+  const materialStates = createMaterialStateTracker(
+    "notification",
+    materialStateOwnership.notification.stress,
   );
-  await verifyMaterialState("snackbar", "text-scale", () =>
-    expect(
-      page.locator("[data-component-audit-id='snackbar-content-stress']"),
-    ).toBeVisible(),
+  const root = await verifyContentStress(page, "notification-content-stress");
+  await materialStates.verifyMaterialState("notification", "long-content", () =>
+    expect(root).toBeVisible(),
   );
-  expectMaterialStates("notification");
-  expectMaterialStates("snackbar");
+  await materialStates.verifyMaterialState(
+    "notification",
+    "narrow-layout",
+    () => expect(root).toBeVisible(),
+  );
+  await materialStates.verifyMaterialState("notification", "text-scale", () =>
+    expect(root).toBeVisible(),
+  );
+  materialStates.expectMaterialStates("notification");
+});
+
+test("Snackbar survives narrow, long and text-scaled content", async ({
+  page,
+}) => {
+  const materialStates = createMaterialStateTracker(
+    "snackbar",
+    materialStateOwnership.snackbar.stress,
+  );
+  const root = await verifyContentStress(page, "snackbar-content-stress");
+  await materialStates.verifyMaterialState("snackbar", "long-content", () =>
+    expect(root).toBeVisible(),
+  );
+  await materialStates.verifyMaterialState("snackbar", "narrow-layout", () =>
+    expect(root).toBeVisible(),
+  );
+  await materialStates.verifyMaterialState("snackbar", "text-scale", () =>
+    expect(root).toBeVisible(),
+  );
+  materialStates.expectMaterialStates("snackbar");
 });
