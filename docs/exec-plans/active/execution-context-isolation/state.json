@@ -8,8 +8,17 @@
       "session": "root-bootstrap-20260823"
     },
     "worker-adapter": {
+      "attemptHistory": [],
       "status": "completed",
       "session": "worker-adapter-bootstrap",
+      "claimId": "bootstrap-worker-adapter-20260823",
+      "briefDigest": "163b4b1f7f7c1384420842b018c0ff1ef1a963657a129c7cab656d4a19210e83",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {
+        "contract-regression": "27fb173bce0a46b8a987c18a166cc118c53b2608d7c8d4c477823c95c14f882d"
+      },
+      "packetDigest": "60be2c09c554fbe7e28ad831d7abf30f3a71a419a6d926ccc60844798ddb51de",
+      "requirementsRevision": 1,
       "execution": {
         "version": 1,
         "source": "codex-exec-jsonl",
@@ -33,6 +42,7 @@
       }
     },
     "telemetry-operator": {
+      "attemptHistory": [],
       "status": "completed",
       "session": "telemetry-operator-worker",
       "execution": {
@@ -44,10 +54,10 @@
         "evidenceDigest": "0e6ed0dbca44355012269c46cda71bb640300fd14fa20a30cb47366c102d728b"
       },
       "claimId": "telemetry-operator-20260823",
-      "briefDigest": "98b4889dd83dcdb12adba89f4b71f86e7bf7862649747549e03575f165a84ca1",
+      "briefDigest": "aaa3b4fe305d1288e757baae75279119ae5f6b02b31190b0266bf2e1c0402743",
       "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
       "dependencyDigests": {
-        "worker-adapter": "cdb44390868ba79f4bd65ca8a01a33c2dd7a43e04cb95d47549a1b4737471516"
+        "worker-adapter": "f0aad8f14607266bfb1d914419e92844aba8d2f37da7753350d3d55d673ccdc8"
       },
       "packetDigest": "9c2bd367441192968e8f6815b718cfda4640701824d9268ae6a2dfda0aee606a",
       "requirementsRevision": 1,
@@ -69,10 +79,11 @@
       "status": "completed",
       "session": "final-audit-worker",
       "claimId": "final-audit-20260823",
-      "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba",
+      "attemptHistory": [],
+      "briefDigest": "8c678e008f7bc1dbd0397141d520db1f31f76000f8ee00ead1349f62f0aced9b",
       "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
       "dependencyDigests": {
-        "telemetry-operator": "96066ee5168d9e9fec103aa53468ce777d7e846cc28f8db65d1f0c168c1b3cde"
+        "telemetry-operator": "4efa106787a8dbcdebbdf9437e7dc73795671b51ab68a78c4b57847cfdb71a50"
       },
       "packetDigest": "153483e9e952206624a0f5b0a9b38ffd6e6cc33900383793ccb6feeeef7e12b8",
       "requirementsRevision": 1,
@@ -125,6 +136,8 @@
     "worker-adapter": {
       "completedPacket": "worker-adapter",
       "workerReportDigest": "12221990c7b6c12173e6f1d2a61c692d0dda76a2a4062de28379c291c83c74a1",
+      "claimId": "bootstrap-worker-adapter-20260823",
+      "briefDigest": "163b4b1f7f7c1384420842b018c0ff1ef1a963657a129c7cab656d4a19210e83",
       "changed": [
         "added codex exec JSONL capability and launch adapter",
         "added immutable digest-bound worker briefs",
@@ -153,7 +166,7 @@
     "telemetry-operator": {
       "completedPacket": "telemetry-operator",
       "claimId": "telemetry-operator-20260823",
-      "briefDigest": "98b4889dd83dcdb12adba89f4b71f86e7bf7862649747549e03575f165a84ca1",
+      "briefDigest": "aaa3b4fe305d1288e757baae75279119ae5f6b02b31190b0266bf2e1c0402743",
       "workerReportDigest": "24cf5675b434f99b02de0c1a6a19c7b02ffe06fbc2002c6371e62abeeee92ac1",
       "changed": [
         "added worker-probe, worker-brief, worker-run and worker-retry commands",
@@ -182,7 +195,7 @@
     "dogfood-review-delivery": {
       "completedPacket": "dogfood-review-delivery",
       "claimId": "final-audit-20260823",
-      "briefDigest": "edfff29ec21479d93f437f9bf71efcc7526e587c5a6bf5ca45413ccf54773cba",
+      "briefDigest": "8c678e008f7bc1dbd0397141d520db1f31f76000f8ee00ead1349f62f0aced9b",
       "workerReportDigest": "3009505757307686691ccf65ceff738867671154a084360fd6d4e49d36ffbbf0",
       "changed": [],
       "provenChecks": [

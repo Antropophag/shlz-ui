@@ -1250,6 +1250,29 @@ test("post-launch recording failures leave a retryable durable state", () => {
   assert.equal(state.packets["shared-native-dialog"].status, "pending");
 });
 
+test("persisted execution-isolation handoffs remain canonical and report-bound", async () => {
+  const directory = "docs/exec-plans/active/execution-context-isolation";
+  const plan = await load(`${directory}/plan.json`);
+  const state = await load(`${directory}/state.json`);
+  for (const packetId of [
+    "worker-adapter",
+    "telemetry-operator",
+    "dogfood-review-delivery",
+  ]) {
+    const packet = state.packets[packetId];
+    const handoff = state.handoffs[packetId];
+    validateHandoff(handoff, plan);
+    assert.equal(packet.status, "completed");
+    assert.equal(packet.claimId, handoff.claimId);
+    assert.equal(packet.briefDigest, handoff.briefDigest);
+    assert.equal(
+      createHash("sha256").update(packet.launch.workerReport).digest("hex"),
+      packet.launch.workerReportDigest,
+    );
+    assert.equal(packet.launch.workerReportDigest, handoff.workerReportDigest);
+  }
+});
+
 test("guarded completion binds claim, brief, baseline, dependency handoff, and packet contract", () => {
   const start = () => {
     const { plan, state } = guardedWorkerFixture();
