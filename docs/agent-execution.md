@@ -6,13 +6,22 @@ Use this workflow after initial discovery, impact routing, requirements readines
 
 For requirements-gated work, `plan` receives the validated state described in `docs/requirements-elicitation.md`. Planning is downstream of the readiness gate; direct S work remains lightweight.
 
-Implementation is also downstream of `implementation-preflight`: work must run on a non-default task branch whose HEAD started at the current `origin/main`. Planning files do not weaken that branch invariant. Never commit or push implementation directly to `main`.
+Implementation is also downstream of `implementation-preflight`: work runs on a non-default task branch and records an immutable execution-episode baseline. New work starts at current `origin/main`; a bounded existing-PR follow-up may start at its verified clean, fully pushed open-PR head. Planning files do not weaken either invariant. Never commit or push implementation directly to `main`.
+
+Keep four decisions orthogonal:
+
+1. semantic impact selects direct or material/unknown;
+2. specification need follows that impact: none or requirements/OpenSpec;
+3. observable execution signals classify S/M/L/XL;
+4. size, context growth, and review risk select inline execution, adaptive packets, and review depth.
+
+There is no remediation or fast lane. The episode delta is simply the unit being routed. A tiny material/security/public-contract delta keeps strict requirements, OpenSpec, and independent review; a local reversible S delta skips those layers while retaining positive route evidence and completion guards.
 
 ## Size before implementation
 
 Record observable signals in an assessment; do not predict an exact token bill. `npm run harness -- plan <assessment.json> <plan.json>` reports the contribution of independent work units, shared seams, contracts, consumers, evidence, ambiguity, scope, review risk, and context-growth risk.
 
-- S: one narrow packet and direct continuation are normally sufficient.
+- S: inline execution is normally sufficient; OpenSpec S still uses requirements/specification but does not need a packet plan solely for that reason.
 - M: record packets; use a fresh session when the semantic phase changes.
 - L: decomposition is required; isolate independent modules/review and integrate through dependencies.
 - XL: re-check whether the OpenSpec change/PR is still coherent, then use bounded packets and concurrency only for disjoint implementation surfaces.
@@ -37,10 +46,11 @@ Read the returned contracts, implementation paths, tests, evidence, and current 
 
 ## Route conformance and delivery
 
-Before completing direct work, inspect the target-relevant diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. The CLI derives the actual Git diff from the fixed base, excludes only operational active-plan state, and rejects an incomplete or stale declared file set. Run:
+Before completing direct work, inspect the target-relevant episode diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. The CLI derives the actual Git diff from the persisted baseline, excludes only operational active-plan state, and rejects an incomplete or stale declared file set. Run:
 
 ```bash
-npm run harness -- route-conformance <route-assessment> <discovered-surface> --base origin/main
+npm run harness -- route-conformance <route-assessment> <discovered-surface> \
+  --execution docs/exec-plans/active/<work>/execution-baseline.json
 ```
 
 If deployment/publishing/release automation, permissions, public contracts, destructive effects, or another material/unknown signal appears, completion is blocked and the work returns to requirements/OpenSpec. A workflow pathname is an inspection trigger, not a keyword verdict: affirmatively behavior-preserving workflow text/format maintenance remains direct.
@@ -55,7 +65,7 @@ The user owns merge. The local guard does not replace server-side branch protect
 
 The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, use labeled proxies: repeated reads, command/output volume, phase changes, and irrelevant-output accumulation. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.
 
-Fresh context is preferred at implementation → independent review, subsystem changes, major replans, and after noisy tool output. Use isolated subagents for bounded independent analysis/review. Use parallel writing only for declared disjoint surfaces and bounded concurrency.
+Fresh context is preferred at implementation → independent review, subsystem changes, major replans, and after noisy tool output. Independent two-axis review applies to material work and M/L/XL or explicitly review-risky work. Direct S work uses complete target-diff inspection without creating review state solely for ceremony. Use isolated subagents for bounded independent analysis/review. Use parallel writing only for declared disjoint surfaces and bounded concurrency.
 
 ## Durable handoff
 

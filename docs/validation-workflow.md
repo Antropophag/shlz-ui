@@ -16,11 +16,11 @@ Record a result with `validation-record`; from a fixed base it derives target-re
 
 ## Review lifecycle
 
-After focused validation, run one diff-scoped Standards review and one Spec review from the same fixed base. Share the diff command and narrow sources, not full prior discovery. Consolidate actionable findings into one remediation batch. Re-review the remediation/current diff and unresolved findings; do not restart repository-wide discovery.
+After focused validation, inspect the complete target diff from the execution-episode baseline. For material work, M/L/XL execution, or explicit review risk, run one diff-scoped Standards review and one Spec review from that same baseline. Direct S work needs the complete target-diff inspection but does not create independent review ceremony by default. Share the diff command and narrow sources, not full prior discovery. Consolidate actionable findings into one remediation batch. Re-review only the remediation/current episode diff and unresolved findings; do not restart parent-PR or repository-wide discovery.
 
 Use `review-init`, `review-record`, `review-context`, and `review-resolve` to persist the fixed base, reviewed head, axes, findings, and dispositions. After a pass, `review-context` returns `<last-reviewed-head>..HEAD` plus unresolved findings, which is the complete re-review working set; resolve ids only after the targeted re-review confirms closure.
 
-For GitHub remediation, load actionable unresolved threads only. Exclude resolved discussion, walkthroughs, release/billing messages, and duplicate bot summaries from active context. P0/P1 defects remain blocking regardless of budget.
+For GitHub follow-ups, load actionable unresolved threads only. Route verified findings by their bounded delta, never by review author. Exclude resolved discussion, walkthroughs, release/billing messages, and duplicate bot summaries from active context. P0/P1 defects remain blocking regardless of budget.
 
 ## Evidence and telemetry
 

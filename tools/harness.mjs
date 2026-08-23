@@ -14,6 +14,7 @@ import {
   fingerprintFiles,
   gitEvidence,
   gitDeliveryState,
+  gitExecutionBaselineState,
   gitImplementationState,
   gitRouteSurfaces,
   pausePacket,
@@ -26,6 +27,7 @@ import {
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
+  assertExecutionBaselineState,
   assertRouteConformance,
   evaluateRouteEligibility,
   resumePacket,
@@ -33,6 +35,7 @@ import {
   resolveReviewFindings,
   summarizeEvents,
   validateHandoff,
+  validateExecutionBaseline,
   validatePlan,
   writeJson,
 } from "./lib/harness/core.mjs";
@@ -107,24 +110,33 @@ switch (command) {
     break;
   case "implementation-preflight": {
     const requirementsPath = option("--requirements");
-    output(
-      assertImplementationPreflight(
-        await readJson(absolute(args[0])),
-        requirementsPath ? await readJson(absolute(requirementsPath)) : null,
-        await gitImplementationState(repoRoot, {
-          defaultBranch: option("--default") ?? "main",
-          baseRef: option("--base") ?? "origin/main",
-        }),
-      ),
+    const result = assertImplementationPreflight(
+      await readJson(absolute(args[0])),
+      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+      await gitImplementationState(repoRoot, {
+        defaultBranch: option("--default") ?? "main",
+        baseRef: option("--base") ?? "origin/main",
+        pullRequestUrl: option("--pull-request"),
+      }),
     );
+    const outputPath = option("--out");
+    if (outputPath) await writeJson(statePath(outputPath), result.baseline);
+    output(result);
     break;
   }
   case "route-conformance":
     {
-      const evidence = await gitEvidence(
-        repoRoot,
-        option("--base") ?? "origin/main",
-      );
+      const executionPath = option("--execution");
+      const baseline = executionPath
+        ? validateExecutionBaseline(await readJson(absolute(executionPath)))
+        : null;
+      if (baseline)
+        assertExecutionBaselineState(
+          baseline,
+          await gitExecutionBaselineState(repoRoot, baseline),
+        );
+      const base = baseline?.commit ?? option("--base") ?? "origin/main";
+      const evidence = await gitEvidence(repoRoot, base);
       const targetRelevantFiles = evidence.changedFiles.filter(
         (file) => !file.startsWith("docs/exec-plans/active/"),
       );
@@ -132,11 +144,7 @@ switch (command) {
         assertRouteConformance(
           await readJson(absolute(args[0])),
           await readJson(absolute(args[1])),
-          await gitRouteSurfaces(
-            repoRoot,
-            option("--base") ?? "origin/main",
-            targetRelevantFiles,
-          ),
+          await gitRouteSurfaces(repoRoot, base, targetRelevantFiles),
         ),
       );
     }
@@ -375,6 +383,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ...",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

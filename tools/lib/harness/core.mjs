@@ -203,12 +203,89 @@ function assertExecutionState(execution) {
     throw new Error(
       `implementation is on default branch ${execution.defaultBranch}; mutation forbidden until redirected to a task branch`,
     );
+  if (!Array.isArray(execution.preImplementationChanges))
+    throw new Error("execution state requires preImplementationChanges");
+  if (execution.baselineKind === "existing-pull-request") {
+    const pullRequest = execution.pullRequest;
+    if (!pullRequest || pullRequest.state !== "OPEN")
+      throw new Error(
+        "existing pull-request baseline requires an open pull request",
+      );
+    if (pullRequest.baseRefName !== execution.defaultBranch)
+      throw new Error("existing pull request must target the default branch");
+    if (
+      pullRequest.headRefName !== execution.currentBranch ||
+      execution.upstreamBranch !== execution.currentBranch
+    )
+      throw new Error(
+        "existing pull-request baseline branch does not match current branch",
+      );
+    if (
+      execution.localHead !== execution.upstreamHead ||
+      execution.localHead !== pullRequest.headRefOid
+    )
+      throw new Error(
+        "existing pull-request baseline must be clean, fully pushed, and current",
+      );
+    return;
+  }
+  if (execution.baselineKind !== "mainline")
+    throw new Error(
+      "execution state requires mainline or existing-pull-request baselineKind",
+    );
   if (execution.baseCurrent !== true || execution.startedAtCurrentBase !== true)
     throw new Error(
       "implementation branch must start from current origin/default branch",
     );
-  if (!Array.isArray(execution.preImplementationChanges))
-    throw new Error("execution state requires preImplementationChanges");
+}
+
+export function validateExecutionBaseline(baseline) {
+  if (!baseline || baseline.version !== 1)
+    throw new Error("execution baseline version must be 1");
+  if (!new Set(["mainline", "existing-pull-request"]).has(baseline.kind))
+    throw new Error("execution baseline kind is invalid");
+  for (const field of ["commit", "branch", "defaultBranch"])
+    if (typeof baseline[field] !== "string" || !baseline[field])
+      throw new Error(`execution baseline requires ${field}`);
+  if (!/^[0-9a-f]{40}$/.test(baseline.commit))
+    throw new Error("execution baseline commit must be a full Git object id");
+  if (
+    baseline.kind === "existing-pull-request" &&
+    (typeof baseline.pullRequestUrl !== "string" || !baseline.pullRequestUrl)
+  )
+    throw new Error("existing pull-request baseline requires pullRequestUrl");
+  return baseline;
+}
+
+export function assertExecutionBaselineState(baseline, actual) {
+  validateExecutionBaseline(baseline);
+  if (!actual || actual.branch !== baseline.branch)
+    throw new Error("execution baseline belongs to a different task branch");
+  if (actual.isAncestor !== true)
+    throw new Error("execution baseline is not an ancestor of current HEAD");
+  return { allowed: true, commit: baseline.commit, branch: baseline.branch };
+}
+
+export function evaluateExecutionStrategy({
+  semanticRoute,
+  size,
+  contextGrowthUncertain = false,
+  reviewRisk = false,
+}) {
+  if (!new Set(["direct", "open-spec"]).has(semanticRoute))
+    throw new Error("execution strategy requires a semantic route");
+  if (!new Set(["S", "M", "L", "XL"]).has(size))
+    throw new Error("execution strategy requires S, M, L, or XL size");
+  const material = semanticRoute === "open-spec";
+  return {
+    semanticRoute,
+    specification: material ? "requirements-and-open-spec" : "none",
+    size,
+    orchestration:
+      size === "S" && !contextGrowthUncertain ? "inline" : "adaptive-plan",
+    review:
+      material || size !== "S" || reviewRisk ? "independent" : "target-diff",
+  };
 }
 
 export function assertImplementationPreflight(
@@ -274,7 +351,17 @@ export function assertImplementationPreflight(
     throw new Error(
       `implementation did not start from a clean task state: ${unexpectedChanges.join(", ")}`,
     );
-  return { allowed: true, route: assessment.route };
+  const baseline = validateExecutionBaseline({
+    version: 1,
+    kind: execution.baselineKind,
+    commit: execution.localHead,
+    branch: execution.currentBranch,
+    defaultBranch: execution.defaultBranch,
+    ...(execution.baselineKind === "existing-pull-request"
+      ? { pullRequestUrl: execution.pullRequest.url }
+      : {}),
+  });
+  return { allowed: true, route: assessment.route, baseline };
 }
 
 export function assertRouteConformance(assessment, discovered, actualSurfaces) {
@@ -513,7 +600,11 @@ export function assertImplementationDelivery(delivery) {
 
 export async function gitImplementationState(
   repoRoot,
-  { defaultBranch = "main", baseRef = "origin/main" } = {},
+  {
+    defaultBranch = "main",
+    baseRef = "origin/main",
+    pullRequestUrl = null,
+  } = {},
 ) {
   const options = { cwd: repoRoot };
   const [
@@ -535,14 +626,61 @@ export async function gitImplementationState(
         .split("\n")
         .map((line) => line.slice(3).split(" -> ").at(-1))
     : [];
-  return {
+  const state = {
     currentBranch: branch.trim(),
     defaultBranch,
+    baselineKind: pullRequestUrl ? "existing-pull-request" : "mainline",
+    localHead: head.trim(),
     baseCurrent: head.trim() === base.trim(),
     startedAtCurrentBase: mergeBase.trim() === base.trim(),
     preImplementationChanges,
     baseRef,
   };
+  if (!pullRequestUrl) return state;
+  const [
+    { stdout: upstream },
+    { stdout: upstreamHead },
+    { stdout: pullRequest },
+  ] = await Promise.all([
+    exec("git", ["rev-parse", "--abbrev-ref", "@{upstream}"], options),
+    exec("git", ["rev-parse", "@{upstream}"], options),
+    exec(
+      "gh",
+      [
+        "pr",
+        "view",
+        pullRequestUrl,
+        "--json",
+        "url,headRefName,headRefOid,baseRefName,state",
+      ],
+      options,
+    ),
+  ]);
+  return {
+    ...state,
+    upstreamBranch: upstream.trim().split("/").slice(1).join("/"),
+    upstreamHead: upstreamHead.trim(),
+    pullRequest: JSON.parse(pullRequest),
+  };
+}
+
+export async function gitExecutionBaselineState(repoRoot, baseline) {
+  validateExecutionBaseline(baseline);
+  const options = { cwd: repoRoot };
+  const [{ stdout: branch }, ancestor] = await Promise.all([
+    exec("git", ["branch", "--show-current"], options),
+    exec(
+      "git",
+      ["merge-base", "--is-ancestor", baseline.commit, "HEAD"],
+      options,
+    )
+      .then(() => true)
+      .catch((error) => {
+        if (error.code === 1) return false;
+        throw error;
+      }),
+  ]);
+  return { branch: branch.trim(), isAncestor: ancestor };
 }
 
 export async function gitDeliveryState(repoRoot, pullRequestUrl) {
