@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "base": "ca1927ec1f9ded0685ed035b339ad41827b7a44d",
+  "axes": {
+    "Standards": {
+      "initialFindings": 3,
+      "remainingFindings": 0,
+      "targetedReReview": "pass"
+    },
+    "Spec": {
+      "initialFindings": 2,
+      "followupFindings": 1,
+      "remainingFindings": 0,
+      "targetedReReview": "pass"
+    }
+  }
+}

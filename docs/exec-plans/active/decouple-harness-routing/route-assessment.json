@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Decouple semantic impact, specification need, execution size, and orchestration so bounded deltas use proportionate execution while material changes retain strict routing and escalation.",
+  "route": "open-spec",
+  "openSpecChange": "decouple-harness-routing",
+  "requiredDecisions": [
+    { "id": "routing-model", "owner": "agent", "blocking": true },
+    { "id": "execution-baseline", "owner": "agent", "blocking": true },
+    { "id": "preserved-guards", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

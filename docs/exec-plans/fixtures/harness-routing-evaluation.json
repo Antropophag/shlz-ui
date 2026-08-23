@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "purpose": "Regression matrix for orthogonal semantic, specification, size, orchestration, baseline, and review decisions.",
+  "scenarios": [
+    {
+      "id": "tiny-local-fix",
+      "intent": "Correct a local source path while preserving the asserted contract.",
+      "semanticRoute": "direct",
+      "size": "S",
+      "baselineKind": "mainline",
+      "expectedEscalation": "reroute-required",
+      "expectedStrategy": {
+        "semanticRoute": "direct",
+        "specification": "none",
+        "size": "S",
+        "orchestration": "inline",
+        "review": "target-diff"
+      }
+    },
+    {
+      "id": "mechanical-internal-change",
+      "intent": "Rename a private helper across several internal files without behavior change.",
+      "semanticRoute": "direct",
+      "size": "M",
+      "baselineKind": "mainline",
+      "expectedEscalation": "reroute-required",
+      "expectedStrategy": {
+        "semanticRoute": "direct",
+        "specification": "none",
+        "size": "M",
+        "orchestration": "adaptive-plan",
+        "review": "independent"
+      }
+    },
+    {
+      "id": "pr30-archive-path",
+      "intent": "Correct the archived Snackbar variant path in its source-integrity test.",
+      "semanticRoute": "direct",
+      "size": "S",
+      "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
+      "expectedStrategy": {
+        "semanticRoute": "direct",
+        "specification": "none",
+        "size": "S",
+        "orchestration": "inline",
+        "review": "target-diff"
+      }
+    },
+    {
+      "id": "pr30-test-local-state",
+      "intent": "Make Playwright material-state tracking test-local without changing the tested public contract.",
+      "semanticRoute": "direct",
+      "size": "S",
+      "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
+      "expectedStrategy": {
+        "semanticRoute": "direct",
+        "specification": "none",
+        "size": "S",
+        "orchestration": "inline",
+        "review": "target-diff"
+      }
+    },
+    {
+      "id": "pr30-combined-followup",
+      "intent": "Resolve both verified PR #30 test-only findings as one bounded follow-up.",
+      "semanticRoute": "direct",
+      "size": "S",
+      "baselineKind": "existing-pull-request",
+      "expectedEscalation": "reroute-required",
+      "expectedStrategy": {
+        "semanticRoute": "direct",
+        "specification": "none",
+        "size": "S",
+        "orchestration": "inline",
+        "review": "target-diff"
+      }
+    },
+    {
+      "id": "small-contract-change",
+      "intent": "Change one public keyboard-interaction requirement.",
+      "semanticRoute": "open-spec",
+      "materialSignal": "publicContract",
+      "size": "S",
+      "baselineKind": "mainline",
+      "expectedEscalation": "route-retained",
+      "expectedStrategy": {
+        "semanticRoute": "open-spec",
+        "specification": "requirements-and-open-spec",
+        "size": "S",
+        "orchestration": "inline",
+        "review": "independent"
+      }
+    }
+  ],
+  "pr30": {
+    "observed": {
+      "parentChangedFiles": 32,
+      "followupChangedFiles": 2,
+      "usage": {
+        "tokensApprox": 255000,
+        "contextPercentApprox": 45,
+        "source": "user-report",
+        "telemetryAvailable": false
+      }
+    },
+    "before": {
+      "classificationScope": "parent-pull-request",
+      "contextSelection": "material parent OpenSpec, audit, execution, and 32-file diff surfaces"
+    },
+    "after": {
+      "classificationScope": "episode-delta",
+      "contextFiles": [
+        "tools/playwright/notification-snackbar-wave8.spec.js",
+        "tools/tests/notification-source.test.mjs"
+      ],
+      "requiredContext": [
+        "two actionable review findings",
+        "touched test contracts",
+        "focused test commands"
+      ]
+    }
+  }
+}

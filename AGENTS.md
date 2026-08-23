@@ -112,7 +112,7 @@ After choosing the direct or OpenSpec workflow, select the smallest materially u
 
 For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` after requirements readiness and OpenSpec synthesis. Keep OpenSpec normative; store only minimal requirements provenance plus plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
 
-Normal implementation starts from a clean current `origin/main` on a task branch/worktree and ends with validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, run the post-discovery route-conformance and delivery guards in `docs/agent-execution.md`; material scope discovered on a direct route requires re-routing before completion.
+Normal new implementation starts from clean current `origin/main` on a task branch/worktree. A bounded follow-up on an existing PR may instead start from that clean, fully pushed, verified open-PR head; its immutable episode baseline scopes routing, validation, and review to the follow-up delta. Both paths end with proportionate validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, run the post-discovery route-conformance and delivery guards in `docs/agent-execution.md`; material scope discovered on a direct route requires re-routing before completion.
 
 ## UI component completion gate
 

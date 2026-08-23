@@ -22,8 +22,10 @@ import {
   recordValidation,
   requirementsStatus,
   assertImplementationDelivery,
+  assertExecutionBaselineState,
   assertImplementationPreflight,
   assertRouteConformance,
+  evaluateExecutionStrategy,
   evaluateRouteEligibility,
   resumePacket,
   reviewContext,
@@ -32,6 +34,7 @@ import {
   gitEvidence,
   fingerprint,
   validateHandoff,
+  validateExecutionBaseline,
   validatePlan,
   validateRequirementsState,
 } from "../lib/harness/core.mjs";
@@ -43,6 +46,17 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+const oid = "a".repeat(40);
+const mainlineExecution = (overrides = {}) => ({
+  currentBranch: "feat/task",
+  defaultBranch: "main",
+  baselineKind: "mainline",
+  localHead: oid,
+  baseCurrent: true,
+  startedAtCurrentBase: true,
+  preImplementationChanges: [],
+  ...overrides,
+});
 
 const directAssessment = (overrides = {}) => ({
   version: 1,
@@ -138,12 +152,159 @@ test("fully determined contract work routes to OpenSpec without interview", () =
   });
   assert.doesNotThrow(() =>
     assertImplementationPreflight(assessment, state, {
+      ...mainlineExecution(),
       currentBranch: "feat/public-contract",
-      defaultBranch: "main",
-      baseCurrent: true,
-      startedAtCurrentBase: true,
-      preImplementationChanges: [],
     }),
+  );
+});
+
+test("execution strategy keeps semantics, specification, size, orchestration, and review independent", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/harness-routing-evaluation.json",
+  );
+  for (const scenario of fixture.scenarios) {
+    const assessment =
+      scenario.semanticRoute === "direct"
+        ? directAssessment({ intent: scenario.intent })
+        : {
+            ...directAssessment({ intent: scenario.intent }),
+            route: "open-spec",
+            directEvidence: undefined,
+            openSpecChange: scenario.id,
+            requiredDecisions: [],
+            materialSignals: {
+              ...directAssessment().materialSignals,
+              [scenario.materialSignal]: true,
+            },
+          };
+    const eligibility = evaluateRouteEligibility(assessment);
+    assert.equal(eligibility.eligible, true, scenario.id);
+    assert.deepEqual(
+      evaluateExecutionStrategy({
+        eligibility,
+        classification: { size: scenario.size },
+        contextGrowthUncertain: scenario.contextGrowthUncertain ?? false,
+        reviewRisk: scenario.reviewRisk ?? false,
+      }),
+      scenario.expectedStrategy,
+      scenario.id,
+    );
+    const discovered = {
+      version: 1,
+      changedFiles: ["local.js"],
+      materialSignals: {
+        ...directAssessment().materialSignals,
+        publicContract: true,
+      },
+    };
+    if (scenario.expectedEscalation === "reroute-required")
+      assert.throws(
+        () => assertRouteConformance(assessment, discovered, ["local.js"]),
+        /re-route required/,
+        scenario.id,
+      );
+    else
+      assert.doesNotThrow(
+        () => assertRouteConformance(assessment, discovered, ["local.js"]),
+        scenario.id,
+      );
+  }
+  assert.equal(fixture.pr30.observed.parentChangedFiles, 32);
+  assert.equal(fixture.pr30.observed.followupChangedFiles, 2);
+  assert.deepEqual(fixture.pr30.after.contextFiles, [
+    "tools/playwright/notification-snackbar-wave8.spec.js",
+    "tools/tests/notification-source.test.mjs",
+  ]);
+  assert.equal(fixture.pr30.observed.usage.source, "user-report");
+});
+
+test("implementation preflight supports a verified immutable existing-PR episode", () => {
+  const execution = {
+    ...mainlineExecution(),
+    baselineKind: "existing-pull-request",
+    currentBranch: "feat/wave-8-notification-snackbar",
+    upstreamBranch: "feat/wave-8-notification-snackbar",
+    upstreamHead: oid,
+    pullRequest: {
+      url: "https://github.com/Antropophag/shlz-ui/pull/30",
+      state: "OPEN",
+      baseRefName: "main",
+      headRefName: "feat/wave-8-notification-snackbar",
+      headRefOid: oid,
+    },
+    baseCurrent: false,
+    startedAtCurrentBase: false,
+  };
+  const result = assertImplementationPreflight(
+    directAssessment(),
+    null,
+    execution,
+  );
+  assert.deepEqual(result.baseline, {
+    version: 1,
+    kind: "existing-pull-request",
+    commit: oid,
+    branch: "feat/wave-8-notification-snackbar",
+    defaultBranch: "main",
+    pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/30",
+  });
+  assert.doesNotThrow(() => validateExecutionBaseline(result.baseline));
+  assert.doesNotThrow(() =>
+    assertExecutionBaselineState(result.baseline, {
+      branch: result.baseline.branch,
+      isAncestor: true,
+    }),
+  );
+  assert.throws(
+    () =>
+      assertExecutionBaselineState(result.baseline, {
+        branch: "feat/other",
+        isAncestor: true,
+      }),
+    /different task branch/,
+  );
+  for (const invalid of [
+    { preImplementationChanges: ["openspec/changes/example/design.md"] },
+    { upstreamHead: "b".repeat(40) },
+    { pullRequest: { ...execution.pullRequest, state: "CLOSED" } },
+    { pullRequest: { ...execution.pullRequest, baseRefName: "release" } },
+    { upstreamBranch: "other" },
+  ])
+    assert.throws(
+      () =>
+        assertImplementationPreflight(directAssessment(), null, {
+          ...execution,
+          ...invalid,
+        }),
+      /existing pull-request baseline|existing pull request/,
+    );
+});
+
+test("CLI requires persisted execution baselines for preflight and conformance", async () => {
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "implementation-preflight",
+        "docs/exec-plans/active/decouple-harness-routing/route-assessment.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --out/,
+  );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "route-conformance",
+        "docs/exec-plans/active/decouple-harness-routing/route-assessment.json",
+        "docs/exec-plans/active/decouple-harness-routing/discovered-surface.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --execution/,
   );
 });
 
