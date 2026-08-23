@@ -10,11 +10,14 @@
     "worker verified complete retry-attempt history preservation",
     "npm run test:harness: 46/46 pass",
     "openspec strict validation: pass",
-    "subsequent fixed-base Standards and Spec passes: PASS"
+    "subsequent fixed-base Standards and Spec passes at b3f7a03: PASS",
+    "Standards report: review-standards-b3f7a03.json digest 0372ba70b03eb30141dfe85ef4bce2d6cabd7e73e6137ad6fe18436cdd4f9c2b",
+    "Spec report: review-spec-b3f7a03.json digest b14ecc9b07dff42ff0b963aa14f0c34ba4eb46dd4ef7c6b84baa08ae2725f047"
   ],
   "settledDecisions": [
     "the worker's only blocker was missing review-state coverage of its final head",
-    "two subsequent independent fixed-base passes closed that evidence gap"
+    "two subsequent independent fixed-base passes closed that evidence gap",
+    "both reports bind the immutable base fd4f1cf, reviewed head b3f7a03, isolated review runtime identity, and report digest"
   ],
   "unresolvedFindings": [],
   "nextPacket": null,
