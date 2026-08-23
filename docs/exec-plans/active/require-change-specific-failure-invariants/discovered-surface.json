@@ -15,6 +15,7 @@
     "tools/tests/change-specific-review-behavior-probe.mjs",
     "tools/tests/change-specific-review-fixture.mjs",
     "tools/tests/harness.test.mjs",
+    "tools/tests/historical-worktree-fixture.mjs",
     "tools/tests/pr33-change-invariant-fixture.mjs",
     "tools/tests/pr33-review-behavior-probe.mjs"
   ],
