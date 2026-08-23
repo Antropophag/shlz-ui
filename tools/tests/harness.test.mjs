@@ -2343,7 +2343,7 @@ test("material review requires baseline and current-change red-green proof", asy
   );
 });
 
-test("contract identity is unique and contract edits change the binding", async () => {
+test("contract identity is unique and only cited contract edits change the binding", async () => {
   const temporaryRoot = await mkdtemp(
     path.join(tmpdir(), "shlz-contract-binding-"),
   );
@@ -2366,7 +2366,7 @@ test("contract identity is unique and contract edits change the binding", async 
       },
     ],
   };
-  const spec = (detail) => `## Purpose
+  const spec = (detail, outcome = "the digest changes") => `## Purpose
 
 This temporary capability verifies strict contract identity and digest behavior.
 
@@ -2379,7 +2379,7 @@ ${detail}
 
 #### Scenario: Contract changes
 - **WHEN** the contract changes
-- **THEN** the digest changes
+- **THEN** ${outcome}
 `;
   try {
     await mkdir(specRoot, { recursive: true });
@@ -2396,7 +2396,17 @@ ${detail}
       manifest,
       temporaryRoot,
     );
-    assert.notEqual(first.contractDigest, second.contractDigest);
+    assert.equal(first.contractDigest, second.contractDigest);
+    await writeFile(
+      specPath,
+      spec("Changed requirement text.", "the cited scenario digest changes"),
+    );
+    const third = await loadChangeFailureInvariants(
+      change,
+      manifest,
+      temporaryRoot,
+    );
+    assert.notEqual(second.contractDigest, third.contractDigest);
     await writeFile(
       specPath,
       `${spec("Changed requirement text.")}
@@ -2532,7 +2542,7 @@ test("review-proof reloads changed contracts and durably invalidates stale proof
   const manifestPath = path.join(root, relativeManifest);
   const proofPath = path.join(root, relativeProof);
   const specPath = path.join(specRoot, "spec.md");
-  const spec = (detail) => `## Purpose
+  const spec = (detail, outcome = "stale proof is removed") => `## Purpose
 
 This temporary delta verifies review-time contract freshness behavior.
 
@@ -2545,7 +2555,7 @@ ${detail}
 
 #### Scenario: Contract changes
 - **WHEN** the contract changes
-- **THEN** stale proof is removed
+- **THEN** ${outcome}
 `;
   try {
     await mkdir(specRoot, { recursive: true });
@@ -2592,7 +2602,10 @@ ${detail}
     const initialized = JSON.parse(await readFile(statePath, "utf8"));
     initialized.failurePathProof = { reviewedHead: "stale" };
     await writeFile(statePath, `${JSON.stringify(initialized)}\n`);
-    await writeFile(specPath, spec("Changed contract."));
+    await writeFile(
+      specPath,
+      spec("Changed contract.", "changed stale proof is removed"),
+    );
     await assert.rejects(
       exec(
         process.execPath,

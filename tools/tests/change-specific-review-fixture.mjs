@@ -1,10 +1,13 @@
 import { execFile } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { mkdir, mkdtemp } from "node:fs/promises";
+import { homedir } from "node:os";
+import path from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const change = "require-change-specific-failure-invariants";
 const knownBadRevision = "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c";
+const reviewedHead = (await exec("git", ["rev-parse", "HEAD"])).stdout.trim();
 const { stdout } = await exec(
   process.execPath,
   ["tools/tests/pr32-failure-path-fixture.mjs"],
@@ -14,74 +17,52 @@ const { stdout } = await exec(
   },
 );
 const baseline = JSON.parse(stdout);
-const [core, cli, spec] = await Promise.all([
-  readFile("tools/lib/harness/core.mjs", "utf8"),
-  readFile("tools/harness.mjs", "utf8"),
-  readFile(
-    `openspec/changes/${change}/specs/harness/change-specific-failure-invariants/spec.md`,
-    "utf8",
-  ),
-]);
-const badCore = (
-  await exec("git", ["show", `${knownBadRevision}:tools/lib/harness/core.mjs`])
-).stdout;
-const checks = [
-  {
-    id: "marked-contracts-require-manifest",
-    concern: "state-machine",
-    pass:
-      cli.includes("material review-init requires --change") &&
-      (spec.match(/<!-- failure-invariant:/g) ?? []).length === 6,
-    knownBadPass: badCore.includes("loadChangeFailureInvariants"),
-  },
-  {
-    id: "manifest-sources-are-grounded",
-    concern: "persistence",
-    pass:
-      core.includes("change-specific failure invariant is ungrounded") &&
-      core.includes("OpenSpec change has no delta specs"),
-    knownBadPass: badCore.includes(
-      "change-specific failure invariant is ungrounded",
-    ),
-  },
-  {
-    id: "marked-contract-coverage-is-complete",
-    concern: "persistence",
-    pass: core.includes("change-specific failure invariants do not cover"),
-    knownBadPass: badCore.includes(
-      "change-specific failure invariants do not cover",
-    ),
-  },
-  {
-    id: "change-specific-results-discriminate",
-    concern: "state-machine",
-    pass:
-      core.includes("expected.set(`${changeBinding.change}/${invariant.id}`") &&
-      core.includes("missingInvariants = [...expected]"),
-    knownBadPass: badCore.includes("missingInvariants = [...expected]"),
-  },
-  {
-    id: "contract-edits-stale-proof",
-    concern: "persistence",
-    pass:
-      core.includes("proof.manifestDigest !== changeBinding.manifestDigest") &&
-      core.includes("proof.contractDigest !== changeBinding.contractDigest"),
-    knownBadPass: badCore.includes(
-      "proof.contractDigest !== changeBinding.contractDigest",
-    ),
-  },
-  {
-    id: "stale-plan-or-pending-packet-blocks-delivery",
-    concern: "state-machine",
-    pass:
-      core.includes("execution plan revision") &&
-      core.includes("delivery requires completed mandatory packets") &&
-      cli.includes("delivery-check requires --plan <plan> --state <state>"),
-    knownBadPass:
-      badCore.includes("execution plan revision") &&
-      badCore.includes("delivery requires completed mandatory packets"),
-  },
-];
+const parent = path.join(homedir(), ".cache");
+await mkdir(parent, { recursive: true });
+const badRoot = await mkdtemp(path.join(parent, "shlz-change-invariants-bad-"));
+const probe = path.resolve(
+  "tools/tests/change-specific-review-behavior-probe.mjs",
+);
+const runProbe = async (targetRoot) =>
+  JSON.parse(
+    (
+      await exec(process.execPath, [probe, targetRoot], {
+        maxBuffer: 10 * 1024 * 1024,
+      })
+    ).stdout,
+  );
+let knownBad;
+let reviewed;
+let runError;
+try {
+  await exec("git", ["worktree", "add", "--detach", badRoot, knownBadRevision]);
+  [knownBad, reviewed] = await Promise.all([runProbe(badRoot), runProbe(".")]);
+} catch (error) {
+  runError = error;
+} finally {
+  const status = await exec("git", ["-C", badRoot, "status", "--porcelain"])
+    .then(({ stdout: value }) => value)
+    .catch(() => null);
+  if (status === null || status.trim())
+    throw new Error("change-specific fixture could not clean its worktree");
+  await exec("git", ["worktree", "remove", badRoot]);
+  await exec("git", ["worktree", "prune"]);
+}
+if (runError) throw runError;
+const concerns = {
+  "marked-contracts-require-manifest": "state-machine",
+  "manifest-sources-are-grounded": "persistence",
+  "marked-contract-coverage-is-complete": "persistence",
+  "change-specific-results-discriminate": "state-machine",
+  "contract-edits-stale-proof": "persistence",
+  "stale-plan-or-pending-packet-blocks-delivery": "state-machine",
+};
+const checks = Object.entries(concerns).map(([id, concern]) => ({
+  id,
+  concern,
+  pass: reviewed[id],
+  knownBadPass: knownBad[id],
+}));
 baseline.invariants.push(
   ...checks.map(({ id, concern, pass, knownBadPass }) => ({
     id: `${change}/${id}`,
@@ -90,4 +71,5 @@ baseline.invariants.push(
     reviewedHead: pass ? "pass" : "fail",
   })),
 );
+baseline.reviewedHead = reviewedHead;
 process.stdout.write(`${JSON.stringify(baseline)}\n`);

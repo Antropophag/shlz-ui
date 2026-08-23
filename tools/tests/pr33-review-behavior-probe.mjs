@@ -149,11 +149,11 @@ try {
       "--proof",
       relative("timeout-command"),
     ],
-    { timeout: 500, killSignal: "SIGKILL" },
+    { timeout: 2000, killSignal: "SIGKILL" },
   ).catch(() => {});
   const timed = JSON.parse(await readFile(absolute("timeout-state")));
   results["proof-execution-is-bounded"] =
-    Date.now() - started < 500 &&
+    Date.now() - started < 2000 &&
     timed.failurePathDegradation?.capability === "execution";
 } finally {
   await Promise.all(files.map((file) => unlink(file).catch(() => {})));

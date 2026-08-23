@@ -1969,13 +1969,8 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
   }
   const sources = new Map();
   const identities = new Set();
-  const specContents = [];
   for (const file of files) {
     const text = await readFile(file, "utf8");
-    specContents.push({
-      spec: path.relative(repoRoot, file).split(path.sep).join("/"),
-      text,
-    });
     const lines = text.split(/\r?\n/);
     let requirement = null;
     for (let index = 0; index < lines.length; index += 1) {
@@ -2062,7 +2057,6 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
       ...source,
       contract,
     })),
-    specs: specContents,
   });
   const binding = {
     version: 1,

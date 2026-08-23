@@ -237,7 +237,7 @@ switch (command) {
     } else {
       const direct = await readJson(absolute(directPath));
       const eligibility = evaluateRouteEligibility(direct);
-      if (direct.route !== "direct" || !eligibility.allowed)
+      if (direct.route !== "direct" || !eligibility.eligible)
         throw new Error("delivery direct evidence is not positively eligible");
     }
     output(
