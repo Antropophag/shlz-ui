@@ -12,11 +12,13 @@ import {
   classify,
   contextIndex,
   createExecutionState,
+  createWorkerBrief,
   createPlan,
   createReviewState,
   matchesPattern,
   pausePacket,
   readyPackets,
+  recordWorkerAttempt,
   relevantValidationFiles,
   recordReview,
   recordValidation,
@@ -28,6 +30,7 @@ import {
   evaluateExecutionStrategy,
   evaluateRouteEligibility,
   resumePacket,
+  retryWorkerPacket,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -38,6 +41,11 @@ import {
   validatePlan,
   validateRequirementsState,
 } from "../lib/harness/core.mjs";
+import {
+  launchCodexWorker,
+  parseCodexExecJsonl,
+  probeCodexExec,
+} from "../lib/harness/codex-worker.mjs";
 
 const root = process.cwd();
 const load = async (file) =>
@@ -741,6 +749,366 @@ test("classification bands are configurable and honest", () => {
   assert.equal(classify(assessment, tuned).size, "M");
 });
 
+test("Wave 8 guarded packets cannot reuse root labels as physical isolation", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/wave-8-execution-isolation.json",
+  );
+  assert.equal(fixture.classification, "XL");
+  assert.equal(fixture.packets.length, 4);
+  assert.deepEqual(
+    new Set(fixture.before.logicalSessions),
+    new Set(["root-wave8"]),
+  );
+  assert.equal(fixture.before.approximateTotalUsageTokens, 592000);
+  assert.equal(fixture.before.remainingContextPercent, 53);
+
+  const assessment = clone(wave7);
+  assessment.workUnits[0].preferredExecutionMode = "continue";
+  assessment.executionIsolation = {
+    version: 1,
+    enforced: true,
+    unavailableFallback: "stop",
+  };
+  const plan = createPlan(assessment, config);
+  const state = createExecutionState(plan);
+  claimPacket(plan, state, "discovery-contracts", "root-wave8");
+  completePacket(plan, state, {
+    completedPacket: "discovery-contracts",
+    changed: [],
+    provenChecks: [],
+    settledDecisions: [],
+    unresolvedFindings: [],
+    nextPacket: "shared-native-dialog",
+    invalidatedAssumptions: [],
+  });
+  assert.throws(
+    () => claimPacket(plan, state, "shared-native-dialog", "root-wave8"),
+    /requires runtime-issued codex exec JSONL evidence/,
+  );
+  const evidence = {
+    version: 1,
+    source: "codex-exec-jsonl",
+    runtimeId: "thread-worker-1",
+    launchId: "launch-1",
+    startedAt: "2026-08-23T00:00:00.000Z",
+    evidenceDigest: "a".repeat(64),
+  };
+  claimPacket(plan, state, "shared-native-dialog", "worker-1", null, evidence);
+  assert.equal(
+    state.packets["shared-native-dialog"].execution.runtimeId,
+    "thread-worker-1",
+  );
+});
+
+test("S and coherent M plans do not acquire isolation ceremony", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/execution-isolation-sizing.json",
+  );
+  assert.equal(
+    fixture.scenarios.find(({ size }) => size === "S").modes[0],
+    "continue",
+  );
+  assert.equal(
+    fixture.scenarios.find(({ id }) => id === "m-coherent-continuation")
+      .expectedEnforced,
+    false,
+  );
+  assert.equal(
+    fixture.scenarios.find(({ id }) => id === "l-decomposed").expectedEnforced,
+    true,
+  );
+});
+
+const guardedWorkerFixture = () => {
+  const assessment = clone(wave7);
+  assessment.workUnits[0].preferredExecutionMode = "continue";
+  assessment.executionIsolation = {
+    version: 1,
+    enforced: true,
+    unavailableFallback: "stop",
+  };
+  const plan = createPlan(assessment, config);
+  const state = createExecutionState(plan);
+  claimPacket(plan, state, "discovery-contracts", "root");
+  completePacket(plan, state, {
+    completedPacket: "discovery-contracts",
+    changed: [],
+    provenChecks: [],
+    settledDecisions: [],
+    unresolvedFindings: [],
+    nextPacket: "shared-native-dialog",
+    invalidatedAssumptions: [],
+  });
+  return { plan, state };
+};
+
+const executionBaseline = {
+  version: 1,
+  kind: "mainline",
+  commit: oid,
+  branch: "feat/task",
+  defaultBranch: "main",
+};
+
+const fakeCodexRun =
+  (jsonl, { exitCode = 0, help = true } = {}) =>
+  async ({ args }) =>
+    args.includes("--help")
+      ? {
+          code: help ? 0 : 1,
+          stdout: help ? "Usage: codex exec --json" : "",
+          stderr: "",
+        }
+      : { code: exitCode, stdout: jsonl, stderr: "", timedOut: false };
+
+test("codex exec adapter probes capability and derives identity/status/usage only from JSONL", async () => {
+  assert.equal(
+    (await probeCodexExec({ run: fakeCodexRun("", { help: false }) }))
+      .available,
+    false,
+  );
+  const jsonl = [
+    JSON.stringify({ type: "thread.started", thread_id: "runtime-42" }),
+    JSON.stringify({
+      type: "turn.completed",
+      usage: { input_tokens: 12, output_tokens: 3 },
+    }),
+  ].join("\n");
+  assert.deepEqual(parseCodexExecJsonl(jsonl).usage, {
+    input_tokens: 12,
+    output_tokens: 3,
+  });
+  const result = await launchCodexWorker({
+    brief: { bounded: true },
+    cwd: root,
+    run: fakeCodexRun(jsonl),
+    launchId: "launch-42",
+    startedAt: "2026-08-23T00:00:00.000Z",
+  });
+  assert.equal(result.terminalStatus, "completed");
+  assert.equal(result.evidence.runtimeId, "runtime-42");
+  assert.match(result.evidence.evidenceDigest, /^[0-9a-f]{64}$/);
+  const unattested = await launchCodexWorker({
+    brief: {},
+    cwd: root,
+    run: fakeCodexRun(JSON.stringify({ type: "turn.completed" })),
+  });
+  assert.equal(unattested.terminalStatus, "unattested");
+  assert.equal(unattested.evidence, undefined);
+});
+
+test("bounded worker briefs are immutable and exclude parent context", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-1",
+  });
+  assert.equal(Object.isFrozen(brief), true);
+  assert.equal(Object.isFrozen(brief.packet.scope), true);
+  assert.equal(brief.requirements.revision, null);
+  assert.deepEqual(Object.keys(brief.dependencyDigests), [
+    "discovery-contracts",
+  ]);
+  assert.equal("parentConversation" in brief, false);
+  assert.equal("events" in brief, false);
+  assert.match(brief.briefDigest, /^[0-9a-f]{64}$/);
+});
+
+test("worker lifecycle fails closed, retries, and never unlocks dependents on partial completion", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-failed",
+  });
+  recordWorkerAttempt(
+    plan,
+    state,
+    "shared-native-dialog",
+    brief,
+    {
+      launchId: "launch-failed",
+      terminalStatus: "unattested",
+      evidenceDigest: "b".repeat(64),
+    },
+    "worker-failed",
+  );
+  assert.equal(state.packets["shared-native-dialog"].status, "failed");
+  assert.deepEqual(readyPackets(plan, state), []);
+  assert.equal(state.handoffs["shared-native-dialog"], undefined);
+  retryWorkerPacket(state, "shared-native-dialog");
+  assert.equal(state.packets["shared-native-dialog"].status, "pending");
+  const retryBrief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-retry",
+  });
+  recordWorkerAttempt(
+    plan,
+    state,
+    "shared-native-dialog",
+    retryBrief,
+    {
+      launchId: "launch-retry",
+      terminalStatus: "failed",
+      evidence: {
+        version: 1,
+        source: "codex-exec-jsonl",
+        runtimeId: "runtime-retry",
+        launchId: "launch-retry",
+        startedAt: "2026-08-23T00:00:00.000Z",
+        evidenceDigest: "c".repeat(64),
+      },
+    },
+    "worker-retry",
+  );
+  assert.equal(state.packets["shared-native-dialog"].status, "failed");
+  assert.deepEqual(readyPackets(plan, state), []);
+});
+
+test("worker attempts reject stale briefs and record only declared unavailable fallback", () => {
+  {
+    const { plan, state } = guardedWorkerFixture();
+    const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+      baseline: executionBaseline,
+      claimId: "claim-stale",
+    });
+    plan.packets
+      .find(({ id }) => id === "shared-native-dialog")
+      .scope.push("new-contract");
+    assert.throws(
+      () =>
+        recordWorkerAttempt(
+          plan,
+          state,
+          "shared-native-dialog",
+          brief,
+          { terminalStatus: "unavailable" },
+          "root",
+        ),
+      /brief is stale/,
+    );
+  }
+  {
+    const { plan, state } = guardedWorkerFixture();
+    plan.executionIsolation.unavailableFallback = "continue";
+    const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+      baseline: executionBaseline,
+      claimId: "claim-degraded",
+    });
+    recordWorkerAttempt(
+      plan,
+      state,
+      "shared-native-dialog",
+      brief,
+      {
+        terminalStatus: "unavailable",
+        capability: { reason: "codex executable is unavailable" },
+      },
+      "root",
+    );
+    assert.deepEqual(state.packets["shared-native-dialog"].execution, {
+      source: "declared-fallback",
+      mode: "continue",
+      reason: "codex executable is unavailable",
+    });
+  }
+});
+
+test("guarded completion binds claim, brief, baseline, dependency handoff, and packet contract", () => {
+  const start = () => {
+    const { plan, state } = guardedWorkerFixture();
+    const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+      baseline: executionBaseline,
+      claimId: "claim-ok",
+    });
+    recordWorkerAttempt(
+      plan,
+      state,
+      "shared-native-dialog",
+      brief,
+      {
+        launchId: "launch-ok",
+        terminalStatus: "completed",
+        evidence: {
+          version: 1,
+          source: "codex-exec-jsonl",
+          runtimeId: "runtime-ok",
+          launchId: "launch-ok",
+          startedAt: "2026-08-23T00:00:00.000Z",
+          evidenceDigest: "d".repeat(64),
+        },
+      },
+      "worker-ok",
+    );
+    const handoff = {
+      completedPacket: "shared-native-dialog",
+      changed: ["tools/lib/harness/"],
+      provenChecks: ["focused"],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: "modal",
+      invalidatedAssumptions: [],
+      claimId: brief.claimId,
+      briefDigest: brief.briefDigest,
+    };
+    return { plan, state, handoff };
+  };
+  {
+    const { plan, state, handoff } = start();
+    assert.throws(
+      () =>
+        completePacket(plan, state, { ...handoff, claimId: "stale" }, null, {
+          baseline: executionBaseline,
+        }),
+      /active claim/,
+    );
+  }
+  {
+    const { plan, state, handoff } = start();
+    assert.throws(
+      () =>
+        completePacket(plan, state, handoff, null, {
+          baseline: { ...executionBaseline, commit: "b".repeat(40) },
+        }),
+      /baseline is stale/,
+    );
+  }
+  {
+    const { plan, state, handoff } = start();
+    state.handoffs["discovery-contracts"].changed.push("late-change");
+    assert.throws(
+      () =>
+        completePacket(plan, state, handoff, null, {
+          baseline: executionBaseline,
+        }),
+      /dependency handoff is stale/,
+    );
+  }
+  {
+    const { plan, state, handoff } = start();
+    plan.packets
+      .find(({ id }) => id === "shared-native-dialog")
+      .scope.push("replanned");
+    assert.throws(
+      () =>
+        completePacket(plan, state, handoff, null, {
+          baseline: executionBaseline,
+        }),
+      /packet contract is stale/,
+    );
+  }
+  {
+    const { plan, state, handoff } = start();
+    completePacket(plan, state, handoff, null, { baseline: executionBaseline });
+    assert.equal(state.packets["shared-native-dialog"].status, "completed");
+    assert.deepEqual(
+      readyPackets(plan, state)
+        .map(({ id }) => id)
+        .sort(),
+      ["drawer", "modal"],
+    );
+  }
+});
+
 const requirementsState = (overrides = {}) => ({
   version: 1,
   intent: "Add a substantial capability",
@@ -1388,6 +1756,9 @@ test("telemetry reports actual observations and never invents unavailable usage"
     { commands: 1, reads: 2, repeats: 1, bytes: 60, focused: 1, full: 1 },
   );
   assert.equal(summary.tokenUsage, "unavailable");
+  assert.equal(summary.physicalBoundaries, "unavailable");
+  assert.equal(summary.contextRelevance, "unavailable");
+  assert.deepEqual(summary.logicalSessions, ["s1"]);
   const measured = summarizeEvents([
     {
       ...base,
@@ -1399,6 +1770,79 @@ test("telemetry reports actual observations and never invents unavailable usage"
   ]);
   assert.equal(measured.tokenUsage.actual, 1234);
   assert.equal(measured.contextUsage.actualPeak, 4567);
+  assert.equal(measured.peakActiveContext.actualPeak, 4567);
+});
+
+test("telemetry distinguishes logical labels from physical boundaries and keeps relevance observational", () => {
+  const base = {
+    packet: "telemetry-operator",
+    agent: "worker",
+    phase: "implementation",
+  };
+  const summary = summarizeEvents([
+    {
+      ...base,
+      session: "label-a",
+      type: "context-read",
+      path: "a",
+      relevant: true,
+    },
+    {
+      ...base,
+      session: "label-b",
+      type: "context-read",
+      path: "a",
+      relevant: true,
+    },
+    {
+      ...base,
+      session: "label-b",
+      type: "context-read",
+      path: "z",
+      relevant: false,
+    },
+    {
+      ...base,
+      session: "label-b",
+      type: "command",
+      command: "rg TODO",
+      discovery: true,
+    },
+    {
+      ...base,
+      session: "label-b",
+      type: "command",
+      command: "rg TODO",
+      discovery: true,
+    },
+    {
+      ...base,
+      session: "label-b",
+      type: "execution-boundary",
+      runtimeId: "runtime-1",
+      executionSource: "codex-exec-jsonl",
+      handoffBytes: 321,
+    },
+  ]);
+  assert.deepEqual(summary.logicalSessions, ["label-a", "label-b"]);
+  assert.deepEqual(summary.physicalBoundaries, {
+    count: 1,
+    runtimeIds: ["runtime-1"],
+    source: "codex-exec-jsonl",
+  });
+  assert.equal(summary.uniqueReads, 2);
+  assert.equal(summary.repeatedReads, 1);
+  assert.equal(summary.handoffBytes, 321);
+  assert.deepEqual(summary.rediscoveryProxies, {
+    repeatedReads: 1,
+    repeatedDiscoveryCommands: 1,
+  });
+  assert.deepEqual(summary.contextRelevance, {
+    kind: "observed-read-ratio",
+    relevantReads: 2,
+    classifiedReads: 3,
+    ratio: 2 / 3,
+  });
 });
 
 test("glob matching supports root docs, recursive paths, and brace sets", () => {
@@ -1439,6 +1883,15 @@ test("CLI reports a missing telemetry event flag", async () => {
     }),
     /requires --event <json>/,
   );
+});
+
+test("CLI exposes the worker capability probe", async () => {
+  const { stdout } = await exec("node", ["tools/harness.mjs", "worker-probe"], {
+    cwd: root,
+  });
+  const result = JSON.parse(stdout);
+  assert.equal(result.adapter, "codex-exec-jsonl");
+  assert.equal(typeof result.available, "boolean");
 });
 
 test("CLI state lock rejects a concurrent packet update", async () => {

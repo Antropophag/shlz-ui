@@ -1,0 +1,28 @@
+{
+  "completedPacket": "telemetry-operator",
+  "claimId": "telemetry-operator-20260823",
+  "briefDigest": "98b4889dd83dcdb12adba89f4b71f86e7bf7862649747549e03575f165a84ca1",
+  "changed": [
+    "added worker-probe, worker-brief, worker-run and worker-retry commands",
+    "added physical boundary, peak context, read/relevance and handoff telemetry",
+    "documented guarded lifecycle and S/M/L/XL selection"
+  ],
+  "provenChecks": [
+    "npm run test:harness: 43/43 pass",
+    "prettier focused check: pass",
+    "openspec strict validation: pass",
+    "adapter-launched thread 01a02f4b-7742-72c2-98ea-bb59e609c146 completed"
+  ],
+  "settledDecisions": [
+    "worker-run is the guarded packet entry point",
+    "physical boundaries require distinct runtime IDs",
+    "S and coherent M continue; L/XL guarded plans enforce isolation",
+    "bounded execution episodes remain a separate follow-up baseline mechanism"
+  ],
+  "unresolvedFindings": [
+    "adapter buffers JSONL until completion; streaming heartbeat is deferred because it is not required for correctness",
+    "fresh contexts still produced high total input, so context relevance remains a first-class measurement"
+  ],
+  "nextPacket": "dogfood-review-delivery",
+  "invalidatedAssumptions": []
+}

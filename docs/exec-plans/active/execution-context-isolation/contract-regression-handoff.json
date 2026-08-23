@@ -1,0 +1,22 @@
+{
+  "completedPacket": "contract-regression",
+  "changed": [
+    "added explicit executionIsolation plan policy",
+    "guarded claims now require Codex JSONL runtime evidence",
+    "added Wave 8 and S/M/L regression fixtures"
+  ],
+  "provenChecks": [
+    "npm run test:harness: 36/36 pass",
+    "Wave 8 root-wave8 label-only guarded claim is rejected"
+  ],
+  "settledDecisions": [
+    "legacy plans without executionIsolation remain readable",
+    "new L/XL guarded plans use unavailableFallback=stop",
+    "logical session labels are never physical proof"
+  ],
+  "unresolvedFindings": [
+    "runtime adapter must derive evidence from actual codex exec JSONL rather than caller construction"
+  ],
+  "nextPacket": "worker-adapter",
+  "invalidatedAssumptions": []
+}

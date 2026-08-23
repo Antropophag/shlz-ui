@@ -11,6 +11,7 @@ import {
   createExecutionState,
   createPlan,
   createReviewState,
+  createWorkerBrief,
   fingerprintFiles,
   gitEvidence,
   gitDeliveryState,
@@ -24,6 +25,7 @@ import {
   recordEvent,
   recordReview,
   recordValidation,
+  recordWorkerAttempt,
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
@@ -33,12 +35,17 @@ import {
   resumePacket,
   reviewContext,
   resolveReviewFindings,
+  retryWorkerPacket,
   summarizeEvents,
   validateHandoff,
   validateExecutionBaseline,
   validatePlan,
   writeJson,
 } from "./lib/harness/core.mjs";
+import {
+  launchCodexWorker,
+  probeCodexExec,
+} from "./lib/harness/codex-worker.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -263,8 +270,85 @@ switch (command) {
     output(state);
     break;
   }
+  case "worker-probe":
+    output(await probeCodexExec({ cwd: repoRoot }));
+    break;
+  case "worker-brief": {
+    const baselinePath = option("--execution");
+    const claimId = option("--claim");
+    const outputPath = option("--out");
+    if (!baselinePath || !claimId || !outputPath)
+      throw new Error(
+        "worker-brief requires --execution <baseline> --claim <id> --out <brief>",
+      );
+    const brief = createWorkerBrief(
+      await readJson(absolute(args[0])),
+      await readJson(absolute(args[1])),
+      args[2],
+      {
+        baseline: await readJson(absolute(baselinePath)),
+        requirementsState: option("--requirements")
+          ? await readJson(absolute(option("--requirements")))
+          : null,
+        claimId,
+      },
+    );
+    await writeJson(statePath(outputPath), brief);
+    output(brief);
+    break;
+  }
+  case "worker-run": {
+    const baselinePath = option("--execution");
+    const claimId = option("--claim");
+    const session = option("--session");
+    const briefPath = option("--brief-out");
+    if (!baselinePath || !claimId || !session || !briefPath)
+      throw new Error(
+        "worker-run requires --execution <baseline> --claim <id> --session <id> --brief-out <brief>",
+      );
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const requirementsState = option("--requirements")
+      ? await readJson(absolute(option("--requirements")))
+      : null;
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      const brief = createWorkerBrief(plan, current, args[2], {
+        baseline: await readJson(absolute(baselinePath)),
+        requirementsState,
+        claimId,
+      });
+      await writeJson(statePath(briefPath), brief);
+      const result = await launchCodexWorker({ brief, cwd: repoRoot });
+      recordWorkerAttempt(
+        plan,
+        current,
+        args[2],
+        brief,
+        result,
+        session,
+        requirementsState,
+      );
+      await writeJson(target, current);
+      return { packet: current.packets[args[2]], result };
+    });
+    output(state);
+    break;
+  }
+  case "worker-retry": {
+    const target = statePath(args[0]);
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      retryWorkerPacket(current, args[1]);
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.packets[args[1]]);
+    break;
+  }
   case "claim": {
     const plan = await readJson(absolute(args[0]));
+    const executionEvidencePath = option("--execution-evidence");
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = claimPacket(
@@ -274,6 +358,9 @@ switch (command) {
         option("--session"),
         option("--requirements")
           ? await readJson(absolute(option("--requirements")))
+          : null,
+        executionEvidencePath
+          ? await readJson(absolute(executionEvidencePath))
           : null,
       );
       await writeJson(target, next);
@@ -293,6 +380,9 @@ switch (command) {
         option("--requirements")
           ? await readJson(absolute(option("--requirements")))
           : null,
+        option("--execution")
+          ? { baseline: await readJson(absolute(option("--execution"))) }
+          : {},
       );
       await writeJson(target, next);
       return next;
@@ -390,6 +480,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

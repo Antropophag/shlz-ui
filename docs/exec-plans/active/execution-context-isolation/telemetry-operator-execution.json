@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "source": "codex-exec-jsonl",
+  "runtimeId": "01a02f4b-7742-72c2-98ea-bb59e609c146",
+  "launchId": "telemetry-operator-20260823",
+  "startedAt": "2026-08-23T15:44:29.601Z",
+  "evidenceDigest": "0e6ed0dbca44355012269c46cda71bb640300fd14fa20a30cb47366c102d728b",
+  "terminalStatus": "completed",
+  "usage": {
+    "inputTokens": 1356900,
+    "cachedInputTokens": 1267200,
+    "outputTokens": 10527,
+    "reasoningOutputTokens": 1926
+  }
+}

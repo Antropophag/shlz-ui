@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "planId": "wave-8-isolation-dogfood",
+  "packets": {
+    "wave-8-read-only-proof": {
+      "status": "completed",
+      "session": "wave8-dogfood-worker",
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a02f51-6c3e-7431-a8b2-db40070f9d7a",
+        "launchId": "cc4ebce8-71f5-44d3-a2ec-1145e532ac63",
+        "startedAt": "2026-08-23T15:50:59.989Z",
+        "evidenceDigest": "d035682101535149cb649fea079f7272cb141d878043247104ac9469cd95a5e2"
+      },
+      "claimId": "wave8-dogfood-20260823",
+      "briefDigest": "fec544262dd1b59c961b18acffde6b5c21eb3fa7199f3d897463874ce6faa4bf",
+      "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+      "dependencyDigests": {},
+      "packetDigest": "9ee4acdb05a19bd5e654abd075bc320d5e1a58df8618eb66fba5e34f0f6d9891",
+      "requirementsRevision": null,
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "cc4ebce8-71f5-44d3-a2ec-1145e532ac63",
+        "usage": {
+          "input_tokens": 37397,
+          "cached_input_tokens": 29184,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 357,
+          "reasoning_output_tokens": 136
+        }
+      }
+    }
+  },
+  "handoffs": {
+    "wave-8-read-only-proof": {
+      "completedPacket": "wave-8-read-only-proof",
+      "claimId": "wave8-dogfood-20260823",
+      "briefDigest": "fec544262dd1b59c961b18acffde6b5c21eb3fa7199f3d897463874ce6faa4bf",
+      "changed": [],
+      "provenChecks": [
+        "physical runtime thread 01a02f51-6c3e-7431-a8b2-db40070f9d7a completed",
+        "runtime usage: 37397 input, 357 output, 136 reasoning tokens",
+        "worktree target diff unchanged by read-only worker"
+      ],
+      "settledDecisions": [
+        "Wave 8 is XL with four packets",
+        "pre-change logical session was root-wave8 for all packets",
+        "pre-change usage was approximately 592000 tokens",
+        "post-change guarded packets require distinct runtime evidence"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": []
+    }
+  }
+}

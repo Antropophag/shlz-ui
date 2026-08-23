@@ -40,6 +40,21 @@ npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-pla
 npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
 
+Guarded packets use the runtime adapter rather than a caller-selected label. The root probes capability, launches one bounded worker, and leaves the resulting claim for that worker's validated handoff:
+
+```bash
+npm run harness -- worker-probe
+npm run harness -- worker-run <plan> <state> <packet-id> \
+  --execution <execution-baseline> --requirements <requirements-state> \
+  --claim <claim-id> --session <logical-label> --brief-out <worker-brief>
+npm run harness -- complete <plan> <state> <handoff-input> \
+  --requirements <requirements-state> --execution <execution-baseline>
+```
+
+The lifecycle is root orchestration → fresh worker → durable handoff → dependent fresh worker → distinct independent review. A failed or unattested launch keeps dependents blocked; use `worker-retry <state> <packet-id>` before generating a new brief. `worker-brief` is available when an operator needs to inspect or transport the immutable brief without launching it.
+
+Selection remains proportional: S continues inline; coherent M continues unless it crosses a semantic or context-pressure boundary; L declares decomposition and isolation; XL re-checks coherence and uses bounded isolated packets. A small follow-up remains a separate execution episode with its own immutable baseline—its size is assessed from that delta, not inherited from the parent PR.
+
 For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
@@ -63,7 +78,7 @@ npm run harness -- delivery-check <delivery-evidence>
 
 The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings.
 
-The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, use labeled proxies: repeated reads, command/output volume, phase changes, and irrelevant-output accumulation. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.
+The starting context hypotheses are 40–70k normal, 60–80k pressure, 80–100k red zone, and above 100k a strong decomposition/fresh-context signal. Runtime tokens take precedence when a trustworthy source exposes them. Without that source, keep usage and peak active context `unavailable`; use labeled proxies such as repeated/unique reads, repeated discovery commands, command/output volume, phase changes, handoff bytes, and irrelevant-output accumulation. Context relevance is only the observed ratio of explicitly classified reads, never a semantic quality score. In the red zone add no new scope; finish/handoff, compact only when continuity is valuable, or start fresh.
 
 Fresh context is preferred at implementation → independent review, subsystem changes, major replans, and after noisy tool output. Independent two-axis review applies to material work and M/L/XL or explicitly review-risky work. Direct S work uses complete target-diff inspection without creating review state solely for ceremony. Use isolated subagents for bounded independent analysis/review. Use parallel writing only for declared disjoint surfaces and bounded concurrency.
 
@@ -73,6 +88,6 @@ OpenSpec owns requirements, Git owns code state, tests own executable evidence, 
 
 ## Multi-session v1
 
-Current official Codex interfaces can start/resume/fork threads and expose usage events; automated jobs are directed toward the Codex SDK. This repository intentionally ships an operator-driven v1 instead of an App Server daemon. Sessions reuse the workspace and exchange structured repository state. Automatic launching remains a future adapter behind the same plan/events interface after telemetry demonstrates the need.
+This repository ships an operator-driven `codex exec --json` adapter, not an App Server daemon. Runtime-issued thread identity proves a physical boundary; logical session labels remain display metadata. Legacy plans without `executionIsolation` remain readable and advisory. New guarded plans fail closed when runtime attestation is unavailable unless their policy explicitly authorizes `continue` degradation.
 
 See `docs/validation-workflow.md` for affected checks/reviews and `docs/exec-plans/README.md` for commands and telemetry.

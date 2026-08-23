@@ -1,0 +1,25 @@
+{
+  "completedPacket": "worker-adapter",
+  "changed": [
+    "added codex exec JSONL capability and launch adapter",
+    "added immutable digest-bound worker briefs",
+    "added guarded claim/completion and retry/failure/staleness lifecycle"
+  ],
+  "provenChecks": [
+    "npm run test:harness: 41/41 pass",
+    "openspec validate execution-context-isolation --strict: pass",
+    "physical worker thread 01a02f44-cd98-7910-8549-68f1dce27279 completed"
+  ],
+  "settledDecisions": [
+    "runtime identity derives only from codex exec JSONL",
+    "unavailable isolation fails closed unless continue is explicitly authorized",
+    "worker completion binds baseline, revision, dependencies, packet digest, claim and brief"
+  ],
+  "unresolvedFindings": [
+    "CLI launcher orchestration and relevance telemetry remain for telemetry-operator",
+    "fresh worker used 1659568 input tokens, demonstrating that broad reads can erase isolation savings",
+    "full lint waits for installed workspace dependencies"
+  ],
+  "nextPacket": "telemetry-operator",
+  "invalidatedAssumptions": ["fresh context alone reduces total token usage"]
+}

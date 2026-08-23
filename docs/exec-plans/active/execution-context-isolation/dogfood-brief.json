@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "planId": "wave-8-isolation-dogfood",
+  "packet": {
+    "contextSources": [
+      "docs/exec-plans/fixtures/wave-8-execution-isolation.json"
+    ],
+    "contracts": ["docs/exec-plans/fixtures/wave-8-execution-isolation.json"],
+    "dependencies": [],
+    "focusedValidation": ["git status remains unchanged"],
+    "handoff": ["runtime identity", "reported fixture fields"],
+    "id": "wave-8-read-only-proof",
+    "implementationOutcomes": [
+      "new runtime thread starts",
+      "fixture is read",
+      "no file changes occur"
+    ],
+    "implementationSurface": [],
+    "nonGoals": [
+      "repository edits",
+      "implementation",
+      "validation",
+      "delivery"
+    ],
+    "objective": "Read only docs/exec-plans/fixtures/wave-8-execution-isolation.json and report its classification, packet count, pre-change logical session, approximate usage, and expected post-change guard; do not modify any file",
+    "outputs": ["five-field read-only report"],
+    "preferredExecutionMode": "fresh-session",
+    "scope": ["Wave 8 regression fixture read"]
+  },
+  "claimId": "wave8-dogfood-20260823",
+  "baseline": {
+    "branch": "feat/execution-context-isolation",
+    "commit": "53936615ea50fcd58117b084c5b601556fc01dd2",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "f60ac123b9a8554143c47acc7931256ec8b7bc8e562185793dfbc0466b48d3cc",
+  "requirements": {
+    "revision": null,
+    "openSpecChange": null
+  },
+  "dependencyDigests": {},
+  "packetDigest": "9ee4acdb05a19bd5e654abd075bc320d5e1a58df8618eb66fba5e34f0f6d9891",
+  "contextIndex": ["docs/exec-plans/fixtures/wave-8-execution-isolation.json"],
+  "allowedImplementationSurface": [],
+  "focusedValidation": ["git status remains unchanged"],
+  "lifecycle": {
+    "completion": "write a validated durable handoff and complete the same claim",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "fec544262dd1b59c961b18acffde6b5c21eb3fa7199f3d897463874ce6faa4bf"
+}
