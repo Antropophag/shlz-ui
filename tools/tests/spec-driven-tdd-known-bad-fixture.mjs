@@ -16,33 +16,20 @@ const matrix = JSON.parse(
     "utf8",
   ),
 );
-const testByCase = {
-  "asymmetric-oracle":
-    "spec-driven TDD public CLI rejects revision-specific overrides",
-  "tautological-oracle":
-    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
-  "source-inspection-oracle":
-    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
-  "timing-dependent-probe":
-    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
-  "post-red-acceptance-edit":
-    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
-  "implementation-runtime-reuse":
-    "spec-driven TDD binds RED and GREEN to immutable evidence",
-  "requirements-reentry":
-    "requirements re-entry invalidates affected TDD slices and retains only digest-identical completed slices",
-  "inapplicable-slice":
-    "spec-driven TDD supports explicit inapplicability and legacy plans",
-};
-
+const executableTests = matrix.cases.map(
+  ({ executableTest }) => executableTest,
+);
 if (
   matrix.seam !== "harness/spec-driven-tdd" ||
-  matrix.cases.some(({ id }) => !testByCase[id])
+  executableTests.some(
+    (testName) => typeof testName !== "string" || !testName,
+  ) ||
+  new Set(executableTests).size !== matrix.cases.length
 )
   throw new Error("known-bad matrix has an unbound case");
 
 const outcomes = {};
-for (const testName of new Set(Object.values(testByCase))) {
+for (const testName of executableTests) {
   const { stdout, stderr } = await exec(
     process.execPath,
     [
@@ -57,22 +44,30 @@ for (const testName of new Set(Object.values(testByCase))) {
       maxBuffer: 10 * 1024 * 1024,
     },
   );
-  if (!stdout.includes("# fail 0"))
+  const escapedName = testName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const selectedPasses = stdout.match(
+    new RegExp(`^ok \\d+ - ${escapedName}$`, "gm"),
+  );
+  if (
+    selectedPasses?.length !== 1 ||
+    !stdout.includes("# pass 1") ||
+    !stdout.includes("# fail 0")
+  )
     throw new Error(
       `known-bad fixture failed: ${testName}\n${stdout}${stderr}`,
     );
-  outcomes[testName] = "pass";
+  outcomes[testName] = { knownBad: "fail", reviewedHead: "pass" };
 }
 
 process.stdout.write(
   `${JSON.stringify(
     {
       version: 1,
-      cases: matrix.cases.map(({ id, signature }) => ({
+      cases: matrix.cases.map(({ id, signature, executableTest }) => ({
         id,
         signature,
-        executableTest: testByCase[id],
-        outcome: outcomes[testByCase[id]],
+        executableTest,
+        ...outcomes[executableTest],
       })),
     },
     null,

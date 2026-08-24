@@ -5,59 +5,56 @@
     {
       "id": "asymmetric-oracle",
       "adapter": "revision-command-override",
-      "command": ["node", "tools/harness.mjs", "tdd-red", "--baseline-command"],
+      "executableTest": "spec-driven TDD public CLI rejects revision-specific overrides",
       "outcome": "rejected-before-execution",
       "signature": "does not accept revision-specific command or oracle overrides"
     },
     {
       "id": "tautological-oracle",
       "adapter": "tautological",
-      "command": ["node", "tools/tests/fixtures/tdd-tautological-probe.mjs"],
+      "executableTest": "known-bad tautological oracle fails the symmetric public CLI oracle",
       "outcome": "control-pass-decoy-pass",
       "signature": "did not discriminate behavioral decoy"
     },
     {
       "id": "source-inspection-oracle",
       "adapter": "source-inspection",
-      "command": [
-        "node",
-        "tools/tests/fixtures/tdd-source-inspection-probe.mjs"
-      ],
+      "executableTest": "known-bad source-inspection oracle fails the symmetric public CLI oracle",
       "outcome": "control-pass-decoy-pass",
       "signature": "did not discriminate behavioral decoy"
     },
     {
       "id": "timing-dependent-probe",
       "adapter": "nondeterministic",
-      "command": ["node", "tools/tests/fixtures/tdd-acceptance-probe.mjs"],
+      "executableTest": "known-bad timing-dependent probe fails deterministic public CLI controls",
       "outcome": "repeated-output-mismatch",
       "signature": "oracle challenge is nondeterministic"
     },
     {
       "id": "post-red-acceptance-edit",
       "adapter": "contract-drift",
-      "command": ["node", "tools/harness.mjs", "tdd-green"],
+      "executableTest": "known-bad post-RED edit invalidates public CLI lifecycle evidence",
       "outcome": "persisted-pending-test-design",
       "signature": "acceptance contract changed after test design"
     },
     {
       "id": "implementation-runtime-reuse",
       "adapter": "designer-runtime-reuse",
-      "command": ["node", "tools/harness.mjs", "claim"],
+      "executableTest": "spec-driven TDD binds RED and GREEN to immutable evidence",
       "outcome": "claim-rejected",
       "signature": "runtime identity must differ"
     },
     {
       "id": "requirements-reentry",
       "adapter": "affected-revision",
-      "command": ["node", "tools/harness.mjs", "resume"],
+      "executableTest": "requirements re-entry invalidates affected TDD slices and retains only digest-identical completed slices",
       "outcome": "affected-slice-reset",
       "signature": "pending-test-design"
     },
     {
       "id": "inapplicable-slice",
       "adapter": "baseline-already-green",
-      "command": ["node", "tools/harness.mjs", "state-init"],
+      "executableTest": "spec-driven TDD supports explicit inapplicability and legacy plans",
       "outcome": "recorded-inapplicable",
       "signature": "inapplicable"
     }

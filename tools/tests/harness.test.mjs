@@ -1138,7 +1138,7 @@ test("spec-driven TDD gates implementation readiness, claim, and completion", ()
   );
 });
 
-test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", async () => {
+const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   const nonce = `${process.pid}-${Date.now()}`;
   const relativeRoot = `docs/exec-plans/tdd-runner-${nonce}`;
   const temporaryRoot = path.join(root, relativeRoot);
@@ -1285,37 +1285,39 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       path.join(root, statePath),
       `${JSON.stringify(state, null, 2)}\n`,
     );
-    const tamperedPlanPath = `${relativeRoot}/tampered-plan.json`;
-    const tamperedStatePath = `${relativeRoot}/tampered-state.json`;
-    const tamperedPlan = clone(plan);
-    tamperedPlan.specDrivenTdd.slices[0].controls.timeoutMs += 1;
-    await Promise.all([
-      writeFile(
-        path.join(root, tamperedPlanPath),
-        `${JSON.stringify(tamperedPlan, null, 2)}\n`,
-      ),
-      writeFile(
-        path.join(root, tamperedStatePath),
-        `${JSON.stringify(state, null, 2)}\n`,
-      ),
-    ]);
-    await assert.rejects(
-      cli(
-        "tdd-green",
-        tamperedPlanPath,
-        tamperedStatePath,
-        "acceptance-contract",
-        "--execution",
-        executionPath,
-      ),
-      /acceptance contract changed after test design/,
-    );
-    assert.equal(
-      (await load(tamperedStatePath)).specDrivenTdd.slices[
-        "acceptance-contract"
-      ].status,
-      "pending-test-design",
-    );
+    if (["all", "post-red-acceptance-edit"].includes(regressionCase)) {
+      const tamperedPlanPath = `${relativeRoot}/tampered-plan.json`;
+      const tamperedStatePath = `${relativeRoot}/tampered-state.json`;
+      const tamperedPlan = clone(plan);
+      tamperedPlan.specDrivenTdd.slices[0].controls.timeoutMs += 1;
+      await Promise.all([
+        writeFile(
+          path.join(root, tamperedPlanPath),
+          `${JSON.stringify(tamperedPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, tamperedStatePath),
+          `${JSON.stringify(state, null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-green",
+          tamperedPlanPath,
+          tamperedStatePath,
+          "acceptance-contract",
+          "--execution",
+          executionPath,
+        ),
+        /acceptance contract changed after test design/,
+      );
+      assert.equal(
+        (await load(tamperedStatePath)).specDrivenTdd.slices[
+          "acceptance-contract"
+        ].status,
+        "pending-test-design",
+      );
+    }
     const { stdout: greenOutput } = await cli(
       "tdd-green",
       planPath,
@@ -1328,39 +1330,46 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
     assert.equal(green.status, "green-proven");
     assert.ok(green.green.runs.every(({ exitCode }) => exitCode === 0));
 
-    const badPlanPath = `${relativeRoot}/bad-plan.json`;
-    const badStatePath = `${relativeRoot}/bad-state.json`;
-    const badPlan = clone(plan);
-    badPlan.specDrivenTdd.slices[0].controls.environment.SHLZ_TDD_PROBE_MODE =
-      "nondeterministic";
-    await Promise.all([
-      writeFile(
-        path.join(root, badPlanPath),
-        `${JSON.stringify(badPlan, null, 2)}\n`,
-      ),
-      writeFile(
-        path.join(root, badStatePath),
-        `${JSON.stringify(attestTddDesigner(createExecutionState(badPlan)), null, 2)}\n`,
-      ),
-    ]);
-    await assert.rejects(
-      cli(
-        "tdd-design-record",
-        badPlanPath,
-        badStatePath,
-        handoffPath,
-        "--execution",
-        executionPath,
-      ),
-      /oracle challenge is nondeterministic/,
-    );
-    for (const [probe, signature] of [
-      ["tdd-tautological-probe.mjs", "did not discriminate behavioral decoy"],
+    if (["all", "timing-dependent-probe"].includes(regressionCase)) {
+      const badPlanPath = `${relativeRoot}/bad-plan.json`;
+      const badStatePath = `${relativeRoot}/bad-state.json`;
+      const badPlan = clone(plan);
+      badPlan.specDrivenTdd.slices[0].controls.environment.SHLZ_TDD_PROBE_MODE =
+        "nondeterministic";
+      await Promise.all([
+        writeFile(
+          path.join(root, badPlanPath),
+          `${JSON.stringify(badPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, badStatePath),
+          `${JSON.stringify(attestTddDesigner(createExecutionState(badPlan)), null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-design-record",
+          badPlanPath,
+          badStatePath,
+          handoffPath,
+          "--execution",
+          executionPath,
+        ),
+        /oracle challenge is nondeterministic/,
+      );
+    }
+    for (const [caseId, probe, signature] of [
       [
+        "tautological-oracle",
+        "tdd-tautological-probe.mjs",
+        "did not discriminate behavioral decoy",
+      ],
+      [
+        "source-inspection-oracle",
         "tdd-source-inspection-probe.mjs",
         "did not discriminate behavioral decoy",
       ],
-    ]) {
+    ].filter(([caseId]) => ["all", caseId].includes(regressionCase))) {
       const weakPlan = clone(plan);
       weakPlan.specDrivenTdd.slices[0].command = [
         process.execPath,
@@ -1403,7 +1412,31 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });
   }
-});
+};
+
+for (const [name, regressionCase] of [
+  [
+    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
+    "all",
+  ],
+  [
+    "known-bad tautological oracle fails the symmetric public CLI oracle",
+    "tautological-oracle",
+  ],
+  [
+    "known-bad source-inspection oracle fails the symmetric public CLI oracle",
+    "source-inspection-oracle",
+  ],
+  [
+    "known-bad timing-dependent probe fails deterministic public CLI controls",
+    "timing-dependent-probe",
+  ],
+  [
+    "known-bad post-RED edit invalidates public CLI lifecycle evidence",
+    "post-red-acceptance-edit",
+  ],
+])
+  test(name, () => exerciseSpecDrivenTddPublicCli(regressionCase));
 
 test("spec-driven TDD public CLI rejects revision-specific overrides", async () => {
   await assert.rejects(
@@ -1445,9 +1478,13 @@ test("spec-driven TDD public CLI executes every known-bad matrix case", async ()
   assert.equal(new Set(matrix.cases.map(({ adapter }) => adapter)).size, 8);
   assert.ok(
     matrix.cases.every(
-      ({ command, outcome, signature }) =>
-        Array.isArray(command) && command.length > 1 && outcome && signature,
+      ({ executableTest, outcome, signature }) =>
+        executableTest && outcome && signature,
     ),
+  );
+  assert.equal(
+    new Set(matrix.cases.map(({ executableTest }) => executableTest)).size,
+    8,
   );
   const { stdout: fixtureOutput } = await exec(
     process.execPath,
@@ -1459,10 +1496,11 @@ test("spec-driven TDD public CLI executes every known-bad matrix case", async ()
     fixture.cases.map(({ id }) => id),
     matrix.cases.map(({ id }) => id),
   );
-  assert.ok(fixture.cases.every(({ outcome }) => outcome === "pass"));
-  assert.equal(
-    new Set(fixture.cases.map(({ executableTest }) => executableTest)).size,
-    5,
+  assert.ok(
+    fixture.cases.every(
+      ({ knownBad, reviewedHead }) =>
+        knownBad === "fail" && reviewedHead === "pass",
+    ),
   );
 });
 

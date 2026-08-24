@@ -82,6 +82,7 @@ const design = {
   fixtureDigest: digest("c"),
   controlsDigest: digest("d"),
   contractDigest: digest("e"),
+  oracleChallengeDigest: digest("f"),
   inputs: [
     "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
   ],
@@ -92,6 +93,24 @@ const design = {
   oracleMethod: {
     kind: "behavioral-assertion",
     observesSeam: "harness/spec-driven-tdd",
+  },
+  oracleChallenge: {
+    version: 1,
+    adapterEnvironment: "SHLZ_TDD_ORACLE_ADAPTER",
+    controlAdapter: "tools/tests/fixtures/tdd-oracle-control.mjs",
+    decoyAdapter: "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+    expectedFailureSignature: "ERR_CONTRACT_INCORRECT",
+    scenarioIds: ["implementation-claim-requires-red"],
+  },
+  oracleChallengeRuns: {
+    control: [
+      { exitCode: 0, output: "" },
+      { exitCode: 0, output: "" },
+    ],
+    decoy: [
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+    ],
   },
 };
 let deliveryRejectsStaleGreen = false;
