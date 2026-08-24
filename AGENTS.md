@@ -116,6 +116,10 @@ Normal new implementation starts from clean current `origin/main` on a task bran
 
 ## UI component completion gate
 
+For a numbered component-audit request such as `Сделай Wave N`, read
+`docs/component-audit-roadmap.md` first; it owns the durable Wave 9+ scope map,
+short-intent resolution, and drift behavior.
+
 Do not call a component fixed, complete, production-ready, review-ready, or a
 finished side quest until the component completion gate in
 `docs/component-audit-workflow.md` passes. In particular:
