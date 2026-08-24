@@ -143,7 +143,6 @@
       ],
       "contextSources": [
         "docs/{agent-execution,validation-workflow,requirements-elicitation}.md",
-        "docs/exec-plans/active/enforce-spec-driven-tdd/workflow-delivery-findings-r1.json",
         "tools/lib/harness/core.mjs",
         "tools/tests/**"
       ],
@@ -193,14 +192,9 @@
         "new requirements",
         "PR merge"
       ],
-      "dependencies": [
-        "workflow-delivery"
-      ],
-      "contracts": [
-        "harness/spec-driven-tdd"
-      ],
+      "dependencies": ["workflow-delivery"],
+      "contracts": ["harness/spec-driven-tdd"],
       "contextSources": [
-        "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
         "openspec/changes/enforce-spec-driven-tdd/**",
         "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
       ],
@@ -210,21 +204,13 @@
         "tools/tests/**",
         "docs/exec-plans/fixtures/**"
       ],
-      "focusedValidation": [
-        "harness",
-        "openspec",
-        "two-axis re-review"
-      ],
+      "focusedValidation": ["harness", "openspec", "two-axis re-review"],
       "outputs": [
         "three regression-first fixes",
         "public known-bad fixture matrix",
         "review-ready handoff"
       ],
-      "handoff": [
-        "finding dispositions",
-        "RED evidence",
-        "GREEN checks"
-      ],
+      "handoff": ["finding dispositions", "RED evidence", "GREEN checks"],
       "implementationOutcomes": [
         "weak oracle rejection",
         "persistent test-design re-entry",
@@ -247,15 +233,10 @@
         "large module extraction",
         "PR merge"
       ],
-      "dependencies": [
-        "workflow-delivery"
-      ],
-      "contracts": [
-        "harness/spec-driven-tdd"
-      ],
+      "dependencies": ["workflow-delivery"],
+      "contracts": ["harness/spec-driven-tdd"],
       "contextSources": [
         "openspec/changes/enforce-spec-driven-tdd/**",
-        "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
         "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
       ],
       "implementationSurface": [
@@ -264,11 +245,7 @@
         "tools/tests/**",
         "docs/exec-plans/fixtures/**"
       ],
-      "focusedValidation": [
-        "harness",
-        "openspec",
-        "two-axis re-review"
-      ],
+      "focusedValidation": ["harness", "openspec", "two-axis re-review"],
       "outputs": [
         "executable oracle challenge",
         "surface-preserving decoy fixture",

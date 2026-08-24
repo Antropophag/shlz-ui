@@ -14,10 +14,7 @@
     }
   ],
   "findings": [],
-  "failurePathConcerns": [
-    "state-machine",
-    "persistence"
-  ],
+  "failurePathConcerns": ["state-machine", "persistence"],
   "changeFailureInvariants": {
     "change": "enforce-spec-driven-tdd",
     "contractDigest": "2422c168c5c66d5985a85158f51e5e49d11e9400d0533dc37766e81c1ba69b20",
@@ -49,10 +46,7 @@
   },
   "failurePathProof": {
     "changeBaselineRevision": "93ff4081aca8ae628696826ef79cc6ba870b2376",
-    "command": [
-      "node",
-      "tools/tests/spec-driven-tdd-failure-proof.mjs"
-    ],
+    "command": ["node", "tools/tests/spec-driven-tdd-failure-proof.mjs"],
     "contractDigest": "2422c168c5c66d5985a85158f51e5e49d11e9400d0533dc37766e81c1ba69b20",
     "invariants": [
       {

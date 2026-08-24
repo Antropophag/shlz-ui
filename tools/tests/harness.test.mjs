@@ -1147,6 +1147,15 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   const handoffPath = `${relativeRoot}/design.json`;
   const executionPath = `${relativeRoot}/execution.json`;
   const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
+  const initialHead = await exec("git", ["rev-parse", "HEAD"], {
+    cwd: root,
+  }).then(({ stdout }) => stdout.trim());
+  const initialBranch = await exec("git", ["branch", "--show-current"], {
+    cwd: root,
+  }).then(({ stdout }) => stdout.trim());
+  const temporaryBranch = initialBranch ? null : `test/tdd-${nonce}`;
+  if (temporaryBranch)
+    await exec("git", ["switch", "-c", temporaryBranch], { cwd: root });
   const plan = createPlan(tddAssessment(), config);
   plan.specDrivenTdd.slices[0].command = [
     process.execPath,
@@ -1358,7 +1367,7 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
         /oracle challenge is nondeterministic/,
       );
     }
-    for (const [caseId, probe, signature] of [
+    for (const [, probe, signature] of [
       [
         "tautological-oracle",
         "tdd-tautological-probe.mjs",
@@ -1411,6 +1420,10 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   } finally {
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });
+    if (temporaryBranch) {
+      await exec("git", ["switch", "--detach", initialHead], { cwd: root });
+      await exec("git", ["branch", "-D", temporaryBranch], { cwd: root });
+    }
   }
 };
 

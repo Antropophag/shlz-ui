@@ -5,8 +5,8 @@ import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const root = path.resolve(process.argv[2] ?? process.cwd());
-const { NODE_TEST_CONTEXT: _nodeTestContext, ...subprocessEnvironment } =
-  process.env;
+const subprocessEnvironment = { ...process.env };
+delete subprocessEnvironment.NODE_TEST_CONTEXT;
 const matrix = JSON.parse(
   await readFile(
     path.join(

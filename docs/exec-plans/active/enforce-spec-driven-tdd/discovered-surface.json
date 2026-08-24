@@ -16,6 +16,7 @@
     "openspec/changes/enforce-spec-driven-tdd/tasks.md",
     "tools/harness.mjs",
     "tools/lib/harness/core.mjs",
+    "tools/lib/harness/spec-driven-tdd.mjs",
     "tools/tests/fixtures/tdd-acceptance-probe.mjs",
     "tools/tests/fixtures/tdd-oracle-control.mjs",
     "tools/tests/fixtures/tdd-oracle-decoy.mjs",
