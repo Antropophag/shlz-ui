@@ -1088,6 +1088,10 @@ test("independent test-contract review rejects incomplete and non-independent ev
     [{ runtimeId: "test-designer-runtime" }, /reviewer runtime/],
     [{ inputs: ["tools/lib/harness/core.mjs"] }, /production context/],
     [
+      { inputs: [String.raw`tools\lib\harness\core.mjs`] },
+      /production context/,
+    ],
+    [
       {
         inputs: [
           "/repo/docs/exec-plans/active/example/shared-native-dialog-r1.handoff.json",
@@ -3430,6 +3434,124 @@ test("final Spec finding invalidates approval through test-design re-entry", () 
   assert.equal(state.packets["discovery-contracts"].status, "pending");
   assert.equal(state.packets["test-contract-review"].status, "pending");
   assert.equal(state.packets["shared-native-dialog"].status, "pending");
+});
+
+test("review-record confines and locks mutable TDD state", async () => {
+  const nonce = `${process.pid}-${Date.now()}`;
+  const relativeRoot = `docs/exec-plans/review-tdd-lock-${nonce}`;
+  const temporaryRoot = path.join(root, relativeRoot);
+  const reviewStatePath = `${relativeRoot}/review-state.json`;
+  const tddPlanPath = `${relativeRoot}/plan.json`;
+  const findingsPath = `${relativeRoot}/findings.json`;
+  const confinedTddStatePath = `${relativeRoot}/tdd-state.json`;
+  const escapedTddStatePath = `tools/tests/review-tdd-state-${nonce}.json`;
+  const unregisterExitCleanup = registerExitCleanup([
+    temporaryRoot,
+    path.join(root, escapedTddStatePath),
+  ]);
+  const { plan, state, review: approval } = prepareReviewedTdd();
+  recordTddReview(plan, state, approval);
+  const lifecycle = state.specDrivenTdd.slices["acceptance-contract"];
+  recordTddRed(plan, state, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+    reviewDigest: lifecycle.reviewDigest,
+  });
+  authorizeTddImplementation(
+    plan,
+    state,
+    "acceptance-contract",
+    "implementation-runtime",
+  );
+  recordTddGreen(plan, state, { ...tddDesign(), candidateHead: oid });
+  const binding = createTddReviewBinding(plan, state, oid);
+  try {
+    await mkdir(temporaryRoot, { recursive: true });
+    await Promise.all([
+      writeFile(
+        path.join(root, reviewStatePath),
+        `${JSON.stringify(createReviewState(oid, [], null, binding))}\n`,
+      ),
+      writeFile(path.join(root, tddPlanPath), `${JSON.stringify(plan)}\n`),
+      writeFile(
+        path.join(root, escapedTddStatePath),
+        `${JSON.stringify(state)}\n`,
+      ),
+      writeFile(
+        path.join(root, findingsPath),
+        `${JSON.stringify([
+          {
+            id: "S1",
+            severity: "P1",
+            summary: "approved test contract omitted a scenario",
+            invalidatesTestContract: true,
+            sliceId: "acceptance-contract",
+            reentry: "test-design",
+          },
+        ])}\n`,
+      ),
+    ]);
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-record",
+          reviewStatePath,
+          "--axis",
+          "Spec",
+          "--head",
+          oid,
+          "--findings",
+          findingsPath,
+          "--tdd-plan",
+          tddPlanPath,
+          "--tdd-state",
+          escapedTddStatePath,
+        ],
+        { cwd: root },
+      ),
+      /mutable harness state must stay under docs\/exec-plans/,
+    );
+    await writeFile(
+      path.join(root, confinedTddStatePath),
+      `${JSON.stringify(state)}\n`,
+    );
+    const tddLock = `${path.join(root, confinedTddStatePath)}.lock`;
+    await writeFile(tddLock, "held\n");
+    try {
+      await assert.rejects(
+        exec(
+          process.execPath,
+          [
+            "tools/harness.mjs",
+            "review-record",
+            reviewStatePath,
+            "--axis",
+            "Spec",
+            "--head",
+            oid,
+            "--findings",
+            findingsPath,
+            "--tdd-plan",
+            tddPlanPath,
+            "--tdd-state",
+            confinedTddStatePath,
+          ],
+          { cwd: root },
+        ),
+        /state is already being updated:.*tdd-state\.json/,
+      );
+    } finally {
+      await rm(tddLock, { force: true });
+    }
+  } finally {
+    unregisterExitCleanup();
+    await rm(temporaryRoot, { recursive: true, force: true });
+    await rm(path.join(root, escapedTddStatePath), { force: true });
+  }
 });
 
 test("delivery rejects an incomplete mandatory packet graph", () => {

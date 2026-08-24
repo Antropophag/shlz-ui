@@ -27,6 +27,6 @@
 
 ## 6. CodeRabbit Review Follow-up
 
-- [ ] 6.1 Add public-path regressions for Windows-style production-context inputs and confined, locked TDD re-entry state; observe both fail on the current PR head.
-- [ ] 6.2 Fix only confirmed findings: normalize single backslashes, make `review-record` TDD state access confined and lock-protected, align the normative review lifecycle explicitly to version 2, and record the PR URL through the existing handoff schema without rewriting runtime attestations.
+- [x] 6.1 Add public-path regressions for Windows-style production-context inputs and confined, locked TDD re-entry state; observe both fail on the current PR head.
+- [x] 6.2 Fix only confirmed findings: normalize single backslashes, make `review-record` TDD state access confined and lock-protected, align the normative review lifecycle explicitly to version 2, and record the PR URL through the existing handoff schema without rewriting runtime attestations.
 - [ ] 6.3 Disposition the immutable historical-context finding without regenerating runtime-bound evidence; run focused/aggregate checks, failure-path proof, independent Standards/Spec review, resolve all verified CodeRabbit threads, and leave PR #38 open and unmerged.

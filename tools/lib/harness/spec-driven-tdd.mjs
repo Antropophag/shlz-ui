@@ -72,7 +72,7 @@ export function createSpecDrivenTdd({
   function normalizedInputCandidates(input) {
     if (typeof input !== "string") return [];
     const normalized = path.posix
-      .normalize(input.replaceAll("\\\\", "/").replace(/^file:/, ""))
+      .normalize(input.replaceAll("\\", "/").replace(/^file:/, ""))
       .replace(/^\.\//, "");
     const parts = normalized.split("/").filter(Boolean);
     return parts.map((_, index) => parts.slice(index).join("/"));

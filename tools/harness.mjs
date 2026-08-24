@@ -904,26 +904,30 @@ switch (command) {
         throw new Error(
           "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
         );
-      const tddPlan = current.specDrivenTdd
-        ? await readJson(absolute(tddPlanPath))
-        : null;
-      const tddState = current.specDrivenTdd
-        ? await readJson(absolute(tddStatePath))
-        : null;
-      const tddEvidence = current.specDrivenTdd
-        ? createTddReviewBinding(tddPlan, tddState, option("--head"))
-        : null;
-      const next = recordReview(current, {
-        axis: option("--axis"),
-        head: option("--head"),
-        findings,
-        tddEvidence,
-        tddPlan,
-        tddState,
-      });
-      if (tddState) await writeJson(absolute(tddStatePath), tddState);
-      await writeJson(target, next);
-      return next;
+      const record = async (tddPlan = null, tddState = null) => {
+        const tddEvidence = current.specDrivenTdd
+          ? createTddReviewBinding(tddPlan, tddState, option("--head"))
+          : null;
+        const next = recordReview(current, {
+          axis: option("--axis"),
+          head: option("--head"),
+          findings,
+          tddEvidence,
+          tddPlan,
+          tddState,
+        });
+        if (tddState) await writeJson(statePath(tddStatePath), tddState);
+        await writeJson(target, next);
+        return next;
+      };
+      if (!current.specDrivenTdd) return record();
+      const tddTarget = statePath(tddStatePath);
+      if (tddTarget === target)
+        throw new Error("review state and TDD state must use distinct files");
+      const tddPlan = await readJson(absolute(tddPlanPath));
+      return withStateLock(tddTarget, async () =>
+        record(tddPlan, await readJson(tddTarget)),
+      );
     });
     output(reviewContext(state));
     break;

@@ -4,7 +4,7 @@
     "remediated R1-R6 across harness lifecycle, tests, docs, and evidence",
     "added current-change state-machine and persistence failure proof",
     "recorded independent Standards and Spec re-review passes",
-    "opened PR 38 at reviewed head 803785789948b23836b7dd7506888dcfcafee732"
+    "opened https://github.com/Antropophag/shlz-ui/pull/38 at reviewed head 803785789948b23836b7dd7506888dcfcafee732"
   ],
   "provenChecks": [
     "harness: 90/90 passed",
