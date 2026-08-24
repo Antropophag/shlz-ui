@@ -108,7 +108,9 @@
       "contextSources": [
         "openspec/changes/require-independent-test-contract-review/**",
         "docs/validation-workflow.md",
-        "current episode diff"
+        "docs/exec-plans/active/require-independent-test-contract-review/review-findings-r1.json",
+        "tools/lib/harness/**",
+        "tools/tests/harness.test.mjs"
       ],
       "implementationSurface": ["current diff remediation only"],
       "focusedValidation": [

@@ -2776,7 +2776,7 @@ export function recordFailurePathDegradation(state, capability, reason) {
 
 export function recordReview(
   state,
-  { axis, head, findings, tddEvidence = null },
+  { axis, head, findings, tddEvidence = null, tddPlan = null, tddState = null },
 ) {
   if (
     !["Standards", "Spec"].includes(axis) ||
@@ -2805,6 +2805,42 @@ export function recordReview(
     );
   if (state.failurePathProof && head !== state.failurePathProof.reviewedHead)
     throw new Error("failure-path proof is stale for the reviewed head");
+  const reentries = findings.filter(
+    ({ invalidatesTestContract }) => invalidatesTestContract === true,
+  );
+  if (reentries.length) {
+    if (axis !== "Spec" || !tddPlan || !tddState)
+      throw new Error(
+        "approval-invalidating Spec findings require TDD test-design re-entry",
+      );
+    for (const finding of reentries) {
+      const contract = tddPlan.specDrivenTdd?.slices.find(
+        ({ id }) => id === finding.sliceId,
+      );
+      const lifecycle = tddState.specDrivenTdd?.slices?.[finding.sliceId];
+      if (!contract || !lifecycle || finding.reentry !== "test-design")
+        throw new Error(
+          "approval-invalidating Spec findings require a valid test-design re-entry",
+        );
+      tddState.specDrivenTdd.slices[finding.sliceId] = {
+        status: "pending-test-design",
+        invalidation: {
+          reason: `final Spec finding ${finding.id} invalidated test-contract approval`,
+          previousDesignDigest: lifecycle.designDigest ?? null,
+          previousRedDigest: lifecycle.redDigest ?? null,
+          previousGreenDigest: lifecycle.greenDigest ?? null,
+        },
+      };
+      for (const packetId of [
+        contract.testDesignPacket,
+        contract.testReviewPacket,
+        contract.implementationPacket,
+      ].filter(Boolean)) {
+        tddState.packets[packetId] = { status: "pending" };
+        delete tddState.handoffs[packetId];
+      }
+    }
+  }
   const pass = state.passes.length + 1;
   state.passes.push({ pass, axis, head });
   for (const finding of findings)

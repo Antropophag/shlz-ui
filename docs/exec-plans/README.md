@@ -50,15 +50,23 @@ npm run harness -- tdd-green <plan> <state> <slice> --execution <baseline>
 
 Version 2 design ends at `pending-test-review`; only a complete approval from
 the declared, completed, runtime-distinct review worker reaches `test-reviewed`
-and unlocks RED. A changes-requested verdict preserves bounded findings and
-returns the slice to test design. Implementation readiness and launch require
+and unlocks RED. Approval repeats the adapter-bound worker-report digest and
+the digest of that worker's durable packet handoff. Review inputs are normalized
+before production-surface and implementation-handoff exclusion, including
+absolute and referenced handoff paths. A changes-requested verdict preserves
+bounded findings, clears completed design/review packet evidence, and returns
+the slice to runnable test design. RED-time identity drift performs the same
+full invalidation. Implementation readiness and launch require
 accepted RED; packet completion requires GREEN. A requirements pause supplies
 `--tdd-reentry <file>` and classifies every slice as affected or explicitly
 retained; affected version 2 slices reset design, review, and implementation
 packets. TDD-bound final review
 initialization and records supply `--tdd-plan <plan> --tdd-state <state>` so
 both axes, any separate failure-path proof, and delivery agree on the candidate
-head and current approval digest. Historical plans without `specDrivenTdd`, and
+head and current approval digest. A final Spec finding that exposes a flawed
+approval declares `invalidatesTestContract: true`, the affected `sliceId`, and
+`reentry: "test-design"`; `review-record` resets that slice's design, review,
+and implementation packets in the supplied TDD state. Historical plans without `specDrivenTdd`, and
 version 1 TDD plans, preserve their prior behavior.
 
 The operator lifecycle is root reservation → worker subprocess and final report → adapter-bound claim/report digest → root-validated durable handoff → dependent worker → independent review. The worker cannot complete while its launch is only reserved; after subprocess exit the root binds the runtime identity and final agent message, then a matching report digest is required in the compact handoff. S defaults to `continue`; coherent M stays inline until a meaningful phase or pressure transition; L/XL plans declare enforced, fail-closed isolated packet graphs. Bounded follow-ups remain separate episodes with a new baseline and sizing assessment.

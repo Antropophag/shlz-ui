@@ -904,19 +904,24 @@ switch (command) {
         throw new Error(
           "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
         );
+      const tddPlan = current.specDrivenTdd
+        ? await readJson(absolute(tddPlanPath))
+        : null;
+      const tddState = current.specDrivenTdd
+        ? await readJson(absolute(tddStatePath))
+        : null;
       const tddEvidence = current.specDrivenTdd
-        ? createTddReviewBinding(
-            await readJson(absolute(tddPlanPath)),
-            await readJson(absolute(tddStatePath)),
-            option("--head"),
-          )
+        ? createTddReviewBinding(tddPlan, tddState, option("--head"))
         : null;
       const next = recordReview(current, {
         axis: option("--axis"),
         head: option("--head"),
         findings,
         tddEvidence,
+        tddPlan,
+        tddState,
       });
+      if (tddState) await writeJson(absolute(tddStatePath), tddState);
       await writeJson(target, next);
       return next;
     });

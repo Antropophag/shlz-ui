@@ -102,6 +102,21 @@ const registerExitCleanup = (paths) => {
 };
 const oid = "a".repeat(40);
 const digest = (character) => character.repeat(64);
+const stableDigest = (value) => {
+  const stable = (item) =>
+    Array.isArray(item)
+      ? item.map(stable)
+      : item && typeof item === "object"
+        ? Object.fromEntries(
+            Object.entries(item)
+              .sort(([left], [right]) => left.localeCompare(right))
+              .map(([key, nested]) => [key, stable(nested)]),
+          )
+        : item;
+  return createHash("sha256")
+    .update(JSON.stringify(stable(value)))
+    .digest("hex");
+};
 const mainlineExecution = (overrides = {}) => ({
   currentBranch: "feat/task",
   defaultBranch: "main",
@@ -973,15 +988,31 @@ const prepareReviewedTdd = () => {
   const plan = createPlan(reviewedTddAssessment(), config);
   const state = attestTddDesigner(createExecutionState(plan));
   recordTddDesign(plan, state, tddDesign());
+  const reviewerHandoff = {
+    completedPacket: "test-contract-review",
+    changed: [],
+    provenChecks: ["independent test-contract review"],
+    settledDecisions: [],
+    unresolvedFindings: [],
+    nextPacket: "shared-native-dialog",
+    invalidatedAssumptions: [],
+    workerReportDigest: digest("7"),
+  };
   state.packets["test-contract-review"] = {
     status: "completed",
     execution: { runtimeId: "test-review-runtime" },
+    launch: { workerReportDigest: reviewerHandoff.workerReportDigest },
   };
+  state.handoffs["test-contract-review"] = reviewerHandoff;
   const design = state.specDrivenTdd.slices["acceptance-contract"];
   return {
     plan,
     state,
-    review: tddReview({ designDigest: design.designDigest }),
+    review: tddReview({
+      designDigest: design.designDigest,
+      workerReportDigest: reviewerHandoff.workerReportDigest,
+      reviewPacketHandoffDigest: stableDigest(reviewerHandoff),
+    }),
   };
 };
 
@@ -1003,18 +1034,14 @@ test("independent test-contract review validates versioned packet topology", () 
 });
 
 test("independent test-contract review gates RED and records approval", () => {
-  const { plan, state } = prepareReviewedTdd();
+  const { plan, state, review } = prepareReviewedTdd();
   const lifecycle = state.specDrivenTdd.slices["acceptance-contract"];
   assert.equal(lifecycle.status, "pending-test-review");
   assert.throws(
     () => recordTddRed(plan, state, tddDesign()),
     /requires approved test-contract review/,
   );
-  recordTddReview(
-    plan,
-    state,
-    tddReview({ designDigest: lifecycle.designDigest }),
-  );
+  recordTddReview(plan, state, review);
   assert.equal(lifecycle.status, "test-reviewed");
   assert.match(lifecycle.reviewDigest, /^[0-9a-f]{64}$/);
   assert.throws(
@@ -1055,6 +1082,16 @@ test("independent test-contract review rejects incomplete and non-independent ev
     ],
     [{ runtimeId: "test-designer-runtime" }, /reviewer runtime/],
     [{ inputs: ["tools/lib/harness/core.mjs"] }, /production context/],
+    [
+      {
+        inputs: [
+          "/repo/docs/exec-plans/active/example/shared-native-dialog-r1.handoff.json",
+        ],
+      },
+      /production context/,
+    ],
+    [{ reviewPacketHandoffDigest: digest("8") }, /reviewer runtime/],
+    [{ workerReportDigest: digest("8") }, /reviewer runtime/],
     [{ designDigest: digest("2") }, /stale test design/],
   ]) {
     const { plan, state, review } = prepareReviewedTdd();
@@ -1086,6 +1123,9 @@ test("independent test-contract rejection preserves findings and returns to desi
     { id: "missing-scenario", scenarioId: "meaningful-deterministic-red" },
   ]);
   assert.equal(lifecycle.review, undefined);
+  assert.equal(state.packets["discovery-contracts"].status, "pending");
+  assert.equal(state.packets["test-contract-review"].status, "pending");
+  assert.equal(state.handoffs["test-contract-review"], undefined);
 });
 
 test("independent test-contract approval is required by final review binding", () => {
@@ -1114,6 +1154,29 @@ test("independent test-contract approval is required by final review binding", (
     () => createTddReviewBinding(plan, state, oid),
     /test-contract approval evidence is stale/,
   );
+});
+
+test("RED identity drift invalidates design and reopens both review packets", () => {
+  const { plan, state, review } = prepareReviewedTdd();
+  recordTddReview(plan, state, review);
+  assert.throws(
+    () =>
+      recordTddRed(plan, state, {
+        ...tddDesign({ controlsDigest: digest("9") }),
+        runtimeId: "red-runner-runtime",
+        normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+        failedScenarioIds: ["meaningful-deterministic-red"],
+        reviewDigest:
+          state.specDrivenTdd.slices["acceptance-contract"].reviewDigest,
+      }),
+    /does not match the designed acceptance contract/,
+  );
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "pending-test-design",
+  );
+  assert.equal(state.packets["discovery-contracts"].status, "pending");
+  assert.equal(state.packets["test-contract-review"].status, "pending");
 });
 
 test("independent test-contract public CLI discriminates incomplete approval", async () => {
@@ -1432,6 +1495,7 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   const planPath = `${relativeRoot}/plan.json`;
   const statePath = `${relativeRoot}/state.json`;
   const handoffPath = `${relativeRoot}/design.json`;
+  const reviewPath = `${relativeRoot}/review.json`;
   const executionPath = `${relativeRoot}/execution.json`;
   const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
   const initialHead = await exec("git", ["rev-parse", "HEAD"], {
@@ -1443,7 +1507,7 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   const temporaryBranch = initialBranch ? null : `chore/tdd-test-${nonce}`;
   if (temporaryBranch)
     await exec("git", ["switch", "-c", temporaryBranch], { cwd: root });
-  const plan = createPlan(tddAssessment(), config);
+  const plan = createPlan(reviewedTddAssessment(), config);
   plan.specDrivenTdd.slices[0].command = [
     process.execPath,
     path.join(root, "tools/tests/fixtures/tdd-acceptance-probe.mjs"),
@@ -1514,7 +1578,26 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
       ),
       writeFile(
         path.join(root, statePath),
-        `${JSON.stringify(attestTddDesigner(createExecutionState(plan)), null, 2)}\n`,
+        (() => {
+          const initial = attestTddDesigner(createExecutionState(plan));
+          const reviewerHandoff = {
+            completedPacket: "test-contract-review",
+            changed: [],
+            provenChecks: ["independent contract review"],
+            settledDecisions: [],
+            unresolvedFindings: [],
+            nextPacket: "shared-native-dialog",
+            invalidatedAssumptions: [],
+            workerReportDigest: digest("7"),
+          };
+          initial.packets["test-contract-review"] = {
+            status: "completed",
+            execution: { runtimeId: "test-review-runtime" },
+            launch: { workerReportDigest: reviewerHandoff.workerReportDigest },
+          };
+          initial.handoffs["test-contract-review"] = reviewerHandoff;
+          return `${JSON.stringify(initial, null, 2)}\n`;
+        })(),
       ),
       writeFile(
         path.join(root, handoffPath),
@@ -1551,6 +1634,67 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
           exitCode !== 0 && output.includes("ERR_CONTRACT_INCORRECT"),
       ),
     );
+    const lifecycle = designed.specDrivenTdd.slices["acceptance-contract"];
+    const reviewerHandoff = designed.handoffs["test-contract-review"];
+    const review = tddReview({
+      ...Object.fromEntries(
+        [
+          "requirementsRevision",
+          "baselineDigest",
+          "acceptanceDigest",
+          "fixtureDigest",
+          "controlsDigest",
+          "contractDigest",
+          "oracleChallengeDigest",
+        ].map((field) => [field, lifecycle.design[field]]),
+      ),
+      designDigest: lifecycle.designDigest,
+      workerReportDigest: reviewerHandoff.workerReportDigest,
+      reviewPacketHandoffDigest: stableDigest(reviewerHandoff),
+    });
+    await writeFile(
+      path.join(root, reviewPath),
+      `${JSON.stringify(
+        {
+          ...review,
+          scenarioEvidence: review.scenarioEvidence.slice(0, 1),
+        },
+        null,
+        2,
+      )}\n`,
+    );
+    await assert.rejects(
+      cli("tdd-review-record", planPath, statePath, reviewPath),
+      /every current scenario/,
+    );
+    await assert.rejects(
+      cli(
+        "tdd-red",
+        planPath,
+        statePath,
+        "acceptance-contract",
+        "--execution",
+        executionPath,
+      ),
+      /requires approved test-contract review/,
+    );
+    const { stdout: pendingReadyOutput } = await cli(
+      "ready",
+      planPath,
+      "--state",
+      statePath,
+    );
+    assert.equal(
+      JSON.parse(pendingReadyOutput).some(
+        ({ id }) => id === "shared-native-dialog",
+      ),
+      false,
+    );
+    await writeFile(
+      path.join(root, reviewPath),
+      `${JSON.stringify(review, null, 2)}\n`,
+    );
+    await cli("tdd-review-record", planPath, statePath, reviewPath);
     const { stdout: redOutput } = await cli(
       "tdd-red",
       planPath,
@@ -2862,11 +3006,7 @@ test("requirements re-entry resets the affected independent review packet", () =
   const plan = createPlan(assessment, config, requirementsState());
   const state = attestTddDesigner(createExecutionState(plan));
   recordTddDesign(plan, state, tddDesign());
-  state.packets["test-contract-review"] = {
-    status: "completed",
-    execution: { runtimeId: "test-review-runtime" },
-  };
-  state.handoffs["test-contract-review"] = {
+  const reviewerHandoff = {
     completedPacket: "test-contract-review",
     changed: [],
     provenChecks: [],
@@ -2874,12 +3014,23 @@ test("requirements re-entry resets the affected independent review packet", () =
     unresolvedFindings: [],
     nextPacket: "shared-native-dialog",
     invalidatedAssumptions: [],
+    workerReportDigest: digest("7"),
   };
+  state.packets["test-contract-review"] = {
+    status: "completed",
+    execution: { runtimeId: "test-review-runtime" },
+    launch: { workerReportDigest: reviewerHandoff.workerReportDigest },
+  };
+  state.handoffs["test-contract-review"] = reviewerHandoff;
   const lifecycle = state.specDrivenTdd.slices["acceptance-contract"];
   recordTddReview(
     plan,
     state,
-    tddReview({ designDigest: lifecycle.designDigest }),
+    tddReview({
+      designDigest: lifecycle.designDigest,
+      workerReportDigest: reviewerHandoff.workerReportDigest,
+      reviewPacketHandoffDigest: stableDigest(reviewerHandoff),
+    }),
   );
   recordTddRed(plan, state, {
     ...tddDesign(),
@@ -3045,6 +3196,54 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
       }),
     /candidate head is stale/,
   );
+});
+
+test("final Spec finding invalidates approval through test-design re-entry", () => {
+  const { plan, state, review: approval } = prepareReviewedTdd();
+  recordTddReview(plan, state, approval);
+  const lifecycle = state.specDrivenTdd.slices["acceptance-contract"];
+  recordTddRed(plan, state, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+    reviewDigest: lifecycle.reviewDigest,
+  });
+  authorizeTddImplementation(
+    plan,
+    state,
+    "acceptance-contract",
+    "implementation-runtime",
+  );
+  recordTddGreen(plan, state, { ...tddDesign(), candidateHead: oid });
+  const binding = createTddReviewBinding(plan, state, oid);
+  const finalReview = createReviewState(oid, [], null, binding);
+
+  recordReview(finalReview, {
+    axis: "Spec",
+    head: oid,
+    findings: [
+      {
+        id: "S1",
+        severity: "P1",
+        summary: "approved test contract omitted a scenario",
+        invalidatesTestContract: true,
+        sliceId: "acceptance-contract",
+        reentry: "test-design",
+      },
+    ],
+    tddEvidence: binding,
+    tddPlan: plan,
+    tddState: state,
+  });
+
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "pending-test-design",
+  );
+  assert.equal(state.packets["discovery-contracts"].status, "pending");
+  assert.equal(state.packets["test-contract-review"].status, "pending");
+  assert.equal(state.packets["shared-native-dialog"].status, "pending");
 });
 
 test("delivery rejects an incomplete mandatory packet graph", () => {

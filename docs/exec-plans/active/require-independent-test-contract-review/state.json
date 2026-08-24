@@ -70,7 +70,17 @@
       }
     },
     "independent-review-delivery": {
-      "status": "pending"
+      "attemptHistory": [],
+      "status": "launching",
+      "session": "independent-review-delivery-r1",
+      "claimId": "independent-review-delivery-r1",
+      "briefDigest": "e6bc3a8c51352e86fd48429906c6050a0042de4010d0c38d0d5c0d24319c6b6a",
+      "baselineDigest": "2cb354986dfdeaff0933f30a1358fea6929e77867453a804c19654ed418a2f2e",
+      "dependencyDigests": {
+        "workflow-integration": "3886c860207cc3950b7af93fe41de8c38ffcb5453c9bbec255b89c65ea86963c"
+      },
+      "packetDigest": "313e8b23da886295bad5f465556d7cec7f48113564f055f30ebb5b8e4b01fce1",
+      "requirementsRevision": 1
     }
   },
   "handoffs": {

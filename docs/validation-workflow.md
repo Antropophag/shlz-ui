@@ -30,7 +30,10 @@ but does not replace marked failure-invariant proof; both must identify the same
 reviewed candidate head. For version 2 slices, both axes and delivery are also
 bound to the current pre-implementation test-contract approval digest. A later
 Spec finding that invalidates that approval returns through requirements or test
-design/review re-entry; the earlier approval cannot waive the finding.
+design/review re-entry; the earlier approval cannot waive the finding. For the
+test-design route, record `invalidatesTestContract: true`, the affected
+`sliceId`, and `reentry: "test-design"`; TDD-bound `review-record` resets the
+slice's design, review, and implementation packets and handoffs.
 
 For GitHub follow-ups, load actionable unresolved threads only. Route verified findings by their bounded delta, never by review author. Exclude resolved discussion, walkthroughs, release/billing messages, and duplicate bot summaries from active context. P0/P1 defects remain blocking regardless of budget.
 

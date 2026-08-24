@@ -50,6 +50,50 @@ export function createSpecDrivenTdd({
       throw new Error(message);
   }
 
+  function resetTddPacket(state, packetId) {
+    state.packets[packetId] = { status: "pending" };
+    delete state.handoffs[packetId];
+  }
+
+  function invalidateTddDesign(state, contract, lifecycle, reason) {
+    state.specDrivenTdd.slices[contract.id] = {
+      status: "pending-test-design",
+      invalidation: {
+        reason,
+        previousDesignDigest: lifecycle.designDigest ?? null,
+        previousRedDigest: lifecycle.redDigest ?? null,
+      },
+    };
+    resetTddPacket(state, contract.testDesignPacket);
+    if (contract.testReviewPacket)
+      resetTddPacket(state, contract.testReviewPacket);
+  }
+
+  function normalizedInputCandidates(input) {
+    if (typeof input !== "string") return [];
+    const normalized = path.posix
+      .normalize(input.replaceAll("\\\\", "/").replace(/^file:/, ""))
+      .replace(/^\.\//, "");
+    const parts = normalized.split("/").filter(Boolean);
+    return parts.map((_, index) => parts.slice(index).join("/"));
+  }
+
+  function isProhibitedReviewInput(input, contract) {
+    if (typeof input !== "string") return true;
+    const candidates = normalizedInputCandidates(
+      input.replace(/^handoff:/, ""),
+    );
+    return candidates.some(
+      (candidate) =>
+        contract.productionSurface.some((pattern) =>
+          matchesPattern(candidate, pattern),
+        ) ||
+        candidate === contract.implementationPacket ||
+        (candidate.includes(contract.implementationPacket) &&
+          /(?:^|[./_-])handoff(?:[./_-]|$)/.test(candidate)),
+    );
+  }
+
   function tddRetentionIdentity(plan, state, contract, design) {
     const packet = (id) => plan.packets.find((item) => item.id === id);
     return {
@@ -532,21 +576,7 @@ export function createSpecDrivenTdd({
       );
     } catch (error) {
       if (phase === "green" || plan.specDrivenTdd.version >= 2)
-        state.specDrivenTdd.slices[sliceId] = {
-          status:
-            phase === "red" ? "pending-test-review" : "pending-test-design",
-          invalidation: {
-            reason: error.message,
-            ...(phase === "red"
-              ? {
-                  design: lifecycle.design,
-                  designDigest: lifecycle.designDigest,
-                  sliceContractDigest: lifecycle.sliceContractDigest,
-                }
-              : {}),
-            previousRedDigest: lifecycle.redDigest,
-          },
-        };
+        invalidateTddDesign(state, contract, lifecycle, error.message);
       throw error;
     }
     const worktree = {
@@ -735,11 +765,19 @@ export function createSpecDrivenTdd({
         `spec-driven TDD slice ${handoff.sliceId} is not awaiting test-contract review`,
       );
     const reviewerPacket = state.packets?.[contract.testReviewPacket];
+    const reviewerHandoff = state.handoffs?.[contract.testReviewPacket];
     if (
       typeof handoff.runtimeId !== "string" ||
       !handoff.runtimeId ||
       reviewerPacket?.status !== "completed" ||
       reviewerPacket.execution?.runtimeId !== handoff.runtimeId ||
+      !reviewerHandoff ||
+      handoff.reviewPacketHandoffDigest !== valueDigest(reviewerHandoff) ||
+      !reviewerHandoff.workerReportDigest ||
+      handoff.workerReportDigest !== reviewerHandoff.workerReportDigest ||
+      (reviewerPacket.launch?.workerReportDigest &&
+        reviewerHandoff.workerReportDigest !==
+          reviewerPacket.launch.workerReportDigest) ||
       handoff.runtimeId === lifecycle.design.runtimeId
     )
       throw new Error(
@@ -747,14 +785,7 @@ export function createSpecDrivenTdd({
       );
     if (
       !Array.isArray(handoff.inputs) ||
-      handoff.inputs.some(
-        (input) =>
-          contract.productionSurface.some((pattern) =>
-            matchesPattern(input, pattern),
-          ) ||
-          input === contract.implementationPacket ||
-          input === `handoff:${contract.implementationPacket}`,
-      )
+      handoff.inputs.some((input) => isProhibitedReviewInput(input, contract))
     )
       throw new Error(
         "spec-driven TDD review declares prohibited production context",
@@ -787,14 +818,15 @@ export function createSpecDrivenTdd({
         throw new Error(
           "spec-driven TDD changes-requested review requires bounded findings only",
         );
-      state.specDrivenTdd.slices[handoff.sliceId] = {
-        status: "pending-test-design",
-        invalidation: {
-          reason: "independent test-contract review requested changes",
-          previousDesignDigest: lifecycle.designDigest,
-          findings: stableValue(handoff.findings),
-        },
-      };
+      const findings = stableValue(handoff.findings);
+      invalidateTddDesign(
+        state,
+        contract,
+        lifecycle,
+        "independent test-contract review requested changes",
+      );
+      state.specDrivenTdd.slices[handoff.sliceId].invalidation.findings =
+        findings;
       return state;
     }
     if (handoff.verdict !== "approved" || handoff.findings !== undefined)
@@ -861,11 +893,8 @@ export function createSpecDrivenTdd({
         "RED evidence does not match the designed acceptance contract",
       );
     } catch (error) {
-      if (plan.specDrivenTdd.version >= 2) {
-        lifecycle.status = "pending-test-review";
-        delete lifecycle.review;
-        delete lifecycle.reviewDigest;
-      }
+      if (plan.specDrivenTdd.version >= 2)
+        invalidateTddDesign(state, contract, lifecycle, error.message);
       throw error;
     }
     if (
