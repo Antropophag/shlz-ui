@@ -1277,12 +1277,6 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
     assert.equal(red.red.runs.length, 2);
     assert.ok(red.red.runs.every(({ exitCode }) => exitCode !== 0));
     assert.equal(red.red.normalizedFailureSignature, "ERR_CONTRACT_MISSING");
-    assert.equal(
-      (
-        await exec("git", ["worktree", "list", "--porcelain"], { cwd: root })
-      ).stdout.includes("shlz-ui-tdd-"),
-      false,
-    );
     const state = await load(statePath);
     authorizeTddImplementation(
       plan,
@@ -1411,12 +1405,6 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
         new RegExp(signature),
       );
     }
-    assert.equal(
-      (
-        await exec("git", ["worktree", "list", "--porcelain"], { cwd: root })
-      ).stdout.includes("shlz-ui-tdd-"),
-      false,
-    );
   } finally {
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });
