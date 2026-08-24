@@ -1,0 +1,133 @@
+{
+  "id": "require-independent-test-contract-review",
+  "baseline": "eecb39d767d4ec3cacd3b1fbcd7748dc193da64e",
+  "requirementsGate": "required",
+  "openSpecChange": "require-independent-test-contract-review",
+  "signals": {
+    "independentWorkUnits": 3,
+    "sharedSeams": 1,
+    "contracts": 1,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 1,
+    "changedScope": 2,
+    "reviewRisk": 3,
+    "contextGrowthRisk": 2
+  },
+  "openSpecTaskCount": 9,
+  "workUnits": [
+    {
+      "id": "review-lifecycle",
+      "group": "review-lifecycle",
+      "objective": "Implement the independent test-contract review state and public transition test-first",
+      "scope": [
+        "plan validation",
+        "review state",
+        "CLI transition",
+        "focused contract tests"
+      ],
+      "nonGoals": ["final delivery", "general approval framework"],
+      "dependencies": [],
+      "contracts": ["harness/independent-test-contract-review"],
+      "contextSources": [
+        "openspec/changes/require-independent-test-contract-review/**",
+        "tools/lib/harness/spec-driven-tdd.mjs",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "implementationSurface": [
+        "tools/lib/harness/**",
+        "tools/harness.mjs",
+        "tools/tests/**"
+      ],
+      "focusedValidation": ["harness", "openspec"],
+      "outputs": ["review lifecycle", "public CLI", "known-bad contract tests"],
+      "handoff": ["state interface", "test results", "settled compatibility"],
+      "implementationOutcomes": [
+        "review-before-RED",
+        "runtime independence",
+        "tamper rejection"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "workflow-integration",
+      "group": "workflow-integration",
+      "objective": "Compose review approval with TDD re-entry, final review, delivery, and operator guidance",
+      "scope": [
+        "downstream bindings",
+        "representative scenario",
+        "agent-facing docs",
+        "aggregate validation"
+      ],
+      "nonGoals": ["merge", "UI packages", "source design assets"],
+      "dependencies": ["review-lifecycle"],
+      "contracts": [
+        "harness/independent-test-contract-review",
+        "harness/spec-driven-tdd"
+      ],
+      "contextSources": [
+        "tools/lib/harness/**",
+        "tools/tests/**",
+        "docs/{agent-execution,validation-workflow}.md"
+      ],
+      "implementationSurface": [
+        "tools/**",
+        "docs/**",
+        "openspec/changes/require-independent-test-contract-review/**"
+      ],
+      "focusedValidation": ["harness", "openspec", "full"],
+      "outputs": [
+        "integrated gates",
+        "scenario evidence",
+        "updated workflow docs"
+      ],
+      "handoff": ["validation results", "known limitations", "review inputs"],
+      "implementationOutcomes": [
+        "re-entry invalidation",
+        "review/delivery freshness",
+        "real scenario discrimination"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "independent-review-delivery",
+      "group": "independent-review-delivery",
+      "objective": "Independently review, remediate, prove failure invariants, and deliver an open PR",
+      "scope": [
+        "Standards review",
+        "Spec review",
+        "failure-path proof",
+        "PR delivery"
+      ],
+      "nonGoals": ["merge", "repository-wide refactor"],
+      "dependencies": ["workflow-integration"],
+      "contracts": [
+        "openspec/changes/require-independent-test-contract-review/**"
+      ],
+      "contextSources": [
+        "openspec/changes/require-independent-test-contract-review/**",
+        "docs/validation-workflow.md",
+        "docs/exec-plans/active/require-independent-test-contract-review/review-findings-r1.json",
+        "tools/lib/harness/**",
+        "tools/tests/harness.test.mjs"
+      ],
+      "implementationSurface": ["current diff remediation only"],
+      "focusedValidation": [
+        "harness",
+        "openspec",
+        "full",
+        "two-axis review",
+        "failure-path proof"
+      ],
+      "outputs": ["review dispositions", "delivery evidence", "open PR"],
+      "handoff": ["resolved findings", "residual risks", "PR URL"],
+      "implementationOutcomes": [
+        "independent Standards pass",
+        "independent Spec pass",
+        "unmerged PR"
+      ],
+      "preferredExecutionMode": "isolated-subagent"
+    }
+  ]
+}

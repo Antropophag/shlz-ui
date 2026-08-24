@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "kind": "existing-pull-request",
+  "commit": "8e0512b1f1639986efda5bd0c5c5ef45eb9dfa90",
+  "branch": "feat/independent-test-contract-review",
+  "defaultBranch": "main",
+  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/38"
+}

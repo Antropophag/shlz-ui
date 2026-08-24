@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "revision": 3,
+  "intent": "Resolve verified CodeRabbit findings on PR #38 without weakening spec-driven TDD or independent test review.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "finding-disposition",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "independently verify every current CodeRabbit finding and fix only confirmed problems"
+      }
+    },
+    {
+      "id": "evidence-integrity",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-authority",
+        "ref": "docs/agent-execution.md: runtime-bound briefs and handoffs cannot be regenerated as caller-authored proof"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "resolve blocking threads and leave PR #38 unmerged"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "require-independent-test-contract-review",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit authorization to verify, remediate, prove, review, and update PR #38"
+    }
+  }
+}

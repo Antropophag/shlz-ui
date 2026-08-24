@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Require independent review of an enforced test contract before it can prove RED or authorize production implementation.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "review-contract",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "determine requirements and boundaries"
+      }
+    },
+    {
+      "id": "lifecycle-placement",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "determine lifecycle" }
+    },
+    {
+      "id": "machine-enforcement",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "determine degree of machine enforcement"
+      }
+    },
+    {
+      "id": "gate-composition",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "determine interaction with TDD and review gates"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "implement as a separate OpenSpec change, open a PR, and do not merge"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "require-independent-test-contract-review",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit request to discover, implement, validate, and open an unmerged PR"
+    }
+  }
+}

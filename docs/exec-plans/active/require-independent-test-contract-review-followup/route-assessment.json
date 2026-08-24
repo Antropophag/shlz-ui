@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "intent": "Ensure independent test-contract review excludes actual production context delivered by packet context sources, dependency handoffs, and worker briefs.",
+  "route": "open-spec",
+  "openSpecChange": "require-independent-test-contract-review",
+  "requiredDecisions": [
+    {
+      "id": "effective-context-enforcement",
+      "owner": "agent",
+      "blocking": true
+    },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

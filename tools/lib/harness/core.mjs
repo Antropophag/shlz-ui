@@ -1093,11 +1093,25 @@ function assertSliceSeam(slice) {
 }
 
 function validateSpecDrivenTdd(contract, packets, executionIsolation) {
-  if (!contract || contract.version !== 1 || !Array.isArray(contract.slices))
-    throw new Error("spec-driven TDD contract version must be 1");
+  if (
+    !contract ||
+    ![1, 2].includes(contract.version) ||
+    !Array.isArray(contract.slices)
+  )
+    throw new Error("spec-driven TDD contract version must be 1 or 2");
   if (!contract.slices.length)
     throw new Error("spec-driven TDD contract requires slices");
   const packetIds = new Set(packets.map(({ id }) => id));
+  const packetById = new Map(packets.map((packet) => [packet.id, packet]));
+  const dependsOn = (packetId, ancestorId, seen = new Set()) => {
+    if (seen.has(packetId)) return false;
+    seen.add(packetId);
+    const dependencies = packetById.get(packetId)?.dependencies ?? [];
+    return (
+      dependencies.includes(ancestorId) ||
+      dependencies.some((id) => dependsOn(id, ancestorId, seen))
+    );
+  };
   const sliceIds = new Set();
   let hasEnforcedSlice = false;
   for (const slice of contract.slices) {
@@ -1134,10 +1148,34 @@ function validateSpecDrivenTdd(contract, packets, executionIsolation) {
     const implementationPacket = packets.find(
       ({ id }) => id === slice.implementationPacket,
     );
-    if (!implementationPacket.dependencies.includes(slice.testDesignPacket))
+    if (
+      contract.version === 1 &&
+      !implementationPacket.dependencies.includes(slice.testDesignPacket)
+    )
       throw new Error(
         `spec-driven TDD slice ${slice.id} implementation packet must depend on test design`,
       );
+    if (contract.version >= 2) {
+      const reviewPacket = packets.find(
+        ({ id }) => id === slice.testReviewPacket,
+      );
+      if (
+        !reviewPacket ||
+        slice.testReviewPacket === slice.testDesignPacket ||
+        slice.testReviewPacket === slice.implementationPacket ||
+        !reviewPacket.dependencies.includes(slice.testDesignPacket) ||
+        !dependsOn(slice.implementationPacket, slice.testReviewPacket) ||
+        !guardedModes.has(reviewPacket.preferredExecutionMode)
+      )
+        throw new Error(
+          `spec-driven TDD slice ${slice.id} requires a distinct guarded test review packet between design and implementation`,
+        );
+      assertTddReviewContext(
+        { specDrivenTdd: contract, packets },
+        null,
+        slice.testReviewPacket,
+      );
+    }
     assertSliceSeam(slice);
   }
   if (hasEnforcedSlice && executionIsolation?.enforced !== true)
@@ -1343,6 +1381,7 @@ async function walk(root, directory = "") {
 
 export async function contextIndex(plan, packetId, repoRoot, state = null) {
   validatePlan(plan, { sizing: { decompositionRequired: [] } });
+  assertTddReviewContext(plan, state, packetId);
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
   const allFiles = await walk(repoRoot);
@@ -1377,7 +1416,11 @@ const tddSlicesForPacket = (plan, packetId, role) =>
     (slice) =>
       slice.applicability === "enforced" &&
       slice[
-        role === "implementation" ? "implementationPacket" : "testDesignPacket"
+        role === "implementation"
+          ? "implementationPacket"
+          : role === "review"
+            ? "testReviewPacket"
+            : "testDesignPacket"
       ] === packetId,
   );
 
@@ -1415,6 +1458,11 @@ export function readyPackets(plan, state = null) {
         (!state?.packets ||
           (state.packets[packet.id]?.status ?? "pending") === "pending") &&
         packet.dependencies.every((id) => completed.has(id)) &&
+        tddSlicesForPacket(plan, packet.id, "review").every(
+          (slice) =>
+            state?.specDrivenTdd?.slices?.[slice.id]?.status ===
+            "pending-test-review",
+        ) &&
         tddSlicesForPacket(plan, packet.id, "implementation").every(
           (slice) =>
             state?.specDrivenTdd?.slices?.[slice.id]?.status === "red-proven",
@@ -1539,10 +1587,12 @@ const valueDigest = (value) =>
     .digest("hex");
 
 const {
+  assertTddReviewContext,
   createTddReentryEvidence,
   createTddDesignEvidence,
   runTddAcceptance,
   recordTddDesign,
+  recordTddReview,
   recordTddRed,
   authorizeTddImplementation,
   recordTddGreen,
@@ -1563,6 +1613,7 @@ export {
   createTddDesignEvidence,
   runTddAcceptance,
   recordTddDesign,
+  recordTddReview,
   recordTddRed,
   authorizeTddImplementation,
   recordTddGreen,
@@ -1606,6 +1657,7 @@ export function createWorkerBrief(
   );
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
+  assertTddReviewContext(plan, state, packetId, contextCapsule);
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready for a worker brief`);
   if (!claimId) throw new Error("worker brief requires claimId");
@@ -2041,6 +2093,7 @@ function applyTddRequirementsReentry(
     };
     for (const affectedPacket of [
       contract.testDesignPacket,
+      ...(contract.testReviewPacket ? [contract.testReviewPacket] : []),
       contract.implementationPacket,
     ]) {
       if (affectedPacket === packetId) continue;
@@ -2591,6 +2644,14 @@ export function createTddReviewBinding(plan, state, candidateHead) {
       throw new Error(
         `spec-driven TDD slice ${contract.id} requires accepted GREEN`,
       );
+    if (
+      plan.specDrivenTdd.version >= 2 &&
+      (!lifecycle.reviewDigest ||
+        lifecycle.retentionIdentity?.reviewDigest !== lifecycle.reviewDigest)
+    )
+      throw new Error(
+        `spec-driven TDD slice ${contract.id} test-contract approval evidence is stale`,
+      );
     if (lifecycle.sliceContractDigest !== valueDigest(contract))
       throw new Error(
         `spec-driven TDD slice ${contract.id} contract evidence is stale`,
@@ -2607,6 +2668,9 @@ export function createTddReviewBinding(plan, state, candidateHead) {
     return {
       id: contract.id,
       designDigest: lifecycle.designDigest,
+      ...(lifecycle.reviewDigest
+        ? { testReviewDigest: lifecycle.reviewDigest }
+        : {}),
       redDigest: lifecycle.redDigest,
       greenDigest: lifecycle.greenDigest,
       sliceContractDigest: lifecycle.sliceContractDigest,
@@ -2720,7 +2784,7 @@ export function recordFailurePathDegradation(state, capability, reason) {
 
 export function recordReview(
   state,
-  { axis, head, findings, tddEvidence = null },
+  { axis, head, findings, tddEvidence = null, tddPlan = null, tddState = null },
 ) {
   if (
     !["Standards", "Spec"].includes(axis) ||
@@ -2749,6 +2813,42 @@ export function recordReview(
     );
   if (state.failurePathProof && head !== state.failurePathProof.reviewedHead)
     throw new Error("failure-path proof is stale for the reviewed head");
+  const reentries = findings.filter(
+    ({ invalidatesTestContract }) => invalidatesTestContract === true,
+  );
+  if (reentries.length) {
+    if (axis !== "Spec" || !tddPlan || !tddState)
+      throw new Error(
+        "approval-invalidating Spec findings require TDD test-design re-entry",
+      );
+    for (const finding of reentries) {
+      const contract = tddPlan.specDrivenTdd?.slices.find(
+        ({ id }) => id === finding.sliceId,
+      );
+      const lifecycle = tddState.specDrivenTdd?.slices?.[finding.sliceId];
+      if (!contract || !lifecycle || finding.reentry !== "test-design")
+        throw new Error(
+          "approval-invalidating Spec findings require a valid test-design re-entry",
+        );
+      tddState.specDrivenTdd.slices[finding.sliceId] = {
+        status: "pending-test-design",
+        invalidation: {
+          reason: `final Spec finding ${finding.id} invalidated test-contract approval`,
+          previousDesignDigest: lifecycle.designDigest ?? null,
+          previousRedDigest: lifecycle.redDigest ?? null,
+          previousGreenDigest: lifecycle.greenDigest ?? null,
+        },
+      };
+      for (const packetId of [
+        contract.testDesignPacket,
+        contract.testReviewPacket,
+        contract.implementationPacket,
+      ].filter(Boolean)) {
+        tddState.packets[packetId] = { status: "pending" };
+        delete tddState.handoffs[packetId];
+      }
+    }
+  }
   const pass = state.passes.length + 1;
   state.passes.push({ pass, axis, head });
   for (const finding of findings)

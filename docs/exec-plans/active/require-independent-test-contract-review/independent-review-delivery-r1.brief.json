@@ -1,0 +1,223 @@
+{
+  "version": 1,
+  "planId": "require-independent-test-contract-review",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/require-independent-test-contract-review/**",
+      "docs/validation-workflow.md",
+      "docs/exec-plans/active/require-independent-test-contract-review/review-findings-r1.json",
+      "tools/lib/harness/**",
+      "tools/tests/harness.test.mjs"
+    ],
+    "contracts": [
+      "openspec/changes/require-independent-test-contract-review/**"
+    ],
+    "dependencies": ["workflow-integration"],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "full",
+      "two-axis review",
+      "failure-path proof"
+    ],
+    "handoff": ["resolved findings", "residual risks", "PR URL"],
+    "id": "independent-review-delivery",
+    "implementationOutcomes": [
+      "independent Standards pass",
+      "independent Spec pass",
+      "unmerged PR"
+    ],
+    "implementationSurface": ["current diff remediation only"],
+    "nonGoals": ["merge", "repository-wide refactor"],
+    "objective": "Independently review, remediate, prove failure invariants, and deliver an open PR",
+    "outputs": ["review dispositions", "delivery evidence", "open PR"],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "Standards review",
+      "Spec review",
+      "failure-path proof",
+      "PR delivery"
+    ]
+  },
+  "claimId": "independent-review-delivery-r1",
+  "baseline": {
+    "branch": "feat/independent-test-contract-review",
+    "commit": "eecb39d767d4ec3cacd3b1fbcd7748dc193da64e",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "2cb354986dfdeaff0933f30a1358fea6929e77867453a804c19654ed418a2f2e",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "require-independent-test-contract-review"
+  },
+  "dependencyDigests": {
+    "workflow-integration": "3886c860207cc3950b7af93fe41de8c38ffcb5453c9bbec255b89c65ea86963c"
+  },
+  "packetDigest": "313e8b23da886295bad5f465556d7cec7f48113564f055f30ebb5b8e4b01fce1",
+  "contextIndex": [
+    "openspec/changes/require-independent-test-contract-review/**",
+    "docs/validation-workflow.md",
+    "docs/exec-plans/active/require-independent-test-contract-review/review-findings-r1.json",
+    "tools/lib/harness/**",
+    "tools/tests/harness.test.mjs"
+  ],
+  "allowedImplementationSurface": ["current diff remediation only"],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "full",
+    "two-axis review",
+    "failure-path proof"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "bed5da8aa44f7d90507cfbd3d5524da48f5205a04728f53a1b92d3496d3630f8",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "96d5dd00799e66e159ac47e03e607b8e38d66d956b79a80303fbafd2772b663b",
+          "changed": [
+            "tools/lib/harness/spec-driven-tdd.mjs",
+            "tools/tests/harness.test.mjs",
+            "docs/agent-execution.md",
+            "docs/validation-workflow.md",
+            "docs/exec-plans/README.md",
+            "openspec/changes/require-independent-test-contract-review/tasks.md"
+          ],
+          "claimId": "workflow-integration-r1",
+          "completedPacket": "workflow-integration",
+          "invalidatedAssumptions": [],
+          "nextPacket": "independent-review-delivery",
+          "provenChecks": [
+            "focused harness: 88/88 passed",
+            "targeted integration scenarios: 8/8 passed",
+            "aggregate repository tests: 183/183 passed",
+            "strict OpenSpec validation: passed",
+            "focused Prettier and git diff --check: passed"
+          ],
+          "settledDecisions": [
+            "affected requirements re-entry invalidates test design and test review together",
+            "version 2 final review and delivery bind the current test-review digest",
+            "RED-time identity drift persists invalidation through the public CLI",
+            "pre-implementation contract review remains distinct from final Standards and Spec review"
+          ],
+          "unresolvedFindings": [
+            "full npm run check stops on formatting of six active execution JSON artifacts whose bound state must be handled by the final packet"
+          ],
+          "workerReportDigest": "519c46253a637d635f474abaa4872f34f18bf7c5a610f720a2fd12890d1f8e72"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "docs/agent-execution.md",
+        "docs/exec-plans/README.md",
+        "docs/validation-workflow.md",
+        "openspec/changes/require-independent-test-contract-review/tasks.md",
+        "tools/lib/harness/spec-driven-tdd.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [
+        "full npm run check stops on formatting of six active execution JSON artifacts whose bound state must be handled by the final packet"
+      ],
+      "verdicts": [
+        "aggregate repository tests: 183/183 passed",
+        "focused Prettier and git diff --check: passed",
+        "focused harness: 88/88 passed",
+        "strict OpenSpec validation: passed",
+        "targeted integration scenarios: 8/8 passed"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "independent-review-delivery-r1",
+    "objective": "Independently review, remediate, prove failure invariants, and deliver an open PR",
+    "obligations": [
+      "contract:openspec/changes/require-independent-test-contract-review/**",
+      "outcome:independent Spec pass",
+      "outcome:independent Standards pass",
+      "outcome:unmerged PR",
+      "validation:failure-path proof",
+      "validation:full",
+      "validation:harness",
+      "validation:openspec",
+      "validation:two-axis review"
+    ],
+    "packetId": "independent-review-delivery",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "require-independent-test-contract-review",
+    "readNow": [
+      {
+        "bytes": 1199,
+        "digest": "3b916240f2f8a26318f240eb9f6c913241db27b26c5961ca48ceb923dba444a7",
+        "path": "docs/exec-plans/active/require-independent-test-contract-review/review-findings-r1.json"
+      },
+      {
+        "bytes": 5364,
+        "digest": "d9c847f2ad93eaf493c036ecfdbdae90c4da8d6727448146c71716f62794f339",
+        "path": "docs/validation-workflow.md"
+      },
+      {
+        "bytes": 40,
+        "digest": "5f408ebe6a8c4d9c4c5e85f9e84c9ac47aa1192c4424a5f5f2224781c6f85fd7",
+        "path": "openspec/changes/require-independent-test-contract-review/.openspec.yaml"
+      },
+      {
+        "bytes": 7067,
+        "digest": "70888bf72b58732d0268d244a97d09a835e8c0ca622bd56d7897a6e054034c2b",
+        "path": "openspec/changes/require-independent-test-contract-review/design.md"
+      },
+      {
+        "bytes": 3014,
+        "digest": "d6a89a09b2454514e187a4cf0a47794e367bf6991f85b2343336d8cd1cde3c73",
+        "path": "openspec/changes/require-independent-test-contract-review/proposal.md"
+      },
+      {
+        "bytes": 6753,
+        "digest": "9a109b1c9a8296b70905b90f366b0fba80c8037f1b80948d553db24a94cee51a",
+        "path": "openspec/changes/require-independent-test-contract-review/specs/harness/independent-test-contract-review/spec.md"
+      },
+      {
+        "bytes": 1929,
+        "digest": "735acdc086bb140b1ccdbb3c136461eaadf832275f7f8f0cb2a663d1c9bb2d8c",
+        "path": "openspec/changes/require-independent-test-contract-review/tasks.md"
+      },
+      {
+        "bytes": 5225,
+        "digest": "0f579f2280e65a6d4f1370ad7cf66204e9c9a1e28aa2c1c9c534f979de3d0958",
+        "path": "tools/lib/harness/codex-worker.mjs"
+      },
+      {
+        "bytes": 27605,
+        "digest": "4f21c1780c408999357768fa9d36eda03b13a9a6a98fa52865948652d275aa3b",
+        "path": "tools/lib/harness/context-cost.mjs"
+      },
+      {
+        "bytes": 103132,
+        "digest": "74e4eaadb0a3940368ef1fc02659f1c43ceeff805f8f3195e77889450e08912d",
+        "path": "tools/lib/harness/core.mjs"
+      },
+      {
+        "bytes": 31430,
+        "digest": "5e011522c13283fb565e351563cc5ef0787b33a5eab4211f3432797d027a7636",
+        "path": "tools/lib/harness/spec-driven-tdd.mjs"
+      },
+      {
+        "bytes": 153363,
+        "digest": "12682307c771675b5ba40c4cb9fbd893d2d51605f3c86e17c0a91f5189b7d0ca",
+        "path": "tools/tests/harness.test.mjs"
+      }
+    ],
+    "sourceDigest": "0ef93cd8a66bda87db1259d204570a146e734aae43d56b91b02823b1afe99fbb",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "e6bc3a8c51352e86fd48429906c6050a0042de4010d0c38d0d5c0d24319c6b6a"
+}

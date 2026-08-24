@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 2,
+  "intent": "Ensure independent test-contract review excludes actual production context delivered by packet context sources, dependency handoffs, and worker briefs.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "effective-context-enforcement",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "if confirmed, fix minimally so prohibited actual context cannot reach the reviewer or approval fails closed"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "re-run independent reviews and leave PR #38 unmerged"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "require-independent-test-contract-review",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit conditional authorization to diagnose, fix, prove, review, and update PR #38"
+    }
+  }
+}

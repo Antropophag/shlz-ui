@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { lstatSync, realpathSync } from "node:fs";
 import { open, readFile, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import path from "node:path";
@@ -37,6 +38,7 @@ import {
   reserveWorkerPacket,
   recordWorkerAttempt,
   recordTddDesign,
+  recordTddReview,
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
@@ -76,6 +78,7 @@ const config = await readJson(
 );
 const [command, ...args] = process.argv.slice(2);
 const stateRoot = path.join(repoRoot, "docs/exec-plans");
+const canonicalStateRoot = realpathSync(stateRoot);
 const within = (root, target) =>
   target === root || target.startsWith(`${root}${path.sep}`);
 const absolute = (file) => {
@@ -86,11 +89,37 @@ const absolute = (file) => {
 };
 const statePath = (file) => {
   const target = absolute(file);
-  if (!within(stateRoot, target))
+  let ancestor = target;
+  const missing = [];
+  let canonicalAncestor;
+  while (!canonicalAncestor) {
+    try {
+      lstatSync(ancestor);
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+      const parent = path.dirname(ancestor);
+      if (parent === ancestor) break;
+      missing.unshift(path.basename(ancestor));
+      ancestor = parent;
+      continue;
+    }
+    try {
+      canonicalAncestor = realpathSync(ancestor);
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+      throw new Error(
+        `mutable harness state must stay under docs/exec-plans: ${file}`,
+      );
+    }
+  }
+  if (!canonicalAncestor)
+    throw new Error(`cannot resolve mutable harness state path: ${file}`);
+  const canonicalTarget = path.join(canonicalAncestor, ...missing);
+  if (!within(canonicalStateRoot, canonicalTarget))
     throw new Error(
       `mutable harness state must stay under docs/exec-plans: ${file}`,
     );
-  return target;
+  return canonicalTarget;
 };
 const repositoryRelative = (file) =>
   path.relative(repoRoot, file).split(path.sep).join("/");
@@ -459,6 +488,19 @@ switch (command) {
     output(state.specDrivenTdd.slices[handoff.sliceId]);
     break;
   }
+  case "tdd-review-record": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const handoff = await readJson(absolute(args[2]));
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      recordTddReview(plan, current, handoff);
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[handoff.sliceId]);
+    break;
+  }
   case "tdd-red":
   case "tdd-green": {
     if (
@@ -486,9 +528,9 @@ switch (command) {
         );
       } catch (error) {
         if (
-          command === "tdd-green" &&
-          current.specDrivenTdd?.slices?.[args[2]]?.status ===
-            "pending-test-design"
+          ["pending-test-design", "pending-test-review"].includes(
+            current.specDrivenTdd?.slices?.[args[2]]?.status,
+          )
         )
           await writeJson(target, current);
         throw error;
@@ -890,21 +932,30 @@ switch (command) {
         throw new Error(
           "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
         );
-      const tddEvidence = current.specDrivenTdd
-        ? createTddReviewBinding(
-            await readJson(absolute(tddPlanPath)),
-            await readJson(absolute(tddStatePath)),
-            option("--head"),
-          )
-        : null;
-      const next = recordReview(current, {
-        axis: option("--axis"),
-        head: option("--head"),
-        findings,
-        tddEvidence,
-      });
-      await writeJson(target, next);
-      return next;
+      const record = async (tddPlan = null, tddState = null) => {
+        const tddEvidence = current.specDrivenTdd
+          ? createTddReviewBinding(tddPlan, tddState, option("--head"))
+          : null;
+        const next = recordReview(current, {
+          axis: option("--axis"),
+          head: option("--head"),
+          findings,
+          tddEvidence,
+          tddPlan,
+          tddState,
+        });
+        if (tddState) await writeJson(statePath(tddStatePath), tddState);
+        await writeJson(target, next);
+        return next;
+      };
+      if (!current.specDrivenTdd) return record();
+      const tddTarget = statePath(tddStatePath);
+      if (tddTarget === target)
+        throw new Error("review state and TDD state must use distinct files");
+      const tddPlan = await readJson(absolute(tddPlanPath));
+      return withStateLock(tddTarget, async () =>
+        record(tddPlan, await readJson(tddTarget)),
+      );
     });
     output(reviewContext(state));
     break;
@@ -946,6 +997,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-review-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

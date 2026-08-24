@@ -1,0 +1,7 @@
+{
+  "command": [
+    "node",
+    "tools/tests/independent-test-contract-review-fixture.mjs"
+  ],
+  "timeoutMs": 120000
+}

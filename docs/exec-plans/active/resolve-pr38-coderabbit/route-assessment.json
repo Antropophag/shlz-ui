@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Resolve verified CodeRabbit findings on PR #38 without weakening spec-driven TDD or independent test review.",
+  "route": "open-spec",
+  "openSpecChange": "require-independent-test-contract-review",
+  "requiredDecisions": [
+    { "id": "finding-disposition", "owner": "agent", "blocking": true },
+    { "id": "evidence-integrity", "owner": "repo", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
