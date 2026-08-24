@@ -19,4 +19,4 @@
 
 - [x] 4.1 Run representative fixtures through the public harness seam, including one successful end-to-end red-to-green flow and every specified known-bad/inapplicable/re-entry case; record exact deterministic outcomes and run focused plus aggregate harness/OpenSpec validation.
 - [x] 4.2 Perform fixed-baseline Standards and Spec reviews with applicable executable failure-invariant proof, remediate and re-review findings without changing acceptance evidence silently, run delivery guards, push the task branch, and open a separate PR targeting `main` without merging it.
-- [ ] 4.3 Resolve the verified CodeRabbit findings on PR #35 with regression coverage for fail-closed review, execution, re-entry, oracle, worktree, and known-bad evidence behavior; rerun fixed-head validation and review before updating the existing unmerged PR.
+- [x] 4.3 Resolve the verified CodeRabbit findings on PR #35 with regression coverage for fail-closed review, execution, re-entry, oracle, worktree, and known-bad evidence behavior; rerun fixed-head validation and review before updating the existing unmerged PR.
