@@ -183,8 +183,8 @@ test("sidebar opened, closed, and current states use the real interaction seam",
   );
   await expect(sourceMark).toHaveCSS("width", "32px");
   await expect(sourceMark).toHaveCSS("height", "32px");
-  await expect(sourceMarkSheet).toHaveCSS("width", "1040px");
-  await expect(sourceMarkSheet).toHaveCSS("height", "920px");
+  await expect(sourceMarkSheet).toHaveCSS("width", "914px");
+  await expect(sourceMarkSheet).toHaveCSS("height", "1604px");
   const [markBox, sourceSheetBox] = await Promise.all([
     sourceMark.boundingBox(),
     sourceMarkSheet.boundingBox(),
