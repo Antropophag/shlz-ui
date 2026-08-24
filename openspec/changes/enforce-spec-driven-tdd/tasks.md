@@ -18,4 +18,4 @@
 ## 4. Representative evidence and delivery
 
 - [x] 4.1 Run representative fixtures through the public harness seam, including one successful end-to-end red-to-green flow and every specified known-bad/inapplicable/re-entry case; record exact deterministic outcomes and run focused plus aggregate harness/OpenSpec validation.
-- [ ] 4.2 Perform fixed-baseline Standards and Spec reviews with applicable executable failure-invariant proof, remediate and re-review findings without changing acceptance evidence silently, run delivery guards, push the task branch, and open a separate PR targeting `main` without merging it.
+- [x] 4.2 Perform fixed-baseline Standards and Spec reviews with applicable executable failure-invariant proof, remediate and re-review findings without changing acceptance evidence silently, run delivery guards, push the task branch, and open a separate PR targeting `main` without merging it.
