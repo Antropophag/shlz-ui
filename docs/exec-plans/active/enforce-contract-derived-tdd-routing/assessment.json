@@ -26,35 +26,35 @@
         "id": "contract-derived-routing",
         "applicability": "enforced",
         "scenarioIds": [
-          "wave-9-behavior-and-state-bypass-is-rejected",
-          "material-scenarios-have-enforced-coverage",
-          "source-only-contract",
-          "absence-only-contract",
-          "documentation-only-contract"
+          "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration",
+          "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration",
+          "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+          "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage",
+          "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable"
         ],
         "authorities": [
           {
-            "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected",
+            "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           {
-            "scenarioId": "material-scenarios-have-enforced-coverage",
+            "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           {
-            "scenarioId": "source-only-contract",
+            "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           {
-            "scenarioId": "absence-only-contract",
+            "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           {
-            "scenarioId": "documentation-only-contract",
+            "scenarioId": "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           }
@@ -69,6 +69,7 @@
         ],
         "fixtureSurface": [
           "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+          "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md",
           "tools/tests/fixtures/contract-derived-tdd-oracle-{control,decoy}.mjs"
         ],
         "productionSurface": [

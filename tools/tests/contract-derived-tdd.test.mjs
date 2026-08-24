@@ -1,8 +1,13 @@
 import assert from "node:assert/strict";
+import { mkdtemp, mkdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import test from "node:test";
 
 import {
+  assertCurrentContractDerivedTdd,
   contractDerivedTddBinding,
+  loadChangeScenarioSemantics,
   parseDeltaScenarioSemantics,
 } from "../lib/harness/contract-derived-tdd.mjs";
 
@@ -50,6 +55,69 @@ test("normalizes contract order before digesting", () => {
     parseDeltaScenarioSemantics([first, second]).contractDigest,
     parseDeltaScenarioSemantics([second, first]).contractDigest,
   );
+});
+
+test("binds the digest to normalized normative scenario content", () => {
+  const original = contract("material-behavior");
+  const changed = {
+    ...original,
+    content: original.content.replace(
+      "- **THEN** routing is derived",
+      "- **THEN** a different observable result is derived",
+    ),
+  };
+  const lineEndingOnly = {
+    ...original,
+    content: original.content.replaceAll("\n", "\r\n"),
+  };
+  assert.notEqual(
+    parseDeltaScenarioSemantics([original]).contractDigest,
+    parseDeltaScenarioSemantics([changed]).contractDigest,
+  );
+  assert.equal(
+    parseDeltaScenarioSemantics([original]).contractDigest,
+    parseDeltaScenarioSemantics([lineEndingOnly]).contractDigest,
+  );
+});
+
+test("derives capability identity from the delta spec path", async () => {
+  const repo = await mkdtemp(path.join(tmpdir(), "shlz-contract-capability-"));
+  try {
+    const specRoot = path.join(
+      repo,
+      "openspec/changes/example/specs/actual/capability",
+    );
+    await mkdir(specRoot, { recursive: true });
+    await writeFile(
+      path.join(specRoot, "spec.md"),
+      contract("source-only").content,
+    );
+    const result = await loadChangeScenarioSemantics(repo, "example", [
+      "planner/false-capability",
+    ]);
+    assert.equal(
+      result.scenarios[0].id,
+      "actual/capability::Deterministic routing::Contract category",
+    );
+    const plan = {
+      openSpecChange: "example",
+      contractDerivedTdd: contractDerivedTddBinding(result),
+    };
+    await assertCurrentContractDerivedTdd(repo, plan);
+    await writeFile(
+      path.join(specRoot, "spec.md"),
+      contract("source-only").content.replace(
+        "- **THEN** routing is derived",
+        "- **THEN** changed contract behavior is derived",
+      ),
+    );
+    await assert.rejects(
+      assertCurrentContractDerivedTdd(repo, plan),
+      /obligation is stale/,
+    );
+  } finally {
+    await rm(repo, { recursive: true, force: true });
+  }
 });
 
 test("rejects missing, duplicate, and unknown declarations", () => {

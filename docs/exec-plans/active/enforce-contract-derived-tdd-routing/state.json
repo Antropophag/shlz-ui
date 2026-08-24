@@ -36,38 +36,7 @@
       }
     },
     "routing-engine": {
-      "attemptHistory": [],
-      "status": "completed",
-      "session": "contract-tdd-routing-engine",
-      "claimId": "contract-tdd-routing-engine-20260825",
-      "briefDigest": "442f6847b6f8e3a91637b0ea95379617426c83496ca681f9fe53ee98681bcfd1",
-      "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
-      "dependencyDigests": {
-        "test-design": "2f137c23fbfe2d932bbecac7f756c1564432536c91422e74187aa6d83d22e0cf"
-      },
-      "packetDigest": "c0e7406a8dac4c669fb1a4442d6569bdb75efb56d182aced076b563d4487b478",
-      "requirementsRevision": 1,
-      "execution": {
-        "version": 1,
-        "source": "codex-exec-jsonl",
-        "runtimeId": "01a035e5-c914-7c60-8c25-3ddd4b0a092b",
-        "launchId": "9f83cf37-ad24-4655-bfe0-9638b313d997",
-        "startedAt": "2026-08-24T22:30:44.999Z",
-        "evidenceDigest": "3ead0461553fa6bb8f9d6680fb9f91e832979c7eb7199ab4cb31c79aa7c5aa04"
-      },
-      "launch": {
-        "terminalStatus": "completed",
-        "launchId": "9f83cf37-ad24-4655-bfe0-9638b313d997",
-        "usage": {
-          "input_tokens": 1473766,
-          "cached_input_tokens": 1376256,
-          "cache_write_input_tokens": 0,
-          "output_tokens": 10617,
-          "reasoning_output_tokens": 2146
-        },
-        "workerReport": "Implemented the `routing-engine` packet.\n\nChanged interface:\n\n- `harness plan` now parses the requirements-selected OpenSpec delta before writing a plan.\n- Added five closed `implementation-semantics` categories.\n- Material scenarios require exact, single enforced-slice coverage.\n- Plans persist a compact `contractDerivedTdd` binding.\n- Historical plans without the binding remain readable.\n- Added parser tests and operator documentation.\n\nValidation:\n\n- Contract-derived routing probe: passed, including six Wave 9 identities.\n- Parser tests: 9/9 passed.\n- Harness tests: 92/92 passed.\n- OpenSpec strict validation: passed.\n- OpenSpec repository check: passed.\n- Prettier and `git diff --check`: passed.\n\nSettled trade-offs:\n\n- Obligation derivation uses normative scenario declarations, not planner-selected fields or prose inference.\n- Evidence-only scenarios do not mandate formal TDD.\n- Existing plans require no migration.\n\nOpenSpec progress is 6/8 tasks. Tasks 3.2’s full repository suite and 3.3’s independent reviews, delivery guards, and PR remain for the root orchestrator, as required by the packet lifecycle. No commit, push, or PR was created.",
-        "workerReportDigest": "39f040398d02bc375e05db2a75f069465ad09da3ff7a3cf773dcbce8c3bce0a4"
-      }
+      "status": "pending"
     },
     "independent-review-delivery": {
       "status": "pending"
@@ -94,50 +63,20 @@
       "claimId": "contract-tdd-test-design-r5-20260825",
       "briefDigest": "a6d6af7d4156b95f8373b9b96904f9d1c6c49e3738bc185ccf50f173b44bc025",
       "workerReportDigest": "3f08c4ff1c4b5e7d285fa84269cddc1296dc6c3d89b1b800a45e3c609d403911"
-    },
-    "routing-engine": {
-      "completedPacket": "routing-engine",
-      "changed": [
-        "contract semantics parser",
-        "plan-time obligation and exact coverage enforcement",
-        "compact plan binding",
-        "focused tests and operator guidance"
-      ],
-      "provenChecks": [
-        "contract routing probe passes",
-        "parser tests 9/9",
-        "harness tests 92/92",
-        "strict OpenSpec passes",
-        "check:openspec passes",
-        "Prettier and diff check pass"
-      ],
-      "settledDecisions": [
-        "normative scenario annotations are the obligation authority",
-        "material behavior/state require exact enforced coverage",
-        "evidence-only categories do not mandate TDD",
-        "historical plans remain readable"
-      ],
-      "unresolvedFindings": [],
-      "nextPacket": "independent-review-delivery",
-      "invalidatedAssumptions": [],
-      "claimId": "contract-tdd-routing-engine-20260825",
-      "briefDigest": "442f6847b6f8e3a91637b0ea95379617426c83496ca681f9fe53ee98681bcfd1",
-      "workerReportDigest": "39f040398d02bc375e05db2a75f069465ad09da3ff7a3cf773dcbce8c3bce0a4"
     }
   },
   "specDrivenTdd": {
     "version": 1,
     "slices": {
       "contract-derived-routing": {
-        "status": "green-proven",
-        "implementationRuntimeId": "01a035e5-c914-7c60-8c25-3ddd4b0a092b",
+        "status": "red-proven",
         "design": {
-          "acceptanceDigest": "b0b44c840a283973398b36738c3d92cbf93548de567e6f7c899ff310c2b2e0f6",
+          "acceptanceDigest": "123022871c9234aece7d638f0038c9b113c2753e2d7f3e7e868fcd080ae3eb72",
           "acceptanceFiles": [
             "tools/tests/contract-derived-tdd-routing-probe.mjs"
           ],
           "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
-          "contractDigest": "ba3245268d401357a5a4c8e453c6a532d9cb54492c2f98529a7dba8977db42ef",
+          "contractDigest": "b3e2eb25b03dd5ee504fbe19116094be79cc2aa6d14ec1a32785e2d9676c5159",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass",
           "expectedResultSource": {
@@ -145,12 +84,13 @@
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           "failedScenarioIds": [
-            "wave-9-behavior-and-state-bypass-is-rejected",
-            "material-scenarios-have-enforced-coverage"
+            "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+            "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
           ],
-          "fixtureDigest": "f602f10950661812b20e278a8944e561960b94f7c97ad564aae1d29e04f4adde",
+          "fixtureDigest": "ee3d6db55b823031ad973b7bc4b05115d8d205a5233e3d4dfc2e2226f692f7b1",
           "fixtureFiles": [
             "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+            "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md",
             "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
             "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs"
           ],
@@ -163,10 +103,12 @@
             "controlAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
             "decoyAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
             "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY",
-            "scenarioIds": ["material-scenarios-have-enforced-coverage"],
+            "scenarioIds": [
+              "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
+            ],
             "version": 1
           },
-          "oracleChallengeDigest": "4f2f89a5eaf7c0d127bd4d6d2a7aa18b81cac7582c2ae79885da3d04966225e5",
+          "oracleChallengeDigest": "afddd99e644fe55eb91641bae3a0aab18f9d9c8e7a65ade5f2729249fca5f74b",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -198,47 +140,47 @@
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected"
+              "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "material-scenarios-have-enforced-coverage"
+              "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "source-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "absence-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "documentation-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable"
             }
           ],
           "sliceId": "contract-derived-routing",
           "version": 1
         },
-        "designDigest": "ed09805bdf3d9e57cdac59259059ff65ea2f58be5ba63f9e2419142c95ad2ad6",
-        "sliceContractDigest": "ba3245268d401357a5a4c8e453c6a532d9cb54492c2f98529a7dba8977db42ef",
+        "designDigest": "5e5ca13556aa197a8c71d421ebb67f65e00a8ebed76ebdec0e06113142d2c2a4",
+        "sliceContractDigest": "b3e2eb25b03dd5ee504fbe19116094be79cc2aa6d14ec1a32785e2d9676c5159",
         "retentionIdentity": {
-          "scenarioDigest": "8ec5f6c1ef6c26a5c0c665c55665017566155f85a5723c34f5bde97a2a07779a",
-          "authorityDigest": "c02b869aeaece58132b217ae68a4d6ad7cf3c6c818da8f3269558983b67caa08",
-          "dependencyDigest": "9de4a39d0104e90bc8cbe1d1b71c86ebd7704e44876d47c5dfffa3e95a617d13",
+          "scenarioDigest": "f0ec53a07d73a0572fe6678132851bab4fb8588d09386238affe4de5b72313d1",
+          "authorityDigest": "ef10640f5b4362d77123574089a432d1bbe8f4f531c1e679789e1d93af2cfe50",
+          "dependencyDigest": "53c05b263b8bd2fb04053e9600160de343c04b4d21340bba0ad9731d90383a30",
           "commandDigest": "279d20967e95bdc1ba53e7b086b1b23f30ecbc45ae947b700b62d2cd7ff41d85",
-          "acceptanceDigest": "b0b44c840a283973398b36738c3d92cbf93548de567e6f7c899ff310c2b2e0f6",
-          "fixtureDigest": "f602f10950661812b20e278a8944e561960b94f7c97ad564aae1d29e04f4adde",
+          "acceptanceDigest": "123022871c9234aece7d638f0038c9b113c2753e2d7f3e7e868fcd080ae3eb72",
+          "fixtureDigest": "ee3d6db55b823031ad973b7bc4b05115d8d205a5233e3d4dfc2e2226f692f7b1",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
-          "sliceContractDigest": "ba3245268d401357a5a4c8e453c6a532d9cb54492c2f98529a7dba8977db42ef"
+          "sliceContractDigest": "b3e2eb25b03dd5ee504fbe19116094be79cc2aa6d14ec1a32785e2d9676c5159"
         },
         "red": {
-          "acceptanceDigest": "b0b44c840a283973398b36738c3d92cbf93548de567e6f7c899ff310c2b2e0f6",
+          "acceptanceDigest": "123022871c9234aece7d638f0038c9b113c2753e2d7f3e7e868fcd080ae3eb72",
           "acceptanceFiles": [
             "tools/tests/contract-derived-tdd-routing-probe.mjs"
           ],
           "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
-          "contractDigest": "ba3245268d401357a5a4c8e453c6a532d9cb54492c2f98529a7dba8977db42ef",
+          "contractDigest": "b3e2eb25b03dd5ee504fbe19116094be79cc2aa6d14ec1a32785e2d9676c5159",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass",
           "expectedResultSource": {
@@ -246,12 +188,13 @@
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           },
           "failedScenarioIds": [
-            "wave-9-behavior-and-state-bypass-is-rejected",
-            "material-scenarios-have-enforced-coverage"
+            "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+            "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
           ],
-          "fixtureDigest": "f602f10950661812b20e278a8944e561960b94f7c97ad564aae1d29e04f4adde",
+          "fixtureDigest": "ee3d6db55b823031ad973b7bc4b05115d8d205a5233e3d4dfc2e2226f692f7b1",
           "fixtureFiles": [
             "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+            "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md",
             "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
             "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs"
           ],
@@ -265,10 +208,12 @@
             "controlAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
             "decoyAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
             "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY",
-            "scenarioIds": ["material-scenarios-have-enforced-coverage"],
+            "scenarioIds": [
+              "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
+            ],
             "version": 1
           },
-          "oracleChallengeDigest": "4f2f89a5eaf7c0d127bd4d6d2a7aa18b81cac7582c2ae79885da3d04966225e5",
+          "oracleChallengeDigest": "afddd99e644fe55eb91641bae3a0aab18f9d9c8e7a65ade5f2729249fca5f74b",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -299,141 +244,40 @@
           "runs": [
             {
               "exitCode": 1,
-              "output": "file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:328\n    throw new Error(\n          ^\n\nError: ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass uncovered=application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress failedScenarioIds=wave-9-behavior-and-state-bypass-is-rejected,material-scenarios-have-enforced-coverage controls=material-covered:accept,source-only:accept,absence-only:accept,documentation-only:accept\n    at file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:328:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n\nNode.js v22.23.1"
+              "output": "file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:348\n    throw new Error(\n          ^\n\nError: ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass uncovered=application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress failedScenarioIds=harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected,harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage controls=material-covered:accept,source-only:accept,absence-only:accept,documentation-only:accept\n    at file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:348:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n\nNode.js v22.23.1"
             },
             {
               "exitCode": 1,
-              "output": "file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:328\n    throw new Error(\n          ^\n\nError: ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass uncovered=application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress failedScenarioIds=wave-9-behavior-and-state-bypass-is-rejected,material-scenarios-have-enforced-coverage controls=material-covered:accept,source-only:accept,absence-only:accept,documentation-only:accept\n    at file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:328:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n\nNode.js v22.23.1"
+              "output": "file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:348\n    throw new Error(\n          ^\n\nError: ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass uncovered=application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress failedScenarioIds=harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected,harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage controls=material-covered:accept,source-only:accept,absence-only:accept,documentation-only:accept\n    at file://<worktree-root>/tools/tests/contract-derived-tdd-routing-probe.mjs:348:11\n    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)\n\nNode.js v22.23.1"
             }
           ],
-          "runtimeId": "tdd-runner-379507",
+          "runtimeId": "tdd-runner-397792",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected"
+              "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "material-scenarios-have-enforced-coverage"
+              "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "source-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "absence-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
             },
             {
               "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "documentation-only-contract"
+              "scenarioId": "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable"
             }
           ],
           "sliceId": "contract-derived-routing",
           "version": 1
         },
-        "redDigest": "7697c92ebf312683ee696104f4752870dfded834c8e13e511833e2763afee57e",
-        "green": {
-          "acceptanceDigest": "b0b44c840a283973398b36738c3d92cbf93548de567e6f7c899ff310c2b2e0f6",
-          "acceptanceFiles": [
-            "tools/tests/contract-derived-tdd-routing-probe.mjs"
-          ],
-          "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
-          "candidateHead": "78ed38fcfdf9889c95f6692da6f1309130811398",
-          "contractDigest": "ba3245268d401357a5a4c8e453c6a532d9cb54492c2f98529a7dba8977db42ef",
-          "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
-          "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass",
-          "expectedResultSource": {
-            "kind": "explicit-openspec-literal",
-            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
-          },
-          "failedScenarioIds": [
-            "wave-9-behavior-and-state-bypass-is-rejected",
-            "material-scenarios-have-enforced-coverage"
-          ],
-          "fixtureDigest": "f602f10950661812b20e278a8944e561960b94f7c97ad564aae1d29e04f4adde",
-          "fixtureFiles": [
-            "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
-            "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
-            "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs"
-          ],
-          "inputs": [
-            "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-            "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json"
-          ],
-          "oracleChallenge": {
-            "adapterEnvironment": "SHLZ_TDD_ORACLE_ADAPTER",
-            "controlAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
-            "decoyAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
-            "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY",
-            "scenarioIds": ["material-scenarios-have-enforced-coverage"],
-            "version": 1
-          },
-          "oracleChallengeDigest": "4f2f89a5eaf7c0d127bd4d6d2a7aa18b81cac7582c2ae79885da3d04966225e5",
-          "oracleChallengeRuns": {
-            "control": [
-              {
-                "exitCode": 0,
-                "output": "contract-derived-routing-v1"
-              },
-              {
-                "exitCode": 0,
-                "output": "contract-derived-routing-v1"
-              }
-            ],
-            "decoy": [
-              {
-                "exitCode": 1,
-                "output": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY"
-              },
-              {
-                "exitCode": 1,
-                "output": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY"
-              }
-            ]
-          },
-          "oracleMethod": {
-            "kind": "behavioral-assertion",
-            "observesSeam": "harness/plan"
-          },
-          "requirementsRevision": 1,
-          "runs": [
-            {
-              "exitCode": 0,
-              "output": "{\n  \"version\": 1,\n  \"outcomes\": [\n    {\n      \"id\": \"wave-9-bypass\",\n      \"expected\": \"reject\",\n      \"status\": \"reject\",\n      \"output\": \"file://<sandbox-root>/tools/lib/harness/core.mjs:1276\\n      throw new Error(\\n            ^\\n\\nError: contract-derived TDD requires enforced coverage; uncovered: application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions\\n    at validatePlan (file://<sandbox-root>/tools/lib/harness/core.mjs:1276:13)\\n    at createPlan (file://<sandbox-root>/tools/lib/harness/core.mjs:1383:10)\\n    at file://<sandbox-root>/tools/harness.mjs:378:18\\n\\nNode.js v22.23.1\\n\"\n    },\n    {\n      \"id\": \"material-covered\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-material-covered\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-material-covered\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-material-covered\\\",\\n    \\\"contractDigest\\\": \\\"0c79071480ad7bf7d96396031e368372b8535555c40862b9c2374c487464efc3\\\",\\n    \\\"requiredScenarioIds\\\": [\\n      \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\"\\n    ]\\n  },\\n  \\\"specDrivenTdd\\\": {\\n    \\\"slices\\\": [\\n      {\\n        \\\"acceptanceSurface\\\": [\\n          \\\"tools/tests/contract-derived-tdd-routing-probe.mjs\\\"\\n        ],\\n        \\\"applicability\\\": \\\"enforced\\\",\\n        \\\"authorities\\\": [\\n          {\\n            \\\"ref\\\": \\\"embedded material-covered contract\\\",\\n            \\\"scenarioId\\\": \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\",\\n            \\\"source\\\": \\\"explicit-openspec-literal\\\"\\n          }\\n        ],\\n        \\\"command\\\": [\\n          \\\"/usr/bin/node\\\",\\n          \\\"tools/tests/contract-derived-tdd-routing-probe.mjs\\\"\\n        ],\\n        \\\"controls\\\": {\\n          \\\"environment\\\": {\\n            \\\"TZ\\\": \\\"UTC\\\"\\n          },\\n          \\\"normalization\\\": [\\n            \\\"repo-root\\\"\\n          ],\\n          \\\"timeoutMs\\\": 10000\\n        },\\n        \\\"fixtureSurface\\\": [\\n          \\\"docs/exec-plans/probe-cases/**\\\"\\n        ],\\n        \\\"id\\\": \\\"covered-behavior\\\",\\n        \\\"implementationPacket\\\": \\\"implementation\\\",\\n        \\\"productionSurface\\\": [\\n          \\\"tools/lib/harness/**\\\"\\n        ],\\n        \\\"repeatCount\\\": 2,\\n        \\\"scenarioIds\\\": [\\n          \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\"\\n        ],\\n        \\\"seam\\\": \\\"harness plan\\\",\\n        \\\"testDesignPacket\\\": \\\"test-design\\\"\\n      }\\n    ],\\n    \\\"version\\\": 1\\n  },\\n  \\\"executionIsolation\\\": {\\n    \\\"version\\\": 1,\\n    \\\"enforced\\\": true,\\n    \\\"unavailableFallback\\\": \\\"stop\\\"\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"test-design\\\",\\n      \\\"objective\\\": \\\"Design the independent acceptance contract\\\",\\n      \\\"scope\\\": [\\n        \\\"acceptance contract\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production implementation\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"harness/contract-derived-tdd-routing\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"acceptance fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"RED probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"independent oracle\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"scenario mapping\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"acceptance contract\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"fresh-session\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"implementation\\\",\\n      \\\"objective\\\": \\\"Implement the covered material behavior\\\",\\n      \\\"scope\\\": [\\n        \\\"production behavior\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"acceptance design\\\"\\n      ],\\n      \\\"dependencies\\\": [\\n        \\\"test-design\\\"\\n      ],\\n      \\\"contracts\\\": [\\n        \\\"harness/contract-derived-tdd-routing\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"approved test-design handoff\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"production fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"GREEN probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"covered behavior\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"validation result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"material behavior\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"fresh-session\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"source-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-source-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-source-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-source-only\\\",\\n    \\\"contractDigest\\\": \\\"a176384d1aa31764f6995751343d6a4da0fa0090c185870485edb4328dc428de\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"absence-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-absence-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-absence-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-absence-only\\\",\\n    \\\"contractDigest\\\": \\\"dbb26520d94c0bf6c2b8427ad4d552d96a84225eae077b94c3a1488cb504370f\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"documentation-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-documentation-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-documentation-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-documentation-only\\\",\\n    \\\"contractDigest\\\": \\\"7750921ff6d3a4ff8c61410c35ed094d53f49ed29a886dbc16c9347a7f141731\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    }\n  ]\n}"
-            },
-            {
-              "exitCode": 0,
-              "output": "{\n  \"version\": 1,\n  \"outcomes\": [\n    {\n      \"id\": \"wave-9-bypass\",\n      \"expected\": \"reject\",\n      \"status\": \"reject\",\n      \"output\": \"file://<sandbox-root>/tools/lib/harness/core.mjs:1276\\n      throw new Error(\\n            ^\\n\\nError: contract-derived TDD requires enforced coverage; uncovered: application-compositions/sidebar-application-shell::Header states preserve native input behavior::Default and hover,application-compositions/sidebar-application-shell::Header states preserve native input behavior::Typing and filled,application-compositions/sidebar-application-shell::Responsive behavior is bounded by evidence::Narrow content stress,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Active and default items,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Keyboard navigation,application-compositions/sidebar-application-shell::Sidebar states are source-traceable and operable::Opened and closed compositions\\n    at validatePlan (file://<sandbox-root>/tools/lib/harness/core.mjs:1276:13)\\n    at createPlan (file://<sandbox-root>/tools/lib/harness/core.mjs:1383:10)\\n    at file://<sandbox-root>/tools/harness.mjs:378:18\\n\\nNode.js v22.23.1\\n\"\n    },\n    {\n      \"id\": \"material-covered\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-material-covered\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-material-covered\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-material-covered\\\",\\n    \\\"contractDigest\\\": \\\"0c79071480ad7bf7d96396031e368372b8535555c40862b9c2374c487464efc3\\\",\\n    \\\"requiredScenarioIds\\\": [\\n      \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\"\\n    ]\\n  },\\n  \\\"specDrivenTdd\\\": {\\n    \\\"slices\\\": [\\n      {\\n        \\\"acceptanceSurface\\\": [\\n          \\\"tools/tests/contract-derived-tdd-routing-probe.mjs\\\"\\n        ],\\n        \\\"applicability\\\": \\\"enforced\\\",\\n        \\\"authorities\\\": [\\n          {\\n            \\\"ref\\\": \\\"embedded material-covered contract\\\",\\n            \\\"scenarioId\\\": \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\",\\n            \\\"source\\\": \\\"explicit-openspec-literal\\\"\\n          }\\n        ],\\n        \\\"command\\\": [\\n          \\\"/usr/bin/node\\\",\\n          \\\"tools/tests/contract-derived-tdd-routing-probe.mjs\\\"\\n        ],\\n        \\\"controls\\\": {\\n          \\\"environment\\\": {\\n            \\\"TZ\\\": \\\"UTC\\\"\\n          },\\n          \\\"normalization\\\": [\\n            \\\"repo-root\\\"\\n          ],\\n          \\\"timeoutMs\\\": 10000\\n        },\\n        \\\"fixtureSurface\\\": [\\n          \\\"docs/exec-plans/probe-cases/**\\\"\\n        ],\\n        \\\"id\\\": \\\"covered-behavior\\\",\\n        \\\"implementationPacket\\\": \\\"implementation\\\",\\n        \\\"productionSurface\\\": [\\n          \\\"tools/lib/harness/**\\\"\\n        ],\\n        \\\"repeatCount\\\": 2,\\n        \\\"scenarioIds\\\": [\\n          \\\"harness/contract-derived-tdd-routing::Material behavior is routed through TDD::Covered behavior\\\"\\n        ],\\n        \\\"seam\\\": \\\"harness plan\\\",\\n        \\\"testDesignPacket\\\": \\\"test-design\\\"\\n      }\\n    ],\\n    \\\"version\\\": 1\\n  },\\n  \\\"executionIsolation\\\": {\\n    \\\"version\\\": 1,\\n    \\\"enforced\\\": true,\\n    \\\"unavailableFallback\\\": \\\"stop\\\"\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"test-design\\\",\\n      \\\"objective\\\": \\\"Design the independent acceptance contract\\\",\\n      \\\"scope\\\": [\\n        \\\"acceptance contract\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production implementation\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"harness/contract-derived-tdd-routing\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"acceptance fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"RED probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"independent oracle\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"scenario mapping\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"acceptance contract\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"fresh-session\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    },\\n    {\\n      \\\"id\\\": \\\"implementation\\\",\\n      \\\"objective\\\": \\\"Implement the covered material behavior\\\",\\n      \\\"scope\\\": [\\n        \\\"production behavior\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"acceptance design\\\"\\n      ],\\n      \\\"dependencies\\\": [\\n        \\\"test-design\\\"\\n      ],\\n      \\\"contracts\\\": [\\n        \\\"harness/contract-derived-tdd-routing\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"approved test-design handoff\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"production fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"GREEN probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"covered behavior\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"validation result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"material behavior\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"fresh-session\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"source-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-source-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-source-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-source-only\\\",\\n    \\\"contractDigest\\\": \\\"a176384d1aa31764f6995751343d6a4da0fa0090c185870485edb4328dc428de\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"absence-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-absence-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-absence-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-absence-only\\\",\\n    \\\"contractDigest\\\": \\\"dbb26520d94c0bf6c2b8427ad4d552d96a84225eae077b94c3a1488cb504370f\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    },\n    {\n      \"id\": \"documentation-only\",\n      \"expected\": \"accept\",\n      \"status\": \"accept\",\n      \"output\": \"{\\n  \\\"version\\\": 2,\\n  \\\"id\\\": \\\"contract-derived-documentation-only\\\",\\n  \\\"baseline\\\": \\\"27f7b49aa407afd9c41e0f32f6eedc14320fcb16\\\",\\n  \\\"requirementsGate\\\": \\\"required\\\",\\n  \\\"openSpecChange\\\": \\\"contract-derived-documentation-only\\\",\\n  \\\"requirementsRevision\\\": 1,\\n  \\\"classification\\\": {\\n    \\\"size\\\": \\\"S\\\",\\n    \\\"score\\\": 9,\\n    \\\"contributions\\\": {\\n      \\\"independentWorkUnits\\\": 2,\\n      \\\"sharedSeams\\\": 0,\\n      \\\"contracts\\\": 2,\\n      \\\"consumerIntegrations\\\": 0,\\n      \\\"evidenceLevels\\\": 1,\\n      \\\"architectureAmbiguity\\\": 0,\\n      \\\"changedScope\\\": 2,\\n      \\\"reviewRisk\\\": 2,\\n      \\\"contextGrowthRisk\\\": 0\\n    },\\n    \\\"kind\\\": \\\"routing-heuristic-not-token-forecast\\\"\\n  },\\n  \\\"regroupCheck\\\": {\\n    \\\"required\\\": false,\\n    \\\"openSpecTaskCount\\\": 1\\n  },\\n  \\\"contextPolicy\\\": {\\n    \\\"unit\\\": \\\"tokens-when-runtime-supplied; otherwise proxy-observations\\\",\\n    \\\"normalTarget\\\": [\\n      40000,\\n      70000\\n    ],\\n    \\\"pressure\\\": [\\n      60000,\\n      80000\\n    ],\\n    \\\"redZone\\\": [\\n      80000,\\n      100000\\n    ],\\n    \\\"decomposeSignal\\\": 100000,\\n    \\\"semanticBoundaries\\\": [\\n      \\\"implementation-to-independent-review\\\",\\n      \\\"subsystem-change\\\",\\n      \\\"major-replan\\\",\\n      \\\"irrelevant-output-accumulation\\\"\\n    ]\\n  },\\n  \\\"contractDerivedTdd\\\": {\\n    \\\"version\\\": 1,\\n    \\\"openSpecChange\\\": \\\"contract-derived-documentation-only\\\",\\n    \\\"contractDigest\\\": \\\"7750921ff6d3a4ff8c61410c35ed094d53f49ed29a886dbc16c9347a7f141731\\\",\\n    \\\"requiredScenarioIds\\\": []\\n  },\\n  \\\"packets\\\": [\\n    {\\n      \\\"id\\\": \\\"fixture-work\\\",\\n      \\\"objective\\\": \\\"Exercise contract-derived planning\\\",\\n      \\\"scope\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"nonGoals\\\": [\\n        \\\"production\\\"\\n      ],\\n      \\\"dependencies\\\": [],\\n      \\\"contracts\\\": [\\n        \\\"application-compositions/sidebar-application-shell\\\"\\n      ],\\n      \\\"contextSources\\\": [\\n        \\\"embedded contract\\\"\\n      ],\\n      \\\"implementationSurface\\\": [\\n        \\\"fixture\\\"\\n      ],\\n      \\\"focusedValidation\\\": [\\n        \\\"probe\\\"\\n      ],\\n      \\\"outputs\\\": [\\n        \\\"outcome\\\"\\n      ],\\n      \\\"handoff\\\": [\\n        \\\"result\\\"\\n      ],\\n      \\\"implementationOutcomes\\\": [\\n        \\\"routing\\\"\\n      ],\\n      \\\"preferredExecutionMode\\\": \\\"continue\\\",\\n      \\\"status\\\": \\\"pending\\\"\\n    }\\n  ]\\n}\\n\"\n    }\n  ]\n}"
-            }
-          ],
-          "runtimeId": "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
-          "scenarioMappings": [
-            {
-              "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected"
-            },
-            {
-              "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "material-scenarios-have-enforced-coverage"
-            },
-            {
-              "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "source-only-contract"
-            },
-            {
-              "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "absence-only-contract"
-            },
-            {
-              "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
-              "scenarioId": "documentation-only-contract"
-            }
-          ],
-          "sliceId": "contract-derived-routing",
-          "version": 1
-        },
-        "greenDigest": "fffe8bf4144864a63c4da422cc82b0065509640ce772f36d5261ef693db9dfe7"
+        "redDigest": "c8a72a4fc383a402b088f2fe097923a7659919ef41cea180b030c53c694deb7c"
       }
     }
   }

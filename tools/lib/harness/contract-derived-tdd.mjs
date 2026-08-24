@@ -30,7 +30,19 @@ export function parseDeltaScenarioSemantics(contracts) {
     throw new Error("OpenSpec change requires at least one delta spec");
   const scenarios = [];
   const identities = new Set();
-  for (const contract of [...contracts].sort((a, b) =>
+  const normalizedContracts = [...contracts].map((contract) => ({
+    ...contract,
+    content:
+      typeof contract?.content === "string"
+        ? contract.content
+            .replace(/\r\n?/g, "\n")
+            .split("\n")
+            .map((line) => line.replace(/\s+$/u, ""))
+            .join("\n")
+            .trimEnd()
+        : contract?.content,
+  }));
+  for (const contract of normalizedContracts.sort((a, b) =>
     order(a.capability, b.capability),
   )) {
     if (
@@ -99,7 +111,12 @@ export function parseDeltaScenarioSemantics(contracts) {
   scenarios.sort((a, b) => order(a.id, b.id));
   return {
     version: 1,
-    contractDigest: digest(scenarios),
+    contractDigest: digest(
+      normalizedContracts.map(({ capability, content }) => ({
+        capability,
+        content,
+      })),
+    ),
     scenarios,
     requiredScenarioIds: scenarios
       .filter(({ semantics }) => materialCategories.has(semantics))
@@ -107,11 +124,7 @@ export function parseDeltaScenarioSemantics(contracts) {
   };
 }
 
-export async function loadChangeScenarioSemantics(
-  repoRoot,
-  change,
-  declaredCapabilities = [],
-) {
+export async function loadChangeScenarioSemantics(repoRoot, change) {
   if (
     typeof change !== "string" ||
     !change ||
@@ -130,27 +143,35 @@ export async function loadChangeScenarioSemantics(
       `cannot read OpenSpec delta specs for ${change}: ${error.message}`,
     );
   }
-  const capabilities = [
-    ...new Set(
-      declaredCapabilities.filter(
-        (value) => typeof value === "string" && value,
-      ),
-    ),
-  ];
   const contracts = await Promise.all(
     files.map(async (file) => ({
-      capability:
-        files.length === 1 && capabilities.length === 1
-          ? capabilities[0]
-          : path
-              .relative(specsRoot, path.dirname(file))
-              .split(path.sep)
-              .join("/"),
+      capability: path
+        .relative(specsRoot, path.dirname(file))
+        .split(path.sep)
+        .join("/"),
       content: await readFile(file, "utf8"),
     })),
   );
   const parsed = parseDeltaScenarioSemantics(contracts);
   return { ...parsed, change };
+}
+
+export async function assertCurrentContractDerivedTdd(repoRoot, plan) {
+  if (plan.contractDerivedTdd === undefined) return plan;
+  const current = await loadChangeScenarioSemantics(
+    repoRoot,
+    plan.openSpecChange,
+  );
+  const binding = contractDerivedTddBinding(current);
+  if (
+    binding.contractDigest !== plan.contractDerivedTdd.contractDigest ||
+    JSON.stringify(binding.requiredScenarioIds) !==
+      JSON.stringify(plan.contractDerivedTdd.requiredScenarioIds)
+  )
+    throw new Error(
+      `contract-derived TDD obligation is stale for ${plan.openSpecChange}`,
+    );
+  return plan;
 }
 
 export function contractDerivedTddBinding(classification) {

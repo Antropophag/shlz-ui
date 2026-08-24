@@ -19,8 +19,8 @@ if (adapter) {
 
 const failureSignature = "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass";
 const failedScenarioIds = [
-  "wave-9-behavior-and-state-bypass-is-rejected",
-  "material-scenarios-have-enforced-coverage",
+  "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+  "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage",
 ];
 const assessmentBase = {
   id: "wave-9-sidebar-application-shell",
@@ -182,10 +182,44 @@ const wave9Scenarios = [
 ];
 const contract = (rows) =>
   `## ADDED Requirements\n\n${rows.map(([requirement, scenario, semantics]) => `### Requirement: ${requirement}\n\n#### Scenario: ${scenario}\n<!-- implementation-semantics: ${semantics} -->\n- **WHEN** the case is planned\n- **THEN** its routing obligation is deterministic\n`).join("\n")}`;
+const wave9Plan = JSON.parse(
+  await readFile(
+    path.join(
+      root,
+      "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+    ),
+    "utf8",
+  ),
+);
+if (
+  wave9Plan.id !== "wave-9-sidebar-application-shell" ||
+  wave9Plan.specDrivenTdd !== undefined
+)
+  throw new Error("Wave 9 regression plan does not preserve the bypass shape");
+const wave9Assessment = {
+  id: wave9Plan.id,
+  baseline: wave9Plan.baseline,
+  requirementsGate: wave9Plan.requirementsGate,
+  openSpecChange: wave9Plan.openSpecChange,
+  signals: wave9Plan.classification.contributions,
+  openSpecTaskCount: wave9Plan.regroupCheck.openSpecTaskCount,
+  executionIsolation: wave9Plan.executionIsolation,
+  workUnits: wave9Plan.packets.map((packet) =>
+    Object.fromEntries(
+      Object.entries(packet).filter(([key]) => key !== "status"),
+    ),
+  ),
+};
+const wave9Contract = await readFile(
+  path.join(root, "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md"),
+  "utf8",
+);
 const cases = [
   {
     id: "wave-9-bypass",
-    contract: contract(wave9Scenarios),
+    contract: wave9Contract,
+    assessment: wave9Assessment,
+    capability: "application-compositions/sidebar-application-shell",
     expected: "reject",
     uncovered: wave9Scenarios.map(
       ([requirement, scenario]) =>
@@ -214,21 +248,6 @@ const cases = [
     expected: "accept",
   })),
 ];
-
-const wave9Plan = JSON.parse(
-  await readFile(
-    path.join(
-      root,
-      "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
-    ),
-    "utf8",
-  ),
-);
-if (
-  wave9Plan.id !== "wave-9-sidebar-application-shell" ||
-  wave9Plan.specDrivenTdd !== undefined
-)
-  throw new Error("Wave 9 regression plan does not preserve the bypass shape");
 
 const sandbox = await mkdtemp(
   path.join(tmpdir(), "shlz-contract-derived-tdd-routing-"),
@@ -269,7 +288,8 @@ try {
       sandbox,
       "openspec/changes",
       change,
-      "specs/harness/contract-derived-tdd-routing",
+      "specs",
+      testCase.capability ?? "harness/contract-derived-tdd-routing",
     );
     await mkdir(caseRoot, { recursive: true });
     await mkdir(specRoot, { recursive: true });

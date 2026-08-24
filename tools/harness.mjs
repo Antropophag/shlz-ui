@@ -68,12 +68,21 @@ import {
   createPacketContextCapsule,
   runContextCostReplay,
 } from "./lib/harness/context-cost.mjs";
-import { loadChangeScenarioSemantics } from "./lib/harness/contract-derived-tdd.mjs";
+import {
+  assertCurrentContractDerivedTdd,
+  loadChangeScenarioSemantics,
+} from "./lib/harness/contract-derived-tdd.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+
+const currentPlan = async (file) => {
+  const plan = validatePlan(await readJson(absolute(file)), config);
+  await assertCurrentContractDerivedTdd(repoRoot, plan);
+  return plan;
+};
 const config = await readJson(
   path.join(repoRoot, "docs/exec-plans/config.json"),
 );
@@ -209,7 +218,7 @@ switch (command) {
         "context-capsule requires --ledger, --phase, --transition, --session, and --out",
       );
     const ledgerTarget = statePath(ledgerPath);
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const executionStatePath = option("--state");
     const index = await contextIndex(
       plan,
@@ -322,7 +331,7 @@ switch (command) {
       );
     let execution = null;
     if (planPath) {
-      const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const plan = await currentPlan(planPath);
       const reviewPath = option("--review");
       if (!reviewPath)
         throw new Error("planned delivery-check requires --review <state>");
@@ -367,13 +376,7 @@ switch (command) {
       : null;
     const scenarioSemantics =
       assessment.requirementsGate === "required"
-        ? await loadChangeScenarioSemantics(
-            repoRoot,
-            assessment.openSpecChange,
-            (assessment.workUnits ?? []).flatMap(
-              ({ contracts = [] }) => contracts,
-            ),
-          )
+        ? await loadChangeScenarioSemantics(repoRoot, assessment.openSpecChange)
         : null;
     const plan = createPlan(
       assessment,
@@ -389,10 +392,10 @@ switch (command) {
     output(requirementsStatus(await readJson(absolute(args[0]))));
     break;
   case "plan-check":
-    output(validatePlan(await readJson(absolute(args[0])), config));
+    output(await currentPlan(args[0]));
     break;
   case "context": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const handoffPath = option("--state") ?? option("--handoff");
     output(
       await contextIndex(
@@ -408,14 +411,14 @@ switch (command) {
     const handoffPath = option("--state") ?? option("--handoff");
     output(
       readyPackets(
-        await readJson(absolute(args[0])),
+        await currentPlan(args[0]),
         handoffPath ? await readJson(absolute(handoffPath)) : null,
       ),
     );
     break;
   }
   case "handoff-write": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const value = validateHandoff(await readJson(absolute(args[1])), plan);
     await writeJson(statePath(args[2]), value);
     output(value);
@@ -482,7 +485,7 @@ switch (command) {
     const baselinePath = option("--execution");
     if (!baselinePath)
       throw new Error("tdd-design-record requires --execution <baseline>");
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const handoff = await readJson(absolute(args[2]));
     const state = await withStateLock(target, async () => {
@@ -505,7 +508,7 @@ switch (command) {
     break;
   }
   case "tdd-review-record": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const handoff = await readJson(absolute(args[2]));
     const state = await withStateLock(target, async () => {
@@ -529,7 +532,7 @@ switch (command) {
     const baselinePath = option("--execution");
     if (!baselinePath)
       throw new Error(`${command} requires --execution <baseline>`);
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
@@ -593,7 +596,7 @@ switch (command) {
       throw new Error(
         "worker-run requires --execution <baseline> --claim <id> --session <id> --brief-out <brief>",
       );
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsState = option("--requirements")
       ? await readJson(absolute(option("--requirements")))
@@ -702,7 +705,7 @@ switch (command) {
     break;
   }
   case "claim": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = claimPacket(
@@ -722,7 +725,7 @@ switch (command) {
     break;
   }
   case "complete": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = completePacket(
@@ -743,7 +746,7 @@ switch (command) {
     break;
   }
   case "pause": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsPath = option("--requirements");
     if (!requirementsPath)
@@ -772,7 +775,7 @@ switch (command) {
     break;
   }
   case "resume": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsPath = option("--requirements");
     if (!requirementsPath)
@@ -832,10 +835,7 @@ switch (command) {
     const executionPlanPath = option("--plan");
     if (!executionPlanPath)
       throw new Error("review-init requires --plan <execution-plan>");
-    const executionPlan = validatePlan(
-      await readJson(absolute(executionPlanPath)),
-      config,
-    );
+    const executionPlan = await currentPlan(executionPlanPath);
     const enforcedTdd = (executionPlan.specDrivenTdd?.slices ?? []).some(
       ({ applicability }) => applicability === "enforced",
     );
@@ -968,7 +968,7 @@ switch (command) {
       const tddTarget = statePath(tddStatePath);
       if (tddTarget === target)
         throw new Error("review state and TDD state must use distinct files");
-      const tddPlan = await readJson(absolute(tddPlanPath));
+      const tddPlan = await currentPlan(tddPlanPath);
       return withStateLock(tddTarget, async () =>
         record(tddPlan, await readJson(tddTarget)),
       );
