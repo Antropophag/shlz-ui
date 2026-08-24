@@ -169,6 +169,8 @@ switch (command) {
     const phase = option("--phase");
     const transition = option("--transition");
     const physicalSession = option("--session");
+    const validationPath = option("--validation");
+    const reviewPath = option("--review");
     const out = option("--out");
     if (!ledgerPath || !phase || !transition || !physicalSession || !out)
       throw new Error(
@@ -186,7 +188,17 @@ switch (command) {
       index,
       await readJsonOr(absolute(ledgerPath), createContextLedger()),
       repoRoot,
-      { phase, transition, physicalSession },
+      {
+        phase,
+        transition,
+        physicalSession,
+        validationLedger: validationPath
+          ? await readJson(absolute(validationPath))
+          : [],
+        reviewState: reviewPath
+          ? await readJson(absolute(reviewPath))
+          : null,
+      },
     );
     await writeJson(statePath(out), capsule);
     output(capsule);

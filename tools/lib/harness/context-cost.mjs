@@ -117,11 +117,40 @@ const packetObligations = (packet) =>
     ...packet.implementationOutcomes.map((value) => `outcome:${value}`),
   ]);
 
+function currentPhaseEvidence(validationLedger = [], reviewState = null) {
+  const validations = Array.isArray(validationLedger) ? validationLedger : [];
+  const reviewPasses = reviewState?.passes ?? [];
+  const reviewFindings = reviewState?.findings ?? [];
+  return {
+    verdicts: stable([
+      ...validations.map(
+        ({ target, outcome }) => `validation:${target}:${outcome}`,
+      ),
+      ...reviewPasses.map(({ axis, head }) => `review:${axis}:pass:${head}`),
+    ]),
+    rawEvidence: stable(validations.flatMap(({ files }) => files ?? [])),
+    findings: reviewFindings.map(({ id, severity, status }) => ({
+      id,
+      severity,
+      status,
+      blocking:
+        ["high", "critical", "P0", "P1"].includes(severity) &&
+        status !== "resolved",
+    })),
+  };
+}
+
 export async function createPacketContextCapsule(
   index,
   ledger,
   repoRoot,
-  { phase, transition, physicalSession },
+  {
+    phase,
+    transition,
+    physicalSession,
+    validationLedger = [],
+    reviewState = null,
+  },
 ) {
   assertLedger(ledger);
   required(phase, "packet context phase");
@@ -138,6 +167,7 @@ export async function createPacketContextCapsule(
     );
   const readNow = [];
   const attested = [];
+  const currentEvidence = currentPhaseEvidence(validationLedger, reviewState);
   for (const source of index.sources) {
     const content = await readWorktreeSource(repoRoot, source);
     const entry = {
@@ -161,17 +191,22 @@ export async function createPacketContextCapsule(
     obligations: packetObligations(index.packet),
     evidence: {
       dependencyHandoffs: index.dependencyHandoffs,
-      verdicts: stable(
-        index.dependencyHandoffs.flatMap(
+      verdicts: stable([
+        ...index.dependencyHandoffs.flatMap(
           (handoff) => handoff.provenChecks ?? [],
         ),
-      ),
-      rawEvidence: stable(
-        index.dependencyHandoffs.flatMap((handoff) => handoff.changed ?? []),
-      ),
-      unresolvedFindings: index.dependencyHandoffs.flatMap(
-        (handoff) => handoff.unresolvedFindings ?? [],
-      ),
+        ...currentEvidence.verdicts,
+      ]),
+      rawEvidence: stable([
+        ...index.dependencyHandoffs.flatMap((handoff) => handoff.changed ?? []),
+        ...currentEvidence.rawEvidence,
+      ]),
+      findings: currentEvidence.findings,
+      unresolvedFindings: [
+        ...index.dependencyHandoffs.flatMap(
+          (handoff) => handoff.unresolvedFindings ?? [],
+        ),
+      ],
     },
     readNow,
     attested,
@@ -193,6 +228,11 @@ export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
   assertLedger(ledger);
   if (capsule?.version !== 1 || capsule.kind !== "packet-context")
     throw new Error("context acknowledgement requires a packet capsule");
+  if (
+    ledger.physicalSession !== null &&
+    ledger.physicalSession !== capsule.physicalSession
+  )
+    throw new Error("context ledger belongs to a different physical session");
   const { capsuleDigest, sourceDigest, ...body } = capsule;
   if (capsuleDigest !== digest(JSON.stringify(body)))
     throw new Error("context capsule digest does not match its content");
@@ -215,7 +255,10 @@ export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
       throw new Error(`context capsule source changed: ${source.path}`);
   }
   if (
-    capsule.evidence.unresolvedFindings.some(
+    [
+      ...(capsule.evidence.unresolvedFindings ?? []),
+      ...(capsule.evidence.findings ?? []),
+    ].some(
       (finding) => finding.blocking === true && finding.status !== "resolved",
     )
   )
@@ -343,6 +386,33 @@ async function readOracle(oracle, repoRoot) {
     }
   }
   return reads;
+}
+
+async function probeProceduralPruning(oracle, repoRoot) {
+  const sources = new Map();
+  for (const phase of oracle.phases)
+    for (const source of phase.sources)
+      if (source.required === true && source.role === "procedural")
+        sources.set(sourceKey(source), source);
+  const occurrences = new Map();
+  for (const source of sources.values()) {
+    const content = (await readSource(repoRoot, source)).toString("utf8");
+    for (const line of content.split(/\r?\n/)) {
+      const normalized = line.trim();
+      if (bytes(normalized) < 80) continue;
+      occurrences.set(normalized, (occurrences.get(normalized) ?? 0) + 1);
+    }
+  }
+  const removableBytes = [...occurrences].reduce(
+    (total, [line, count]) => total + Math.max(0, count - 1) * bytes(line),
+    0,
+  );
+  return {
+    uniqueProceduralSources: sources.size,
+    duplicateLongLines: [...occurrences.values()].filter((count) => count > 1)
+      .length,
+    removableBytes,
+  };
 }
 
 export async function loadContextCostOracle(fixture, repoRoot) {
@@ -507,14 +577,19 @@ export async function runContextCostReplay(fixture, repoRoot) {
     .filter((source) => source.phase === oracle.phases[0].id)
     .reduce((total, source) => total + source.bytes, 0);
   const repeatedBytes = baselineSourceBytes - readNowBytes;
+  const pruningProbe = await probeProceduralPruning(oracle, repoRoot);
+  const pruningBytes = baselineSourceBytes - pruningProbe.removableBytes;
   const candidateResults = [
     {
       id: "procedural-pruning",
-      totalBytes: baselineSourceBytes,
-      reductionBytes: 0,
-      reductionRatio: 0,
-      equivalencePass: true,
-      thresholdMet: false,
+      totalBytes: pruningBytes,
+      reductionBytes: pruningProbe.removableBytes,
+      reductionRatio: pruningProbe.removableBytes / baselineSourceBytes,
+      equivalencePass: pruningProbe.removableBytes === 0,
+      thresholdMet:
+        pruningProbe.removableBytes / baselineSourceBytes >=
+        fixture.minimumReductionRatio,
+      probe: pruningProbe,
       note: "No repeated long-form procedural content was found inside the authoritative documents, so content pruning has no evidenced byte reduction.",
     },
     {

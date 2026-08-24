@@ -4020,11 +4020,37 @@ test("context cost capsules invalidate changed sources and replay deterministica
         phase: "initial",
         transition: "pending-to-read",
         physicalSession: "probe-worker",
+        validationLedger: [
+          {
+            target: "harness",
+            outcome: "pass",
+            files: ["docs/source.md"],
+          },
+        ],
+        reviewState: {
+          passes: [
+            { axis: "Standards", head: "a".repeat(40) },
+            { axis: "Spec", head: "a".repeat(40) },
+          ],
+          findings: [
+            {
+              id: "resolved-review-finding",
+              severity: "high",
+              status: "resolved",
+            },
+          ],
+        },
       },
     );
     assert.equal(initial.readNow.length, 1);
-    assert.deepEqual(initial.evidence.verdicts, ["focused:test-pass"]);
+    assert.deepEqual(initial.evidence.verdicts, [
+      "focused:test-pass",
+      `review:Spec:pass:${"a".repeat(40)}`,
+      `review:Standards:pass:${"a".repeat(40)}`,
+      "validation:harness:pass",
+    ]);
     assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
+    assert.equal(initial.evidence.findings[0].status, "resolved");
     const tampered = clone(initial);
     tampered.evidence.verdicts = [];
     await assert.rejects(
@@ -4032,6 +4058,14 @@ test("context cost capsules invalidate changed sources and replay deterministica
       /capsule digest does not match/,
     );
     ledger = await acknowledgeContextCapsule(ledger, initial, changedRoot);
+    await assert.rejects(
+      acknowledgeContextCapsule(
+        ledger,
+        { ...initial, physicalSession: "other-worker" },
+        changedRoot,
+      ),
+      /different physical session/,
+    );
     const reused = await createPacketContextCapsule(
       index,
       ledger,
