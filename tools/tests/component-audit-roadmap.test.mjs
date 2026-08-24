@@ -13,23 +13,39 @@ const expectedWaves = new Map([
 ]);
 
 const parseRoadmapRows = (roadmap) =>
-  new Map(
-    [...roadmap.matchAll(/^\|\s+(\d+)\s+\|\s+([^|]+?)\s+\|/gm)].map(
-      ([, wave, family]) => [Number(wave), family.trim()],
-    ),
+  [...roadmap.matchAll(/^\|\s+(\d+)\s+\|\s+([^|]+?)\s+\|/gm)].map(
+    ([, wave, family]) => [Number(wave), family.trim()],
   );
 
 test("Wave 9+ roadmap assigns every remaining inventory family exactly once", async () => {
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
   const roadmap = await readFile(roadmapPath, "utf8");
-  const mappedWaves = parseRoadmapRows(roadmap);
+  const mappedRows = parseRoadmapRows(roadmap);
+  const mappedWaveNumbers = mappedRows.map(([wave]) => wave);
+  const mappedWaves = new Map(mappedRows);
   const remainingFamilies = inventory.families
     .filter(({ audit_status: status }) => status !== "VERIFIED")
     .map(({ canonical_name: name }) => name);
 
+  assert.equal(mappedRows.length, expectedWaves.size);
+  assert.equal(new Set(mappedWaveNumbers).size, mappedRows.length);
   assert.deepEqual(mappedWaves, expectedWaves);
   assert.deepEqual([...mappedWaves.values()], remainingFamilies);
   assert.equal(new Set(mappedWaves.values()).size, remainingFamilies.length);
+});
+
+test("roadmap parser preserves duplicate rows for exact-once validation", async () => {
+  const roadmap = await readFile(roadmapPath, "utf8");
+  const waveNineRow = roadmap
+    .split("\n")
+    .find((line) => /^\|\s+9\s+\|/.test(line));
+  assert.ok(waveNineRow);
+
+  const duplicated = roadmap.replace(
+    waveNineRow,
+    `${waveNineRow}\n${waveNineRow}`,
+  );
+  assert.equal(parseRoadmapRows(duplicated).length, expectedWaves.size + 1);
 });
 
 test("roadmap keeps short-intent and workflow boundaries explicit", async () => {
