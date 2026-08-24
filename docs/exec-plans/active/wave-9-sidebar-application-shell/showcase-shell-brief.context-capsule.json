@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "wave-9-sidebar-application-shell",
+  "packetId": "showcase-shell",
+  "physicalSession": null,
+  "launchClaim": "wave9-showcase-shell-20260824",
+  "phase": "implementation",
+  "objective": "Reconcile and prove the application-local Showcase shell across all material interactions and stress states",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:application-compositions/sidebar-application-shell",
+    "outcome:accessible application-local composition",
+    "outcome:real interaction state evidence",
+    "outcome:responsive consumer proof",
+    "validation:Wave 9 browser runtime/accessibility",
+    "validation:desktop/narrow content stress",
+    "validation:focused snapshots",
+    "validation:verified primitive regressions"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "source-census",
+        "changed": [
+          "source and state ledger for Sidebar and Header",
+          "schema-v2 Sidebar / Application Shell manifest",
+          "repository and built-DOM occurrence guard"
+        ],
+        "provenChecks": [
+          "focused source, manifest, and census validation: 7/7 pass",
+          "Showcase build: 495 modules",
+          "git diff --check: pass"
+        ],
+        "settledDecisions": [
+          "Sidebar.svg and Header.svg are immutable authority",
+          "one application-local Showcase consumer and one local stylesheet are the implementation boundary",
+          "runtime and responsive evidence remain for the Showcase packet"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "showcase-shell",
+        "invalidatedAssumptions": [
+          "the existing hero header is a bounded header substitute, not proof of the Header.svg state family"
+        ],
+        "claimId": "wave9-source-census-20260824",
+        "briefDigest": "3cbaa4110828f4f3253acd71964b7ff2a4603cbad543f3b1226a997503a40b80",
+        "workerReportDigest": "03e9968d666f66218b6d40e4ea456d401bb2af13c813beaeb9ed0dc57581bcb3"
+      }
+    ],
+    "verdicts": [
+      "Showcase build: 495 modules",
+      "focused source, manifest, and census validation: 7/7 pass",
+      "git diff --check: pass"
+    ],
+    "rawEvidence": [
+      "repository and built-DOM occurrence guard",
+      "schema-v2 Sidebar / Application Shell manifest",
+      "source and state ledger for Sidebar and Header"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "apps/showcase/src/main.js",
+      "digest": "4e3eae496ffeb85b62b2f0d2a21d5b4636c75f5b7dab45a04b7abac8b97d918c",
+      "bytes": 65654
+    },
+    {
+      "path": "apps/showcase/src/showcase.css",
+      "digest": "6b4cfc0f1c738a8c883e019a66cb51ce985d6606ff90482e8745f87ba481f169",
+      "bytes": 32918
+    },
+    {
+      "path": "openspec/changes/wave-9-sidebar-application-shell/specs/application-compositions/sidebar-application-shell/spec.md",
+      "digest": "e2aa2835568e0dc6337d2ab772ed6b36a0a63676f90fea878bb54a9d3c66430a",
+      "bytes": 5086
+    },
+    {
+      "path": "tools/playwright/showcase-navigation.spec.js",
+      "digest": "9c145333f4d6a4297194ca209c2bf7d6afaf2c80c2074f4bf0f6d72ca1b02652",
+      "bytes": 1784
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "00d2867e623c46a9ce279b7555044c8fe36d66b0b704827a7db128abd19c6246",
+  "capsuleDigest": "313ee6404859ababf7358c8b7787f00ef6c31f49ec0bc1e79b1ae9c8c688e5c2"
+}

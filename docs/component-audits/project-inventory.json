@@ -1842,31 +1842,43 @@
     {
       "tests": ["tools/playwright/showcase-navigation.spec.js"],
       "evidence": {
-        "source-integrity": "indexed source only",
-        "structural-contract": "application-local CSS",
-        "runtime-browser": "sidebar keyboard test",
-        "accessibility": "partial",
-        "focused-visual": "page-level only",
-        "consumer-integration": "Showcase shell",
-        "responsive-content-stress": "two desktop viewports only"
+        "source-integrity": "verified raw Sidebar.svg and Header.svg hashes plus unchanged-source guard",
+        "structural-contract": "verified application-local shell, audit root, manifest, and occurrence census",
+        "runtime-browser": "nine focused real-interaction Chromium tests",
+        "accessibility": "verified native landmarks, controls, current location, keyboard order, and visible focus",
+        "focused-visual": "three reviewed focused snapshots plus source-critical computed geometry and paint",
+        "consumer-integration": "verified real Showcase shell consumer",
+        "responsive-content-stress": "verified 390px viewport, long Cyrillic/Latin content, 20px root text, overflow, and focus"
       },
       "canonical_name": "Sidebar / Application Shell",
       "category": "application-compositions",
       "implementation_status": "application-local",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Sidebar.svg",
         "shlz-design-source/raw/svg/Header.svg"
       ],
-      "production_implementation": ["apps/showcase/src/showcase.css"],
-      "behavior": [],
-      "docs": [],
+      "production_implementation": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/showcase.css"
+      ],
+      "behavior": [
+        "application-owned sidebar density toggle and deterministic current hash navigation",
+        "native header search default, hover, typing, and filled lifecycle"
+      ],
+      "docs": [
+        "docs/components/sidebar-application-shell.md",
+        "docs/component-audits/sidebar-application-shell.json",
+        "docs/component-audits/wave-9-report.md"
+      ],
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": [
+        "apps/showcase/src/fidelity.js (source-only Sidebar/Drawer diagnostic reference)"
+      ],
       "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "local_alternatives": ["apps/showcase/src/showcase.css"],
       "scope": [
         "opened/closed sidebar",
         "active/default menu item",
@@ -1874,12 +1886,16 @@
         "desktop/narrow"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "routing, authorization, persistence, and mobile-drawer behavior are not established by the source and remain out of scope",
+        "narrow behavior is a bounded Showcase decision rather than a reusable responsive-shell contract",
+        "Chromium is the configured browser evidence environment"
+      ],
       "measured_counts": {
         "executableShowcase": 1,
         "liveConsumers": 1,
         "dataWorkspace": 0,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 1,
         "legacyNative": 0,
         "localAlternatives": 1
       }

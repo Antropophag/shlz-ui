@@ -1,0 +1,26 @@
+{
+  "completedPacket": "source-census",
+  "changed": [
+    "source and state ledger for Sidebar and Header",
+    "schema-v2 Sidebar / Application Shell manifest",
+    "repository and built-DOM occurrence guard"
+  ],
+  "provenChecks": [
+    "focused source, manifest, and census validation: 7/7 pass",
+    "Showcase build: 495 modules",
+    "git diff --check: pass"
+  ],
+  "settledDecisions": [
+    "Sidebar.svg and Header.svg are immutable authority",
+    "one application-local Showcase consumer and one local stylesheet are the implementation boundary",
+    "runtime and responsive evidence remain for the Showcase packet"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "showcase-shell",
+  "invalidatedAssumptions": [
+    "the existing hero header is a bounded header substitute, not proof of the Header.svg state family"
+  ],
+  "claimId": "wave9-source-census-20260824",
+  "briefDigest": "3cbaa4110828f4f3253acd71964b7ff2a4603cbad543f3b1226a997503a40b80",
+  "workerReportDigest": "03e9968d666f66218b6d40e4ea456d401bb2af13c813beaeb9ed0dc57581bcb3"
+}

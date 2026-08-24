@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "intent": "Audit and implement the bounded Showcase Sidebar / Application Shell contract in Wave 9, then deliver an unmerged green PR.",
+  "route": "open-spec",
+  "openSpecChange": "wave-9-sidebar-application-shell",
+  "requiredDecisions": [
+    { "id": "wave-scope", "owner": "user", "blocking": true },
+    { "id": "source-authority", "owner": "repo", "blocking": true },
+    { "id": "application-ownership", "owner": "repo", "blocking": true },
+    { "id": "responsive-boundary", "owner": "repo", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
