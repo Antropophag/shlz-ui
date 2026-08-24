@@ -21,6 +21,7 @@ import {
   gitExecutionBaselineState,
   gitImplementationState,
   gitRouteSurfaces,
+  loadChangeFailureInvariants,
   pausePacket,
   readJson,
   readyPackets,
@@ -118,6 +119,37 @@ const option = (name) => {
 };
 const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+const refreshChangeFailureInvariants = async (state, target) => {
+  const stored = state.changeFailureInvariants;
+  if (!stored) return state;
+  const current = await loadChangeFailureInvariants(
+    stored.change,
+    {
+      version: 1,
+      change: stored.change,
+      invariants: stored.invariants.map(
+        ({ id, concern, requirement, scenario }) => ({
+          id,
+          concern,
+          requirement,
+          scenario,
+        }),
+      ),
+    },
+    repoRoot,
+  );
+  if (
+    current.manifestDigest !== stored.manifestDigest ||
+    current.contractDigest !== stored.contractDigest
+  ) {
+    delete state.failurePathProof;
+    await writeJson(target, state);
+    throw new Error(
+      "change-specific failure invariant contracts changed after review initialization",
+    );
+  }
+  return state;
+};
 const exec = promisify(execFile);
 
 switch (command) {
@@ -174,11 +206,48 @@ switch (command) {
     break;
   case "delivery-check": {
     const delivery = await readJson(absolute(args[0]));
+    const planPath = option("--plan");
+    const executionStatePath = option("--state");
+    const directPath = option("--direct");
+    if (Boolean(planPath) !== Boolean(executionStatePath))
+      throw new Error("delivery-check requires both --plan and --state");
+    if (!planPath && !directPath)
+      throw new Error(
+        "delivery-check requires --plan <plan> --state <state> or --direct <route-assessment>",
+      );
+    if (planPath && directPath)
+      throw new Error(
+        "delivery-check cannot combine execution and direct evidence",
+      );
+    let execution = null;
+    if (planPath) {
+      const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const requirementsPath = option("--requirements");
+      if (plan.requirementsGate === "required" && !requirementsPath)
+        throw new Error(
+          "requirements-gated delivery-check requires --requirements <state>",
+        );
+      execution = {
+        plan,
+        state: await readJson(absolute(executionStatePath)),
+        requirementsState: requirementsPath
+          ? await readJson(absolute(requirementsPath))
+          : null,
+      };
+    } else {
+      const direct = await readJson(absolute(directPath));
+      const eligibility = evaluateRouteEligibility(direct);
+      if (direct.route !== "direct" || !eligibility.eligible)
+        throw new Error("delivery direct evidence is not positively eligible");
+    }
     output(
-      assertImplementationDelivery({
-        ...delivery,
-        actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
-      }),
+      assertImplementationDelivery(
+        {
+          ...delivery,
+          actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
+        },
+        execution,
+      ),
     );
     break;
   }
@@ -472,12 +541,35 @@ switch (command) {
       throw new Error(
         "review-init requires --failure-path-concerns <list|none>",
       );
-    const state = createReviewState(
-      args[1],
+    const concerns =
       failurePathOption === "none"
         ? []
-        : failurePathOption.split(",").filter(Boolean),
-    );
+        : failurePathOption.split(",").filter(Boolean);
+    const change = option("--change");
+    const invariantsPath = option("--invariants");
+    if (concerns.length && (!change || !invariantsPath))
+      throw new Error(
+        "material review-init requires --change <name> --invariants <manifest>",
+      );
+    if (!concerns.length && (change || invariantsPath))
+      throw new Error(
+        "concern-free review-init does not accept change-specific invariants",
+      );
+    const binding = concerns.length
+      ? await loadChangeFailureInvariants(
+          change,
+          await readJson(absolute(invariantsPath)),
+          repoRoot,
+        )
+      : null;
+    if (
+      binding &&
+      binding.invariants.some(({ concern }) => !concerns.includes(concern))
+    )
+      throw new Error(
+        "change-specific failure invariant concern is not enabled for review",
+      );
+    const state = createReviewState(args[1], concerns, binding);
     await writeJson(statePath(args[0]), state);
     output(state);
     break;
@@ -488,11 +580,20 @@ switch (command) {
     if (
       !Array.isArray(definition.command) ||
       !definition.command.length ||
-      definition.command.some((part) => typeof part !== "string" || !part)
+      definition.command.some((part) => typeof part !== "string" || !part) ||
+      (definition.timeoutMs !== undefined &&
+        (!Number.isInteger(definition.timeoutMs) ||
+          definition.timeoutMs < 1 ||
+          definition.timeoutMs > 10 * 60 * 1000))
     )
-      throw new Error("review proof requires a command array");
+      throw new Error(
+        "review proof requires a command array and optional bounded timeoutMs",
+      );
     const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
+      const current = await refreshChangeFailureInvariants(
+        await readJson(target),
+        target,
+      );
       let observed;
       try {
         const { stdout } = await exec(
@@ -502,7 +603,7 @@ switch (command) {
             cwd: repoRoot,
             env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
             maxBuffer: 10 * 1024 * 1024,
-            timeout: 10 * 60 * 1000,
+            timeout: definition.timeoutMs ?? 10 * 60 * 1000,
             killSignal: "SIGKILL",
           },
         );
@@ -517,6 +618,13 @@ switch (command) {
       const proof = {
         ...observed,
         command: definition.command,
+        ...(current.changeFailureInvariants
+          ? {
+              openSpecChange: current.changeFailureInvariants.change,
+              manifestDigest: current.changeFailureInvariants.manifestDigest,
+              contractDigest: current.changeFailureInvariants.contractDigest,
+            }
+          : {}),
       };
       proof.resultDigest = failurePathResultDigest(proof);
       const next = recordFailurePathProof(current, proof);
@@ -544,11 +652,14 @@ switch (command) {
     const target = statePath(args[0]);
     const findings = await readJson(absolute(option("--findings")));
     const state = await withStateLock(target, async () => {
-      const next = recordReview(await readJson(target), {
-        axis: option("--axis"),
-        head: option("--head"),
-        findings,
-      });
+      const next = recordReview(
+        await refreshChangeFailureInvariants(await readJson(target), target),
+        {
+          axis: option("--axis"),
+          head: option("--head"),
+          findings,
+        },
+      );
       await writeJson(target, next);
       return next;
     });

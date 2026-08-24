@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { mkdtemp, readFile, rm, unlink, writeFile } from "node:fs/promises";
+import { rmSync } from "node:fs";
+import {
+  mkdir,
+  mkdtemp,
+  readFile,
+  rm,
+  unlink,
+  writeFile,
+} from "node:fs/promises";
 import { execFile } from "node:child_process";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -37,6 +45,7 @@ import {
   evaluateExecutionStrategy,
   evaluateRouteEligibility,
   failurePathResultDigest,
+  loadChangeFailureInvariants,
   resumePacket,
   retryWorkerPacket,
   reviewContext,
@@ -62,6 +71,14 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+const registerExitCleanup = (paths) => {
+  const cleanup = () => {
+    for (const target of paths)
+      rmSync(target, { recursive: true, force: true });
+  };
+  process.once("exit", cleanup);
+  return () => process.removeListener("exit", cleanup);
+};
 const oid = "a".repeat(40);
 const mainlineExecution = (overrides = {}) => ({
   currentBranch: "feat/task",
@@ -321,6 +338,18 @@ test("CLI requires persisted execution baselines for preflight and conformance",
       { cwd: root },
     ),
     /requires --execution/,
+  );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "delivery-check",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/delivery-evidence.json",
+      ],
+      { cwd: root },
+    ),
+    /requires --plan <plan> --state <state> or --direct <route-assessment>/,
   );
 });
 
@@ -1561,12 +1590,73 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
     /revision 1 is stale; expected at least 2/,
   );
   const updated = requirementsState({ revision: 2 });
+  assert.throws(
+    () =>
+      resumePacket(plan, state, "discovery-contracts", "session-b", updated),
+    /execution plan revision 1 is stale; expected 2/,
+  );
+  plan.requirementsRevision = 2;
   resumePacket(plan, state, "discovery-contracts", "session-b", updated);
   assert.deepEqual(state.packets["discovery-contracts"], {
     status: "claimed",
     session: "session-b",
     requirementsRevision: 2,
   });
+});
+
+test("delivery rejects an incomplete mandatory packet graph", () => {
+  const ready = requirementsState();
+  const plan = createPlan(
+    {
+      ...clone(wave7),
+      requirementsGate: "required",
+      openSpecChange: "add-capability",
+    },
+    config,
+    ready,
+  );
+  const state = createExecutionState(plan);
+  const delivery = {
+    defaultBranch: "main",
+    pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/29",
+    actual: {
+      repository: "Antropophag/shlz-ui",
+      currentBranch: "feat/guard",
+      pushRemote: "origin",
+      pushBranch: "feat/guard",
+      localHead: "abc",
+      upstreamHead: "abc",
+      pullRequest: {
+        url: "https://github.com/Antropophag/shlz-ui/pull/29",
+        headRefName: "feat/guard",
+        headRefOid: "abc",
+        baseRefName: "main",
+        state: "OPEN",
+      },
+    },
+  };
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        requirementsState: ready,
+      }),
+    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+  );
+  for (const { id } of plan.packets) {
+    state.packets[id] = { status: "completed" };
+    state.handoffs[id] = {};
+  }
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        requirementsState: ready,
+      }),
+    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+  );
 });
 
 test("agent routing preserves eligibility, readiness, conformance, and apply re-entry", async () => {
@@ -2137,6 +2227,470 @@ test("failure-path capability degradation is durable and blocks proof completion
     "independent-method",
   );
   assert.equal(reviewContext(state).failurePathProof.complete, false);
+});
+
+test("change-specific failure invariants are grounded in marked delta scenarios", async () => {
+  const manifest = await load(
+    "docs/exec-plans/active/require-change-specific-failure-invariants/failure-invariants.json",
+  );
+  const binding = await loadChangeFailureInvariants(
+    manifest.change,
+    manifest,
+    root,
+  );
+  assert.equal(binding.invariants.length, 6);
+  assert.match(binding.manifestDigest, /^[0-9a-f]{64}$/);
+  assert.match(binding.contractDigest, /^[0-9a-f]{64}$/);
+  await assert.rejects(
+    loadChangeFailureInvariants(
+      manifest.change,
+      { ...manifest, change: "another-change" },
+      root,
+    ),
+    /manifest is invalid/,
+  );
+  await assert.rejects(
+    loadChangeFailureInvariants(
+      manifest.change,
+      { ...manifest, invariants: manifest.invariants.slice(1) },
+      root,
+    ),
+    /do not cover: marked-contracts-require-manifest/,
+  );
+  await assert.rejects(
+    loadChangeFailureInvariants(
+      manifest.change,
+      {
+        ...manifest,
+        invariants: [manifest.invariants[0], manifest.invariants[0]],
+      },
+      root,
+    ),
+    /entry is invalid/,
+  );
+  await assert.rejects(
+    loadChangeFailureInvariants(
+      manifest.change,
+      {
+        ...manifest,
+        invariants: manifest.invariants.map((item, index) =>
+          index === 0 ? { ...item, scenario: "Missing scenario" } : item,
+        ),
+      },
+      root,
+    ),
+    /is ungrounded/,
+  );
+  await assert.rejects(
+    loadChangeFailureInvariants(
+      manifest.change,
+      {
+        ...manifest,
+        invariants: manifest.invariants.map((item, index) =>
+          index === 0 ? { ...item, concern: "subprocess" } : item,
+        ),
+      },
+      root,
+    ),
+    /is ungrounded/,
+  );
+});
+
+test("material review requires baseline and current-change red-green proof", async () => {
+  const manifest = await load(
+    "docs/exec-plans/active/require-change-specific-failure-invariants/failure-invariants.json",
+  );
+  const binding = await loadChangeFailureInvariants(
+    manifest.change,
+    manifest,
+    root,
+  );
+  const concerns = ["state-machine", "persistence"];
+  const state = createReviewState("origin/main", concerns, binding);
+  const baseline = [
+    ["launch-recording-is-recoverable", "state-machine"],
+    ["declared-fallback-can-complete", "state-machine"],
+    ["retry-state-is-monotonic", "persistence"],
+    ["persisted-completions-are-report-bound", "persistence"],
+  ];
+  const proof = {
+    version: 1,
+    reviewBase: "origin/main",
+    knownBadRevision: "a".repeat(40),
+    reviewedHead: "b".repeat(40),
+    command: ["node", "fixture.mjs"],
+    openSpecChange: binding.change,
+    manifestDigest: binding.manifestDigest,
+    contractDigest: binding.contractDigest,
+    invariants: [
+      ...baseline.map(([id, concern]) => ({
+        id,
+        concern,
+        knownBad: "fail",
+        reviewedHead: "pass",
+      })),
+      ...binding.invariants.map(({ id, concern }) => ({
+        id: `${binding.change}/${id}`,
+        concern,
+        knownBad: "fail",
+        reviewedHead: "pass",
+      })),
+    ],
+  };
+  proof.resultDigest = failurePathResultDigest(proof);
+  recordFailurePathProof(state, proof);
+  assert.equal(reviewContext(state).failurePathProof.change, binding.change);
+  const baselineOnly = { ...proof, invariants: proof.invariants.slice(0, 4) };
+  baselineOnly.resultDigest = failurePathResultDigest(baselineOnly);
+  assert.throws(
+    () =>
+      recordFailurePathProof(
+        createReviewState("origin/main", concerns, binding),
+        baselineOnly,
+      ),
+    /does not cover/,
+  );
+  const stale = {
+    ...proof,
+    contractDigest: "c".repeat(64),
+  };
+  stale.resultDigest = failurePathResultDigest(stale);
+  assert.throws(
+    () =>
+      recordFailurePathProof(
+        createReviewState("origin/main", concerns, binding),
+        stale,
+      ),
+    /contract is invalid/,
+  );
+});
+
+test("contract identity includes requirement prose and cited scenarios", async () => {
+  const temporaryRoot = await mkdtemp(
+    path.join(tmpdir(), "shlz-contract-binding-"),
+  );
+  const change = "binding-probe";
+  const specRoot = path.join(
+    temporaryRoot,
+    "openspec/changes",
+    change,
+    "specs/harness/probe",
+  );
+  const manifest = {
+    version: 1,
+    change,
+    invariants: [
+      {
+        id: "contract-stays-current",
+        concern: "persistence",
+        requirement: "Proof binding",
+        scenario: "Contract changes",
+      },
+    ],
+  };
+  const spec = (detail, outcome = "the digest changes") => `## Purpose
+
+This temporary capability verifies strict contract identity and digest behavior.
+
+## ADDED Requirements
+
+### Requirement: Proof binding
+${detail}
+
+<!-- failure-invariant: contract-stays-current concern=persistence -->
+
+#### Scenario: Contract changes
+- **WHEN** the contract changes
+- **THEN** ${outcome}
+`;
+  try {
+    await mkdir(specRoot, { recursive: true });
+    const specPath = path.join(specRoot, "spec.md");
+    await writeFile(specPath, spec("First requirement text."));
+    const first = await loadChangeFailureInvariants(
+      change,
+      manifest,
+      temporaryRoot,
+    );
+    await writeFile(specPath, spec("Changed requirement text."));
+    const second = await loadChangeFailureInvariants(
+      change,
+      manifest,
+      temporaryRoot,
+    );
+    assert.notEqual(first.contractDigest, second.contractDigest);
+    await writeFile(
+      specPath,
+      spec("Changed requirement text.", "the cited scenario digest changes"),
+    );
+    const third = await loadChangeFailureInvariants(
+      change,
+      manifest,
+      temporaryRoot,
+    );
+    assert.notEqual(second.contractDigest, third.contractDigest);
+    await writeFile(
+      specPath,
+      `${spec("Changed requirement text.")}
+### Requirement: Proof binding
+Changed requirement text.
+
+<!-- failure-invariant: duplicate-contract concern=persistence -->
+
+#### Scenario: Contract changes
+- **WHEN** the contract changes
+- **THEN** duplicate identities are rejected
+`,
+    );
+    await assert.rejects(
+      loadChangeFailureInvariants(
+        change,
+        {
+          ...manifest,
+          invariants: [
+            ...manifest.invariants,
+            {
+              ...manifest.invariants[0],
+              id: "duplicate-contract",
+            },
+          ],
+        },
+        temporaryRoot,
+      ),
+      /duplicate failure invariant contract identity/,
+    );
+  } finally {
+    await rm(temporaryRoot, { recursive: true, force: true });
+  }
+});
+
+test("PR 33 CodeRabbit fixture executes four dynamic findings and classifies the rest", async () => {
+  const inventory = await load(
+    "docs/exec-plans/fixtures/pr33-coderabbit-findings.json",
+  );
+  assert.equal(inventory.findings.length, 8);
+  assert.deepEqual(
+    inventory.findings.reduce(
+      (counts, { classification }) => ({
+        ...counts,
+        [classification]: (counts[classification] ?? 0) + 1,
+      }),
+      {},
+    ),
+    {
+      "change-specific-failure-invariant": 4,
+      "test-quality-validation": 1,
+      "static-validation": 2,
+      "ci-environment-validation": 1,
+    },
+  );
+  const definition = await load(
+    "docs/exec-plans/fixtures/pr33-change-invariant-proof.json",
+  );
+  const { stdout } = await exec(
+    definition.command[0],
+    definition.command.slice(1),
+    { cwd: root },
+  );
+  const observed = JSON.parse(stdout);
+  assert.equal(observed.invariants.length, 4);
+  assert.deepEqual(
+    observed.invariants
+      .map(({ id, concern }) => ({ id, concern }))
+      .sort((left, right) => left.id.localeCompare(right.id)),
+    inventory.findings
+      .filter(
+        ({ classification }) =>
+          classification === "change-specific-failure-invariant",
+      )
+      .map(({ id, concern }) => ({ id, concern }))
+      .sort((left, right) => left.id.localeCompare(right.id)),
+  );
+  assert.ok(
+    observed.invariants.every(
+      ({ knownBad, reviewedHead }) =>
+        knownBad === "fail" && reviewedHead === "pass",
+    ),
+  );
+  assert.equal(
+    inventory.findings.find(({ id }) => id === "static-node-global-is-declared")
+      .expectedCatcher,
+    "lint",
+  );
+});
+
+test("PR 33 behavior probe rejects a non-worktree cwd before file access", async () => {
+  const target = await mkdtemp(path.join(tmpdir(), "pr33-probe-outside-"));
+  try {
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [path.join(root, "tools/tests/pr33-review-behavior-probe.mjs")],
+        {
+          cwd: target,
+        },
+      ),
+      /not a git repository|canonical Git worktree root/,
+    );
+  } finally {
+    await rm(target, { recursive: true, force: true });
+  }
+});
+
+test("review-init CLI requires and records current-change invariant bindings", async () => {
+  const relativeState = `docs/exec-plans/review-manifest-test-${process.pid}.json`;
+  const state = path.join(root, relativeState);
+  const unregisterExitCleanup = registerExitCleanup([state]);
+  try {
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-init",
+          relativeState,
+          "origin/main",
+          "--failure-path-concerns",
+          "state-machine,persistence",
+        ],
+        { cwd: root },
+      ),
+      /requires --change.*--invariants/,
+    );
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "review-init",
+        relativeState,
+        "origin/main",
+        "--failure-path-concerns",
+        "state-machine,persistence",
+        "--change",
+        "require-change-specific-failure-invariants",
+        "--invariants",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/failure-invariants.json",
+      ],
+      { cwd: root },
+    );
+    const recorded = JSON.parse(await readFile(state, "utf8"));
+    assert.equal(
+      recorded.changeFailureInvariants.change,
+      "require-change-specific-failure-invariants",
+    );
+    assert.equal(recorded.changeFailureInvariants.invariants.length, 6);
+  } finally {
+    await unlink(state).catch(() => {});
+    unregisterExitCleanup();
+  }
+});
+
+test("review-proof reloads changed contracts and durably invalidates stale proof", async () => {
+  const change = `review-refresh-probe-${process.pid}`;
+  const changeRoot = path.join(root, "openspec/changes", change);
+  const specRoot = path.join(changeRoot, "specs/harness/probe");
+  const relativeState = `docs/exec-plans/${change}-state.json`;
+  const relativeManifest = `docs/exec-plans/${change}-manifest.json`;
+  const relativeProof = `docs/exec-plans/${change}-proof.json`;
+  const statePath = path.join(root, relativeState);
+  const manifestPath = path.join(root, relativeManifest);
+  const proofPath = path.join(root, relativeProof);
+  const specPath = path.join(specRoot, "spec.md");
+  const unregisterExitCleanup = registerExitCleanup([
+    changeRoot,
+    statePath,
+    manifestPath,
+    proofPath,
+  ]);
+  const spec = (detail, outcome = "stale proof is removed") => `## Purpose
+
+This temporary delta verifies review-time contract freshness behavior.
+
+## ADDED Requirements
+
+### Requirement: Fresh review contracts
+${detail}
+
+<!-- failure-invariant: proof-uses-current-contract concern=persistence -->
+
+#### Scenario: Contract changes
+- **WHEN** the contract changes
+- **THEN** ${outcome}
+`;
+  try {
+    await mkdir(specRoot, { recursive: true });
+    await writeFile(
+      path.join(changeRoot, ".openspec.yaml"),
+      "schema: spec-driven\n",
+    );
+    await writeFile(specPath, spec("Initial contract."));
+    await writeFile(
+      manifestPath,
+      `${JSON.stringify({
+        version: 1,
+        change,
+        invariants: [
+          {
+            id: "proof-uses-current-contract",
+            concern: "persistence",
+            requirement: "Fresh review contracts",
+            scenario: "Contract changes",
+          },
+        ],
+      })}\n`,
+    );
+    await writeFile(
+      proofPath,
+      `${JSON.stringify({ command: [process.execPath, "-e", "process.stdout.write('{}')"] })}\n`,
+    );
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "review-init",
+        relativeState,
+        "origin/main",
+        "--failure-path-concerns",
+        "persistence",
+        "--change",
+        change,
+        "--invariants",
+        relativeManifest,
+      ],
+      { cwd: root },
+    );
+    const initialized = JSON.parse(await readFile(statePath, "utf8"));
+    initialized.failurePathProof = { reviewedHead: "stale" };
+    await writeFile(statePath, `${JSON.stringify(initialized)}\n`);
+    await writeFile(
+      specPath,
+      spec("Changed contract.", "changed stale proof is removed"),
+    );
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-proof",
+          relativeState,
+          "--proof",
+          relativeProof,
+        ],
+        { cwd: root },
+      ),
+      /contracts changed after review initialization/,
+    );
+    const invalidated = JSON.parse(await readFile(statePath, "utf8"));
+    assert.equal(invalidated.failurePathProof, undefined);
+  } finally {
+    await Promise.all(
+      [statePath, manifestPath, proofPath].map((file) =>
+        unlink(file).catch(() => {}),
+      ),
+    );
+    await rm(changeRoot, { recursive: true, force: true });
+    unregisterExitCleanup();
+  }
 });
 
 test("failure-path proof stays off the cheap review path", () => {

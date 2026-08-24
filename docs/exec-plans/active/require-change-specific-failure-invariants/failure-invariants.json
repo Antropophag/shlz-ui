@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "change": "require-change-specific-failure-invariants",
+  "invariants": [
+    {
+      "id": "marked-contracts-require-manifest",
+      "concern": "state-machine",
+      "requirement": "Applicable review derives invariants from the current change",
+      "scenario": "Current delta contains material failure contracts"
+    },
+    {
+      "id": "manifest-sources-are-grounded",
+      "concern": "persistence",
+      "requirement": "Applicable review derives invariants from the current change",
+      "scenario": "Manifest points outside the current change"
+    },
+    {
+      "id": "marked-contract-coverage-is-complete",
+      "concern": "persistence",
+      "requirement": "Applicable review derives invariants from the current change",
+      "scenario": "Applicable scenario is omitted"
+    },
+    {
+      "id": "change-specific-results-discriminate",
+      "concern": "state-machine",
+      "requirement": "Executable proof discriminates every required invariant",
+      "scenario": "Baseline passes but change-specific invariant does not discriminate"
+    },
+    {
+      "id": "contract-edits-stale-proof",
+      "concern": "persistence",
+      "requirement": "Executable proof discriminates every required invariant",
+      "scenario": "Contracts change after proof"
+    },
+    {
+      "id": "stale-plan-or-pending-packet-blocks-delivery",
+      "concern": "state-machine",
+      "requirement": "Delivery preserves the guarded execution lifecycle",
+      "scenario": "Requirements or delivery bypasses the execution plan"
+    }
+  ]
+}

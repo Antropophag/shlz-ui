@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "base": "e36668b2a933cf9d97ea2657cef6ee7ca202f322",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "8adadf8fbccb42cd449fb691d5ffa29ced3b2ea3"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "8adadf8fbccb42cd449fb691d5ffa29ced3b2ea3"
+    }
+  ],
+  "findings": [],
+  "failurePathConcerns": ["state-machine", "persistence", "subprocess"],
+  "changeFailureInvariants": {
+    "change": "require-change-specific-failure-invariants",
+    "contractDigest": "43d9da3f53f0286b33bdfbced9969148afe88bfe390be69c5bc6cef5e027a229",
+    "invariants": [
+      {
+        "concern": "state-machine",
+        "id": "marked-contracts-require-manifest",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Current delta contains material failure contracts",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "manifest-sources-are-grounded",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Manifest points outside the current change",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "marked-contract-coverage-is-complete",
+        "requirement": "Applicable review derives invariants from the current change",
+        "scenario": "Applicable scenario is omitted",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "state-machine",
+        "id": "change-specific-results-discriminate",
+        "requirement": "Executable proof discriminates every required invariant",
+        "scenario": "Baseline passes but change-specific invariant does not discriminate",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "persistence",
+        "id": "contract-edits-stale-proof",
+        "requirement": "Executable proof discriminates every required invariant",
+        "scenario": "Contracts change after proof",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      },
+      {
+        "concern": "state-machine",
+        "id": "stale-plan-or-pending-packet-blocks-delivery",
+        "requirement": "Delivery preserves the guarded execution lifecycle",
+        "scenario": "Requirements or delivery bypasses the execution plan",
+        "spec": "openspec/changes/require-change-specific-failure-invariants/specs/harness/change-specific-failure-invariants/spec.md"
+      }
+    ],
+    "manifestDigest": "d764b52390b36ffe7a403896ca3e01256ddc9bb2ca16f9c4860efcf4c2b08c19",
+    "version": 1
+  },
+  "failurePathProof": {
+    "command": ["node", "tools/tests/change-specific-review-fixture.mjs"],
+    "contractDigest": "43d9da3f53f0286b33bdfbced9969148afe88bfe390be69c5bc6cef5e027a229",
+    "invariants": [
+      {
+        "concern": "state-machine",
+        "id": "launch-recording-is-recoverable",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "state-machine",
+        "id": "declared-fallback-can-complete",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "retry-state-is-monotonic",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "subprocess",
+        "id": "stdin-failure-settles-once",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "subprocess",
+        "id": "terminal-events-have-defined-precedence",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "persisted-completions-are-report-bound",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "state-machine",
+        "id": "require-change-specific-failure-invariants/marked-contracts-require-manifest",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "require-change-specific-failure-invariants/manifest-sources-are-grounded",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "require-change-specific-failure-invariants/marked-contract-coverage-is-complete",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "state-machine",
+        "id": "require-change-specific-failure-invariants/change-specific-results-discriminate",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "persistence",
+        "id": "require-change-specific-failure-invariants/contract-edits-stale-proof",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      },
+      {
+        "concern": "state-machine",
+        "id": "require-change-specific-failure-invariants/stale-plan-or-pending-packet-blocks-delivery",
+        "knownBad": "fail",
+        "reviewedHead": "pass"
+      }
+    ],
+    "knownBadRevision": "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c",
+    "manifestDigest": "d764b52390b36ffe7a403896ca3e01256ddc9bb2ca16f9c4860efcf4c2b08c19",
+    "openSpecChange": "require-change-specific-failure-invariants",
+    "resultDigest": "afbbc9117bff0d0d556797cb7749da1b181fd3f4a61eab56e39e98500d14a9fa",
+    "reviewBase": "e36668b2a933cf9d97ea2657cef6ee7ca202f322",
+    "reviewedHead": "8adadf8fbccb42cd449fb691d5ffa29ced3b2ea3",
+    "version": 1
+  }
+}

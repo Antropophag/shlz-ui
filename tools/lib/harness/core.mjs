@@ -559,7 +559,21 @@ export function deterministicRouteRiskFloor(surfaces) {
   return [...signals].sort((a, b) => a.localeCompare(b));
 }
 
-export function assertImplementationDelivery(delivery) {
+const incompleteDeliveryPackets = (plan, state) =>
+  plan.packets
+    .filter(({ id }) => {
+      if (state.packets?.[id]?.status !== "completed") return true;
+      try {
+        return (
+          validateHandoff(state.handoffs?.[id], plan).completedPacket !== id
+        );
+      } catch {
+        return true;
+      }
+    })
+    .map(({ id }) => id);
+
+export function assertImplementationDelivery(delivery, execution = null) {
   if (!delivery || typeof delivery !== "object")
     throw new Error("implementation delivery evidence is required");
   const actual = delivery.actual;
@@ -567,6 +581,37 @@ export function assertImplementationDelivery(delivery) {
     throw new Error(
       "implementation delivery requires actual repository evidence",
     );
+  if (execution) {
+    const { plan, state, requirementsState = null } = execution;
+    if (!plan || !state)
+      throw new Error("delivery execution evidence requires plan and state");
+    if (state.planId !== plan.id)
+      throw new Error("delivery execution state belongs to a different plan");
+    if (plan.requirementsGate === "required") {
+      assertPlanRequirements(
+        plan,
+        requirementsState,
+        state.requirementsRevision ?? plan.requirementsRevision,
+      );
+      if (state.requirementsRevision !== plan.requirementsRevision)
+        throw new Error(
+          `delivery execution state revision ${state.requirementsRevision ?? "missing"} does not match plan revision ${plan.requirementsRevision}`,
+        );
+    }
+    const planIds = new Set(plan.packets.map(({ id }) => id));
+    const unknown = Object.keys(state.packets ?? {}).filter(
+      (id) => !planIds.has(id),
+    );
+    if (unknown.length)
+      throw new Error(
+        `delivery execution state has unknown packets: ${unknown.join(", ")}`,
+      );
+    const incomplete = incompleteDeliveryPackets(plan, state);
+    if (incomplete.length)
+      throw new Error(
+        `delivery requires completed mandatory packets: ${incomplete.join(", ")}`,
+      );
+  }
   if (actual.currentBranch === delivery.defaultBranch)
     throw new Error(
       `implementation cannot complete on default branch ${delivery.defaultBranch}`,
@@ -879,6 +924,13 @@ function assertPlanRequirements(
   if (!status.readyForPlanning)
     throw new Error(
       `requirements are not ready: ${status.unresolvedBlocking.join(", ") || status.authorization}`,
+    );
+  if (
+    Number.isInteger(subject.requirementsRevision) &&
+    subject.requirementsRevision !== requirementsRevision(requirementsState)
+  )
+    throw new Error(
+      `execution plan revision ${subject.requirementsRevision} is stale; expected ${requirementsRevision(requirementsState)}`,
     );
 }
 
@@ -1890,7 +1942,190 @@ const failurePathInvariants = new Map([
   ["terminal-events-have-defined-precedence", "subprocess"],
 ]);
 
-export function createReviewState(base, concerns = []) {
+const failureInvariantMarker =
+  /^<!-- failure-invariant: ([a-z0-9]+(?:-[a-z0-9]+)*) concern=(state-machine|persistence|subprocess) -->$/;
+
+function assertFailureInvariantManifest(change, manifest) {
+  if (
+    !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(change ?? "") ||
+    !manifest ||
+    manifest.version !== 1 ||
+    manifest.change !== change ||
+    !Array.isArray(manifest.invariants) ||
+    !manifest.invariants.length
+  )
+    throw new Error("change-specific failure invariant manifest is invalid");
+}
+
+async function findDeltaSpecFiles(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...(await findDeltaSpecFiles(target)));
+    else if (entry.isFile() && entry.name === "spec.md") files.push(target);
+  }
+  return files;
+}
+
+function parseFailureInvariantSources(
+  text,
+  file,
+  repoRoot,
+  sources,
+  identities,
+) {
+  const lines = text.split(/\r?\n/);
+  let requirement = null;
+  let requirementContract = null;
+  for (let index = 0; index < lines.length; index += 1) {
+    const requirementMatch = lines[index].match(/^### Requirement: (.+)$/);
+    if (requirementMatch) {
+      requirement = requirementMatch[1];
+      const sectionEnd = lines.findIndex(
+        (line, candidate) =>
+          candidate > index && /^### Requirement:/.test(line),
+      );
+      const contractEnd = lines.findIndex(
+        (line, candidate) =>
+          candidate > index &&
+          (sectionEnd === -1 || candidate < sectionEnd) &&
+          (failureInvariantMarker.test(line) || /^#### Scenario:/.test(line)),
+      );
+      requirementContract = lines
+        .slice(index, contractEnd === -1 ? sectionEnd : contractEnd)
+        .join("\n")
+        .trim();
+    }
+    const marker = lines[index].match(failureInvariantMarker);
+    if (!marker) continue;
+    let scenarioIndex = index + 1;
+    while (lines[scenarioIndex] === "") scenarioIndex += 1;
+    const scenarioMatch = lines[scenarioIndex]?.match(/^#### Scenario: (.+)$/);
+    if (!requirement || !scenarioMatch)
+      throw new Error(
+        `failure invariant marker is not adjacent to a scenario: ${path.relative(repoRoot, file)}:${index + 1}`,
+      );
+    const [, id, concern] = marker;
+    if (sources.has(id))
+      throw new Error(`duplicate failure invariant marker: ${id}`);
+    const identity = `${requirement}\0${scenarioMatch[1]}`;
+    if (identities.has(identity))
+      throw new Error(
+        `duplicate failure invariant contract identity: ${requirement} / ${scenarioMatch[1]}`,
+      );
+    identities.add(identity);
+    const end = lines.findIndex(
+      (line, candidate) =>
+        candidate > scenarioIndex &&
+        /^(### Requirement:|#### Scenario:)/.test(line),
+    );
+    sources.set(id, {
+      id,
+      concern,
+      requirement,
+      scenario: scenarioMatch[1],
+      spec: path.relative(repoRoot, file).split(path.sep).join("/"),
+      contract: {
+        requirement: requirementContract,
+        scenario: lines
+          .slice(scenarioIndex, end === -1 ? lines.length : end)
+          .join("\n")
+          .trim(),
+      },
+    });
+  }
+}
+
+function normalizeFailureInvariantManifest(manifest, sources) {
+  const ids = new Set();
+  const normalized = manifest.invariants.map((item) => {
+    if (
+      !item ||
+      typeof item.id !== "string" ||
+      ids.has(item.id) ||
+      !failurePathConcerns.has(item.concern) ||
+      typeof item.requirement !== "string" ||
+      typeof item.scenario !== "string"
+    )
+      throw new Error("change-specific failure invariant entry is invalid");
+    ids.add(item.id);
+    const source = sources.get(item.id);
+    if (
+      !source ||
+      source.concern !== item.concern ||
+      source.requirement !== item.requirement ||
+      source.scenario !== item.scenario
+    )
+      throw new Error(
+        `change-specific failure invariant is ungrounded: ${item.id}`,
+      );
+    return {
+      id: source.id,
+      concern: source.concern,
+      requirement: source.requirement,
+      scenario: source.scenario,
+      spec: source.spec,
+    };
+  });
+  const uncovered = [...sources.keys()].filter((id) => !ids.has(id));
+  if (uncovered.length)
+    throw new Error(
+      `change-specific failure invariants do not cover: ${uncovered.join(", ")}`,
+    );
+  return normalized;
+}
+
+export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
+  assertFailureInvariantManifest(change, manifest);
+  const changeRoot = path.resolve(repoRoot, "openspec/changes", change);
+  const specsRoot = path.join(changeRoot, "specs");
+  const resolvedRoot = path.resolve(repoRoot);
+  if (
+    changeRoot !== resolvedRoot &&
+    !changeRoot.startsWith(`${resolvedRoot}${path.sep}`)
+  )
+    throw new Error(
+      "change-specific failure invariant change escapes repository",
+    );
+  let files;
+  try {
+    files = (await findDeltaSpecFiles(specsRoot)).sort((a, b) =>
+      a.localeCompare(b),
+    );
+  } catch (error) {
+    if (error.code === "ENOENT")
+      throw new Error(`OpenSpec change has no delta specs: ${change}`);
+    throw error;
+  }
+  const sources = new Map();
+  const identities = new Set();
+  for (const file of files) {
+    parseFailureInvariantSources(
+      await readFile(file, "utf8"),
+      file,
+      repoRoot,
+      sources,
+      identities,
+    );
+  }
+  const normalized = normalizeFailureInvariantManifest(manifest, sources);
+  const contractDigest = valueDigest({
+    sources: [...sources.values()].map(({ contract, ...source }) => ({
+      ...source,
+      contract,
+    })),
+  });
+  const binding = {
+    version: 1,
+    change,
+    invariants: stableValue(normalized),
+    contractDigest,
+  };
+  binding.manifestDigest = valueDigest(binding);
+  return binding;
+}
+
+export function createReviewState(base, concerns = [], changeBinding = null) {
   if (!base) throw new Error("review base is required");
   if (
     !Array.isArray(concerns) ||
@@ -1904,6 +2139,9 @@ export function createReviewState(base, concerns = []) {
     passes: [],
     findings: [],
     ...(concerns.length ? { failurePathConcerns: concerns } : {}),
+    ...(changeBinding
+      ? { changeFailureInvariants: stableValue(changeBinding) }
+      : {}),
   };
 }
 
@@ -1915,10 +2153,14 @@ export const failurePathResultDigest = (proof) =>
     reviewedHead: proof.reviewedHead,
     invariants: proof.invariants,
     command: proof.command,
+    openSpecChange: proof.openSpecChange,
+    manifestDigest: proof.manifestDigest,
+    contractDigest: proof.contractDigest,
   });
 
 export function recordFailurePathProof(state, proof) {
   const concerns = state.failurePathConcerns ?? [];
+  const changeBinding = state.changeFailureInvariants ?? null;
   if (!concerns.length)
     throw new Error("review does not require a failure-path proof");
   if (
@@ -1934,17 +2176,28 @@ export function recordFailurePathProof(state, proof) {
     !/^[0-9a-f]{40}$/.test(proof.reviewedHead ?? "") ||
     proof.knownBadRevision === proof.reviewedHead ||
     !Array.isArray(proof.invariants) ||
-    !proof.invariants.length
+    !proof.invariants.length ||
+    (changeBinding &&
+      (proof.openSpecChange !== changeBinding.change ||
+        proof.manifestDigest !== changeBinding.manifestDigest ||
+        proof.contractDigest !== changeBinding.contractDigest))
   )
     throw new Error("failure-path proof contract is invalid");
   const covered = new Set();
   const ids = new Set();
+  const expected = new Map(
+    [...failurePathInvariants].filter(([, concern]) =>
+      concerns.includes(concern),
+    ),
+  );
+  for (const invariant of changeBinding?.invariants ?? [])
+    expected.set(`${changeBinding.change}/${invariant.id}`, invariant.concern);
   for (const invariant of proof.invariants) {
     if (
       typeof invariant.id !== "string" ||
       !invariant.id ||
       ids.has(invariant.id) ||
-      failurePathInvariants.get(invariant.id) !== invariant.concern ||
+      expected.get(invariant.id) !== invariant.concern ||
       !concerns.includes(invariant.concern) ||
       invariant.knownBad !== "fail" ||
       invariant.reviewedHead !== "pass"
@@ -1956,9 +2209,7 @@ export function recordFailurePathProof(state, proof) {
     covered.add(invariant.concern);
   }
   const missing = concerns.filter((concern) => !covered.has(concern));
-  const missingInvariants = [...failurePathInvariants].filter(
-    ([id, concern]) => concerns.includes(concern) && !ids.has(id),
-  );
+  const missingInvariants = [...expected].filter(([id]) => !ids.has(id));
   if (missing.length || missingInvariants.length)
     throw new Error(
       `failure-path proof does not cover: ${[
@@ -2039,6 +2290,14 @@ export function reviewContext(state) {
       concerns: state.failurePathConcerns ?? [],
       complete: Boolean(state.failurePathProof),
       degradation: state.failurePathDegradation ?? null,
+      ...(state.changeFailureInvariants
+        ? {
+            change: state.changeFailureInvariants.change,
+            manifestDigest: state.changeFailureInvariants.manifestDigest,
+            contractDigest: state.changeFailureInvariants.contractDigest,
+            invariants: state.changeFailureInvariants.invariants,
+          }
+        : {}),
     },
     discovery: "fixed-diff-and-known-findings-only",
   };

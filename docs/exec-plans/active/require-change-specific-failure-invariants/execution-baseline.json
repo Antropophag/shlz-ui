@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "e36668b2a933cf9d97ea2657cef6ee7ca202f322",
+  "branch": "feature/change-specific-failure-invariants",
+  "defaultBranch": "main"
+}
