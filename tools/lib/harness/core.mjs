@@ -1657,7 +1657,7 @@ export function createWorkerBrief(
   );
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
-  assertTddReviewContext(plan, state, packetId);
+  assertTddReviewContext(plan, state, packetId, contextCapsule);
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready for a worker brief`);
   if (!claimId) throw new Error("worker brief requires claimId");

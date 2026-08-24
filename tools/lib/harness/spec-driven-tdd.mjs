@@ -102,7 +102,12 @@ export function createSpecDrivenTdd({
     return [];
   }
 
-  function assertTddReviewContext(plan, state, packetId) {
+  function assertTddReviewContext(
+    plan,
+    state,
+    packetId,
+    additionalContext = null,
+  ) {
     const slices = (plan.specDrivenTdd?.slices ?? []).filter(
       (slice) =>
         slice.applicability === "enforced" &&
@@ -110,10 +115,14 @@ export function createSpecDrivenTdd({
     );
     const packet = plan.packets.find(({ id }) => id === packetId);
     for (const contract of slices) {
-      const packetInputs = packet?.contextSources ?? [];
+      const packetInputs = [
+        ...(packet?.contextSources ?? []),
+        ...(packet?.implementationSurface ?? []),
+      ];
       const dependencyInputs = (packet?.dependencies ?? []).flatMap(
         (dependency) => reviewContextValues(state?.handoffs?.[dependency]),
       );
+      const additionalInputs = reviewContextValues(additionalContext);
       if (
         packetInputs.some(
           (input) =>
@@ -122,7 +131,7 @@ export function createSpecDrivenTdd({
               matchesPattern(surface, input),
             ),
         ) ||
-        dependencyInputs.some((input) =>
+        [...dependencyInputs, ...additionalInputs].some((input) =>
           isProhibitedReviewInput(input, contract),
         )
       )

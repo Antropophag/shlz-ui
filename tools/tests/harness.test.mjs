@@ -1240,6 +1240,8 @@ test("public review execution rejects effective production context hidden by ben
   const planPath = `${relativeRoot}/plan.json`;
   const statePath = `${relativeRoot}/state.json`;
   const reviewPath = `${relativeRoot}/review.json`;
+  const executionPath = `${relativeRoot}/execution.json`;
+  const briefPath = `${relativeRoot}/review.brief.json`;
   const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
   const cli = (...arguments_) =>
     exec(process.execPath, ["tools/harness.mjs", ...arguments_], { cwd: root });
@@ -1288,6 +1290,73 @@ test("public review execution rejects effective production context hidden by ben
         /prohibited production context/,
       );
     }
+    for (const contaminate of [
+      ({ plan }) => {
+        plan.packets
+          .find(({ id }) => id === "test-contract-review")
+          .contextSources.push("tools/lib/harness/core.mjs");
+      },
+      ({ state }) => {
+        state.handoffs["discovery-contracts"] = {
+          completedPacket: "discovery-contracts",
+          changed: ["tools/lib/harness/core.mjs"],
+          provenChecks: [],
+          settledDecisions: [],
+          unresolvedFindings: [],
+          nextPacket: "test-contract-review",
+          invalidatedAssumptions: [],
+        };
+      },
+      ({ plan }) => {
+        plan.packets
+          .find(({ id }) => id === "test-contract-review")
+          .implementationSurface.push("tools/lib/harness/core.mjs");
+      },
+    ]) {
+      const plan = createPlan(reviewedTddAssessment(), config);
+      const state = attestTddDesigner(createExecutionState(plan));
+      recordTddDesign(plan, state, tddDesign());
+      contaminate({ plan, state });
+      await rm(path.join(root, briefPath), { force: true });
+      await Promise.all([
+        writeFile(path.join(root, planPath), `${JSON.stringify(plan)}\n`),
+        writeFile(path.join(root, statePath), `${JSON.stringify(state)}\n`),
+        writeFile(
+          path.join(root, executionPath),
+          `${JSON.stringify(executionBaseline)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "worker-brief",
+          planPath,
+          statePath,
+          "test-contract-review",
+          "--execution",
+          executionPath,
+          "--claim",
+          "test-review-context-r1",
+          "--out",
+          briefPath,
+        ),
+        /prohibited production context/,
+      );
+      await assert.rejects(readFile(path.join(root, briefPath)), /ENOENT/);
+    }
+    const phasePlan = createPlan(reviewedTddAssessment(), config);
+    const phaseState = attestTddDesigner(createExecutionState(phasePlan));
+    recordTddDesign(phasePlan, phaseState, tddDesign());
+    assert.throws(
+      () =>
+        createWorkerBrief(phasePlan, phaseState, "test-contract-review", {
+          baseline: executionBaseline,
+          claimId: "test-review-phase-r1",
+          contextCapsule: {
+            sources: ["tools/lib/harness/core.mjs"],
+          },
+        }),
+      /prohibited production context/,
+    );
   } finally {
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });
