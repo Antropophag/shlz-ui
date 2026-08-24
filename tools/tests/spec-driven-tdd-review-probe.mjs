@@ -85,6 +85,14 @@ const design = {
   inputs: [
     "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
   ],
+  expectedResultSource: {
+    kind: "explicit-openspec-literal",
+    ref: "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
+  },
+  oracleMethod: {
+    kind: "behavioral-assertion",
+    observesSeam: "harness/spec-driven-tdd",
+  },
 };
 let deliveryRejectsStaleGreen = false;
 if (

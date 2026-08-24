@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "packet": {
+    "contextSources": [
+      "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+      "openspec/changes/enforce-spec-driven-tdd/**",
+      "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+    ],
+    "contracts": [
+      "harness/spec-driven-tdd"
+    ],
+    "dependencies": [
+      "workflow-delivery"
+    ],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "two-axis re-review"
+    ],
+    "handoff": [
+      "finding dispositions",
+      "RED evidence",
+      "GREEN checks"
+    ],
+    "id": "final-remediation",
+    "implementationOutcomes": [
+      "weak oracle rejection",
+      "persistent test-design re-entry",
+      "representative invariant discrimination"
+    ],
+    "implementationSurface": [
+      "tools/harness.mjs",
+      "tools/lib/harness/**",
+      "tools/tests/**",
+      "docs/exec-plans/fixtures/**"
+    ],
+    "nonGoals": [
+      "large core module extraction",
+      "new requirements",
+      "PR merge"
+    ],
+    "objective": "Resolve final independent Spec review blockers without weakening the acceptance contract",
+    "outputs": [
+      "three regression-first fixes",
+      "public known-bad fixture matrix",
+      "review-ready handoff"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "oracle-method evidence and validation",
+      "durable tamper invalidation",
+      "representative public known-bad fixtures",
+      "focused regression validation"
+    ]
+  },
+  "claimId": "final-remediation-r1",
+  "baseline": {
+    "branch": "feat/spec-driven-tdd-gate",
+    "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-spec-driven-tdd"
+  },
+  "dependencyDigests": {
+    "workflow-delivery": "a905b5b8e5d65ebb9554cef5f396b4ae22b09caab0c56f348739b8c8cf5c66b1"
+  },
+  "packetDigest": "b81d1cf0514b906bf63c0cce5dd140ab962fd12f79178f0ef5fb4a9dc636243b",
+  "contextIndex": [
+    "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+    "openspec/changes/enforce-spec-driven-tdd/**",
+    "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+  ],
+  "allowedImplementationSurface": [
+    "tools/harness.mjs",
+    "tools/lib/harness/**",
+    "tools/tests/**",
+    "docs/exec-plans/fixtures/**"
+  ],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "two-axis re-review"
+  ],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "165423fb5e25ee88cddd39b6094cf2a1cea780dd5dc038c753a0565e00ac40e8"
+}

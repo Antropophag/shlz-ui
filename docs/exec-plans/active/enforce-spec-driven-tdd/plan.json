@@ -178,6 +178,114 @@
       ],
       "preferredExecutionMode": "fresh-session",
       "status": "pending"
+    },
+    {
+      "id": "final-remediation",
+      "objective": "Resolve final independent Spec review blockers without weakening the acceptance contract",
+      "scope": [
+        "oracle-method evidence and validation",
+        "durable tamper invalidation",
+        "representative public known-bad fixtures",
+        "focused regression validation"
+      ],
+      "nonGoals": [
+        "large core module extraction",
+        "new requirements",
+        "PR merge"
+      ],
+      "dependencies": [
+        "workflow-delivery"
+      ],
+      "contracts": [
+        "harness/spec-driven-tdd"
+      ],
+      "contextSources": [
+        "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+        "openspec/changes/enforce-spec-driven-tdd/**",
+        "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/**",
+        "docs/exec-plans/fixtures/**"
+      ],
+      "focusedValidation": [
+        "harness",
+        "openspec",
+        "two-axis re-review"
+      ],
+      "outputs": [
+        "three regression-first fixes",
+        "public known-bad fixture matrix",
+        "review-ready handoff"
+      ],
+      "handoff": [
+        "finding dispositions",
+        "RED evidence",
+        "GREEN checks"
+      ],
+      "implementationOutcomes": [
+        "weak oracle rejection",
+        "persistent test-design re-entry",
+        "representative invariant discrimination"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "oracle-discrimination",
+      "objective": "Implement the revised independently executable oracle-challenge contract and known-bad matrix",
+      "scope": [
+        "same-oracle control/decoy challenge",
+        "behaviorally wrong surface-preserving decoy",
+        "public invariant-specific fixture matrix",
+        "focused RED/GREEN validation"
+      ],
+      "nonGoals": [
+        "production implementation changes outside the harness",
+        "large module extraction",
+        "PR merge"
+      ],
+      "dependencies": [
+        "workflow-delivery"
+      ],
+      "contracts": [
+        "harness/spec-driven-tdd"
+      ],
+      "contextSources": [
+        "openspec/changes/enforce-spec-driven-tdd/**",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+        "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/**",
+        "docs/exec-plans/fixtures/**"
+      ],
+      "focusedValidation": [
+        "harness",
+        "openspec",
+        "two-axis re-review"
+      ],
+      "outputs": [
+        "executable oracle challenge",
+        "surface-preserving decoy fixture",
+        "public discrimination matrix"
+      ],
+      "handoff": [
+        "challenge interface",
+        "known-bad outcomes",
+        "validation results"
+      ],
+      "implementationOutcomes": [
+        "tautology rejection",
+        "source-inspection rejection",
+        "same-oracle discrimination"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
     }
   ]
 }

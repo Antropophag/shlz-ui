@@ -402,14 +402,24 @@ switch (command) {
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
-      await runTddAcceptance(
-        plan,
-        current,
-        args[2],
-        await readJson(absolute(baselinePath)),
-        repoRoot,
-        command === "tdd-red" ? "red" : "green",
-      );
+      try {
+        await runTddAcceptance(
+          plan,
+          current,
+          args[2],
+          await readJson(absolute(baselinePath)),
+          repoRoot,
+          command === "tdd-red" ? "red" : "green",
+        );
+      } catch (error) {
+        if (
+          command === "tdd-green" &&
+          current.specDrivenTdd?.slices?.[args[2]]?.status ===
+            "pending-test-design"
+        )
+          await writeJson(target, current);
+        throw error;
+      }
       await writeJson(target, current);
       return current;
     });

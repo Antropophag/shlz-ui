@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "seam": "harness/spec-driven-tdd",
+  "cases": [
+    {
+      "id": "asymmetric-oracle",
+      "adapter": "revision-command-override",
+      "command": ["node", "tools/harness.mjs", "tdd-red", "--baseline-command"],
+      "outcome": "rejected-before-execution",
+      "signature": "does not accept revision-specific command or oracle overrides"
+    },
+    {
+      "id": "tautological-oracle",
+      "adapter": "tautological",
+      "command": ["node", "tools/tests/fixtures/tdd-tautological-probe.mjs"],
+      "outcome": "control-pass-decoy-pass",
+      "signature": "did not discriminate behavioral decoy"
+    },
+    {
+      "id": "source-inspection-oracle",
+      "adapter": "source-inspection",
+      "command": [
+        "node",
+        "tools/tests/fixtures/tdd-source-inspection-probe.mjs"
+      ],
+      "outcome": "control-pass-decoy-pass",
+      "signature": "did not discriminate behavioral decoy"
+    },
+    {
+      "id": "timing-dependent-probe",
+      "adapter": "nondeterministic",
+      "command": ["node", "tools/tests/fixtures/tdd-acceptance-probe.mjs"],
+      "outcome": "repeated-output-mismatch",
+      "signature": "oracle challenge is nondeterministic"
+    },
+    {
+      "id": "post-red-acceptance-edit",
+      "adapter": "contract-drift",
+      "command": ["node", "tools/harness.mjs", "tdd-green"],
+      "outcome": "persisted-pending-test-design",
+      "signature": "acceptance contract changed after test design"
+    },
+    {
+      "id": "implementation-runtime-reuse",
+      "adapter": "designer-runtime-reuse",
+      "command": ["node", "tools/harness.mjs", "claim"],
+      "outcome": "claim-rejected",
+      "signature": "runtime identity must differ"
+    },
+    {
+      "id": "requirements-reentry",
+      "adapter": "affected-revision",
+      "command": ["node", "tools/harness.mjs", "resume"],
+      "outcome": "affected-slice-reset",
+      "signature": "pending-test-design"
+    },
+    {
+      "id": "inapplicable-slice",
+      "adapter": "baseline-already-green",
+      "command": ["node", "tools/harness.mjs", "state-init"],
+      "outcome": "recorded-inapplicable",
+      "signature": "inapplicable"
+    }
+  ]
+}

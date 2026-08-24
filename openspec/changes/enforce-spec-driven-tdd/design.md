@@ -50,9 +50,11 @@ Alternative: allow acceptance edits with reviewer approval. Rejected because it 
 
 Both revisions use one manifest-generated execution request; callers cannot supply separate baseline/candidate commands. The runner records argv, environment digest, file digests, fixture digest, normalization rules, timeout, and repeat count. RED requires repeated identical non-zero outcomes and a declared signature mapped to at least one changed scenario. GREEN requires zero outcomes from that same request.
 
-The manifest must classify the independent expected-result source (worked example, standard, design authority, existing public contract, or explicit OpenSpec literal) and attest that the oracle observes behavior at the declared seam. Spec review remains responsible for semantic strength; executable fixtures demonstrate that source/symbol-presence, tautological, retry-masked, asymmetric, and timing-race adapters are rejected. This combines structural guardrails with independent human judgment rather than pretending the harness can infer semantics.
+The manifest must classify the independent expected-result source (worked example, standard, design authority, existing public contract, or explicit OpenSpec literal) and bind an executable oracle challenge produced by the test-design worker before production implementation. The challenge runs the frozen acceptance contract and oracle through the same argv against two test-design-owned adapters selected only through a harness-controlled adapter input: a known-good control and a behaviorally wrong decoy. The decoy preserves the surface symbols and text that a source-inspection oracle might look for while violating the mapped scenario behavior. The challenge is accepted only when repeated runs pass for the control and fail with the declared scenario-grounded signature for the decoy. A tautological oracle passes both; a source/symbol oracle cannot distinguish the decoy; nondeterministic results disagree across repeats. All three fail closed before baseline RED is accepted.
 
-Alternative: compare arbitrary known-bad and known-good scripts. Rejected based on PR #34: asymmetric artifacts can manufacture discrimination. Alternative: run once. Rejected because timing-dependent probes can produce accidental RED.
+The oracle-challenge adapters, selector, commands, results, and digests are part of the immutable test-design evidence. Baseline RED and candidate GREEN still use one symmetric execution request; the deliberately varied adapter input exists only in the preceding oracle-quality challenge and cannot vary between RED and GREEN. Spec review remains responsible for verifying that the control/decoy pair faithfully represents the authoritative scenario rather than accepting a self-attested label.
+
+Alternative: trust an oracle-method label or review alone. Rejected because a weak executable can lie about its method and still manufacture RED. Alternative: compare arbitrary known-bad and known-good scripts. Rejected based on PR #34: asymmetric artifacts can manufacture discrimination; both controls must use the frozen acceptance test and oracle. Alternative: run once. Rejected because timing-dependent probes can produce accidental RED.
 
 ### Preserve physical and methodological independence
 
@@ -80,7 +82,7 @@ Acceptance RED/GREEN proves promised behavior; change-specific failure-invariant
 
 ## Risks / Trade-offs
 
-- **[Test-design quality remains partly semantic]** → Require independent expected sources, scenario mapping, adversarial fixtures, and Spec review; do not claim keyword validation proves a strong oracle.
+- **[A dishonest or mistaken control/decoy pair can misstate behavior]** → Bind independently designed adapters and their authoritative scenario mapping, require executable same-oracle discrimination, and retain Spec review of the pair; do not claim self-attested labels prove a strong oracle.
 - **[Repeated baseline execution increases cost]** → Apply only to eligible material slices and keep commands focused and bounded.
 - **[Worktree cleanup can fail]** → Use explicit home-directory paths, process-exit/finally cleanup, dirty-tree refusal, and `git worktree prune`; retain failure evidence without destructive cleanup.
 - **[Strict freezing delays legitimate test corrections]** → Provide explicit test-design re-entry that invalidates old RED rather than silently editing evidence.

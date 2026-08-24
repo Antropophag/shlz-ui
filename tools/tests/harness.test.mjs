@@ -860,6 +860,33 @@ const tddDesign = (overrides = {}) => ({
   controlsDigest: digest("d"),
   contractDigest: digest("e"),
   inputs: ["openspec/changes/example/specs/harness/spec.md"],
+  expectedResultSource: {
+    kind: "explicit-openspec-literal",
+    ref: "openspec/changes/example/specs/harness/spec.md",
+  },
+  oracleMethod: {
+    kind: "behavioral-assertion",
+    observesSeam: "harness/spec-driven-tdd",
+  },
+  oracleChallenge: {
+    version: 1,
+    adapterEnvironment: "SHLZ_TDD_ORACLE_ADAPTER",
+    controlAdapter: "tools/tests/fixtures/tdd-oracle-control.mjs",
+    decoyAdapter: "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+    expectedFailureSignature: "ERR_CONTRACT_INCORRECT",
+    scenarioIds: ["meaningful-deterministic-red"],
+  },
+  oracleChallengeDigest: digest("f"),
+  oracleChallengeRuns: {
+    control: [
+      { exitCode: 0, output: "" },
+      { exitCode: 0, output: "" },
+    ],
+    decoy: [
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+    ],
+  },
   ...overrides,
 });
 
@@ -931,6 +958,36 @@ test("spec-driven TDD records independent design and blocks implementation befor
     () => recordTddDesign(plan, mismatched, tddDesign()),
     /requires the completed guarded test-design worker runtime/,
   );
+  for (const weak of [
+    { expectedResultSource: undefined },
+    {
+      oracleMethod: {
+        kind: "tautological",
+        observesSeam: "harness/spec-driven-tdd",
+      },
+    },
+    {
+      oracleMethod: {
+        kind: "source-inspection",
+        observesSeam: "harness/spec-driven-tdd",
+      },
+    },
+    {
+      oracleMethod: {
+        kind: "behavioral-assertion",
+        observesSeam: "internal/source",
+      },
+    },
+  ])
+    assert.throws(
+      () =>
+        recordTddDesign(
+          plan,
+          attestTddDesigner(createExecutionState(plan)),
+          tddDesign(weak),
+        ),
+      /independent expected-result source|behavioral oracle must observe the declared seam/,
+    );
 });
 
 test("spec-driven TDD binds RED and GREEN to immutable evidence", () => {
@@ -1100,6 +1157,8 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
   ];
   plan.specDrivenTdd.slices[0].fixtureSurface = [
     "docs/exec-plans/fixtures/spec-driven-tdd-oracle.json",
+    "tools/tests/fixtures/tdd-oracle-control.mjs",
+    "tools/tests/fixtures/tdd-oracle-decoy.mjs",
   ];
   plan.specDrivenTdd.slices[0].productionSurface = [
     "tools/tests/fixtures/tdd-production-adapter.mjs",
@@ -1128,6 +1187,27 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
     scenarioMappings: tddDesign().scenarioMappings,
     expectedFailureSignature: "ERR_CONTRACT_MISSING",
     failedScenarioIds: ["meaningful-deterministic-red"],
+    expectedResultSource: {
+      kind: "explicit-openspec-literal",
+      ref: "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
+    },
+    oracleMethod: {
+      kind: "behavioral-assertion",
+      observesSeam: "harness/spec-driven-tdd",
+    },
+    oracleChallenge: {
+      version: 1,
+      adapterEnvironment: "SHLZ_TDD_ORACLE_ADAPTER",
+      controlAdapter: "tools/tests/fixtures/tdd-oracle-control.mjs",
+      decoyAdapter: "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+      expectedFailureSignature: "ERR_CONTRACT_INCORRECT",
+      scenarioIds: ["meaningful-deterministic-red"],
+    },
+    oracleChallengeDigest: digest("0"),
+    oracleChallengeRuns: {
+      control: [{ exitCode: 0, output: "fabricated" }],
+      decoy: [{ exitCode: 1, output: "ERR_CONTRACT_INCORRECT" }],
+    },
   };
   try {
     await mkdir(temporaryRoot, { recursive: true });
@@ -1161,6 +1241,20 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       "--execution",
       executionPath,
     );
+    const designed = await load(statePath);
+    const challenge =
+      designed.specDrivenTdd.slices["acceptance-contract"].design
+        .oracleChallengeRuns;
+    assert.equal(challenge.control.length, 2);
+    assert.ok(challenge.control.every(({ exitCode }) => exitCode === 0));
+    assert.ok(challenge.control.every(({ output }) => output !== "fabricated"));
+    assert.equal(challenge.decoy.length, 2);
+    assert.ok(
+      challenge.decoy.every(
+        ({ exitCode, output }) =>
+          exitCode !== 0 && output.includes("ERR_CONTRACT_INCORRECT"),
+      ),
+    );
     const { stdout: redOutput } = await cli(
       "tdd-red",
       planPath,
@@ -1192,22 +1286,35 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       `${JSON.stringify(state, null, 2)}\n`,
     );
     const tamperedPlanPath = `${relativeRoot}/tampered-plan.json`;
+    const tamperedStatePath = `${relativeRoot}/tampered-state.json`;
     const tamperedPlan = clone(plan);
     tamperedPlan.specDrivenTdd.slices[0].controls.timeoutMs += 1;
-    await writeFile(
-      path.join(root, tamperedPlanPath),
-      `${JSON.stringify(tamperedPlan, null, 2)}\n`,
-    );
+    await Promise.all([
+      writeFile(
+        path.join(root, tamperedPlanPath),
+        `${JSON.stringify(tamperedPlan, null, 2)}\n`,
+      ),
+      writeFile(
+        path.join(root, tamperedStatePath),
+        `${JSON.stringify(state, null, 2)}\n`,
+      ),
+    ]);
     await assert.rejects(
       cli(
         "tdd-green",
         tamperedPlanPath,
-        statePath,
+        tamperedStatePath,
         "acceptance-contract",
         "--execution",
         executionPath,
       ),
       /acceptance contract changed after test design/,
+    );
+    assert.equal(
+      (await load(tamperedStatePath)).specDrivenTdd.slices[
+        "acceptance-contract"
+      ].status,
+      "pending-test-design",
     );
     const { stdout: greenOutput } = await cli(
       "tdd-green",
@@ -1236,41 +1343,56 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
         `${JSON.stringify(attestTddDesigner(createExecutionState(badPlan)), null, 2)}\n`,
       ),
     ]);
-    await cli(
-      "tdd-design-record",
-      badPlanPath,
-      badStatePath,
-      handoffPath,
-      "--execution",
-      executionPath,
-    );
     await assert.rejects(
       cli(
-        "tdd-red",
+        "tdd-design-record",
         badPlanPath,
         badStatePath,
-        "acceptance-contract",
+        handoffPath,
         "--execution",
         executionPath,
       ),
-      /probe is nondeterministic/,
+      /oracle challenge is nondeterministic/,
     );
-    badPlan.specDrivenTdd.slices[0].repeatCount = 3;
-    await writeFile(
-      path.join(root, badPlanPath),
-      `${JSON.stringify(badPlan, null, 2)}\n`,
-    );
-    await assert.rejects(
-      cli(
-        "tdd-red",
-        badPlanPath,
-        badStatePath,
-        "acceptance-contract",
-        "--execution",
-        executionPath,
-      ),
-      /acceptance contract changed after test design/,
-    );
+    for (const [probe, signature] of [
+      ["tdd-tautological-probe.mjs", "did not discriminate behavioral decoy"],
+      [
+        "tdd-source-inspection-probe.mjs",
+        "did not discriminate behavioral decoy",
+      ],
+    ]) {
+      const weakPlan = clone(plan);
+      weakPlan.specDrivenTdd.slices[0].command = [
+        process.execPath,
+        path.join(root, `tools/tests/fixtures/${probe}`),
+      ];
+      weakPlan.specDrivenTdd.slices[0].acceptanceSurface = [
+        `tools/tests/fixtures/${probe}`,
+      ];
+      const weakPlanPath = `${relativeRoot}/${probe}-plan.json`;
+      const weakStatePath = `${relativeRoot}/${probe}-state.json`;
+      await Promise.all([
+        writeFile(
+          path.join(root, weakPlanPath),
+          `${JSON.stringify(weakPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, weakStatePath),
+          `${JSON.stringify(attestTddDesigner(createExecutionState(weakPlan)), null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-design-record",
+          weakPlanPath,
+          weakStatePath,
+          handoffPath,
+          "--execution",
+          executionPath,
+        ),
+        new RegExp(signature),
+      );
+    }
     assert.equal(
       (
         await exec("git", ["worktree", "list", "--porcelain"], { cwd: root })
@@ -1283,17 +1405,7 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
   }
 });
 
-test("spec-driven TDD public CLI rejects asymmetry, nondeterminism, and tampering", async () => {
-  const source = await readFile(
-    path.join(root, "tools/tests/fixtures/tdd-acceptance-probe.mjs"),
-    "utf8",
-  );
-  assert.match(source, /process\.cwd\(\)/);
-  assert.doesNotMatch(source, /git diff|git show/);
-  assert.equal(
-    tddAssessment().specDrivenTdd.slices[0].command.length > 0,
-    true,
-  );
+test("spec-driven TDD public CLI rejects revision-specific overrides", async () => {
   await assert.rejects(
     exec(
       process.execPath,
@@ -1309,6 +1421,48 @@ test("spec-driven TDD public CLI rejects asymmetry, nondeterminism, and tamperin
       { cwd: root },
     ),
     /does not accept revision-specific command or oracle overrides/,
+  );
+});
+
+test("spec-driven TDD public CLI executes every known-bad matrix case", async () => {
+  const matrix = await load(
+    "docs/exec-plans/fixtures/spec-driven-tdd-known-bad-matrix.json",
+  );
+  assert.equal(matrix.seam, "harness/spec-driven-tdd");
+  assert.deepEqual(
+    matrix.cases.map(({ id }) => id),
+    [
+      "asymmetric-oracle",
+      "tautological-oracle",
+      "source-inspection-oracle",
+      "timing-dependent-probe",
+      "post-red-acceptance-edit",
+      "implementation-runtime-reuse",
+      "requirements-reentry",
+      "inapplicable-slice",
+    ],
+  );
+  assert.equal(new Set(matrix.cases.map(({ adapter }) => adapter)).size, 8);
+  assert.ok(
+    matrix.cases.every(
+      ({ command, outcome, signature }) =>
+        Array.isArray(command) && command.length > 1 && outcome && signature,
+    ),
+  );
+  const { stdout: fixtureOutput } = await exec(
+    process.execPath,
+    ["tools/tests/spec-driven-tdd-known-bad-fixture.mjs", root],
+    { cwd: root, timeout: 120000 },
+  );
+  const fixture = JSON.parse(fixtureOutput);
+  assert.deepEqual(
+    fixture.cases.map(({ id }) => id),
+    matrix.cases.map(({ id }) => id),
+  );
+  assert.ok(fixture.cases.every(({ outcome }) => outcome === "pass"));
+  assert.equal(
+    new Set(fixture.cases.map(({ executableTest }) => executableTest)).size,
+    5,
   );
 });
 

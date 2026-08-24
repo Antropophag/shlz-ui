@@ -1532,6 +1532,7 @@ const tddIdentityFields = [
   "fixtureDigest",
   "controlsDigest",
   "contractDigest",
+  "oracleChallengeDigest",
 ];
 
 function assertTddDigests(value) {
@@ -1645,7 +1646,7 @@ export async function createTddDesignEvidence(
     throw new Error(
       "spec-driven TDD command must execute a declared acceptance file",
     );
-  return {
+  const evidence = {
     ...handoff,
     requirementsRevision:
       state.requirementsRevision ?? plan.requirementsRevision ?? 1,
@@ -1656,6 +1657,81 @@ export async function createTddDesignEvidence(
     contractDigest: valueDigest(contract),
     acceptanceFiles,
     fixtureFiles,
+  };
+  const challenge = handoff.oracleChallenge;
+  if (
+    challenge?.version !== 1 ||
+    typeof challenge.adapterEnvironment !== "string" ||
+    !challenge.adapterEnvironment ||
+    typeof challenge.controlAdapter !== "string" ||
+    typeof challenge.decoyAdapter !== "string" ||
+    challenge.controlAdapter === challenge.decoyAdapter ||
+    !fixtureFiles.includes(challenge.controlAdapter) ||
+    !fixtureFiles.includes(challenge.decoyAdapter) ||
+    typeof challenge.expectedFailureSignature !== "string" ||
+    !challenge.expectedFailureSignature ||
+    !Array.isArray(challenge.scenarioIds) ||
+    !challenge.scenarioIds.length ||
+    challenge.scenarioIds.some((id) => !contract.scenarioIds.includes(id))
+  )
+    throw new Error(
+      "spec-driven TDD design requires a fixture-bound scenario-grounded oracle challenge",
+    );
+  const oracleChallengeDigest = valueDigest({
+    challenge,
+    command: contract.command,
+    controls: contract.controls,
+    fixtureDigest: evidence.fixtureDigest,
+  });
+  const runAdapter = async (adapter) => {
+    const challengeContract = {
+      ...contract,
+      controls: {
+        ...contract.controls,
+        environment: {
+          ...contract.controls.environment,
+          [challenge.adapterEnvironment]: adapter,
+        },
+      },
+    };
+    const runs = [];
+    for (let index = 0; index < contract.repeatCount; index++)
+      runs.push(
+        await executeTddRequest(
+          challengeContract,
+          repoRoot,
+          repoRoot,
+          repoRoot,
+        ),
+      );
+    if (runs.some((run) => run.output !== runs[0].output))
+      throw new Error("spec-driven TDD oracle challenge is nondeterministic");
+    return runs;
+  };
+  const [controlRuns, decoyRuns] = await Promise.all([
+    runAdapter(challenge.controlAdapter),
+    runAdapter(challenge.decoyAdapter),
+  ]);
+  if (controlRuns.some(({ exitCode }) => exitCode !== 0))
+    throw new Error(
+      "spec-driven TDD oracle challenge rejected known-good control",
+    );
+  if (decoyRuns.some(({ exitCode }) => exitCode === 0))
+    throw new Error(
+      "spec-driven TDD oracle challenge did not discriminate behavioral decoy",
+    );
+  if (
+    decoyRuns.some(
+      ({ output }) => !output.includes(challenge.expectedFailureSignature),
+    )
+  )
+    throw new Error(
+      "spec-driven TDD oracle challenge did not match the scenario failure signature",
+    );
+  return {
+    ...evidence,
+    oracleChallengeDigest,
+    oracleChallengeRuns: { control: controlRuns, decoy: decoyRuns },
   };
 }
 
@@ -1757,11 +1833,23 @@ export async function runTddAcceptance(
     baseline,
     repoRoot,
   );
-  assertTddIdentity(
-    designed,
-    currentIdentity,
-    "acceptance contract changed after test design",
-  );
+  try {
+    assertTddIdentity(
+      designed,
+      currentIdentity,
+      "acceptance contract changed after test design",
+    );
+  } catch (error) {
+    if (phase === "green")
+      state.specDrivenTdd.slices[sliceId] = {
+        status: "pending-test-design",
+        invalidation: {
+          reason: error.message,
+          previousRedDigest: lifecycle.redDigest,
+        },
+      };
+    throw error;
+  }
   let worktreeRoot = repoRoot;
   let allocatedWorktree = false;
   let createdWorktree = false;
@@ -1874,7 +1962,9 @@ export async function runTddAcceptance(
         cleanupErrors.push(error);
       }
       try {
-        if (createdWorktree)
+        if (!createdWorktree)
+          await rm(worktreeRoot, { recursive: true, force: true });
+        else if (!modifiedBaseline)
           await exec(
             "git",
             [
@@ -1885,7 +1975,6 @@ export async function runTddAcceptance(
             ],
             { cwd: repoRoot },
           );
-        else await rm(worktreeRoot, { recursive: true, force: true });
       } catch (error) {
         cleanupErrors.push(error);
       }
@@ -1899,7 +1988,11 @@ export async function runTddAcceptance(
   const failures = [
     ...(runError ? [runError] : []),
     ...(modifiedBaseline
-      ? [new Error("spec-driven TDD baseline worktree was modified")]
+      ? [
+          new Error(
+            `spec-driven TDD baseline worktree was modified; evidence retained at ${worktreeRoot}`,
+          ),
+        ]
       : []),
     ...cleanupErrors,
   ];
@@ -1964,6 +2057,52 @@ export function recordTddDesign(plan, state, handoff) {
   )
     throw new Error(
       "spec-driven TDD design declares production implementation input",
+    );
+  const expectedSourceKinds = new Set([
+    "worked-example",
+    "standard",
+    "design-authority",
+    "existing-public-contract",
+    "explicit-openspec-literal",
+  ]);
+  if (
+    !expectedSourceKinds.has(handoff.expectedResultSource?.kind) ||
+    typeof handoff.expectedResultSource?.ref !== "string" ||
+    !handoff.expectedResultSource.ref
+  )
+    throw new Error(
+      "spec-driven TDD design requires an independent expected-result source",
+    );
+  if (
+    handoff.oracleMethod?.kind !== "behavioral-assertion" ||
+    handoff.oracleMethod?.observesSeam !== contract.seam
+  )
+    throw new Error(
+      "spec-driven TDD behavioral oracle must observe the declared seam",
+    );
+  if (
+    !sha256Pattern.test(handoff.oracleChallengeDigest ?? "") ||
+    !Array.isArray(handoff.oracleChallengeRuns?.control) ||
+    handoff.oracleChallengeRuns.control.length !== contract.repeatCount ||
+    handoff.oracleChallengeRuns.control.some(
+      ({ exitCode }) => exitCode !== 0,
+    ) ||
+    handoff.oracleChallengeRuns.control.some(
+      ({ output }) => output !== handoff.oracleChallengeRuns.control[0].output,
+    ) ||
+    !Array.isArray(handoff.oracleChallengeRuns?.decoy) ||
+    handoff.oracleChallengeRuns.decoy.length !== contract.repeatCount ||
+    handoff.oracleChallengeRuns.decoy.some(
+      ({ exitCode, output }) =>
+        exitCode === 0 ||
+        !output.includes(handoff.oracleChallenge.expectedFailureSignature),
+    ) ||
+    handoff.oracleChallengeRuns.decoy.some(
+      ({ output }) => output !== handoff.oracleChallengeRuns.decoy[0].output,
+    )
+  )
+    throw new Error(
+      "spec-driven TDD design requires accepted same-oracle challenge evidence",
     );
   state.specDrivenTdd.slices[handoff.sliceId] = {
     status: "designed",

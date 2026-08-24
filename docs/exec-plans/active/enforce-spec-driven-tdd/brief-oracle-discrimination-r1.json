@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/enforce-spec-driven-tdd/**",
+      "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+      "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+    ],
+    "contracts": [
+      "harness/spec-driven-tdd"
+    ],
+    "dependencies": [
+      "workflow-delivery"
+    ],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "two-axis re-review"
+    ],
+    "handoff": [
+      "challenge interface",
+      "known-bad outcomes",
+      "validation results"
+    ],
+    "id": "oracle-discrimination",
+    "implementationOutcomes": [
+      "tautology rejection",
+      "source-inspection rejection",
+      "same-oracle discrimination"
+    ],
+    "implementationSurface": [
+      "tools/harness.mjs",
+      "tools/lib/harness/**",
+      "tools/tests/**",
+      "docs/exec-plans/fixtures/**"
+    ],
+    "nonGoals": [
+      "production implementation changes outside the harness",
+      "large module extraction",
+      "PR merge"
+    ],
+    "objective": "Implement the revised independently executable oracle-challenge contract and known-bad matrix",
+    "outputs": [
+      "executable oracle challenge",
+      "surface-preserving decoy fixture",
+      "public discrimination matrix"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "same-oracle control/decoy challenge",
+      "behaviorally wrong surface-preserving decoy",
+      "public invariant-specific fixture matrix",
+      "focused RED/GREEN validation"
+    ]
+  },
+  "claimId": "oracle-discrimination-r1",
+  "baseline": {
+    "branch": "feat/spec-driven-tdd-gate",
+    "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-spec-driven-tdd"
+  },
+  "dependencyDigests": {
+    "workflow-delivery": "a905b5b8e5d65ebb9554cef5f396b4ae22b09caab0c56f348739b8c8cf5c66b1"
+  },
+  "packetDigest": "9bf4699e743174e28113fe11241e63ae49e5e8f6b417c1a1486b368a40edfa53",
+  "contextIndex": [
+    "openspec/changes/enforce-spec-driven-tdd/**",
+    "docs/exec-plans/active/enforce-spec-driven-tdd/final-review-findings.json",
+    "tools/{harness.mjs,lib/harness/core.mjs,tests/**}"
+  ],
+  "allowedImplementationSurface": [
+    "tools/harness.mjs",
+    "tools/lib/harness/**",
+    "tools/tests/**",
+    "docs/exec-plans/fixtures/**"
+  ],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "two-axis re-review"
+  ],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "e15ee443c62b4aa446669ddf5ef723d352548a5c1b01defb66c920dab1c6aaa6"
+}
