@@ -22,10 +22,15 @@ import {
   classify,
   contextIndex,
   createExecutionState,
+  authorizeTddImplementation,
+  recordTddDesign,
+  recordTddGreen,
+  recordTddRed,
   createWorkerBrief,
   failWorkerReservation,
   createPlan,
   createReviewState,
+  createTddReviewBinding,
   matchesPattern,
   pausePacket,
   readyPackets,
@@ -71,6 +76,10 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+const recordKnownBadObservation = (caseId) => {
+  if (process.env.SHLZ_TDD_OBSERVATION_CASE === caseId)
+    process.stdout.write(`# known-bad-observation ${caseId}=fail\n`);
+};
 const registerExitCleanup = (paths) => {
   const cleanup = () => {
     for (const target of paths)
@@ -80,6 +89,7 @@ const registerExitCleanup = (paths) => {
   return () => process.removeListener("exit", cleanup);
 };
 const oid = "a".repeat(40);
+const digest = (character) => character.repeat(64);
 const mainlineExecution = (overrides = {}) => ({
   currentBranch: "feat/task",
   defaultBranch: "main",
@@ -350,6 +360,22 @@ test("CLI requires persisted execution baselines for preflight and conformance",
       { cwd: root },
     ),
     /requires --plan <plan> --state <state> or --direct <route-assessment>/,
+  );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "delivery-check",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/delivery-evidence.json",
+        "--plan",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/plan.json",
+        "--state",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/state.json",
+      ],
+      { cwd: root },
+    ),
+    /planned delivery-check requires --review <state>/,
   );
 });
 
@@ -771,6 +797,748 @@ test("Wave 7 is large before implementation and decomposes along semantic seams"
   assert.deepEqual(
     plan.packets.find(({ id }) => id === "nested-integration").dependencies,
     ["modal", "drawer"],
+  );
+});
+
+const tddAssessment = () => {
+  const assessment = clone(wave7);
+  assessment.specDrivenTdd = {
+    version: 1,
+    slices: [
+      {
+        id: "acceptance-contract",
+        applicability: "enforced",
+        scenarioIds: [
+          "eligible-behavioral-change",
+          "meaningful-deterministic-red",
+        ],
+        authorities: [
+          {
+            scenarioId: "eligible-behavioral-change",
+            source: "explicit-openspec-literal",
+            ref: "openspec/changes/example/specs/harness/spec.md",
+          },
+          {
+            scenarioId: "meaningful-deterministic-red",
+            source: "worked-example",
+            ref: "fixture:red-contract",
+          },
+        ],
+        seam: "harness/spec-driven-tdd",
+        command: [
+          process.execPath,
+          "--test",
+          "tools/tests/acceptance.test.mjs",
+        ],
+        acceptanceSurface: ["tools/tests/acceptance.test.mjs"],
+        fixtureSurface: ["tools/tests/fixtures/tdd/**"],
+        productionSurface: ["tools/lib/harness/core.mjs"],
+        testDesignPacket: "discovery-contracts",
+        implementationPacket: "shared-native-dialog",
+        controls: {
+          environment: { TZ: "UTC" },
+          timeoutMs: 5000,
+          normalization: ["repo-root"],
+        },
+        repeatCount: 2,
+      },
+    ],
+  };
+  return assessment;
+};
+
+const tddDesign = (overrides = {}) => ({
+  version: 1,
+  sliceId: "acceptance-contract",
+  runtimeId: "test-designer-runtime",
+  requirementsRevision: 1,
+  baselineDigest: digest("a"),
+  scenarioMappings: [
+    {
+      scenarioId: "eligible-behavioral-change",
+      authorityRef: "openspec/changes/example/specs/harness/spec.md",
+    },
+    {
+      scenarioId: "meaningful-deterministic-red",
+      authorityRef: "fixture:red-contract",
+    },
+  ],
+  acceptanceDigest: digest("b"),
+  fixtureDigest: digest("c"),
+  controlsDigest: digest("d"),
+  contractDigest: digest("e"),
+  inputs: ["openspec/changes/example/specs/harness/spec.md"],
+  expectedResultSource: {
+    kind: "explicit-openspec-literal",
+    ref: "openspec/changes/example/specs/harness/spec.md",
+  },
+  oracleMethod: {
+    kind: "behavioral-assertion",
+    observesSeam: "harness/spec-driven-tdd",
+  },
+  oracleChallenge: {
+    version: 1,
+    adapterEnvironment: "SHLZ_TDD_ORACLE_ADAPTER",
+    controlAdapter: "tools/tests/fixtures/tdd-oracle-control.mjs",
+    decoyAdapter: "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+    expectedFailureSignature: "ERR_CONTRACT_INCORRECT",
+    scenarioIds: ["meaningful-deterministic-red"],
+  },
+  oracleChallengeDigest: digest("f"),
+  oracleChallengeRuns: {
+    control: [
+      { exitCode: 0, output: "" },
+      { exitCode: 0, output: "" },
+    ],
+    decoy: [
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+      { exitCode: 1, output: "ERR_CONTRACT_INCORRECT" },
+    ],
+  },
+  ...overrides,
+});
+
+const attestTddDesigner = (state, runtimeId = "test-designer-runtime") => {
+  state.packets["discovery-contracts"] = {
+    status: "completed",
+    execution: { runtimeId },
+  };
+  return state;
+};
+
+test("spec-driven TDD validates eligibility and initializes lifecycle state", () => {
+  const plan = createPlan(tddAssessment(), config);
+  assert.equal(plan.specDrivenTdd.version, 1);
+  assert.equal(
+    createExecutionState(plan).specDrivenTdd.slices["acceptance-contract"]
+      .status,
+    "pending-test-design",
+  );
+
+  const overlap = tddAssessment();
+  overlap.specDrivenTdd.slices[0].acceptanceSurface = [
+    "tools/lib/harness/core.mjs",
+  ];
+  assert.throws(() => createPlan(overlap, config), /surfaces overlap/);
+
+  const ungrounded = tddAssessment();
+  ungrounded.specDrivenTdd.slices[0].authorities.pop();
+  assert.throws(
+    () => createPlan(ungrounded, config),
+    /scenario authority mapping/,
+  );
+
+  const unresolvedExecutable = tddAssessment();
+  unresolvedExecutable.specDrivenTdd.slices[0].command[0] = "node";
+  assert.throws(
+    () => createPlan(unresolvedExecutable, config),
+    /absolute command/,
+  );
+});
+
+test("spec-driven TDD records independent design and blocks implementation before RED", () => {
+  const plan = createPlan(tddAssessment(), config);
+  const state = createExecutionState(plan);
+  attestTddDesigner(state);
+  recordTddDesign(plan, state, tddDesign());
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "designed",
+  );
+
+  const malformed = createExecutionState(plan);
+  attestTddDesigner(malformed);
+  assert.throws(
+    () =>
+      recordTddDesign(plan, malformed, {
+        ...tddDesign(),
+        oracleChallenge: undefined,
+      }),
+    /requires accepted same-oracle challenge evidence/,
+  );
+  assert.throws(
+    () =>
+      authorizeTddImplementation(
+        plan,
+        state,
+        "acceptance-contract",
+        "implementation-runtime",
+      ),
+    /requires accepted RED/,
+  );
+  assert.throws(
+    () =>
+      recordTddDesign(
+        plan,
+        attestTddDesigner(createExecutionState(plan)),
+        tddDesign({ inputs: ["tools/lib/harness/core.mjs"] }),
+      ),
+    /production implementation input/,
+  );
+  const mismatched = createExecutionState(plan);
+  mismatched.packets["discovery-contracts"] = {
+    status: "completed",
+    execution: { runtimeId: "guarded-designer-runtime" },
+  };
+  assert.throws(
+    () => recordTddDesign(plan, mismatched, tddDesign()),
+    /requires the completed guarded test-design worker runtime/,
+  );
+  for (const weak of [
+    { expectedResultSource: undefined },
+    {
+      oracleMethod: {
+        kind: "tautological",
+        observesSeam: "harness/spec-driven-tdd",
+      },
+    },
+    {
+      oracleMethod: {
+        kind: "source-inspection",
+        observesSeam: "harness/spec-driven-tdd",
+      },
+    },
+    {
+      oracleMethod: {
+        kind: "behavioral-assertion",
+        observesSeam: "internal/source",
+      },
+    },
+  ])
+    assert.throws(
+      () =>
+        recordTddDesign(
+          plan,
+          attestTddDesigner(createExecutionState(plan)),
+          tddDesign(weak),
+        ),
+      /independent expected-result source|behavioral oracle must observe the declared seam/,
+    );
+});
+
+test("spec-driven TDD binds RED and GREEN to immutable evidence", () => {
+  const plan = createPlan(tddAssessment(), config);
+  const state = createExecutionState(plan);
+  attestTddDesigner(state);
+  const design = tddDesign();
+  recordTddDesign(plan, state, design);
+  recordTddRed(plan, state, {
+    ...design,
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+  });
+  assert.throws(
+    () =>
+      authorizeTddImplementation(
+        plan,
+        clone(state),
+        "acceptance-contract",
+        "test-designer-runtime",
+      ),
+    /runtime identity must differ/,
+  );
+  authorizeTddImplementation(
+    plan,
+    state,
+    "acceptance-contract",
+    "implementation-runtime",
+  );
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "implementing",
+  );
+  const tampered = clone(state);
+  assert.throws(
+    () =>
+      recordTddGreen(plan, tampered, {
+        ...design,
+        acceptanceDigest: digest("f"),
+        candidateHead: oid,
+      }),
+    /acceptance contract changed after RED/,
+  );
+  assert.equal(
+    tampered.specDrivenTdd.slices["acceptance-contract"].status,
+    "pending-test-design",
+  );
+  recordTddGreen(plan, state, { ...design, candidateHead: oid });
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "green-proven",
+  );
+  recordKnownBadObservation("implementation-runtime-reuse");
+});
+
+test("spec-driven TDD supports explicit inapplicability and legacy plans", () => {
+  const legacyPlan = createPlan(wave7, config);
+  assert.equal(legacyPlan.specDrivenTdd, undefined);
+  assert.equal(createExecutionState(legacyPlan).specDrivenTdd, undefined);
+
+  const assessment = tddAssessment();
+  assessment.specDrivenTdd.slices[0] = {
+    id: "acceptance-contract",
+    applicability: "inapplicable",
+    reason: "baseline-already-green",
+    evidence: "The immutable baseline already implements this scenario.",
+    scenarioIds: ["eligible-behavioral-change"],
+  };
+  const state = createExecutionState(createPlan(assessment, config));
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "inapplicable",
+  );
+  recordKnownBadObservation("inapplicable-slice");
+});
+
+test("spec-driven TDD gates implementation readiness, claim, and completion", () => {
+  const plan = createPlan(tddAssessment(), config);
+  const state = createExecutionState(plan);
+  attestTddDesigner(state);
+  state.handoffs["discovery-contracts"] = {
+    completedPacket: "discovery-contracts",
+    changed: [],
+    provenChecks: [],
+    settledDecisions: [],
+    unresolvedFindings: [],
+    nextPacket: "shared-native-dialog",
+    invalidatedAssumptions: [],
+  };
+  assert.equal(
+    readyPackets(plan, state).some(({ id }) => id === "shared-native-dialog"),
+    false,
+  );
+  recordTddDesign(plan, state, tddDesign());
+  recordTddRed(plan, state, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+  });
+  assert.equal(
+    readyPackets(plan, state).some(({ id }) => id === "shared-native-dialog"),
+    true,
+  );
+  const execution = {
+    version: 1,
+    source: "codex-exec-jsonl",
+    runtimeId: "implementation-runtime",
+    launchId: "launch-implementation",
+    startedAt: "2026-08-24T00:00:00.000Z",
+    evidenceDigest: digest("f"),
+  };
+  claimPacket(
+    plan,
+    state,
+    "shared-native-dialog",
+    "implementation-session",
+    null,
+    execution,
+  );
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "implementing",
+  );
+  assert.throws(
+    () =>
+      completePacket(plan, state, {
+        completedPacket: "shared-native-dialog",
+        changed: [],
+        provenChecks: [],
+        settledDecisions: [],
+        unresolvedFindings: [],
+        nextPacket: "modal",
+        invalidatedAssumptions: [],
+      }),
+    /requires accepted GREEN/,
+  );
+  recordTddGreen(plan, state, { ...tddDesign(), candidateHead: oid });
+  assert.doesNotThrow(() =>
+    completePacket(plan, state, {
+      completedPacket: "shared-native-dialog",
+      changed: [],
+      provenChecks: [],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: "modal",
+      invalidatedAssumptions: [],
+    }),
+  );
+});
+
+const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
+  const nonce = `${process.pid}-${Date.now()}`;
+  const relativeRoot = `docs/exec-plans/tdd-runner-${nonce}`;
+  const temporaryRoot = path.join(root, relativeRoot);
+  const planPath = `${relativeRoot}/plan.json`;
+  const statePath = `${relativeRoot}/state.json`;
+  const handoffPath = `${relativeRoot}/design.json`;
+  const executionPath = `${relativeRoot}/execution.json`;
+  const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
+  const initialHead = await exec("git", ["rev-parse", "HEAD"], {
+    cwd: root,
+  }).then(({ stdout }) => stdout.trim());
+  const initialBranch = await exec("git", ["branch", "--show-current"], {
+    cwd: root,
+  }).then(({ stdout }) => stdout.trim());
+  const temporaryBranch = initialBranch ? null : `chore/tdd-test-${nonce}`;
+  if (temporaryBranch)
+    await exec("git", ["switch", "-c", temporaryBranch], { cwd: root });
+  const plan = createPlan(tddAssessment(), config);
+  plan.specDrivenTdd.slices[0].command = [
+    process.execPath,
+    path.join(root, "tools/tests/fixtures/tdd-acceptance-probe.mjs"),
+  ];
+  plan.specDrivenTdd.slices[0].acceptanceSurface = [
+    "tools/tests/fixtures/tdd-acceptance-probe.mjs",
+  ];
+  plan.specDrivenTdd.slices[0].fixtureSurface = [
+    "docs/exec-plans/fixtures/spec-driven-tdd-oracle.json",
+    "tools/tests/fixtures/tdd-oracle-control.mjs",
+    "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+  ];
+  plan.specDrivenTdd.slices[0].productionSurface = [
+    "tools/tests/fixtures/tdd-production-adapter.mjs",
+  ];
+  plan.specDrivenTdd.slices[0].controls = {
+    environment: { SHLZ_TDD_PROBE_MODE: "stable", TZ: "UTC" },
+    timeoutMs: 5000,
+    normalization: ["repo-root", "worktree-root"],
+  };
+  const execution = {
+    version: 1,
+    kind: "mainline",
+    branch: await exec("git", ["branch", "--show-current"], { cwd: root }).then(
+      ({ stdout }) => stdout.trim(),
+    ),
+    defaultBranch: "main",
+    commit: "93ff4081aca8ae628696826ef79cc6ba870b2376",
+  };
+  const design = {
+    version: 1,
+    sliceId: "acceptance-contract",
+    runtimeId: "test-designer-runtime",
+    inputs: [
+      "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
+    ],
+    scenarioMappings: tddDesign().scenarioMappings,
+    expectedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+    expectedResultSource: {
+      kind: "explicit-openspec-literal",
+      ref: "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md",
+    },
+    oracleMethod: {
+      kind: "behavioral-assertion",
+      observesSeam: "harness/spec-driven-tdd",
+    },
+    oracleChallenge: {
+      version: 1,
+      adapterEnvironment: "SHLZ_TDD_ORACLE_ADAPTER",
+      controlAdapter: "tools/tests/fixtures/tdd-oracle-control.mjs",
+      decoyAdapter: "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+      expectedFailureSignature: "ERR_CONTRACT_INCORRECT",
+      scenarioIds: ["meaningful-deterministic-red"],
+    },
+    oracleChallengeDigest: digest("0"),
+    oracleChallengeRuns: {
+      control: [{ exitCode: 0, output: "fabricated" }],
+      decoy: [{ exitCode: 1, output: "ERR_CONTRACT_INCORRECT" }],
+    },
+  };
+  try {
+    await mkdir(temporaryRoot, { recursive: true });
+    await Promise.all([
+      writeFile(
+        path.join(root, planPath),
+        `${JSON.stringify(plan, null, 2)}\n`,
+      ),
+      writeFile(
+        path.join(root, statePath),
+        `${JSON.stringify(attestTddDesigner(createExecutionState(plan)), null, 2)}\n`,
+      ),
+      writeFile(
+        path.join(root, handoffPath),
+        `${JSON.stringify(design, null, 2)}\n`,
+      ),
+      writeFile(
+        path.join(root, executionPath),
+        `${JSON.stringify(execution, null, 2)}\n`,
+      ),
+    ]);
+    const cli = (...arguments_) =>
+      exec(process.execPath, ["tools/harness.mjs", ...arguments_], {
+        cwd: root,
+      });
+    await cli(
+      "tdd-design-record",
+      planPath,
+      statePath,
+      handoffPath,
+      "--execution",
+      executionPath,
+    );
+    const designed = await load(statePath);
+    const challenge =
+      designed.specDrivenTdd.slices["acceptance-contract"].design
+        .oracleChallengeRuns;
+    assert.equal(challenge.control.length, 2);
+    assert.ok(challenge.control.every(({ exitCode }) => exitCode === 0));
+    assert.ok(challenge.control.every(({ output }) => output !== "fabricated"));
+    assert.equal(challenge.decoy.length, 2);
+    assert.ok(
+      challenge.decoy.every(
+        ({ exitCode, output }) =>
+          exitCode !== 0 && output.includes("ERR_CONTRACT_INCORRECT"),
+      ),
+    );
+    const { stdout: redOutput } = await cli(
+      "tdd-red",
+      planPath,
+      statePath,
+      "acceptance-contract",
+      "--execution",
+      executionPath,
+    );
+    const red = JSON.parse(redOutput);
+    assert.equal(red.status, "red-proven");
+    assert.equal(red.red.runs.length, 2);
+    assert.ok(red.red.runs.every(({ exitCode }) => exitCode !== 0));
+    assert.equal(red.red.normalizedFailureSignature, "ERR_CONTRACT_MISSING");
+    const state = await load(statePath);
+    authorizeTddImplementation(
+      plan,
+      state,
+      "acceptance-contract",
+      "implementation-runtime",
+    );
+    await writeFile(
+      path.join(root, statePath),
+      `${JSON.stringify(state, null, 2)}\n`,
+    );
+    if (["all", "post-red-acceptance-edit"].includes(regressionCase)) {
+      const tamperedPlanPath = `${relativeRoot}/tampered-plan.json`;
+      const tamperedStatePath = `${relativeRoot}/tampered-state.json`;
+      const tamperedPlan = clone(plan);
+      tamperedPlan.specDrivenTdd.slices[0].controls.timeoutMs += 1;
+      await Promise.all([
+        writeFile(
+          path.join(root, tamperedPlanPath),
+          `${JSON.stringify(tamperedPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, tamperedStatePath),
+          `${JSON.stringify(state, null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-green",
+          tamperedPlanPath,
+          tamperedStatePath,
+          "acceptance-contract",
+          "--execution",
+          executionPath,
+        ),
+        /acceptance contract changed after test design/,
+      );
+      assert.equal(
+        (await load(tamperedStatePath)).specDrivenTdd.slices[
+          "acceptance-contract"
+        ].status,
+        "pending-test-design",
+      );
+    }
+    const { stdout: greenOutput } = await cli(
+      "tdd-green",
+      planPath,
+      statePath,
+      "acceptance-contract",
+      "--execution",
+      executionPath,
+    );
+    const green = JSON.parse(greenOutput);
+    assert.equal(green.status, "green-proven");
+    assert.ok(green.green.runs.every(({ exitCode }) => exitCode === 0));
+
+    if (["all", "timing-dependent-probe"].includes(regressionCase)) {
+      const badPlanPath = `${relativeRoot}/bad-plan.json`;
+      const badStatePath = `${relativeRoot}/bad-state.json`;
+      const badPlan = clone(plan);
+      badPlan.specDrivenTdd.slices[0].controls.environment.SHLZ_TDD_PROBE_MODE =
+        "nondeterministic";
+      await Promise.all([
+        writeFile(
+          path.join(root, badPlanPath),
+          `${JSON.stringify(badPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, badStatePath),
+          `${JSON.stringify(attestTddDesigner(createExecutionState(badPlan)), null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-design-record",
+          badPlanPath,
+          badStatePath,
+          handoffPath,
+          "--execution",
+          executionPath,
+        ),
+        /oracle challenge is nondeterministic/,
+      );
+    }
+    for (const [, probe, signature] of [
+      [
+        "tautological-oracle",
+        "tdd-tautological-probe.mjs",
+        "did not discriminate behavioral decoy",
+      ],
+      [
+        "source-inspection-oracle",
+        "tdd-source-inspection-probe.mjs",
+        "did not discriminate behavioral decoy",
+      ],
+    ].filter(([caseId]) => ["all", caseId].includes(regressionCase))) {
+      const weakPlan = clone(plan);
+      weakPlan.specDrivenTdd.slices[0].command = [
+        process.execPath,
+        path.join(root, `tools/tests/fixtures/${probe}`),
+      ];
+      weakPlan.specDrivenTdd.slices[0].acceptanceSurface = [
+        `tools/tests/fixtures/${probe}`,
+      ];
+      const weakPlanPath = `${relativeRoot}/${probe}-plan.json`;
+      const weakStatePath = `${relativeRoot}/${probe}-state.json`;
+      await Promise.all([
+        writeFile(
+          path.join(root, weakPlanPath),
+          `${JSON.stringify(weakPlan, null, 2)}\n`,
+        ),
+        writeFile(
+          path.join(root, weakStatePath),
+          `${JSON.stringify(attestTddDesigner(createExecutionState(weakPlan)), null, 2)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli(
+          "tdd-design-record",
+          weakPlanPath,
+          weakStatePath,
+          handoffPath,
+          "--execution",
+          executionPath,
+        ),
+        new RegExp(signature),
+      );
+    }
+  } finally {
+    unregisterExitCleanup();
+    await rm(temporaryRoot, { recursive: true, force: true });
+    if (temporaryBranch) {
+      await exec("git", ["switch", "--detach", initialHead], { cwd: root });
+      await exec("git", ["branch", "-D", temporaryBranch], { cwd: root });
+    }
+  }
+};
+
+for (const [name, regressionCase, observationCase] of [
+  [
+    "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
+    "all",
+    null,
+  ],
+  [
+    "known-bad tautological oracle fails the symmetric public CLI oracle",
+    "tautological-oracle",
+    "tautological-oracle",
+  ],
+  [
+    "known-bad source-inspection oracle fails the symmetric public CLI oracle",
+    "source-inspection-oracle",
+    "source-inspection-oracle",
+  ],
+  [
+    "known-bad timing-dependent probe fails deterministic public CLI controls",
+    "timing-dependent-probe",
+    "timing-dependent-probe",
+  ],
+  [
+    "known-bad post-RED edit invalidates public CLI lifecycle evidence",
+    "post-red-acceptance-edit",
+    "post-red-acceptance-edit",
+  ],
+])
+  test(name, async () => {
+    await exerciseSpecDrivenTddPublicCli(regressionCase);
+    if (observationCase) recordKnownBadObservation(observationCase);
+  });
+
+test("spec-driven TDD public CLI rejects revision-specific overrides", async () => {
+  await assert.rejects(
+    exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "tdd-red",
+        "missing-plan.json",
+        "missing-state.json",
+        "acceptance-contract",
+        "--baseline-command",
+        "node bad.mjs",
+      ],
+      { cwd: root },
+    ),
+    /does not accept revision-specific command or oracle overrides/,
+  );
+  recordKnownBadObservation("asymmetric-oracle");
+});
+
+test("spec-driven TDD public CLI executes every known-bad matrix case", async () => {
+  const matrix = await load(
+    "docs/exec-plans/fixtures/spec-driven-tdd-known-bad-matrix.json",
+  );
+  assert.equal(matrix.seam, "harness/spec-driven-tdd");
+  assert.deepEqual(
+    matrix.cases.map(({ id }) => id),
+    [
+      "asymmetric-oracle",
+      "tautological-oracle",
+      "source-inspection-oracle",
+      "timing-dependent-probe",
+      "post-red-acceptance-edit",
+      "implementation-runtime-reuse",
+      "requirements-reentry",
+      "inapplicable-slice",
+    ],
+  );
+  assert.equal(new Set(matrix.cases.map(({ adapter }) => adapter)).size, 8);
+  assert.ok(
+    matrix.cases.every(
+      ({ executableTest, outcome, signature }) =>
+        executableTest && outcome && signature,
+    ),
+  );
+  assert.equal(
+    new Set(matrix.cases.map(({ executableTest }) => executableTest)).size,
+    8,
+  );
+  const { stdout: fixtureOutput } = await exec(
+    process.execPath,
+    ["tools/tests/spec-driven-tdd-known-bad-fixture.mjs"],
+    { cwd: root, timeout: 120000 },
+  );
+  const fixture = JSON.parse(fixtureOutput);
+  assert.deepEqual(
+    fixture.cases.map(({ id }) => id),
+    matrix.cases.map(({ id }) => id),
+  );
+  assert.ok(
+    fixture.cases.every(
+      ({ knownBad, reviewedHead }) =>
+        knownBad === "fail" && reviewedHead === "pass",
+    ),
   );
 });
 
@@ -1602,6 +2370,249 @@ test("apply-time ambiguity durably pauses and gates packet resume", () => {
     session: "session-b",
     requirementsRevision: 2,
   });
+});
+
+test("requirements re-entry invalidates affected TDD slices and retains only digest-identical completed slices", () => {
+  const assessment = tddAssessment();
+  assessment.requirementsGate = "required";
+  assessment.openSpecChange = "add-capability";
+  const plan = createPlan(assessment, config, requirementsState());
+  const state = createExecutionState(plan);
+  state.packets["discovery-contracts"] = {
+    status: "completed",
+    execution: { runtimeId: "test-designer-runtime" },
+  };
+  state.handoffs["discovery-contracts"] = {
+    completedPacket: "discovery-contracts",
+    changed: [],
+    provenChecks: [],
+    settledDecisions: [],
+    unresolvedFindings: [],
+    nextPacket: "shared-native-dialog",
+    invalidatedAssumptions: [],
+  };
+  recordTddDesign(plan, state, tddDesign());
+  recordTddRed(plan, state, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+  });
+  claimPacket(
+    plan,
+    state,
+    "shared-native-dialog",
+    "implementation",
+    requirementsState(),
+    {
+      version: 1,
+      source: "codex-exec-jsonl",
+      runtimeId: "implementation-runtime",
+      launchId: "launch-implementation",
+      startedAt: "2026-08-24T00:00:00.000Z",
+      evidenceDigest: digest("f"),
+    },
+  );
+  const blocked = requirementsState({
+    revision: 2,
+    openSpec: { change: "add-capability", status: "pending" },
+    decisions: [
+      {
+        id: "changed-contract",
+        owner: "user",
+        status: "unresolved",
+        blocking: true,
+        provenance: { kind: "apply", ref: "slice:acceptance-contract" },
+      },
+    ],
+    authorization: {
+      status: "approval-required",
+      provenance: { kind: "scope-expansion", ref: "revision:2" },
+    },
+  });
+  pausePacket(plan, state, "shared-native-dialog", blocked, {
+    version: 1,
+    fromRevision: 1,
+    toRevision: 2,
+    slices: [{ sliceId: "acceptance-contract", classification: "affected" }],
+  });
+  assert.equal(
+    state.specDrivenTdd.slices["acceptance-contract"].status,
+    "pending-test-design",
+  );
+  assert.equal(state.packets["discovery-contracts"].status, "pending");
+
+  const retainedPlan = createPlan(assessment, config, requirementsState());
+  const retained = createExecutionState(retainedPlan);
+  attestTddDesigner(retained);
+  recordTddDesign(retainedPlan, retained, tddDesign());
+  recordTddRed(retainedPlan, retained, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+  });
+  authorizeTddImplementation(
+    retainedPlan,
+    retained,
+    "acceptance-contract",
+    "implementation-runtime",
+  );
+  recordTddGreen(retainedPlan, retained, {
+    ...tddDesign(),
+    candidateHead: oid,
+  });
+  retained.packets["shared-native-dialog"] = { status: "claimed" };
+  pausePacket(retainedPlan, retained, "shared-native-dialog", blocked, {
+    version: 1,
+    fromRevision: 1,
+    toRevision: 2,
+    slices: [
+      {
+        sliceId: "acceptance-contract",
+        classification: "retained",
+        evidence: clone(
+          retained.specDrivenTdd.slices["acceptance-contract"]
+            .retentionIdentity,
+        ),
+      },
+    ],
+  });
+  assert.equal(
+    retained.specDrivenTdd.slices["acceptance-contract"].retention.toRevision,
+    2,
+  );
+  const changedPlan = clone(retainedPlan);
+  changedPlan.specDrivenTdd.slices[0].controls.timeoutMs += 1;
+  assert.throws(
+    () =>
+      pausePacket(
+        changedPlan,
+        createExecutionState(changedPlan),
+        "shared-native-dialog",
+        blocked,
+        {
+          version: 1,
+          fromRevision: 1,
+          toRevision: 2,
+          slices: [
+            { sliceId: "acceptance-contract", classification: "retained" },
+          ],
+        },
+      ),
+    /re-entry classifications are invalid|retention requires completed digest-identical evidence|must be claimed/,
+  );
+  recordKnownBadObservation("requirements-reentry");
+});
+
+test("review and delivery bind fresh GREEN evidence to the candidate head", () => {
+  const plan = createPlan(tddAssessment(), config);
+  const state = createExecutionState(plan);
+  attestTddDesigner(state);
+  recordTddDesign(plan, state, tddDesign());
+  recordTddRed(plan, state, {
+    ...tddDesign(),
+    runtimeId: "red-runner-runtime",
+    normalizedFailureSignature: "ERR_CONTRACT_MISSING",
+    failedScenarioIds: ["meaningful-deterministic-red"],
+  });
+  authorizeTddImplementation(
+    plan,
+    state,
+    "acceptance-contract",
+    "implementation-runtime",
+  );
+  recordTddGreen(plan, state, { ...tddDesign(), candidateHead: oid });
+  const binding = createTddReviewBinding(plan, state, oid);
+  const review = createReviewState(oid, [], null, binding);
+  assert.throws(
+    () =>
+      recordReview(review, {
+        axis: "Standards",
+        head: oid,
+        findings: [],
+      }),
+    /requires current spec-driven TDD evidence/,
+  );
+  assert.doesNotThrow(() =>
+    recordReview(review, {
+      axis: "Standards",
+      head: oid,
+      findings: [],
+      tddEvidence: createTddReviewBinding(plan, state, oid),
+    }),
+  );
+  assert.throws(
+    () => createTddReviewBinding(plan, state, "b".repeat(40)),
+    /candidate head is stale/,
+  );
+
+  for (const { id } of plan.packets) {
+    state.packets[id] = { status: "completed" };
+    state.handoffs[id] = {
+      completedPacket: id,
+      changed: [],
+      provenChecks: [],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: null,
+      invalidatedAssumptions: [],
+    };
+  }
+  const delivery = {
+    defaultBranch: "main",
+    pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/99",
+    actual: {
+      repository: "Antropophag/shlz-ui",
+      currentBranch: "feat/tdd",
+      pushBranch: "feat/tdd",
+      localHead: oid,
+      upstreamHead: oid,
+      pullRequest: {
+        url: "https://github.com/Antropophag/shlz-ui/pull/99",
+        state: "OPEN",
+        headRefName: "feat/tdd",
+        headRefOid: oid,
+        baseRefName: "main",
+      },
+    },
+  };
+  assert.throws(
+    () => assertImplementationDelivery(delivery, { plan, state }),
+    /delivery requires current independent review evidence/,
+  );
+  const deliveryReview = createReviewState(oid, [], null, binding);
+  recordReview(deliveryReview, {
+    axis: "Standards",
+    head: oid,
+    findings: [],
+    tddEvidence: binding,
+  });
+  recordReview(deliveryReview, {
+    axis: "Spec",
+    head: oid,
+    findings: [],
+    tddEvidence: binding,
+  });
+  assert.doesNotThrow(() =>
+    assertImplementationDelivery(delivery, {
+      plan,
+      state,
+      reviewState: deliveryReview,
+    }),
+  );
+  delivery.actual.localHead = "b".repeat(40);
+  delivery.actual.upstreamHead = delivery.actual.localHead;
+  delivery.actual.pullRequest.headRefOid = delivery.actual.localHead;
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        reviewState: deliveryReview,
+      }),
+    /candidate head is stale/,
+  );
 });
 
 test("delivery rejects an incomplete mandatory packet graph", () => {
@@ -2539,9 +3550,15 @@ test("PR 33 behavior probe rejects a non-worktree cwd before file access", async
 
 test("review-init CLI requires and records current-change invariant bindings", async () => {
   const relativeState = `docs/exec-plans/review-manifest-test-${process.pid}.json`;
+  const relativeTddPlan = `docs/exec-plans/review-tdd-plan-test-${process.pid}.json`;
   const state = path.join(root, relativeState);
-  const unregisterExitCleanup = registerExitCleanup([state]);
+  const tddPlan = path.join(root, relativeTddPlan);
+  const unregisterExitCleanup = registerExitCleanup([state, tddPlan]);
   try {
+    await writeFile(
+      tddPlan,
+      `${JSON.stringify(createPlan(tddAssessment(), config), null, 2)}\n`,
+    );
     await assert.rejects(
       exec(
         process.execPath,
@@ -2550,6 +3567,25 @@ test("review-init CLI requires and records current-change invariant bindings", a
           "review-init",
           relativeState,
           "origin/main",
+          "--plan",
+          relativeTddPlan,
+          "--failure-path-concerns",
+          "none",
+        ],
+        { cwd: root },
+      ),
+      /requires a TDD binding.*enforced slices/,
+    );
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-init",
+          relativeState,
+          "origin/main",
+          "--plan",
+          "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
           "--failure-path-concerns",
           "state-machine,persistence",
         ],
@@ -2564,6 +3600,8 @@ test("review-init CLI requires and records current-change invariant bindings", a
         "review-init",
         relativeState,
         "origin/main",
+        "--plan",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
         "--failure-path-concerns",
         "state-machine,persistence",
         "--change",
@@ -2581,6 +3619,7 @@ test("review-init CLI requires and records current-change invariant bindings", a
     assert.equal(recorded.changeFailureInvariants.invariants.length, 6);
   } finally {
     await unlink(state).catch(() => {});
+    await unlink(tddPlan).catch(() => {});
     unregisterExitCleanup();
   }
 });
@@ -2650,6 +3689,8 @@ ${detail}
         "review-init",
         relativeState,
         "origin/main",
+        "--plan",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
         "--failure-path-concerns",
         "persistence",
         "--change",

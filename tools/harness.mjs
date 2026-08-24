@@ -12,6 +12,9 @@ import {
   contextIndex,
   createExecutionState,
   createPlan,
+  createTddDesignEvidence,
+  createTddReviewBinding,
+  createTddReentryEvidence,
   createReviewState,
   createWorkerBrief,
   failWorkerReservation,
@@ -33,6 +36,7 @@ import {
   recordValidation,
   reserveWorkerPacket,
   recordWorkerAttempt,
+  recordTddDesign,
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
@@ -41,6 +45,7 @@ import {
   evaluateRouteEligibility,
   failurePathResultDigest,
   resumePacket,
+  runTddAcceptance,
   reviewContext,
   resolveReviewFindings,
   retryWorkerPacket,
@@ -222,6 +227,9 @@ switch (command) {
     let execution = null;
     if (planPath) {
       const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const reviewPath = option("--review");
+      if (!reviewPath)
+        throw new Error("planned delivery-check requires --review <state>");
       const requirementsPath = option("--requirements");
       if (plan.requirementsGate === "required" && !requirementsPath)
         throw new Error(
@@ -233,6 +241,10 @@ switch (command) {
         requirementsState: requirementsPath
           ? await readJson(absolute(requirementsPath))
           : null,
+        reviewState: await refreshChangeFailureInvariants(
+          await readJson(absolute(reviewPath)),
+          absolute(reviewPath),
+        ),
       };
     } else {
       const direct = await readJson(absolute(directPath));
@@ -346,6 +358,72 @@ switch (command) {
     const state = createExecutionState(await readJson(absolute(args[0])));
     await writeJson(statePath(args[1]), state);
     output(state);
+    break;
+  }
+  case "tdd-design-record": {
+    const baselinePath = option("--execution");
+    if (!baselinePath)
+      throw new Error("tdd-design-record requires --execution <baseline>");
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const handoff = await readJson(absolute(args[2]));
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      recordTddDesign(
+        plan,
+        current,
+        await createTddDesignEvidence(
+          plan,
+          current,
+          handoff,
+          await readJson(absolute(baselinePath)),
+          repoRoot,
+        ),
+      );
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[handoff.sliceId]);
+    break;
+  }
+  case "tdd-red":
+  case "tdd-green": {
+    if (
+      args.includes("--baseline-command") ||
+      args.includes("--candidate-command")
+    )
+      throw new Error(
+        "spec-driven TDD does not accept revision-specific command or oracle overrides",
+      );
+    const baselinePath = option("--execution");
+    if (!baselinePath)
+      throw new Error(`${command} requires --execution <baseline>`);
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      try {
+        await runTddAcceptance(
+          plan,
+          current,
+          args[2],
+          await readJson(absolute(baselinePath)),
+          repoRoot,
+          command === "tdd-red" ? "red" : "green",
+        );
+      } catch (error) {
+        if (
+          command === "tdd-green" &&
+          current.specDrivenTdd?.slices?.[args[2]]?.status ===
+            "pending-test-design"
+        )
+          await writeJson(target, current);
+        throw error;
+      }
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[args[2]]);
     break;
   }
   case "worker-probe":
@@ -503,11 +581,21 @@ switch (command) {
     if (!requirementsPath)
       throw new Error("pause requires --requirements <state>");
     const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      const reentry = option("--tdd-reentry")
+        ? await createTddReentryEvidence(
+            plan,
+            current,
+            await readJson(absolute(option("--tdd-reentry"))),
+            repoRoot,
+          )
+        : null;
       const next = pausePacket(
         plan,
-        await readJson(target),
+        current,
         args[2],
         await readJson(absolute(requirementsPath)),
+        reentry,
       );
       await writeJson(target, next);
       return next;
@@ -569,7 +657,37 @@ switch (command) {
       throw new Error(
         "change-specific failure invariant concern is not enabled for review",
       );
-    const state = createReviewState(args[1], concerns, binding);
+    const tddPlanPath = option("--tdd-plan");
+    const tddStatePath = option("--tdd-state");
+    if (Boolean(tddPlanPath) !== Boolean(tddStatePath))
+      throw new Error("review-init requires both --tdd-plan and --tdd-state");
+    const executionPlanPath = option("--plan");
+    if (!executionPlanPath)
+      throw new Error("review-init requires --plan <execution-plan>");
+    const executionPlan = validatePlan(
+      await readJson(absolute(executionPlanPath)),
+      config,
+    );
+    const enforcedTdd = (executionPlan.specDrivenTdd?.slices ?? []).some(
+      ({ applicability }) => applicability === "enforced",
+    );
+    if (enforcedTdd && (!tddPlanPath || !tddStatePath))
+      throw new Error(
+        "review-init requires a TDD binding for an execution plan with enforced slices",
+      );
+    if (tddPlanPath && absolute(tddPlanPath) !== absolute(executionPlanPath))
+      throw new Error("review-init TDD plan must be the authoritative plan");
+    const currentHead = await exec("git", ["rev-parse", "HEAD"], {
+      cwd: repoRoot,
+    }).then(({ stdout }) => stdout.trim());
+    const tddBinding = tddPlanPath
+      ? createTddReviewBinding(
+          executionPlan,
+          await readJson(absolute(tddStatePath)),
+          currentHead,
+        )
+      : null;
+    const state = createReviewState(args[1], concerns, binding, tddBinding);
     await writeJson(statePath(args[0]), state);
     output(state);
     break;
@@ -652,14 +770,29 @@ switch (command) {
     const target = statePath(args[0]);
     const findings = await readJson(absolute(option("--findings")));
     const state = await withStateLock(target, async () => {
-      const next = recordReview(
-        await refreshChangeFailureInvariants(await readJson(target), target),
-        {
-          axis: option("--axis"),
-          head: option("--head"),
-          findings,
-        },
+      const current = await refreshChangeFailureInvariants(
+        await readJson(target),
+        target,
       );
+      const tddPlanPath = option("--tdd-plan");
+      const tddStatePath = option("--tdd-state");
+      if (current.specDrivenTdd && (!tddPlanPath || !tddStatePath))
+        throw new Error(
+          "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
+        );
+      const tddEvidence = current.specDrivenTdd
+        ? createTddReviewBinding(
+            await readJson(absolute(tddPlanPath)),
+            await readJson(absolute(tddStatePath)),
+            option("--head"),
+          )
+        : null;
+      const next = recordReview(current, {
+        axis: option("--axis"),
+        head: option("--head"),
+        findings,
+        tddEvidence,
+      });
       await writeJson(target, next);
       return next;
     });
@@ -703,6 +836,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

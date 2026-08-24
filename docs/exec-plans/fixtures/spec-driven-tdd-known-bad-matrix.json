@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "seam": "harness/spec-driven-tdd",
+  "cases": [
+    {
+      "id": "asymmetric-oracle",
+      "adapter": "revision-command-override",
+      "executableTest": "spec-driven TDD public CLI rejects revision-specific overrides",
+      "outcome": "rejected-before-execution",
+      "signature": "does not accept revision-specific command or oracle overrides"
+    },
+    {
+      "id": "tautological-oracle",
+      "adapter": "tautological",
+      "executableTest": "known-bad tautological oracle fails the symmetric public CLI oracle",
+      "outcome": "control-pass-decoy-pass",
+      "signature": "did not discriminate behavioral decoy"
+    },
+    {
+      "id": "source-inspection-oracle",
+      "adapter": "source-inspection",
+      "executableTest": "known-bad source-inspection oracle fails the symmetric public CLI oracle",
+      "outcome": "control-pass-decoy-pass",
+      "signature": "did not discriminate behavioral decoy"
+    },
+    {
+      "id": "timing-dependent-probe",
+      "adapter": "nondeterministic",
+      "executableTest": "known-bad timing-dependent probe fails deterministic public CLI controls",
+      "outcome": "repeated-output-mismatch",
+      "signature": "oracle challenge is nondeterministic"
+    },
+    {
+      "id": "post-red-acceptance-edit",
+      "adapter": "contract-drift",
+      "executableTest": "known-bad post-RED edit invalidates public CLI lifecycle evidence",
+      "outcome": "persisted-pending-test-design",
+      "signature": "acceptance contract changed after test design"
+    },
+    {
+      "id": "implementation-runtime-reuse",
+      "adapter": "designer-runtime-reuse",
+      "executableTest": "spec-driven TDD binds RED and GREEN to immutable evidence",
+      "outcome": "claim-rejected",
+      "signature": "runtime identity must differ"
+    },
+    {
+      "id": "requirements-reentry",
+      "adapter": "affected-revision",
+      "executableTest": "requirements re-entry invalidates affected TDD slices and retains only digest-identical completed slices",
+      "outcome": "affected-slice-reset",
+      "signature": "pending-test-design"
+    },
+    {
+      "id": "inapplicable-slice",
+      "adapter": "baseline-already-green",
+      "executableTest": "spec-driven TDD supports explicit inapplicability and legacy plans",
+      "outcome": "recorded-inapplicable",
+      "signature": "inapplicable"
+    }
+  ]
+}
