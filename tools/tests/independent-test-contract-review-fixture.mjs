@@ -52,17 +52,34 @@ const concerns = {
   "unreviewed-contract-cannot-authorize-production": "state-machine",
   "stale-test-contract-approval-is-rejected": "persistence",
 };
+const baseline = JSON.parse(
+  (
+    await exec(
+      process.execPath,
+      ["tools/tests/pr32-failure-path-fixture.mjs"],
+      {
+        env: { ...process.env, SHLZ_REVIEW_BASE: reviewBase },
+        maxBuffer: 10 * 1024 * 1024,
+      },
+    )
+  ).stdout,
+);
 process.stdout.write(
   `${JSON.stringify({
     version: 1,
     reviewBase,
     knownBadRevision,
     reviewedHead,
-    invariants: Object.entries(concerns).map(([id, concern]) => ({
-      id: `${change}/${id}`,
-      concern,
-      knownBad: knownBad[id] ? "pass" : "fail",
-      reviewedHead: reviewed[id] ? "pass" : "fail",
-    })),
+    invariants: [
+      ...baseline.invariants.filter(({ concern }) =>
+        ["state-machine", "persistence"].includes(concern),
+      ),
+      ...Object.entries(concerns).map(([id, concern]) => ({
+        id: `${change}/${id}`,
+        concern,
+        knownBad: knownBad[id] ? "pass" : "fail",
+        reviewedHead: reviewed[id] ? "pass" : "fail",
+      })),
+    ],
   })}\n`,
 );
