@@ -1489,7 +1489,7 @@ test("spec-driven TDD public CLI executes every known-bad matrix case", async ()
   );
   const { stdout: fixtureOutput } = await exec(
     process.execPath,
-    ["tools/tests/spec-driven-tdd-known-bad-fixture.mjs", root],
+    ["tools/tests/spec-driven-tdd-known-bad-fixture.mjs"],
     { cwd: root, timeout: 120000 },
   );
   const fixture = JSON.parse(fixtureOutput);

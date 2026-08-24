@@ -1,21 +1,25 @@
 import { execFile } from "node:child_process";
-import { realpath } from "node:fs/promises";
-import path from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 
-export async function validatedWorktreeRoot(argument) {
-  const requested = await realpath(path.resolve(argument ?? process.cwd()));
+export async function registeredWorktreeAtRevision(revision) {
+  if (!/^[0-9a-f]{40}$/.test(revision ?? ""))
+    throw new Error("fixture revision must be a full Git object id");
   const { stdout } = await exec("git", ["worktree", "list", "--porcelain"]);
-  const registered = stdout
-    .split("\n")
-    .filter((line) => line.startsWith("worktree "))
-    .map((line) => line.slice("worktree ".length));
-  const canonical = await Promise.all(
-    registered.map((candidate) => realpath(candidate).catch(() => null)),
-  );
-  if (!canonical.includes(requested))
-    throw new Error("fixture root must be a registered Git worktree");
-  return requested;
+  const match = stdout
+    .trim()
+    .split("\n\n")
+    .map((block) =>
+      Object.fromEntries(
+        block.split("\n").map((line) => {
+          const separator = line.indexOf(" ");
+          return [line.slice(0, separator), line.slice(separator + 1)];
+        }),
+      ),
+    )
+    .find(({ HEAD }) => HEAD === revision);
+  if (!match?.worktree)
+    throw new Error("fixture revision must have a registered Git worktree");
+  return match.worktree;
 }

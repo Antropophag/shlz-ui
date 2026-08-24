@@ -2,10 +2,9 @@ import { execFile } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { promisify } from "node:util";
-import { validatedWorktreeRoot } from "./validated-worktree-root.mjs";
 
 const exec = promisify(execFile);
-const root = await validatedWorktreeRoot(process.argv[2]);
+const root = process.cwd();
 const subprocessEnvironment = { ...process.env };
 delete subprocessEnvironment.NODE_TEST_CONTEXT;
 const matrix = JSON.parse(

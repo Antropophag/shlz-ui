@@ -15,16 +15,15 @@ const reviewBase = process.env.SHLZ_REVIEW_BASE ?? changeBaselineRevision;
 const parent = path.join(homedir(), ".cache");
 await mkdir(parent, { recursive: true });
 const badRoot = await mkdtemp(path.join(parent, "shlz-tdd-known-bad-"));
-const goodRoot = await mkdtemp(path.join(parent, "shlz-tdd-reviewed-"));
 const probe = path.resolve("tools/tests/spec-driven-tdd-review-probe.mjs");
 const worktrees = createHistoricalWorktreeManager(
   exec,
   "spec-driven TDD fixture",
 );
-const runProbe = async (targetRoot) =>
+const runProbe = async (revision) =>
   JSON.parse(
     (
-      await exec(process.execPath, [probe, targetRoot], {
+      await exec(process.execPath, [probe, ...(revision ? [revision] : [])], {
         cwd: process.cwd(),
         maxBuffer: 10 * 1024 * 1024,
       })
@@ -37,15 +36,14 @@ let knownBad;
 let reviewed;
 try {
   await worktrees.add(badRoot, changeBaselineRevision);
-  await worktrees.add(goodRoot, reviewedHead);
   [knownBad, reviewed] = await Promise.all([
-    runProbe(badRoot),
-    runProbe(goodRoot),
+    runProbe(changeBaselineRevision),
+    runProbe(),
   ]);
 } catch (error) {
   runError = error;
 } finally {
-  cleanupErrors.push(...(await worktrees.cleanup([badRoot, goodRoot])));
+  cleanupErrors.push(...(await worktrees.cleanup([badRoot])));
 }
 if (runError && cleanupErrors.length)
   throw new AggregateError(
