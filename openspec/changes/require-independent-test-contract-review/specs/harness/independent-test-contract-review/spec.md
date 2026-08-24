@@ -36,7 +36,7 @@ An approval SHALL account for every current-change scenario and attest: the requ
 
 ### Requirement: Reviewer independence is machine enforced
 
-The reviewer SHALL be a completed guarded worker declared by the slice and SHALL have a runtime identity different from the test designer, RED runner, and production implementer. The review handoff MUST declare its inputs and MUST exclude proposed or existing production implementation surfaces and implementation-worker handoffs. Reusing a runtime or including prohibited implementation context SHALL invalidate the review.
+The reviewer SHALL be a completed guarded worker declared by the slice and SHALL have a runtime identity different from the test designer, RED runner, and production implementer. The review handoff MUST declare its inputs and MUST exclude proposed or existing production implementation surfaces and implementation-worker handoffs. The harness MUST also derive and validate the reviewer's effective context from the review packet's context sources, dependency handoffs, and issued worker brief rather than trusting the handoff declaration alone. Prohibited effective context MUST prevent the brief from being issued or MUST invalidate approval fail-closed. Reusing a runtime or including prohibited implementation context SHALL invalidate the review.
 
 #### Scenario: Designer self-approves
 
@@ -45,8 +45,13 @@ The reviewer SHALL be a completed guarded worker declared by the slice and SHALL
 
 #### Scenario: Review receives implementation context
 
-- **WHEN** the review declares an input matching the production surface or an implementation handoff
+- **WHEN** the review declares an input matching the production surface or an implementation handoff, or the packet context sources, dependency handoffs, or issued worker brief contain either
 - **THEN** the harness rejects the approval as non-independent
+
+#### Scenario: Benign declaration cannot hide effective implementation context
+
+- **WHEN** the review handoff declares only permitted inputs but the public worker execution path would deliver a production surface or implementation-worker handoff
+- **THEN** the harness fails closed before delivery or approval and does not record reviewed state
 
 ### Requirement: Approval is tamper-evident and re-entry aware
 

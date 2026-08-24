@@ -18,3 +18,9 @@
 - [x] 4.1 Run strict OpenSpec, focused harness, aggregate repository, formatting, and diff checks; record exact results and limitations.
 - [x] 4.2 Prove the marked state-machine and persistence failure invariants against the immutable baseline and reviewed head, then run independent Standards and Spec reviews and resolve every blocking finding.
 - [x] 4.3 Run route conformance and guarded delivery checks, push the task branch, open a PR targeting `main`, and verify the PR remains open and unmerged.
+
+## 5. Effective Context Follow-up
+
+- [ ] 5.1 Add a public-path regression that proves benign self-declared review inputs cannot hide production context delivered through packet context sources, dependency handoffs, or the worker brief; observe it fail on the PR head.
+- [ ] 5.2 Enforce production-context exclusion against the actual reviewer context before brief delivery and again at approval, preserving a fail-closed outcome for bypassed or stale execution state.
+- [ ] 5.3 Re-run focused and aggregate validation, failure-path proof, independent Standards and Spec reviews, route conformance, and delivery guards; push the follow-up to PR #38 and leave it open and unmerged.

@@ -7,7 +7,7 @@ The current spec-driven TDD gate separates test design from production implement
 - Add an independent test-contract review transition after test design and before RED.
 - Require the reviewer to attest requirement/scenario coverage, authoritative expected results, behavioral oracle strength, fixture/control validity, and production-surface independence.
 - Bind approval to the immutable test-design and requirements identities; any relevant drift invalidates approval and returns the slice to review or test design as appropriate.
-- Require a reviewer runtime distinct from both the test designer and production implementer, and reject self-review or implementation-context input.
+- Require a reviewer runtime distinct from both the test designer and production implementer, and reject self-review or implementation context present in either declared inputs or the effective packet/dependency/worker-brief context.
 - Compose the new gate with existing RED/GREEN, requirements re-entry, worker claims, later Standards/Spec review, failure-invariant proof, and delivery checks.
 - Dogfood the gate with a representative harness scenario that rejects a plausible but incomplete test contract before production authorization.
 - Preserve legacy plans and ordinary TDD; the new transition applies only to enforced spec-driven TDD slices.

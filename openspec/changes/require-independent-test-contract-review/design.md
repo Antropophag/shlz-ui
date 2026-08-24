@@ -38,7 +38,7 @@ Alternative: keep status `designed` and attach an optional approval object. Reje
 
 Approval contains five fixed dimensions: scenario/authority correctness, behavioral seam observation, wrong-behavior discrimination, fixture/control independence, and production-context exclusion. Each dimension is `pass` and carries non-empty evidence refs; scenario evidence covers the exact scenario set. Findings are structured only for `changes-requested` and cannot coexist with approval.
 
-The harness checks shape, coverage, digest identity, and worker/input independence. It does not score prose, parse tests for meaning, or accept coverage percentage as authorization. Semantic judgment remains with the reviewer and is challenged later by Spec review.
+The harness checks shape, coverage, digest identity, worker/input independence, and the effective context assembled by the public worker path. Review packet context sources and dependency handoffs are rejected when they expose a production surface or implementation-worker handoff; approval rechecks the same plan/state facts so a manually completed or stale path cannot bypass brief-time enforcement. It does not score prose, parse tests for meaning, or accept coverage percentage as authorization. Semantic judgment remains with the reviewer and is challenged later by Spec review.
 
 Alternative: require a numeric confidence threshold or static heuristics. Rejected because both can create false machine authority over requirement interpretation.
 
@@ -50,7 +50,7 @@ Alternative: bind only acceptance-file bytes. Rejected because authorities, scen
 
 ### Keep pre-implementation and final review method-independent
 
-The pre-implementation review packet receives synthesized requirements, authorities, seam, frozen test design, and test/fixture surfaces, but excludes proposed production code and implementation handoffs. Its question is “can this contract safely authorize implementation?” Final Spec review sees the candidate diff and asks “does the implementation and evidence satisfy the spec?” Standards review continues to inspect repository discipline and deterministic execution.
+The pre-implementation review packet receives synthesized requirements, authorities, seam, frozen test design, and test/fixture surfaces, but excludes proposed production code and implementation handoffs. This exclusion is enforced against the packet's resolved context sources, dependency handoffs, and immutable worker brief as well as the review handoff's declared inputs. Its question is “can this contract safely authorize implementation?” Final Spec review sees the candidate diff and asks “does the implementation and evidence satisfy the spec?” Standards review continues to inspect repository discipline and deterministic execution.
 
 Final review/delivery binding gains the current test-contract approval digest through the existing TDD review binding. No third final-review axis is added.
 
