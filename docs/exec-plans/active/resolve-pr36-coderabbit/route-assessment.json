@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "intent": "Resolve the verified CodeRabbit duplicate-wave guard finding on PR #36 with a minimal regression test and no roadmap contract change.",
+  "route": "direct",
+  "requiredDecisions": [],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  },
+  "directEvidence": {
+    "behaviorPreserving": true,
+    "local": true,
+    "reversible": true,
+    "noExternalEffects": true,
+    "noContractChange": true,
+    "ambiguityResolved": true
+  }
+}

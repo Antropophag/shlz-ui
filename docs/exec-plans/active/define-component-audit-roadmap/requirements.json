@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Define a durable roadmap for every remaining component-audit wave from Wave 9 so a short Wave N intent resolves to a bounded scope, then deliver it in an unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "wave-scope-map",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/component-audits/project-inventory.json and Waves 1-8 reports"
+      }
+    },
+    {
+      "id": "intent-resolution-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "short intent Сделай Wave N must resolve scope without repeated pipeline instructions"
+      }
+    },
+    {
+      "id": "pipeline-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md and docs/component-audit-workflow.md remain the pipeline authority"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "open a separate PR and do not merge it"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "define-component-audit-roadmap",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "explicit repository change and PR delivery request"
+    }
+  }
+}
