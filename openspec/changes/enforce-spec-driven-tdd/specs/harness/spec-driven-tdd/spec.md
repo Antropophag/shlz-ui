@@ -69,9 +69,9 @@ After accepted RED, the implementation worker SHALL be constrained to the declar
 
 Any newer requirements revision or changed OpenSpec contract digest SHALL invalidate affected RED/GREEN evidence and pause implementation. Resume SHALL require a fresh physically distinct test-design worker to classify existing tests as retained, revised, added, or removed against the new requirements, establish a new immutable acceptance contract, and prove RED again where the revised behavior is not present on the immutable baseline. Unaffected completed slices MAY remain valid only when their scenario and dependency digests are unchanged and the retained classification is explicit.
 
-#### Scenario: Material requirement changes during implementation
-
 <!-- failure-invariant: affected-slice-requires-fresh-red concern=state-machine -->
+
+#### Scenario: Material requirement changes during implementation
 
 - **WHEN** requirements re-entry synthesizes a newer OpenSpec revision affecting an enforced slice
 - **THEN** its implementation claim is invalidated and cannot resume until revised independent test design and RED evidence are accepted
@@ -85,16 +85,16 @@ Any newer requirements revision or changed OpenSpec contract digest SHALL invali
 
 Worker readiness, claims, completion, independent Standards and Spec review, change-specific failure-invariant proof, route conformance, and delivery SHALL all fail closed when required TDD evidence is missing, stale, nondeterministic, or refers to another baseline or candidate head. Spec review SHALL inspect scenario coverage and oracle independence; Standards review SHALL inspect deterministic isolation and harness integrity. Applicable failure-invariant scenarios SHALL continue to require their independent executable proof in addition to acceptance RED/GREEN.
 
-#### Scenario: Implementation packet is claimed before RED
-
 <!-- failure-invariant: implementation-claim-requires-red concern=state-machine -->
+
+#### Scenario: Implementation packet is claimed before RED
 
 - **WHEN** a worker attempts to claim or launch an implementation packet whose enforced slice lacks accepted RED evidence
 - **THEN** the harness refuses the transition without mutating the packet to claimed or launching
 
-#### Scenario: Delivery has stale TDD evidence
-
 <!-- failure-invariant: delivery-rejects-stale-green concern=persistence -->
+
+#### Scenario: Delivery has stale TDD evidence
 
 - **WHEN** delivery evidence refers to a different requirements revision, baseline, current head, acceptance digest, or incomplete packet graph
 - **THEN** delivery-check rejects the PR as not ready
