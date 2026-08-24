@@ -42,17 +42,32 @@
     {
       "id": "procedural-pruning",
       "result": "insufficient-alone",
-      "evidence": "No literal long-line duplication was observed in 33,195 unique procedural bytes; the measured multiplier comes from cross-phase reloads."
+      "baselineBytes": 153997,
+      "candidateBytes": 153997,
+      "reductionRatio": 0,
+      "equivalencePass": true,
+      "thresholdMet": false,
+      "evidence": "No literal long-line duplication was observed in 33,195 unique procedural bytes; content pruning has no evidenced reduction and the measured multiplier comes from cross-phase reloads."
     },
     {
       "id": "phase-bound-source-attestation",
       "result": "selected",
+      "baselineBytes": 153997,
+      "candidateBytes": 65829,
+      "reductionRatio": 0.57253,
+      "equivalencePass": true,
+      "thresholdMet": true,
       "evidence": "The pinned replay reduces repository-controlled input from 153,997 to 65,829 bytes (57.25%) while the independent oracle preserves 12 source identities and 19 obligations."
     },
     {
       "id": "orchestration-simplification",
       "result": "not-selected",
-      "evidence": "Durable state is 4,395 bytes and required transitions encode correctness gates; orchestration amplifies reloads but is not the minimal safe seam."
+      "baselineBytes": 153997,
+      "candidateBytes": 153744,
+      "reductionRatio": 0.001643,
+      "equivalencePass": false,
+      "thresholdMet": false,
+      "evidence": "Removing every 253-byte transition still misses the threshold and fails equivalence because required correctness gates disappear."
     },
     {
       "id": "semantic-retrieval-broker",

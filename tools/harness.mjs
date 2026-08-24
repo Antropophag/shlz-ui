@@ -168,10 +168,11 @@ switch (command) {
     const ledgerPath = option("--ledger");
     const phase = option("--phase");
     const transition = option("--transition");
+    const physicalSession = option("--session");
     const out = option("--out");
-    if (!ledgerPath || !phase || !transition || !out)
+    if (!ledgerPath || !phase || !transition || !physicalSession || !out)
       throw new Error(
-        "context-capsule requires --ledger, --phase, --transition, and --out",
+        "context-capsule requires --ledger, --phase, --transition, --session, and --out",
       );
     const plan = await readJson(absolute(args[0]));
     const executionStatePath = option("--state");
@@ -185,7 +186,7 @@ switch (command) {
       index,
       await readJsonOr(absolute(ledgerPath), createContextLedger()),
       repoRoot,
-      { phase, transition },
+      { phase, transition, physicalSession },
     );
     await writeJson(statePath(out), capsule);
     output(capsule);
@@ -194,9 +195,10 @@ switch (command) {
   case "context-ack": {
     const ledgerPath = args[1];
     if (!ledgerPath) throw new Error("context-ack requires <capsule> <ledger>");
-    const next = acknowledgeContextCapsule(
+    const next = await acknowledgeContextCapsule(
       await readJsonOr(absolute(ledgerPath), createContextLedger()),
       await readJson(absolute(args[0])),
+      repoRoot,
     );
     await writeJson(statePath(ledgerPath), next);
     output(next);

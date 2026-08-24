@@ -24,7 +24,7 @@ npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --r
 npm run harness -- worker-retry <state> <packet>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
-npm run harness -- context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --out <capsule>
+npm run harness -- context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --session <physical-session-id> --out <capsule>
 npm run harness -- context-ack <capsule> <ledger>
 npm run harness -- context-cost-replay <fixture>
 ```

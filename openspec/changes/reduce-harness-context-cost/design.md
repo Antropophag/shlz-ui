@@ -23,9 +23,9 @@ The causal analysis separates six contributors: discovery, always/repeated proce
 
 No corrective architecture is selected before the probes. The replay first varies one contributor at a time while holding obligations constant, then compares combined candidates against the same threshold.
 
-### Candidate A: procedural pruning and stronger pointers
+### Candidate A: procedural content pruning
 
-Reduce always-loaded and repeated agent instructions, remove duplicated caches, and sharpen branch triggers. This has the lowest implementation cost. The probe must show whether procedural bytes alone explain enough of the baseline.
+Remove duplicated long-form instructions and redundant procedural content inside the authoritative documents. This has the lowest implementation cost. The probe must show whether content duplication inside those documents explains enough of the baseline; cross-phase pointer/attestation behavior belongs to Candidate B.
 
 ### Candidate B: phase-bound structured input
 
@@ -50,6 +50,8 @@ The corrected PR #36 replay uses immutable Git blobs from base `50bee6f` and hea
 Select Candidate B: a packet-integrated phase capsule with content digests, `readNow` for new/changed required sources, `attested` identities for content acknowledged earlier in the same physical session, obligations, transition, verdicts, unresolved findings, and raw-evidence pointers. `context-capsule` derives this input from the real packet context index and a persisted session ledger; `context-ack` records the exact capsule/source digests after the operator has read the inputs. Fresh workers start fresh ledgers. The replay compares the candidate with a separately stored pinned oracle and refuses an improvement verdict unless source, obligation, transition, finding, and raw-evidence equivalence pass.
 
 Candidate A is insufficient alone because literal document duplication was not the measured multiplier. Candidate C targets a smaller state representation and risks removing correctness transitions. Candidate D is unnecessary because Candidate B's source-read reduction alone exceeds the 35% threshold before counting safe output compaction.
+
+The executable candidate table makes this comparison explicit. Candidate A preserves equivalence but measures 0% evidenced reduction because the procedural corpus contains no duplicated long-form lines. Candidate B passes equivalence at 57.25%. Candidate C models removing all 253 transition bytes, reaches only 0.16%, and fails equivalence because required transitions disappear. Candidate D is not probed further because the lower-complexity deterministic candidate already passes both gates.
 
 ### Keep the 188K signal observational
 

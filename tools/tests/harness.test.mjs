@@ -6,6 +6,7 @@ import {
   mkdtemp,
   readFile,
   rm,
+  symlink,
   unlink,
   writeFile,
 } from "node:fs/promises";
@@ -3930,8 +3931,27 @@ test("context cost capsules invalidate changed sources and replay deterministica
   assert.deepEqual(second, first);
   assert.ok(first.optimized.attestedReferences > 0);
   assert.ok(first.capsules.some((capsule) => capsule.readNow.length > 0));
+  assert.equal(first.candidateResults.length, 4);
+  assert.equal(
+    first.candidateResults.find(({ id }) => id === "procedural-pruning")
+      .thresholdMet,
+    false,
+  );
+  assert.equal(
+    first.candidateResults.find(
+      ({ id }) => id === "phase-bound-source-attestation",
+    ).thresholdMet,
+    true,
+  );
+  assert.equal(
+    first.candidateResults.find(
+      ({ id }) => id === "orchestration-simplification",
+    ).equivalencePass,
+    false,
+  );
 
   const changedRoot = await mkdtemp(path.join(tmpdir(), "context-cost-"));
+  const outside = path.join(tmpdir(), `context-cost-outside-${process.pid}`);
   try {
     await mkdir(path.join(changedRoot, "docs"), { recursive: true });
     const localFixture = {
@@ -3983,22 +4003,44 @@ test("context cost capsules invalidate changed sources and replay deterministica
       },
       sources: ["docs/source.md"],
       missingPatterns: [],
-      dependencyHandoffs: [],
+      dependencyHandoffs: [
+        {
+          provenChecks: ["focused:test-pass"],
+          changed: ["docs/source.md"],
+          unresolvedFindings: [],
+        },
+      ],
     };
     let ledger = createContextLedger();
     const initial = await createPacketContextCapsule(
       index,
       ledger,
       changedRoot,
-      { phase: "initial", transition: "pending-to-read" },
+      {
+        phase: "initial",
+        transition: "pending-to-read",
+        physicalSession: "probe-worker",
+      },
     );
     assert.equal(initial.readNow.length, 1);
-    ledger = acknowledgeContextCapsule(ledger, initial);
+    assert.deepEqual(initial.evidence.verdicts, ["focused:test-pass"]);
+    assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
+    const tampered = clone(initial);
+    tampered.evidence.verdicts = [];
+    await assert.rejects(
+      acknowledgeContextCapsule(ledger, tampered, changedRoot),
+      /capsule digest does not match/,
+    );
+    ledger = await acknowledgeContextCapsule(ledger, initial, changedRoot);
     const reused = await createPacketContextCapsule(
       index,
       ledger,
       changedRoot,
-      { phase: "reused", transition: "read-to-reused" },
+      {
+        phase: "reused",
+        transition: "read-to-reused",
+        physicalSession: "probe-worker",
+      },
     );
     assert.equal(reused.readNow.length, 0);
     assert.equal(reused.attested.length, 1);
@@ -4007,15 +4049,45 @@ test("context cost capsules invalidate changed sources and replay deterministica
       index,
       ledger,
       changedRoot,
-      { phase: "changed", transition: "reused-to-changed" },
+      {
+        phase: "changed",
+        transition: "reused-to-changed",
+        physicalSession: "probe-worker",
+      },
     );
     assert.equal(invalidated.readNow.length, 1);
     assert.notEqual(
       invalidated.readNow[0].digest,
       ledger.attestations["docs/source.md"].digest,
     );
+
+    await writeFile(outside, "outside");
+    await symlink(outside, path.join(changedRoot, "docs/escape.md"));
+    await assert.rejects(
+      createPacketContextCapsule(
+        { ...index, sources: ["docs/escape.md"] },
+        createContextLedger(),
+        changedRoot,
+        {
+          phase: "escape",
+          transition: "read-to-escape",
+          physicalSession: "probe-worker",
+        },
+      ),
+      /escapes repository/,
+    );
+    await assert.rejects(
+      createPacketContextCapsule(index, ledger, changedRoot, {
+        phase: "fresh-worker",
+        transition: "reused-to-fresh",
+        physicalSession: "other-worker",
+      }),
+      /different physical session/,
+    );
+    await unlink(outside);
   } finally {
     await rm(changedRoot, { recursive: true, force: true });
+    await unlink(outside).catch(() => {});
   }
 });
 
@@ -4137,6 +4209,8 @@ test("context capsule CLI persists packet attestations across real context phase
           phase,
           "--transition",
           transition,
+          "--session",
+          "cli-session",
           "--out",
           out,
         ],

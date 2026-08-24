@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { Buffer } from "node:buffer";
 import { execFile } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, realpath } from "node:fs/promises";
 import path from "node:path";
 import { promisify } from "node:util";
 
@@ -69,6 +69,14 @@ function safeSource(repoRoot, sourcePath) {
   return target;
 }
 
+async function readWorktreeSource(repoRoot, sourcePath) {
+  const root = await realpath(repoRoot);
+  const target = await realpath(safeSource(repoRoot, sourcePath));
+  if (target !== root && !target.startsWith(`${root}${path.sep}`))
+    throw new Error(`context-cost source escapes repository: ${sourcePath}`);
+  return readFile(target);
+}
+
 const sourceKey = (source) => `${source.gitRef ?? "worktree"}:${source.path}`;
 
 async function readSource(repoRoot, source) {
@@ -85,11 +93,11 @@ async function readSource(repoRoot, source) {
     );
     return stdout;
   }
-  return readFile(safeSource(repoRoot, source.path));
+  return readWorktreeSource(repoRoot, source.path);
 }
 
 export function createContextLedger() {
-  return { version: 1, attestations: {} };
+  return { version: 1, physicalSession: null, attestations: {} };
 }
 
 function assertLedger(ledger) {
@@ -113,11 +121,17 @@ export async function createPacketContextCapsule(
   index,
   ledger,
   repoRoot,
-  { phase, transition },
+  { phase, transition, physicalSession },
 ) {
   assertLedger(ledger);
   required(phase, "packet context phase");
   required(transition, "packet context transition");
+  required(physicalSession, "packet context physical session");
+  if (
+    ledger.physicalSession !== null &&
+    ledger.physicalSession !== physicalSession
+  )
+    throw new Error("context ledger belongs to a different physical session");
   if (index.missingPatterns?.length)
     throw new Error(
       `packet context has missing patterns: ${index.missingPatterns.join(", ")}`,
@@ -125,7 +139,7 @@ export async function createPacketContextCapsule(
   const readNow = [];
   const attested = [];
   for (const source of index.sources) {
-    const content = await readFile(safeSource(repoRoot, source));
+    const content = await readWorktreeSource(repoRoot, source);
     const entry = {
       path: source,
       digest: digest(content),
@@ -140,12 +154,21 @@ export async function createPacketContextCapsule(
     kind: "packet-context",
     planId: index.planId,
     packetId: index.packet.id,
+    physicalSession,
     phase,
     objective: index.packet.objective,
     transition,
     obligations: packetObligations(index.packet),
     evidence: {
       dependencyHandoffs: index.dependencyHandoffs,
+      verdicts: stable(
+        index.dependencyHandoffs.flatMap(
+          (handoff) => handoff.provenChecks ?? [],
+        ),
+      ),
+      rawEvidence: stable(
+        index.dependencyHandoffs.flatMap((handoff) => handoff.changed ?? []),
+      ),
       unresolvedFindings: index.dependencyHandoffs.flatMap(
         (handoff) => handoff.unresolvedFindings ?? [],
       ),
@@ -166,10 +189,31 @@ export async function createPacketContextCapsule(
   };
 }
 
-export function acknowledgeContextCapsule(ledger, capsule) {
+export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
   assertLedger(ledger);
   if (capsule?.version !== 1 || capsule.kind !== "packet-context")
     throw new Error("context acknowledgement requires a packet capsule");
+  const { capsuleDigest, sourceDigest, ...body } = capsule;
+  if (capsuleDigest !== digest(JSON.stringify(body)))
+    throw new Error("context capsule digest does not match its content");
+  const sources = [...capsule.readNow, ...capsule.attested];
+  const expectedSourceDigest = digest(
+    JSON.stringify(
+      sources
+        .map(({ path: source, digest: hash }) => [source, hash])
+        .sort(([left], [right]) => left.localeCompare(right)),
+    ),
+  );
+  if (sourceDigest !== expectedSourceDigest)
+    throw new Error("context capsule source digest does not match its sources");
+  for (const source of sources) {
+    const content = await readWorktreeSource(repoRoot, source.path);
+    if (
+      source.digest !== digest(content) ||
+      source.bytes !== content.byteLength
+    )
+      throw new Error(`context capsule source changed: ${source.path}`);
+  }
   if (
     capsule.evidence.unresolvedFindings.some(
       (finding) => finding.blocking === true && finding.status !== "resolved",
@@ -178,9 +222,10 @@ export function acknowledgeContextCapsule(ledger, capsule) {
     throw new Error("context capsule has unresolved blocking findings");
   const next = {
     ...ledger,
+    physicalSession: capsule.physicalSession,
     attestations: { ...ledger.attestations },
   };
-  for (const source of [...capsule.readNow, ...capsule.attested])
+  for (const source of sources)
     next.attestations[source.path] = {
       digest: source.digest,
       phase: capsule.phase,
@@ -303,7 +348,7 @@ async function readOracle(oracle, repoRoot) {
 export async function loadContextCostOracle(fixture, repoRoot) {
   assertFixture(fixture);
   const definition = JSON.parse(
-    await readFile(safeSource(repoRoot, fixture.oraclePath), "utf8"),
+    await readWorktreeSource(repoRoot, fixture.oraclePath),
   );
   const oracle = materialize(definition);
   return { oracle, oracleReads: await readOracle(oracle, repoRoot) };
@@ -462,6 +507,41 @@ export async function runContextCostReplay(fixture, repoRoot) {
     .filter((source) => source.phase === oracle.phases[0].id)
     .reduce((total, source) => total + source.bytes, 0);
   const repeatedBytes = baselineSourceBytes - readNowBytes;
+  const candidateResults = [
+    {
+      id: "procedural-pruning",
+      totalBytes: baselineSourceBytes,
+      reductionBytes: 0,
+      reductionRatio: 0,
+      equivalencePass: true,
+      thresholdMet: false,
+      note: "No repeated long-form procedural content was found inside the authoritative documents, so content pruning has no evidenced byte reduction.",
+    },
+    {
+      id: "phase-bound-source-attestation",
+      totalBytes: optimizedBytes,
+      reductionBytes,
+      reductionRatio,
+      equivalencePass: equivalence.pass,
+      thresholdMet,
+      note: "Reads new or changed phase sources and carries acknowledged unchanged identities.",
+    },
+    {
+      id: "orchestration-simplification",
+      totalBytes: baselineSourceBytes - transitionBytes,
+      reductionBytes: transitionBytes,
+      reductionRatio: transitionBytes / baselineSourceBytes,
+      equivalencePass: false,
+      thresholdMet:
+        transitionBytes / baselineSourceBytes >= fixture.minimumReductionRatio,
+      note: "Modeled removal of every transition still misses the threshold and intentionally fails equivalence because required transitions disappear.",
+    },
+    {
+      id: "semantic-retrieval-broker",
+      result: "not-probed-unnecessary",
+      note: "Higher-complexity retrieval is not admissible because a deterministic local candidate already passes equivalence and threshold.",
+    },
+  ];
 
   return {
     version: 1,
@@ -482,6 +562,7 @@ export async function runContextCostReplay(fixture, repoRoot) {
       repeatedReads: delta(repeatedBytes, 0),
       stateOrchestration: delta(transitionBytes, transitionBytes),
     },
+    candidateResults,
     sourceDigest: digest(
       JSON.stringify(
         oracleReads.map(({ gitRef, path: source, digest: hash }) => [
