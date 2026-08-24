@@ -176,8 +176,23 @@ test("sidebar opened, closed, and current states use the real interaction seam",
   await expect(dropdownLink).toHaveAttribute("title", "Dropdown");
   const sourceMark = page.locator(".shlz-docs-home__mark");
   await expect(sourceMark).toBeVisible();
+  const sourceMarkSheet = sourceMark.locator(".shlz-docs-home__mark-source");
+  await expect(sourceMarkSheet).toHaveAttribute(
+    "src",
+    /Sidebar(?:-[^/]+)?\.svg$/,
+  );
   await expect(sourceMark).toHaveCSS("width", "32px");
   await expect(sourceMark).toHaveCSS("height", "32px");
+  await expect(sourceMarkSheet).toHaveCSS("width", "1040px");
+  await expect(sourceMarkSheet).toHaveCSS("height", "920px");
+  const [markBox, sourceSheetBox] = await Promise.all([
+    sourceMark.boundingBox(),
+    sourceMarkSheet.boundingBox(),
+  ]);
+  expect(markBox).not.toBeNull();
+  expect(sourceSheetBox).not.toBeNull();
+  expect(sourceSheetBox.x - markBox.x).toBe(-441);
+  expect(sourceSheetBox.y - markBox.y).toBe(-532);
   const compactDestinations = page.locator("[data-shlz-docs-link]");
   expect(
     await compactDestinations.evaluateAll((links) =>

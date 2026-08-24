@@ -20,6 +20,7 @@ import manifest from "@shlz/icons/manifest.json";
 import compatibilityAliases from "@shlz/icons/compatibility-aliases.json";
 import { iconHref, iconViewBox } from "@shlz/icons";
 import spriteUrl from "@shlz/icons/sprite.svg?url";
+import sidebarSourceUrl from "../../../shlz-design-source/raw/svg/Sidebar.svg?url";
 import {
   enhanceDrawers,
   enhanceDropdowns,
@@ -658,7 +659,7 @@ shell.dataset.componentAuditId = "sidebar-application-shell-showcase";
 const sidebar = document.createElement("aside");
 sidebar.className = "shlz-docs-sidebar";
 sidebar.setAttribute("aria-label", "Showcase navigation");
-sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top"><img class="shlz-docs-home__mark" src="${showcaseIconUrl("circle-grid-interface-sidebar")}" alt=""><span class="shlz-docs-home__label">SHLZ UI</span></a><button class="shlz-docs-sidebar__toggle" type="button" aria-pressed="false" aria-label="Use compact showcase navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
+sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top"><span class="shlz-docs-home__mark" aria-hidden="true"><img class="shlz-docs-home__mark-source" src="${sidebarSourceUrl}" alt=""></span><span class="shlz-docs-home__label">SHLZ UI</span></a><button class="shlz-docs-sidebar__toggle" type="button" aria-pressed="false" aria-label="Use compact showcase navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
 const content = document.createElement("div");
 content.className = "shlz-docs-content";
 const topAnchor = document.createElement("span");

@@ -232,10 +232,20 @@ main {
 }
 
 .shlz-docs-home__mark {
+  position: relative;
+  overflow: hidden;
   flex: 0 0 32px;
   inline-size: 32px;
   block-size: 32px;
-  filter: brightness(0) invert(1);
+}
+
+.shlz-docs-home__mark-source {
+  position: absolute;
+  inset-block-start: -532px;
+  inset-inline-start: -441px;
+  max-inline-size: none;
+  inline-size: 1040px;
+  block-size: 920px;
 }
 
 .shlz-docs-nav__group + .shlz-docs-nav__group {
