@@ -1881,9 +1881,12 @@ if (process.argv.includes("--help")) {
       load(relative("brief.context-ledger.json")),
     ]);
     assert.deepEqual(brief.phaseInput, capsule);
-    assert.equal(capsule.physicalSession, "claim:claim-context-cli");
+    assert.equal(capsule.physicalSession, null);
+    assert.equal(capsule.launchClaim, "claim-context-cli");
     assert.ok(capsule.readNow.length > 0);
-    assert.deepEqual(ledger, createContextLedger());
+    assert.equal(ledger.physicalSession, "runtime-context");
+    assert.equal(ledger.launchClaim, "claim-context-cli");
+    assert.deepEqual(ledger.attestations, {});
   } finally {
     await rm(directory, { recursive: true, force: true });
   }
@@ -3155,15 +3158,30 @@ test("expensive successful reruns require an invalidation reason", () => {
 
 test("validation records compute fingerprints and durably enforce invalidation", async () => {
   const ledger = [];
+  const rawLog = `docs/exec-plans/validation-raw-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("validation output\n")
+    .digest("hex")}.log`;
+  const cleanup = registerExitCleanup([
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
+  ]);
+  await writeFile(path.join(root, rawLog), "validation output\n");
   const request = {
     target: "full-browser",
     files: ["tools/harness.mjs"],
     outcome: "pass",
     packet: "integration",
     session: "s1",
+    rawLog: path.join(root, rawLog),
   };
   await recordValidation(request, ledger, config, root);
   assert.match(ledger[0].fingerprint, /^[0-9a-f]{64}$/);
+  assert.equal(ledger[0].rawLog.path, rawArtifact);
+  await assert.rejects(
+    recordValidation({ ...request, rawLog: null }, [], config, root),
+    /requires a retained raw log/,
+  );
   await assert.rejects(
     recordValidation(request, ledger, config, root),
     /reason is required/,
@@ -3196,18 +3214,31 @@ test("validation records compute fingerprints and durably enforce invalidation",
     ),
     /escapes repository/,
   );
+  await Promise.all(
+    [rawLog, rawArtifact].map((file) =>
+      unlink(path.join(root, file)).catch(() => {}),
+    ),
+  );
+  cleanup();
 });
 
 test("validation CLI excludes its own operational ledger from fingerprints", async () => {
   const ledger = `docs/exec-plans/validation-self-${process.pid}.json`;
   const source = `docs/validation-self-source-${process.pid}.md`;
+  const rawLog = `docs/exec-plans/validation-self-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("validation cli output\n")
+    .digest("hex")}.log`;
   const cleanup = registerExitCleanup([
     path.join(root, ledger),
     path.join(root, source),
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
   ]);
   try {
     await writeFile(path.join(root, ledger), "[]\n");
     await writeFile(path.join(root, source), "validation source\n");
+    await writeFile(path.join(root, rawLog), "validation cli output\n");
     await exec(
       process.execPath,
       [
@@ -3223,6 +3254,8 @@ test("validation CLI excludes its own operational ledger from fingerprints", asy
         "probe",
         "--session",
         "probe-session",
+        "--raw-log",
+        rawLog,
       ],
       { cwd: root },
     );
@@ -3243,6 +3276,8 @@ test("validation CLI excludes its own operational ledger from fingerprints", asy
   } finally {
     await unlink(path.join(root, ledger)).catch(() => {});
     await unlink(path.join(root, source)).catch(() => {});
+    await unlink(path.join(root, rawLog)).catch(() => {});
+    await unlink(path.join(root, rawArtifact)).catch(() => {});
     cleanup();
   }
 });
@@ -4219,6 +4254,53 @@ test("context cost capsules invalidate changed sources and replay deterministica
     assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
     assert.deepEqual(initial.evidence.rawEvidenceIndex, []);
     assert.equal(initial.evidence.findings[0].status, "resolved");
+    const reorderedIndex = {
+      ...index,
+      dependencyHandoffs: [
+        {
+          provenChecks: ["second-check"],
+          changed: [],
+          unresolvedFindings: [],
+        },
+        ...index.dependencyHandoffs,
+      ],
+    };
+    const orderedCapsule = await createPacketContextCapsule(
+      reorderedIndex,
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-order",
+        transition: "read-to-stable",
+        physicalSession: "probe-worker",
+        reviewState: {
+          findings: [
+            { id: "z-finding", severity: "low", status: "resolved" },
+            { id: "a-finding", severity: "low", status: "resolved" },
+          ],
+        },
+      },
+    );
+    const reversedCapsule = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        dependencyHandoffs: [...reorderedIndex.dependencyHandoffs].reverse(),
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-order",
+        transition: "read-to-stable",
+        physicalSession: "probe-worker",
+        reviewState: {
+          findings: [
+            { id: "a-finding", severity: "low", status: "resolved" },
+            { id: "z-finding", severity: "low", status: "resolved" },
+          ],
+        },
+      },
+    );
+    assert.equal(reversedCapsule.capsuleDigest, orderedCapsule.capsuleDigest);
     const tampered = clone(initial);
     tampered.evidence.verdicts = [];
     await assert.rejects(
@@ -4505,7 +4587,10 @@ test("validation evidence keeps a compact digest-verified raw-log boundary", asy
       "focused-tests",
       "locale-independent-ordering",
     ]);
-    assert.equal(ledger[0].rawLog.path, relativeLog);
+    assert.match(
+      ledger[0].rawLog.path,
+      /^docs\/exec-plans\/raw-logs\/[0-9a-f]{64}\.log$/,
+    );
     assert.equal(ledger[0].command, "npm run test:harness");
     assert.match(ledger[0].rawLog.digest, /^[0-9a-f]{64}$/);
     assert.equal(ledger[0].rawLog.bytes, 22);
@@ -4543,7 +4628,7 @@ test("validation evidence keeps a compact digest-verified raw-log boundary", asy
         ...ledger[0].rawLog,
       },
     ]);
-    await writeFile(path.join(root, relativeLog), "tampered\n");
+    await writeFile(path.join(root, ledger[0].rawLog.path), "tampered\n");
     await assert.rejects(
       createPacketContextCapsule(index, createContextLedger(), root, {
         phase: "validation",
@@ -4554,6 +4639,10 @@ test("validation evidence keeps a compact digest-verified raw-log boundary", asy
       /raw validation evidence changed/,
     );
   } finally {
+    const retained = `docs/exec-plans/raw-logs/${createHash("sha256")
+      .update("suite output\nall pass\n")
+      .digest("hex")}.log`;
+    await unlink(path.join(root, retained)).catch(() => {});
     await rm(directory, { recursive: true, force: true });
   }
 });

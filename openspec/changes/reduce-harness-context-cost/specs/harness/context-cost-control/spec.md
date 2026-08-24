@@ -57,7 +57,7 @@ The harness SHALL compare a candidate execution with an independently captured a
 
 ### Requirement: Evidence-backed phase input control
 
-The harness SHALL provide a packet-integrated, phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged sources acknowledged earlier in the same physical session without reloading their full content. A persisted session ledger SHALL record acknowledgement and SHALL NOT be reused across a fresh worker boundary. The CLI session identity is operator-declared and SHALL be unique to the physical worker; reusing its value across workers violates the operator contract. The representation SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
+The harness SHALL provide a packet-integrated, phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged sources acknowledged earlier in the same physical session without reloading their full content. A persisted session ledger SHALL record acknowledgement and SHALL NOT be reused across a fresh worker boundary. Explicit later-phase CLI capsules use an operator-declared identity that SHALL be unique to that continuing physical worker. Guarded `worker-run` instead creates a fresh unacknowledgeable pre-launch capsule bound to the claim, then binds its ledger to the adapter-issued runtime identity after launch attestation; a claim ID SHALL NOT be reported as a physical boundary. The representation SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
 
 #### Scenario: Unchanged source was attested in an earlier phase
 
@@ -77,7 +77,7 @@ The harness SHALL provide a packet-integrated, phase-local structured context re
 #### Scenario: A fresh worker starts
 
 - **WHEN** packet work moves to a fresh worker process
-- **THEN** the worker starts with a new ledger and all required packet sources are `readNow`
+- **THEN** the worker starts with a new ledger and all required packet sources are `readNow`, and the root binds that ledger to the adapter-issued runtime identity before accepting later lifecycle evidence
 
 #### Scenario: Compact evidence index omits a blocking result
 
@@ -105,7 +105,7 @@ The replay SHALL classify each contributor delta as prevented work, content not 
 
 ### Requirement: Compact validation and CI evidence boundary
 
-The harness SHALL produce a deterministic compact evidence index from structured validation or CI results and SHALL retain raw logs as content-addressed repository-local artifacts. The compact index SHALL carry command identity, outcome, obligation identities, raw-log path, byte size, and digest. Phase capsules SHALL carry the compact index and pointer, not inline raw log content, unless raw inspection is required by a finding.
+The harness SHALL require a raw log for every newly recorded structured validation or CI result, copy it to a digest-named repository-local artifact, and produce a deterministic compact evidence index. The compact index SHALL carry command identity, outcome, obligation identities, canonical repository-relative raw-log path, byte size, and digest. Phase capsules SHALL fail closed on a missing pointer and carry the compact index, not inline raw log content, unless raw inspection is required by a finding.
 
 #### Scenario: Validation emits a large raw log
 

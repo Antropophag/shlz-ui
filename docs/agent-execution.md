@@ -64,7 +64,7 @@ npm run harness -- complete <plan> <state> <handoff-input> \
   --requirements <requirements-state> --execution <execution-baseline>
 ```
 
-`worker-run` automatically creates a fresh initial context ledger and a content-addressed implementation-phase capsule next to the worker brief, then binds that capsule into the immutable brief. Operators do not run a separate pre-launch capsule protocol. Explicit `context-capsule` and `context-ack` remain the later-phase interface after the worker has actually read `readNow`; an attested path means only that unchanged source content need not be reread through this harness interface.
+`worker-run` automatically creates a fresh initial context ledger and an unacknowledgeable pre-launch implementation-phase capsule next to the worker brief, then binds that capsule into the immutable brief. After launch, the root binds the ledger to the adapter-issued runtime identity; the claim ID is launch provenance, not proof of a physical boundary. Operators do not run a separate pre-launch capsule protocol. Explicit `context-capsule` and `context-ack` remain the later-phase interface after the worker has actually read `readNow`; an attested path means only that unchanged source content need not be reread through this harness interface.
 
 The lifecycle is root orchestration → fresh worker → durable handoff → dependent fresh worker → distinct independent review. A failed or unattested launch keeps dependents blocked; use `worker-retry <state> <packet-id>` before generating a new brief. `worker-brief` is available when an operator needs to inspect or transport the immutable brief without launching it.
 

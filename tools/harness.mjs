@@ -560,7 +560,7 @@ switch (command) {
         {
           phase: "implementation",
           transition: "pending-to-launching",
-          physicalSession: `claim:${claimId}`,
+          launchClaim: claimId,
           validationLedger: option("--validation")
             ? await readJson(absolute(option("--validation")))
             : [],
@@ -595,6 +595,13 @@ switch (command) {
     });
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
+      if (result.evidence?.runtimeId) {
+        const ledgerTarget = statePath(prepared.contextLedgerPath);
+        const ledger = await readJson(ledgerTarget);
+        ledger.physicalSession = result.evidence.runtimeId;
+        ledger.launchClaim = claimId;
+        await writeJson(ledgerTarget, ledger);
+      }
       let recordingError = null;
       try {
         recordWorkerAttempt(

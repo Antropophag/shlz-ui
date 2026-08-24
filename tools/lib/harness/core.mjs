@@ -2320,21 +2320,25 @@ export async function recordValidation(
 ) {
   if (!files.length || !["pass", "fail"].includes(outcome))
     throw new Error("validation record requires files and pass/fail outcome");
+  if (!rawLog) throw new Error("validation record requires a retained raw log");
   const currentFingerprint = await fingerprintFiles(files, repoRoot);
   assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
-  let rawLogEvidence = null;
-  if (rawLog) {
-    const root = await realpath(repoRoot);
-    const targetPath = await realpath(path.resolve(repoRoot, rawLog));
-    if (targetPath !== root && !targetPath.startsWith(`${root}${path.sep}`))
-      throw new Error(`validation raw log escapes repository: ${rawLog}`);
-    const content = await readFile(targetPath);
-    rawLogEvidence = {
-      path: rawLog,
-      digest: createHash("sha256").update(content).digest("hex"),
-      bytes: content.byteLength,
-    };
-  }
+  const root = await realpath(repoRoot);
+  const targetPath = await realpath(path.resolve(repoRoot, rawLog));
+  if (targetPath !== root && !targetPath.startsWith(`${root}${path.sep}`))
+    throw new Error(`validation raw log escapes repository: ${rawLog}`);
+  const content = await readFile(targetPath);
+  const rawDigest = createHash("sha256").update(content).digest("hex");
+  const retainedPath = `docs/exec-plans/raw-logs/${rawDigest}.log`;
+  await mkdir(path.dirname(path.join(repoRoot, retainedPath)), {
+    recursive: true,
+  });
+  await writeFile(path.join(repoRoot, retainedPath), content);
+  const rawLogEvidence = {
+    path: retainedPath,
+    digest: rawDigest,
+    bytes: content.byteLength,
+  };
   ledger.push({
     target,
     command: config.validationTargets[target].command,
@@ -2342,7 +2346,7 @@ export async function recordValidation(
     fingerprint: currentFingerprint,
     outcome,
     obligations: [...new Set(obligations)].sort(order),
-    ...(rawLogEvidence ? { rawLog: rawLogEvidence } : {}),
+    rawLog: rawLogEvidence,
     reason: reason ?? null,
     packet,
     session,

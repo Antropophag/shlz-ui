@@ -11,7 +11,19 @@ const digest = (value) => createHash("sha256").update(value).digest("hex");
 const bytes = (value) => Buffer.byteLength(value);
 const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const stable = (values) => [...new Set(values)].sort(order);
-const identity = (value) => JSON.stringify(value);
+const canonicalValue = (value) => {
+  if (Array.isArray(value)) return value.map(canonicalValue);
+  if (value && typeof value === "object")
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([left], [right]) => order(left, right))
+        .map(([key, item]) => [key, canonicalValue(item)]),
+    );
+  return value;
+};
+const identity = (value) => JSON.stringify(canonicalValue(value));
+const stableEntries = (values) =>
+  [...values].sort((left, right) => order(identity(left), identity(right)));
 
 function required(value, label) {
   if (!value) throw new Error(`context-cost replay requires ${label}`);
@@ -98,7 +110,12 @@ async function readSource(repoRoot, source) {
 }
 
 export function createContextLedger() {
-  return { version: 1, physicalSession: null, attestations: {} };
+  return {
+    version: 1,
+    physicalSession: null,
+    launchClaim: null,
+    attestations: {},
+  };
 }
 
 function assertLedger(ledger) {
@@ -148,7 +165,7 @@ async function currentPhaseEvidence(
     });
   }
   rawEvidenceIndex.sort((left, right) =>
-    order(`${left.target}:${left.path}`, `${right.target}:${right.path}`),
+    order(identity(left), identity(right)),
   );
   return {
     verdicts: stable([
@@ -159,14 +176,16 @@ async function currentPhaseEvidence(
     ]),
     rawEvidence: stable(validations.flatMap(({ files }) => files ?? [])),
     rawEvidenceIndex,
-    findings: reviewFindings.map(({ id, severity, status }) => ({
-      id,
-      severity,
-      status,
-      blocking:
-        ["high", "critical", "P0", "P1"].includes(severity) &&
-        status !== "resolved",
-    })),
+    findings: stableEntries(
+      reviewFindings.map(({ id, severity, status }) => ({
+        id,
+        severity,
+        status,
+        blocking:
+          ["high", "critical", "P0", "P1"].includes(severity) &&
+          status !== "resolved",
+      })),
+    ),
   };
 }
 
@@ -178,6 +197,7 @@ export async function createPacketContextCapsule(
     phase,
     transition,
     physicalSession,
+    launchClaim = null,
     validationLedger = [],
     reviewState = null,
   },
@@ -185,7 +205,10 @@ export async function createPacketContextCapsule(
   assertLedger(ledger);
   required(phase, "packet context phase");
   required(transition, "packet context transition");
-  required(physicalSession, "packet context physical session");
+  if (!physicalSession && !launchClaim)
+    throw new Error(
+      "context-cost replay requires packet context physical session or launch claim",
+    );
   if (
     ledger.physicalSession !== null &&
     ledger.physicalSession !== physicalSession
@@ -218,13 +241,14 @@ export async function createPacketContextCapsule(
     kind: "packet-context",
     planId: index.planId,
     packetId: index.packet.id,
-    physicalSession,
+    physicalSession: physicalSession ?? null,
+    launchClaim,
     phase,
     objective: index.packet.objective,
     transition,
     obligations: packetObligations(index.packet),
     evidence: {
-      dependencyHandoffs: index.dependencyHandoffs,
+      dependencyHandoffs: stableEntries(index.dependencyHandoffs),
       verdicts: stable([
         ...index.dependencyHandoffs.flatMap(
           (handoff) => handoff.provenChecks ?? [],
@@ -237,11 +261,11 @@ export async function createPacketContextCapsule(
       ]),
       rawEvidenceIndex: currentEvidence.rawEvidenceIndex,
       findings: currentEvidence.findings,
-      unresolvedFindings: [
+      unresolvedFindings: stableEntries([
         ...index.dependencyHandoffs.flatMap(
           (handoff) => handoff.unresolvedFindings ?? [],
         ),
-      ],
+      ]),
     },
     readNow,
     attested,
@@ -263,6 +287,10 @@ export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
   assertLedger(ledger);
   if (capsule?.version !== 1 || capsule.kind !== "packet-context")
     throw new Error("context acknowledgement requires a packet capsule");
+  if (!capsule.physicalSession)
+    throw new Error(
+      "initial worker capsule cannot be acknowledged before runtime binding",
+    );
   if (
     ledger.physicalSession !== null &&
     ledger.physicalSession !== capsule.physicalSession

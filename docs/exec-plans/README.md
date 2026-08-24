@@ -23,7 +23,7 @@ npm run harness -- worker-brief <plan> <state> <packet> --execution <baseline> -
 npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --session <label> --brief-out <brief> --telemetry-out <telemetry>
 npm run harness -- worker-retry <state> <packet>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
-npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
+npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id> --raw-log <repository-path>
 npm run harness -- context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --session <physical-session-id> [--validation <validation-ledger>] [--review <review-state>] --out <capsule>
 npm run harness -- context-ack <capsule> <ledger>
 npm run harness -- context-cost-replay <fixture>
@@ -56,9 +56,9 @@ The operator lifecycle is root reservation → worker subprocess and final repor
 
 Telemetry keeps logical labels separate from `codex-exec-jsonl` runtime identities. It summarizes physical boundaries, total tokens and peak active context when runtime-supplied, unique/repeated reads, repeated discovery commands, handoff bytes, and an observational relevance ratio for explicitly classified reads. Missing runtime values remain `unavailable`; caller labels and estimates never become proof.
 
-Guarded `worker-run` automatically writes the initial phase capsule and fresh ledger beside `--brief-out` and includes the capsule in the launched brief. Later phases may acknowledge content only after reading `readNow`; the ledger records non-rereading through the harness, not avoided runtime retention.
+Guarded `worker-run` automatically writes an unacknowledgeable pre-launch phase capsule and fresh ledger beside `--brief-out`, includes the capsule in the launched brief, and binds the ledger to the adapter-issued runtime identity after launch. The claim ID is launch provenance, never a physical-boundary claim. Explicit later-phase capsules may acknowledge content only after reading `readNow`; the ledger records non-rereading through the harness, not avoided runtime retention.
 
-`validation-record` accepts optional `--obligations <comma-separated-ids>` and `--raw-log <repository-path>`. It stores a compact result plus the raw log's SHA-256 digest and byte size. Capsule creation verifies that pointer and fails closed on drift. Raw logs remain retained and addressable; only their repeated inline carryover is replaced by compact evidence.
+`validation-record` requires `--raw-log <repository-path>` and accepts optional `--obligations <comma-separated-ids>`. It copies the log to `docs/exec-plans/raw-logs/<sha256>.log` and stores a compact result with the canonical repository-relative path, digest, and byte size. Capsule creation verifies that pointer and fails closed on drift. Raw logs remain retained and addressable; only their repeated inline carryover is replaced by compact evidence.
 
 ## Compatibility
 
