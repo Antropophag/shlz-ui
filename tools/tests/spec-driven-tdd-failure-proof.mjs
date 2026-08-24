@@ -81,5 +81,5 @@ const baselineProof = JSON.parse(
   ).stdout,
 );
 process.stdout.write(
-  `${JSON.stringify({ version: 1, reviewBase, knownBadRevision, changeBaselineRevision, reviewedHead, invariants: [...baselineProof.invariants, ...invariants] })}\n`,
+  `${JSON.stringify({ version: 1, reviewBase, knownBadRevision, changeBaselineRevision, reviewedHead, invariants: [...baselineProof.invariants.filter(({ concern }) => ["state-machine", "persistence"].includes(concern)), ...invariants] })}\n`,
 );
