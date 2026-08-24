@@ -40,6 +40,19 @@ npm run harness -- claim docs/exec-plans/active/<change>/plan.json docs/exec-pla
 npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id> --state docs/exec-plans/active/<change>/state.json
 ```
 
+For an eligible plan with `specDrivenTdd.version: 1`, each enforced slice names
+its OpenSpec scenarios and authorities, deterministic public seam, one argv
+command, controls/repeat count, disjoint acceptance/fixture/production surfaces,
+and distinct guarded test-design and implementation packets. Use
+`tdd-design-record`, then `tdd-red --execution <baseline>` before launching the
+implementation packet, and `tdd-green --execution <baseline>` before completing
+it. The harness derives and freezes acceptance, fixture, controls, contract, and
+baseline identities; callers cannot provide separate baseline/candidate
+commands. The test-design brief must contain only requirements, authorities,
+the seam, tests, and fixtures—not a production proposal or implementation
+handoff. Direct changes and slices without an honest deterministic RED use
+ordinary TDD or an explicit bounded `inapplicable` disposition.
+
 Guarded packets use the runtime adapter rather than a caller-selected label. The root reserves the claim atomically, releases the state lock, launches one bounded worker, then binds its runtime identity before accepting the worker's durable handoff:
 
 ```bash
@@ -56,6 +69,14 @@ The lifecycle is root orchestration → fresh worker → durable handoff → dep
 Selection remains proportional: S continues inline; coherent M continues unless it crosses a semantic or context-pressure boundary; L declares decomposition and isolation; XL re-checks coherence and uses bounded isolated packets. A small follow-up remains a separate execution episode with its own immutable baseline—its size is assessed from that delta, not inherited from the parent PR.
 
 For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`; resuming a guarded packet returns it to pending so a fresh `worker-run` must re-attest the updated revision.
+
+For a spec-driven TDD plan, `pause` also requires `--tdd-reentry <file>`. The
+versioned file classifies every enforced slice as `affected` or `retained` and
+binds the old/new requirements revisions. Affected slices lose RED/GREEN and
+return both test-design and implementation packets to pending. Retention is
+accepted only for already-green slices whose complete slice contract digest is
+unchanged; the bridge remains in execution state. Resume never authorizes an
+affected implementation slice until a fresh independent design and RED pass.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 
@@ -76,6 +97,13 @@ Normal successful implementation then pushes only its current task branch, creat
 npm run harness -- delivery-check <delivery-evidence> \
   --plan <current-plan> --state <current-state> --requirements <requirements-state>
 ```
+
+Initialize a material TDD review with `--tdd-plan <plan> --tdd-state <state>`.
+Each `review-record` for that review repeats those options. The harness binds
+both review axes to the current GREEN candidate head; failure-invariant proof
+remains an additional independent obligation for marked state-machine,
+persistence, or subprocess scenarios. `delivery-check` likewise rejects a
+missing/stale GREEN, requirements bridge, slice contract, or PR head.
 
 Adaptive-plan delivery requires the current plan and execution state; every declared packet must be completed with a handoff, and requirements-gated plan/state/revisions must agree. Direct work instead passes `--direct <route-assessment>` so the narrow route is positively re-proven. The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings. For material state-machine, persistence, or subprocess changes, executable review derives change-specific failure invariants from marked scenarios in the current OpenSpec delta and proves them alongside the fixed baseline; see `docs/validation-workflow.md`.
 

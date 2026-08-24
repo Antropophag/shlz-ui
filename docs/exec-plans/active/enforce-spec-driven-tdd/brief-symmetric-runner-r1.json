@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "packet": {
+    "contextSources": [
+      "tools/harness.mjs",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/**",
+      "PR #34 oracle remediation evidence"
+    ],
+    "contracts": ["harness/spec-driven-tdd"],
+    "dependencies": ["acceptance-contract"],
+    "focusedValidation": ["harness", "openspec"],
+    "handoff": ["CLI interface", "fixture results", "cleanup guarantees"],
+    "id": "symmetric-runner",
+    "implementationOutcomes": [
+      "asymmetry rejection",
+      "nondeterminism rejection",
+      "immutable baseline proof"
+    ],
+    "implementationSurface": [
+      "tools/harness.mjs",
+      "tools/lib/harness/**",
+      "tools/tests/**",
+      "docs/exec-plans/fixtures/**"
+    ],
+    "nonGoals": ["review lifecycle", "PR delivery"],
+    "objective": "Implement and prove a bounded symmetric deterministic acceptance runner through the public CLI seam",
+    "outputs": [
+      "symmetric runner",
+      "stable RED/GREEN proof",
+      "representative fixtures"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "CLI transitions",
+      "immutable baseline worktree",
+      "repeat/signature proof",
+      "known-bad fixtures"
+    ]
+  },
+  "claimId": "symmetric-runner-r1",
+  "baseline": {
+    "branch": "feat/spec-driven-tdd-gate",
+    "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-spec-driven-tdd"
+  },
+  "dependencyDigests": {
+    "acceptance-contract": "9f5a41ce571c9d5ef9d4438db9b49b722384de65525d3aaa3c135cfbc4c1145a"
+  },
+  "packetDigest": "349a7edd05b11fa32b2945f6d49cdff750932b20f8ec34d22e4046eb70ef2813",
+  "contextIndex": [
+    "tools/harness.mjs",
+    "tools/lib/harness/core.mjs",
+    "tools/tests/**",
+    "PR #34 oracle remediation evidence"
+  ],
+  "allowedImplementationSurface": [
+    "tools/harness.mjs",
+    "tools/lib/harness/**",
+    "tools/tests/**",
+    "docs/exec-plans/fixtures/**"
+  ],
+  "focusedValidation": ["harness", "openspec"],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "ffefd94a30f32d8389ec899820505cda6517e47cef4e8e93c8ce625332003779"
+}

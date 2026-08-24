@@ -70,4 +70,18 @@ npm run harness -- pause <plan> <state> <packet> --requirements <blocked-require
 npm run harness -- resume <plan> <state> <packet> --session <session> --requirements <ready-requirements-state>
 ```
 
+When the plan enables spec-driven TDD, pass a version 1 re-entry file to pause:
+
+```bash
+npm run harness -- pause <plan> <state> <packet> \
+  --requirements <blocked-requirements-state> --tdd-reentry <classification>
+```
+
+It must classify every enforced slice as `affected` or `retained`, with
+`fromRevision` and `toRevision`. Use `retained` only for a completed slice when
+its scenarios, authorities, packet dependencies, command, tests, fixtures, and
+controls remain digest-identical. An affected slice returns to independent test
+design and must prove RED again; do not edit or silently reuse its prior
+acceptance evidence.
+
 Increment `revision` when apply records a new ambiguity. The pause binds that revision into execution state; guarded `claim`, `resume`, and `complete` commands require a matching ready state at least that new. This prevents another packet or fresh session from bypassing a newly closed gate with a stale snapshot.

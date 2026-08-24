@@ -12,6 +12,8 @@ import {
   contextIndex,
   createExecutionState,
   createPlan,
+  createTddDesignEvidence,
+  createTddReviewBinding,
   createReviewState,
   createWorkerBrief,
   failWorkerReservation,
@@ -33,6 +35,7 @@ import {
   recordValidation,
   reserveWorkerPacket,
   recordWorkerAttempt,
+  recordTddDesign,
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
@@ -41,6 +44,7 @@ import {
   evaluateRouteEligibility,
   failurePathResultDigest,
   resumePacket,
+  runTddAcceptance,
   reviewContext,
   resolveReviewFindings,
   retryWorkerPacket,
@@ -348,6 +352,62 @@ switch (command) {
     output(state);
     break;
   }
+  case "tdd-design-record": {
+    const baselinePath = option("--execution");
+    if (!baselinePath)
+      throw new Error("tdd-design-record requires --execution <baseline>");
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const handoff = await readJson(absolute(args[2]));
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      recordTddDesign(
+        plan,
+        current,
+        await createTddDesignEvidence(
+          plan,
+          current,
+          handoff,
+          await readJson(absolute(baselinePath)),
+          repoRoot,
+        ),
+      );
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[handoff.sliceId]);
+    break;
+  }
+  case "tdd-red":
+  case "tdd-green": {
+    if (
+      args.includes("--baseline-command") ||
+      args.includes("--candidate-command")
+    )
+      throw new Error(
+        "spec-driven TDD does not accept revision-specific command or oracle overrides",
+      );
+    const baselinePath = option("--execution");
+    if (!baselinePath)
+      throw new Error(`${command} requires --execution <baseline>`);
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      await runTddAcceptance(
+        plan,
+        current,
+        args[2],
+        await readJson(absolute(baselinePath)),
+        repoRoot,
+        command === "tdd-red" ? "red" : "green",
+      );
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[args[2]]);
+    break;
+  }
   case "worker-probe":
     output(await probeCodexExec({ cwd: repoRoot }));
     break;
@@ -508,6 +568,9 @@ switch (command) {
         await readJson(target),
         args[2],
         await readJson(absolute(requirementsPath)),
+        option("--tdd-reentry")
+          ? await readJson(absolute(option("--tdd-reentry")))
+          : null,
       );
       await writeJson(target, next);
       return next;
@@ -569,7 +632,21 @@ switch (command) {
       throw new Error(
         "change-specific failure invariant concern is not enabled for review",
       );
-    const state = createReviewState(args[1], concerns, binding);
+    const tddPlanPath = option("--tdd-plan");
+    const tddStatePath = option("--tdd-state");
+    if (Boolean(tddPlanPath) !== Boolean(tddStatePath))
+      throw new Error("review-init requires both --tdd-plan and --tdd-state");
+    const currentHead = await exec("git", ["rev-parse", "HEAD"], {
+      cwd: repoRoot,
+    }).then(({ stdout }) => stdout.trim());
+    const tddBinding = tddPlanPath
+      ? createTddReviewBinding(
+          await readJson(absolute(tddPlanPath)),
+          await readJson(absolute(tddStatePath)),
+          currentHead,
+        )
+      : null;
+    const state = createReviewState(args[1], concerns, binding, tddBinding);
     await writeJson(statePath(args[0]), state);
     output(state);
     break;
@@ -652,14 +729,29 @@ switch (command) {
     const target = statePath(args[0]);
     const findings = await readJson(absolute(option("--findings")));
     const state = await withStateLock(target, async () => {
-      const next = recordReview(
-        await refreshChangeFailureInvariants(await readJson(target), target),
-        {
-          axis: option("--axis"),
-          head: option("--head"),
-          findings,
-        },
+      const current = await refreshChangeFailureInvariants(
+        await readJson(target),
+        target,
       );
+      const tddPlanPath = option("--tdd-plan");
+      const tddStatePath = option("--tdd-state");
+      if (current.specDrivenTdd && (!tddPlanPath || !tddStatePath))
+        throw new Error(
+          "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
+        );
+      const tddEvidence = current.specDrivenTdd
+        ? createTddReviewBinding(
+            await readJson(absolute(tddPlanPath)),
+            await readJson(absolute(tddStatePath)),
+            option("--head"),
+          )
+        : null;
+      const next = recordReview(current, {
+        axis: option("--axis"),
+        head: option("--head"),
+        findings,
+        tddEvidence,
+      });
       await writeJson(target, next);
       return next;
     });
@@ -703,6 +795,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

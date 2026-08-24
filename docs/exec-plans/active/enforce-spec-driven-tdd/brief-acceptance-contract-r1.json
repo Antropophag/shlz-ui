@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/enforce-spec-driven-tdd/**",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "contracts": ["harness/spec-driven-tdd"],
+    "dependencies": [],
+    "focusedValidation": ["harness", "openspec"],
+    "handoff": ["state interface", "digests", "test outcomes"],
+    "id": "acceptance-contract",
+    "implementationOutcomes": [
+      "independent test design",
+      "blocked implementation before RED",
+      "tamper invalidation"
+    ],
+    "implementationSurface": [
+      "tools/lib/harness/core.mjs",
+      "tools/tests/harness.test.mjs"
+    ],
+    "nonGoals": ["subprocess runner", "delivery", "generated OpenSpec skills"],
+    "objective": "Specify and test the independent acceptance contract and RED/GREEN lifecycle as pure harness state",
+    "outputs": [
+      "failing contract tests",
+      "validated lifecycle state",
+      "legacy compatibility"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "plan schema",
+      "scenario grounding",
+      "test-design handoff",
+      "lifecycle transitions",
+      "contract tests"
+    ]
+  },
+  "claimId": "acceptance-contract-r1",
+  "baseline": {
+    "branch": "feat/spec-driven-tdd-gate",
+    "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-spec-driven-tdd"
+  },
+  "dependencyDigests": {},
+  "packetDigest": "3027c7258de54c2aaa79e43e13d4c027f98a685a9ba79f5be01c28ed241c62e4",
+  "contextIndex": [
+    "openspec/changes/enforce-spec-driven-tdd/**",
+    "tools/lib/harness/core.mjs",
+    "tools/tests/harness.test.mjs"
+  ],
+  "allowedImplementationSurface": [
+    "tools/lib/harness/core.mjs",
+    "tools/tests/harness.test.mjs"
+  ],
+  "focusedValidation": ["harness", "openspec"],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "fe2804b0bea3e80559af171c66d2ada0f1ac9c46af6323e42fff4841b6a7d209"
+}

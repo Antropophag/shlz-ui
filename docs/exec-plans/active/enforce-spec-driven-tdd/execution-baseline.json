@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+  "branch": "feat/spec-driven-tdd-gate",
+  "defaultBranch": "main"
+}

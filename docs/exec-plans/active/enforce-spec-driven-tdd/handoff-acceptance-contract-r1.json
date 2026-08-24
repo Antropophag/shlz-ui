@@ -1,0 +1,26 @@
+{
+  "completedPacket": "acceptance-contract",
+  "changed": [
+    "versioned spec-driven TDD plan eligibility and disjoint-surface validation",
+    "pure test-design, RED, implementation authorization, GREEN, and invalidation transitions",
+    "independent runtime, scenario authority, digest binding, and legacy compatibility tests"
+  ],
+  "provenChecks": [
+    "contract tests first failed because lifecycle exports were absent",
+    "63 focused harness tests pass after the minimal implementation",
+    "strict current-change OpenSpec and OpenSpec integration checks pass",
+    "Prettier and git diff whitespace checks pass"
+  ],
+  "settledDecisions": [
+    "enforced slices require disjoint production, acceptance, and fixture surfaces",
+    "implementation runtime differs from test-design and RED runtime identities",
+    "acceptance identity drift returns the slice to pending test design",
+    "legacy plans without specDrivenTdd remain compatible"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "symmetric-runner",
+  "invalidatedAssumptions": [],
+  "claimId": "acceptance-contract-r1",
+  "briefDigest": "fe2804b0bea3e80559af171c66d2ada0f1ac9c46af6323e42fff4841b6a7d209",
+  "workerReportDigest": "2a3118e4b926d16dc1e6d448c648d93e2685bbb968db50ccacf3962d9c6980cf"
+}

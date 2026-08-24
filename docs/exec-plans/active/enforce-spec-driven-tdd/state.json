@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "requirementsRevision": 1,
+  "packets": {
+    "acceptance-contract": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "acceptance-contract-r1",
+      "claimId": "acceptance-contract-r1",
+      "briefDigest": "fe2804b0bea3e80559af171c66d2ada0f1ac9c46af6323e42fff4841b6a7d209",
+      "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+      "dependencyDigests": {},
+      "packetDigest": "3027c7258de54c2aaa79e43e13d4c027f98a685a9ba79f5be01c28ed241c62e4",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a03244-3d47-7802-a27c-e1c1b666749f",
+        "launchId": "4357ea36-0e20-4aff-a28b-98e50146cb2f",
+        "startedAt": "2026-08-24T05:35:27.722Z",
+        "evidenceDigest": "c3f2771a44cecc0ab6c82edf9988dfa565fc53ac1007531f45d7a04fbe4c781a"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "4357ea36-0e20-4aff-a28b-98e50146cb2f",
+        "usage": {
+          "input_tokens": 940787,
+          "cached_input_tokens": 862976,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 8698,
+          "reasoning_output_tokens": 837
+        },
+        "workerReport": "Implemented the `acceptance-contract` packet within its two-file surface.\n\nChanged:\n\n- [core.mjs](/home/antropophag/code/shlz-ui-spec-driven-tdd-gate/tools/lib/harness/core.mjs:994)\n  - Versioned TDD plan validation\n  - Eligibility, disjoint-surface, scenario-authority, and inapplicability checks\n  - Pure lifecycle state and transitions\n  - Independent runtime enforcement\n  - Digest-bound RED/GREEN evidence\n  - Tamper invalidation back to test design\n  - Legacy-plan compatibility\n\n- [harness.test.mjs](/home/antropophag/code/shlz-ui-spec-driven-tdd-gate/tools/tests/harness.test.mjs:849)\n  - Four contract tests covering those behaviors\n\nValidation:\n\n- RED confirmed before implementation: missing lifecycle exports\n- `npm run check:focused`: passed\n- Harness: 63/63 passed\n- `openspec validate enforce-spec-driven-tdd --strict`: passed\n- OpenSpec integration check: passed\n- Prettier and `git diff --check`: passed\n\nNo subprocess runner, CLI, delivery, planning-state, or OpenSpec artifact files were modified. Overall OpenSpec task checkboxes remain unchanged because later packets still own the remaining portions of tasks 2.1–2.2.",
+        "workerReportDigest": "2a3118e4b926d16dc1e6d448c648d93e2685bbb968db50ccacf3962d9c6980cf"
+      }
+    },
+    "symmetric-runner": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "symmetric-runner-r1",
+      "claimId": "symmetric-runner-r1",
+      "briefDigest": "ffefd94a30f32d8389ec899820505cda6517e47cef4e8e93c8ce625332003779",
+      "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+      "dependencyDigests": {
+        "acceptance-contract": "9f5a41ce571c9d5ef9d4438db9b49b722384de65525d3aaa3c135cfbc4c1145a"
+      },
+      "packetDigest": "349a7edd05b11fa32b2945f6d49cdff750932b20f8ec34d22e4046eb70ef2813",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a03249-0664-7c83-99e5-ffda2fff4692",
+        "launchId": "15b8b60d-1531-471a-9b00-978060762ee7",
+        "startedAt": "2026-08-24T05:40:41.322Z",
+        "evidenceDigest": "f05ff45fc30bc3ed3b43cb1e95519d95fd8457823b33e413113d855ba51581e5"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "15b8b60d-1531-471a-9b00-978060762ee7",
+        "usage": {
+          "input_tokens": 1465045,
+          "cached_input_tokens": 1367296,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 13162,
+          "reasoning_output_tokens": 3520
+        },
+        "workerReport": "Implemented the `symmetric-runner` packet through the public harness CLI.\n\nAdded:\n\n- `tdd-design-record`, `tdd-red`, and `tdd-green` CLI transitions.\n- Detached immutable-baseline worktree execution under `~/code`.\n- Identical argv, environment, fixtures, controls, and oracle for RED/GREEN.\n- Repeated-output determinism and stable failure-signature checks.\n- Acceptance, fixture, control, contract, requirements, and baseline digest binding.\n- Rejection of asymmetric command overrides, nondeterministic probes, and post-RED tampering.\n- Guaranteed worktree removal and pruning, including failure paths.\n- Representative behavioral fixtures.\n\nValidation:\n\n- Initial RED: 2 CLI tests failed because transitions were absent.\n- Final harness: 65/65 tests passed.\n- Focused public-CLI tests: 2/2 passed.\n- OpenSpec integration check passed.\n- Prettier and `git diff --check` passed.\n- No temporary `shlz-ui-tdd-*` worktrees remain.\n\nOnly this packet was performed. OpenSpec task checkboxes and durable execution handoff were intentionally left for the root orchestrator.",
+        "workerReportDigest": "0caea36a4856d5025bd27c2043b868fffcefbba7cef6ced217c33546d0615060"
+      }
+    },
+    "workflow-delivery": {
+      "attemptHistory": [],
+      "status": "launching",
+      "session": "workflow-delivery-r1",
+      "claimId": "workflow-delivery-r1",
+      "briefDigest": "36492d89e5848cc57ff545fa2c6f6c0cb6b68d516f494e970bfe292be269cb43",
+      "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+      "dependencyDigests": {
+        "symmetric-runner": "17dfe203fdd2e0e1c2a8d88487ab353d0c674a34c189315467566536b9b287b2"
+      },
+      "packetDigest": "050d101fd50fad2d5e75008b665ae379aba77ea9fc6fb1aa7bb54689dec3e53e",
+      "requirementsRevision": 1
+    }
+  },
+  "handoffs": {
+    "acceptance-contract": {
+      "completedPacket": "acceptance-contract",
+      "changed": [
+        "versioned spec-driven TDD plan eligibility and disjoint-surface validation",
+        "pure test-design, RED, implementation authorization, GREEN, and invalidation transitions",
+        "independent runtime, scenario authority, digest binding, and legacy compatibility tests"
+      ],
+      "provenChecks": [
+        "contract tests first failed because lifecycle exports were absent",
+        "63 focused harness tests pass after the minimal implementation",
+        "strict current-change OpenSpec and OpenSpec integration checks pass",
+        "Prettier and git diff whitespace checks pass"
+      ],
+      "settledDecisions": [
+        "enforced slices require disjoint production, acceptance, and fixture surfaces",
+        "implementation runtime differs from test-design and RED runtime identities",
+        "acceptance identity drift returns the slice to pending test design",
+        "legacy plans without specDrivenTdd remain compatible"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "symmetric-runner",
+      "invalidatedAssumptions": [],
+      "claimId": "acceptance-contract-r1",
+      "briefDigest": "fe2804b0bea3e80559af171c66d2ada0f1ac9c46af6323e42fff4841b6a7d209",
+      "workerReportDigest": "2a3118e4b926d16dc1e6d448c648d93e2685bbb968db50ccacf3962d9c6980cf"
+    },
+    "symmetric-runner": {
+      "completedPacket": "symmetric-runner",
+      "changed": [
+        "public tdd-design-record, tdd-red, and tdd-green CLI transitions",
+        "one symmetric bounded runner for immutable baseline and candidate",
+        "representative asymmetry, nondeterminism, tamper, and cleanup fixtures"
+      ],
+      "provenChecks": [
+        "two public CLI tests failed before the transitions existed",
+        "65 harness tests pass including deterministic end-to-end RED/GREEN",
+        "known-bad asymmetry, nondeterminism, and post-RED tampering are rejected",
+        "OpenSpec integration, Prettier, diff whitespace, and worktree cleanup pass"
+      ],
+      "settledDecisions": [
+        "baseline and candidate use one manifest-derived argv, environment, fixture set, controls, and oracle",
+        "RED requires repeated identical non-zero results and a stable declared signature",
+        "baseline worktrees live under the home code directory and are removed and pruned on all settled paths"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "workflow-delivery",
+      "invalidatedAssumptions": [],
+      "claimId": "symmetric-runner-r1",
+      "briefDigest": "ffefd94a30f32d8389ec899820505cda6517e47cef4e8e93c8ce625332003779",
+      "workerReportDigest": "0caea36a4856d5025bd27c2043b868fffcefbba7cef6ced217c33546d0615060"
+    }
+  }
+}

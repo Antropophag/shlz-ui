@@ -26,6 +26,25 @@ npm run harness -- complete <plan> <state> <handoff-input> --requirements <requi
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
 ```
 
+Version 2 plans may opt into `specDrivenTdd.version: 1`. Every material
+behavioral slice then has either a bounded inapplicability disposition or an
+enforced contract with scenario/authority mappings, a deterministic seam and
+argv command, disjoint acceptance/fixture/production surfaces, controls,
+repeat count, and test-design/implementation packet identities. Enforced flow:
+
+```bash
+npm run harness -- tdd-design-record <plan> <state> <design-handoff> --execution <baseline>
+npm run harness -- tdd-red <plan> <state> <slice> --execution <baseline>
+npm run harness -- tdd-green <plan> <state> <slice> --execution <baseline>
+```
+
+Implementation readiness and launch require accepted RED; packet completion
+requires GREEN. A requirements pause supplies `--tdd-reentry <file>` and
+classifies every slice as affected or explicitly retained. TDD-bound review
+initialization and records supply `--tdd-plan <plan> --tdd-state <state>` so
+both axes, any separate failure-path proof, and delivery agree on the candidate
+head. Historical plans without `specDrivenTdd` preserve their prior behavior.
+
 The operator lifecycle is root reservation → worker subprocess and final report → adapter-bound claim/report digest → root-validated durable handoff → dependent worker → independent review. The worker cannot complete while its launch is only reserved; after subprocess exit the root binds the runtime identity and final agent message, then a matching report digest is required in the compact handoff. S defaults to `continue`; coherent M stays inline until a meaningful phase or pressure transition; L/XL plans declare enforced, fail-closed isolated packet graphs. Bounded follow-ups remain separate episodes with a new baseline and sizing assessment.
 
 Telemetry keeps logical labels separate from `codex-exec-jsonl` runtime identities. It summarizes physical boundaries, total tokens and peak active context when runtime-supplied, unique/repeated reads, repeated discovery commands, handoff bytes, and an observational relevance ratio for explicitly classified reads. Missing runtime values remain `unavailable`; caller labels and estimates never become proof.

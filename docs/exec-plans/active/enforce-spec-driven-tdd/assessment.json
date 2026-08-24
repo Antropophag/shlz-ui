@@ -1,0 +1,154 @@
+{
+  "id": "enforce-spec-driven-tdd",
+  "baseline": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+  "requirementsGate": "required",
+  "openSpecChange": "enforce-spec-driven-tdd",
+  "signals": {
+    "independentWorkUnits": 3,
+    "sharedSeams": 3,
+    "contracts": 1,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 1,
+    "changedScope": 2,
+    "reviewRisk": 3,
+    "contextGrowthRisk": 2
+  },
+  "openSpecTaskCount": 10,
+  "workUnits": [
+    {
+      "id": "acceptance-contract",
+      "group": "acceptance-contract",
+      "objective": "Specify and test the independent acceptance contract and RED/GREEN lifecycle as pure harness state",
+      "scope": [
+        "plan schema",
+        "scenario grounding",
+        "test-design handoff",
+        "lifecycle transitions",
+        "contract tests"
+      ],
+      "nonGoals": [
+        "subprocess runner",
+        "delivery",
+        "generated OpenSpec skills"
+      ],
+      "dependencies": [],
+      "contracts": ["harness/spec-driven-tdd"],
+      "contextSources": [
+        "openspec/changes/enforce-spec-driven-tdd/**",
+        "tools/lib/harness/core.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "implementationSurface": [
+        "tools/lib/harness/core.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "focusedValidation": ["harness", "openspec"],
+      "outputs": [
+        "failing contract tests",
+        "validated lifecycle state",
+        "legacy compatibility"
+      ],
+      "handoff": ["state interface", "digests", "test outcomes"],
+      "implementationOutcomes": [
+        "independent test design",
+        "blocked implementation before RED",
+        "tamper invalidation"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "symmetric-runner",
+      "group": "symmetric-runner",
+      "objective": "Implement and prove a bounded symmetric deterministic acceptance runner through the public CLI seam",
+      "scope": [
+        "CLI transitions",
+        "immutable baseline worktree",
+        "repeat/signature proof",
+        "known-bad fixtures"
+      ],
+      "nonGoals": ["review lifecycle", "PR delivery"],
+      "dependencies": ["acceptance-contract"],
+      "contracts": ["harness/spec-driven-tdd"],
+      "contextSources": [
+        "tools/harness.mjs",
+        "tools/lib/harness/core.mjs",
+        "tools/tests/**",
+        "PR #34 oracle remediation evidence"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/**",
+        "docs/exec-plans/fixtures/**"
+      ],
+      "focusedValidation": ["harness", "openspec"],
+      "outputs": [
+        "symmetric runner",
+        "stable RED/GREEN proof",
+        "representative fixtures"
+      ],
+      "handoff": ["CLI interface", "fixture results", "cleanup guarantees"],
+      "implementationOutcomes": [
+        "asymmetry rejection",
+        "nondeterminism rejection",
+        "immutable baseline proof"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    },
+    {
+      "id": "workflow-delivery",
+      "group": "workflow-delivery",
+      "objective": "Compose spec-driven TDD with requirements, workers, review, failure invariants, and guarded PR delivery",
+      "scope": [
+        "claim/completion gates",
+        "requirements re-entry",
+        "review/delivery binding",
+        "agent docs",
+        "validation and PR"
+      ],
+      "nonGoals": ["merge", "product UI", "shlz-design-source"],
+      "dependencies": ["symmetric-runner"],
+      "contracts": [
+        "harness/spec-driven-tdd",
+        "requirements readiness",
+        "delivery guards"
+      ],
+      "contextSources": [
+        "docs/{agent-execution,validation-workflow,requirements-elicitation}.md",
+        "tools/lib/harness/core.mjs",
+        "tools/tests/**"
+      ],
+      "implementationSurface": [
+        "tools/**",
+        "docs/**",
+        "openspec/changes/enforce-spec-driven-tdd/**"
+      ],
+      "focusedValidation": [
+        "harness",
+        "openspec",
+        "full",
+        "two-axis review",
+        "failure-path proof"
+      ],
+      "outputs": [
+        "integrated gates",
+        "re-entry fixtures",
+        "review evidence",
+        "unmerged PR"
+      ],
+      "handoff": [
+        "integration behavior",
+        "validation",
+        "review findings",
+        "PR URL"
+      ],
+      "implementationOutcomes": [
+        "fail-closed composition",
+        "slice-aware re-entry",
+        "guarded delivery"
+      ],
+      "preferredExecutionMode": "fresh-session"
+    }
+  ]
+}

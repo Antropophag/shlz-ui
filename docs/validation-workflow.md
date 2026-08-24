@@ -22,6 +22,13 @@ Use `review-init`, `review-record`, `review-context`, and `review-resolve` to pe
 
 When the material diff changes a state machine, persisted recovery, or a subprocess/stream boundary, mark each applicable current-change delta scenario with `<!-- failure-invariant: <id> concern=<concern> -->`, derive the executable manifest from those contracts, and initialize the same review with `--failure-path-concerns <list> --change <name> --invariants <manifest>`. Before treating its two axes as complete, run a focused failure-path fixture and record it with `review-proof --proof <result>`. A valid proof covers the fixed baseline plus every marked current-change invariant, binds their contract/manifest digests, and discriminates a known-bad revision from the reviewed head; physical reviewer separation, green happy-path tests, prose handoffs, and a third PASS do not supply that guarantee. If the fixture or an independent failure-path method is unavailable, keep review incomplete and seek external diversity only when it can supply the missing method or environment. Direct S target-diff review and stateless changes skip this branch.
 
+For an enforced spec-driven TDD plan, pass `--tdd-plan` and `--tdd-state` to
+`review-init` and every `review-record`. Spec review owns scenario coverage,
+authority independence, and oracle strength. Standards review owns deterministic
+controls, surface isolation, cleanup, and harness integrity. GREEN is necessary
+but does not replace marked failure-invariant proof; both must identify the same
+reviewed candidate head.
+
 For GitHub follow-ups, load actionable unresolved threads only. Route verified findings by their bounded delta, never by review author. Exclude resolved discussion, walkthroughs, release/billing messages, and duplicate bot summaries from active context. P0/P1 defects remain blocking regardless of budget.
 
 ## Evidence and telemetry
