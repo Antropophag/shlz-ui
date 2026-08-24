@@ -115,6 +115,10 @@ test("shell occurrence and native landmarks are classified", async ({
     "aria-label",
     "Showcase navigation",
   );
+  await expect(page.locator(".shlz-shell-avatar")).toHaveRole("img");
+  await expect(page.locator(".shlz-shell-avatar")).toHaveAccessibleName(
+    "Showcase profile",
+  );
   await expect(sidebar(page).locator("nav")).toHaveAttribute(
     "aria-label",
     "Components and foundations",
@@ -170,20 +174,25 @@ test("sidebar opened, closed, and current states use the real interaction seam",
   await expect(sidebar(page)).toHaveCSS("width", "72px");
   await expect(dropdownLink).toBeVisible();
   await expect(dropdownLink).toHaveAttribute("title", "Dropdown");
-  const compactDestinations = await page
-    .locator("[data-shlz-docs-link]")
-    .evaluateAll((links) =>
-      links.map((link) => ({
-        label: link.dataset.compactLabel,
-        title: link.title,
-      })),
-    );
-  expect(compactDestinations.every(({ label, title }) => label && title)).toBe(
-    true,
+  const sourceMark = page.locator(".shlz-docs-home__mark");
+  await expect(sourceMark).toBeVisible();
+  await expect(sourceMark).toHaveCSS("width", "32px");
+  await expect(sourceMark).toHaveCSS("height", "32px");
+  const compactDestinations = page.locator("[data-shlz-docs-link]");
+  expect(
+    await compactDestinations.evaluateAll((links) =>
+      links.every((link) => !link.hasAttribute("data-compact-label")),
+    ),
+  ).toBe(true);
+  await expect(compactDestinations.locator(".shlz-docs-nav__icon")).toHaveCount(
+    await compactDestinations.count(),
   );
-  expect(new Set(compactDestinations.map(({ label }) => label)).size).toBe(
-    compactDestinations.length,
-  );
+  const iconSources = await compactDestinations
+    .locator(".shlz-docs-nav__icon img")
+    .evaluateAll((icons) => icons.map((icon) => icon.getAttribute("src")));
+  expect(new Set(iconSources).size).toBeGreaterThanOrEqual(8);
+  await expect(dropdownLink).toHaveCSS("width", "44px");
+  await expect(dropdownLink).toHaveCSS("height", "44px");
 
   await dropdownLink.focus();
   await page.keyboard.press("Enter");

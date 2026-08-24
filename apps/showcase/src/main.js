@@ -156,26 +156,31 @@ const navigationGroups = [
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
 ];
-const navigationTitles = navigationGroups.flatMap(([, links]) =>
-  links.map(([, title]) => title.replaceAll(" ", "")),
-);
-const compactLabelFor = (title) => {
-  const normalizedTitle = title.replaceAll(" ", "");
-  for (let length = 2; length <= normalizedTitle.length; length += 1) {
-    const candidate = normalizedTitle.slice(0, length);
-    if (
-      navigationTitles.every(
-        (other) => other === normalizedTitle || !other.startsWith(candidate),
-      )
-    )
-      return candidate;
-  }
-  return normalizedTitle;
-};
+const navigationIcons = [
+  "circle-grid-interface-sidebar",
+  "ai-brain-network",
+  "bar-chart-square-plus",
+  "cloud-refresh",
+  "data-set",
+  "delivery-4",
+  "docs",
+  "document-paper-2-lines",
+  "graph",
+  "setting-tool-circle",
+  "user-sidebar",
+];
+let navigationIconIndex = 0;
 const navigationMarkup = navigationGroups
   .map(
     ([label, links]) =>
-      `<div class="shlz-docs-nav__group"><h2>${label}</h2>${links.map(([id, title]) => `<a href="#${id}" title="${title}" data-compact-label="${compactLabelFor(title)}" data-shlz-docs-link>${title}</a>`).join("")}</div>`,
+      `<div class="shlz-docs-nav__group"><h2>${label}</h2>${links
+        .map(([id, title]) => {
+          const icon =
+            navigationIcons[navigationIconIndex % navigationIcons.length];
+          navigationIconIndex += 1;
+          return `<a href="#${id}" title="${title}" data-shlz-docs-link><span class="shlz-docs-nav__icon" aria-hidden="true"><img src="${showcaseIconUrl(icon)}" alt=""></span><span class="shlz-docs-nav__label">${title}</span></a>`;
+        })
+        .join("")}</div>`,
   )
   .join("");
 const groupBy = (items, getKey) =>
@@ -241,7 +246,7 @@ const typographyCompatibilityMarkup = `
   </div>
 </section>`;
 
-app.innerHTML = `<header class="shlz-hero"><div class="shlz-hero__intro"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p></div><div class="shlz-hero__actions"><label class="shlz-shell-search"><span class="shlz-visually-hidden">Search components and foundations</span><input type="search" placeholder="Search components" autocomplete="off" data-shlz-shell-search></label><span class="shlz-shell-avatar" aria-label="Showcase profile"><img src="${showcaseIconUrl("user")}" alt=""></span></div><fieldset class="shlz-font-switch" data-shlz-visual-addition><legend>Typography profile</legend><label><input type="radio" name="shlz-font-profile" value="golos" checked>Golos Text</label><label><input type="radio" name="shlz-font-profile" value="fira">Fira Sans</label></fieldset></header>
+app.innerHTML = `<header class="shlz-hero"><div class="shlz-hero__intro"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p></div><div class="shlz-hero__actions"><label class="shlz-shell-search"><span class="shlz-visually-hidden">Search components and foundations</span><input type="search" placeholder="Search components" autocomplete="off" data-shlz-shell-search></label><span class="shlz-shell-avatar" role="img" aria-label="Showcase profile"><img src="${showcaseIconUrl("user")}" alt=""></span></div><fieldset class="shlz-font-switch" data-shlz-visual-addition><legend>Typography profile</legend><label><input type="radio" name="shlz-font-profile" value="golos" checked>Golos Text</label><label><input type="radio" name="shlz-font-profile" value="fira">Fira Sans</label></fieldset></header>
 <section id="source-spec" class="shlz-major-section"><p class="shlz-section-kicker">A. SOURCE SPEC</p><h2>Буквальная спецификация Figma ${sourceEvidence}</h2><p><code>Colors.svg</code>, <code>Spacing.svg</code> и human-verified Corner radius source. Имена, группы и значения не нормализованы в искусственные шкалы.</p>
 <div class="shlz-source-sheet"><h2>Colors</h2><div class="shlz-source-palette">${colors}</div></div>
 <div class="shlz-source-sheet shlz-source-sheet--split"><div><h2>Spacing</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Literal named source values.</p><div class="shlz-stack">${spaces}</div></div><div><h2>Corner radius</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Source labels, not a universal component mapping.</p><div class="shlz-radius-grid">${radii}</div></div></div>
@@ -653,7 +658,7 @@ shell.dataset.componentAuditId = "sidebar-application-shell-showcase";
 const sidebar = document.createElement("aside");
 sidebar.className = "shlz-docs-sidebar";
 sidebar.setAttribute("aria-label", "Showcase navigation");
-sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top">SHLZ UI</a><button class="shlz-docs-sidebar__toggle" type="button" aria-pressed="false" aria-label="Use compact showcase navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
+sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top"><img class="shlz-docs-home__mark" src="${showcaseIconUrl("circle-grid-interface-sidebar")}" alt=""><span class="shlz-docs-home__label">SHLZ UI</span></a><button class="shlz-docs-sidebar__toggle" type="button" aria-pressed="false" aria-label="Use compact showcase navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
 const content = document.createElement("div");
 content.className = "shlz-docs-content";
 const topAnchor = document.createElement("span");

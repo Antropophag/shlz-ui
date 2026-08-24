@@ -221,12 +221,21 @@ main {
 }
 
 .shlz-docs-home {
-  display: block;
+  display: flex;
+  gap: var(--shlz-source-spacing-8);
+  align-items: center;
   margin-block-end: var(--shlz-source-spacing-24);
   color: inherit;
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
+}
+
+.shlz-docs-home__mark {
+  flex: 0 0 32px;
+  inline-size: 32px;
+  block-size: 32px;
+  filter: brightness(0) invert(1);
 }
 
 .shlz-docs-nav__group + .shlz-docs-nav__group {
@@ -243,7 +252,9 @@ main {
 }
 
 .shlz-docs-nav__group a {
-  display: block;
+  display: flex;
+  gap: var(--shlz-source-spacing-8);
+  align-items: center;
   min-block-size: 44px;
   padding: 12px var(--shlz-source-spacing-16);
   color: rgb(255 255 255 / 82%);
@@ -252,13 +263,27 @@ main {
   text-decoration: none;
 }
 
+.shlz-docs-nav__icon {
+  display: inline-grid;
+  flex: 0 0 20px;
+  inline-size: 20px;
+  block-size: 20px;
+  place-items: center;
+}
+
+.shlz-docs-nav__icon img {
+  inline-size: 20px;
+  block-size: 20px;
+  filter: brightness(0) invert(1);
+}
+
 .shlz-docs-nav__group
   a:is(:hover, :focus-visible, .shlz-docs-nav__link--active) {
   color: var(--shlz-source-color-white-white);
   background: rgb(255 255 255 / 10%);
 }
 
-.shlz-docs-shell--closed .shlz-docs-home,
+.shlz-docs-shell--closed .shlz-docs-home__label,
 .shlz-docs-shell--closed .shlz-docs-nav__group h2 {
   position: absolute;
   inline-size: 1px;
@@ -268,7 +293,12 @@ main {
 }
 
 .shlz-docs-shell--closed .shlz-docs-sidebar__header {
+  flex-direction: column;
   justify-content: center;
+}
+
+.shlz-docs-shell--closed .shlz-docs-home {
+  margin-block-end: 0;
 }
 
 .shlz-docs-shell--closed .shlz-docs-nav__group + .shlz-docs-nav__group {
@@ -276,30 +306,18 @@ main {
 }
 
 .shlz-docs-shell--closed .shlz-docs-nav__group a {
-  position: relative;
   inline-size: 44px;
+  block-size: 44px;
+  justify-content: center;
   padding-inline: 0;
-  overflow: hidden;
-  color: transparent;
-  white-space: nowrap;
 }
 
-.shlz-docs-shell--closed .shlz-docs-nav__group a::before {
+.shlz-docs-shell--closed .shlz-docs-nav__label {
   position: absolute;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  color: rgb(255 255 255 / 82%);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  content: attr(data-compact-label);
-}
-
-.shlz-docs-shell--closed
-  .shlz-docs-nav__group
-  a:is(:hover, :focus-visible, .shlz-docs-nav__link--active)::before {
-  color: var(--shlz-source-color-white-white);
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
 }
 
 .shlz-docs-content {

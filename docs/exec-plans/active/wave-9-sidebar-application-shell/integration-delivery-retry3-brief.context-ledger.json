@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "physicalSession": null,
-  "launchClaim": null,
+  "physicalSession": "01a03570-1e89-76e0-b978-1a75631cefd9",
+  "launchClaim": "wave9-integration-delivery-retry3-20260824",
   "attestations": {}
 }

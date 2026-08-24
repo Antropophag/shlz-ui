@@ -135,7 +135,7 @@
     "structural-contract": "pass: executable markup, application CSS, and Playwright fixture/reference surfaces are scanned for bounded shell/sidebar/header signatures; the live shell, local stylesheet, inert fidelity reference, focused fixture, test references, header substitute, and absence of a package export are classified",
     "runtime-browser": "pass: nine focused Chromium tests execute sidebar density toggle/current navigation and native header default/hover/typing/filled lifecycle",
     "accessibility": "pass: native aside/nav/link/button/search semantics, truthful pressed-state density control, accessible names, current location, keyboard activation, tab order, and visible focus are exercised",
-    "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; real-interaction computed checks lock source-critical 301/72 geometry, #0B1623 and active/default item paint, repository-documented header token paint, 48px avatar, and active text contrast",
+    "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; real-interaction computed checks lock source-critical 301/72 geometry, visible 32px mark, icon-based closed hierarchy, 44px active item, #0B1623 and active/default item paint, repository-documented header token paint, accessible 48px avatar, and active text contrast",
     "consumer-integration": "pass: the sole current occurrence is classified as the real Showcase live consumer",
     "responsive-content-stress": "pass: 390px viewport with 20px root text and long Cyrillic/unbroken Latin navigation retains reachable toggle/search/links, wrapped legibility, fully visible link and search focus boxes, and zero page-level horizontal overflow"
   },
@@ -165,7 +165,7 @@
       "header-filled"
     ],
     "browserTest": "tools/playwright/showcase-navigation.spec.js",
-    "manualStateWalk": "pass: reviewed pointer hover, keyboard focus/Enter, open/closed and active/default sidebar, default/hover/typing/filled header, focused snapshots, and narrow long-content/text-scale behavior on 2026-08-24"
+    "manualStateWalk": "pass: reviewed pointer hover, keyboard focus/Enter, source-backed icon/mark open/closed and active/default sidebar, accessible avatar, default/hover/typing/filled header, focused snapshots, and narrow long-content/text-scale behavior on 2026-08-25"
   },
   "acceptedDeviations": [],
   "findings": [],
