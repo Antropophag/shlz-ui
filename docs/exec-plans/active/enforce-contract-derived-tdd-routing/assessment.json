@@ -201,7 +201,7 @@
       "contextSources": [
         "openspec/changes/enforce-contract-derived-tdd-routing/**",
         "docs/validation-workflow.md",
-        "current episode diff"
+        "docs/exec-plans/active/enforce-contract-derived-tdd-routing/review-state.json"
       ],
       "implementationSurface": ["current diff remediation only"],
       "focusedValidation": [
