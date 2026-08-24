@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "subject": "PR #36 representative replay",
+  "runtimeObservation": {
+    "value": 188000,
+    "unit": "tokens",
+    "provenance": "user-observed",
+    "trustedRuntimeTrace": false
+  },
+  "measurements": {
+    "phaseCount": 5,
+    "sourceReads": 29,
+    "uniqueSourceReads": 12,
+    "baselineSourceBytes": 153997,
+    "optimizedSourceBytes": 57234,
+    "capsuleBytes": 8823,
+    "optimizedTotalBytes": 66057,
+    "sourceInputProxyDifferenceBytes": 87940,
+    "sourceInputProxyDifferenceRatio": 0.57105,
+    "repeatedSourceBytes": 96763,
+    "repeatedSourceRatio": 0.628344,
+    "proceduralSourceBytesAcrossPhases": 112971,
+    "proceduralOptimizedBytes": 33195,
+    "githubPrRawBytes": 20432,
+    "githubPrCompactEvidenceBytes": 559,
+    "reviewBodiesBytes": 12196,
+    "reviewVerdictIndexBytes": 54,
+    "durableStateBytes": 4395,
+    "openSpecPlanningBytes": 10447,
+    "proceduralUniqueBytes": 33195,
+    "proceduralLiteralDuplicateLongLines": 0
+  },
+  "metricLimits": [
+    "The 188K observation has no trusted runtime trace and is not derived from byte measurements.",
+    "Source and output bytes are deterministic context-cost proxies, not token estimates.",
+    "The replay is bound to immutable PR #36 Git blobs and checked-in captured evidence; it is not a chat transcript.",
+    "The independent oracle is separate from the candidate phase manifest.",
+    "A fresh implementation worker reported 1,169,262 input tokens, including 1,048,576 cached; this limits claims to repository-controlled phase input.",
+    "Compact output sizes prove compression potential only; validation/CI generation and raw-log retention remain incurred.",
+    "The 96,763 repeated-source bytes overlap the procedural contributor and are not additive.",
+    "Attested repeated sources are not reread through the capsule interface; no prevented processing, cache-retention, or active/session byte claim is made.",
+    "Comparable active/session improvement is unavailable without trusted before/after runtime telemetry."
+  ],
+  "candidates": [
+    {
+      "id": "procedural-pruning",
+      "result": "insufficient-alone",
+      "baselineBytes": 153997,
+      "candidateBytes": 153997,
+      "reductionRatio": 0,
+      "equivalencePass": true,
+      "thresholdMet": false,
+      "evidence": "No literal long-line duplication was observed in 33,195 unique procedural bytes; content pruning has no evidenced reduction and the measured multiplier comes from cross-phase reloads."
+    },
+    {
+      "id": "phase-bound-source-attestation",
+      "result": "selected",
+      "baselineBytes": 153997,
+      "candidateBytes": 66057,
+      "sourceInputProxyDifferenceRatio": 0.57105,
+      "equivalencePass": true,
+      "thresholdMet": true,
+      "evidence": "The pinned replay replaces later unchanged full-source inputs with digest references: 153,997 modeled source-read bytes become 57,234 read-now bytes plus 8,823 capsule bytes (57.11% proxy difference), while preserving 12 source identities and 19 obligations. This is not an active/session reduction claim."
+    },
+    {
+      "id": "orchestration-simplification",
+      "result": "not-selected",
+      "baselineBytes": 153997,
+      "candidateBytes": 153744,
+      "reductionRatio": 0.001643,
+      "equivalencePass": false,
+      "thresholdMet": false,
+      "evidence": "Removing every 253-byte transition still misses the threshold and fails equivalence because required correctness gates disappear."
+    },
+    {
+      "id": "semantic-retrieval-broker",
+      "result": "unnecessary",
+      "evidence": "The deterministic local candidate already exceeds the threshold, so retrieval infrastructure has no demonstrated necessity."
+    }
+  ],
+  "redProof": {
+    "command": "node tools/tests/context-cost-red-proof.mjs",
+    "result": "red",
+    "baselineImplementationRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+    "testSourceRef": "850586c493ca4993091fc19f5a132826e9783d81",
+    "exercisedTestSourceAgainstBaseline": true,
+    "failure": "The context-cost test source from the first implementation commit fails when executed in an archive of the immutable pre-implementation parent."
+  }
+}

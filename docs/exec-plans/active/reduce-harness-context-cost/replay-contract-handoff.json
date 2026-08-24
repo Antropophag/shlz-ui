@@ -1,0 +1,26 @@
+{
+  "completedPacket": "replay-contract",
+  "changed": [
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+    "docs/exec-plans/active/reduce-harness-context-cost/probe-results.json",
+    "openspec/changes/reduce-harness-context-cost/",
+    "tools/tests/harness.test.mjs"
+  ],
+  "provenChecks": [
+    "openspec validate reduce-harness-context-cost --strict: pass",
+    "focused context-cost replay test: red because context-cost-replay command is absent",
+    "source replay probe: 102674/148950 bytes repeated (68.9%)",
+    "PR/review output probe: raw evidence materially exceeds compact index"
+  ],
+  "settledDecisions": [
+    "188K remains user-observed and is never converted from bytes",
+    "phase-bound source attestation is the minimal sufficient architecture",
+    "digest identity and obligation equivalence must fail closed",
+    "embeddings and semantic brokers are unnecessary"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "capsule-implementation",
+  "invalidatedAssumptions": [
+    "phase capsule and digest dedup were initially treated as normative before probes; artifacts were corrected and the mechanism was selected only after measured comparison"
+  ]
+}

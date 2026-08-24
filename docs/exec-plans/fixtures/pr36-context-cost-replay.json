@@ -1,0 +1,246 @@
+{
+  "version": 1,
+  "id": "pr36-small-openspec-doc-followup",
+  "oraclePath": "docs/exec-plans/fixtures/pr36-context-cost-oracle.json",
+  "subject": {
+    "pullRequest": 36,
+    "base": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+    "head": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+    "changedFiles": 16,
+    "addedLines": 437,
+    "reviewFollowups": 1
+  },
+  "runtimeObservation": {
+    "value": 188000,
+    "unit": "tokens",
+    "provenance": "user-observed",
+    "trustedRuntimeTrace": false,
+    "note": "Forensic signal only; replay bytes are not converted to tokens."
+  },
+  "minimumReductionRatio": 0.35,
+  "contributors": [
+    "discovery",
+    "procedural-context",
+    "validation-output",
+    "review-output",
+    "repeated-reads",
+    "state-orchestration"
+  ],
+  "sources": {
+    "agents": {
+      "path": "AGENTS.md",
+      "gitRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+      "role": "procedural",
+      "required": true
+    },
+    "openspecPolicy": {
+      "path": "docs/openspec.md",
+      "gitRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+      "role": "procedural",
+      "required": true
+    },
+    "requirementsPolicy": {
+      "path": "docs/requirements-elicitation.md",
+      "gitRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+      "role": "procedural",
+      "required": true
+    },
+    "executionPolicy": {
+      "path": "docs/agent-execution.md",
+      "gitRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+      "role": "procedural",
+      "required": true
+    },
+    "proposal": {
+      "path": "openspec/changes/define-component-audit-roadmap/proposal.md",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "normative",
+      "required": true
+    },
+    "design": {
+      "path": "openspec/changes/define-component-audit-roadmap/design.md",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "normative",
+      "required": true
+    },
+    "spec": {
+      "path": "openspec/changes/define-component-audit-roadmap/specs/component-audits/wave-roadmap/spec.md",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "normative",
+      "required": true
+    },
+    "tasks": {
+      "path": "openspec/changes/define-component-audit-roadmap/tasks.md",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "normative",
+      "required": true
+    },
+    "roadmap": {
+      "path": "docs/component-audit-roadmap.md",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "implementation",
+      "required": true
+    },
+    "test": {
+      "path": "tools/tests/component-audit-roadmap.test.mjs",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "implementation",
+      "required": true
+    },
+    "delivery": {
+      "path": "docs/exec-plans/active/resolve-pr36-coderabbit/discovered-surface.json",
+      "gitRef": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+      "role": "state",
+      "required": true
+    },
+    "evidence": {
+      "path": "docs/exec-plans/fixtures/pr36-evidence-oracle.json",
+      "gitRef": "4e30c84add36b4b0cd8047c5ebcbf00a9ba3ea3a",
+      "role": "evidence",
+      "required": true
+    }
+  },
+  "phases": [
+    {
+      "id": "discovery-routing",
+      "objective": "Route the bounded PR #36 documentation capability",
+      "stateTransition": "request-to-synthesized",
+      "sourceIds": [
+        "agents",
+        "openspecPolicy",
+        "requirementsPolicy",
+        "executionPolicy"
+      ],
+      "obligations": [
+        "route-eligibility",
+        "requirements-readiness",
+        "source-authority"
+      ],
+      "evidence": {
+        "verdicts": ["route-check:pass", "requirements-check:pass"],
+        "findings": [],
+        "rawEvidenceIds": ["openspecPolicy", "requirementsPolicy"]
+      }
+    },
+    {
+      "id": "openspec-synthesis",
+      "objective": "Synthesize the actual PR #36 OpenSpec artifacts",
+      "stateTransition": "synthesized-to-preflight",
+      "sourceIds": [
+        "agents",
+        "openspecPolicy",
+        "proposal",
+        "design",
+        "spec",
+        "tasks"
+      ],
+      "obligations": [
+        "openspec-artifacts",
+        "strict-validation",
+        "execution-authorization"
+      ],
+      "evidence": {
+        "verdicts": ["openspec-strict:pass", "authorization:pre-authorized"],
+        "findings": [],
+        "rawEvidenceIds": ["spec"]
+      }
+    },
+    {
+      "id": "implementation-validation",
+      "objective": "Validate the actual PR #36 implementation and evidence",
+      "stateTransition": "preflight-to-validated",
+      "sourceIds": [
+        "agents",
+        "executionPolicy",
+        "spec",
+        "tasks",
+        "roadmap",
+        "test",
+        "evidence"
+      ],
+      "obligations": [
+        "focused-tests",
+        "full-tests",
+        "lint",
+        "build",
+        "route-conformance"
+      ],
+      "evidence": {
+        "verdicts": [
+          "focused-tests:pass",
+          "full-tests:pass",
+          "lint:pass",
+          "build:pass",
+          "route-conformance:pass"
+        ],
+        "findings": [],
+        "rawEvidenceIds": ["evidence"]
+      }
+    },
+    {
+      "id": "independent-review",
+      "objective": "Review the actual fixed PR #36 diff",
+      "stateTransition": "validated-to-reviewed",
+      "sourceIds": [
+        "agents",
+        "executionPolicy",
+        "spec",
+        "tasks",
+        "test",
+        "evidence"
+      ],
+      "obligations": [
+        "standards-review",
+        "spec-review",
+        "fixed-diff",
+        "finding-disposition"
+      ],
+      "evidence": {
+        "verdicts": ["standards-review:pass", "spec-review:pass"],
+        "findings": [
+          {
+            "id": "pr36-duplicate-wave-rows",
+            "blocking": true,
+            "status": "resolved"
+          }
+        ],
+        "rawEvidenceIds": ["evidence"]
+      }
+    },
+    {
+      "id": "review-followup-delivery",
+      "objective": "Resolve the one PR #36 review finding and preserve delivery evidence",
+      "stateTransition": "reviewed-to-delivered",
+      "sourceIds": [
+        "agents",
+        "openspecPolicy",
+        "executionPolicy",
+        "tasks",
+        "delivery",
+        "evidence"
+      ],
+      "obligations": [
+        "finding-fixed",
+        "focused-revalidation",
+        "delivery-check",
+        "open-unmerged-pr"
+      ],
+      "evidence": {
+        "verdicts": [
+          "finding:resolved",
+          "focused-revalidation:pass",
+          "delivery-check:pass",
+          "pull-request:open"
+        ],
+        "findings": [
+          {
+            "id": "pr36-duplicate-wave-rows",
+            "blocking": true,
+            "status": "resolved"
+          }
+        ],
+        "rawEvidenceIds": ["evidence"]
+      }
+    }
+  ]
+}

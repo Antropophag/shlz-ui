@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "revision": 4,
+  "intent": "Correct PR #37 against the PR #36 188K active/session forensic problem, automate phase input control and validation/CI evidence boundaries, then update the existing unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "cost-attribution",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "Distinguish prevented costs from content merely not reread and do not claim unproven active/session, validation, CI, output, or retention elimination."
+      }
+    },
+    {
+      "id": "execution-integration",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "Investigate and implement the minimum necessary automatic phase input control in the execution path."
+      }
+    },
+    {
+      "id": "compact-raw-boundary",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "Investigate validation/CI compact versus raw-log boundary and preserve costs the mechanism does not prevent."
+      }
+    },
+    {
+      "id": "delivery-and-review",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "Fix correctness and reproducibility findings, process current CodeRabbit review, re-prove minimum scope, and leave PR #37 unmerged."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "reduce-harness-context-cost",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "Explicit request to revise and implement PR #37 follow-up."
+    }
+  }
+}

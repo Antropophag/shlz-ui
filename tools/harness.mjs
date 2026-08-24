@@ -60,6 +60,12 @@ import {
   launchCodexWorker,
   probeCodexExec,
 } from "./lib/harness/codex-worker.mjs";
+import {
+  acknowledgeContextCapsule,
+  createContextLedger,
+  createPacketContextCapsule,
+  runContextCostReplay,
+} from "./lib/harness/context-cost.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -86,6 +92,8 @@ const statePath = (file) => {
     );
   return target;
 };
+const repositoryRelative = (file) =>
+  path.relative(repoRoot, file).split(path.sep).join("/");
 const readJsonOr = async (file, fallback) => {
   try {
     return await readJson(file);
@@ -158,6 +166,64 @@ const refreshChangeFailureInvariants = async (state, target) => {
 const exec = promisify(execFile);
 
 switch (command) {
+  case "context-capsule": {
+    const ledgerPath = option("--ledger");
+    const phase = option("--phase");
+    const transition = option("--transition");
+    const physicalSession = option("--session");
+    const validationPath = option("--validation");
+    const reviewPath = option("--review");
+    const out = option("--out");
+    if (!ledgerPath || !phase || !transition || !physicalSession || !out)
+      throw new Error(
+        "context-capsule requires --ledger, --phase, --transition, --session, and --out",
+      );
+    const ledgerTarget = statePath(ledgerPath);
+    const plan = await readJson(absolute(args[0]));
+    const executionStatePath = option("--state");
+    const index = await contextIndex(
+      plan,
+      args[1],
+      repoRoot,
+      executionStatePath ? await readJson(absolute(executionStatePath)) : null,
+    );
+    const capsule = await createPacketContextCapsule(
+      index,
+      await readJsonOr(ledgerTarget, createContextLedger()),
+      repoRoot,
+      {
+        phase,
+        transition,
+        physicalSession,
+        validationLedger: validationPath
+          ? await readJson(absolute(validationPath))
+          : [],
+        reviewState: reviewPath ? await readJson(absolute(reviewPath)) : null,
+      },
+    );
+    await writeJson(statePath(out), capsule);
+    output(capsule);
+    break;
+  }
+  case "context-ack": {
+    const ledgerPath = args[1];
+    if (!args[0] || !ledgerPath)
+      throw new Error("context-ack requires <capsule> <ledger>");
+    const ledgerTarget = statePath(ledgerPath);
+    const next = await acknowledgeContextCapsule(
+      await readJsonOr(ledgerTarget, createContextLedger()),
+      await readJson(absolute(args[0])),
+      repoRoot,
+    );
+    await writeJson(ledgerTarget, next);
+    output(next);
+    break;
+  }
+  case "context-cost-replay":
+    output(
+      await runContextCostReplay(await readJson(absolute(args[0])), repoRoot),
+    );
+    break;
   case "route-check":
     output(evaluateRouteEligibility(await readJson(absolute(args[0]))));
     break;
@@ -314,13 +380,14 @@ switch (command) {
     output(affectedValidation(args, config));
     break;
   case "validation-check": {
-    const ledger = await readJsonOr(absolute(args[1]), []);
+    const ledgerPath = absolute(args[1]);
+    const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
     const files = relevantValidationFiles(
       changed.changedFiles,
       args[0],
       config,
-    );
+    ).filter((file) => file !== repositoryRelative(ledgerPath));
     assertValidationRun(
       {
         target: args[0],
@@ -340,11 +407,17 @@ switch (command) {
     await recordValidation(
       {
         target: args[1],
-        files: relevantValidationFiles(changed.changedFiles, args[1], config),
+        files: relevantValidationFiles(
+          changed.changedFiles,
+          args[1],
+          config,
+        ).filter((file) => file !== repositoryRelative(ledgerPath)),
         outcome: option("--outcome"),
         reason: option("--reason"),
         packet: option("--packet"),
         session: option("--session"),
+        obligations: (option("--obligations") ?? "").split(",").filter(Boolean),
+        rawLog: option("--raw-log"),
       },
       ledger,
       config,
@@ -467,13 +540,43 @@ switch (command) {
     const requirementsState = option("--requirements")
       ? await readJson(absolute(option("--requirements")))
       : null;
+    const workerArtifactPath = (suffix) =>
+      briefPath.endsWith(".json")
+        ? `${briefPath.slice(0, -5)}${suffix}`
+        : `${briefPath}${suffix}`;
+    const contextCapsulePath =
+      option("--context-capsule-out") ??
+      workerArtifactPath(".context-capsule.json");
+    const contextLedgerPath =
+      option("--context-ledger-out") ??
+      workerArtifactPath(".context-ledger.json");
     const prepared = await withStateLock(target, async () => {
       const current = await readJson(target);
+      const ledger = createContextLedger();
+      const capsule = await createPacketContextCapsule(
+        await contextIndex(plan, args[2], repoRoot, current),
+        ledger,
+        repoRoot,
+        {
+          phase: "implementation",
+          transition: "pending-to-launching",
+          launchClaim: claimId,
+          validationLedger: option("--validation")
+            ? await readJson(absolute(option("--validation")))
+            : [],
+          reviewState: option("--review")
+            ? await readJson(absolute(option("--review")))
+            : null,
+        },
+      );
       const brief = createWorkerBrief(plan, current, args[2], {
         baseline: await readJson(absolute(baselinePath)),
         requirementsState,
         claimId,
+        contextCapsule: capsule,
       });
+      await writeJson(statePath(contextLedgerPath), ledger);
+      await writeJson(statePath(contextCapsulePath), capsule);
       await writeJson(statePath(briefPath), brief);
       reserveWorkerPacket(
         plan,
@@ -484,7 +587,7 @@ switch (command) {
         requirementsState,
       );
       await writeJson(target, current);
-      return { brief };
+      return { brief, contextCapsulePath, contextLedgerPath };
     });
     const result = await launchCodexWorker({
       brief: prepared.brief,
@@ -492,6 +595,13 @@ switch (command) {
     });
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
+      if (result.evidence?.runtimeId) {
+        const ledgerTarget = statePath(prepared.contextLedgerPath);
+        const ledger = await readJson(ledgerTarget);
+        ledger.physicalSession = result.evidence.runtimeId;
+        ledger.launchClaim = claimId;
+        await writeJson(ledgerTarget, ledger);
+      }
       let recordingError = null;
       try {
         recordWorkerAttempt(
@@ -836,6 +946,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

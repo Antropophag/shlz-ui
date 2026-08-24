@@ -23,8 +23,15 @@ npm run harness -- worker-brief <plan> <state> <packet> --execution <baseline> -
 npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --requirements <requirements> --claim <id> --session <label> --brief-out <brief> --telemetry-out <telemetry>
 npm run harness -- worker-retry <state> <packet>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
-npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
+npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id> --raw-log <repository-path>
+npm run harness -- context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --session <physical-session-id> [--validation <validation-ledger>] [--review <review-state>] --out <capsule>
+npm run harness -- context-ack <capsule> <ledger>
+npm run harness -- context-cost-replay <fixture>
 ```
+
+`context-capsule` applies the packet working set to a session-local content ledger. Read every `readNow` source, resolve `attested` sources only on demand, then run `context-ack`; acknowledgement persists the exact digests and transition for the next phase. A changed source digest returns to `readNow`. The ledger is an operational cache, never authority, and it must not cross a physical worker boundary because a fresh worker has not read the earlier content.
+
+`context-cost-replay` is an additive, offline measurement command. Its independent oracle is a separate checked-in manifest bound to immutable Git blobs and captured evidence; the candidate emits deterministic phase capsules with `readNow` content identities, `attested` unchanged sources, compact obligations/transitions/evidence, and raw-evidence pointers. Its improvement verdict fails closed on nonequivalent sources, obligations, transitions, evidence, unresolved blocking findings, or a missed byte-proxy threshold. Reported bytes cover repository-controlled input only. Runtime token observations take precedence for total input and remain separate; the live implementation worker used 1,169,262 input tokens (1,048,576 cached), so this mechanism does not claim an equivalent reduction in total or active model context.
 
 Version 2 plans may opt into `specDrivenTdd.version: 1`. Every material
 behavioral slice then has either a bounded inapplicability disposition or an
@@ -48,6 +55,10 @@ head. Historical plans without `specDrivenTdd` preserve their prior behavior.
 The operator lifecycle is root reservation → worker subprocess and final report → adapter-bound claim/report digest → root-validated durable handoff → dependent worker → independent review. The worker cannot complete while its launch is only reserved; after subprocess exit the root binds the runtime identity and final agent message, then a matching report digest is required in the compact handoff. S defaults to `continue`; coherent M stays inline until a meaningful phase or pressure transition; L/XL plans declare enforced, fail-closed isolated packet graphs. Bounded follow-ups remain separate episodes with a new baseline and sizing assessment.
 
 Telemetry keeps logical labels separate from `codex-exec-jsonl` runtime identities. It summarizes physical boundaries, total tokens and peak active context when runtime-supplied, unique/repeated reads, repeated discovery commands, handoff bytes, and an observational relevance ratio for explicitly classified reads. Missing runtime values remain `unavailable`; caller labels and estimates never become proof.
+
+Guarded `worker-run` automatically writes an unacknowledgeable pre-launch phase capsule and fresh ledger beside `--brief-out`, includes the capsule in the launched brief, and binds the ledger to the adapter-issued runtime identity after launch. The claim ID is launch provenance, never a physical-boundary claim. Explicit later-phase capsules may acknowledge content only after reading `readNow`; the ledger records non-rereading through the harness, not avoided runtime retention.
+
+`validation-record` requires `--raw-log <repository-path>` and accepts optional `--obligations <comma-separated-ids>`. It copies the log to `docs/exec-plans/raw-logs/<sha256>.log` and stores a compact result with the canonical repository-relative path, digest, and byte size. Capsule creation verifies that pointer and fails closed on drift. Raw logs remain retained and addressable; only their repeated inline carryover is replaced by compact evidence.
 
 ## Compatibility
 

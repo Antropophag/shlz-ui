@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "base": "45b5928a2827aabe60e4e189bfce71b3c5225c86",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "e8980e7c1960a95e6281ba66c052ce226c31fa84"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "e8980e7c1960a95e6281ba66c052ce226c31fa84"
+    }
+  ],
+  "findings": [
+    { "id": "runtime-issued-physical-identity", "status": "resolved" },
+    { "id": "canonical-content-addressed-raw-log", "status": "resolved" },
+    { "id": "missing-raw-pointer-fails-closed", "status": "resolved" },
+    { "id": "stable-capsule-collections", "status": "resolved" }
+  ],
+  "failurePathConcerns": null
+}

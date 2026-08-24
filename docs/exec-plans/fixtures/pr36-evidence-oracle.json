@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "pullRequest": 36,
+  "url": "https://github.com/Antropophag/shlz-ui/pull/36",
+  "capturedAt": "2026-08-24T15:20:00+03:00",
+  "baseCommit": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+  "headCommit": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+  "state": "OPEN",
+  "changedFiles": 16,
+  "addedLines": 437,
+  "commits": [
+    "fec2ee3f25ef433ef7f1904b55adbf49217a3dc4",
+    "6358dd4e259cf4dc051915d398348d144591b6eb",
+    "5efef3ded38084e1dd31bc26d8195ed0e26f6dfe",
+    "c824dbb3b114a9bb89fd0748e7a4aa8c080706a8",
+    "69482a9231218494bba1365330f1eaa0f1ecbad5",
+    "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794"
+  ],
+  "declaredValidation": [
+    "node --test tools/tests/component-audit-roadmap.test.mjs",
+    "npm test",
+    "npm run check:openspec",
+    "openspec validate define-component-audit-roadmap --strict",
+    "npm run lint",
+    "npm run build",
+    "node tools/validate.mjs"
+  ],
+  "reviewFinding": {
+    "id": "pr36-duplicate-wave-rows",
+    "source": "CodeRabbit review PRR_kwDOTyJWqM8AAAABKnXB8w",
+    "status": "resolved",
+    "resolutionCommit": "69482a9231218494bba1365330f1eaa0f1ecbad5",
+    "summary": "Reject duplicate roadmap wave rows before Map construction."
+  },
+  "externalChecks": {
+    "sonarQualityGate": "pass",
+    "coderabbitFindingCount": 1,
+    "qodo": "billing-blocked-not-evidence"
+  },
+  "limitations": [
+    "No trusted raw Codex runtime trace for the user-observed 188K context is available.",
+    "Declared validation and external review evidence prove obligations and outcomes, not the exact chat read sequence.",
+    "The replay models phase reads from immutable PR blobs and keeps byte metrics separate from token usage."
+  ]
+}

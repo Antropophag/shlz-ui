@@ -2,10 +2,12 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { rmSync } from "node:fs";
 import {
+  chmod,
   mkdir,
   mkdtemp,
   readFile,
   rm,
+  symlink,
   unlink,
   writeFile,
 } from "node:fs/promises";
@@ -68,6 +70,15 @@ import {
   parseCodexExecJsonl,
   probeCodexExec,
 } from "../lib/harness/codex-worker.mjs";
+import {
+  acknowledgeContextCapsule,
+  compareContextCostReplay,
+  createContextLedger,
+  createPacketContextCapsule,
+  createPhaseCapsules,
+  loadContextCostOracle,
+  runContextCostReplay,
+} from "../lib/harness/context-cost.mjs";
 
 const root = process.cwd();
 const load = async (file) =>
@@ -1790,6 +1801,97 @@ test("bounded worker briefs are immutable and exclude parent context", () => {
   assert.match(brief.briefDigest, /^[0-9a-f]{64}$/);
 });
 
+test("bounded worker briefs bind automatic phase input control", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const contextCapsule = {
+    version: 1,
+    kind: "packet-context",
+    phase: "implementation",
+    capsuleDigest: "a".repeat(64),
+  };
+  const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-with-context",
+    contextCapsule,
+  });
+  assert.deepEqual(brief.phaseInput, contextCapsule);
+  assert.notEqual(
+    brief.briefDigest,
+    createWorkerBrief(plan, state, "shared-native-dialog", {
+      baseline: executionBaseline,
+      claimId: "claim-with-context",
+    }).briefDigest,
+  );
+});
+
+test("worker-run automatically supplies the initial phase capsule", async () => {
+  const directory = await mkdtemp(
+    path.join(root, "docs/exec-plans/worker-context-"),
+  );
+  const relative = (name) => path.relative(root, path.join(directory, name));
+  const fakeCodex = path.join(directory, "codex");
+  try {
+    const { plan, state } = guardedWorkerFixture();
+    await Promise.all([
+      writeFile(path.join(directory, "plan.json"), JSON.stringify(plan)),
+      writeFile(path.join(directory, "state.json"), JSON.stringify(state)),
+      writeFile(
+        path.join(directory, "baseline.json"),
+        JSON.stringify(executionBaseline),
+      ),
+      writeFile(
+        fakeCodex,
+        `#!/usr/bin/env node
+if (process.argv.includes("--help")) {
+  process.stdout.write("Usage: codex exec --json\\n");
+} else {
+  process.stdout.write(JSON.stringify({ type: "thread.started", thread_id: "runtime-context" }) + "\\n");
+  process.stdout.write(JSON.stringify({ type: "item.completed", item: { type: "agent_message", text: "phase input consumed" } }) + "\\n");
+  process.stdout.write(JSON.stringify({ type: "turn.completed", usage: { input_tokens: 1, output_tokens: 1 } }) + "\\n");
+}
+`,
+      ),
+    ]);
+    await chmod(fakeCodex, 0o755);
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "worker-run",
+        relative("plan.json"),
+        relative("state.json"),
+        "shared-native-dialog",
+        "--execution",
+        relative("baseline.json"),
+        "--claim",
+        "claim-context-cli",
+        "--session",
+        "logical-context-cli",
+        "--brief-out",
+        relative("brief.json"),
+      ],
+      {
+        cwd: root,
+        env: { ...process.env, PATH: `${directory}:${process.env.PATH}` },
+      },
+    );
+    const [brief, capsule, ledger] = await Promise.all([
+      load(relative("brief.json")),
+      load(relative("brief.context-capsule.json")),
+      load(relative("brief.context-ledger.json")),
+    ]);
+    assert.deepEqual(brief.phaseInput, capsule);
+    assert.equal(capsule.physicalSession, null);
+    assert.equal(capsule.launchClaim, "claim-context-cli");
+    assert.ok(capsule.readNow.length > 0);
+    assert.equal(ledger.physicalSession, "runtime-context");
+    assert.equal(ledger.launchClaim, "claim-context-cli");
+    assert.deepEqual(ledger.attestations, {});
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("public telemetry cannot forge physical boundaries or runtime usage", async () => {
   const directory = await mkdtemp(
     path.join(tmpdir(), "shlz-harness-telemetry-"),
@@ -3056,15 +3158,30 @@ test("expensive successful reruns require an invalidation reason", () => {
 
 test("validation records compute fingerprints and durably enforce invalidation", async () => {
   const ledger = [];
+  const rawLog = `docs/exec-plans/validation-raw-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("validation output\n")
+    .digest("hex")}.log`;
+  const cleanup = registerExitCleanup([
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
+  ]);
+  await writeFile(path.join(root, rawLog), "validation output\n");
   const request = {
     target: "full-browser",
     files: ["tools/harness.mjs"],
     outcome: "pass",
     packet: "integration",
     session: "s1",
+    rawLog: path.join(root, rawLog),
   };
   await recordValidation(request, ledger, config, root);
   assert.match(ledger[0].fingerprint, /^[0-9a-f]{64}$/);
+  assert.equal(ledger[0].rawLog.path, rawArtifact);
+  await assert.rejects(
+    recordValidation({ ...request, rawLog: null }, [], config, root),
+    /requires a retained raw log/,
+  );
   await assert.rejects(
     recordValidation(request, ledger, config, root),
     /reason is required/,
@@ -3097,6 +3214,72 @@ test("validation records compute fingerprints and durably enforce invalidation",
     ),
     /escapes repository/,
   );
+  await Promise.all(
+    [rawLog, rawArtifact].map((file) =>
+      unlink(path.join(root, file)).catch(() => {}),
+    ),
+  );
+  cleanup();
+});
+
+test("validation CLI excludes its own operational ledger from fingerprints", async () => {
+  const ledger = `docs/exec-plans/validation-self-${process.pid}.json`;
+  const source = `docs/validation-self-source-${process.pid}.md`;
+  const rawLog = `docs/exec-plans/validation-self-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("validation cli output\n")
+    .digest("hex")}.log`;
+  const cleanup = registerExitCleanup([
+    path.join(root, ledger),
+    path.join(root, source),
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
+  ]);
+  try {
+    await writeFile(path.join(root, ledger), "[]\n");
+    await writeFile(path.join(root, source), "validation source\n");
+    await writeFile(path.join(root, rawLog), "validation cli output\n");
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "validation-record",
+        ledger,
+        "docs",
+        "--base",
+        "HEAD",
+        "--outcome",
+        "pass",
+        "--packet",
+        "probe",
+        "--session",
+        "probe-session",
+        "--raw-log",
+        rawLog,
+      ],
+      { cwd: root },
+    );
+    const recorded = await load(ledger);
+    assert.equal(recorded[0].files.includes(ledger), false);
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "validation-check",
+        "docs",
+        ledger,
+        "--base",
+        "HEAD",
+      ],
+      { cwd: root },
+    );
+  } finally {
+    await unlink(path.join(root, ledger)).catch(() => {});
+    await unlink(path.join(root, source)).catch(() => {});
+    await unlink(path.join(root, rawLog)).catch(() => {});
+    await unlink(path.join(root, rawArtifact)).catch(() => {});
+    cleanup();
+  }
 });
 
 test("review state reuses the remediation diff and unresolved findings", () => {
@@ -3870,6 +4053,659 @@ test("telemetry distinguishes logical labels from physical boundaries and keeps 
     classifiedReads: 3,
     ratio: 2 / 3,
   });
+});
+
+test("context cost replay materially reduces PR 36 proxy cost without dropping evidence", async () => {
+  const { stdout } = await exec(
+    process.execPath,
+    [
+      "tools/harness.mjs",
+      "context-cost-replay",
+      "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+    ],
+    { cwd: root },
+  );
+  const report = JSON.parse(stdout);
+  assert.deepEqual(report.runtimeObservation, {
+    value: 188000,
+    unit: "tokens",
+    provenance: "user-observed",
+    trustedRuntimeTrace: false,
+    note: "Forensic signal only; replay bytes are not converted to tokens.",
+  });
+  assert.deepEqual(report.contributors, [
+    "discovery",
+    "procedural-context",
+    "validation-output",
+    "review-output",
+    "repeated-reads",
+    "state-orchestration",
+  ]);
+  assert.equal(report.equivalence.pass, true);
+  assert.equal(report.improvement.pass, true);
+  assert.equal(report.improvement.scope, "repository-source-input-proxy");
+  assert.deepEqual(report.activeSessionImprovement, {
+    available: false,
+    reason: "comparable trusted before/after runtime telemetry is unavailable",
+  });
+  assert.equal(
+    report.costAttribution.repeatedSourceInput.classification,
+    "not-reread",
+  );
+  assert.equal(
+    report.costAttribution.repeatedSourceInput.preventedRuntimeBytes,
+    0,
+  );
+  assert.equal(
+    report.costAttribution.validationCiOutput.classification,
+    "retained-unmeasured",
+  );
+  assert.equal(report.contributorAccounting.additive, false);
+  assert.equal(
+    report.contributorDeltas.repeatedReads.classification,
+    "not-reread",
+  );
+  assert.ok(report.improvement.reductionRatio >= 0.35);
+  assert.ok(report.optimized.totalBytes < report.baseline.totalBytes);
+  assert.equal(
+    report.optimized.obligationCount,
+    report.baseline.obligationCount,
+  );
+  assert.equal(
+    report.optimized.authoritativeSourceCount,
+    report.baseline.authoritativeSourceCount,
+  );
+});
+
+test("context cost capsules invalidate changed sources and replay deterministically", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+  );
+  const first = await runContextCostReplay(fixture, root);
+  const second = await runContextCostReplay(fixture, root);
+  assert.deepEqual(second, first);
+  assert.ok(first.optimized.attestedReferences > 0);
+  assert.ok(first.capsules.some((capsule) => capsule.readNow.length > 0));
+  assert.equal(first.candidateResults.length, 4);
+  assert.equal(
+    first.candidateResults.find(({ id }) => id === "procedural-pruning")
+      .thresholdMet,
+    false,
+  );
+  assert.equal(
+    first.candidateResults.find(
+      ({ id }) => id === "phase-bound-source-attestation",
+    ).thresholdMet,
+    true,
+  );
+  assert.equal(
+    first.candidateResults.find(
+      ({ id }) => id === "orchestration-simplification",
+    ).equivalencePass,
+    false,
+  );
+
+  const changedRoot = await mkdtemp(path.join(tmpdir(), "context-cost-"));
+  const outside = path.join(tmpdir(), `context-cost-outside-${process.pid}`);
+  try {
+    await mkdir(path.join(changedRoot, "docs"), { recursive: true });
+    const localFixture = {
+      version: 1,
+      id: "digest-invalidation",
+      oraclePath: "unused-oracle.json",
+      minimumReductionRatio: 0,
+      contributors: ["repeated-reads"],
+      sources: {
+        source: {
+          path: "docs/source.md",
+          role: "normative",
+          required: true,
+        },
+      },
+      phases: [
+        {
+          id: "one",
+          stateTransition: "start-to-one",
+          sourceIds: ["source"],
+          obligations: ["source-current"],
+        },
+        {
+          id: "two",
+          stateTransition: "one-to-two",
+          sourceIds: ["source"],
+          obligations: ["source-current"],
+        },
+      ],
+    };
+    await writeFile(path.join(changedRoot, "docs/source.md"), "before");
+    await writeFile(path.join(changedRoot, "docs/validation.log"), "pass\n");
+    const before = await createPhaseCapsules(localFixture, changedRoot);
+    await writeFile(path.join(changedRoot, "docs/source.md"), "after");
+    const after = await createPhaseCapsules(localFixture, changedRoot);
+    assert.notEqual(
+      before.capsules[0].readNow[0].digest,
+      after.capsules[0].readNow[0].digest,
+    );
+    assert.equal(after.capsules[1].attested.length, 1);
+
+    const index = {
+      planId: "probe-plan",
+      packet: {
+        id: "probe",
+        objective: "Probe persisted source attestations",
+        contracts: ["ä-contract", "Z-contract", "source-current"],
+        focusedValidation: ["probe-test"],
+        implementationOutcomes: ["changed sources return to readNow"],
+      },
+      sources: ["docs/source.md"],
+      missingPatterns: [],
+      dependencyHandoffs: [
+        {
+          provenChecks: ["focused:test-pass"],
+          changed: ["docs/source.md"],
+          unresolvedFindings: [],
+        },
+      ],
+    };
+    let ledger = createContextLedger();
+    const initial = await createPacketContextCapsule(
+      index,
+      ledger,
+      changedRoot,
+      {
+        phase: "initial",
+        transition: "pending-to-read",
+        physicalSession: "probe-worker",
+        validationLedger: [
+          {
+            target: "harness",
+            command: "npm run test:harness",
+            outcome: "pass",
+            obligations: ["probe-test"],
+            files: ["docs/source.md"],
+            rawLog: {
+              path: "docs/validation.log",
+              digest: createHash("sha256").update("pass\n").digest("hex"),
+              bytes: 5,
+            },
+          },
+        ],
+        reviewState: {
+          passes: [
+            { axis: "Standards", head: "a".repeat(40) },
+            { axis: "Spec", head: "a".repeat(40) },
+          ],
+          findings: [
+            {
+              id: "resolved-review-finding",
+              severity: "high",
+              status: "resolved",
+            },
+          ],
+        },
+      },
+    );
+    assert.equal(initial.readNow.length, 1);
+    assert.deepEqual(initial.obligations, [
+      "contract:Z-contract",
+      "contract:source-current",
+      "contract:ä-contract",
+      "outcome:changed sources return to readNow",
+      "validation:probe-test",
+    ]);
+    assert.deepEqual(initial.evidence.verdicts, [
+      "focused:test-pass",
+      `review:Spec:pass:${"a".repeat(40)}`,
+      `review:Standards:pass:${"a".repeat(40)}`,
+      "validation:harness:pass",
+    ]);
+    assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
+    assert.equal(initial.evidence.rawEvidenceIndex.length, 1);
+    assert.equal(initial.evidence.findings[0].status, "resolved");
+    const reorderedIndex = {
+      ...index,
+      dependencyHandoffs: [
+        {
+          provenChecks: ["second-check"],
+          changed: [],
+          unresolvedFindings: [],
+        },
+        ...index.dependencyHandoffs,
+      ],
+    };
+    const orderedCapsule = await createPacketContextCapsule(
+      reorderedIndex,
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-order",
+        transition: "read-to-stable",
+        physicalSession: "probe-worker",
+        reviewState: {
+          findings: [
+            { id: "z-finding", severity: "low", status: "resolved" },
+            { id: "a-finding", severity: "low", status: "resolved" },
+          ],
+        },
+      },
+    );
+    const reversedCapsule = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        dependencyHandoffs: [...reorderedIndex.dependencyHandoffs].reverse(),
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-order",
+        transition: "read-to-stable",
+        physicalSession: "probe-worker",
+        reviewState: {
+          findings: [
+            { id: "a-finding", severity: "low", status: "resolved" },
+            { id: "z-finding", severity: "low", status: "resolved" },
+          ],
+        },
+      },
+    );
+    assert.equal(reversedCapsule.capsuleDigest, orderedCapsule.capsuleDigest);
+    const reversedSources = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        sources: [...reorderedIndex.sources, "docs/validation.log"].reverse(),
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-sources",
+        transition: "read-to-stable-sources",
+        physicalSession: "probe-worker",
+      },
+    );
+    const orderedSources = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        sources: [...reorderedIndex.sources, "docs/validation.log"],
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-sources",
+        transition: "read-to-stable-sources",
+        physicalSession: "probe-worker",
+      },
+    );
+    assert.equal(reversedSources.capsuleDigest, orderedSources.capsuleDigest);
+    const tampered = clone(initial);
+    tampered.evidence.verdicts = [];
+    await assert.rejects(
+      acknowledgeContextCapsule(ledger, tampered, changedRoot),
+      /capsule digest does not match/,
+    );
+    const unresolved = await createPacketContextCapsule(
+      {
+        ...index,
+        dependencyHandoffs: [
+          {
+            ...index.dependencyHandoffs[0],
+            unresolvedFindings: ["full validation remains"],
+          },
+        ],
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "unresolved",
+        transition: "pending-to-blocked",
+        physicalSession: "probe-worker",
+      },
+    );
+    await assert.rejects(
+      acknowledgeContextCapsule(ledger, unresolved, changedRoot),
+      /unresolved blocking findings/,
+    );
+    ledger = await acknowledgeContextCapsule(ledger, initial, changedRoot);
+    await assert.rejects(
+      acknowledgeContextCapsule(
+        ledger,
+        { ...initial, physicalSession: "other-worker" },
+        changedRoot,
+      ),
+      /different physical session/,
+    );
+    const reused = await createPacketContextCapsule(
+      index,
+      ledger,
+      changedRoot,
+      {
+        phase: "reused",
+        transition: "read-to-reused",
+        physicalSession: "probe-worker",
+      },
+    );
+    assert.equal(reused.readNow.length, 0);
+    assert.equal(reused.attested.length, 1);
+    await writeFile(path.join(changedRoot, "docs/source.md"), "changed-again");
+    const invalidated = await createPacketContextCapsule(
+      index,
+      ledger,
+      changedRoot,
+      {
+        phase: "changed",
+        transition: "reused-to-changed",
+        physicalSession: "probe-worker",
+      },
+    );
+    assert.equal(invalidated.readNow.length, 1);
+    assert.notEqual(
+      invalidated.readNow[0].digest,
+      ledger.attestations["docs/source.md"].digest,
+    );
+
+    await writeFile(outside, "outside");
+    await symlink(outside, path.join(changedRoot, "docs/escape.md"));
+    await assert.rejects(
+      createPacketContextCapsule(
+        { ...index, sources: ["docs/escape.md"] },
+        createContextLedger(),
+        changedRoot,
+        {
+          phase: "escape",
+          transition: "read-to-escape",
+          physicalSession: "probe-worker",
+        },
+      ),
+      /escapes repository/,
+    );
+    await assert.rejects(
+      createPacketContextCapsule(index, ledger, changedRoot, {
+        phase: "fresh-worker",
+        transition: "reused-to-fresh",
+        physicalSession: "other-worker",
+      }),
+      /different physical session/,
+    );
+    await unlink(outside);
+  } finally {
+    await rm(changedRoot, { recursive: true, force: true });
+    await unlink(outside).catch(() => {});
+  }
+});
+
+test("context cost equivalence and improvement fail closed", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+  );
+  const { oracle, oracleReads } = await loadContextCostOracle(fixture, root);
+  const prepared = await createPhaseCapsules(fixture, root);
+  const missingObligation = clone(prepared.capsules);
+  missingObligation[0].obligations.pop();
+  assert.equal(
+    compareContextCostReplay({
+      oracle,
+      oracleReads,
+      capsules: missingObligation,
+    }).pass,
+    false,
+  );
+
+  const missingTransition = clone(prepared.capsules);
+  missingTransition.pop();
+  assert.equal(
+    compareContextCostReplay({
+      oracle,
+      oracleReads,
+      capsules: missingTransition,
+    }).pass,
+    false,
+  );
+
+  const blockingFinding = clone(prepared.capsules);
+  blockingFinding[0].evidence.findings.push({
+    id: "unresolved",
+    blocking: true,
+    status: "open",
+  });
+  assert.equal(
+    compareContextCostReplay({
+      oracle,
+      oracleReads,
+      capsules: blockingFinding,
+    }).pass,
+    false,
+  );
+
+  const impossibleThreshold = await runContextCostReplay(
+    { ...fixture, minimumReductionRatio: 1 },
+    root,
+  );
+  assert.equal(impossibleThreshold.equivalence.pass, true);
+  assert.equal(impossibleThreshold.improvement.pass, false);
+
+  const missingPhaseSource = clone(prepared.capsules);
+  missingPhaseSource[1].attested.shift();
+  assert.equal(
+    compareContextCostReplay({
+      oracle,
+      oracleReads,
+      capsules: missingPhaseSource,
+    }).pass,
+    false,
+  );
+
+  await assert.rejects(
+    createPhaseCapsules(
+      {
+        ...fixture,
+        sources: {
+          ...fixture.sources,
+          "not-a-phase-source": {
+            path: "docs/not-a-phase-source.md",
+            role: "evidence",
+            required: true,
+          },
+        },
+        phases: fixture.phases.map((phase, index) =>
+          index === 0
+            ? {
+                ...phase,
+                evidence: {
+                  ...phase.evidence,
+                  rawEvidenceIds: ["not-a-phase-source"],
+                },
+              }
+            : phase,
+        ),
+      },
+      root,
+    ),
+    /raw evidence is not an addressable phase source/,
+  );
+});
+
+test("context capsule CLI persists packet attestations across real context phases", async () => {
+  const prefix = `docs/exec-plans/context-capsule-${process.pid}`;
+  const ledger = `${prefix}-ledger.json`;
+  const firstPath = `${prefix}-first.json`;
+  const secondPath = `${prefix}-second.json`;
+  const cleanup = registerExitCleanup([
+    path.join(root, ledger),
+    path.join(root, firstPath),
+    path.join(root, secondPath),
+  ]);
+  try {
+    await assert.rejects(
+      exec(process.execPath, ["tools/harness.mjs", "context-ack"], {
+        cwd: root,
+      }),
+      /context-ack requires <capsule> <ledger>/,
+    );
+    await assert.rejects(
+      exec(
+        process.execPath,
+        ["tools/harness.mjs", "context-ack", firstPath, "README.md"],
+        { cwd: root },
+      ),
+      /mutable harness state must stay under docs\/exec-plans/,
+    );
+    const command = (phase, transition, out) =>
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "context-capsule",
+          "docs/exec-plans/active/reduce-harness-context-cost/plan.json",
+          "replay-contract",
+          "--state",
+          "docs/exec-plans/active/reduce-harness-context-cost/state.json",
+          "--ledger",
+          ledger,
+          "--phase",
+          phase,
+          "--transition",
+          transition,
+          "--session",
+          "cli-session",
+          "--out",
+          out,
+        ],
+        { cwd: root },
+      );
+    await command("probe", "pending-to-probed", firstPath);
+    const first = await load(firstPath);
+    assert.ok(first.readNow.length > 0);
+    await exec(
+      process.execPath,
+      ["tools/harness.mjs", "context-ack", firstPath, ledger],
+      { cwd: root },
+    );
+    await command("handoff", "probed-to-handed-off", secondPath);
+    const second = await load(secondPath);
+    assert.equal(second.readNow.length, 0);
+    assert.equal(second.attested.length, first.readNow.length);
+    assert.notEqual(second.capsuleDigest, first.capsuleDigest);
+  } finally {
+    await Promise.all(
+      [ledger, firstPath, secondPath].map((file) =>
+        unlink(path.join(root, file)).catch(() => {}),
+      ),
+    );
+    cleanup();
+  }
+});
+
+test("validation evidence keeps a compact digest-verified raw-log boundary", async () => {
+  const directory = await mkdtemp(path.join(root, "docs/exec-plans/raw-log-"));
+  const relativeLog = path.relative(
+    root,
+    path.join(directory, "validation.log"),
+  );
+  try {
+    await writeFile(path.join(root, relativeLog), "suite output\nall pass\n");
+    const ledger = [];
+    await recordValidation(
+      {
+        target: "harness",
+        files: ["tools/lib/harness/context-cost.mjs"],
+        outcome: "pass",
+        reason: null,
+        packet: "probe",
+        session: "probe",
+        obligations: ["focused-tests", "locale-independent-ordering"],
+        rawLog: relativeLog,
+      },
+      ledger,
+      config,
+      root,
+    );
+    assert.deepEqual(ledger[0].obligations, [
+      "focused-tests",
+      "locale-independent-ordering",
+    ]);
+    assert.match(
+      ledger[0].rawLog.path,
+      /^docs\/exec-plans\/raw-logs\/[0-9a-f]{64}\.log$/,
+    );
+    assert.equal(ledger[0].command, "npm run test:harness");
+    assert.match(ledger[0].rawLog.digest, /^[0-9a-f]{64}$/);
+    assert.equal(ledger[0].rawLog.bytes, 22);
+    await assert.rejects(
+      createPacketContextCapsule(
+        {
+          planId: "missing-evidence",
+          packet: {
+            id: "missing-evidence",
+            objective: "Fail closed",
+            contracts: [],
+            focusedValidation: [],
+            implementationOutcomes: [],
+          },
+          sources: ["tools/lib/harness/context-cost.mjs"],
+          missingPatterns: [],
+          dependencyHandoffs: [],
+        },
+        createContextLedger(),
+        root,
+        {
+          phase: "validation",
+          transition: "implementation-to-validation",
+          physicalSession: "probe-worker",
+          validationLedger: [{ target: "harness", outcome: "pass" }],
+        },
+      ),
+      /missing a raw-log pointer/,
+    );
+
+    const index = {
+      planId: "probe-plan",
+      packet: {
+        id: "probe",
+        objective: "Preserve compact validation evidence",
+        contracts: [],
+        focusedValidation: ["focused-tests"],
+        implementationOutcomes: [],
+      },
+      sources: ["tools/lib/harness/context-cost.mjs"],
+      missingPatterns: [],
+      dependencyHandoffs: [],
+    };
+    const capsule = await createPacketContextCapsule(
+      index,
+      createContextLedger(),
+      root,
+      {
+        phase: "validation",
+        transition: "implementation-to-validation",
+        physicalSession: "probe-worker",
+        validationLedger: ledger,
+      },
+    );
+    assert.deepEqual(capsule.evidence.rawEvidenceIndex, [
+      {
+        target: "harness",
+        command: "npm run test:harness",
+        outcome: "pass",
+        obligations: ["focused-tests", "locale-independent-ordering"],
+        ...ledger[0].rawLog,
+      },
+    ]);
+    await writeFile(path.join(root, ledger[0].rawLog.path), "tampered\n");
+    await assert.rejects(
+      createPacketContextCapsule(index, createContextLedger(), root, {
+        phase: "validation",
+        transition: "implementation-to-validation",
+        physicalSession: "probe-worker",
+        validationLedger: ledger,
+      }),
+      /raw validation evidence changed/,
+    );
+  } finally {
+    const retained = `docs/exec-plans/raw-logs/${createHash("sha256")
+      .update("suite output\nall pass\n")
+      .digest("hex")}.log`;
+    await unlink(path.join(root, retained)).catch(() => {});
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 test("glob matching supports root docs, recursive paths, and brace sets", () => {

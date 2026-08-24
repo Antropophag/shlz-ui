@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "planId": "reduce-harness-context-cost",
+  "requirementsRevision": 2,
+  "packets": {
+    "replay-contract": {
+      "status": "completed",
+      "session": "root-probe"
+    },
+    "capsule-implementation": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "capsule-implementation-worker",
+      "claimId": "capsule-implementation-20260824",
+      "briefDigest": "497057897f5ac710d7228b4b3ae81f1aee90d05ebc612b3754d3fcccf7ada362",
+      "baselineDigest": "ac7beb4a08f19b9bb9090a42e23d63158c116045d52dfa74ec53130a157cf60d",
+      "dependencyDigests": {
+        "replay-contract": "d2f6d89f784a69b7d928baeb4cc47218452447ddc9614d32298677f8ce743cf4"
+      },
+      "packetDigest": "154c1bbfc48aa822a0871364e67d2f6508511687951a7edbf0b0a60011208e00",
+      "requirementsRevision": 2,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a0339c-f096-76c2-9961-bffc86d96ef9",
+        "launchId": "f1e84f9f-1caf-4186-9f63-2f7aebb173c3",
+        "startedAt": "2026-08-24T11:51:57.804Z",
+        "evidenceDigest": "1c40190fc2f34e21b6ecde930f9d64d14e4a615733daba8166cd02eaf767da24"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "f1e84f9f-1caf-4186-9f63-2f7aebb173c3",
+        "usage": {
+          "input_tokens": 1169262,
+          "cached_input_tokens": 1048576,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 10364,
+          "reasoning_output_tokens": 1733
+        },
+        "workerReport": "Implemented packet `capsule-implementation`.\n\nKey results:\n\n- Added content-addressed phase capsules with `readNow` and `attested` source identities.\n- Added fail-closed source, obligation, transition, evidence, and blocking-finding equivalence.\n- Added `context-cost-replay` CLI and operator documentation.\n- Replay: 158,294 → 54,838 proxy bytes, reducing 103,456 bytes (65.36%) against the 35% threshold.\n- Two identical runs produced SHA-256 `5e00ec58b68a546b20545e385f7b949562117c49aefd849e6e2e71d17f06d52b`.\n- OpenSpec progress: 5/6; task 3.2 remains for review/delivery.\n\nValidation:\n\n- `npm run test:harness`: 76/76 passed.\n- `openspec validate reduce-harness-context-cost --strict`: passed.\n- Prettier and `git diff --check`: passed.\n- `npm run check:docs`: unavailable because the script is absent.\n- Supplemental ESLint unavailable because installed dependencies lack `@eslint/js`.\n\nOrchestration state was intentionally left untouched for the root orchestrator to bind and complete the runtime claim.",
+        "workerReportDigest": "5bed3d40ee148049e5f04e29554284cf029e227199f0d3aa779e5c4efabfc9d2"
+      }
+    },
+    "review-delivery": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "review-delivery-worker",
+      "claimId": "review-delivery-20260824",
+      "briefDigest": "41f20d1e88e40a690d85da2ebe8dd9fda34d82c1a59c2d8f3535f45267946544",
+      "baselineDigest": "ac7beb4a08f19b9bb9090a42e23d63158c116045d52dfa74ec53130a157cf60d",
+      "dependencyDigests": {
+        "capsule-implementation": "d06433729b8f9b406fef3b51a081aac64e1c0446cfa66fb2ecc6064827ea05ca"
+      },
+      "packetDigest": "eca1fa04bf6f2a415cae0567e7e05bada4afe671e86bd9d538be36cb34b10861",
+      "requirementsRevision": 2,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a033cc-ff4f-70d0-8187-12fa3e520666",
+        "launchId": "b3f712cf-283d-4f44-8db8-2a470ba6bfa4",
+        "startedAt": "2026-08-24T12:44:27.336Z",
+        "evidenceDigest": "2f4f0e29ea889347d6e54ec13520f6323489f9419f3574a5f8fcbe931df4f210"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "b3f712cf-283d-4f44-8db8-2a470ba6bfa4",
+        "usage": {
+          "input_tokens": 1015912,
+          "cached_input_tokens": 948736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5279,
+          "reasoning_output_tokens": 1093
+        },
+        "workerReport": "Implemented the `review-delivery` packet.\n\n## Standards\n\n- 0 documented-standard violations.\n- 2 non-blocking judgment calls:\n  - duplicated source-digest calculation;\n  - possible divergent responsibilities in `context-cost.mjs`.\n\n## Spec\n\nTwo reported concerns were investigated and disposed as non-defects:\n\n- Free-form handoff notes are intentionally non-blocking; structured findings carry blocking status.\n- Raw-evidence paths are addressable phase sources, while validation/review ledgers are separately content-addressed capsule inputs.\n\nNo scope creep found.\n\n## Checks\n\n- `npm run test:harness`: 78/78 passed\n- `npm test`: 170/170 passed\n- `npm run lint`: passed\n- `npm run build`: passed\n- `openspec validate reduce-harness-context-cost --strict`: passed\n- Context-cost replay: passed with equivalence preserved and 57.25% byte-proxy reduction\n- Route conformance: passed\n\n## Delivery\n\nPR [#37](https://github.com/Antropophag/shlz-ui/pull/37) is open and unmerged at commit `a2aa24b`.\n\nThe final delivery guard correctly remains pending because `review-delivery` is still marked `launching`; per the packet lifecycle, the root orchestrator must bind this runtime claim and persist the durable handoff before rerunning it. Runtime claim artifacts and `delivery-evidence.json` remain uncommitted for that orchestration step.",
+        "workerReportDigest": "5243448c782ace047eed92b975dc04e7e23b13e6cdf5ab57d9a03b1381487d19"
+      },
+      "completion": {
+        "actor": "root-orchestrator",
+        "completedAt": "2026-08-24T15:51:56+03:00",
+        "finalizationCommit": "d7554f70c86685e16e7cdf8ff17ece91b8b6c637",
+        "durableHandoff": "docs/exec-plans/active/reduce-harness-context-cost/review-delivery-handoff.json",
+        "deliveryEvidence": "docs/exec-plans/active/reduce-harness-context-cost/delivery-evidence.json"
+      }
+    }
+  },
+  "handoffs": {
+    "replay-contract": {
+      "completedPacket": "replay-contract",
+      "changed": [
+        "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+        "docs/exec-plans/active/reduce-harness-context-cost/probe-results.json",
+        "openspec/changes/reduce-harness-context-cost/",
+        "tools/tests/harness.test.mjs"
+      ],
+      "provenChecks": [
+        "openspec validate reduce-harness-context-cost --strict: pass",
+        "focused context-cost replay test: red because context-cost-replay command is absent",
+        "source replay probe: 102674/148950 bytes repeated (68.9%)",
+        "PR/review output probe: raw evidence materially exceeds compact index"
+      ],
+      "settledDecisions": [
+        "188K remains user-observed and is never converted from bytes",
+        "phase-bound source attestation is the minimal sufficient architecture",
+        "digest identity and obligation equivalence must fail closed",
+        "embeddings and semantic brokers are unnecessary"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "capsule-implementation",
+      "invalidatedAssumptions": [
+        "phase capsule and digest dedup were initially treated as normative before probes; artifacts were corrected and the mechanism was selected only after measured comparison"
+      ]
+    },
+    "capsule-implementation": {
+      "completedPacket": "capsule-implementation",
+      "changed": [
+        "tools/lib/harness/context-cost.mjs",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/agent-execution.md",
+        "docs/exec-plans/README.md",
+        "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+        "openspec/changes/reduce-harness-context-cost/tasks.md"
+      ],
+      "provenChecks": [
+        "focused context cost tests: 3/3 pass after root correctness hardening",
+        "representative replay: equivalence pass and 64.86% byte-proxy reduction against 35% threshold",
+        "worker npm run test:harness: 76/76 pass before root hardening",
+        "worker openspec strict validation: pass",
+        "worker runtime identity: 01a0339c-f096-76c2-9961-bffc86d96ef9"
+      ],
+      "settledDecisions": [
+        "source equivalence is phase-specific",
+        "raw evidence must be an addressable source of its phase",
+        "unchanged content is attested by path and digest; new or changed content remains readNow",
+        "proxy bytes remain separate from runtime token usage"
+      ],
+      "unresolvedFindings": [
+        "full validation and independent two-axis review remain",
+        "worker used 1169262 input tokens including 1048576 cached input tokens, confirming fresh isolation does not by itself control total input"
+      ],
+      "nextPacket": "review-delivery",
+      "invalidatedAssumptions": [],
+      "claimId": "capsule-implementation-20260824",
+      "briefDigest": "497057897f5ac710d7228b4b3ae81f1aee90d05ebc612b3754d3fcccf7ada362",
+      "workerReportDigest": "5bed3d40ee148049e5f04e29554284cf029e227199f0d3aa779e5c4efabfc9d2"
+    },
+    "review-delivery": {
+      "completedPacket": "review-delivery",
+      "changed": [],
+      "provenChecks": [
+        "npm run test:harness: 78/78 pass",
+        "npm test: 170/170 pass",
+        "npm run lint: pass",
+        "npm run build: pass",
+        "openspec validate reduce-harness-context-cost --strict: pass",
+        "route conformance: pass",
+        "Standards and Spec review: clean at a2aa24b",
+        "PR #37: open and unmerged"
+      ],
+      "settledDecisions": [
+        "phase-bound acknowledged context is the minimal candidate that passes the 35% replay threshold",
+        "repository byte proxies do not establish total runtime token reduction",
+        "validation ledgers exclude their own operational output from fingerprints"
+      ],
+      "unresolvedFindings": [
+        "runtime-level before/after telemetry remains necessary before claiming total or active-context reduction"
+      ],
+      "nextPacket": null,
+      "invalidatedAssumptions": [
+        "fresh worker isolation alone controls context cost"
+      ],
+      "claimId": "review-delivery-20260824",
+      "briefDigest": "41f20d1e88e40a690d85da2ebe8dd9fda34d82c1a59c2d8f3535f45267946544",
+      "workerReportDigest": "5243448c782ace047eed92b975dc04e7e23b13e6cdf5ab57d9a03b1381487d19"
+    }
+  }
+}
