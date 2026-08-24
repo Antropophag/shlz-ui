@@ -1242,6 +1242,7 @@ test("public review execution rejects effective production context hidden by ben
   const reviewPath = `${relativeRoot}/review.json`;
   const executionPath = `${relativeRoot}/execution.json`;
   const briefPath = `${relativeRoot}/review.brief.json`;
+  const workerReviewPath = `${relativeRoot}/worker-review.json`;
   const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
   const cli = (...arguments_) =>
     exec(process.execPath, ["tools/harness.mjs", ...arguments_], { cwd: root });
@@ -1357,6 +1358,56 @@ test("public review execution rejects effective production context hidden by ben
         }),
       /prohibited production context/,
     );
+    const workerPlan = createPlan(reviewedTddAssessment(), config);
+    const reviewPacket = workerPlan.packets.find(
+      ({ id }) => id === "test-contract-review",
+    );
+    reviewPacket.contextSources = ["tools/tests/harness.test.mjs"];
+    reviewPacket.implementationSurface = ["tools/tests/**"];
+    const workerState = attestTddDesigner(createExecutionState(workerPlan));
+    recordTddDesign(workerPlan, workerState, tddDesign());
+    await Promise.all([
+      writeFile(path.join(root, planPath), `${JSON.stringify(workerPlan)}\n`),
+      writeFile(path.join(root, statePath), `${JSON.stringify(workerState)}\n`),
+      writeFile(
+        path.join(root, workerReviewPath),
+        `${JSON.stringify({
+          passes: [],
+          findings: [
+            {
+              id: "tools/lib/harness/core.mjs",
+              severity: "high",
+              status: "open",
+            },
+          ],
+        })}\n`,
+      ),
+    ]);
+    await assert.rejects(
+      cli(
+        "worker-run",
+        planPath,
+        statePath,
+        "test-contract-review",
+        "--execution",
+        executionPath,
+        "--claim",
+        "test-review-worker-r1",
+        "--session",
+        "test-review-worker-r1",
+        "--brief-out",
+        briefPath,
+        "--review",
+        workerReviewPath,
+      ),
+      /prohibited production context/,
+    );
+    for (const artifact of [
+      briefPath,
+      briefPath.replace(/\.json$/, ".context-capsule.json"),
+      briefPath.replace(/\.json$/, ".context-ledger.json"),
+    ])
+      await assert.rejects(readFile(path.join(root, artifact)), /ENOENT/);
   } finally {
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });
