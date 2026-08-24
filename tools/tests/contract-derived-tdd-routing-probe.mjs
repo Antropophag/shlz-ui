@@ -148,6 +148,11 @@ const coveredOverlay = {
     ],
   },
 };
+const duplicateCoverageOverlay = clone(coveredOverlay);
+duplicateCoverageOverlay.specDrivenTdd.slices.push({
+  ...clone(duplicateCoverageOverlay.specDrivenTdd.slices[0]),
+  id: "duplicate-covered-behavior",
+});
 const wave9Scenarios = [
   [
     "Sidebar states are source-traceable and operable",
@@ -238,6 +243,26 @@ const cases = [
     assessment: coveredOverlay,
     expected: "accept",
   },
+  {
+    id: "material-duplicate-coverage",
+    contract: contract([
+      [
+        "Material behavior is routed through TDD",
+        "Covered behavior",
+        "material-behavior",
+      ],
+    ]),
+    assessment: duplicateCoverageOverlay,
+    expected: "reject",
+    diagnostics: [scenarioId],
+  },
+  {
+    id: "unavailable-contract",
+    expected: "reject",
+    skipContract: true,
+    planMustBeAbsent: true,
+    diagnostics: ["cannot read OpenSpec delta specs"],
+  },
   ...[
     ["source-only", "source-only"],
     ["absence-only", "absence-only"],
@@ -292,7 +317,7 @@ try {
       testCase.capability ?? "harness/contract-derived-tdd-routing",
     );
     await mkdir(caseRoot, { recursive: true });
-    await mkdir(specRoot, { recursive: true });
+    if (!testCase.skipContract) await mkdir(specRoot, { recursive: true });
     await writeFile(
       path.join(caseRoot, "assessment.json"),
       `${JSON.stringify(assessment, null, 2)}\n`,
@@ -301,7 +326,8 @@ try {
       path.join(caseRoot, "requirements.json"),
       `${JSON.stringify(requirements, null, 2)}\n`,
     );
-    await writeFile(path.join(specRoot, "spec.md"), testCase.contract);
+    if (!testCase.skipContract)
+      await writeFile(path.join(specRoot, "spec.md"), testCase.contract);
     let result;
     try {
       const done = await exec(
@@ -333,16 +359,26 @@ try {
       );
     if (testCase.expected === "reject" && result.status !== "reject")
       failures.push(
-        `${failureSignature} uncovered=${testCase.uncovered.join(",")} failedScenarioIds=${failedScenarioIds.join(",")}`,
+        `${failureSignature} case=${testCase.id} uncovered=${(testCase.uncovered ?? []).join(",")} failedScenarioIds=${failedScenarioIds.join(",")}`,
       );
+    const requiredDiagnostics =
+      testCase.diagnostics ?? testCase.uncovered ?? [];
     if (
       testCase.expected === "reject" &&
       result.status === "reject" &&
-      !testCase.uncovered.every((id) => result.output.includes(id))
+      !requiredDiagnostics.every((text) => result.output.includes(text))
     )
       failures.push(
         `ERR_CONTRACT_DERIVED_TDD_DIAGNOSTIC ${testCase.id}\n${result.output}`,
       );
+    if (testCase.planMustBeAbsent) {
+      try {
+        await readFile(path.join(caseRoot, "plan.json"));
+        failures.push(`ERR_CONTRACT_DERIVED_TDD_PLAN_WRITTEN ${testCase.id}`);
+      } catch (error) {
+        if (error.code !== "ENOENT") throw error;
+      }
+    }
   }
   if (failures.length)
     throw new Error(
