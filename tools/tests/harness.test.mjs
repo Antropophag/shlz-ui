@@ -1153,7 +1153,7 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   const initialBranch = await exec("git", ["branch", "--show-current"], {
     cwd: root,
   }).then(({ stdout }) => stdout.trim());
-  const temporaryBranch = initialBranch ? null : `test/tdd-${nonce}`;
+  const temporaryBranch = initialBranch ? null : `chore/tdd-test-${nonce}`;
   if (temporaryBranch)
     await exec("git", ["switch", "-c", temporaryBranch], { cwd: root });
   const plan = createPlan(tddAssessment(), config);
