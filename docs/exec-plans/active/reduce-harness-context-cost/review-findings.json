@@ -1,36 +1,34 @@
 {
-  "version": 1,
-  "reviewedHead": "850586c493ca4993091fc19f5a132826e9783d81",
-  "findings": [
+  "version": 2,
+  "reviewedHead": "f258f035440f0dcd64308bc409661e06121f5560",
+  "rounds": [
     {
-      "id": "SPEC-1",
-      "severity": "high",
-      "summary": "Offline replay is not integrated with the real context/worker path and therefore does not reduce actual harness phase input."
+      "head": "850586c493ca4993091fc19f5a132826e9783d81",
+      "result": "remediated",
+      "findingCount": 6
     },
     {
-      "id": "SPEC-2",
-      "severity": "high",
-      "summary": "The PR #36 replay uses current-change sources instead of pinned PR #36 artifacts and declared verdicts instead of captured evidence."
+      "head": "4e30c84",
+      "result": "remediated",
+      "findingCount": 5
     },
     {
-      "id": "SPEC-3",
-      "severity": "high",
-      "summary": "Baseline and candidate derive from the same manifest, making equivalence circular."
+      "head": "be445e3",
+      "result": "remediated",
+      "findingCount": 3
     },
     {
-      "id": "SPEC-4",
-      "severity": "medium",
-      "summary": "Contributor and alternative comparisons are asserted rather than independently probed."
-    },
-    {
-      "id": "SPEC-5",
-      "severity": "medium",
-      "summary": "No persisted capsule API rejects or refreshes stale source attestations."
-    },
-    {
-      "id": "STD-1",
-      "severity": "high",
-      "summary": "Trustworthy worker telemetry reports 1169262 input tokens, so proxy success cannot be presented as total or active-context improvement."
+      "head": "f258f035440f0dcd64308bc409661e06121f5560",
+      "result": "clean",
+      "standardsFindings": 0,
+      "specFindings": 0
     }
+  ],
+  "resolvedThemes": [
+    "replay pinned to PR #36 artifacts and independent oracle",
+    "real packet context and current validation/review evidence integration",
+    "capsule integrity, changed-source, symlink, and physical-session guards",
+    "executable quantitative alternative comparison",
+    "runtime telemetry limits proxy claims"
   ]
 }
