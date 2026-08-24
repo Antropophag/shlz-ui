@@ -1,8 +1,9 @@
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { readFile } from "node:fs/promises";
+import { validatedWorktreeRoot } from "./validated-worktree-root.mjs";
 
-const targetRoot = path.resolve(process.argv[2] ?? process.cwd());
+const targetRoot = await validatedWorktreeRoot(process.argv[2]);
 const core = await import(
   `${pathToFileURL(path.join(targetRoot, "tools/lib/harness/core.mjs"))}?review=${Date.now()}`
 );

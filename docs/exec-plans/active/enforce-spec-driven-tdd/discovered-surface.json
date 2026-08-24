@@ -26,7 +26,8 @@
     "tools/tests/harness.test.mjs",
     "tools/tests/spec-driven-tdd-failure-proof.mjs",
     "tools/tests/spec-driven-tdd-known-bad-fixture.mjs",
-    "tools/tests/spec-driven-tdd-review-probe.mjs"
+    "tools/tests/spec-driven-tdd-review-probe.mjs",
+    "tools/tests/validated-worktree-root.mjs"
   ],
   "materialSignals": {
     "newCapability": true,
