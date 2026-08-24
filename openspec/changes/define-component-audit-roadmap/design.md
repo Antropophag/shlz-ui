@@ -46,7 +46,7 @@ Every wave begins by comparing its entry with the current inventory and reposito
 - [The inventory evolves after this PR] → Require entry reconciliation before mutation when status, membership, source, or implementation surface drifts.
 - [A source-only wave is mistaken for implementation authorization] → State that audit disposition may remain source-only and that new public/runtime contracts require current requirements and OpenSpec decisions.
 - [The pointer becomes too broad] → Trigger it specifically on numbered component-audit wave requests.
-- [Sequential numbering blocks independent work] → Keep ordering as the default delivery sequence while allowing an explicit roadmap update if repository priorities change.
+- [Numbering is mistaken for a prerequisite] → State that numbering identifies roadmap order only; every mapped wave remains independently executable from current `origin/main` when its entry still matches the inventory.
 
 ## Migration Plan
 
