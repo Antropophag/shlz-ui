@@ -156,10 +156,26 @@ const navigationGroups = [
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
 ];
+const navigationTitles = navigationGroups.flatMap(([, links]) =>
+  links.map(([, title]) => title.replaceAll(" ", "")),
+);
+const compactLabelFor = (title) => {
+  const normalizedTitle = title.replaceAll(" ", "");
+  for (let length = 2; length <= normalizedTitle.length; length += 1) {
+    const candidate = normalizedTitle.slice(0, length);
+    if (
+      navigationTitles.every(
+        (other) => other === normalizedTitle || !other.startsWith(candidate),
+      )
+    )
+      return candidate;
+  }
+  return normalizedTitle;
+};
 const navigationMarkup = navigationGroups
   .map(
     ([label, links]) =>
-      `<div class="shlz-docs-nav__group"><h2>${label}</h2>${links.map(([id, title]) => `<a href="#${id}" data-shlz-docs-link>${title}</a>`).join("")}</div>`,
+      `<div class="shlz-docs-nav__group"><h2>${label}</h2>${links.map(([id, title]) => `<a href="#${id}" title="${title}" data-compact-label="${compactLabelFor(title)}" data-shlz-docs-link>${title}</a>`).join("")}</div>`,
   )
   .join("");
 const groupBy = (items, getKey) =>

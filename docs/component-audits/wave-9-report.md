@@ -7,7 +7,7 @@
 
 ## Census and contract
 
-The repository contains one executable and live application-shell occurrence in the Showcase, one application-local stylesheet implementation, one inert source-only Sidebar/Drawer diagnostic reference, and one bounded pre-existing hero-header substitute. No executable shell fixture, legacy/native shell substitute, Data Workspace consumer, or package export exists. The repository and built-DOM guard passes for this classification and rejects synthetic unclassified occurrences.
+The repository contains one executable and live application-shell occurrence in the Showcase, one application-local stylesheet implementation, one focused Playwright fixture, eight additional executable Playwright references, one inert source-only Sidebar/Drawer diagnostic reference, and one bounded pre-existing hero-header substitute. No second shell implementation, legacy/native shell substitute, Data Workspace consumer, or package export exists. The repository and built-DOM guard passes for this classification and rejects synthetic unclassified occurrences, including inside the Playwright surface.
 
 The raw Sidebar source contains 301×1000 opened and 72×1000 closed dark compositions plus active/default item treatments. Header establishes represented vector paint, sheet geometry, and two 48×48 radius-24 avatar instances; its outlined text does not establish typography. Repeated paint and spacing are recorded as derived patterns rather than promoted to global tokens. Routing, authorization, toggle persistence, native input behavior, mobile-drawer behavior, and a universal breakpoint are not source facts; the implemented interaction and narrow layout remain bounded Showcase decisions.
 

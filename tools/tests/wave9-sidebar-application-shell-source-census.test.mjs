@@ -20,7 +20,12 @@ const sourceHashes = new Map([
     "8af415f1b5a499d89b189372837c4a6c584b05471753688550187832ca672392",
   ],
 ]);
-const executableRoots = ["apps", "packages", "tools/fixtures"];
+const executableRoots = [
+  "apps",
+  "packages",
+  "tools/fixtures",
+  "tools/playwright",
+];
 const executableExtensions = new Set([
   ".html",
   ".js",
@@ -176,11 +181,13 @@ test("Wave 9 repository census classifies every bounded executable shell", async
 test("Wave 9 repository census rejects a synthetic unclassified shell", () => {
   const found = matchingPaths([
     {
-      path: "apps/third-consumer/shell.php",
+      path: "tools/playwright/unclassified-shell.spec.js",
       source: '<aside class="third-party-sidebar">Navigation</aside>',
     },
   ]);
-  assert.deepEqual(unclassifiedPaths(found), ["apps/third-consumer/shell.php"]);
+  assert.deepEqual(unclassifiedPaths(found), [
+    "tools/playwright/unclassified-shell.spec.js",
+  ]);
 });
 
 test("Wave 9 built-DOM census is exact and mutation-sensitive", async () => {

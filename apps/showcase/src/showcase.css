@@ -286,16 +286,20 @@ main {
 
 .shlz-docs-shell--closed .shlz-docs-nav__group a::before {
   position: absolute;
-  inset: 16px;
-  background: rgb(255 255 255 / 65%);
-  border-radius: 50%;
-  content: "";
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: rgb(255 255 255 / 82%);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  content: attr(data-compact-label);
 }
 
 .shlz-docs-shell--closed
   .shlz-docs-nav__group
   a:is(:hover, :focus-visible, .shlz-docs-nav__link--active)::before {
-  background: var(--shlz-source-color-white-white);
+  color: var(--shlz-source-color-white-white);
 }
 
 .shlz-docs-content {
@@ -1598,30 +1602,10 @@ article {
     background: rgb(255 255 255 / 10%);
   }
 
-  .shlz-docs-shell--closed .shlz-docs-home {
-    position: static;
-    inline-size: auto;
-    block-size: auto;
-    overflow: visible;
-    clip-path: none;
-  }
-
-  .shlz-docs-shell--closed .shlz-docs-nav__group h2 {
-    position: static;
-    inline-size: auto;
-    block-size: auto;
-    overflow: visible;
-    clip-path: none;
-  }
-
   .shlz-docs-shell--closed .shlz-docs-nav__group a {
-    inline-size: auto;
-    padding-inline: var(--shlz-source-spacing-8);
-    color: rgb(255 255 255 / 82%);
-  }
-
-  .shlz-docs-shell--closed .shlz-docs-nav__group a::before {
-    content: none;
+    inline-size: 44px;
+    padding-inline: 0;
+    color: transparent;
   }
 
   .shlz-docs-content {

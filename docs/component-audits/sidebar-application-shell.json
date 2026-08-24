@@ -38,6 +38,42 @@
     {
       "path": "apps/showcase/src/fidelity.js",
       "classification": "inert-diagnostic-reference"
+    },
+    {
+      "path": "tools/playwright/content-states.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/fidelity.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/icons.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/primitives.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/remediation-fidelity.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/review.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/showcase-navigation.spec.js",
+      "classification": "focused-executable-fixture"
+    },
+    {
+      "path": "tools/playwright/typography-profiles.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
+      "path": "tools/playwright/visual-harness.js",
+      "classification": "executable-test-reference"
     }
   ],
   "supportedSizes": ["source-desktop", "showcase-narrow-decision"],
@@ -96,7 +132,7 @@
   ],
   "evidence": {
     "source-integrity": "pass: focused byte hashes and source-critical SVG geometry are locked by the Wave 9 source test",
-    "structural-contract": "pass: executable markup and application CSS are scanned for bounded shell/sidebar/header signatures; the live shell, local stylesheet, inert fidelity reference, header substitute, and absence of a package export are classified",
+    "structural-contract": "pass: executable markup, application CSS, and Playwright fixture/reference surfaces are scanned for bounded shell/sidebar/header signatures; the live shell, local stylesheet, inert fidelity reference, focused fixture, test references, header substitute, and absence of a package export are classified",
     "runtime-browser": "pass: nine focused Chromium tests execute sidebar density toggle/current navigation and native header default/hover/typing/filled lifecycle",
     "accessibility": "pass: native aside/nav/link/button/search semantics, truthful pressed-state density control, accessible names, current location, keyboard activation, tab order, and visible focus are exercised",
     "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; real-interaction computed checks lock source-critical 301/72 geometry, #0B1623 and active/default item paint, repository-documented header token paint, 48px avatar, and active text contrast",

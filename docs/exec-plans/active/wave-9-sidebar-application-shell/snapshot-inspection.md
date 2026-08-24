@@ -25,6 +25,6 @@ update mode in the 99-test affected group and the 207-test aggregate suite.
 | `typography-fira-compatibility-chromium-linux.png` | Fira stress samples remain legible and unclipped.                                  |
 
 The three focused Wave 9 images were inspected separately: opened Sidebar
-shows the full hierarchy and active Input item; closed Sidebar shows the compact
-icon treatment and active marker; filled Header shows the populated search,
+shows the full hierarchy and active Input item; closed Sidebar shows distinct
+compact text labels, full-title tooltips, and the active marker; filled Header shows the populated search,
 48px avatar geometry, and typography-profile control without clipping.

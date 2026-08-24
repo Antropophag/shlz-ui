@@ -110,13 +110,33 @@
             "workerReportDigest": "06770adf06ada4fe9519c49638f42bf0d7ee62fd33d921b10341490e8885aba6"
           },
           "failure": null
+        },
+        {
+          "claimId": "wave9-integration-delivery-retry2-20260824",
+          "briefDigest": "f26509f7fe96286f40bba0f82b478547ae05acd1036f423807d3e43c765eea3c",
+          "execution": {
+            "version": 1,
+            "source": "codex-exec-jsonl",
+            "runtimeId": "01a03554-7c8f-7922-90ea-24440205f698",
+            "launchId": "b8c37583-a04b-46aa-b86f-0915290c683e",
+            "startedAt": "2026-08-24T19:52:04.029Z",
+            "evidenceDigest": "ba4305d6d790bbfe9101b23661a71953be4a888aafb6e51998c6bde8700b5272"
+          },
+          "launch": {
+            "terminalStatus": "failed",
+            "launchId": "b8c37583-a04b-46aa-b86f-0915290c683e",
+            "usage": null,
+            "workerReport": "The second CI run exposed the next clean-environment dependency: building Showcase inside the census requires its four workspace packages to be built first. I’m making that prerequisite explicit in the test setup, matching the repository’s normal build order; the browser job continues independently.",
+            "workerReportDigest": "b3dabf96d2182c3505d065f9bc2f5d3a9ff371b9159d9d88058b8a055f49e8eb"
+          },
+          "failure": null
         }
       ],
-      "attempts": 2,
+      "attempts": 3,
       "status": "launching",
-      "session": "wave9-integration-delivery-retry2",
-      "claimId": "wave9-integration-delivery-retry2-20260824",
-      "briefDigest": "f26509f7fe96286f40bba0f82b478547ae05acd1036f423807d3e43c765eea3c",
+      "session": "wave9-integration-delivery-retry3",
+      "claimId": "wave9-integration-delivery-retry3-20260824",
+      "briefDigest": "5a59735d1025bdf3ded6f4c145d85d17ccc2e81722919ff204e20f49672ad3b5",
       "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
       "dependencyDigests": {
         "showcase-shell": "f806855725733f78c05566550458c611d9c8b8502daae68d5f1c51d39a1b1478"

@@ -169,6 +169,21 @@ test("sidebar opened, closed, and current states use the real interaction seam",
   await expect(shell(page)).toHaveClass(/shlz-docs-shell--closed/);
   await expect(sidebar(page)).toHaveCSS("width", "72px");
   await expect(dropdownLink).toBeVisible();
+  await expect(dropdownLink).toHaveAttribute("title", "Dropdown");
+  const compactDestinations = await page
+    .locator("[data-shlz-docs-link]")
+    .evaluateAll((links) =>
+      links.map((link) => ({
+        label: link.dataset.compactLabel,
+        title: link.title,
+      })),
+    );
+  expect(compactDestinations.every(({ label, title }) => label && title)).toBe(
+    true,
+  );
+  expect(new Set(compactDestinations.map(({ label }) => label)).size).toBe(
+    compactDestinations.length,
+  );
 
   await dropdownLink.focus();
   await page.keyboard.press("Enter");
@@ -301,4 +316,17 @@ test("narrow, long-content, and text-scale stress stays reachable", async ({
     expect(box.x).toBeGreaterThanOrEqual(2);
     expect(box.x + box.width).toBeLessThanOrEqual(388);
   }
+
+  const toggle = page.locator("[data-shlz-sidebar-toggle]");
+  const firstLink = page.locator("[data-shlz-docs-link]").first();
+  const expandedWidth = await firstLink.evaluate(
+    (element) => element.clientWidth,
+  );
+  await toggle.click();
+  await expect(toggle).toHaveAttribute("aria-pressed", "true");
+  await expect(shell(page)).toHaveClass(/shlz-docs-shell--closed/);
+  await expect(firstLink).toHaveCSS("width", "44px");
+  expect(
+    await firstLink.evaluate((element) => element.clientWidth),
+  ).toBeLessThan(expandedWidth);
 });
