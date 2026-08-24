@@ -90,13 +90,33 @@
             "workerReportDigest": "704565be0b27fc402d240d28b488e4107c41c667e1628a1770533544dfae115e"
           },
           "failure": null
+        },
+        {
+          "claimId": "wave9-integration-delivery-retry-20260824",
+          "briefDigest": "bdb9769f310d401417d2f2f368cee7195c63fbefbc71bf3d1ac6d69ccb66b27d",
+          "execution": {
+            "version": 1,
+            "source": "codex-exec-jsonl",
+            "runtimeId": "01a03538-dbd4-7e20-853d-d267ce8967b9",
+            "launchId": "e2c88874-5ed7-43da-8654-683b88bc2695",
+            "startedAt": "2026-08-24T19:21:53.456Z",
+            "evidenceDigest": "a73b213a41a524c1f24fa35c2567243d6c2e21a7a108f8f71e0dfdff542c09c9"
+          },
+          "launch": {
+            "terminalStatus": "failed",
+            "launchId": "e2c88874-5ed7-43da-8654-683b88bc2695",
+            "usage": null,
+            "workerReport": "The stronger tests did exactly what they were meant to do and exposed three concrete mismatches: the compact active item hides text (so its text contrast must be measured while expanded), CSS variables need resolved-color comparison rather than raw hex, and long narrow links currently clip their focus box. I’m correcting the test state placement and the actual narrow wrapping/focus defect, then rerunning the focused suite.",
+            "workerReportDigest": "06770adf06ada4fe9519c49638f42bf0d7ee62fd33d921b10341490e8885aba6"
+          },
+          "failure": null
         }
       ],
-      "attempts": 1,
+      "attempts": 2,
       "status": "launching",
-      "session": "wave9-integration-delivery-retry",
-      "claimId": "wave9-integration-delivery-retry-20260824",
-      "briefDigest": "bdb9769f310d401417d2f2f368cee7195c63fbefbc71bf3d1ac6d69ccb66b27d",
+      "session": "wave9-integration-delivery-retry2",
+      "claimId": "wave9-integration-delivery-retry2-20260824",
+      "briefDigest": "f26509f7fe96286f40bba0f82b478547ae05acd1036f423807d3e43c765eea3c",
       "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
       "dependencyDigests": {
         "showcase-shell": "f806855725733f78c05566550458c611d9c8b8502daae68d5f1c51d39a1b1478"

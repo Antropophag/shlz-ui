@@ -5,6 +5,7 @@ import { extname, join, relative } from "node:path";
 import test from "node:test";
 
 const manifestPath = "docs/component-audits/sidebar-application-shell.json";
+const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
 const sourceHashes = new Map([
   [
     "shlz-design-source/raw/svg/Sidebar.svg",
@@ -26,9 +27,13 @@ const executableExtensions = new Set([
   ".tsx",
   ".vue",
   ".php",
+  ".css",
 ]);
-const shellSignature = /shlz-docs-shell|shlz-docs-sidebar/;
-const classifiedExecutableFiles = new Set(["apps/showcase/src/main.js"]);
+const shellSignature =
+  /shlz-docs-shell|shlz-docs-sidebar|data-shlz-shell-search|application[-_ ]shell|app[-_ ]shell|\bsidebar\b|<aside\b/i;
+const classifiedSourceFiles = new Set(
+  manifest.sourceOccurrences.map(({ path }) => path),
+);
 
 async function filesBelow(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -51,7 +56,7 @@ function matchingPaths(sources) {
 }
 
 function unclassifiedPaths(found) {
-  return [...found].filter((path) => !classifiedExecutableFiles.has(path));
+  return [...found].filter((path) => !classifiedSourceFiles.has(path));
 }
 
 function countToken(source, token) {
@@ -92,7 +97,6 @@ test("Wave 9 authoritative sources retain exact hashes and critical geometry", a
 });
 
 test("Wave 9 schema-v2 manifest records the bounded source-census contract", async () => {
-  const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
   assert.equal(manifest.schemaVersion, 2);
   assert.equal(manifest.component, "sidebar-application-shell");
   assert.deepEqual(Object.keys(manifest.stateLedgers).sort(), [
@@ -117,6 +121,10 @@ test("Wave 9 schema-v2 manifest records the bounded source-census contract", asy
       kind: "live-consumer",
     },
   ]);
+  assert.deepEqual(
+    manifest.sourceOccurrences.map(({ path }) => path).sort(),
+    [...classifiedSourceFiles].sort(),
+  );
   assert.equal(manifest.diagnosticOccurrenceCount, 0);
   assert.deepEqual(Object.keys(manifest.evidence).sort(), [
     "accessibility",
@@ -151,7 +159,7 @@ test("Wave 9 repository census classifies every bounded executable shell", async
   const found = matchingPaths(sources);
   assert.deepEqual(unclassifiedPaths(found), []);
   assert.deepEqual(
-    [...classifiedExecutableFiles].filter((path) => !found.has(path)),
+    [...classifiedSourceFiles].filter((path) => !found.has(path)),
     [],
   );
 
@@ -165,7 +173,7 @@ test("Wave 9 repository census rejects a synthetic unclassified shell", () => {
   const found = matchingPaths([
     {
       path: "apps/third-consumer/shell.php",
-      source: '<aside class="shlz-docs-sidebar">Navigation</aside>',
+      source: '<aside class="third-party-sidebar">Navigation</aside>',
     },
   ]);
   assert.deepEqual(unclassifiedPaths(found), ["apps/third-consumer/shell.php"]);

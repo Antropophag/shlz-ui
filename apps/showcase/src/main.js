@@ -637,7 +637,7 @@ shell.dataset.componentAuditId = "sidebar-application-shell-showcase";
 const sidebar = document.createElement("aside");
 sidebar.className = "shlz-docs-sidebar";
 sidebar.setAttribute("aria-label", "Showcase navigation");
-sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top">SHLZ UI</a><button class="shlz-docs-sidebar__toggle" type="button" aria-expanded="true" aria-controls="showcase-navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span><span class="shlz-visually-hidden">Collapse showcase navigation</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
+sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top">SHLZ UI</a><button class="shlz-docs-sidebar__toggle" type="button" aria-pressed="false" aria-label="Use compact showcase navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
 const content = document.createElement("div");
 content.className = "shlz-docs-content";
 const topAnchor = document.createElement("span");
@@ -649,14 +649,17 @@ app.append(shell);
 const sidebarToggle = sidebar.querySelector("[data-shlz-sidebar-toggle]");
 const setSidebarOpen = (open) => {
   shell.classList.toggle("shlz-docs-shell--closed", !open);
-  sidebarToggle.setAttribute("aria-expanded", String(open));
+  sidebarToggle.setAttribute("aria-pressed", String(!open));
+  sidebarToggle.setAttribute(
+    "aria-label",
+    open
+      ? "Use compact showcase navigation"
+      : "Use expanded showcase navigation",
+  );
   sidebarToggle.querySelector("[aria-hidden]").textContent = open ? "‹" : "›";
-  sidebarToggle.querySelector(".shlz-visually-hidden").textContent = open
-    ? "Collapse showcase navigation"
-    : "Expand showcase navigation";
 };
 sidebarToggle.addEventListener("click", () =>
-  setSidebarOpen(sidebarToggle.getAttribute("aria-expanded") !== "true"),
+  setSidebarOpen(sidebarToggle.getAttribute("aria-pressed") === "true"),
 );
 
 const revealHashTarget = () => {

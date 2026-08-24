@@ -1863,7 +1863,7 @@
         "apps/showcase/src/showcase.css"
       ],
       "behavior": [
-        "application-owned sidebar disclosure and deterministic current hash navigation",
+        "application-owned sidebar density toggle and deterministic current hash navigation",
         "native header search default, hover, typing, and filled lifecycle"
       ],
       "docs": [
@@ -1874,7 +1874,9 @@
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/main.js"],
       "data_workspace_consumers": [],
-      "inert_diagnostics": [],
+      "inert_diagnostics": [
+        "apps/showcase/src/fidelity.js (source-only Sidebar/Drawer diagnostic reference)"
+      ],
       "legacy_native_implementations": [],
       "local_alternatives": ["apps/showcase/src/showcase.css"],
       "scope": [
@@ -1893,7 +1895,7 @@
         "executableShowcase": 1,
         "liveConsumers": 1,
         "dataWorkspace": 0,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 1,
         "legacyNative": 0,
         "localAlternatives": 1
       }

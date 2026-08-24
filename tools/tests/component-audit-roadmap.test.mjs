@@ -6,6 +6,7 @@ const inventoryPath = "docs/component-audits/project-inventory.json";
 const roadmapPath = "docs/component-audit-roadmap.md";
 
 const expectedWaves = new Map([
+  [9, "Sidebar / Application Shell"],
   [10, "Card compositions"],
   [11, "Upload / Document compositions"],
   [12, "Messaging / History / Planner compositions"],

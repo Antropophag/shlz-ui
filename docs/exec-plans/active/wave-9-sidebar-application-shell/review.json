@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "base": "27f7b49aa407afd9c41e0f32f6eedc14320fcb16",
+  "passes": [
+    {
+      "pass": 1,
+      "axis": "Standards",
+      "head": "0efc8a8fbc073725cbbc58190102190fde9d1b89"
+    },
+    {
+      "pass": 2,
+      "axis": "Spec",
+      "head": "0efc8a8fbc073725cbbc58190102190fde9d1b89"
+    }
+  ],
+  "findings": [
+    {
+      "id": "STD-1",
+      "severity": "P1",
+      "summary": "compact navigation used false disclosure semantics while controlled navigation stayed interactive",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "STD-2",
+      "severity": "P1",
+      "summary": "material-state visual and contrast evidence was weaker than the completion contract",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "STD-3",
+      "severity": "P2",
+      "summary": "report incorrectly claimed Header typography as a source fact",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "STD-4",
+      "severity": "P2",
+      "summary": "15 regenerated legacy snapshots lacked per-image inspection dispositions",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "STD-5",
+      "severity": "P3",
+      "summary": "source census duplicated classification outside the manifest",
+      "axis": "Standards",
+      "introducedPass": 1,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-1",
+      "severity": "P1",
+      "summary": "VERIFIED was claimed before independent review and delivery gates",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-2",
+      "severity": "P1",
+      "summary": "real-interaction oracle did not prove source-backed or documented paint for every material state",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-3",
+      "severity": "P2",
+      "summary": "narrow stress did not prove long navigation reachability or unclipped link focus",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    },
+    {
+      "id": "SPEC-4",
+      "severity": "P2",
+      "summary": "occurrence census omitted CSS and broader bounded shell/sidebar signatures",
+      "axis": "Spec",
+      "introducedPass": 2,
+      "status": "open"
+    }
+  ]
+}

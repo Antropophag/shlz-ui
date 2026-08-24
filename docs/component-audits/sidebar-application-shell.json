@@ -26,6 +26,20 @@
       "kind": "live-consumer"
     }
   ],
+  "sourceOccurrences": [
+    {
+      "path": "apps/showcase/src/main.js",
+      "classification": "live-consumer"
+    },
+    {
+      "path": "apps/showcase/src/showcase.css",
+      "classification": "local-style-implementation"
+    },
+    {
+      "path": "apps/showcase/src/fidelity.js",
+      "classification": "inert-diagnostic-reference"
+    }
+  ],
   "supportedSizes": ["source-desktop", "showcase-narrow-decision"],
   "supportedStates": [
     "sidebar-opened",
@@ -82,12 +96,12 @@
   ],
   "evidence": {
     "source-integrity": "pass: focused byte hashes and source-critical SVG geometry are locked by the Wave 9 source test",
-    "structural-contract": "pass: the current application-local shell, sidebar, header substitute, styles, and absence of a package export are censused",
-    "runtime-browser": "pass: nine focused Chromium tests execute sidebar toggle/current navigation and native header default/hover/typing/filled lifecycle",
-    "accessibility": "pass: native aside/nav/link/button/search semantics, accessible names, current location, keyboard activation, tab order, and visible focus are exercised",
-    "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; computed checks lock source-critical 301/72 geometry, #0B1623 paint, 48px avatar, and header state changes",
+    "structural-contract": "pass: executable markup and application CSS are scanned for bounded shell/sidebar/header signatures; the live shell, local stylesheet, inert fidelity reference, header substitute, and absence of a package export are classified",
+    "runtime-browser": "pass: nine focused Chromium tests execute sidebar density toggle/current navigation and native header default/hover/typing/filled lifecycle",
+    "accessibility": "pass: native aside/nav/link/button/search semantics, truthful pressed-state density control, accessible names, current location, keyboard activation, tab order, and visible focus are exercised",
+    "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; real-interaction computed checks lock source-critical 301/72 geometry, #0B1623 and active/default item paint, repository-documented header token paint, 48px avatar, and active text contrast",
     "consumer-integration": "pass: the sole current occurrence is classified as the real Showcase live consumer",
-    "responsive-content-stress": "pass: 390px viewport with 20px root text, long Cyrillic and unbroken Latin navigation retains reachable toggle/search, visible focus, and zero page-level horizontal overflow"
+    "responsive-content-stress": "pass: 390px viewport with 20px root text and long Cyrillic/unbroken Latin navigation retains reachable toggle/search/links, wrapped legibility, fully visible link and search focus boxes, and zero page-level horizontal overflow"
   },
   "interactionEvidence": {
     "types": {
@@ -95,11 +109,11 @@
         "reviewed focused snapshots for sidebar-opened, sidebar-closed, and header-filled"
       ],
       "realInteractionVisual": [
-        "real pointer hover changes the native search border; focus/typing exposes the native focus outline; blur with content exposes the filled background",
-        "real toggle activation produces computed 301px opened and 72px closed sidebar geometry"
+        "real pointer hover and focus/typing match the documented gray-200/blue-200 native search border and outline; blur with content matches the documented blue-50 filled background; typing and filled text pass 4.5:1 contrast",
+        "real density-toggle activation produces computed 301px opened and 72px closed sidebar geometry; real hash activation matches the source-backed active/default item paint and expanded active text passes 4.5:1 contrast"
       ],
       "runtimeBehavior": [
-        "pointer and Enter activation toggle aria-expanded and shell state",
+        "pointer and Enter activation toggle truthful aria-pressed density state",
         "hash activation leaves exactly one aria-current=location link",
         "native search retains typed content across focus and blur"
       ]

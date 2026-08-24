@@ -10,10 +10,11 @@ The map was derived on `origin/main` commit `50bee6f6603e0e4d7b3f511fe610dc1522c
 - the Wave 1–8 reports under `docs/foundation-audits/` and `docs/component-audits/`;
 - the completion contract in `docs/component-audit-workflow.md`.
 
-At this baseline, 36 families are `VERIFIED` and the three rows below are the complete `INVENTORIED` remainder. Each remaining family appears exactly once. Wave 9 remains documented below as completed durable scope.
+Until the Wave 9 delivery gate closes, 35 families are `VERIFIED` and the four rows below are the complete `INVENTORIED` remainder. Each remaining family appears exactly once.
 
 | Wave | Inventory family                           | Starting disposition | Original source authority                               |
 | ---- | ------------------------------------------ | -------------------- | ------------------------------------------------------- |
+| 9    | Sidebar / Application Shell                | application-local    | `Sidebar.svg`; `Header.svg`                             |
 | 10   | Card compositions                          | source-only          | `Card with button.svg`; `Reports card.svg`; `Cover.svg` |
 | 11   | Upload / Document compositions             | composition-only     | `Documents.svg`; `Detailed appeals.svg`                 |
 | 12   | Messaging / History / Planner compositions | source-only          | `Messages.svg`; `History of changes.svg`; `Planner.svg` |

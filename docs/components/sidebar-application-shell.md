@@ -35,14 +35,15 @@ promoted tokens. The repeated source paints observed in the file are
 
 ## Header facts and state ledger
 
-| Class               | Claim                                                                                                                                           | Evidence                                                                               |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| source-fact         | The export sheet is 1528×724, partitioned into white 1528×400 and 1528×324 regions.                                                             | Exact root and raw `rect` attributes.                                                  |
-| source-fact         | Two raster-backed circular avatar instances are 48×48 with radius 24, at (1173,504) and (80,596).                                               | Exact raw `rect`/pattern attributes.                                                   |
-| source-fact         | The vector paint set includes `#0B1623`, white, `#253D98`, and `#939CA5`; the file contains eight paths and five rectangles.                    | Raw element and attribute census.                                                      |
-| repository-decision | “default”, “hover”, “typing”, and “filled” are separate material-state names required by the approved audit contract.                           | OpenSpec contract; later runtime evidence must bind each name to a real control state. |
-| unknown             | Flattened paths do not by themselves prove native input semantics, event ownership, placeholder behavior, accessible naming, or focus behavior. | No DOM/behavior metadata exists in the SVG.                                            |
-| unknown             | The source does not establish a universal narrow-header or mobile-drawer contract.                                                              | Only represented sheet compositions are authoritative.                                 |
+| Class               | Claim                                                                                                                                                   | Evidence                                                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| source-fact         | The export sheet is 1528×724, partitioned into white 1528×400 and 1528×324 regions.                                                                     | Exact root and raw `rect` attributes.                                                                                |
+| source-fact         | Two raster-backed circular avatar instances are 48×48 with radius 24, at (1173,504) and (80,596).                                                       | Exact raw `rect`/pattern attributes.                                                                                 |
+| source-fact         | The vector paint set includes `#0B1623`, white, `#253D98`, and `#939CA5`; the file contains eight paths and five rectangles.                            | Raw element and attribute census.                                                                                    |
+| repository-decision | “default”, “hover”, “typing”, and “filled” are separate material-state names required by the approved audit contract.                                   | OpenSpec contract; later runtime evidence must bind each name to a real control state.                               |
+| repository-decision | The native Showcase search maps default border to gray-200, hover/focus border and focus outline to blue-200, and blurred filled background to blue-50. | Application-local contract tested through real interaction; the SVG does not establish native input paint semantics. |
+| unknown             | Flattened paths do not by themselves prove native input semantics, event ownership, placeholder behavior, accessible naming, or focus behavior.         | No DOM/behavior metadata exists in the SVG.                                                                          |
+| unknown             | The source does not establish a universal narrow-header or mobile-drawer contract.                                                                      | Only represented sheet compositions are authoritative.                                                               |
 
 Typography visible in the export is outlined into paths, so font family,
 weight, line height, and editable text values cannot be claimed from SVG text
@@ -58,13 +59,13 @@ Measured on baseline commit `27f7b49aa407afd9c41e0f32f6eedc14320fcb16`:
 - one application-local style implementation in
   `apps/showcase/src/showcase.css`;
 - one bounded header substitute, `.shlz-hero`, inside the same live consumer;
-- zero executable fixtures, content-stress fixtures, Data Workspace consumers,
-  inert diagnostics, legacy/native shell substitutes, or package exports.
+- one inert source-only Sidebar/Drawer diagnostic reference in
+  `apps/showcase/src/fidelity.js` and zero executable shell fixtures,
+  content-stress fixtures, Data Workspace consumers, legacy/native shell
+  substitutes, or package exports.
 
-The manifest reserves `sidebar-application-shell-showcase` as the stable audit
-ID. The current source predates that attribute; adding it belongs to the later
-application-composition packet. Until then, the focused census deliberately
-keys the one live occurrence by its bounded shell/sidebar signature, checks the
-built bundle for the same one-to-one signature, and rejects additional source
-or built-DOM signatures. This is a temporary, explicit limitation rather than
-runtime evidence.
+The live consumer carries the stable audit ID
+`sidebar-application-shell-showcase`. The census derives classified source
+paths from the manifest, scans executable markup and application-local CSS for
+bounded shell/sidebar/header signatures, classifies the stylesheet alternative,
+and checks the built bundle for the same one-to-one executable signature.

@@ -1585,10 +1585,12 @@ article {
   }
 
   .shlz-docs-nav__group a {
+    max-inline-size: calc(100vw - var(--shlz-source-spacing-32));
     padding: var(--shlz-source-spacing-4) var(--shlz-source-spacing-8);
     border: 0;
     border-radius: var(--shlz-source-radius-max);
-    white-space: nowrap;
+    overflow-wrap: anywhere;
+    white-space: normal;
   }
 
   .shlz-docs-nav__group
