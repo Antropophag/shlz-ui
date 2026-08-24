@@ -15,7 +15,7 @@ The harness SHALL distinguish runtime-observed context usage from reproducible p
 
 ### Requirement: Deterministic representative replay
 
-The harness SHALL represent discovery, procedural context, validation output, review output, repeated reads, state, and orchestration in a PR #36 replay bound to immutable PR artifacts and captured external evidence. The expected contract SHALL be stored independently from the candidate replay definition, and identical repository content and replay definitions SHALL produce stable measurements.
+The harness SHALL represent discovery, procedural context, validation output, review output, repeated reads, state, and orchestration in a PR #36 replay bound to immutable PR artifacts and pinned captured external evidence. The expected contract SHALL be a frozen snapshot assembled from that captured evidence independently of the candidate replay definition. Stable collections and digests SHALL use locale-independent code-unit ordering, and identical repository content and replay definitions SHALL produce stable measurements.
 
 #### Scenario: Repeating a replay
 
@@ -43,7 +43,7 @@ The change SHALL probe each declared contributor, compare at least documentation
 
 ### Requirement: Correctness and evidence equivalence
 
-The harness SHALL compare a candidate execution with an independently stored oracle covering required sources, correctness/evidence obligations, findings, and state transitions. It SHALL fail closed on a missing or substituted source identity, missing obligation, unresolved blocking finding, omitted raw-evidence pointer, or omitted required state transition.
+The harness SHALL compare a candidate execution with an independently captured and stored oracle covering required sources, correctness/evidence obligations, findings, and state transitions. It SHALL fail closed on a missing or substituted source identity, missing obligation, any unresolved dependency-handoff finding, unresolved blocking structured finding, omitted raw-evidence pointer, or omitted required state transition.
 
 #### Scenario: Smaller input drops validation evidence
 
@@ -57,7 +57,7 @@ The harness SHALL compare a candidate execution with an independently stored ora
 
 ### Requirement: Evidence-backed phase input control
 
-The harness SHALL provide a packet-integrated, phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged sources acknowledged earlier in the same physical session without reloading their full content. A persisted session ledger SHALL record acknowledgement and SHALL NOT be reused across a fresh worker boundary. The representation SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
+The harness SHALL provide a packet-integrated, phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged sources acknowledged earlier in the same physical session without reloading their full content. A persisted session ledger SHALL record acknowledgement and SHALL NOT be reused across a fresh worker boundary. The CLI session identity is operator-declared and SHALL be unique to the physical worker; reusing its value across workers violates the operator contract. The representation SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
 
 #### Scenario: Unchanged source was attested in an earlier phase
 

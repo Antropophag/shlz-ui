@@ -59,7 +59,11 @@ The fixture records `{ value: 188000, unit: "tokens", provenance: "user-observed
 
 ### Stable replay input
 
-The candidate fixture and independent oracle separately record immutable PR metadata, contributor classifications, source identities, and obligations derived from actual PR artifacts. Git-backed inputs use full commit hashes; external PR/review evidence is captured in a checked-in oracle. Probe metrics must be sourced or explicitly labeled modeled. This makes replay offline and stable. The report documents that it is representative, not a transcript.
+The candidate fixture and independent oracle separately record immutable PR metadata, contributor classifications, source identities, and obligations derived from actual PR artifacts. The oracle is a frozen contract assembled from the captured PR/review evidence rather than generated from the candidate manifest. Git-backed inputs, including the checked-in external evidence capture, use full commit hashes. Stable collections use plain code-unit ordering instead of locale-sensitive collation. Probe metrics must be sourced or explicitly labeled modeled. This makes replay offline and stable. The report documents that it is representative, not a transcript.
+
+### Review follow-up hardening
+
+Acknowledgement treats every non-empty dependency-handoff `unresolvedFindings` entry as unresolved, including legacy string entries, while retaining status-aware handling for structured review findings. The operator-supplied session identity is explicitly part of the worker-boundary contract: a fresh worker must choose a new identity and ledger. Delivery evidence is committed only after the root orchestration guard has actually bound the worker claim and persisted the durable handoff.
 
 ### Runtime limitation
 
