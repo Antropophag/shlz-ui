@@ -195,9 +195,7 @@ switch (command) {
         validationLedger: validationPath
           ? await readJson(absolute(validationPath))
           : [],
-        reviewState: reviewPath
-          ? await readJson(absolute(reviewPath))
-          : null,
+        reviewState: reviewPath ? await readJson(absolute(reviewPath)) : null,
       },
     );
     await writeJson(statePath(out), capsule);
