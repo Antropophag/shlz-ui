@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "reviewedHead": "850586c493ca4993091fc19f5a132826e9783d81",
+  "findings": [
+    {
+      "id": "SPEC-1",
+      "severity": "high",
+      "summary": "Offline replay is not integrated with the real context/worker path and therefore does not reduce actual harness phase input."
+    },
+    {
+      "id": "SPEC-2",
+      "severity": "high",
+      "summary": "The PR #36 replay uses current-change sources instead of pinned PR #36 artifacts and declared verdicts instead of captured evidence."
+    },
+    {
+      "id": "SPEC-3",
+      "severity": "high",
+      "summary": "Baseline and candidate derive from the same manifest, making equivalence circular."
+    },
+    {
+      "id": "SPEC-4",
+      "severity": "medium",
+      "summary": "Contributor and alternative comparisons are asserted rather than independently probed."
+    },
+    {
+      "id": "SPEC-5",
+      "severity": "medium",
+      "summary": "No persisted capsule API rejects or refreshes stale source attestations."
+    },
+    {
+      "id": "STD-1",
+      "severity": "high",
+      "summary": "Trustworthy worker telemetry reports 1169262 input tokens, so proxy success cannot be presented as total or active-context improvement."
+    }
+  ]
+}

@@ -9,14 +9,18 @@
   },
   "measurements": {
     "phaseCount": 5,
-    "sourceReads": 23,
-    "uniqueSourceReads": 8,
-    "baselineSourceBytes": 148950,
-    "uniqueSourceBytes": 46276,
-    "repeatedSourceBytes": 102674,
-    "repeatedSourceRatio": 0.6893185632762672,
-    "proceduralSourceBytesAcrossPhases": 118811,
-    "normativeSourceBytesAcrossPhases": 30139,
+    "sourceReads": 29,
+    "uniqueSourceReads": 12,
+    "baselineSourceBytes": 153997,
+    "optimizedSourceBytes": 57234,
+    "capsuleBytes": 8595,
+    "optimizedTotalBytes": 65829,
+    "absoluteReductionBytes": 88168,
+    "reductionRatio": 0.57253,
+    "repeatedSourceBytes": 96763,
+    "repeatedSourceRatio": 0.628344,
+    "proceduralSourceBytesAcrossPhases": 112971,
+    "proceduralOptimizedBytes": 33195,
     "githubPrRawBytes": 20432,
     "githubPrCompactEvidenceBytes": 559,
     "reviewBodiesBytes": 12196,
@@ -29,7 +33,9 @@
   "metricLimits": [
     "The 188K observation has no trusted runtime trace and is not derived from byte measurements.",
     "Source and output bytes are deterministic context-cost proxies, not token estimates.",
-    "The replay represents the observed PR #36 workflow shape; it is not a chat transcript.",
+    "The replay is bound to immutable PR #36 Git blobs and checked-in captured evidence; it is not a chat transcript.",
+    "The independent oracle is separate from the candidate phase manifest.",
+    "A fresh implementation worker reported 1,169,262 input tokens, including 1,048,576 cached; this limits claims to repository-controlled phase input.",
     "Compact output sizes prove compression potential only; obligation equivalence must independently prevent evidence loss."
   ],
   "candidates": [
@@ -41,7 +47,7 @@
     {
       "id": "phase-bound-source-attestation",
       "result": "selected",
-      "evidence": "Avoiding unchanged cross-phase reloads removes up to 102,674 of 148,950 source bytes (68.9%), exceeding the 35% threshold before output compaction."
+      "evidence": "The pinned replay reduces repository-controlled input from 153,997 to 65,829 bytes (57.25%) while the independent oracle preserves 12 source identities and 19 obligations."
     },
     {
       "id": "orchestration-simplification",

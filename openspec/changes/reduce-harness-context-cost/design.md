@@ -45,9 +45,9 @@ The replay declares contributor classes and invariant obligations. Probes remove
 
 ## Evidence-backed Decision
 
-The PR #36 replay measured 23 source reads across five phases but only eight unique paths. Full phase-by-phase loading consumed 148,950 source bytes; 102,674 bytes (68.9%) were unchanged repeated reads. Procedural inputs accounted for 118,811 phase-loaded bytes, while the four unique procedural files contained 33,195 bytes and no duplicated long lines. Actual GitHub PR JSON was 20,432 bytes versus a 559-byte evidence index; review bodies were 12,196 bytes versus a 54-byte verdict index. Durable execution state was only 4,395 bytes and OpenSpec planning artifacts 10,447 bytes. These are byte proxies, not token estimates; the 188K value remains user-observed only.
+The corrected PR #36 replay uses immutable Git blobs from base `50bee6f` and head `b7dd0ae` plus checked-in captured external evidence. Its independent oracle is separate from the candidate phase manifest. The baseline measured 29 phase reads, 12 authoritative source identities, and 153,997 repository-controlled bytes. The selected candidate measured 57,234 newly read bytes plus 8,595 capsule bytes (65,829 total), a reduction of 88,168 bytes or 57.25%. Repeated-read bytes fell from 96,763 to zero; procedural bytes fell from 112,971 to 33,195. Discovery, validation, review, and state inputs were preserved rather than credited with artificial savings. These are byte proxies, not token estimates; the 188K value remains user-observed only.
 
-Select Candidate B: a phase-local context capsule with content digests, `readNow` for new/changed required sources, `attested` identities for unchanged earlier reads, obligations, transition, verdicts, unresolved findings, and raw-evidence pointers. The replay interface produces baseline and capsule metrics and refuses an improvement verdict unless equivalence passes. This is one local deterministic module and additive CLI command.
+Select Candidate B: a packet-integrated phase capsule with content digests, `readNow` for new/changed required sources, `attested` identities for content acknowledged earlier in the same physical session, obligations, transition, verdicts, unresolved findings, and raw-evidence pointers. `context-capsule` derives this input from the real packet context index and a persisted session ledger; `context-ack` records the exact capsule/source digests after the operator has read the inputs. Fresh workers start fresh ledgers. The replay compares the candidate with a separately stored pinned oracle and refuses an improvement verdict unless source, obligation, transition, finding, and raw-evidence equivalence pass.
 
 Candidate A is insufficient alone because literal document duplication was not the measured multiplier. Candidate C targets a smaller state representation and risks removing correctness transitions. Candidate D is unnecessary because Candidate B's source-read reduction alone exceeds the 35% threshold before counting safe output compaction.
 
@@ -57,7 +57,11 @@ The fixture records `{ value: 188000, unit: "tokens", provenance: "user-observed
 
 ### Stable replay input
 
-The fixture records immutable PR metadata, contributor classifications, and obligations derived from the actual PR artifacts. Probe metrics must be sourced or explicitly labeled modeled. This makes replay offline and stable. The report documents that it is representative, not a transcript.
+The candidate fixture and independent oracle separately record immutable PR metadata, contributor classifications, source identities, and obligations derived from actual PR artifacts. Git-backed inputs use full commit hashes; external PR/review evidence is captured in a checked-in oracle. Probe metrics must be sourced or explicitly labeled modeled. This makes replay offline and stable. The report documents that it is representative, not a transcript.
+
+### Runtime limitation
+
+The fresh implementation worker reported 1,169,262 input tokens, including 1,048,576 cached input tokens. This observation is not comparable to the byte proxy and shows that fresh-process isolation alone does not control total runtime input. Therefore the selected mechanism claims only a measured reduction in repository-controlled phase input. It does not claim a 57.25% reduction in total tokens or active/session context; runtime-level improvement needs comparable before/after telemetry outside this change.
 
 ## Risks / Trade-offs
 

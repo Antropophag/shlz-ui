@@ -15,7 +15,7 @@ The harness SHALL distinguish runtime-observed context usage from reproducible p
 
 ### Requirement: Deterministic representative replay
 
-The harness SHALL represent discovery, procedural context, validation output, review output, repeated reads, state, and orchestration in a PR #36 replay and SHALL produce stable measurements for identical repository content and replay definitions.
+The harness SHALL represent discovery, procedural context, validation output, review output, repeated reads, state, and orchestration in a PR #36 replay bound to immutable PR artifacts and captured external evidence. The expected contract SHALL be stored independently from the candidate replay definition, and identical repository content and replay definitions SHALL produce stable measurements.
 
 #### Scenario: Repeating a replay
 
@@ -43,7 +43,7 @@ The change SHALL probe each declared contributor, compare at least documentation
 
 ### Requirement: Correctness and evidence equivalence
 
-The harness SHALL compare baseline and candidate executions only when both cover the same required correctness, evidence, and reproducibility obligations. It SHALL fail closed on a missing obligation, unresolved blocking finding, or omitted required state transition.
+The harness SHALL compare a candidate execution with an independently stored oracle covering required sources, correctness/evidence obligations, findings, and state transitions. It SHALL fail closed on a missing or substituted source identity, missing obligation, unresolved blocking finding, omitted raw-evidence pointer, or omitted required state transition.
 
 #### Scenario: Smaller input drops validation evidence
 
@@ -57,7 +57,7 @@ The harness SHALL compare baseline and candidate executions only when both cover
 
 ### Requirement: Evidence-backed phase input control
 
-The harness SHALL provide a phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged previously attested sources without reloading their full content. It SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
+The harness SHALL provide a packet-integrated, phase-local structured context representation that identifies required sources by current content digest, requires newly relevant or changed source content, and carries unchanged sources acknowledged earlier in the same physical session without reloading their full content. A persisted session ledger SHALL record acknowledgement and SHALL NOT be reused across a fresh worker boundary. The representation SHALL preserve compact validation/review verdicts, unresolved findings, obligations, and state transitions while keeping raw evidence addressable on demand.
 
 #### Scenario: Unchanged source was attested in an earlier phase
 
@@ -69,6 +69,16 @@ The harness SHALL provide a phase-local structured context representation that i
 - **WHEN** a later phase requires a source whose digest differs from the attested digest
 - **THEN** the phase representation requires that source content to be read again
 
+#### Scenario: Phase acknowledgement is persisted
+
+- **WHEN** an operator acknowledges a capsule after reading its `readNow` inputs
+- **THEN** the ledger binds the source digests, phase, transition, and capsule digest for later phases in that physical session
+
+#### Scenario: A fresh worker starts
+
+- **WHEN** packet work moves to a fresh worker process
+- **THEN** the worker starts with a new ledger and all required packet sources are `readNow`
+
 #### Scenario: Compact evidence index omits a blocking result
 
 - **WHEN** compact validation or review state omits an obligation, unresolved blocking finding, verdict, or required transition
@@ -76,7 +86,7 @@ The harness SHALL provide a phase-local structured context representation that i
 
 ### Requirement: Measurable improvement
 
-The representative PR #36 replay SHALL publish a measured baseline, candidate results, contributor deltas, and a configured minimum reduction threshold using transparent metrics selected by the probe design. A passing improvement SHALL meet the threshold without weakening equivalence and SHALL state the limitations of each metric.
+The representative PR #36 replay SHALL publish a measured baseline, candidate results, contributor deltas, and a configured minimum reduction threshold using transparent repository-controlled byte/read metrics selected by the probe design. A passing improvement SHALL meet the threshold without weakening equivalence and SHALL state that runtime token usage is a separate observation which limits, and can contradict, any broader context-cost claim.
 
 #### Scenario: Improvement threshold is met
 

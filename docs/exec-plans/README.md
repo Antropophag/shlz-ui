@@ -24,10 +24,14 @@ npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --r
 npm run harness -- worker-retry <state> <packet>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
+npm run harness -- context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --out <capsule>
+npm run harness -- context-ack <capsule> <ledger>
 npm run harness -- context-cost-replay <fixture>
 ```
 
-`context-cost-replay` is an additive, offline measurement command. It emits a deterministic phase capsule with `readNow` content identities for new or changed sources, `attested` identities for unchanged sources, compact obligations/transitions/evidence, and raw-evidence pointers when the fixture declares them. Its improvement verdict fails closed on nonequivalent sources, obligations, transitions, evidence, unresolved blocking findings, or a missed byte-proxy threshold. Reported bytes are reproducible proxies; runtime token observations are copied only with their fixture provenance and are never inferred.
+`context-capsule` applies the packet working set to a session-local content ledger. Read every `readNow` source, resolve `attested` sources only on demand, then run `context-ack`; acknowledgement persists the exact digests and transition for the next phase. A changed source digest returns to `readNow`. The ledger is an operational cache, never authority, and it must not cross a physical worker boundary because a fresh worker has not read the earlier content.
+
+`context-cost-replay` is an additive, offline measurement command. Its independent oracle is a separate checked-in manifest bound to immutable Git blobs and captured evidence; the candidate emits deterministic phase capsules with `readNow` content identities, `attested` unchanged sources, compact obligations/transitions/evidence, and raw-evidence pointers. Its improvement verdict fails closed on nonequivalent sources, obligations, transitions, evidence, unresolved blocking findings, or a missed byte-proxy threshold. Reported bytes cover repository-controlled input only. Runtime token observations take precedence for total input and remain separate; the live implementation worker used 1,169,262 input tokens (1,048,576 cached), so this mechanism does not claim an equivalent reduction in total or active model context.
 
 Version 2 plans may opt into `specDrivenTdd.version: 1`. Every material
 behavioral slice then has either a bounded inapplicability disposition or an

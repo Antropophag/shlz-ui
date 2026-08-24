@@ -1364,6 +1364,7 @@ export async function contextIndex(plan, packetId, repoRoot, state = null) {
       ? [state]
       : [];
   return {
+    planId: plan.id,
     packet,
     sources,
     missingPatterns,

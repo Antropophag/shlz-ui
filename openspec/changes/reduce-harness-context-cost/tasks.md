@@ -6,10 +6,10 @@
 
 ## 2. Context-cost module
 
-- [x] 2.1 Implement only the selected context-cost mechanism behind one small harness interface; verify focused unit cases cover the contributor behavior and deterministic replay results established by Task 1.2.
-- [x] 2.2 Implement fail-closed obligation/state/finding equivalence and improvement verdicts; verify missing evidence and below-threshold reductions fail even when candidate inputs are smaller.
+- [x] 2.1 Implement only the selected context-cost mechanism behind one small harness interface and integrate it with real packet context through a persisted session ledger; verify focused unit cases cover reuse, acknowledgement, changed-source invalidation, and deterministic replay.
+- [x] 2.2 Implement an independent pinned PR #36 oracle plus fail-closed source/obligation/state/finding equivalence and improvement verdicts; verify fixture omissions, missing evidence, and below-threshold reductions fail even when candidate inputs are smaller.
 
 ## 3. Integration and evidence
 
-- [x] 3.1 Add the additive harness CLI and phase-local operator documentation; run the PR #36 replay twice and record a deterministic report showing a material reduction without runtime-token inference or new infrastructure.
+- [x] 3.1 Add the additive harness CLI and phase-local operator documentation; run the pinned PR #36 replay twice and record a deterministic report showing a material repository-controlled reduction, while explicitly treating live worker token usage as a contrary total-input limitation.
 - [ ] 3.2 Run focused and repository validation, strict OpenSpec validation, route conformance, and independent Standards/Spec review; resolve in-scope findings and open a separate unmerged PR with baseline, replay deltas, checks, limitations, and review state.

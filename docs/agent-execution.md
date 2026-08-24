@@ -80,7 +80,9 @@ affected implementation slice until a fresh independent design and RED pass.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 
-For phase-bound work with a context-cost replay fixture, run `npm run harness -- context-cost-replay <fixture>`. The report's capsule lists required new or changed content under `readNow` and carries unchanged content-addressed sources under `attested`; read the former and resolve the latter on demand. Treat `sourceDigest` as the currency check: any source change produces a new digest and requires a new capsule. An improvement verdict is valid only when source, obligation, transition, evidence, and blocking-finding equivalence passes and the configured byte-proxy threshold is met. Runtime observations retain their stated provenance and remain separate from proxy bytes.
+For multiple semantic phases in one physical session, generate `context-capsule <plan> <packet> --state <state> --ledger <ledger> --phase <phase> --transition <transition> --out <capsule>`. Read every `readNow` source, resolve `attested` sources only on demand, and persist the attestation with `context-ack <capsule> <ledger>`. Start a new ledger for every fresh worker. Any source change returns it to `readNow`; an unresolved blocking handoff prevents acknowledgement. This controls repository-owned phase input without treating a digest as proof of comprehension.
+
+Use `context-cost-replay <fixture>` to compare a candidate against a separate pinned oracle. An improvement verdict is valid only when source, obligation, transition, evidence, and blocking-finding equivalence passes and the configured byte-proxy threshold is met. Proxy bytes cover repository-controlled inputs, not total model context. Trustworthy runtime usage takes precedence and retains its provenance; a proxy improvement must report any contrary live runtime observation rather than generalize it.
 
 ## Route conformance and delivery
 

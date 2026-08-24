@@ -60,7 +60,12 @@ import {
   launchCodexWorker,
   probeCodexExec,
 } from "./lib/harness/codex-worker.mjs";
-import { runContextCostReplay } from "./lib/harness/context-cost.mjs";
+import {
+  acknowledgeContextCapsule,
+  createContextLedger,
+  createPacketContextCapsule,
+  runContextCostReplay,
+} from "./lib/harness/context-cost.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -159,6 +164,44 @@ const refreshChangeFailureInvariants = async (state, target) => {
 const exec = promisify(execFile);
 
 switch (command) {
+  case "context-capsule": {
+    const ledgerPath = option("--ledger");
+    const phase = option("--phase");
+    const transition = option("--transition");
+    const out = option("--out");
+    if (!ledgerPath || !phase || !transition || !out)
+      throw new Error(
+        "context-capsule requires --ledger, --phase, --transition, and --out",
+      );
+    const plan = await readJson(absolute(args[0]));
+    const executionStatePath = option("--state");
+    const index = await contextIndex(
+      plan,
+      args[1],
+      repoRoot,
+      executionStatePath ? await readJson(absolute(executionStatePath)) : null,
+    );
+    const capsule = await createPacketContextCapsule(
+      index,
+      await readJsonOr(absolute(ledgerPath), createContextLedger()),
+      repoRoot,
+      { phase, transition },
+    );
+    await writeJson(statePath(out), capsule);
+    output(capsule);
+    break;
+  }
+  case "context-ack": {
+    const ledgerPath = args[1];
+    if (!ledgerPath) throw new Error("context-ack requires <capsule> <ledger>");
+    const next = acknowledgeContextCapsule(
+      await readJsonOr(absolute(ledgerPath), createContextLedger()),
+      await readJson(absolute(args[0])),
+    );
+    await writeJson(statePath(ledgerPath), next);
+    output(next);
+    break;
+  }
   case "context-cost-replay":
     output(
       await runContextCostReplay(await readJson(absolute(args[0])), repoRoot),
@@ -842,6 +885,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }
