@@ -225,7 +225,7 @@ const typographyCompatibilityMarkup = `
   </div>
 </section>`;
 
-app.innerHTML = `<header class="shlz-hero"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p><fieldset class="shlz-font-switch" data-shlz-visual-addition><legend>Typography profile</legend><label><input type="radio" name="shlz-font-profile" value="golos" checked>Golos Text</label><label><input type="radio" name="shlz-font-profile" value="fira">Fira Sans</label></fieldset></header>
+app.innerHTML = `<header class="shlz-hero"><div class="shlz-hero__intro"><p>SHLZ UI · component library</p><h1>Components and foundations</h1><p>Production contracts and examples, with source verification available on demand.</p></div><div class="shlz-hero__actions"><label class="shlz-shell-search"><span class="shlz-visually-hidden">Search components and foundations</span><input type="search" placeholder="Search components" autocomplete="off" data-shlz-shell-search></label><span class="shlz-shell-avatar" aria-label="Showcase profile"><img src="${showcaseIconUrl("user")}" alt=""></span></div><fieldset class="shlz-font-switch" data-shlz-visual-addition><legend>Typography profile</legend><label><input type="radio" name="shlz-font-profile" value="golos" checked>Golos Text</label><label><input type="radio" name="shlz-font-profile" value="fira">Fira Sans</label></fieldset></header>
 <section id="source-spec" class="shlz-major-section"><p class="shlz-section-kicker">A. SOURCE SPEC</p><h2>Буквальная спецификация Figma ${sourceEvidence}</h2><p><code>Colors.svg</code>, <code>Spacing.svg</code> и human-verified Corner radius source. Имена, группы и значения не нормализованы в искусственные шкалы.</p>
 <div class="shlz-source-sheet"><h2>Colors</h2><div class="shlz-source-palette">${colors}</div></div>
 <div class="shlz-source-sheet shlz-source-sheet--split"><div><h2>Spacing</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Literal named source values.</p><div class="shlz-stack">${spaces}</div></div><div><h2>Corner radius</h2><p><span class="shlz-evidence" data-kind="FACT">FACT</span> Source labels, not a universal component mapping.</p><div class="shlz-radius-grid">${radii}</div></div></div>
@@ -633,10 +633,11 @@ for (const [id, selector] of [
 
 const shell = document.createElement("div");
 shell.className = "shlz-docs-shell";
+shell.dataset.componentAuditId = "sidebar-application-shell-showcase";
 const sidebar = document.createElement("aside");
 sidebar.className = "shlz-docs-sidebar";
 sidebar.setAttribute("aria-label", "Showcase navigation");
-sidebar.innerHTML = `<a class="shlz-docs-home" href="#top">SHLZ UI</a><nav>${navigationMarkup}</nav>`;
+sidebar.innerHTML = `<div class="shlz-docs-sidebar__header"><a class="shlz-docs-home" href="#top">SHLZ UI</a><button class="shlz-docs-sidebar__toggle" type="button" aria-expanded="true" aria-controls="showcase-navigation" data-shlz-sidebar-toggle><span aria-hidden="true">‹</span><span class="shlz-visually-hidden">Collapse showcase navigation</span></button></div><nav id="showcase-navigation" aria-label="Components and foundations">${navigationMarkup}</nav>`;
 const content = document.createElement("div");
 content.className = "shlz-docs-content";
 const topAnchor = document.createElement("span");
@@ -644,6 +645,19 @@ topAnchor.id = "top";
 content.append(topAnchor, ...app.childNodes);
 shell.append(sidebar, content);
 app.append(shell);
+
+const sidebarToggle = sidebar.querySelector("[data-shlz-sidebar-toggle]");
+const setSidebarOpen = (open) => {
+  shell.classList.toggle("shlz-docs-shell--closed", !open);
+  sidebarToggle.setAttribute("aria-expanded", String(open));
+  sidebarToggle.querySelector("[aria-hidden]").textContent = open ? "‹" : "›";
+  sidebarToggle.querySelector(".shlz-visually-hidden").textContent = open
+    ? "Collapse showcase navigation"
+    : "Expand showcase navigation";
+};
+sidebarToggle.addEventListener("click", () =>
+  setSidebarOpen(sidebarToggle.getAttribute("aria-expanded") !== "true"),
+);
 
 const revealHashTarget = () => {
   if (!window.location.hash) return;

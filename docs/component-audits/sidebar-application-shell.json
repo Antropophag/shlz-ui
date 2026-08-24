@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "component": "sidebar-application-shell",
+  "authoritativeSource": "shlz-design-source/raw/svg/Sidebar.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Header.svg",
+    "docs/components/sidebar-application-shell.md"
+  ],
+  "implementation": [
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/showcase.css"
+  ],
+  "behavior": "apps/showcase/src/main.js",
+  "docs": "docs/components/sidebar-application-shell.md",
+  "rootSelector": ".shlz-docs-shell",
+  "legacySelectors": [".shlz-docs-sidebar", ".shlz-hero"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    {
+      "id": "sidebar-application-shell-showcase",
+      "kind": "live-consumer"
+    }
+  ],
+  "supportedSizes": ["source-desktop", "showcase-narrow-decision"],
+  "supportedStates": [
+    "sidebar-opened",
+    "sidebar-closed",
+    "sidebar-active-item",
+    "sidebar-default-item",
+    "header-default",
+    "header-hover",
+    "header-typing",
+    "header-filled"
+  ],
+  "contentStress": [
+    "long-cyrillic-navigation",
+    "long-latin-navigation",
+    "text-scale",
+    "narrow-overflow-and-focus"
+  ],
+  "stateLedgers": {
+    "sidebar": ["opened", "closed", "active-item", "default-item"],
+    "header": ["default", "hover", "typing", "filled"]
+  },
+  "sourceClaims": [
+    {
+      "claim": "Sidebar.svg contains exact 72 by 1000 closed and 301 by 1000 opened dark compositions",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Sidebar.svg"
+    },
+    {
+      "claim": "repeated dark surface and translucent white item/divider paints form a sidebar pattern without becoming global tokens",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Sidebar.svg"
+    },
+    {
+      "claim": "Header.svg contains two 48 by 48 radius-24 raster-backed avatar instances",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Header.svg"
+    },
+    {
+      "claim": "the Showcase narrow layout and state names remain application-owned audit decisions",
+      "classification": "repository-decision",
+      "evidence": "docs/components/sidebar-application-shell.md"
+    },
+    {
+      "claim": "source exports do not establish routing, authorization, persistence, mobile drawer, or native input behavior",
+      "classification": "assumption",
+      "evidence": "docs/components/sidebar-application-shell.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/showcase-navigation.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-opened-chromium-linux.png",
+    "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-closed-chromium-linux.png",
+    "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-header-filled-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: focused byte hashes and source-critical SVG geometry are locked by the Wave 9 source test",
+    "structural-contract": "pass: the current application-local shell, sidebar, header substitute, styles, and absence of a package export are censused",
+    "runtime-browser": "pass: nine focused Chromium tests execute sidebar toggle/current navigation and native header default/hover/typing/filled lifecycle",
+    "accessibility": "pass: native aside/nav/link/button/search semantics, accessible names, current location, keyboard activation, tab order, and visible focus are exercised",
+    "focused-visual": "pass: three reviewed component snapshots cover opened and closed sidebar plus filled header; computed checks lock source-critical 301/72 geometry, #0B1623 paint, 48px avatar, and header state changes",
+    "consumer-integration": "pass: the sole current occurrence is classified as the real Showcase live consumer",
+    "responsive-content-stress": "pass: 390px viewport with 20px root text, long Cyrillic and unbroken Latin navigation retains reachable toggle/search, visible focus, and zero page-level horizontal overflow"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "reviewed focused snapshots for sidebar-opened, sidebar-closed, and header-filled"
+      ],
+      "realInteractionVisual": [
+        "real pointer hover changes the native search border; focus/typing exposes the native focus outline; blur with content exposes the filled background",
+        "real toggle activation produces computed 301px opened and 72px closed sidebar geometry"
+      ],
+      "runtimeBehavior": [
+        "pointer and Enter activation toggle aria-expanded and shell state",
+        "hash activation leaves exactly one aria-current=location link",
+        "native search retains typed content across focus and blur"
+      ]
+    },
+    "materialStates": [
+      "sidebar-opened",
+      "sidebar-closed",
+      "sidebar-active-item",
+      "sidebar-default-item",
+      "header-default",
+      "header-hover",
+      "header-typing",
+      "header-filled"
+    ],
+    "browserTest": "tools/playwright/showcase-navigation.spec.js",
+    "manualStateWalk": "pass: reviewed pointer hover, keyboard focus/Enter, open/closed and active/default sidebar, default/hover/typing/filled header, focused snapshots, and narrow long-content/text-scale behavior on 2026-08-24"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "the raw exports do not establish routing, authorization, toggle persistence, or native input behavior; these remain bounded Showcase decisions",
+    "the narrow horizontal navigation is application-owned and does not establish a reusable responsive-shell or mobile-drawer contract",
+    "the header avatar uses the verified local user icon inside source-backed 48px circular geometry because the source raster portrait is not a reusable application asset"
+  ]
+}

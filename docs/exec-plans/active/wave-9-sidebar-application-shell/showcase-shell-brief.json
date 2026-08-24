@@ -1,0 +1,183 @@
+{
+  "version": 1,
+  "planId": "wave-9-sidebar-application-shell",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/wave-9-sidebar-application-shell/specs/application-compositions/sidebar-application-shell/spec.md",
+      "apps/showcase/src/main.js",
+      "apps/showcase/src/showcase.css",
+      "tools/playwright/showcase-navigation.spec.js"
+    ],
+    "contracts": ["application-compositions/sidebar-application-shell"],
+    "dependencies": ["source-census"],
+    "focusedValidation": [
+      "Wave 9 browser runtime/accessibility",
+      "focused snapshots",
+      "desktop/narrow content stress",
+      "verified primitive regressions"
+    ],
+    "handoff": [
+      "material interactions",
+      "screenshots and computed checks",
+      "limitations/findings"
+    ],
+    "id": "showcase-shell",
+    "implementationOutcomes": [
+      "accessible application-local composition",
+      "real interaction state evidence",
+      "responsive consumer proof"
+    ],
+    "implementationSurface": [
+      "apps/showcase/src/**",
+      "tools/playwright/**",
+      "docs/component-audits/sidebar-application-shell.json"
+    ],
+    "nonGoals": [
+      "reusable shell package",
+      "routing",
+      "authorization",
+      "unsupported mobile drawer"
+    ],
+    "objective": "Reconcile and prove the application-local Showcase shell across all material interactions and stress states",
+    "outputs": [
+      "source-reconciled Showcase shell",
+      "complete focused evidence ladder"
+    ],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "Showcase shell markup/styles",
+      "sidebar current/open/closed states",
+      "header default/hover/typing/filled",
+      "runtime/a11y/visual/stress evidence"
+    ]
+  },
+  "claimId": "wave9-showcase-shell-20260824",
+  "baseline": {
+    "branch": "feat/wave-9-data-display",
+    "commit": "27f7b49aa407afd9c41e0f32f6eedc14320fcb16",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "wave-9-sidebar-application-shell"
+  },
+  "dependencyDigests": {
+    "source-census": "e621d5cc9c3718850040751635b2c656043c823057d6aeee33a7bcf15d7012a3"
+  },
+  "packetDigest": "e93bcb2f7ec03c3c4b4c4c13d12e557df0175a193c5caac5bf9c1a8434af0cd7",
+  "contextIndex": [
+    "openspec/changes/wave-9-sidebar-application-shell/specs/application-compositions/sidebar-application-shell/spec.md",
+    "apps/showcase/src/main.js",
+    "apps/showcase/src/showcase.css",
+    "tools/playwright/showcase-navigation.spec.js"
+  ],
+  "allowedImplementationSurface": [
+    "apps/showcase/src/**",
+    "tools/playwright/**",
+    "docs/component-audits/sidebar-application-shell.json"
+  ],
+  "focusedValidation": [
+    "Wave 9 browser runtime/accessibility",
+    "focused snapshots",
+    "desktop/narrow content stress",
+    "verified primitive regressions"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "313ee6404859ababf7358c8b7787f00ef6c31f49ec0bc1e79b1ae9c8c688e5c2",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "3cbaa4110828f4f3253acd71964b7ff2a4603cbad543f3b1226a997503a40b80",
+          "changed": [
+            "source and state ledger for Sidebar and Header",
+            "schema-v2 Sidebar / Application Shell manifest",
+            "repository and built-DOM occurrence guard"
+          ],
+          "claimId": "wave9-source-census-20260824",
+          "completedPacket": "source-census",
+          "invalidatedAssumptions": [
+            "the existing hero header is a bounded header substitute, not proof of the Header.svg state family"
+          ],
+          "nextPacket": "showcase-shell",
+          "provenChecks": [
+            "focused source, manifest, and census validation: 7/7 pass",
+            "Showcase build: 495 modules",
+            "git diff --check: pass"
+          ],
+          "settledDecisions": [
+            "Sidebar.svg and Header.svg are immutable authority",
+            "one application-local Showcase consumer and one local stylesheet are the implementation boundary",
+            "runtime and responsive evidence remain for the Showcase packet"
+          ],
+          "unresolvedFindings": [],
+          "workerReportDigest": "03e9968d666f66218b6d40e4ea456d401bb2af13c813beaeb9ed0dc57581bcb3"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "repository and built-DOM occurrence guard",
+        "schema-v2 Sidebar / Application Shell manifest",
+        "source and state ledger for Sidebar and Header"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": [
+        "Showcase build: 495 modules",
+        "focused source, manifest, and census validation: 7/7 pass",
+        "git diff --check: pass"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "wave9-showcase-shell-20260824",
+    "objective": "Reconcile and prove the application-local Showcase shell across all material interactions and stress states",
+    "obligations": [
+      "contract:application-compositions/sidebar-application-shell",
+      "outcome:accessible application-local composition",
+      "outcome:real interaction state evidence",
+      "outcome:responsive consumer proof",
+      "validation:Wave 9 browser runtime/accessibility",
+      "validation:desktop/narrow content stress",
+      "validation:focused snapshots",
+      "validation:verified primitive regressions"
+    ],
+    "packetId": "showcase-shell",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "wave-9-sidebar-application-shell",
+    "readNow": [
+      {
+        "bytes": 65654,
+        "digest": "4e3eae496ffeb85b62b2f0d2a21d5b4636c75f5b7dab45a04b7abac8b97d918c",
+        "path": "apps/showcase/src/main.js"
+      },
+      {
+        "bytes": 32918,
+        "digest": "6b4cfc0f1c738a8c883e019a66cb51ce985d6606ff90482e8745f87ba481f169",
+        "path": "apps/showcase/src/showcase.css"
+      },
+      {
+        "bytes": 5086,
+        "digest": "e2aa2835568e0dc6337d2ab772ed6b36a0a63676f90fea878bb54a9d3c66430a",
+        "path": "openspec/changes/wave-9-sidebar-application-shell/specs/application-compositions/sidebar-application-shell/spec.md"
+      },
+      {
+        "bytes": 1784,
+        "digest": "9c145333f4d6a4297194ca209c2bf7d6afaf2c80c2074f4bf0f6d72ca1b02652",
+        "path": "tools/playwright/showcase-navigation.spec.js"
+      }
+    ],
+    "sourceDigest": "00d2867e623c46a9ce279b7555044c8fe36d66b0b704827a7db128abd19c6246",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "ab83105c81c7bc5c277acef6cc553ba34179d880b195a7ddda8918aae8639c22"
+}

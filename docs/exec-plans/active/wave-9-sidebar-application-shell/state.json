@@ -1,0 +1,164 @@
+{
+  "version": 1,
+  "planId": "wave-9-sidebar-application-shell",
+  "requirementsRevision": 1,
+  "packets": {
+    "source-census": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "wave9-source-census",
+      "claimId": "wave9-source-census-20260824",
+      "briefDigest": "3cbaa4110828f4f3253acd71964b7ff2a4603cbad543f3b1226a997503a40b80",
+      "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
+      "dependencyDigests": {},
+      "packetDigest": "5d1455104a6fc209b71a12c85b39d385d43387b3d0fcd4b4fa88bdec665ab5e5",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a0350b-dd9b-7dd3-8fb5-0298985cd765",
+        "launchId": "72c12a43-33f9-4fc8-91a7-3ca306a967bb",
+        "startedAt": "2026-08-24T18:32:44.805Z",
+        "evidenceDigest": "a7410321b0c62bdf2456e1801bd8845ed36b8d1811f7ed70321c568ff775bbbc"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "72c12a43-33f9-4fc8-91a7-3ca306a967bb",
+        "usage": {
+          "input_tokens": 231343,
+          "cached_input_tokens": 190720,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 2003,
+          "reasoning_output_tokens": 495
+        },
+        "workerReport": "Completed the isolated `source-census` packet within its allowed surface.\n\nChanged:\n\n- [source/state ledger](/home/antropophag/code/shlz-ui-wave-9/docs/components/sidebar-application-shell.md)\n- [schema-v2 manifest](/home/antropophag/code/shlz-ui-wave-9/docs/component-audits/sidebar-application-shell.json)\n- [source/census guard](/home/antropophag/code/shlz-ui-wave-9/tools/tests/wave9-sidebar-application-shell-source-census.test.mjs)\n\nResults:\n\n- Authoritative sources unchanged:\n  - `Sidebar.svg`: `92ec7b…c96a0`\n  - `Header.svg`: `8af415…2392`\n- Census: 1 live Showcase consumer, 1 local style implementation, 1 bounded header substitute, and no fixtures, diagnostics, legacy substitutes, Data Workspace consumers, or package exports.\n- Positive census and synthetic unclassified repository/built-DOM mutations are covered.\n- Focused source, manifest, and census validation: **7/7 passed**.\n- Showcase build passed: **495 modules**.\n- `git diff --check` passed.\n\nRecorded limitation: audit ID `sidebar-application-shell-showcase` is reserved but not yet attached because application code is outside this packet. Runtime, accessibility, visual, responsive, and overall Wave 9 completion remain unclaimed.",
+        "workerReportDigest": "03e9968d666f66218b6d40e4ea456d401bb2af13c813beaeb9ed0dc57581bcb3"
+      }
+    },
+    "showcase-shell": {
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "wave9-showcase-shell",
+      "claimId": "wave9-showcase-shell-20260824",
+      "briefDigest": "ab83105c81c7bc5c277acef6cc553ba34179d880b195a7ddda8918aae8639c22",
+      "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
+      "dependencyDigests": {
+        "source-census": "e621d5cc9c3718850040751635b2c656043c823057d6aeee33a7bcf15d7012a3"
+      },
+      "packetDigest": "e93bcb2f7ec03c3c4b4c4c13d12e557df0175a193c5caac5bf9c1a8434af0cd7",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a03510-abe1-77a0-b924-d97384a5de27",
+        "launchId": "3de20293-5cb7-4ff9-9f58-92a84dfdddb9",
+        "startedAt": "2026-08-24T18:37:59.774Z",
+        "evidenceDigest": "ed051c1ea8df0dab0a9d113e37374a064825f0ded6e45d30b756926a9add1171"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "3de20293-5cb7-4ff9-9f58-92a84dfdddb9",
+        "usage": {
+          "input_tokens": 980772,
+          "cached_input_tokens": 900864,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 3873,
+          "reasoning_output_tokens": 943
+        },
+        "workerReport": "Implemented the `showcase-shell` packet within its authorized surface.\n\nChanged:\n\n- [main.js](/home/antropophag/code/shlz-ui-wave-9/apps/showcase/src/main.js)\n- [showcase.css](/home/antropophag/code/shlz-ui-wave-9/apps/showcase/src/showcase.css)\n- [showcase-navigation.spec.js](/home/antropophag/code/shlz-ui-wave-9/tools/playwright/showcase-navigation.spec.js)\n- [sidebar-application-shell.json](/home/antropophag/code/shlz-ui-wave-9/docs/component-audits/sidebar-application-shell.json)\n- Three focused sidebar/header snapshots\n\nDelivered accessible open/closed sidebar behavior, deterministic current navigation, native header search states, source-backed geometry, and narrow/content-stress handling.\n\nValidation:\n\n- Focused Playwright: 9/9 passed\n- Source/manifest/census: 5/5 passed\n- Showcase build: 495 modules\n- ESLint, Stylelint, Prettier: passed\n- `git diff --check`: passed\n- Impeccable detector: no shell-specific findings\n\nKnown pre-existing regression: primitive suite remains 16/17 due to the unrelated `button-icon-foregrounds.png` mismatch (212 pixels, 1%); its computed-color assertion passes.\n\nNo files outside the packet surface were changed. Integration/reporting, OpenSpec task completion, and PR delivery remain for the next packet.",
+        "workerReportDigest": "802a451f45aa7baa7460a35493d3f9290465cce6ef70918b1bc777d5e49e8554"
+      }
+    },
+    "integration-delivery": {
+      "attemptHistory": [
+        {
+          "claimId": "wave9-integration-delivery-20260824",
+          "briefDigest": "2116856ed8e0a68824ed01b218a5508e949d64d11e3c95ebd7a7c1481f07b187",
+          "execution": {
+            "version": 1,
+            "source": "codex-exec-jsonl",
+            "runtimeId": "01a0351d-381f-7012-8025-ba369cbd8766",
+            "launchId": "c08b6102-dd7b-4717-9998-a54a72befc72",
+            "startedAt": "2026-08-24T18:51:42.118Z",
+            "evidenceDigest": "cdca80d53d854bd7729442396b4c0db940c68ce968cb3f90258573d4abcaa35d"
+          },
+          "launch": {
+            "terminalStatus": "failed",
+            "launchId": "c08b6102-dd7b-4717-9998-a54a72befc72",
+            "usage": null,
+            "workerReport": "The clean baseline passes the first snapshot groups that fail on Wave 9—including Button, Dropdown, and Popover—so these are not pre-existing raster drift in this environment. They are deterministic downstream reflow/subpixel changes from the source-correct 301px shell. I’ll treat the legacy snapshots as affected regression baselines: regenerate only the failing snapshots, inspect the material reflow, and rerun the full suite.",
+            "workerReportDigest": "704565be0b27fc402d240d28b488e4107c41c667e1628a1770533544dfae115e"
+          },
+          "failure": null
+        }
+      ],
+      "attempts": 1,
+      "status": "launching",
+      "session": "wave9-integration-delivery-retry",
+      "claimId": "wave9-integration-delivery-retry-20260824",
+      "briefDigest": "bdb9769f310d401417d2f2f368cee7195c63fbefbc71bf3d1ac6d69ccb66b27d",
+      "baselineDigest": "570c09ece59c665607ee3a23680eb784e4ef94dc63ecb90d2d58f5fa3ccada40",
+      "dependencyDigests": {
+        "showcase-shell": "f806855725733f78c05566550458c611d9c8b8502daae68d5f1c51d39a1b1478"
+      },
+      "packetDigest": "b9e9ffaa9293cea818870655a9de1d5fc93c48c87d1f7c54dd3b66b48f22ae80",
+      "requirementsRevision": 1
+    }
+  },
+  "handoffs": {
+    "source-census": {
+      "completedPacket": "source-census",
+      "changed": [
+        "source and state ledger for Sidebar and Header",
+        "schema-v2 Sidebar / Application Shell manifest",
+        "repository and built-DOM occurrence guard"
+      ],
+      "provenChecks": [
+        "focused source, manifest, and census validation: 7/7 pass",
+        "Showcase build: 495 modules",
+        "git diff --check: pass"
+      ],
+      "settledDecisions": [
+        "Sidebar.svg and Header.svg are immutable authority",
+        "one application-local Showcase consumer and one local stylesheet are the implementation boundary",
+        "runtime and responsive evidence remain for the Showcase packet"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "showcase-shell",
+      "invalidatedAssumptions": [
+        "the existing hero header is a bounded header substitute, not proof of the Header.svg state family"
+      ],
+      "claimId": "wave9-source-census-20260824",
+      "briefDigest": "3cbaa4110828f4f3253acd71964b7ff2a4603cbad543f3b1226a997503a40b80",
+      "workerReportDigest": "03e9968d666f66218b6d40e4ea456d401bb2af13c813beaeb9ed0dc57581bcb3"
+    },
+    "showcase-shell": {
+      "completedPacket": "showcase-shell",
+      "changed": [
+        "Showcase application-local shell markup and styles",
+        "real sidebar current/open/closed and header search interaction coverage",
+        "three focused sidebar/header snapshots and manifest evidence"
+      ],
+      "provenChecks": [
+        "focused Playwright: 9/9 pass",
+        "source/manifest/census: 5/5 pass",
+        "Showcase build, ESLint, Stylelint, Prettier, git diff --check: pass",
+        "Impeccable detector: no shell-specific findings"
+      ],
+      "settledDecisions": [
+        "sidebar disclosure and header search remain Showcase-owned",
+        "current navigation is deterministic native hash navigation, not a router contract",
+        "narrow layout is a bounded application decision rather than a reusable mobile drawer"
+      ],
+      "unresolvedFindings": [
+        "pre-existing primitive visual suite mismatch: button-icon-foregrounds.png differs by 212 pixels while its computed-color assertion passes",
+        "tests were produced with implementation in the same worker; no formal spec-driven TDD RED evidence exists"
+      ],
+      "nextPacket": "integration-delivery",
+      "invalidatedAssumptions": [],
+      "claimId": "wave9-showcase-shell-20260824",
+      "briefDigest": "ab83105c81c7bc5c277acef6cc553ba34179d880b195a7ddda8918aae8639c22",
+      "workerReportDigest": "802a451f45aa7baa7460a35493d3f9290465cce6ef70918b1bc777d5e49e8554"
+    }
+  }
+}

@@ -6,7 +6,6 @@ const inventoryPath = "docs/component-audits/project-inventory.json";
 const roadmapPath = "docs/component-audit-roadmap.md";
 
 const expectedWaves = new Map([
-  [9, "Sidebar / Application Shell"],
   [10, "Card compositions"],
   [11, "Upload / Document compositions"],
   [12, "Messaging / History / Planner compositions"],
@@ -36,14 +35,14 @@ test("Wave 9+ roadmap assigns every remaining inventory family exactly once", as
 
 test("roadmap parser preserves duplicate rows for exact-once validation", async () => {
   const roadmap = await readFile(roadmapPath, "utf8");
-  const waveNineRow = roadmap
+  const firstRemainingRow = roadmap
     .split("\n")
-    .find((line) => /^\|\s+9\s+\|/.test(line));
-  assert.ok(waveNineRow);
+    .find((line) => /^\|\s+10\s+\|/.test(line));
+  assert.ok(firstRemainingRow);
 
   const duplicated = roadmap.replace(
-    waveNineRow,
-    `${waveNineRow}\n${waveNineRow}`,
+    firstRemainingRow,
+    `${firstRemainingRow}\n${firstRemainingRow}`,
   );
   assert.equal(parseRoadmapRows(duplicated).length, expectedWaves.size + 1);
 });
