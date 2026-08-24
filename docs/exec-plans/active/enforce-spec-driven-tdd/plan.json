@@ -43,6 +43,22 @@
     "enforced": true,
     "unavailableFallback": "stop"
   },
+  "specDrivenTdd": {
+    "version": 1,
+    "slices": [
+      {
+        "id": "bootstrap-lifecycle",
+        "applicability": "inapplicable",
+        "reason": "no-deterministic-seam",
+        "evidence": "The immutable 93ff408 baseline predates the spec-driven TDD CLI and state machine, so it cannot execute this lifecycle against itself without relying on implementation introduced by the candidate revision.",
+        "scenarioIds": [
+          "eligible-behavioral-change",
+          "meaningful-deterministic-red",
+          "existing-execution-and-review-gates-compose-with-tdd-evidence"
+        ]
+      }
+    ]
+  },
   "packets": [
     {
       "id": "acceptance-contract",

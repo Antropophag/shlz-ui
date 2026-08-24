@@ -1,0 +1,113 @@
+{
+  "id": "resolve-pr35-coderabbit",
+  "baseline": "0b4b668d1c7943bd13617d33f2a1ad2c80d7ad35",
+  "requirementsGate": "required",
+  "openSpecChange": "enforce-spec-driven-tdd",
+  "signals": {
+    "independentWorkUnits": 2,
+    "sharedSeams": 2,
+    "contracts": 1,
+    "consumerIntegrations": 0,
+    "evidenceLevels": 3,
+    "architectureAmbiguity": 0,
+    "changedScope": 2,
+    "reviewRisk": 2,
+    "contextGrowthRisk": 1
+  },
+  "openSpecTaskCount": 11,
+  "specDrivenTdd": {
+    "version": 1,
+    "slices": [
+      {
+        "id": "coderabbit-remediation",
+        "applicability": "inapplicable",
+        "reason": "no-deterministic-seam",
+        "evidence": "The bounded follow-up spans plan validation, review initialization, requirements re-entry, subprocess resolution, Git worktree cleanup, and historical known-bad execution; no single symmetric acceptance command can exercise that heterogeneous surface honestly, so focused regression tests apply instead.",
+        "scenarioIds": [
+          "existing-execution-and-review-gates-compose-with-tdd-evidence",
+          "representative-fixtures-discriminate-good-and-bad-workflow-revisions"
+        ]
+      }
+    ]
+  },
+  "workUnits": [
+    {
+      "id": "review-remediation",
+      "group": "review-remediation",
+      "objective": "Verify and remediate the CodeRabbit findings with focused regression coverage",
+      "scope": [
+        "harness validation",
+        "oracle and subprocess execution",
+        "worktree cleanup",
+        "known-bad evidence",
+        "operational plan evidence"
+      ],
+      "nonGoals": [
+        "new product behavior",
+        "generated OpenSpec skill edits",
+        "PR merge"
+      ],
+      "dependencies": [],
+      "contracts": ["harness/spec-driven-tdd"],
+      "contextSources": [
+        "openspec/changes/enforce-spec-driven-tdd/**",
+        "tools/{harness.mjs,lib/harness/**,tests/**}",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/**"
+      ],
+      "implementationSurface": [
+        "tools/harness.mjs",
+        "tools/lib/harness/**",
+        "tools/tests/**",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/{plan,state}.json"
+      ],
+      "focusedValidation": ["harness", "openspec"],
+      "outputs": [
+        "verified finding dispositions",
+        "regression tests",
+        "minimal fixes"
+      ],
+      "handoff": ["changed areas", "observed checks", "unresolved findings"],
+      "implementationOutcomes": [
+        "fail-closed invalid input handling",
+        "deterministic evidence",
+        "portable execution"
+      ],
+      "preferredExecutionMode": "continue"
+    },
+    {
+      "id": "review-delivery",
+      "group": "review-delivery",
+      "objective": "Run fixed-head validation and independent review, then update the existing PR",
+      "scope": [
+        "focused and aggregate validation",
+        "Standards and Spec review",
+        "thread disposition",
+        "push and delivery guard"
+      ],
+      "nonGoals": ["merge", "unrelated refactors", "new PR"],
+      "dependencies": ["review-remediation"],
+      "contracts": ["harness/spec-driven-tdd", "PR #35 review findings"],
+      "contextSources": [
+        "openspec/changes/enforce-spec-driven-tdd/**",
+        "docs/exec-plans/active/resolve-pr35-coderabbit/**",
+        "PR #35"
+      ],
+      "implementationSurface": [
+        "valid diff-scoped remediation and review evidence only"
+      ],
+      "focusedValidation": ["harness", "openspec", "full", "two-axis review"],
+      "outputs": [
+        "review dispositions",
+        "validation evidence",
+        "updated PR head"
+      ],
+      "handoff": ["CI state", "resolved threads", "residual risks"],
+      "implementationOutcomes": [
+        "all verified findings resolved",
+        "head-bound evidence",
+        "unmerged PR remains open"
+      ],
+      "preferredExecutionMode": "isolated-subagent"
+    }
+  ]
+}

@@ -2,6 +2,16 @@
   "version": 1,
   "planId": "enforce-spec-driven-tdd",
   "requirementsRevision": 1,
+  "specDrivenTdd": {
+    "version": 1,
+    "slices": {
+      "bootstrap-lifecycle": {
+        "status": "inapplicable",
+        "reason": "no-deterministic-seam",
+        "evidence": "The immutable 93ff408 baseline predates the spec-driven TDD CLI and state machine, so it cannot execute this lifecycle against itself without relying on implementation introduced by the candidate revision."
+      }
+    }
+  },
   "packets": {
     "acceptance-contract": {
       "attemptHistory": [],
@@ -31,8 +41,8 @@
           "output_tokens": 8698,
           "reasoning_output_tokens": 837
         },
-        "workerReport": "Implemented the `acceptance-contract` packet within its two-file surface.\n\nChanged:\n\n- [core.mjs](/home/antropophag/code/shlz-ui-spec-driven-tdd-gate/tools/lib/harness/core.mjs:994)\n  - Versioned TDD plan validation\n  - Eligibility, disjoint-surface, scenario-authority, and inapplicability checks\n  - Pure lifecycle state and transitions\n  - Independent runtime enforcement\n  - Digest-bound RED/GREEN evidence\n  - Tamper invalidation back to test design\n  - Legacy-plan compatibility\n\n- [harness.test.mjs](/home/antropophag/code/shlz-ui-spec-driven-tdd-gate/tools/tests/harness.test.mjs:849)\n  - Four contract tests covering those behaviors\n\nValidation:\n\n- RED confirmed before implementation: missing lifecycle exports\n- `npm run check:focused`: passed\n- Harness: 63/63 passed\n- `openspec validate enforce-spec-driven-tdd --strict`: passed\n- OpenSpec integration check: passed\n- Prettier and `git diff --check`: passed\n\nNo subprocess runner, CLI, delivery, planning-state, or OpenSpec artifact files were modified. Overall OpenSpec task checkboxes remain unchanged because later packets still own the remaining portions of tasks 2.1–2.2.",
-        "workerReportDigest": "2a3118e4b926d16dc1e6d448c648d93e2685bbb968db50ccacf3962d9c6980cf"
+        "workerReport": "Implemented the `acceptance-contract` packet within its two-file surface.\n\nChanged:\n\n- `tools/lib/harness/core.mjs:994`\n  - Versioned TDD plan validation\n  - Eligibility, disjoint-surface, scenario-authority, and inapplicability checks\n  - Pure lifecycle state and transitions\n  - Independent runtime enforcement\n  - Digest-bound RED/GREEN evidence\n  - Tamper invalidation back to test design\n  - Legacy-plan compatibility\n\n- `tools/tests/harness.test.mjs:849`\n  - Four contract tests covering those behaviors\n\nValidation:\n\n- RED confirmed before implementation: missing lifecycle exports\n- `npm run check:focused`: passed\n- Harness: 63/63 passed\n- `openspec validate enforce-spec-driven-tdd --strict`: passed\n- OpenSpec integration check: passed\n- Prettier and `git diff --check`: passed\n\nNo subprocess runner, CLI, delivery, planning-state, or OpenSpec artifact files were modified. Overall OpenSpec task checkboxes remain unchanged because later packets still own the remaining portions of tasks 2.1–2.2.",
+        "workerReportDigest": "9239e55b78265a92dace85d5f9d9d0f82cd5746ff47a520347ee307181460970"
       }
     },
     "symmetric-runner": {
@@ -219,7 +229,7 @@
       "invalidatedAssumptions": [],
       "claimId": "acceptance-contract-r1",
       "briefDigest": "fe2804b0bea3e80559af171c66d2ada0f1ac9c46af6323e42fff4841b6a7d209",
-      "workerReportDigest": "2a3118e4b926d16dc1e6d448c648d93e2685bbb968db50ccacf3962d9c6980cf"
+      "workerReportDigest": "9239e55b78265a92dace85d5f9d9d0f82cd5746ff47a520347ee307181460970"
     },
     "symmetric-runner": {
       "completedPacket": "symmetric-runner",
