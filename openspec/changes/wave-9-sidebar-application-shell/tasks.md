@@ -23,4 +23,4 @@
 
 - [x] 5.1 Reconcile the project inventory and create the Wave 9 audit report with exact counts, source hashes, evidence results, snapshot disposition, limitations, CI/review state, and independent bounded status; verify `VERIFIED` is claimed only if the full component gate passes.
 - [x] 5.2 Run source integrity, OpenSpec, formatting/lint/build/package, source/manifest/census, focused browser/accessibility/visual/stress, affected regressions, and final aggregate validation; verify raw results and exact totals are retained without hiding browser failures behind aggregate success.
-- [ ] 5.3 Review the complete episode diff against repository standards, the Wave 9 spec, authoritative SVGs, and scoped non-goals; remediate every scope-local finding, re-run affected checks, satisfy delivery guards, and deliver an unmerged green PR targeting `main`.
+- [x] 5.3 Review the complete episode diff against repository standards, the Wave 9 spec, authoritative SVGs, and scoped non-goals; remediate every scope-local finding, re-run affected checks, satisfy delivery guards, and deliver an unmerged green PR targeting `main`.
