@@ -1,4 +1,9 @@
 {
+  "lifecycle": {
+    "workerReportState": "pending-root-finalization",
+    "rootFinalizationState": "completed",
+    "finalizationCommit": "d7554f70c86685e16e7cdf8ff17ece91b8b6c637"
+  },
   "completedPacket": "review-delivery",
   "changed": [],
   "provenChecks": [

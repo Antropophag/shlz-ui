@@ -16,5 +16,5 @@
 
 ## 4. PR review follow-up
 
-- [ ] 4.1 Harden deterministic ordering, pinned oracle provenance, unresolved-handoff acknowledgement, argument/path validation, and regression coverage identified by PR #37 review.
+- [x] 4.1 Harden deterministic ordering, pinned oracle provenance, unresolved-handoff acknowledgement, argument/path validation, and regression coverage identified by PR #37 review.
 - [ ] 4.2 Reconcile RED/review/delivery evidence with the commits and lifecycle it claims, rerun proportionate validation and delivery guards, push the follow-up, and resolve the verified GitHub review threads.

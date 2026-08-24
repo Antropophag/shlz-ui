@@ -4046,7 +4046,7 @@ test("context cost capsules invalidate changed sources and replay deterministica
       packet: {
         id: "probe",
         objective: "Probe persisted source attestations",
-        contracts: ["source-current"],
+        contracts: ["ä-contract", "Z-contract", "source-current"],
         focusedValidation: ["probe-test"],
         implementationOutcomes: ["changed sources return to readNow"],
       },
@@ -4092,6 +4092,13 @@ test("context cost capsules invalidate changed sources and replay deterministica
       },
     );
     assert.equal(initial.readNow.length, 1);
+    assert.deepEqual(initial.obligations, [
+      "contract:Z-contract",
+      "contract:source-current",
+      "contract:ä-contract",
+      "outcome:changed sources return to readNow",
+      "validation:probe-test",
+    ]);
     assert.deepEqual(initial.evidence.verdicts, [
       "focused:test-pass",
       `review:Spec:pass:${"a".repeat(40)}`,
@@ -4105,6 +4112,28 @@ test("context cost capsules invalidate changed sources and replay deterministica
     await assert.rejects(
       acknowledgeContextCapsule(ledger, tampered, changedRoot),
       /capsule digest does not match/,
+    );
+    const unresolved = await createPacketContextCapsule(
+      {
+        ...index,
+        dependencyHandoffs: [
+          {
+            ...index.dependencyHandoffs[0],
+            unresolvedFindings: ["full validation remains"],
+          },
+        ],
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "unresolved",
+        transition: "pending-to-blocked",
+        physicalSession: "probe-worker",
+      },
+    );
+    await assert.rejects(
+      acknowledgeContextCapsule(ledger, unresolved, changedRoot),
+      /unresolved blocking findings/,
     );
     ledger = await acknowledgeContextCapsule(ledger, initial, changedRoot);
     await assert.rejects(
@@ -4276,6 +4305,20 @@ test("context capsule CLI persists packet attestations across real context phase
     path.join(root, secondPath),
   ]);
   try {
+    await assert.rejects(
+      exec(process.execPath, ["tools/harness.mjs", "context-ack"], {
+        cwd: root,
+      }),
+      /context-ack requires <capsule> <ledger>/,
+    );
+    await assert.rejects(
+      exec(
+        process.execPath,
+        ["tools/harness.mjs", "context-ack", firstPath, "README.md"],
+        { cwd: root },
+      ),
+      /mutable harness state must stay under docs\/exec-plans/,
+    );
     const command = (phase, transition, out) =>
       exec(
         process.execPath,

@@ -95,6 +95,7 @@
     },
     "evidence": {
       "path": "docs/exec-plans/fixtures/pr36-evidence-oracle.json",
+      "gitRef": "4e30c84add36b4b0cd8047c5ebcbf00a9ba3ea3a",
       "role": "evidence",
       "required": true
     }

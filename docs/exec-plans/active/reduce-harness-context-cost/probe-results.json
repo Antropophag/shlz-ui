@@ -76,8 +76,11 @@
     }
   ],
   "redProof": {
-    "command": "node --test --test-name-pattern='context cost' tools/tests/harness.test.mjs",
-    "result": "fail",
-    "failure": "context-cost-replay command is absent on the immutable baseline"
+    "command": "node tools/tests/context-cost-red-proof.mjs",
+    "result": "red",
+    "baselineImplementationRef": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+    "testSourceRef": "850586c493ca4993091fc19f5a132826e9783d81",
+    "exercisedTestSourceAgainstBaseline": true,
+    "failure": "The context-cost test source from the first implementation commit fails when executed in an archive of the immutable pre-implementation parent."
   }
 }

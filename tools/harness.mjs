@@ -92,6 +92,8 @@ const statePath = (file) => {
     );
   return target;
 };
+const repositoryRelative = (file) =>
+  path.relative(repoRoot, file).split(path.sep).join("/");
 const readJsonOr = async (file, fallback) => {
   try {
     return await readJson(file);
@@ -176,6 +178,7 @@ switch (command) {
       throw new Error(
         "context-capsule requires --ledger, --phase, --transition, --session, and --out",
       );
+    const ledgerTarget = statePath(ledgerPath);
     const plan = await readJson(absolute(args[0]));
     const executionStatePath = option("--state");
     const index = await contextIndex(
@@ -186,7 +189,7 @@ switch (command) {
     );
     const capsule = await createPacketContextCapsule(
       index,
-      await readJsonOr(absolute(ledgerPath), createContextLedger()),
+      await readJsonOr(ledgerTarget, createContextLedger()),
       repoRoot,
       {
         phase,
@@ -204,13 +207,15 @@ switch (command) {
   }
   case "context-ack": {
     const ledgerPath = args[1];
-    if (!ledgerPath) throw new Error("context-ack requires <capsule> <ledger>");
+    if (!args[0] || !ledgerPath)
+      throw new Error("context-ack requires <capsule> <ledger>");
+    const ledgerTarget = statePath(ledgerPath);
     const next = await acknowledgeContextCapsule(
-      await readJsonOr(absolute(ledgerPath), createContextLedger()),
+      await readJsonOr(ledgerTarget, createContextLedger()),
       await readJson(absolute(args[0])),
       repoRoot,
     );
-    await writeJson(statePath(ledgerPath), next);
+    await writeJson(ledgerTarget, next);
     output(next);
     break;
   }
@@ -382,10 +387,7 @@ switch (command) {
       changed.changedFiles,
       args[0],
       config,
-    ).filter(
-      (file) =>
-        file !== path.relative(repoRoot, ledgerPath).split(path.sep).join("/"),
-    );
+    ).filter((file) => file !== repositoryRelative(ledgerPath));
     assertValidationRun(
       {
         target: args[0],
@@ -409,11 +411,7 @@ switch (command) {
           changed.changedFiles,
           args[1],
           config,
-        ).filter(
-          (file) =>
-            file !==
-            path.relative(repoRoot, ledgerPath).split(path.sep).join("/"),
-        ),
+        ).filter((file) => file !== repositoryRelative(ledgerPath)),
         outcome: option("--outcome"),
         reason: option("--reason"),
         packet: option("--packet"),

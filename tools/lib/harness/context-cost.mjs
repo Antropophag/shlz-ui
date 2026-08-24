@@ -9,8 +9,8 @@ const exec = promisify(execFile);
 
 const digest = (value) => createHash("sha256").update(value).digest("hex");
 const bytes = (value) => Buffer.byteLength(value);
-const stable = (values) =>
-  [...new Set(values)].sort((left, right) => left.localeCompare(right));
+const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+const stable = (values) => [...new Set(values)].sort(order);
 const identity = (value) => JSON.stringify(value);
 
 function required(value, label) {
@@ -218,7 +218,7 @@ export async function createPacketContextCapsule(
       JSON.stringify(
         [...readNow, ...attested]
           .map(({ path: source, digest: hash }) => [source, hash])
-          .sort(([left], [right]) => left.localeCompare(right)),
+          .sort(([left], [right]) => order(left, right)),
       ),
     ),
     capsuleDigest: digest(JSON.stringify(capsule)),
@@ -242,7 +242,7 @@ export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
     JSON.stringify(
       sources
         .map(({ path: source, digest: hash }) => [source, hash])
-        .sort(([left], [right]) => left.localeCompare(right)),
+        .sort(([left], [right]) => order(left, right)),
     ),
   );
   if (sourceDigest !== expectedSourceDigest)
@@ -255,14 +255,11 @@ export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
     )
       throw new Error(`context capsule source changed: ${source.path}`);
   }
-  if (
-    [
-      ...(capsule.evidence.unresolvedFindings ?? []),
-      ...(capsule.evidence.findings ?? []),
-    ].some(
-      (finding) => finding.blocking === true && finding.status !== "resolved",
-    )
-  )
+  const unresolvedHandoffFindings = capsule.evidence.unresolvedFindings ?? [];
+  const unresolvedStructuredFindings = (capsule.evidence.findings ?? []).some(
+    (finding) => finding.blocking === true && finding.status !== "resolved",
+  );
+  if (unresolvedHandoffFindings.length || unresolvedStructuredFindings)
     throw new Error("context capsule has unresolved blocking findings");
   const next = {
     ...ledger,
@@ -290,13 +287,13 @@ function evidenceFor(phase) {
         blocking: finding.blocking === true,
         status: required(finding.status, `finding status in phase ${phase.id}`),
       }))
-      .sort((a, b) => a.id.localeCompare(b.id)),
+      .sort((a, b) => order(a.id, b.id)),
     rawEvidence: [...(evidence.rawEvidence ?? [])]
       .map((source) => ({
         path: required(source.path, `raw evidence path in phase ${phase.id}`),
         gitRef: source.gitRef ?? null,
       }))
-      .sort((left, right) => sourceKey(left).localeCompare(sourceKey(right))),
+      .sort((left, right) => order(sourceKey(left), sourceKey(right))),
   };
 }
 
@@ -421,6 +418,13 @@ export async function loadContextCostOracle(fixture, repoRoot) {
   const definition = JSON.parse(
     await readWorktreeSource(repoRoot, fixture.oraclePath),
   );
+  if (
+    definition.provenance?.mode !== "frozen-snapshot" ||
+    !/^[0-9a-f]{40}$/.test(definition.provenance?.capturedFrom?.gitRef ?? "")
+  )
+    throw new Error(
+      "context-cost oracle requires independently captured pinned provenance",
+    );
   const oracle = materialize(definition);
   return { oracle, oracleReads: await readOracle(oracle, repoRoot) };
 }
