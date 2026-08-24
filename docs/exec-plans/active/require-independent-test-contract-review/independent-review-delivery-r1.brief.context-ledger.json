@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "physicalSession": null,
-  "launchClaim": null,
+  "physicalSession": "01a034ad-33bf-7583-be60-292928a11a55",
+  "launchClaim": "independent-review-delivery-r1",
   "attestations": {}
 }

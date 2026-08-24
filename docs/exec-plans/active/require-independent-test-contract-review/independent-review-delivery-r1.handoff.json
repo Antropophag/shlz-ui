@@ -1,0 +1,35 @@
+{
+  "completedPacket": "independent-review-delivery",
+  "changed": [
+    "remediated R1-R6 across harness lifecycle, tests, docs, and evidence",
+    "added current-change state-machine and persistence failure proof",
+    "recorded independent Standards and Spec re-review passes",
+    "opened PR 38 at reviewed head 803785789948b23836b7dd7506888dcfcafee732"
+  ],
+  "provenChecks": [
+    "harness: 90/90 passed",
+    "aggregate Node tests: 185/185 passed",
+    "Playwright: 202/202 passed",
+    "strict OpenSpec, lint, build, validation, package smoke, formatting and diff checks: passed",
+    "change-specific failure proof: baseline fail / reviewed head pass for both marked invariants",
+    "independent Standards re-review: pass with 0 findings",
+    "independent Spec re-review: pass with 0 findings",
+    "route conformance: allowed"
+  ],
+  "settledDecisions": [
+    "approval is adapter-report-bound to the guarded reviewer handoff",
+    "rejection and drift reset designer/reviewer packet state for recoverable re-entry",
+    "implementation handoff context is rejected by canonical handoff identity",
+    "final Spec findings have an explicit test-design or requirements re-entry path",
+    "public known-bad scenario proves denial through RED and implementation authorization"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": null,
+  "invalidatedAssumptions": [
+    "runtime identity alone proves the guarded reviewer authored approval",
+    "returning stale design to pending review is a recoverable drift path"
+  ],
+  "claimId": "independent-review-delivery-r1",
+  "briefDigest": "e6bc3a8c51352e86fd48429906c6050a0042de4010d0c38d0d5c0d24319c6b6a",
+  "workerReportDigest": "6fa08e9cba3e575276696f4e9b23eb36580bdd3af1d543d3b9e0255d5fb2576c"
+}

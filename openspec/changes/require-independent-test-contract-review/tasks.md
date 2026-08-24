@@ -17,4 +17,4 @@
 
 - [x] 4.1 Run strict OpenSpec, focused harness, aggregate repository, formatting, and diff checks; record exact results and limitations.
 - [x] 4.2 Prove the marked state-machine and persistence failure invariants against the immutable baseline and reviewed head, then run independent Standards and Spec reviews and resolve every blocking finding.
-- [ ] 4.3 Run route conformance and guarded delivery checks, push the task branch, open a PR targeting `main`, and verify the PR remains open and unmerged.
+- [x] 4.3 Run route conformance and guarded delivery checks, push the task branch, open a PR targeting `main`, and verify the PR remains open and unmerged.
