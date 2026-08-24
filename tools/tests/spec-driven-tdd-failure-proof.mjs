@@ -6,11 +6,12 @@ import { promisify } from "node:util";
 import { createHistoricalWorktreeManager } from "./historical-worktree-fixture.mjs";
 
 const exec = promisify(execFile);
-const knownBadRevision = "93ff4081aca8ae628696826ef79cc6ba870b2376";
+const changeBaselineRevision = "93ff4081aca8ae628696826ef79cc6ba870b2376";
+const knownBadRevision = "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c";
 const reviewedHead = (
   await exec("git", ["rev-parse", "HEAD"], { cwd: process.cwd() })
 ).stdout.trim();
-const reviewBase = process.env.SHLZ_REVIEW_BASE ?? knownBadRevision;
+const reviewBase = process.env.SHLZ_REVIEW_BASE ?? changeBaselineRevision;
 const parent = path.join(homedir(), ".cache");
 await mkdir(parent, { recursive: true });
 const badRoot = await mkdtemp(path.join(parent, "shlz-tdd-known-bad-"));
@@ -35,7 +36,7 @@ const cleanupErrors = [];
 let knownBad;
 let reviewed;
 try {
-  await worktrees.add(badRoot, knownBadRevision);
+  await worktrees.add(badRoot, changeBaselineRevision);
   await worktrees.add(goodRoot, reviewedHead);
   [knownBad, reviewed] = await Promise.all([
     runProbe(badRoot),
@@ -66,6 +67,19 @@ const invariants = Object.entries(concerns).map(([id, concern]) => ({
   knownBad: knownBad[id] ? "pass" : "fail",
   reviewedHead: reviewed[id] ? "pass" : "fail",
 }));
+const baselineProof = JSON.parse(
+  (
+    await exec(
+      process.execPath,
+      ["tools/tests/pr32-failure-path-fixture.mjs"],
+      {
+        cwd: process.cwd(),
+        env: { ...process.env, SHLZ_REVIEW_BASE: reviewBase },
+        maxBuffer: 10 * 1024 * 1024,
+      },
+    )
+  ).stdout,
+);
 process.stdout.write(
-  `${JSON.stringify({ version: 1, reviewBase, knownBadRevision, reviewedHead, invariants })}\n`,
+  `${JSON.stringify({ version: 1, reviewBase, knownBadRevision, changeBaselineRevision, reviewedHead, invariants: [...baselineProof.invariants, ...invariants] })}\n`,
 );
