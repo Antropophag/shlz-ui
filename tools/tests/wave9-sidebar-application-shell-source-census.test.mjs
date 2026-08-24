@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
+import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
 import test from "node:test";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 const manifestPath = "docs/component-audits/sidebar-application-shell.json";
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
@@ -180,6 +184,9 @@ test("Wave 9 repository census rejects a synthetic unclassified shell", () => {
 });
 
 test("Wave 9 built-DOM census is exact and mutation-sensitive", async () => {
+  await execFileAsync("npm", ["run", "build", "-w", "@shlz/showcase"], {
+    maxBuffer: 10 * 1024 * 1024,
+  });
   const builtFiles = await filesBelow("apps/showcase/dist");
   const builtSource = (
     await Promise.all(builtFiles.map((path) => readFile(path, "utf8")))

@@ -10,7 +10,7 @@ The map was derived on `origin/main` commit `50bee6f6603e0e4d7b3f511fe610dc1522c
 - the Wave 1–8 reports under `docs/foundation-audits/` and `docs/component-audits/`;
 - the completion contract in `docs/component-audit-workflow.md`.
 
-Until the Wave 9 delivery gate closes, 35 families are `VERIFIED` and the four rows below are the complete `INVENTORIED` remainder. Each remaining family appears exactly once.
+At the Wave 9 delivery baseline, 35 families were `VERIFIED` and the four rows below were the complete `INVENTORIED` remainder. Completed rows remain in this durable scope map; each still-unverified family appears exactly once.
 
 | Wave | Inventory family                           | Starting disposition | Original source authority                               |
 | ---- | ------------------------------------------ | -------------------- | ------------------------------------------------------- |
