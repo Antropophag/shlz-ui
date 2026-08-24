@@ -6,18 +6,18 @@ Prevents an erroneous requirements interpretation or weak acceptance-test design
 
 ### Requirement: Independent approval precedes executable authorization
 
-Every enforced spec-driven TDD slice SHALL enter a pending-review state after test design. RED execution and production implementation authorization MUST remain unavailable until a physically distinct reviewer approves the exact test contract; review rejection MUST preserve findings and return the slice to test design without creating approval evidence.
+Every enforced `specDrivenTdd.version: 2` slice SHALL enter a pending-review state after test design. RED execution and production implementation authorization MUST remain unavailable until a physically distinct reviewer approves the exact test contract; review rejection MUST preserve findings and return the slice to test design without creating approval evidence. Version 1 slices retain their legacy lifecycle without this review transition.
 
 <!-- failure-invariant: unreviewed-contract-cannot-authorize-production concern=state-machine -->
 
 #### Scenario: Approved contract unlocks RED
 
-- **WHEN** a guarded reviewer distinct from the test designer approves the current test-contract identity
+- **WHEN** a guarded reviewer distinct from the test designer approves the current version 2 test-contract identity
 - **THEN** the harness records immutable approval evidence and permits that contract to proceed to deterministic RED
 
 #### Scenario: Design attempts to proceed without review
 
-- **WHEN** RED or an implementation claim is attempted while the slice is pending review or has a rejected review
+- **WHEN** RED or an implementation claim is attempted for a version 2 slice while it is pending review or has a rejected review
 - **THEN** the harness rejects the transition without creating RED or implementation authorization state
 
 ### Requirement: Review evaluates a bounded test-contract checklist
