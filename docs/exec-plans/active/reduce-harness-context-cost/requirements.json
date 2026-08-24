@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "revision": 2,
+  "intent": "Investigate and materially reduce disproportionate active/session context cost in the repository harness using PR #36 as a representative signal, then deliver a separate unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "baseline-contract",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "Use the PR #36 188K forensic signal and independently build and verify hypotheses."
+      }
+    },
+    {
+      "id": "architecture-choice",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "Compare architectures and choose the minimally sufficient approach; avoid embeddings or a semantic broker absent proof."
+      }
+    },
+    {
+      "id": "equivalence-contract",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "Reduce context cost without weakening correctness, evidence, or reproducibility and prove it on representative replay."
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Open a separate PR and do not merge it."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "reduce-harness-context-cost",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "Explicit request to investigate, choose, implement, validate, and open an unmerged PR."
+    }
+  }
+}

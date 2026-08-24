@@ -1,0 +1,34 @@
+{
+  "completedPacket": "capsule-implementation",
+  "changed": [
+    "tools/lib/harness/context-cost.mjs",
+    "tools/harness.mjs",
+    "tools/tests/harness.test.mjs",
+    "docs/agent-execution.md",
+    "docs/exec-plans/README.md",
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+    "openspec/changes/reduce-harness-context-cost/tasks.md"
+  ],
+  "provenChecks": [
+    "focused context cost tests: 3/3 pass after root correctness hardening",
+    "representative replay: equivalence pass and 64.86% byte-proxy reduction against 35% threshold",
+    "worker npm run test:harness: 76/76 pass before root hardening",
+    "worker openspec strict validation: pass",
+    "worker runtime identity: 01a0339c-f096-76c2-9961-bffc86d96ef9"
+  ],
+  "settledDecisions": [
+    "source equivalence is phase-specific",
+    "raw evidence must be an addressable source of its phase",
+    "unchanged content is attested by path and digest; new or changed content remains readNow",
+    "proxy bytes remain separate from runtime token usage"
+  ],
+  "unresolvedFindings": [
+    "full validation and independent two-axis review remain",
+    "worker used 1169262 input tokens including 1048576 cached input tokens, confirming fresh isolation does not by itself control total input"
+  ],
+  "nextPacket": "review-delivery",
+  "invalidatedAssumptions": [],
+  "claimId": "capsule-implementation-20260824",
+  "briefDigest": "497057897f5ac710d7228b4b3ae81f1aee90d05ebc612b3754d3fcccf7ada362",
+  "workerReportDigest": "5bed3d40ee148049e5f04e29554284cf029e227199f0d3aa779e5c4efabfc9d2"
+}

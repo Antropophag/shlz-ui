@@ -68,6 +68,11 @@ import {
   parseCodexExecJsonl,
   probeCodexExec,
 } from "../lib/harness/codex-worker.mjs";
+import {
+  compareContextCostReplay,
+  createPhaseCapsules,
+  runContextCostReplay,
+} from "../lib/harness/context-cost.mjs";
 
 const root = process.cwd();
 const load = async (file) =>
@@ -3870,6 +3875,179 @@ test("telemetry distinguishes logical labels from physical boundaries and keeps 
     classifiedReads: 3,
     ratio: 2 / 3,
   });
+});
+
+test("context cost replay materially reduces PR 36 proxy cost without dropping evidence", async () => {
+  const { stdout } = await exec(
+    process.execPath,
+    [
+      "tools/harness.mjs",
+      "context-cost-replay",
+      "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+    ],
+    { cwd: root },
+  );
+  const report = JSON.parse(stdout);
+  assert.deepEqual(report.runtimeObservation, {
+    value: 188000,
+    unit: "tokens",
+    provenance: "user-observed",
+    trustedRuntimeTrace: false,
+    note: "Forensic signal only; replay bytes are not converted to tokens.",
+  });
+  assert.deepEqual(report.contributors, [
+    "discovery",
+    "procedural-context",
+    "validation-output",
+    "review-output",
+    "repeated-reads",
+    "state-orchestration",
+  ]);
+  assert.equal(report.equivalence.pass, true);
+  assert.equal(report.improvement.pass, true);
+  assert.ok(report.improvement.reductionRatio >= 0.35);
+  assert.ok(report.optimized.totalBytes < report.baseline.totalBytes);
+  assert.equal(
+    report.optimized.obligationCount,
+    report.baseline.obligationCount,
+  );
+  assert.equal(
+    report.optimized.authoritativeSourceCount,
+    report.baseline.authoritativeSourceCount,
+  );
+});
+
+test("context cost capsules invalidate changed sources and replay deterministically", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+  );
+  const first = await runContextCostReplay(fixture, root);
+  const second = await runContextCostReplay(fixture, root);
+  assert.deepEqual(second, first);
+  assert.ok(first.optimized.attestedReferences > 0);
+  assert.ok(first.capsules.some((capsule) => capsule.readNow.length > 0));
+
+  const changedRoot = await mkdtemp(path.join(tmpdir(), "context-cost-"));
+  try {
+    await mkdir(path.join(changedRoot, "docs"), { recursive: true });
+    const localFixture = {
+      version: 1,
+      id: "digest-invalidation",
+      minimumReductionRatio: 0,
+      contributors: ["repeated-reads"],
+      phases: [
+        {
+          id: "one",
+          stateTransition: "start-to-one",
+          sources: [
+            { path: "docs/source.md", role: "normative", required: true },
+          ],
+          obligations: ["source-current"],
+        },
+        {
+          id: "two",
+          stateTransition: "one-to-two",
+          sources: [
+            { path: "docs/source.md", role: "normative", required: true },
+          ],
+          obligations: ["source-current"],
+        },
+      ],
+    };
+    await writeFile(path.join(changedRoot, "docs/source.md"), "before");
+    const before = await createPhaseCapsules(localFixture, changedRoot);
+    await writeFile(path.join(changedRoot, "docs/source.md"), "after");
+    const after = await createPhaseCapsules(localFixture, changedRoot);
+    assert.notEqual(
+      before.capsules[0].readNow[0].digest,
+      after.capsules[0].readNow[0].digest,
+    );
+    assert.equal(after.capsules[1].attested.length, 1);
+  } finally {
+    await rm(changedRoot, { recursive: true, force: true });
+  }
+});
+
+test("context cost equivalence and improvement fail closed", async () => {
+  const fixture = await load(
+    "docs/exec-plans/fixtures/pr36-context-cost-replay.json",
+  );
+  const prepared = await createPhaseCapsules(fixture, root);
+  const missingObligation = clone(prepared.capsules);
+  missingObligation[0].obligations.pop();
+  assert.equal(
+    compareContextCostReplay({
+      fixture,
+      baselineReads: prepared.baselineReads,
+      capsules: missingObligation,
+    }).pass,
+    false,
+  );
+
+  const missingTransition = clone(prepared.capsules);
+  missingTransition.pop();
+  assert.equal(
+    compareContextCostReplay({
+      fixture,
+      baselineReads: prepared.baselineReads,
+      capsules: missingTransition,
+    }).pass,
+    false,
+  );
+
+  const blockingFinding = clone(prepared.capsules);
+  blockingFinding[0].evidence.findings.push({
+    id: "unresolved",
+    blocking: true,
+    status: "open",
+  });
+  assert.equal(
+    compareContextCostReplay({
+      fixture,
+      baselineReads: prepared.baselineReads,
+      capsules: blockingFinding,
+    }).pass,
+    false,
+  );
+
+  const impossibleThreshold = await runContextCostReplay(
+    { ...fixture, minimumReductionRatio: 1 },
+    root,
+  );
+  assert.equal(impossibleThreshold.equivalence.pass, true);
+  assert.equal(impossibleThreshold.improvement.pass, false);
+
+  const missingPhaseSource = clone(prepared.capsules);
+  missingPhaseSource[1].attested.shift();
+  assert.equal(
+    compareContextCostReplay({
+      fixture,
+      baselineReads: prepared.baselineReads,
+      capsules: missingPhaseSource,
+    }).pass,
+    false,
+  );
+
+  await assert.rejects(
+    createPhaseCapsules(
+      {
+        ...fixture,
+        phases: fixture.phases.map((phase, index) =>
+          index === 0
+            ? {
+                ...phase,
+                evidence: {
+                  ...phase.evidence,
+                  rawEvidence: ["docs/not-a-phase-source.md"],
+                },
+              }
+            : phase,
+        ),
+      },
+      root,
+    ),
+    /raw evidence is not an addressable phase source/,
+  );
 });
 
 test("glob matching supports root docs, recursive paths, and brace sets", () => {

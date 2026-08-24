@@ -60,6 +60,7 @@ import {
   launchCodexWorker,
   probeCodexExec,
 } from "./lib/harness/codex-worker.mjs";
+import { runContextCostReplay } from "./lib/harness/context-cost.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -158,6 +159,11 @@ const refreshChangeFailureInvariants = async (state, target) => {
 const exec = promisify(execFile);
 
 switch (command) {
+  case "context-cost-replay":
+    output(
+      await runContextCostReplay(await readJson(absolute(args[0])), repoRoot),
+    );
+    break;
   case "route-check":
     output(evaluateRouteEligibility(await readJson(absolute(args[0]))));
     break;
@@ -836,6 +842,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

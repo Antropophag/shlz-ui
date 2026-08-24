@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "id": "pr36-small-openspec-doc-followup",
+  "subject": {
+    "pullRequest": 36,
+    "base": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+    "head": "b7dd0ae3d3a7b3534b106f1d903a90fc7e3f8794",
+    "changedFiles": 16,
+    "addedLines": 437,
+    "reviewFollowups": 1
+  },
+  "runtimeObservation": {
+    "value": 188000,
+    "unit": "tokens",
+    "provenance": "user-observed",
+    "trustedRuntimeTrace": false,
+    "note": "Forensic signal only; replay bytes are not converted to tokens."
+  },
+  "minimumReductionRatio": 0.35,
+  "contributors": [
+    "discovery",
+    "procedural-context",
+    "validation-output",
+    "review-output",
+    "repeated-reads",
+    "state-orchestration"
+  ],
+  "phases": [
+    {
+      "id": "discovery-routing",
+      "objective": "Route the bounded documentation capability and resolve requirements",
+      "stateTransition": "request-to-synthesized",
+      "sources": [
+        { "path": "AGENTS.md", "role": "procedural", "required": true },
+        { "path": "docs/openspec.md", "role": "procedural", "required": true },
+        {
+          "path": "docs/requirements-elicitation.md",
+          "role": "procedural",
+          "required": true
+        },
+        {
+          "path": "docs/agent-execution.md",
+          "role": "procedural",
+          "required": true
+        }
+      ],
+      "obligations": [
+        "route-eligibility",
+        "requirements-readiness",
+        "source-authority"
+      ],
+      "evidence": {
+        "verdicts": ["route-check:pass", "requirements-check:pass"],
+        "findings": [],
+        "rawEvidence": ["docs/openspec.md", "docs/requirements-elicitation.md"]
+      }
+    },
+    {
+      "id": "openspec-synthesis",
+      "objective": "Synthesize proposal, design, requirements, and executable tasks",
+      "stateTransition": "synthesized-to-preflight",
+      "sources": [
+        { "path": "AGENTS.md", "role": "procedural", "required": true },
+        { "path": "docs/openspec.md", "role": "procedural", "required": true },
+        {
+          "path": "docs/requirements-elicitation.md",
+          "role": "procedural",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/proposal.md",
+          "role": "normative",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/design.md",
+          "role": "normative",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md",
+          "role": "normative",
+          "required": true
+        }
+      ],
+      "obligations": [
+        "openspec-artifacts",
+        "strict-validation",
+        "execution-authorization"
+      ],
+      "evidence": {
+        "verdicts": ["openspec-strict:pass", "authorization:pre-authorized"],
+        "findings": [],
+        "rawEvidence": [
+          "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md"
+        ]
+      }
+    },
+    {
+      "id": "implementation-validation",
+      "objective": "Implement the bounded change and preserve validation evidence",
+      "stateTransition": "preflight-to-validated",
+      "sources": [
+        { "path": "AGENTS.md", "role": "procedural", "required": true },
+        {
+          "path": "docs/agent-execution.md",
+          "role": "procedural",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/design.md",
+          "role": "normative",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md",
+          "role": "normative",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/tasks.md",
+          "role": "normative",
+          "required": true
+        }
+      ],
+      "obligations": [
+        "focused-tests",
+        "full-tests",
+        "lint",
+        "build",
+        "route-conformance"
+      ],
+      "evidence": {
+        "verdicts": [
+          "focused-tests:pass",
+          "full-tests:pass",
+          "lint:pass",
+          "build:pass",
+          "route-conformance:pass"
+        ],
+        "findings": [],
+        "rawEvidence": ["openspec/changes/reduce-harness-context-cost/tasks.md"]
+      }
+    },
+    {
+      "id": "independent-review",
+      "objective": "Review the fixed diff on Standards and Spec axes",
+      "stateTransition": "validated-to-reviewed",
+      "sources": [
+        { "path": "AGENTS.md", "role": "procedural", "required": true },
+        {
+          "path": "docs/agent-execution.md",
+          "role": "procedural",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md",
+          "role": "normative",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/tasks.md",
+          "role": "normative",
+          "required": true
+        }
+      ],
+      "obligations": [
+        "standards-review",
+        "spec-review",
+        "fixed-diff",
+        "finding-disposition"
+      ],
+      "evidence": {
+        "verdicts": ["standards-review:pass", "spec-review:pass"],
+        "findings": [
+          {
+            "id": "pr36-duplicate-wave-rows",
+            "blocking": true,
+            "status": "resolved"
+          }
+        ],
+        "rawEvidence": [
+          "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md"
+        ]
+      }
+    },
+    {
+      "id": "review-followup-delivery",
+      "objective": "Apply one bounded review fix and prove open unmerged delivery",
+      "stateTransition": "reviewed-to-delivered",
+      "sources": [
+        { "path": "AGENTS.md", "role": "procedural", "required": true },
+        { "path": "docs/openspec.md", "role": "procedural", "required": true },
+        {
+          "path": "docs/agent-execution.md",
+          "role": "procedural",
+          "required": true
+        },
+        {
+          "path": "openspec/changes/reduce-harness-context-cost/tasks.md",
+          "role": "normative",
+          "required": true
+        }
+      ],
+      "obligations": [
+        "finding-fixed",
+        "focused-revalidation",
+        "delivery-check",
+        "open-unmerged-pr"
+      ],
+      "evidence": {
+        "verdicts": [
+          "finding:resolved",
+          "focused-revalidation:pass",
+          "delivery-check:pass",
+          "pull-request:open"
+        ],
+        "findings": [
+          {
+            "id": "pr36-duplicate-wave-rows",
+            "blocking": true,
+            "status": "resolved"
+          }
+        ],
+        "rawEvidence": ["openspec/changes/reduce-harness-context-cost/tasks.md"]
+      }
+    }
+  ]
+}

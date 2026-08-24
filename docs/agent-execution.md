@@ -80,6 +80,8 @@ affected implementation slice until a fresh independent design and RED pass.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 
+For phase-bound work with a context-cost replay fixture, run `npm run harness -- context-cost-replay <fixture>`. The report's capsule lists required new or changed content under `readNow` and carries unchanged content-addressed sources under `attested`; read the former and resolve the latter on demand. Treat `sourceDigest` as the currency check: any source change produces a new digest and requires a new capsule. An improvement verdict is valid only when source, obligation, transition, evidence, and blocking-finding equivalence passes and the configured byte-proxy threshold is met. Runtime observations retain their stated provenance and remain separate from proxy bytes.
+
 ## Route conformance and delivery
 
 Before completing direct work, inspect the target-relevant episode diff and record a version 1 discovered-surface input with changed files and the same closed material-signal set used by routing. The CLI derives the actual Git diff from the persisted baseline, excludes only operational active-plan state, and rejects an incomplete or stale declared file set. Run:

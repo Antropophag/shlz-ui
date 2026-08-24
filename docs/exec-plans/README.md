@@ -24,7 +24,10 @@ npm run harness -- worker-run <plan> <state> <packet> --execution <baseline> --r
 npm run harness -- worker-retry <state> <packet>
 npm run harness -- complete <plan> <state> <handoff-input> --requirements <requirements> --execution <baseline>
 npm run harness -- validation-record <ledger> <target> --base <fixed-ref> --outcome pass --packet <id> --session <id>
+npm run harness -- context-cost-replay <fixture>
 ```
+
+`context-cost-replay` is an additive, offline measurement command. It emits a deterministic phase capsule with `readNow` content identities for new or changed sources, `attested` identities for unchanged sources, compact obligations/transitions/evidence, and raw-evidence pointers when the fixture declares them. Its improvement verdict fails closed on nonequivalent sources, obligations, transitions, evidence, unresolved blocking findings, or a missed byte-proxy threshold. Reported bytes are reproducible proxies; runtime token observations are copied only with their fixture provenance and are never inferred.
 
 Version 2 plans may opt into `specDrivenTdd.version: 1`. Every material
 behavioral slice then has either a bounded inapplicability disposition or an

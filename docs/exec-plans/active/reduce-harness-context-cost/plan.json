@@ -1,0 +1,188 @@
+{
+  "version": 2,
+  "id": "reduce-harness-context-cost",
+  "baseline": "origin/main@50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+  "requirementsGate": "required",
+  "openSpecChange": "reduce-harness-context-cost",
+  "requirementsRevision": 2,
+  "classification": {
+    "size": "L",
+    "score": 42,
+    "contributions": {
+      "independentWorkUnits": 6,
+      "sharedSeams": 6,
+      "contracts": 2,
+      "consumerIntegrations": 2,
+      "evidenceLevels": 3,
+      "architectureAmbiguity": 3,
+      "changedScope": 4,
+      "reviewRisk": 4,
+      "contextGrowthRisk": 12
+    },
+    "kind": "routing-heuristic-not-token-forecast"
+  },
+  "regroupCheck": {
+    "required": true,
+    "openSpecTaskCount": 6
+  },
+  "contextPolicy": {
+    "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
+    "decomposeSignal": 100000,
+    "semanticBoundaries": [
+      "implementation-to-independent-review",
+      "subsystem-change",
+      "major-replan",
+      "irrelevant-output-accumulation"
+    ]
+  },
+  "executionIsolation": {
+    "version": 1,
+    "enforced": true,
+    "unavailableFallback": "stop"
+  },
+  "packets": [
+    {
+      "id": "replay-contract",
+      "objective": "Probe PR #36 contributor hypotheses, build the red-capable replay, and select the minimal architecture",
+      "scope": [
+        "context-cost replay fixture",
+        "focused failing tests",
+        "proxy baseline"
+      ],
+      "nonGoals": ["production implementation", "runtime token reconstruction"],
+      "dependencies": [],
+      "contracts": [
+        "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md"
+      ],
+      "contextSources": [
+        "openspec/changes/reduce-harness-context-cost/{proposal,design,tasks}.md",
+        "openspec/changes/reduce-harness-context-cost/specs/**/*.md",
+        "tools/lib/harness/{core,codex-worker}.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/exec-plans/fixtures/**"
+      ],
+      "implementationSurface": [
+        "docs/exec-plans/fixtures/",
+        "tools/tests/harness.test.mjs"
+      ],
+      "focusedValidation": [
+        "node --test --test-name-pattern='context cost' tools/tests/harness.test.mjs"
+      ],
+      "outputs": [
+        "red-capable replay",
+        "measured proxy baseline",
+        "ranked hypothesis evidence",
+        "evidence-backed selection"
+      ],
+      "handoff": ["fixture schema", "red command", "baseline measurements"],
+      "implementationOutcomes": [
+        "PR #36 contributor classes represented",
+        "188K provenance stays observational",
+        "current broad loading misses threshold"
+      ],
+      "preferredExecutionMode": "continue",
+      "status": "pending"
+    },
+    {
+      "id": "capsule-implementation",
+      "objective": "Implement the compact content-addressed phase capsule and equivalence comparison",
+      "scope": [
+        "context-cost module",
+        "additive CLI",
+        "focused tests",
+        "operator docs"
+      ],
+      "nonGoals": [
+        "embeddings",
+        "semantic broker",
+        "external service",
+        "existing command redesign"
+      ],
+      "dependencies": ["replay-contract"],
+      "contracts": [
+        "openspec/changes/reduce-harness-context-cost/specs/harness/context-cost-control/spec.md"
+      ],
+      "contextSources": [
+        "tools/lib/harness/core.mjs",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/agent-execution.md",
+        "docs/exec-plans/README.md",
+        "docs/exec-plans/fixtures/pr36-context-cost-replay.json"
+      ],
+      "implementationSurface": [
+        "tools/lib/harness/",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/agent-execution.md",
+        "docs/exec-plans/README.md"
+      ],
+      "focusedValidation": [
+        "npm run test:harness",
+        "npm run check:docs",
+        "openspec validate reduce-harness-context-cost --strict"
+      ],
+      "outputs": [
+        "phase capsule interface",
+        "replay report",
+        "operator contract"
+      ],
+      "handoff": ["public CLI", "measured delta", "known limitations"],
+      "implementationOutcomes": [
+        "digest invalidation",
+        "source and obligation equivalence",
+        "minimum reduction met",
+        "deterministic replay"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "review-delivery",
+      "objective": "Independently review the fixed diff, validate replay evidence, and deliver an unmerged PR",
+      "scope": [
+        "Standards review",
+        "Spec review",
+        "validation",
+        "delivery guards",
+        "PR"
+      ],
+      "nonGoals": ["merge", "unrelated harness refactor"],
+      "dependencies": ["capsule-implementation"],
+      "contracts": [
+        "openspec/changes/reduce-harness-context-cost/**",
+        "docs/agent-execution.md"
+      ],
+      "contextSources": [
+        "openspec/changes/reduce-harness-context-cost/**",
+        "docs/exec-plans/active/reduce-harness-context-cost/**",
+        "git diff origin/main...HEAD"
+      ],
+      "implementationSurface": ["current diff remediation only"],
+      "focusedValidation": [
+        "npm run test:harness",
+        "npm test",
+        "npm run lint",
+        "npm run build",
+        "openspec validate reduce-harness-context-cost --strict"
+      ],
+      "outputs": ["two-axis review", "final replay report", "unmerged PR"],
+      "handoff": [
+        "findings and dispositions",
+        "checks",
+        "limitations",
+        "PR URL"
+      ],
+      "implementationOutcomes": [
+        "correctness/evidence/reproducibility preserved",
+        "delivery guard passes",
+        "PR remains open"
+      ],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    }
+  ]
+}
