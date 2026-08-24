@@ -1029,25 +1029,83 @@ function surfacesOverlap(left, right) {
   );
 }
 
-function validateSpecDrivenTdd(contract, packets) {
+function assertSliceScenarios(slice) {
+  if (!Array.isArray(slice.scenarioIds) || !slice.scenarioIds.length)
+    throw new Error(
+      `spec-driven TDD slice ${slice.id} requires scenario identities`,
+    );
+  if (new Set(slice.scenarioIds).size !== slice.scenarioIds.length)
+    throw new Error(
+      `spec-driven TDD slice ${slice.id} has duplicate scenarios`,
+    );
+}
+
+function assertSliceSurfaces(slice) {
+  for (const field of [
+    "acceptanceSurface",
+    "fixtureSurface",
+    "productionSurface",
+  ])
+    if (!Array.isArray(slice[field]) || !slice[field].length)
+      throw new Error(`spec-driven TDD slice ${slice.id} requires ${field}`);
+  if (
+    surfacesOverlap(slice.productionSurface, slice.acceptanceSurface) ||
+    surfacesOverlap(slice.productionSurface, slice.fixtureSurface)
+  )
+    throw new Error(
+      `spec-driven TDD slice ${slice.id} production and acceptance surfaces overlap`,
+    );
+}
+
+function assertSliceAuthorities(slice) {
+  const mappings = new Map(
+    (slice.authorities ?? []).map((authority) => [
+      authority.scenarioId,
+      authority,
+    ]),
+  );
+  if (
+    mappings.size !== slice.scenarioIds.length ||
+    slice.scenarioIds.some((id) => {
+      const authority = mappings.get(id);
+      return !authority?.source || !authority?.ref;
+    })
+  )
+    throw new Error(
+      `spec-driven TDD slice ${slice.id} requires one scenario authority mapping per scenario`,
+    );
+}
+
+function assertSliceSeam(slice) {
+  if (
+    typeof slice.seam !== "string" ||
+    !slice.seam ||
+    !Array.isArray(slice.command) ||
+    !slice.command.length ||
+    !slice.command.every((value) => typeof value === "string" && value) ||
+    !path.isAbsolute(slice.command[0]) ||
+    !slice.controls ||
+    !Number.isInteger(slice.repeatCount) ||
+    slice.repeatCount < 2
+  )
+    throw new Error(
+      `spec-driven TDD slice ${slice.id} requires a deterministic executable seam with an absolute command`,
+    );
+}
+
+function validateSpecDrivenTdd(contract, packets, executionIsolation) {
   if (!contract || contract.version !== 1 || !Array.isArray(contract.slices))
     throw new Error("spec-driven TDD contract version must be 1");
   if (!contract.slices.length)
     throw new Error("spec-driven TDD contract requires slices");
   const packetIds = new Set(packets.map(({ id }) => id));
   const sliceIds = new Set();
+  let hasEnforcedSlice = false;
   for (const slice of contract.slices) {
     if (!slice?.id || sliceIds.has(slice.id))
       throw new Error("spec-driven TDD slice ids must be unique and non-empty");
     sliceIds.add(slice.id);
-    if (!Array.isArray(slice.scenarioIds) || !slice.scenarioIds.length)
-      throw new Error(
-        `spec-driven TDD slice ${slice.id} requires scenario identities`,
-      );
-    if (new Set(slice.scenarioIds).size !== slice.scenarioIds.length)
-      throw new Error(
-        `spec-driven TDD slice ${slice.id} has duplicate scenarios`,
-      );
+    assertSliceScenarios(slice);
     if (slice.applicability === "inapplicable") {
       if (
         !tddApplicabilityReasons.has(slice.reason) ||
@@ -1063,36 +1121,9 @@ function validateSpecDrivenTdd(contract, packets) {
       throw new Error(
         `spec-driven TDD slice ${slice.id} applicability is invalid`,
       );
-    for (const field of [
-      "acceptanceSurface",
-      "fixtureSurface",
-      "productionSurface",
-    ])
-      if (!Array.isArray(slice[field]) || !slice[field].length)
-        throw new Error(`spec-driven TDD slice ${slice.id} requires ${field}`);
-    if (
-      surfacesOverlap(slice.productionSurface, slice.acceptanceSurface) ||
-      surfacesOverlap(slice.productionSurface, slice.fixtureSurface)
-    )
-      throw new Error(
-        `spec-driven TDD slice ${slice.id} production and acceptance surfaces overlap`,
-      );
-    const mappings = new Map(
-      (slice.authorities ?? []).map((authority) => [
-        authority.scenarioId,
-        authority,
-      ]),
-    );
-    if (
-      mappings.size !== slice.scenarioIds.length ||
-      slice.scenarioIds.some((id) => {
-        const authority = mappings.get(id);
-        return !authority?.source || !authority?.ref;
-      })
-    )
-      throw new Error(
-        `spec-driven TDD slice ${slice.id} requires one scenario authority mapping per scenario`,
-      );
+    hasEnforcedSlice = true;
+    assertSliceSurfaces(slice);
+    assertSliceAuthorities(slice);
     if (
       !packetIds.has(slice.testDesignPacket) ||
       !packetIds.has(slice.implementationPacket) ||
@@ -1108,20 +1139,12 @@ function validateSpecDrivenTdd(contract, packets) {
       throw new Error(
         `spec-driven TDD slice ${slice.id} implementation packet must depend on test design`,
       );
-    if (
-      typeof slice.seam !== "string" ||
-      !slice.seam ||
-      !Array.isArray(slice.command) ||
-      !slice.command.length ||
-      !slice.command.every((value) => typeof value === "string" && value) ||
-      !slice.controls ||
-      !Number.isInteger(slice.repeatCount) ||
-      slice.repeatCount < 2
-    )
-      throw new Error(
-        `spec-driven TDD slice ${slice.id} requires a deterministic executable seam`,
-      );
+    assertSliceSeam(slice);
   }
+  if (hasEnforcedSlice && executionIsolation?.enforced !== true)
+    throw new Error(
+      "spec-driven TDD enforced slices requires an executionIsolation policy with enforced=true",
+    );
   return contract;
 }
 
@@ -1176,7 +1199,11 @@ export function validatePlan(plan, config) {
   }
   assertAcyclic(plan.packets);
   if (plan.specDrivenTdd !== undefined)
-    validateSpecDrivenTdd(plan.specDrivenTdd, plan.packets);
+    validateSpecDrivenTdd(
+      plan.specDrivenTdd,
+      plan.packets,
+      plan.executionIsolation,
+    );
   if (
     plan.version >= 2 &&
     ["L", "XL"].includes(plan.classification.size) &&
@@ -1913,18 +1940,12 @@ export function claimPacket(
   return state;
 }
 
-function applyTddRequirementsReentry(
-  plan,
-  state,
-  packetId,
+function tddReentryClassifications(
+  enforced,
+  reentry,
   fromRevision,
   toRevision,
-  reentry,
 ) {
-  const enforced = (plan.specDrivenTdd?.slices ?? []).filter(
-    ({ applicability }) => applicability === "enforced",
-  );
-  if (!enforced.length) return;
   if (
     reentry?.version !== 1 ||
     reentry.fromRevision !== fromRevision ||
@@ -1939,10 +1960,11 @@ function applyTddRequirementsReentry(
     if (
       !item?.sliceId ||
       !["affected", "retained"].includes(item.classification) ||
+      (item.classification === "retained" && !item.evidence) ||
       classifications.has(item.sliceId)
     )
       throw new Error("spec-driven TDD re-entry classifications are invalid");
-    classifications.set(item.sliceId, item.classification);
+    classifications.set(item.sliceId, item);
   }
   if (
     classifications.size !== enforced.length ||
@@ -1951,13 +1973,36 @@ function applyTddRequirementsReentry(
     throw new Error(
       "spec-driven TDD re-entry must classify every enforced slice",
     );
+  return classifications;
+}
+
+function applyTddRequirementsReentry(
+  plan,
+  state,
+  packetId,
+  fromRevision,
+  toRevision,
+  reentry,
+) {
+  const enforced = (plan.specDrivenTdd?.slices ?? []).filter(
+    ({ applicability }) => applicability === "enforced",
+  );
+  if (!enforced.length) return;
+  const classifications = tddReentryClassifications(
+    enforced,
+    reentry,
+    fromRevision,
+    toRevision,
+  );
 
   for (const contract of enforced) {
-    const lifecycle = state.specDrivenTdd.slices[contract.id];
-    if (classifications.get(contract.id) === "retained") {
-      const classification = reentry.slices.find(
-        ({ sliceId }) => sliceId === contract.id,
+    const lifecycle = state.specDrivenTdd?.slices?.[contract.id];
+    const classification = classifications.get(contract.id);
+    if (!lifecycle)
+      throw new Error(
+        `spec-driven TDD slice ${contract.id} retention requires completed digest-identical evidence`,
       );
+    if (classification.classification === "retained") {
       const currentIdentity = tddRetentionIdentity(
         plan,
         state,

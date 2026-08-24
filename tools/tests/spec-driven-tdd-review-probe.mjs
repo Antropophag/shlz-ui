@@ -33,7 +33,7 @@ assessment.specDrivenTdd = {
         },
       ],
       seam: "harness/spec-driven-tdd",
-      command: ["node", "tools/tests/harness.test.mjs"],
+      command: [process.execPath, "tools/tests/harness.test.mjs"],
       acceptanceSurface: ["tools/tests/harness.test.mjs"],
       fixtureSurface: ["docs/exec-plans/fixtures/spec-driven-tdd-oracle.json"],
       productionSurface: ["tools/lib/harness/core.mjs"],

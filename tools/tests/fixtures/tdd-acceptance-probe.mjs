@@ -24,8 +24,10 @@ const adapter = path.join(
 
 try {
   const { observedContract } = await import(pathToFileURL(adapter));
-  if (observedContract() !== "symmetric-runner-v1")
-    throw new Error("ERR_CONTRACT_INCORRECT");
+  if (observedContract() !== "symmetric-runner-v1") {
+    process.stderr.write("ERR_CONTRACT_INCORRECT\n");
+    process.exit(1);
+  }
 } catch (error) {
   if (error?.code === "ERR_MODULE_NOT_FOUND") {
     process.stderr.write("ERR_CONTRACT_MISSING\n");

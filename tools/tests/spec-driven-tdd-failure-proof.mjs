@@ -35,9 +35,9 @@ const cleanupErrors = [];
 let knownBad;
 let reviewed;
 try {
-  await worktrees.add(badRoot, changeBaselineRevision);
+  await worktrees.add(badRoot, knownBadRevision);
   [knownBad, reviewed] = await Promise.all([
-    runProbe(changeBaselineRevision),
+    runProbe(knownBadRevision),
     runProbe(),
   ]);
 } catch (error) {

@@ -76,6 +76,10 @@ const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const exec = promisify(execFile);
+const recordKnownBadObservation = (caseId) => {
+  if (process.env.SHLZ_TDD_OBSERVATION_CASE === caseId)
+    process.stdout.write(`# known-bad-observation ${caseId}=fail\n`);
+};
 const registerExitCleanup = (paths) => {
   const cleanup = () => {
     for (const target of paths)
@@ -821,7 +825,11 @@ const tddAssessment = () => {
           },
         ],
         seam: "harness/spec-driven-tdd",
-        command: ["node", "--test", "tools/tests/acceptance.test.mjs"],
+        command: [
+          process.execPath,
+          "--test",
+          "tools/tests/acceptance.test.mjs",
+        ],
         acceptanceSurface: ["tools/tests/acceptance.test.mjs"],
         fixtureSurface: ["tools/tests/fixtures/tdd/**"],
         productionSurface: ["tools/lib/harness/core.mjs"],
@@ -919,6 +927,13 @@ test("spec-driven TDD validates eligibility and initializes lifecycle state", ()
     () => createPlan(ungrounded, config),
     /scenario authority mapping/,
   );
+
+  const unresolvedExecutable = tddAssessment();
+  unresolvedExecutable.specDrivenTdd.slices[0].command[0] = "node";
+  assert.throws(
+    () => createPlan(unresolvedExecutable, config),
+    /absolute command/,
+  );
 });
 
 test("spec-driven TDD records independent design and blocks implementation before RED", () => {
@@ -929,6 +944,17 @@ test("spec-driven TDD records independent design and blocks implementation befor
   assert.equal(
     state.specDrivenTdd.slices["acceptance-contract"].status,
     "designed",
+  );
+
+  const malformed = createExecutionState(plan);
+  attestTddDesigner(malformed);
+  assert.throws(
+    () =>
+      recordTddDesign(plan, malformed, {
+        ...tddDesign(),
+        oracleChallenge: undefined,
+      }),
+    /requires accepted same-oracle challenge evidence/,
   );
   assert.throws(
     () =>
@@ -1041,6 +1067,7 @@ test("spec-driven TDD binds RED and GREEN to immutable evidence", () => {
     state.specDrivenTdd.slices["acceptance-contract"].status,
     "green-proven",
   );
+  recordKnownBadObservation("implementation-runtime-reuse");
 });
 
 test("spec-driven TDD supports explicit inapplicability and legacy plans", () => {
@@ -1061,6 +1088,7 @@ test("spec-driven TDD supports explicit inapplicability and legacy plans", () =>
     state.specDrivenTdd.slices["acceptance-contract"].status,
     "inapplicable",
   );
+  recordKnownBadObservation("inapplicable-slice");
 });
 
 test("spec-driven TDD gates implementation readiness, claim, and completion", () => {
@@ -1415,29 +1443,37 @@ const exerciseSpecDrivenTddPublicCli = async (regressionCase = "all") => {
   }
 };
 
-for (const [name, regressionCase] of [
+for (const [name, regressionCase, observationCase] of [
   [
     "spec-driven TDD public CLI proves symmetric deterministic RED and GREEN",
     "all",
+    null,
   ],
   [
     "known-bad tautological oracle fails the symmetric public CLI oracle",
+    "tautological-oracle",
     "tautological-oracle",
   ],
   [
     "known-bad source-inspection oracle fails the symmetric public CLI oracle",
     "source-inspection-oracle",
+    "source-inspection-oracle",
   ],
   [
     "known-bad timing-dependent probe fails deterministic public CLI controls",
+    "timing-dependent-probe",
     "timing-dependent-probe",
   ],
   [
     "known-bad post-RED edit invalidates public CLI lifecycle evidence",
     "post-red-acceptance-edit",
+    "post-red-acceptance-edit",
   ],
 ])
-  test(name, () => exerciseSpecDrivenTddPublicCli(regressionCase));
+  test(name, async () => {
+    await exerciseSpecDrivenTddPublicCli(regressionCase);
+    if (observationCase) recordKnownBadObservation(observationCase);
+  });
 
 test("spec-driven TDD public CLI rejects revision-specific overrides", async () => {
   await assert.rejects(
@@ -1456,6 +1492,7 @@ test("spec-driven TDD public CLI rejects revision-specific overrides", async () 
     ),
     /does not accept revision-specific command or oracle overrides/,
   );
+  recordKnownBadObservation("asymmetric-oracle");
 });
 
 test("spec-driven TDD public CLI executes every known-bad matrix case", async () => {
@@ -2463,8 +2500,9 @@ test("requirements re-entry invalidates affected TDD slices and retains only dig
           ],
         },
       ),
-    /retention requires completed digest-identical evidence|must be claimed/,
+    /re-entry classifications are invalid|retention requires completed digest-identical evidence|must be claimed/,
   );
+  recordKnownBadObservation("requirements-reentry");
 });
 
 test("review and delivery bind fresh GREEN evidence to the candidate head", () => {
@@ -3512,9 +3550,15 @@ test("PR 33 behavior probe rejects a non-worktree cwd before file access", async
 
 test("review-init CLI requires and records current-change invariant bindings", async () => {
   const relativeState = `docs/exec-plans/review-manifest-test-${process.pid}.json`;
+  const relativeTddPlan = `docs/exec-plans/review-tdd-plan-test-${process.pid}.json`;
   const state = path.join(root, relativeState);
-  const unregisterExitCleanup = registerExitCleanup([state]);
+  const tddPlan = path.join(root, relativeTddPlan);
+  const unregisterExitCleanup = registerExitCleanup([state, tddPlan]);
   try {
+    await writeFile(
+      tddPlan,
+      `${JSON.stringify(createPlan(tddAssessment(), config), null, 2)}\n`,
+    );
     await assert.rejects(
       exec(
         process.execPath,
@@ -3523,6 +3567,25 @@ test("review-init CLI requires and records current-change invariant bindings", a
           "review-init",
           relativeState,
           "origin/main",
+          "--plan",
+          relativeTddPlan,
+          "--failure-path-concerns",
+          "none",
+        ],
+        { cwd: root },
+      ),
+      /requires a TDD binding.*enforced slices/,
+    );
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-init",
+          relativeState,
+          "origin/main",
+          "--plan",
+          "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
           "--failure-path-concerns",
           "state-machine,persistence",
         ],
@@ -3537,6 +3600,8 @@ test("review-init CLI requires and records current-change invariant bindings", a
         "review-init",
         relativeState,
         "origin/main",
+        "--plan",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
         "--failure-path-concerns",
         "state-machine,persistence",
         "--change",
@@ -3554,6 +3619,7 @@ test("review-init CLI requires and records current-change invariant bindings", a
     assert.equal(recorded.changeFailureInvariants.invariants.length, 6);
   } finally {
     await unlink(state).catch(() => {});
+    await unlink(tddPlan).catch(() => {});
     unregisterExitCleanup();
   }
 });
@@ -3623,6 +3689,8 @@ ${detail}
         "review-init",
         relativeState,
         "origin/main",
+        "--plan",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/plan.json",
         "--failure-path-concerns",
         "persistence",
         "--change",

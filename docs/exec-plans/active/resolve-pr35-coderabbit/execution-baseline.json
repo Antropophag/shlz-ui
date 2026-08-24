@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "kind": "existing-pull-request",
+  "commit": "e73e8e94749c5f3414636cba228ff870b18e3a13",
+  "branch": "feature/spec-driven-tdd-gate",
+  "defaultBranch": "main",
+  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/35"
+}

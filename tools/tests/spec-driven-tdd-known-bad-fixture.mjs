@@ -29,22 +29,24 @@ if (
   throw new Error("known-bad matrix has an unbound case");
 
 const outcomes = {};
-for (const testName of executableTests) {
+const escapePattern = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+for (const { id, executableTest: testName } of matrix.cases) {
   const { stdout, stderr } = await exec(
     process.execPath,
     [
       "--test",
-      `--test-name-pattern=^${testName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}$`,
+      "--test-reporter=tap",
+      `--test-name-pattern=^${escapePattern(testName)}$`,
       "tools/tests/harness.test.mjs",
     ],
     {
       cwd: root,
-      env: subprocessEnvironment,
+      env: { ...subprocessEnvironment, SHLZ_TDD_OBSERVATION_CASE: id },
       timeout: 120000,
       maxBuffer: 10 * 1024 * 1024,
     },
   );
-  const escapedName = testName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const escapedName = escapePattern(testName);
   const selectedPasses = stdout.match(
     new RegExp(`^ok \\d+ - ${escapedName}$`, "gm"),
   );
@@ -56,7 +58,20 @@ for (const testName of executableTests) {
     throw new Error(
       `known-bad fixture failed: ${testName}\n${stdout}${stderr}`,
     );
-  outcomes[testName] = { knownBad: "fail", reviewedHead: "pass" };
+  const observedKnownBad = stdout.includes(
+    `# known-bad-observation ${id}=fail`,
+  );
+  if (!observedKnownBad)
+    throw new Error(
+      `known-bad fixture did not observe ${id}\n${stdout}${stderr}`,
+    );
+  outcomes[testName] = {
+    knownBad: observedKnownBad ? "fail" : "pass",
+    reviewedHead:
+      stdout.includes("# pass 1") && stdout.includes("# fail 0")
+        ? "pass"
+        : "fail",
+  };
 }
 
 process.stdout.write(

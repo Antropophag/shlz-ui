@@ -116,7 +116,7 @@ export function createSpecDrivenTdd({
           files.filter((file) => matchesPattern(file, pattern)),
         ),
       ),
-    ].sort((left, right) => left.localeCompare(right));
+    ].sort((left, right) => (left < right ? -1 : left > right ? 1 : 0));
     const missing = patterns.filter(
       (pattern) => !files.some((file) => matchesPattern(file, pattern)),
     );
@@ -127,7 +127,7 @@ export function createSpecDrivenTdd({
     return selected;
   }
 
-  async function createTddDesignEvidence(
+  async function computeTddDesignIdentity(
     plan,
     state,
     handoff,
@@ -188,6 +188,10 @@ export function createSpecDrivenTdd({
       controls: contract.controls,
       fixtureDigest: evidence.fixtureDigest,
     });
+    return { contract, challenge, evidence, oracleChallengeDigest };
+  }
+
+  async function executeOracleChallenge(contract, challenge, repoRoot) {
     const runAdapter = async (adapter) => {
       const challengeContract = {
         ...contract,
@@ -213,10 +217,8 @@ export function createSpecDrivenTdd({
         throw new Error("spec-driven TDD oracle challenge is nondeterministic");
       return runs;
     };
-    const [controlRuns, decoyRuns] = await Promise.all([
-      runAdapter(challenge.controlAdapter),
-      runAdapter(challenge.decoyAdapter),
-    ]);
+    const controlRuns = await runAdapter(challenge.controlAdapter);
+    const decoyRuns = await runAdapter(challenge.decoyAdapter);
     if (controlRuns.some(({ exitCode }) => exitCode !== 0))
       throw new Error(
         "spec-driven TDD oracle challenge rejected known-good control",
@@ -233,10 +235,26 @@ export function createSpecDrivenTdd({
       throw new Error(
         "spec-driven TDD oracle challenge did not match the scenario failure signature",
       );
+    return { control: controlRuns, decoy: decoyRuns };
+  }
+
+  async function createTddDesignEvidence(
+    plan,
+    state,
+    handoff,
+    baseline,
+    repoRoot,
+  ) {
+    const { contract, challenge, evidence, oracleChallengeDigest } =
+      await computeTddDesignIdentity(plan, state, handoff, baseline, repoRoot);
     return {
       ...evidence,
       oracleChallengeDigest,
-      oracleChallengeRuns: { control: controlRuns, decoy: decoyRuns },
+      oracleChallengeRuns: await executeOracleChallenge(
+        contract,
+        challenge,
+        repoRoot,
+      ),
     };
   }
 
@@ -310,6 +328,157 @@ export function createSpecDrivenTdd({
     }
   }
 
+  async function prepareRedWorktree(context, repoRoot, baseline, frozenFiles) {
+    const worktreeParent = path.join(homedir(), "code");
+    await mkdir(worktreeParent, { recursive: true });
+    context.root = await mkdtemp(path.join(worktreeParent, "shlz-ui-tdd-"));
+    context.allocated = true;
+    await exec(
+      "git",
+      ["worktree", "add", "--detach", context.root, baseline.commit],
+      {
+        cwd: repoRoot,
+      },
+    );
+    context.created = true;
+    const { stdout } = await exec("git", ["rev-parse", "HEAD"], {
+      cwd: context.root,
+    });
+    if (stdout.trim() !== baseline.commit)
+      throw new Error(
+        "spec-driven TDD RED worktree is not the immutable baseline",
+      );
+    for (const file of frozenFiles) {
+      await mkdir(path.dirname(path.join(context.root, file)), {
+        recursive: true,
+      });
+      await copyFile(path.join(repoRoot, file), path.join(context.root, file));
+    }
+  }
+
+  async function repeatedTddRuns(contract, worktreeRoot, repoRoot) {
+    const runs = [];
+    for (let index = 0; index < contract.repeatCount; index++)
+      runs.push(
+        await executeTddRequest(contract, worktreeRoot, repoRoot, worktreeRoot),
+      );
+    if (runs.some((run) => run.output !== runs[0].output))
+      throw new Error("spec-driven TDD probe is nondeterministic");
+    return runs;
+  }
+
+  async function recordAcceptancePhase(
+    plan,
+    state,
+    phase,
+    designed,
+    runs,
+    repoRoot,
+  ) {
+    if (phase === "red") {
+      if (runs.some(({ exitCode }) => exitCode === 0))
+        throw new Error("spec-driven TDD baseline did not produce RED");
+      if (
+        typeof designed.expectedFailureSignature !== "string" ||
+        !runs[0].output.includes(designed.expectedFailureSignature)
+      )
+        throw new Error(
+          "spec-driven TDD RED did not match the stable failure signature",
+        );
+      return recordTddRed(plan, state, {
+        ...designed,
+        runtimeId: `tdd-runner-${process.pid}`,
+        normalizedFailureSignature: designed.expectedFailureSignature,
+        failedScenarioIds: designed.failedScenarioIds,
+        runs,
+      });
+    }
+    if (runs.some(({ exitCode }) => exitCode !== 0))
+      throw new Error("spec-driven TDD candidate did not produce GREEN");
+    const { stdout: candidateHead } = await exec("git", ["rev-parse", "HEAD"], {
+      cwd: repoRoot,
+    });
+    return recordTddGreen(plan, state, {
+      ...designed,
+      candidateHead: candidateHead.trim(),
+      runs,
+    });
+  }
+
+  function porcelainChangedPaths(stdout) {
+    const records = stdout.split("\0");
+    const changed = [];
+    for (let index = 0; index < records.length; index++) {
+      const record = records[index];
+      if (!record) continue;
+      changed.push(record.slice(3));
+      if (/[RC]/.test(record.slice(0, 2))) index++;
+    }
+    return changed;
+  }
+
+  async function inspectBaselineWorktree(
+    context,
+    currentIdentity,
+    frozenFiles,
+  ) {
+    const { stdout } = await exec("git", ["status", "--porcelain=v1", "-z"], {
+      cwd: context.root,
+    });
+    context.dirty = Boolean(stdout);
+    const frozen = new Set(frozenFiles);
+    const frozenIdentityMatches =
+      (await fingerprintFiles(
+        currentIdentity.acceptanceFiles,
+        context.root,
+      )) === currentIdentity.acceptanceDigest &&
+      (await fingerprintFiles(currentIdentity.fixtureFiles, context.root)) ===
+        currentIdentity.fixtureDigest;
+    context.modified =
+      porcelainChangedPaths(stdout).some((file) => !frozen.has(file)) ||
+      !frozenIdentityMatches;
+  }
+
+  async function cleanupBaselineWorktree(
+    context,
+    repoRoot,
+    currentIdentity,
+    frozenFiles,
+  ) {
+    const errors = [];
+    if (!context.allocated) return errors;
+    try {
+      if (context.created)
+        await inspectBaselineWorktree(context, currentIdentity, frozenFiles);
+    } catch (error) {
+      context.modified = true;
+      errors.push(error);
+    }
+    try {
+      if (!context.created)
+        await rm(context.root, { recursive: true, force: true });
+      else if (!context.modified)
+        await exec(
+          "git",
+          [
+            "worktree",
+            "remove",
+            ...(context.dirty ? ["--force"] : []),
+            context.root,
+          ],
+          { cwd: repoRoot },
+        );
+    } catch (error) {
+      errors.push(error);
+    }
+    try {
+      await exec("git", ["worktree", "prune"], { cwd: repoRoot });
+    } catch (error) {
+      errors.push(error);
+    }
+    return errors;
+  }
+
   async function runTddAcceptance(
     plan,
     state,
@@ -331,17 +500,19 @@ export function createSpecDrivenTdd({
       throw new Error(
         `spec-driven TDD slice ${sliceId} requires accepted design`,
       );
-    const currentIdentity = await createTddDesignEvidence(
-      plan,
-      state,
-      {
-        ...designed,
-        acceptanceFiles: undefined,
-        fixtureFiles: undefined,
-      },
-      baseline,
-      repoRoot,
-    );
+    const { evidence: currentEvidence, oracleChallengeDigest } =
+      await computeTddDesignIdentity(
+        plan,
+        state,
+        {
+          ...designed,
+          acceptanceFiles: undefined,
+          fixtureFiles: undefined,
+        },
+        baseline,
+        repoRoot,
+      );
+    const currentIdentity = { ...currentEvidence, oracleChallengeDigest };
     try {
       assertTddIdentity(
         designed,
@@ -359,153 +530,46 @@ export function createSpecDrivenTdd({
         };
       throw error;
     }
-    let worktreeRoot = repoRoot;
-    let allocatedWorktree = false;
-    let createdWorktree = false;
+    const worktree = {
+      root: repoRoot,
+      allocated: false,
+      created: false,
+      dirty: false,
+      modified: false,
+    };
     const frozenFiles = [
       ...currentIdentity.acceptanceFiles,
       ...currentIdentity.fixtureFiles,
     ];
     let result;
     let runError;
-    let modifiedBaseline = false;
-    let worktreeDirty = false;
-    const cleanupErrors = [];
     try {
-      if (phase === "red") {
-        const worktreeParent = path.join(homedir(), "code");
-        await mkdir(worktreeParent, { recursive: true });
-        worktreeRoot = await mkdtemp(path.join(worktreeParent, "shlz-ui-tdd-"));
-        allocatedWorktree = true;
-        await rm(worktreeRoot, { recursive: true, force: true });
-        await exec(
-          "git",
-          ["worktree", "add", "--detach", worktreeRoot, baseline.commit],
-          { cwd: repoRoot },
-        );
-        createdWorktree = true;
-        const { stdout } = await exec("git", ["rev-parse", "HEAD"], {
-          cwd: worktreeRoot,
-        });
-        if (stdout.trim() !== baseline.commit)
-          throw new Error(
-            "spec-driven TDD RED worktree is not the immutable baseline",
-          );
-        for (const file of frozenFiles) {
-          await mkdir(path.dirname(path.join(worktreeRoot, file)), {
-            recursive: true,
-          });
-          await copyFile(
-            path.join(repoRoot, file),
-            path.join(worktreeRoot, file),
-          );
-        }
-      }
-      const runs = [];
-      for (let index = 0; index < contract.repeatCount; index++)
-        runs.push(
-          await executeTddRequest(
-            contract,
-            worktreeRoot,
-            repoRoot,
-            worktreeRoot,
-          ),
-        );
-      if (runs.some((run) => run.output !== runs[0].output))
-        throw new Error("spec-driven TDD probe is nondeterministic");
-      if (phase === "red") {
-        if (runs.some(({ exitCode }) => exitCode === 0))
-          throw new Error("spec-driven TDD baseline did not produce RED");
-        if (
-          typeof designed.expectedFailureSignature !== "string" ||
-          !runs[0].output.includes(designed.expectedFailureSignature)
-        )
-          throw new Error(
-            "spec-driven TDD RED did not match the stable failure signature",
-          );
-        result = recordTddRed(plan, state, {
-          ...designed,
-          runtimeId: `tdd-runner-${process.pid}`,
-          normalizedFailureSignature: designed.expectedFailureSignature,
-          failedScenarioIds: designed.failedScenarioIds,
-          runs,
-        });
-      } else {
-        if (runs.some(({ exitCode }) => exitCode !== 0))
-          throw new Error("spec-driven TDD candidate did not produce GREEN");
-        const { stdout: candidateHead } = await exec(
-          "git",
-          ["rev-parse", "HEAD"],
-          { cwd: repoRoot },
-        );
-        result = recordTddGreen(plan, state, {
-          ...designed,
-          candidateHead: candidateHead.trim(),
-          runs,
-        });
-      }
+      if (phase === "red")
+        await prepareRedWorktree(worktree, repoRoot, baseline, frozenFiles);
+      const runs = await repeatedTddRuns(contract, worktree.root, repoRoot);
+      result = await recordAcceptancePhase(
+        plan,
+        state,
+        phase,
+        designed,
+        runs,
+        repoRoot,
+      );
     } catch (error) {
       runError = error;
-    } finally {
-      if (allocatedWorktree) {
-        try {
-          if (createdWorktree) {
-            const { stdout } = await exec("git", ["status", "--porcelain=v1"], {
-              cwd: worktreeRoot,
-            });
-            worktreeDirty = Boolean(stdout.trim());
-            const frozen = new Set(frozenFiles);
-            const changed = stdout
-              .trim()
-              .split("\n")
-              .filter(Boolean)
-              .map((line) => line.slice(3));
-            const frozenIdentityMatches =
-              (await fingerprintFiles(
-                currentIdentity.acceptanceFiles,
-                worktreeRoot,
-              )) === currentIdentity.acceptanceDigest &&
-              (await fingerprintFiles(
-                currentIdentity.fixtureFiles,
-                worktreeRoot,
-              )) === currentIdentity.fixtureDigest;
-            modifiedBaseline =
-              changed.some((file) => !frozen.has(file)) ||
-              !frozenIdentityMatches;
-          }
-        } catch (error) {
-          cleanupErrors.push(error);
-        }
-        try {
-          if (!createdWorktree)
-            await rm(worktreeRoot, { recursive: true, force: true });
-          else if (!modifiedBaseline)
-            await exec(
-              "git",
-              [
-                "worktree",
-                "remove",
-                ...(worktreeDirty ? ["--force"] : []),
-                worktreeRoot,
-              ],
-              { cwd: repoRoot },
-            );
-        } catch (error) {
-          cleanupErrors.push(error);
-        }
-        try {
-          await exec("git", ["worktree", "prune"], { cwd: repoRoot });
-        } catch (error) {
-          cleanupErrors.push(error);
-        }
-      }
     }
+    const cleanupErrors = await cleanupBaselineWorktree(
+      worktree,
+      repoRoot,
+      currentIdentity,
+      frozenFiles,
+    );
     const failures = [
       ...(runError ? [runError] : []),
-      ...(modifiedBaseline
+      ...(worktree.modified
         ? [
             new Error(
-              `spec-driven TDD baseline worktree was modified; evidence retained at ${worktreeRoot}`,
+              `spec-driven TDD baseline worktree was modified; evidence retained at ${worktree.root}`,
             ),
           ]
         : []),
@@ -596,6 +660,7 @@ export function createSpecDrivenTdd({
         "spec-driven TDD behavioral oracle must observe the declared seam",
       );
     if (
+      !handoff.oracleChallenge ||
       !sha256Pattern.test(handoff.oracleChallengeDigest ?? "") ||
       !Array.isArray(handoff.oracleChallengeRuns?.control) ||
       handoff.oracleChallengeRuns.control.length !== contract.repeatCount ||

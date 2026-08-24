@@ -661,12 +661,28 @@ switch (command) {
     const tddStatePath = option("--tdd-state");
     if (Boolean(tddPlanPath) !== Boolean(tddStatePath))
       throw new Error("review-init requires both --tdd-plan and --tdd-state");
+    const executionPlanPath = option("--plan");
+    if (!executionPlanPath)
+      throw new Error("review-init requires --plan <execution-plan>");
+    const executionPlan = validatePlan(
+      await readJson(absolute(executionPlanPath)),
+      config,
+    );
+    const enforcedTdd = (executionPlan.specDrivenTdd?.slices ?? []).some(
+      ({ applicability }) => applicability === "enforced",
+    );
+    if (enforcedTdd && (!tddPlanPath || !tddStatePath))
+      throw new Error(
+        "review-init requires a TDD binding for an execution plan with enforced slices",
+      );
+    if (tddPlanPath && absolute(tddPlanPath) !== absolute(executionPlanPath))
+      throw new Error("review-init TDD plan must be the authoritative plan");
     const currentHead = await exec("git", ["rev-parse", "HEAD"], {
       cwd: repoRoot,
     }).then(({ stdout }) => stdout.trim());
     const tddBinding = tddPlanPath
       ? createTddReviewBinding(
-          await readJson(absolute(tddPlanPath)),
+          executionPlan,
           await readJson(absolute(tddStatePath)),
           currentHead,
         )

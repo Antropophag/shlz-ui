@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "planId": "resolve-pr35-coderabbit",
+  "requirementsRevision": 1,
+  "packets": {
+    "review-remediation": {
+      "status": "completed",
+      "session": "root-pr35-coderabbit"
+    },
+    "review-delivery": {
+      "status": "pending"
+    }
+  },
+  "handoffs": {
+    "review-remediation": {
+      "completedPacket": "review-remediation",
+      "changed": [
+        "fail-closed plan, review-init, and requirements re-entry validation",
+        "deterministic oracle identity, sequential challenge execution, and absolute executable validation",
+        "race-free home-directory RED worktree setup and NUL-safe status cleanup",
+        "observed known-bad and failure-proof evidence",
+        "focused regression coverage and portable committed evidence"
+      ],
+      "provenChecks": [
+        "73 of 73 focused harness tests pass",
+        "165 of 165 aggregate Node tests pass",
+        "202 of 202 Playwright tests pass",
+        "OpenSpec integration, lint, build, validation, and package consumer smoke pass",
+        "known-bad fixture reports eight observed fail/pass pairs"
+      ],
+      "settledDecisions": [
+        "the original bootstrap plan records bounded inapplicability because its immutable baseline predates the TDD runner",
+        "Git worktrees remain under the user home code directory per AGENTS.md; the pre-add removal race is eliminated",
+        "review-init requires an authoritative plan and enforced slices require a matching TDD binding"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "review-delivery",
+      "invalidatedAssumptions": []
+    }
+  },
+  "specDrivenTdd": {
+    "version": 1,
+    "slices": {
+      "coderabbit-remediation": {
+        "status": "inapplicable",
+        "reason": "no-deterministic-seam",
+        "evidence": "The bounded follow-up spans plan validation, review initialization, requirements re-entry, subprocess resolution, Git worktree cleanup, and historical known-bad execution; no single symmetric acceptance command can exercise that heterogeneous surface honestly, so focused regression tests apply instead."
+      }
+    }
+  }
+}
