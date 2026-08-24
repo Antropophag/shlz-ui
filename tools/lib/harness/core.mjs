@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { execFile } from "node:child_process";
 import {
   appendFile,
+  copyFile,
   mkdir,
   mkdtemp,
   readFile,
@@ -584,6 +585,37 @@ const incompleteDeliveryPackets = (plan, state) =>
     })
     .map(({ id }) => id);
 
+function assertDeliveryReview(review, candidateHead, tddBinding) {
+  if (!review || review.version !== 1)
+    throw new Error("delivery requires current independent review evidence");
+  const currentAxes = new Set(
+    (review.passes ?? [])
+      .filter(({ head }) => head === candidateHead)
+      .map(({ axis }) => axis),
+  );
+  if (!currentAxes.has("Standards") || !currentAxes.has("Spec"))
+    throw new Error(
+      "delivery requires current Standards and Spec review passes",
+    );
+  if ((review.findings ?? []).some(({ status }) => status !== "resolved"))
+    throw new Error("delivery review has unresolved findings");
+  if (review.failurePathConcerns?.length) {
+    if (!review.failurePathProof)
+      throw new Error("delivery requires executable failure-path proof");
+    if (review.failurePathProof.reviewedHead !== candidateHead)
+      throw new Error("delivery failure-path proof is stale");
+    const proofValidation = stableValue(review);
+    const proof = proofValidation.failurePathProof;
+    delete proofValidation.failurePathProof;
+    recordFailurePathProof(proofValidation, proof);
+  }
+  if (
+    tddBinding &&
+    valueDigest(review.specDrivenTdd) !== valueDigest(tddBinding)
+  )
+    throw new Error("delivery review has stale spec-driven TDD evidence");
+}
+
 export function assertImplementationDelivery(delivery, execution = null) {
   if (!delivery || typeof delivery !== "object")
     throw new Error("implementation delivery evidence is required");
@@ -593,7 +625,12 @@ export function assertImplementationDelivery(delivery, execution = null) {
       "implementation delivery requires actual repository evidence",
     );
   if (execution) {
-    const { plan, state, requirementsState = null } = execution;
+    const {
+      plan,
+      state,
+      requirementsState = null,
+      reviewState = null,
+    } = execution;
     if (!plan || !state)
       throw new Error("delivery execution evidence requires plan and state");
     if (state.planId !== plan.id)
@@ -622,7 +659,8 @@ export function assertImplementationDelivery(delivery, execution = null) {
       throw new Error(
         `delivery requires completed mandatory packets: ${incomplete.join(", ")}`,
       );
-    createTddReviewBinding(plan, state, actual.localHead);
+    const tddBinding = createTddReviewBinding(plan, state, actual.localHead);
+    assertDeliveryReview(reviewState, actual.localHead, tddBinding);
   }
   if (actual.currentBranch === delivery.defaultBranch)
     throw new Error(
@@ -1507,6 +1545,63 @@ function assertTddIdentity(expected, actual, message) {
     throw new Error(message);
 }
 
+function tddRetentionIdentity(plan, state, contract, design) {
+  const packet = (id) => plan.packets.find((item) => item.id === id);
+  return {
+    scenarioDigest: valueDigest(contract.scenarioIds),
+    authorityDigest: valueDigest(contract.authorities),
+    dependencyDigest: valueDigest({
+      testDesign: packet(contract.testDesignPacket)?.dependencies ?? [],
+      implementation: packet(contract.implementationPacket)?.dependencies ?? [],
+      handoffs: Object.fromEntries(
+        [contract.testDesignPacket, contract.implementationPacket]
+          .filter((id) => state.handoffs?.[id])
+          .map((id) => [id, valueDigest(state.handoffs[id])]),
+      ),
+    }),
+    commandDigest: valueDigest(contract.command),
+    acceptanceDigest: design.acceptanceDigest,
+    fixtureDigest: design.fixtureDigest,
+    controlsDigest: design.controlsDigest,
+    sliceContractDigest: valueDigest(contract),
+  };
+}
+
+export async function createTddReentryEvidence(plan, state, reentry, repoRoot) {
+  if (!Array.isArray(reentry?.slices)) return reentry;
+  return {
+    ...reentry,
+    slices: await Promise.all(
+      reentry.slices.map(async (item) => {
+        if (item.classification !== "retained") return item;
+        const { contract, lifecycle } = tddSlice(plan, state, item.sliceId);
+        if (
+          !Array.isArray(lifecycle.design?.acceptanceFiles) ||
+          !Array.isArray(lifecycle.design?.fixtureFiles)
+        )
+          throw new Error(
+            `spec-driven TDD slice ${item.sliceId} retention requires file-bound design evidence`,
+          );
+        const evidence = tddRetentionIdentity(
+          plan,
+          state,
+          contract,
+          lifecycle.design,
+        );
+        evidence.acceptanceDigest = await fingerprintFiles(
+          lifecycle.design.acceptanceFiles,
+          repoRoot,
+        );
+        evidence.fixtureDigest = await fingerprintFiles(
+          lifecycle.design.fixtureFiles,
+          repoRoot,
+        );
+        return { ...item, evidence };
+      }),
+    ),
+  };
+}
+
 async function tddSurfaceFiles(patterns, repoRoot) {
   const files = await walk(repoRoot);
   const selected = [
@@ -1593,10 +1688,21 @@ async function executeTddRequest(contract, cwd, repoRoot, worktreeRoot) {
     killSignal: "SIGKILL",
     maxBuffer: 10 * 1024 * 1024,
   };
+  const command = contract.command.map((part) => {
+    const resolved = path.isAbsolute(part) ? path.resolve(part) : null;
+    const relative = resolved ? path.relative(repoRoot, resolved) : null;
+    const isRepositoryPath =
+      relative !== null &&
+      relative !== "" &&
+      !relative.startsWith(`..${path.sep}`) &&
+      relative !== ".." &&
+      !path.isAbsolute(relative);
+    return isRepositoryPath ? path.join(cwd, relative) : part;
+  });
   try {
     const { stdout, stderr } = await exec(
-      contract.command[0],
-      contract.command.slice(1),
+      command[0],
+      command.slice(1),
       options,
     );
     return {
@@ -1657,33 +1763,47 @@ export async function runTddAcceptance(
     "acceptance contract changed after test design",
   );
   let worktreeRoot = repoRoot;
+  let allocatedWorktree = false;
   let createdWorktree = false;
-  if (phase === "red") {
-    const worktreeParent = path.join(homedir(), "code");
-    await mkdir(worktreeParent, { recursive: true });
-    worktreeRoot = await mkdtemp(path.join(worktreeParent, "shlz-ui-tdd-"));
-    await rm(worktreeRoot, { recursive: true, force: true });
-    await exec(
-      "git",
-      ["worktree", "add", "--detach", worktreeRoot, baseline.commit],
-      {
-        cwd: repoRoot,
-      },
-    );
-    createdWorktree = true;
-    const { stdout } = await exec("git", ["rev-parse", "HEAD"], {
-      cwd: worktreeRoot,
-    });
-    if (stdout.trim() !== baseline.commit)
-      throw new Error(
-        "spec-driven TDD RED worktree is not the immutable baseline",
-      );
-  }
+  const frozenFiles = [
+    ...currentIdentity.acceptanceFiles,
+    ...currentIdentity.fixtureFiles,
+  ];
   let result;
   let runError;
   let modifiedBaseline = false;
-  let cleanupError;
+  let worktreeDirty = false;
+  const cleanupErrors = [];
   try {
+    if (phase === "red") {
+      const worktreeParent = path.join(homedir(), "code");
+      await mkdir(worktreeParent, { recursive: true });
+      worktreeRoot = await mkdtemp(path.join(worktreeParent, "shlz-ui-tdd-"));
+      allocatedWorktree = true;
+      await rm(worktreeRoot, { recursive: true, force: true });
+      await exec(
+        "git",
+        ["worktree", "add", "--detach", worktreeRoot, baseline.commit],
+        { cwd: repoRoot },
+      );
+      createdWorktree = true;
+      const { stdout } = await exec("git", ["rev-parse", "HEAD"], {
+        cwd: worktreeRoot,
+      });
+      if (stdout.trim() !== baseline.commit)
+        throw new Error(
+          "spec-driven TDD RED worktree is not the immutable baseline",
+        );
+      for (const file of frozenFiles) {
+        await mkdir(path.dirname(path.join(worktreeRoot, file)), {
+          recursive: true,
+        });
+        await copyFile(
+          path.join(repoRoot, file),
+          path.join(worktreeRoot, file),
+        );
+      }
+    }
     const runs = [];
     for (let index = 0; index < contract.repeatCount; index++)
       runs.push(
@@ -1725,25 +1845,54 @@ export async function runTddAcceptance(
   } catch (error) {
     runError = error;
   } finally {
-    if (createdWorktree) {
+    if (allocatedWorktree) {
       try {
-        const { stdout } = await exec("git", ["status", "--porcelain=v1"], {
-          cwd: worktreeRoot,
-        });
-        modifiedBaseline = Boolean(stdout.trim());
-        await exec(
-          "git",
-          [
-            "worktree",
-            "remove",
-            ...(modifiedBaseline ? ["--force"] : []),
-            worktreeRoot,
-          ],
-          { cwd: repoRoot },
-        );
+        if (createdWorktree) {
+          const { stdout } = await exec("git", ["status", "--porcelain=v1"], {
+            cwd: worktreeRoot,
+          });
+          worktreeDirty = Boolean(stdout.trim());
+          const frozen = new Set(frozenFiles);
+          const changed = stdout
+            .trim()
+            .split("\n")
+            .filter(Boolean)
+            .map((line) => line.slice(3));
+          const frozenIdentityMatches =
+            (await fingerprintFiles(
+              currentIdentity.acceptanceFiles,
+              worktreeRoot,
+            )) === currentIdentity.acceptanceDigest &&
+            (await fingerprintFiles(
+              currentIdentity.fixtureFiles,
+              worktreeRoot,
+            )) === currentIdentity.fixtureDigest;
+          modifiedBaseline =
+            changed.some((file) => !frozen.has(file)) || !frozenIdentityMatches;
+        }
+      } catch (error) {
+        cleanupErrors.push(error);
+      }
+      try {
+        if (createdWorktree)
+          await exec(
+            "git",
+            [
+              "worktree",
+              "remove",
+              ...(worktreeDirty ? ["--force"] : []),
+              worktreeRoot,
+            ],
+            { cwd: repoRoot },
+          );
+        else await rm(worktreeRoot, { recursive: true, force: true });
+      } catch (error) {
+        cleanupErrors.push(error);
+      }
+      try {
         await exec("git", ["worktree", "prune"], { cwd: repoRoot });
       } catch (error) {
-        cleanupError = error;
+        cleanupErrors.push(error);
       }
     }
   }
@@ -1752,7 +1901,7 @@ export async function runTddAcceptance(
     ...(modifiedBaseline
       ? [new Error("spec-driven TDD baseline worktree was modified")]
       : []),
-    ...(cleanupError ? [cleanupError] : []),
+    ...cleanupErrors,
   ];
   if (failures.length === 1) throw failures[0];
   if (failures.length > 1)
@@ -1775,11 +1924,11 @@ export function recordTddDesign(plan, state, handoff) {
     throw new Error("spec-driven TDD design requires runtime identity");
   const designerPacket = state.packets?.[contract.testDesignPacket];
   if (
-    designerPacket?.status === "completed" &&
+    designerPacket?.status !== "completed" ||
     designerPacket.execution?.runtimeId !== handoff.runtimeId
   )
     throw new Error(
-      "spec-driven TDD design runtime does not match the guarded test-design worker",
+      "spec-driven TDD design requires the completed guarded test-design worker runtime",
     );
   if (
     handoff.requirementsRevision !==
@@ -1821,6 +1970,7 @@ export function recordTddDesign(plan, state, handoff) {
     design: stableValue(handoff),
     designDigest: valueDigest(handoff),
     sliceContractDigest: valueDigest(contract),
+    retentionIdentity: tddRetentionIdentity(plan, state, contract, handoff),
   };
   return state;
 }
@@ -2312,9 +2462,21 @@ function applyTddRequirementsReentry(
   for (const contract of enforced) {
     const lifecycle = state.specDrivenTdd.slices[contract.id];
     if (classifications.get(contract.id) === "retained") {
+      const classification = reentry.slices.find(
+        ({ sliceId }) => sliceId === contract.id,
+      );
+      const currentIdentity = tddRetentionIdentity(
+        plan,
+        state,
+        contract,
+        lifecycle.design ?? {},
+      );
       if (
         lifecycle.status !== "green-proven" ||
-        lifecycle.sliceContractDigest !== valueDigest(contract)
+        lifecycle.sliceContractDigest !== valueDigest(contract) ||
+        valueDigest(classification.evidence) !== valueDigest(currentIdentity) ||
+        valueDigest(lifecycle.retentionIdentity) !==
+          valueDigest(currentIdentity)
       )
         throw new Error(
           `spec-driven TDD slice ${contract.id} retention requires completed digest-identical evidence`,

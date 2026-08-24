@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "attempt": "workflow-delivery-r1",
+  "status": "blocking",
+  "findings": [
+    {
+      "id": "baseline-executes-designed-acceptance-bytes",
+      "axis": "Spec",
+      "severity": "P1",
+      "summary": "RED hashes candidate acceptance files but does not overlay those exact designed bytes into the immutable baseline worktree before executing a relative command."
+    },
+    {
+      "id": "retained-reentry-rechecks-full-identity",
+      "axis": "Spec",
+      "severity": "P1",
+      "summary": "Retained requirements re-entry does not re-verify every unchanged scenario, authority, dependency, acceptance, fixture, command, and control identity."
+    },
+    {
+      "id": "design-requires-bound-guarded-runtime",
+      "axis": "Spec",
+      "severity": "P1",
+      "summary": "A design handoff can be recorded before the guarded test-design packet has an adapter-bound runtime identity."
+    },
+    {
+      "id": "fixture-baseline-is-immutable",
+      "axis": "Standards",
+      "severity": "P1",
+      "summary": "The public CLI fixture uses moving current HEAD as baseline and would become green after its production adapter is committed."
+    }
+  ],
+  "requiredDisposition": "Remediate all four as one batch, add regression tests that fail on the attempt-r1 behavior, rerun focused and aggregate validation, then perform fixed-baseline Standards and Spec re-review."
+}

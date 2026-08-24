@@ -14,6 +14,7 @@ import {
   createPlan,
   createTddDesignEvidence,
   createTddReviewBinding,
+  createTddReentryEvidence,
   createReviewState,
   createWorkerBrief,
   failWorkerReservation,
@@ -226,6 +227,9 @@ switch (command) {
     let execution = null;
     if (planPath) {
       const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const reviewPath = option("--review");
+      if (!reviewPath)
+        throw new Error("planned delivery-check requires --review <state>");
       const requirementsPath = option("--requirements");
       if (plan.requirementsGate === "required" && !requirementsPath)
         throw new Error(
@@ -237,6 +241,10 @@ switch (command) {
         requirementsState: requirementsPath
           ? await readJson(absolute(requirementsPath))
           : null,
+        reviewState: await refreshChangeFailureInvariants(
+          await readJson(absolute(reviewPath)),
+          absolute(reviewPath),
+        ),
       };
     } else {
       const direct = await readJson(absolute(directPath));
@@ -563,14 +571,21 @@ switch (command) {
     if (!requirementsPath)
       throw new Error("pause requires --requirements <state>");
     const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      const reentry = option("--tdd-reentry")
+        ? await createTddReentryEvidence(
+            plan,
+            current,
+            await readJson(absolute(option("--tdd-reentry"))),
+            repoRoot,
+          )
+        : null;
       const next = pausePacket(
         plan,
-        await readJson(target),
+        current,
         args[2],
         await readJson(absolute(requirementsPath)),
-        option("--tdd-reentry")
-          ? await readJson(absolute(option("--tdd-reentry")))
-          : null,
+        reentry,
       );
       await writeJson(target, next);
       return next;

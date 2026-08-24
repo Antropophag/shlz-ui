@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "planId": "enforce-spec-driven-tdd",
+  "packet": {
+    "contextSources": [
+      "docs/{agent-execution,validation-workflow,requirements-elicitation}.md",
+      "docs/exec-plans/active/enforce-spec-driven-tdd/workflow-delivery-findings-r1.json",
+      "tools/lib/harness/core.mjs",
+      "tools/tests/**"
+    ],
+    "contracts": [
+      "harness/spec-driven-tdd",
+      "requirements readiness",
+      "delivery guards"
+    ],
+    "dependencies": [
+      "symmetric-runner"
+    ],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "full",
+      "two-axis review",
+      "failure-path proof"
+    ],
+    "handoff": [
+      "integration behavior",
+      "validation",
+      "review findings",
+      "PR URL"
+    ],
+    "id": "workflow-delivery",
+    "implementationOutcomes": [
+      "fail-closed composition",
+      "slice-aware re-entry",
+      "guarded delivery"
+    ],
+    "implementationSurface": [
+      "tools/**",
+      "docs/**",
+      "openspec/changes/enforce-spec-driven-tdd/**"
+    ],
+    "nonGoals": [
+      "merge",
+      "product UI",
+      "shlz-design-source"
+    ],
+    "objective": "Compose spec-driven TDD with requirements, workers, review, failure invariants, and guarded PR delivery",
+    "outputs": [
+      "integrated gates",
+      "re-entry fixtures",
+      "review evidence",
+      "unmerged PR"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "claim/completion gates",
+      "requirements re-entry",
+      "review/delivery binding",
+      "agent docs",
+      "validation and PR"
+    ]
+  },
+  "claimId": "workflow-delivery-r2",
+  "baseline": {
+    "branch": "feat/spec-driven-tdd-gate",
+    "commit": "93ff4081aca8ae628696826ef79cc6ba870b2376",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-spec-driven-tdd"
+  },
+  "dependencyDigests": {
+    "symmetric-runner": "17dfe203fdd2e0e1c2a8d88487ab353d0c674a34c189315467566536b9b287b2"
+  },
+  "packetDigest": "c891a80970513d48add35673834e0ec624b0567bfbd9818b6824b07d7b947a17",
+  "contextIndex": [
+    "docs/{agent-execution,validation-workflow,requirements-elicitation}.md",
+    "docs/exec-plans/active/enforce-spec-driven-tdd/workflow-delivery-findings-r1.json",
+    "tools/lib/harness/core.mjs",
+    "tools/tests/**"
+  ],
+  "allowedImplementationSurface": [
+    "tools/**",
+    "docs/**",
+    "openspec/changes/enforce-spec-driven-tdd/**"
+  ],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "full",
+    "two-axis review",
+    "failure-path proof"
+  ],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "2f32390bdd122208013eae98bbcc9aa9f5e95dee44d35df229446b4793a83900"
+}

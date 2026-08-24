@@ -143,6 +143,7 @@
       ],
       "contextSources": [
         "docs/{agent-execution,validation-workflow,requirements-elicitation}.md",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/workflow-delivery-findings-r1.json",
         "tools/lib/harness/core.mjs",
         "tools/tests/**"
       ],

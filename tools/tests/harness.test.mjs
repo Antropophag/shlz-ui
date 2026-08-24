@@ -357,6 +357,22 @@ test("CLI requires persisted execution baselines for preflight and conformance",
     ),
     /requires --plan <plan> --state <state> or --direct <route-assessment>/,
   );
+  await assert.rejects(
+    exec(
+      "node",
+      [
+        "tools/harness.mjs",
+        "delivery-check",
+        "docs/exec-plans/active/require-change-specific-failure-invariants/delivery-evidence.json",
+        "--plan",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/plan.json",
+        "--state",
+        "docs/exec-plans/active/enforce-spec-driven-tdd/state.json",
+      ],
+      { cwd: root },
+    ),
+    /planned delivery-check requires --review <state>/,
+  );
 });
 
 test("exact GitHub Pages intent is non-direct and blocks mutation on owned decisions", async () => {
@@ -847,6 +863,14 @@ const tddDesign = (overrides = {}) => ({
   ...overrides,
 });
 
+const attestTddDesigner = (state, runtimeId = "test-designer-runtime") => {
+  state.packets["discovery-contracts"] = {
+    status: "completed",
+    execution: { runtimeId },
+  };
+  return state;
+};
+
 test("spec-driven TDD validates eligibility and initializes lifecycle state", () => {
   const plan = createPlan(tddAssessment(), config);
   assert.equal(plan.specDrivenTdd.version, 1);
@@ -873,6 +897,7 @@ test("spec-driven TDD validates eligibility and initializes lifecycle state", ()
 test("spec-driven TDD records independent design and blocks implementation before RED", () => {
   const plan = createPlan(tddAssessment(), config);
   const state = createExecutionState(plan);
+  attestTddDesigner(state);
   recordTddDesign(plan, state, tddDesign());
   assert.equal(
     state.specDrivenTdd.slices["acceptance-contract"].status,
@@ -892,7 +917,7 @@ test("spec-driven TDD records independent design and blocks implementation befor
     () =>
       recordTddDesign(
         plan,
-        createExecutionState(plan),
+        attestTddDesigner(createExecutionState(plan)),
         tddDesign({ inputs: ["tools/lib/harness/core.mjs"] }),
       ),
     /production implementation input/,
@@ -904,13 +929,14 @@ test("spec-driven TDD records independent design and blocks implementation befor
   };
   assert.throws(
     () => recordTddDesign(plan, mismatched, tddDesign()),
-    /does not match the guarded test-design worker/,
+    /requires the completed guarded test-design worker runtime/,
   );
 });
 
 test("spec-driven TDD binds RED and GREEN to immutable evidence", () => {
   const plan = createPlan(tddAssessment(), config);
   const state = createExecutionState(plan);
+  attestTddDesigner(state);
   const design = tddDesign();
   recordTddDesign(plan, state, design);
   recordTddRed(plan, state, {
@@ -983,10 +1009,7 @@ test("spec-driven TDD supports explicit inapplicability and legacy plans", () =>
 test("spec-driven TDD gates implementation readiness, claim, and completion", () => {
   const plan = createPlan(tddAssessment(), config);
   const state = createExecutionState(plan);
-  state.packets["discovery-contracts"] = {
-    status: "completed",
-    execution: { runtimeId: "test-designer-runtime" },
-  };
+  attestTddDesigner(state);
   state.handoffs["discovery-contracts"] = {
     completedPacket: "discovery-contracts",
     changed: [],
@@ -1086,9 +1109,6 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
     timeoutMs: 5000,
     normalization: ["repo-root", "worktree-root"],
   };
-  const { stdout: baseline } = await exec("git", ["rev-parse", "HEAD"], {
-    cwd: root,
-  });
   const execution = {
     version: 1,
     kind: "mainline",
@@ -1096,7 +1116,7 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       ({ stdout }) => stdout.trim(),
     ),
     defaultBranch: "main",
-    commit: baseline.trim(),
+    commit: "93ff4081aca8ae628696826ef79cc6ba870b2376",
   };
   const design = {
     version: 1,
@@ -1118,7 +1138,7 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       ),
       writeFile(
         path.join(root, statePath),
-        `${JSON.stringify(createExecutionState(plan), null, 2)}\n`,
+        `${JSON.stringify(attestTddDesigner(createExecutionState(plan)), null, 2)}\n`,
       ),
       writeFile(
         path.join(root, handoffPath),
@@ -1213,7 +1233,7 @@ test("spec-driven TDD public CLI proves symmetric deterministic RED and GREEN", 
       ),
       writeFile(
         path.join(root, badStatePath),
-        `${JSON.stringify(createExecutionState(badPlan), null, 2)}\n`,
+        `${JSON.stringify(attestTddDesigner(createExecutionState(badPlan)), null, 2)}\n`,
       ),
     ]);
     await cli(
@@ -2194,6 +2214,7 @@ test("requirements re-entry invalidates affected TDD slices and retains only dig
 
   const retainedPlan = createPlan(assessment, config, requirementsState());
   const retained = createExecutionState(retainedPlan);
+  attestTddDesigner(retained);
   recordTddDesign(retainedPlan, retained, tddDesign());
   recordTddRed(retainedPlan, retained, {
     ...tddDesign(),
@@ -2216,7 +2237,16 @@ test("requirements re-entry invalidates affected TDD slices and retains only dig
     version: 1,
     fromRevision: 1,
     toRevision: 2,
-    slices: [{ sliceId: "acceptance-contract", classification: "retained" }],
+    slices: [
+      {
+        sliceId: "acceptance-contract",
+        classification: "retained",
+        evidence: clone(
+          retained.specDrivenTdd.slices["acceptance-contract"]
+            .retentionIdentity,
+        ),
+      },
+    ],
   });
   assert.equal(
     retained.specDrivenTdd.slices["acceptance-contract"].retention.toRevision,
@@ -2247,6 +2277,7 @@ test("requirements re-entry invalidates affected TDD slices and retains only dig
 test("review and delivery bind fresh GREEN evidence to the candidate head", () => {
   const plan = createPlan(tddAssessment(), config);
   const state = createExecutionState(plan);
+  attestTddDesigner(state);
   recordTddDesign(plan, state, tddDesign());
   recordTddRed(plan, state, {
     ...tddDesign(),
@@ -2315,14 +2346,40 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
       },
     },
   };
+  assert.throws(
+    () => assertImplementationDelivery(delivery, { plan, state }),
+    /delivery requires current independent review evidence/,
+  );
+  const deliveryReview = createReviewState(oid, [], null, binding);
+  recordReview(deliveryReview, {
+    axis: "Standards",
+    head: oid,
+    findings: [],
+    tddEvidence: binding,
+  });
+  recordReview(deliveryReview, {
+    axis: "Spec",
+    head: oid,
+    findings: [],
+    tddEvidence: binding,
+  });
   assert.doesNotThrow(() =>
-    assertImplementationDelivery(delivery, { plan, state }),
+    assertImplementationDelivery(delivery, {
+      plan,
+      state,
+      reviewState: deliveryReview,
+    }),
   );
   delivery.actual.localHead = "b".repeat(40);
   delivery.actual.upstreamHead = delivery.actual.localHead;
   delivery.actual.pullRequest.headRefOid = delivery.actual.localHead;
   assert.throws(
-    () => assertImplementationDelivery(delivery, { plan, state }),
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+        reviewState: deliveryReview,
+      }),
     /candidate head is stale/,
   );
 });

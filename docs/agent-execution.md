@@ -95,7 +95,8 @@ Normal successful implementation then pushes only its current task branch, creat
 
 ```bash
 npm run harness -- delivery-check <delivery-evidence> \
-  --plan <current-plan> --state <current-state> --requirements <requirements-state>
+  --plan <current-plan> --state <current-state> --requirements <requirements-state> \
+  --review <current-review-state>
 ```
 
 Initialize a material TDD review with `--tdd-plan <plan> --tdd-state <state>`.

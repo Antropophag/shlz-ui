@@ -1,0 +1,29 @@
+{
+  "completedPacket": "workflow-delivery",
+  "changed": [
+    "worker claim, completion, requirements re-entry, review, and delivery bindings for TDD evidence",
+    "four P1 remediations for exact baseline acceptance bytes, full retained identity, bound designer runtime, and immutable fixtures",
+    "agent-facing execution, validation, requirements, and operator documentation"
+  ],
+  "provenChecks": [
+    "four r1 review blockers have focused regression coverage",
+    "68 harness tests and 160 aggregate tests pass",
+    "strict OpenSpec integration, Prettier, and diff whitespace checks pass",
+    "no temporary spec-driven TDD worktrees remain"
+  ],
+  "settledDecisions": [
+    "RED overlays the exact designed acceptance and fixture bytes into the immutable baseline worktree",
+    "retained re-entry requires the complete unchanged evidence identity",
+    "test design requires the guarded test-design packet's adapter-bound runtime",
+    "review and delivery bind candidate head and exact TDD evidence alongside failure-invariant proof"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": null,
+  "invalidatedAssumptions": [
+    "hashing candidate acceptance bytes without overlaying them proves baseline execution used those bytes",
+    "moving HEAD is an acceptable committed fixture baseline"
+  ],
+  "claimId": "workflow-delivery-r2",
+  "briefDigest": "2f32390bdd122208013eae98bbcc9aa9f5e95dee44d35df229446b4793a83900",
+  "workerReportDigest": "fb1d67f9bba40dc6930fa0419b8c7aa516ea33613e76ceadeb264d0a8a5517b8"
+}

@@ -70,17 +70,60 @@
       }
     },
     "workflow-delivery": {
-      "attemptHistory": [],
-      "status": "launching",
-      "session": "workflow-delivery-r1",
-      "claimId": "workflow-delivery-r1",
-      "briefDigest": "36492d89e5848cc57ff545fa2c6f6c0cb6b68d516f494e970bfe292be269cb43",
+      "attemptHistory": [
+        {
+          "claimId": "workflow-delivery-r1",
+          "briefDigest": "36492d89e5848cc57ff545fa2c6f6c0cb6b68d516f494e970bfe292be269cb43",
+          "execution": {
+            "version": 1,
+            "source": "codex-exec-jsonl",
+            "runtimeId": "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+            "launchId": "88dd248d-7247-49e8-9e0e-015000846c22",
+            "startedAt": "2026-08-24T05:49:09.031Z",
+            "evidenceDigest": "251feb1a22f1d888c0b777ebe77e6c99942966ce921cafc223d054fbcf590e3d"
+          },
+          "launch": {
+            "terminalStatus": "failed",
+            "launchId": "88dd248d-7247-49e8-9e0e-015000846c22",
+            "usage": null,
+            "workerReport": "The independent reviews found real blockers, so I’m not proceeding to delivery yet:\n\n- Spec: RED was hashing candidate acceptance files but not overlaying those exact bytes into the baseline worktree; relative commands could therefore execute absent/older tests.\n- Spec: retained re-entry did not re-verify every unchanged identity.\n- Spec: a design handoff could be recorded before its guarded designer runtime was bound.\n- Standards: the committed public-CLI fixture used current `HEAD` as “baseline,” which becomes green once the fixture implementation is committed.\n\nI’m remediating these as one batch, then I’ll rerun the focused/aggregate gates and both fixed-baseline review axes against the remediation diff.",
+            "workerReportDigest": "3fa9452eeae5122041faa71a657bc0419e4789c150ca75a32d7a45f2872d9c4d"
+          },
+          "failure": null
+        }
+      ],
+      "attempts": 1,
+      "status": "completed",
+      "session": "workflow-delivery-r2",
+      "claimId": "workflow-delivery-r2",
+      "briefDigest": "2f32390bdd122208013eae98bbcc9aa9f5e95dee44d35df229446b4793a83900",
       "baselineDigest": "fde0ea762d8b23cc3b62df81c0c26921b8bdb5039e7eaf492699c1ba06e3208a",
       "dependencyDigests": {
         "symmetric-runner": "17dfe203fdd2e0e1c2a8d88487ab353d0c674a34c189315467566536b9b287b2"
       },
-      "packetDigest": "050d101fd50fad2d5e75008b665ae379aba77ea9fc6fb1aa7bb54689dec3e53e",
-      "requirementsRevision": 1
+      "packetDigest": "c891a80970513d48add35673834e0ec624b0567bfbd9818b6824b07d7b947a17",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a0326c-df51-7433-b277-0799b85203f3",
+        "launchId": "e93bbda7-4138-4b62-88f2-14a94c660173",
+        "startedAt": "2026-08-24T06:19:50.625Z",
+        "evidenceDigest": "d634ac0fd791529309257e8fbd95f4bacbde45f8089029b01e4acf7de90f58ad"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "e93bbda7-4138-4b62-88f2-14a94c660173",
+        "usage": {
+          "input_tokens": 4216459,
+          "cached_input_tokens": 4021760,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 12866,
+          "reasoning_output_tokens": 2577
+        },
+        "workerReport": "Packet implementation and remediation are complete; guarded delivery remains intentionally pending for the root orchestrator.\n\nImplemented:\n\n- Fixed all four r1 P1 findings.\n- Protected RED worktree setup and cleanup across partial failures.\n- Bound planned `delivery-check` to current Standards/Spec review, resolved findings, validated failure-path proof, candidate head, and exact TDD evidence.\n- Added regression coverage and updated operational documentation.\n\nValidation:\n\n- Harness: 68/68 passed.\n- Aggregate tests: 160/160 passed.\n- OpenSpec integration: healthy.\n- Prettier and `git diff --check`: passed.\n- Independent Standards re-review: PASS.\n- Independent Spec re-review: PASS.\n- No leaked `shlz-ui-tdd-*` worktrees.\n\nOpenSpec remains 9/10 because the root orchestrator must now bind runtime claim `workflow-delivery-r2`, write the durable handoff, commit/push, rerun head-bound failure proof/review evidence, open the unmerged PR, and execute `delivery-check --review …`. No PR URL exists yet.",
+        "workerReportDigest": "fb1d67f9bba40dc6930fa0419b8c7aa516ea33613e76ceadeb264d0a8a5517b8"
+      }
     }
   },
   "handoffs": {
@@ -134,6 +177,35 @@
       "claimId": "symmetric-runner-r1",
       "briefDigest": "ffefd94a30f32d8389ec899820505cda6517e47cef4e8e93c8ce625332003779",
       "workerReportDigest": "0caea36a4856d5025bd27c2043b868fffcefbba7cef6ced217c33546d0615060"
+    },
+    "workflow-delivery": {
+      "completedPacket": "workflow-delivery",
+      "changed": [
+        "worker claim, completion, requirements re-entry, review, and delivery bindings for TDD evidence",
+        "four P1 remediations for exact baseline acceptance bytes, full retained identity, bound designer runtime, and immutable fixtures",
+        "agent-facing execution, validation, requirements, and operator documentation"
+      ],
+      "provenChecks": [
+        "four r1 review blockers have focused regression coverage",
+        "68 harness tests and 160 aggregate tests pass",
+        "strict OpenSpec integration, Prettier, and diff whitespace checks pass",
+        "no temporary spec-driven TDD worktrees remain"
+      ],
+      "settledDecisions": [
+        "RED overlays the exact designed acceptance and fixture bytes into the immutable baseline worktree",
+        "retained re-entry requires the complete unchanged evidence identity",
+        "test design requires the guarded test-design packet's adapter-bound runtime",
+        "review and delivery bind candidate head and exact TDD evidence alongside failure-invariant proof"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": null,
+      "invalidatedAssumptions": [
+        "hashing candidate acceptance bytes without overlaying them proves baseline execution used those bytes",
+        "moving HEAD is an acceptable committed fixture baseline"
+      ],
+      "claimId": "workflow-delivery-r2",
+      "briefDigest": "2f32390bdd122208013eae98bbcc9aa9f5e95dee44d35df229446b4793a83900",
+      "workerReportDigest": "fb1d67f9bba40dc6930fa0419b8c7aa516ea33613e76ceadeb264d0a8a5517b8"
     }
   }
 }
