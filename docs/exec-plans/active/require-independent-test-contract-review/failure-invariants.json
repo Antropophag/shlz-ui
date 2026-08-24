@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "change": "require-independent-test-contract-review",
+  "invariants": [
+    {
+      "id": "unreviewed-contract-cannot-authorize-production",
+      "concern": "state-machine",
+      "requirement": "Independent test-contract review gates RED and implementation",
+      "scenario": "Review is required before RED"
+    },
+    {
+      "id": "stale-test-contract-approval-is-rejected",
+      "concern": "persistence",
+      "requirement": "Review approval is digest-bound and invalidated by drift",
+      "scenario": "Approved test evidence changes before RED"
+    }
+  ]
+}
