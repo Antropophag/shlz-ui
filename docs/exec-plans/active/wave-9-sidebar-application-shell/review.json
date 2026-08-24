@@ -134,6 +134,33 @@
       "introducedPass": 2,
       "status": "resolved",
       "resolvedAtHead": "7a7eabc444a6ad5a786c93746e5914aa35dd0a8c"
+    },
+    {
+      "id": "EXT-1",
+      "severity": "P1",
+      "summary": "compact navigation destinations used indistinguishable markers",
+      "axis": "Standards",
+      "introducedPass": 8,
+      "status": "resolved",
+      "resolvedAtHead": "25dddcfead7f7a59fb323a214671a1073b274e06"
+    },
+    {
+      "id": "EXT-2",
+      "severity": "P1",
+      "summary": "narrow density toggle changed semantic state without changing presentation",
+      "axis": "Spec",
+      "introducedPass": 8,
+      "status": "resolved",
+      "resolvedAtHead": "25dddcfead7f7a59fb323a214671a1073b274e06"
+    },
+    {
+      "id": "EXT-3",
+      "severity": "P1",
+      "summary": "repository census omitted executable Playwright fixture and reference surfaces",
+      "axis": "Spec",
+      "introducedPass": 8,
+      "status": "resolved",
+      "resolvedAtHead": "25dddcfead7f7a59fb323a214671a1073b274e06"
     }
   ]
 }
