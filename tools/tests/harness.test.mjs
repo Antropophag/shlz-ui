@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { rmSync } from "node:fs";
 import {
+  chmod,
   mkdir,
   mkdtemp,
   readFile,
@@ -1798,6 +1799,94 @@ test("bounded worker briefs are immutable and exclude parent context", () => {
   assert.equal("parentConversation" in brief, false);
   assert.equal("events" in brief, false);
   assert.match(brief.briefDigest, /^[0-9a-f]{64}$/);
+});
+
+test("bounded worker briefs bind automatic phase input control", () => {
+  const { plan, state } = guardedWorkerFixture();
+  const contextCapsule = {
+    version: 1,
+    kind: "packet-context",
+    phase: "implementation",
+    capsuleDigest: "a".repeat(64),
+  };
+  const brief = createWorkerBrief(plan, state, "shared-native-dialog", {
+    baseline: executionBaseline,
+    claimId: "claim-with-context",
+    contextCapsule,
+  });
+  assert.deepEqual(brief.phaseInput, contextCapsule);
+  assert.notEqual(
+    brief.briefDigest,
+    createWorkerBrief(plan, state, "shared-native-dialog", {
+      baseline: executionBaseline,
+      claimId: "claim-with-context",
+    }).briefDigest,
+  );
+});
+
+test("worker-run automatically supplies the initial phase capsule", async () => {
+  const directory = await mkdtemp(
+    path.join(root, "docs/exec-plans/worker-context-"),
+  );
+  const relative = (name) => path.relative(root, path.join(directory, name));
+  const fakeCodex = path.join(directory, "codex");
+  try {
+    const { plan, state } = guardedWorkerFixture();
+    await Promise.all([
+      writeFile(path.join(directory, "plan.json"), JSON.stringify(plan)),
+      writeFile(path.join(directory, "state.json"), JSON.stringify(state)),
+      writeFile(
+        path.join(directory, "baseline.json"),
+        JSON.stringify(executionBaseline),
+      ),
+      writeFile(
+        fakeCodex,
+        `#!/usr/bin/env node
+if (process.argv.includes("--help")) {
+  process.stdout.write("Usage: codex exec --json\\n");
+} else {
+  process.stdout.write(JSON.stringify({ type: "thread.started", thread_id: "runtime-context" }) + "\\n");
+  process.stdout.write(JSON.stringify({ type: "item.completed", item: { type: "agent_message", text: "phase input consumed" } }) + "\\n");
+  process.stdout.write(JSON.stringify({ type: "turn.completed", usage: { input_tokens: 1, output_tokens: 1 } }) + "\\n");
+}
+`,
+      ),
+    ]);
+    await chmod(fakeCodex, 0o755);
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "worker-run",
+        relative("plan.json"),
+        relative("state.json"),
+        "shared-native-dialog",
+        "--execution",
+        relative("baseline.json"),
+        "--claim",
+        "claim-context-cli",
+        "--session",
+        "logical-context-cli",
+        "--brief-out",
+        relative("brief.json"),
+      ],
+      {
+        cwd: root,
+        env: { ...process.env, PATH: `${directory}:${process.env.PATH}` },
+      },
+    );
+    const [brief, capsule, ledger] = await Promise.all([
+      load(relative("brief.json")),
+      load(relative("brief.context-capsule.json")),
+      load(relative("brief.context-ledger.json")),
+    ]);
+    assert.deepEqual(brief.phaseInput, capsule);
+    assert.equal(capsule.physicalSession, "claim:claim-context-cli");
+    assert.ok(capsule.readNow.length > 0);
+    assert.deepEqual(ledger, createContextLedger());
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
 });
 
 test("public telemetry cannot forge physical boundaries or runtime usage", async () => {
@@ -3959,6 +4048,28 @@ test("context cost replay materially reduces PR 36 proxy cost without dropping e
   ]);
   assert.equal(report.equivalence.pass, true);
   assert.equal(report.improvement.pass, true);
+  assert.equal(report.improvement.scope, "repository-source-input-proxy");
+  assert.deepEqual(report.activeSessionImprovement, {
+    available: false,
+    reason: "comparable trusted before/after runtime telemetry is unavailable",
+  });
+  assert.equal(
+    report.costAttribution.repeatedSourceInput.classification,
+    "not-reread",
+  );
+  assert.equal(
+    report.costAttribution.repeatedSourceInput.preventedRuntimeBytes,
+    0,
+  );
+  assert.equal(
+    report.costAttribution.validationCiOutput.classification,
+    "retained-unmeasured",
+  );
+  assert.equal(report.contributorAccounting.additive, false);
+  assert.equal(
+    report.contributorDeltas.repeatedReads.classification,
+    "not-reread",
+  );
   assert.ok(report.improvement.reductionRatio >= 0.35);
   assert.ok(report.optimized.totalBytes < report.baseline.totalBytes);
   assert.equal(
@@ -4106,6 +4217,7 @@ test("context cost capsules invalidate changed sources and replay deterministica
       "validation:harness:pass",
     ]);
     assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
+    assert.deepEqual(initial.evidence.rawEvidenceIndex, []);
     assert.equal(initial.evidence.findings[0].status, "resolved");
     const tampered = clone(initial);
     tampered.evidence.verdicts = [];
@@ -4362,6 +4474,87 @@ test("context capsule CLI persists packet attestations across real context phase
       ),
     );
     cleanup();
+  }
+});
+
+test("validation evidence keeps a compact digest-verified raw-log boundary", async () => {
+  const directory = await mkdtemp(path.join(root, "docs/exec-plans/raw-log-"));
+  const relativeLog = path.relative(
+    root,
+    path.join(directory, "validation.log"),
+  );
+  try {
+    await writeFile(path.join(root, relativeLog), "suite output\nall pass\n");
+    const ledger = [];
+    await recordValidation(
+      {
+        target: "harness",
+        files: ["tools/lib/harness/context-cost.mjs"],
+        outcome: "pass",
+        reason: null,
+        packet: "probe",
+        session: "probe",
+        obligations: ["focused-tests", "locale-independent-ordering"],
+        rawLog: relativeLog,
+      },
+      ledger,
+      config,
+      root,
+    );
+    assert.deepEqual(ledger[0].obligations, [
+      "focused-tests",
+      "locale-independent-ordering",
+    ]);
+    assert.equal(ledger[0].rawLog.path, relativeLog);
+    assert.equal(ledger[0].command, "npm run test:harness");
+    assert.match(ledger[0].rawLog.digest, /^[0-9a-f]{64}$/);
+    assert.equal(ledger[0].rawLog.bytes, 22);
+
+    const index = {
+      planId: "probe-plan",
+      packet: {
+        id: "probe",
+        objective: "Preserve compact validation evidence",
+        contracts: [],
+        focusedValidation: ["focused-tests"],
+        implementationOutcomes: [],
+      },
+      sources: ["tools/lib/harness/context-cost.mjs"],
+      missingPatterns: [],
+      dependencyHandoffs: [],
+    };
+    const capsule = await createPacketContextCapsule(
+      index,
+      createContextLedger(),
+      root,
+      {
+        phase: "validation",
+        transition: "implementation-to-validation",
+        physicalSession: "probe-worker",
+        validationLedger: ledger,
+      },
+    );
+    assert.deepEqual(capsule.evidence.rawEvidenceIndex, [
+      {
+        target: "harness",
+        command: "npm run test:harness",
+        outcome: "pass",
+        obligations: ["focused-tests", "locale-independent-ordering"],
+        ...ledger[0].rawLog,
+      },
+    ]);
+    await writeFile(path.join(root, relativeLog), "tampered\n");
+    await assert.rejects(
+      createPacketContextCapsule(index, createContextLedger(), root, {
+        phase: "validation",
+        transition: "implementation-to-validation",
+        physicalSession: "probe-worker",
+        validationLedger: ledger,
+      }),
+      /raw validation evidence changed/,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
   }
 });
 

@@ -118,10 +118,38 @@ const packetObligations = (packet) =>
     ...packet.implementationOutcomes.map((value) => `outcome:${value}`),
   ]);
 
-function currentPhaseEvidence(validationLedger = [], reviewState = null) {
+async function currentPhaseEvidence(
+  validationLedger = [],
+  reviewState = null,
+  repoRoot,
+) {
   const validations = Array.isArray(validationLedger) ? validationLedger : [];
   const reviewPasses = reviewState?.passes ?? [];
   const reviewFindings = reviewState?.findings ?? [];
+  const rawEvidenceIndex = [];
+  for (const validation of validations) {
+    if (!validation.rawLog) continue;
+    const content = await readWorktreeSource(repoRoot, validation.rawLog.path);
+    if (
+      validation.rawLog.digest !== digest(content) ||
+      validation.rawLog.bytes !== content.byteLength
+    )
+      throw new Error(
+        `raw validation evidence changed: ${validation.rawLog.path}`,
+      );
+    rawEvidenceIndex.push({
+      target: validation.target,
+      command: validation.command,
+      outcome: validation.outcome,
+      obligations: stable(validation.obligations ?? []),
+      path: validation.rawLog.path,
+      digest: validation.rawLog.digest,
+      bytes: validation.rawLog.bytes,
+    });
+  }
+  rawEvidenceIndex.sort((left, right) =>
+    order(`${left.target}:${left.path}`, `${right.target}:${right.path}`),
+  );
   return {
     verdicts: stable([
       ...validations.map(
@@ -130,6 +158,7 @@ function currentPhaseEvidence(validationLedger = [], reviewState = null) {
       ...reviewPasses.map(({ axis, head }) => `review:${axis}:pass:${head}`),
     ]),
     rawEvidence: stable(validations.flatMap(({ files }) => files ?? [])),
+    rawEvidenceIndex,
     findings: reviewFindings.map(({ id, severity, status }) => ({
       id,
       severity,
@@ -168,7 +197,11 @@ export async function createPacketContextCapsule(
     );
   const readNow = [];
   const attested = [];
-  const currentEvidence = currentPhaseEvidence(validationLedger, reviewState);
+  const currentEvidence = await currentPhaseEvidence(
+    validationLedger,
+    reviewState,
+    repoRoot,
+  );
   for (const source of index.sources) {
     const content = await readWorktreeSource(repoRoot, source);
     const entry = {
@@ -202,6 +235,7 @@ export async function createPacketContextCapsule(
         ...index.dependencyHandoffs.flatMap((handoff) => handoff.changed ?? []),
         ...currentEvidence.rawEvidence,
       ]),
+      rawEvidenceIndex: currentEvidence.rawEvidenceIndex,
       findings: currentEvidence.findings,
       unresolvedFindings: [
         ...index.dependencyHandoffs.flatMap(
@@ -573,10 +607,11 @@ export async function runContextCostReplay(fixture, repoRoot) {
       candidate.phases.map((phase) => [phase.id, phase.stateTransition]),
     ),
   );
-  const delta = (baseline, optimized) => ({
+  const delta = (baseline, optimized, classification) => ({
     baselineBytes: baseline,
     optimizedBytes: optimized,
-    reductionBytes: baseline - optimized,
+    proxyDifferenceBytes: baseline - optimized,
+    classification,
   });
   const firstPhaseBytes = oracleReads
     .filter((source) => source.phase === oracle.phases[0].id)
@@ -628,19 +663,29 @@ export async function runContextCostReplay(fixture, repoRoot) {
     replay: fixture.id,
     runtimeObservation: fixture.runtimeObservation ?? null,
     contributors: fixture.contributors,
+    contributorAccounting: {
+      additive: false,
+      note: "Contributor probes overlap and must not be summed; procedural source bytes are also part of repeated source reads.",
+    },
     contributorDeltas: {
-      discovery: delta(firstPhaseBytes, firstPhaseBytes),
+      discovery: delta(firstPhaseBytes, firstPhaseBytes, "retained"),
       proceduralContext: delta(
         roleBytes(oracleReads, "procedural"),
         roleBytes(uniqueReadNow, "procedural"),
+        "not-reread-overlapping-proxy",
       ),
       validationOutput: delta(
         evidenceBytes(["validation"]),
         evidenceBytes(["validation"]),
+        "retained-unmeasured-runtime-cost",
       ),
-      reviewOutput: delta(evidenceBytes(["review"]), evidenceBytes(["review"])),
-      repeatedReads: delta(repeatedBytes, 0),
-      stateOrchestration: delta(transitionBytes, transitionBytes),
+      reviewOutput: delta(
+        evidenceBytes(["review"]),
+        evidenceBytes(["review"]),
+        "retained-unmeasured-runtime-cost",
+      ),
+      repeatedReads: delta(repeatedBytes, 0, "not-reread"),
+      stateOrchestration: delta(transitionBytes, transitionBytes, "retained"),
     },
     candidateResults,
     sourceDigest: digest(
@@ -678,16 +723,45 @@ export async function runContextCostReplay(fixture, repoRoot) {
     equivalence,
     improvement: {
       pass: equivalence.pass && thresholdMet,
+      scope: "repository-source-input-proxy",
       threshold: fixture.minimumReductionRatio,
       thresholdMet,
       reductionBytes,
       reductionRatio,
+    },
+    activeSessionImprovement: {
+      available: false,
+      reason:
+        "comparable trusted before/after runtime telemetry is unavailable",
+    },
+    costAttribution: {
+      repeatedSourceInput: {
+        classification: "not-reread",
+        bytes: repeatedBytes,
+        preventedRuntimeBytes: 0,
+        note: "Attestation replaces later full source input with an identity and digest; it does not prove avoided processing or retention.",
+      },
+      validationCiOutput: {
+        classification: "retained-unmeasured",
+        preventedRuntimeBytes: 0,
+        note: "Generation and raw-log retention remain incurred; only later inline carryover can use a compact pointer.",
+      },
+      reviewOutput: {
+        classification: "retained-unmeasured",
+        preventedRuntimeBytes: 0,
+      },
+      capsuleOverhead: {
+        classification: "incurred",
+        bytes: capsuleBytes,
+      },
     },
     metricLimitations: [
       "The runtime observation is reported only with fixture provenance; replay bytes are never converted to tokens.",
       "Source and capsule bytes are deterministic context-cost proxies, not runtime usage.",
       "Content identity proves source currency and equivalence, not model comprehension.",
       "The replay represents the declared workflow shape rather than a raw session transcript.",
+      "Repeated source bytes are classified as not reread through the capsule interface, not as prevented runtime or retention cost.",
+      "Validation, CI, review output generation and raw-log retention are not eliminated by compact evidence pointers.",
     ],
   };
 }

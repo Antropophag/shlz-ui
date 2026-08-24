@@ -416,6 +416,8 @@ switch (command) {
         reason: option("--reason"),
         packet: option("--packet"),
         session: option("--session"),
+        obligations: (option("--obligations") ?? "").split(",").filter(Boolean),
+        rawLog: option("--raw-log"),
       },
       ledger,
       config,
@@ -538,13 +540,43 @@ switch (command) {
     const requirementsState = option("--requirements")
       ? await readJson(absolute(option("--requirements")))
       : null;
+    const workerArtifactPath = (suffix) =>
+      briefPath.endsWith(".json")
+        ? `${briefPath.slice(0, -5)}${suffix}`
+        : `${briefPath}${suffix}`;
+    const contextCapsulePath =
+      option("--context-capsule-out") ??
+      workerArtifactPath(".context-capsule.json");
+    const contextLedgerPath =
+      option("--context-ledger-out") ??
+      workerArtifactPath(".context-ledger.json");
     const prepared = await withStateLock(target, async () => {
       const current = await readJson(target);
+      const ledger = createContextLedger();
+      const capsule = await createPacketContextCapsule(
+        await contextIndex(plan, args[2], repoRoot, current),
+        ledger,
+        repoRoot,
+        {
+          phase: "implementation",
+          transition: "pending-to-launching",
+          physicalSession: `claim:${claimId}`,
+          validationLedger: option("--validation")
+            ? await readJson(absolute(option("--validation")))
+            : [],
+          reviewState: option("--review")
+            ? await readJson(absolute(option("--review")))
+            : null,
+        },
+      );
       const brief = createWorkerBrief(plan, current, args[2], {
         baseline: await readJson(absolute(baselinePath)),
         requirementsState,
         claimId,
+        contextCapsule: capsule,
       });
+      await writeJson(statePath(contextLedgerPath), ledger);
+      await writeJson(statePath(contextCapsulePath), capsule);
       await writeJson(statePath(briefPath), brief);
       reserveWorkerPacket(
         plan,
@@ -555,7 +587,7 @@ switch (command) {
         requirementsState,
       );
       await writeJson(target, current);
-      return { brief };
+      return { brief, contextCapsulePath, contextLedgerPath };
     });
     const result = await launchCodexWorker({
       brief: prepared.brief,

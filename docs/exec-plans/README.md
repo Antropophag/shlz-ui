@@ -56,6 +56,10 @@ The operator lifecycle is root reservation → worker subprocess and final repor
 
 Telemetry keeps logical labels separate from `codex-exec-jsonl` runtime identities. It summarizes physical boundaries, total tokens and peak active context when runtime-supplied, unique/repeated reads, repeated discovery commands, handoff bytes, and an observational relevance ratio for explicitly classified reads. Missing runtime values remain `unavailable`; caller labels and estimates never become proof.
 
+Guarded `worker-run` automatically writes the initial phase capsule and fresh ledger beside `--brief-out` and includes the capsule in the launched brief. Later phases may acknowledge content only after reading `readNow`; the ledger records non-rereading through the harness, not avoided runtime retention.
+
+`validation-record` accepts optional `--obligations <comma-separated-ids>` and `--raw-log <repository-path>`. It stores a compact result plus the raw log's SHA-256 digest and byte size. Capsule creation verifies that pointer and fails closed on drift. Raw logs remain retained and addressable; only their repeated inline carryover is replaced by compact evidence.
+
 ## Compatibility
 
 Historical plans without `executionIsolation` remain readable and retain advisory behavior. New enforced plans require attested guarded claims; an unavailable adapter stops unless `unavailableFallback: "continue"` was declared in advance, in which case state records the explicit degradation. No migration rewrites historical state.

@@ -14,6 +14,7 @@ import path from "node:path";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
+const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const modes = new Set([
   "continue",
   "fresh-session",
@@ -410,11 +411,9 @@ export function assertRouteConformance(assessment, discovered, actualSurfaces) {
       typeof surface.patch !== "string"
     )
       throw new Error("actual changed surface has invalid path/status/patch");
-  const declaredFiles = [...new Set(discovered.changedFiles)].sort((a, b) =>
-    a.localeCompare(b),
-  );
+  const declaredFiles = [...new Set(discovered.changedFiles)].sort(order);
   const actualFiles = [...new Set(surfaces.map(({ path }) => path))].sort(
-    (a, b) => a.localeCompare(b),
+    order,
   );
   if (JSON.stringify(declaredFiles) !== JSON.stringify(actualFiles))
     throw new Error(
@@ -564,7 +563,7 @@ export function deterministicRouteRiskFloor(surfaces) {
       signals.add(signal),
     );
   }
-  return [...signals].sort((a, b) => a.localeCompare(b));
+  return [...signals].sort(order);
 }
 
 const incompleteDeliveryPackets = (plan, state) =>
@@ -1353,7 +1352,7 @@ export async function contextIndex(plan, packetId, repoRoot, state = null) {
         allFiles.filter((file) => matchesPattern(file, pattern)),
       ),
     ),
-  ].sort((a, b) => a.localeCompare(b));
+  ].sort(order);
   const missingPatterns = packet.contextSources.filter(
     (pattern) => !allFiles.some((file) => matchesPattern(file, pattern)),
   );
@@ -1598,7 +1597,7 @@ export function createWorkerBrief(
   plan,
   state,
   packetId,
-  { baseline, requirementsState = null, claimId },
+  { baseline, requirementsState = null, claimId, contextCapsule = null },
 ) {
   assertPlanRequirements(
     plan,
@@ -1633,6 +1632,7 @@ export function createWorkerBrief(
     contextIndex: [...packet.contextSources],
     allowedImplementationSurface: [...packet.implementationSurface],
     focusedValidation: [...packet.focusedValidation],
+    ...(contextCapsule ? { phaseInput: stableValue(contextCapsule) } : {}),
     lifecycle: {
       completion:
         "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
@@ -2222,7 +2222,7 @@ export function affectedValidation(files, config) {
   if (files.length > 0 && selected.size === 0) selected.add("full");
   return [...selected]
     .map((id) => ({ id, ...config.validationTargets[id] }))
-    .sort((a, b) => a.level - b.level || a.id.localeCompare(b.id));
+    .sort((a, b) => a.level - b.level || order(a.id, b.id));
 }
 
 export function relevantValidationFiles(files, target, config) {
@@ -2246,7 +2246,7 @@ export function relevantValidationFiles(files, target, config) {
 
 export function fingerprint(files, contentsByFile = {}) {
   const hash = createHash("sha256");
-  for (const file of [...files].sort((a, b) => a.localeCompare(b))) {
+  for (const file of [...files].sort(order)) {
     const content = contentsByFile[file] ?? "";
     hash.update(`${file}\0`);
     if (content?.state === "deleted") hash.update("deleted\0");
@@ -2304,7 +2304,16 @@ export function assertValidationRun(
 }
 
 export async function recordValidation(
-  { target, files, outcome, reason, packet, session },
+  {
+    target,
+    files,
+    outcome,
+    reason,
+    packet,
+    session,
+    obligations = [],
+    rawLog = null,
+  },
   ledger,
   config,
   repoRoot,
@@ -2313,11 +2322,27 @@ export async function recordValidation(
     throw new Error("validation record requires files and pass/fail outcome");
   const currentFingerprint = await fingerprintFiles(files, repoRoot);
   assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
+  let rawLogEvidence = null;
+  if (rawLog) {
+    const root = await realpath(repoRoot);
+    const targetPath = await realpath(path.resolve(repoRoot, rawLog));
+    if (targetPath !== root && !targetPath.startsWith(`${root}${path.sep}`))
+      throw new Error(`validation raw log escapes repository: ${rawLog}`);
+    const content = await readFile(targetPath);
+    rawLogEvidence = {
+      path: rawLog,
+      digest: createHash("sha256").update(content).digest("hex"),
+      bytes: content.byteLength,
+    };
+  }
   ledger.push({
     target,
-    files: [...files].sort((a, b) => a.localeCompare(b)),
+    command: config.validationTargets[target].command,
+    files: [...files].sort(order),
     fingerprint: currentFingerprint,
     outcome,
+    obligations: [...new Set(obligations)].sort(order),
+    ...(rawLogEvidence ? { rawLog: rawLogEvidence } : {}),
     reason: reason ?? null,
     packet,
     session,
@@ -2487,9 +2512,7 @@ export async function loadChangeFailureInvariants(change, manifest, repoRoot) {
     );
   let files;
   try {
-    files = (await findDeltaSpecFiles(specsRoot)).sort((a, b) =>
-      a.localeCompare(b),
-    );
+    files = (await findDeltaSpecFiles(specsRoot)).sort(order);
   } catch (error) {
     if (error.code === "ENOENT")
       throw new Error(`OpenSpec change has no delta specs: ${change}`);
@@ -2916,14 +2939,12 @@ export function summarizeEvents(events) {
     }
   }
   result.uniqueReads = reads.size;
-  result.logicalSessions = [...logicalSessions].sort((a, b) =>
-    a.localeCompare(b),
-  );
+  result.logicalSessions = [...logicalSessions].sort(order);
   result.rediscoveryProxies.repeatedReads = result.repeatedReads;
   if (runtimeIds.size)
     result.physicalBoundaries = {
       count: runtimeIds.size,
-      runtimeIds: [...runtimeIds].sort((a, b) => a.localeCompare(b)),
+      runtimeIds: [...runtimeIds].sort(order),
       source: "codex-exec-jsonl",
     };
   if (classifiedReads)
@@ -2981,7 +3002,7 @@ export async function gitEvidence(repoRoot, base) {
     currentHead: head.trim(),
     changedFiles: [
       ...new Set([...trackedFiles, ...modifiedFiles, ...untrackedFiles]),
-    ].sort((a, b) => a.localeCompare(b)),
+    ].sort(order),
     workingTree,
     collectedAt: new Date().toISOString(),
     mutatesRepository: false,

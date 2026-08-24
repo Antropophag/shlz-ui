@@ -13,10 +13,10 @@
     "uniqueSourceReads": 12,
     "baselineSourceBytes": 153997,
     "optimizedSourceBytes": 57234,
-    "capsuleBytes": 8595,
-    "optimizedTotalBytes": 65829,
-    "absoluteReductionBytes": 88168,
-    "reductionRatio": 0.57253,
+    "capsuleBytes": 8823,
+    "optimizedTotalBytes": 66057,
+    "sourceInputProxyDifferenceBytes": 87940,
+    "sourceInputProxyDifferenceRatio": 0.57105,
     "repeatedSourceBytes": 96763,
     "repeatedSourceRatio": 0.628344,
     "proceduralSourceBytesAcrossPhases": 112971,
@@ -36,7 +36,10 @@
     "The replay is bound to immutable PR #36 Git blobs and checked-in captured evidence; it is not a chat transcript.",
     "The independent oracle is separate from the candidate phase manifest.",
     "A fresh implementation worker reported 1,169,262 input tokens, including 1,048,576 cached; this limits claims to repository-controlled phase input.",
-    "Compact output sizes prove compression potential only; obligation equivalence must independently prevent evidence loss."
+    "Compact output sizes prove compression potential only; validation/CI generation and raw-log retention remain incurred.",
+    "The 96,763 repeated-source bytes overlap the procedural contributor and are not additive.",
+    "Attested repeated sources are not reread through the capsule interface; no prevented processing, cache-retention, or active/session byte claim is made.",
+    "Comparable active/session improvement is unavailable without trusted before/after runtime telemetry."
   ],
   "candidates": [
     {
@@ -53,11 +56,11 @@
       "id": "phase-bound-source-attestation",
       "result": "selected",
       "baselineBytes": 153997,
-      "candidateBytes": 65829,
-      "reductionRatio": 0.57253,
+      "candidateBytes": 66057,
+      "sourceInputProxyDifferenceRatio": 0.57105,
       "equivalencePass": true,
       "thresholdMet": true,
-      "evidence": "The pinned replay reduces repository-controlled input from 153,997 to 65,829 bytes (57.25%) while the independent oracle preserves 12 source identities and 19 obligations."
+      "evidence": "The pinned replay replaces later unchanged full-source inputs with digest references: 153,997 modeled source-read bytes become 57,234 read-now bytes plus 8,823 capsule bytes (57.11% proxy difference), while preserving 12 source identities and 19 obligations. This is not an active/session reduction claim."
     },
     {
       "id": "orchestration-simplification",

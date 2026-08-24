@@ -53,7 +53,7 @@ Validation and CI use a compact/raw boundary: structured results retain command,
 
 Candidate A is insufficient alone because literal document duplication was not the measured multiplier. Candidate C targets a smaller state representation and risks removing correctness transitions. Candidate D remains unnecessary because Candidate B meets the 35% threshold for the narrowly named repeated-source-input proxy; it does not establish a total active/session reduction.
 
-The executable candidate table makes this comparison explicit. Candidate A preserves equivalence but measures 0% evidenced reduction because the procedural corpus contains no duplicated long-form lines. Candidate B passes equivalence at 57.25%. Candidate C models removing all 253 transition bytes, reaches only 0.16%, and fails equivalence because required transitions disappear. Candidate D is not probed further because the lower-complexity deterministic candidate already passes both gates.
+The executable candidate table makes this comparison explicit. Candidate A preserves equivalence but measures 0% evidenced difference because the procedural corpus contains no duplicated long-form lines. Candidate B passes equivalence with a 57.11% repository-source-input proxy difference after the compact evidence-index field is included. Candidate C models removing all 253 transition bytes, reaches only 0.16%, and fails equivalence because required transitions disappear. Candidate D is not probed further because the lower-complexity deterministic candidate already passes both narrowly scoped gates.
 
 ### Keep the 188K signal observational
 

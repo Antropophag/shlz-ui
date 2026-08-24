@@ -21,6 +21,6 @@
 
 ## 5. Active/session forensic correction
 
-- [ ] 5.1 Reconcile the PR #36 replay with the 188K active/session forensic contributor breakdown; add red-capable regression coverage for cost attribution, automatic guarded-worker phase input, validation/CI compact-to-raw evidence integrity, and locale-independent ordering.
-- [ ] 5.2 Implement the minimum automatic execution-path and compact/raw-log boundary changes, report prevented versus merely not-reread versus retained/unmeasured costs without claiming active/session elimination, and rerun the replay and focused validation.
+- [x] 5.1 Reconcile the PR #36 replay with the 188K active/session forensic contributor breakdown; add red-capable regression coverage for cost attribution, automatic guarded-worker phase input, validation/CI compact-to-raw evidence integrity, and locale-independent ordering.
+- [x] 5.2 Implement the minimum automatic execution-path and compact/raw-log boundary changes, report prevented versus merely not-reread versus retained/unmeasured costs without claiming active/session elimination, and rerun the replay and focused validation.
 - [ ] 5.3 Re-prove the bounded follow-up scope, complete independent Standards/Spec review, process the current CodeRabbit round, update the existing PR, and leave it unmerged.
