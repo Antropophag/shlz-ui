@@ -94,6 +94,44 @@ export function createSpecDrivenTdd({
     );
   }
 
+  function reviewContextValues(value) {
+    if (typeof value === "string") return [value];
+    if (Array.isArray(value)) return value.flatMap(reviewContextValues);
+    if (value && typeof value === "object")
+      return Object.values(value).flatMap(reviewContextValues);
+    return [];
+  }
+
+  function assertTddReviewContext(plan, state, packetId) {
+    const slices = (plan.specDrivenTdd?.slices ?? []).filter(
+      (slice) =>
+        slice.applicability === "enforced" &&
+        slice.testReviewPacket === packetId,
+    );
+    const packet = plan.packets.find(({ id }) => id === packetId);
+    for (const contract of slices) {
+      const packetInputs = packet?.contextSources ?? [];
+      const dependencyInputs = (packet?.dependencies ?? []).flatMap(
+        (dependency) => reviewContextValues(state?.handoffs?.[dependency]),
+      );
+      if (
+        packetInputs.some(
+          (input) =>
+            isProhibitedReviewInput(input, contract) ||
+            contract.productionSurface.some((surface) =>
+              matchesPattern(surface, input),
+            ),
+        ) ||
+        dependencyInputs.some((input) =>
+          isProhibitedReviewInput(input, contract),
+        )
+      )
+        throw new Error(
+          `spec-driven TDD review packet ${packetId} contains prohibited production context`,
+        );
+    }
+  }
+
   function tddRetentionIdentity(plan, state, contract, design) {
     const packet = (id) => plan.packets.find((item) => item.id === id);
     return {
@@ -757,6 +795,7 @@ export function createSpecDrivenTdd({
     if (!handoff || handoff.version !== 1 || !handoff.sliceId)
       throw new Error("spec-driven TDD review handoff version must be 1");
     const { contract, lifecycle } = tddSlice(plan, state, handoff.sliceId);
+    assertTddReviewContext(plan, state, contract.testReviewPacket);
     if (
       plan.specDrivenTdd.version < 2 ||
       lifecycle.status !== "pending-test-review"
@@ -977,6 +1016,7 @@ export function createSpecDrivenTdd({
     return state;
   }
   return {
+    assertTddReviewContext,
     createTddReentryEvidence,
     createTddDesignEvidence,
     runTddAcceptance,

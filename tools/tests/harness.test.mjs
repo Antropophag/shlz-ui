@@ -943,6 +943,11 @@ const reviewedTddAssessment = () => {
     ...clone(implementation),
     id: "test-contract-review",
     dependencies: ["discovery-contracts"],
+    contextSources: [
+      "openspec/changes/example/specs/harness/spec.md",
+      "tools/tests/acceptance.test.mjs",
+      "tools/tests/fixtures/tdd/**",
+    ],
     preferredExecutionMode: "fresh-session",
   });
   implementation.dependencies = ["test-contract-review"];
@@ -1222,6 +1227,67 @@ test("independent test-contract public CLI discriminates incomplete approval", a
     await writeFile(path.join(root, reviewPath), `${JSON.stringify(review)}\n`);
     const { stdout } = await cli();
     assert.equal(JSON.parse(stdout).status, "test-reviewed");
+  } finally {
+    unregisterExitCleanup();
+    await rm(temporaryRoot, { recursive: true, force: true });
+  }
+});
+
+test("public review execution rejects effective production context hidden by benign inputs", async () => {
+  const nonce = `${process.pid}-${Date.now()}`;
+  const relativeRoot = `docs/exec-plans/tdd-review-context-${nonce}`;
+  const temporaryRoot = path.join(root, relativeRoot);
+  const planPath = `${relativeRoot}/plan.json`;
+  const statePath = `${relativeRoot}/state.json`;
+  const reviewPath = `${relativeRoot}/review.json`;
+  const unregisterExitCleanup = registerExitCleanup([temporaryRoot]);
+  const cli = (...arguments_) =>
+    exec(process.execPath, ["tools/harness.mjs", ...arguments_], { cwd: root });
+  try {
+    await mkdir(temporaryRoot, { recursive: true });
+    for (const contaminate of [
+      ({ plan }) => {
+        plan.packets
+          .find(({ id }) => id === "test-contract-review")
+          .contextSources.push("tools/lib/harness/core.mjs");
+      },
+      ({ state }) => {
+        state.handoffs["discovery-contracts"] = {
+          completedPacket: "discovery-contracts",
+          changed: ["tools/lib/harness/core.mjs"],
+          provenChecks: [],
+          settledDecisions: [],
+          unresolvedFindings: [],
+          nextPacket: "test-contract-review",
+          invalidatedAssumptions: [],
+        };
+      },
+    ]) {
+      const fixture = prepareReviewedTdd();
+      contaminate(fixture);
+      await Promise.all([
+        writeFile(
+          path.join(root, planPath),
+          `${JSON.stringify(fixture.plan)}\n`,
+        ),
+        writeFile(
+          path.join(root, statePath),
+          `${JSON.stringify(fixture.state)}\n`,
+        ),
+        writeFile(
+          path.join(root, reviewPath),
+          `${JSON.stringify(fixture.review)}\n`,
+        ),
+      ]);
+      await assert.rejects(
+        cli("context", planPath, "test-contract-review", "--state", statePath),
+        /prohibited production context/,
+      );
+      await assert.rejects(
+        cli("tdd-review-record", planPath, statePath, reviewPath),
+        /prohibited production context/,
+      );
+    }
   } finally {
     unregisterExitCleanup();
     await rm(temporaryRoot, { recursive: true, force: true });

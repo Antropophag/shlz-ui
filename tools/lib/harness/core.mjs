@@ -1170,6 +1170,11 @@ function validateSpecDrivenTdd(contract, packets, executionIsolation) {
         throw new Error(
           `spec-driven TDD slice ${slice.id} requires a distinct guarded test review packet between design and implementation`,
         );
+      assertTddReviewContext(
+        { specDrivenTdd: contract, packets },
+        null,
+        slice.testReviewPacket,
+      );
     }
     assertSliceSeam(slice);
   }
@@ -1376,6 +1381,7 @@ async function walk(root, directory = "") {
 
 export async function contextIndex(plan, packetId, repoRoot, state = null) {
   validatePlan(plan, { sizing: { decompositionRequired: [] } });
+  assertTddReviewContext(plan, state, packetId);
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
   const allFiles = await walk(repoRoot);
@@ -1581,6 +1587,7 @@ const valueDigest = (value) =>
     .digest("hex");
 
 const {
+  assertTddReviewContext,
   createTddReentryEvidence,
   createTddDesignEvidence,
   runTddAcceptance,
@@ -1650,6 +1657,7 @@ export function createWorkerBrief(
   );
   const packet = plan.packets.find(({ id }) => id === packetId);
   if (!packet) throw new Error(`unknown packet ${packetId}`);
+  assertTddReviewContext(plan, state, packetId);
   if (!readyPackets(plan, state).some(({ id }) => id === packetId))
     throw new Error(`packet ${packetId} is not ready for a worker brief`);
   if (!claimId) throw new Error("worker brief requires claimId");

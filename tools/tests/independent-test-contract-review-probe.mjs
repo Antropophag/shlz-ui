@@ -32,6 +32,7 @@ const stableDigest = (value) => {
 
 let unreviewedContractCannotAuthorizeProduction = false;
 let staleTestContractApprovalIsRejected = false;
+let effectiveReviewContextIsRejected = false;
 try {
   const assessment = clone(
     await load("docs/exec-plans/fixtures/wave-7-assessment.json"),
@@ -83,6 +84,19 @@ try {
     assessment,
     await load("docs/exec-plans/config.json"),
   );
+  const contaminatedPlan = clone(plan);
+  contaminatedPlan.packets
+    .find(({ id }) => id === "test-contract-review")
+    .contextSources.push("tools/lib/harness/core.mjs");
+  try {
+    core.validatePlan(contaminatedPlan, {
+      sizing: { decompositionRequired: [] },
+    });
+  } catch (error) {
+    effectiveReviewContextIsRejected = /prohibited production context/.test(
+      error.message,
+    );
+  }
   const state = core.createExecutionState(plan);
   state.packets["discovery-contracts"] = {
     status: "completed",
@@ -199,5 +213,6 @@ process.stdout.write(
       unreviewedContractCannotAuthorizeProduction,
     "stale-test-contract-approval-is-rejected":
       staleTestContractApprovalIsRejected,
+    "effective-review-context-is-rejected": effectiveReviewContextIsRejected,
   })}\n`,
 );

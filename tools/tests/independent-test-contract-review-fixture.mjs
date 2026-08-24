@@ -51,6 +51,7 @@ if (cleanupErrors.length)
 const concerns = {
   "unreviewed-contract-cannot-authorize-production": "state-machine",
   "stale-test-contract-approval-is-rejected": "persistence",
+  "effective-review-context-is-rejected": "state-machine",
 };
 const baseline = JSON.parse(
   (

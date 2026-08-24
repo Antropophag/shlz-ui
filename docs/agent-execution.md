@@ -70,6 +70,8 @@ npm run harness -- complete <plan> <state> <handoff-input> \
 
 The lifecycle is root orchestration → fresh worker → durable handoff → dependent fresh worker → distinct independent review. A failed or unattested launch keeps dependents blocked; use `worker-retry <state> <packet-id>` before generating a new brief. `worker-brief` is available when an operator needs to inspect or transport the immutable brief without launching it.
 
+For an enforced spec-driven TDD test-review packet, independence applies to the effective worker context, not only the review handoff's declared inputs. Packet context sources and dependency handoffs that expose a production surface or implementation-worker handoff fail closed before context/brief delivery and again at approval.
+
 Selection remains proportional: S continues inline; coherent M continues unless it crosses a semantic or context-pressure boundary; L declares decomposition and isolation; XL re-checks coherence and uses bounded isolated packets. A small follow-up remains a separate execution episode with its own immutable baseline—its size is assessed from that delta, not inherited from the parent PR.
 
 For a requirements-gated plan, pass `--requirements <requirements-state>` to `claim` and `complete`. If apply discovers a material ambiguity, use the deterministic `pause`/`resume` commands in `docs/requirements-elicitation.md`; resuming a guarded packet returns it to pending so a fresh `worker-run` must re-attest the updated revision.

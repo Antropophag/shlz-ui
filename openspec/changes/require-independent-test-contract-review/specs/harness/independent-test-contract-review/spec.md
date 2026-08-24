@@ -50,6 +50,8 @@ The reviewer SHALL be a completed guarded worker declared by the slice and SHALL
 
 #### Scenario: Benign declaration cannot hide effective implementation context
 
+<!-- failure-invariant: effective-review-context-is-rejected concern=state-machine -->
+
 - **WHEN** the review handoff declares only permitted inputs but the public worker execution path would deliver a production surface or implementation-worker handoff
 - **THEN** the harness fails closed before delivery or approval and does not record reviewed state
 
