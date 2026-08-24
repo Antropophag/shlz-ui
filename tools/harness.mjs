@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, realpathSync } from "node:fs";
+import { lstatSync, realpathSync } from "node:fs";
 import { open, readFile, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import path from "node:path";
@@ -91,13 +91,30 @@ const statePath = (file) => {
   const target = absolute(file);
   let ancestor = target;
   const missing = [];
-  while (!existsSync(ancestor)) {
-    const parent = path.dirname(ancestor);
-    if (parent === ancestor) break;
-    missing.unshift(path.basename(ancestor));
-    ancestor = parent;
+  let canonicalAncestor;
+  while (!canonicalAncestor) {
+    try {
+      lstatSync(ancestor);
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+      const parent = path.dirname(ancestor);
+      if (parent === ancestor) break;
+      missing.unshift(path.basename(ancestor));
+      ancestor = parent;
+      continue;
+    }
+    try {
+      canonicalAncestor = realpathSync(ancestor);
+    } catch (error) {
+      if (error.code !== "ENOENT") throw error;
+      throw new Error(
+        `mutable harness state must stay under docs/exec-plans: ${file}`,
+      );
+    }
   }
-  const canonicalTarget = path.join(realpathSync(ancestor), ...missing);
+  if (!canonicalAncestor)
+    throw new Error(`cannot resolve mutable harness state path: ${file}`);
+  const canonicalTarget = path.join(canonicalAncestor, ...missing);
   if (!within(canonicalStateRoot, canonicalTarget))
     throw new Error(
       `mutable harness state must stay under docs/exec-plans: ${file}`,

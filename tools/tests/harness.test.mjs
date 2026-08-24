@@ -3539,6 +3539,36 @@ test("review-record confines and locks mutable TDD state", async () => {
       ),
       /mutable harness state must stay under docs\/exec-plans/,
     );
+    const danglingTarget = path.join(
+      root,
+      "tools/tests",
+      `review-tdd-dangling-${nonce}.json`,
+    );
+    const danglingLink = path.join(temporaryRoot, "dangling-state.json");
+    await symlink(danglingTarget, danglingLink, "file");
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-record",
+          reviewStatePath,
+          "--axis",
+          "Spec",
+          "--head",
+          oid,
+          "--findings",
+          findingsPath,
+          "--tdd-plan",
+          tddPlanPath,
+          "--tdd-state",
+          `${relativeRoot}/dangling-state.json`,
+        ],
+        { cwd: root },
+      ),
+      /mutable harness state must stay under docs\/exec-plans/,
+    );
+    await assert.rejects(readFile(danglingTarget), { code: "ENOENT" });
     await writeFile(
       path.join(root, confinedTddStatePath),
       `${JSON.stringify(state)}\n`,

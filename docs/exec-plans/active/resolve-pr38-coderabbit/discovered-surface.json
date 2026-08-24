@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "changedFiles": [
+    "openspec/changes/require-independent-test-contract-review/tasks.md",
+    "tools/harness.mjs",
+    "tools/lib/harness/spec-driven-tdd.mjs",
+    "tools/tests/harness.test.mjs"
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
