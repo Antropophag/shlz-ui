@@ -12,4 +12,4 @@
 ## 3. Integration and evidence
 
 - [x] 3.1 Add the additive harness CLI and phase-local operator documentation; run the pinned PR #36 replay twice and record a deterministic report showing a material repository-controlled reduction, while explicitly treating live worker token usage as a contrary total-input limitation.
-- [ ] 3.2 Run focused and repository validation, strict OpenSpec validation, route conformance, and independent Standards/Spec review; resolve in-scope findings and open a separate unmerged PR with baseline, replay deltas, checks, limitations, and review state.
+- [x] 3.2 Run focused and repository validation, strict OpenSpec validation, route conformance, and independent Standards/Spec review; resolve in-scope findings and open a separate unmerged PR with baseline, replay deltas, checks, limitations, and review state.

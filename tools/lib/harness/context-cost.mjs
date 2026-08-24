@@ -9,7 +9,8 @@ const exec = promisify(execFile);
 
 const digest = (value) => createHash("sha256").update(value).digest("hex");
 const bytes = (value) => Buffer.byteLength(value);
-const stable = (values) => [...new Set(values)].sort();
+const stable = (values) =>
+  [...new Set(values)].sort((left, right) => left.localeCompare(right));
 const identity = (value) => JSON.stringify(value);
 
 function required(value, label) {
@@ -54,7 +55,7 @@ function materialize(definition) {
         ...phase,
         sources: phase.sourceIds.map(resolve),
         evidence: {
-          ...(phase.evidence ?? {}),
+          ...phase.evidence,
           rawEvidence: (phase.evidence?.rawEvidenceIds ?? []).map(resolve),
         },
       };

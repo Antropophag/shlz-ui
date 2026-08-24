@@ -42,7 +42,38 @@
       }
     },
     "review-delivery": {
-      "status": "pending"
+      "attemptHistory": [],
+      "status": "completed",
+      "session": "review-delivery-worker",
+      "claimId": "review-delivery-20260824",
+      "briefDigest": "41f20d1e88e40a690d85da2ebe8dd9fda34d82c1a59c2d8f3535f45267946544",
+      "baselineDigest": "ac7beb4a08f19b9bb9090a42e23d63158c116045d52dfa74ec53130a157cf60d",
+      "dependencyDigests": {
+        "capsule-implementation": "d06433729b8f9b406fef3b51a081aac64e1c0446cfa66fb2ecc6064827ea05ca"
+      },
+      "packetDigest": "eca1fa04bf6f2a415cae0567e7e05bada4afe671e86bd9d538be36cb34b10861",
+      "requirementsRevision": 2,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a033cc-ff4f-70d0-8187-12fa3e520666",
+        "launchId": "b3f712cf-283d-4f44-8db8-2a470ba6bfa4",
+        "startedAt": "2026-08-24T12:44:27.336Z",
+        "evidenceDigest": "2f4f0e29ea889347d6e54ec13520f6323489f9419f3574a5f8fcbe931df4f210"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "b3f712cf-283d-4f44-8db8-2a470ba6bfa4",
+        "usage": {
+          "input_tokens": 1015912,
+          "cached_input_tokens": 948736,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 5279,
+          "reasoning_output_tokens": 1093
+        },
+        "workerReport": "Implemented the `review-delivery` packet.\n\n## Standards\n\n- 0 documented-standard violations.\n- 2 non-blocking judgment calls:\n  - duplicated source-digest calculation;\n  - possible divergent responsibilities in `context-cost.mjs`.\n\n## Spec\n\nTwo reported concerns were investigated and disposed as non-defects:\n\n- Free-form handoff notes are intentionally non-blocking; structured findings carry blocking status.\n- Raw-evidence paths are addressable phase sources, while validation/review ledgers are separately content-addressed capsule inputs.\n\nNo scope creep found.\n\n## Checks\n\n- `npm run test:harness`: 78/78 passed\n- `npm test`: 170/170 passed\n- `npm run lint`: passed\n- `npm run build`: passed\n- `openspec validate reduce-harness-context-cost --strict`: passed\n- Context-cost replay: passed with equivalence preserved and 57.25% byte-proxy reduction\n- Route conformance: passed\n\n## Delivery\n\nPR [#37](https://github.com/Antropophag/shlz-ui/pull/37) is open and unmerged at commit `a2aa24b`.\n\nThe final delivery guard correctly remains pending because `review-delivery` is still marked `launching`; per the packet lifecycle, the root orchestrator must bind this runtime claim and persist the durable handoff before rerunning it. Runtime claim artifacts and `delivery-evidence.json` remain uncommitted for that orchestration step.",
+        "workerReportDigest": "5243448c782ace047eed92b975dc04e7e23b13e6cdf5ab57d9a03b1381487d19"
+      }
     }
   },
   "handoffs": {
@@ -105,6 +136,35 @@
       "claimId": "capsule-implementation-20260824",
       "briefDigest": "497057897f5ac710d7228b4b3ae81f1aee90d05ebc612b3754d3fcccf7ada362",
       "workerReportDigest": "5bed3d40ee148049e5f04e29554284cf029e227199f0d3aa779e5c4efabfc9d2"
+    },
+    "review-delivery": {
+      "completedPacket": "review-delivery",
+      "changed": [],
+      "provenChecks": [
+        "npm run test:harness: 78/78 pass",
+        "npm test: 170/170 pass",
+        "npm run lint: pass",
+        "npm run build: pass",
+        "openspec validate reduce-harness-context-cost --strict: pass",
+        "route conformance: pass",
+        "Standards and Spec review: clean at a2aa24b",
+        "PR #37: open and unmerged"
+      ],
+      "settledDecisions": [
+        "phase-bound acknowledged context is the minimal candidate that passes the 35% replay threshold",
+        "repository byte proxies do not establish total runtime token reduction",
+        "validation ledgers exclude their own operational output from fingerprints"
+      ],
+      "unresolvedFindings": [
+        "runtime-level before/after telemetry remains necessary before claiming total or active-context reduction"
+      ],
+      "nextPacket": null,
+      "invalidatedAssumptions": [
+        "fresh worker isolation alone controls context cost"
+      ],
+      "claimId": "review-delivery-20260824",
+      "briefDigest": "41f20d1e88e40a690d85da2ebe8dd9fda34d82c1a59c2d8f3535f45267946544",
+      "workerReportDigest": "5243448c782ace047eed92b975dc04e7e23b13e6cdf5ab57d9a03b1381487d19"
     }
   }
 }

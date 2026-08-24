@@ -1,0 +1,78 @@
+{
+  "version": 1,
+  "planId": "reduce-harness-context-cost",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/reduce-harness-context-cost/**",
+      "docs/exec-plans/active/reduce-harness-context-cost/**",
+      "git diff origin/main...HEAD"
+    ],
+    "contracts": [
+      "openspec/changes/reduce-harness-context-cost/**",
+      "docs/agent-execution.md"
+    ],
+    "dependencies": ["capsule-implementation"],
+    "focusedValidation": [
+      "npm run test:harness",
+      "npm test",
+      "npm run lint",
+      "npm run build",
+      "openspec validate reduce-harness-context-cost --strict"
+    ],
+    "handoff": ["findings and dispositions", "checks", "limitations", "PR URL"],
+    "id": "review-delivery",
+    "implementationOutcomes": [
+      "correctness/evidence/reproducibility preserved",
+      "delivery guard passes",
+      "PR remains open"
+    ],
+    "implementationSurface": ["current diff remediation only"],
+    "nonGoals": ["merge", "unrelated harness refactor"],
+    "objective": "Independently review the fixed diff, validate replay evidence, and deliver an unmerged PR",
+    "outputs": ["two-axis review", "final replay report", "unmerged PR"],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "Standards review",
+      "Spec review",
+      "validation",
+      "delivery guards",
+      "PR"
+    ]
+  },
+  "claimId": "review-delivery-20260824",
+  "baseline": {
+    "branch": "feat/reduce-harness-context-cost",
+    "commit": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "ac7beb4a08f19b9bb9090a42e23d63158c116045d52dfa74ec53130a157cf60d",
+  "requirements": {
+    "revision": 2,
+    "openSpecChange": "reduce-harness-context-cost"
+  },
+  "dependencyDigests": {
+    "capsule-implementation": "d06433729b8f9b406fef3b51a081aac64e1c0446cfa66fb2ecc6064827ea05ca"
+  },
+  "packetDigest": "eca1fa04bf6f2a415cae0567e7e05bada4afe671e86bd9d538be36cb34b10861",
+  "contextIndex": [
+    "openspec/changes/reduce-harness-context-cost/**",
+    "docs/exec-plans/active/reduce-harness-context-cost/**",
+    "git diff origin/main...HEAD"
+  ],
+  "allowedImplementationSurface": ["current diff remediation only"],
+  "focusedValidation": [
+    "npm run test:harness",
+    "npm test",
+    "npm run lint",
+    "npm run build",
+    "openspec validate reduce-harness-context-cost --strict"
+  ],
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "41f20d1e88e40a690d85da2ebe8dd9fda34d82c1a59c2d8f3535f45267946544"
+}
