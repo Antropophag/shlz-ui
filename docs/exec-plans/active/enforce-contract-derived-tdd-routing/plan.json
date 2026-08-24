@@ -1,0 +1,244 @@
+{
+  "version": 2,
+  "id": "enforce-contract-derived-tdd-routing",
+  "baseline": "78ed38fcfdf9889c95f6692da6f1309130811398",
+  "requirementsGate": "required",
+  "openSpecChange": "enforce-contract-derived-tdd-routing",
+  "requirementsRevision": 1,
+  "classification": {
+    "size": "L",
+    "score": 48,
+    "contributions": {
+      "independentWorkUnits": 8,
+      "sharedSeams": 6,
+      "contracts": 2,
+      "consumerIntegrations": 0,
+      "evidenceLevels": 3,
+      "architectureAmbiguity": 6,
+      "changedScope": 6,
+      "reviewRisk": 8,
+      "contextGrowthRisk": 9
+    },
+    "kind": "routing-heuristic-not-token-forecast"
+  },
+  "regroupCheck": {
+    "required": true,
+    "openSpecTaskCount": 8
+  },
+  "contextPolicy": {
+    "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
+    "decomposeSignal": 100000,
+    "semanticBoundaries": [
+      "implementation-to-independent-review",
+      "subsystem-change",
+      "major-replan",
+      "irrelevant-output-accumulation"
+    ]
+  },
+  "specDrivenTdd": {
+    "slices": [
+      {
+        "acceptanceSurface": [
+          "tools/tests/contract-derived-tdd-routing-probe.mjs"
+        ],
+        "applicability": "enforced",
+        "authorities": [
+          {
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+            "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+            "scenarioId": "material-scenarios-have-enforced-coverage",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+            "scenarioId": "source-only-contract",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+            "scenarioId": "absence-only-contract",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+            "scenarioId": "documentation-only-contract",
+            "source": "explicit-openspec-literal"
+          }
+        ],
+        "command": [
+          "/usr/bin/node",
+          "tools/tests/contract-derived-tdd-routing-probe.mjs"
+        ],
+        "controls": {
+          "environment": {
+            "TZ": "UTC"
+          },
+          "normalization": ["repo-root"],
+          "timeoutMs": 10000
+        },
+        "fixtureSurface": [
+          "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+          "tools/tests/fixtures/contract-derived-tdd-oracle-{control,decoy}.mjs"
+        ],
+        "id": "contract-derived-routing",
+        "implementationPacket": "routing-engine",
+        "productionSurface": [
+          "tools/harness.mjs",
+          "tools/lib/harness/core.mjs",
+          "tools/lib/harness/contract-derived-tdd.mjs"
+        ],
+        "repeatCount": 2,
+        "scenarioIds": [
+          "wave-9-behavior-and-state-bypass-is-rejected",
+          "material-scenarios-have-enforced-coverage",
+          "source-only-contract",
+          "absence-only-contract",
+          "documentation-only-contract"
+        ],
+        "seam": "harness/plan",
+        "testDesignPacket": "test-design"
+      }
+    ],
+    "version": 1
+  },
+  "executionIsolation": {
+    "version": 1,
+    "enforced": true,
+    "unavailableFallback": "stop"
+  },
+  "packets": [
+    {
+      "id": "test-design",
+      "objective": "Create the contract-derived routing oracle and Wave 9 regression fixtures without production context",
+      "scope": [
+        "acceptance probe",
+        "Wave 9 fixture",
+        "non-material fixtures",
+        "RED oracle controls"
+      ],
+      "nonGoals": ["production implementation", "planner logic"],
+      "dependencies": [],
+      "contracts": ["harness/contract-derived-tdd-routing"],
+      "contextSources": [
+        "openspec/changes/enforce-contract-derived-tdd-routing/**",
+        "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+        "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r1.json",
+        "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r2.json",
+        "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r3.json",
+        "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r4.json"
+      ],
+      "implementationSurface": [
+        "tools/tests/contract-derived-tdd-routing-probe.mjs",
+        "docs/exec-plans/fixtures/contract-derived-tdd-routing/**"
+      ],
+      "focusedValidation": ["acceptance probe RED"],
+      "outputs": [
+        "independent oracle",
+        "immutable regression fixtures",
+        "known-bad discrimination"
+      ],
+      "handoff": ["scenario mapping", "oracle method", "RED signature"],
+      "implementationOutcomes": [
+        "Wave 9 bypass fixture",
+        "material obligation assertions",
+        "non-material exclusion assertions"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "routing-engine",
+      "objective": "Implement contract parsing, obligation derivation, exact TDD coverage, and compatibility",
+      "scope": [
+        "scenario parser",
+        "plan command",
+        "plan validation",
+        "focused tests",
+        "operator docs"
+      ],
+      "nonGoals": [
+        "automatic slice synthesis",
+        "historical plan migration",
+        "design-system packages"
+      ],
+      "dependencies": ["test-design"],
+      "contracts": [
+        "harness/contract-derived-tdd-routing",
+        "harness/spec-driven-tdd"
+      ],
+      "contextSources": [
+        "openspec/changes/enforce-contract-derived-tdd-routing/**",
+        "tools/lib/harness/**",
+        "tools/harness.mjs",
+        "tools/tests/**"
+      ],
+      "implementationSurface": [
+        "tools/lib/harness/**",
+        "tools/harness.mjs",
+        "tools/tests/**",
+        "docs/{agent-execution,validation-workflow}.md",
+        "docs/exec-plans/README.md"
+      ],
+      "focusedValidation": [
+        "contract-derived routing probe",
+        "harness tests",
+        "OpenSpec strict"
+      ],
+      "outputs": [
+        "contract-derived obligation",
+        "public planning enforcement",
+        "compatibility evidence"
+      ],
+      "handoff": [
+        "changed interface",
+        "validation results",
+        "settled trade-offs"
+      ],
+      "implementationOutcomes": [
+        "planner omission rejected",
+        "exact material coverage",
+        "evidence-only exclusions"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "independent-review-delivery",
+      "objective": "Validate, independently review, remediate, and deliver an unmerged PR",
+      "scope": [
+        "full validation",
+        "Standards review",
+        "Spec review",
+        "delivery guards",
+        "PR"
+      ],
+      "nonGoals": ["merge", "unrelated cleanup"],
+      "dependencies": ["routing-engine"],
+      "contracts": ["openspec/changes/enforce-contract-derived-tdd-routing/**"],
+      "contextSources": [
+        "openspec/changes/enforce-contract-derived-tdd-routing/**",
+        "docs/validation-workflow.md",
+        "current episode diff"
+      ],
+      "implementationSurface": ["current diff remediation only"],
+      "focusedValidation": [
+        "harness affected",
+        "full repository validation",
+        "two-axis review",
+        "delivery-check"
+      ],
+      "outputs": ["review dispositions", "validation evidence", "open PR"],
+      "handoff": ["resolved findings", "residual risks", "PR URL"],
+      "implementationOutcomes": ["Standards pass", "Spec pass", "unmerged PR"],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    }
+  ]
+}

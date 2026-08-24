@@ -12,6 +12,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { promisify } from "node:util";
+import { contractDerivedTddBinding } from "./contract-derived-tdd.mjs";
 
 const exec = promisify(execFile);
 const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
@@ -1241,6 +1242,45 @@ export function validatePlan(plan, config) {
       plan.packets,
       plan.executionIsolation,
     );
+  if (plan.contractDerivedTdd !== undefined) {
+    const obligation = plan.contractDerivedTdd;
+    if (
+      obligation?.version !== 1 ||
+      obligation.openSpecChange !== plan.openSpecChange ||
+      typeof obligation.contractDigest !== "string" ||
+      !/^[a-f0-9]{64}$/.test(obligation.contractDigest) ||
+      !Array.isArray(obligation.requiredScenarioIds) ||
+      obligation.requiredScenarioIds.some(
+        (id, index) =>
+          typeof id !== "string" ||
+          !id ||
+          obligation.requiredScenarioIds.indexOf(id) !== index,
+      )
+    )
+      throw new Error("plan has invalid contract-derived TDD obligation");
+    const coverage = new Map(
+      obligation.requiredScenarioIds.map((id) => [id, 0]),
+    );
+    for (const slice of plan.specDrivenTdd?.slices ?? []) {
+      if (slice.applicability !== "enforced") continue;
+      for (const id of slice.scenarioIds)
+        if (coverage.has(id)) coverage.set(id, coverage.get(id) + 1);
+    }
+    const uncovered = [...coverage]
+      .filter(([, count]) => count === 0)
+      .map(([id]) => id);
+    const duplicate = [...coverage]
+      .filter(([, count]) => count > 1)
+      .map(([id]) => id);
+    if (uncovered.length)
+      throw new Error(
+        `contract-derived TDD requires enforced coverage; uncovered: ${uncovered.join(",")}`,
+      );
+    if (duplicate.length)
+      throw new Error(
+        `contract-derived TDD requires exact coverage; duplicated: ${duplicate.join(",")}`,
+      );
+  }
   if (
     plan.version >= 2 &&
     ["L", "XL"].includes(plan.classification.size) &&
@@ -1278,7 +1318,12 @@ export function validatePlan(plan, config) {
   return plan;
 }
 
-export function createPlan(assessment, config, requirementsState = null) {
+export function createPlan(
+  assessment,
+  config,
+  requirementsState = null,
+  scenarioSemantics = null,
+) {
   if (
     !assessment.id ||
     !Array.isArray(assessment.workUnits) ||
@@ -1308,6 +1353,9 @@ export function createPlan(assessment, config, requirementsState = null) {
       openSpecTaskCount: assessment.openSpecTaskCount ?? null,
     },
     contextPolicy: config.context,
+    ...(scenarioSemantics
+      ? { contractDerivedTdd: contractDerivedTddBinding(scenarioSemantics) }
+      : {}),
     ...(assessment.specDrivenTdd
       ? { specDrivenTdd: stableValue(assessment.specDrivenTdd) }
       : {}),

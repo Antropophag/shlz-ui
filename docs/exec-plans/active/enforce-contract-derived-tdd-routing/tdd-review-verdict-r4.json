@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "verdict": "changes-requested",
+  "finding": {
+    "id": "TCR-004",
+    "summary": "Embed synthetic oracle contracts, assessments, requirements, and expected cases inside the acceptance probe; keep the tracked original Wave 9 plan as its only external regression input."
+  }
+}

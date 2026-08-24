@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "sliceId": "contract-derived-routing",
+  "runtimeId": "01a035d7-290d-7450-84a4-021f5cd4bc59",
+  "requirementsRevision": 1,
+  "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
+  "acceptanceDigest": "3f0d5760c2b79a23f2173015f9f3ae75be2f9f11b02ebe03f718aaa3bc96556c",
+  "fixtureDigest": "5f3e5d16f0577902cfed1beda617394b39b7217900d22d3189024363cf294b6f",
+  "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
+  "contractDigest": "c1f55a512d25a02c5fcd5469b54d64059644bad64dbf78043308ad2b99930557",
+  "oracleChallengeDigest": "fe32c2370880944767cd8ddf0a5ecb03a7ff8c75c7db72312d6f1acf7e4b56e5",
+  "designDigest": "ca93b68444aaac12c20045f789cff666d100f15d00000ddf23f3ecb639de63fb",
+  "reviewPacketHandoffDigest": "4f84077fd11785aa5991b9946c8c070bfea1682ff6b9667f553b2be6a2ca96ca",
+  "workerReportDigest": "2ba9db3bb5bc26ab8b727340ea103ceff65ab3b3ddb5997e40e318869a1d14fe",
+  "inputs": [
+    "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+    "tools/tests/contract-derived-tdd-routing-probe.mjs",
+    "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle.json"
+  ],
+  "verdict": "approved",
+  "checklist": {
+    "scenarioAuthority": {
+      "result": "pass",
+      "evidenceRefs": ["openspec:five-scenario-authorities"]
+    },
+    "behavioralSeam": {
+      "result": "pass",
+      "evidenceRefs": ["probe:public-harness-plan"]
+    },
+    "wrongBehavior": {
+      "result": "pass",
+      "evidenceRefs": ["oracle:control-decoy-2x"]
+    },
+    "fixtureIndependence": {
+      "result": "pass",
+      "evidenceRefs": ["fixture:wave9-byte-identical"]
+    },
+    "productionContextExcluded": {
+      "result": "pass",
+      "evidenceRefs": ["capsule:18-source-digests"]
+    }
+  },
+  "scenarioEvidence": [
+    {
+      "scenarioId": "wave-9-behavior-and-state-bypass-is-rejected",
+      "evidenceRefs": ["probe:wave9-six-uncovered"]
+    },
+    {
+      "scenarioId": "material-scenarios-have-enforced-coverage",
+      "evidenceRefs": ["probe:material-covered"]
+    },
+    {
+      "scenarioId": "source-only-contract",
+      "evidenceRefs": ["probe:source-only"]
+    },
+    {
+      "scenarioId": "absence-only-contract",
+      "evidenceRefs": ["probe:absence-only"]
+    },
+    {
+      "scenarioId": "documentation-only-contract",
+      "evidenceRefs": ["probe:documentation-only"]
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "version": 1,
+  "planId": "enforce-contract-derived-tdd-routing",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/enforce-contract-derived-tdd-routing/**",
+      "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+      "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r1.json",
+      "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r2.json",
+      "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r3.json",
+      "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r4.json"
+    ],
+    "contracts": ["harness/contract-derived-tdd-routing"],
+    "dependencies": [],
+    "focusedValidation": ["acceptance probe RED"],
+    "handoff": ["scenario mapping", "oracle method", "RED signature"],
+    "id": "test-design",
+    "implementationOutcomes": [
+      "Wave 9 bypass fixture",
+      "material obligation assertions",
+      "non-material exclusion assertions"
+    ],
+    "implementationSurface": [
+      "tools/tests/contract-derived-tdd-routing-probe.mjs",
+      "docs/exec-plans/fixtures/contract-derived-tdd-routing/**"
+    ],
+    "nonGoals": ["production implementation", "planner logic"],
+    "objective": "Create the contract-derived routing oracle and Wave 9 regression fixtures without production context",
+    "outputs": [
+      "independent oracle",
+      "immutable regression fixtures",
+      "known-bad discrimination"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "acceptance probe",
+      "Wave 9 fixture",
+      "non-material fixtures",
+      "RED oracle controls"
+    ]
+  },
+  "claimId": "contract-tdd-test-design-r5-20260825",
+  "baseline": {
+    "branch": "feat/deterministic-tdd-routing",
+    "commit": "78ed38fcfdf9889c95f6692da6f1309130811398",
+    "defaultBranch": "main",
+    "kind": "mainline",
+    "version": 1
+  },
+  "baselineDigest": "de347e17da72de970313ae332452c4741ed80c81d0d7fef22fc9e5458f92f31b",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "enforce-contract-derived-tdd-routing"
+  },
+  "dependencyDigests": {},
+  "packetDigest": "523032c395d30ea8d20b6acc64dfb23bd5ec0a04dbb540ba4eec118bd1f27027",
+  "contextIndex": [
+    "openspec/changes/enforce-contract-derived-tdd-routing/**",
+    "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+    "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r1.json",
+    "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r2.json",
+    "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r3.json",
+    "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r4.json"
+  ],
+  "allowedImplementationSurface": [
+    "tools/tests/contract-derived-tdd-routing-probe.mjs",
+    "docs/exec-plans/fixtures/contract-derived-tdd-routing/**"
+  ],
+  "focusedValidation": ["acceptance probe RED"],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "bf06f615e817b7a8c076e2469e5bd770ad729a303c424cc841b21aa8914df9e8",
+    "evidence": {
+      "dependencyHandoffs": [],
+      "findings": [],
+      "rawEvidence": [],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": []
+    },
+    "kind": "packet-context",
+    "launchClaim": "contract-tdd-test-design-r5-20260825",
+    "objective": "Create the contract-derived routing oracle and Wave 9 regression fixtures without production context",
+    "obligations": [
+      "contract:harness/contract-derived-tdd-routing",
+      "outcome:Wave 9 bypass fixture",
+      "outcome:material obligation assertions",
+      "outcome:non-material exclusion assertions",
+      "validation:acceptance probe RED"
+    ],
+    "packetId": "test-design",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "enforce-contract-derived-tdd-routing",
+    "readNow": [
+      {
+        "bytes": 1553,
+        "digest": "e584d56898ec5ea2aa3a28498b860a55e002fc336bcb0c9e60ddc17cbaeb818c",
+        "path": "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r1.json"
+      },
+      {
+        "bytes": 1443,
+        "digest": "d265e12a9b54b7fc333c8dd25981348f1bf1f2a689e621d5a945ff7d35df9d02",
+        "path": "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r2.json"
+      },
+      {
+        "bytes": 319,
+        "digest": "daee631330cbd8595077814ffc6669d6331aaf9dacd962082a77d262fa56a732",
+        "path": "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r3.json"
+      },
+      {
+        "bytes": 297,
+        "digest": "c91ca02ea6aa324102babddf756642e9a9788d3280223fdcb193ee3e13fc81bf",
+        "path": "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-verdict-r4.json"
+      },
+      {
+        "bytes": 6200,
+        "digest": "c5b566a31cf5ee5050ce4cc321718547ef484cea201c4f399bfcf57a213cc5cc",
+        "path": "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json"
+      },
+      {
+        "bytes": 40,
+        "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+        "path": "openspec/changes/enforce-contract-derived-tdd-routing/.openspec.yaml"
+      },
+      {
+        "bytes": 4694,
+        "digest": "120db33b024a415befba31100566090e38f8456fd87e9391231268600aa6d601",
+        "path": "openspec/changes/enforce-contract-derived-tdd-routing/design.md"
+      },
+      {
+        "bytes": 2075,
+        "digest": "47e31d6b141fc1081e82fc6158b36ec512edbd0b559944b308da031e621fe279",
+        "path": "openspec/changes/enforce-contract-derived-tdd-routing/proposal.md"
+      },
+      {
+        "bytes": 4736,
+        "digest": "9d09c6f1e0819cb371b48efddb54adf7277153361052bce793489b44343e81e5",
+        "path": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+      },
+      {
+        "bytes": 1781,
+        "digest": "41993101830d045bf1f90f30a1e1e2e2f893780199eae887f0175848375d7778",
+        "path": "openspec/changes/enforce-contract-derived-tdd-routing/tasks.md"
+      }
+    ],
+    "sourceDigest": "9ca9a02ff13645942e52262b742bd0840f42dafbf82015b295139150786867c6",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "a6d6af7d4156b95f8373b9b96904f9d1c6c49e3738bc185ccf50f173b44bc025"
+}

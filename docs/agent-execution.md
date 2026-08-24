@@ -55,6 +55,21 @@ the seam, tests, and fixtures—not a production proposal or implementation
 handoff. Direct changes and slices without an honest deterministic RED use
 ordinary TDD or an explicit bounded `inapplicable` disposition.
 
+For every newly created requirements-gated plan, `harness plan` reads the
+requirements-selected OpenSpec delta specs before writing the plan. Each
+`#### Scenario` must carry exactly one adjacent closed declaration:
+
+```md
+<!-- implementation-semantics: material-behavior -->
+```
+
+The other supported values are `material-state`, `source-only`, `absence-only`,
+and `documentation-only`. Material behavior/state identities must each appear
+exactly once in an enforced `specDrivenTdd` slice. Evidence-only classifications
+do not create that mandatory lifecycle. The emitted `contractDerivedTdd`
+binding records the selected change, normalized contract digest, and required
+identities; historical plans without this field remain readable.
+
 Guarded packets use the runtime adapter rather than a caller-selected label. The root reserves the claim atomically, releases the state lock, launches one bounded worker, then binds its runtime identity before accepting the worker's durable handoff:
 
 ```bash

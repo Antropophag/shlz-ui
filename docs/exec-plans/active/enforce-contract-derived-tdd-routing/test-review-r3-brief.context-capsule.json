@@ -1,0 +1,146 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "enforce-contract-derived-tdd-routing",
+  "packetId": "test-contract-review",
+  "physicalSession": null,
+  "launchClaim": "contract-tdd-test-review-20260825-r3",
+  "phase": "implementation",
+  "objective": "Independently review the test contract before RED authorization",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/contract-derived-tdd-routing",
+    "outcome:decoy discrimination review",
+    "outcome:independent authority review",
+    "outcome:production-context exclusion",
+    "validation:test-contract review checklist"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "test-design",
+        "changed": [
+          "acceptance probe for contract-derived TDD routing",
+          "immutable original Wave 9 plan and minimal classified contract fixture",
+          "source-only, absence-only, and documentation-only control fixtures"
+        ],
+        "provenChecks": [
+          "probe reports ERR_CONTRACT_DERIVED_TDD_BYPASS for Wave 9 before production implementation",
+          "Wave 9 fixture digest matches the original execution plan",
+          "all three evidence-only controls are accepted",
+          "syntax, formatting, and git diff --check pass"
+        ],
+        "settledDecisions": [
+          "public harness plan is the acceptance seam",
+          "stable scenario identities use capability, requirement, and scenario headings",
+          "the original Wave 9 plan is copied exactly and contract text is reduced only to routing-relevant semantics"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "test-contract-review",
+        "invalidatedAssumptions": [],
+        "claimId": "contract-tdd-test-design-20260825",
+        "briefDigest": "4164d8b1b389843d6960979592f54b6472f2509d3b8793c3b6a76dde553714cb",
+        "workerReportDigest": "017f88a50b03c146426defdc42fbabaaef406230102884796cdd38573159ed0d"
+      }
+    ],
+    "verdicts": [
+      "Wave 9 fixture digest matches the original execution plan",
+      "all three evidence-only controls are accepted",
+      "probe reports ERR_CONTRACT_DERIVED_TDD_BYPASS for Wave 9 before production implementation",
+      "syntax, formatting, and git diff --check pass"
+    ],
+    "rawEvidence": [
+      "acceptance probe for contract-derived TDD routing",
+      "immutable original Wave 9 plan and minimal classified contract fixture",
+      "source-only, absence-only, and documentation-only control fixtures"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/absence-only-contract.md",
+      "digest": "23007e622929cecc55107579b80b01048665579d4d5481812469bdcb714cd6a3",
+      "bytes": 268
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/assessment.json",
+      "digest": "98771660d2b02c733a4798af0d09eb0db25b1941f3ef092c28fb3e9bdcea83f3",
+      "bytes": 1030
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/documentation-only-contract.md",
+      "digest": "ffee548619b30ded3f63aeb60620ebdfe6570ece42485b4fb04ec984d0aac752",
+      "bytes": 276
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle-control.mjs",
+      "digest": "32719c9d9d5d2724f38fcf48cd51b6b5501a776ec466225ae0c2df0ef5361353",
+      "bytes": 84
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle-decoy.mjs",
+      "digest": "f320c42a8a0ded86465a8008b8b2c662da6d29c3646171d8cfbffe877891c34c",
+      "bytes": 137
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle.json",
+      "digest": "494798e49deb9be0454f6283ec7e675761e1d89728f9c52e8169bc86f4e079bc",
+      "bytes": 1369
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/requirements.json",
+      "digest": "cc96cb4d6f3e673b89aeccf67cc858a8cc79a2b25738eb45e01ac6dd9ae20506",
+      "bytes": 352
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/source-only-contract.md",
+      "digest": "b91ac7026cc0a81eaae8ca14b0d182817076f9c870d55b5e0855259604306894",
+      "bytes": 253
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/wave-9-contract.md",
+      "digest": "feac31998e4f8635f382c7ef40d72c1e0eabd805d7c567e3d6ba135053d41d86",
+      "bytes": 2323
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/wave-9-plan.json",
+      "digest": "c5b566a31cf5ee5050ce4cc321718547ef484cea201c4f399bfcf57a213cc5cc",
+      "bytes": 6200
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/design.md",
+      "digest": "120db33b024a415befba31100566090e38f8456fd87e9391231268600aa6d601",
+      "bytes": 4694
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/proposal.md",
+      "digest": "47e31d6b141fc1081e82fc6158b36ec512edbd0b559944b308da031e621fe279",
+      "bytes": 2075
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "digest": "9d09c6f1e0819cb371b48efddb54adf7277153361052bce793489b44343e81e5",
+      "bytes": 4736
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/tasks.md",
+      "digest": "41993101830d045bf1f90f30a1e1e2e2f893780199eae887f0175848375d7778",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/tests/contract-derived-tdd-routing-probe.mjs",
+      "digest": "693a58779f378e3e341ab5caf0006293705d987f835683d2cd0557ee5094c13a",
+      "bytes": 5385
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "0deafd4f03b1287eac4f6010e399a4c913571ac8d98ddd5aaf8e1e6db1d03206",
+  "capsuleDigest": "f9dbbaaf448ff063e3d1eba54a3cd97c04c3443afc997db4234373e388f63f10"
+}

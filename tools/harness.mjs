@@ -68,6 +68,7 @@ import {
   createPacketContextCapsule,
   runContextCostReplay,
 } from "./lib/harness/context-cost.mjs";
+import { loadChangeScenarioSemantics } from "./lib/harness/contract-derived-tdd.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -360,10 +361,25 @@ switch (command) {
   }
   case "plan": {
     const requirementsPath = option("--requirements");
+    const assessment = await readJson(absolute(args[0]));
+    const requirementsState = requirementsPath
+      ? await readJson(absolute(requirementsPath))
+      : null;
+    const scenarioSemantics =
+      assessment.requirementsGate === "required"
+        ? await loadChangeScenarioSemantics(
+            repoRoot,
+            assessment.openSpecChange,
+            (assessment.workUnits ?? []).flatMap(
+              ({ contracts = [] }) => contracts,
+            ),
+          )
+        : null;
     const plan = createPlan(
-      await readJson(absolute(args[0])),
+      assessment,
       config,
-      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+      requirementsState,
+      scenarioSemantics,
     );
     await writeJson(statePath(args[1]), plan);
     output(plan);

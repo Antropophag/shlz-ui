@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "enforce-contract-derived-tdd-routing",
+  "packetId": "test-design",
+  "physicalSession": null,
+  "launchClaim": "contract-tdd-test-design-20260825",
+  "phase": "implementation",
+  "objective": "Create the contract-derived routing oracle and Wave 9 regression fixtures without production context",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/contract-derived-tdd-routing",
+    "outcome:Wave 9 bypass fixture",
+    "outcome:material obligation assertions",
+    "outcome:non-material exclusion assertions",
+    "validation:acceptance probe RED"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [],
+    "verdicts": [],
+    "rawEvidence": [],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
+      "digest": "c5b566a31cf5ee5050ce4cc321718547ef484cea201c4f399bfcf57a213cc5cc",
+      "bytes": 6200
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/design.md",
+      "digest": "120db33b024a415befba31100566090e38f8456fd87e9391231268600aa6d601",
+      "bytes": 4694
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/proposal.md",
+      "digest": "47e31d6b141fc1081e82fc6158b36ec512edbd0b559944b308da031e621fe279",
+      "bytes": 2075
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "digest": "9d09c6f1e0819cb371b48efddb54adf7277153361052bce793489b44343e81e5",
+      "bytes": 4736
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/tasks.md",
+      "digest": "41993101830d045bf1f90f30a1e1e2e2f893780199eae887f0175848375d7778",
+      "bytes": 1781
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "b225ad5884d5abfcbdd8b50dbb2c18dc36f0da9513e42f9c7927276969eb49dd",
+  "capsuleDigest": "195b3df24625ca1de77e55ed56ed1d2f1ba862830b57007e5f626105a6209ad7"
+}

@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "78ed38fcfdf9889c95f6692da6f1309130811398",
+  "branch": "feat/deterministic-tdd-routing",
+  "defaultBranch": "main"
+}

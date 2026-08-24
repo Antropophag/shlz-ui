@@ -82,3 +82,12 @@ Guarded `worker-run` automatically writes an unacknowledgeable pre-launch phase 
 Historical plans without `executionIsolation` remain readable and retain advisory behavior. New enforced plans require attested guarded claims; an unavailable adapter stops unless `unavailableFallback: "continue"` was declared in advance, in which case state records the explicit degradation. No migration rewrites historical state.
 
 Active plans live in `docs/exec-plans/active/<change>/`. Fixtures live in `docs/exec-plans/fixtures/`; telemetry JSONL should be summarized rather than loaded into normal packet context.
+
+# Contract-derived planning
+
+`harness plan` derives mandatory spec-driven TDD from the requirements-selected
+OpenSpec delta contract. Contract authors classify each scenario with one of
+`material-behavior`, `material-state`, `source-only`, `absence-only`, or
+`documentation-only`; planners map every material identity exactly once to an
+enforced slice. Omitting `specDrivenTdd` cannot suppress a material obligation.
+Existing plan files remain readable without migration.

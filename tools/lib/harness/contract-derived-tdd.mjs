@@ -1,0 +1,163 @@
+import { createHash } from "node:crypto";
+import { readdir, readFile } from "node:fs/promises";
+import path from "node:path";
+
+const semanticsCategories = new Set([
+  "material-behavior",
+  "material-state",
+  "source-only",
+  "absence-only",
+  "documentation-only",
+]);
+const materialCategories = new Set(["material-behavior", "material-state"]);
+
+const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
+const digest = (value) =>
+  createHash("sha256").update(JSON.stringify(value)).digest("hex");
+
+async function markdownFiles(directory) {
+  const files = [];
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const target = path.join(directory, entry.name);
+    if (entry.isDirectory()) files.push(...(await markdownFiles(target)));
+    else if (entry.isFile() && entry.name.endsWith(".md")) files.push(target);
+  }
+  return files.sort(order);
+}
+
+export function parseDeltaScenarioSemantics(contracts) {
+  if (!Array.isArray(contracts) || contracts.length === 0)
+    throw new Error("OpenSpec change requires at least one delta spec");
+  const scenarios = [];
+  const identities = new Set();
+  for (const contract of [...contracts].sort((a, b) =>
+    order(a.capability, b.capability),
+  )) {
+    if (
+      !contract ||
+      typeof contract.capability !== "string" ||
+      !contract.capability ||
+      typeof contract.content !== "string"
+    )
+      throw new Error("delta spec requires capability and content");
+    const lines = contract.content.split(/\r?\n/);
+    let requirement = null;
+    for (let index = 0; index < lines.length; index++) {
+      const requirementMatch = lines[index].match(
+        /^### Requirement:\s*(.+?)\s*$/,
+      );
+      if (requirementMatch) {
+        requirement = requirementMatch[1];
+        continue;
+      }
+      const scenarioMatch = lines[index].match(/^#### Scenario:\s*(.+?)\s*$/);
+      if (!scenarioMatch) continue;
+      if (!requirement)
+        throw new Error(
+          `scenario ${scenarioMatch[1]} in ${contract.capability} has no requirement`,
+        );
+      const scenario = scenarioMatch[1];
+      const declarations = [];
+      let firstContent = null;
+      for (let cursor = index + 1; cursor < lines.length; cursor++) {
+        if (/^#{3,4}\s/.test(lines[cursor])) break;
+        if (firstContent === null && lines[cursor].trim())
+          firstContent = lines[cursor].trim();
+        const declaration = lines[cursor].match(
+          /<!--\s*implementation-semantics:\s*([^\s>]+)\s*-->/g,
+        );
+        if (declaration)
+          declarations.push(
+            ...declaration.map(
+              (value) =>
+                value.match(/implementation-semantics:\s*([^\s>]+)/)[1],
+            ),
+          );
+      }
+      const identity = `${contract.capability}::${requirement}::${scenario}`;
+      if (identities.has(identity))
+        throw new Error(`duplicate OpenSpec scenario identity: ${identity}`);
+      identities.add(identity);
+      if (declarations.length !== 1)
+        throw new Error(
+          `${identity} requires exactly one implementation-semantics declaration`,
+        );
+      if (!/^<!--\s*implementation-semantics:/.test(firstContent ?? ""))
+        throw new Error(
+          `${identity} requires an adjacent implementation-semantics declaration`,
+        );
+      const semantics = declarations[0];
+      if (!semanticsCategories.has(semantics))
+        throw new Error(
+          `${identity} has unknown implementation-semantics: ${semantics}`,
+        );
+      scenarios.push({ id: identity, semantics });
+    }
+  }
+  if (scenarios.length === 0)
+    throw new Error("OpenSpec delta specs require at least one scenario");
+  scenarios.sort((a, b) => order(a.id, b.id));
+  return {
+    version: 1,
+    contractDigest: digest(scenarios),
+    scenarios,
+    requiredScenarioIds: scenarios
+      .filter(({ semantics }) => materialCategories.has(semantics))
+      .map(({ id }) => id),
+  };
+}
+
+export async function loadChangeScenarioSemantics(
+  repoRoot,
+  change,
+  declaredCapabilities = [],
+) {
+  if (
+    typeof change !== "string" ||
+    !change ||
+    change.includes("/") ||
+    change.includes("\\") ||
+    change === "." ||
+    change === ".."
+  )
+    throw new Error("requirements-selected OpenSpec change is invalid");
+  const specsRoot = path.join(repoRoot, "openspec", "changes", change, "specs");
+  let files;
+  try {
+    files = await markdownFiles(specsRoot);
+  } catch (error) {
+    throw new Error(
+      `cannot read OpenSpec delta specs for ${change}: ${error.message}`,
+    );
+  }
+  const capabilities = [
+    ...new Set(
+      declaredCapabilities.filter(
+        (value) => typeof value === "string" && value,
+      ),
+    ),
+  ];
+  const contracts = await Promise.all(
+    files.map(async (file) => ({
+      capability:
+        files.length === 1 && capabilities.length === 1
+          ? capabilities[0]
+          : path
+              .relative(specsRoot, path.dirname(file))
+              .split(path.sep)
+              .join("/"),
+      content: await readFile(file, "utf8"),
+    })),
+  );
+  const parsed = parseDeltaScenarioSemantics(contracts);
+  return { ...parsed, change };
+}
+
+export function contractDerivedTddBinding(classification) {
+  return {
+    version: 1,
+    openSpecChange: classification.change,
+    contractDigest: classification.contractDigest,
+    requiredScenarioIds: [...classification.requiredScenarioIds],
+  };
+}

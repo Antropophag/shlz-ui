@@ -1,0 +1,373 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "enforce-contract-derived-tdd-routing",
+  "packetId": "routing-engine",
+  "physicalSession": null,
+  "launchClaim": "contract-tdd-routing-engine-20260825",
+  "phase": "implementation",
+  "objective": "Implement contract parsing, obligation derivation, exact TDD coverage, and compatibility",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/contract-derived-tdd-routing",
+    "contract:harness/spec-driven-tdd",
+    "outcome:evidence-only exclusions",
+    "outcome:exact material coverage",
+    "outcome:planner omission rejected",
+    "validation:OpenSpec strict",
+    "validation:contract-derived routing probe",
+    "validation:harness tests"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "test-design",
+        "changed": [
+          "self-contained acceptance oracle with tracked Wave 9 plan as sole regression input"
+        ],
+        "provenChecks": [
+          "deterministic RED",
+          "all six Wave 9 identities reported",
+          "material-covered and three evidence-only controls accepted",
+          "oracle decoy rejected"
+        ],
+        "settledDecisions": [
+          "synthetic controls are embedded in the acceptance oracle"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "routing-engine",
+        "invalidatedAssumptions": [],
+        "claimId": "contract-tdd-test-design-r5-20260825",
+        "briefDigest": "a6d6af7d4156b95f8373b9b96904f9d1c6c49e3738bc185ccf50f173b44bc025",
+        "workerReportDigest": "3f08c4ff1c4b5e7d285fa84269cddc1296dc6c3d89b1b800a45e3c609d403911"
+      }
+    ],
+    "verdicts": [
+      "all six Wave 9 identities reported",
+      "deterministic RED",
+      "material-covered and three evidence-only controls accepted",
+      "oracle decoy rejected"
+    ],
+    "rawEvidence": [
+      "self-contained acceptance oracle with tracked Wave 9 plan as sole regression input"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/design.md",
+      "digest": "120db33b024a415befba31100566090e38f8456fd87e9391231268600aa6d601",
+      "bytes": 4694
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/proposal.md",
+      "digest": "47e31d6b141fc1081e82fc6158b36ec512edbd0b559944b308da031e621fe279",
+      "bytes": 2075
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "digest": "9d09c6f1e0819cb371b48efddb54adf7277153361052bce793489b44343e81e5",
+      "bytes": 4736
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/tasks.md",
+      "digest": "41993101830d045bf1f90f30a1e1e2e2f893780199eae887f0175848375d7778",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/harness.mjs",
+      "digest": "5d68784755c771be3afb961fb7385ee607c3fb6d15f395680213061d5766d454",
+      "bytes": 32717
+    },
+    {
+      "path": "tools/lib/harness/codex-worker.mjs",
+      "digest": "0f579f2280e65a6d4f1370ad7cf66204e9c9a1e28aa2c1c9c534f979de3d0958",
+      "bytes": 5225
+    },
+    {
+      "path": "tools/lib/harness/context-cost.mjs",
+      "digest": "4f21c1780c408999357768fa9d36eda03b13a9a6a98fa52865948652d275aa3b",
+      "bytes": 27605
+    },
+    {
+      "path": "tools/lib/harness/core.mjs",
+      "digest": "7ec413ca74a2232d729a9fd986d45b4fe1de348c3070863262c6a38f22fae12b",
+      "bytes": 104859
+    },
+    {
+      "path": "tools/lib/harness/spec-driven-tdd.mjs",
+      "digest": "f0b89bb00256bcdf7841571500d915072e1e007b0059742df904cf6cd0d294c3",
+      "bytes": 34297
+    },
+    {
+      "path": "tools/tests/basic-icons-normalization.test.mjs",
+      "digest": "909e21d377c652eee35b5e2e1d0ede7bf7d123f3ef5891b99741ad44045f4417",
+      "bytes": 5391
+    },
+    {
+      "path": "tools/tests/change-specific-review-behavior-probe.mjs",
+      "digest": "64a9cafe3003465b7e31829b41d226503bdc112b1aca25e169aef48274a7d8fe",
+      "bytes": 6700
+    },
+    {
+      "path": "tools/tests/change-specific-review-fixture.mjs",
+      "digest": "6e8e923f69587d730b560bbc0f0668e1cc2aaa4be447f356e4fc7f125f48aeea",
+      "bytes": 2666
+    },
+    {
+      "path": "tools/tests/choice-status-source.test.mjs",
+      "digest": "b8a3782f56340e39d03cc580ce6cbe7a1cb633b8f62640615994c875cb42c15b",
+      "bytes": 3890
+    },
+    {
+      "path": "tools/tests/component-audit-manifest.test.mjs",
+      "digest": "6cd309311f3eb11e91925513e36056091112febd45f6375211ef983171ae92f9",
+      "bytes": 11407
+    },
+    {
+      "path": "tools/tests/component-audit-roadmap.test.mjs",
+      "digest": "3836e9701fba9953508a1df7c920c7dccc045f0e7520551d3070e5f486dd4df8",
+      "bytes": 2764
+    },
+    {
+      "path": "tools/tests/component-documentation.test.mjs",
+      "digest": "e2a975f3f323e7b067d181c39b92e2efd003ff557604b3362f18b2df9f54878d",
+      "bytes": 18031
+    },
+    {
+      "path": "tools/tests/components.test.mjs",
+      "digest": "f36a154a828da09e04cdd70b98d093430cd6fd21ef26f802369b509daa274ec8",
+      "bytes": 7099
+    },
+    {
+      "path": "tools/tests/consumer-workspace.test.mjs",
+      "digest": "3b6c134d974ff2f0b178f990db4adff91a7f7de216faa5232b14ce8b62150a40",
+      "bytes": 1718
+    },
+    {
+      "path": "tools/tests/content-states.test.mjs",
+      "digest": "0d7a6ad7d069d08e79cb6bd1b68d4c263dfd4674535daa4d6e9f620007b6175a",
+      "bytes": 3538
+    },
+    {
+      "path": "tools/tests/context-cost-red-proof.mjs",
+      "digest": "628462832f2533486419a5ddfbe5118a00abc0e91cf44a23968e3d798eab6912",
+      "bytes": 1715
+    },
+    {
+      "path": "tools/tests/contract-derived-tdd-routing-probe.mjs",
+      "digest": "2dfd0732b04873257d4fec87690d406a14558d0772f79149f3c5a9aec6717283",
+      "bytes": 10323
+    },
+    {
+      "path": "tools/tests/design-source-index.test.mjs",
+      "digest": "2e7ad00d8917bb3392c25fb6d50352742e81abfbe8ee4600d516142fbb1790d0",
+      "bytes": 2916
+    },
+    {
+      "path": "tools/tests/dropdown-source.test.mjs",
+      "digest": "135c3b331a9289b258b547033cd1ea79cfadcdf517686f542ce78c45565e0437",
+      "bytes": 2303
+    },
+    {
+      "path": "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
+      "digest": "32719c9d9d5d2724f38fcf48cd51b6b5501a776ec466225ae0c2df0ef5361353",
+      "bytes": 84
+    },
+    {
+      "path": "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
+      "digest": "f320c42a8a0ded86465a8008b8b2c662da6d29c3646171d8cfbffe877891c34c",
+      "bytes": 137
+    },
+    {
+      "path": "tools/tests/fixtures/early-exit-worker.mjs",
+      "digest": "8bd84068849db1cf74863fdff2bc74704c33efb8fafe33347274fc758a63b302",
+      "bytes": 17
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-acceptance-probe.mjs",
+      "digest": "1377802b458ee3c55eddff3eb15f1ed1be9130b16fe95c89707c4a6e31fd0637",
+      "bytes": 998
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-oracle-control.mjs",
+      "digest": "87eb4eb3574c1890e739d309a7eaabbd629c6917912c0de00db99700dfe587f3",
+      "bytes": 141
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-oracle-decoy.mjs",
+      "digest": "f945b87789f8f216352eb76e4c8012bae1fe22bbc256d6aab38666c4f2eea07e",
+      "bytes": 272
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-production-adapter.mjs",
+      "digest": "5b53206c4650f11dd5b8be35b1784a2163442b7998a1155cda94fd7aa510bdeb",
+      "bytes": 61
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-source-inspection-probe.mjs",
+      "digest": "13bd868805ec959be72a6d88d90405071d31de8217dacff0cba622be8e94fcdf",
+      "bytes": 449
+    },
+    {
+      "path": "tools/tests/fixtures/tdd-tautological-probe.mjs",
+      "digest": "b4f09013a026e3f2f88a45299ab23ae258f7a6d6c49900969befec628bd2e3f3",
+      "bytes": 78
+    },
+    {
+      "path": "tools/tests/form-controls-source.test.mjs",
+      "digest": "dfb9234d5e42c98e3d59c9f8741cbe1a39d9f4923b8f9a487f45ae268b1a7488",
+      "bytes": 4182
+    },
+    {
+      "path": "tools/tests/foundation-audits.test.mjs",
+      "digest": "bc05cf2423b641d306db15f4e171a62652d2c02d48c89de8d4f77713665b1e12",
+      "bytes": 6906
+    },
+    {
+      "path": "tools/tests/generators.test.mjs",
+      "digest": "4d4bc72b4b945b16c479811627777c9a5b9d0a05746aae9c9a5deb0bcfc7a5ba",
+      "bytes": 10184
+    },
+    {
+      "path": "tools/tests/harness.test.mjs",
+      "digest": "ebba5ab7fb2b1a25696f9bb1e8aee3c5c5e8316336529cbc37b6f047aa10af39",
+      "bytes": 171843
+    },
+    {
+      "path": "tools/tests/historical-worktree-fixture.mjs",
+      "digest": "8427e150af3b710d46a587feba842347bcdb8592925b7184d5adf76b9270ff82",
+      "bytes": 1428
+    },
+    {
+      "path": "tools/tests/independent-test-contract-review-fixture.mjs",
+      "digest": "cb8194bbb3826a80914117407c1ad5238ba001aa25342d4c226dbb26f7f28265",
+      "bytes": 2598
+    },
+    {
+      "path": "tools/tests/independent-test-contract-review-probe.mjs",
+      "digest": "7e01c62a59731246c39ebbe2c6600373fdc9818a0527483b88d2e132797694a9",
+      "bytes": 7208
+    },
+    {
+      "path": "tools/tests/notification-source.test.mjs",
+      "digest": "3f0b42e3dababa1b18037e178d9aefc3878e45923019318b503aa30ead8b2995",
+      "bytes": 4371
+    },
+    {
+      "path": "tools/tests/overlay-source.test.mjs",
+      "digest": "77f8886e197b95652defac202992047ea4bdaeb9de5ba6eca1158751dc7f1b88",
+      "bytes": 5082
+    },
+    {
+      "path": "tools/tests/pagination-source.test.mjs",
+      "digest": "fdbc1c50082ce93c64fd6af592291a0e93bfef23331089ef3331b555fb9b562f",
+      "bytes": 782
+    },
+    {
+      "path": "tools/tests/pr32-failure-path-fixture.mjs",
+      "digest": "fca132e434543ff4e811a83c98b4d494c3d729abafb136afe83b67b1642f457e",
+      "bytes": 2005
+    },
+    {
+      "path": "tools/tests/pr32-revision-probe.mjs",
+      "digest": "ae10821c8e3e5684dea52d2b2e2055243cfacc0ed82204a49f9132cf79d8f7e3",
+      "bytes": 5737
+    },
+    {
+      "path": "tools/tests/pr33-change-invariant-fixture.mjs",
+      "digest": "f4ee956be33627166a94875fc4e286b43c66e6fcb22169680a1d7799c6fcf98d",
+      "bytes": 2338
+    },
+    {
+      "path": "tools/tests/pr33-review-behavior-probe.mjs",
+      "digest": "e60c4403c28761bd3635f8411aa0dd92fb8f27830e40dd4e2ef3c51a86cf6589",
+      "bytes": 6231
+    },
+    {
+      "path": "tools/tests/remediation-wave2-source.test.mjs",
+      "digest": "4f19981e4964f88b534c13ff655e35b1c116fdd3d19c0b81b330c1792e8f6375",
+      "bytes": 3348
+    },
+    {
+      "path": "tools/tests/segment-source.test.mjs",
+      "digest": "b0d342d7bc3a48f386869fd1c340a42298d43f3500e14377e268346d4e00552a",
+      "bytes": 873
+    },
+    {
+      "path": "tools/tests/spec-driven-tdd-failure-proof.mjs",
+      "digest": "427218dbbb80d7d7cb746154e5833f9d591aa100938815ef6a927dafa79ac534",
+      "bytes": 2775
+    },
+    {
+      "path": "tools/tests/spec-driven-tdd-known-bad-fixture.mjs",
+      "digest": "73e9404f8415e6400aaf1abf3771526daf7536431a9179bfb17636b9526f43c8",
+      "bytes": 2433
+    },
+    {
+      "path": "tools/tests/spec-driven-tdd-review-probe.mjs",
+      "digest": "9c7bc373fba448152a40810e7ebc08dab213d2ccf9e7de907c33254618855e02",
+      "bytes": 6531
+    },
+    {
+      "path": "tools/tests/tabs-source.test.mjs",
+      "digest": "fcdda63f00ca9661f41ad0a5146a455b11539cebf1428590f1abbbaf9bfe81e1",
+      "bytes": 773
+    },
+    {
+      "path": "tools/tests/tag-source.test.mjs",
+      "digest": "25b2cd9efbd595afb62b9af49d79be0e9e3a11a911eda10c6b2c60c48faa17b8",
+      "bytes": 838
+    },
+    {
+      "path": "tools/tests/typography-index.test.mjs",
+      "digest": "46e9e826ef848b70f0cfca4bf4235c4927fd8f8387f45e8854ebeacdc681676e",
+      "bytes": 2521
+    },
+    {
+      "path": "tools/tests/typography-profiles.test.mjs",
+      "digest": "e28a5e791acb9fd215b53f3189f6b8bcf9c7b36e6710460f4ef1fcea72b0677a",
+      "bytes": 1628
+    },
+    {
+      "path": "tools/tests/validated-worktree-root.mjs",
+      "digest": "5e6ca32288b0277ca17602814180748c9dc98efe26acc75b12e7f071b2151a61",
+      "bytes": 838
+    },
+    {
+      "path": "tools/tests/wave3-source.test.mjs",
+      "digest": "91b258d7f13cf37f6b763ad93ca23e7d608f3629c96f1c6ba2ebc6dfe7ccbb7b",
+      "bytes": 1450
+    },
+    {
+      "path": "tools/tests/wave6-repository-census.test.mjs",
+      "digest": "4f5f983dcb4739e07a95204a17b1587891173f350d537e06cadd8eba66eb1637",
+      "bytes": 2612
+    },
+    {
+      "path": "tools/tests/wave7-repository-census.test.mjs",
+      "digest": "e7b28e5871029e6d5714acc36dd6dda372ca58d51c623d2c8fcb88ce4f770f8f",
+      "bytes": 3300
+    },
+    {
+      "path": "tools/tests/wave8-repository-census.test.mjs",
+      "digest": "5a4aae166d0d2f7027501a00aba3688d20c62877e85baa1c5ca986ecbc7d3392",
+      "bytes": 2979
+    },
+    {
+      "path": "tools/tests/wave9-sidebar-application-shell-source-census.test.mjs",
+      "digest": "e485cd932cc1288484855dc5695abba3f8da16da51ddf2ecf17666e9f498885a",
+      "bytes": 6750
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "795a446e6eea7aa8777c0faa2354834a33f53555d25e10bafd7f5e2d9679fde6",
+  "capsuleDigest": "80d4b146312a516f51b92814f9b4657fbae3049bfac245c613666b0f0fc63f04"
+}

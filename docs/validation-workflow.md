@@ -42,3 +42,21 @@ For GitHub follow-ups, load actionable unresolved threads only. Route verified f
 `harness evidence <base-ref>` queries baseline/current refs, changed files, and working-tree state without editing a report. Record validation results, totals exposed by commands, occurrence counts, CI/review state, and material states as structured observations. Prose owns decisions, limitations, findings, and dispositions. Never commit a “final SHA” update whose own commit immediately makes it stale.
 
 Telemetry events require packet/session/agent/phase and record only observed counts. Token/context usage requires an explicit runtime source; absent usage is `unavailable`, not zero. Summaries stay out of normal packet context unless evaluation needs them.
+
+# Contract-derived TDD routing
+
+Before accepting a newly created requirements-gated execution plan, validation
+must confirm that the selected delta contract is readable, every scenario has
+one supported `implementation-semantics` declaration, and every derived
+material identity has exact enforced-slice coverage. Run the focused public
+probe with:
+
+```bash
+node tools/tests/contract-derived-tdd-routing-probe.mjs
+```
+
+The probe must reject the original Wave 9 omission, report all six uncovered
+identities, accept complete material coverage, and accept source-only,
+absence-only, and documentation-only controls. `plan-check` remains the
+compatibility seam for historical persisted plans without a
+`contractDerivedTdd` binding.

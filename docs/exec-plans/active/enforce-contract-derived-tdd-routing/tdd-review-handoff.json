@@ -1,0 +1,32 @@
+{
+  "completedPacket": "test-contract-review",
+  "changed": [
+    "docs/exec-plans/active/enforce-contract-derived-tdd-routing/tdd-review-handoff.json"
+  ],
+  "provenChecks": [
+    "reviewed test-design dependency digest a613d51262ccddd783a4cf9af9d4a71af69478a735a84ad1fd28ee494fe11386",
+    "all five selected oracle cases have explicit OpenSpec authority and distinct expected outcomes",
+    "the positive material-covered case exercises exact single enforced-slice coverage at the public harness plan seam",
+    "two repeated baseline runs rejected the original Wave 9 bypass with ERR_CONTRACT_DERIVED_TDD_BYPASS and reported all six uncovered material scenario identities",
+    "both repeated baseline runs accepted the material-covered, source-only, absence-only, and documentation-only controls",
+    "two repeated oracle-control runs exited 0 and two repeated oracle-decoy runs exited 1 with ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY",
+    "all 17 read-now source digests matched launch capsule 55f26f1d38a0a1eec98143da9fe83a2fac129c91d3698f98860033bc277e896a",
+    "the Wave 9 plan fixture remained byte-identical at c5b566a31cf5ee5050ce4cc321718547ef484cea201c4f399bfcf57a213cc5cc",
+    "no implementation-worker handoff was inspected"
+  ],
+  "settledDecisions": [
+    "verdict: changes-requested",
+    "design digest: a613d51262ccddd783a4cf9af9d4a71af69478a735a84ad1fd28ee494fe11386",
+    "the revised oracle independently discriminates the missing-TDD bypass, valid exact material coverage, each evidence-only exclusion, and the declared wrong-behavior adapter",
+    "fixture expectations are derived from explicit OpenSpec scenario classifications and stable scenario identities rather than production implementation details"
+  ],
+  "unresolvedFindings": [
+    "TCR-003 blocking: this review worker inspected tools/lib/harness/spec-driven-tdd.mjs while checking the handoff schema, so effective production-context exclusion is not satisfied; retry test-contract-review in a fresh worker restricted to the launch capsule"
+  ],
+  "nextPacket": "test-contract-review",
+  "invalidatedAssumptions": [
+    "this worker's effective context excluded the production surface"
+  ],
+  "claimId": "contract-tdd-test-review-r6-20260825",
+  "briefDigest": "c84a27f47a1dd391ab3b78311f96aad990573118223c89c3fdef5f703ee6be9a"
+}
