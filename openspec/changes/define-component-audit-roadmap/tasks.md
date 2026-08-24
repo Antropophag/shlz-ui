@@ -10,4 +10,4 @@
 ## 3. Validation and delivery
 
 - [x] 3.1 Add focused structural documentation coverage for the roadmap contract and verify it passes with strict OpenSpec validation and existing repository checks.
-- [ ] 3.2 Inspect the final diff against the OpenSpec contract, run route/delivery guards, and deliver a separate unmerged PR with current check and review state recorded.
+- [x] 3.2 Inspect the final diff against the OpenSpec contract, run route/delivery guards, and deliver a separate unmerged PR with current check and review state recorded. The delivery CLI was run and its existing OpenSpec-S representation gap is reported in the PR handoff; direct GitHub evidence verifies the open, unmerged PR.
