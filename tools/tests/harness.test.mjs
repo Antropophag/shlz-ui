@@ -3109,6 +3109,55 @@ test("validation records compute fingerprints and durably enforce invalidation",
   );
 });
 
+test("validation CLI excludes its own operational ledger from fingerprints", async () => {
+  const ledger = `docs/exec-plans/validation-self-${process.pid}.json`;
+  const source = `docs/validation-self-source-${process.pid}.md`;
+  const cleanup = registerExitCleanup([
+    path.join(root, ledger),
+    path.join(root, source),
+  ]);
+  try {
+    await writeFile(path.join(root, ledger), "[]\n");
+    await writeFile(path.join(root, source), "validation source\n");
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "validation-record",
+        ledger,
+        "docs",
+        "--base",
+        "HEAD",
+        "--outcome",
+        "pass",
+        "--packet",
+        "probe",
+        "--session",
+        "probe-session",
+      ],
+      { cwd: root },
+    );
+    const recorded = await load(ledger);
+    assert.equal(recorded[0].files.includes(ledger), false);
+    await exec(
+      process.execPath,
+      [
+        "tools/harness.mjs",
+        "validation-check",
+        "docs",
+        ledger,
+        "--base",
+        "HEAD",
+      ],
+      { cwd: root },
+    );
+  } finally {
+    await unlink(path.join(root, ledger)).catch(() => {});
+    await unlink(path.join(root, source)).catch(() => {});
+    cleanup();
+  }
+});
+
 test("review state reuses the remediation diff and unresolved findings", () => {
   const state = createReviewState("origin/main");
   recordReview(state, {

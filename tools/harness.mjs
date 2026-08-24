@@ -375,12 +375,16 @@ switch (command) {
     output(affectedValidation(args, config));
     break;
   case "validation-check": {
-    const ledger = await readJsonOr(absolute(args[1]), []);
+    const ledgerPath = absolute(args[1]);
+    const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
     const files = relevantValidationFiles(
       changed.changedFiles,
       args[0],
       config,
+    ).filter(
+      (file) =>
+        file !== path.relative(repoRoot, ledgerPath).split(path.sep).join("/"),
     );
     assertValidationRun(
       {
@@ -401,7 +405,15 @@ switch (command) {
     await recordValidation(
       {
         target: args[1],
-        files: relevantValidationFiles(changed.changedFiles, args[1], config),
+        files: relevantValidationFiles(
+          changed.changedFiles,
+          args[1],
+          config,
+        ).filter(
+          (file) =>
+            file !==
+            path.relative(repoRoot, ledgerPath).split(path.sep).join("/"),
+        ),
         outcome: option("--outcome"),
         reason: option("--reason"),
         packet: option("--packet"),
