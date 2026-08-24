@@ -84,9 +84,42 @@ The harness SHALL provide a packet-integrated, phase-local structured context re
 - **WHEN** compact validation or review state omits an obligation, unresolved blocking finding, verdict, or required transition
 - **THEN** equivalence fails and no improvement claim is accepted
 
+#### Scenario: A guarded worker is launched
+
+- **WHEN** `worker-run` prepares a bounded worker input
+- **THEN** it automatically creates and supplies the packet's initial phase capsule from a fresh physical-session ledger without requiring a separate operator protocol
+
+### Requirement: Honest cost attribution
+
+The replay SHALL classify each contributor delta as prevented work, content not reread after verified acknowledgement, retained/addressable evidence, or unmeasured runtime retention/output cost. It SHALL NOT count validation, CI, review output, raw-log retention, cached input, or active/session context as eliminated unless comparable trusted before/after telemetry proves that outcome.
+
+#### Scenario: A source becomes an attested reference
+
+- **WHEN** unchanged source content is replaced by its identity and digest in a later phase
+- **THEN** the report labels its bytes as not reread and does not claim that source processing, cache retention, or active/session cost was prevented
+
+#### Scenario: Runtime retention is unavailable
+
+- **WHEN** the replay has no comparable trusted before/after active-context trace
+- **THEN** active/session improvement remains unavailable even if repository-controlled input bytes decrease
+
+### Requirement: Compact validation and CI evidence boundary
+
+The harness SHALL produce a deterministic compact evidence index from structured validation or CI results and SHALL retain raw logs as content-addressed repository-local artifacts. The compact index SHALL carry command identity, outcome, obligation identities, raw-log path, byte size, and digest. Phase capsules SHALL carry the compact index and pointer, not inline raw log content, unless raw inspection is required by a finding.
+
+#### Scenario: Validation emits a large raw log
+
+- **WHEN** a validation result is recorded for later phases
+- **THEN** the compact evidence identifies its outcome and obligations while the exact raw log remains digest-verified and addressable
+
+#### Scenario: Raw validation evidence changes
+
+- **WHEN** the retained raw log no longer matches the compact index digest or byte size
+- **THEN** capsule creation fails closed
+
 ### Requirement: Measurable improvement
 
-The representative PR #36 replay SHALL publish a measured baseline, candidate results, contributor deltas, and a configured minimum reduction threshold using transparent repository-controlled byte/read metrics selected by the probe design. A passing improvement SHALL meet the threshold without weakening equivalence and SHALL state that runtime token usage is a separate observation which limits, and can contradict, any broader context-cost claim.
+The representative PR #36 replay SHALL publish a measured source-read baseline, candidate results, attributed contributor deltas, and a configured minimum reduction threshold using transparent repository-controlled byte/read metrics selected by the probe design. A passing improvement SHALL apply only to the explicitly measured repository-input proxy, meet the threshold without weakening equivalence, and SHALL report total active/session improvement as unavailable unless comparable trusted runtime telemetry exists.
 
 #### Scenario: Improvement threshold is met
 
