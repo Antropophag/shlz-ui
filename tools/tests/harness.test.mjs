@@ -3515,6 +3515,30 @@ test("review-record confines and locks mutable TDD state", async () => {
       ),
       /mutable harness state must stay under docs\/exec-plans/,
     );
+    const stateEscapeLink = path.join(temporaryRoot, "outside");
+    await symlink(path.join(root, "tools/tests"), stateEscapeLink, "dir");
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "review-record",
+          reviewStatePath,
+          "--axis",
+          "Spec",
+          "--head",
+          oid,
+          "--findings",
+          findingsPath,
+          "--tdd-plan",
+          tddPlanPath,
+          "--tdd-state",
+          `${relativeRoot}/outside/${path.basename(escapedTddStatePath)}`,
+        ],
+        { cwd: root },
+      ),
+      /mutable harness state must stay under docs\/exec-plans/,
+    );
     await writeFile(
       path.join(root, confinedTddStatePath),
       `${JSON.stringify(state)}\n`,

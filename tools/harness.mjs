@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { existsSync, realpathSync } from "node:fs";
 import { open, readFile, unlink } from "node:fs/promises";
 import { execFile } from "node:child_process";
 import path from "node:path";
@@ -77,6 +78,7 @@ const config = await readJson(
 );
 const [command, ...args] = process.argv.slice(2);
 const stateRoot = path.join(repoRoot, "docs/exec-plans");
+const canonicalStateRoot = realpathSync(stateRoot);
 const within = (root, target) =>
   target === root || target.startsWith(`${root}${path.sep}`);
 const absolute = (file) => {
@@ -87,11 +89,20 @@ const absolute = (file) => {
 };
 const statePath = (file) => {
   const target = absolute(file);
-  if (!within(stateRoot, target))
+  let ancestor = target;
+  const missing = [];
+  while (!existsSync(ancestor)) {
+    const parent = path.dirname(ancestor);
+    if (parent === ancestor) break;
+    missing.unshift(path.basename(ancestor));
+    ancestor = parent;
+  }
+  const canonicalTarget = path.join(realpathSync(ancestor), ...missing);
+  if (!within(canonicalStateRoot, canonicalTarget))
     throw new Error(
       `mutable harness state must stay under docs/exec-plans: ${file}`,
     );
-  return target;
+  return canonicalTarget;
 };
 const repositoryRelative = (file) =>
   path.relative(repoRoot, file).split(path.sep).join("/");

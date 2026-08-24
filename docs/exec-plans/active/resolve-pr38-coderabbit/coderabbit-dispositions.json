@@ -25,7 +25,7 @@
       "threadId": "PRRT_kwDOTyJWqM6bylx6",
       "commentId": 3845901488,
       "status": "confirmed-remediated",
-      "disposition": "Confined mutable TDD state through statePath and nested its read, re-entry transition, and writes under the TDD state lock while retaining the review-state lock."
+      "disposition": "Confined mutable TDD state through canonical statePath resolution, including symlink-escape rejection, and nested its read, re-entry transition, and writes under the canonical TDD state lock while retaining the review-state lock."
     },
     {
       "threadId": "PRRT_kwDOTyJWqM6bylx_",
