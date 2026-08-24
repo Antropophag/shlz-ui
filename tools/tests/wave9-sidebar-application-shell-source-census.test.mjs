@@ -184,6 +184,9 @@ test("Wave 9 repository census rejects a synthetic unclassified shell", () => {
 });
 
 test("Wave 9 built-DOM census is exact and mutation-sensitive", async () => {
+  await execFileAsync("npm", ["run", "build:packages"], {
+    maxBuffer: 10 * 1024 * 1024,
+  });
   await execFileAsync("npm", ["run", "build", "-w", "@shlz/showcase"], {
     maxBuffer: 10 * 1024 * 1024,
   });
