@@ -145,7 +145,10 @@ async function currentPhaseEvidence(
   const reviewFindings = reviewState?.findings ?? [];
   const rawEvidenceIndex = [];
   for (const validation of validations) {
-    if (!validation.rawLog) continue;
+    if (!validation.rawLog)
+      throw new Error(
+        `validation evidence is missing a raw-log pointer: ${validation.target}`,
+      );
     const content = await readWorktreeSource(repoRoot, validation.rawLog.path);
     if (
       validation.rawLog.digest !== digest(content) ||
@@ -225,7 +228,7 @@ export async function createPacketContextCapsule(
     reviewState,
     repoRoot,
   );
-  for (const source of index.sources) {
+  for (const source of stable(index.sources)) {
     const content = await readWorktreeSource(repoRoot, source);
     const entry = {
       path: source,

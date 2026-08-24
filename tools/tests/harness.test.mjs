@@ -4178,6 +4178,7 @@ test("context cost capsules invalidate changed sources and replay deterministica
       ],
     };
     await writeFile(path.join(changedRoot, "docs/source.md"), "before");
+    await writeFile(path.join(changedRoot, "docs/validation.log"), "pass\n");
     const before = await createPhaseCapsules(localFixture, changedRoot);
     await writeFile(path.join(changedRoot, "docs/source.md"), "after");
     const after = await createPhaseCapsules(localFixture, changedRoot);
@@ -4218,8 +4219,15 @@ test("context cost capsules invalidate changed sources and replay deterministica
         validationLedger: [
           {
             target: "harness",
+            command: "npm run test:harness",
             outcome: "pass",
+            obligations: ["probe-test"],
             files: ["docs/source.md"],
+            rawLog: {
+              path: "docs/validation.log",
+              digest: createHash("sha256").update("pass\n").digest("hex"),
+              bytes: 5,
+            },
           },
         ],
         reviewState: {
@@ -4252,7 +4260,7 @@ test("context cost capsules invalidate changed sources and replay deterministica
       "validation:harness:pass",
     ]);
     assert.deepEqual(initial.evidence.rawEvidence, ["docs/source.md"]);
-    assert.deepEqual(initial.evidence.rawEvidenceIndex, []);
+    assert.equal(initial.evidence.rawEvidenceIndex.length, 1);
     assert.equal(initial.evidence.findings[0].status, "resolved");
     const reorderedIndex = {
       ...index,
@@ -4301,6 +4309,33 @@ test("context cost capsules invalidate changed sources and replay deterministica
       },
     );
     assert.equal(reversedCapsule.capsuleDigest, orderedCapsule.capsuleDigest);
+    const reversedSources = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        sources: [...reorderedIndex.sources, "docs/validation.log"].reverse(),
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-sources",
+        transition: "read-to-stable-sources",
+        physicalSession: "probe-worker",
+      },
+    );
+    const orderedSources = await createPacketContextCapsule(
+      {
+        ...reorderedIndex,
+        sources: [...reorderedIndex.sources, "docs/validation.log"],
+      },
+      ledger,
+      changedRoot,
+      {
+        phase: "stable-sources",
+        transition: "read-to-stable-sources",
+        physicalSession: "probe-worker",
+      },
+    );
+    assert.equal(reversedSources.capsuleDigest, orderedSources.capsuleDigest);
     const tampered = clone(initial);
     tampered.evidence.verdicts = [];
     await assert.rejects(
@@ -4594,6 +4629,32 @@ test("validation evidence keeps a compact digest-verified raw-log boundary", asy
     assert.equal(ledger[0].command, "npm run test:harness");
     assert.match(ledger[0].rawLog.digest, /^[0-9a-f]{64}$/);
     assert.equal(ledger[0].rawLog.bytes, 22);
+    await assert.rejects(
+      createPacketContextCapsule(
+        {
+          planId: "missing-evidence",
+          packet: {
+            id: "missing-evidence",
+            objective: "Fail closed",
+            contracts: [],
+            focusedValidation: [],
+            implementationOutcomes: [],
+          },
+          sources: ["tools/lib/harness/context-cost.mjs"],
+          missingPatterns: [],
+          dependencyHandoffs: [],
+        },
+        createContextLedger(),
+        root,
+        {
+          phase: "validation",
+          transition: "implementation-to-validation",
+          physicalSession: "probe-worker",
+          validationLedger: [{ target: "harness", outcome: "pass" }],
+        },
+      ),
+      /missing a raw-log pointer/,
+    );
 
     const index = {
       planId: "probe-plan",
