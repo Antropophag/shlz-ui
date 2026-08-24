@@ -37,6 +37,7 @@ import {
   reserveWorkerPacket,
   recordWorkerAttempt,
   recordTddDesign,
+  recordTddReview,
   requirementsStatus,
   assertImplementationDelivery,
   assertImplementationPreflight,
@@ -459,6 +460,19 @@ switch (command) {
     output(state.specDrivenTdd.slices[handoff.sliceId]);
     break;
   }
+  case "tdd-review-record": {
+    const plan = await readJson(absolute(args[0]));
+    const target = statePath(args[1]);
+    const handoff = await readJson(absolute(args[2]));
+    const state = await withStateLock(target, async () => {
+      const current = await readJson(target);
+      recordTddReview(plan, current, handoff);
+      await writeJson(target, current);
+      return current;
+    });
+    output(state.specDrivenTdd.slices[handoff.sliceId]);
+    break;
+  }
   case "tdd-red":
   case "tdd-green": {
     if (
@@ -486,9 +500,9 @@ switch (command) {
         );
       } catch (error) {
         if (
-          command === "tdd-green" &&
-          current.specDrivenTdd?.slices?.[args[2]]?.status ===
-            "pending-test-design"
+          ["pending-test-design", "pending-test-review"].includes(
+            current.specDrivenTdd?.slices?.[args[2]]?.status,
+          )
         )
           await writeJson(target, current);
         throw error;
@@ -946,6 +960,6 @@ switch (command) {
     break;
   default:
     throw new Error(
-      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-review-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
     );
 }

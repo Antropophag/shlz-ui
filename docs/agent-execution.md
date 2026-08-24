@@ -43,10 +43,12 @@ npm run harness -- context docs/exec-plans/active/<change>/plan.json <packet-id>
 For an eligible plan with `specDrivenTdd.version: 1`, each enforced slice names
 its OpenSpec scenarios and authorities, deterministic public seam, one argv
 command, controls/repeat count, disjoint acceptance/fixture/production surfaces,
-and distinct guarded test-design and implementation packets. Use
-`tdd-design-record`, then `tdd-red --execution <baseline>` before launching the
-implementation packet, and `tdd-green --execution <baseline>` before completing
-it. The harness derives and freezes acceptance, fixture, controls, contract, and
+and distinct guarded test-design and implementation packets. Version 2 adds a
+distinct guarded `testReviewPacket`. Use `tdd-design-record`, then
+`tdd-review-record` for the completed independent review worker, then `tdd-red
+--execution <baseline>` before launching the implementation packet, and
+`tdd-green --execution <baseline>` before completing it. The harness derives
+and freezes acceptance, fixture, controls, contract, and
 baseline identities; callers cannot provide separate baseline/candidate
 commands. The test-design brief must contain only requirements, authorities,
 the seam, tests, and fixtures—not a production proposal or implementation
@@ -75,10 +77,11 @@ For a requirements-gated plan, pass `--requirements <requirements-state>` to `cl
 For a spec-driven TDD plan, `pause` also requires `--tdd-reentry <file>`. The
 versioned file classifies every enforced slice as `affected` or `retained` and
 binds the old/new requirements revisions. Affected slices lose RED/GREEN and
-return both test-design and implementation packets to pending. Retention is
-accepted only for already-green slices whose complete slice contract digest is
-unchanged; the bridge remains in execution state. Resume never authorizes an
-affected implementation slice until a fresh independent design and RED pass.
+return test-design, test-review when declared, and implementation packets to
+pending. Retention is accepted only for already-green slices whose complete
+slice contract and approval digests are unchanged; the bridge remains in
+execution state. Resume never authorizes an affected implementation slice until
+a fresh independent design, approval, and RED pass.
 
 Read the returned contracts, implementation paths, tests, evidence, and current findings as needed. Do not reload all OpenSpec artifacts, audit history, or other packets after each task.
 
@@ -107,7 +110,8 @@ npm run harness -- delivery-check <delivery-evidence> \
 
 Initialize a material TDD review with `--tdd-plan <plan> --tdd-state <state>`.
 Each `review-record` for that review repeats those options. The harness binds
-both review axes to the current GREEN candidate head; failure-invariant proof
+both review axes to the current GREEN candidate head and, for version 2, the
+current test-contract approval digest; failure-invariant proof
 remains an additional independent obligation for marked state-machine,
 persistence, or subprocess scenarios. `delivery-check` likewise rejects a
 missing/stale GREEN, requirements bridge, slice contract, or PR head.

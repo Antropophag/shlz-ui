@@ -1,0 +1,7 @@
+{
+  "version": 1,
+  "kind": "mainline",
+  "commit": "eecb39d767d4ec3cacd3b1fbcd7748dc193da64e",
+  "branch": "feat/independent-test-contract-review",
+  "defaultBranch": "main"
+}

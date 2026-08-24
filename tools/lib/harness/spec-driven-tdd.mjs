@@ -70,6 +70,11 @@ export function createSpecDrivenTdd({
       fixtureDigest: design.fixtureDigest,
       controlsDigest: design.controlsDigest,
       sliceContractDigest: valueDigest(contract),
+      ...(state.specDrivenTdd?.slices?.[contract.id]?.reviewDigest
+        ? {
+            reviewDigest: state.specDrivenTdd.slices[contract.id].reviewDigest,
+          }
+        : {}),
     };
   }
 
@@ -387,6 +392,12 @@ export function createSpecDrivenTdd({
         );
       return recordTddRed(plan, state, {
         ...designed,
+        ...(plan.specDrivenTdd.version >= 2
+          ? {
+              reviewDigest:
+                state.specDrivenTdd.slices[designed.sliceId].reviewDigest,
+            }
+          : {}),
         runtimeId: `tdd-runner-${process.pid}`,
         normalizedFailureSignature: designed.expectedFailureSignature,
         failedScenarioIds: designed.failedScenarioIds,
@@ -520,11 +531,19 @@ export function createSpecDrivenTdd({
         "acceptance contract changed after test design",
       );
     } catch (error) {
-      if (phase === "green")
+      if (phase === "green" || plan.specDrivenTdd.version >= 2)
         state.specDrivenTdd.slices[sliceId] = {
-          status: "pending-test-design",
+          status:
+            phase === "red" ? "pending-test-review" : "pending-test-design",
           invalidation: {
             reason: error.message,
+            ...(phase === "red"
+              ? {
+                  design: lifecycle.design,
+                  designDigest: lifecycle.designDigest,
+                  sliceContractDigest: lifecycle.sliceContractDigest,
+                }
+              : {}),
             previousRedDigest: lifecycle.redDigest,
           },
         };
@@ -686,7 +705,8 @@ export function createSpecDrivenTdd({
         "spec-driven TDD design requires accepted same-oracle challenge evidence",
       );
     state.specDrivenTdd.slices[handoff.sliceId] = {
-      status: "designed",
+      status:
+        plan.specDrivenTdd.version >= 2 ? "pending-test-review" : "designed",
       design: stableValue(handoff),
       designDigest: valueDigest(handoff),
       sliceContractDigest: valueDigest(contract),
@@ -695,17 +715,173 @@ export function createSpecDrivenTdd({
     return state;
   }
 
-  function recordTddRed(plan, state, evidence) {
-    const { contract, lifecycle } = tddSlice(plan, state, evidence?.sliceId);
-    if (lifecycle.status !== "designed")
+  const reviewChecklistDimensions = [
+    "scenarioAuthority",
+    "behavioralSeam",
+    "wrongBehavior",
+    "fixtureIndependence",
+    "productionContextExcluded",
+  ];
+
+  function recordTddReview(plan, state, handoff) {
+    if (!handoff || handoff.version !== 1 || !handoff.sliceId)
+      throw new Error("spec-driven TDD review handoff version must be 1");
+    const { contract, lifecycle } = tddSlice(plan, state, handoff.sliceId);
+    if (
+      plan.specDrivenTdd.version < 2 ||
+      lifecycle.status !== "pending-test-review"
+    )
       throw new Error(
-        `spec-driven TDD slice ${evidence?.sliceId} requires accepted design`,
+        `spec-driven TDD slice ${handoff.sliceId} is not awaiting test-contract review`,
       );
+    const reviewerPacket = state.packets?.[contract.testReviewPacket];
+    if (
+      typeof handoff.runtimeId !== "string" ||
+      !handoff.runtimeId ||
+      reviewerPacket?.status !== "completed" ||
+      reviewerPacket.execution?.runtimeId !== handoff.runtimeId ||
+      handoff.runtimeId === lifecycle.design.runtimeId
+    )
+      throw new Error(
+        "spec-driven TDD reviewer runtime must be the distinct completed guarded review worker",
+      );
+    if (
+      !Array.isArray(handoff.inputs) ||
+      handoff.inputs.some(
+        (input) =>
+          contract.productionSurface.some((pattern) =>
+            matchesPattern(input, pattern),
+          ) ||
+          input === contract.implementationPacket ||
+          input === `handoff:${contract.implementationPacket}`,
+      )
+    )
+      throw new Error(
+        "spec-driven TDD review declares prohibited production context",
+      );
+    if (
+      handoff.designDigest !== lifecycle.designDigest ||
+      handoff.requirementsRevision !== lifecycle.design.requirementsRevision
+    )
+      throw new Error("spec-driven TDD review is bound to stale test design");
+    assertTddDigests(handoff);
     assertTddIdentity(
       lifecycle.design,
-      evidence,
-      "RED evidence does not match the designed acceptance contract",
+      handoff,
+      "spec-driven TDD review is bound to stale test design",
     );
+    if (handoff.verdict === "changes-requested") {
+      if (
+        !Array.isArray(handoff.findings) ||
+        !handoff.findings.length ||
+        handoff.findings.some(
+          (finding) =>
+            typeof finding?.id !== "string" ||
+            !finding.id ||
+            (finding.scenarioId !== undefined &&
+              !contract.scenarioIds.includes(finding.scenarioId)),
+        ) ||
+        handoff.checklist !== undefined ||
+        handoff.scenarioEvidence !== undefined
+      )
+        throw new Error(
+          "spec-driven TDD changes-requested review requires bounded findings only",
+        );
+      state.specDrivenTdd.slices[handoff.sliceId] = {
+        status: "pending-test-design",
+        invalidation: {
+          reason: "independent test-contract review requested changes",
+          previousDesignDigest: lifecycle.designDigest,
+          findings: stableValue(handoff.findings),
+        },
+      };
+      return state;
+    }
+    if (handoff.verdict !== "approved" || handoff.findings !== undefined)
+      throw new Error("spec-driven TDD review verdict is invalid");
+    if (
+      Object.keys(handoff.checklist ?? {}).length !==
+        reviewChecklistDimensions.length ||
+      reviewChecklistDimensions.some((dimension) => {
+        const item = handoff.checklist?.[dimension];
+        return (
+          item?.result !== "pass" ||
+          !Array.isArray(item.evidenceRefs) ||
+          !item.evidenceRefs.length ||
+          item.evidenceRefs.some((ref) => typeof ref !== "string" || !ref)
+        );
+      })
+    )
+      throw new Error(
+        "spec-driven TDD approval requires the complete review checklist",
+      );
+    const scenarioEvidence = new Map(
+      (handoff.scenarioEvidence ?? []).map((item) => [item.scenarioId, item]),
+    );
+    if (
+      scenarioEvidence.size !== contract.scenarioIds.length ||
+      contract.scenarioIds.some((scenarioId) => {
+        const evidence = scenarioEvidence.get(scenarioId)?.evidenceRefs;
+        return (
+          !Array.isArray(evidence) ||
+          !evidence.length ||
+          evidence.some((ref) => typeof ref !== "string" || !ref)
+        );
+      })
+    )
+      throw new Error(
+        "spec-driven TDD approval requires evidence for every current scenario",
+      );
+    lifecycle.status = "test-reviewed";
+    lifecycle.review = stableValue(handoff);
+    lifecycle.reviewDigest = valueDigest(handoff);
+    lifecycle.retentionIdentity = tddRetentionIdentity(
+      plan,
+      state,
+      contract,
+      lifecycle.design,
+    );
+    return state;
+  }
+
+  function recordTddRed(plan, state, evidence) {
+    const { contract, lifecycle } = tddSlice(plan, state, evidence?.sliceId);
+    const expectedStatus =
+      plan.specDrivenTdd.version >= 2 ? "test-reviewed" : "designed";
+    if (lifecycle.status !== expectedStatus)
+      throw new Error(
+        plan.specDrivenTdd.version >= 2
+          ? `spec-driven TDD slice ${evidence?.sliceId} requires approved test-contract review`
+          : `spec-driven TDD slice ${evidence?.sliceId} requires accepted design`,
+      );
+    try {
+      assertTddIdentity(
+        lifecycle.design,
+        evidence,
+        "RED evidence does not match the designed acceptance contract",
+      );
+    } catch (error) {
+      if (plan.specDrivenTdd.version >= 2) {
+        lifecycle.status = "pending-test-review";
+        delete lifecycle.review;
+        delete lifecycle.reviewDigest;
+      }
+      throw error;
+    }
+    if (
+      plan.specDrivenTdd.version >= 2 &&
+      evidence.reviewDigest !== lifecycle.reviewDigest
+    )
+      throw new Error(
+        "RED evidence does not match the approved test-contract review",
+      );
+    if (
+      plan.specDrivenTdd.version >= 2 &&
+      evidence.runtimeId === lifecycle.review.runtimeId
+    )
+      throw new Error(
+        "RED runtime identity must differ from test-contract reviewer",
+      );
     if (
       typeof evidence.normalizedFailureSignature !== "string" ||
       !evidence.normalizedFailureSignature ||
@@ -731,10 +907,11 @@ export function createSpecDrivenTdd({
     if (
       !runtimeId ||
       runtimeId === lifecycle.design.runtimeId ||
-      runtimeId === lifecycle.red.runtimeId
+      runtimeId === lifecycle.red.runtimeId ||
+      runtimeId === lifecycle.review?.runtimeId
     )
       throw new Error(
-        "implementation runtime identity must differ from test design and RED",
+        "implementation runtime identity must differ from test design, test review, and RED",
       );
     lifecycle.status = "implementing";
     lifecycle.implementationRuntimeId = runtimeId;
@@ -775,6 +952,7 @@ export function createSpecDrivenTdd({
     createTddDesignEvidence,
     runTddAcceptance,
     recordTddDesign,
+    recordTddReview,
     recordTddRed,
     authorizeTddImplementation,
     recordTddGreen,

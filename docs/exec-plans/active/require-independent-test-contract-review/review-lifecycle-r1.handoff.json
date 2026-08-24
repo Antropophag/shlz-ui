@@ -1,0 +1,28 @@
+{
+  "completedPacket": "review-lifecycle",
+  "changed": [
+    "tools/harness.mjs",
+    "tools/lib/harness/core.mjs",
+    "tools/lib/harness/spec-driven-tdd.mjs",
+    "tools/tests/harness.test.mjs"
+  ],
+  "provenChecks": [
+    "worker RED observed before implementation: missing recordTddReview export",
+    "worker harness suite: 86/86 passed",
+    "root focused review-contract tests: passed through public and pure seams",
+    "openspec validate require-independent-test-contract-review --strict: passed",
+    "git diff --check: passed"
+  ],
+  "settledDecisions": [
+    "version 2 enforced slices declare a guarded testReviewPacket",
+    "pending-test-review and test-reviewed are explicit authorization states",
+    "approval binds a fixed checklist, exact scenarios, design identity, and independent runtime",
+    "version 1 plans preserve their existing lifecycle"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "workflow-integration",
+  "invalidatedAssumptions": [],
+  "claimId": "review-lifecycle-r1",
+  "briefDigest": "4b3601d839df04191f5c7b4cce952a0979a9ddec067a2a89a9c262787e171f7a",
+  "workerReportDigest": "2c0a378580da52a77a3857526fe9c79496bb8fa673e15cbba08af0f31ea953b7"
+}
