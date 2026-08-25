@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Turn the PR #40 routing-engine packet split-brain incident into a delivery-check regression and require canonical state, runtime evidence, telemetry, and handoff consistency before delivery.",
+  "route": "open-spec",
+  "openSpecChange": "enforce-delivery-packet-consistency",
+  "requiredDecisions": [
+    { "id": "packet-completion-authority", "owner": "repo", "blocking": true },
+    { "id": "runtime-evidence-binding", "owner": "agent", "blocking": true },
+    { "id": "incident-fixture-scope", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
