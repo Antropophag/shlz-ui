@@ -88,6 +88,49 @@ const load = async (file) =>
 const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
+const completeDeliveryPackets = (plan, state) => {
+  const telemetryEvents = [];
+  for (const [index, { id }] of plan.packets.entries()) {
+    const claimId = `${id}-claim`;
+    const briefDigest = createHash("sha256")
+      .update(`${id}-brief`)
+      .digest("hex");
+    const workerReportDigest = createHash("sha256")
+      .update(`${id}-report`)
+      .digest("hex");
+    const session = `${id}-session`;
+    const runtimeId = `00000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`;
+    const launchId = `10000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`;
+    state.packets[id] = {
+      status: "completed",
+      claimId,
+      briefDigest,
+      session,
+      execution: { source: "codex-exec-jsonl", runtimeId, launchId },
+      launch: { terminalStatus: "completed", launchId, workerReportDigest },
+    };
+    state.handoffs[id] = {
+      completedPacket: id,
+      changed: [],
+      provenChecks: [],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: null,
+      invalidatedAssumptions: [],
+      claimId,
+      briefDigest,
+      workerReportDigest,
+    };
+    telemetryEvents.push({
+      type: "execution-boundary",
+      executionSource: "codex-exec-jsonl",
+      packet: id,
+      session,
+      runtimeId,
+    });
+  }
+  return telemetryEvents;
+};
 const exec = promisify(execFile);
 const recordKnownBadObservation = (caseId) => {
   if (process.env.SHLZ_TDD_OBSERVATION_CASE === caseId)
@@ -3321,18 +3364,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
     /candidate head is stale/,
   );
 
-  for (const { id } of plan.packets) {
-    state.packets[id] = { status: "completed" };
-    state.handoffs[id] = {
-      completedPacket: id,
-      changed: [],
-      provenChecks: [],
-      settledDecisions: [],
-      unresolvedFindings: [],
-      nextPacket: null,
-      invalidatedAssumptions: [],
-    };
-  }
+  const telemetryEvents = completeDeliveryPackets(plan, state);
   const delivery = {
     defaultBranch: "main",
     pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/99",
@@ -3352,7 +3384,16 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
     },
   };
   assert.throws(
-    () => assertImplementationDelivery(delivery, { plan, state }),
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+      }),
+    /planned delivery requires trusted packet telemetry/,
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, { plan, state, telemetryEvents }),
     /delivery requires current independent review evidence/,
   );
   const deliveryReview = createReviewState(oid, [], null, binding);
@@ -3373,6 +3414,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
       plan,
       state,
       reviewState: deliveryReview,
+      telemetryEvents,
     }),
   );
   delivery.actual.localHead = "b".repeat(40);
@@ -3384,6 +3426,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
         plan,
         state,
         reviewState: deliveryReview,
+        telemetryEvents,
       }),
     /candidate head is stale/,
   );
@@ -3646,6 +3689,7 @@ test("delivery rejects an incomplete mandatory packet graph", () => {
         plan,
         state,
         requirementsState: ready,
+        telemetryEvents: [],
       }),
     /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
   );
@@ -3659,8 +3703,9 @@ test("delivery rejects an incomplete mandatory packet graph", () => {
         plan,
         state,
         requirementsState: ready,
+        telemetryEvents: [],
       }),
-    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+    /handoff|ERR_DELIVERY_PACKET_EVIDENCE/,
   );
 });
 

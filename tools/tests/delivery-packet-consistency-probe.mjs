@@ -76,12 +76,17 @@ const handoffFor = (attempt) => ({
   briefDigest: attempt.briefDigest,
   workerReportDigest: attempt.workerReportDigest,
 });
-const stateFor = ({ canonicalAttempt, detachedAttempt, divergentField }) => ({
+const stateFor = ({
+  canonicalAttempt,
+  detachedAttempt,
+  divergentField,
+  canonicalStatus = "completed",
+}) => ({
   version: 1,
   planId: plan.id,
   packets: {
     [packet.id]: {
-      status: "completed",
+      status: canonicalStatus,
       session: canonicalAttempt.session,
       claimId: canonicalAttempt.claimId,
       briefDigest: canonicalAttempt.briefDigest,
@@ -107,17 +112,27 @@ const stateFor = ({ canonicalAttempt, detachedAttempt, divergentField }) => ({
   },
   handoffs: { [packet.id]: handoffFor(detachedAttempt) },
 });
-const telemetryFor = ({ detachedAttempt }) =>
-  `${JSON.stringify({
-    at: "2026-08-24T22:30:00.000Z",
-    packet: packet.id,
-    session: detachedAttempt.session,
-    agent: "codex-worker",
-    phase: "execution",
-    type: "execution-boundary",
-    executionSource: "codex-exec-jsonl",
-    runtimeId: detachedAttempt.runtimeId,
-  })}\n`;
+const telemetryBoundary = (attempt) => ({
+  at: "2026-08-24T22:30:00.000Z",
+  packet: packet.id,
+  session: attempt.session,
+  agent: "codex-worker",
+  phase: "execution",
+  type: "execution-boundary",
+  executionSource: "codex-exec-jsonl",
+  runtimeId: attempt.runtimeId,
+});
+const telemetryFor = ({
+  canonicalAttempt,
+  detachedAttempt,
+  includeCanonical,
+}) =>
+  `${(includeCanonical
+    ? [telemetryBoundary(canonicalAttempt), telemetryBoundary(detachedAttempt)]
+    : [telemetryBoundary(detachedAttempt)]
+  )
+    .map((event) => JSON.stringify(event))
+    .join("\n")}\n`;
 
 const sandbox = await mkdtemp(
   path.join(tmpdir(), "shlz-delivery-packet-consistency-"),
@@ -168,7 +183,12 @@ try {
   ]);
   const outcomes = [];
   const failures = [];
-  for (const name of ["incident", "coherent"]) {
+  for (const name of [
+    "incident",
+    "incident-pending",
+    "detached-boundary",
+    "coherent",
+  ]) {
     const fixture = JSON.parse(
       await readFile(path.join(fixtureRoot, `${name}.json`), "utf8"),
     );

@@ -582,7 +582,6 @@ const incompleteDeliveryPackets = (plan, state) =>
     .map(({ id }) => id);
 
 function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
-  if (telemetryEvents === null) return;
   if (!Array.isArray(telemetryEvents))
     throw new Error("planned delivery requires trusted packet telemetry");
   const boundaries = telemetryEvents.filter(
@@ -637,6 +636,16 @@ function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
         `ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field ?? "execution-boundary"}`,
       );
     }
+    if (
+      packetBoundaries.some(
+        (event) =>
+          event.session !== packet.session ||
+          event.runtimeId !== packet.execution.runtimeId,
+      )
+    )
+      throw new Error(
+        `ERR_DELIVERY_PACKET_EVIDENCE ${id} detached-execution-boundary`,
+      );
   }
 }
 
@@ -685,7 +694,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       state,
       requirementsState = null,
       reviewState = null,
-      telemetryEvents = null,
+      telemetryEvents,
     } = execution;
     if (!plan || !state)
       throw new Error("delivery execution evidence requires plan and state");
