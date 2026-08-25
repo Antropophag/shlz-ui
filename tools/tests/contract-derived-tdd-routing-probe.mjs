@@ -2,20 +2,17 @@ import { execFile } from "node:child_process";
 import { cp, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const root = process.cwd();
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const adapter = process.env.SHLZ_TDD_ORACLE_ADAPTER;
-if (adapter) {
-  if (!adapter.endsWith("contract-derived-tdd-oracle-control.mjs")) {
-    process.stderr.write("ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY\n");
-    process.exit(1);
-  }
-  process.stdout.write("contract-derived-routing-v1\n");
-  process.exit(0);
-}
+const expectedRoutingOutcome = adapter
+  ? (await import(pathToFileURL(path.resolve(root, adapter))))
+      .contractDerivedRoutingOutcome
+  : undefined;
 
 const failureSignature = "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass";
 const failedScenarioIds = [
@@ -387,9 +384,19 @@ try {
         .map(({ id, status }) => `${id}:${status}`)
         .join(",")}`,
     );
-  process.stdout.write(
-    `${JSON.stringify({ version: 1, outcomes }, null, 2)}\n`,
-  );
+  if (
+    expectedRoutingOutcome &&
+    expectedRoutingOutcome() !== "contract-derived-routing-v1"
+  ) {
+    process.stderr.write("ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY\n");
+    process.exitCode = 1;
+  } else if (expectedRoutingOutcome) {
+    process.stdout.write("contract-derived-routing-v1\n");
+  } else {
+    process.stdout.write(
+      `${JSON.stringify({ version: 1, outcomes }, null, 2)}\n`,
+    );
+  }
 } finally {
   await rm(sandbox, { recursive: true, force: true });
 }
