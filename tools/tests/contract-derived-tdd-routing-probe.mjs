@@ -186,10 +186,7 @@ const contract = (rows) =>
   `## ADDED Requirements\n\n${rows.map(([requirement, scenario, semantics]) => `### Requirement: ${requirement}\n\n#### Scenario: ${scenario}\n<!-- implementation-semantics: ${semantics} -->\n- **WHEN** the case is planned\n- **THEN** its routing obligation is deterministic\n`).join("\n")}`;
 const wave9Plan = JSON.parse(
   await readFile(
-    path.join(
-      root,
-      "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json",
-    ),
+    path.join(root, "docs/exec-plans/fixtures/wave-9-plan.json"),
     "utf8",
   ),
 );
@@ -212,7 +209,10 @@ const wave9Assessment = {
     ),
   ),
 };
-const wave9Contract = contract(wave9Scenarios);
+const wave9Contract = await readFile(
+  path.join(root, "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md"),
+  "utf8",
+);
 const cases = [
   {
     id: "wave-9-bypass",

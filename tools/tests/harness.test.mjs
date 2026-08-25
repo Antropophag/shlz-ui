@@ -4084,6 +4084,7 @@ test("harness validation fingerprints its complete contract-routing suite and or
     "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
     "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
     "docs/exec-plans/fixtures/wave-9-plan.json",
+    "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md",
     "docs/exec-plans/config.json",
     "package.json",
     "README.md",
@@ -4098,6 +4099,56 @@ test("harness validation fingerprints its complete contract-routing suite and or
       initial,
       `${file} must invalidate harness validation reuse`,
     );
+});
+
+test("full validation reuse ignores its own operational evidence outputs", async () => {
+  const rawLog = `docs/exec-plans/validation-full-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("full validation output\n")
+    .digest("hex")}.log`;
+  const cleanup = registerExitCleanup([
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
+  ]);
+  try {
+    await writeFile(path.join(root, rawLog), "full validation output\n");
+    const candidates = [
+      "tools/harness.mjs",
+      rawLog,
+      rawArtifact,
+      "docs/exec-plans/active/example/state.json",
+      "docs/exec-plans/validation-example.json",
+    ];
+    const before = validationInputFiles(candidates, "full", config);
+    assert.deepEqual(before, ["tools/harness.mjs"]);
+    const ledger = [];
+    const request = {
+      target: "full",
+      files: before,
+      outcome: "pass",
+      packet: "delivery",
+      session: "full-validation",
+      rawLog,
+    };
+    await recordValidation(request, ledger, config, root);
+    const after = validationInputFiles(candidates, "full", config);
+    assert.deepEqual(after, before);
+    assert.equal(
+      (
+        await recordValidation(
+          { ...request, files: after, rawLog: null },
+          ledger,
+          config,
+          root,
+        )
+      ).action,
+      "reuse",
+    );
+  } finally {
+    await unlink(path.join(root, rawLog)).catch(() => {});
+    await unlink(path.join(root, rawArtifact)).catch(() => {});
+    cleanup();
+  }
 });
 
 test("validation targets derive their own relevant changed-file set", () => {

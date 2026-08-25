@@ -64,7 +64,7 @@
         "tools/tests/contract-derived-tdd.test.mjs",
         "tools/tests/contract-derived-tdd-routing-probe.mjs",
         "tools/tests/fixtures/contract-derived-tdd-oracle-*.mjs",
-        "docs/exec-plans/fixtures/wave-9-*.{json,md}",
+        "docs/exec-plans/fixtures/wave-9-{plan.json,contract-derived-tdd.md}",
         "package.json",
         "docs/exec-plans/**"
       ],
@@ -143,7 +143,12 @@
       "level": 4,
       "command": "npm run check",
       "expensive": true,
-      "fingerprintPatterns": ["**"]
+      "fingerprintPatterns": ["**"],
+      "fingerprintIgnorePatterns": [
+        "docs/exec-plans/active/**",
+        "docs/exec-plans/raw-logs/**",
+        "docs/exec-plans/validation-*.{json,log}"
+      ]
     }
   },
   "validationRules": [
