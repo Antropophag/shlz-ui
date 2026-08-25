@@ -56,6 +56,7 @@ import {
   loadChangeFailureInvariants,
   resumePacket,
   retryWorkerPacket,
+  validationInputFiles,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -3978,6 +3979,101 @@ test("affected validation routes docs, component, shared seam, and manifest chan
   );
 });
 
+test("impact-aware validation excludes Playwright only for proven non-browser impact", () => {
+  const nonBrowser = {
+    version: 1,
+    kinds: ["harness", "spec", "docs"],
+    browserExecutable: false,
+  };
+  assert.deepEqual(
+    affectedValidation(
+      ["docs/agent-execution.md", "tools/harness.mjs"],
+      config,
+      nonBrowser,
+    ).map(({ id }) => id),
+    ["docs", "harness"],
+  );
+  assert.ok(
+    affectedValidation(
+      ["openspec/changes/example/specs/browser/spec.md"],
+      config,
+      {
+        version: 1,
+        kinds: ["spec", "browser-contract"],
+        browserExecutable: true,
+      },
+    ).some(({ id }) => id === "full-browser"),
+  );
+  const contradictory = affectedValidation(
+    ["tools/playwright/overlay.spec.js"],
+    config,
+    nonBrowser,
+  );
+  assert.deepEqual(
+    contradictory.map(({ id }) => id),
+    ["full-browser"],
+  );
+  assert.equal(contradictory[0].escalation, "contradictory-browser-impact");
+  assert.deepEqual(
+    affectedValidation(["docs/agent-execution.md"], config, {
+      version: 1,
+      kinds: ["unknown"],
+      browserExecutable: false,
+    }).map(({ id }) => id),
+    ["full-browser"],
+  );
+});
+
+test("public affected command derives impact from the selected change", async () => {
+  const { stdout } = await exec(
+    process.execPath,
+    [
+      "tools/harness.mjs",
+      "affected",
+      "tools/harness.mjs",
+      "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "--change",
+      "enforce-contract-derived-tdd-routing",
+    ],
+    { cwd: root },
+  );
+  const targets = JSON.parse(stdout);
+  assert.deepEqual(
+    targets.map(({ id }) => id),
+    ["harness", "openspec"],
+  );
+  assert.ok(targets.every(({ browser }) => browser !== true));
+});
+
+test("validation fingerprints include the complete meaning-changing input closure", () => {
+  const files = [
+    "packages/behaviors/src/modal.ts",
+    "tools/playwright/overlay.spec.js",
+    "playwright.config.js",
+    "docs/exec-plans/config.json",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+  ];
+  assert.deepEqual(validationInputFiles(files, "modal-browser", config), [
+    "docs/exec-plans/config.json",
+    "package-lock.json",
+    "package.json",
+    "packages/behaviors/src/modal.ts",
+    "playwright.config.js",
+    "tools/playwright/overlay.spec.js",
+  ]);
+  const closure = validationInputFiles(files, "modal-browser", config);
+  const contents = Object.fromEntries(closure.map((file) => [file, "v1"]));
+  const initial = fingerprint(closure, contents);
+  for (const file of closure)
+    assert.notEqual(
+      fingerprint(closure, { ...contents, [file]: "v2" }),
+      initial,
+      `${file} must invalidate validation reuse`,
+    );
+});
+
 test("validation targets derive their own relevant changed-file set", () => {
   assert.deepEqual(
     relevantValidationFiles(
@@ -4013,20 +4109,19 @@ test("validation targets derive their own relevant changed-file set", () => {
   );
 });
 
-test("expensive successful reruns require an invalidation reason", () => {
+test("expensive successful results are reused only for an identical closure", () => {
   const ledger = [
     { target: "full-browser", fingerprint: "same", outcome: "pass" },
   ];
-  assert.throws(
-    () =>
-      assertValidationRun(
-        { target: "full-browser", currentFingerprint: "same" },
-        ledger,
-        config,
-      ),
-    /reason is required/,
+  assert.deepEqual(
+    assertValidationRun(
+      { target: "full-browser", currentFingerprint: "same" },
+      ledger,
+      config,
+    ),
+    { action: "reuse", entry: ledger[0] },
   );
-  assert.doesNotThrow(() =>
+  assert.deepEqual(
     assertValidationRun(
       {
         target: "full-browser",
@@ -4036,15 +4131,15 @@ test("expensive successful reruns require an invalidation reason", () => {
       ledger,
       config,
     ),
+    { action: "run" },
   );
-  assert.throws(
-    () =>
-      assertValidationRun(
-        { target: "modal-browser", currentFingerprint: "same" },
-        [{ target: "modal-browser", fingerprint: "same", outcome: "pass" }],
-        config,
-      ),
-    /reason is required/,
+  assert.equal(
+    assertValidationRun(
+      { target: "full-browser", currentFingerprint: "changed" },
+      ledger,
+      config,
+    ).action,
+    "run",
   );
 });
 
@@ -4074,10 +4169,14 @@ test("validation records compute fingerprints and durably enforce invalidation",
     recordValidation({ ...request, rawLog: null }, [], config, root),
     /requires a retained raw log/,
   );
-  await assert.rejects(
-    recordValidation(request, ledger, config, root),
-    /reason is required/,
+  const reused = await recordValidation(
+    { ...request, rawLog: null },
+    ledger,
+    config,
+    root,
   );
+  assert.equal(reused.action, "reuse");
+  assert.equal(ledger.length, 1);
   await recordValidation(
     { ...request, reason: "substantive remediation" },
     ledger,

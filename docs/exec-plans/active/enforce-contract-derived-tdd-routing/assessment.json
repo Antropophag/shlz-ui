@@ -30,7 +30,12 @@
           "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration",
           "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
           "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage",
-          "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable"
+          "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable",
+          "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Harness-only impact excludes Playwright",
+          "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Contract text carries browser impact",
+          "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Unknown impact fails closed",
+          "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Unchanged closure reuses a successful result",
+          "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Meaning-changing input invalidates reuse"
         ],
         "authorities": [
           {
@@ -55,6 +60,31 @@
           },
           {
             "scenarioId": "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+          },
+          {
+            "scenarioId": "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Harness-only impact excludes Playwright",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+          },
+          {
+            "scenarioId": "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Contract text carries browser impact",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+          },
+          {
+            "scenarioId": "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Unknown impact fails closed",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+          },
+          {
+            "scenarioId": "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Unchanged closure reuses a successful result",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+          },
+          {
+            "scenarioId": "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Meaning-changing input invalidates reuse",
             "source": "explicit-openspec-literal",
             "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
           }

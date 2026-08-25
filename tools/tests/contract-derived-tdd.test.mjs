@@ -80,6 +80,50 @@ test("binds the digest to normalized normative scenario content", () => {
   );
 });
 
+test("derives closed validation impact from normative scenario declarations", () => {
+  const result = parseDeltaScenarioSemantics([
+    contract(
+      "material-behavior",
+      "\n<!-- validation-impact: spec,browser-contract -->",
+    ),
+  ]);
+  assert.deepEqual(result.validationImpact, {
+    version: 1,
+    kinds: ["browser-contract", "spec"],
+    browserExecutable: true,
+  });
+  assert.throws(
+    () =>
+      parseDeltaScenarioSemantics([
+        contract(
+          "material-behavior",
+          "\n<!-- validation-impact: planner-choice -->",
+        ),
+      ]),
+    /unknown validation-impact/,
+  );
+  assert.throws(
+    () =>
+      parseDeltaScenarioSemantics([contract("material-behavior")], {
+        requireValidationImpact: true,
+      }),
+    /requires exactly one validation-impact declaration/,
+  );
+  assert.throws(
+    () =>
+      parseDeltaScenarioSemantics(
+        [
+          contract(
+            "material-behavior",
+            "\n<!-- validation-impact: harness -->\n<!-- validation-impact: docs -->",
+          ),
+        ],
+        { requireValidationImpact: true },
+      ),
+    /requires exactly one validation-impact declaration/,
+  );
+});
+
 test("derives capability identity from the delta spec path", async () => {
   const repo = await mkdtemp(path.join(tmpdir(), "shlz-contract-capability-"));
   try {

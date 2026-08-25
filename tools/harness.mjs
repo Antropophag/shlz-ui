@@ -55,6 +55,7 @@ import {
   validateHandoff,
   validateExecutionBaseline,
   validatePlan,
+  validationInputFiles,
   writeJson,
   workerTelemetryEvents,
 } from "./lib/harness/core.mjs";
@@ -171,6 +172,14 @@ const option = (name) => {
 };
 const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+const repositoryFiles = async () => {
+  const { stdout } = await exec(
+    "git",
+    ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+    { cwd: repoRoot },
+  );
+  return stdout.split("\0").filter(Boolean);
+};
 const refreshChangeFailureInvariants = async (state, target) => {
   const stored = state.changeFailureInvariants;
   if (!stored) return state;
@@ -424,19 +433,31 @@ switch (command) {
     output(value);
     break;
   }
-  case "affected":
-    output(affectedValidation(args, config));
+  case "affected": {
+    const changeIndex = args.indexOf("--change");
+    const files = changeIndex === -1 ? args : args.slice(0, changeIndex);
+    const impact =
+      changeIndex === -1
+        ? { version: 1, kinds: ["unknown"], browserExecutable: null }
+        : (
+            await loadChangeScenarioSemantics(repoRoot, args[changeIndex + 1], {
+              requireValidationImpact: true,
+            })
+          ).validationImpact;
+    output(affectedValidation(files, config, impact));
     break;
+  }
   case "validation-check": {
     const ledgerPath = absolute(args[1]);
     const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
-    const files = relevantValidationFiles(
-      changed.changedFiles,
+    relevantValidationFiles(changed.changedFiles, args[0], config);
+    const files = validationInputFiles(
+      [...(await repositoryFiles()), ...changed.changedFiles],
       args[0],
       config,
     ).filter((file) => file !== repositoryRelative(ledgerPath));
-    assertValidationRun(
+    const decision = assertValidationRun(
       {
         target: args[0],
         currentFingerprint: await fingerprintFiles(files, repoRoot),
@@ -445,18 +466,19 @@ switch (command) {
       ledger,
       config,
     );
-    output({ allowed: true });
+    output(decision);
     break;
   }
   case "validation-record": {
     const ledgerPath = statePath(args[0]);
     const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
-    await recordValidation(
+    relevantValidationFiles(changed.changedFiles, args[1], config);
+    const result = await recordValidation(
       {
         target: args[1],
-        files: relevantValidationFiles(
-          changed.changedFiles,
+        files: validationInputFiles(
+          [...(await repositoryFiles()), ...changed.changedFiles],
           args[1],
           config,
         ).filter((file) => file !== repositoryRelative(ledgerPath)),
@@ -472,7 +494,7 @@ switch (command) {
       repoRoot,
     );
     await writeJson(ledgerPath, ledger);
-    output(ledger.at(-1));
+    output(result);
     break;
   }
   case "state-init": {

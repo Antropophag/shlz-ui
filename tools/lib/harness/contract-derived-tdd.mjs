@@ -10,6 +10,14 @@ const semanticsCategories = new Set([
   "documentation-only",
 ]);
 const materialCategories = new Set(["material-behavior", "material-state"]);
+const validationImpactKinds = new Set([
+  "harness",
+  "spec",
+  "docs",
+  "product",
+  "browser-contract",
+  "browser-executable",
+]);
 
 const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
 const digest = (value) =>
@@ -25,10 +33,14 @@ async function markdownFiles(directory) {
   return files.sort(order);
 }
 
-export function parseDeltaScenarioSemantics(contracts) {
+export function parseDeltaScenarioSemantics(
+  contracts,
+  { requireValidationImpact = false } = {},
+) {
   if (!Array.isArray(contracts) || contracts.length === 0)
     throw new Error("OpenSpec change requires at least one delta spec");
   const scenarios = [];
+  const validationImpacts = new Set();
   const identities = new Set();
   const normalizedContracts = [...contracts].map((contract) => ({
     ...contract,
@@ -70,6 +82,7 @@ export function parseDeltaScenarioSemantics(contracts) {
         );
       const scenario = scenarioMatch[1];
       const declarations = [];
+      const impactDeclarations = [];
       let firstContent = null;
       for (let cursor = index + 1; cursor < lines.length; cursor++) {
         if (/^#{3,4}\s/.test(lines[cursor])) break;
@@ -83,6 +96,18 @@ export function parseDeltaScenarioSemantics(contracts) {
             ...declaration.map(
               (value) =>
                 value.match(/implementation-semantics:\s*([^\s>]+)/)[1],
+            ),
+          );
+        const impactDeclaration = lines[cursor].match(
+          /<!--\s*validation-impact:\s*([^>]+?)\s*-->/g,
+        );
+        if (impactDeclaration)
+          impactDeclarations.push(
+            ...impactDeclaration.map((value) =>
+              value
+                .match(/validation-impact:\s*([^>]+?)\s*-->/)[1]
+                .split(",")
+                .map((kind) => kind.trim()),
             ),
           );
       }
@@ -103,7 +128,20 @@ export function parseDeltaScenarioSemantics(contracts) {
         throw new Error(
           `${identity} has unknown implementation-semantics: ${semantics}`,
         );
+      if (requireValidationImpact && impactDeclarations.length !== 1)
+        throw new Error(
+          `${identity} requires exactly one validation-impact declaration`,
+        );
       scenarios.push({ id: identity, semantics });
+      for (const kinds of impactDeclarations) {
+        for (const kind of kinds) {
+          if (!validationImpactKinds.has(kind))
+            throw new Error(
+              `${identity} has unknown validation-impact: ${kind}`,
+            );
+          validationImpacts.add(kind);
+        }
+      }
     }
   }
   if (scenarios.length === 0)
@@ -121,10 +159,26 @@ export function parseDeltaScenarioSemantics(contracts) {
     requiredScenarioIds: scenarios
       .filter(({ semantics }) => materialCategories.has(semantics))
       .map(({ id }) => id),
+    validationImpact:
+      validationImpacts.size === 0
+        ? null
+        : {
+            version: 1,
+            kinds: [...validationImpacts].sort(order),
+            browserExecutable: [...validationImpacts].some((kind) =>
+              ["product", "browser-contract", "browser-executable"].includes(
+                kind,
+              ),
+            ),
+          },
   };
 }
 
-export async function loadChangeScenarioSemantics(repoRoot, change) {
+export async function loadChangeScenarioSemantics(
+  repoRoot,
+  change,
+  options = {},
+) {
   if (
     typeof change !== "string" ||
     !change ||
@@ -152,7 +206,7 @@ export async function loadChangeScenarioSemantics(repoRoot, change) {
       content: await readFile(file, "utf8"),
     })),
   );
-  const parsed = parseDeltaScenarioSemantics(contracts);
+  const parsed = parseDeltaScenarioSemantics(contracts, options);
   return { ...parsed, change };
 }
 

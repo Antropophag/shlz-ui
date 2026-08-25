@@ -2311,7 +2311,24 @@ export function completePacket(
   return state;
 }
 
-export function affectedValidation(files, config) {
+const validationImpactKinds = new Set([
+  "harness",
+  "spec",
+  "docs",
+  "product",
+  "browser-contract",
+  "browser-executable",
+]);
+
+const conservativeBrowserValidation = (config, escalation) => [
+  {
+    id: "full-browser",
+    ...config.validationTargets["full-browser"],
+    escalation,
+  },
+];
+
+export function affectedValidation(files, config, impact = null) {
   const selected = new Set();
   for (const rule of config.validationRules)
     if (
@@ -2321,9 +2338,50 @@ export function affectedValidation(files, config) {
     )
       for (const target of rule.targets) selected.add(target);
   if (files.length > 0 && selected.size === 0) selected.add("full");
+  if (impact !== null) {
+    const valid =
+      impact?.version === 1 &&
+      Array.isArray(impact.kinds) &&
+      impact.kinds.length > 0 &&
+      impact.kinds.every((kind) => validationImpactKinds.has(kind)) &&
+      typeof impact.browserExecutable === "boolean";
+    if (!valid) return conservativeBrowserValidation(config, "unknown-impact");
+    const selectedBrowser = [...selected].some(
+      (id) => config.validationTargets[id]?.browser === true,
+    );
+    if (!impact.browserExecutable && selectedBrowser)
+      return conservativeBrowserValidation(
+        config,
+        "contradictory-browser-impact",
+      );
+    if (impact.browserExecutable && !selectedBrowser)
+      selected.add("full-browser");
+    if (!impact.browserExecutable)
+      for (const id of [...selected])
+        if (config.validationTargets[id]?.browser === true) selected.delete(id);
+  }
   return [...selected]
     .map((id) => ({ id, ...config.validationTargets[id] }))
     .sort((a, b) => a.level - b.level || order(a.id, b.id));
+}
+
+export function validationInputFiles(files, target, config) {
+  const definition = config.validationTargets[target];
+  if (!definition) throw new Error(`unknown validation target ${target}`);
+  const patterns = [
+    ...definition.fingerprintPatterns,
+    ...(config.validationPolicyPatterns ?? []),
+    ...(definition.browser ? (config.browserValidationPatterns ?? []) : []),
+  ];
+  return [...new Set(files)]
+    .filter(
+      (file) =>
+        patterns.some((pattern) => matchesPattern(file, pattern)) &&
+        !(definition.fingerprintIgnorePatterns ?? []).some((pattern) =>
+          matchesPattern(file, pattern),
+        ),
+    )
+    .sort(order);
 }
 
 export function relevantValidationFiles(files, target, config) {
@@ -2392,16 +2450,15 @@ export function assertValidationRun(
 ) {
   const definition = config.validationTargets[target];
   if (!definition) throw new Error(`unknown validation target ${target}`);
-  const duplicate = ledger.some(
+  const entry = ledger.find(
     (entry) =>
       entry.target === target &&
       entry.fingerprint === currentFingerprint &&
       entry.outcome === "pass",
   );
-  if (definition.expensive && duplicate && !reason)
-    throw new Error(
-      `expensive target ${target} already passed for this fingerprint; --reason is required`,
-    );
+  if (definition.expensive && entry && !reason)
+    return { action: "reuse", entry };
+  return { action: "run" };
 }
 
 export async function recordValidation(
@@ -2421,9 +2478,14 @@ export async function recordValidation(
 ) {
   if (!files.length || !["pass", "fail"].includes(outcome))
     throw new Error("validation record requires files and pass/fail outcome");
-  if (!rawLog) throw new Error("validation record requires a retained raw log");
   const currentFingerprint = await fingerprintFiles(files, repoRoot);
-  assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
+  const decision = assertValidationRun(
+    { target, currentFingerprint, reason },
+    ledger,
+    config,
+  );
+  if (decision.action === "reuse") return decision;
+  if (!rawLog) throw new Error("validation record requires a retained raw log");
   const root = await realpath(repoRoot);
   const targetPath = await realpath(path.resolve(repoRoot, rawLog));
   if (targetPath !== root && !targetPath.startsWith(`${root}${path.sep}`))
@@ -2453,7 +2515,7 @@ export async function recordValidation(
     session,
     recordedAt: new Date().toISOString(),
   });
-  return ledger;
+  return { action: "record", entry: ledger.at(-1) };
 }
 
 const failurePathConcerns = new Set([

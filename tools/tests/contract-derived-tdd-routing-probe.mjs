@@ -212,10 +212,7 @@ const wave9Assessment = {
     ),
   ),
 };
-const wave9Contract = await readFile(
-  path.join(root, "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md"),
-  "utf8",
-);
+const wave9Contract = contract(wave9Scenarios);
 const cases = [
   {
     id: "wave-9-bypass",

@@ -10,9 +10,15 @@ Ask the harness for deterministic routing:
 npm run harness -- affected <changed-file> [changed-file...]
 ```
 
-The mapping lives in `docs/exec-plans/config.json` and is regression-tested. It is conservative for shared seams. A docs-only result excludes Playwright; `native-dialog.ts` expands to Modal, Drawer, and overlay integration; component-local changes remain component-local; manifests select census/schema evidence.
+For requirements-gated work, bind routing to normative impact declarations:
 
-Record a result with `validation-record --raw-log <repository-path>`; from a fixed base it derives target-relevant changed files using configured fingerprint patterns, reads them inside the repository, computes their SHA-256 fingerprint, copies the raw output to a digest-named artifact under `docs/exec-plans/raw-logs/`, checks prior successful entries, and appends the compact result/reason/pointer to the ledger. Before repeating an expensive successful target at the same fingerprint, supply an invalidation reason. A changed runtime input, substantive remediation, flaky/infrastructure diagnosis, changed browser/dependency, or final stabilized integration can be a reason. Report/docs edits are not browser invalidation. Unmatched scope conservatively selects the full target instead of returning no checks. The full suite remains required when the change/final gate calls for it; the selector does not weaken acceptance or the component gate.
+```bash
+npm run harness -- affected <changed-file> [changed-file...] --change <openspec-change>
+```
+
+The mapping lives in `docs/exec-plans/config.json` and is regression-tested. Paths locate candidate surfaces; they do not decide impact. A change whose contract classifies it as harness/spec/docs-only excludes Playwright only when no changed browser/product executable surface contradicts that claim. Browser-contract or browser-executable impact selects browser validation even when the edited file is prose. Missing, unknown, or contradictory impact conservatively escalates to `full-browser`. `native-dialog.ts` expands to Modal, Drawer, and overlay integration; component-local changes remain component-local; manifests select census/schema evidence.
+
+Record a result with `validation-record --raw-log <repository-path>`. From a fixed base it first proves target relevance, then fingerprints the complete configured validation-input closure: relevant source/executable surfaces, target tests and oracles, validation policy, runner/browser configuration, and applicable dependency/lock inputs. It copies raw output to a digest-named artifact under `docs/exec-plans/raw-logs/` and appends the compact result/reason/pointer to the ledger. `validation-check` returns `action: reuse` for an expensive successful target with an identical closure, so the command must not be executed again. Any closure mutation yields `action: run`; an explicit reason can justify a deliberate rerun of an unchanged closure but cannot make changed inputs reusable. Unmatched or unknown impact conservatively selects browser escalation instead of returning no checks.
 
 ## Review lifecycle
 
