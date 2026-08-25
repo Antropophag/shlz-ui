@@ -5486,7 +5486,10 @@ test("representative efficiency evaluation reproduces checked report and preserv
 test("efficiency evaluation applies unavailable policy to observed context relevance", async (t) => {
   const directory = await mkdtemp(path.join(root, ".telemetry-efficiency-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
-  const telemetryPath = path.relative(root, path.join(directory, "telemetry.jsonl"));
+  const telemetryPath = path.relative(
+    root,
+    path.join(directory, "telemetry.jsonl"),
+  );
   await writeFile(
     path.join(root, telemetryPath),
     `${JSON.stringify({
