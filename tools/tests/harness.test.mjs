@@ -5441,6 +5441,21 @@ test("representative efficiency evaluation reproduces checked report and preserv
   assert.equal(report.runtime.uncachedInputTokens, "unavailable");
   assert.equal(report.runtime.outputTokens, "unavailable");
   assert.equal(report.proxies.contextRelevance, "unavailable");
+  assert.ok(
+    report.byChange.every(
+      ({ runtime, packets, sessions, phases, attempts }) =>
+        runtime && packets && sessions && phases && Array.isArray(attempts),
+    ),
+  );
+  assert.ok(
+    Object.values(report.attribution.phases).every(
+      (phase) =>
+        "inputTokens" in phase &&
+        "cachedInputTokens" in phase &&
+        "uncachedInputTokens" in phase &&
+        "outputTokens" in phase,
+    ),
+  );
   assert.deepEqual(report.attribution.repeatedPackets[1], {
     change: "enforce-contract-derived-tdd-routing",
     packet: "test-design",
