@@ -318,19 +318,6 @@ test("independent review keeps Standards and Spec distinct and candidate-bound",
     }).payload.spec.outcome,
     "pass",
   );
-  const collaborationAxis = (runtimeId) => ({
-    ...axis(runtimeId),
-    runtimeSource: "collaboration-subagent",
-  });
-  assert.equal(
-    review({
-      contractReceipt,
-      candidateHead: candidate,
-      standards: collaborationAxis("/root/standards_review"),
-      spec: collaborationAxis("/root/spec_review"),
-    }).payload.standards.outcome,
-    "pass",
-  );
   assert.throws(
     () =>
       review({

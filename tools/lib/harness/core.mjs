@@ -512,9 +512,7 @@ export function review({ contractReceipt, candidateHead, standards, spec }) {
     assert(
       value?.outcome === "pass" &&
         value.runtimeId &&
-        ["codex-exec-jsonl", "collaboration-subagent"].includes(
-          value.runtimeSource,
-        ) &&
+        value.runtimeSource === "codex-exec-jsonl" &&
         value.candidateHead === candidateHead &&
         value.contractDigest === contractReceipt.payload.contractDigest,
       `${axis} review is incomplete or stale`,
