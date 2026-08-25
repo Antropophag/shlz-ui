@@ -22,7 +22,39 @@
       "inputTokens": 647527,
       "physicalBoundaries": 3,
       "usageEvents": 3,
-      "missingUsageBoundaries": 0
+      "missingUsageBoundaries": 0,
+      "attempts": [
+        {
+          "runtimeId": "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+          "packet": "dogfood-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 281263,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 3167
+        },
+        {
+          "runtimeId": "01a02f72-d6cc-7f63-aceb-eee23b9304d9",
+          "packet": "remediation-audit",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 328718,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 2955
+        },
+        {
+          "runtimeId": "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+          "packet": "wave-8-read-only-proof",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 37546,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 610
+        }
+      ]
     },
     {
       "id": "reduce-harness-context-cost",
@@ -30,7 +62,19 @@
       "inputTokens": 1169262,
       "physicalBoundaries": 1,
       "usageEvents": 1,
-      "missingUsageBoundaries": 0
+      "missingUsageBoundaries": 0,
+      "attempts": [
+        {
+          "runtimeId": "01a0339c-f096-76c2-9961-bffc86d96ef9",
+          "packet": "capsule-implementation",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1169262,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 10364
+        }
+      ]
     },
     {
       "id": "enforce-spec-driven-tdd",
@@ -38,7 +82,69 @@
       "inputTokens": 11006535,
       "physicalBoundaries": 6,
       "usageEvents": 5,
-      "missingUsageBoundaries": 1
+      "missingUsageBoundaries": 1,
+      "attempts": [
+        {
+          "runtimeId": "01a03244-3d47-7802-a27c-e1c1b666749f",
+          "packet": "acceptance-contract",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 940787,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 8698
+        },
+        {
+          "runtimeId": "01a03279-56fc-7a11-925b-3985574b0284",
+          "packet": "final-remediation",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1882020,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 9055
+        },
+        {
+          "runtimeId": "01a03280-f8ef-7e51-81e1-0a8df88af6e3",
+          "packet": "oracle-discrimination",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2502224,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 12509
+        },
+        {
+          "runtimeId": "01a03249-0664-7c83-99e5-ffda2fff4692",
+          "packet": "symmetric-runner",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1465045,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 13162
+        },
+        {
+          "runtimeId": "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0326c-df51-7433-b277-0799b85203f3",
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 4216459,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 12866
+        }
+      ]
     },
     {
       "id": "require-independent-test-contract-review",
@@ -46,7 +152,39 @@
       "inputTokens": 16368052,
       "physicalBoundaries": 3,
       "usageEvents": 3,
-      "missingUsageBoundaries": 0
+      "missingUsageBoundaries": 0,
+      "attempts": [
+        {
+          "runtimeId": "01a034ad-33bf-7583-be60-292928a11a55",
+          "packet": "independent-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 11378026,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 27749
+        },
+        {
+          "runtimeId": "01a03491-5425-77c2-88dc-8dd5b34bb441",
+          "packet": "review-lifecycle",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2988084,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 14486
+        },
+        {
+          "runtimeId": "01a0349a-0c5c-7c72-b7da-98172232c590",
+          "packet": "workflow-integration",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2001942,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 9638
+        }
+      ]
     },
     {
       "id": "enforce-contract-derived-tdd-routing",
@@ -54,7 +192,109 @@
       "inputTokens": 6457539,
       "physicalBoundaries": 10,
       "usageEvents": 10,
-      "missingUsageBoundaries": 0
+      "missingUsageBoundaries": 0,
+      "attempts": [
+        {
+          "runtimeId": "01a035e5-c914-7c60-8c25-3ddd4b0a092b",
+          "packet": "routing-engine",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1473766,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 10617
+        },
+        {
+          "runtimeId": "01a035cd-4a6e-7f30-9317-1c100fb27f77",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 547391,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 4110
+        },
+        {
+          "runtimeId": "01a035d2-6ef5-7091-a9d1-1472afb27089",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 458506,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 5420
+        },
+        {
+          "runtimeId": "01a035d7-290d-7450-84a4-021f5cd4bc59",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 464343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 5249
+        },
+        {
+          "runtimeId": "01a035de-0754-7fe2-9337-268275069ad7",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": 346528,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 4112
+        },
+        {
+          "runtimeId": "01a035c4-c742-7613-b294-4f03fd49a442",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1171057,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 9173
+        },
+        {
+          "runtimeId": "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 702784,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 5064
+        },
+        {
+          "runtimeId": "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 254849,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 2361
+        },
+        {
+          "runtimeId": "01a035db-7896-7461-ad05-08d3e05e2625",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": 421566,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 4268
+        },
+        {
+          "runtimeId": "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 5,
+          "inputTokens": 616749,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 10327
+        }
+      ]
     },
     {
       "id": "enforce-delivery-packet-consistency",
@@ -62,7 +302,69 @@
       "inputTokens": 2229352,
       "physicalBoundaries": 6,
       "usageEvents": 6,
-      "missingUsageBoundaries": 0
+      "missingUsageBoundaries": 0,
+      "attempts": [
+        {
+          "runtimeId": "01a037e7-2601-7632-aaa2-58f65720068e",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 190196,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 1489
+        },
+        {
+          "runtimeId": "01a037ed-98f8-7a82-ba5a-a6b25b743e2a",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 58902,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 704
+        },
+        {
+          "runtimeId": "01a037f2-6f6c-7b02-95d0-bedcc6f76862",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 270846,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 2754
+        },
+        {
+          "runtimeId": "01a037de-c5fa-74f0-a23a-d9043dab6310",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 965352,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 9949
+        },
+        {
+          "runtimeId": "01a037ea-8f53-7f41-9725-60cf14d37003",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 367893,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 3160
+        },
+        {
+          "runtimeId": "01a037ef-f652-7d93-b3ef-180f98df0660",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 376163,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 3692
+        }
+      ]
     },
     {
       "id": "wave-9-sidebar-application-shell",
@@ -70,7 +372,79 @@
       "inputTokens": 1981944,
       "physicalBoundaries": 7,
       "usageEvents": 3,
-      "missingUsageBoundaries": 4
+      "missingUsageBoundaries": 4,
+      "attempts": [
+        {
+          "runtimeId": "01a0351d-381f-7012-8025-ba369cbd8766",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03538-dbd4-7e20-853d-d267ce8967b9",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03554-7c8f-7922-90ea-24440205f698",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03570-1e89-76e0-b978-1a75631cefd9",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0358b-bebe-7970-a001-5388b3b6d774",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 5,
+          "inputTokens": 769829,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 3065
+        },
+        {
+          "runtimeId": "01a03510-abe1-77a0-b924-d97384a5de27",
+          "packet": "showcase-shell",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 980772,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 3873
+        },
+        {
+          "runtimeId": "01a0350b-dd9b-7dd3-8fb5-0298985cd765",
+          "packet": "source-census",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 231343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": 2003
+        }
+      ]
     }
   ],
   "attribution": {
@@ -203,7 +577,10 @@
   "proxies": {
     "handoffBytes": "unavailable",
     "contextRelevance": "unavailable",
-    "retryFanOut": { "physicalBoundaries": 36, "repeatedPacketAttempts": 22 }
+    "retryFanOut": {
+      "physicalBoundaries": 36,
+      "repeatedPacketAttempts": 22
+    }
   },
   "limitations": [
     "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",

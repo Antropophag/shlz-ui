@@ -3158,6 +3158,7 @@ export function workerTelemetryEvents(state) {
         ...base,
         type: "usage",
         usageSource: "codex-exec-jsonl:turn.completed",
+        runtimeId: value.execution.runtimeId,
         tokens: (usage.input_tokens ?? 0) + (usage.output_tokens ?? 0),
         contextTokens: usage.input_tokens,
         ...(Number.isFinite(usage.input_tokens)
@@ -3251,6 +3252,7 @@ export function summarizeEvents(events) {
         phase: event.phase,
         attempt: packetAttempts.length + 1,
         runtimeId: event.runtimeId,
+        usage: null,
       });
       attempts.set(event.packet, packetAttempts);
     }
@@ -3272,8 +3274,34 @@ export function summarizeEvents(events) {
       contextTokens = Math.max(contextTokens, event.contextTokens);
       contextSeen = true;
     }
-    if (event.type === "usage" && Number.isFinite(event.inputTokens))
-      rawUsage.push(event);
+    if (
+      event.type === "usage" &&
+      (Number.isFinite(event.inputTokens) ||
+        Number.isFinite(event.contextTokens))
+    ) {
+      const normalizedUsage = {
+        ...event,
+        inputTokens: event.inputTokens ?? event.contextTokens,
+        outputTokens:
+          event.outputTokens ??
+          (Number.isFinite(event.tokens) && Number.isFinite(event.contextTokens)
+            ? event.tokens - event.contextTokens
+            : undefined),
+      };
+      rawUsage.push(normalizedUsage);
+      const packetAttempts = attempts.get(event.packet) ?? [];
+      const attempt = event.runtimeId
+        ? packetAttempts.find(({ runtimeId }) => runtimeId === event.runtimeId)
+        : [...packetAttempts]
+            .reverse()
+            .find(
+              (candidate) =>
+                candidate.usage === null &&
+                candidate.session === event.session &&
+                candidate.phase === event.phase,
+            );
+      if (attempt) attempt.usage = normalizedUsage;
+    }
   }
   result.uniqueReads = reads.size;
   result.logicalSessions = [...logicalSessions].sort(order);
@@ -3343,7 +3371,9 @@ export function summarizeEvents(events) {
   for (const [packet, packetAttempts] of [...attempts].sort(([left], [right]) =>
     order(left, right),
   )) {
-    const usage = rawUsage.filter((event) => event.packet === packet);
+    const usage = packetAttempts.flatMap((attempt) =>
+      attempt.usage ? [attempt.usage] : [],
+    );
     const allCached =
       usage.length > 0 &&
       usage.every((event) => Number.isFinite(event.cachedInputTokens));
@@ -3369,8 +3399,8 @@ export function summarizeEvents(events) {
         ? usage.reduce((total, event) => total + event.outputTokens, 0)
         : "unavailable",
     };
-    for (const [index, attempt] of packetAttempts.entries()) {
-      const event = usage[index];
+    for (const attempt of packetAttempts) {
+      const event = attempt.usage;
       const cached = Number.isFinite(event?.cachedInputTokens);
       const attributed = {
         packet: attempt.packet,

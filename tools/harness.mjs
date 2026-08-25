@@ -104,6 +104,7 @@ const efficiencyEvaluation = async (fixture) => {
       ({ type }) => type === "execution-boundary",
     ).length;
     const usage = events.filter(({ type }) => type === "usage");
+    const attribution = summarizeEvents(events);
     changes.push({
       id: source.id,
       tokens: usage.reduce((total, event) => total + (event.tokens ?? 0), 0),
@@ -114,6 +115,9 @@ const efficiencyEvaluation = async (fixture) => {
       physicalBoundaries: boundaries,
       usageEvents: usage.length,
       missingUsageBoundaries: boundaries - usage.length,
+      attempts: Object.entries(attribution.byAttempt).map(
+        ([runtimeId, attempt]) => ({ runtimeId, ...attempt }),
+      ),
     });
   }
   const usage = all.filter(({ type }) => type === "usage");
@@ -1211,9 +1215,14 @@ switch (command) {
     break;
   }
   case "telemetry-summary": {
-    if (args.includes("--evaluation"))
-      output(await efficiencyEvaluation(await readJson(absolute(args[0]))));
-    else {
+    if (args.includes("--evaluation")) {
+      const report = await efficiencyEvaluation(
+        await readJson(absolute(args[0])),
+      );
+      const out = option("--out");
+      if (out) await writeJson(absolute(out), report);
+      output(report);
+    } else {
       const text = await readFile(absolute(args[0]), "utf8");
       output(
         summarizeEvents(

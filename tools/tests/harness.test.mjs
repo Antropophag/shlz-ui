@@ -5379,6 +5379,16 @@ test("telemetry attributes raw runtime usage to packet attempts and sessions", (
   );
   assert.equal(reused.byAttempt["runtime-a"].inputTokens, 10);
   assert.equal(reused.byAttempt["runtime-b"].inputTokens, 20);
+
+  const missingFirstUsage = summarizeEvents([
+    event("implementation", "same-label", "runtime-missing", 10, 4, 1)[0],
+    ...event("implementation", "same-label", "runtime-present", 20, 5, 2),
+  ]);
+  assert.equal(
+    missingFirstUsage.byAttempt["runtime-missing"].inputTokens,
+    "unavailable",
+  );
+  assert.equal(missingFirstUsage.byAttempt["runtime-present"].inputTokens, 20);
 });
 
 test("worker telemetry preserves adapter-issued raw usage fields", () => {
@@ -5405,6 +5415,7 @@ test("worker telemetry preserves adapter-issued raw usage fields", () => {
     phase: "execution",
     type: "usage",
     usageSource: "codex-exec-jsonl:turn.completed",
+    runtimeId: "runtime-1",
     tokens: 107,
     contextTokens: 100,
     inputTokens: 100,
