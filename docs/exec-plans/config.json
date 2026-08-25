@@ -61,6 +61,11 @@
         "tools/harness.mjs",
         "tools/lib/harness/**",
         "tools/tests/harness.test.mjs",
+        "tools/tests/contract-derived-tdd.test.mjs",
+        "tools/tests/contract-derived-tdd-routing-probe.mjs",
+        "tools/tests/fixtures/contract-derived-tdd-oracle-*.mjs",
+        "docs/exec-plans/fixtures/wave-9-*.{json,md}",
+        "package.json",
         "docs/exec-plans/**"
       ],
       "fingerprintIgnorePatterns": ["docs/exec-plans/active/**"]

@@ -4074,6 +4074,32 @@ test("validation fingerprints include the complete meaning-changing input closur
     );
 });
 
+test("harness validation fingerprints its complete contract-routing suite and oracles", () => {
+  const files = [
+    "tools/harness.mjs",
+    "tools/lib/harness/contract-derived-tdd.mjs",
+    "tools/tests/harness.test.mjs",
+    "tools/tests/contract-derived-tdd.test.mjs",
+    "tools/tests/contract-derived-tdd-routing-probe.mjs",
+    "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
+    "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
+    "docs/exec-plans/fixtures/wave-9-plan.json",
+    "docs/exec-plans/config.json",
+    "package.json",
+    "README.md",
+  ];
+  const closure = validationInputFiles(files, "harness", config);
+  assert.deepEqual(closure, files.slice(0, -1).sort());
+  const contents = Object.fromEntries(closure.map((file) => [file, "v1"]));
+  const initial = fingerprint(closure, contents);
+  for (const file of closure)
+    assert.notEqual(
+      fingerprint(closure, { ...contents, [file]: "v2" }),
+      initial,
+      `${file} must invalidate harness validation reuse`,
+    );
+});
+
 test("validation targets derive their own relevant changed-file set", () => {
   assert.deepEqual(
     relevantValidationFiles(
