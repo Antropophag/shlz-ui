@@ -1,0 +1,19 @@
+{
+  "completedPacket": "test-design",
+  "changed": ["exact per-field RED signatures for six evidence bindings"],
+  "provenChecks": [
+    "six RED cases deterministic",
+    "coherent control accepted",
+    "oracle control accepted",
+    "behavioral decoy rejected"
+  ],
+  "settledDecisions": [
+    "RED signature is ERR_DELIVERY_PACKET_CONSISTENCY_BYPASS-<fixture-id>"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "test-contract-review",
+  "invalidatedAssumptions": [],
+  "claimId": "delivery-consistency-test-design-3",
+  "briefDigest": "2d9f7283b298881c30d6b506a7d4e93da96a14c384241249692abf9305b537d8",
+  "workerReportDigest": "968f0ff18a7ec340da74110882b181eaefb3ce7d66e5eb90410d3b4644f3ca69"
+}

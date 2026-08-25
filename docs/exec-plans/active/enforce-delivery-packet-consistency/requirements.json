@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "intent": "Turn the PR #40 routing-engine packet split-brain incident into a delivery-check regression and require canonical state, runtime evidence, telemetry, and handoff consistency before delivery.",
+  "revision": 2,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "packet-completion-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "docs/agent-execution.md assigns atomic lifecycle progress and per-packet handoffs to execution state"
+      }
+    },
+    {
+      "id": "runtime-evidence-binding",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "make delivery fail closed across state, execution evidence, and handoff"
+      }
+    },
+    {
+      "id": "incident-fixture-scope",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "PR #40 state.json, handoff-routing-engine.json, and telemetry.jsonl at head 23493c3966d49230a1133f23558193c1450a0953"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "enforce-delivery-packet-consistency",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "verify the CodeRabbit incident, add a RED fixture, fix delivery fail-closed, run impact-selected validation, and do not merge PR #40"
+    }
+  }
+}

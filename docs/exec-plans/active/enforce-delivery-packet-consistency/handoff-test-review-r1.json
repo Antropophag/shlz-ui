@@ -1,0 +1,25 @@
+{
+  "completedPacket": "test-contract-review",
+  "changed": ["independent test-contract verdict only"],
+  "provenChecks": [
+    "public delivery-check seam reached",
+    "RED and coherent control deterministic across two runs",
+    "behavioral decoy rejected"
+  ],
+  "settledDecisions": [
+    "verdict: changes-requested",
+    "public seam approved",
+    "oracle sensitivity rejected"
+  ],
+  "unresolvedFindings": [
+    "any nonzero incident result currently satisfies the oracle without the packet-specific diagnostic",
+    "all attempt identity fields diverge together so partial reconciliation can pass"
+  ],
+  "nextPacket": "test-design",
+  "invalidatedAssumptions": [
+    "the first incident fixture discriminates every required identity binding"
+  ],
+  "claimId": "delivery-consistency-test-review-1",
+  "briefDigest": "6e5c35fda7cc406bdd2a7a3c4c62e5f7ae77d19bad0cbe972ad3b424803a1ddc",
+  "workerReportDigest": "2394309dfa2811848fa5dfc68e321828b88e0fc8b220213c1fec6abe834d8c3a"
+}

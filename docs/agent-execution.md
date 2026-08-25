@@ -55,6 +55,21 @@ the seam, tests, and fixtures—not a production proposal or implementation
 handoff. Direct changes and slices without an honest deterministic RED use
 ordinary TDD or an explicit bounded `inapplicable` disposition.
 
+For every newly created requirements-gated plan, `harness plan` reads the
+requirements-selected OpenSpec delta specs before writing the plan. Each
+`#### Scenario` must carry exactly one adjacent closed declaration:
+
+```md
+<!-- implementation-semantics: material-behavior -->
+```
+
+The other supported values are `material-state`, `source-only`, `absence-only`,
+and `documentation-only`. Material behavior/state identities must each appear
+exactly once in an enforced `specDrivenTdd` slice. Evidence-only classifications
+do not create that mandatory lifecycle. The emitted `contractDerivedTdd`
+binding records the selected change, normalized contract digest, and required
+identities; historical plans without this field remain readable.
+
 Guarded packets use the runtime adapter rather than a caller-selected label. The root reserves the claim atomically, releases the state lock, launches one bounded worker, then binds its runtime identity before accepting the worker's durable handoff:
 
 ```bash
@@ -107,7 +122,7 @@ Normal successful implementation then pushes only its current task branch, creat
 ```bash
 npm run harness -- delivery-check <delivery-evidence> \
   --plan <current-plan> --state <current-state> --requirements <requirements-state> \
-  --review <current-review-state>
+  --review <current-review-state> --telemetry <runtime-telemetry-jsonl>
 ```
 
 Initialize a material TDD review with `--tdd-plan <plan> --tdd-state <state>`.
@@ -116,7 +131,10 @@ both review axes to the current GREEN candidate head and, for version 2, the
 current test-contract approval digest; failure-invariant proof
 remains an additional independent obligation for marked state-machine,
 persistence, or subprocess scenarios. `delivery-check` likewise rejects a
-missing/stale GREEN, requirements bridge, slice contract, or PR head.
+missing/stale GREEN, requirements bridge, slice contract, or PR head. For each
+mandatory packet it also reconciles canonical completion and handoff bindings
+with the matching adapter-issued telemetry boundary; detached or stale evidence
+fails with `ERR_DELIVERY_PACKET_EVIDENCE <packet> <field>`.
 
 Adaptive-plan delivery requires the current plan and execution state; every declared packet must be completed with a handoff, and requirements-gated plan/state/revisions must agree. Direct work instead passes `--direct <route-assessment>` so the narrow route is positively re-proven. The user owns merge. The local guard does not replace server-side branch protection; report missing administrator enforcement or required reviews as residual risk rather than silently changing repository settings. For material state-machine, persistence, or subprocess changes, executable review derives change-specific failure invariants from marked scenarios in the current OpenSpec delta and proves them alongside the fixed baseline; see `docs/validation-workflow.md`.
 

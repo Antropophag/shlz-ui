@@ -1,0 +1,21 @@
+{
+  "completedPacket": "test-design",
+  "changed": [
+    "self-contained acceptance oracle with tracked Wave 9 plan as sole regression input"
+  ],
+  "provenChecks": [
+    "deterministic RED",
+    "all six Wave 9 identities reported",
+    "material-covered and three evidence-only controls accepted",
+    "oracle decoy rejected"
+  ],
+  "settledDecisions": [
+    "synthetic controls are embedded in the acceptance oracle"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "routing-engine",
+  "invalidatedAssumptions": [],
+  "claimId": "contract-tdd-test-design-r5-20260825",
+  "briefDigest": "a6d6af7d4156b95f8373b9b96904f9d1c6c49e3738bc185ccf50f173b44bc025",
+  "workerReportDigest": "3f08c4ff1c4b5e7d285fa84269cddc1296dc6c3d89b1b800a45e3c609d403911"
+}

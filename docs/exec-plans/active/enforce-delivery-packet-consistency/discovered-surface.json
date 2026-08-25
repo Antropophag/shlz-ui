@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "changedFiles": [
+    "docs/agent-execution.md",
+    "docs/exec-plans/README.md",
+    "openspec/changes/enforce-delivery-packet-consistency/tasks.md",
+    "tools/harness.mjs",
+    "tools/lib/harness/core.mjs",
+    "tools/tests/delivery-packet-consistency-probe.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/coherent.json",
+    "tools/tests/fixtures/delivery-packet-consistency/detached-boundary.json",
+    "tools/tests/fixtures/delivery-packet-consistency/incident-pending.json",
+    "tools/tests/fixtures/delivery-packet-consistency/incident.json",
+    "tools/tests/fixtures/delivery-packet-consistency/oracle-control.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/oracle-decoy.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/retry-history.json",
+    "tools/tests/fixtures/delivery-packet-consistency/retry-history-missing-session.json",
+    "tools/tests/harness.test.mjs"
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

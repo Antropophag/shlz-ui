@@ -55,6 +55,7 @@ import {
   validateHandoff,
   validateExecutionBaseline,
   validatePlan,
+  validationInputFiles,
   writeJson,
   workerTelemetryEvents,
 } from "./lib/harness/core.mjs";
@@ -68,11 +69,21 @@ import {
   createPacketContextCapsule,
   runContextCostReplay,
 } from "./lib/harness/context-cost.mjs";
+import {
+  assertCurrentContractDerivedTdd,
+  loadChangeScenarioSemantics,
+} from "./lib/harness/contract-derived-tdd.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+
+const currentPlan = async (file) => {
+  const plan = validatePlan(await readJson(absolute(file)), config);
+  await assertCurrentContractDerivedTdd(repoRoot, plan);
+  return plan;
+};
 const config = await readJson(
   path.join(repoRoot, "docs/exec-plans/config.json"),
 );
@@ -161,6 +172,14 @@ const option = (name) => {
 };
 const output = (value) =>
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
+const repositoryFiles = async () => {
+  const { stdout } = await exec(
+    "git",
+    ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
+    { cwd: repoRoot },
+  );
+  return stdout.split("\0").filter(Boolean);
+};
 const refreshChangeFailureInvariants = async (state, target) => {
   const stored = state.changeFailureInvariants;
   if (!stored) return state;
@@ -208,7 +227,7 @@ switch (command) {
         "context-capsule requires --ledger, --phase, --transition, --session, and --out",
       );
     const ledgerTarget = statePath(ledgerPath);
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const executionStatePath = option("--state");
     const index = await contextIndex(
       plan,
@@ -321,10 +340,13 @@ switch (command) {
       );
     let execution = null;
     if (planPath) {
-      const plan = validatePlan(await readJson(absolute(planPath)), config);
+      const plan = await currentPlan(planPath);
       const reviewPath = option("--review");
+      const telemetryPath = option("--telemetry");
       if (!reviewPath)
         throw new Error("planned delivery-check requires --review <state>");
+      if (!telemetryPath)
+        throw new Error("planned delivery-check requires --telemetry <jsonl>");
       const requirementsPath = option("--requirements");
       if (plan.requirementsGate === "required" && !requirementsPath)
         throw new Error(
@@ -340,6 +362,10 @@ switch (command) {
           await readJson(absolute(reviewPath)),
           absolute(reviewPath),
         ),
+        telemetryEvents: (await readFile(absolute(telemetryPath), "utf8"))
+          .split(/\r?\n/)
+          .filter(Boolean)
+          .map((line) => JSON.parse(line)),
       };
     } else {
       const direct = await readJson(absolute(directPath));
@@ -360,10 +386,19 @@ switch (command) {
   }
   case "plan": {
     const requirementsPath = option("--requirements");
+    const assessment = await readJson(absolute(args[0]));
+    const requirementsState = requirementsPath
+      ? await readJson(absolute(requirementsPath))
+      : null;
+    const scenarioSemantics =
+      assessment.requirementsGate === "required"
+        ? await loadChangeScenarioSemantics(repoRoot, assessment.openSpecChange)
+        : null;
     const plan = createPlan(
-      await readJson(absolute(args[0])),
+      assessment,
       config,
-      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
+      requirementsState,
+      scenarioSemantics,
     );
     await writeJson(statePath(args[1]), plan);
     output(plan);
@@ -373,10 +408,10 @@ switch (command) {
     output(requirementsStatus(await readJson(absolute(args[0]))));
     break;
   case "plan-check":
-    output(validatePlan(await readJson(absolute(args[0])), config));
+    output(await currentPlan(args[0]));
     break;
   case "context": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const handoffPath = option("--state") ?? option("--handoff");
     output(
       await contextIndex(
@@ -392,32 +427,44 @@ switch (command) {
     const handoffPath = option("--state") ?? option("--handoff");
     output(
       readyPackets(
-        await readJson(absolute(args[0])),
+        await currentPlan(args[0]),
         handoffPath ? await readJson(absolute(handoffPath)) : null,
       ),
     );
     break;
   }
   case "handoff-write": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const value = validateHandoff(await readJson(absolute(args[1])), plan);
     await writeJson(statePath(args[2]), value);
     output(value);
     break;
   }
-  case "affected":
-    output(affectedValidation(args, config));
+  case "affected": {
+    const changeIndex = args.indexOf("--change");
+    const files = changeIndex === -1 ? args : args.slice(0, changeIndex);
+    const impact =
+      changeIndex === -1
+        ? { version: 1, kinds: ["unknown"], browserExecutable: null }
+        : (
+            await loadChangeScenarioSemantics(repoRoot, args[changeIndex + 1], {
+              requireValidationImpact: true,
+            })
+          ).validationImpact;
+    output(affectedValidation(files, config, impact));
     break;
+  }
   case "validation-check": {
     const ledgerPath = absolute(args[1]);
     const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
-    const files = relevantValidationFiles(
-      changed.changedFiles,
+    relevantValidationFiles(changed.changedFiles, args[0], config);
+    const files = validationInputFiles(
+      [...(await repositoryFiles()), ...changed.changedFiles],
       args[0],
       config,
     ).filter((file) => file !== repositoryRelative(ledgerPath));
-    assertValidationRun(
+    const decision = assertValidationRun(
       {
         target: args[0],
         currentFingerprint: await fingerprintFiles(files, repoRoot),
@@ -426,18 +473,19 @@ switch (command) {
       ledger,
       config,
     );
-    output({ allowed: true });
+    output(decision);
     break;
   }
   case "validation-record": {
     const ledgerPath = statePath(args[0]);
     const ledger = await readJsonOr(ledgerPath, []);
     const changed = await gitEvidence(repoRoot, option("--base"));
-    await recordValidation(
+    relevantValidationFiles(changed.changedFiles, args[1], config);
+    const result = await recordValidation(
       {
         target: args[1],
-        files: relevantValidationFiles(
-          changed.changedFiles,
+        files: validationInputFiles(
+          [...(await repositoryFiles()), ...changed.changedFiles],
           args[1],
           config,
         ).filter((file) => file !== repositoryRelative(ledgerPath)),
@@ -453,7 +501,7 @@ switch (command) {
       repoRoot,
     );
     await writeJson(ledgerPath, ledger);
-    output(ledger.at(-1));
+    output(result);
     break;
   }
   case "state-init": {
@@ -466,7 +514,7 @@ switch (command) {
     const baselinePath = option("--execution");
     if (!baselinePath)
       throw new Error("tdd-design-record requires --execution <baseline>");
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const handoff = await readJson(absolute(args[2]));
     const state = await withStateLock(target, async () => {
@@ -489,7 +537,7 @@ switch (command) {
     break;
   }
   case "tdd-review-record": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const handoff = await readJson(absolute(args[2]));
     const state = await withStateLock(target, async () => {
@@ -513,7 +561,7 @@ switch (command) {
     const baselinePath = option("--execution");
     if (!baselinePath)
       throw new Error(`${command} requires --execution <baseline>`);
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const current = await readJson(target);
@@ -577,7 +625,7 @@ switch (command) {
       throw new Error(
         "worker-run requires --execution <baseline> --claim <id> --session <id> --brief-out <brief>",
       );
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsState = option("--requirements")
       ? await readJson(absolute(option("--requirements")))
@@ -686,7 +734,7 @@ switch (command) {
     break;
   }
   case "claim": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = claimPacket(
@@ -706,7 +754,7 @@ switch (command) {
     break;
   }
   case "complete": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const state = await withStateLock(target, async () => {
       const next = completePacket(
@@ -727,7 +775,7 @@ switch (command) {
     break;
   }
   case "pause": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsPath = option("--requirements");
     if (!requirementsPath)
@@ -756,7 +804,7 @@ switch (command) {
     break;
   }
   case "resume": {
-    const plan = await readJson(absolute(args[0]));
+    const plan = await currentPlan(args[0]);
     const target = statePath(args[1]);
     const requirementsPath = option("--requirements");
     if (!requirementsPath)
@@ -816,10 +864,7 @@ switch (command) {
     const executionPlanPath = option("--plan");
     if (!executionPlanPath)
       throw new Error("review-init requires --plan <execution-plan>");
-    const executionPlan = validatePlan(
-      await readJson(absolute(executionPlanPath)),
-      config,
-    );
+    const executionPlan = await currentPlan(executionPlanPath);
     const enforcedTdd = (executionPlan.specDrivenTdd?.slices ?? []).some(
       ({ applicability }) => applicability === "enforced",
     );
@@ -952,7 +997,7 @@ switch (command) {
       const tddTarget = statePath(tddStatePath);
       if (tddTarget === target)
         throw new Error("review state and TDD state must use distinct files");
-      const tddPlan = await readJson(absolute(tddPlanPath));
+      const tddPlan = await currentPlan(tddPlanPath);
       return withStateLock(tddTarget, async () =>
         record(tddPlan, await readJson(tddTarget)),
       );

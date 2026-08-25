@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "enforce-contract-derived-tdd-routing",
+  "packetId": "test-contract-review",
+  "physicalSession": null,
+  "launchClaim": "contract-tdd-test-review-r6-20260825",
+  "phase": "implementation",
+  "objective": "Independently review the test contract before RED authorization",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/contract-derived-tdd-routing",
+    "outcome:decoy discrimination review",
+    "outcome:independent authority review",
+    "outcome:production-context exclusion",
+    "validation:test-contract review checklist"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "test-design",
+        "changed": [
+          "self-contained baseline RED over tracked Wave 9 plan",
+          "explicit RED signature and failed scenario binding"
+        ],
+        "provenChecks": [
+          "RED is deterministic 2/2",
+          "control passes 2/2",
+          "decoy fails 2/2",
+          "Wave 9 baseline digest matches"
+        ],
+        "settledDecisions": [
+          "formal RED uses tracked baseline fixtures; readable new fixtures remain regression documentation"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "test-contract-review",
+        "invalidatedAssumptions": [],
+        "claimId": "contract-tdd-test-design-r4-20260825",
+        "briefDigest": "6f6c0195973de2d7b81cec2dc98cebd989230ecb7baf402e789afc1b0eab45a0",
+        "workerReportDigest": "4a90afa1b4387243806bf92a4ce455d922ab700bd0718e42a1ac880aea175a60"
+      }
+    ],
+    "verdicts": [
+      "RED is deterministic 2/2",
+      "Wave 9 baseline digest matches",
+      "control passes 2/2",
+      "decoy fails 2/2"
+    ],
+    "rawEvidence": [
+      "explicit RED signature and failed scenario binding",
+      "self-contained baseline RED over tracked Wave 9 plan"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/absence-only-contract.md",
+      "digest": "23007e622929cecc55107579b80b01048665579d4d5481812469bdcb714cd6a3",
+      "bytes": 268
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/assessment.json",
+      "digest": "98771660d2b02c733a4798af0d09eb0db25b1941f3ef092c28fb3e9bdcea83f3",
+      "bytes": 1030
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/documentation-only-contract.md",
+      "digest": "ffee548619b30ded3f63aeb60620ebdfe6570ece42485b4fb04ec984d0aac752",
+      "bytes": 276
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/material-covered-assessment.json",
+      "digest": "acc16fa4a790867411d05416395ab89fdc9de4baf3301134b7dda484b57fceb1",
+      "bytes": 2633
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/material-covered-contract.md",
+      "digest": "18dcbf52ac228ebfc733aecd6a2c17c25297e06142fe24cf51c11005f5a184c8",
+      "bytes": 290
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle-control.mjs",
+      "digest": "32719c9d9d5d2724f38fcf48cd51b6b5501a776ec466225ae0c2df0ef5361353",
+      "bytes": 84
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle-decoy.mjs",
+      "digest": "f320c42a8a0ded86465a8008b8b2c662da6d29c3646171d8cfbffe877891c34c",
+      "bytes": 137
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/oracle.json",
+      "digest": "9357f052ee97100791d8e2a62d6d898744e15a4be9a0bbc977f624fd22f49877",
+      "bytes": 1756
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/requirements.json",
+      "digest": "cc96cb4d6f3e673b89aeccf67cc858a8cc79a2b25738eb45e01ac6dd9ae20506",
+      "bytes": 352
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/source-only-contract.md",
+      "digest": "b91ac7026cc0a81eaae8ca14b0d182817076f9c870d55b5e0855259604306894",
+      "bytes": 253
+    },
+    {
+      "path": "docs/exec-plans/fixtures/contract-derived-tdd-routing/wave-9-contract.md",
+      "digest": "feac31998e4f8635f382c7ef40d72c1e0eabd805d7c567e3d6ba135053d41d86",
+      "bytes": 2323
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/design.md",
+      "digest": "120db33b024a415befba31100566090e38f8456fd87e9391231268600aa6d601",
+      "bytes": 4694
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/proposal.md",
+      "digest": "47e31d6b141fc1081e82fc6158b36ec512edbd0b559944b308da031e621fe279",
+      "bytes": 2075
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "digest": "9d09c6f1e0819cb371b48efddb54adf7277153361052bce793489b44343e81e5",
+      "bytes": 4736
+    },
+    {
+      "path": "openspec/changes/enforce-contract-derived-tdd-routing/tasks.md",
+      "digest": "41993101830d045bf1f90f30a1e1e2e2f893780199eae887f0175848375d7778",
+      "bytes": 1781
+    },
+    {
+      "path": "tools/tests/contract-derived-tdd-routing-probe.mjs",
+      "digest": "4a8854b4c75b63b496b371336f4e3382e610f425d9045f6b672d8e8e45c2e302",
+      "bytes": 6023
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "c5b5e0f700af0fe7f9048264c8d4b771ce941fc5ecb77eed6462925a2a736e1a",
+  "capsuleDigest": "55f26f1d38a0a1eec98143da9fe83a2fac129c91d3698f98860033bc277e896a"
+}

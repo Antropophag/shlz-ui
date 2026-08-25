@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "sliceId": "delivery-packet-consistency",
+  "runtimeId": "01a037ef-f652-7d93-b3ef-180f98df0660",
+  "requirementsRevision": 2,
+  "baselineDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "acceptanceDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "fixtureDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "controlsDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "contractDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "oracleChallengeDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "scenarioMappings": [
+    {
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected",
+      "authorityRef": "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md"
+    },
+    {
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Coherent packet evidence reaches ordinary delivery checks",
+      "authorityRef": "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md"
+    }
+  ],
+  "inputs": [
+    "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md",
+    "tools/tests/delivery-packet-consistency-probe.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/incident.json",
+    "tools/tests/fixtures/delivery-packet-consistency/coherent.json"
+  ],
+  "expectedResultSource": {
+    "kind": "explicit-openspec-literal",
+    "ref": "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md"
+  },
+  "oracleMethod": {
+    "kind": "behavioral-assertion",
+    "observesSeam": "harness/delivery-check"
+  },
+  "expectedFailureSignature": "ERR_DELIVERY_PACKET_CONSISTENCY_BYPASS routing-engine-split-brain",
+  "failedScenarioIds": [
+    "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected"
+  ],
+  "oracleChallenge": {
+    "version": 1,
+    "adapterEnvironment": "SHLZ_TDD_ORACLE_ADAPTER",
+    "controlAdapter": "tools/tests/fixtures/delivery-packet-consistency/oracle-control.mjs",
+    "decoyAdapter": "tools/tests/fixtures/delivery-packet-consistency/oracle-decoy.mjs",
+    "expectedFailureSignature": "ERR_DELIVERY_PACKET_CONSISTENCY_ORACLE_DECOY",
+    "scenarioIds": [
+      "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected"
+    ]
+  },
+  "oracleChallengeRuns": {
+    "control": [],
+    "decoy": []
+  }
+}

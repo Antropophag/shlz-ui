@@ -56,6 +56,7 @@ import {
   loadChangeFailureInvariants,
   resumePacket,
   retryWorkerPacket,
+  validationInputFiles,
   reviewContext,
   resolveReviewFindings,
   summarizeEvents,
@@ -87,6 +88,49 @@ const load = async (file) =>
 const config = await load("docs/exec-plans/config.json");
 const wave7 = await load("docs/exec-plans/fixtures/wave-7-assessment.json");
 const clone = (value) => JSON.parse(JSON.stringify(value));
+const completeDeliveryPackets = (plan, state) => {
+  const telemetryEvents = [];
+  for (const [index, { id }] of plan.packets.entries()) {
+    const claimId = `${id}-claim`;
+    const briefDigest = createHash("sha256")
+      .update(`${id}-brief`)
+      .digest("hex");
+    const workerReportDigest = createHash("sha256")
+      .update(`${id}-report`)
+      .digest("hex");
+    const session = `${id}-session`;
+    const runtimeId = `00000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`;
+    const launchId = `10000000-0000-4000-8000-${String(index + 1).padStart(12, "0")}`;
+    state.packets[id] = {
+      status: "completed",
+      claimId,
+      briefDigest,
+      session,
+      execution: { source: "codex-exec-jsonl", runtimeId, launchId },
+      launch: { terminalStatus: "completed", launchId, workerReportDigest },
+    };
+    state.handoffs[id] = {
+      completedPacket: id,
+      changed: [],
+      provenChecks: [],
+      settledDecisions: [],
+      unresolvedFindings: [],
+      nextPacket: null,
+      invalidatedAssumptions: [],
+      claimId,
+      briefDigest,
+      workerReportDigest,
+    };
+    telemetryEvents.push({
+      type: "execution-boundary",
+      executionSource: "codex-exec-jsonl",
+      packet: id,
+      session,
+      runtimeId,
+    });
+  }
+  return telemetryEvents;
+};
 const exec = promisify(execFile);
 const recordKnownBadObservation = (caseId) => {
   if (process.env.SHLZ_TDD_OBSERVATION_CASE === caseId)
@@ -2600,6 +2644,10 @@ test("worker lifecycle fails closed, retries, and never unlocks dependents on pa
       .terminalStatus,
     "invalid-worker-report",
   );
+  assert.equal(
+    state.packets["shared-native-dialog"].attemptHistory.at(-1).session,
+    "worker-reportless",
+  );
   const retryBrief = createWorkerBrief(plan, state, "shared-native-dialog", {
     baseline: executionBaseline,
     claimId: "claim-retry",
@@ -3320,18 +3368,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
     /candidate head is stale/,
   );
 
-  for (const { id } of plan.packets) {
-    state.packets[id] = { status: "completed" };
-    state.handoffs[id] = {
-      completedPacket: id,
-      changed: [],
-      provenChecks: [],
-      settledDecisions: [],
-      unresolvedFindings: [],
-      nextPacket: null,
-      invalidatedAssumptions: [],
-    };
-  }
+  const telemetryEvents = completeDeliveryPackets(plan, state);
   const delivery = {
     defaultBranch: "main",
     pullRequestUrl: "https://github.com/Antropophag/shlz-ui/pull/99",
@@ -3351,7 +3388,16 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
     },
   };
   assert.throws(
-    () => assertImplementationDelivery(delivery, { plan, state }),
+    () =>
+      assertImplementationDelivery(delivery, {
+        plan,
+        state,
+      }),
+    /planned delivery requires trusted packet telemetry/,
+  );
+  assert.throws(
+    () =>
+      assertImplementationDelivery(delivery, { plan, state, telemetryEvents }),
     /delivery requires current independent review evidence/,
   );
   const deliveryReview = createReviewState(oid, [], null, binding);
@@ -3372,6 +3418,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
       plan,
       state,
       reviewState: deliveryReview,
+      telemetryEvents,
     }),
   );
   delivery.actual.localHead = "b".repeat(40);
@@ -3383,6 +3430,7 @@ test("review and delivery bind fresh GREEN evidence to the candidate head", () =
         plan,
         state,
         reviewState: deliveryReview,
+        telemetryEvents,
       }),
     /candidate head is stale/,
   );
@@ -3645,6 +3693,7 @@ test("delivery rejects an incomplete mandatory packet graph", () => {
         plan,
         state,
         requirementsState: ready,
+        telemetryEvents: [],
       }),
     /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
   );
@@ -3658,8 +3707,9 @@ test("delivery rejects an incomplete mandatory packet graph", () => {
         plan,
         state,
         requirementsState: ready,
+        telemetryEvents: [],
       }),
-    /delivery requires completed mandatory packets: discovery-contracts, shared-native-dialog, modal, drawer, nested-integration/,
+    /handoff|ERR_DELIVERY_PACKET_EVIDENCE/,
   );
 });
 
@@ -3978,6 +4028,178 @@ test("affected validation routes docs, component, shared seam, and manifest chan
   );
 });
 
+test("impact-aware validation excludes Playwright only for proven non-browser impact", () => {
+  const nonBrowser = {
+    version: 1,
+    kinds: ["harness", "spec", "docs"],
+    browserExecutable: false,
+  };
+  assert.deepEqual(
+    affectedValidation(
+      ["docs/agent-execution.md", "tools/harness.mjs"],
+      config,
+      nonBrowser,
+    ).map(({ id }) => id),
+    ["docs", "harness"],
+  );
+  assert.ok(
+    affectedValidation(
+      ["openspec/changes/example/specs/browser/spec.md"],
+      config,
+      {
+        version: 1,
+        kinds: ["spec", "browser-contract"],
+        browserExecutable: true,
+      },
+    ).some(({ id }) => id === "full-browser"),
+  );
+  const contradictory = affectedValidation(
+    ["tools/playwright/overlay.spec.js"],
+    config,
+    nonBrowser,
+  );
+  assert.deepEqual(
+    contradictory.map(({ id }) => id),
+    ["full-browser"],
+  );
+  assert.equal(contradictory[0].escalation, "contradictory-browser-impact");
+  assert.deepEqual(
+    affectedValidation(["docs/agent-execution.md"], config, {
+      version: 1,
+      kinds: ["unknown"],
+      browserExecutable: false,
+    }).map(({ id }) => id),
+    ["full-browser"],
+  );
+});
+
+test("public affected command derives impact from the selected change", async () => {
+  const { stdout } = await exec(
+    process.execPath,
+    [
+      "tools/harness.mjs",
+      "affected",
+      "tools/harness.mjs",
+      "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+      "--change",
+      "enforce-contract-derived-tdd-routing",
+    ],
+    { cwd: root },
+  );
+  const targets = JSON.parse(stdout);
+  assert.deepEqual(
+    targets.map(({ id }) => id),
+    ["harness", "openspec"],
+  );
+  assert.ok(targets.every(({ browser }) => browser !== true));
+});
+
+test("validation fingerprints include the complete meaning-changing input closure", () => {
+  const files = [
+    "packages/behaviors/src/modal.ts",
+    "tools/playwright/overlay.spec.js",
+    "playwright.config.js",
+    "docs/exec-plans/config.json",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+  ];
+  assert.deepEqual(validationInputFiles(files, "modal-browser", config), [
+    "docs/exec-plans/config.json",
+    "package-lock.json",
+    "package.json",
+    "packages/behaviors/src/modal.ts",
+    "playwright.config.js",
+    "tools/playwright/overlay.spec.js",
+  ]);
+  const closure = validationInputFiles(files, "modal-browser", config);
+  const contents = Object.fromEntries(closure.map((file) => [file, "v1"]));
+  const initial = fingerprint(closure, contents);
+  for (const file of closure)
+    assert.notEqual(
+      fingerprint(closure, { ...contents, [file]: "v2" }),
+      initial,
+      `${file} must invalidate validation reuse`,
+    );
+});
+
+test("harness validation fingerprints its complete contract-routing suite and oracles", () => {
+  const files = [
+    "tools/harness.mjs",
+    "tools/lib/harness/contract-derived-tdd.mjs",
+    "tools/tests/harness.test.mjs",
+    "tools/tests/contract-derived-tdd.test.mjs",
+    "tools/tests/contract-derived-tdd-routing-probe.mjs",
+    "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
+    "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
+    "docs/exec-plans/fixtures/wave-9-plan.json",
+    "docs/exec-plans/fixtures/wave-9-contract-derived-tdd.md",
+    "docs/exec-plans/config.json",
+    "package.json",
+    "README.md",
+  ];
+  const closure = validationInputFiles(files, "harness", config);
+  assert.deepEqual(closure, files.slice(0, -1).sort());
+  const contents = Object.fromEntries(closure.map((file) => [file, "v1"]));
+  const initial = fingerprint(closure, contents);
+  for (const file of closure)
+    assert.notEqual(
+      fingerprint(closure, { ...contents, [file]: "v2" }),
+      initial,
+      `${file} must invalidate harness validation reuse`,
+    );
+});
+
+test("full validation reuse ignores its own operational evidence outputs", async () => {
+  const rawLog = `docs/exec-plans/validation-full-${process.pid}.log`;
+  const rawArtifact = `docs/exec-plans/raw-logs/${createHash("sha256")
+    .update("full validation output\n")
+    .digest("hex")}.log`;
+  const cleanup = registerExitCleanup([
+    path.join(root, rawLog),
+    path.join(root, rawArtifact),
+  ]);
+  try {
+    await writeFile(path.join(root, rawLog), "full validation output\n");
+    const candidates = [
+      "tools/harness.mjs",
+      rawLog,
+      rawArtifact,
+      "docs/exec-plans/active/example/state.json",
+      "docs/exec-plans/validation-example.json",
+    ];
+    const before = validationInputFiles(candidates, "full", config);
+    assert.deepEqual(before, ["tools/harness.mjs"]);
+    const ledger = [];
+    const request = {
+      target: "full",
+      files: before,
+      outcome: "pass",
+      packet: "delivery",
+      session: "full-validation",
+      rawLog,
+    };
+    await recordValidation(request, ledger, config, root);
+    const after = validationInputFiles(candidates, "full", config);
+    assert.deepEqual(after, before);
+    assert.equal(
+      (
+        await recordValidation(
+          { ...request, files: after, rawLog: null },
+          ledger,
+          config,
+          root,
+        )
+      ).action,
+      "reuse",
+    );
+  } finally {
+    await unlink(path.join(root, rawLog)).catch(() => {});
+    await unlink(path.join(root, rawArtifact)).catch(() => {});
+    cleanup();
+  }
+});
+
 test("validation targets derive their own relevant changed-file set", () => {
   assert.deepEqual(
     relevantValidationFiles(
@@ -4013,20 +4235,19 @@ test("validation targets derive their own relevant changed-file set", () => {
   );
 });
 
-test("expensive successful reruns require an invalidation reason", () => {
+test("expensive successful results are reused only for an identical closure", () => {
   const ledger = [
     { target: "full-browser", fingerprint: "same", outcome: "pass" },
   ];
-  assert.throws(
-    () =>
-      assertValidationRun(
-        { target: "full-browser", currentFingerprint: "same" },
-        ledger,
-        config,
-      ),
-    /reason is required/,
+  assert.deepEqual(
+    assertValidationRun(
+      { target: "full-browser", currentFingerprint: "same" },
+      ledger,
+      config,
+    ),
+    { action: "reuse", entry: ledger[0] },
   );
-  assert.doesNotThrow(() =>
+  assert.deepEqual(
     assertValidationRun(
       {
         target: "full-browser",
@@ -4036,15 +4257,15 @@ test("expensive successful reruns require an invalidation reason", () => {
       ledger,
       config,
     ),
+    { action: "run" },
   );
-  assert.throws(
-    () =>
-      assertValidationRun(
-        { target: "modal-browser", currentFingerprint: "same" },
-        [{ target: "modal-browser", fingerprint: "same", outcome: "pass" }],
-        config,
-      ),
-    /reason is required/,
+  assert.equal(
+    assertValidationRun(
+      { target: "full-browser", currentFingerprint: "changed" },
+      ledger,
+      config,
+    ).action,
+    "run",
   );
 });
 
@@ -4074,10 +4295,14 @@ test("validation records compute fingerprints and durably enforce invalidation",
     recordValidation({ ...request, rawLog: null }, [], config, root),
     /requires a retained raw log/,
   );
-  await assert.rejects(
-    recordValidation(request, ledger, config, root),
-    /reason is required/,
+  const reused = await recordValidation(
+    { ...request, rawLog: null },
+    ledger,
+    config,
+    root,
   );
+  assert.equal(reused.action, "reuse");
+  assert.equal(ledger.length, 1);
   await recordValidation(
     { ...request, reason: "substantive remediation" },
     ledger,

@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "sliceId": "contract-derived-routing",
+  "runtimeId": "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
+  "requirementsRevision": 1,
+  "baselineDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "acceptanceDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "fixtureDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "controlsDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "contractDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "oracleChallengeDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+  "scenarioMappings": [
+    {
+      "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration",
+      "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+    },
+    {
+      "scenarioId": "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration",
+      "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+    },
+    {
+      "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+      "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+    },
+    {
+      "scenarioId": "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage",
+      "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+    },
+    {
+      "scenarioId": "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable",
+      "authorityRef": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+    }
+  ],
+  "inputs": [
+    "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md",
+    "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json"
+  ],
+  "expectedResultSource": {
+    "kind": "explicit-openspec-literal",
+    "ref": "openspec/changes/enforce-contract-derived-tdd-routing/specs/harness/contract-derived-tdd-routing/spec.md"
+  },
+  "oracleMethod": {
+    "kind": "behavioral-assertion",
+    "observesSeam": "harness/plan"
+  },
+  "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_BYPASS wave-9-bypass",
+  "failedScenarioIds": [
+    "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected",
+    "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
+  ],
+  "oracleChallenge": {
+    "version": 1,
+    "adapterEnvironment": "SHLZ_TDD_ORACLE_ADAPTER",
+    "controlAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-control.mjs",
+    "decoyAdapter": "tools/tests/fixtures/contract-derived-tdd-oracle-decoy.mjs",
+    "expectedFailureSignature": "ERR_CONTRACT_DERIVED_TDD_ORACLE_DECOY",
+    "scenarioIds": [
+      "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage"
+    ]
+  },
+  "oracleChallengeRuns": {
+    "control": [],
+    "decoy": []
+  }
+}

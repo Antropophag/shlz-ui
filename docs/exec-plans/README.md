@@ -11,7 +11,7 @@ OpenSpec is the normative contract. Git is implementation state, tests are execu
 5. End a packet with `complete`; the state retains one structured handoff per packet, so dependency joins receive every direct handoff without chat history.
 6. Record ordinary observed events with `telemetry-record`; pass `--telemetry-out <telemetry>` to `worker-run` so that command appends runtime boundaries and usage directly from its adapter result, then use `telemetry-summary` for calibration. Never import runtime proof from a caller-selected state file or estimate missing tokens.
 
-Before implementation, `route-check` validates semantic route evidence and `implementation-preflight --out <execution-baseline>` binds it to requirements intent/change/decision ownership/readiness plus either current-main task-branch state or a verified existing open-PR head. Before completion, `route-conformance --execution <execution-baseline>` binds discovered semantic surface to that episode diff and planned `delivery-check --review <current-review-state>` requires current Standards/Spec passes plus applicable failure proof before it queries Git/GitHub for matching local, upstream, and open-PR heads targeting the default branch. Baseline kind is provenance, not a semantic lane. Route/discovery JSON is operational guard evidence, not normative requirements; OpenSpec remains authoritative.
+Before implementation, `route-check` validates semantic route evidence and `implementation-preflight --out <execution-baseline>` binds it to requirements intent/change/decision ownership/readiness plus either current-main task-branch state or a verified existing open-PR head. Before completion, `route-conformance --execution <execution-baseline>` binds discovered semantic surface to that episode diff and planned `delivery-check --review <current-review-state> --telemetry <runtime-telemetry-jsonl>` reconciles packet state, adapter evidence, and handoffs before requiring current Standards/Spec passes plus applicable failure proof and querying Git/GitHub for matching local, upstream, and open-PR heads targeting the default branch. Baseline kind is provenance, not a semantic lane. Route/discovery JSON is operational guard evidence, not normative requirements; OpenSpec remains authoritative.
 
 Plan and handoff fields are validated by the CLI. `preferredExecutionMode` is one of `continue`, `fresh-session`, `isolated-subagent`, or `parallelizable-subagent`. An enforced plan guards the latter three with runtime evidence; parallel packets must also have disjoint implementation surfaces.
 
@@ -82,3 +82,12 @@ Guarded `worker-run` automatically writes an unacknowledgeable pre-launch phase 
 Historical plans without `executionIsolation` remain readable and retain advisory behavior. New enforced plans require attested guarded claims; an unavailable adapter stops unless `unavailableFallback: "continue"` was declared in advance, in which case state records the explicit degradation. No migration rewrites historical state.
 
 Active plans live in `docs/exec-plans/active/<change>/`. Fixtures live in `docs/exec-plans/fixtures/`; telemetry JSONL should be summarized rather than loaded into normal packet context.
+
+# Contract-derived planning
+
+`harness plan` derives mandatory spec-driven TDD from the requirements-selected
+OpenSpec delta contract. Contract authors classify each scenario with one of
+`material-behavior`, `material-state`, `source-only`, `absence-only`, or
+`documentation-only`; planners map every material identity exactly once to an
+enforced slice. Omitting `specDrivenTdd` cannot suppress a material obligation.
+Existing plan files remain readable without migration.

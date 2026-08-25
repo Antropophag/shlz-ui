@@ -29,6 +29,17 @@
       "irrelevant-output-accumulation"
     ]
   },
+  "validationPolicyPatterns": [
+    "docs/exec-plans/config.json",
+    "tools/harness.mjs",
+    "tools/lib/harness/**"
+  ],
+  "browserValidationPatterns": [
+    "playwright.config.*",
+    "tools/playwright/**",
+    "package.json",
+    "package-lock.json"
+  ],
   "validationTargets": {
     "docs": {
       "level": 1,
@@ -50,6 +61,11 @@
         "tools/harness.mjs",
         "tools/lib/harness/**",
         "tools/tests/harness.test.mjs",
+        "tools/tests/contract-derived-tdd.test.mjs",
+        "tools/tests/contract-derived-tdd-routing-probe.mjs",
+        "tools/tests/fixtures/contract-derived-tdd-oracle-*.mjs",
+        "docs/exec-plans/fixtures/wave-9-{plan.json,contract-derived-tdd.md}",
+        "package.json",
         "docs/exec-plans/**"
       ],
       "fingerprintIgnorePatterns": ["docs/exec-plans/active/**"]
@@ -74,6 +90,7 @@
       ]
     },
     "modal-browser": {
+      "browser": true,
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Modal",
       "expensive": true,
@@ -85,6 +102,7 @@
       ]
     },
     "drawer-browser": {
+      "browser": true,
       "level": 2,
       "command": "playwright test tools/playwright/overlay.spec.js -g Drawer",
       "expensive": true,
@@ -96,6 +114,7 @@
       ]
     },
     "overlay-integration": {
+      "browser": true,
       "level": 3,
       "command": "playwright test tools/playwright/overlay.spec.js",
       "expensive": true,
@@ -107,6 +126,7 @@
       ]
     },
     "full-browser": {
+      "browser": true,
       "level": 4,
       "command": "npm run test:e2e",
       "expensive": true,
@@ -119,10 +139,16 @@
       ]
     },
     "full": {
+      "browser": true,
       "level": 4,
       "command": "npm run check",
       "expensive": true,
-      "fingerprintPatterns": ["**"]
+      "fingerprintPatterns": ["**"],
+      "fingerprintIgnorePatterns": [
+        "docs/exec-plans/active/**",
+        "docs/exec-plans/raw-logs/**",
+        "docs/exec-plans/validation-*.{json,log}"
+      ]
     }
   },
   "validationRules": [

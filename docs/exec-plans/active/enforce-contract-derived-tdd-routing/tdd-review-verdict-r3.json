@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "verdict": "changes-requested",
+  "finding": {
+    "id": "TCR-003",
+    "summary": "Make baseline RED self-contained over the tracked original Wave 9 plan, bind expectedFailureSignature and failedScenarioIds, and avoid a new fixture directory being mistaken for non-frozen worktree mutation."
+  }
+}

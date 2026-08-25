@@ -14,7 +14,7 @@
     "generate:source-index": "node tools/generate-design-source-index.mjs",
     "build": "npm run generate && npm run build --workspaces --if-present",
     "test": "node --test --test-concurrency=1 tools/tests/*.test.mjs",
-    "test:harness": "node --test tools/tests/harness.test.mjs",
+    "test:harness": "node --test tools/tests/harness.test.mjs tools/tests/contract-derived-tdd.test.mjs && node tools/tests/contract-derived-tdd-routing-probe.mjs",
     "test:packages": "node tools/package-consumer-smoke.mjs",
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",

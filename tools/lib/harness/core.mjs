@@ -12,6 +12,7 @@ import {
 } from "node:fs/promises";
 import path from "node:path";
 import { promisify } from "node:util";
+import { contractDerivedTddBinding } from "./contract-derived-tdd.mjs";
 
 const exec = promisify(execFile);
 const order = (left, right) => (left < right ? -1 : left > right ? 1 : 0);
@@ -580,6 +581,78 @@ const incompleteDeliveryPackets = (plan, state) =>
     })
     .map(({ id }) => id);
 
+function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
+  if (!Array.isArray(telemetryEvents))
+    throw new Error("planned delivery requires trusted packet telemetry");
+  const boundaries = telemetryEvents.filter(
+    ({ type, executionSource }) =>
+      type === "execution-boundary" && executionSource === "codex-exec-jsonl",
+  );
+  for (const { id } of plan.packets) {
+    const packet = state.packets?.[id];
+    const packetBoundaries = boundaries.filter((event) => event.packet === id);
+    if (packet?.status !== "completed") {
+      if (packetBoundaries.length)
+        throw new Error(
+          `ERR_DELIVERY_PACKET_EVIDENCE ${id} telemetry exists without canonical completion`,
+        );
+      continue;
+    }
+    const handoff = validateHandoff(state.handoffs?.[id], plan);
+    for (const [field, expected, actual] of [
+      ["claimId", packet.claimId, handoff.claimId],
+      ["briefDigest", packet.briefDigest, handoff.briefDigest],
+      [
+        "workerReportDigest",
+        packet.launch?.workerReportDigest,
+        handoff.workerReportDigest,
+      ],
+    ])
+      if (expected !== actual)
+        throw new Error(`ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field}`);
+    if (
+      packet.launch?.terminalStatus !== "completed" ||
+      packet.execution?.source !== "codex-exec-jsonl" ||
+      packet.launch?.launchId !== packet.execution?.launchId
+    )
+      throw new Error(`ERR_DELIVERY_PACKET_EVIDENCE ${id} launchId`);
+    const matchingBoundary = packetBoundaries.some(
+      (event) =>
+        event.session === packet.session &&
+        event.runtimeId === packet.execution.runtimeId,
+    );
+    if (!matchingBoundary) {
+      const fields = ["session", "runtimeId"];
+      const field = fields.find((candidate) =>
+        packetBoundaries.some(
+          (event) =>
+            event[candidate] !==
+            (candidate === "session"
+              ? packet.session
+              : packet.execution[candidate]),
+        ),
+      );
+      throw new Error(
+        `ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field ?? "execution-boundary"}`,
+      );
+    }
+    const knownAttempts = [packet, ...(packet.attemptHistory ?? [])];
+    if (
+      packetBoundaries.some(
+        (event) =>
+          !knownAttempts.some(
+            (attempt) =>
+              attempt.execution?.runtimeId === event.runtimeId &&
+              attempt.session === event.session,
+          ),
+      )
+    )
+      throw new Error(
+        `ERR_DELIVERY_PACKET_EVIDENCE ${id} detached-execution-boundary`,
+      );
+  }
+}
+
 function assertDeliveryReview(review, candidateHead, tddBinding) {
   if (!review || review.version !== 1)
     throw new Error("delivery requires current independent review evidence");
@@ -625,6 +698,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       state,
       requirementsState = null,
       reviewState = null,
+      telemetryEvents,
     } = execution;
     if (!plan || !state)
       throw new Error("delivery execution evidence requires plan and state");
@@ -649,6 +723,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       throw new Error(
         `delivery execution state has unknown packets: ${unknown.join(", ")}`,
       );
+    assertDeliveryPacketEvidence(plan, state, telemetryEvents);
     const incomplete = incompleteDeliveryPackets(plan, state);
     if (incomplete.length)
       throw new Error(
@@ -1241,6 +1316,45 @@ export function validatePlan(plan, config) {
       plan.packets,
       plan.executionIsolation,
     );
+  if (plan.contractDerivedTdd !== undefined) {
+    const obligation = plan.contractDerivedTdd;
+    if (
+      obligation?.version !== 1 ||
+      obligation.openSpecChange !== plan.openSpecChange ||
+      typeof obligation.contractDigest !== "string" ||
+      !/^[a-f0-9]{64}$/.test(obligation.contractDigest) ||
+      !Array.isArray(obligation.requiredScenarioIds) ||
+      obligation.requiredScenarioIds.some(
+        (id, index) =>
+          typeof id !== "string" ||
+          !id ||
+          obligation.requiredScenarioIds.indexOf(id) !== index,
+      )
+    )
+      throw new Error("plan has invalid contract-derived TDD obligation");
+    const coverage = new Map(
+      obligation.requiredScenarioIds.map((id) => [id, 0]),
+    );
+    for (const slice of plan.specDrivenTdd?.slices ?? []) {
+      if (slice.applicability !== "enforced") continue;
+      for (const id of slice.scenarioIds)
+        if (coverage.has(id)) coverage.set(id, coverage.get(id) + 1);
+    }
+    const uncovered = [...coverage]
+      .filter(([, count]) => count === 0)
+      .map(([id]) => id);
+    const duplicate = [...coverage]
+      .filter(([, count]) => count > 1)
+      .map(([id]) => id);
+    if (uncovered.length)
+      throw new Error(
+        `contract-derived TDD requires enforced coverage; uncovered: ${uncovered.join(",")}`,
+      );
+    if (duplicate.length)
+      throw new Error(
+        `contract-derived TDD requires exact coverage; duplicated: ${duplicate.join(",")}`,
+      );
+  }
   if (
     plan.version >= 2 &&
     ["L", "XL"].includes(plan.classification.size) &&
@@ -1278,7 +1392,12 @@ export function validatePlan(plan, config) {
   return plan;
 }
 
-export function createPlan(assessment, config, requirementsState = null) {
+export function createPlan(
+  assessment,
+  config,
+  requirementsState = null,
+  scenarioSemantics = null,
+) {
   if (
     !assessment.id ||
     !Array.isArray(assessment.workUnits) ||
@@ -1308,6 +1427,9 @@ export function createPlan(assessment, config, requirementsState = null) {
       openSpecTaskCount: assessment.openSpecTaskCount ?? null,
     },
     contextPolicy: config.context,
+    ...(scenarioSemantics
+      ? { contractDerivedTdd: contractDerivedTddBinding(scenarioSemantics) }
+      : {}),
     ...(assessment.specDrivenTdd
       ? { specDrivenTdd: stableValue(assessment.specDrivenTdd) }
       : {}),
@@ -1900,6 +2022,7 @@ export function retryWorkerPacket(state, packetId) {
     attemptHistory: [
       ...(current.attemptHistory ?? []),
       {
+        session: current.session,
         claimId: current.claimId ?? null,
         briefDigest: current.briefDigest ?? null,
         execution: current.execution ?? null,
@@ -2263,7 +2386,24 @@ export function completePacket(
   return state;
 }
 
-export function affectedValidation(files, config) {
+const validationImpactKinds = new Set([
+  "harness",
+  "spec",
+  "docs",
+  "product",
+  "browser-contract",
+  "browser-executable",
+]);
+
+const conservativeBrowserValidation = (config, escalation) => [
+  {
+    id: "full-browser",
+    ...config.validationTargets["full-browser"],
+    escalation,
+  },
+];
+
+export function affectedValidation(files, config, impact = null) {
   const selected = new Set();
   for (const rule of config.validationRules)
     if (
@@ -2273,9 +2413,50 @@ export function affectedValidation(files, config) {
     )
       for (const target of rule.targets) selected.add(target);
   if (files.length > 0 && selected.size === 0) selected.add("full");
+  if (impact !== null) {
+    const valid =
+      impact?.version === 1 &&
+      Array.isArray(impact.kinds) &&
+      impact.kinds.length > 0 &&
+      impact.kinds.every((kind) => validationImpactKinds.has(kind)) &&
+      typeof impact.browserExecutable === "boolean";
+    if (!valid) return conservativeBrowserValidation(config, "unknown-impact");
+    const selectedBrowser = [...selected].some(
+      (id) => config.validationTargets[id]?.browser === true,
+    );
+    if (!impact.browserExecutable && selectedBrowser)
+      return conservativeBrowserValidation(
+        config,
+        "contradictory-browser-impact",
+      );
+    if (impact.browserExecutable && !selectedBrowser)
+      selected.add("full-browser");
+    if (!impact.browserExecutable)
+      for (const id of [...selected])
+        if (config.validationTargets[id]?.browser === true) selected.delete(id);
+  }
   return [...selected]
     .map((id) => ({ id, ...config.validationTargets[id] }))
     .sort((a, b) => a.level - b.level || order(a.id, b.id));
+}
+
+export function validationInputFiles(files, target, config) {
+  const definition = config.validationTargets[target];
+  if (!definition) throw new Error(`unknown validation target ${target}`);
+  const patterns = [
+    ...definition.fingerprintPatterns,
+    ...(config.validationPolicyPatterns ?? []),
+    ...(definition.browser ? (config.browserValidationPatterns ?? []) : []),
+  ];
+  return [...new Set(files)]
+    .filter(
+      (file) =>
+        patterns.some((pattern) => matchesPattern(file, pattern)) &&
+        !(definition.fingerprintIgnorePatterns ?? []).some((pattern) =>
+          matchesPattern(file, pattern),
+        ),
+    )
+    .sort(order);
 }
 
 export function relevantValidationFiles(files, target, config) {
@@ -2344,16 +2525,15 @@ export function assertValidationRun(
 ) {
   const definition = config.validationTargets[target];
   if (!definition) throw new Error(`unknown validation target ${target}`);
-  const duplicate = ledger.some(
+  const entry = ledger.find(
     (entry) =>
       entry.target === target &&
       entry.fingerprint === currentFingerprint &&
       entry.outcome === "pass",
   );
-  if (definition.expensive && duplicate && !reason)
-    throw new Error(
-      `expensive target ${target} already passed for this fingerprint; --reason is required`,
-    );
+  if (definition.expensive && entry && !reason)
+    return { action: "reuse", entry };
+  return { action: "run" };
 }
 
 export async function recordValidation(
@@ -2373,9 +2553,14 @@ export async function recordValidation(
 ) {
   if (!files.length || !["pass", "fail"].includes(outcome))
     throw new Error("validation record requires files and pass/fail outcome");
-  if (!rawLog) throw new Error("validation record requires a retained raw log");
   const currentFingerprint = await fingerprintFiles(files, repoRoot);
-  assertValidationRun({ target, currentFingerprint, reason }, ledger, config);
+  const decision = assertValidationRun(
+    { target, currentFingerprint, reason },
+    ledger,
+    config,
+  );
+  if (decision.action === "reuse") return decision;
+  if (!rawLog) throw new Error("validation record requires a retained raw log");
   const root = await realpath(repoRoot);
   const targetPath = await realpath(path.resolve(repoRoot, rawLog));
   if (targetPath !== root && !targetPath.startsWith(`${root}${path.sep}`))
@@ -2405,7 +2590,7 @@ export async function recordValidation(
     session,
     recordedAt: new Date().toISOString(),
   });
-  return ledger;
+  return { action: "record", entry: ledger.at(-1) };
 }
 
 const failurePathConcerns = new Set([

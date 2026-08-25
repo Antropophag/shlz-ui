@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "intent": "Eliminate the Wave 9 TDD-routing bypass by deriving mandatory test-first lifecycle coverage from OpenSpec change contracts and material implementation semantics, while excluding source-only, absence, and documentation scenarios.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "tdd-obligation-authority",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "design the minimal sufficient mechanism independently"
+      }
+    },
+    {
+      "id": "material-semantics-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "OpenSpec change scenarios distinguish behavior/state contracts from source-only, absence, and documentation evidence"
+      }
+    },
+    {
+      "id": "regression-fixture-scope",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "docs/exec-plans/active/wave-9-sidebar-application-shell/plan.json and its delta spec"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "enforce-contract-derived-tdd-routing",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "implement, fully validate, independently review, and open an unmerged PR"
+    }
+  }
+}
