@@ -636,11 +636,16 @@ function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
         `ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field ?? "execution-boundary"}`,
       );
     }
+    const knownAttempts = [packet, ...(packet.attemptHistory ?? [])];
     if (
       packetBoundaries.some(
         (event) =>
-          event.session !== packet.session ||
-          event.runtimeId !== packet.execution.runtimeId,
+          !knownAttempts.some(
+            (attempt) =>
+              attempt.execution?.runtimeId === event.runtimeId &&
+              (attempt.session === undefined ||
+                attempt.session === event.session),
+          ),
       )
     )
       throw new Error(
@@ -2018,6 +2023,7 @@ export function retryWorkerPacket(state, packetId) {
     attemptHistory: [
       ...(current.attemptHistory ?? []),
       {
+        session: current.session,
         claimId: current.claimId ?? null,
         briefDigest: current.briefDigest ?? null,
         execution: current.execution ?? null,

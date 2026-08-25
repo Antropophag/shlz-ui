@@ -81,6 +81,8 @@ const stateFor = ({
   detachedAttempt,
   divergentField,
   canonicalStatus = "completed",
+  recordedAttempts = [],
+  canonicalHandoff = false,
 }) => ({
   version: 1,
   planId: plan.id,
@@ -108,9 +110,14 @@ const stateFor = ({
         workerReport: "routing engine completed",
         workerReportDigest: canonicalAttempt.workerReportDigest,
       },
+      attemptHistory: recordedAttempts,
     },
   },
-  handoffs: { [packet.id]: handoffFor(detachedAttempt) },
+  handoffs: {
+    [packet.id]: handoffFor(
+      canonicalHandoff ? canonicalAttempt : detachedAttempt,
+    ),
+  },
 });
 const telemetryBoundary = (attempt) => ({
   at: "2026-08-24T22:30:00.000Z",
@@ -187,6 +194,7 @@ try {
     "incident",
     "incident-pending",
     "detached-boundary",
+    "retry-history",
     "coherent",
   ]) {
     const fixture = JSON.parse(
