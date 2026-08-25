@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "planId": "enforce-delivery-packet-consistency",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/enforce-delivery-packet-consistency/specs/**",
+      "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design.json"
+    ],
+    "contracts": ["harness/delivery-packet-consistency"],
+    "dependencies": ["test-design"],
+    "focusedValidation": ["repeat RED", "control/decoy challenge"],
+    "handoff": ["oracle verdict", "failure signature", "unresolved findings"],
+    "id": "test-contract-review",
+    "implementationOutcomes": [
+      "independent seam check",
+      "fixture fidelity decision",
+      "oracle sensitivity decision"
+    ],
+    "implementationSurface": ["test contract verdict only"],
+    "nonGoals": ["production implementation", "standards review"],
+    "objective": "Independently challenge the delivery consistency oracle before production implementation",
+    "outputs": ["approved or rejected test contract"],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "fixture fidelity",
+      "public seam",
+      "decoy sensitivity",
+      "expected diagnostics"
+    ]
+  },
+  "claimId": "delivery-consistency-test-review-2",
+  "baseline": {
+    "branch": "feat/deterministic-tdd-routing",
+    "commit": "089c1de56db59bafee8dcce90553e779d9668abe",
+    "defaultBranch": "main",
+    "kind": "existing-pull-request",
+    "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/40",
+    "version": 1
+  },
+  "baselineDigest": "11f884d22eb9996f1a201e9a0bf82bcee09007b3f6b3086e54a25e5b2b671597",
+  "requirements": {
+    "revision": 2,
+    "openSpecChange": "enforce-delivery-packet-consistency"
+  },
+  "dependencyDigests": {
+    "test-design": "554403b3221737cbf922f1d53ec568dd935e6052b27cce90e6e9c020e51f9630"
+  },
+  "packetDigest": "944b66f315b07d6b95f138d6a65bb448bd1dce04ebcccaa0d8413017fa0d5531",
+  "contextIndex": [
+    "openspec/changes/enforce-delivery-packet-consistency/specs/**",
+    "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design.json"
+  ],
+  "allowedImplementationSurface": ["test contract verdict only"],
+  "focusedValidation": ["repeat RED", "control/decoy challenge"],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "a89215da4d5c0f0dbb99789f18da929e5bc4cd1e19da1872035cc26e6bf70cba",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "739a7e3f9b7ce8af0e44638cfffc58f2b4d3df21f600d86e4b354260144d5345",
+          "changed": [
+            "exact packet-specific rejection signature",
+            "single-field divergence matrix for claim, brief, session, runtime, launch, and worker report"
+          ],
+          "claimId": "delivery-consistency-test-design-2",
+          "completedPacket": "test-design",
+          "invalidatedAssumptions": [],
+          "nextPacket": "test-contract-review",
+          "provenChecks": [
+            "public delivery probe remains deterministic RED",
+            "coherent control accepted",
+            "oracle control accepted and behavioral decoy rejected"
+          ],
+          "settledDecisions": [
+            "each required evidence binding is challenged independently"
+          ],
+          "unresolvedFindings": [],
+          "workerReportDigest": "d8c7df26e80c5808e421f77a7c34b59c53d85c863bc0e2148724433f7c438e0e"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "exact packet-specific rejection signature",
+        "single-field divergence matrix for claim, brief, session, runtime, launch, and worker report"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": [
+        "coherent control accepted",
+        "oracle control accepted and behavioral decoy rejected",
+        "public delivery probe remains deterministic RED"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "delivery-consistency-test-review-2",
+    "objective": "Independently challenge the delivery consistency oracle before production implementation",
+    "obligations": [
+      "contract:harness/delivery-packet-consistency",
+      "outcome:fixture fidelity decision",
+      "outcome:independent seam check",
+      "outcome:oracle sensitivity decision",
+      "validation:control/decoy challenge",
+      "validation:repeat RED"
+    ],
+    "packetId": "test-contract-review",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "enforce-delivery-packet-consistency",
+    "readNow": [
+      {
+        "bytes": 1041,
+        "digest": "497dfdb20b2a26f30f80a4eb34fcf52c42e37a03122e2b750fb4e60ab8bfff3c",
+        "path": "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design.json"
+      },
+      {
+        "bytes": 2367,
+        "digest": "3dcd397f549d0f3ec96a5244c4e22eb2c31366ea9a8cb4b8868a726d0aa899b7",
+        "path": "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md"
+      }
+    ],
+    "sourceDigest": "11aff2403b0b2255edd64330e73a59f8cb2c61d1fdd0ec59d2ebebccdcc7fb6a",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "589777e1a451b71652cc66eed5fe4b23e0d85a1c69b6b98274e0154a7b0be760"
+}

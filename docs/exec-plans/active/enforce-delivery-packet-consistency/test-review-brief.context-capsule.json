@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "enforce-delivery-packet-consistency",
+  "packetId": "test-contract-review",
+  "physicalSession": null,
+  "launchClaim": "delivery-consistency-test-review-1",
+  "phase": "implementation",
+  "objective": "Independently challenge the delivery consistency oracle before production implementation",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/delivery-packet-consistency",
+    "outcome:fixture fidelity decision",
+    "outcome:independent seam check",
+    "outcome:oracle sensitivity decision",
+    "validation:control/decoy challenge",
+    "validation:repeat RED"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "test-design",
+        "changed": [
+          "argv-level delivery packet consistency probe",
+          "minimized PR #40 split-brain fixture",
+          "coherent control and behavioral decoy"
+        ],
+        "provenChecks": [
+          "baseline probe deterministically reports ERR_DELIVERY_PACKET_CONSISTENCY_BYPASS routing-engine-split-brain",
+          "coherent control reaches ordinary delivery validation",
+          "behavioral decoy is rejected with ERR_DELIVERY_PACKET_CONSISTENCY_ORACLE_DECOY",
+          "syntax, Prettier, and diff check pass"
+        ],
+        "settledDecisions": [
+          "the fixture binds canonical state to attempt A and detached telemetry/handoff to attempt B",
+          "the oracle observes the public delivery-check seam"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "test-contract-review",
+        "invalidatedAssumptions": [],
+        "claimId": "delivery-consistency-test-design-1",
+        "briefDigest": "7617e05f30c3d9212a730802ac0f0d320172cc3ed4bfcb85cd94d05695d45f85",
+        "workerReportDigest": "91b5876057cb41202af6e6a4851755039a21641412a2bf66e4b239efbf4973b7"
+      }
+    ],
+    "verdicts": [
+      "baseline probe deterministically reports ERR_DELIVERY_PACKET_CONSISTENCY_BYPASS routing-engine-split-brain",
+      "behavioral decoy is rejected with ERR_DELIVERY_PACKET_CONSISTENCY_ORACLE_DECOY",
+      "coherent control reaches ordinary delivery validation",
+      "syntax, Prettier, and diff check pass"
+    ],
+    "rawEvidence": [
+      "argv-level delivery packet consistency probe",
+      "coherent control and behavioral decoy",
+      "minimized PR #40 split-brain fixture"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design.json",
+      "digest": "497dfdb20b2a26f30f80a4eb34fcf52c42e37a03122e2b750fb4e60ab8bfff3c",
+      "bytes": 1041
+    },
+    {
+      "path": "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md",
+      "digest": "3dcd397f549d0f3ec96a5244c4e22eb2c31366ea9a8cb4b8868a726d0aa899b7",
+      "bytes": 2367
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "11aff2403b0b2255edd64330e73a59f8cb2c61d1fdd0ec59d2ebebccdcc7fb6a",
+  "capsuleDigest": "f3d23f72854b317764ff44354e86e4bf6dc0814a163866ae92d7716824c358fe"
+}

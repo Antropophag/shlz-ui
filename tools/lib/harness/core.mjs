@@ -581,6 +581,66 @@ const incompleteDeliveryPackets = (plan, state) =>
     })
     .map(({ id }) => id);
 
+function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
+  if (telemetryEvents === null) return;
+  if (!Array.isArray(telemetryEvents))
+    throw new Error("planned delivery requires trusted packet telemetry");
+  const boundaries = telemetryEvents.filter(
+    ({ type, executionSource }) =>
+      type === "execution-boundary" && executionSource === "codex-exec-jsonl",
+  );
+  for (const { id } of plan.packets) {
+    const packet = state.packets?.[id];
+    const packetBoundaries = boundaries.filter((event) => event.packet === id);
+    if (packet?.status !== "completed") {
+      if (packetBoundaries.length)
+        throw new Error(
+          `ERR_DELIVERY_PACKET_EVIDENCE ${id} telemetry exists without canonical completion`,
+        );
+      continue;
+    }
+    const handoff = validateHandoff(state.handoffs?.[id], plan);
+    for (const [field, expected, actual] of [
+      ["claimId", packet.claimId, handoff.claimId],
+      ["briefDigest", packet.briefDigest, handoff.briefDigest],
+      [
+        "workerReportDigest",
+        packet.launch?.workerReportDigest,
+        handoff.workerReportDigest,
+      ],
+    ])
+      if (expected !== actual)
+        throw new Error(`ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field}`);
+    if (
+      packet.launch?.terminalStatus !== "completed" ||
+      packet.execution?.source !== "codex-exec-jsonl" ||
+      packet.launch?.launchId !== packet.execution?.launchId
+    )
+      throw new Error(`ERR_DELIVERY_PACKET_EVIDENCE ${id} launchId`);
+    const matchingBoundary = packetBoundaries.some(
+      (event) =>
+        event.session === packet.session &&
+        event.runtimeId === packet.execution.runtimeId &&
+        event.launchId === packet.execution.launchId,
+    );
+    if (!matchingBoundary) {
+      const fields = ["session", "runtimeId", "launchId"];
+      const field = fields.find((candidate) =>
+        packetBoundaries.some(
+          (event) =>
+            event[candidate] !==
+            (candidate === "session"
+              ? packet.session
+              : packet.execution[candidate]),
+        ),
+      );
+      throw new Error(
+        `ERR_DELIVERY_PACKET_EVIDENCE ${id} ${field ?? "execution-boundary"}`,
+      );
+    }
+  }
+}
+
 function assertDeliveryReview(review, candidateHead, tddBinding) {
   if (!review || review.version !== 1)
     throw new Error("delivery requires current independent review evidence");
@@ -626,6 +686,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       state,
       requirementsState = null,
       reviewState = null,
+      telemetryEvents = null,
     } = execution;
     if (!plan || !state)
       throw new Error("delivery execution evidence requires plan and state");
@@ -650,6 +711,7 @@ export function assertImplementationDelivery(delivery, execution = null) {
       throw new Error(
         `delivery execution state has unknown packets: ${unknown.join(", ")}`,
       );
+    assertDeliveryPacketEvidence(plan, state, telemetryEvents);
     const incomplete = incompleteDeliveryPackets(plan, state);
     if (incomplete.length)
       throw new Error(

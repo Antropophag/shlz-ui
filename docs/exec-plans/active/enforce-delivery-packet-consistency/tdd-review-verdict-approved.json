@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "sliceId": "delivery-packet-consistency",
+  "runtimeId": "01a037f2-6f6c-7b02-95d0-bedcc6f76862",
+  "requirementsRevision": 2,
+  "designDigest": "cfa9d838371cd6be247a5207bd257a38cab74cc444847a1e13a4bc557488f87c",
+  "reviewPacketHandoffDigest": "56f4b4c30c7ccf577ec376236a480d592e8c8c443a85b01e0dfd27471f495390",
+  "workerReportDigest": "4e27b5bb023f9c74cc457b6fce27bcb85cbecff3530945bdc9bd17fa946ead01",
+  "baselineDigest": "11f884d22eb9996f1a201e9a0bf82bcee09007b3f6b3086e54a25e5b2b671597",
+  "acceptanceDigest": "98711f53fee608b512be660d90620b451e3a2a4455f6bbd6dbb29d8bdb047b7a",
+  "fixtureDigest": "50eedabe36d2e4418b659ec572e961cd7106355b964b74c4a51bd38e048176b2",
+  "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
+  "contractDigest": "77ba595c2d29103fb43bce82c26b6c635b2713ac543fc1ee7fdb5d0443316fc3",
+  "oracleChallengeDigest": "db8a8eafa499e28fb8918433fc23eacb5a238913ae702dbc541abfa8e04ddd42",
+  "inputs": [
+    "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md",
+    "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design-r3.json",
+    "tools/tests/delivery-packet-consistency-probe.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/incident.json"
+  ],
+  "verdict": "approved",
+  "checklist": {
+    "scenarioAuthority": {
+      "result": "pass",
+      "evidenceRefs": ["OpenSpec scenario mappings reproduced"]
+    },
+    "behavioralSeam": {
+      "result": "pass",
+      "evidenceRefs": ["argv-level harness delivery-check"]
+    },
+    "wrongBehavior": {
+      "result": "pass",
+      "evidenceRefs": ["behavioral decoy rejected twice"]
+    },
+    "fixtureIndependence": {
+      "result": "pass",
+      "evidenceRefs": ["six one-field divergences plus coherent control"]
+    },
+    "productionContextExcluded": {
+      "result": "pass",
+      "evidenceRefs": ["review capsule excluded production implementation"]
+    }
+  },
+  "scenarioEvidence": [
+    {
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected",
+      "evidenceRefs": ["six deterministic one-field RED cases"]
+    },
+    {
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Coherent packet evidence reaches ordinary delivery checks",
+      "evidenceRefs": ["coherent control accepted twice"]
+    }
+  ]
+}

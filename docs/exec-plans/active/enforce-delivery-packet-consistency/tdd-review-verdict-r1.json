@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "sliceId": "delivery-packet-consistency",
+  "runtimeId": "01a037e7-2601-7632-aaa2-58f65720068e",
+  "requirementsRevision": 2,
+  "designDigest": "7a4ccba17990f9d0dbaa704d16ef5d6dd1a9e5e05007e20d4fe02db09cadfc1c",
+  "reviewPacketHandoffDigest": "96e7660a5e18e93689d1ee30b1fc3ab09db70ad9465f783817e9343eac204245",
+  "workerReportDigest": "2394309dfa2811848fa5dfc68e321828b88e0fc8b220213c1fec6abe834d8c3a",
+  "baselineDigest": "11f884d22eb9996f1a201e9a0bf82bcee09007b3f6b3086e54a25e5b2b671597",
+  "acceptanceDigest": "d07d564a4a8aa62ac5f82b32b566027ce091ad3df9fa1c14dc778894f69886ce",
+  "fixtureDigest": "0854ed97a33dbaf9e3f08eea8bfbdc96310bff6e79c755dc8300eeef0936032e",
+  "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
+  "contractDigest": "77ba595c2d29103fb43bce82c26b6c635b2713ac543fc1ee7fdb5d0443316fc3",
+  "oracleChallengeDigest": "fd465f9bc63370fdb4edf715a506af188b5ce5081aaccab8bbd6b3b4c518eca1",
+  "inputs": [
+    "openspec/changes/enforce-delivery-packet-consistency/specs/harness/delivery-packet-consistency/spec.md",
+    "docs/exec-plans/active/enforce-delivery-packet-consistency/handoff-test-design.json",
+    "tools/tests/delivery-packet-consistency-probe.mjs",
+    "tools/tests/fixtures/delivery-packet-consistency/incident.json",
+    "tools/tests/fixtures/delivery-packet-consistency/coherent.json"
+  ],
+  "verdict": "changes-requested",
+  "findings": [
+    {
+      "id": "TCR-DELIVERY-001",
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected",
+      "summary": "Require the exact packet-specific consistency diagnostic instead of treating any rejection as success"
+    },
+    {
+      "id": "TCR-DELIVERY-002",
+      "scenarioId": "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected",
+      "summary": "Vary claim, brief, session, runtime, launch, and worker-report bindings independently"
+    }
+  ]
+}

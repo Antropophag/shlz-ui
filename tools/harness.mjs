@@ -342,8 +342,11 @@ switch (command) {
     if (planPath) {
       const plan = await currentPlan(planPath);
       const reviewPath = option("--review");
+      const telemetryPath = option("--telemetry");
       if (!reviewPath)
         throw new Error("planned delivery-check requires --review <state>");
+      if (!telemetryPath)
+        throw new Error("planned delivery-check requires --telemetry <jsonl>");
       const requirementsPath = option("--requirements");
       if (plan.requirementsGate === "required" && !requirementsPath)
         throw new Error(
@@ -359,6 +362,10 @@ switch (command) {
           await readJson(absolute(reviewPath)),
           absolute(reviewPath),
         ),
+        telemetryEvents: (await readFile(absolute(telemetryPath), "utf8"))
+          .split(/\r?\n/)
+          .filter(Boolean)
+          .map((line) => JSON.parse(line)),
       };
     } else {
       const direct = await readJson(absolute(directPath));
