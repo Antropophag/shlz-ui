@@ -226,6 +226,37 @@ await checkRegression(
     assert.equal(policyReport.proxies.contextRelevance, "unavailable");
   },
 );
+await checkRegression(
+  "observed contextRelevance removes the unavailable-relevance limitation",
+  async () => {
+    const observedRelevanceReport = await evaluateTelemetryEfficiency(
+      {
+        version: 1,
+        id: "observed-relevance-regression",
+        telemetrySources: [
+          {
+            id: "change",
+            path: "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl",
+          },
+        ],
+        sourceEnvelopes: [],
+      },
+      root,
+    );
+
+    assert.deepEqual(observedRelevanceReport.proxies.contextRelevance, {
+      kind: "observed-read-ratio",
+      relevantReads: 1,
+      classifiedReads: 1,
+      ratio: 1,
+    });
+    assert.ok(
+      !observedRelevanceReport.limitations.includes(
+        "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+      ),
+    );
+  },
+);
 const evaluated = await evaluateTelemetryEfficiency(fixture, root);
 await checkRegression("missing usage limitation uses a numeric count", () =>
   assert.ok(
