@@ -10,4 +10,4 @@
 ## 3. Review and delivery
 
 - [x] 3.1 Run only impact-selected validation, strict OpenSpec validation, and target-diff inspection; record exact selected and excluded targets.
-- [ ] 3.2 Independently review Standards and Spec/failure-path behavior, remediate blocking findings, run delivery guards, post CodeRabbit dispositions including the timezone evidence, push the PR #40 head, and leave it unmerged.
+- [x] 3.2 Independently review Standards and Spec/failure-path behavior, remediate blocking findings, run delivery guards, post CodeRabbit dispositions including the timezone evidence, push the PR #40 head, and leave it unmerged.

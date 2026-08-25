@@ -195,6 +195,7 @@ try {
     "incident-pending",
     "detached-boundary",
     "retry-history",
+    "retry-history-missing-session",
     "coherent",
   ]) {
     const fixture = JSON.parse(

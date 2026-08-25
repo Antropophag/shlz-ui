@@ -643,8 +643,7 @@ function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
           !knownAttempts.some(
             (attempt) =>
               attempt.execution?.runtimeId === event.runtimeId &&
-              (attempt.session === undefined ||
-                attempt.session === event.session),
+              attempt.session === event.session,
           ),
       )
     )
