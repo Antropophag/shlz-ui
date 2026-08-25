@@ -620,11 +620,10 @@ function assertDeliveryPacketEvidence(plan, state, telemetryEvents) {
     const matchingBoundary = packetBoundaries.some(
       (event) =>
         event.session === packet.session &&
-        event.runtimeId === packet.execution.runtimeId &&
-        event.launchId === packet.execution.launchId,
+        event.runtimeId === packet.execution.runtimeId,
     );
     if (!matchingBoundary) {
-      const fields = ["session", "runtimeId", "launchId"];
+      const fields = ["session", "runtimeId"];
       const field = fields.find((candidate) =>
         packetBoundaries.some(
           (event) =>

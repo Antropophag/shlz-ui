@@ -76,7 +76,7 @@ const handoffFor = (attempt) => ({
   briefDigest: attempt.briefDigest,
   workerReportDigest: attempt.workerReportDigest,
 });
-const stateFor = ({ canonicalAttempt, detachedAttempt }) => ({
+const stateFor = ({ canonicalAttempt, detachedAttempt, divergentField }) => ({
   version: 1,
   planId: plan.id,
   packets: {
@@ -96,7 +96,10 @@ const stateFor = ({ canonicalAttempt, detachedAttempt }) => ({
       },
       launch: {
         terminalStatus: "completed",
-        launchId: canonicalAttempt.launchId,
+        launchId:
+          divergentField === "launchId"
+            ? detachedAttempt.launchId
+            : canonicalAttempt.launchId,
         workerReport: "routing engine completed",
         workerReportDigest: canonicalAttempt.workerReportDigest,
       },
@@ -114,7 +117,6 @@ const telemetryFor = ({ detachedAttempt }) =>
     type: "execution-boundary",
     executionSource: "codex-exec-jsonl",
     runtimeId: detachedAttempt.runtimeId,
-    launchId: detachedAttempt.launchId,
   })}\n`;
 
 const sandbox = await mkdtemp(
@@ -173,6 +175,7 @@ try {
     const cases = (fixture.divergentFields ?? [null]).map((field) => ({
       ...fixture,
       id: field ? `${fixture.id}-${field}` : fixture.id,
+      divergentField: field,
       detachedAttempt: field
         ? {
             ...fixture.canonicalAttempt,
