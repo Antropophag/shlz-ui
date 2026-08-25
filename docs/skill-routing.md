@@ -6,7 +6,7 @@ OpenSpec impact routing and engineering skill routing answer different questions
 
 Skills supplement the selected workflow; they do not create parallel workflow state or replace OpenSpec artifacts.
 
-Execution packets are also not skills or OpenSpec artifacts. Use `docs/agent-execution.md` to keep each skill invocation/session scoped to the current packet and its direct dependencies.
+Execution receipts are not skills or OpenSpec artifacts. Use `docs/agent-execution.md` to keep each skill invocation/session scoped to its declared objective and direct receipt dependencies.
 
 Requirements elicitation is also not a skill stack. Use `docs/requirements-elicitation.md` only when inspection leaves a material user-owned decision; direct and fully determined work should not acquire interview ceremony.
 

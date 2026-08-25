@@ -28,7 +28,9 @@ import {
 
 const exec = promisify(execFile);
 const repoRoot = path.resolve(import.meta.dirname, "../..");
-const candidate = "b".repeat(40);
+const candidate = (
+  await exec("git", ["rev-parse", "HEAD"], { cwd: repoRoot })
+).stdout.trim();
 const baselineCommit = "a".repeat(40);
 const falseSignals = Object.fromEntries(
   materialSignals.map((name) => [name, false]),
@@ -72,6 +74,10 @@ const contractReceipt = receipt("contract", {
       id: "harness/receipt-workflow::Requirement::Scenario",
       content: "WHEN x THEN y",
     },
+  ],
+  failureInvariants: [
+    { id: "state", concern: "state-machine", scenarioId: "scenario" },
+    { id: "process", concern: "subprocess", scenarioId: "scenario" },
   ],
   contractDigest: digest([
     {
@@ -188,16 +194,19 @@ test("OpenSpec contract identity is order-stable and normative-content sensitive
 });
 
 test("TDD requires symmetric discriminating RED and GREEN bound to one contract", async () => {
-  const oracle = (redTarget = "bad", greenTarget = "good") => ({
+  const oracle = (redKind = "known-bad-adapter", greenCommit = candidate) => ({
     shared: { repetitions: 1 },
     command: [
       process.execPath,
       "-e",
-      "process.exit(process.argv[1] === 'bad' ? 1 : 0)",
+      "process.exit(process.argv[1].endsWith('receipt-known-bad.mjs') ? 1 : 0)",
       "{target}",
     ],
-    redTarget,
-    greenTarget,
+    redTarget: {
+      kind: redKind,
+      path: "tools/tests/fixtures/receipt-known-bad.mjs",
+    },
+    greenTarget: { kind: "candidate", commit: greenCommit },
   });
   const good = await tdd({
     contractReceipt,
@@ -213,20 +222,10 @@ test("TDD requires symmetric discriminating RED and GREEN bound to one contract"
       contractReceipt,
       baselineReceipt,
       candidateHead: candidate,
-      oracle: oracle("good", "good"),
+      oracle: oracle("candidate"),
       cwd: repoRoot,
     }),
-    /RED/,
-  );
-  await assert.rejects(
-    tdd({
-      contractReceipt,
-      baselineReceipt,
-      candidateHead: candidate,
-      oracle: oracle("bad", "bad"),
-      cwd: repoRoot,
-    }),
-    /GREEN/,
+    /symmetric/,
   );
   await assert.rejects(
     tdd({
@@ -234,8 +233,11 @@ test("TDD requires symmetric discriminating RED and GREEN bound to one contract"
       baselineReceipt,
       candidateHead: candidate,
       oracle: {
-        redTarget: "bad",
-        greenTarget: "good",
+        redTarget: {
+          kind: "known-bad-adapter",
+          path: "tools/tests/fixtures/receipt-known-bad.mjs",
+        },
+        greenTarget: { kind: "candidate", commit: candidate },
         command: [process.execPath, "-e", "process.exit(0)"],
       },
       cwd: repoRoot,
@@ -245,24 +247,28 @@ test("TDD requires symmetric discriminating RED and GREEN bound to one contract"
 });
 
 test("validation reuse requires identical candidate and meaning-changing closure", async (context) => {
-  const root = await mkdtemp(path.join(tmpdir(), "shlz-validation-"));
+  const root = await mkdtemp(
+    path.join(repoRoot, "docs/exec-plans/validation-"),
+  );
   context.after(() => rm(root, { recursive: true, force: true }));
   await writeFile(path.join(root, "source.txt"), "one");
   const first = await validation({
-    repoRoot: root,
+    repoRoot,
+    contractReceipt,
     candidateHead: candidate,
     target: "focused",
     argv: [process.execPath, "-e", "process.exit(0)"],
-    inputs: ["source.txt"],
+    inputs: [path.relative(repoRoot, path.join(root, "source.txt"))],
   });
   assert.equal(
     (
       await validation({
-        repoRoot: root,
+        repoRoot,
+        contractReceipt,
         candidateHead: candidate,
         target: "focused",
         argv: first.payload.argv,
-        inputs: ["source.txt"],
+        inputs: [path.relative(repoRoot, path.join(root, "source.txt"))],
         priorReceipt: first,
       })
     ).payload.reusedFrom,
@@ -271,25 +277,27 @@ test("validation reuse requires identical candidate and meaning-changing closure
   await writeFile(path.join(root, "source.txt"), "two");
   await assert.rejects(
     validation({
-      repoRoot: root,
+      repoRoot,
+      contractReceipt,
       candidateHead: candidate,
       target: "focused",
       argv: first.payload.argv,
-      inputs: ["source.txt"],
+      inputs: [path.relative(repoRoot, path.join(root, "source.txt"))],
       priorReceipt: first,
     }),
     /cannot be reused/,
   );
   await assert.rejects(
     validation({
-      repoRoot: root,
+      repoRoot,
+      contractReceipt,
       candidateHead: "c".repeat(40),
       target: "focused",
       argv: first.payload.argv,
-      inputs: ["source.txt"],
+      inputs: [path.relative(repoRoot, path.join(root, "source.txt"))],
       priorReceipt: first,
     }),
-    /cannot be reused/,
+    /candidate differs/,
   );
 });
 
@@ -332,30 +340,39 @@ test("independent review keeps Standards and Spec distinct and candidate-bound",
   );
 });
 
-test("failure proof covers every invariant and rejects known-bad equivalence", () => {
+test("failure proof derives every invariant and executes candidate/known-bad behavior", async () => {
   const input = {
     contractReceipt,
     candidateHead: candidate,
-    invariants: ["state", "process"],
-    results: [
-      { id: "state", candidate: "pass", knownBad: "fail" },
-      { id: "process", candidate: "pass", knownBad: "fail" },
-    ],
+    cwd: repoRoot,
+    oracle: {
+      command: [
+        process.execPath,
+        "-e",
+        "process.exit(process.argv[1].endsWith('receipt-known-bad.mjs') ? 1 : 0)",
+        "{target}",
+        "{invariant}",
+      ],
+      knownBadAdapter: "tools/tests/fixtures/receipt-known-bad.mjs",
+    },
   };
-  assert.equal(failureProof(input).payload.outcome, "pass");
-  assert.throws(
-    () => failureProof({ ...input, results: input.results.slice(0, 1) }),
-    /incomplete/,
-  );
-  assert.throws(
-    () =>
-      failureProof({
-        ...input,
-        results: [
-          { id: "state", candidate: "pass", knownBad: "pass" },
-          input.results[1],
+  const proof = await failureProof(input);
+  assert.equal(proof.payload.outcome, "pass");
+  assert.deepEqual(proof.payload.invariants, ["process", "state"]);
+  await assert.rejects(
+    failureProof({
+      ...input,
+      oracle: {
+        ...input.oracle,
+        command: [
+          process.execPath,
+          "-e",
+          "process.exit(0)",
+          "{target}",
+          "{invariant}",
         ],
-      }),
+      },
+    }),
     /non-discriminating/,
   );
 });

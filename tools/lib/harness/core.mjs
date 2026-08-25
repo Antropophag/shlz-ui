@@ -284,9 +284,20 @@ export async function contract(changeRoot) {
       .join("/");
     const lines = (await readFile(file, "utf8")).split(/\r?\n/);
     let requirement;
+    let requirementContent;
     for (let i = 0; i < lines.length; i += 1) {
-      requirement =
-        lines[i].match(/^### Requirement:\s*(.+)$/)?.[1] ?? requirement;
+      const requirementMatch = lines[i].match(/^### Requirement:\s*(.+)$/);
+      if (requirementMatch) {
+        requirement = requirementMatch[1];
+        const body = [];
+        for (
+          let j = i + 1;
+          j < lines.length && !/^#### Scenario:/.test(lines[j]);
+          j += 1
+        )
+          body.push(lines[j].trimEnd());
+        requirementContent = body.join("\n").trim();
+      }
       const name = lines[i].match(/^#### Scenario:\s*(.+)$/)?.[1];
       if (!name) continue;
       const body = [];
@@ -310,6 +321,7 @@ export async function contract(changeRoot) {
         id: `${capability}::${requirement}::${name}`,
         capability,
         requirement,
+        requirementContent,
         name,
         content,
       });
@@ -321,7 +333,25 @@ export async function contract(changeRoot) {
       new Set(scenarios.map(({ id }) => id)).size === scenarios.length,
     "missing or duplicate scenarios",
   );
-  return receipt("contract", { scenarios, contractDigest: digest(scenarios) });
+  const failureInvariants = scenarios
+    .flatMap((scenario) =>
+      [
+        ...scenario.content.matchAll(
+          /<!-- failure-invariant:\s*(\S+)\s+concern=(\S+)\s*-->/g,
+        ),
+      ].map(([, id, concern]) => ({ id, concern, scenarioId: scenario.id })),
+    )
+    .sort((a, b) => order(a.id, b.id));
+  assert(
+    new Set(failureInvariants.map(({ id }) => id)).size ===
+      failureInvariants.length,
+    "failure invariant identities are duplicated",
+  );
+  return receipt("contract", {
+    scenarios,
+    failureInvariants,
+    contractDigest: digest({ scenarios, failureInvariants }),
+  });
 }
 
 export async function command(argv, cwd) {
@@ -357,16 +387,24 @@ export async function tdd({
   verify(baselineReceipt, "baseline");
   assert(sha.test(candidateHead), "invalid candidate head");
   assert(
+    (await git(cwd, "rev-parse", "HEAD")) === candidateHead,
+    "TDD candidate differs from checked-out Git head",
+  );
+  assert(
     Array.isArray(oracle?.command) &&
       oracle.command.includes("{target}") &&
-      oracle.redTarget &&
-      oracle.greenTarget,
+      oracle.redTarget?.kind === "known-bad-adapter" &&
+      typeof oracle.redTarget.path === "string" &&
+      oracle.greenTarget?.kind === "candidate" &&
+      oracle.greenTarget.commit === candidateHead,
     "one symmetric oracle command and RED/GREEN targets are required",
   );
+  const knownBadPath = path.resolve(cwd, oracle.redTarget.path);
+  const knownBadDigest = digest(await readFile(knownBadPath));
   const invoke = (target) =>
     oracle.command.map((part) => (part === "{target}" ? target : part));
-  const red = await command(invoke(oracle.redTarget), cwd);
-  const green = await command(invoke(oracle.greenTarget), cwd);
+  const red = await command(invoke(knownBadPath), cwd);
+  const green = await command(invoke(cwd), cwd);
   assert(red.outcome === "fail", "RED did not reject known-bad behavior");
   assert(green.outcome === "pass", "GREEN did not accept candidate");
   return receipt(
@@ -378,7 +416,7 @@ export async function tdd({
       oracleDigest: digest({
         command: oracle.command,
         shared: oracle.shared ?? {},
-        redTarget: oracle.redTarget,
+        redTarget: { ...oracle.redTarget, digest: knownBadDigest },
         greenTarget: oracle.greenTarget,
       }),
       red,
@@ -414,6 +452,7 @@ async function files(repoRoot, names) {
 }
 export async function validation({
   repoRoot,
+  contractReceipt,
   candidateHead,
   target,
   argv,
@@ -421,33 +460,50 @@ export async function validation({
   priorReceipt,
   cwd = repoRoot,
 }) {
+  verify(contractReceipt, "contract");
   assert(sha.test(candidateHead), "invalid candidate head");
+  assert(
+    (await git(repoRoot, "rev-parse", "HEAD")) === candidateHead,
+    "validation candidate differs from checked-out Git head",
+  );
   const closure = await files(repoRoot, inputs);
-  const closureDigest = digest({ target, argv, closure });
+  const closureDigest = digest({
+    target,
+    argv,
+    closure,
+    contractDigest: contractReceipt.payload.contractDigest,
+  });
   if (priorReceipt) {
     verify(priorReceipt, "validation");
     assert(
       priorReceipt.payload.candidateHead === candidateHead &&
+        priorReceipt.contractReceiptDigest === contractReceipt.digest &&
         priorReceipt.payload.closureDigest === closureDigest &&
         priorReceipt.payload.outcome === "pass",
       "validation receipt cannot be reused",
     );
-    return receipt("validation", {
-      ...priorReceipt.payload,
-      reusedFrom: priorReceipt.digest,
-    });
+    return receipt(
+      "validation",
+      { ...priorReceipt.payload, reusedFrom: priorReceipt.digest },
+      { contractReceiptDigest: contractReceipt.digest },
+    );
   }
   const result = await command(argv, cwd);
   assert(result.outcome === "pass", `validation failed: ${target}`);
-  return receipt("validation", {
-    candidateHead,
-    target,
-    argv,
-    closure,
-    closureDigest,
-    outcome: "pass",
-    result,
-  });
+  return receipt(
+    "validation",
+    {
+      candidateHead,
+      contractDigest: contractReceipt.payload.contractDigest,
+      target,
+      argv,
+      closure,
+      closureDigest,
+      outcome: "pass",
+      result,
+    },
+    { contractReceiptDigest: contractReceipt.digest },
+  );
 }
 export function review({ contractReceipt, candidateHead, standards, spec }) {
   verify(contractReceipt, "contract");
@@ -476,31 +532,45 @@ export function review({ contractReceipt, candidateHead, standards, spec }) {
     { contractReceiptDigest: contractReceipt.digest },
   );
 }
-export function failureProof({
+export async function failureProof({
   contractReceipt,
   candidateHead,
-  invariants,
-  results,
+  oracle,
+  cwd,
 }) {
   verify(contractReceipt, "contract");
   assert(sha.test(candidateHead), "invalid candidate head");
-  const expected = new Set(invariants);
-  const seen = new Set();
-  assert(expected.size, "failure invariants are required");
-  for (const result of results ?? []) {
-    assert(
-      expected.has(result.id) &&
-        !seen.has(result.id) &&
-        result.candidate === "pass" &&
-        result.knownBad === "fail",
-      `non-discriminating invariant: ${result.id}`,
-    );
-    seen.add(result.id);
-  }
   assert(
-    [...expected].every((id) => seen.has(id)),
-    "failure proof is incomplete",
+    (await git(cwd, "rev-parse", "HEAD")) === candidateHead,
+    "failure-proof candidate differs from checked-out Git head",
   );
+  const expected = new Set(
+    contractReceipt.payload.failureInvariants.map(({ id }) => id),
+  );
+  assert(expected.size, "failure invariants are required");
+  assert(
+    Array.isArray(oracle?.command) &&
+      oracle.command.includes("{target}") &&
+      oracle.command.includes("{invariant}") &&
+      typeof oracle.knownBadAdapter === "string",
+    "failure proof requires one executable candidate/known-bad oracle",
+  );
+  const knownBadPath = path.resolve(cwd, oracle.knownBadAdapter);
+  const knownBadDigest = digest(await readFile(knownBadPath));
+  const invoke = (target, invariant) =>
+    oracle.command.map((part) =>
+      part === "{target}" ? target : part === "{invariant}" ? invariant : part,
+    );
+  const results = [];
+  for (const id of [...expected].sort(order)) {
+    const candidate = await command(invoke(cwd, id), cwd);
+    const knownBad = await command(invoke(knownBadPath, id), cwd);
+    assert(
+      candidate.outcome === "pass" && knownBad.outcome === "fail",
+      `non-discriminating invariant: ${id}`,
+    );
+    results.push({ id, candidate, knownBad });
+  }
   return receipt(
     "failure-proof",
     {
@@ -508,6 +578,11 @@ export function failureProof({
       contractDigest: contractReceipt.payload.contractDigest,
       invariants: [...expected].sort(order),
       results: stable(results),
+      oracleDigest: digest({
+        command: oracle.command,
+        knownBadAdapter: oracle.knownBadAdapter,
+        knownBadDigest,
+      }),
       outcome: "pass",
     },
     { contractReceiptDigest: contractReceipt.digest },
@@ -546,6 +621,10 @@ export async function conformance({
 }) {
   verify(routeReceipt, "route");
   verify(baselineReceipt, "baseline");
+  assert(
+    baselineReceipt.routeDigest === routeReceipt.digest,
+    "baseline belongs to another route",
+  );
   signals(discovered?.materialSignals);
   const raw = await git(
     repoRoot,
@@ -620,6 +699,14 @@ export async function delivery({
     conformanceReceipt.payload.candidateHead === head,
     "conformance candidate differs",
   );
+  assert(
+    conformanceReceipt.routeReceiptDigest === routeReceipt.digest &&
+      conformanceReceipt.baselineReceiptDigest === baselineReceipt.digest &&
+      baselineReceipt.payload.branch === branch &&
+      baselineReceipt.payload.upstream ===
+        (await git(repoRoot, "rev-parse", "--abbrev-ref", "@{upstream}")),
+    "baseline, conformance, branch, or upstream receipt chain differs",
+  );
   if (routeReceipt.payload.route === "open-spec") {
     verify(requirementsReceipt, "requirements");
     verify(contractReceipt, "contract");
@@ -641,7 +728,7 @@ export async function delivery({
         reviewReceipt.contractReceiptDigest === contractReceipt.digest,
       "TDD or review contract differs",
     );
-    if (failureProofReceipt) {
+    if (contractReceipt.payload.failureInvariants.length) {
       verify(failureProofReceipt, "failure-proof");
       assert(
         failureProofReceipt.payload.candidateHead === head &&
@@ -656,6 +743,11 @@ export async function delivery({
     assert(
       item.payload.candidateHead === head && item.payload.outcome === "pass",
       "validation candidate differs",
+    );
+    assert(
+      routeReceipt.payload.route === "direct" ||
+        item.contractReceiptDigest === contractReceipt.digest,
+      "validation contract differs",
     );
   }
   const repo = await repository(repoRoot);

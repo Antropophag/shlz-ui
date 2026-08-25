@@ -159,6 +159,7 @@ try {
       result = await validation({
         ...input,
         repoRoot,
+        contractReceipt: await load(input.contract),
         priorReceipt: input.prior ? await load(input.prior) : null,
       });
       break;
@@ -173,9 +174,10 @@ try {
     }
     case "failure-proof": {
       const input = await load(positional[0]);
-      result = failureProof({
+      result = await failureProof({
         ...input,
         contractReceipt: await load(input.contract),
+        cwd: repoRoot,
       });
       break;
     }
