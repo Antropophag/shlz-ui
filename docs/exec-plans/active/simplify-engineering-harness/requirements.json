@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "intent": "Replace the mutable engineering harness orchestration with a narrow immutable-receipt workflow while preserving all fail-closed routing, contract, TDD, validation, review, isolation, budget, telemetry, conformance, and delivery guarantees.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "canonical-receipt-interface",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "independently verify and adjust the proposed architecture" }
+    },
+    {
+      "id": "legacy-command-removal",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "implement deletion-first simplification while preserving listed guarantees" }
+    },
+    {
+      "id": "durable-artifact-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "retain compact receipts and remove historical operational state and raw telemetry" }
+    },
+    {
+      "id": "isolated-runner-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "docs/agent-execution.md and existing execution-context-isolation OpenSpec scenarios require runtime-issued identity and fail-closed results" }
+    }
+  ],
+  "openSpec": { "change": "simplify-engineering-harness", "status": "synthesized" },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-request", "ref": "synthesize requirements, implement simplification, and open a separate unmerged PR" }
+  }
+}
