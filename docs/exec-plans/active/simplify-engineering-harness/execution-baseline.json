@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "kind": "existing-pull-request",
+  "commit": "28a889f16f54d6d1755d29e5aa55fd90df992133",
+  "branch": "feat/simplify-engineering-harness",
+  "defaultBranch": "main",
+  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/42"
+}

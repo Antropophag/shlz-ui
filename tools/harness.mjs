@@ -1,1066 +1,231 @@
 #!/usr/bin/env node
-import { lstatSync, realpathSync } from "node:fs";
-import { open, readFile, unlink } from "node:fs/promises";
-import { execFile } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
 import {
-  affectedValidation,
-  assertValidationRun,
-  claimPacket,
-  completePacket,
-  contextIndex,
-  createExecutionState,
-  createPlan,
-  createTddDesignEvidence,
-  createTddReviewBinding,
-  createTddReentryEvidence,
-  createReviewState,
-  createWorkerBrief,
-  failWorkerReservation,
-  fingerprintFiles,
-  gitEvidence,
-  gitDeliveryState,
-  gitExecutionBaselineState,
-  gitImplementationState,
-  gitRouteSurfaces,
-  loadChangeFailureInvariants,
-  pausePacket,
+  baseline,
+  conformance,
+  contract,
+  delivery,
+  failureProof,
   readJson,
-  readyPackets,
-  relevantValidationFiles,
-  recordEvent,
-  recordFailurePathDegradation,
-  recordFailurePathProof,
-  recordReview,
-  recordValidation,
-  reserveWorkerPacket,
-  recordWorkerAttempt,
-  recordTddDesign,
-  recordTddReview,
-  requirementsStatus,
-  assertImplementationDelivery,
-  assertImplementationPreflight,
-  assertExecutionBaselineState,
-  assertRouteConformance,
-  evaluateRouteEligibility,
-  failurePathResultDigest,
-  resumePacket,
-  runTddAcceptance,
-  reviewContext,
-  resolveReviewFindings,
-  retryWorkerPacket,
-  summarizeEvents,
-  validateHandoff,
-  validateExecutionBaseline,
-  validatePlan,
-  validationInputFiles,
+  receipt,
+  requirements,
+  review,
+  route,
+  sourceManifest,
+  tdd,
+  telemetry,
+  validation,
+  verify,
   writeJson,
-  workerTelemetryEvents,
+  digest,
 } from "./lib/harness/core.mjs";
-import {
-  launchCodexWorker,
-  probeCodexExec,
-} from "./lib/harness/codex-worker.mjs";
-import {
-  acknowledgeContextCapsule,
-  assertInitialContextEnvelope,
-  createContextLedger,
-  createPacketContextCapsule,
-  runContextCostReplay,
-} from "./lib/harness/context-cost.mjs";
-import { evaluateTelemetryEfficiency } from "./lib/harness/telemetry-efficiency.mjs";
-import {
-  assertCurrentContractDerivedTdd,
-  loadChangeScenarioSemantics,
-} from "./lib/harness/contract-derived-tdd.mjs";
+import { launchCodexWorker } from "./lib/harness/codex-worker.mjs";
+
+export const publicCommands = [
+  "route",
+  "requirements",
+  "baseline",
+  "contract",
+  "tdd",
+  "validate",
+  "review",
+  "failure-proof",
+  "run-isolated",
+  "conformance",
+  "delivery",
+  "telemetry-summary",
+];
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
-
-const currentPlan = async (file) => {
-  const plan = validatePlan(await readJson(absolute(file)), config);
-  await assertCurrentContractDerivedTdd(repoRoot, plan);
-  return plan;
+const [name, ...args] = process.argv.slice(2);
+const option = (flag) => {
+  const index = args.indexOf(flag);
+  return index < 0 ? null : args[index + 1];
 };
-const config = await readJson(
-  path.join(repoRoot, "docs/exec-plans/config.json"),
+const positional = args.filter(
+  (value, index) =>
+    !value.startsWith("--") &&
+    (index === 0 || !args[index - 1].startsWith("--")),
 );
-const [command, ...args] = process.argv.slice(2);
-
-const stateRoot = path.join(repoRoot, "docs/exec-plans");
-const canonicalStateRoot = realpathSync(stateRoot);
-const within = (root, target) =>
-  target === root || target.startsWith(`${root}${path.sep}`);
 const absolute = (file) => {
   const target = path.resolve(repoRoot, file);
-  if (!within(repoRoot, target))
+  if (target !== repoRoot && !target.startsWith(`${repoRoot}${path.sep}`))
     throw new Error(`path escapes repository: ${file}`);
   return target;
 };
-const statePath = (file) => {
-  const target = absolute(file);
-  let ancestor = target;
-  const missing = [];
-  let canonicalAncestor;
-  while (!canonicalAncestor) {
-    try {
-      lstatSync(ancestor);
-    } catch (error) {
-      if (error.code !== "ENOENT") throw error;
-      const parent = path.dirname(ancestor);
-      if (parent === ancestor) break;
-      missing.unshift(path.basename(ancestor));
-      ancestor = parent;
-      continue;
-    }
-    try {
-      canonicalAncestor = realpathSync(ancestor);
-    } catch (error) {
-      if (error.code !== "ENOENT") throw error;
-      throw new Error(
-        `mutable harness state must stay under docs/exec-plans: ${file}`,
-      );
-    }
-  }
-  if (!canonicalAncestor)
-    throw new Error(`cannot resolve mutable harness state path: ${file}`);
-  const canonicalTarget = path.join(canonicalAncestor, ...missing);
-  if (!within(canonicalStateRoot, canonicalTarget))
-    throw new Error(
-      `mutable harness state must stay under docs/exec-plans: ${file}`,
-    );
-  return canonicalTarget;
-};
-const repositoryRelative = (file) =>
-  path.relative(repoRoot, file).split(path.sep).join("/");
-const readJsonOr = async (file, fallback) => {
-  try {
-    return await readJson(file);
-  } catch (error) {
-    if (error.code === "ENOENT") return fallback;
-    throw error;
-  }
-};
-const withStateLock = async (target, operation) => {
-  const lockPath = `${target}.lock`;
-  let lock;
-  try {
-    lock = await open(lockPath, "wx");
-  } catch (error) {
-    if (error.code === "EEXIST") {
-      const owner = await readFile(lockPath, "utf8").catch(
-        () => "unknown owner",
-      );
-      throw new Error(
-        `state is already being updated: ${path.relative(repoRoot, target)}; lock ${path.relative(repoRoot, lockPath)} (${owner.trim() || "unknown owner"}) may be removed if its process stopped`,
-      );
-    }
-    throw error;
-  }
-  await lock.write(`${process.pid} ${new Date().toISOString()}\n`);
-  try {
-    return await operation();
-  } finally {
-    await lock.close().catch(() => {});
-    await unlink(lockPath).catch(() => {});
-  }
-};
-const option = (name) => {
-  const index = args.indexOf(name);
-  return index === -1 ? null : args[index + 1];
-};
-const output = (value) =>
+const load = (file) => readJson(absolute(file));
+const emit = async (value) => {
+  const output = option("--out");
+  if (output) await writeJson(absolute(output), value);
   process.stdout.write(`${JSON.stringify(value, null, 2)}\n`);
-const repositoryFiles = async () => {
-  const { stdout } = await exec(
-    "git",
-    ["ls-files", "--cached", "--others", "--exclude-standard", "-z"],
-    { cwd: repoRoot },
-  );
-  return stdout.split("\0").filter(Boolean);
 };
-const refreshChangeFailureInvariants = async (state, target) => {
-  const stored = state.changeFailureInvariants;
-  if (!stored) return state;
-  const current = await loadChangeFailureInvariants(
-    stored.change,
-    {
-      version: 1,
-      change: stored.change,
-      invariants: stored.invariants.map(
-        ({ id, concern, requirement, scenario }) => ({
-          id,
-          concern,
-          requirement,
-          scenario,
-        }),
-      ),
-    },
-    repoRoot,
+const usage = () => {
+  process.stdout.write(
+    `usage: npm run harness -- <${publicCommands.join("|")}> ... [--out receipt.json]\n`,
   );
-  if (
-    current.manifestDigest !== stored.manifestDigest ||
-    current.contractDigest !== stored.contractDigest
-  ) {
-    delete state.failurePathProof;
-    await writeJson(target, state);
-    throw new Error(
-      "change-specific failure invariant contracts changed after review initialization",
-    );
-  }
-  return state;
+  process.stdout.write(
+    "Each command validates immutable inputs and emits one content-addressed receipt.\n",
+  );
 };
-const exec = promisify(execFile);
 
-switch (command) {
-  case "context-capsule": {
-    const ledgerPath = option("--ledger");
-    const phase = option("--phase");
-    const transition = option("--transition");
-    const physicalSession = option("--session");
-    const validationPath = option("--validation");
-    const reviewPath = option("--review");
-    const out = option("--out");
-    if (!ledgerPath || !phase || !transition || !physicalSession || !out)
-      throw new Error(
-        "context-capsule requires --ledger, --phase, --transition, --session, and --out",
-      );
-    const ledgerTarget = statePath(ledgerPath);
-    const plan = await currentPlan(args[0]);
-    const executionStatePath = option("--state");
-    const index = await contextIndex(
-      plan,
-      args[1],
-      repoRoot,
-      executionStatePath ? await readJson(absolute(executionStatePath)) : null,
-    );
-    const capsule = await createPacketContextCapsule(
-      index,
-      await readJsonOr(ledgerTarget, createContextLedger()),
-      repoRoot,
-      {
-        phase,
-        transition,
-        physicalSession,
-        validationLedger: validationPath
-          ? await readJson(absolute(validationPath))
-          : [],
-        reviewState: reviewPath ? await readJson(absolute(reviewPath)) : null,
-      },
-    );
-    await writeJson(statePath(out), capsule);
-    output(capsule);
-    break;
-  }
-  case "context-ack": {
-    const ledgerPath = args[1];
-    if (!args[0] || !ledgerPath)
-      throw new Error("context-ack requires <capsule> <ledger>");
-    const ledgerTarget = statePath(ledgerPath);
-    const next = await acknowledgeContextCapsule(
-      await readJsonOr(ledgerTarget, createContextLedger()),
-      await readJson(absolute(args[0])),
-      repoRoot,
-    );
-    await writeJson(ledgerTarget, next);
-    output(next);
-    break;
-  }
-  case "context-cost-replay":
-    output(
-      await runContextCostReplay(await readJson(absolute(args[0])), repoRoot),
-    );
-    break;
-  case "route-check":
-    output(evaluateRouteEligibility(await readJson(absolute(args[0]))));
-    break;
-  case "implementation-preflight": {
-    const requirementsPath = option("--requirements");
-    const outputPath = option("--out");
-    if (!outputPath)
-      throw new Error(
-        "implementation-preflight requires --out <execution-baseline>",
-      );
-    const result = assertImplementationPreflight(
-      await readJson(absolute(args[0])),
-      requirementsPath ? await readJson(absolute(requirementsPath)) : null,
-      await gitImplementationState(repoRoot, {
-        defaultBranch: option("--default") ?? "main",
-        baseRef: option("--base") ?? "origin/main",
-        pullRequestUrl: option("--pull-request"),
-      }),
-    );
-    await writeJson(statePath(outputPath), result.baseline);
-    output(result);
-    break;
-  }
-  case "route-conformance":
-    {
-      const executionPath = option("--execution");
-      if (!executionPath)
-        throw new Error(
-          "route-conformance requires --execution <execution-baseline>",
-        );
-      const baseline = validateExecutionBaseline(
-        await readJson(absolute(executionPath)),
-      );
-      assertExecutionBaselineState(
-        baseline,
-        await gitExecutionBaselineState(repoRoot, baseline),
-      );
-      const base = baseline.commit;
-      const evidence = await gitEvidence(repoRoot, base);
-      const targetRelevantFiles = evidence.changedFiles.filter(
-        (file) => !file.startsWith("docs/exec-plans/active/"),
-      );
-      output(
-        assertRouteConformance(
-          await readJson(absolute(args[0])),
-          await readJson(absolute(args[1])),
-          await gitRouteSurfaces(repoRoot, base, targetRelevantFiles),
-        ),
-      );
-    }
-    break;
-  case "delivery-check": {
-    const delivery = await readJson(absolute(args[0]));
-    const planPath = option("--plan");
-    const executionStatePath = option("--state");
-    const directPath = option("--direct");
-    if (Boolean(planPath) !== Boolean(executionStatePath))
-      throw new Error("delivery-check requires both --plan and --state");
-    if (!planPath && !directPath)
-      throw new Error(
-        "delivery-check requires --plan <plan> --state <state> or --direct <route-assessment>",
-      );
-    if (planPath && directPath)
-      throw new Error(
-        "delivery-check cannot combine execution and direct evidence",
-      );
-    let execution = null;
-    if (planPath) {
-      const plan = await currentPlan(planPath);
-      const reviewPath = option("--review");
-      const telemetryPath = option("--telemetry");
-      if (!reviewPath)
-        throw new Error("planned delivery-check requires --review <state>");
-      if (!telemetryPath)
-        throw new Error("planned delivery-check requires --telemetry <jsonl>");
-      const requirementsPath = option("--requirements");
-      if (plan.requirementsGate === "required" && !requirementsPath)
-        throw new Error(
-          "requirements-gated delivery-check requires --requirements <state>",
-        );
-      execution = {
-        plan,
-        state: await readJson(absolute(executionStatePath)),
-        requirementsState: requirementsPath
-          ? await readJson(absolute(requirementsPath))
-          : null,
-        reviewState: await refreshChangeFailureInvariants(
-          await readJson(absolute(reviewPath)),
-          absolute(reviewPath),
-        ),
-        telemetryEvents: (await readFile(absolute(telemetryPath), "utf8"))
-          .split(/\r?\n/)
-          .filter(Boolean)
-          .map((line) => JSON.parse(line)),
-      };
-    } else {
-      const direct = await readJson(absolute(directPath));
-      const eligibility = evaluateRouteEligibility(direct);
-      if (direct.route !== "direct" || !eligibility.eligible)
-        throw new Error("delivery direct evidence is not positively eligible");
-    }
-    output(
-      assertImplementationDelivery(
-        {
-          ...delivery,
-          actual: await gitDeliveryState(repoRoot, delivery.pullRequestUrl),
-        },
-        execution,
-      ),
-    );
-    break;
-  }
-  case "plan": {
-    const requirementsPath = option("--requirements");
-    const assessment = await readJson(absolute(args[0]));
-    const requirementsState = requirementsPath
-      ? await readJson(absolute(requirementsPath))
-      : null;
-    const scenarioSemantics =
-      assessment.requirementsGate === "required"
-        ? await loadChangeScenarioSemantics(repoRoot, assessment.openSpecChange)
-        : null;
-    const plan = createPlan(
-      assessment,
-      config,
-      requirementsState,
-      scenarioSemantics,
-    );
-    await writeJson(statePath(args[1]), plan);
-    output(plan);
-    break;
-  }
-  case "requirements-check":
-    output(requirementsStatus(await readJson(absolute(args[0]))));
-    break;
-  case "plan-check":
-    output(await currentPlan(args[0]));
-    break;
-  case "context": {
-    const plan = await currentPlan(args[0]);
-    const handoffPath = option("--state") ?? option("--handoff");
-    output(
-      await contextIndex(
-        plan,
-        args[1],
-        repoRoot,
-        handoffPath ? await readJson(absolute(handoffPath)) : null,
-      ),
-    );
-    break;
-  }
-  case "ready": {
-    const handoffPath = option("--state") ?? option("--handoff");
-    output(
-      readyPackets(
-        await currentPlan(args[0]),
-        handoffPath ? await readJson(absolute(handoffPath)) : null,
-      ),
-    );
-    break;
-  }
-  case "handoff-write": {
-    const plan = await currentPlan(args[0]);
-    const value = validateHandoff(await readJson(absolute(args[1])), plan);
-    await writeJson(statePath(args[2]), value);
-    output(value);
-    break;
-  }
-  case "affected": {
-    const changeIndex = args.indexOf("--change");
-    const files = changeIndex === -1 ? args : args.slice(0, changeIndex);
-    const impact =
-      changeIndex === -1
-        ? { version: 1, kinds: ["unknown"], browserExecutable: null }
-        : (
-            await loadChangeScenarioSemantics(repoRoot, args[changeIndex + 1], {
-              requireValidationImpact: true,
-            })
-          ).validationImpact;
-    output(affectedValidation(files, config, impact));
-    break;
-  }
-  case "validation-check": {
-    const ledgerPath = absolute(args[1]);
-    const ledger = await readJsonOr(ledgerPath, []);
-    const changed = await gitEvidence(repoRoot, option("--base"));
-    relevantValidationFiles(changed.changedFiles, args[0], config);
-    const files = validationInputFiles(
-      [...(await repositoryFiles()), ...changed.changedFiles],
-      args[0],
-      config,
-    ).filter((file) => file !== repositoryRelative(ledgerPath));
-    const decision = assertValidationRun(
-      {
-        target: args[0],
-        currentFingerprint: await fingerprintFiles(files, repoRoot),
-        reason: option("--reason"),
-      },
-      ledger,
-      config,
-    );
-    output(decision);
-    break;
-  }
-  case "validation-record": {
-    const ledgerPath = statePath(args[0]);
-    const ledger = await readJsonOr(ledgerPath, []);
-    const changed = await gitEvidence(repoRoot, option("--base"));
-    relevantValidationFiles(changed.changedFiles, args[1], config);
-    const result = await recordValidation(
-      {
-        target: args[1],
-        files: validationInputFiles(
-          [...(await repositoryFiles()), ...changed.changedFiles],
-          args[1],
-          config,
-        ).filter((file) => file !== repositoryRelative(ledgerPath)),
-        outcome: option("--outcome"),
-        reason: option("--reason"),
-        packet: option("--packet"),
-        session: option("--session"),
-        obligations: (option("--obligations") ?? "").split(",").filter(Boolean),
-        rawLog: option("--raw-log"),
-      },
-      ledger,
-      config,
-      repoRoot,
-    );
-    await writeJson(ledgerPath, ledger);
-    output(result);
-    break;
-  }
-  case "state-init": {
-    const state = createExecutionState(await readJson(absolute(args[0])));
-    await writeJson(statePath(args[1]), state);
-    output(state);
-    break;
-  }
-  case "tdd-design-record": {
-    const baselinePath = option("--execution");
-    if (!baselinePath)
-      throw new Error("tdd-design-record requires --execution <baseline>");
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const handoff = await readJson(absolute(args[2]));
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      recordTddDesign(
-        plan,
-        current,
-        await createTddDesignEvidence(
-          plan,
-          current,
-          handoff,
-          await readJson(absolute(baselinePath)),
-          repoRoot,
-        ),
-      );
-      await writeJson(target, current);
-      return current;
-    });
-    output(state.specDrivenTdd.slices[handoff.sliceId]);
-    break;
-  }
-  case "tdd-review-record": {
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const handoff = await readJson(absolute(args[2]));
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      recordTddReview(plan, current, handoff);
-      await writeJson(target, current);
-      return current;
-    });
-    output(state.specDrivenTdd.slices[handoff.sliceId]);
-    break;
-  }
-  case "tdd-red":
-  case "tdd-green": {
-    if (
-      args.includes("--baseline-command") ||
-      args.includes("--candidate-command")
-    )
-      throw new Error(
-        "spec-driven TDD does not accept revision-specific command or oracle overrides",
-      );
-    const baselinePath = option("--execution");
-    if (!baselinePath)
-      throw new Error(`${command} requires --execution <baseline>`);
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      try {
-        await runTddAcceptance(
-          plan,
-          current,
-          args[2],
-          await readJson(absolute(baselinePath)),
-          repoRoot,
-          command === "tdd-red" ? "red" : "green",
-        );
-      } catch (error) {
-        if (
-          ["pending-test-design", "pending-test-review"].includes(
-            current.specDrivenTdd?.slices?.[args[2]]?.status,
-          )
-        )
-          await writeJson(target, current);
-        throw error;
-      }
-      await writeJson(target, current);
-      return current;
-    });
-    output(state.specDrivenTdd.slices[args[2]]);
-    break;
-  }
-  case "worker-probe":
-    output(await probeCodexExec({ cwd: repoRoot }));
-    break;
-  case "worker-brief": {
-    const baselinePath = option("--execution");
-    const claimId = option("--claim");
-    const outputPath = option("--out");
-    if (!baselinePath || !claimId || !outputPath)
-      throw new Error(
-        "worker-brief requires --execution <baseline> --claim <id> --out <brief>",
-      );
-    const brief = createWorkerBrief(
-      await readJson(absolute(args[0])),
-      await readJson(absolute(args[1])),
-      args[2],
-      {
-        baseline: await readJson(absolute(baselinePath)),
-        requirementsState: option("--requirements")
-          ? await readJson(absolute(option("--requirements")))
-          : null,
-        claimId,
-      },
-    );
-    await writeJson(statePath(outputPath), brief);
-    output(brief);
-    break;
-  }
-  case "worker-run": {
-    const baselinePath = option("--execution");
-    const claimId = option("--claim");
-    const session = option("--session");
-    const briefPath = option("--brief-out");
-    if (!baselinePath || !claimId || !session || !briefPath)
-      throw new Error(
-        "worker-run requires --execution <baseline> --claim <id> --session <id> --brief-out <brief>",
-      );
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const requirementsState = option("--requirements")
-      ? await readJson(absolute(option("--requirements")))
-      : null;
-    const workerArtifactPath = (suffix) =>
-      briefPath.endsWith(".json")
-        ? `${briefPath.slice(0, -5)}${suffix}`
-        : `${briefPath}${suffix}`;
-    const contextCapsulePath =
-      option("--context-capsule-out") ??
-      workerArtifactPath(".context-capsule.json");
-    const contextLedgerPath =
-      option("--context-ledger-out") ??
-      workerArtifactPath(".context-ledger.json");
-    const prepared = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      const ledger = createContextLedger();
-      const capsule = await createPacketContextCapsule(
-        await contextIndex(plan, args[2], repoRoot, current),
-        ledger,
-        repoRoot,
-        {
-          phase: "implementation",
-          transition: "pending-to-launching",
-          launchClaim: claimId,
-          validationLedger: option("--validation")
-            ? await readJson(absolute(option("--validation")))
-            : [],
-          reviewState: option("--review")
-            ? await readJson(absolute(option("--review")))
-            : null,
-        },
-      );
-      assertInitialContextEnvelope(
-        plan.packets.find(({ id }) => id === args[2]),
-        capsule,
-      );
-      const brief = createWorkerBrief(plan, current, args[2], {
-        baseline: await readJson(absolute(baselinePath)),
-        requirementsState,
-        claimId,
-        contextCapsule: capsule,
-      });
-      await writeJson(statePath(contextLedgerPath), ledger);
-      await writeJson(statePath(contextCapsulePath), capsule);
-      await writeJson(statePath(briefPath), brief);
-      reserveWorkerPacket(
-        plan,
-        current,
-        args[2],
-        brief,
-        session,
-        requirementsState,
-      );
-      await writeJson(target, current);
-      return { brief, contextCapsulePath, contextLedgerPath };
-    });
-    const result = await launchCodexWorker({
-      brief: prepared.brief,
-      cwd: repoRoot,
-    });
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      if (result.evidence?.runtimeId) {
-        const ledgerTarget = statePath(prepared.contextLedgerPath);
-        const ledger = await readJson(ledgerTarget);
-        ledger.physicalSession = result.evidence.runtimeId;
-        ledger.launchClaim = claimId;
-        await writeJson(ledgerTarget, ledger);
-      }
-      let recordingError = null;
-      try {
-        recordWorkerAttempt(
-          plan,
-          current,
-          args[2],
-          prepared.brief,
-          result,
-          session,
-          requirementsState,
-        );
-      } catch (error) {
-        failWorkerReservation(current, args[2], error, result);
-        recordingError = error;
-      }
-      await writeJson(target, current);
-      return { packet: current.packets[args[2]], result, recordingError };
-    });
-    if (state.recordingError) throw state.recordingError;
-    const telemetryPath = option("--telemetry-out");
-    if (telemetryPath)
-      for (const event of workerTelemetryEvents({
-        packets: { [args[2]]: state.packet },
-      }))
-        await recordEvent(statePath(telemetryPath), event, {
-          trustedRuntime: true,
-        });
-    output(state);
-    break;
-  }
-  case "worker-retry": {
-    const target = statePath(args[0]);
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      retryWorkerPacket(current, args[1]);
-      await writeJson(target, current);
-      return current;
-    });
-    output(state.packets[args[1]]);
-    break;
-  }
-  case "claim": {
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const state = await withStateLock(target, async () => {
-      const next = claimPacket(
-        plan,
-        await readJson(target),
-        args[2],
-        option("--session"),
-        option("--requirements")
-          ? await readJson(absolute(option("--requirements")))
-          : null,
-        null,
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(state.packets[args[2]]);
-    break;
-  }
-  case "complete": {
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const state = await withStateLock(target, async () => {
-      const next = completePacket(
-        plan,
-        await readJson(target),
-        await readJson(absolute(args[2])),
-        option("--requirements")
-          ? await readJson(absolute(option("--requirements")))
-          : null,
-        option("--execution")
-          ? { baseline: await readJson(absolute(option("--execution"))) }
-          : {},
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(state.packets);
-    break;
-  }
-  case "pause": {
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const requirementsPath = option("--requirements");
-    if (!requirementsPath)
-      throw new Error("pause requires --requirements <state>");
-    const state = await withStateLock(target, async () => {
-      const current = await readJson(target);
-      const reentry = option("--tdd-reentry")
-        ? await createTddReentryEvidence(
-            plan,
-            current,
-            await readJson(absolute(option("--tdd-reentry"))),
-            repoRoot,
-          )
-        : null;
-      const next = pausePacket(
-        plan,
-        current,
-        args[2],
-        await readJson(absolute(requirementsPath)),
-        reentry,
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(state.packets[args[2]]);
-    break;
-  }
-  case "resume": {
-    const plan = await currentPlan(args[0]);
-    const target = statePath(args[1]);
-    const requirementsPath = option("--requirements");
-    if (!requirementsPath)
-      throw new Error("resume requires --requirements <state>");
-    const state = await withStateLock(target, async () => {
-      const next = resumePacket(
-        plan,
-        await readJson(target),
-        args[2],
-        option("--session"),
-        await readJson(absolute(requirementsPath)),
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(state.packets[args[2]]);
-    break;
-  }
-  case "review-init": {
-    const failurePathOption = option("--failure-path-concerns");
-    if (!failurePathOption)
-      throw new Error(
-        "review-init requires --failure-path-concerns <list|none>",
-      );
-    const concerns =
-      failurePathOption === "none"
-        ? []
-        : failurePathOption.split(",").filter(Boolean);
-    const change = option("--change");
-    const invariantsPath = option("--invariants");
-    if (concerns.length && (!change || !invariantsPath))
-      throw new Error(
-        "material review-init requires --change <name> --invariants <manifest>",
-      );
-    if (!concerns.length && (change || invariantsPath))
-      throw new Error(
-        "concern-free review-init does not accept change-specific invariants",
-      );
-    const binding = concerns.length
-      ? await loadChangeFailureInvariants(
-          change,
-          await readJson(absolute(invariantsPath)),
-          repoRoot,
-        )
-      : null;
-    if (
-      binding &&
-      binding.invariants.some(({ concern }) => !concerns.includes(concern))
-    )
-      throw new Error(
-        "change-specific failure invariant concern is not enabled for review",
-      );
-    const tddPlanPath = option("--tdd-plan");
-    const tddStatePath = option("--tdd-state");
-    if (Boolean(tddPlanPath) !== Boolean(tddStatePath))
-      throw new Error("review-init requires both --tdd-plan and --tdd-state");
-    const executionPlanPath = option("--plan");
-    if (!executionPlanPath)
-      throw new Error("review-init requires --plan <execution-plan>");
-    const executionPlan = await currentPlan(executionPlanPath);
-    const enforcedTdd = (executionPlan.specDrivenTdd?.slices ?? []).some(
-      ({ applicability }) => applicability === "enforced",
-    );
-    if (enforcedTdd && (!tddPlanPath || !tddStatePath))
-      throw new Error(
-        "review-init requires a TDD binding for an execution plan with enforced slices",
-      );
-    if (tddPlanPath && absolute(tddPlanPath) !== absolute(executionPlanPath))
-      throw new Error("review-init TDD plan must be the authoritative plan");
-    const currentHead = await exec("git", ["rev-parse", "HEAD"], {
-      cwd: repoRoot,
-    }).then(({ stdout }) => stdout.trim());
-    const tddBinding = tddPlanPath
-      ? createTddReviewBinding(
-          executionPlan,
-          await readJson(absolute(tddStatePath)),
-          currentHead,
-        )
-      : null;
-    const state = createReviewState(args[1], concerns, binding, tddBinding);
-    await writeJson(statePath(args[0]), state);
-    output(state);
-    break;
-  }
-  case "review-proof": {
-    const target = statePath(args[0]);
-    const definition = await readJson(absolute(option("--proof")));
-    if (
-      !Array.isArray(definition.command) ||
-      !definition.command.length ||
-      definition.command.some((part) => typeof part !== "string" || !part) ||
-      (definition.timeoutMs !== undefined &&
-        (!Number.isInteger(definition.timeoutMs) ||
-          definition.timeoutMs < 1 ||
-          definition.timeoutMs > 10 * 60 * 1000))
-    )
-      throw new Error(
-        "review proof requires a command array and optional bounded timeoutMs",
-      );
-    const state = await withStateLock(target, async () => {
-      const current = await refreshChangeFailureInvariants(
-        await readJson(target),
-        target,
-      );
-      let observed;
-      try {
-        const { stdout } = await exec(
-          definition.command[0],
-          definition.command.slice(1),
-          {
-            cwd: repoRoot,
-            env: { ...process.env, SHLZ_REVIEW_BASE: current.base },
-            maxBuffer: 10 * 1024 * 1024,
-            timeout: definition.timeoutMs ?? 10 * 60 * 1000,
-            killSignal: "SIGKILL",
-          },
-        );
-        observed = JSON.parse(stdout);
-      } catch (error) {
-        await writeJson(
-          target,
-          recordFailurePathDegradation(current, "execution", error.message),
-        );
-        throw error;
-      }
-      const proof = {
-        ...observed,
-        command: definition.command,
-        ...(current.changeFailureInvariants
-          ? {
-              openSpecChange: current.changeFailureInvariants.change,
-              manifestDigest: current.changeFailureInvariants.manifestDigest,
-              contractDigest: current.changeFailureInvariants.contractDigest,
-            }
-          : {}),
-      };
-      proof.resultDigest = failurePathResultDigest(proof);
-      const next = recordFailurePathProof(current, proof);
-      await writeJson(target, next);
-      return next;
-    });
-    output(reviewContext(state));
-    break;
-  }
-  case "review-degrade": {
-    const target = statePath(args[0]);
-    const state = await withStateLock(target, async () => {
-      const next = recordFailurePathDegradation(
-        await readJson(target),
-        option("--capability"),
-        option("--reason"),
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(reviewContext(state));
-    break;
-  }
-  case "review-record": {
-    const target = statePath(args[0]);
-    const findings = await readJson(absolute(option("--findings")));
-    const state = await withStateLock(target, async () => {
-      const current = await refreshChangeFailureInvariants(
-        await readJson(target),
-        target,
-      );
-      const tddPlanPath = option("--tdd-plan");
-      const tddStatePath = option("--tdd-state");
-      if (current.specDrivenTdd && (!tddPlanPath || !tddStatePath))
-        throw new Error(
-          "review-record requires --tdd-plan and --tdd-state for a TDD-bound review",
-        );
-      const record = async (tddPlan = null, tddState = null) => {
-        const tddEvidence = current.specDrivenTdd
-          ? createTddReviewBinding(tddPlan, tddState, option("--head"))
-          : null;
-        const next = recordReview(current, {
-          axis: option("--axis"),
-          head: option("--head"),
-          findings,
-          tddEvidence,
-          tddPlan,
-          tddState,
-        });
-        if (tddState) await writeJson(statePath(tddStatePath), tddState);
-        await writeJson(target, next);
-        return next;
-      };
-      if (!current.specDrivenTdd) return record();
-      const tddTarget = statePath(tddStatePath);
-      if (tddTarget === target)
-        throw new Error("review state and TDD state must use distinct files");
-      const tddPlan = await currentPlan(tddPlanPath);
-      return withStateLock(tddTarget, async () =>
-        record(tddPlan, await readJson(tddTarget)),
-      );
-    });
-    output(reviewContext(state));
-    break;
-  }
-  case "review-context":
-    output(reviewContext(await readJson(absolute(args[0]))));
-    break;
-  case "review-resolve": {
-    const target = statePath(args[0]);
-    const state = await withStateLock(target, async () => {
-      const next = resolveReviewFindings(
-        await readJson(target),
-        option("--ids")?.split(",").filter(Boolean) ?? [],
-        option("--head"),
-      );
-      await writeJson(target, next);
-      return next;
-    });
-    output(reviewContext(state));
-    break;
-  }
-  case "telemetry-record": {
-    const raw = option("--event");
-    if (!raw) throw new Error("telemetry-record requires --event <json>");
-    const event = JSON.parse(raw);
-    await recordEvent(statePath(args[0]), event);
-    output({ recorded: true, type: event.type });
-    break;
-  }
-  case "telemetry-summary": {
-    if (args.includes("--evaluation")) {
-      const report = await evaluateTelemetryEfficiency(
-        await readJson(absolute(args[0])),
-        repoRoot,
-      );
-      const out = option("--out");
-      if (out) await writeJson(absolute(out), report);
-      output(report);
-    } else {
-      const text = await readFile(absolute(args[0]), "utf8");
-      output(
-        summarizeEvents(
-          text.trim().split("\n").filter(Boolean).map(JSON.parse),
-        ),
-      );
-    }
-    break;
-  }
-  case "evidence":
-    output(await gitEvidence(repoRoot, args[0]));
-    break;
-  default:
+async function isolated(manifest) {
+  const dependencies = await Promise.all(
+    (manifest.dependencies ?? []).map(load),
+  );
+  for (const dependency of dependencies) verify(dependency);
+  const sources = await sourceManifest(
+    repoRoot,
+    manifest.sources ?? [],
+    manifest.byteBudget ?? null,
+  );
+  if (!sources.allowed)
     throw new Error(
-      "usage: harness <context-capsule|context-ack|context-cost-replay|route-check|implementation-preflight|route-conformance|delivery-check|requirements-check|plan|plan-check|context|ready|state-init|tdd-design-record|tdd-review-record|tdd-red|tdd-green|worker-probe|worker-brief|worker-run|worker-retry|claim|pause|resume|complete|handoff-write|affected|validation-check|validation-record|review-init|review-record|review-context|review-resolve|telemetry-record|telemetry-summary|evidence> ... (preflight: --out/--pull-request; conformance: --execution)",
+      `context byte budget exceeded: ${sources.bytes} > ${sources.byteBudget}; contributors: ${sources.contributors.map(({ path: name, bytes }) => `${name}:${bytes}`).join(", ")}`,
     );
+  const launchManifest = {
+    version: 1,
+    objective: manifest.objective,
+    sourceManifest: sources,
+    dependencyDigests: dependencies.map(({ digest: value }) => value),
+  };
+  const result = await launchCodexWorker({
+    brief: launchManifest,
+    cwd: repoRoot,
+    command: manifest.command ?? "codex",
+    timeoutMs: manifest.timeoutMs,
+  });
+  if (
+    result.terminalStatus !== "completed" ||
+    !result.evidence?.runtimeId ||
+    !result.workerReport ||
+    !result.workerReportDigest
+  )
+    throw new Error(`isolated execution incomplete: ${result.terminalStatus}`);
+  return receipt("isolated-result", {
+    manifestDigest: digest(launchManifest),
+    sourceManifest: sources,
+    dependencyDigests: launchManifest.dependencyDigests,
+    launchId: result.launchId,
+    runtimeId: result.evidence.runtimeId,
+    reportDigest: result.workerReportDigest,
+    outcome: "pass",
+    telemetry: telemetry(result.usage ?? {}, {
+      sourceBytes: sources.bytes,
+      sourceCount: sources.contributors.length,
+    }),
+  });
+}
+
+try {
+  let result;
+  switch (name) {
+    case "route":
+      result = route(await load(positional[0]));
+      break;
+    case "requirements":
+      result = requirements(
+        await load(positional[0]),
+        await load(positional[1]),
+      );
+      break;
+    case "baseline":
+      result = await baseline({
+        repoRoot,
+        routeReceipt: await load(positional[0]),
+        requirementsReceipt: positional[1] ? await load(positional[1]) : null,
+        defaultBranch: option("--default") ?? "main",
+        pullRequestUrl: option("--pull-request"),
+      });
+      break;
+    case "contract":
+      result = await contract(absolute(positional[0]));
+      break;
+    case "tdd": {
+      const input = await load(positional[0]);
+      result = await tdd({
+        ...input,
+        contractReceipt: await load(input.contract),
+        baselineReceipt: await load(input.baseline),
+        cwd: repoRoot,
+      });
+      break;
+    }
+    case "validate": {
+      const input = await load(positional[0]);
+      result = await validation({
+        ...input,
+        repoRoot,
+        priorReceipt: input.prior ? await load(input.prior) : null,
+      });
+      break;
+    }
+    case "review": {
+      const input = await load(positional[0]);
+      result = review({
+        ...input,
+        contractReceipt: await load(input.contract),
+      });
+      break;
+    }
+    case "failure-proof": {
+      const input = await load(positional[0]);
+      result = failureProof({
+        ...input,
+        contractReceipt: await load(input.contract),
+      });
+      break;
+    }
+    case "run-isolated":
+      result = await isolated(await load(positional[0]));
+      break;
+    case "conformance":
+      result = await conformance({
+        repoRoot,
+        routeReceipt: await load(positional[0]),
+        baselineReceipt: await load(positional[1]),
+        discovered: await load(positional[2]),
+      });
+      break;
+    case "delivery": {
+      const input = await load(positional[0]);
+      result = await delivery({
+        repoRoot,
+        ...Object.fromEntries(
+          await Promise.all(
+            Object.entries(input.receipts).map(async ([key, value]) => [
+              key,
+              Array.isArray(value)
+                ? await Promise.all(value.map(load))
+                : value
+                  ? await load(value)
+                  : null,
+            ]),
+          ),
+        ),
+        pullRequestUrl: input.pullRequestUrl,
+      });
+      break;
+    }
+    case "telemetry-summary": {
+      const input = await load(positional[0]);
+      result = telemetry(input.runtime, input.observations);
+      break;
+    }
+    case "help":
+    case "--help":
+    case undefined:
+      usage();
+      process.exit(0);
+      break;
+    default:
+      throw new Error(`unknown command: ${name}`);
+  }
+  await emit(result);
+} catch (error) {
+  process.stderr.write(`${error.message}\n`);
+  process.exitCode = 1;
 }

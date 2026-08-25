@@ -1,3 +1,0 @@
-{
-  "command": ["node", "tools/tests/change-specific-review-fixture.mjs"]
-}

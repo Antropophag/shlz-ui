@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feat/simplify-engineering-harness",
+    "commit": "28a889f16f54d6d1755d29e5aa55fd90df992133",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feat/simplify-engineering-harness",
+      "headRefOid": "28a889f16f54d6d1755d29e5aa55fd90df992133",
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/42"
+    },
+    "repository": {
+      "digest": "3f3931c1c3989575fa564bc6b5854d18b14418fd60e30f42bc4a675bc134cb12",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-simplify-harness"
+    },
+    "upstream": "origin/feat/simplify-engineering-harness"
+  },
+  "requirementsDigest": "0bc0d9e4f0c777a27dd8be8719fd1105e025a088726aadbf406586d3dbebd618",
+  "routeDigest": "7bac4a92cd196cc2bc2067f67599c9fb1aa443875f1f0e01b8c5ec05da5cb930",
+  "version": 1,
+  "digest": "e68f4a7aa629b9b123a79c5fd1c833b8a2534807182c498b1f412c4b799bbb1f"
+}

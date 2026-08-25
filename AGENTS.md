@@ -110,9 +110,9 @@ Requirements integration: for short, ambiguous, or substantial intents and for m
 
 After choosing the direct or OpenSpec workflow, select the smallest materially useful set of engineering skills using `docs/skill-routing.md`.
 
-For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive execution workflow in `docs/agent-execution.md` after requirements readiness and OpenSpec synthesis. Keep OpenSpec normative; store only minimal requirements provenance plus plan, packet, claim, handoff, validation, review, and telemetry state under `docs/exec-plans/`.
+For M/L/XL work, or whenever scope/context growth is uncertain, use the receipt-based execution workflow in `docs/agent-execution.md` after requirements readiness and OpenSpec synthesis. Keep OpenSpec normative; store no more than the compact route-to-delivery receipts under `docs/exec-plans/`. Use isolated execution only for a genuinely useful physical context boundary.
 
-Normal new implementation starts from clean current `origin/main` on a task branch/worktree. A bounded follow-up on an existing PR may instead start from that clean, fully pushed, verified open-PR head; its immutable episode baseline scopes routing, validation, and review to the follow-up delta. Both paths end with proportionate validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, run the post-discovery route-conformance and delivery guards in `docs/agent-execution.md`; material scope discovered on a direct route requires re-routing before completion.
+Normal new implementation starts from clean current `origin/main` on a task branch/worktree. An explicitly based episode may instead start from a clean, fully pushed, verified open-PR head; its immutable baseline scopes routing, validation, and review. Both paths end with proportionate validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, create conformance and delivery receipts; material scope discovered on a direct route requires re-routing.
 
 ## UI component completion gate
 

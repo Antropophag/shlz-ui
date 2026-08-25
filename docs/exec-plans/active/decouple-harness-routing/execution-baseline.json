@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "kind": "mainline",
-  "commit": "ca1927ec1f9ded0685ed035b339ad41827b7a44d",
-  "branch": "feat/decouple-harness-routing",
-  "defaultBranch": "main"
-}

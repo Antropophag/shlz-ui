@@ -1,3 +1,0 @@
-{
-  "command": ["node", "tools/tests/pr33-change-invariant-fixture.mjs"]
-}

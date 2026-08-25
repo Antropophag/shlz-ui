@@ -1,8 +1,0 @@
-{
-  "version": 1,
-  "kind": "existing-pull-request",
-  "commit": "089c1de56db59bafee8dcce90553e779d9668abe",
-  "branch": "feat/deterministic-tdd-routing",
-  "defaultBranch": "main",
-  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/40"
-}

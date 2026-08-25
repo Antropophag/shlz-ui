@@ -1,8 +1,0 @@
-{
-  "version": 1,
-  "kind": "existing-pull-request",
-  "commit": "d15f40baf1be4da12ad98daa5268b8d716d62e1c",
-  "branch": "feat/reduce-harness-context-cost",
-  "defaultBranch": "main",
-  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/37"
-}
