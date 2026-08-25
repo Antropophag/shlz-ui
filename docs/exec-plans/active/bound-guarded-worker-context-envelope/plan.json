@@ -27,18 +27,9 @@
   },
   "contextPolicy": {
     "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
-    "normalTarget": [
-      40000,
-      70000
-    ],
-    "pressure": [
-      60000,
-      80000
-    ],
-    "redZone": [
-      80000,
-      100000
-    ],
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
     "decomposeSignal": 100000,
     "semanticBoundaries": [
       "implementation-to-independent-review",
@@ -113,9 +104,7 @@
           "environment": {
             "TZ": "UTC"
           },
-          "normalization": [
-            "repo-root"
-          ],
+          "normalization": ["repo-root"],
           "timeoutMs": 10000
         },
         "fixtureSurface": [
@@ -159,14 +148,9 @@
         "red-capable tests",
         "evaluation report"
       ],
-      "nonGoals": [
-        "production launch guard",
-        "runtime token estimation"
-      ],
+      "nonGoals": ["production launch guard", "runtime token estimation"],
       "dependencies": [],
-      "contracts": [
-        "harness/context-envelope-efficiency"
-      ],
+      "contracts": ["harness/context-envelope-efficiency"],
       "contextSources": [
         "openspec/changes/bound-guarded-worker-context-envelope/**",
         "docs/exec-plans/active/{execution-context-isolation,reduce-harness-context-cost,enforce-spec-driven-tdd,require-independent-test-contract-review,enforce-contract-derived-tdd-routing,enforce-delivery-packet-consistency,wave-9-sidebar-application-shell}/telemetry.jsonl",
@@ -180,19 +164,13 @@
         "tools/tests/harness.test.mjs",
         "docs/exec-plans/active/bound-guarded-worker-context-envelope/"
       ],
-      "focusedValidation": [
-        "npm run test:harness"
-      ],
+      "focusedValidation": ["npm run test:harness"],
       "outputs": [
         "representative evaluation",
         "red attribution coverage",
         "measured envelope evidence"
       ],
-      "handoff": [
-        "sample identities",
-        "cost findings",
-        "red assertions"
-      ],
+      "handoff": ["sample identities", "cost findings", "red assertions"],
       "implementationOutcomes": [
         "stage/session cost visible",
         "unavailable relevance remains unavailable",
@@ -216,12 +194,8 @@
         "universal threshold",
         "external service"
       ],
-      "dependencies": [
-        "evaluation-contract"
-      ],
-      "contracts": [
-        "harness/context-envelope-efficiency"
-      ],
+      "dependencies": ["evaluation-contract"],
+      "contracts": ["harness/context-envelope-efficiency"],
       "contextSources": [
         "openspec/changes/bound-guarded-worker-context-envelope/**",
         "tools/lib/harness/{core,codex-worker,context-cost}.mjs",
@@ -246,11 +220,7 @@
         "fail-closed guard",
         "attributed telemetry summary"
       ],
-      "handoff": [
-        "interface",
-        "compatibility checks",
-        "measured findings"
-      ],
+      "handoff": ["interface", "compatibility checks", "measured findings"],
       "implementationOutcomes": [
         "over-budget launch prevented",
         "coverage unchanged",
@@ -270,13 +240,8 @@
         "delivery guard",
         "PR"
       ],
-      "nonGoals": [
-        "merge",
-        "unrelated harness refactor"
-      ],
-      "dependencies": [
-        "envelope-implementation"
-      ],
+      "nonGoals": ["merge", "unrelated harness refactor"],
+      "dependencies": ["envelope-implementation"],
       "contracts": [
         "openspec/changes/bound-guarded-worker-context-envelope/**"
       ],
@@ -288,26 +253,15 @@
         "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
         "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation,validation-summary,review-summary}.json"
       ],
-      "implementationSurface": [
-        "current diff remediation only"
-      ],
+      "implementationSurface": ["current diff remediation only"],
       "focusedValidation": [
         "inspect supplied validation and two-axis review evidence",
         "run only focused harness, probe, and strict OpenSpec checks if verification is needed",
         "do not rerun full repository or browser suites unless implementation changes",
         "delivery-check"
       ],
-      "outputs": [
-        "review dispositions",
-        "validation evidence",
-        "open PR"
-      ],
-      "handoff": [
-        "findings",
-        "checks",
-        "limitations",
-        "PR URL"
-      ],
+      "outputs": ["review dispositions", "validation evidence", "open PR"],
+      "handoff": ["findings", "checks", "limitations", "PR URL"],
       "implementationOutcomes": [
         "Standards pass",
         "Spec pass",

@@ -192,7 +192,7 @@
     {
       "id": "review-delivery",
       "group": "review",
-    "objective": "Audit the current diff and supplied validation/review evidence, then deliver the unmerged PR without repeating full suites",
+      "objective": "Audit the current diff and supplied validation/review evidence, then deliver the unmerged PR without repeating full suites",
       "scope": [
         "full validation",
         "Standards review",
@@ -212,13 +212,13 @@
         "tools/harness.mjs",
         "tools/lib/harness/{core,context-cost}.mjs",
         "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
-      "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation,validation-summary,review-summary}.json"
+        "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation,validation-summary,review-summary}.json"
       ],
       "implementationSurface": ["current diff remediation only"],
       "focusedValidation": [
-      "inspect supplied validation and two-axis review evidence",
-      "run only focused harness, probe, and strict OpenSpec checks if verification is needed",
-      "do not rerun full repository or browser suites unless implementation changes",
+        "inspect supplied validation and two-axis review evidence",
+        "run only focused harness, probe, and strict OpenSpec checks if verification is needed",
+        "do not rerun full repository or browser suites unless implementation changes",
         "delivery-check"
       ],
       "outputs": ["review dispositions", "validation evidence", "open PR"],

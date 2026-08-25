@@ -4,7 +4,10 @@
   "standards": {
     "outcome": "pass",
     "blockingFindings": [],
-    "judgmentCalls": ["CLI and core retain some duplicated evaluation aggregation", "exact fixture totals increase shotgun-surgery sensitivity"]
+    "judgmentCalls": [
+      "CLI and core retain some duplicated evaluation aggregation",
+      "exact fixture totals increase shotgun-surgery sensitivity"
+    ]
   },
   "spec": {
     "outcome": "pass",

@@ -9,22 +9,14 @@
       "tools/tests/harness.test.mjs",
       "docs/{agent-execution,exec-plans/README}.md"
     ],
-    "contracts": [
-      "harness/context-envelope-efficiency"
-    ],
-    "dependencies": [
-      "evaluation-contract"
-    ],
+    "contracts": ["harness/context-envelope-efficiency"],
+    "dependencies": ["evaluation-contract"],
     "focusedValidation": [
       "npm run test:harness",
       "npm run check:docs",
       "openspec validate bound-guarded-worker-context-envelope --strict"
     ],
-    "handoff": [
-      "interface",
-      "compatibility checks",
-      "measured findings"
-    ],
+    "handoff": ["interface", "compatibility checks", "measured findings"],
     "id": "envelope-implementation",
     "implementationOutcomes": [
       "over-budget launch prevented",

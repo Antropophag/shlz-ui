@@ -2,13 +2,32 @@
   "version": 1,
   "candidate": "f8a7744",
   "checks": [
-    { "command": "npm run test:harness", "outcome": "pass", "observed": "115/115" },
+    {
+      "command": "npm run test:harness",
+      "outcome": "pass",
+      "observed": "115/115"
+    },
     { "command": "npm run lint", "outcome": "pass" },
-    { "command": "npm run build", "outcome": "pass", "limitations": ["pre-existing chunk-size warnings"] },
-    { "command": "node tools/validate.mjs", "outcome": "pass", "observed": "68 SVGs, 3 token groups, 119 icons, 42 aliases" },
-    { "command": "npm run test:packages", "outcome": "pass", "observed": "4 package consumers" },
+    {
+      "command": "npm run build",
+      "outcome": "pass",
+      "limitations": ["pre-existing chunk-size warnings"]
+    },
+    {
+      "command": "node tools/validate.mjs",
+      "outcome": "pass",
+      "observed": "68 SVGs, 3 token groups, 119 icons, 42 aliases"
+    },
+    {
+      "command": "npm run test:packages",
+      "outcome": "pass",
+      "observed": "4 package consumers"
+    },
     { "command": "npm run test:e2e", "outcome": "pass", "observed": "207/207" },
-    { "command": "openspec validate bound-guarded-worker-context-envelope --strict", "outcome": "pass" }
+    {
+      "command": "openspec validate bound-guarded-worker-context-envelope --strict",
+      "outcome": "pass"
+    }
   ],
   "disposition": "The full browser suite already passed on the implementation candidate. Review retries must consume this evidence and must not repeat the full repository or browser suites unless the candidate implementation changes."
 }
