@@ -26,6 +26,7 @@ import {
   gitImplementationState,
   gitRouteSurfaces,
   loadChangeFailureInvariants,
+  matchesPattern,
   pausePacket,
   readJson,
   readyPackets,
@@ -125,9 +126,11 @@ const efficiencyEvaluation = async (fixture) => {
       packet: event.packet,
       attempts: 0,
       sessions: [],
+      runtimeIds: [],
     };
     value.attempts += 1;
     value.sessions.push(event.session);
+    value.runtimeIds.push(event.runtimeId);
     grouped.set(key, value);
   }
   const repeatedPackets = [...grouped.values()].filter(
@@ -150,19 +153,40 @@ const efficiencyEvaluation = async (fixture) => {
     }
     phases.set(event.phase, phase);
   }
-  const sourceEnvelopes = fixture.sourceEnvelopes.map((source) => ({
-    change: source.change,
-    packet: source.packet,
-    budget: source.maxInitialContextBytes ?? "unbudgeted",
-    resolvedSourceCount: source.resolvedSourceCount,
-    resolvedSourceBytes: source.resolvedSourceBytes,
-    broadPattern: {
-      pattern: source.declaredPattern,
-      sourceCount: source.patternSourceCount,
-      sourceBytes: source.patternSourceBytes,
-    },
-    largestContributor: source.largestContributor,
-  }));
+  const sourceEnvelopes = await Promise.all(
+    fixture.sourceEnvelopes.map(async (source) => {
+      const capsule = await readJson(absolute(source.capsule));
+      const resolved = capsule.readNow ?? [];
+      const patternSources = resolved.filter(({ path: sourcePath }) =>
+        matchesPattern(sourcePath, source.declaredPattern),
+      );
+      const largestContributor =
+        [...resolved].sort(
+          (left, right) =>
+            right.bytes - left.bytes ||
+            (left.path < right.path ? -1 : left.path > right.path ? 1 : 0),
+        )[0] ?? null;
+      return {
+        change: source.change,
+        packet: source.packet,
+        budget: source.maxInitialContextBytes ?? "unbudgeted",
+        resolvedSourceCount: resolved.length,
+        resolvedSourceBytes: resolved.reduce(
+          (total, item) => total + item.bytes,
+          0,
+        ),
+        broadPattern: {
+          pattern: source.declaredPattern,
+          sourceCount: patternSources.length,
+          sourceBytes: patternSources.reduce(
+            (total, item) => total + item.bytes,
+            0,
+          ),
+        },
+        largestContributor,
+      };
+    }),
+  );
   const hasRawCached =
     usage.length > 0 &&
     usage.every((event) => Number.isFinite(event.cachedInputTokens));

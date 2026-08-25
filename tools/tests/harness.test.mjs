@@ -5361,6 +5361,24 @@ test("telemetry attributes raw runtime usage to packet attempts and sessions", (
     uncachedInputTokens: 50,
     outputTokens: 11,
   });
+  assert.equal(summary.byAttempt["runtime-2"].inputTokens, 250);
+
+  const reused = summarizeEvents([
+    ...event("implementation", "same-label", "runtime-a", 10, 4, 1),
+    ...event("implementation", "same-label", "runtime-b", 20, 5, 2),
+  ]);
+  assert.deepEqual(
+    reused.bySession["same-label"].map(({ runtimeId, inputTokens }) => ({
+      runtimeId,
+      inputTokens,
+    })),
+    [
+      { runtimeId: "runtime-a", inputTokens: 10 },
+      { runtimeId: "runtime-b", inputTokens: 20 },
+    ],
+  );
+  assert.equal(reused.byAttempt["runtime-a"].inputTokens, 10);
+  assert.equal(reused.byAttempt["runtime-b"].inputTokens, 20);
 });
 
 test("worker telemetry preserves adapter-issued raw usage fields", () => {
@@ -5422,6 +5440,13 @@ test("representative efficiency evaluation reproduces checked report and preserv
       "contract-tdd-test-design-r3",
       "contract-tdd-test-design-r4",
       "contract-tdd-test-design-r5",
+    ],
+    runtimeIds: [
+      "01a035c4-c742-7613-b294-4f03fd49a442",
+      "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+      "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+      "01a035db-7896-7461-ad05-08d3e05e2625",
+      "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
     ],
   });
   assert.deepEqual(report.sourceEnvelopes[0].broadPattern, {

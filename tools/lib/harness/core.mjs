@@ -3208,6 +3208,7 @@ export function summarizeEvents(events) {
     },
     byPacket: {},
     bySession: {},
+    byAttempt: {},
     byPhase: {},
   };
   const reads = new Set();
@@ -3368,10 +3369,10 @@ export function summarizeEvents(events) {
         ? usage.reduce((total, event) => total + event.outputTokens, 0)
         : "unavailable",
     };
-    for (const attempt of packetAttempts) {
-      const event = usage.find(({ session }) => session === attempt.session);
+    for (const [index, attempt] of packetAttempts.entries()) {
+      const event = usage[index];
       const cached = Number.isFinite(event?.cachedInputTokens);
-      result.bySession[attempt.session] = {
+      const attributed = {
         packet: attempt.packet,
         phase: attempt.phase,
         attempt: attempt.attempt,
@@ -3385,6 +3386,13 @@ export function summarizeEvents(events) {
           ? event.outputTokens
           : "unavailable",
       };
+      result.byAttempt[attempt.runtimeId] = attributed;
+      const priorSession = result.bySession[attempt.session];
+      result.bySession[attempt.session] = priorSession
+        ? Array.isArray(priorSession)
+          ? [...priorSession, attributed]
+          : [priorSession, attributed]
+        : attributed;
       const phase = (result.byPhase[attempt.phase] ??= {
         attempts: 0,
         physicalBoundaries: 0,

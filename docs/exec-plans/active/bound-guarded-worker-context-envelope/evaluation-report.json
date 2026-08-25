@@ -88,7 +88,11 @@
         "change": "enforce-spec-driven-tdd",
         "packet": "workflow-delivery",
         "attempts": 2,
-        "sessions": ["workflow-delivery-r1", "workflow-delivery-r2"]
+        "sessions": ["workflow-delivery-r1", "workflow-delivery-r2"],
+        "runtimeIds": [
+          "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+          "01a0326c-df51-7433-b277-0799b85203f3"
+        ]
       },
       {
         "change": "enforce-contract-derived-tdd-routing",
@@ -100,6 +104,13 @@
           "contract-tdd-test-design-r3",
           "contract-tdd-test-design-r4",
           "contract-tdd-test-design-r5"
+        ],
+        "runtimeIds": [
+          "01a035c4-c742-7613-b294-4f03fd49a442",
+          "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+          "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+          "01a035db-7896-7461-ad05-08d3e05e2625",
+          "01a035e1-3f54-7eb3-9592-cbfc50a14a1c"
         ]
       },
       {
@@ -111,6 +122,12 @@
           "contract-tdd-test-review-r4",
           "contract-tdd-test-review-r5",
           "contract-tdd-test-review-r6"
+        ],
+        "runtimeIds": [
+          "01a035cd-4a6e-7f30-9317-1c100fb27f77",
+          "01a035d2-6ef5-7091-a9d1-1472afb27089",
+          "01a035d7-290d-7450-84a4-021f5cd4bc59",
+          "01a035de-0754-7fe2-9337-268275069ad7"
         ]
       },
       {
@@ -121,6 +138,11 @@
           "delivery-consistency-test-design",
           "delivery-consistency-test-design-r2",
           "delivery-consistency-test-design-r3"
+        ],
+        "runtimeIds": [
+          "01a037de-c5fa-74f0-a23a-d9043dab6310",
+          "01a037ea-8f53-7f41-9725-60cf14d37003",
+          "01a037ef-f652-7d93-b3ef-180f98df0660"
         ]
       },
       {
@@ -131,6 +153,11 @@
           "delivery-consistency-test-review",
           "delivery-consistency-test-review-r2",
           "delivery-consistency-test-review-r3"
+        ],
+        "runtimeIds": [
+          "01a037e7-2601-7632-aaa2-58f65720068e",
+          "01a037ed-98f8-7a82-ba5a-a6b25b743e2a",
+          "01a037f2-6f6c-7b02-95d0-bedcc6f76862"
         ]
       },
       {
@@ -143,6 +170,13 @@
           "wave9-integration-delivery-retry2",
           "wave9-integration-delivery-retry3",
           "wave9-integration-delivery-retry4"
+        ],
+        "runtimeIds": [
+          "01a0351d-381f-7012-8025-ba369cbd8766",
+          "01a03538-dbd4-7e20-853d-d267ce8967b9",
+          "01a03554-7c8f-7922-90ea-24440205f698",
+          "01a03570-1e89-76e0-b978-1a75631cefd9",
+          "01a0358b-bebe-7970-a001-5388b3b6d774"
         ]
       }
     ]
@@ -161,6 +195,7 @@
       },
       "largestContributor": {
         "path": "tools/tests/harness.test.mjs",
+        "digest": "ebba5ab7fb2b1a25696f9bb1e8aee3c5c5e8316336529cbc37b6f047aa10af39",
         "bytes": 171843
       }
     }
