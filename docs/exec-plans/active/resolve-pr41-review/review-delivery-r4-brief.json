@@ -12,9 +12,7 @@
       "harness/context-envelope-efficiency",
       "PR #41 review findings"
     ],
-    "dependencies": [
-      "review-remediation"
-    ],
+    "dependencies": ["review-remediation"],
     "focusedValidation": [
       "harness",
       "openspec",
@@ -22,11 +20,7 @@
       "two-axis review",
       "delivery-check"
     ],
-    "handoff": [
-      "CI state",
-      "resolved threads",
-      "residual risks"
-    ],
+    "handoff": ["CI state", "resolved threads", "residual risks"],
     "id": "review-delivery",
     "implementationOutcomes": [
       "all verified findings resolved",
@@ -36,11 +30,7 @@
     "implementationSurface": [
       "valid diff-scoped remediation and review evidence only"
     ],
-    "nonGoals": [
-      "merge",
-      "unrelated refactors",
-      "new PR"
-    ],
+    "nonGoals": ["merge", "unrelated refactors", "new PR"],
     "objective": "Run fixed-head validation and independent review, then update the existing PR and resolve verified threads",
     "outputs": [
       "review dispositions",
