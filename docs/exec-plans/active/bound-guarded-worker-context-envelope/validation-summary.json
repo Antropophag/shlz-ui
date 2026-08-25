@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "candidate": "e8d7caf694e3e4141e42e30b6c67bb138d5a7799",
+  "candidate": "6a3968388bbe9856240e05db860fee217e5369e2",
   "checks": [
     {
       "command": "npm run test:harness",
@@ -10,7 +10,7 @@
     {
       "command": "node tools/tests/context-envelope-efficiency-probe.mjs",
       "outcome": "pass",
-      "observed": "all eight phase-attribution, fixture-policy, numeric-reporting, and control-normalization regressions passed"
+      "observed": "all phase-attribution, fixture-policy, relevance-limitation, numeric-reporting, and control-normalization regressions passed"
     },
     {
       "command": "npm run check:openspec && openspec validate bound-guarded-worker-context-envelope --strict",
@@ -33,9 +33,9 @@
   ],
   "tddEvidence": {
     "slice": "review-remediation",
-    "outcome": "green-proven",
-    "candidateHead": "e8d7caf694e3e4141e42e30b6c67bb138d5a7799",
-    "observed": "requirements revision 2 re-entry completed with fresh independent test design, deterministic RED, remediation worker, and GREEN"
+    "outcome": "acceptance-green",
+    "candidateHead": "6a3968388bbe9856240e05db860fee217e5369e2",
+    "observed": "requirements revision 3 recorded a deterministic baseline RED; the committed candidate passes the same focused acceptance probe"
   },
   "invalidatedEvidence": {
     "candidate": "f8a7744",
