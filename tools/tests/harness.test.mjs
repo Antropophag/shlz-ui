@@ -5517,6 +5517,44 @@ test("efficiency evaluation applies unavailable policy to observed context relev
   assert.equal(report.proxies.contextRelevance, "unavailable");
 });
 
+test("efficiency evaluation reports explicitly observed context relevance without a suppression policy", async (t) => {
+  const directory = await mkdtemp(path.join(root, ".telemetry-efficiency-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const telemetryPath = path.relative(
+    root,
+    path.join(directory, "telemetry.jsonl"),
+  );
+  await writeFile(
+    path.join(root, telemetryPath),
+    `${JSON.stringify({
+      packet: "review",
+      session: "review-r1",
+      agent: "codex-worker",
+      phase: "review",
+      type: "context-read",
+      path: "spec.md",
+      relevant: true,
+    })}\n`,
+  );
+
+  const report = await evaluateTelemetryEfficiency(
+    {
+      version: 1,
+      id: "available-policy-regression",
+      telemetrySources: [{ id: "change", path: telemetryPath }],
+      sourceEnvelopes: [],
+    },
+    root,
+  );
+
+  assert.deepEqual(report.proxies.contextRelevance, {
+    kind: "observed-read-ratio",
+    relevantReads: 1,
+    classifiedReads: 1,
+    ratio: 1,
+  });
+});
+
 test("context cost replay materially reduces PR 36 proxy cost without dropping evidence", async () => {
   const { stdout } = await exec(
     process.execPath,

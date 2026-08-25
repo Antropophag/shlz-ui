@@ -55,7 +55,10 @@ export async function evaluateTelemetryEfficiency(fixture, repoRoot) {
     throw new Error("efficiency evaluation requires a version 1 fixture");
   if (!Array.isArray(fixture.sourceEnvelopes))
     throw new Error("sourceEnvelopes must be an array");
-  if (!fixture.metricPolicy?.unavailable?.includes("contextRelevance"))
+  if (
+    fixture.metricPolicy &&
+    !fixture.metricPolicy.unavailable?.includes("contextRelevance")
+  )
     throw new Error("metricPolicy.unavailable must include contextRelevance");
   const changes = [];
   const all = [];
