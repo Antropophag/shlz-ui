@@ -7,9 +7,7 @@ export function summarizeEvents(events) {
   );
   const packets = new Map();
   const bySession = {};
-
   for (const event of usage) {
-    const inputTokens = event.inputTokens ?? event.contextTokens;
     const packet = packets.get(event.packet) ?? {
       attempts: 0,
       physicalBoundaries: 0,
@@ -25,10 +23,10 @@ export function summarizeEvents(events) {
     packet.attempts += 1;
     packet.physicalBoundaries += boundary ? 1 : 0;
     packet.sessions.push(event.session);
-    packet.inputTokens += inputTokens;
+    packet.inputTokens += event.inputTokens;
     if (Number.isFinite(event.cachedInputTokens)) {
       packet.cachedInputTokens += event.cachedInputTokens;
-      packet.uncachedInputTokens += inputTokens - event.cachedInputTokens;
+      packet.uncachedInputTokens += event.inputTokens - event.cachedInputTokens;
     } else {
       packet.cachedInputTokens = unavailable;
       packet.uncachedInputTokens = unavailable;
@@ -42,26 +40,21 @@ export function summarizeEvents(events) {
       phase: event.phase,
       attempt: packet.attempts,
       runtimeId: boundary?.runtimeId,
-      inputTokens,
+      inputTokens: event.inputTokens,
       cachedInputTokens: event.cachedInputTokens ?? unavailable,
       uncachedInputTokens: Number.isFinite(event.cachedInputTokens)
-        ? inputTokens - event.cachedInputTokens
+        ? event.inputTokens - event.cachedInputTokens
         : unavailable,
       outputTokens: event.outputTokens ?? unavailable,
     };
   }
-
   const allFinite = (field) =>
     usage.every((event) => Number.isFinite(event[field]));
-  const normalizedUsage = usage.map((event) => ({
-    ...event,
-    inputTokens: event.inputTokens ?? event.contextTokens,
-  }));
-  const normalizedSum = (field) =>
-    normalizedUsage.reduce((total, event) => total + event[field], 0);
-  const inputTokens = normalizedSum("inputTokens");
+  const sum = (field) =>
+    usage.reduce((total, event) => total + event[field], 0);
+  const inputTokens = sum("inputTokens");
   const cachedInputTokens = allFinite("cachedInputTokens")
-    ? normalizedSum("cachedInputTokens")
+    ? sum("cachedInputTokens")
     : unavailable;
   return {
     runtimeUsage: {
@@ -72,7 +65,7 @@ export function summarizeEvents(events) {
           ? unavailable
           : inputTokens - cachedInputTokens,
       outputTokens: allFinite("outputTokens")
-        ? normalizedSum("outputTokens")
+        ? sum("outputTokens")
         : unavailable,
       source: "codex-exec-jsonl:turn.completed",
     },

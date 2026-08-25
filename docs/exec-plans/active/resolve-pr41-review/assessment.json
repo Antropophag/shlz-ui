@@ -35,22 +35,66 @@
           "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope"
         ],
         "authorities": [
-          {"scenarioId":"harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"},
-          {"scenarioId":"harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope","source":"explicit-openspec-literal","ref":"openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"}
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          },
+          {
+            "scenarioId": "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope",
+            "source": "explicit-openspec-literal",
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+          }
         ],
         "seam": "harness/telemetry-summary-evaluation",
-        "command": ["/usr/bin/node", "tools/tests/context-envelope-efficiency-probe.mjs"],
-        "acceptanceSurface": ["tools/tests/context-envelope-efficiency-probe.mjs"],
-        "fixtureSurface": ["docs/exec-plans/fixtures/context-envelope-efficiency-eval.json", "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs"],
-        "productionSurface": ["tools/lib/harness/core.mjs", "tools/lib/harness/telemetry-efficiency.mjs"],
+        "command": [
+          "/usr/bin/node",
+          "tools/tests/context-envelope-efficiency-probe.mjs"
+        ],
+        "acceptanceSurface": [
+          "tools/tests/context-envelope-efficiency-probe.mjs"
+        ],
+        "fixtureSurface": [
+          "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+          "tools/tests/fixtures/context-envelope-efficiency-{challenge-control,decoy}.mjs"
+        ],
+        "productionSurface": [
+          "tools/lib/harness/core.mjs",
+          "tools/lib/harness/telemetry-efficiency.mjs",
+          "tools/tests/fixtures/context-envelope-efficiency-control.mjs"
+        ],
         "testDesignPacket": "test-design",
         "implementationPacket": "review-remediation",
-        "controls": {"environment":{"TZ":"UTC"},"timeoutMs":10000,"normalization":["repo-root"]},
+        "controls": {
+          "environment": { "TZ": "UTC" },
+          "timeoutMs": 10000,
+          "normalization": ["repo-root"]
+        },
         "repeatCount": 2
       }
     ]
@@ -60,16 +104,30 @@
       "id": "test-design",
       "group": "test-design",
       "objective": "Define focused regression assertions for each verified executable review finding before production remediation",
-      "scope": ["phase aggregates", "fixture contract", "metric policy", "control-oracle normalization"],
+      "scope": [
+        "phase aggregates",
+        "fixture contract",
+        "metric policy",
+        "control-oracle normalization"
+      ],
       "nonGoals": ["production fixes", "operational evidence regeneration"],
       "dependencies": [],
       "contracts": ["harness/context-envelope-efficiency"],
-      "contextSources": ["openspec/changes/bound-guarded-worker-context-envelope/**", "tools/tests/context-envelope-efficiency-probe.mjs", "tools/tests/harness.test.mjs", "PR #41 unresolved review threads"],
+      "contextSources": [
+        "openspec/changes/bound-guarded-worker-context-envelope/**",
+        "tools/tests/context-envelope-efficiency-probe.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+      ],
       "implementationSurface": ["tools/tests/**"],
-      "focusedValidation": ["node tools/tests/context-envelope-efficiency-probe.mjs"],
+      "focusedValidation": [
+        "node tools/tests/context-envelope-efficiency-probe.mjs"
+      ],
       "outputs": ["regression assertions"],
       "handoff": ["test identities", "expected failures"],
-      "implementationOutcomes": ["review findings are reproducible at deterministic seams"],
+      "implementationOutcomes": [
+        "review findings are reproducible at deterministic seams"
+      ],
       "preferredExecutionMode": "fresh-session"
     },
     {
@@ -82,22 +140,16 @@
         "control-oracle input normalization",
         "review and validation evidence integrity"
       ],
-      "nonGoals": [
-        "new harness capability",
-        "contract weakening",
-        "PR merge"
-      ],
+      "nonGoals": ["new harness capability", "contract weakening", "PR merge"],
       "dependencies": ["test-design"],
-      "contracts": [
-        "harness/context-envelope-efficiency"
-      ],
+      "contracts": ["harness/context-envelope-efficiency"],
       "contextSources": [
         "openspec/changes/bound-guarded-worker-context-envelope/**",
         "tools/lib/harness/{core,telemetry-efficiency}.mjs",
         "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
         "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
         "docs/exec-plans/active/bound-guarded-worker-context-envelope/**",
-        "PR #41 unresolved review threads"
+        "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
       ],
       "implementationSurface": [
         "tools/lib/harness/**",
@@ -116,11 +168,7 @@
         "minimal fixes",
         "current candidate evidence"
       ],
-      "handoff": [
-        "changed areas",
-        "observed checks",
-        "unresolved findings"
-      ],
+      "handoff": ["changed areas", "observed checks", "unresolved findings"],
       "implementationOutcomes": [
         "complete phase attribution",
         "explicit fixture contract",
@@ -139,14 +187,8 @@
         "thread disposition",
         "push and delivery guard"
       ],
-      "nonGoals": [
-        "merge",
-        "unrelated refactors",
-        "new PR"
-      ],
-      "dependencies": [
-        "review-remediation"
-      ],
+      "nonGoals": ["merge", "unrelated refactors", "new PR"],
+      "dependencies": ["review-remediation"],
       "contracts": [
         "harness/context-envelope-efficiency",
         "PR #41 review findings"
@@ -155,7 +197,7 @@
         "openspec/changes/bound-guarded-worker-context-envelope/**",
         "docs/exec-plans/active/resolve-pr41-review/**",
         "docs/exec-plans/active/bound-guarded-worker-context-envelope/{state.json,telemetry.jsonl}",
-        "PR #41 unresolved review threads"
+        "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
       ],
       "implementationSurface": [
         "valid diff-scoped remediation and review evidence only"
@@ -172,11 +214,7 @@
         "validation evidence",
         "updated PR head"
       ],
-      "handoff": [
-        "CI state",
-        "resolved threads",
-        "residual risks"
-      ],
+      "handoff": ["CI state", "resolved threads", "residual risks"],
       "implementationOutcomes": [
         "all verified findings resolved",
         "head-bound evidence",

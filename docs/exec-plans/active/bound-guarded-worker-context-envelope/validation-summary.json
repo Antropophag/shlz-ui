@@ -1,33 +1,35 @@
 {
   "version": 1,
-  "candidate": "f8a7744",
+  "candidate": "worktree-diff:198bab11e5aa1fa7b2d047298e678b18269640761282e76ddb975170383cab93@72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
   "checks": [
     {
       "command": "npm run test:harness",
       "outcome": "pass",
-      "observed": "115/115"
-    },
-    { "command": "npm run lint", "outcome": "pass" },
-    {
-      "command": "npm run build",
-      "outcome": "pass",
-      "limitations": ["pre-existing chunk-size warnings"]
+      "observed": "exit 0, including guarded envelope and known-bad oracle coverage"
     },
     {
-      "command": "node tools/validate.mjs",
+      "command": "node tools/tests/context-envelope-efficiency-probe.mjs",
       "outcome": "pass",
-      "observed": "68 SVGs, 3 token groups, 119 icons, 42 aliases"
+      "observed": "all phase-attribution, fixture-policy, numeric-reporting, and control-normalization regressions passed"
     },
-    {
-      "command": "npm run test:packages",
-      "outcome": "pass",
-      "observed": "4 package consumers"
-    },
-    { "command": "npm run test:e2e", "outcome": "pass", "observed": "207/207" },
     {
       "command": "openspec validate bound-guarded-worker-context-envelope --strict",
       "outcome": "pass"
-    }
+    },
+    {
+      "command": "npx prettier --check tools/lib/harness/core.mjs tools/lib/harness/telemetry-efficiency.mjs tools/tests/context-envelope-efficiency-probe.mjs tools/tests/fixtures/context-envelope-efficiency-control.mjs docs/exec-plans/fixtures/context-envelope-efficiency-eval.json docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-report.json",
+      "outcome": "pass"
+    },
+    { "command": "git diff --check", "outcome": "pass" }
   ],
-  "disposition": "The full browser suite already passed on the implementation candidate. Review retries must consume this evidence and must not repeat the full repository or browser suites unless the candidate implementation changes."
+  "invalidatedEvidence": {
+    "candidate": "f8a7744",
+    "reason": "The review-remediation implementation changed production, fixture, and evidence surfaces after that candidate; its validation is historical and is not presented as proof for the current worktree."
+  },
+  "limitations": [
+    "The candidate is bound to the listed baseline plus a deterministic tracked diff digest because the remediation worker does not create the final commit.",
+    "The root orchestrator must replace the worktree identity with the committed candidate head before final review and delivery guards.",
+    "Broad repository, package, build, and browser suites from f8a7744 were not reused as current-candidate proof."
+  ],
+  "disposition": "Focused validation is current for the remediation candidate. Final candidate-head binding and regenerated review/delivery evidence remain root-orchestrator responsibilities."
 }

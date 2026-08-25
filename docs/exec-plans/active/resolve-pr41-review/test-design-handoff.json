@@ -1,0 +1,20 @@
+{
+  "completedPacket": "test-design",
+  "changed": [
+    "added eight deterministic regression assertions to the context-envelope efficiency probe"
+  ],
+  "provenChecks": [
+    "context-envelope-efficiency-probe exits 1 with eight expected RED failures",
+    "node --check passes",
+    "git diff --check passes"
+  ],
+  "settledDecisions": [
+    "production and evidence fixes remain outside the test-design packet"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "review-remediation",
+  "invalidatedAssumptions": [],
+  "claimId": "pr41-test-design-4",
+  "briefDigest": "818b1ad573efbf436c673dadf8d8ac4d8024573ec1d0ea3f2d31086958d8cbf1",
+  "workerReportDigest": "db9f460f197d2994ae965a6c02c366f66a8437c2724b54df381826d5a8169e3f"
+}

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "resolve-pr41-review",
+  "packetId": "test-design",
+  "physicalSession": null,
+  "launchClaim": "pr41-test-design-2",
+  "phase": "implementation",
+  "objective": "Define focused regression assertions for each verified executable review finding before production remediation",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/context-envelope-efficiency",
+    "outcome:review findings are reproducible at deterministic seams",
+    "validation:node tools/tests/context-envelope-efficiency-probe.mjs"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [],
+    "verdicts": [],
+    "rawEvidence": [],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/active/resolve-pr41-review/review-findings.json",
+      "digest": "f9553ec3406cbdaf3aaeb5ecbe5e10ad9b3e0a887ea76ac927717b5f42ea843f",
+      "bytes": 2072
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md",
+      "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+      "bytes": 4060
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md",
+      "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+      "bytes": 2009
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+      "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+      "bytes": 4145
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md",
+      "digest": "4d4059c76654bcc4a9621a3a6d13cf6abd6cfebedd1c46c2403d851252027adf",
+      "bytes": 1483
+    },
+    {
+      "path": "tools/tests/context-envelope-efficiency-probe.mjs",
+      "digest": "9bc4818218c18405e1f85560e83c14db55ae16ae6950d8fb9d3c7e2e7c75f653",
+      "bytes": 3508
+    },
+    {
+      "path": "tools/tests/harness.test.mjs",
+      "digest": "c711eab3c7fa214922602cde77c5cd49eabb38bb029ffe3143a24f9a8f17cf8a",
+      "bytes": 188587
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "6d50866272271cd35f2bf4d32f223f4f2114511d2019e78129526967b92b4379",
+  "capsuleDigest": "b44cce251331609339dfdefd774a919a302fd93488b8e68d832a2a9f8f5b6ca2"
+}

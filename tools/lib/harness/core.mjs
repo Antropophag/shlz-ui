@@ -3430,10 +3430,24 @@ export function summarizeEvents(events) {
         attempts: 0,
         physicalBoundaries: 0,
         sessions: [],
+        inputTokens: 0,
+        cachedInputTokens: 0,
+        uncachedInputTokens: 0,
+        outputTokens: 0,
       });
       phase.attempts += 1;
       phase.physicalBoundaries += 1;
       phase.sessions.push(attempt.session);
+      for (const field of [
+        "inputTokens",
+        "cachedInputTokens",
+        "uncachedInputTokens",
+        "outputTokens",
+      ])
+        phase[field] =
+          phase[field] === "unavailable" || !Number.isFinite(attributed[field])
+            ? "unavailable"
+            : phase[field] + attributed[field];
     }
   }
   return result;
