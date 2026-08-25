@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "base": "origin/main",
+  "standards": {
+    "outcome": "pass",
+    "blockingFindings": [],
+    "judgmentCalls": ["CLI and core retain some duplicated evaluation aggregation", "exact fixture totals increase shotgun-surgery sensitivity"]
+  },
+  "spec": {
+    "outcome": "pass",
+    "blockingFindings": [],
+    "observed": "36 physical attempts, 31 costed and 5 explicitly unavailable"
+  },
+  "retryEvidence": {
+    "attempt": "review-delivery-r2",
+    "outcome": "operator-interrupted-redundant-validation",
+    "reason": "The isolated reviewer repeated the already-passed full Playwright suite for more than 20 minutes without producing additional contract evidence."
+  }
+}

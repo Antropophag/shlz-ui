@@ -1,0 +1,17 @@
+{
+  "completedPacket": "review-delivery",
+  "changed": ["independent review dispositions", "validation evidence", "route and PR evidence"],
+  "provenChecks": [
+    "Standards PASS with zero blocking findings",
+    "Spec PASS with zero findings",
+    "focused probe, strict OpenSpec validation, and route conformance passed",
+    "full harness 115/115 and browser 207/207 evidence consumed without redundant rerun"
+  ],
+  "settledDecisions": ["review retries consume stable full-suite evidence unless implementation changes"],
+  "unresolvedFindings": ["non-blocking duplicated evaluation aggregation remains a future deepening opportunity"],
+  "nextPacket": null,
+  "invalidatedAssumptions": ["an isolated final reviewer must rerun an unchanged full browser suite"],
+  "claimId": "review-delivery-r3-20260825",
+  "briefDigest": "b0ff2078526489f0a50e0cc65b83ebd00ba63213b581db6b113dc14c02d098f1",
+  "workerReportDigest": "c31fd9d30c59b165dfc9211a51da7f3f2995169a11f8718f71bf5498d98c3628"
+}

@@ -24,7 +24,7 @@
   ],
   "nextPacket": "review-delivery",
   "invalidatedAssumptions": [],
-  "claimId": "envelope-implementation-20260825",
-  "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8",
-  "workerReportDigest": "ab7b049a85ddb1809ea759b8481bb75ef6453fff9c052691fb2a66a45d2a46bc"
+  "claimId": "envelope-implementation-r2-20260825",
+  "briefDigest": "01060c5be354acf047c3add9f084ef820b3091ed76866d24dee02aeb0bc2f6a3",
+  "workerReportDigest": "084965a5f867dc1f9344ea5cb66255f2aa0e38ef5797ad2b5bf63a138bdb85f7"
 }

@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "bound-guarded-worker-context-envelope",
+  "packetId": "evaluation-contract",
+  "physicalSession": null,
+  "launchClaim": "evaluation-contract-r3-20260825",
+  "phase": "implementation",
+  "objective": "Build the deterministic representative cost and context-utility evaluation before launch behavior changes",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/context-envelope-efficiency",
+    "outcome:broad source envelope quantified",
+    "outcome:stage/session cost visible",
+    "outcome:unavailable relevance remains unavailable",
+    "validation:npm run test:harness"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [],
+    "verdicts": [],
+    "rawEvidence": [],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/active/enforce-contract-derived-tdd-routing/telemetry.jsonl",
+      "digest": "b6a52d3850b578996bcf1553bf489d311fc31909ab173e75ca5c4febf6db929e",
+      "bytes": 5056
+    },
+    {
+      "path": "docs/exec-plans/active/enforce-delivery-packet-consistency/telemetry.jsonl",
+      "digest": "ddc54693495c0edfe58333573428f0f2911df48b1a9e7f8c508363981fcc142f",
+      "bytes": 3124
+    },
+    {
+      "path": "docs/exec-plans/active/enforce-spec-driven-tdd/telemetry.jsonl",
+      "digest": "d6746a5e431dfa8573327909c7fdb6b5198a251f160e779b1da6f1e06021db43",
+      "bytes": 2763
+    },
+    {
+      "path": "docs/exec-plans/active/execution-context-isolation/telemetry.jsonl",
+      "digest": "3edc1b7fdbe6fb0f4a4a34f6aa70b39ab083b4c10f9885bd0771f6390441bb0e",
+      "bytes": 1510
+    },
+    {
+      "path": "docs/exec-plans/active/reduce-harness-context-cost/telemetry.jsonl",
+      "digest": "5d0cb054112a7b390e29e95e4b5bd8807899bf3d94389e275aa7da138815e1e5",
+      "bytes": 526
+    },
+    {
+      "path": "docs/exec-plans/active/require-independent-test-contract-review/telemetry.jsonl",
+      "digest": "709e5afe37275c887e6fe3550c6d4db4eb21d792f2f8f6133c95eae2bdf297a0",
+      "bytes": 1544
+    },
+    {
+      "path": "docs/exec-plans/active/wave-9-sidebar-application-shell/telemetry.jsonl",
+      "digest": "bd5e7b985326bd6a3202e4f421aeb54cab16915bec3fa41c6d2a4a7a722bf7f0",
+      "bytes": 2580
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md",
+      "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+      "bytes": 4060
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md",
+      "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+      "bytes": 2009
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+      "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+      "bytes": 4145
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md",
+      "digest": "4f2daeaddd25d8150f00edc1e9c35e219880486cbe9f4956d807ff14df1f9c1e",
+      "bytes": 1483
+    },
+    {
+      "path": "tools/lib/harness/codex-worker.mjs",
+      "digest": "0f579f2280e65a6d4f1370ad7cf66204e9c9a1e28aa2c1c9c534f979de3d0958",
+      "bytes": 5225
+    },
+    {
+      "path": "tools/lib/harness/core.mjs",
+      "digest": "6b9777ce466e72c141ac6c974a57314cd136b59abb4edb858277b60e4c1b22c5",
+      "bytes": 117211
+    },
+    {
+      "path": "tools/tests/harness.test.mjs",
+      "digest": "c711eab3c7fa214922602cde77c5cd49eabb38bb029ffe3143a24f9a8f17cf8a",
+      "bytes": 188587
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "2c166bee45221fe30b3b43d5a5fd2f2a384965f1751c513452c5193fd56b21fa",
+  "capsuleDigest": "2d952dda5a1978dcbcdbe5608cccc197e4edfe1b662d2ae950ac52f56eca9d56"
+}

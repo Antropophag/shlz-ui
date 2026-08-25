@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "bound-guarded-worker-context-envelope",
+  "packetId": "envelope-implementation",
+  "physicalSession": null,
+  "launchClaim": "envelope-implementation-r2-20260825",
+  "phase": "implementation",
+  "objective": "Implement optional explicit packet envelopes and detailed telemetry summaries",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/context-envelope-efficiency",
+    "outcome:coverage unchanged",
+    "outcome:legacy telemetry/plans supported",
+    "outcome:over-budget launch prevented",
+    "validation:npm run check:docs",
+    "validation:npm run test:harness",
+    "validation:openspec validate bound-guarded-worker-context-envelope --strict"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "evaluation-contract",
+        "changed": [
+          "representative seven-change evaluation fixture and report",
+          "standalone acceptance probe with control and decoy adapters",
+          "RED harness assertions for detailed attribution and evaluation CLI"
+        ],
+        "provenChecks": [
+          "control probe passed twice",
+          "decoy failed on flattened attempt attribution",
+          "current production probe is RED",
+          "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries",
+          "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope"
+        ],
+        "settledDecisions": [
+          "runtime values remain separate from source-byte proxies",
+          "cached/uncached and relevance stay unavailable where historical events omit them",
+          "packet/session/attempt attribution is the public acceptance seam"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "envelope-implementation",
+        "invalidatedAssumptions": [
+          "the initial test-design attempt had a complete acceptance surface"
+        ],
+        "claimId": "evaluation-contract-r3-20260825",
+        "briefDigest": "9f20ff325942b61ee53af03e82c9725d4869cbd6ec218ed3d561411cf72dd886",
+        "workerReportDigest": "053a11c55d5524da30ae4ea28f3b77682eb205d0560e7b0538b5dcac501ce51a"
+      }
+    ],
+    "verdicts": [
+      "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope",
+      "control probe passed twice",
+      "current production probe is RED",
+      "decoy failed on flattened attempt attribution",
+      "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries"
+    ],
+    "rawEvidence": [
+      "RED harness assertions for detailed attribution and evaluation CLI",
+      "representative seven-change evaluation fixture and report",
+      "standalone acceptance probe with control and decoy adapters"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/agent-execution.md",
+      "digest": "fe0b4bdcd58c1a38270ce241194813671f9ebec4ee05a7d7950738c23c74825e",
+      "bytes": 16916
+    },
+    {
+      "path": "docs/exec-plans/README.md",
+      "digest": "beda72327572f5bf4f279e0d3492d5083c727de59920dec147089951111fb8f8",
+      "bytes": 11556
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md",
+      "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+      "bytes": 4060
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md",
+      "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+      "bytes": 2009
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+      "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+      "bytes": 4145
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md",
+      "digest": "4f2daeaddd25d8150f00edc1e9c35e219880486cbe9f4956d807ff14df1f9c1e",
+      "bytes": 1483
+    },
+    {
+      "path": "tools/harness.mjs",
+      "digest": "173616639481ff75661d0e73070e78f45b04a197b24ec36e8e4f18f2b718b1c1",
+      "bytes": 34920
+    },
+    {
+      "path": "tools/lib/harness/codex-worker.mjs",
+      "digest": "0f579f2280e65a6d4f1370ad7cf66204e9c9a1e28aa2c1c9c534f979de3d0958",
+      "bytes": 5225
+    },
+    {
+      "path": "tools/lib/harness/context-cost.mjs",
+      "digest": "e38bfcde1b14d4d0abd78286896c4fcf851c8d2908a6bfb8ce1de977a4d86e61",
+      "bytes": 28299
+    },
+    {
+      "path": "tools/lib/harness/core.mjs",
+      "digest": "6b9777ce466e72c141ac6c974a57314cd136b59abb4edb858277b60e4c1b22c5",
+      "bytes": 117211
+    },
+    {
+      "path": "tools/tests/harness.test.mjs",
+      "digest": "c711eab3c7fa214922602cde77c5cd49eabb38bb029ffe3143a24f9a8f17cf8a",
+      "bytes": 188587
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "4ed40206a8e367503a97437aac637a2457d58183fe204cadc8040afa10d59002",
+  "capsuleDigest": "48d19f1824592303780444f13256665073b98fd7e391e0b81883fa7d99111457"
+}

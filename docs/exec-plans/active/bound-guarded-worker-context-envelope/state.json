@@ -6,9 +6,9 @@
     "evaluation-contract": {
       "attemptHistory": [],
       "status": "completed",
-      "session": "evaluation-contract-r2",
-      "claimId": "evaluation-contract-r2-20260825",
-      "briefDigest": "cde36bb6439264603fcd4b2bde82a07f12b0699635a00ae4ce64b3fc34efa1c7",
+      "session": "evaluation-contract-r3",
+      "claimId": "evaluation-contract-r3-20260825",
+      "briefDigest": "9f20ff325942b61ee53af03e82c9725d4869cbd6ec218ed3d561411cf72dd886",
       "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
       "dependencyDigests": {},
       "packetDigest": "0f8096e8b03dd1e084fb7db9b2d6b29729833987e886071678d333dd213378bb",
@@ -16,92 +16,109 @@
       "execution": {
         "version": 1,
         "source": "codex-exec-jsonl",
-        "runtimeId": "01a0381b-bcce-7713-8d38-8290d0376010",
-        "launchId": "6d0692a5-5121-4ddb-9fa4-e70182d36495",
-        "startedAt": "2026-08-25T08:48:56.678Z",
-        "evidenceDigest": "f78870d17b72b86c970138d9da0b256c47fd751ee4d465f722b937b01b6b9f18"
+        "runtimeId": "01a03851-f372-7c52-a047-7d0facef9813",
+        "launchId": "9b0c7e8a-13c1-483f-83b1-57df233ff712",
+        "startedAt": "2026-08-25T09:48:09.626Z",
+        "evidenceDigest": "231975706ad65054242897deb6e2a26881aa641d26d519d84af7eb719ea5c158"
       },
       "launch": {
         "terminalStatus": "completed",
-        "launchId": "6d0692a5-5121-4ddb-9fa4-e70182d36495",
+        "launchId": "9b0c7e8a-13c1-483f-83b1-57df233ff712",
         "usage": {
-          "input_tokens": 1170995,
-          "cached_input_tokens": 1098496,
+          "input_tokens": 1058833,
+          "cached_input_tokens": 971520,
           "cache_write_input_tokens": 0,
-          "output_tokens": 7600,
-          "reasoning_output_tokens": 1542
+          "output_tokens": 4420,
+          "reasoning_output_tokens": 1009
         },
-        "workerReport": "Completed the `evaluation-contract` packet for `bound-guarded-worker-context-envelope`.\n\nDelivered:\n\n- Deterministic seven-change telemetry fixture and evaluation report.\n- Stage, packet, session, attempt, cached/uncached, output, and unavailable-metric assertions.\n- Independent acceptance probe with control and surface-compatible decoy adapters.\n- Measured broad envelope evidence: `tools/tests/**` resolves to 52 files / 353,242 bytes within a 571,271-byte source envelope.\n\nValidation:\n\n- Control probe: passed twice.\n- Decoy: failed on flattened attempt attribution.\n- Current production probe: RED as expected.\n- `npm run test:harness`: 109 passed, 2 expected RED failures:\n  - missing `runtimeUsage` and packet/session attribution;\n  - missing `telemetry-summary --evaluation`.\n- Telemetry replay reproduced 40,076,860 total tokens, 39,860,211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries.\n- Syntax checks and `git diff --check`: passed.\n\nProduction launch behavior was not changed. OpenSpec task checkboxes remain untouched because `tasks.md` is outside this packet’s authorized implementation surface; the root orchestrator can bind the claim and durable handoff.",
-        "workerReportDigest": "d8c7c4162bf257c250f81449dbc46d0b328d66b4a00c268e3620cc71734aec11"
+        "workerReport": "Completed the `evaluation-contract` packet for `bound-guarded-worker-context-envelope`.\n\nResults:\n\n- Representative sample: 7 changes, 36 physical boundaries, 31 usage events.\n- Trusted input usage: 39,860,211 tokens.\n- Cached input, uncached input, output, handoff bytes, and context relevance remain honestly `unavailable`.\n- Repeated packet/session attempts are individually attributed.\n- Broad `tools/tests/**` envelope: 52 files / 353,242 bytes within 62 resolved sources / 571,271 bytes.\n- Control adapter passed twice.\n- Decoy adapter failed as intended on flattened attempt attribution.\n- Checked evaluation report reproduced semantically; raw differences were formatting only.\n- `npm run test:harness`: 115 passed, 0 failed.\n- `git diff --check`: passed.\n\nNo implementation files were changed during this retry: the current PR head already contains the corrected frozen acceptance surface and satisfies this packet. Harness-owned launch-state files remain untouched for the root orchestrator to bind the runtime claim and durable handoff.\n\nOverall OpenSpec progress remains 5/6; task 3.2 belongs to the later review/delivery packet.",
+        "workerReportDigest": "053a11c55d5524da30ae4ea28f3b77682eb205d0560e7b0538b5dcac501ce51a"
       }
     },
     "envelope-implementation": {
       "attemptHistory": [],
       "status": "completed",
-      "session": "envelope-implementation-r1",
-      "claimId": "envelope-implementation-20260825",
-      "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8",
+      "session": "envelope-implementation-r2",
+      "claimId": "envelope-implementation-r2-20260825",
+      "briefDigest": "01060c5be354acf047c3add9f084ef820b3091ed76866d24dee02aeb0bc2f6a3",
       "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
       "dependencyDigests": {
-        "evaluation-contract": "f5ae9afe4be23af1d9dbb42f0a56f1df81e8d4512fed04e6ff1a37b886890c1b"
+        "evaluation-contract": "08c1efd5f9d2ba944752275e0ab254d9bea8dd4abb5c5fc5816ec10384c79dfd"
       },
       "packetDigest": "d55d4cf229dcc313e99a0c9d92a043fab3afe8d6ca05596590d037b5daac70a1",
       "requirementsRevision": 1,
       "execution": {
         "version": 1,
         "source": "codex-exec-jsonl",
-        "runtimeId": "01a03820-c33b-7eb3-89b8-c17eca8dbf23",
-        "launchId": "533aacbd-4a3c-4243-b6e7-5c9c3059beae",
-        "startedAt": "2026-08-25T08:54:26.016Z",
-        "evidenceDigest": "2b4cd2869affc86b30cda4fe11da0334a6b6a8573faf3471b515666632c29b12"
+        "runtimeId": "01a03858-0683-7d72-8e9a-913c7d76c46a",
+        "launchId": "d889de62-26ce-41cb-99f3-37cf3f92b559",
+        "startedAt": "2026-08-25T09:54:47.716Z",
+        "evidenceDigest": "3cb75af6b9a3749a9937b699ca6ed1f6784ccd44130163b1a4753ca90733c852"
       },
       "launch": {
         "terminalStatus": "completed",
-        "launchId": "533aacbd-4a3c-4243-b6e7-5c9c3059beae",
+        "launchId": "d889de62-26ce-41cb-99f3-37cf3f92b559",
         "usage": {
-          "input_tokens": 2696317,
-          "cached_input_tokens": 2584576,
+          "input_tokens": 327445,
+          "cached_input_tokens": 276224,
           "cache_write_input_tokens": 0,
-          "output_tokens": 16292,
-          "reasoning_output_tokens": 2253
+          "output_tokens": 2210,
+          "reasoning_output_tokens": 494
         },
-        "workerReport": "Implemented packet `envelope-implementation`.\n\nKey outcomes:\n\n- Added optional positive `maxInitialContextBytes` for guarded packets; legacy plans remain valid.\n- Added a fail-closed pre-launch capsule guard with measured totals and largest contributors. Declared coverage is never trimmed.\n- Preserved raw input, cached-input, and output telemetry.\n- Added packet, phase, session, runtime, and attempt attribution.\n- Added deterministic `telemetry-summary --evaluation` support.\n- Documented packet authoring and measured findings.\n- Added regression coverage for malformed budgets, in-budget launches, blocked launches, telemetry integrity, and legacy data.\n\nValidation:\n\n- `npm run test:harness`: passed, 115/115 plus routing probe.\n- `openspec validate bound-guarded-worker-context-envelope --strict`: passed.\n- Standalone efficiency probe: passed.\n- Prettier and `git diff --check`: passed.\n- `npm run check:docs`: unavailable because this repository has no `check:docs` script.\n\nOpenSpec progress is 5/6. Task 3.2 remains open for the root orchestrator’s independent Standards/Spec review, delivery guards, and PR workflow. No commit or push was performed.",
-        "workerReportDigest": "ab7b049a85ddb1809ea759b8481bb75ef6453fff9c052691fb2a66a45d2a46bc"
+        "workerReport": "## Implementation paused\n\n**Change:** `bound-guarded-worker-context-envelope`  \n**Progress:** 5/6 tasks complete\n\nValidation results:\n\n- `npm run test:harness` — passed, 115/115 tests\n- `openspec validate bound-guarded-worker-context-envelope --strict` — passed\n- `npm run check:docs` — blocked: script does not exist in `package.json`\n\nAdding that script would modify `package.json`, which is outside this packet’s allowed implementation surface. Substituting another command would silently change the declared validation contract.\n\nPlease choose whether to:\n\n1. Expand the packet surface to add `check:docs`.\n2. Revise the packet to name an existing check, likely `npm run lint` or `npm run check:focused`.\n3. Remove the nonexistent gate with an explicit disposition.\n\nI have not marked task 3.2 complete or run final review/delivery guards.",
+        "workerReportDigest": "084965a5f867dc1f9344ea5cb66255f2aa0e38ef5797ad2b5bf63a138bdb85f7"
       }
     },
     "review-delivery": {
-      "status": "pending"
+      "attemptHistory": [
+        {
+          "session": "review-delivery-r2",
+          "claimId": "review-delivery-r2-20260825",
+          "briefDigest": "c7526d9a906b0da9cdb0a2bea4b2a9ffeeb17a427acaaf03abaa1c116b162d85",
+          "execution": null,
+          "launch": null,
+          "failure": {
+            "terminalStatus": "operator-interrupted-redundant-validation",
+            "launchId": null,
+            "evidenceDigest": null
+          }
+        }
+      ],
+      "attempts": 1,
+      "status": "completed",
+      "session": "review-delivery-r3",
+      "claimId": "review-delivery-r3-20260825",
+      "briefDigest": "b0ff2078526489f0a50e0cc65b83ebd00ba63213b581db6b113dc14c02d098f1",
+      "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
+      "dependencyDigests": {
+        "envelope-implementation": "a7b33a88c7b4fd102662746562f51b5dc75b249694436144b2584edc73f616f6"
+      },
+      "packetDigest": "93b88aafc1a6ad97ac9930047751d60cf735ae980613f3a0f76f52696f813ed2",
+      "requirementsRevision": 1,
+      "execution": {
+        "version": 1,
+        "source": "codex-exec-jsonl",
+        "runtimeId": "01a0385b-8b97-7a52-8b31-ba5b5e9ad6b8",
+        "launchId": "75517a1c-7416-419b-825a-accc96d833c6",
+        "startedAt": "2026-08-25T09:58:38.330Z",
+        "evidenceDigest": "3149d2d127b8ed7bea2619012ac0a1a39f4b19ae1e73ed1747231ba9ce71833c"
+      },
+      "launch": {
+        "terminalStatus": "completed",
+        "launchId": "75517a1c-7416-419b-825a-accc96d833c6",
+        "usage": {
+          "input_tokens": 478008,
+          "cached_input_tokens": 438272,
+          "cache_write_input_tokens": 0,
+          "output_tokens": 4103,
+          "reasoning_output_tokens": 818
+        },
+        "workerReport": "Completed the `review-delivery` audit with no implementation changes.\n\n## Standards\n\n**PASS — 0 blocking findings.**\n\nOne non-blocking judgment call: attempt aggregation is partially duplicated between `core.mjs` and `telemetry-efficiency.mjs`. The evaluation layer’s distinct policy currently justifies keeping it local.\n\n## Spec\n\n**PASS — 0 findings.**\n\nThe diff satisfies runtime attribution, unavailable metrics, packet/session/attempt reporting, guarded `readNow` budgets, fail-closed behavior, coverage preservation, and legacy-plan compatibility.\n\n## Checks\n\n- Standalone efficiency probe: passed\n- Strict OpenSpec validation: passed\n- Route conformance: passed, OpenSpec route\n- `git diff --check`: passed\n- Supplied harness evidence: 115/115 passed\n- Supplied browser evidence: 207/207 passed; not redundantly rerun\n- GitHub CI: all checks successful\n- PR head matches local `89abdc65b62febe73efa72507c50d85e7ba345ea`\n- PR is open, draft, merge-clean, and unmerged\n\nLimitation: the full validation summary is bound to `f8a7744`; later focused evidence covers the subsequent remediation commits, but the broad suites were not repeated.\n\nThe root orchestrator must now bind this worker’s runtime claim, persist the review/handoff evidence, complete task 3.2, and run the final delivery guard.\n\nPR: https://github.com/Antropophag/shlz-ui/pull/41",
+        "workerReportDigest": "c31fd9d30c59b165dfc9211a51da7f3f2995169a11f8718f71bf5498d98c3628"
+      }
     }
   },
   "handoffs": {
-    "evaluation-contract": {
-      "completedPacket": "evaluation-contract",
-      "changed": [
-        "representative seven-change evaluation fixture and report",
-        "standalone acceptance probe with control and decoy adapters",
-        "RED harness assertions for detailed attribution and evaluation CLI"
-      ],
-      "provenChecks": [
-        "control probe passed twice",
-        "decoy failed on flattened attempt attribution",
-        "current production probe is RED",
-        "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries",
-        "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope"
-      ],
-      "settledDecisions": [
-        "runtime values remain separate from source-byte proxies",
-        "cached/uncached and relevance stay unavailable where historical events omit them",
-        "packet/session/attempt attribution is the public acceptance seam"
-      ],
-      "unresolvedFindings": [],
-      "nextPacket": "envelope-implementation",
-      "invalidatedAssumptions": [
-        "the initial test-design attempt had a complete acceptance surface"
-      ],
-      "claimId": "evaluation-contract-r2-20260825",
-      "briefDigest": "cde36bb6439264603fcd4b2bde82a07f12b0699635a00ae4ce64b3fc34efa1c7",
-      "workerReportDigest": "d8c7c4162bf257c250f81449dbc46d0b328d66b4a00c268e3620cc71734aec11"
-    },
     "envelope-implementation": {
       "completedPacket": "envelope-implementation",
       "changed": [
@@ -128,9 +145,64 @@
       ],
       "nextPacket": "review-delivery",
       "invalidatedAssumptions": [],
-      "claimId": "envelope-implementation-20260825",
-      "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8",
-      "workerReportDigest": "ab7b049a85ddb1809ea759b8481bb75ef6453fff9c052691fb2a66a45d2a46bc"
+      "claimId": "envelope-implementation-r2-20260825",
+      "briefDigest": "01060c5be354acf047c3add9f084ef820b3091ed76866d24dee02aeb0bc2f6a3",
+      "workerReportDigest": "084965a5f867dc1f9344ea5cb66255f2aa0e38ef5797ad2b5bf63a138bdb85f7"
+    },
+    "evaluation-contract": {
+      "completedPacket": "evaluation-contract",
+      "changed": [
+        "representative seven-change evaluation fixture and report",
+        "standalone acceptance probe with control and decoy adapters",
+        "RED harness assertions for detailed attribution and evaluation CLI"
+      ],
+      "provenChecks": [
+        "control probe passed twice",
+        "decoy failed on flattened attempt attribution",
+        "current production probe is RED",
+        "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries",
+        "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope"
+      ],
+      "settledDecisions": [
+        "runtime values remain separate from source-byte proxies",
+        "cached/uncached and relevance stay unavailable where historical events omit them",
+        "packet/session/attempt attribution is the public acceptance seam"
+      ],
+      "unresolvedFindings": [],
+      "nextPacket": "envelope-implementation",
+      "invalidatedAssumptions": [
+        "the initial test-design attempt had a complete acceptance surface"
+      ],
+      "claimId": "evaluation-contract-r3-20260825",
+      "briefDigest": "9f20ff325942b61ee53af03e82c9725d4869cbd6ec218ed3d561411cf72dd886",
+      "workerReportDigest": "053a11c55d5524da30ae4ea28f3b77682eb205d0560e7b0538b5dcac501ce51a"
+    },
+    "review-delivery": {
+      "completedPacket": "review-delivery",
+      "changed": [
+        "independent review dispositions",
+        "validation evidence",
+        "route and PR evidence"
+      ],
+      "provenChecks": [
+        "Standards PASS with zero blocking findings",
+        "Spec PASS with zero findings",
+        "focused probe, strict OpenSpec validation, and route conformance passed",
+        "full harness 115/115 and browser 207/207 evidence consumed without redundant rerun"
+      ],
+      "settledDecisions": [
+        "review retries consume stable full-suite evidence unless implementation changes"
+      ],
+      "unresolvedFindings": [
+        "non-blocking duplicated evaluation aggregation remains a future deepening opportunity"
+      ],
+      "nextPacket": null,
+      "invalidatedAssumptions": [
+        "an isolated final reviewer must rerun an unchanged full browser suite"
+      ],
+      "claimId": "review-delivery-r3-20260825",
+      "briefDigest": "b0ff2078526489f0a50e0cc65b83ebd00ba63213b581db6b113dc14c02d098f1",
+      "workerReportDigest": "c31fd9d30c59b165dfc9211a51da7f3f2995169a11f8718f71bf5498d98c3628"
     }
   },
   "specDrivenTdd": {
@@ -139,7 +211,7 @@
       "context-envelope-efficiency": {
         "status": "green-proven",
         "design": {
-          "acceptanceDigest": "5c265941216130f1402c3e328c86fda38b605a439ef7f64233e51ee075e586c7",
+          "acceptanceDigest": "f3a2600916b5874306cee81e771cc34635193fea0784fe96cabef32126852188",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
@@ -155,7 +227,7 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "bb11f7b69d6cbda3685152486c250b78128ba1bb0788209d41d2cf0ddd4ed66e",
+          "fixtureDigest": "2f38f6be38d231648d5f82ad2e3496a994f59958ffffeb66188aafe970188a71",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
@@ -176,7 +248,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "69f3f6d57796b56436e0c858147ac79e0aeff116bb7ccf264795291ae015b22c",
+          "oracleChallengeDigest": "345abdc047119f47158dac11f58bc3a685972c965cd17be279e82c24e2b6eb2f",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -191,11 +263,11 @@
             "decoy": [
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               },
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               }
             ]
           },
@@ -204,7 +276,7 @@
             "observesSeam": "harness/worker-run-and-telemetry-summary"
           },
           "requirementsRevision": 1,
-          "runtimeId": "01a0381b-bcce-7713-8d38-8290d0376010",
+          "runtimeId": "01a03851-f372-7c52-a047-7d0facef9813",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -238,20 +310,20 @@
           "sliceId": "context-envelope-efficiency",
           "version": 1
         },
-        "designDigest": "b62cdcea463dd6bd916ec62a493e8ed9b8e716516accd82b6d39c05737a3c069",
+        "designDigest": "0dac0f75b5b78706c0c8813d154b663add36d5c982559fa61cf9645f3451837a",
         "sliceContractDigest": "04ef9fea2ee7c3212d423bf5620fb8f46445a4e31f668b8f4ae8df09df740880",
         "retentionIdentity": {
           "scenarioDigest": "e8aa07bb067a0f2c3ee72a2f6436876bf23674ba5bfdd7acba6174b1f550b12a",
           "authorityDigest": "959cf8f97474c931cd944bd14997d6dedded36ee1817bc0f92ad6613ad04ffd5",
-          "dependencyDigest": "785d77ef31e5e5b7c297c16f623f6c6af048f49c279d5336cc37f5b165b3a819",
+          "dependencyDigest": "5143884403ea62caf849c28f29bdec79c6e3fe3ad8228ed0cdcd0557ebaec252",
           "commandDigest": "a2652e660d887e71a463c2661ac6a2608d0aa0799c6ab6349d2752503f64ffa9",
-          "acceptanceDigest": "5c265941216130f1402c3e328c86fda38b605a439ef7f64233e51ee075e586c7",
-          "fixtureDigest": "bb11f7b69d6cbda3685152486c250b78128ba1bb0788209d41d2cf0ddd4ed66e",
+          "acceptanceDigest": "f3a2600916b5874306cee81e771cc34635193fea0784fe96cabef32126852188",
+          "fixtureDigest": "2f38f6be38d231648d5f82ad2e3496a994f59958ffffeb66188aafe970188a71",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "sliceContractDigest": "04ef9fea2ee7c3212d423bf5620fb8f46445a4e31f668b8f4ae8df09df740880"
         },
         "red": {
-          "acceptanceDigest": "5c265941216130f1402c3e328c86fda38b605a439ef7f64233e51ee075e586c7",
+          "acceptanceDigest": "f3a2600916b5874306cee81e771cc34635193fea0784fe96cabef32126852188",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
@@ -267,7 +339,7 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "bb11f7b69d6cbda3685152486c250b78128ba1bb0788209d41d2cf0ddd4ed66e",
+          "fixtureDigest": "2f38f6be38d231648d5f82ad2e3496a994f59958ffffeb66188aafe970188a71",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
@@ -289,7 +361,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "69f3f6d57796b56436e0c858147ac79e0aeff116bb7ccf264795291ae015b22c",
+          "oracleChallengeDigest": "345abdc047119f47158dac11f58bc3a685972c965cd17be279e82c24e2b6eb2f",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -304,11 +376,11 @@
             "decoy": [
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               },
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               }
             ]
           },
@@ -320,14 +392,14 @@
           "runs": [
             {
               "exitCode": 1,
-              "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ undefined\n- {\n-   cachedInputTokens: 300,\n-   inputTokens: 430,\n-   outputTokens: 23,\n-   source: 'codex-exec-jsonl:turn.completed',\n-   uncachedInputTokens: 130\n- }\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:71:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: undefined,\n  expected: {\n    inputTokens: 430,\n    cachedInputTokens: 300,\n    uncachedInputTokens: 130,\n    outputTokens: 23,\n    source: 'codex-exec-jsonl:turn.completed'\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+              "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ undefined\n- {\n-   cachedInputTokens: 300,\n-   inputTokens: 430,\n-   outputTokens: 23,\n-   source: 'codex-exec-jsonl:turn.completed',\n-   uncachedInputTokens: 130\n- }\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:70:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: undefined,\n  expected: {\n    inputTokens: 430,\n    cachedInputTokens: 300,\n    uncachedInputTokens: 130,\n    outputTokens: 23,\n    source: 'codex-exec-jsonl:turn.completed'\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
             },
             {
               "exitCode": 1,
-              "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ undefined\n- {\n-   cachedInputTokens: 300,\n-   inputTokens: 430,\n-   outputTokens: 23,\n-   source: 'codex-exec-jsonl:turn.completed',\n-   uncachedInputTokens: 130\n- }\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:71:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: undefined,\n  expected: {\n    inputTokens: 430,\n    cachedInputTokens: 300,\n    uncachedInputTokens: 130,\n    outputTokens: 23,\n    source: 'codex-exec-jsonl:turn.completed'\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+              "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n+ undefined\n- {\n-   cachedInputTokens: 300,\n-   inputTokens: 430,\n-   outputTokens: 23,\n-   source: 'codex-exec-jsonl:turn.completed',\n-   uncachedInputTokens: 130\n- }\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:70:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: undefined,\n  expected: {\n    inputTokens: 430,\n    cachedInputTokens: 300,\n    uncachedInputTokens: 130,\n    outputTokens: 23,\n    source: 'codex-exec-jsonl:turn.completed'\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
             }
           ],
-          "runtimeId": "tdd-runner-565319",
+          "runtimeId": "tdd-runner-640256",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -361,15 +433,15 @@
           "sliceId": "context-envelope-efficiency",
           "version": 1
         },
-        "redDigest": "2f3e6055023f3c5998cbbceb846619133629e35aa3fd57093c36f2c8edc324eb",
-        "implementationRuntimeId": "01a03820-c33b-7eb3-89b8-c17eca8dbf23",
+        "redDigest": "11fee3b9d2eaf50e95216f5a9273411e4b94d703d45be2908e56c2ec35b31de5",
+        "implementationRuntimeId": "01a03858-0683-7d72-8e9a-913c7d76c46a",
         "green": {
-          "acceptanceDigest": "5c265941216130f1402c3e328c86fda38b605a439ef7f64233e51ee075e586c7",
+          "acceptanceDigest": "f3a2600916b5874306cee81e771cc34635193fea0784fe96cabef32126852188",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
           "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
-          "candidateHead": "528e75f072d0962f7965c4167bca5cb4df9bde4c",
+          "candidateHead": "89abdc65b62febe73efa72507c50d85e7ba345ea",
           "contractDigest": "04ef9fea2ee7c3212d423bf5620fb8f46445a4e31f668b8f4ae8df09df740880",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "AssertionError",
@@ -381,7 +453,7 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "bb11f7b69d6cbda3685152486c250b78128ba1bb0788209d41d2cf0ddd4ed66e",
+          "fixtureDigest": "2f38f6be38d231648d5f82ad2e3496a994f59958ffffeb66188aafe970188a71",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
@@ -402,7 +474,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "69f3f6d57796b56436e0c858147ac79e0aeff116bb7ccf264795291ae015b22c",
+          "oracleChallengeDigest": "345abdc047119f47158dac11f58bc3a685972c965cd17be279e82c24e2b6eb2f",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -417,11 +489,11 @@
             "decoy": [
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               },
               {
                 "exitCode": 1,
-                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:78:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
+                "output": "node:internal/modules/run_main:123\n    triggerUncaughtException(\n    ^\n\nAssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n\n  {\n+   attempts: 1,\n-   attempts: 2,\n    cachedInputTokens: 260,\n    inputTokens: 350,\n    outputTokens: 18,\n    physicalBoundaries: 2,\n    sessions: [\n\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:77:8 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: {\n    attempts: 1,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  expected: {\n    attempts: 2,\n    physicalBoundaries: 2,\n    sessions: [ 'implementation-r1', 'implementation-r2' ],\n    inputTokens: 350,\n    cachedInputTokens: 260,\n    uncachedInputTokens: 90,\n    outputTokens: 18\n  },\n  operator: 'deepStrictEqual',\n  diff: 'simple'\n}\n\nNode.js v22.23.1"
               }
             ]
           },
@@ -440,7 +512,7 @@
               "output": ""
             }
           ],
-          "runtimeId": "01a0381b-bcce-7713-8d38-8290d0376010",
+          "runtimeId": "01a03851-f372-7c52-a047-7d0facef9813",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -474,7 +546,7 @@
           "sliceId": "context-envelope-efficiency",
           "version": 1
         },
-        "greenDigest": "bf242cc4b6e69cf693bb93c2fc165027bad43d3248fb8bec05b45e84d1a802a1"
+        "greenDigest": "1ccf2f87489a6c4a2740ee783a5ec45e421d4dce5f27fc0f98a35f4c7c7e74fe"
       }
     }
   }

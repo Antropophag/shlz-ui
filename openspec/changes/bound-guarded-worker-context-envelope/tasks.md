@@ -11,4 +11,4 @@
 ## 3. Integration and delivery
 
 - [x] 3.1 Extend worker telemetry and summary output with cached/uncached input, output, packet/session/phase/attempt breakdowns, fan-out, and handoff/read proxies; verify old telemetry stays readable and representative summaries are deterministic.
-- [ ] 3.2 Document the measured findings and packet-authoring contract, run focused/full harness and docs checks plus strict OpenSpec validation, then complete independent Standards/Spec review and delivery guards before opening an unmerged PR.
+- [x] 3.2 Document the measured findings and packet-authoring contract, run focused/full harness and docs checks plus strict OpenSpec validation, then complete independent Standards/Spec review and delivery guards before opening an unmerged PR.
