@@ -1,0 +1,332 @@
+{
+  "version": 1,
+  "planId": "resolve-pr41-review",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/bound-guarded-worker-context-envelope/**",
+      "docs/exec-plans/active/resolve-pr41-review/**",
+      "docs/exec-plans/active/bound-guarded-worker-context-envelope/{state.json,telemetry.jsonl}",
+      "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+    ],
+    "contracts": [
+      "harness/context-envelope-efficiency",
+      "PR #41 review findings"
+    ],
+    "dependencies": ["review-remediation"],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "full",
+      "two-axis review",
+      "delivery-check"
+    ],
+    "handoff": ["CI state", "resolved threads", "residual risks"],
+    "id": "review-delivery",
+    "implementationOutcomes": [
+      "all verified findings resolved",
+      "head-bound evidence",
+      "unmerged PR remains open"
+    ],
+    "implementationSurface": [
+      "valid diff-scoped remediation and review evidence only"
+    ],
+    "nonGoals": ["merge", "unrelated refactors", "new PR"],
+    "objective": "Run fixed-head validation and independent review, then update the existing PR and resolve verified threads",
+    "outputs": [
+      "review dispositions",
+      "validation evidence",
+      "updated PR head"
+    ],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "focused and aggregate validation",
+      "Standards and Spec review",
+      "thread disposition",
+      "push and delivery guard"
+    ]
+  },
+  "claimId": "pr41-review-delivery-1",
+  "baseline": {
+    "branch": "feat/harness-efficiency-eval",
+    "commit": "72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
+    "defaultBranch": "main",
+    "kind": "existing-pull-request",
+    "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/41",
+    "version": 1
+  },
+  "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "bound-guarded-worker-context-envelope"
+  },
+  "dependencyDigests": {
+    "review-remediation": "911f88bd5e0aa0cbfd589b2f4f380fd67e504183be378ff3500c3ce848aad896"
+  },
+  "packetDigest": "c2f40a5104feab507b1b8ead072632936f13d079ec059834fd38b3ccb664b3d1",
+  "contextIndex": [
+    "openspec/changes/bound-guarded-worker-context-envelope/**",
+    "docs/exec-plans/active/resolve-pr41-review/**",
+    "docs/exec-plans/active/bound-guarded-worker-context-envelope/{state.json,telemetry.jsonl}",
+    "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+  ],
+  "allowedImplementationSurface": [
+    "valid diff-scoped remediation and review evidence only"
+  ],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "full",
+    "two-axis review",
+    "delivery-check"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "f970a1134ed3dab6f76260403d5307d00b7d6fbcd1183b24cdc1e2cca883e6c3",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "56077d58b039a41bf58a00331d3aaa6084727f657fe948c55afbc3ae656f192c",
+          "changed": [
+            "complete all-or-unavailable phase token aggregation",
+            "explicit efficiency fixture and metric-policy validation",
+            "numeric missing-usage reporting and legacy contextTokens normalization",
+            "deterministic eight-assertion regression probe with independent challenge control",
+            "executable check:docs script and current-candidate validation evidence"
+          ],
+          "claimId": "pr41-remediation-2",
+          "completedPacket": "review-remediation",
+          "invalidatedAssumptions": [],
+          "nextPacket": "review-delivery",
+          "provenChecks": [
+            "npm run test:harness passes",
+            "context-envelope-efficiency-probe passes all eight regressions",
+            "strict OpenSpec validation passes",
+            "targeted Prettier and git diff checks pass"
+          ],
+          "settledDecisions": [
+            "historical worker briefs remain immutable; package.json now supplies their documented check:docs command",
+            "final committed-head validation and review evidence belongs to review-delivery"
+          ],
+          "unresolvedFindings": [],
+          "workerReportDigest": "a61d4ad33381d159a5405c2a8387c268f06d028efe5d3e7c882c24ed3c4001d4"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "complete all-or-unavailable phase token aggregation",
+        "deterministic eight-assertion regression probe with independent challenge control",
+        "executable check:docs script and current-candidate validation evidence",
+        "explicit efficiency fixture and metric-policy validation",
+        "numeric missing-usage reporting and legacy contextTokens normalization"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": [
+        "context-envelope-efficiency-probe passes all eight regressions",
+        "npm run test:harness passes",
+        "strict OpenSpec validation passes",
+        "targeted Prettier and git diff checks pass"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "pr41-review-delivery-1",
+    "objective": "Run fixed-head validation and independent review, then update the existing PR and resolve verified threads",
+    "obligations": [
+      "contract:PR #41 review findings",
+      "contract:harness/context-envelope-efficiency",
+      "outcome:all verified findings resolved",
+      "outcome:head-bound evidence",
+      "outcome:unmerged PR remains open",
+      "validation:delivery-check",
+      "validation:full",
+      "validation:harness",
+      "validation:openspec",
+      "validation:two-axis review"
+    ],
+    "packetId": "review-delivery",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "resolve-pr41-review",
+    "readNow": [
+      {
+        "bytes": 38133,
+        "digest": "1cb016b1be2616c8e24d073000edf710709c50abaa29ff0b9c1404e1d8efb13b",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/state.json"
+      },
+      {
+        "bytes": 3406,
+        "digest": "0b63d1947dafc984fdeab54c30147d0e8fceabb61578eb629b1ab6bd91d8621b",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/telemetry.jsonl"
+      },
+      {
+        "bytes": 9714,
+        "digest": "75ce7812941d62c3986dc298dba5a4aa85f950f3723b95dea3476566117f95b1",
+        "path": "docs/exec-plans/active/resolve-pr41-review/assessment.json"
+      },
+      {
+        "bytes": 251,
+        "digest": "8213aed8848092feeca9f2bb67be0c421a8ac6688e70cffd1910fc31272ac203",
+        "path": "docs/exec-plans/active/resolve-pr41-review/execution-baseline.json"
+      },
+      {
+        "bytes": 11401,
+        "digest": "8fd2a7515765b3358950d677f48828091a58461f26144bdb9ea614690541137e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/plan.json"
+      },
+      {
+        "bytes": 1135,
+        "digest": "5addd60f621bdaecb912770ff255fb523644968e12a7763e8e3a52008143a82e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/requirements.json"
+      },
+      {
+        "bytes": 2368,
+        "digest": "b37a9828cf940fde6d89f73dd07f2355b93499d1599599c592621c86ed485588",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+      },
+      {
+        "bytes": 12891,
+        "digest": "2006865ed259e7f2742881a355188e246afee002bd878636e6b9e243bbb442ae",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "26feee15f50bd4e4da8dcdbc4fda229ad6d02490de77097741928f4602afde16",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17439,
+        "digest": "e86ebf86bdf0dc5b4dad908d563c5f83dc16543eca342bf2334b7dcd49f1ef42",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.json"
+      },
+      {
+        "bytes": 1186,
+        "digest": "dfa40463e094b38f88561698cb1ccc343f21e341d609556cfd94e704dbbb8767",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-handoff.json"
+      },
+      {
+        "bytes": 12891,
+        "digest": "784517075f88d36d6420fe507f6739aecea982287b7bd7dbff24c9126dda1f9c",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "98cac18be5f15c593c2c01a5a9657c65289eccac53f41e6f436aa028e9d699db",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17439,
+        "digest": "f0c671baf55e35471c077c89d32433ef80c12ae64028daf7d1a072aeb8713507",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.json"
+      },
+      {
+        "bytes": 834,
+        "digest": "23c2ca343d3042e03d7031c29025a61f008126bdac6ee0e488d0a4a989197322",
+        "path": "docs/exec-plans/active/resolve-pr41-review/route-assessment.json"
+      },
+      {
+        "bytes": 51808,
+        "digest": "51831c973b6d2b1e9439225aca62487b3ba0bf3b7a64b76db64f277650223e23",
+        "path": "docs/exec-plans/active/resolve-pr41-review/state.json"
+      },
+      {
+        "bytes": 32,
+        "digest": "eedfeaa2a312f6b2bfa3ec9b36ecb5a0c0b23a1b2fef578e3ca6cb578f02af5b",
+        "path": "docs/exec-plans/active/resolve-pr41-review/state.json.lock"
+      },
+      {
+        "bytes": 3483,
+        "digest": "ed516ce855faae6bb1094b85f8517a77f5e95e8c06e3382dc285d310cfb90997",
+        "path": "docs/exec-plans/active/resolve-pr41-review/tdd-design-handoff.json"
+      },
+      {
+        "bytes": 2417,
+        "digest": "cf94205d9f64f9ccab32f08ac4ec3085d1be49d941cdfe775da9b5210287cf6f",
+        "path": "docs/exec-plans/active/resolve-pr41-review/telemetry.jsonl"
+      },
+      {
+        "bytes": 2561,
+        "digest": "d10323a98d899f5485cbf4ed0c893f5958f3c88ab13bedab590f7ec32d987c92",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "a9002abb3f6d6a7655a65c23caeacfd8e3ca5131f7e085737d744b0411a5a158",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "ee63001b9ccf0a525d561a398b0b351285df877e7dfabf2aa24183281ab61eb6",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.json"
+      },
+      {
+        "bytes": 731,
+        "digest": "cb30eb0a5c0bcdcd3ad75977a31011a55647fabda0fa4ad958a8325811abfc24",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-handoff.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "79c8249768cc700567a3d3332ba16b2982f27f2fd5e3056e296d0575579ac8ec",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "4c5835f05a813214002eb6261f196c3e8653c9a61036b482f503530f51d1de0e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "d0a2c5b8216a6c73d9d2d485bc7690d15517f2ae9a50c95ec42bf15b894a32db",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "17b364762edb45c64cc96888b2a874df2b8e2995f23bf08b25a20dd3905a2a93",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "e222c56d6ab7a5495f6711295a90a6e7128aeb1df39d195867cbe99d82df4e96",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "b97685e48b92bf25f61f19e5dfef2af7b09815e76481a09e59bd77c97cd7bfac",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.json"
+      },
+      {
+        "bytes": 40,
+        "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml"
+      },
+      {
+        "bytes": 4060,
+        "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md"
+      },
+      {
+        "bytes": 2009,
+        "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md"
+      },
+      {
+        "bytes": 4145,
+        "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+      },
+      {
+        "bytes": 1483,
+        "digest": "4d4059c76654bcc4a9621a3a6d13cf6abd6cfebedd1c46c2403d851252027adf",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md"
+      }
+    ],
+    "sourceDigest": "0a10c3f9d4784e57d254889488ab6824286f2d37e6e29976488364e7d95e3fdb",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "1467cd8a819e52095d2e52a3943531acde9c6f7d6e5dafb60ff6b5107562051e"
+}

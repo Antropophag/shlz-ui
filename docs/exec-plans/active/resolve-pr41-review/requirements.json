@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "revision": 1,
+  "revision": 3,
   "intent": "Resolve verified review findings on PR #41 while preserving the approved context-envelope efficiency contract and candidate-bound evidence.",
   "route": "open-spec",
   "decisions": [
     {
       "id": "review-remediation-scope",
       "owner": "user",
-      "status": "resolved",
+      "status": "unresolved",
       "blocking": true,
       "provenance": {
         "kind": "user-prompt",
@@ -23,11 +23,31 @@
         "kind": "repository",
         "ref": "docs/agent-execution.md and docs/validation-workflow.md require current candidate-bound validation, review, telemetry, and delivery evidence"
       }
+    },
+    {
+      "id": "observed-context-relevance-compatibility",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "review-finding",
+        "ref": "final Spec review found that requiring metricPolicy globally suppresses the contractually available observed-read ratio for fixtures without that policy"
+      }
+    },
+    {
+      "id": "observed-context-relevance-limitation",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "review-finding",
+        "ref": "final Standards rereview found that an observed relevance ratio contradicted the unconditional no-classified-read limitation"
+      }
     }
   ],
   "openSpec": {
     "change": "bound-guarded-worker-context-envelope",
-    "status": "synthesized"
+    "status": "pending"
   },
   "authorization": {
     "status": "pre-authorized",

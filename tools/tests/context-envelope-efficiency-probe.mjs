@@ -226,6 +226,32 @@ await checkRegression(
     assert.equal(policyReport.proxies.contextRelevance, "unavailable");
   },
 );
+await checkRegression(
+  "observed contextRelevance removes the unavailable limitation",
+  async () => {
+    const observedReport = await evaluateTelemetryEfficiency(
+      {
+        version: 1,
+        id: "observed-relevance-regression",
+        telemetrySources: [
+          {
+            id: "change",
+            path: "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl",
+          },
+        ],
+        sourceEnvelopes: [],
+      },
+      root,
+    );
+
+    assert.equal(observedReport.proxies.contextRelevance.ratio, 1);
+    assert.ok(
+      !observedReport.limitations.some((limitation) =>
+        limitation.startsWith("No selected event explicitly classifies"),
+      ),
+    );
+  },
+);
 
 const evaluated = await evaluateTelemetryEfficiency(fixture, root);
 await checkRegression("missing usage limitation uses a numeric count", () =>

@@ -1,35 +1,50 @@
 {
   "version": 1,
-  "candidate": "worktree-diff:198bab11e5aa1fa7b2d047298e678b18269640761282e76ddb975170383cab93@72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
+  "candidate": "e8d7caf694e3e4141e42e30b6c67bb138d5a7799",
   "checks": [
     {
       "command": "npm run test:harness",
       "outcome": "pass",
-      "observed": "exit 0, including guarded envelope and known-bad oracle coverage"
+      "observed": "117/117 focused harness tests passed, followed by the contract-derived routing probe"
     },
     {
       "command": "node tools/tests/context-envelope-efficiency-probe.mjs",
       "outcome": "pass",
-      "observed": "all phase-attribution, fixture-policy, numeric-reporting, and control-normalization regressions passed"
+      "observed": "all eight phase-attribution, fixture-policy, numeric-reporting, and control-normalization regressions passed"
     },
     {
-      "command": "openspec validate bound-guarded-worker-context-envelope --strict",
+      "command": "npm run check:openspec && openspec validate bound-guarded-worker-context-envelope --strict",
       "outcome": "pass"
     },
     {
-      "command": "npx prettier --check tools/lib/harness/core.mjs tools/lib/harness/telemetry-efficiency.mjs tools/tests/context-envelope-efficiency-probe.mjs tools/tests/fixtures/context-envelope-efficiency-control.mjs docs/exec-plans/fixtures/context-envelope-efficiency-eval.json docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-report.json",
-      "outcome": "pass"
+      "command": "npm run check:docs",
+      "outcome": "pass",
+      "observed": "all generated PR-review orchestration JSON is formatted"
     },
-    { "command": "git diff --check", "outcome": "pass" }
+    {
+      "command": "npm run check",
+      "outcome": "pass",
+      "observed": "217/217 Node tests and 207/207 Playwright tests passed with lint, build, source validation, and package-consumer smoke"
+    },
+    {
+      "command": "git diff --check",
+      "outcome": "pass"
+    }
   ],
+  "tddEvidence": {
+    "slice": "review-remediation",
+    "outcome": "green-proven",
+    "candidateHead": "e8d7caf694e3e4141e42e30b6c67bb138d5a7799",
+    "observed": "requirements revision 2 re-entry completed with fresh independent test design, deterministic RED, remediation worker, and GREEN"
+  },
   "invalidatedEvidence": {
     "candidate": "f8a7744",
-    "reason": "The review-remediation implementation changed production, fixture, and evidence surfaces after that candidate; its validation is historical and is not presented as proof for the current worktree."
+    "reason": "The review-remediation implementation changed production, fixture, and evidence surfaces after that candidate; its validation is historical and is not presented as delivery proof."
   },
   "limitations": [
-    "The candidate is bound to the listed baseline plus a deterministic tracked diff digest because the remediation worker does not create the final commit.",
-    "The root orchestrator must replace the worktree identity with the committed candidate head before final review and delivery guards.",
-    "Broad repository, package, build, and browser suites from f8a7744 were not reused as current-candidate proof."
+    "The recorded candidate is the committed remediation code head. This evidence file is a documentation-only delivery record, so its later evidence commit does not alter the validated implementation, fixture, oracle, or dependency closure.",
+    "GitHub CI status is reported separately from local fixed-head validation.",
+    "Operational evidence commits after this candidate do not alter the validated implementation, fixture, oracle, or dependency closure."
   ],
-  "disposition": "Focused validation is current for the remediation candidate. Final candidate-head binding and regenerated review/delivery evidence remain root-orchestrator responsibilities."
+  "disposition": "The committed remediation candidate passes focused and full validation with fresh candidate-bound TDD evidence."
 }

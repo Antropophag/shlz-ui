@@ -4,7 +4,7 @@
   "baseline": "11d06490d355dd7150950025a2faab99975e7385",
   "requirementsGate": "required",
   "openSpecChange": "bound-guarded-worker-context-envelope",
-  "requirementsRevision": 1,
+  "requirementsRevision": 3,
   "classification": {
     "size": "M",
     "score": 28,

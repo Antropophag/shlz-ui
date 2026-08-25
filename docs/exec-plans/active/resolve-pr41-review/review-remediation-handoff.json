@@ -3,13 +3,15 @@
   "changed": [
     "complete all-or-unavailable phase token aggregation",
     "explicit efficiency fixture and metric-policy validation",
+    "preserve observed context relevance when no suppression policy is declared",
     "numeric missing-usage reporting and legacy contextTokens normalization",
     "deterministic eight-assertion regression probe with independent challenge control",
     "executable check:docs script and current-candidate validation evidence"
   ],
   "provenChecks": [
     "npm run test:harness passes",
-    "context-envelope-efficiency-probe passes all eight regressions",
+    "context-envelope-efficiency-probe passes all review regressions",
+    "npm run test:harness passes 117/117 including compatibility coverage",
     "strict OpenSpec validation passes",
     "targeted Prettier and git diff checks pass"
   ],
@@ -20,7 +22,7 @@
   "unresolvedFindings": [],
   "nextPacket": "review-delivery",
   "invalidatedAssumptions": [],
-  "claimId": "pr41-remediation-2",
-  "briefDigest": "56077d58b039a41bf58a00331d3aaa6084727f657fe948c55afbc3ae656f192c",
-  "workerReportDigest": "a61d4ad33381d159a5405c2a8387c268f06d028efe5d3e7c882c24ed3c4001d4"
+  "claimId": "pr41-remediation-5",
+  "briefDigest": "5d08089159d31528b034b4312c7a1d68c329ec0545e42a0922ad2bff745be530",
+  "workerReportDigest": "972df937ae5335f163333775ab250ec9e3f43bad5733534bae5b009c97e56434"
 }

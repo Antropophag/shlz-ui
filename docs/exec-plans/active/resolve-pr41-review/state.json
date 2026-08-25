@@ -1,86 +1,98 @@
 {
   "version": 1,
   "planId": "resolve-pr41-review",
-  "requirementsRevision": 1,
+  "requirementsRevision": 2,
   "packets": {
     "test-design": {
       "attemptHistory": [],
       "status": "completed",
-      "session": "pr41-test-design-r3",
-      "claimId": "pr41-test-design-4",
-      "briefDigest": "818b1ad573efbf436c673dadf8d8ac4d8024573ec1d0ea3f2d31086958d8cbf1",
+      "session": "pr41-test-design-r7",
+      "claimId": "pr41-test-design-8",
+      "briefDigest": "b8c1dfed2dcc69ff40a2e4799070cd2f5c0e745446a6548a067d9fa7f5d490e3",
       "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
       "dependencyDigests": {},
       "packetDigest": "e3364baa52f2eb25c572f6e221c07b4c83ac6c47773069d77543cb20e3134b96",
-      "requirementsRevision": 1,
+      "requirementsRevision": 2,
       "execution": {
         "version": 1,
         "source": "codex-exec-jsonl",
-        "runtimeId": "01a0391c-a3a3-7502-a710-1e7361f683f2",
-        "launchId": "3a54f05c-efc8-4cc7-a274-50f00d89b2d8",
-        "startedAt": "2026-08-25T13:29:32.980Z",
-        "evidenceDigest": "e84e4a8f644e178d9301cea0eb4e13185125fb4008a73907ab713107f2bfdd51"
+        "runtimeId": "01a0397a-20d0-7f10-90c7-fdace46da577",
+        "launchId": "1c945df2-1988-4ef3-8d50-bde462f03a0a",
+        "startedAt": "2026-08-25T15:11:39.870Z",
+        "evidenceDigest": "0e205824510a1c1ba0fb735dfaed08e4f07c0b34b79cac7d30d0453983083be5"
       },
       "launch": {
         "terminalStatus": "completed",
-        "launchId": "3a54f05c-efc8-4cc7-a274-50f00d89b2d8",
+        "launchId": "1c945df2-1988-4ef3-8d50-bde462f03a0a",
         "usage": {
-          "input_tokens": 191194,
-          "cached_input_tokens": 159232,
+          "input_tokens": 316780,
+          "cached_input_tokens": 282368,
           "cache_write_input_tokens": 0,
-          "output_tokens": 1851,
-          "reasoning_output_tokens": 469
+          "output_tokens": 2576,
+          "reasoning_output_tokens": 790
         },
-        "workerReport": "Implemented the `test-design` packet within `tools/tests/**`; no production files or operational evidence were changed.\n\nFiles:\n\n- [context-envelope-efficiency-probe.mjs](/home/antropophag/code/shlz-ui-harness-efficiency-eval/tools/tests/context-envelope-efficiency-probe.mjs)\n- [context-envelope-efficiency-challenge-control.mjs](/home/antropophag/code/shlz-ui-harness-efficiency-eval/tools/tests/fixtures/context-envelope-efficiency-challenge-control.mjs)\n\nFocused validation is deterministically RED with exactly 8 named failures:\n\n1. Phase aggregates include complete runtime usage.\n2. Phase aggregates are all-or-unavailable.\n3. Fixture requires `sourceEnvelopes` to be an array.\n4. Fixture policy requires unavailable `contextRelevance`.\n5. Missing-usage limitation uses a numeric count.\n6. Control runtime usage normalizes legacy `contextTokens`.\n7. Control packet aggregation normalizes legacy `contextTokens`.\n8. Control session aggregation normalizes legacy `contextTokens`.\n\nValidation:\n\n- `node tools/tests/context-envelope-efficiency-probe.mjs` → expected failure, 8/8 regression assertions reproduced.\n- Probe with the challenge-control adapter → passed.\n- `git diff --check -- tools/tests/context-envelope-efficiency-probe.mjs` → passed.\n\nProduction remediation remains intentionally out of scope.",
-        "workerReportDigest": "db9f460f197d2994ae965a6c02c366f66a8437c2724b54df381826d5a8169e3f"
+        "workerReport": "Packet `test-design` is complete.\n\n- Regression seams: phase aggregates, fixture validation/metric policy, numeric missing-usage reporting, and legacy control-oracle normalization.\n- Assertions reside in `tools/tests/**`; no production or operational-evidence files were changed in this run.\n- Pre-remediation handoff records eight deterministic RED failures; the subsequent context-relevance policy regression is also covered.\n- Current candidate validation passed:\n  - `node tools/tests/context-envelope-efficiency-probe.mjs`\n  - Node syntax checks\n  - `git diff --check`\n- `tools/tests/**` is clean.",
+        "workerReportDigest": "640d02ff859445102f9be18c7f54251fa1f3948768e7b97c6edbb886f6342631"
       }
     },
     "review-remediation": {
       "attemptHistory": [],
       "status": "completed",
-      "session": "pr41-remediation-r2",
-      "claimId": "pr41-remediation-2",
-      "briefDigest": "56077d58b039a41bf58a00331d3aaa6084727f657fe948c55afbc3ae656f192c",
+      "session": "pr41-remediation-r5",
+      "claimId": "pr41-remediation-5",
+      "briefDigest": "5d08089159d31528b034b4312c7a1d68c329ec0545e42a0922ad2bff745be530",
       "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
       "dependencyDigests": {
-        "test-design": "71e287dce5b7998aa3ea5d52725d642ecdc6ce0ce61ceab9da5d3ae4d372535c"
+        "test-design": "f95db1cc4679cbf614599b30cd3120a397c2dae46b9d79e8ebfd6ef27a65b3b4"
       },
       "packetDigest": "8772da0e988ae2b11bc9df68c5364b24f4556f2f01350003485d2356177855f2",
-      "requirementsRevision": 1,
+      "requirementsRevision": 2,
       "execution": {
         "version": 1,
         "source": "codex-exec-jsonl",
-        "runtimeId": "01a0391d-f71d-70e0-a8b2-6fdeb3be76d0",
-        "launchId": "74ea1b1f-4083-4260-a386-8578709d6dd7",
-        "startedAt": "2026-08-25T13:30:59.913Z",
-        "evidenceDigest": "047e9a6251e481a138e3750b4ad509c9a86b29c8ff52f54e088baabd0dea6009"
+        "runtimeId": "01a0397c-df5f-7310-be93-27ff1170fc5e",
+        "launchId": "179a8e00-bf7b-4100-bb97-7952963df312",
+        "startedAt": "2026-08-25T15:14:39.721Z",
+        "evidenceDigest": "70ae4dc16ffb2242f94c6f35b287c965e057423596cc13220879d2eee9c6f265"
       },
       "launch": {
         "terminalStatus": "completed",
-        "launchId": "74ea1b1f-4083-4260-a386-8578709d6dd7",
+        "launchId": "179a8e00-bf7b-4100-bb97-7952963df312",
         "usage": {
-          "input_tokens": 2012470,
-          "cached_input_tokens": 1916416,
+          "input_tokens": 1095733,
+          "cached_input_tokens": 1026560,
           "cache_write_input_tokens": 0,
-          "output_tokens": 10289,
-          "reasoning_output_tokens": 3289
+          "output_tokens": 4084,
+          "reasoning_output_tokens": 1026
         },
-        "workerReport": "Completed the `review-remediation` packet.\n\nChanged areas:\n\n- Added complete all-or-unavailable token aggregation by phase.\n- Enforced `sourceEnvelopes` array and `contextRelevance` metric-policy contracts.\n- Rendered missing-usage counts numerically.\n- Normalized legacy `contextTokens` in all control-oracle aggregation paths.\n- Regenerated the efficiency report.\n- Replaced stale `f8a7744` validation claims with current worktree-bound evidence.\n\nObserved checks:\n\n- `npm run test:harness` — passed.\n- `node tools/tests/context-envelope-efficiency-probe.mjs` — passed, all eight regressions green.\n- Strict OpenSpec validation — passed.\n- Targeted Prettier check — passed.\n- `git diff --check` — passed.\n\nUnresolved handoff obligations:\n\n- The `review-delivery` packet must bind validation to the final committed head.\n- It must regenerate review/delivery evidence with `state.json` and `telemetry.jsonl`.\n- Historical immutable briefs were not manually rewritten or fabricated.\n- PR remains unmerged.",
-        "workerReportDigest": "a61d4ad33381d159a5405c2a8387c268f06d028efe5d3e7c882c24ed3c4001d4"
+        "workerReport": "Packet `review-remediation` completed at candidate `e8d7caf`.\n\nChanged areas:\n\n- Phase token aggregation now uses all-or-unavailable semantics.\n- Evaluation fixtures require `sourceEnvelopes` arrays.\n- `missingUsage` is rendered numerically.\n- Control-oracle input normalization supports legacy `contextTokens`.\n- `contextRelevance` obeys explicit unavailable policy while remaining observable without suppression.\n- Review-delivery regeneration includes `state.json` and `telemetry.jsonl`.\n- Stale `f8a7744` evidence is explicitly invalidated.\n- `check:docs` now has an executable npm contract.\n\nObserved checks:\n\n- `npm run test:harness` — pass, 117/117.\n- `node tools/tests/context-envelope-efficiency-probe.mjs` — pass.\n- `openspec validate bound-guarded-worker-context-envelope --strict` — pass.\n- `git diff --check` — pass.\n\nUnresolved delivery work:\n\n- Durable validation/TDD evidence still needs root-orchestrator rebinding from `47d711a` to current candidate `e8d7caf`.\n- Root-owned generated orchestration briefs still need formatting before `npm run check:docs` can be reported as passing.\n- No PR merge was performed.",
+        "workerReportDigest": "972df937ae5335f163333775ab250ec9e3f43bad5733534bae5b009c97e56434"
       }
     },
     "review-delivery": {
-      "status": "pending"
+      "attemptHistory": [],
+      "attempts": 1,
+      "status": "launching",
+      "session": "pr41-review-delivery-r4",
+      "claimId": "pr41-review-delivery-4",
+      "briefDigest": "70bf7343a8d1f37ac5c0c8033dbf8bcfdb4d09e3ce2785adef0207bd64d118e4",
+      "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
+      "dependencyDigests": {
+        "review-remediation": "73986a15131955aa2229cf2773ad32188d069b3e8420e3ea8b63e7dc549b7d4a"
+      },
+      "packetDigest": "c2f40a5104feab507b1b8ead072632936f13d079ec059834fd38b3ccb664b3d1",
+      "requirementsRevision": 2
     }
   },
   "handoffs": {
     "test-design": {
       "completedPacket": "test-design",
       "changed": [
-        "added eight deterministic regression assertions to the context-envelope efficiency probe"
+        "verified the deterministic acceptance regressions, including available observed context relevance without suppression policy"
       ],
       "provenChecks": [
-        "context-envelope-efficiency-probe exits 1 with eight expected RED failures",
+        "context-envelope-efficiency-probe covers the original eight deterministic review regressions",
+        "harness.test.mjs covers the available observed context relevance compatibility regression",
         "node --check passes",
         "git diff --check passes"
       ],
@@ -90,22 +102,24 @@
       "unresolvedFindings": [],
       "nextPacket": "review-remediation",
       "invalidatedAssumptions": [],
-      "claimId": "pr41-test-design-4",
-      "briefDigest": "818b1ad573efbf436c673dadf8d8ac4d8024573ec1d0ea3f2d31086958d8cbf1",
-      "workerReportDigest": "db9f460f197d2994ae965a6c02c366f66a8437c2724b54df381826d5a8169e3f"
+      "claimId": "pr41-test-design-8",
+      "briefDigest": "b8c1dfed2dcc69ff40a2e4799070cd2f5c0e745446a6548a067d9fa7f5d490e3",
+      "workerReportDigest": "640d02ff859445102f9be18c7f54251fa1f3948768e7b97c6edbb886f6342631"
     },
     "review-remediation": {
       "completedPacket": "review-remediation",
       "changed": [
         "complete all-or-unavailable phase token aggregation",
         "explicit efficiency fixture and metric-policy validation",
+        "preserve observed context relevance when no suppression policy is declared",
         "numeric missing-usage reporting and legacy contextTokens normalization",
         "deterministic eight-assertion regression probe with independent challenge control",
         "executable check:docs script and current-candidate validation evidence"
       ],
       "provenChecks": [
         "npm run test:harness passes",
-        "context-envelope-efficiency-probe passes all eight regressions",
+        "context-envelope-efficiency-probe passes all review regressions",
+        "npm run test:harness passes 117/117 including compatibility coverage",
         "strict OpenSpec validation passes",
         "targeted Prettier and git diff checks pass"
       ],
@@ -116,9 +130,9 @@
       "unresolvedFindings": [],
       "nextPacket": "review-delivery",
       "invalidatedAssumptions": [],
-      "claimId": "pr41-remediation-2",
-      "briefDigest": "56077d58b039a41bf58a00331d3aaa6084727f657fe948c55afbc3ae656f192c",
-      "workerReportDigest": "a61d4ad33381d159a5405c2a8387c268f06d028efe5d3e7c882c24ed3c4001d4"
+      "claimId": "pr41-remediation-5",
+      "briefDigest": "5d08089159d31528b034b4312c7a1d68c329ec0545e42a0922ad2bff745be530",
+      "workerReportDigest": "972df937ae5335f163333775ab250ec9e3f43bad5733534bae5b009c97e56434"
     }
   },
   "specDrivenTdd": {
@@ -127,12 +141,12 @@
       "review-remediation": {
         "status": "green-proven",
         "design": {
-          "acceptanceDigest": "33d7de303b826fccb0bac9e66656899fc2d3ed8b7a21161802bec34b4fb7c281",
+          "acceptanceDigest": "62b96158b1e676f84fd7d5089b23292ecea817c21a02bab6fa629dccd5c7322e",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
           "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
-          "contractDigest": "ff129f706d5b7532bc7c2bff3689c288a3d6770c878e34e7a18906c55b75fe1d",
+          "contractDigest": "1fd5b6a19fa5c67c4a9b79ab5a4f2662c46edebb60527d0b7b0498afede4a6a5",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "AggregateError",
           "expectedResultSource": {
@@ -144,11 +158,12 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "843b698e2859f10d0b0323fc1f60808173c9cc81dfd1cb01c31147b9c3d5e372",
+          "fixtureDigest": "1efdc65c18f4cf383d1d974a2a30c211f533e5897596fd7d01d10726b9271f59",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-challenge-control.mjs",
-            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs"
+            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs",
+            "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl"
           ],
           "inputs": [
             "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -165,7 +180,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "f72fd0ee5ec1012a09899a1e2bd07bf25782e6a3cc475c1f3874de5f215b094a",
+          "oracleChallengeDigest": "5935c940a866e0dcf02a46688e6674f09212881ff59c3b0e586bc63d065ae062",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -192,8 +207,8 @@
             "kind": "behavioral-assertion",
             "observesSeam": "harness/telemetry-summary-evaluation"
           },
-          "requirementsRevision": 1,
-          "runtimeId": "01a0391c-a3a3-7502-a710-1e7361f683f2",
+          "requirementsRevision": 2,
+          "runtimeId": "01a0397a-20d0-7f10-90c7-fdace46da577",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -227,25 +242,25 @@
           "sliceId": "review-remediation",
           "version": 1
         },
-        "designDigest": "4feff9eb920b1187cdda4334b301e8a8d68f5cc5a49add1b88f515c84d2e333f",
-        "sliceContractDigest": "ff129f706d5b7532bc7c2bff3689c288a3d6770c878e34e7a18906c55b75fe1d",
+        "designDigest": "61b3258103b9ab8862bc8fbdcb449246844b8d71c6c5fd81cb7392632ec8ff4e",
+        "sliceContractDigest": "1fd5b6a19fa5c67c4a9b79ab5a4f2662c46edebb60527d0b7b0498afede4a6a5",
         "retentionIdentity": {
           "scenarioDigest": "e8aa07bb067a0f2c3ee72a2f6436876bf23674ba5bfdd7acba6174b1f550b12a",
           "authorityDigest": "959cf8f97474c931cd944bd14997d6dedded36ee1817bc0f92ad6613ad04ffd5",
-          "dependencyDigest": "f55de5368dee7a8e5c30dcfc3c2b55b0a2f127f9cae8ca50785dcd073e69e288",
+          "dependencyDigest": "47cbae1d8ca51f57053d16f671eb3e17362c4a80378ed7015b3fabfce5fd6847",
           "commandDigest": "a2652e660d887e71a463c2661ac6a2608d0aa0799c6ab6349d2752503f64ffa9",
-          "acceptanceDigest": "33d7de303b826fccb0bac9e66656899fc2d3ed8b7a21161802bec34b4fb7c281",
-          "fixtureDigest": "843b698e2859f10d0b0323fc1f60808173c9cc81dfd1cb01c31147b9c3d5e372",
+          "acceptanceDigest": "62b96158b1e676f84fd7d5089b23292ecea817c21a02bab6fa629dccd5c7322e",
+          "fixtureDigest": "1efdc65c18f4cf383d1d974a2a30c211f533e5897596fd7d01d10726b9271f59",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
-          "sliceContractDigest": "ff129f706d5b7532bc7c2bff3689c288a3d6770c878e34e7a18906c55b75fe1d"
+          "sliceContractDigest": "1fd5b6a19fa5c67c4a9b79ab5a4f2662c46edebb60527d0b7b0498afede4a6a5"
         },
         "red": {
-          "acceptanceDigest": "33d7de303b826fccb0bac9e66656899fc2d3ed8b7a21161802bec34b4fb7c281",
+          "acceptanceDigest": "62b96158b1e676f84fd7d5089b23292ecea817c21a02bab6fa629dccd5c7322e",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
           "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
-          "contractDigest": "ff129f706d5b7532bc7c2bff3689c288a3d6770c878e34e7a18906c55b75fe1d",
+          "contractDigest": "1fd5b6a19fa5c67c4a9b79ab5a4f2662c46edebb60527d0b7b0498afede4a6a5",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "AggregateError",
           "expectedResultSource": {
@@ -257,11 +272,12 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "843b698e2859f10d0b0323fc1f60808173c9cc81dfd1cb01c31147b9c3d5e372",
+          "fixtureDigest": "1efdc65c18f4cf383d1d974a2a30c211f533e5897596fd7d01d10726b9271f59",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-challenge-control.mjs",
-            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs"
+            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs",
+            "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl"
           ],
           "inputs": [
             "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -279,7 +295,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "f72fd0ee5ec1012a09899a1e2bd07bf25782e6a3cc475c1f3874de5f215b094a",
+          "oracleChallengeDigest": "5935c940a866e0dcf02a46688e6674f09212881ff59c3b0e586bc63d065ae062",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -306,18 +322,18 @@
             "kind": "behavioral-assertion",
             "observesSeam": "harness/telemetry-summary-evaluation"
           },
-          "requirementsRevision": 1,
+          "requirementsRevision": 2,
           "runs": [
             {
               "exitCode": 1,
-              "output": "file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272\n  throw new AggregateError(\n        ^\n\nAggregateError: 8 context-envelope regression assertions failed\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272:9 {\n  [errors]: [\n    Error: phase aggregates include complete runtime usage\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 3,\n      -   cachedInputTokens: 300,\n      -   inputTokens: 430,\n      -   outputTokens: 23,\n          physicalBoundaries: 3,\n          sessions: [\n            'implementation-r1',\n            'implementation-r2',\n            'review-r1'\n          ],\n      -   uncachedInputTokens: 130\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:118:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ]\n        },\n        expected: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ],\n          inputTokens: 430,\n          cachedInputTokens: 300,\n          uncachedInputTokens: 130,\n          outputTokens: 23\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: phase aggregates are all-or-unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 2,\n      -   cachedInputTokens: 'unavailable',\n      -   inputTokens: 'unavailable',\n      -   outputTokens: 'unavailable',\n          physicalBoundaries: 2,\n          sessions: [\n            'complete-r1',\n            'incomplete-r1'\n          ],\n      -   uncachedInputTokens: 'unavailable'\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:149:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ]\n        },\n        expected: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ],\n          inputTokens: 'unavailable',\n          cachedInputTokens: 'unavailable',\n          uncachedInputTokens: 'unavailable',\n          outputTokens: 'unavailable'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: fixture requires sourceEnvelopes array\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: The input did not match the regular expression /sourceEnvelopes must be an array/. Input:\n      \n      'TypeError: fixture.sourceEnvelopes.map is not a function'\n      \n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: TypeError: fixture.sourceEnvelopes.map is not a function\n            at evaluateTelemetryEfficiency (file://<worktree-root>/tools/lib/harness/telemetry-efficiency.mjs:133:29)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:186:5\n            at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:7,\n        expected: /sourceEnvelopes must be an array/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy marks contextRelevance unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Missing expected rejection.\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n        generatedMessage: false,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: /metricPolicy\\.unavailable must include contextRelevance/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: missing usage limitation uses a numeric count\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:209:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n      \n        assert.ok(\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:210:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:209:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: false,\n        expected: true,\n        operator: '==',\n        diff: 'simple'\n      }\n    },\n    Error: control normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:249:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          cachedInputTokens: 15,\n      +   inputTokens: NaN,\n      -   inputTokens: 40,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed',\n      +   uncachedInputTokens: NaN\n      -   uncachedInputTokens: 25\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:250:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:249:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          inputTokens: NaN,\n          cachedInputTokens: 15,\n          uncachedInputTokens: NaN,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        expected: {\n          inputTokens: 40,\n          cachedInputTokens: 15,\n          uncachedInputTokens: 25,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control packet normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:258:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      NaN !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:259:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:258:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: NaN,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control session normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:264:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      undefined !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:265:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:264:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    }\n  ]\n}\n\nNode.js v22.23.1"
+              "output": "file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:294\n  throw new AggregateError(\n        ^\n\nAggregateError: 9 context-envelope regression assertions failed\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:294:9 {\n  [errors]: [\n    Error: phase aggregates include complete runtime usage\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 3,\n      -   cachedInputTokens: 300,\n      -   inputTokens: 430,\n      -   outputTokens: 23,\n          physicalBoundaries: 3,\n          sessions: [\n            'implementation-r1',\n            'implementation-r2',\n            'review-r1'\n          ],\n      -   uncachedInputTokens: 130\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:118:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ]\n        },\n        expected: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ],\n          inputTokens: 430,\n          cachedInputTokens: 300,\n          uncachedInputTokens: 130,\n          outputTokens: 23\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: phase aggregates are all-or-unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 2,\n      -   cachedInputTokens: 'unavailable',\n      -   inputTokens: 'unavailable',\n      -   outputTokens: 'unavailable',\n          physicalBoundaries: 2,\n          sessions: [\n            'complete-r1',\n            'incomplete-r1'\n          ],\n      -   uncachedInputTokens: 'unavailable'\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:149:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ]\n        },\n        expected: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ],\n          inputTokens: 'unavailable',\n          cachedInputTokens: 'unavailable',\n          uncachedInputTokens: 'unavailable',\n          outputTokens: 'unavailable'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: fixture requires sourceEnvelopes array\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: The input did not match the regular expression /sourceEnvelopes must be an array/. Input:\n      \n      'TypeError: fixture.sourceEnvelopes.map is not a function'\n      \n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: TypeError: fixture.sourceEnvelopes.map is not a function\n            at evaluateTelemetryEfficiency (file://<worktree-root>/tools/lib/harness/telemetry-efficiency.mjs:133:29)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:186:5\n            at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:7,\n        expected: /sourceEnvelopes must be an array/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy marks contextRelevance unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Missing expected rejection.\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n        generatedMessage: false,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: /metricPolicy\\.unavailable must include contextRelevance/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy suppresses observed contextRelevance\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:207:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      + actual - expected\n      \n      + {\n      +   classifiedReads: 1,\n      +   kind: 'observed-read-ratio',\n      +   ratio: 1,\n      +   relevantReads: 1\n      + }\n      - 'unavailable'\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:226:12\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:207:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          kind: 'observed-read-ratio',\n          relevantReads: 1,\n          classifiedReads: 1,\n          ratio: 1\n        },\n        expected: 'unavailable',\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: missing usage limitation uses a numeric count\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:231:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n      \n        assert.ok(\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:232:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:231:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: false,\n        expected: true,\n        operator: '==',\n        diff: 'simple'\n      }\n    },\n    Error: control normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:271:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          cachedInputTokens: 15,\n      +   inputTokens: NaN,\n      -   inputTokens: 40,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed',\n      +   uncachedInputTokens: NaN\n      -   uncachedInputTokens: 25\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:271:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          inputTokens: NaN,\n          cachedInputTokens: 15,\n          uncachedInputTokens: NaN,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        expected: {\n          inputTokens: 40,\n          cachedInputTokens: 15,\n          uncachedInputTokens: 25,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control packet normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:280:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      NaN !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:281:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:280:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: NaN,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control session normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:286:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      undefined !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:287:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:286:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    }\n  ]\n}\n\nNode.js v22.23.1"
             },
             {
               "exitCode": 1,
-              "output": "file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272\n  throw new AggregateError(\n        ^\n\nAggregateError: 8 context-envelope regression assertions failed\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272:9 {\n  [errors]: [\n    Error: phase aggregates include complete runtime usage\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 3,\n      -   cachedInputTokens: 300,\n      -   inputTokens: 430,\n      -   outputTokens: 23,\n          physicalBoundaries: 3,\n          sessions: [\n            'implementation-r1',\n            'implementation-r2',\n            'review-r1'\n          ],\n      -   uncachedInputTokens: 130\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:118:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ]\n        },\n        expected: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ],\n          inputTokens: 430,\n          cachedInputTokens: 300,\n          uncachedInputTokens: 130,\n          outputTokens: 23\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: phase aggregates are all-or-unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 2,\n      -   cachedInputTokens: 'unavailable',\n      -   inputTokens: 'unavailable',\n      -   outputTokens: 'unavailable',\n          physicalBoundaries: 2,\n          sessions: [\n            'complete-r1',\n            'incomplete-r1'\n          ],\n      -   uncachedInputTokens: 'unavailable'\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:149:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ]\n        },\n        expected: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ],\n          inputTokens: 'unavailable',\n          cachedInputTokens: 'unavailable',\n          uncachedInputTokens: 'unavailable',\n          outputTokens: 'unavailable'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: fixture requires sourceEnvelopes array\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: The input did not match the regular expression /sourceEnvelopes must be an array/. Input:\n      \n      'TypeError: fixture.sourceEnvelopes.map is not a function'\n      \n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: TypeError: fixture.sourceEnvelopes.map is not a function\n            at evaluateTelemetryEfficiency (file://<worktree-root>/tools/lib/harness/telemetry-efficiency.mjs:133:29)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:186:5\n            at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:7,\n        expected: /sourceEnvelopes must be an array/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy marks contextRelevance unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Missing expected rejection.\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n        generatedMessage: false,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: /metricPolicy\\.unavailable must include contextRelevance/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: missing usage limitation uses a numeric count\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:209:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n      \n        assert.ok(\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:210:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:209:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: false,\n        expected: true,\n        operator: '==',\n        diff: 'simple'\n      }\n    },\n    Error: control normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:249:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          cachedInputTokens: 15,\n      +   inputTokens: NaN,\n      -   inputTokens: 40,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed',\n      +   uncachedInputTokens: NaN\n      -   uncachedInputTokens: 25\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:250:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:249:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          inputTokens: NaN,\n          cachedInputTokens: 15,\n          uncachedInputTokens: NaN,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        expected: {\n          inputTokens: 40,\n          cachedInputTokens: 15,\n          uncachedInputTokens: 25,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control packet normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:258:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      NaN !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:259:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:258:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: NaN,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control session normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:264:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      undefined !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:265:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:264:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    }\n  ]\n}\n\nNode.js v22.23.1"
+              "output": "file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:294\n  throw new AggregateError(\n        ^\n\nAggregateError: 9 context-envelope regression assertions failed\n    at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:294:9 {\n  [errors]: [\n    Error: phase aggregates include complete runtime usage\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 3,\n      -   cachedInputTokens: 300,\n      -   inputTokens: 430,\n      -   outputTokens: 23,\n          physicalBoundaries: 3,\n          sessions: [\n            'implementation-r1',\n            'implementation-r2',\n            'review-r1'\n          ],\n      -   uncachedInputTokens: 130\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:118:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:117:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ]\n        },\n        expected: {\n          attempts: 3,\n          physicalBoundaries: 3,\n          sessions: [ 'implementation-r1', 'implementation-r2', 'review-r1' ],\n          inputTokens: 430,\n          cachedInputTokens: 300,\n          uncachedInputTokens: 130,\n          outputTokens: 23\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: phase aggregates are all-or-unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          attempts: 2,\n      -   cachedInputTokens: 'unavailable',\n      -   inputTokens: 'unavailable',\n      -   outputTokens: 'unavailable',\n          physicalBoundaries: 2,\n          sessions: [\n            'complete-r1',\n            'incomplete-r1'\n          ],\n      -   uncachedInputTokens: 'unavailable'\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:149:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:148:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ]\n        },\n        expected: {\n          attempts: 2,\n          physicalBoundaries: 2,\n          sessions: [ 'complete-r1', 'incomplete-r1' ],\n          inputTokens: 'unavailable',\n          cachedInputTokens: 'unavailable',\n          uncachedInputTokens: 'unavailable',\n          outputTokens: 'unavailable'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: fixture requires sourceEnvelopes array\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: The input did not match the regular expression /sourceEnvelopes must be an array/. Input:\n      \n      'TypeError: fixture.sourceEnvelopes.map is not a function'\n      \n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: TypeError: fixture.sourceEnvelopes.map is not a function\n            at evaluateTelemetryEfficiency (file://<worktree-root>/tools/lib/harness/telemetry-efficiency.mjs:133:29)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:186:5\n            at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n            at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:184:7,\n        expected: /sourceEnvelopes must be an array/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy marks contextRelevance unavailable\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Missing expected rejection.\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:193:1 {\n        generatedMessage: false,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: /metricPolicy\\.unavailable must include contextRelevance/,\n        operator: 'rejects',\n        diff: 'simple'\n      }\n    },\n    Error: fixture policy suppresses observed contextRelevance\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:207:1 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      + actual - expected\n      \n      + {\n      +   classifiedReads: 1,\n      +   kind: 'observed-read-ratio',\n      +   ratio: 1,\n      +   relevantReads: 1\n      + }\n      - 'unavailable'\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:226:12\n          at async checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:5)\n          at async file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:207:1 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          kind: 'observed-read-ratio',\n          relevantReads: 1,\n          classifiedReads: 1,\n          ratio: 1\n        },\n        expected: 'unavailable',\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: missing usage limitation uses a numeric count\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:231:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n      \n        assert.ok(\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:232:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:231:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: false,\n        expected: true,\n        operator: '==',\n        diff: 'simple'\n      }\n    },\n    Error: control normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:271:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n      + actual - expected\n      \n        {\n          cachedInputTokens: 15,\n      +   inputTokens: NaN,\n      -   inputTokens: 40,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed',\n      +   uncachedInputTokens: NaN\n      -   uncachedInputTokens: 25\n        }\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:272:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:271:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: {\n          inputTokens: NaN,\n          cachedInputTokens: 15,\n          uncachedInputTokens: NaN,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        expected: {\n          inputTokens: 40,\n          cachedInputTokens: 15,\n          uncachedInputTokens: 25,\n          outputTokens: 4,\n          source: 'codex-exec-jsonl:turn.completed'\n        },\n        operator: 'deepStrictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control packet normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:280:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      NaN !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:281:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:280:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: NaN,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    },\n    Error: control session normalizes legacy contextTokens\n        at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:30:29)\n        at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:286:7 {\n      [cause]: AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n      \n      undefined !== 40\n      \n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:287:10\n          at checkRegression (file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:28:11)\n          at file://<worktree-root>/tools/tests/context-envelope-efficiency-probe.mjs:286:7 {\n        generatedMessage: true,\n        code: 'ERR_ASSERTION',\n        actual: undefined,\n        expected: 40,\n        operator: 'strictEqual',\n        diff: 'simple'\n      }\n    }\n  ]\n}\n\nNode.js v22.23.1"
             }
           ],
-          "runtimeId": "tdd-runner-667961",
+          "runtimeId": "tdd-runner-778517",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -351,16 +367,16 @@
           "sliceId": "review-remediation",
           "version": 1
         },
-        "redDigest": "008d776ca0e6cf6a449243b34c78becbb6237eecef0ac948dffd947e9777b4c2",
-        "implementationRuntimeId": "01a0391d-f71d-70e0-a8b2-6fdeb3be76d0",
+        "redDigest": "a353ba22cd153de77e4b2efdd49cc6344c0afb1315001a8ca74999d1bf6efd8b",
+        "implementationRuntimeId": "01a0397c-df5f-7310-be93-27ff1170fc5e",
         "green": {
-          "acceptanceDigest": "33d7de303b826fccb0bac9e66656899fc2d3ed8b7a21161802bec34b4fb7c281",
+          "acceptanceDigest": "62b96158b1e676f84fd7d5089b23292ecea817c21a02bab6fa629dccd5c7322e",
           "acceptanceFiles": [
             "tools/tests/context-envelope-efficiency-probe.mjs"
           ],
           "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
-          "candidateHead": "72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
-          "contractDigest": "ff129f706d5b7532bc7c2bff3689c288a3d6770c878e34e7a18906c55b75fe1d",
+          "candidateHead": "e8d7caf694e3e4141e42e30b6c67bb138d5a7799",
+          "contractDigest": "1fd5b6a19fa5c67c4a9b79ab5a4f2662c46edebb60527d0b7b0498afede4a6a5",
           "controlsDigest": "ad1ded4b36eb185479b9bdf6d1779f6c4856419016af9317516ffaf393f265d7",
           "expectedFailureSignature": "AggregateError",
           "expectedResultSource": {
@@ -372,11 +388,12 @@
             "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
             "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
           ],
-          "fixtureDigest": "843b698e2859f10d0b0323fc1f60808173c9cc81dfd1cb01c31147b9c3d5e372",
+          "fixtureDigest": "1efdc65c18f4cf383d1d974a2a30c211f533e5897596fd7d01d10726b9271f59",
           "fixtureFiles": [
             "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
             "tools/tests/fixtures/context-envelope-efficiency-challenge-control.mjs",
-            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs"
+            "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs",
+            "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl"
           ],
           "inputs": [
             "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -393,7 +410,7 @@
             ],
             "version": 1
           },
-          "oracleChallengeDigest": "f72fd0ee5ec1012a09899a1e2bd07bf25782e6a3cc475c1f3874de5f215b094a",
+          "oracleChallengeDigest": "5935c940a866e0dcf02a46688e6674f09212881ff59c3b0e586bc63d065ae062",
           "oracleChallengeRuns": {
             "control": [
               {
@@ -420,7 +437,7 @@
             "kind": "behavioral-assertion",
             "observesSeam": "harness/telemetry-summary-evaluation"
           },
-          "requirementsRevision": 1,
+          "requirementsRevision": 2,
           "runs": [
             {
               "exitCode": 0,
@@ -431,7 +448,7 @@
               "output": ""
             }
           ],
-          "runtimeId": "01a0391c-a3a3-7502-a710-1e7361f683f2",
+          "runtimeId": "01a0397a-20d0-7f10-90c7-fdace46da577",
           "scenarioMappings": [
             {
               "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
@@ -465,7 +482,7 @@
           "sliceId": "review-remediation",
           "version": 1
         },
-        "greenDigest": "9f34dd99aabce11b6e8c85f2a2bd655507e3b5a37c3e3605501057cdbf9bd377"
+        "greenDigest": "05efecb60786b3d711917e57abe364ee5116cdea32569a406796c74718a23679"
       }
     }
   }

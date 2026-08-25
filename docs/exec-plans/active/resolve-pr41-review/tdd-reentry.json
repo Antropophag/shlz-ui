@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "fromRevision": 2,
+  "toRevision": 3,
+  "slices": [
+    {
+      "sliceId": "review-remediation",
+      "classification": "affected",
+      "reason": "Final Standards rereview exposed contradictory limitation text when relevance is observed."
+    }
+  ]
+}
