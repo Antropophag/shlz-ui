@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "kind": "existing-pull-request",
+  "commit": "528e75f072d0962f7965c4167bca5cb4df9bde4c",
+  "branch": "feat/harness-efficiency-eval",
+  "defaultBranch": "main",
+  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/41"
+}

@@ -1,0 +1,301 @@
+{
+  "version": 1,
+  "kind": "packet-context",
+  "planId": "resolve-pr41-review",
+  "packetId": "review-remediation",
+  "physicalSession": null,
+  "launchClaim": "pr41-remediation-4",
+  "phase": "implementation",
+  "objective": "Verify and remediate the seven unresolved PR review findings with focused regression coverage",
+  "transition": "pending-to-launching",
+  "obligations": [
+    "contract:harness/context-envelope-efficiency",
+    "outcome:candidate-bound evidence",
+    "outcome:complete phase attribution",
+    "outcome:explicit fixture contract",
+    "outcome:honest metric policy",
+    "validation:node tools/tests/context-envelope-efficiency-probe.mjs",
+    "validation:npm run test:harness",
+    "validation:openspec validate bound-guarded-worker-context-envelope --strict"
+  ],
+  "evidence": {
+    "dependencyHandoffs": [
+      {
+        "completedPacket": "test-design",
+        "changed": [
+          "added eight deterministic regression assertions to the context-envelope efficiency probe"
+        ],
+        "provenChecks": [
+          "context-envelope-efficiency-probe exits 1 with eight expected RED failures",
+          "node --check passes",
+          "git diff --check passes"
+        ],
+        "settledDecisions": [
+          "production and evidence fixes remain outside the test-design packet"
+        ],
+        "unresolvedFindings": [],
+        "nextPacket": "review-remediation",
+        "invalidatedAssumptions": [],
+        "claimId": "pr41-test-design-7",
+        "briefDigest": "b9803fd04db246809812cde3acb3dae39ee8c54bab31ded6dc0bf8759342e65d",
+        "workerReportDigest": "b30fc811eeda75aa131311d4116dd5e7feea7c9acafa6c7a51c987ef826e11f8"
+      }
+    ],
+    "verdicts": [
+      "context-envelope-efficiency-probe exits 1 with eight expected RED failures",
+      "git diff --check passes",
+      "node --check passes"
+    ],
+    "rawEvidence": [
+      "added eight deterministic regression assertions to the context-envelope efficiency probe"
+    ],
+    "rawEvidenceIndex": [],
+    "findings": [],
+    "unresolvedFindings": []
+  },
+  "readNow": [
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/assessment.json",
+      "digest": "7ed749e5ee2846ec9539f3e82fa873956544d1e93aedd734387ba0e7b68117f2",
+      "bytes": 10137
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/discovered-surface.json",
+      "digest": "da7da9d4a26d4b63073039efc3a3e3962efe5e63d5ea5b50e8e455e9a42eb89c",
+      "bytes": 978
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-brief.context-capsule.json",
+      "digest": "e34807c7b02aa7136f33b02c13fa2a41146e953696e125d1ca0788e587283da1",
+      "bytes": 5411
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-brief.context-ledger.json",
+      "digest": "bfa3c0837753ed63ea16ff48793524b15ba614c5c08e3b42954757f9529e5357",
+      "bytes": 155
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-brief.json",
+      "digest": "658043ef357f02fe359b91ae54e01322442a90ff883f69e8f7a780497e334773",
+      "bytes": 9113
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-r2-brief.context-capsule.json",
+      "digest": "fca1fe124a295b0cb6feeb5995aa93f2f6bdadba835977ed5f37bd342e5d1fee",
+      "bytes": 5414
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-r2-brief.context-ledger.json",
+      "digest": "bd2fa17dc0292516e1b932d4dea421cdfc37e9680b9cc56527fede49d8acb5b5",
+      "bytes": 158
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-r2-brief.json",
+      "digest": "3180c9a37050028b97bc7f29c56b7aa3da935db5860f976d3dbf9e0674307a1a",
+      "bytes": 9119
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-brief.context-capsule.json",
+      "digest": "47c1b6f1b6844c288a85df06c1cb5ab6799ec45eba534785f6ee6ec2ccd32199",
+      "bytes": 4021
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-brief.context-ledger.json",
+      "digest": "e75dffe4800e6b30aee9de049a7a7ee5e9f76d0918ffecfa1c7037c3fdbad1eb",
+      "bytes": 151
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-brief.json",
+      "digest": "e4e6418ffd7f4d59d0e515f36e020a7aa51dac0e786c1c3b3410afa4fd881499",
+      "bytes": 7664
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r2-brief.context-capsule.json",
+      "digest": "66422056bb9982a8a150d5b6997d4381b3bc49101185f1d33b155dc7fefdd4b2",
+      "bytes": 4024
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r2-brief.context-ledger.json",
+      "digest": "3dbd5a9030a75dc8c5e172db45fccdd77685ff720ed3f029b25827be08ab5ea0",
+      "bytes": 154
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r2-brief.json",
+      "digest": "3936ad389cd4749f056499393a8604a207633bc585796663f8dc6e73060dad9f",
+      "bytes": 7940
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r3-brief.context-capsule.json",
+      "digest": "9daf0719c7d2b5ebfbe08d049c4d8fbc5a3792faaf913bc7f9a14781a41afdc1",
+      "bytes": 4024
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r3-brief.context-ledger.json",
+      "digest": "004596847e541d6878b3e014e410d4d0c10e0f609b0c43e476de69c445429ae6",
+      "bytes": 154
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-contract-r3-brief.json",
+      "digest": "2998924bb3cdff6668d042c046f6159260723731b9d7ec0a13f75cee0ec5744e",
+      "bytes": 7940
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-report.json",
+      "digest": "c784c8d64c08d2f9ecdcb5df814815c32085462c70d151e81599f3691d237c9b",
+      "bytes": 49382
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/execution-baseline.json",
+      "digest": "b5b451a79e381bd676e324327e90dec75a6d1b6c261cf7dbd4811594517470a2",
+      "bytes": 251
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/handoff-envelope-implementation.json",
+      "digest": "8155da5d9da1166791a02c79bfd0028257eca9a0f6eaf31358b1fadd9950b292",
+      "bytes": 1368
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/handoff-evaluation-contract.json",
+      "digest": "e443fcf9f056e27c799cfd41960e1d11725b439dcbb8e53c28013fde89e09fb8",
+      "bytes": 1326
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/handoff-review-delivery.json",
+      "digest": "d350ea0315e48c6e675055b88f0be19cefb26a39c4ef094b490c7286894a2aff",
+      "bytes": 1028
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/invalidated-evaluation-attempt.json",
+      "digest": "57b9f0465c368c483688660670510b9442ef024b24dd6185a91b519d8b4dfe2f",
+      "bytes": 694
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/plan.json",
+      "digest": "aabdfd5143be9aa03c4dff5f09727707ee90f7abdd8508dedc72010bea58ad3d",
+      "bytes": 11839
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/requirements.json",
+      "digest": "6c08b79fda48e136bad1a21e445eb747c35514c2ad93839f886c1ef132b6f7e2",
+      "bytes": 1568
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r2-brief.context-capsule.json",
+      "digest": "2cd221bcc4955eb6d3eade05182d8c40ff996825e553205abfb1a64d6eb7ff21",
+      "bytes": 6103
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r2-brief.context-ledger.json",
+      "digest": "08fd67d71cb840cd4234c05e7be28f6c418c64b6b8250d901b3f51e91ac0bcf4",
+      "bytes": 91
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r2-brief.json",
+      "digest": "20115b0dbd73be4b2ac351f776370cbee03f26b833670c7b7699d21896824baf",
+      "bytes": 9718
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r3-brief.context-capsule.json",
+      "digest": "fd3cc18e11776dc92803b69a26fdcb85f360741f32b8bd10168f73e79dacd5a5",
+      "bytes": 6751
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r3-brief.context-ledger.json",
+      "digest": "e7ce0127e9afc0cf3e547868e2f8147425357e428a565a7947702b571eb02266",
+      "bytes": 150
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r3-brief.json",
+      "digest": "cd8d659b11856f264aaccffc0099a4263b14ef14669c6c5aa4a8cb82ee8ad033",
+      "bytes": 10828
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-summary.json",
+      "digest": "2bd878d49558e73406e9486b2f7e63dbaf5ead4208547d103ea5f48ec758e74f",
+      "bytes": 1086
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/route-assessment.json",
+      "digest": "0308df1ea0d1812cc05cd95be92b20128a4bd5d441971dabe176ab9142d74584",
+      "bytes": 865
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/state.json",
+      "digest": "1cb016b1be2616c8e24d073000edf710709c50abaa29ff0b9c1404e1d8efb13b",
+      "bytes": 38133
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/tdd-design-handoff.json",
+      "digest": "ca2f50e65fdff21383344dec84f10c89246ca91d2291f2180ad28adda1fa51d9",
+      "bytes": 3396
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/telemetry.jsonl",
+      "digest": "0b63d1947dafc984fdeab54c30147d0e8fceabb61578eb629b1ab6bd91d8621b",
+      "bytes": 3406
+    },
+    {
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/validation-summary.json",
+      "digest": "c3a9af7a985f141a08bf24dfce932dc9628a56fd86fc6fd007f4acb7b47b5bea",
+      "bytes": 2452
+    },
+    {
+      "path": "docs/exec-plans/active/resolve-pr41-review/review-findings.json",
+      "digest": "b37a9828cf940fde6d89f73dd07f2355b93499d1599599c592621c86ed485588",
+      "bytes": 2368
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml",
+      "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+      "bytes": 40
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md",
+      "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+      "bytes": 4060
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md",
+      "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+      "bytes": 2009
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+      "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+      "bytes": 4145
+    },
+    {
+      "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md",
+      "digest": "4d4059c76654bcc4a9621a3a6d13cf6abd6cfebedd1c46c2403d851252027adf",
+      "bytes": 1483
+    },
+    {
+      "path": "tools/lib/harness/core.mjs",
+      "digest": "ac02e321e1a83ec4d62e2abb4498f22e8a560e6440a23ce6f420e49073288757",
+      "bytes": 117645
+    },
+    {
+      "path": "tools/lib/harness/telemetry-efficiency.mjs",
+      "digest": "a506978a4d4d046247613e750f8fcce9cef1b9c847dc3deebb9466007f8b6de6",
+      "bytes": 7718
+    },
+    {
+      "path": "tools/tests/context-envelope-efficiency-probe.mjs",
+      "digest": "2f52b73b56699d15fcd657d6579cbb8e3bc614676a01aabca9f86cfda66f8ffc",
+      "bytes": 8123
+    },
+    {
+      "path": "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
+      "digest": "fae19632e7a1f2b726d4f8d07e47ccd069f5c7da6d832d04cf92b64e70f3c4d1",
+      "bytes": 2739
+    },
+    {
+      "path": "tools/tests/harness.test.mjs",
+      "digest": "839840b3724a89c73a1d792154511abdcf0c494dd833b3facb85bb67774c2574",
+      "bytes": 189643
+    }
+  ],
+  "attested": [],
+  "sourceDigest": "f85c7a4e26ba14a299767ae814389c797cefa8939f7a0d2bd0128976ce9177c5",
+  "capsuleDigest": "7a5dc449709f84703f9d9f90d8a99e4b4429fe4280c5832efbdf8adda0daffa9"
+}

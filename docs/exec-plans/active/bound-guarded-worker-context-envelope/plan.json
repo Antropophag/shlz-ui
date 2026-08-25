@@ -1,0 +1,274 @@
+{
+  "version": 2,
+  "id": "bound-guarded-worker-context-envelope",
+  "baseline": "2c6f45d",
+  "requirementsGate": "required",
+  "openSpecChange": "bound-guarded-worker-context-envelope",
+  "requirementsRevision": 1,
+  "classification": {
+    "size": "L",
+    "score": 44,
+    "contributions": {
+      "independentWorkUnits": 6,
+      "sharedSeams": 6,
+      "contracts": 2,
+      "consumerIntegrations": 0,
+      "evidenceLevels": 3,
+      "architectureAmbiguity": 3,
+      "changedScope": 6,
+      "reviewRisk": 6,
+      "contextGrowthRisk": 12
+    },
+    "kind": "routing-heuristic-not-token-forecast"
+  },
+  "regroupCheck": {
+    "required": true,
+    "openSpecTaskCount": 6
+  },
+  "contextPolicy": {
+    "unit": "tokens-when-runtime-supplied; otherwise proxy-observations",
+    "normalTarget": [40000, 70000],
+    "pressure": [60000, 80000],
+    "redZone": [80000, 100000],
+    "decomposeSignal": 100000,
+    "semanticBoundaries": [
+      "implementation-to-independent-review",
+      "subsystem-change",
+      "major-replan",
+      "irrelevant-output-accumulation"
+    ]
+  },
+  "contractDerivedTdd": {
+    "version": 1,
+    "openSpecChange": "bound-guarded-worker-context-envelope",
+    "contractDigest": "ce47223852571dca3e0ead76e97a7707d6c106ccbfbe1bbe4ca70b8bdab693e8",
+    "requiredScenarioIds": [
+      "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope",
+      "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope",
+      "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget",
+      "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget",
+      "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
+      "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
+      "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
+    ]
+  },
+  "specDrivenTdd": {
+    "slices": [
+      {
+        "acceptanceSurface": [
+          "tools/tests/context-envelope-efficiency-probe.mjs"
+        ],
+        "applicability": "enforced",
+        "authorities": [
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope",
+            "source": "explicit-openspec-literal"
+          },
+          {
+            "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+            "scenarioId": "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope",
+            "source": "explicit-openspec-literal"
+          }
+        ],
+        "command": [
+          "/usr/bin/node",
+          "tools/tests/context-envelope-efficiency-probe.mjs"
+        ],
+        "controls": {
+          "environment": {
+            "TZ": "UTC"
+          },
+          "normalization": ["repo-root"],
+          "timeoutMs": 10000
+        },
+        "fixtureSurface": [
+          "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+          "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs"
+        ],
+        "id": "context-envelope-efficiency",
+        "implementationPacket": "envelope-implementation",
+        "productionSurface": [
+          "tools/harness.mjs",
+          "tools/lib/harness/core.mjs"
+        ],
+        "repeatCount": 2,
+        "scenarioIds": [
+          "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
+          "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete",
+          "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly",
+          "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget",
+          "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget",
+          "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope",
+          "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope"
+        ],
+        "seam": "harness/worker-run-and-telemetry-summary",
+        "testDesignPacket": "evaluation-contract"
+      }
+    ],
+    "version": 1
+  },
+  "executionIsolation": {
+    "version": 1,
+    "enforced": true,
+    "unavailableFallback": "stop"
+  },
+  "packets": [
+    {
+      "id": "evaluation-contract",
+      "objective": "Build the deterministic representative cost and context-utility evaluation before launch behavior changes",
+      "scope": [
+        "completed telemetry sample",
+        "stage/session attribution",
+        "red-capable tests",
+        "evaluation report"
+      ],
+      "nonGoals": ["production launch guard", "runtime token estimation"],
+      "dependencies": [],
+      "contracts": ["harness/context-envelope-efficiency"],
+      "contextSources": [
+        "openspec/changes/bound-guarded-worker-context-envelope/**",
+        "docs/exec-plans/active/{execution-context-isolation,reduce-harness-context-cost,enforce-spec-driven-tdd,require-independent-test-contract-review,enforce-contract-derived-tdd-routing,enforce-delivery-packet-consistency,wave-9-sidebar-application-shell}/telemetry.jsonl",
+        "tools/lib/harness/{core,codex-worker}.mjs",
+        "tools/tests/harness.test.mjs"
+      ],
+      "implementationSurface": [
+        "docs/exec-plans/fixtures/",
+        "tools/tests/context-envelope-efficiency-probe.mjs",
+        "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/exec-plans/active/bound-guarded-worker-context-envelope/"
+      ],
+      "focusedValidation": ["npm run test:harness"],
+      "outputs": [
+        "representative evaluation",
+        "red attribution coverage",
+        "measured envelope evidence"
+      ],
+      "handoff": ["sample identities", "cost findings", "red assertions"],
+      "implementationOutcomes": [
+        "stage/session cost visible",
+        "unavailable relevance remains unavailable",
+        "broad source envelope quantified"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "envelope-implementation",
+      "objective": "Implement optional explicit packet envelopes and detailed telemetry summaries",
+      "scope": [
+        "plan validation",
+        "pre-launch capsule guard",
+        "telemetry attribution",
+        "focused tests",
+        "operator docs"
+      ],
+      "nonGoals": [
+        "automatic source omission",
+        "universal threshold",
+        "external service"
+      ],
+      "dependencies": ["evaluation-contract"],
+      "contracts": ["harness/context-envelope-efficiency"],
+      "contextSources": [
+        "openspec/changes/bound-guarded-worker-context-envelope/**",
+        "tools/lib/harness/{core,codex-worker,context-cost}.mjs",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/{agent-execution,exec-plans/README}.md"
+      ],
+      "implementationSurface": [
+        "tools/lib/harness/",
+        "tools/harness.mjs",
+        "tools/tests/harness.test.mjs",
+        "docs/agent-execution.md",
+        "docs/exec-plans/README.md"
+      ],
+      "focusedValidation": [
+        "npm run test:harness",
+        "npm run check:docs",
+        "openspec validate bound-guarded-worker-context-envelope --strict"
+      ],
+      "outputs": [
+        "optional envelope contract",
+        "fail-closed guard",
+        "attributed telemetry summary"
+      ],
+      "handoff": ["interface", "compatibility checks", "measured findings"],
+      "implementationOutcomes": [
+        "over-budget launch prevented",
+        "coverage unchanged",
+        "legacy telemetry/plans supported"
+      ],
+      "preferredExecutionMode": "fresh-session",
+      "status": "pending"
+    },
+    {
+      "id": "review-delivery",
+      "objective": "Audit the current diff and supplied validation/review evidence, then deliver the unmerged PR without repeating full suites",
+      "scope": [
+        "full validation",
+        "Standards review",
+        "Spec review",
+        "route conformance",
+        "delivery guard",
+        "PR"
+      ],
+      "nonGoals": ["merge", "unrelated harness refactor"],
+      "dependencies": ["envelope-implementation"],
+      "contracts": [
+        "openspec/changes/bound-guarded-worker-context-envelope/**"
+      ],
+      "contextSources": [
+        "openspec/changes/bound-guarded-worker-context-envelope/**",
+        "docs/validation-workflow.md",
+        "tools/harness.mjs",
+        "tools/lib/harness/{core,context-cost}.mjs",
+        "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
+        "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation,validation-summary,review-summary}.json"
+      ],
+      "implementationSurface": ["current diff remediation only"],
+      "focusedValidation": [
+        "inspect supplied validation and two-axis review evidence",
+        "run only focused harness, probe, and strict OpenSpec checks if verification is needed",
+        "do not rerun full repository or browser suites unless implementation changes",
+        "delivery-check"
+      ],
+      "outputs": ["review dispositions", "validation evidence", "open PR"],
+      "handoff": ["findings", "checks", "limitations", "PR URL"],
+      "implementationOutcomes": [
+        "Standards pass",
+        "Spec pass",
+        "PR remains unmerged"
+      ],
+      "preferredExecutionMode": "isolated-subagent",
+      "status": "pending"
+    }
+  ]
+}

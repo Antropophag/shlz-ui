@@ -1,0 +1,1412 @@
+{
+  "version": 1,
+  "fixture": "completed-guarded-worker-sample-2026-08-25",
+  "sample": {
+    "changes": 7,
+    "physicalBoundaries": 36,
+    "usageEvents": 31,
+    "missingUsageBoundaries": 5
+  },
+  "runtime": {
+    "inputTokens": 39860211,
+    "cachedInputTokens": "unavailable",
+    "uncachedInputTokens": "unavailable",
+    "outputTokens": "unavailable",
+    "source": "codex-exec-jsonl:turn.completed"
+  },
+  "byChange": [
+    {
+      "id": "execution-context-isolation",
+      "runtime": {
+        "inputTokens": 647527,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 3,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 0,
+      "packets": {
+        "dogfood-review-delivery": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["final-audit-worker"],
+          "inputTokens": 281263,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "remediation-audit": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["remediation-audit-worker"],
+          "inputTokens": 328718,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave-8-read-only-proof": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["wave8-final-dogfood"],
+          "inputTokens": 37546,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "final-audit-worker": {
+          "packet": "dogfood-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+          "inputTokens": 281263,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "remediation-audit-worker": {
+          "packet": "remediation-audit",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a02f72-d6cc-7f63-aceb-eee23b9304d9",
+          "inputTokens": 328718,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave8-final-dogfood": {
+          "packet": "wave-8-read-only-proof",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+          "inputTokens": 37546,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 3,
+          "physicalBoundaries": 3,
+          "sessions": [
+            "final-audit-worker",
+            "remediation-audit-worker",
+            "wave8-final-dogfood"
+          ],
+          "inputTokens": 647527,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a02f6d-b2e3-7922-9498-2ca7de5e9fa7",
+          "session": "final-audit-worker",
+          "packet": "dogfood-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 281263,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a02f72-d6cc-7f63-aceb-eee23b9304d9",
+          "session": "remediation-audit-worker",
+          "packet": "remediation-audit",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 328718,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a02f6a-6efb-7e42-a35c-5ec16f8e9151",
+          "session": "wave8-final-dogfood",
+          "packet": "wave-8-read-only-proof",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 37546,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "reduce-harness-context-cost",
+      "runtime": {
+        "inputTokens": 1169262,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 1,
+      "usageEvents": 1,
+      "missingUsageBoundaries": 0,
+      "packets": {
+        "capsule-implementation": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["capsule-implementation-worker"],
+          "inputTokens": 1169262,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "capsule-implementation-worker": {
+          "packet": "capsule-implementation",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a0339c-f096-76c2-9961-bffc86d96ef9",
+          "inputTokens": 1169262,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["capsule-implementation-worker"],
+          "inputTokens": 1169262,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a0339c-f096-76c2-9961-bffc86d96ef9",
+          "session": "capsule-implementation-worker",
+          "packet": "capsule-implementation",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1169262,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "enforce-spec-driven-tdd",
+      "runtime": {
+        "inputTokens": 11006535,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 6,
+      "usageEvents": 5,
+      "missingUsageBoundaries": 1,
+      "packets": {
+        "acceptance-contract": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["acceptance-contract-r1"],
+          "inputTokens": 940787,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "final-remediation": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["final-remediation-r1"],
+          "inputTokens": 1882020,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "oracle-discrimination": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["oracle-discrimination-r1"],
+          "inputTokens": 2502224,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "symmetric-runner": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["symmetric-runner-r1"],
+          "inputTokens": 1465045,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "workflow-delivery": {
+          "attempts": 2,
+          "physicalBoundaries": 2,
+          "sessions": ["workflow-delivery-r1", "workflow-delivery-r2"],
+          "inputTokens": 4216459,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "acceptance-contract-r1": {
+          "packet": "acceptance-contract",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03244-3d47-7802-a27c-e1c1b666749f",
+          "inputTokens": 940787,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "final-remediation-r1": {
+          "packet": "final-remediation",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03279-56fc-7a11-925b-3985574b0284",
+          "inputTokens": 1882020,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "oracle-discrimination-r1": {
+          "packet": "oracle-discrimination",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03280-f8ef-7e51-81e1-0a8df88af6e3",
+          "inputTokens": 2502224,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "symmetric-runner-r1": {
+          "packet": "symmetric-runner",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03249-0664-7c83-99e5-ffda2fff4692",
+          "inputTokens": 1465045,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "workflow-delivery-r1": {
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "workflow-delivery-r2": {
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a0326c-df51-7433-b277-0799b85203f3",
+          "inputTokens": 4216459,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 6,
+          "physicalBoundaries": 6,
+          "sessions": [
+            "acceptance-contract-r1",
+            "final-remediation-r1",
+            "oracle-discrimination-r1",
+            "symmetric-runner-r1",
+            "workflow-delivery-r1",
+            "workflow-delivery-r2"
+          ],
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a03244-3d47-7802-a27c-e1c1b666749f",
+          "session": "acceptance-contract-r1",
+          "packet": "acceptance-contract",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 940787,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03279-56fc-7a11-925b-3985574b0284",
+          "session": "final-remediation-r1",
+          "packet": "final-remediation",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1882020,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03280-f8ef-7e51-81e1-0a8df88af6e3",
+          "session": "oracle-discrimination-r1",
+          "packet": "oracle-discrimination",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2502224,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03249-0664-7c83-99e5-ffda2fff4692",
+          "session": "symmetric-runner-r1",
+          "packet": "symmetric-runner",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1465045,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+          "session": "workflow-delivery-r1",
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0326c-df51-7433-b277-0799b85203f3",
+          "session": "workflow-delivery-r2",
+          "packet": "workflow-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 4216459,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "require-independent-test-contract-review",
+      "runtime": {
+        "inputTokens": 16368052,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 3,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 0,
+      "packets": {
+        "independent-review-delivery": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["independent-review-delivery-r1"],
+          "inputTokens": 11378026,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "review-lifecycle": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["review-lifecycle-r1"],
+          "inputTokens": 2988084,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "workflow-integration": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["workflow-integration-r1"],
+          "inputTokens": 2001942,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "independent-review-delivery-r1": {
+          "packet": "independent-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a034ad-33bf-7583-be60-292928a11a55",
+          "inputTokens": 11378026,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "review-lifecycle-r1": {
+          "packet": "review-lifecycle",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03491-5425-77c2-88dc-8dd5b34bb441",
+          "inputTokens": 2988084,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "workflow-integration-r1": {
+          "packet": "workflow-integration",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a0349a-0c5c-7c72-b7da-98172232c590",
+          "inputTokens": 2001942,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 3,
+          "physicalBoundaries": 3,
+          "sessions": [
+            "independent-review-delivery-r1",
+            "review-lifecycle-r1",
+            "workflow-integration-r1"
+          ],
+          "inputTokens": 16368052,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a034ad-33bf-7583-be60-292928a11a55",
+          "session": "independent-review-delivery-r1",
+          "packet": "independent-review-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 11378026,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03491-5425-77c2-88dc-8dd5b34bb441",
+          "session": "review-lifecycle-r1",
+          "packet": "review-lifecycle",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2988084,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0349a-0c5c-7c72-b7da-98172232c590",
+          "session": "workflow-integration-r1",
+          "packet": "workflow-integration",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 2001942,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "enforce-contract-derived-tdd-routing",
+      "runtime": {
+        "inputTokens": 6457539,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 10,
+      "usageEvents": 10,
+      "missingUsageBoundaries": 0,
+      "packets": {
+        "routing-engine": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["contract-tdd-routing-engine"],
+          "inputTokens": 1473766,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "test-contract-review": {
+          "attempts": 4,
+          "physicalBoundaries": 4,
+          "sessions": [
+            "contract-tdd-test-review-r3",
+            "contract-tdd-test-review-r4",
+            "contract-tdd-test-review-r5",
+            "contract-tdd-test-review-r6"
+          ],
+          "inputTokens": 1816768,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "test-design": {
+          "attempts": 5,
+          "physicalBoundaries": 5,
+          "sessions": [
+            "contract-tdd-test-design",
+            "contract-tdd-test-design-r2",
+            "contract-tdd-test-design-r3",
+            "contract-tdd-test-design-r4",
+            "contract-tdd-test-design-r5"
+          ],
+          "inputTokens": 3167005,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "contract-tdd-routing-engine": {
+          "packet": "routing-engine",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a035e5-c914-7c60-8c25-3ddd4b0a092b",
+          "inputTokens": 1473766,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-review-r3": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a035cd-4a6e-7f30-9317-1c100fb27f77",
+          "inputTokens": 547391,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-review-r4": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a035d2-6ef5-7091-a9d1-1472afb27089",
+          "inputTokens": 458506,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-review-r5": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "runtimeId": "01a035d7-290d-7450-84a4-021f5cd4bc59",
+          "inputTokens": 464343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-review-r6": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 4,
+          "runtimeId": "01a035de-0754-7fe2-9337-268275069ad7",
+          "inputTokens": 346528,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-design": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a035c4-c742-7613-b294-4f03fd49a442",
+          "inputTokens": 1171057,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-design-r2": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+          "inputTokens": 702784,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-design-r3": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "runtimeId": "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+          "inputTokens": 254849,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-design-r4": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 4,
+          "runtimeId": "01a035db-7896-7461-ad05-08d3e05e2625",
+          "inputTokens": 421566,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "contract-tdd-test-design-r5": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 5,
+          "runtimeId": "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
+          "inputTokens": 616749,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 10,
+          "physicalBoundaries": 10,
+          "sessions": [
+            "contract-tdd-routing-engine",
+            "contract-tdd-test-review-r3",
+            "contract-tdd-test-review-r4",
+            "contract-tdd-test-review-r5",
+            "contract-tdd-test-review-r6",
+            "contract-tdd-test-design",
+            "contract-tdd-test-design-r2",
+            "contract-tdd-test-design-r3",
+            "contract-tdd-test-design-r4",
+            "contract-tdd-test-design-r5"
+          ],
+          "inputTokens": 6457539,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a035e5-c914-7c60-8c25-3ddd4b0a092b",
+          "session": "contract-tdd-routing-engine",
+          "packet": "routing-engine",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1473766,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035cd-4a6e-7f30-9317-1c100fb27f77",
+          "session": "contract-tdd-test-review-r3",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 547391,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035d2-6ef5-7091-a9d1-1472afb27089",
+          "session": "contract-tdd-test-review-r4",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 458506,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035d7-290d-7450-84a4-021f5cd4bc59",
+          "session": "contract-tdd-test-review-r5",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 464343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035de-0754-7fe2-9337-268275069ad7",
+          "session": "contract-tdd-test-review-r6",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": 346528,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035c4-c742-7613-b294-4f03fd49a442",
+          "session": "contract-tdd-test-design",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 1171057,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+          "session": "contract-tdd-test-design-r2",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 702784,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+          "session": "contract-tdd-test-design-r3",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 254849,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035db-7896-7461-ad05-08d3e05e2625",
+          "session": "contract-tdd-test-design-r4",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": 421566,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a035e1-3f54-7eb3-9592-cbfc50a14a1c",
+          "session": "contract-tdd-test-design-r5",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 5,
+          "inputTokens": 616749,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "enforce-delivery-packet-consistency",
+      "runtime": {
+        "inputTokens": 2229352,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 6,
+      "usageEvents": 6,
+      "missingUsageBoundaries": 0,
+      "packets": {
+        "test-contract-review": {
+          "attempts": 3,
+          "physicalBoundaries": 3,
+          "sessions": [
+            "delivery-consistency-test-review",
+            "delivery-consistency-test-review-r2",
+            "delivery-consistency-test-review-r3"
+          ],
+          "inputTokens": 519944,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "test-design": {
+          "attempts": 3,
+          "physicalBoundaries": 3,
+          "sessions": [
+            "delivery-consistency-test-design",
+            "delivery-consistency-test-design-r2",
+            "delivery-consistency-test-design-r3"
+          ],
+          "inputTokens": 1709408,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "delivery-consistency-test-review": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a037e7-2601-7632-aaa2-58f65720068e",
+          "inputTokens": 190196,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "delivery-consistency-test-review-r2": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a037ed-98f8-7a82-ba5a-a6b25b743e2a",
+          "inputTokens": 58902,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "delivery-consistency-test-review-r3": {
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "runtimeId": "01a037f2-6f6c-7b02-95d0-bedcc6f76862",
+          "inputTokens": 270846,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "delivery-consistency-test-design": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a037de-c5fa-74f0-a23a-d9043dab6310",
+          "inputTokens": 965352,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "delivery-consistency-test-design-r2": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a037ea-8f53-7f41-9725-60cf14d37003",
+          "inputTokens": 367893,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "delivery-consistency-test-design-r3": {
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "runtimeId": "01a037ef-f652-7d93-b3ef-180f98df0660",
+          "inputTokens": 376163,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 6,
+          "physicalBoundaries": 6,
+          "sessions": [
+            "delivery-consistency-test-review",
+            "delivery-consistency-test-review-r2",
+            "delivery-consistency-test-review-r3",
+            "delivery-consistency-test-design",
+            "delivery-consistency-test-design-r2",
+            "delivery-consistency-test-design-r3"
+          ],
+          "inputTokens": 2229352,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a037e7-2601-7632-aaa2-58f65720068e",
+          "session": "delivery-consistency-test-review",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 190196,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a037ed-98f8-7a82-ba5a-a6b25b743e2a",
+          "session": "delivery-consistency-test-review-r2",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 58902,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a037f2-6f6c-7b02-95d0-bedcc6f76862",
+          "session": "delivery-consistency-test-review-r3",
+          "packet": "test-contract-review",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 270846,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a037de-c5fa-74f0-a23a-d9043dab6310",
+          "session": "delivery-consistency-test-design",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 965352,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a037ea-8f53-7f41-9725-60cf14d37003",
+          "session": "delivery-consistency-test-design-r2",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": 367893,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a037ef-f652-7d93-b3ef-180f98df0660",
+          "session": "delivery-consistency-test-design-r3",
+          "packet": "test-design",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": 376163,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    },
+    {
+      "id": "wave-9-sidebar-application-shell",
+      "runtime": {
+        "inputTokens": 1981944,
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable",
+        "source": "codex-exec-jsonl:turn.completed"
+      },
+      "physicalBoundaries": 7,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 4,
+      "packets": {
+        "integration-delivery": {
+          "attempts": 5,
+          "physicalBoundaries": 5,
+          "sessions": [
+            "wave9-integration-delivery",
+            "wave9-integration-delivery-retry",
+            "wave9-integration-delivery-retry2",
+            "wave9-integration-delivery-retry3",
+            "wave9-integration-delivery-retry4"
+          ],
+          "inputTokens": 769829,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "showcase-shell": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["wave9-showcase-shell"],
+          "inputTokens": 980772,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "source-census": {
+          "attempts": 1,
+          "physicalBoundaries": 1,
+          "sessions": ["wave9-source-census"],
+          "inputTokens": 231343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "sessions": {
+        "wave9-integration-delivery": {
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a0351d-381f-7012-8025-ba369cbd8766",
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-integration-delivery-retry": {
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "runtimeId": "01a03538-dbd4-7e20-853d-d267ce8967b9",
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-integration-delivery-retry2": {
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 3,
+          "runtimeId": "01a03554-7c8f-7922-90ea-24440205f698",
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-integration-delivery-retry3": {
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 4,
+          "runtimeId": "01a03570-1e89-76e0-b978-1a75631cefd9",
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-integration-delivery-retry4": {
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 5,
+          "runtimeId": "01a0358b-bebe-7970-a001-5388b3b6d774",
+          "inputTokens": 769829,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-showcase-shell": {
+          "packet": "showcase-shell",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a03510-abe1-77a0-b924-d97384a5de27",
+          "inputTokens": 980772,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        "wave9-source-census": {
+          "packet": "source-census",
+          "phase": "execution",
+          "attempt": 1,
+          "runtimeId": "01a0350b-dd9b-7dd3-8fb5-0298985cd765",
+          "inputTokens": 231343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "phases": {
+        "execution": {
+          "attempts": 7,
+          "physicalBoundaries": 7,
+          "sessions": [
+            "wave9-integration-delivery",
+            "wave9-integration-delivery-retry",
+            "wave9-integration-delivery-retry2",
+            "wave9-integration-delivery-retry3",
+            "wave9-integration-delivery-retry4",
+            "wave9-showcase-shell",
+            "wave9-source-census"
+          ],
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      },
+      "attempts": [
+        {
+          "runtimeId": "01a0351d-381f-7012-8025-ba369cbd8766",
+          "session": "wave9-integration-delivery",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03538-dbd4-7e20-853d-d267ce8967b9",
+          "session": "wave9-integration-delivery-retry",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 2,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03554-7c8f-7922-90ea-24440205f698",
+          "session": "wave9-integration-delivery-retry2",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 3,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03570-1e89-76e0-b978-1a75631cefd9",
+          "session": "wave9-integration-delivery-retry3",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 4,
+          "inputTokens": "unavailable",
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0358b-bebe-7970-a001-5388b3b6d774",
+          "session": "wave9-integration-delivery-retry4",
+          "packet": "integration-delivery",
+          "phase": "execution",
+          "attempt": 5,
+          "inputTokens": 769829,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a03510-abe1-77a0-b924-d97384a5de27",
+          "session": "wave9-showcase-shell",
+          "packet": "showcase-shell",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 980772,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        },
+        {
+          "runtimeId": "01a0350b-dd9b-7dd3-8fb5-0298985cd765",
+          "session": "wave9-source-census",
+          "packet": "source-census",
+          "phase": "execution",
+          "attempt": 1,
+          "inputTokens": 231343,
+          "cachedInputTokens": "unavailable",
+          "uncachedInputTokens": "unavailable",
+          "outputTokens": "unavailable"
+        }
+      ]
+    }
+  ],
+  "attribution": {
+    "phases": {
+      "execution": {
+        "attempts": 36,
+        "physicalBoundaries": 36,
+        "sessions": [
+          "final-audit-worker",
+          "remediation-audit-worker",
+          "wave8-final-dogfood",
+          "capsule-implementation-worker",
+          "acceptance-contract-r1",
+          "final-remediation-r1",
+          "oracle-discrimination-r1",
+          "symmetric-runner-r1",
+          "workflow-delivery-r1",
+          "workflow-delivery-r2",
+          "independent-review-delivery-r1",
+          "review-lifecycle-r1",
+          "workflow-integration-r1",
+          "contract-tdd-routing-engine",
+          "contract-tdd-test-review-r3",
+          "contract-tdd-test-review-r4",
+          "contract-tdd-test-review-r5",
+          "contract-tdd-test-review-r6",
+          "contract-tdd-test-design",
+          "contract-tdd-test-design-r2",
+          "contract-tdd-test-design-r3",
+          "contract-tdd-test-design-r4",
+          "contract-tdd-test-design-r5",
+          "delivery-consistency-test-review",
+          "delivery-consistency-test-review-r2",
+          "delivery-consistency-test-review-r3",
+          "delivery-consistency-test-design",
+          "delivery-consistency-test-design-r2",
+          "delivery-consistency-test-design-r3",
+          "wave9-integration-delivery",
+          "wave9-integration-delivery-retry",
+          "wave9-integration-delivery-retry2",
+          "wave9-integration-delivery-retry3",
+          "wave9-integration-delivery-retry4",
+          "wave9-showcase-shell",
+          "wave9-source-census"
+        ],
+        "inputTokens": "unavailable",
+        "cachedInputTokens": "unavailable",
+        "uncachedInputTokens": "unavailable",
+        "outputTokens": "unavailable"
+      }
+    },
+    "repeatedPackets": [
+      {
+        "change": "enforce-spec-driven-tdd",
+        "packet": "workflow-delivery",
+        "attempts": 2,
+        "sessions": ["workflow-delivery-r1", "workflow-delivery-r2"],
+        "runtimeIds": [
+          "01a03250-c5b2-70c0-8427-534fd4e5ba5a",
+          "01a0326c-df51-7433-b277-0799b85203f3"
+        ]
+      },
+      {
+        "change": "enforce-contract-derived-tdd-routing",
+        "packet": "test-design",
+        "attempts": 5,
+        "sessions": [
+          "contract-tdd-test-design",
+          "contract-tdd-test-design-r2",
+          "contract-tdd-test-design-r3",
+          "contract-tdd-test-design-r4",
+          "contract-tdd-test-design-r5"
+        ],
+        "runtimeIds": [
+          "01a035c4-c742-7613-b294-4f03fd49a442",
+          "01a035cf-f13c-7d02-9d8d-489d0b3ad91c",
+          "01a035d5-b0be-7630-89ea-e7a03a5638e6",
+          "01a035db-7896-7461-ad05-08d3e05e2625",
+          "01a035e1-3f54-7eb3-9592-cbfc50a14a1c"
+        ]
+      },
+      {
+        "change": "enforce-contract-derived-tdd-routing",
+        "packet": "test-contract-review",
+        "attempts": 4,
+        "sessions": [
+          "contract-tdd-test-review-r3",
+          "contract-tdd-test-review-r4",
+          "contract-tdd-test-review-r5",
+          "contract-tdd-test-review-r6"
+        ],
+        "runtimeIds": [
+          "01a035cd-4a6e-7f30-9317-1c100fb27f77",
+          "01a035d2-6ef5-7091-a9d1-1472afb27089",
+          "01a035d7-290d-7450-84a4-021f5cd4bc59",
+          "01a035de-0754-7fe2-9337-268275069ad7"
+        ]
+      },
+      {
+        "change": "enforce-delivery-packet-consistency",
+        "packet": "test-design",
+        "attempts": 3,
+        "sessions": [
+          "delivery-consistency-test-design",
+          "delivery-consistency-test-design-r2",
+          "delivery-consistency-test-design-r3"
+        ],
+        "runtimeIds": [
+          "01a037de-c5fa-74f0-a23a-d9043dab6310",
+          "01a037ea-8f53-7f41-9725-60cf14d37003",
+          "01a037ef-f652-7d93-b3ef-180f98df0660"
+        ]
+      },
+      {
+        "change": "enforce-delivery-packet-consistency",
+        "packet": "test-contract-review",
+        "attempts": 3,
+        "sessions": [
+          "delivery-consistency-test-review",
+          "delivery-consistency-test-review-r2",
+          "delivery-consistency-test-review-r3"
+        ],
+        "runtimeIds": [
+          "01a037e7-2601-7632-aaa2-58f65720068e",
+          "01a037ed-98f8-7a82-ba5a-a6b25b743e2a",
+          "01a037f2-6f6c-7b02-95d0-bedcc6f76862"
+        ]
+      },
+      {
+        "change": "wave-9-sidebar-application-shell",
+        "packet": "integration-delivery",
+        "attempts": 5,
+        "sessions": [
+          "wave9-integration-delivery",
+          "wave9-integration-delivery-retry",
+          "wave9-integration-delivery-retry2",
+          "wave9-integration-delivery-retry3",
+          "wave9-integration-delivery-retry4"
+        ],
+        "runtimeIds": [
+          "01a0351d-381f-7012-8025-ba369cbd8766",
+          "01a03538-dbd4-7e20-853d-d267ce8967b9",
+          "01a03554-7c8f-7922-90ea-24440205f698",
+          "01a03570-1e89-76e0-b978-1a75631cefd9",
+          "01a0358b-bebe-7970-a001-5388b3b6d774"
+        ]
+      }
+    ]
+  },
+  "sourceEnvelopes": [
+    {
+      "change": "enforce-contract-derived-tdd-routing",
+      "packet": "routing-engine",
+      "budget": "unbudgeted",
+      "resolvedSourceCount": 62,
+      "resolvedSourceBytes": 571271,
+      "broadPattern": {
+        "pattern": "tools/tests/**",
+        "sourceCount": 52,
+        "sourceBytes": 353242
+      },
+      "largestContributor": {
+        "path": "tools/tests/harness.test.mjs",
+        "digest": "ebba5ab7fb2b1a25696f9bb1e8aee3c5c5e8316336529cbc37b6f047aa10af39",
+        "bytes": 171843
+      }
+    }
+  ],
+  "proxies": {
+    "handoffBytes": "unavailable",
+    "contextRelevance": "unavailable",
+    "retryFanOut": {
+      "physicalBoundaries": 36,
+      "repeatedPacketAttempts": 22
+    }
+  },
+  "limitations": [
+    "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",
+    "5 physical boundaries have no matching trusted usage event and are excluded from token totals without estimation.",
+    "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+    "Source-envelope bytes are a repository-controlled input proxy and are not converted into model tokens.",
+    "The sample observes guarded workers only; root-agent context and unrecorded execution remain outside the evaluation."
+  ]
+}

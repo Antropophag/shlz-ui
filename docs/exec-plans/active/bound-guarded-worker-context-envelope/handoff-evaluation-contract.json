@@ -1,0 +1,28 @@
+{
+  "completedPacket": "evaluation-contract",
+  "changed": [
+    "representative seven-change evaluation fixture and report",
+    "standalone acceptance probe with control and decoy adapters",
+    "RED harness assertions for detailed attribution and evaluation CLI"
+  ],
+  "provenChecks": [
+    "control probe passed twice",
+    "decoy failed on flattened attempt attribution",
+    "current production probe is RED",
+    "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries",
+    "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope"
+  ],
+  "settledDecisions": [
+    "runtime values remain separate from source-byte proxies",
+    "cached/uncached and relevance stay unavailable where historical events omit them",
+    "packet/session/attempt attribution is the public acceptance seam"
+  ],
+  "unresolvedFindings": [],
+  "nextPacket": "envelope-implementation",
+  "invalidatedAssumptions": [
+    "the initial test-design attempt had a complete acceptance surface"
+  ],
+  "claimId": "evaluation-contract-r3-20260825",
+  "briefDigest": "9f20ff325942b61ee53af03e82c9725d4869cbd6ec218ed3d561411cf72dd886",
+  "workerReportDigest": "053a11c55d5524da30ae4ea28f3b77682eb205d0560e7b0538b5dcac501ce51a"
+}

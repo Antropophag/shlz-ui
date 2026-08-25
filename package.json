@@ -19,6 +19,7 @@
     "test:e2e": "playwright test",
     "test:e2e:update": "playwright test --update-snapshots",
     "check:openspec": "node tools/check-openspec.mjs",
+    "check:docs": "prettier --check docs openspec",
     "check:focused": "npm run test:harness && npm run check:openspec",
     "harness": "node tools/harness.mjs",
     "lint": "eslint . && stylelint 'packages/**/*.css' 'apps/**/*.css' && prettier --check .",

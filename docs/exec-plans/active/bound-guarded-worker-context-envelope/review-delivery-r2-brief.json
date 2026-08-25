@@ -1,0 +1,230 @@
+{
+  "version": 1,
+  "planId": "bound-guarded-worker-context-envelope",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/bound-guarded-worker-context-envelope/**",
+      "docs/validation-workflow.md",
+      "tools/harness.mjs",
+      "tools/lib/harness/{core,context-cost}.mjs",
+      "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
+      "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation}.json"
+    ],
+    "contracts": ["openspec/changes/bound-guarded-worker-context-envelope/**"],
+    "dependencies": ["envelope-implementation"],
+    "focusedValidation": [
+      "affected validation",
+      "full repository checks",
+      "two-axis review",
+      "delivery-check"
+    ],
+    "handoff": ["findings", "checks", "limitations", "PR URL"],
+    "id": "review-delivery",
+    "implementationOutcomes": [
+      "Standards pass",
+      "Spec pass",
+      "PR remains unmerged"
+    ],
+    "implementationSurface": ["current diff remediation only"],
+    "nonGoals": ["merge", "unrelated harness refactor"],
+    "objective": "Validate, independently review, remediate, and deliver the unmerged PR",
+    "outputs": ["review dispositions", "validation evidence", "open PR"],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "full validation",
+      "Standards review",
+      "Spec review",
+      "route conformance",
+      "delivery guard",
+      "PR"
+    ]
+  },
+  "claimId": "review-delivery-r2-20260825",
+  "baseline": {
+    "branch": "feat/harness-efficiency-eval",
+    "commit": "528e75f072d0962f7965c4167bca5cb4df9bde4c",
+    "defaultBranch": "main",
+    "kind": "existing-pull-request",
+    "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/41",
+    "version": 1
+  },
+  "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "bound-guarded-worker-context-envelope"
+  },
+  "dependencyDigests": {
+    "envelope-implementation": "80099964e04572bcf44247449df68eecb3d293037e89e35edae48c034725efc7"
+  },
+  "packetDigest": "b466df88851dfce9b66815d55c08ed93ecc58bba171b0f489b08563b9d69e723",
+  "contextIndex": [
+    "openspec/changes/bound-guarded-worker-context-envelope/**",
+    "docs/validation-workflow.md",
+    "tools/harness.mjs",
+    "tools/lib/harness/{core,context-cost}.mjs",
+    "tools/tests/{harness.test,context-envelope-efficiency-probe}.mjs",
+    "docs/exec-plans/active/bound-guarded-worker-context-envelope/{evaluation-report,handoff-evaluation-contract,handoff-envelope-implementation}.json"
+  ],
+  "allowedImplementationSurface": ["current diff remediation only"],
+  "focusedValidation": [
+    "affected validation",
+    "full repository checks",
+    "two-axis review",
+    "delivery-check"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "d23b9510981742812e2259d2dfbac625ebc1dab83109901a108097b4ba7aff08",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8",
+          "changed": [
+            "optional positive maxInitialContextBytes guarded-packet contract",
+            "fail-closed resolved readNow envelope guard with largest contributors",
+            "raw cached/uncached/output telemetry and packet/session/attempt attribution",
+            "deterministic telemetry-summary evaluation mode",
+            "operator documentation and regression coverage"
+          ],
+          "claimId": "envelope-implementation-20260825",
+          "completedPacket": "envelope-implementation",
+          "invalidatedAssumptions": [],
+          "nextPacket": "review-delivery",
+          "provenChecks": [
+            "TDD GREEN passed twice with unchanged acceptance and fixture identities",
+            "npm run test:harness passed 115 tests plus routing probe",
+            "standalone efficiency probe passed",
+            "strict OpenSpec validation passed",
+            "Prettier and git diff --check passed"
+          ],
+          "settledDecisions": [
+            "budgets are explicit per packet, not repository-wide defaults",
+            "over-budget launch fails before codex exec and never trims coverage",
+            "legacy plans and telemetry remain compatible"
+          ],
+          "unresolvedFindings": [
+            "repository has no npm check:docs script; use the documented docs formatting check during final validation"
+          ],
+          "workerReportDigest": "ab7b049a85ddb1809ea759b8481bb75ef6453fff9c052691fb2a66a45d2a46bc"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "deterministic telemetry-summary evaluation mode",
+        "fail-closed resolved readNow envelope guard with largest contributors",
+        "operator documentation and regression coverage",
+        "optional positive maxInitialContextBytes guarded-packet contract",
+        "raw cached/uncached/output telemetry and packet/session/attempt attribution"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [
+        "repository has no npm check:docs script; use the documented docs formatting check during final validation"
+      ],
+      "verdicts": [
+        "Prettier and git diff --check passed",
+        "TDD GREEN passed twice with unchanged acceptance and fixture identities",
+        "npm run test:harness passed 115 tests plus routing probe",
+        "standalone efficiency probe passed",
+        "strict OpenSpec validation passed"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "review-delivery-r2-20260825",
+    "objective": "Validate, independently review, remediate, and deliver the unmerged PR",
+    "obligations": [
+      "contract:openspec/changes/bound-guarded-worker-context-envelope/**",
+      "outcome:PR remains unmerged",
+      "outcome:Spec pass",
+      "outcome:Standards pass",
+      "validation:affected validation",
+      "validation:delivery-check",
+      "validation:full repository checks",
+      "validation:two-axis review"
+    ],
+    "packetId": "review-delivery",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "bound-guarded-worker-context-envelope",
+    "readNow": [
+      {
+        "bytes": 19261,
+        "digest": "9440d6eb430604d60ce40aacd1156b98fe21acbced7fd138466683190f0ff073",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-report.json"
+      },
+      {
+        "bytes": 1365,
+        "digest": "89904b5af5b5f5a65457517052e826fa76a08195cf738df572cf79763ba42920",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/handoff-envelope-implementation.json"
+      },
+      {
+        "bytes": 1326,
+        "digest": "391089fd4146a9de5171c8d771279398642341ee559b3bcd885c465cac365979",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/handoff-evaluation-contract.json"
+      },
+      {
+        "bytes": 6779,
+        "digest": "a99a05b3bae836d746baca8d591d56cdb3d698de2f9277f1fd5fef274c57fdc7",
+        "path": "docs/validation-workflow.md"
+      },
+      {
+        "bytes": 40,
+        "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml"
+      },
+      {
+        "bytes": 4060,
+        "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md"
+      },
+      {
+        "bytes": 2009,
+        "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md"
+      },
+      {
+        "bytes": 4145,
+        "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+      },
+      {
+        "bytes": 1483,
+        "digest": "4f2daeaddd25d8150f00edc1e9c35e219880486cbe9f4956d807ff14df1f9c1e",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md"
+      },
+      {
+        "bytes": 41502,
+        "digest": "f649c8686001a72b74e663334eda7163537f3c7cec017be430a33d2f02a7392f",
+        "path": "tools/harness.mjs"
+      },
+      {
+        "bytes": 28299,
+        "digest": "e38bfcde1b14d4d0abd78286896c4fcf851c8d2908a6bfb8ce1de977a4d86e61",
+        "path": "tools/lib/harness/context-cost.mjs"
+      },
+      {
+        "bytes": 117136,
+        "digest": "a930293b15c0d322ce0b3d913610ca68a96daed3228dc0174ad9943b88ecbbd8",
+        "path": "tools/lib/harness/core.mjs"
+      },
+      {
+        "bytes": 3508,
+        "digest": "9bc4818218c18405e1f85560e83c14db55ae16ae6950d8fb9d3c7e2e7c75f653",
+        "path": "tools/tests/context-envelope-efficiency-probe.mjs"
+      },
+      {
+        "bytes": 188155,
+        "digest": "26d18049bbc6dedc807ebf25ad0834b11aa2ef2b2c871713903e8280292c3e35",
+        "path": "tools/tests/harness.test.mjs"
+      }
+    ],
+    "sourceDigest": "b17fd15e9df084d2703637f051c559d3b1807bc6ecbdb9f9390b59ab94cb3996",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "c7526d9a906b0da9cdb0a2bea4b2a9ffeeb17a427acaaf03abaa1c116b162d85"
+}

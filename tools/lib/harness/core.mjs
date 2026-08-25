@@ -1300,6 +1300,16 @@ export function validatePlan(plan, config) {
         throw new Error(`packet ${packet.id} ${field} must be an array`);
     if (!modes.has(packet.preferredExecutionMode))
       throw new Error(`packet ${packet.id} has invalid execution mode`);
+    if (packet.maxInitialContextBytes !== undefined) {
+      if (
+        !guardedModes.has(packet.preferredExecutionMode) ||
+        !Number.isInteger(packet.maxInitialContextBytes) ||
+        packet.maxInitialContextBytes <= 0
+      )
+        throw new Error(
+          `packet ${packet.id} maxInitialContextBytes must be a positive integer on a guarded packet`,
+        );
+    }
     if (
       config.sizing.decompositionRequired.includes(plan.classification.size) &&
       (packet.implementationOutcomes.length < 3 ||
@@ -3102,7 +3112,10 @@ export async function recordEvent(
     !trustedRuntime &&
     (event.type === "execution-boundary" ||
       "tokens" in event ||
-      "contextTokens" in event)
+      "contextTokens" in event ||
+      "inputTokens" in event ||
+      "cachedInputTokens" in event ||
+      "outputTokens" in event)
   )
     throw new Error(
       "runtime identity and usage must be imported from adapter-bound execution state",
@@ -3145,8 +3158,18 @@ export function workerTelemetryEvents(state) {
         ...base,
         type: "usage",
         usageSource: "codex-exec-jsonl:turn.completed",
+        runtimeId: value.execution.runtimeId,
         tokens: (usage.input_tokens ?? 0) + (usage.output_tokens ?? 0),
         contextTokens: usage.input_tokens,
+        ...(Number.isFinite(usage.input_tokens)
+          ? { inputTokens: usage.input_tokens }
+          : {}),
+        ...(Number.isFinite(usage.cached_input_tokens)
+          ? { cachedInputTokens: usage.cached_input_tokens }
+          : {}),
+        ...(Number.isFinite(usage.output_tokens)
+          ? { outputTokens: usage.output_tokens }
+          : {}),
       });
   }
   return events;
@@ -3171,12 +3194,24 @@ export function summarizeEvents(events) {
     peakActiveContext: "unavailable",
     physicalBoundaries: "unavailable",
     handoffBytes: 0,
+    handoffObservations: 0,
     contextRelevance: "unavailable",
     rediscoveryProxies: {
       repeatedReads: 0,
       repeatedDiscoveryCommands: 0,
     },
     logicalSessions: [],
+    runtimeUsage: {
+      inputTokens: "unavailable",
+      cachedInputTokens: "unavailable",
+      uncachedInputTokens: "unavailable",
+      outputTokens: "unavailable",
+      source: "unavailable",
+    },
+    byPacket: {},
+    bySession: {},
+    byAttempt: {},
+    byPhase: {},
   };
   const reads = new Set();
   const discoveryCommands = new Set();
@@ -3188,6 +3223,8 @@ export function summarizeEvents(events) {
     contextSeen = false,
     classifiedReads = 0,
     relevantReads = 0;
+  const attempts = new Map();
+  const rawUsage = [];
   for (const event of events) {
     logicalSessions.add(event.session);
     if (event.type === "command") {
@@ -3207,9 +3244,23 @@ export function summarizeEvents(events) {
         if (event.relevant) relevantReads += 1;
       }
     }
-    if (event.type === "execution-boundary") runtimeIds.add(event.runtimeId);
-    if (Number.isFinite(event.handoffBytes))
+    if (event.type === "execution-boundary") {
+      runtimeIds.add(event.runtimeId);
+      const packetAttempts = attempts.get(event.packet) ?? [];
+      packetAttempts.push({
+        packet: event.packet,
+        session: event.session,
+        phase: event.phase,
+        attempt: packetAttempts.length + 1,
+        runtimeId: event.runtimeId,
+        usage: null,
+      });
+      attempts.set(event.packet, packetAttempts);
+    }
+    if (Number.isFinite(event.handoffBytes)) {
       result.handoffBytes += event.handoffBytes;
+      result.handoffObservations += 1;
+    }
     result.outputBytes += event.outputBytes ?? 0;
     if (event.type === "validation") {
       event.level === "full" ? result.fullSuites++ : result.focusedSuites++;
@@ -3225,6 +3276,34 @@ export function summarizeEvents(events) {
     if (event.usageSource && Number.isFinite(event.contextTokens)) {
       contextTokens = Math.max(contextTokens, event.contextTokens);
       contextSeen = true;
+    }
+    if (
+      event.type === "usage" &&
+      (Number.isFinite(event.inputTokens) ||
+        Number.isFinite(event.contextTokens))
+    ) {
+      const normalizedUsage = {
+        ...event,
+        inputTokens: event.inputTokens ?? event.contextTokens,
+        outputTokens:
+          event.outputTokens ??
+          (Number.isFinite(event.tokens) && Number.isFinite(event.contextTokens)
+            ? event.tokens - event.contextTokens
+            : undefined),
+      };
+      rawUsage.push(normalizedUsage);
+      const packetAttempts = attempts.get(event.packet) ?? [];
+      const attempt = event.runtimeId
+        ? packetAttempts.find(({ runtimeId }) => runtimeId === event.runtimeId)
+        : [...packetAttempts]
+            .reverse()
+            .find(
+              (candidate) =>
+                candidate.usage === null &&
+                candidate.session === event.session &&
+                candidate.phase === event.phase,
+            );
+      if (attempt) attempt.usage = normalizedUsage;
     }
   }
   result.uniqueReads = reads.size;
@@ -3262,6 +3341,115 @@ export function summarizeEvents(events) {
       ],
     };
   if (contextSeen) result.peakActiveContext = result.contextUsage;
+  if (rawUsage.length) {
+    const allCached = rawUsage.every((event) =>
+      Number.isFinite(event.cachedInputTokens),
+    );
+    const allOutput = rawUsage.every((event) =>
+      Number.isFinite(event.outputTokens),
+    );
+    const inputTokens = rawUsage.reduce(
+      (total, event) => total + event.inputTokens,
+      0,
+    );
+    const cachedInputTokens = allCached
+      ? rawUsage.reduce((total, event) => total + event.cachedInputTokens, 0)
+      : "unavailable";
+    result.runtimeUsage = {
+      inputTokens,
+      cachedInputTokens,
+      uncachedInputTokens: allCached
+        ? inputTokens - cachedInputTokens
+        : "unavailable",
+      outputTokens: allOutput
+        ? rawUsage.reduce((total, event) => total + event.outputTokens, 0)
+        : "unavailable",
+      source:
+        rawUsage.length &&
+        rawUsage.every((event) => event.usageSource === rawUsage[0].usageSource)
+          ? rawUsage[0].usageSource
+          : "mixed",
+    };
+  }
+  for (const [packet, packetAttempts] of [...attempts].sort(([left], [right]) =>
+    order(left, right),
+  )) {
+    const usage = packetAttempts.flatMap((attempt) =>
+      attempt.usage ? [attempt.usage] : [],
+    );
+    const allCached =
+      usage.length > 0 &&
+      usage.every((event) => Number.isFinite(event.cachedInputTokens));
+    const allOutput =
+      usage.length > 0 &&
+      usage.every((event) => Number.isFinite(event.outputTokens));
+    const inputTokens = usage.length
+      ? usage.reduce((total, event) => total + event.inputTokens, 0)
+      : "unavailable";
+    const cachedInputTokens = allCached
+      ? usage.reduce((total, event) => total + event.cachedInputTokens, 0)
+      : "unavailable";
+    result.byPacket[packet] = {
+      attempts: packetAttempts.length,
+      physicalBoundaries: packetAttempts.length,
+      sessions: packetAttempts.map(({ session }) => session),
+      inputTokens,
+      cachedInputTokens,
+      uncachedInputTokens: allCached
+        ? inputTokens - cachedInputTokens
+        : "unavailable",
+      outputTokens: allOutput
+        ? usage.reduce((total, event) => total + event.outputTokens, 0)
+        : "unavailable",
+    };
+    for (const attempt of packetAttempts) {
+      const event = attempt.usage;
+      const cached = Number.isFinite(event?.cachedInputTokens);
+      const attributed = {
+        packet: attempt.packet,
+        phase: attempt.phase,
+        attempt: attempt.attempt,
+        runtimeId: attempt.runtimeId,
+        inputTokens: event?.inputTokens ?? "unavailable",
+        cachedInputTokens: cached ? event.cachedInputTokens : "unavailable",
+        uncachedInputTokens: cached
+          ? event.inputTokens - event.cachedInputTokens
+          : "unavailable",
+        outputTokens: Number.isFinite(event?.outputTokens)
+          ? event.outputTokens
+          : "unavailable",
+      };
+      result.byAttempt[attempt.runtimeId] = attributed;
+      const priorSession = result.bySession[attempt.session];
+      result.bySession[attempt.session] = priorSession
+        ? Array.isArray(priorSession)
+          ? [...priorSession, attributed]
+          : [priorSession, attributed]
+        : attributed;
+      const phase = (result.byPhase[attempt.phase] ??= {
+        attempts: 0,
+        physicalBoundaries: 0,
+        sessions: [],
+        inputTokens: 0,
+        cachedInputTokens: 0,
+        uncachedInputTokens: 0,
+        outputTokens: 0,
+      });
+      phase.attempts += 1;
+      phase.physicalBoundaries += 1;
+      phase.sessions.push(attempt.session);
+      for (const field of [
+        "inputTokens",
+        "cachedInputTokens",
+        "uncachedInputTokens",
+        "outputTokens",
+      ])
+        phase[field] =
+          phase[field] === "unavailable" || !Number.isFinite(attributed[field])
+            ? "unavailable"
+            : phase[field] + attributed[field];
+    }
+  }
   return result;
 }
 

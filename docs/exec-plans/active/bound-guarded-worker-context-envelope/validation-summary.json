@@ -1,0 +1,50 @@
+{
+  "version": 1,
+  "candidate": "6a3968388bbe9856240e05db860fee217e5369e2",
+  "checks": [
+    {
+      "command": "npm run test:harness",
+      "outcome": "pass",
+      "observed": "117/117 focused harness tests passed, followed by the contract-derived routing probe"
+    },
+    {
+      "command": "node tools/tests/context-envelope-efficiency-probe.mjs",
+      "outcome": "pass",
+      "observed": "all phase-attribution, fixture-policy, relevance-limitation, numeric-reporting, and control-normalization regressions passed"
+    },
+    {
+      "command": "npm run check:openspec && openspec validate bound-guarded-worker-context-envelope --strict",
+      "outcome": "pass"
+    },
+    {
+      "command": "npm run check:docs",
+      "outcome": "pass",
+      "observed": "all generated PR-review orchestration JSON is formatted"
+    },
+    {
+      "command": "npm run check",
+      "outcome": "pass",
+      "observed": "217/217 Node tests and 207/207 Playwright tests passed with lint, build, source validation, and package-consumer smoke"
+    },
+    {
+      "command": "git diff --check",
+      "outcome": "pass"
+    }
+  ],
+  "tddEvidence": {
+    "slice": "review-remediation",
+    "outcome": "acceptance-green",
+    "candidateHead": "6a3968388bbe9856240e05db860fee217e5369e2",
+    "observed": "requirements revision 3 recorded a deterministic baseline RED; the committed candidate passes the same focused acceptance probe"
+  },
+  "invalidatedEvidence": {
+    "candidate": "f8a7744",
+    "reason": "The review-remediation implementation changed production, fixture, and evidence surfaces after that candidate; its validation is historical and is not presented as delivery proof."
+  },
+  "limitations": [
+    "The recorded candidate is the committed remediation code head. This evidence file is a documentation-only delivery record, so its later evidence commit does not alter the validated implementation, fixture, oracle, or dependency closure.",
+    "GitHub CI status is reported separately from local fixed-head validation.",
+    "Operational evidence commits after this candidate do not alter the validated implementation, fixture, oracle, or dependency closure."
+  ],
+  "disposition": "The committed remediation candidate passes focused and full validation with fresh candidate-bound TDD evidence."
+}

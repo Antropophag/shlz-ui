@@ -65,10 +65,12 @@ import {
 } from "./lib/harness/codex-worker.mjs";
 import {
   acknowledgeContextCapsule,
+  assertInitialContextEnvelope,
   createContextLedger,
   createPacketContextCapsule,
   runContextCostReplay,
 } from "./lib/harness/context-cost.mjs";
+import { evaluateTelemetryEfficiency } from "./lib/harness/telemetry-efficiency.mjs";
 import {
   assertCurrentContractDerivedTdd,
   loadChangeScenarioSemantics,
@@ -88,6 +90,7 @@ const config = await readJson(
   path.join(repoRoot, "docs/exec-plans/config.json"),
 );
 const [command, ...args] = process.argv.slice(2);
+
 const stateRoot = path.join(repoRoot, "docs/exec-plans");
 const canonicalStateRoot = realpathSync(stateRoot);
 const within = (root, target) =>
@@ -659,6 +662,10 @@ switch (command) {
             : null,
         },
       );
+      assertInitialContextEnvelope(
+        plan.packets.find(({ id }) => id === args[2]),
+        capsule,
+      );
       const brief = createWorkerBrief(plan, current, args[2], {
         baseline: await readJson(absolute(baselinePath)),
         requirementsState,
@@ -1031,10 +1038,22 @@ switch (command) {
     break;
   }
   case "telemetry-summary": {
-    const text = await readFile(absolute(args[0]), "utf8");
-    output(
-      summarizeEvents(text.trim().split("\n").filter(Boolean).map(JSON.parse)),
-    );
+    if (args.includes("--evaluation")) {
+      const report = await evaluateTelemetryEfficiency(
+        await readJson(absolute(args[0])),
+        repoRoot,
+      );
+      const out = option("--out");
+      if (out) await writeJson(absolute(out), report);
+      output(report);
+    } else {
+      const text = await readFile(absolute(args[0]), "utf8");
+      output(
+        summarizeEvents(
+          text.trim().split("\n").filter(Boolean).map(JSON.parse),
+        ),
+      );
+    }
     break;
   }
   case "evidence":

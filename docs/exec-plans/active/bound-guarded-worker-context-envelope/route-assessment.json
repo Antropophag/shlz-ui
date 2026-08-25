@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Evaluate completed harness executions and add explicit coverage-preserving guarded-worker context envelopes with stage/session cost attribution.",
+  "route": "open-spec",
+  "openSpecChange": "bound-guarded-worker-context-envelope",
+  "requiredDecisions": [
+    { "id": "representative-sample", "owner": "repo", "blocking": true },
+    { "id": "envelope-authority", "owner": "agent", "blocking": true },
+    { "id": "coverage-preservation", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

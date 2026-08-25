@@ -1,0 +1,452 @@
+{
+  "version": 1,
+  "planId": "resolve-pr41-review",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/bound-guarded-worker-context-envelope/**",
+      "docs/exec-plans/active/resolve-pr41-review/**",
+      "docs/exec-plans/active/bound-guarded-worker-context-envelope/{state.json,telemetry.jsonl}",
+      "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+    ],
+    "contracts": [
+      "harness/context-envelope-efficiency",
+      "PR #41 review findings"
+    ],
+    "dependencies": ["review-remediation"],
+    "focusedValidation": [
+      "harness",
+      "openspec",
+      "full",
+      "two-axis review",
+      "delivery-check"
+    ],
+    "handoff": ["CI state", "resolved threads", "residual risks"],
+    "id": "review-delivery",
+    "implementationOutcomes": [
+      "all verified findings resolved",
+      "head-bound evidence",
+      "unmerged PR remains open"
+    ],
+    "implementationSurface": [
+      "valid diff-scoped remediation and review evidence only"
+    ],
+    "nonGoals": ["merge", "unrelated refactors", "new PR"],
+    "objective": "Run fixed-head validation and independent review, then update the existing PR and resolve verified threads",
+    "outputs": [
+      "review dispositions",
+      "validation evidence",
+      "updated PR head"
+    ],
+    "preferredExecutionMode": "isolated-subagent",
+    "scope": [
+      "focused and aggregate validation",
+      "Standards and Spec review",
+      "thread disposition",
+      "push and delivery guard"
+    ]
+  },
+  "claimId": "pr41-review-delivery-3",
+  "baseline": {
+    "branch": "feat/harness-efficiency-eval",
+    "commit": "72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
+    "defaultBranch": "main",
+    "kind": "existing-pull-request",
+    "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/41",
+    "version": 1
+  },
+  "baselineDigest": "dae157957e004c6afb7f43eb177b234f1e8db917551a99b51f2bdfcca627c818",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "bound-guarded-worker-context-envelope"
+  },
+  "dependencyDigests": {
+    "review-remediation": "bc224ac97f6f214947b71947d57c6455f89c5cd64603049d53c97a9d27bba534"
+  },
+  "packetDigest": "c2f40a5104feab507b1b8ead072632936f13d079ec059834fd38b3ccb664b3d1",
+  "contextIndex": [
+    "openspec/changes/bound-guarded-worker-context-envelope/**",
+    "docs/exec-plans/active/resolve-pr41-review/**",
+    "docs/exec-plans/active/bound-guarded-worker-context-envelope/{state.json,telemetry.jsonl}",
+    "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+  ],
+  "allowedImplementationSurface": [
+    "valid diff-scoped remediation and review evidence only"
+  ],
+  "focusedValidation": [
+    "harness",
+    "openspec",
+    "full",
+    "two-axis review",
+    "delivery-check"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "8da3b56b3de784ad43522c27f322f9479e6753739f2e317e63526d409a91893d",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "4b8b5dd542dd2d95acb1d29df4c03cbabee02dfb9c62f6ab55c62f00e7d465a6",
+          "changed": [
+            "complete all-or-unavailable phase token aggregation",
+            "explicit efficiency fixture and metric-policy validation",
+            "numeric missing-usage reporting and legacy contextTokens normalization",
+            "deterministic eight-assertion regression probe with independent challenge control",
+            "executable check:docs script and current-candidate validation evidence"
+          ],
+          "claimId": "pr41-remediation-4",
+          "completedPacket": "review-remediation",
+          "invalidatedAssumptions": [],
+          "nextPacket": "review-delivery",
+          "provenChecks": [
+            "npm run test:harness passes",
+            "context-envelope-efficiency-probe passes all eight regressions",
+            "strict OpenSpec validation passes",
+            "targeted Prettier and git diff checks pass"
+          ],
+          "settledDecisions": [
+            "historical worker briefs remain immutable; package.json now supplies their documented check:docs command",
+            "final committed-head validation and review evidence belongs to review-delivery"
+          ],
+          "unresolvedFindings": [],
+          "workerReportDigest": "62bd59974fada506296646398c6dc29ad7d8aea7c00a4b105c893a571eafdfd6"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "complete all-or-unavailable phase token aggregation",
+        "deterministic eight-assertion regression probe with independent challenge control",
+        "executable check:docs script and current-candidate validation evidence",
+        "explicit efficiency fixture and metric-policy validation",
+        "numeric missing-usage reporting and legacy contextTokens normalization"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": [
+        "context-envelope-efficiency-probe passes all eight regressions",
+        "npm run test:harness passes",
+        "strict OpenSpec validation passes",
+        "targeted Prettier and git diff checks pass"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "pr41-review-delivery-3",
+    "objective": "Run fixed-head validation and independent review, then update the existing PR and resolve verified threads",
+    "obligations": [
+      "contract:PR #41 review findings",
+      "contract:harness/context-envelope-efficiency",
+      "outcome:all verified findings resolved",
+      "outcome:head-bound evidence",
+      "outcome:unmerged PR remains open",
+      "validation:delivery-check",
+      "validation:full",
+      "validation:harness",
+      "validation:openspec",
+      "validation:two-axis review"
+    ],
+    "packetId": "review-delivery",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "resolve-pr41-review",
+    "readNow": [
+      {
+        "bytes": 38133,
+        "digest": "1cb016b1be2616c8e24d073000edf710709c50abaa29ff0b9c1404e1d8efb13b",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/state.json"
+      },
+      {
+        "bytes": 3406,
+        "digest": "0b63d1947dafc984fdeab54c30147d0e8fceabb61578eb629b1ab6bd91d8621b",
+        "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/telemetry.jsonl"
+      },
+      {
+        "bytes": 9789,
+        "digest": "765e1ff84ba4339170d521b06494fb2c0f576ecab0b7955fe9850598f9b5231f",
+        "path": "docs/exec-plans/active/resolve-pr41-review/assessment.json"
+      },
+      {
+        "bytes": 251,
+        "digest": "8213aed8848092feeca9f2bb67be0c421a8ac6688e70cffd1910fc31272ac203",
+        "path": "docs/exec-plans/active/resolve-pr41-review/execution-baseline.json"
+      },
+      {
+        "bytes": 11476,
+        "digest": "4a15ee8b18440af1fb6df2e9c440bf49c258d42336e038851e6d0b270ffa5633",
+        "path": "docs/exec-plans/active/resolve-pr41-review/plan.json"
+      },
+      {
+        "bytes": 1135,
+        "digest": "5addd60f621bdaecb912770ff255fb523644968e12a7763e8e3a52008143a82e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/requirements.json"
+      },
+      {
+        "bytes": 10111,
+        "digest": "accdacae3696527a9a22a5e2109b1562d26c1e63c2d4846a0f9cb46a65360f19",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-brief.context-capsule.json"
+      },
+      {
+        "bytes": 145,
+        "digest": "3d3d64f94ed1a6b77821f4e608cf77d346ffbe98b913b8175ac32ba9dc3760a4",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-brief.context-ledger.json"
+      },
+      {
+        "bytes": 13827,
+        "digest": "7767b516c54fe9871b6b6ddfa9d16918993aab0a5979d844e58b77e5ced90e2e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-brief.json"
+      },
+      {
+        "bytes": 12056,
+        "digest": "aaf8a4e9b96421752d54e05dc189a652322286ef35cf2401c44cc10ffb311d17",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-r2-brief.context-capsule.json"
+      },
+      {
+        "bytes": 145,
+        "digest": "95cbcf7438540b3f141aabaeb8031df804ff752a573c26c9b26b2a0e99c6bf26",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-r2-brief.context-ledger.json"
+      },
+      {
+        "bytes": 15862,
+        "digest": "853def9617e0193ccaa2291625ce8a870c4f88319142ab26cf08f34f063adb93",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-delivery-r2-brief.json"
+      },
+      {
+        "bytes": 2368,
+        "digest": "b37a9828cf940fde6d89f73dd07f2355b93499d1599599c592621c86ed485588",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-findings.json"
+      },
+      {
+        "bytes": 12891,
+        "digest": "2006865ed259e7f2742881a355188e246afee002bd878636e6b9e243bbb442ae",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "26feee15f50bd4e4da8dcdbc4fda229ad6d02490de77097741928f4602afde16",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17439,
+        "digest": "e86ebf86bdf0dc5b4dad908d563c5f83dc16543eca342bf2334b7dcd49f1ef42",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-brief.json"
+      },
+      {
+        "bytes": 1186,
+        "digest": "a6e3b7e43a06676c24dccf688907ec4c61dfb9856036221a5193f0e121e08562",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-handoff.json"
+      },
+      {
+        "bytes": 12891,
+        "digest": "784517075f88d36d6420fe507f6739aecea982287b7bd7dbff24c9126dda1f9c",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "98cac18be5f15c593c2c01a5a9657c65289eccac53f41e6f436aa028e9d699db",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17439,
+        "digest": "f0c671baf55e35471c077c89d32433ef80c12ae64028daf7d1a072aeb8713507",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r2-brief.json"
+      },
+      {
+        "bytes": 12891,
+        "digest": "5ffa5aae88b3422070fa8b00c06f4dc0356e945e20be540269ffd9164a43bbaf",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r3-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "7d1e410c7e93a5fe58737bf88bac2919e543abe250a0b7c54b27399fe8faae26",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r3-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17439,
+        "digest": "83d8b7e2d419be294661719abfe58d7960ca892709c0f9ac80855e66db37706c",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r3-brief.json"
+      },
+      {
+        "bytes": 12892,
+        "digest": "e9cd54fed4d7beed7e4b314f99d5faf04e966184868c7879a3bbaaac300f6b28",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r4-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "6dc51983dffcaf9e8354a5fae6747d998a40a772d3051db56833d8aa1cb0f52e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r4-brief.context-ledger.json"
+      },
+      {
+        "bytes": 17440,
+        "digest": "68081a693dacd46220e396c0f758e24bc838a3b241a31361772f534a87a23b22",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-remediation-r4-brief.json"
+      },
+      {
+        "bytes": 3,
+        "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-spec-final.json"
+      },
+      {
+        "bytes": 3,
+        "digest": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-standards-final.json"
+      },
+      {
+        "bytes": 1079,
+        "digest": "508cd099996ae37aa8d9a3d16289ae7fb7aac204243407165e785dc47bb121d6",
+        "path": "docs/exec-plans/active/resolve-pr41-review/review-state.json"
+      },
+      {
+        "bytes": 834,
+        "digest": "23c2ca343d3042e03d7031c29025a61f008126bdac6ee0e488d0a4a989197322",
+        "path": "docs/exec-plans/active/resolve-pr41-review/route-assessment.json"
+      },
+      {
+        "bytes": 54299,
+        "digest": "edc0dd29b2c16e423031081a99147e2e6dc7b13477738979fbafbedb8d92c200",
+        "path": "docs/exec-plans/active/resolve-pr41-review/state.json"
+      },
+      {
+        "bytes": 32,
+        "digest": "ad72cac2687d99e25b7f3866d04191397ba7d76d84623ff8cbc4ed01a1f915d3",
+        "path": "docs/exec-plans/active/resolve-pr41-review/state.json.lock"
+      },
+      {
+        "bytes": 3483,
+        "digest": "939b706e344f0f2c6a63e2df59957618cba58c2ff4782cb5c597ca41cfc548b7",
+        "path": "docs/exec-plans/active/resolve-pr41-review/tdd-design-handoff.json"
+      },
+      {
+        "bytes": 6691,
+        "digest": "158396150124f56c1c4c55a966a9faf090f7ce95439fca97febb3f24509d6d71",
+        "path": "docs/exec-plans/active/resolve-pr41-review/telemetry.jsonl"
+      },
+      {
+        "bytes": 2561,
+        "digest": "d10323a98d899f5485cbf4ed0c893f5958f3c88ab13bedab590f7ec32d987c92",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "a9002abb3f6d6a7655a65c23caeacfd8e3ca5131f7e085737d744b0411a5a158",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "ee63001b9ccf0a525d561a398b0b351285df877e7dfabf2aa24183281ab61eb6",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-brief.json"
+      },
+      {
+        "bytes": 731,
+        "digest": "cfef7b20828e0b37b261a16eefe7002f68921048d6b2643fe099b938f1316c16",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-handoff.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "79c8249768cc700567a3d3332ba16b2982f27f2fd5e3056e296d0575579ac8ec",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "4c5835f05a813214002eb6261f196c3e8653c9a61036b482f503530f51d1de0e",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "d0a2c5b8216a6c73d9d2d485bc7690d15517f2ae9a50c95ec42bf15b894a32db",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r2-brief.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "17b364762edb45c64cc96888b2a874df2b8e2995f23bf08b25a20dd3905a2a93",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "e222c56d6ab7a5495f6711295a90a6e7128aeb1df39d195867cbe99d82df4e96",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "b97685e48b92bf25f61f19e5dfef2af7b09815e76481a09e59bd77c97cd7bfac",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r3-brief.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "b66755814d15f30c4bfedb39e54b193b63e2c0b8149d77e13ce441be9b5fb8c5",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r4-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "98e5d159b892a667b9cf38da81e544b1fdc813902e19cb3b071c71833ade312a",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r4-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "d6dd9975b4802534bc7db409f03fa3f8cfa7b5750462cf0d42e7efe8d14d3793",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r4-brief.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "2072d78a0c3549011768a16bcf50ec1e0d536b07cc6890e5acaedf7ff4019437",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r5-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "f7973b23841e067dcc5166b71c423f53ededa211c15736835ad38e244813835f",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r5-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "245cd888058ea5215d9233f0fb7fd04ebce77ed9102c477f406566b177647df0",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r5-brief.json"
+      },
+      {
+        "bytes": 2561,
+        "digest": "6642e7bf363c252329297b105e815190a489583726ac2aa3641b9d6d447c5a23",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r6-brief.context-capsule.json"
+      },
+      {
+        "bytes": 141,
+        "digest": "bc02f7dac0349e5647c33b4343f8f45b62362300dde9544b4f5416f2bbbe6116",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r6-brief.context-ledger.json"
+      },
+      {
+        "bytes": 5363,
+        "digest": "40b2905163ff84dce0c4805235483f9b6868e34af2c50a8fce5dc5b131864c3c",
+        "path": "docs/exec-plans/active/resolve-pr41-review/test-design-r6-brief.json"
+      },
+      {
+        "bytes": 40,
+        "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml"
+      },
+      {
+        "bytes": 4060,
+        "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md"
+      },
+      {
+        "bytes": 2009,
+        "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md"
+      },
+      {
+        "bytes": 4145,
+        "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+      },
+      {
+        "bytes": 1483,
+        "digest": "4d4059c76654bcc4a9621a3a6d13cf6abd6cfebedd1c46c2403d851252027adf",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md"
+      }
+    ],
+    "sourceDigest": "fde6bd31210f181a580d8bcd6fda7db12130cfd329ec9082cf98d2d40b78dada",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "efdb8c38a7305824fac9ca06bd350c110c5c1d8942c86ebd2e31261a625d9cd4"
+}

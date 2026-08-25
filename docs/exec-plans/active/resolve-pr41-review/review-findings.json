@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "pullRequest": "https://github.com/Antropophag/shlz-ui/pull/41",
+  "capturedAtHead": "72dcc18a9df9a2c3c59cab01269f6ec5366b4002",
+  "findings": [
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUOm",
+      "commentId": 3853273622,
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/envelope-implementation-brief.json",
+      "summary": "Replace the nonexistent check:docs contract with an executable documented check and regenerate completion evidence."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUOy",
+      "commentId": 3853273643,
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/review-delivery-r3-brief.json",
+      "summary": "Include state.json and telemetry.jsonl in review delivery context and regenerate bound delivery evidence."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUO1",
+      "commentId": 3853273648,
+      "path": "docs/exec-plans/active/bound-guarded-worker-context-envelope/validation-summary.json",
+      "summary": "Invalidate stale f8a7744 validation and bind rerun validation/TDD evidence to the delivered candidate."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUO6",
+      "commentId": 3853273654,
+      "path": "tools/lib/harness/core.mjs",
+      "summary": "Aggregate all-or-unavailable input, cached-input, uncached-input, and output tokens in byPhase."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUPA",
+      "commentId": 3853273662,
+      "path": "tools/lib/harness/telemetry-efficiency.mjs",
+      "summary": "Require sourceEnvelopes as an array with a clear fixture contract error."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUPJ",
+      "commentId": 3853273676,
+      "path": "tools/lib/harness/telemetry-efficiency.mjs",
+      "summary": "Render missingUsage consistently as a numeric count."
+    },
+    {
+      "threadId": "PRRT_kwDOTyJWqM6cFUPh",
+      "commentId": 3853273710,
+      "path": "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
+      "summary": "Normalize inputTokens from contextTokens in both control aggregation sites."
+    },
+    {
+      "threadId": null,
+      "commentId": null,
+      "path": "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+      "summary": "Enforce metricPolicy.unavailable for proxies.contextRelevance, as requested by the review summary nitpick."
+    }
+  ]
+}
