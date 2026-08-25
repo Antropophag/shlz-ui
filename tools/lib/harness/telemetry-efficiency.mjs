@@ -188,7 +188,9 @@ export async function evaluateTelemetryEfficiency(fixture, repoRoot) {
       handoffBytes: attribution.handoffObservations
         ? attribution.handoffBytes
         : unavailable,
-      contextRelevance: attribution.contextRelevance,
+      contextRelevance: unavailableMetrics.has("contextRelevance")
+        ? unavailable
+        : attribution.contextRelevance,
       retryFanOut: {
         physicalBoundaries: boundaries.length,
         repeatedPacketAttempts: repeatedPackets.reduce(

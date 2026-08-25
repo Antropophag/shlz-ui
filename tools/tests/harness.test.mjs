@@ -16,6 +16,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
+import { evaluateTelemetryEfficiency } from "../lib/harness/telemetry-efficiency.mjs";
 import {
   affectedValidation,
   assertValidationRun,
@@ -5480,6 +5481,37 @@ test("representative efficiency evaluation reproduces checked report and preserv
     sourceCount: 52,
     sourceBytes: 353242,
   });
+});
+
+test("efficiency evaluation applies unavailable policy to observed context relevance", async (t) => {
+  const directory = await mkdtemp(path.join(root, ".telemetry-efficiency-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const telemetryPath = path.relative(root, path.join(directory, "telemetry.jsonl"));
+  await writeFile(
+    path.join(root, telemetryPath),
+    `${JSON.stringify({
+      packet: "review",
+      session: "review-r1",
+      agent: "codex-worker",
+      phase: "review",
+      type: "context-read",
+      path: "spec.md",
+      relevant: true,
+    })}\n`,
+  );
+
+  const report = await evaluateTelemetryEfficiency(
+    {
+      version: 1,
+      id: "policy-regression",
+      telemetrySources: [{ id: "change", path: telemetryPath }],
+      sourceEnvelopes: [],
+      metricPolicy: { unavailable: ["contextRelevance"] },
+    },
+    root,
+  );
+
+  assert.equal(report.proxies.contextRelevance, "unavailable");
 });
 
 test("context cost replay materially reduces PR 36 proxy cost without dropping evidence", async () => {
