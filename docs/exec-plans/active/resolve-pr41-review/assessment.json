@@ -81,7 +81,8 @@
         ],
         "fixtureSurface": [
           "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
-          "tools/tests/fixtures/context-envelope-efficiency-{challenge-control,decoy}.mjs"
+          "tools/tests/fixtures/context-envelope-efficiency-{challenge-control,decoy}.mjs",
+          "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl"
         ],
         "productionSurface": [
           "tools/lib/harness/core.mjs",

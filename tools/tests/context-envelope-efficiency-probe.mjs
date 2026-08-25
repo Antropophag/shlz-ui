@@ -204,6 +204,28 @@ await checkRegression("fixture policy marks contextRelevance unavailable", () =>
     /metricPolicy\.unavailable must include contextRelevance/,
   ),
 );
+await checkRegression(
+  "fixture policy suppresses observed contextRelevance",
+  async () => {
+    const policyReport = await evaluateTelemetryEfficiency(
+      {
+        version: 1,
+        id: "policy-regression",
+        telemetrySources: [
+          {
+            id: "change",
+            path: "tools/tests/fixtures/context-envelope-efficiency-policy.jsonl",
+          },
+        ],
+        sourceEnvelopes: [],
+        metricPolicy: { unavailable: ["contextRelevance"] },
+      },
+      root,
+    );
+
+    assert.equal(policyReport.proxies.contextRelevance, "unavailable");
+  },
+);
 
 const evaluated = await evaluateTelemetryEfficiency(fixture, root);
 await checkRegression("missing usage limitation uses a numeric count", () =>
