@@ -205,7 +205,11 @@ export async function evaluateTelemetryEfficiency(fixture, repoRoot) {
     limitations: [
       "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",
       `${missingUsage} physical boundaries have no matching trusted usage event and are excluded from token totals without estimation.`,
-      "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+      ...(attribution.contextRelevance === "unavailable"
+        ? [
+            "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+          ]
+        : []),
       "Source-envelope bytes are a repository-controlled input proxy and are not converted into model tokens.",
       "The sample observes guarded workers only; root-agent context and unrecorded execution remain outside the evaluation.",
     ],
