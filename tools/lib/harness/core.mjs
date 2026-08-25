@@ -3194,6 +3194,7 @@ export function summarizeEvents(events) {
     peakActiveContext: "unavailable",
     physicalBoundaries: "unavailable",
     handoffBytes: 0,
+    handoffObservations: 0,
     contextRelevance: "unavailable",
     rediscoveryProxies: {
       repeatedReads: 0,
@@ -3256,8 +3257,10 @@ export function summarizeEvents(events) {
       });
       attempts.set(event.packet, packetAttempts);
     }
-    if (Number.isFinite(event.handoffBytes))
+    if (Number.isFinite(event.handoffBytes)) {
       result.handoffBytes += event.handoffBytes;
+      result.handoffObservations += 1;
+    }
     result.outputBytes += event.outputBytes ?? 0;
     if (event.type === "validation") {
       event.level === "full" ? result.fullSuites++ : result.focusedSuites++;

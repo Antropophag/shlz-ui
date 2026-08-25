@@ -26,7 +26,6 @@ import {
   gitImplementationState,
   gitRouteSurfaces,
   loadChangeFailureInvariants,
-  matchesPattern,
   pausePacket,
   readJson,
   readyPackets,
@@ -71,6 +70,7 @@ import {
   createPacketContextCapsule,
   runContextCostReplay,
 } from "./lib/harness/context-cost.mjs";
+import { evaluateTelemetryEfficiency } from "./lib/harness/telemetry-efficiency.mjs";
 import {
   assertCurrentContractDerivedTdd,
   loadChangeScenarioSemantics,
@@ -91,183 +91,6 @@ const config = await readJson(
 );
 const [command, ...args] = process.argv.slice(2);
 
-const efficiencyEvaluation = async (fixture) => {
-  if (fixture?.version !== 1 || !Array.isArray(fixture.telemetrySources))
-    throw new Error("efficiency evaluation requires a version 1 fixture");
-  const changes = [];
-  const all = [];
-  for (const source of fixture.telemetrySources) {
-    const text = await readFile(absolute(source.path), "utf8");
-    const events = text.trim().split("\n").filter(Boolean).map(JSON.parse);
-    all.push(...events.map((event) => ({ ...event, change: source.id })));
-    const boundaries = events.filter(
-      ({ type }) => type === "execution-boundary",
-    ).length;
-    const usage = events.filter(({ type }) => type === "usage");
-    const attribution = summarizeEvents(events);
-    changes.push({
-      id: source.id,
-      tokens: usage.reduce((total, event) => total + (event.tokens ?? 0), 0),
-      inputTokens: usage.reduce(
-        (total, event) => total + (event.contextTokens ?? 0),
-        0,
-      ),
-      physicalBoundaries: boundaries,
-      usageEvents: usage.length,
-      missingUsageBoundaries: boundaries - usage.length,
-      attempts: Object.entries(attribution.byAttempt).map(
-        ([runtimeId, attempt]) => ({ runtimeId, ...attempt }),
-      ),
-    });
-  }
-  const usage = all.filter(({ type }) => type === "usage");
-  const boundaries = all.filter(({ type }) => type === "execution-boundary");
-  const grouped = new Map();
-  for (const event of boundaries) {
-    const key = `${event.change}\0${event.packet}`;
-    const value = grouped.get(key) ?? {
-      change: event.change,
-      packet: event.packet,
-      attempts: 0,
-      sessions: [],
-      runtimeIds: [],
-    };
-    value.attempts += 1;
-    value.sessions.push(event.session);
-    value.runtimeIds.push(event.runtimeId);
-    grouped.set(key, value);
-  }
-  const repeatedPackets = [...grouped.values()].filter(
-    ({ attempts }) => attempts > 1,
-  );
-  const phases = new Map();
-  for (const event of all) {
-    const phase = phases.get(event.phase) ?? {
-      phase: event.phase,
-      physicalBoundaries: 0,
-      usageEvents: 0,
-      tokens: 0,
-      inputTokens: 0,
-    };
-    if (event.type === "execution-boundary") phase.physicalBoundaries += 1;
-    if (event.type === "usage") {
-      phase.usageEvents += 1;
-      phase.tokens += event.tokens ?? 0;
-      phase.inputTokens += event.contextTokens ?? 0;
-    }
-    phases.set(event.phase, phase);
-  }
-  const sourceEnvelopes = await Promise.all(
-    fixture.sourceEnvelopes.map(async (source) => {
-      const capsule = await readJson(absolute(source.capsule));
-      const resolved = capsule.readNow ?? [];
-      const patternSources = resolved.filter(({ path: sourcePath }) =>
-        matchesPattern(sourcePath, source.declaredPattern),
-      );
-      const largestContributor =
-        [...resolved].sort(
-          (left, right) =>
-            right.bytes - left.bytes ||
-            (left.path < right.path ? -1 : left.path > right.path ? 1 : 0),
-        )[0] ?? null;
-      return {
-        change: source.change,
-        packet: source.packet,
-        budget: source.maxInitialContextBytes ?? "unbudgeted",
-        resolvedSourceCount: resolved.length,
-        resolvedSourceBytes: resolved.reduce(
-          (total, item) => total + item.bytes,
-          0,
-        ),
-        broadPattern: {
-          pattern: source.declaredPattern,
-          sourceCount: patternSources.length,
-          sourceBytes: patternSources.reduce(
-            (total, item) => total + item.bytes,
-            0,
-          ),
-        },
-        largestContributor,
-      };
-    }),
-  );
-  const hasRawCached =
-    usage.length > 0 &&
-    usage.every((event) => Number.isFinite(event.cachedInputTokens));
-  const hasRawOutput =
-    usage.length > 0 &&
-    usage.every((event) => Number.isFinite(event.outputTokens));
-  const classifiedReads = all.filter(
-    (event) =>
-      event.type === "context-read" && typeof event.relevant === "boolean",
-  );
-  const handoffs = all.filter((event) => Number.isFinite(event.handoffBytes));
-  const missingUsage = boundaries.length - usage.length;
-  return {
-    version: 1,
-    fixture: fixture.id,
-    sample: {
-      changes: changes.length,
-      physicalBoundaries: boundaries.length,
-      usageEvents: usage.length,
-      missingUsageBoundaries: missingUsage,
-    },
-    runtime: {
-      tokens: usage.reduce((total, event) => total + (event.tokens ?? 0), 0),
-      inputTokens: usage.reduce(
-        (total, event) => total + (event.contextTokens ?? 0),
-        0,
-      ),
-      cachedInputTokens: hasRawCached
-        ? usage.reduce((total, event) => total + event.cachedInputTokens, 0)
-        : "unavailable",
-      uncachedInputTokens: hasRawCached
-        ? usage.reduce(
-            (total, event) =>
-              total + event.inputTokens - event.cachedInputTokens,
-            0,
-          )
-        : "unavailable",
-      outputTokens: hasRawOutput
-        ? usage.reduce((total, event) => total + event.outputTokens, 0)
-        : "unavailable",
-      source: fixture.metricPolicy.trustedUsageSource,
-    },
-    byChange: changes,
-    attribution: { phases: [...phases.values()], repeatedPackets },
-    sourceEnvelopes,
-    proxies: {
-      handoffBytes: handoffs.length
-        ? handoffs.reduce((total, event) => total + event.handoffBytes, 0)
-        : "unavailable",
-      contextRelevance: classifiedReads.length
-        ? {
-            kind: "observed-read-ratio",
-            relevantReads: classifiedReads.filter(({ relevant }) => relevant)
-              .length,
-            classifiedReads: classifiedReads.length,
-            ratio:
-              classifiedReads.filter(({ relevant }) => relevant).length /
-              classifiedReads.length,
-          }
-        : "unavailable",
-      retryFanOut: {
-        physicalBoundaries: boundaries.length,
-        repeatedPacketAttempts: repeatedPackets.reduce(
-          (total, packet) => total + packet.attempts,
-          0,
-        ),
-      },
-    },
-    limitations: [
-      "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",
-      `${missingUsage === 5 ? "Five" : missingUsage} physical boundaries have no matching trusted usage event and are excluded from token totals without estimation.`,
-      "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
-      "Source-envelope bytes are a repository-controlled input proxy and are not converted into model tokens.",
-      "The sample observes guarded workers only; root-agent context and unrecorded execution remain outside the evaluation.",
-    ],
-  };
-};
 const stateRoot = path.join(repoRoot, "docs/exec-plans");
 const canonicalStateRoot = realpathSync(stateRoot);
 const within = (root, target) =>
@@ -1216,8 +1039,9 @@ switch (command) {
   }
   case "telemetry-summary": {
     if (args.includes("--evaluation")) {
-      const report = await efficiencyEvaluation(
+      const report = await evaluateTelemetryEfficiency(
         await readJson(absolute(args[0])),
+        repoRoot,
       );
       const out = option("--out");
       if (out) await writeJson(absolute(out), report);
