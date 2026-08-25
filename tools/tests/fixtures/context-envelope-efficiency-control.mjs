@@ -27,8 +27,7 @@ export function summarizeEvents(events) {
     packet.inputTokens += event.inputTokens;
     if (Number.isFinite(event.cachedInputTokens)) {
       packet.cachedInputTokens += event.cachedInputTokens;
-      packet.uncachedInputTokens +=
-        event.inputTokens - event.cachedInputTokens;
+      packet.uncachedInputTokens += event.inputTokens - event.cachedInputTokens;
     } else {
       packet.cachedInputTokens = unavailable;
       packet.uncachedInputTokens = unavailable;
@@ -51,8 +50,10 @@ export function summarizeEvents(events) {
     };
   }
 
-  const allFinite = (field) => usage.every((event) => Number.isFinite(event[field]));
-  const sum = (field) => usage.reduce((total, event) => total + event[field], 0);
+  const allFinite = (field) =>
+    usage.every((event) => Number.isFinite(event[field]));
+  const sum = (field) =>
+    usage.reduce((total, event) => total + event[field], 0);
   const inputTokens = sum("inputTokens");
   const cachedInputTokens = allFinite("cachedInputTokens")
     ? sum("cachedInputTokens")

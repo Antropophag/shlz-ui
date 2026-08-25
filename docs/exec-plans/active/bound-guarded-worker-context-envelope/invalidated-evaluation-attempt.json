@@ -11,8 +11,5 @@
     "evaluation fixture and report",
     "initial RED assertions"
   ],
-  "invalidatedClaims": [
-    "completed TDD test design",
-    "packet completion"
-  ]
+  "invalidatedClaims": ["completed TDD test design", "packet completion"]
 }

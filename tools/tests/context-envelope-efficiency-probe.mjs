@@ -6,8 +6,7 @@ import { pathToFileURL } from "node:url";
 const root = process.cwd();
 const adapterPath = path.join(
   root,
-  process.env.SHLZ_CONTEXT_ENVELOPE_ADAPTER ??
-    "tools/lib/harness/core.mjs",
+  process.env.SHLZ_CONTEXT_ENVELOPE_ADAPTER ?? "tools/lib/harness/core.mjs",
 );
 const { summarizeEvents } = await import(pathToFileURL(adapterPath));
 

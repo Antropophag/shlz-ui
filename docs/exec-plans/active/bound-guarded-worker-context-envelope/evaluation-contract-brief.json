@@ -8,18 +8,10 @@
       "tools/lib/harness/{core,codex-worker}.mjs",
       "tools/tests/harness.test.mjs"
     ],
-    "contracts": [
-      "harness/context-envelope-efficiency"
-    ],
+    "contracts": ["harness/context-envelope-efficiency"],
     "dependencies": [],
-    "focusedValidation": [
-      "npm run test:harness"
-    ],
-    "handoff": [
-      "sample identities",
-      "cost findings",
-      "red assertions"
-    ],
+    "focusedValidation": ["npm run test:harness"],
+    "handoff": ["sample identities", "cost findings", "red assertions"],
     "id": "evaluation-contract",
     "implementationOutcomes": [
       "stage/session cost visible",
@@ -31,10 +23,7 @@
       "tools/tests/harness.test.mjs",
       "docs/exec-plans/active/bound-guarded-worker-context-envelope/"
     ],
-    "nonGoals": [
-      "production launch guard",
-      "runtime token estimation"
-    ],
+    "nonGoals": ["production launch guard", "runtime token estimation"],
     "objective": "Build the deterministic representative cost and context-utility evaluation before launch behavior changes",
     "outputs": [
       "representative evaluation",
@@ -76,9 +65,7 @@
     "tools/tests/harness.test.mjs",
     "docs/exec-plans/active/bound-guarded-worker-context-envelope/"
   ],
-  "focusedValidation": [
-    "npm run test:harness"
-  ],
+  "focusedValidation": ["npm run test:harness"],
   "phaseInput": {
     "attested": [],
     "capsuleDigest": "e35c3eb990b21f8bd0a1c9d99bb18c113dc0a373c8a0045800437632b63f2dcf",
