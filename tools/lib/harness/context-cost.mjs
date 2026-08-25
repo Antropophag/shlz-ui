@@ -286,6 +286,25 @@ export async function createPacketContextCapsule(
   };
 }
 
+export function assertInitialContextEnvelope(packet, capsule) {
+  if (packet.maxInitialContextBytes === undefined) return;
+  const total = capsule.readNow.reduce(
+    (bytes, source) => bytes + source.bytes,
+    0,
+  );
+  if (total <= packet.maxInitialContextBytes) return;
+  const largest = [...capsule.readNow]
+    .sort(
+      (left, right) =>
+        right.bytes - left.bytes || left.path.localeCompare(right.path),
+    )
+    .slice(0, 5)
+    .map(({ path: sourcePath, bytes }) => ({ path: sourcePath, bytes }));
+  throw new Error(
+    `ERR_INITIAL_CONTEXT_ENVELOPE packet=${packet.id} measured=${total} maximum=${packet.maxInitialContextBytes} largest=${JSON.stringify(largest)}`,
+  );
+}
+
 export async function acknowledgeContextCapsule(ledger, capsule, repoRoot) {
   assertLedger(ledger);
   if (capsule?.version !== 1 || capsule.kind !== "packet-context")

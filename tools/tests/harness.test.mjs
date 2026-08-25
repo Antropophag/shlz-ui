@@ -66,6 +66,7 @@ import {
   validateExecutionBaseline,
   validatePlan,
   validateRequirementsState,
+  workerTelemetryEvents,
 } from "../lib/harness/core.mjs";
 import {
   launchCodexWorker,
@@ -74,6 +75,7 @@ import {
 } from "../lib/harness/codex-worker.mjs";
 import {
   acknowledgeContextCapsule,
+  assertInitialContextEnvelope,
   compareContextCostReplay,
   createContextLedger,
   createPacketContextCapsule,
@@ -2458,6 +2460,9 @@ test("worker-run automatically supplies the initial phase capsule", async () => 
   const fakeCodex = path.join(directory, "codex");
   try {
     const { plan, state } = guardedWorkerFixture();
+    plan.packets.find(
+      ({ id }) => id === "shared-native-dialog",
+    ).maxInitialContextBytes = 1_000_000;
     await Promise.all([
       writeFile(path.join(directory, "plan.json"), JSON.stringify(plan)),
       writeFile(path.join(directory, "state.json"), JSON.stringify(state)),
@@ -2518,6 +2523,114 @@ if (process.argv.includes("--help")) {
   }
 });
 
+test("guarded packet context budgets are optional positive integers", () => {
+  const { plan } = guardedWorkerFixture();
+  assert.doesNotThrow(() => validatePlan(clone(plan), config));
+  const guarded = plan.packets.find(({ id }) => id === "shared-native-dialog");
+  guarded.maxInitialContextBytes = 4096;
+  assert.doesNotThrow(() => validatePlan(clone(plan), config));
+  for (const malformed of [0, -1, 1.5, "4096"]) {
+    guarded.maxInitialContextBytes = malformed;
+    assert.throws(
+      () => validatePlan(clone(plan), config),
+      /maxInitialContextBytes must be a positive integer on a guarded packet/,
+    );
+  }
+  guarded.maxInitialContextBytes = 4096;
+  guarded.preferredExecutionMode = "continue";
+  assert.throws(
+    () => validatePlan(clone(plan), config),
+    /maxInitialContextBytes must be a positive integer on a guarded packet/,
+  );
+});
+
+test("initial context envelope reports largest contributors without changing coverage", () => {
+  const packet = { id: "implementation", maxInitialContextBytes: 100 };
+  const capsule = {
+    readNow: [
+      { path: "small.md", bytes: 20 },
+      { path: "largest.test.mjs", bytes: 90 },
+      { path: "second.mjs", bytes: 40 },
+    ],
+  };
+  const before = clone(capsule.readNow);
+  assert.throws(
+    () => assertInitialContextEnvelope(packet, capsule),
+    (error) =>
+      error.message.includes("measured=150 maximum=100") &&
+      error.message.indexOf("largest.test.mjs") <
+        error.message.indexOf("second.mjs"),
+  );
+  assert.deepEqual(capsule.readNow, before);
+  assert.doesNotThrow(() =>
+    assertInitialContextEnvelope(
+      { ...packet, maxInitialContextBytes: 150 },
+      capsule,
+    ),
+  );
+});
+
+test("worker-run fails before adapter launch when the resolved capsule exceeds its budget", async () => {
+  const directory = await mkdtemp(
+    path.join(root, "docs/exec-plans/worker-envelope-"),
+  );
+  const relative = (name) => path.relative(root, path.join(directory, name));
+  const fakeCodex = path.join(directory, "codex");
+  const launchMarker = path.join(directory, "launched");
+  try {
+    const { plan, state } = guardedWorkerFixture();
+    const packet = plan.packets.find(({ id }) => id === "shared-native-dialog");
+    packet.maxInitialContextBytes = 1;
+    await Promise.all([
+      writeFile(path.join(directory, "plan.json"), JSON.stringify(plan)),
+      writeFile(path.join(directory, "state.json"), JSON.stringify(state)),
+      writeFile(
+        path.join(directory, "baseline.json"),
+        JSON.stringify(executionBaseline),
+      ),
+      writeFile(
+        fakeCodex,
+        `#!/usr/bin/env node\nrequire("node:fs").writeFileSync(${JSON.stringify(launchMarker)}, "launched");\n`,
+      ),
+    ]);
+    await chmod(fakeCodex, 0o755);
+    await assert.rejects(
+      exec(
+        process.execPath,
+        [
+          "tools/harness.mjs",
+          "worker-run",
+          relative("plan.json"),
+          relative("state.json"),
+          "shared-native-dialog",
+          "--execution",
+          relative("baseline.json"),
+          "--claim",
+          "claim-over-budget",
+          "--session",
+          "over-budget",
+          "--brief-out",
+          relative("brief.json"),
+        ],
+        {
+          cwd: root,
+          env: { ...process.env, PATH: `${directory}:${process.env.PATH}` },
+        },
+      ),
+      /ERR_INITIAL_CONTEXT_ENVELOPE.*measured=.*maximum=1.*largest=/,
+    );
+    await assert.rejects(readFile(launchMarker), /ENOENT/);
+    const unchanged = await load(relative("state.json"));
+    assert.equal(unchanged.packets["shared-native-dialog"].status, "pending");
+    assert.deepEqual(
+      packet.contextSources,
+      plan.packets.find(({ id }) => id === packet.id).contextSources,
+    );
+  } finally {
+    await rm(directory, { recursive: true, force: true });
+  }
+});
+
 test("public telemetry cannot forge physical boundaries or runtime usage", async () => {
   const directory = await mkdtemp(
     path.join(tmpdir(), "shlz-harness-telemetry-"),
@@ -2533,6 +2646,20 @@ test("public telemetry cannot forge physical boundaries or runtime usage", async
         phase: "implementation",
         runtimeId: "forged-runtime",
         executionSource: "codex-exec-jsonl",
+      }),
+      /must be imported from adapter-bound execution state/,
+    );
+    await assert.rejects(
+      recordEvent(file, {
+        type: "usage",
+        packet: "notification",
+        session: "forged-session",
+        agent: "worker",
+        phase: "implementation",
+        inputTokens: 1,
+        cachedInputTokens: 1,
+        outputTokens: 1,
+        usageSource: "caller-asserted",
       }),
       /must be imported from adapter-bound execution state/,
     );
@@ -5169,6 +5296,138 @@ test("telemetry distinguishes logical labels from physical boundaries and keeps 
     relevantReads: 2,
     classifiedReads: 3,
     ratio: 2 / 3,
+  });
+});
+
+test("telemetry attributes raw runtime usage to packet attempts and sessions", () => {
+  const event = (
+    packet,
+    session,
+    runtimeId,
+    inputTokens,
+    cachedInputTokens,
+    outputTokens,
+  ) => [
+    {
+      packet,
+      session,
+      agent: "codex-worker",
+      phase: "implementation",
+      type: "execution-boundary",
+      executionSource: "codex-exec-jsonl",
+      runtimeId,
+    },
+    {
+      packet,
+      session,
+      agent: "codex-worker",
+      phase: "implementation",
+      type: "usage",
+      usageSource: "codex-exec-jsonl:turn.completed",
+      inputTokens,
+      cachedInputTokens,
+      outputTokens,
+    },
+  ];
+  const summary = summarizeEvents([
+    ...event("implementation", "implementation-r1", "runtime-1", 100, 60, 7),
+    ...event("implementation", "implementation-r2", "runtime-2", 250, 200, 11),
+    ...event("review", "review-r1", "runtime-3", 80, 40, 5),
+  ]);
+
+  assert.deepEqual(summary.runtimeUsage, {
+    inputTokens: 430,
+    cachedInputTokens: 300,
+    uncachedInputTokens: 130,
+    outputTokens: 23,
+    source: "codex-exec-jsonl:turn.completed",
+  });
+  assert.deepEqual(summary.byPacket.implementation, {
+    attempts: 2,
+    physicalBoundaries: 2,
+    sessions: ["implementation-r1", "implementation-r2"],
+    inputTokens: 350,
+    cachedInputTokens: 260,
+    uncachedInputTokens: 90,
+    outputTokens: 18,
+  });
+  assert.deepEqual(summary.bySession["implementation-r2"], {
+    packet: "implementation",
+    phase: "implementation",
+    attempt: 2,
+    runtimeId: "runtime-2",
+    inputTokens: 250,
+    cachedInputTokens: 200,
+    uncachedInputTokens: 50,
+    outputTokens: 11,
+  });
+});
+
+test("worker telemetry preserves adapter-issued raw usage fields", () => {
+  const events = workerTelemetryEvents({
+    packets: {
+      implementation: {
+        status: "launching",
+        session: "implementation-r1",
+        execution: { source: "codex-exec-jsonl", runtimeId: "runtime-1" },
+        launch: {
+          usage: {
+            input_tokens: 100,
+            cached_input_tokens: 60,
+            output_tokens: 7,
+          },
+        },
+      },
+    },
+  });
+  assert.deepEqual(events[1], {
+    packet: "implementation",
+    session: "implementation-r1",
+    agent: "codex-worker",
+    phase: "execution",
+    type: "usage",
+    usageSource: "codex-exec-jsonl:turn.completed",
+    tokens: 107,
+    contextTokens: 100,
+    inputTokens: 100,
+    cachedInputTokens: 60,
+    outputTokens: 7,
+  });
+});
+
+test("representative efficiency evaluation reproduces checked report and preserves unavailable metrics", async () => {
+  const fixturePath =
+    "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json";
+  const fixture = await load(fixturePath);
+  const expected = await load(fixture.expectedReport);
+  const { stdout } = await exec(
+    process.execPath,
+    ["tools/harness.mjs", "telemetry-summary", fixturePath, "--evaluation"],
+    { cwd: root },
+  );
+  const report = JSON.parse(stdout);
+
+  assert.deepEqual(report, expected);
+  assert.equal(report.runtime.cachedInputTokens, "unavailable");
+  assert.equal(report.runtime.uncachedInputTokens, "unavailable");
+  assert.equal(report.runtime.outputTokens, "unavailable");
+  assert.equal(report.proxies.contextRelevance, "unavailable");
+  assert.deepEqual(report.attribution.repeatedPackets[1], {
+    change: "enforce-contract-derived-tdd-routing",
+    packet: "test-design",
+    attempts: 5,
+    sessions: [
+      "contract-tdd-test-design",
+      "contract-tdd-test-design-r2",
+      "contract-tdd-test-design-r3",
+      "contract-tdd-test-design-r4",
+      "contract-tdd-test-design-r5",
+    ],
+  });
+  assert.deepEqual(report.sourceEnvelopes[0].broadPattern, {
+    pattern: "tools/tests/**",
+    sourceCount: 52,
+    sourceBytes: 353242,
   });
 });
 

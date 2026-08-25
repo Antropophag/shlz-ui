@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "fixture": "completed-guarded-worker-sample-2026-08-25",
+  "sample": {
+    "changes": 7,
+    "physicalBoundaries": 36,
+    "usageEvents": 31,
+    "missingUsageBoundaries": 5
+  },
+  "runtime": {
+    "tokens": 40076860,
+    "inputTokens": 39860211,
+    "cachedInputTokens": "unavailable",
+    "uncachedInputTokens": "unavailable",
+    "outputTokens": "unavailable",
+    "source": "codex-exec-jsonl:turn.completed"
+  },
+  "byChange": [
+    {
+      "id": "execution-context-isolation",
+      "tokens": 654259,
+      "inputTokens": 647527,
+      "physicalBoundaries": 3,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 0
+    },
+    {
+      "id": "reduce-harness-context-cost",
+      "tokens": 1179626,
+      "inputTokens": 1169262,
+      "physicalBoundaries": 1,
+      "usageEvents": 1,
+      "missingUsageBoundaries": 0
+    },
+    {
+      "id": "enforce-spec-driven-tdd",
+      "tokens": 11062825,
+      "inputTokens": 11006535,
+      "physicalBoundaries": 6,
+      "usageEvents": 5,
+      "missingUsageBoundaries": 1
+    },
+    {
+      "id": "require-independent-test-contract-review",
+      "tokens": 16419925,
+      "inputTokens": 16368052,
+      "physicalBoundaries": 3,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 0
+    },
+    {
+      "id": "enforce-contract-derived-tdd-routing",
+      "tokens": 6518240,
+      "inputTokens": 6457539,
+      "physicalBoundaries": 10,
+      "usageEvents": 10,
+      "missingUsageBoundaries": 0
+    },
+    {
+      "id": "enforce-delivery-packet-consistency",
+      "tokens": 2251100,
+      "inputTokens": 2229352,
+      "physicalBoundaries": 6,
+      "usageEvents": 6,
+      "missingUsageBoundaries": 0
+    },
+    {
+      "id": "wave-9-sidebar-application-shell",
+      "tokens": 1990885,
+      "inputTokens": 1981944,
+      "physicalBoundaries": 7,
+      "usageEvents": 3,
+      "missingUsageBoundaries": 4
+    }
+  ],
+  "attribution": {
+    "phases": [
+      {
+        "phase": "execution",
+        "physicalBoundaries": 36,
+        "usageEvents": 31,
+        "tokens": 40076860,
+        "inputTokens": 39860211
+      }
+    ],
+    "repeatedPackets": [
+      {
+        "change": "enforce-spec-driven-tdd",
+        "packet": "workflow-delivery",
+        "attempts": 2,
+        "sessions": ["workflow-delivery-r1", "workflow-delivery-r2"]
+      },
+      {
+        "change": "enforce-contract-derived-tdd-routing",
+        "packet": "test-design",
+        "attempts": 5,
+        "sessions": [
+          "contract-tdd-test-design",
+          "contract-tdd-test-design-r2",
+          "contract-tdd-test-design-r3",
+          "contract-tdd-test-design-r4",
+          "contract-tdd-test-design-r5"
+        ]
+      },
+      {
+        "change": "enforce-contract-derived-tdd-routing",
+        "packet": "test-contract-review",
+        "attempts": 4,
+        "sessions": [
+          "contract-tdd-test-review-r3",
+          "contract-tdd-test-review-r4",
+          "contract-tdd-test-review-r5",
+          "contract-tdd-test-review-r6"
+        ]
+      },
+      {
+        "change": "enforce-delivery-packet-consistency",
+        "packet": "test-design",
+        "attempts": 3,
+        "sessions": [
+          "delivery-consistency-test-design",
+          "delivery-consistency-test-design-r2",
+          "delivery-consistency-test-design-r3"
+        ]
+      },
+      {
+        "change": "enforce-delivery-packet-consistency",
+        "packet": "test-contract-review",
+        "attempts": 3,
+        "sessions": [
+          "delivery-consistency-test-review",
+          "delivery-consistency-test-review-r2",
+          "delivery-consistency-test-review-r3"
+        ]
+      },
+      {
+        "change": "wave-9-sidebar-application-shell",
+        "packet": "integration-delivery",
+        "attempts": 5,
+        "sessions": [
+          "wave9-integration-delivery",
+          "wave9-integration-delivery-retry",
+          "wave9-integration-delivery-retry2",
+          "wave9-integration-delivery-retry3",
+          "wave9-integration-delivery-retry4"
+        ]
+      }
+    ]
+  },
+  "sourceEnvelopes": [
+    {
+      "change": "enforce-contract-derived-tdd-routing",
+      "packet": "routing-engine",
+      "budget": "unbudgeted",
+      "resolvedSourceCount": 62,
+      "resolvedSourceBytes": 571271,
+      "broadPattern": {
+        "pattern": "tools/tests/**",
+        "sourceCount": 52,
+        "sourceBytes": 353242
+      },
+      "largestContributor": {
+        "path": "tools/tests/harness.test.mjs",
+        "bytes": 171843
+      }
+    }
+  ],
+  "proxies": {
+    "handoffBytes": "unavailable",
+    "contextRelevance": "unavailable",
+    "retryFanOut": { "physicalBoundaries": 36, "repeatedPacketAttempts": 22 }
+  },
+  "limitations": [
+    "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",
+    "Five physical boundaries have no matching trusted usage event and are excluded from token totals without estimation.",
+    "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+    "Source-envelope bytes are a repository-controlled input proxy and are not converted into model tokens.",
+    "The sample observes guarded workers only; root-agent context and unrecorded execution remain outside the evaluation."
+  ]
+}

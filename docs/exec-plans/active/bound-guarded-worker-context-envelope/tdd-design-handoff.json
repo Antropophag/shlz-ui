@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "sliceId": "context-envelope-efficiency",
+  "runtimeId": "01a0381b-bcce-7713-8d38-8290d0376010",
+  "scenarioMappings": [
+    { "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" },
+    { "scenarioId": "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope", "authorityRef": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md" }
+  ],
+  "inputs": [
+    "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md",
+    "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+    "docs/exec-plans/active/bound-guarded-worker-context-envelope/evaluation-report.json"
+  ],
+  "expectedResultSource": {
+    "kind": "explicit-openspec-literal",
+    "ref": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+  },
+  "oracleMethod": {
+    "kind": "behavioral-assertion",
+    "observesSeam": "harness/worker-run-and-telemetry-summary"
+  },
+  "expectedFailureSignature": "AssertionError",
+  "failedScenarioIds": [
+    "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists",
+    "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
+  ],
+  "oracleChallenge": {
+    "version": 1,
+    "adapterEnvironment": "SHLZ_CONTEXT_ENVELOPE_ADAPTER",
+    "controlAdapter": "tools/tests/fixtures/context-envelope-efficiency-control.mjs",
+    "decoyAdapter": "tools/tests/fixtures/context-envelope-efficiency-decoy.mjs",
+    "expectedFailureSignature": "AssertionError",
+    "scenarioIds": [
+      "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly"
+    ]
+  }
+}

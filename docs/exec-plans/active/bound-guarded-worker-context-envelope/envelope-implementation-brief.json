@@ -1,0 +1,236 @@
+{
+  "version": 1,
+  "planId": "bound-guarded-worker-context-envelope",
+  "packet": {
+    "contextSources": [
+      "openspec/changes/bound-guarded-worker-context-envelope/**",
+      "tools/lib/harness/{core,codex-worker,context-cost}.mjs",
+      "tools/harness.mjs",
+      "tools/tests/harness.test.mjs",
+      "docs/{agent-execution,exec-plans/README}.md"
+    ],
+    "contracts": [
+      "harness/context-envelope-efficiency"
+    ],
+    "dependencies": [
+      "evaluation-contract"
+    ],
+    "focusedValidation": [
+      "npm run test:harness",
+      "npm run check:docs",
+      "openspec validate bound-guarded-worker-context-envelope --strict"
+    ],
+    "handoff": [
+      "interface",
+      "compatibility checks",
+      "measured findings"
+    ],
+    "id": "envelope-implementation",
+    "implementationOutcomes": [
+      "over-budget launch prevented",
+      "coverage unchanged",
+      "legacy telemetry/plans supported"
+    ],
+    "implementationSurface": [
+      "tools/lib/harness/",
+      "tools/harness.mjs",
+      "tools/tests/harness.test.mjs",
+      "docs/agent-execution.md",
+      "docs/exec-plans/README.md"
+    ],
+    "nonGoals": [
+      "automatic source omission",
+      "universal threshold",
+      "external service"
+    ],
+    "objective": "Implement optional explicit packet envelopes and detailed telemetry summaries",
+    "outputs": [
+      "optional envelope contract",
+      "fail-closed guard",
+      "attributed telemetry summary"
+    ],
+    "preferredExecutionMode": "fresh-session",
+    "scope": [
+      "plan validation",
+      "pre-launch capsule guard",
+      "telemetry attribution",
+      "focused tests",
+      "operator docs"
+    ]
+  },
+  "claimId": "envelope-implementation-20260825",
+  "baseline": {
+    "branch": "feat/harness-efficiency-eval",
+    "commit": "528e75f072d0962f7965c4167bca5cb4df9bde4c",
+    "defaultBranch": "main",
+    "kind": "existing-pull-request",
+    "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/41",
+    "version": 1
+  },
+  "baselineDigest": "712d201975479df99f7e9a0ed3736b24195f4e2a7dd814272d766243e79e3858",
+  "requirements": {
+    "revision": 1,
+    "openSpecChange": "bound-guarded-worker-context-envelope"
+  },
+  "dependencyDigests": {
+    "evaluation-contract": "f5ae9afe4be23af1d9dbb42f0a56f1df81e8d4512fed04e6ff1a37b886890c1b"
+  },
+  "packetDigest": "d55d4cf229dcc313e99a0c9d92a043fab3afe8d6ca05596590d037b5daac70a1",
+  "contextIndex": [
+    "openspec/changes/bound-guarded-worker-context-envelope/**",
+    "tools/lib/harness/{core,codex-worker,context-cost}.mjs",
+    "tools/harness.mjs",
+    "tools/tests/harness.test.mjs",
+    "docs/{agent-execution,exec-plans/README}.md"
+  ],
+  "allowedImplementationSurface": [
+    "tools/lib/harness/",
+    "tools/harness.mjs",
+    "tools/tests/harness.test.mjs",
+    "docs/agent-execution.md",
+    "docs/exec-plans/README.md"
+  ],
+  "focusedValidation": [
+    "npm run test:harness",
+    "npm run check:docs",
+    "openspec validate bound-guarded-worker-context-envelope --strict"
+  ],
+  "phaseInput": {
+    "attested": [],
+    "capsuleDigest": "72a844a571bc5329dd752ef223c7ed557e338a4a1fabb6c50e94b1ec78264c9c",
+    "evidence": {
+      "dependencyHandoffs": [
+        {
+          "briefDigest": "cde36bb6439264603fcd4b2bde82a07f12b0699635a00ae4ce64b3fc34efa1c7",
+          "changed": [
+            "representative seven-change evaluation fixture and report",
+            "standalone acceptance probe with control and decoy adapters",
+            "RED harness assertions for detailed attribution and evaluation CLI"
+          ],
+          "claimId": "evaluation-contract-r2-20260825",
+          "completedPacket": "evaluation-contract",
+          "invalidatedAssumptions": [
+            "the initial test-design attempt had a complete acceptance surface"
+          ],
+          "nextPacket": "envelope-implementation",
+          "provenChecks": [
+            "control probe passed twice",
+            "decoy failed on flattened attempt attribution",
+            "current production probe is RED",
+            "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries",
+            "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope"
+          ],
+          "settledDecisions": [
+            "runtime values remain separate from source-byte proxies",
+            "cached/uncached and relevance stay unavailable where historical events omit them",
+            "packet/session/attempt attribution is the public acceptance seam"
+          ],
+          "unresolvedFindings": [],
+          "workerReportDigest": "d8c7c4162bf257c250f81449dbc46d0b328d66b4a00c268e3620cc71734aec11"
+        }
+      ],
+      "findings": [],
+      "rawEvidence": [
+        "RED harness assertions for detailed attribution and evaluation CLI",
+        "representative seven-change evaluation fixture and report",
+        "standalone acceptance probe with control and decoy adapters"
+      ],
+      "rawEvidenceIndex": [],
+      "unresolvedFindings": [],
+      "verdicts": [
+        "broad tools/tests/** resolves to 52 files and 353242 bytes within a 571271-byte packet source envelope",
+        "control probe passed twice",
+        "current production probe is RED",
+        "decoy failed on flattened attempt attribution",
+        "telemetry replay reproduced 40076860 total tokens, 39860211 input tokens, 36 boundaries, 31 usage events, and 5 unmatched boundaries"
+      ]
+    },
+    "kind": "packet-context",
+    "launchClaim": "envelope-implementation-20260825",
+    "objective": "Implement optional explicit packet envelopes and detailed telemetry summaries",
+    "obligations": [
+      "contract:harness/context-envelope-efficiency",
+      "outcome:coverage unchanged",
+      "outcome:legacy telemetry/plans supported",
+      "outcome:over-budget launch prevented",
+      "validation:npm run check:docs",
+      "validation:npm run test:harness",
+      "validation:openspec validate bound-guarded-worker-context-envelope --strict"
+    ],
+    "packetId": "envelope-implementation",
+    "phase": "implementation",
+    "physicalSession": null,
+    "planId": "bound-guarded-worker-context-envelope",
+    "readNow": [
+      {
+        "bytes": 15991,
+        "digest": "015b7ccbbfaa978264a0a386138f7adab0c581543b21a9d42dbd4a94132f0c73",
+        "path": "docs/agent-execution.md"
+      },
+      {
+        "bytes": 10372,
+        "digest": "9eae44db8b94c49d92c392beb1c16f4578e873116a3566d2373485d37db51ed5",
+        "path": "docs/exec-plans/README.md"
+      },
+      {
+        "bytes": 40,
+        "digest": "2722d733de6305f7dbd2c1c069cebb0c319f7cdcbc249e6da8b5422b6bb689d9",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/.openspec.yaml"
+      },
+      {
+        "bytes": 4060,
+        "digest": "8c36b197e281c2fa1719337d325679af3361fbb6d9966f4a9b455231ea5e2ad5",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/design.md"
+      },
+      {
+        "bytes": 2009,
+        "digest": "0f48baabd119fc3ce1a81cc33aa93562f95baab8631106cb6d8aa9fc5e927dd1",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/proposal.md"
+      },
+      {
+        "bytes": 4145,
+        "digest": "f418a25722ebae64ade17da174c273819174f0e0dd171259444fd795ec4455c4",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/specs/harness/context-envelope-efficiency/spec.md"
+      },
+      {
+        "bytes": 1483,
+        "digest": "be5e934011b681ca48f585967de5fb42b12aaf806ed2b05360f385f581edc227",
+        "path": "openspec/changes/bound-guarded-worker-context-envelope/tasks.md"
+      },
+      {
+        "bytes": 34357,
+        "digest": "6d06076a13181f29d736cdae3e9a91a91b680868bde16b30b237442ca7090b24",
+        "path": "tools/harness.mjs"
+      },
+      {
+        "bytes": 5225,
+        "digest": "0f579f2280e65a6d4f1370ad7cf66204e9c9a1e28aa2c1c9c534f979de3d0958",
+        "path": "tools/lib/harness/codex-worker.mjs"
+      },
+      {
+        "bytes": 27605,
+        "digest": "4f21c1780c408999357768fa9d36eda03b13a9a6a98fa52865948652d275aa3b",
+        "path": "tools/lib/harness/context-cost.mjs"
+      },
+      {
+        "bytes": 111130,
+        "digest": "86257a8c42b336eb2032e661a1709c18b23b0e9209559ca8efe503c4b6770b8b",
+        "path": "tools/lib/harness/core.mjs"
+      },
+      {
+        "bytes": 181653,
+        "digest": "fed1a06c12aa72ff85822824e65efe88c8244310838061a85805cc67b121824e",
+        "path": "tools/tests/harness.test.mjs"
+      }
+    ],
+    "sourceDigest": "3e584af6868182522ed94ada25099168173e8300952fa4c8056e9085303e14d9",
+    "transition": "pending-to-launching",
+    "version": 1
+  },
+  "lifecycle": {
+    "completion": "perform only this packet and report results; after the subprocess exits, the root orchestrator binds the runtime claim, validates the result, and writes the durable handoff",
+    "pause": "pause through a newer requirements revision on material ambiguity",
+    "failure": "report partial work; never fabricate completion"
+  },
+  "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8"
+}

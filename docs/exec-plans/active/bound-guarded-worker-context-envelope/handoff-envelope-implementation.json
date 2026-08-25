@@ -1,0 +1,30 @@
+{
+  "completedPacket": "envelope-implementation",
+  "changed": [
+    "optional positive maxInitialContextBytes guarded-packet contract",
+    "fail-closed resolved readNow envelope guard with largest contributors",
+    "raw cached/uncached/output telemetry and packet/session/attempt attribution",
+    "deterministic telemetry-summary evaluation mode",
+    "operator documentation and regression coverage"
+  ],
+  "provenChecks": [
+    "TDD GREEN passed twice with unchanged acceptance and fixture identities",
+    "npm run test:harness passed 115 tests plus routing probe",
+    "standalone efficiency probe passed",
+    "strict OpenSpec validation passed",
+    "Prettier and git diff --check passed"
+  ],
+  "settledDecisions": [
+    "budgets are explicit per packet, not repository-wide defaults",
+    "over-budget launch fails before codex exec and never trims coverage",
+    "legacy plans and telemetry remain compatible"
+  ],
+  "unresolvedFindings": [
+    "repository has no npm check:docs script; use the documented docs formatting check during final validation"
+  ],
+  "nextPacket": "review-delivery",
+  "invalidatedAssumptions": [],
+  "claimId": "envelope-implementation-20260825",
+  "briefDigest": "d64dee2d7a0cfec13489c9a570850e496282938fbee1e6304ee6243fbec3e0f8",
+  "workerReportDigest": "ab7b049a85ddb1809ea759b8481bb75ef6453fff9c052691fb2a66a45d2a46bc"
+}

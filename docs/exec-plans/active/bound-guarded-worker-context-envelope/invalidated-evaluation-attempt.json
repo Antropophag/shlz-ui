@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "packet": "evaluation-contract",
+  "runtimeId": "01a03815-a1ee-74b1-a038-832f60a12c3f",
+  "claimId": "evaluation-contract-20260825",
+  "workerReportDigest": "fb423106de85713c06c18de56d0199e875b9ce23a28dcd60ae3eff8fa110f7ba",
+  "disposition": "invalidated-before-completion",
+  "reason": "The execution plan declared a standalone acceptance probe and required oracle discrimination but omitted the probe and adapters from the packet implementation surface.",
+  "retainedEvidence": [
+    "representative telemetry measurements",
+    "evaluation fixture and report",
+    "initial RED assertions"
+  ],
+  "invalidatedClaims": [
+    "completed TDD test design",
+    "packet completion"
+  ]
+}

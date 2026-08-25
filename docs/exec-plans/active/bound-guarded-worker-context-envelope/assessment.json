@@ -46,7 +46,10 @@
         "seam": "harness/worker-run-and-telemetry-summary",
         "command": ["/usr/bin/node", "tools/tests/context-envelope-efficiency-probe.mjs"],
         "acceptanceSurface": ["tools/tests/context-envelope-efficiency-probe.mjs"],
-        "fixtureSurface": ["docs/exec-plans/fixtures/context-envelope-efficiency-eval.json"],
+        "fixtureSurface": [
+          "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+          "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs"
+        ],
         "productionSurface": ["tools/harness.mjs", "tools/lib/harness/core.mjs"],
         "testDesignPacket": "evaluation-contract",
         "implementationPacket": "envelope-implementation",
@@ -74,7 +77,7 @@
         "tools/lib/harness/{core,codex-worker}.mjs",
         "tools/tests/harness.test.mjs"
       ],
-      "implementationSurface": ["docs/exec-plans/fixtures/", "tools/tests/harness.test.mjs", "docs/exec-plans/active/bound-guarded-worker-context-envelope/"],
+      "implementationSurface": ["docs/exec-plans/fixtures/", "tools/tests/context-envelope-efficiency-probe.mjs", "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs", "tools/tests/harness.test.mjs", "docs/exec-plans/active/bound-guarded-worker-context-envelope/"],
       "focusedValidation": ["npm run test:harness"],
       "outputs": ["representative evaluation", "red attribution coverage", "measured envelope evidence"],
       "handoff": ["sample identities", "cost findings", "red assertions"],

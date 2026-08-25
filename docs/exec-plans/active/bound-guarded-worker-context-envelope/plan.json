@@ -119,7 +119,8 @@
           "timeoutMs": 10000
         },
         "fixtureSurface": [
-          "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json"
+          "docs/exec-plans/fixtures/context-envelope-efficiency-eval.json",
+          "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs"
         ],
         "id": "context-envelope-efficiency",
         "implementationPacket": "envelope-implementation",
@@ -174,6 +175,8 @@
       ],
       "implementationSurface": [
         "docs/exec-plans/fixtures/",
+        "tools/tests/context-envelope-efficiency-probe.mjs",
+        "tools/tests/fixtures/context-envelope-efficiency-{control,decoy}.mjs",
         "tools/tests/harness.test.mjs",
         "docs/exec-plans/active/bound-guarded-worker-context-envelope/"
       ],

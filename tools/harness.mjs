@@ -65,6 +65,7 @@ import {
 } from "./lib/harness/codex-worker.mjs";
 import {
   acknowledgeContextCapsule,
+  assertInitialContextEnvelope,
   createContextLedger,
   createPacketContextCapsule,
   runContextCostReplay,
@@ -88,6 +89,157 @@ const config = await readJson(
   path.join(repoRoot, "docs/exec-plans/config.json"),
 );
 const [command, ...args] = process.argv.slice(2);
+
+const efficiencyEvaluation = async (fixture) => {
+  if (fixture?.version !== 1 || !Array.isArray(fixture.telemetrySources))
+    throw new Error("efficiency evaluation requires a version 1 fixture");
+  const changes = [];
+  const all = [];
+  for (const source of fixture.telemetrySources) {
+    const text = await readFile(absolute(source.path), "utf8");
+    const events = text.trim().split("\n").filter(Boolean).map(JSON.parse);
+    all.push(...events.map((event) => ({ ...event, change: source.id })));
+    const boundaries = events.filter(
+      ({ type }) => type === "execution-boundary",
+    ).length;
+    const usage = events.filter(({ type }) => type === "usage");
+    changes.push({
+      id: source.id,
+      tokens: usage.reduce((total, event) => total + (event.tokens ?? 0), 0),
+      inputTokens: usage.reduce(
+        (total, event) => total + (event.contextTokens ?? 0),
+        0,
+      ),
+      physicalBoundaries: boundaries,
+      usageEvents: usage.length,
+      missingUsageBoundaries: boundaries - usage.length,
+    });
+  }
+  const usage = all.filter(({ type }) => type === "usage");
+  const boundaries = all.filter(({ type }) => type === "execution-boundary");
+  const grouped = new Map();
+  for (const event of boundaries) {
+    const key = `${event.change}\0${event.packet}`;
+    const value = grouped.get(key) ?? {
+      change: event.change,
+      packet: event.packet,
+      attempts: 0,
+      sessions: [],
+    };
+    value.attempts += 1;
+    value.sessions.push(event.session);
+    grouped.set(key, value);
+  }
+  const repeatedPackets = [...grouped.values()].filter(
+    ({ attempts }) => attempts > 1,
+  );
+  const phases = new Map();
+  for (const event of all) {
+    const phase = phases.get(event.phase) ?? {
+      phase: event.phase,
+      physicalBoundaries: 0,
+      usageEvents: 0,
+      tokens: 0,
+      inputTokens: 0,
+    };
+    if (event.type === "execution-boundary") phase.physicalBoundaries += 1;
+    if (event.type === "usage") {
+      phase.usageEvents += 1;
+      phase.tokens += event.tokens ?? 0;
+      phase.inputTokens += event.contextTokens ?? 0;
+    }
+    phases.set(event.phase, phase);
+  }
+  const sourceEnvelopes = fixture.sourceEnvelopes.map((source) => ({
+    change: source.change,
+    packet: source.packet,
+    budget: source.maxInitialContextBytes ?? "unbudgeted",
+    resolvedSourceCount: source.resolvedSourceCount,
+    resolvedSourceBytes: source.resolvedSourceBytes,
+    broadPattern: {
+      pattern: source.declaredPattern,
+      sourceCount: source.patternSourceCount,
+      sourceBytes: source.patternSourceBytes,
+    },
+    largestContributor: source.largestContributor,
+  }));
+  const hasRawCached =
+    usage.length > 0 &&
+    usage.every((event) => Number.isFinite(event.cachedInputTokens));
+  const hasRawOutput =
+    usage.length > 0 &&
+    usage.every((event) => Number.isFinite(event.outputTokens));
+  const classifiedReads = all.filter(
+    (event) =>
+      event.type === "context-read" && typeof event.relevant === "boolean",
+  );
+  const handoffs = all.filter((event) => Number.isFinite(event.handoffBytes));
+  const missingUsage = boundaries.length - usage.length;
+  return {
+    version: 1,
+    fixture: fixture.id,
+    sample: {
+      changes: changes.length,
+      physicalBoundaries: boundaries.length,
+      usageEvents: usage.length,
+      missingUsageBoundaries: missingUsage,
+    },
+    runtime: {
+      tokens: usage.reduce((total, event) => total + (event.tokens ?? 0), 0),
+      inputTokens: usage.reduce(
+        (total, event) => total + (event.contextTokens ?? 0),
+        0,
+      ),
+      cachedInputTokens: hasRawCached
+        ? usage.reduce((total, event) => total + event.cachedInputTokens, 0)
+        : "unavailable",
+      uncachedInputTokens: hasRawCached
+        ? usage.reduce(
+            (total, event) =>
+              total + event.inputTokens - event.cachedInputTokens,
+            0,
+          )
+        : "unavailable",
+      outputTokens: hasRawOutput
+        ? usage.reduce((total, event) => total + event.outputTokens, 0)
+        : "unavailable",
+      source: fixture.metricPolicy.trustedUsageSource,
+    },
+    byChange: changes,
+    attribution: { phases: [...phases.values()], repeatedPackets },
+    sourceEnvelopes,
+    proxies: {
+      handoffBytes: handoffs.length
+        ? handoffs.reduce((total, event) => total + event.handoffBytes, 0)
+        : "unavailable",
+      contextRelevance: classifiedReads.length
+        ? {
+            kind: "observed-read-ratio",
+            relevantReads: classifiedReads.filter(({ relevant }) => relevant)
+              .length,
+            classifiedReads: classifiedReads.length,
+            ratio:
+              classifiedReads.filter(({ relevant }) => relevant).length /
+              classifiedReads.length,
+          }
+        : "unavailable",
+      retryFanOut: {
+        physicalBoundaries: boundaries.length,
+        repeatedPacketAttempts: repeatedPackets.reduce(
+          (total, packet) => total + packet.attempts,
+          0,
+        ),
+      },
+    },
+    limitations: [
+      "The selected telemetry does not retain raw cached-input or output fields, so cached, uncached, and output token values remain unavailable.",
+      `${missingUsage === 5 ? "Five" : missingUsage} physical boundaries have no matching trusted usage event and are excluded from token totals without estimation.`,
+      "No selected event explicitly classifies source-read relevance; capsule inclusion and byte size are not treated as semantic relevance.",
+      "Source-envelope bytes are a repository-controlled input proxy and are not converted into model tokens.",
+      "The sample observes guarded workers only; root-agent context and unrecorded execution remain outside the evaluation.",
+    ],
+  };
+};
 const stateRoot = path.join(repoRoot, "docs/exec-plans");
 const canonicalStateRoot = realpathSync(stateRoot);
 const within = (root, target) =>
@@ -659,6 +811,10 @@ switch (command) {
             : null,
         },
       );
+      assertInitialContextEnvelope(
+        plan.packets.find(({ id }) => id === args[2]),
+        capsule,
+      );
       const brief = createWorkerBrief(plan, current, args[2], {
         baseline: await readJson(absolute(baselinePath)),
         requirementsState,
@@ -1031,10 +1187,16 @@ switch (command) {
     break;
   }
   case "telemetry-summary": {
-    const text = await readFile(absolute(args[0]), "utf8");
-    output(
-      summarizeEvents(text.trim().split("\n").filter(Boolean).map(JSON.parse)),
-    );
+    if (args.includes("--evaluation"))
+      output(await efficiencyEvaluation(await readJson(absolute(args[0]))));
+    else {
+      const text = await readFile(absolute(args[0]), "utf8");
+      output(
+        summarizeEvents(
+          text.trim().split("\n").filter(Boolean).map(JSON.parse),
+        ),
+      );
+    }
     break;
   }
   case "evidence":
