@@ -33,11 +33,33 @@ The harness SHALL classify an `evidenceKind` of `source-only`, `discovery`, or `
 <!-- failure-invariant: evidence-wave-cannot-promote-roadmap concern=state-machine -->
 
 - **WHEN** a numbered wave declares `source-only`, `discovery`, or `audit` work
-- **THEN** its route receipt selects bounded evidence execution and records that product-roadmap advancement is forbidden
+- **THEN** its route receipt selects OpenSpec-backed bounded evidence execution, records that product-roadmap advancement is forbidden, and prevents isolated worker execution
+
+#### Scenario: Historical evidence work attempts isolated execution
+
+<!-- implementation-semantics: material-state -->
+<!-- validation-impact: harness,spec -->
+<!-- failure-invariant: bounded-evidence-cannot-launch-isolated concern=subprocess -->
+
+- **WHEN** the PR #43 bounded-evidence route is supplied to the isolated execution seam
+- **THEN** the harness refuses the launch before starting a worker runtime
+
+### Requirement: Roadmap proof is derived from candidate runtime evidence
+
+For a roadmap-eligible product wave, validation SHALL derive production-outcome proof only after the current candidate passes the requested runtime command over a hashed closure containing explicit outcome-evidence paths. The proof SHALL bind the expected production delta, candidate head, command target and arguments, closure digest, evidence paths, and command result. A caller-supplied copy of the expected production delta MUST NOT satisfy delivery by itself.
+
+#### Scenario: Validation repeats the expected delta without outcome evidence
+
+<!-- implementation-semantics: material-state -->
+<!-- validation-impact: harness,spec -->
+<!-- failure-invariant: repeated-production-delta-is-not-proof concern=state-machine -->
+
+- **WHEN** validation repeats a product wave's expected production delta without candidate/runtime-bound outcome evidence
+- **THEN** delivery refuses roadmap advancement
 
 ### Requirement: PR 43 remains a discriminating regression fixture
 
-The executable harness regression suite SHALL preserve a compact fixture representing PR #43's Wave 10 source-only Card-compositions audit: zero production implementation delta, source and absence evidence, and a verified audit disposition. The fixture SHALL prove that this historical incident takes bounded evidence execution and cannot advance the product roadmap.
+The executable harness regression suite SHALL preserve a compact fixture representing PR #43's Wave 10 source-only Card-compositions audit: zero production implementation delta, zero runtime consumers, source and absence evidence, a verified audit disposition, and its historical multi-session/packet execution shape. The fixture SHALL prove that this historical incident takes bounded inline evidence execution, cannot produce production-outcome proof, cannot launch isolated execution, and cannot advance the product roadmap.
 
 #### Scenario: Historical Wave 10 incident is replayed
 

@@ -9,6 +9,7 @@ PR #43 completed a source-only audit as numbered Wave 10 through the same expens
 - Make the route receipt the single typed seam that carries this classification through the existing immutable receipt chain.
 - Reframe the component-audit roadmap so audit dispositions remain useful evidence but do not count as product-wave delivery without a production delta.
 - Preserve PR #43's source-only Wave 10 shape as a regression fixture that must take the bounded path and leave the product roadmap unchanged.
+- Require roadmap advancement to use candidate/runtime-bound production-outcome proof rather than a repeated production-delta declaration, and prevent bounded evidence from launching isolated multi-session execution.
 - Do not select or start Wave 11 as part of this change.
 
 ## Capabilities
@@ -24,4 +25,4 @@ None.
 
 ## Impact
 
-The change affects the harness route contract and focused tests, the numbered component-audit roadmap and its structural test, and agent-facing workflow guidance. It adds no UI component, public runtime API, dependency, design-source mutation, or next-wave implementation. Existing non-wave route inputs remain compatible.
+The change affects the harness route, validation, and isolated-execution contracts and focused tests, the numbered component-audit roadmap and its structural test, and agent-facing workflow guidance. It adds no UI component, public runtime API, dependency, design-source mutation, or next-wave implementation. Existing non-wave route inputs remain compatible.
