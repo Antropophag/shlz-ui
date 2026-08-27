@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readdir, readFile } from "node:fs/promises";
 import { extname, join, relative } from "node:path";
+import { fileURLToPath } from "node:url";
 import test from "node:test";
 
 const manifestPath = "docs/component-audits/card-compositions.json";
@@ -25,6 +26,7 @@ const boundedCensusRoots = [
   "packages",
   "tools/fixtures",
   "tools/playwright",
+  "tools/tests",
   "docs/components",
 ];
 const terminologyCensusRoots = [
@@ -44,7 +46,9 @@ const sourceExtensions = new Set([
   ".vue",
   ".php",
   ".css",
+  ".md",
 ]);
+const currentTestPath = relative(".", fileURLToPath(import.meta.url));
 const boundedSignature =
   /\.(?:shlz-(?:report-)?card|shlz-cover)\b|(?:class|className)\s*=\s*["'][^"']*\bshlz-(?:report-)?card\b|(?:class|className)\s*=\s*["'][^"']*\bshlz-cover\b|data-shlz-(?:report-)?card\b|data-shlz-cover\b|customElements\.define\(\s*["']shlz-(?:report-)?card["']|export\s+(?:class|function|const)\s+(?:Reports?Card|Card|Cover)\b/i;
 const terminology = /\bcard(?:s)?\b|cover/i;
@@ -148,10 +152,12 @@ test("Wave 10 repository census proves bounded absence and classifies terminolog
     await Promise.all(boundedCensusRoots.map(filesBelow))
   ).flat();
   const boundedSources = await Promise.all(
-    boundedFiles.map(async (path) => ({
-      path: relative(".", path),
-      source: await readFile(path, "utf8"),
-    })),
+    boundedFiles
+      .filter((path) => relative(".", path) !== currentTestPath)
+      .map(async (path) => ({
+        path: relative(".", path),
+        source: await readFile(path, "utf8"),
+      })),
   );
   assert.deepEqual([...matchingPaths(boundedSources, boundedSignature)], []);
 
