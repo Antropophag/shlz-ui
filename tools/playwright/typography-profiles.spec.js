@@ -35,18 +35,35 @@ test("Golos is default and profiles work on roots and subtrees", async ({
   await expect(body).toHaveCSS("font-family", /Golos Text/);
 
   const golosFaces = await page.evaluate(async () => {
-    const latin = await document.fonts.load('400 16px "Golos Text"', "SHLZ");
-    const cyrillic = await document.fonts.load(
-      '400 16px "Golos Text"',
-      "Кириллица",
-    );
+    const weights = [400, 500, 600, 700];
+    const loadSample = async (sample) =>
+      Object.fromEntries(
+        await Promise.all(
+          weights.map(async (weight) => [
+            weight,
+            (
+              await document.fonts.load(`${weight} 16px "Golos Text"`, sample)
+            ).map(({ family, status, weight: loadedWeight }) => ({
+              family,
+              status,
+              weight: loadedWeight,
+            })),
+          ]),
+        ),
+      );
     return {
-      latin: latin.map(({ family, status }) => ({ family, status })),
-      cyrillic: cyrillic.map(({ family, status }) => ({ family, status })),
+      latin: await loadSample("SHLZ"),
+      cyrillic: await loadSample("Кириллица"),
     };
   });
-  for (const faces of [golosFaces.latin, golosFaces.cyrillic]) {
-    expect(faces).toContainEqual({ family: "Golos Text", status: "loaded" });
+  for (const sample of [golosFaces.latin, golosFaces.cyrillic]) {
+    for (const weight of [400, 500, 600, 700]) {
+      expect(sample[weight]).toContainEqual({
+        family: "Golos Text",
+        status: "loaded",
+        weight: String(weight),
+      });
+    }
   }
 
   await body.evaluate((node) => {
