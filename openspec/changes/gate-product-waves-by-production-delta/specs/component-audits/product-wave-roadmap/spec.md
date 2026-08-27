@@ -26,4 +26,3 @@ A numbered entry SHALL count as product-wave progress only when its pre-executio
 
 - **WHEN** the current bounded or product episode completes and no separate request authorizes the next wave
 - **THEN** the agent stops without selecting or starting the next numbered wave
-

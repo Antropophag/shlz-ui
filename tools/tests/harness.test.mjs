@@ -129,6 +129,79 @@ test("direct routing is positively proven and material or unknown signals fail c
   );
 });
 
+test("numbered product waves require production delta and PR 43 stays bounded evidence", async () => {
+  const incident = JSON.parse(
+    await readFile(
+      path.join(repoRoot, "tools/tests/fixtures/pr43-wave-incident.json"),
+      "utf8",
+    ),
+  );
+  const waveAssessment = {
+    ...assessment,
+    intent: "numbered wave",
+  };
+
+  assert.throws(
+    () =>
+      route({
+        ...waveAssessment,
+        wave: {
+          number: 11,
+          workKind: "product",
+          expectedProductionDelta: "   ",
+        },
+      }),
+    /expected production delta/,
+  );
+
+  const product = route({
+    ...waveAssessment,
+    wave: {
+      number: 11,
+      workKind: "product",
+      expectedProductionDelta:
+        "A production Upload composition with a public interaction contract",
+    },
+  });
+  assert.deepEqual(product.payload.wave, {
+    number: 11,
+    workKind: "product",
+    expectedProductionDelta:
+      "A production Upload composition with a public interaction contract",
+    executionPath: "product",
+    heavyExecution: true,
+    roadmapAdvance: true,
+  });
+
+  const replay = route({
+    ...waveAssessment,
+    intent: `Replay PR #${incident.pullRequest}`,
+    wave: incident.wave,
+  });
+  assert.equal(incident.evidence.auditDisposition, "VERIFIED");
+  assert.equal(incident.evidence.productionImplementations, 0);
+  assert.deepEqual(replay.payload.wave, {
+    number: 10,
+    workKind: "source-only",
+    expectedProductionDelta: null,
+    executionPath: "bounded-evidence",
+    heavyExecution: false,
+    roadmapAdvance: false,
+  });
+
+  assert.throws(
+    () =>
+      route({
+        ...waveAssessment,
+        wave: {
+          ...incident.wave,
+          expectedProductionDelta: "Claimed production delivery",
+        },
+      }),
+    /evidence-only wave cannot declare a production delta/,
+  );
+});
+
 test("requirements require decisions, synthesis, authorization, and exact route identity", () => {
   assert.equal(requirementsReceipt.payload.authorization, "pre-authorized");
   assert.throws(
@@ -462,7 +535,12 @@ test("every prior harness scenario has an explicit migration disposition", async
   for (const file of stdout
     .trim()
     .split("\n")
-    .filter((name) => name && !name.includes("simplify-engineering-harness"))) {
+    .filter(
+      (name) =>
+        name &&
+        !name.includes("simplify-engineering-harness") &&
+        !name.includes("gate-product-waves-by-production-delta"),
+    )) {
     const capability = file.match(/specs\/(harness\/[^/]+)\/spec\.md$/)[1];
     const lines = (await readFile(path.join(repoRoot, file), "utf8")).split(
       /\r?\n/,

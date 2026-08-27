@@ -1,0 +1,14 @@
+{
+  "pullRequest": 43,
+  "wave": {
+    "number": 10,
+    "workKind": "source-only",
+    "expectedProductionDelta": null
+  },
+  "evidence": {
+    "family": "Card compositions",
+    "auditDisposition": "VERIFIED",
+    "productionImplementations": 0,
+    "runtimeConsumers": 0
+  }
+}

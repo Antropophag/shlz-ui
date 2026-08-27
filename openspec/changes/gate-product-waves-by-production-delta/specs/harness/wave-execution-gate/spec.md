@@ -9,6 +9,7 @@ Prevents evidence-only work from consuming product-wave execution or roadmap pro
 The harness SHALL require a numbered product wave to carry a non-empty expected production delta in its route assessment before producing a baseline receipt. The delta MUST identify an observable production implementation, behavior, public interface, or real consumer outcome; audit status, source knowledge, documentation, planning, and test-only evidence MUST NOT satisfy this field.
 
 #### Scenario: Product wave has no production outcome
+
 <!-- implementation-semantics: material-state -->
 <!-- validation-impact: harness,spec,docs -->
 <!-- failure-invariant: product-wave-without-delta-cannot-start concern=state-machine -->
@@ -26,6 +27,7 @@ The harness SHALL require a numbered product wave to carry a non-empty expected 
 The harness SHALL classify source-only, discovery-only, and audit-only numbered work as bounded evidence execution. This classification MUST set product-roadmap eligibility to false and MUST NOT be overridable by calling the work a product wave or by recording a verified audit disposition.
 
 #### Scenario: Source-only audit is submitted as a numbered wave
+
 <!-- implementation-semantics: material-state -->
 <!-- validation-impact: harness,spec,docs -->
 <!-- failure-invariant: evidence-wave-cannot-promote-roadmap concern=state-machine -->
@@ -41,4 +43,3 @@ The executable harness regression suite SHALL preserve a compact fixture represe
 
 - **WHEN** the PR #43 regression fixture is evaluated through the wave gate
 - **THEN** it is classified as bounded evidence with no product-roadmap eligibility
-

@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Require numbered product waves to declare an expected production delta, route source-only discovery and audit work to bounded evidence execution, prevent that work from advancing the product roadmap, and lock PR #43 as a regression fixture without starting the next wave.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

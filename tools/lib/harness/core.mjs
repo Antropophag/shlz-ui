@@ -37,6 +37,7 @@ export const materialSignals = [
   "publicContract",
   "materialAmbiguity",
 ];
+const waveWorkKinds = new Set(["product", "source-only", "discovery", "audit"]);
 
 export function stable(value) {
   if (Array.isArray(value)) return value.map(stable);
@@ -79,6 +80,53 @@ function signals(value) {
   );
 }
 
+function classifyWave(value) {
+  if (value === undefined) return undefined;
+  assert(value && typeof value === "object", "wave assessment is required");
+  assert(
+    Number.isInteger(value.number) && value.number > 0,
+    "wave number must be a positive integer",
+  );
+  assert(waveWorkKinds.has(value.workKind), "unknown wave work kind");
+  if (value.workKind === "product") {
+    assert(
+      typeof value.expectedProductionDelta === "string" &&
+        value.expectedProductionDelta.trim(),
+      "numbered product wave requires an expected production delta",
+    );
+    return {
+      number: value.number,
+      workKind: value.workKind,
+      expectedProductionDelta: value.expectedProductionDelta.trim(),
+      executionPath: "product",
+      heavyExecution: true,
+      roadmapAdvance: true,
+    };
+  }
+  assert(
+    value.expectedProductionDelta === null ||
+      value.expectedProductionDelta === undefined,
+    "evidence-only wave cannot declare a production delta",
+  );
+  return {
+    number: value.number,
+    workKind: value.workKind,
+    expectedProductionDelta: null,
+    executionPath: "bounded-evidence",
+    heavyExecution: false,
+    roadmapAdvance: false,
+  };
+}
+
+function assertWaveReceipt(value) {
+  if (value === undefined) return;
+  assert(
+    JSON.stringify(stable(value)) ===
+      JSON.stringify(stable(classifyWave(value))),
+    "route receipt has an invalid wave execution classification",
+  );
+}
+
 export function route(assessment) {
   assert(
     assessment?.version === 1 && assessment.intent,
@@ -111,6 +159,7 @@ export function route(assessment) {
     materialSignals: assessment.materialSignals,
     material,
     unknown,
+    wave: classifyWave(assessment.wave),
   });
 }
 export function requirements(routeReceipt, state) {
@@ -206,6 +255,7 @@ export async function baseline({
   pullRequestUrl,
 }) {
   verify(routeReceipt, "route");
+  assertWaveReceipt(routeReceipt.payload.wave);
   if (routeReceipt.payload.route === "open-spec") {
     verify(requirementsReceipt, "requirements");
     assert(
@@ -710,31 +760,34 @@ export async function delivery({
   if (routeReceipt.payload.route === "open-spec") {
     verify(requirementsReceipt, "requirements");
     verify(contractReceipt, "contract");
-    verify(tddReceipt, "tdd");
-    verify(reviewReceipt, "review");
     assert(
       requirementsReceipt.routeDigest === routeReceipt.digest &&
         baselineReceipt.routeDigest === routeReceipt.digest &&
         baselineReceipt.requirementsDigest === requirementsReceipt.digest,
       "route, requirements, and baseline receipt chain differs",
     );
-    assert(
-      tddReceipt.payload.candidateHead === head &&
-        reviewReceipt.payload.candidateHead === head,
-      "TDD or review candidate differs",
-    );
-    assert(
-      tddReceipt.contractReceiptDigest === contractReceipt.digest &&
-        reviewReceipt.contractReceiptDigest === contractReceipt.digest,
-      "TDD or review contract differs",
-    );
-    if (contractReceipt.payload.failureInvariants.length) {
-      verify(failureProofReceipt, "failure-proof");
+    if (routeReceipt.payload.wave?.heavyExecution !== false) {
+      verify(tddReceipt, "tdd");
+      verify(reviewReceipt, "review");
       assert(
-        failureProofReceipt.payload.candidateHead === head &&
-          failureProofReceipt.contractReceiptDigest === contractReceipt.digest,
-        "failure proof candidate or contract differs",
+        tddReceipt.payload.candidateHead === head &&
+          reviewReceipt.payload.candidateHead === head,
+        "TDD or review candidate differs",
       );
+      assert(
+        tddReceipt.contractReceiptDigest === contractReceipt.digest &&
+          reviewReceipt.contractReceiptDigest === contractReceipt.digest,
+        "TDD or review contract differs",
+      );
+      if (contractReceipt.payload.failureInvariants.length) {
+        verify(failureProofReceipt, "failure-proof");
+        assert(
+          failureProofReceipt.payload.candidateHead === head &&
+            failureProofReceipt.contractReceiptDigest ===
+              contractReceipt.digest,
+          "failure proof candidate or contract differs",
+        );
+      }
     }
   }
   assert(validationReceipts?.length, "delivery requires validation");

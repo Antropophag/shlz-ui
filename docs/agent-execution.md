@@ -18,6 +18,8 @@ Normal S/M work runs inline and needs no packet graph, claim, capsule, ledger, h
 
 Material behavior creates a `contract` receipt from current OpenSpec scenario identities and normative content. When test-first proof applies, `tdd` runs one symmetric oracle: RED must reject the immutable baseline or declared known-bad adapter and GREEN must accept the candidate with the same contract and oracle inputs.
 
+A numbered `source-only`, `discovery`, or `audit` wave uses the bounded evidence path recorded by its route receipt. It retains requirements/OpenSpec, baseline, contract, focused validation, conformance, and delivery, but does not acquire product TDD, independent code review, or failure-proof receipts solely from its wave number. Its delivery cannot advance the product roadmap. A numbered product wave retains the full applicable chain and must declare its expected production delta before baseline.
+
 `validate` hashes every configured meaning-changing input. A successful expensive result is reusable only for the same candidate and identical input closure.
 
 Material or review-risky work records separate Standards and Spec outcomes with `review`. Material state-machine, persistence, or subprocess changes also record a discriminating `failure-proof` derived from marked current-change invariants.

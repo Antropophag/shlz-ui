@@ -59,13 +59,20 @@ test("roadmap parser preserves duplicate rows for exact-once validation", async 
   assert.equal(parseRoadmapRows(duplicated).length, expectedWaves.size + 1);
 });
 
-test("roadmap keeps short-intent and workflow boundaries explicit", async () => {
+test("roadmap gates numbered product work and keeps evidence waves bounded", async () => {
   const agents = await readFile("AGENTS.md", "utf8");
   const roadmap = await readFile(roadmapPath, "utf8");
 
-  assert.match(agents, /numbered component-audit request/);
+  assert.match(agents, /numbered product or component-audit request/);
   assert.match(agents, /docs\/component-audit-roadmap\.md/);
-  assert.match(roadmap, /`Сделай Wave N` selects the complete entry/);
+  assert.match(
+    roadmap,
+    /product` requires a non-empty expected production delta/,
+  );
+  assert.match(roadmap, /automatically use bounded evidence execution/);
+  assert.match(roadmap, /PR #43 is the regression fixture/);
+  assert.match(roadmap, /did not deliver or advance a product Wave 10/);
+  assert.match(roadmap, /does not authorize the next numbered wave/);
   assert.match(roadmap, /This roadmap selects scope; it does not cache/);
   assert.match(roadmap, /number outside Waves 9–12 is unplanned/);
   assert.doesNotMatch(roadmap, /npm run harness --/);

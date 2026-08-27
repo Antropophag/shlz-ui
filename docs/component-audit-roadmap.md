@@ -1,6 +1,11 @@
-# Component-audit roadmap: Waves 9–12
+# Component-audit scope map and product-wave gate: Waves 9–12
 
-This is the durable scope map for the component-audit waves remaining after Wave 8. A request of the form `Сделай Wave N` selects the complete entry for N below and authorizes its bounded implementation and unmerged-PR delivery. The requester does not need to repeat component names or pipeline instructions.
+This is the durable scope map for the component-audit families recorded after Wave 8. A request of the form `Сделай Wave N` selects the complete entry for N below, but numbering alone does not make the work a product wave or authorize heavy execution. Before baseline, the route assessment must classify the entry explicitly:
+
+- `product` requires a non-empty expected production delta: an observable production implementation, behavior, public interface, or real consumer outcome;
+- `source-only`, `discovery`, and `audit` automatically use bounded evidence execution and set product-roadmap advancement to false.
+
+Audit status, source knowledge, documentation, planning, test-only evidence, and a `VERIFIED` disposition are not production deltas. The requester does not need to repeat component names, but a short numbered intent cannot manufacture a production outcome that the source and current contract do not establish.
 
 ## Authority and provenance
 
@@ -24,9 +29,9 @@ Every source filename above is relative to `shlz-design-source/raw/svg/`. Those 
 ## Resolving `Сделай Wave N`
 
 1. Read the numbered entry and compare its family, audit status, source authority, and material implementation surfaces with the current project inventory and repository census.
-2. If they still agree, use the entry's included scope, exclusions, and completion boundary as the task scope. Wave numbering expresses roadmap order, not a dependency on merging an earlier wave; each wave starts from the clean current `origin/main` required by repository policy.
+2. If they still agree, use the entry's included scope, exclusions, and completion boundary as the task scope. Record the typed `wave` block in the harness route assessment. Use `workKind: product` only with an explicit expected production delta; otherwise use the matching bounded evidence kind. Wave numbering expresses map order, not permission to infer production scope.
 3. Apply the current authorities in `docs/openspec.md`, `docs/requirements-elicitation.md`, `docs/agent-execution.md`, `docs/validation-workflow.md`, and `docs/component-audit-workflow.md`. This roadmap selects scope; it does not cache their commands or replace their gates.
-4. Treat the short request as pre-authorization to implement only the mapped wave and open its separate PR. It does not authorize a design-source change, an application-derived visual contract, an unsupported public/runtime API, accepting a new finding, merging a PR, or claiming one family complete because another passed.
+4. Treat the short request as pre-authorization to execute only the classified path and open its separate PR. Bounded evidence work may update source/audit evidence but cannot mark a product wave delivered, exhaust a product-roadmap entry, or authorize the next wave. The request does not authorize a design-source change, an application-derived visual contract, an unsupported public/runtime API, accepting a new finding, merging a PR, or claiming one family complete because another passed.
 
 Material drift in family membership, audit status, source authority, or implementation surface closes the gate: update this roadmap and the affected OpenSpec artifacts before implementation. Incidental count drift is recorded in the wave census and does not change scope by itself. A number outside Waves 9–12 is unplanned; report that no durable scope exists instead of extrapolating a new wave.
 
@@ -48,7 +53,7 @@ Audit `Card with button.svg`, `Reports card.svg`, and `Cover.svg` as source-defi
 
 The starting disposition is source-only. As Wave 6 did for Date Picker / Calendar, absence may be a valid verified audit outcome. Static exports do not establish click behavior, navigation, loading, media lifecycle, responsive reflow, data models, or a generic Card API. This wave excludes inventing those contracts and excludes re-certifying any verified primitive nested in the source frames.
 
-Completion boundary: Card compositions receive an independent source/absence manifest, applicable evidence with reasoned `not-applicable` levels, inventory update, and Wave 10 report. A reusable implementation is added only if current requirements/OpenSpec resolution establishes a complete public contract; the short wave intent alone supplies no missing semantics.
+Evidence boundary: Card compositions may receive an independent source/absence manifest, applicable evidence with reasoned `not-applicable` levels, inventory update, and report. PR #43 is the regression fixture for this case: its zero production implementations and source-only `VERIFIED` audit disposition are valid bounded evidence, but they did not deliver or advance a product Wave 10. A product Wave 10 requires a separate explicit expected production delta backed by a complete current requirements/OpenSpec contract; the short numbered intent supplies no missing semantics.
 
 ## Wave 11 — Upload / Document compositions
 
@@ -70,6 +75,6 @@ The starting disposition is source-only. The source does not establish editor co
 
 Completion boundary: each of Messaging, History, and Planner has a source/absence and occurrence ledger with independently stated applicable evidence, limitations, and findings; the family inventory row is reconciled; and the Wave 12 report preserves the three separate dispositions. Runtime implementation proceeds only for semantics established through current requirements/OpenSpec resolution.
 
-## Roadmap completion
+## Product-roadmap advancement
 
-The roadmap is exhausted when Waves 9–12 each have a delivered, merged audit disposition reflected in the current inventory and no newly discovered family remains unplanned. Opening a wave PR does not itself satisfy this condition, and agents never merge on the user's behalf.
+Audit dispositions remain recorded in the inventory and reports, but do not consume product entries. A numbered entry advances only when its pre-execution route receipt records `workKind: product`, a non-empty expected production delta, and product-roadmap eligibility, and delivery proves that same delta. Completing or merging bounded evidence does not authorize the next numbered wave. After the current episode, stop unless the user separately requests another wave; agents never merge on the user's behalf.

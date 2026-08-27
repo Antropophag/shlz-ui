@@ -12,6 +12,8 @@ npm run harness -- route <assessment.json> --out <route-receipt.json>
 
 Direct is positively proven only when every signal is false and the work is local, reversible, behavior-preserving, free of external effects/contract changes, and unambiguous. Any true or unknown signal routes to requirements/OpenSpec. Material signals include new capability, publishing/release, external effects or automation, public URLs, deployment semantics, permissions/security, irreversible action, public contract changes, and material ambiguity.
 
+Numbered wave assessments also carry a typed `wave` block. `workKind: product` requires a non-empty expected production delta before `baseline`; `source-only`, `discovery`, and `audit` select bounded evidence execution and are never product-roadmap eligible. The harness validates this semantic declaration and does not infer it from the intent text.
+
 Direct flow:
 
 `inspect → route → baseline → implement → validate → conformance → PR → delivery`
