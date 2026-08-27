@@ -1,0 +1,24 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Ensure the current showcase renders the already-authoritative Golos Text typography instead of a platform-dependent system fallback.",
+    "material": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "requiredDecisions": [],
+    "route": "direct",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "c314e4e16d2be65998ce94b3baf305c868be351c3dc50b2cc3c706d4b8996737"
+}
