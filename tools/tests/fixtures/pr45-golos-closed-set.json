@@ -13,6 +13,31 @@
       "excluded": []
     }
   ],
+  "declaredButNotExecutable": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "500",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "600",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "700",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        }
+      ],
+      "excluded": []
+    }
+  ],
   "complete": [
     {
       "id": "golos-text-weights",

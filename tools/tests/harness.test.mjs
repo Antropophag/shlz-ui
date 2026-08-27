@@ -563,7 +563,9 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
     argv: [
       process.execPath,
       "-e",
-      "process.exit(process.argv[1] ? 0 : 1)",
+      "process.exit(process.argv.slice(1).every(Boolean) ? 0 : 1)",
+      "{evidence}",
+      "{set}",
       "{member}",
     ],
     inputs: [evidence],
@@ -702,7 +704,7 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
         },
       ],
     }),
-    /exactly one \{member\} placeholder/,
+    /exactly one \{evidence\} placeholder/,
   );
   await assert.rejects(
     validation({
@@ -710,7 +712,9 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
       argv: [
         process.execPath,
         "-e",
-        "process.exit(process.argv[1] === 'hover' ? 1 : 0)",
+        "process.exit(process.argv[3] === 'hover' ? 1 : 0)",
+        "{evidence}",
+        "{set}",
         "{member}",
       ],
       closedSetEvidence: [
@@ -736,7 +740,6 @@ test("PR 45 Golos Text fixture rejects representative-only weight evidence", asy
       "utf8",
     ),
   );
-  const evidence = "tools/playwright/typography-profiles.spec.js";
   const run = (closedSetEvidence) =>
     validation({
       repoRoot,
@@ -745,14 +748,25 @@ test("PR 45 Golos Text fixture rejects representative-only weight evidence", asy
       target: "PR 45 Golos weights",
       argv: [
         process.execPath,
-        "-e",
-        "process.exit(['400', '500', '600', '700'].includes(process.argv[1]) ? 0 : 1)",
+        "tools/tests/golos-weight-evidence-probe.mjs",
+        "{evidence}",
+        "{set}",
         "{member}",
       ],
-      inputs: [evidence],
+      inputs: [
+        ...new Set(
+          closedSetEvidence.flatMap((item) =>
+            item.covered.flatMap(({ evidence }) => evidence),
+          ),
+        ),
+      ],
       closedSetEvidence,
     });
   await assert.rejects(run(fixture.knownBad), /500, 600, 700/);
+  await assert.rejects(
+    run(fixture.declaredButNotExecutable),
+    /closed-set validation failed: golos-text-weights: 500/,
+  );
   assert.equal((await run(fixture.complete)).payload.outcome, "pass");
   assert.equal((await run(fixture.withExclusions)).payload.outcome, "pass");
 });

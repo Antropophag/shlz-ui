@@ -20,7 +20,7 @@ After remediation, recreate every receipt whose candidate, contract, oracle, or 
 When an episode introduces or changes a finite set of variants, states, weights, roles, enum values, or explicitly supported combinations:
 
 1. Declare each changed set in post-implementation discovery as `closedSets: [{ id, members }]`. Use stable contract identities. A combination is one opaque member such as `size=large|state=disabled`; independent axes do not imply an undeclared Cartesian product.
-2. In a relevant `validate` manifest, add `closedSetEvidence` with the exact `id` and `members`. Partition every member into either `covered` or `excluded`, and include exactly one `{member}` argument in `argv`; validation substitutes and executes it once for every covered member.
+2. In a relevant `validate` manifest, add `closedSetEvidence` with the exact `id` and `members`. Partition every member into either `covered` or `excluded`, and include exactly one each of `{evidence}`, `{set}`, and `{member}` in `argv`; validation substitutes and executes the oracle once for every covered member/evidence pair.
 3. Give every covered member at least one executable evidence path from `inputs`. Give every excluded member a non-empty, reviewable reason. Independent Spec review decides whether an exclusion is acceptable.
 
 Validation rejects missing, duplicate, undeclared, overlapping, closure-free, unexercised, or failing entries. Conformance binds the declaration, validation binds each per-member outcome, and delivery requires an exact proof for every declared set. An empty `closedSets` list preserves the ordinary validation path for changes with no finite-set impact.

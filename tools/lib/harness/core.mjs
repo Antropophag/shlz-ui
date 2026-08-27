@@ -742,27 +742,47 @@ export async function validation({
       { contractReceiptDigest: contractReceipt.digest },
     );
   }
-  const coveredMembers = normalizedClosedSetEvidence.flatMap((item) =>
-    item.covered.map(({ member }) => ({ setId: item.id, member })),
+  const coveredEvidence = normalizedClosedSetEvidence.flatMap((item) =>
+    item.covered.flatMap(({ member, evidence }) =>
+      evidence.map((evidencePath) => ({
+        setId: item.id,
+        member,
+        evidencePath,
+      })),
+    ),
   );
-  if (coveredMembers.length)
-    assert(
-      argv.filter((part) => part === "{member}").length === 1,
-      "closed-set validation command requires exactly one {member} placeholder",
-    );
+  if (coveredEvidence.length)
+    for (const placeholder of ["{evidence}", "{set}", "{member}"])
+      assert(
+        argv.filter((part) => part === placeholder).length === 1,
+        `closed-set validation command requires exactly one ${placeholder} placeholder`,
+      );
   const memberResults = [];
-  for (const { setId, member } of coveredMembers) {
+  for (const { setId, member, evidencePath } of coveredEvidence) {
     const memberResult = await command(
-      argv.map((part) => (part === "{member}" ? member : part)),
+      argv.map((part) =>
+        part === "{evidence}"
+          ? evidencePath
+          : part === "{set}"
+            ? setId
+            : part === "{member}"
+              ? member
+              : part,
+      ),
       cwd,
     );
     assert(
       memberResult.outcome === "pass",
       `closed-set validation failed: ${setId}: ${member}`,
     );
-    memberResults.push({ setId, member, result: memberResult });
+    memberResults.push({
+      setId,
+      member,
+      evidence: evidencePath,
+      result: memberResult,
+    });
   }
-  const result = coveredMembers.length
+  const result = coveredEvidence.length
     ? { outcome: "pass", members: memberResults }
     : await command(argv, cwd);
   assert(result.outcome === "pass", `validation failed: ${target}`);

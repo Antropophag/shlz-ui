@@ -20,7 +20,7 @@ For an episode that introduces or changes a finite set of variants, states, weig
 
 ### Requirement: Executable evidence exhausts each declared set
 
-A passing validation receipt for a declared finite set MUST partition every member into exactly one of executable-covered or explicitly excluded. Each covered member MUST reference executable outcome evidence in the validation input closure, and validation MUST execute the declared command once for that member through an explicit member placeholder before recording its passing outcome. Each excluded member MUST carry a non-empty justification and MUST NOT be reported as covered.
+A passing validation receipt for a declared finite set MUST partition every member into exactly one of executable-covered or explicitly excluded. Each covered member MUST reference executable outcome evidence in the validation input closure, and validation MUST execute the declared command for every referenced evidence path through explicit evidence-path, set, and member placeholders before recording its passing outcome. Each excluded member MUST carry a non-empty justification and MUST NOT be reported as covered.
 
 <!-- failure-invariant: closed-set-evidence-is-exhaustive concern=state-machine -->
 
@@ -32,7 +32,7 @@ A passing validation receipt for a declared finite set MUST partition every memb
 #### Scenario: Every member is covered or justified
 
 - **WHEN** executable evidence covers every declared member except members carrying explicit exclusion justifications
-- **THEN** validation executes the shared command for every covered member and emits a receipt bound to the normalized declaration, coverage, exclusions, evidence references, and per-member outcomes
+- **THEN** validation executes the shared command for every covered member and referenced evidence path, then emits a receipt bound to the normalized declaration, coverage, exclusions, evidence references, and per-member outcomes
 
 #### Scenario: Coverage declaration is internally inconsistent
 
@@ -41,7 +41,7 @@ A passing validation receipt for a declared finite set MUST partition every memb
 
 #### Scenario: Covered member is not executable
 
-- **WHEN** closed-set evidence omits the member placeholder from its validation command or the command fails for any covered member
+- **WHEN** closed-set evidence omits an evidence-path, set, or member placeholder from its validation command or the command fails for any covered member/evidence pair
 - **THEN** validation fails without treating the member's referenced path as executable proof
 
 ### Requirement: Delivery composes conformance and validation coverage
