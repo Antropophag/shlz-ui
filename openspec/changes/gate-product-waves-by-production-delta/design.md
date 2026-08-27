@@ -40,7 +40,7 @@ A small JSON fixture will record only incident facts needed by the public harnes
 
 ### Derive delivery proof from executed candidate evidence
 
-A validation request that claims a production outcome must identify non-empty outcome evidence within its hashed input closure. Only after the validation command passes does the harness derive `productionOutcomeProof` from the expected delta, candidate head, target, argv, closure digest, evidence paths, and command result. Delivery accepts roadmap advancement only when that derived proof matches the route delta and current candidate. Repeating `productionDelta` in a validation request is not proof.
+A validation request that claims a production outcome must supply the roadmap-eligible route receipt, exactly match its expected delta, and identify non-empty outcome evidence within its hashed input closure. Only after the validation command passes does the harness derive `productionOutcomeProof` from the route digest, expected delta, candidate head, target, argv, closure digest, evidence paths, and command result. Delivery accepts roadmap advancement only when that derived proof matches the route delta and current candidate. Repeating `productionDelta` in a validation request is not proof, and a bounded-evidence route cannot mint production-outcome proof.
 
 This keeps candidate/runtime binding at the existing validation receipt seam. A new roadmap receipt or semantic inspection engine was rejected as duplicate architecture; the executable command and declared evidence closure remain responsible for proving the domain-specific outcome.
 

@@ -539,6 +539,7 @@ async function files(repoRoot, names) {
 }
 export async function validation({
   repoRoot,
+  routeReceipt,
   contractReceipt,
   candidateHead,
   target,
@@ -550,6 +551,7 @@ export async function validation({
   cwd = repoRoot,
 }) {
   verify(contractReceipt, "contract");
+  if (routeReceipt) verify(routeReceipt, "route");
   assert(sha.test(candidateHead), "invalid candidate head");
   assert(
     (await git(repoRoot, "rev-parse", "HEAD")) === candidateHead,
@@ -562,6 +564,7 @@ export async function validation({
     closure,
     productionDelta,
     outcomeEvidence,
+    routeDigest: routeReceipt?.digest ?? null,
     contractDigest: contractReceipt.payload.contractDigest,
   });
   if (productionDelta !== null)
@@ -573,6 +576,8 @@ export async function validation({
         productionDelta.description,
       "validation production delta is invalid",
     );
+  if (productionDelta !== null)
+    assertProductionOutcomeEligible(routeReceipt, productionDelta);
   assert(
     Array.isArray(outcomeEvidence) &&
       outcomeEvidence.every((name) => typeof name === "string"),
@@ -607,6 +612,7 @@ export async function validation({
       ? null
       : {
           productionDelta,
+          routeDigest: routeReceipt.digest,
           candidateHead,
           target,
           argv,
@@ -632,13 +638,18 @@ export async function validation({
   );
 }
 
-export function assertProductionDeltaProof(wave, validationReceipts) {
+export function assertProductionDeltaProof(
+  wave,
+  validationReceipts,
+  routeDigest,
+) {
   if (!wave?.roadmapAdvance) return;
   assert(
     validationReceipts.some(({ payload }) => {
       const proof = payload.productionOutcomeProof;
       return (
         proof &&
+        proof.routeDigest === routeDigest &&
         digest(proof.productionDelta) ===
           digest(wave.expectedProductionDelta) &&
         proof.candidateHead === payload.candidateHead &&
@@ -654,6 +665,16 @@ export function assertProductionDeltaProof(wave, validationReceipts) {
       );
     }),
     "roadmap advancement requires candidate/runtime-bound production outcome proof",
+  );
+}
+
+export function assertProductionOutcomeEligible(routeReceipt, productionDelta) {
+  verify(routeReceipt, "route");
+  assert(
+    routeReceipt.payload.wave?.roadmapAdvance === true &&
+      digest(routeReceipt.payload.wave.expectedProductionDelta) ===
+        digest(productionDelta),
+    "production outcome proof requires its roadmap-eligible route delta",
   );
 }
 
@@ -922,7 +943,11 @@ export async function delivery({
       "validation contract differs",
     );
   }
-  assertProductionDeltaProof(routeReceipt.payload.wave, validationReceipts);
+  assertProductionDeltaProof(
+    routeReceipt.payload.wave,
+    validationReceipts,
+    routeReceipt.digest,
+  );
   const repo = await repository(repoRoot);
   assert(
     repo.digest === baselineReceipt.payload.repository.digest,

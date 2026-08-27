@@ -8,6 +8,7 @@ import test from "node:test";
 import {
   assertIsolatedExecutionAllowed,
   assertProductionDeltaProof,
+  assertProductionOutcomeEligible,
   contract,
   digest,
   failureProof,
@@ -239,6 +240,14 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
   assert.throws(
     () => assertIsolatedExecutionAllowed([replay]),
     /bounded evidence must execute inline/,
+  );
+  assert.throws(
+    () =>
+      assertProductionOutcomeEligible(replay, {
+        kind: "implementation",
+        description: "Claimed production delivery",
+      }),
+    /roadmap-eligible route delta/,
   );
 });
 
@@ -494,8 +503,14 @@ test("production validation derives candidate/runtime-bound outcome proof", asyn
     kind: "behavior",
     description: "Upload reports progress to a real consumer",
   };
+  const productRoute = route({
+    ...assessment,
+    intent: "production outcome proof",
+    wave: { number: 11, expectedProductionDelta: productionDelta },
+  });
   const proven = await validation({
     repoRoot,
+    routeReceipt: productRoute,
     contractReceipt,
     candidateHead: candidate,
     target: "runtime consumer",
@@ -513,12 +528,18 @@ test("production validation derives candidate/runtime-bound outcome proof", asyn
     assertProductionDeltaProof(
       { roadmapAdvance: true, expectedProductionDelta: productionDelta },
       [proven],
+      productRoute.digest,
     ),
   );
 
   await assert.rejects(
     validation({
       repoRoot,
+      routeReceipt: route({
+        ...assessment,
+        intent: "self declaration",
+        wave: { number: 11, expectedProductionDelta: productionDelta },
+      }),
       contractReceipt,
       candidateHead: candidate,
       target: "self declaration",

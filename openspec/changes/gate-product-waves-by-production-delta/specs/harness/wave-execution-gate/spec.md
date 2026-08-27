@@ -46,7 +46,7 @@ The harness SHALL classify an `evidenceKind` of `source-only`, `discovery`, or `
 
 ### Requirement: Roadmap proof is derived from candidate runtime evidence
 
-For a roadmap-eligible product wave, validation SHALL derive production-outcome proof only after the current candidate passes the requested runtime command over a hashed closure containing explicit outcome-evidence paths. The proof SHALL bind the expected production delta, candidate head, command target and arguments, closure digest, evidence paths, and command result. A caller-supplied copy of the expected production delta MUST NOT satisfy delivery by itself.
+For a roadmap-eligible product wave, validation SHALL derive production-outcome proof only after its route receipt confirms roadmap eligibility and the current candidate passes the requested runtime command over a hashed closure containing explicit outcome-evidence paths. The proof SHALL bind the route digest, expected production delta, candidate head, command target and arguments, closure digest, evidence paths, and command result. A caller-supplied copy of the expected production delta MUST NOT satisfy delivery by itself, and a bounded-evidence route MUST NOT produce this proof.
 
 #### Scenario: Validation repeats the expected delta without outcome evidence
 

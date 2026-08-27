@@ -161,6 +161,7 @@ try {
       result = await validation({
         ...input,
         repoRoot,
+        routeReceipt: input.route ? await load(input.route) : null,
         contractReceipt: await load(input.contract),
         priorReceipt: input.prior ? await load(input.prior) : null,
       });

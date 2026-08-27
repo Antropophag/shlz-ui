@@ -83,17 +83,27 @@ if (invariant === "bounded-evidence-cannot-launch-isolated") {
 }
 
 if (invariant === "repeated-production-delta-is-not-proof") {
-  assert.equal(typeof harness.assertProductionDeltaProof, "function");
-  const expectedProductionDelta = {
-    kind: "behavior",
-    description: "Upload reports progress to a real consumer",
-  };
+  assert.equal(typeof harness.assertProductionOutcomeEligible, "function");
+  const fixtureRoot = targetStat.isDirectory() ? target : path.dirname(target);
+  const incident = JSON.parse(
+    await readFile(
+      path.join(fixtureRoot, "tools/tests/fixtures/pr43-wave-incident.json"),
+      "utf8",
+    ),
+  );
+  const replay = route({
+    ...assessment,
+    intent: `Replay PR #${incident.pullRequest}`,
+    wave: incident.wave,
+  });
+  assert.equal(incident.evidence.productionImplementations, 0);
+  assert.equal(incident.evidence.runtimeConsumers, 0);
   assert.throws(
     () =>
-      harness.assertProductionDeltaProof(
-        { roadmapAdvance: true, expectedProductionDelta },
-        [{ payload: { productionDelta: expectedProductionDelta } }],
-      ),
-    /production outcome proof/,
+      harness.assertProductionOutcomeEligible(replay, {
+        kind: "implementation",
+        description: "Claimed production delivery",
+      }),
+    /roadmap-eligible route delta/,
   );
 }
