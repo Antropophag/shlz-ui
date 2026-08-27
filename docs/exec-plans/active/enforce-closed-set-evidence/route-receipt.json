@@ -1,0 +1,29 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Require exhaustive executable evidence or explicit per-member exclusions whenever an episode introduces or changes a declared finite contract set, using PR #45 Golos Text weights as a regression fixture.",
+    "material": ["newCapability", "externalAutomation", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": true,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "enforce-closed-set-evidence",
+    "requiredDecisions": [
+      { "blocking": true, "id": "closed-set-seam", "owner": "agent" },
+      { "blocking": true, "id": "coverage-model", "owner": "agent" },
+      { "blocking": true, "id": "regression-scope", "owner": "agent" }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "4f4f1b27bbd7c0bc2518e94f7b8f0023b5ae5eb41465c6fa72d653910681abd0"
+}

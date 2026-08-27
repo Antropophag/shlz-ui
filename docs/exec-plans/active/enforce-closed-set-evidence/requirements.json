@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "intent": "Require exhaustive executable evidence or explicit per-member exclusions whenever an episode introduces or changes a declared finite contract set, using PR #45 Golos Text weights as a regression fixture.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "closed-set-seam",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "User requested that the agent choose the minimal architecture and tests."
+      }
+    },
+    {
+      "id": "coverage-model",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "User requested generalized handling for variants, states, weights, roles, and enum values."
+      }
+    },
+    {
+      "id": "regression-scope",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "User named PR #45 as the regression fixture and delegated similar error-class selection."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "enforce-closed-set-evidence",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "User explicitly requested implementation, tests, and an unmerged PR in the initial request."
+    }
+  }
+}

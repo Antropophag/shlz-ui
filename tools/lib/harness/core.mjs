@@ -86,6 +86,137 @@ function signals(value) {
   );
 }
 
+function uniqueStrings(values, label, { allowEmpty = false } = {}) {
+  assert(Array.isArray(values), `${label} must be an array`);
+  const normalized = values.map((value) => {
+    assert(
+      typeof value === "string" && value.trim() === value && value,
+      `${label} must contain non-empty canonical strings`,
+    );
+    return value;
+  });
+  assert(allowEmpty || normalized.length, `${label} must not be empty`);
+  assert(
+    new Set(normalized).size === normalized.length,
+    `duplicate ${label.slice(0, -1)}`,
+  );
+  return normalized.sort(order);
+}
+
+function normalizeClosedSets(value = []) {
+  assert(Array.isArray(value), "closedSets must be an array");
+  const normalized = value.map((item) => {
+    assert(
+      item &&
+        typeof item === "object" &&
+        typeof item.id === "string" &&
+        item.id.trim() === item.id &&
+        item.id,
+      "closed-set id must be a non-empty canonical string",
+    );
+    return {
+      id: item.id,
+      members: uniqueStrings(item.members, "closed-set members"),
+    };
+  });
+  assert(
+    new Set(normalized.map(({ id }) => id)).size === normalized.length,
+    "duplicate closed-set id",
+  );
+  return normalized.sort((a, b) => order(a.id, b.id));
+}
+
+function normalizeClosedSetEvidence(value = [], closurePaths = null) {
+  assert(Array.isArray(value), "closedSetEvidence must be an array");
+  const normalized = value.map((item) => {
+    const [{ id, members }] = normalizeClosedSets([
+      { id: item?.id, members: item?.members },
+    ]);
+    assert(Array.isArray(item.covered), `covered members are required: ${id}`);
+    assert(
+      Array.isArray(item.excluded),
+      `excluded members are required: ${id}`,
+    );
+    const declared = new Set(members);
+    const covered = item.covered.map((entry) => {
+      assert(
+        entry && typeof entry.member === "string" && declared.has(entry.member),
+        `undeclared closed-set member: ${id}: ${entry?.member ?? "<missing>"}`,
+      );
+      const evidence = uniqueStrings(entry.evidence, "evidence paths");
+      if (closurePaths)
+        assert(
+          evidence.every((name) => closurePaths.has(name)),
+          `closed-set evidence must be in validation input closure: ${id}: ${entry.member}`,
+        );
+      return { member: entry.member, evidence };
+    });
+    const excluded = item.excluded.map((entry) => {
+      assert(
+        entry && typeof entry.member === "string" && declared.has(entry.member),
+        `undeclared closed-set member: ${id}: ${entry?.member ?? "<missing>"}`,
+      );
+      assert(
+        typeof entry.reason === "string" &&
+          entry.reason.trim() === entry.reason &&
+          entry.reason,
+        `closed-set exclusion reason is required: ${id}: ${entry.member}`,
+      );
+      return { member: entry.member, reason: entry.reason };
+    });
+    const coveredMembers = covered.map(({ member }) => member);
+    const excludedMembers = excluded.map(({ member }) => member);
+    assert(
+      new Set(coveredMembers).size === coveredMembers.length,
+      `duplicate covered closed-set member: ${id}`,
+    );
+    assert(
+      new Set(excludedMembers).size === excludedMembers.length,
+      `duplicate excluded closed-set member: ${id}`,
+    );
+    const overlap = coveredMembers.filter((member) =>
+      excludedMembers.includes(member),
+    );
+    assert(
+      !overlap.length,
+      `closed-set members are covered and excluded: ${id}: ${overlap.join(", ")}`,
+    );
+    const accounted = new Set([...coveredMembers, ...excludedMembers]);
+    const missing = members.filter((member) => !accounted.has(member));
+    assert(
+      !missing.length,
+      `unaccounted closed-set members: ${id}: ${missing.join(", ")}`,
+    );
+    return {
+      id,
+      members,
+      covered: covered.sort((a, b) => order(a.member, b.member)),
+      excluded: excluded.sort((a, b) => order(a.member, b.member)),
+    };
+  });
+  assert(
+    new Set(normalized.map(({ id }) => id)).size === normalized.length,
+    "duplicate closed-set evidence id",
+  );
+  return normalized.sort((a, b) => order(a.id, b.id));
+}
+
+export function assertClosedSetProof(closedSets = [], validationReceipts = []) {
+  const declarations = normalizeClosedSets(closedSets);
+  const evidence = validationReceipts.flatMap((item) => {
+    verify(item, "validation");
+    return normalizeClosedSetEvidence(item.payload.closedSetEvidence ?? []);
+  });
+  for (const declaration of declarations) {
+    const expected = JSON.stringify(declaration.members);
+    const matches = evidence.filter(
+      (item) =>
+        item.id === declaration.id && JSON.stringify(item.members) === expected,
+    );
+    assert(matches.length, `missing closed-set validation: ${declaration.id}`);
+  }
+}
+
 function classifyWave(value) {
   if (value === undefined) return undefined;
   assert(value && typeof value === "object", "wave assessment is required");
@@ -547,6 +678,7 @@ export async function validation({
   inputs,
   productionDelta = null,
   outcomeEvidence = [],
+  closedSetEvidence = [],
   priorReceipt,
   cwd = repoRoot,
 }) {
@@ -558,12 +690,18 @@ export async function validation({
     "validation candidate differs from checked-out Git head",
   );
   const closure = await files(repoRoot, inputs);
+  const closurePaths = new Set(closure.map(({ path: name }) => name));
+  const normalizedClosedSetEvidence = normalizeClosedSetEvidence(
+    closedSetEvidence,
+    closurePaths,
+  );
   const closureDigest = digest({
     target,
     argv,
     closure,
     productionDelta,
     outcomeEvidence,
+    closedSetEvidence: normalizedClosedSetEvidence,
     routeDigest: routeReceipt?.digest ?? null,
     contractDigest: contractReceipt.payload.contractDigest,
   });
@@ -583,7 +721,6 @@ export async function validation({
       outcomeEvidence.every((name) => typeof name === "string"),
     "validation outcome evidence must be paths",
   );
-  const closurePaths = new Set(closure.map(({ path: name }) => name));
   if (productionDelta !== null)
     assert(
       outcomeEvidence.length > 0 &&
@@ -629,6 +766,7 @@ export async function validation({
       argv,
       productionDelta,
       productionOutcomeProof,
+      closedSetEvidence: normalizedClosedSetEvidence,
       closure,
       closureDigest,
       outcome: "pass",
@@ -808,6 +946,7 @@ export async function conformance({
     "baseline belongs to another route",
   );
   signals(discovered?.materialSignals);
+  const closedSets = normalizeClosedSets(discovered.closedSets ?? []);
   const raw = await git(
     repoRoot,
     "diff",
@@ -840,6 +979,7 @@ export async function conformance({
     {
       candidateHead: await git(repoRoot, "rev-parse", "HEAD"),
       actual,
+      closedSets,
       materialSignals: discovered.materialSignals,
       outcome: "pass",
     },
@@ -947,6 +1087,10 @@ export async function delivery({
     routeReceipt.payload.wave,
     validationReceipts,
     routeReceipt.digest,
+  );
+  assertClosedSetProof(
+    conformanceReceipt.payload.closedSets ?? [],
+    validationReceipts,
   );
   const repo = await repository(repoRoot);
   assert(

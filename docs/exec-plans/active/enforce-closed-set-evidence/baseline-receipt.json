@@ -1,0 +1,19 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feat/closed-set-executable-evidence",
+    "commit": "01dd9bfd870481896efc86db610254f8751b41c6",
+    "defaultBranch": "main",
+    "pullRequest": null,
+    "repository": {
+      "digest": "a23817954bece9e9f382339abf9559efa5adb940a43d94c43d1e636e148e3227",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-closed-set-evidence"
+    },
+    "upstream": "origin/main"
+  },
+  "requirementsDigest": "0e6b515d438bda2758296c1f17df00dd5037590fde9c7243f37d6ee7b367a169",
+  "routeDigest": "4f4f1b27bbd7c0bc2518e94f7b8f0023b5ae5eb41465c6fa72d653910681abd0",
+  "version": 1,
+  "digest": "3606a03342ef6defe6353bdcf3407d53e888c39d5b11042e088dbc3134cc5b88"
+}
