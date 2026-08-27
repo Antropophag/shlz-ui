@@ -1,87 +1,32 @@
 # Requirements readiness
 
-Use this layer after initial repository inspection and positive route eligibility, before OpenSpec synthesis and adaptive execution planning:
+Use this protocol after route eligibility and before material implementation:
 
-`request → inspect → route eligibility → decision ownership → targeted interview → readiness → OpenSpec → authorization → branch preflight → execution planning`
+`request → inspect → decision ownership → targeted interview if blocked → OpenSpec synthesis → authorization → requirements receipt → baseline`
 
-Direct behavior-preserving work exits only after `route-check` positively accepts it. A complete contract-affecting request skips questions but still follows OpenSpec. A short or ambiguous substantial intent enters the decision loop below. Material or unknown state never defaults to direct.
+## Decision ownership
 
-## Inspect, then assign ownership
+- **repo-owned** facts and constraints are resolved from repository authority and cite that source.
+- **agent-owned** implementation choices preserve the specified contract; explicit “decide yourself” delegation is recorded here.
+- **user-owned** product, scope, public-contract, security, publishing, destructive, or material trade-off choices block until answered.
 
-Inspect the affected repository paths, existing specs, architecture, source authority, tooling, and publishing/security constraints before asking anything. Record only material decisions:
+Ask only unresolved blocking user-owned questions. A complete request skips interview. Readiness means no unresolved blocking user-owned decisions.
 
-- **repo-owned**: facts and constraints reliably established by repository authority. Cite the path or command result and resolve them without asking.
-- **agent-owned**: implementation choices that preserve observable behavior and public contracts. Resolve them independently; a user's explicit “decide yourself” transfers that decision here with `user-delegation` provenance.
-- **user-owned**: unresolved product, scope, UX, public-contract, security, publishing, destructive, or material trade-off choices that repository authority cannot settle.
+## Operational state and receipt
 
-Ask only blocking user-owned questions. Group related high-impact questions into a small round. Ask a follow-up only when an answer introduces a new material user-owned decision. The interview is complete at the explicit gate:
+During synthesis, `docs/exec-plans/active/<change>/requirements.json` stores only intent/revision/route, compact decision ownership/status/provenance, OpenSpec linkage status, and authorization. Acceptance content belongs only in OpenSpec.
 
-`no unresolved blocking user-owned decisions`
-
-## Durable operational state
-
-For requirements-gated work, write `docs/exec-plans/active/<work>/requirements.json` and validate it with:
+After strict OpenSpec validation marks linkage `synthesized` and authorization is `approved` or explicitly `pre-authorized`, run:
 
 ```bash
-npm run harness -- requirements-check docs/exec-plans/active/<work>/requirements.json
+npm run harness -- requirements <route-receipt.json> <requirements.json> \
+  --out <requirements-receipt.json>
 ```
 
-The version 1 state contains only:
+The receipt fails on missing/mismatched decisions, pending synthesis, unresolved blocking state, or missing authorization. Pass it to `baseline` before implementation.
 
-- `intent`, a monotonic operational `revision`, and the selected `direct` or `open-spec` route;
-- decisions with `id`, `owner`, `status`, `blocking`, and compact `{ kind, ref }` provenance;
-- compact OpenSpec `{ change, status }` linkage;
-- execution authorization status and provenance.
-
-Store acceptance criteria and resolved answers in OpenSpec, not this state. Use `unresolved`, `resolved`, or `delegated` decision status; delegated decisions are agent-owned with `user-delegation` provenance.
-
-An assessment that declares `"requirementsGate": "required"` also records `"openSpecChange": "<change>"` and must pass the matching state to planning:
-
-```bash
-npm run harness -- plan <assessment> <plan> --requirements <requirements-state>
-```
-
-The harness permits planning only after the readiness gate, OpenSpec status is `synthesized`, and authorization is `pre-authorized` or `approved`.
-
-Before implementation mutation, compose that readiness result with the route assessment and task-branch state using `implementation-preflight`. A publishing or deployment intent with unresolved release policy, public URL, permissions, or other user-owned choices therefore cannot mutate the repository even if an earlier semantic step mislabeled it implementation-only.
-
-## OpenSpec synthesis and authorization
-
-Synthesize every resolved normative decision into the existing OpenSpec proposal/spec/design/tasks artifacts and set the linkage status to `synthesized` only after OpenSpec validation succeeds.
-
-Substantial/new capability work defaults to `approval-required`: present a compact understanding/spec summary and stop before adaptive planning/apply. Record `approved` after explicit approval. Record `pre-authorized` only when the user's request explicitly authorizes implementation after requirements synthesis; then continue through adaptive planning/apply without a second approval.
+Substantial new work defaults to approval-required. Use pre-authorization only when the user's request explicitly authorizes implementation after synthesis.
 
 ## Apply re-entry
 
-When implementation exposes new material user-owned ambiguity or scope expansion:
-
-1. Pause the affected packet and record the new blocking decision as unresolved.
-2. Set OpenSpec linkage to `pending`; set authorization to `approval-required` unless the earlier authorization explicitly covers the added scope.
-3. Ask only the newly blocked user-owned question. Delegation resolves it as agent-owned.
-4. Update the existing OpenSpec artifacts from the answer and validate them.
-5. Restore `synthesized`, re-check requirements, and resume the packet only when authorization is ready.
-
-Keep completed handoffs unless the revised OpenSpec invalidates a recorded assumption; record any invalidation explicitly.
-
-For a guarded execution plan, persist the pause and resume through the existing execution state:
-
-```bash
-npm run harness -- pause <plan> <state> <packet> --requirements <blocked-requirements-state>
-npm run harness -- resume <plan> <state> <packet> --session <session> --requirements <ready-requirements-state>
-```
-
-When the plan enables spec-driven TDD, pass a version 1 re-entry file to pause:
-
-```bash
-npm run harness -- pause <plan> <state> <packet> \
-  --requirements <blocked-requirements-state> --tdd-reentry <classification>
-```
-
-It must classify every enforced slice as `affected` or `retained`, with
-`fromRevision` and `toRevision`. Use `retained` only for a completed slice when
-its scenarios, authorities, packet dependencies, command, tests, fixtures, and
-controls remain digest-identical. An affected slice returns to independent test
-design and must prove RED again; do not edit or silently reuse its prior
-acceptance evidence.
-
-Increment `revision` when apply records a new ambiguity. The pause binds that revision into execution state; guarded `claim`, `resume`, and `complete` commands require a matching ready state at least that new. This prevents another packet or fresh session from bypassing a newly closed gate with a stale snapshot.
+If implementation discovers new material ambiguity, stop the affected work, increment the requirements revision, record the new blocking decision, set OpenSpec linkage pending, and ask only that question. Update and validate the existing OpenSpec change, restore synthesis/authorization, and emit a new requirements receipt. Every downstream receipt bound to the old contract, revision, or candidate becomes stale and must be recreated. No mutable pause/resume state is required.

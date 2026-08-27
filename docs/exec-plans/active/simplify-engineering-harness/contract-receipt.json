@@ -1,0 +1,101 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "b1e3c6382c9c721658d3f73aeb008350d2402269b029d34a28d90177fec224ac",
+    "scenarios": [
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** a scenario identity or normative WHEN/THEN content changes after contract-bound evidence was produced\n- **THEN** TDD, validation, review, failure-proof, conformance, and delivery consumers reject the stale digest",
+        "id": "harness/receipt-workflow::Contract identity is stable and normative::Contract content changes after evidence",
+        "name": "Contract content changes after evidence",
+        "requirement": "Contract identity is stable and normative"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: delivery-requires-coherent-receipt-chain concern=persistence -->\n\n- **WHEN** any required receipt is missing, stale, digest-incoherent, or bound to another repository, branch, pull request, or candidate head\n- **THEN** delivery fails before an acceptance receipt is produced",
+        "id": "harness/receipt-workflow::Delivery evidence is repository and candidate bound::Delivery evidence belongs to another candidate or repository",
+        "name": "Delivery evidence belongs to another candidate or repository",
+        "requirement": "Delivery evidence is repository and candidate bound"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** normal material delivery is validated after completed operational directories and raw telemetry are removed\n- **THEN** the canonical receipt chain remains executable using at most eight compact episode artifacts",
+        "id": "harness/receipt-workflow::Durable repository artifacts stay minimal::Historical state is absent",
+        "name": "Historical state is absent",
+        "requirement": "Durable repository artifacts stay minimal"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: execution-baseline-drift-is-rejected concern=persistence -->\n\n- **WHEN** execution begins from a dirty, stale, mismatched, default, or differently tracked branch\n- **THEN** no execution-baseline receipt is produced",
+        "id": "harness/receipt-workflow::Execution baseline is immutable Git provenance::Baseline identity drifts",
+        "name": "Baseline identity drifts",
+        "requirement": "Execution baseline is immutable Git provenance"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: context-budget-blocks-before-launch concern=subprocess -->\n\n- **WHEN** the complete resolved source set exceeds the declared byte budget\n- **THEN** the worker is not launched and the result reports the total, limit, and contributors",
+        "id": "harness/receipt-workflow::Explicit source byte budgets block before launch::Complete source manifest exceeds budget",
+        "name": "Complete source manifest exceeds budget",
+        "requirement": "Explicit source byte budgets block before launch"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: isolated-result-is-complete concern=subprocess -->\n\n- **WHEN** an isolated launch is unavailable, fails, lacks runtime-issued identity or a complete report, or references missing or stale dependency receipts\n- **THEN** the result fails closed without manufacturing completion and can be retried from the unchanged manifest",
+        "id": "harness/receipt-workflow::Isolated execution is optional and receipt based::Isolated result is missing runtime proof or dependencies",
+        "name": "Isolated result is missing runtime proof or dependencies",
+        "requirement": "Isolated execution is optional and receipt based"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** the episode diff and discovered surface differ or a direct episode discovers material impact\n- **THEN** route conformance fails before delivery",
+        "id": "harness/receipt-workflow::Route conformance binds declared and actual episode surfaces::Implementation drifts from declared surface",
+        "name": "Implementation drifts from declared surface",
+        "requirement": "Route conformance binds declared and actual episode surfaces"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: routing-readiness-cannot-be-bypassed concern=state-machine -->\n\n- **WHEN** a direct assessment contains a true or unknown material signal, or a material assessment has an unresolved decision, missing synthesis, or missing authorization\n- **THEN** the harness refuses the next receipt and identifies the unsatisfied gate",
+        "id": "harness/receipt-workflow::Routing and requirements fail closed::Direct or gated work attempts to bypass readiness",
+        "name": "Direct or gated work attempts to bypass readiness",
+        "requirement": "Routing and requirements fail closed"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** an axis is missing, both axes share an identity, an outcome is incomplete, or either axis reviews another candidate or contract\n- **THEN** no passing review receipt is produced",
+        "id": "harness/receipt-workflow::Standards and Spec review remain independent::Review identity, axis, or candidate is incomplete",
+        "name": "Review identity, axis, or candidate is incomplete",
+        "requirement": "Standards and Spec review remain independent"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: failure-proof-covers-current-contract concern=state-machine -->\n\n- **WHEN** a marked invariant is absent, a proof refers to another contract or head, or correct and known-bad behavior receive the same result\n- **THEN** review completion and delivery are rejected",
+        "id": "harness/receipt-workflow::Stateful failure proof discriminates good and known-bad behavior::Failure proof is incomplete or non-discriminating",
+        "name": "Failure proof is incomplete or non-discriminating",
+        "requirement": "Stateful failure proof discriminates good and known-bad behavior"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "<!-- failure-invariant: tdd-requires-discriminating-red-green concern=subprocess -->\n\n- **WHEN** RED passes, GREEN fails, a known-bad implementation passes, the oracle changes, or either phase is bound to another contract or candidate\n- **THEN** the harness refuses the TDD receipt",
+        "id": "harness/receipt-workflow::TDD receipt binds RED and GREEN symmetrically::Weak, tuned, stale, or known-bad implementation",
+        "name": "Weak, tuned, stale, or known-bad implementation",
+        "requirement": "TDD receipt binds RED and GREEN symmetrically"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** an isolated result does not contain a runtime-issued metric\n- **THEN** the compact summary reports that metric as unavailable and labels any repository-controlled observations separately",
+        "id": "harness/receipt-workflow::Telemetry is compact and honest::Runtime metrics are absent",
+        "name": "Runtime metrics are absent",
+        "requirement": "Telemetry is compact and honest"
+      },
+      {
+        "capability": "harness/receipt-workflow",
+        "content": "- **WHEN** any meaning-changing input or candidate head differs from a prior successful receipt\n- **THEN** reuse is rejected and a new validation result is required",
+        "id": "harness/receipt-workflow::Validation reuse binds the meaning-changing closure::Validation input closure drifts",
+        "name": "Validation input closure drifts",
+        "requirement": "Validation reuse binds the meaning-changing closure"
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "bdd14d03d9d0b2502958688901b6c5b70222d36165ed1fdc48dc655a818482da"
+}

@@ -1,0 +1,790 @@
+{
+  "version": 1,
+  "mappings": {
+    "harness/change-aware-validation::Change-aware validation ladder::Documentation-only change avoids browser tests": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Change-aware validation ladder::Shared dialog lifecycle affects both consumers": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Change-aware validation ladder::Component-local change stays local": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Change-aware validation ladder::Expensive rerun needs invalidation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Bounded review and remediation::Remediation review reuses findings": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Machine-collected evidence::Evidence collection does not create SHA churn": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Honest execution telemetry::Execution profile is measurable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-aware-validation::Supported multi-session operator flow::One change spans sessions": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Observable work classification::Large change is detected before implementation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Observable work classification::Small change remains lightweight": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Cognitive execution packets::Shared seam precedes consumers": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Cognitive execution packets::Packet working set is bounded": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Context lifecycle policy::Semantic phase boundary triggers fresh context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Context lifecycle policy::Runtime usage is unavailable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Durable continuation::Fresh session continues without chat history": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-planning::Outcome-level task granularity::Acceptance scenarios do not become microtasks": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage exists": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    },
+    "harness/context-envelope-efficiency::Representative efficiency evaluation::Runtime usage is incomplete": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    },
+    "harness/context-envelope-efficiency::Stage and session attribution::One packet is launched repeatedly": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources fit the packet budget": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-envelope-efficiency::Explicit guarded-worker envelope::Initial sources exceed the packet budget": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-envelope-efficiency::Coverage-preserving remediation::Broad source pattern exceeds the envelope": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-envelope-efficiency::Backward-compatible adoption::Legacy guarded packet has no envelope": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Routing decisions are independent::Tiny local fix": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Routing decisions are independent::Small contract change": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Routing decisions are independent::Large behavior-preserving change": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Execution uses a verified immutable episode baseline::New task branch": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Execution uses a verified immutable episode baseline::Existing pull request follow-up": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Execution uses a verified immutable episode baseline::Stale or dirty pull request baseline": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Ceremony follows semantic risk and execution need::Two local findings on a material parent pull request": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Ceremony follows semantic risk and execution need::Material small finding": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Discovery can only raise semantic safeguards::Local fix reveals contract impact": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Discovery can only raise semantic safeguards::Discovery remains local": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-routing::Representative evaluation remains executable::PR #30 regression evaluation": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    },
+    "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Complete semantic declaration": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Current-change scenarios declare implementation semantics::Invalid semantic declaration": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Wave 9 behavior and state bypass is rejected": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Material behavior and state require enforced TDD coverage::Material scenarios have enforced coverage": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Evidence-only scenarios do not create false TDD obligations::Source-only contract": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Evidence-only scenarios do not create false TDD obligations::Absence-only contract": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Evidence-only scenarios do not create false TDD obligations::Documentation-only contract": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Historical plan remains readable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Contract-derived routing composes with compatibility and delivery::Newly planned contract is unavailable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Harness-only impact excludes Playwright": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Contract text carries browser impact": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Validation routing is derived from semantic impact::Unknown impact fails closed": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Unchanged closure reuses a successful result": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/contract-derived-tdd-routing::Validation reuse binds every meaning-changing input::Meaning-changing input invalidates reuse": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Divergent routing-engine records are rejected": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/delivery-packet-consistency::Planned delivery reconciles mandatory packet evidence::Coherent packet evidence reaches ordinary delivery checks": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/delivery-packet-consistency::Incident provenance remains truthful::Moscow-local creation date is not future-dated": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Eligibility is explicit and bounded::Eligible behavioral change": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Eligibility is explicit and bounded::No honest baseline RED is possible": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Test design precedes and is independent from implementation::Test designer produces an acceptance contract first": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Test design precedes and is independent from implementation::Same worker or leaked implementation context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::RED uses one symmetric deterministic oracle::Meaningful deterministic RED": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::RED uses one symmetric deterministic oracle::Weak or asymmetric oracle": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::RED uses one symmetric deterministic oracle::Nondeterministic probe": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::GREEN preserves the acceptance contract::Production implementation reaches GREEN": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::GREEN preserves the acceptance contract::Acceptance tests are tuned to the implementation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Requirements changes trigger test-design re-entry::Material requirement changes during implementation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Requirements changes trigger test-design re-entry::Requirement change does not affect a completed slice": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Existing execution and review gates compose with TDD evidence::Implementation packet is claimed before RED": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Existing execution and review gates compose with TDD evidence::Delivery has stale TDD evidence": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/spec-driven-tdd::Representative fixtures discriminate good and bad workflow revisions::Fixture suite evaluates workflow sensitivity": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Guarded execution modes are enforced::Root cannot silently execute Wave 8": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Guarded execution modes are enforced::Small continuation stays lightweight": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Guarded execution modes are enforced::Declared degradation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Guarded execution modes are enforced::Undeclared degradation stops": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Workers receive bounded authoritative context::Dependent worker starts from durable state": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Workers receive bounded authoritative context::Stale brief is rejected": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Isolation uses a supported replaceable adapter seam::CLI worker physically starts a new context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Isolation uses a supported replaceable adapter seam::Runtime capability is absent": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Lifecycle and recovery are durable::Worker fails before completion": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Lifecycle and recovery are durable::Material ambiguity pauses execution": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Lifecycle and recovery are durable::Replan invalidates stale handoff": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Lifecycle and recovery are durable::Independent review has a distinct context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Isolation is selected only when it earns its overhead::M without semantic transition continues": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Isolation is selected only when it earns its overhead::M phase transition starts fresh": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Isolation is selected only when it earns its overhead::L and XL declare isolation": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/execution-context-isolation::Telemetry proves boundaries honestly::Wave 8 before and after comparison": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    },
+    "harness/execution-context-isolation::Telemetry proves boundaries honestly::Session labels are not proof": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Requirements readiness gates execution planning::User-owned product decision blocks work": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Requirements readiness gates execution planning::Trivial typo stays direct": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Requirements readiness gates execution planning::Fully determined contract change uses OpenSpec directly": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Requirements readiness gates execution planning::Publishing decisions remain user-owned": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Direct eligibility is positively established before mutation::Typo or local fix remains direct": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Direct eligibility is positively established before mutation::Fully determined contract change skips ritual interview": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Direct eligibility is positively established before mutation::Publishing intent cannot enter direct": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Direct eligibility is positively established before mutation::Material uncertainty is conservative": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Direct eligibility is positively established before mutation::Harmless workflow maintenance remains narrow": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Route conformance is checked against discovered changes::Deployment surface discovered on direct route": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Route conformance is checked against discovered changes::Harmless workflow typo is not escalated": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Route conformance is checked against discovered changes::Pages workflow creation cannot suppress material risk": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Route conformance is checked against discovered changes::Harmless CI workflow maintenance stays below the floor": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Implementation delivery uses a task branch and pull request::Implementation starts on main": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/route-eligibility::Implementation delivery uses a task branch and pull request::Successful implementation delivery": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/failure-path-proof::Applicable reviews prove failure-path invariants::Stateful material change requires proof": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/failure-path-proof::Applicable reviews prove failure-path invariants::Subprocess boundary requires proof": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/failure-path-proof::Applicable reviews prove failure-path invariants::Fixture does not discriminate": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/failure-path-proof::Review overhead remains proportional::Low-risk S change": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/failure-path-proof::Review capability degradation is explicit::Proof capability unavailable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Honest context-cost baseline::User-observed runtime signal without a raw trace": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Deterministic representative replay::Repeating a replay": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Deterministic representative replay::Source changes": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Hypothesis comparison and minimal selection::Simpler mechanism meets the target": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Hypothesis comparison and minimal selection::Candidate does not address a measured contributor": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Correctness and evidence equivalence::Smaller input drops validation evidence": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Correctness and evidence equivalence::Equivalent smaller input": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::Unchanged source was attested in an earlier phase": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::Required source content changed": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::Phase acknowledgement is persisted": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::A fresh worker starts": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::Compact evidence index omits a blocking result": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Evidence-backed phase input control::A guarded worker is launched": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Honest cost attribution::A source becomes an attested reference": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Honest cost attribution::Runtime retention is unavailable": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Compact validation and CI evidence boundary::Validation emits a large raw log": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Compact validation and CI evidence boundary::Raw validation evidence changes": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Measurable improvement::Improvement threshold is met": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Measurable improvement::Improvement threshold is missed": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/context-cost-control::Local deterministic architecture::Offline replay": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    },
+    "harness/change-specific-failure-invariants::Applicable review derives invariants from the current change::Current delta contains material failure contracts": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Applicable review derives invariants from the current change::Manifest points outside the current change": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Applicable review derives invariants from the current change::Applicable scenario is omitted": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Executable proof discriminates every required invariant::Baseline passes but change-specific invariant does not discriminate": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Executable proof discriminates every required invariant::Contracts change after proof": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::PR 33 findings act as regression evidence::Pre-remediation PR 33 revision is reviewed": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::PR 33 findings act as regression evidence::Remediated PR 33 revision is reviewed": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::PR 33 findings act as regression evidence::Static lint finding is classified": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Proportional review remains compatible::Non-applicable review": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/change-specific-failure-invariants::Delivery preserves the guarded execution lifecycle::Requirements or delivery bypasses the execution plan": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Independent approval precedes executable authorization::Approved contract unlocks RED": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Independent approval precedes executable authorization::Design attempts to proceed without review": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Review evaluates a bounded test-contract checklist::Plausible but incomplete test design is rejected": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Review evaluates a bounded test-contract checklist::Machine-verifiable approval is complete": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Reviewer independence is machine enforced::Designer self-approves": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Reviewer independence is machine enforced::Review receives implementation context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Reviewer independence is machine enforced::Benign declaration cannot hide effective implementation context": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Approval is tamper-evident and re-entry aware::Test contract changes after approval": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Approval is tamper-evident and re-entry aware::Requirements revision affects the slice": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Pre-implementation review and final code review remain distinct::Approved test contract reaches final review": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Pre-implementation review and final code review remain distinct::Final review finds a test-contract flaw": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/independent-test-contract-review::Representative scenario proves the gate rejects weak authorization::Known-bad review contract is discriminated": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Discovery precedes requirements questions::Repository answers the ambiguity": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Discovery precedes requirements questions::Implementation choice is safely delegated": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Discovery precedes requirements questions::User-owned decision remains unresolved": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Discovery precedes requirements questions::Complete prompt needs no interview": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Interview rounds are material and bounded::Delegated answer closes a decision": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Interview rounds are material and bounded::Answer creates no new material ambiguity": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::OpenSpec remains normative::Fresh session restores readiness": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::OpenSpec remains normative::Specification supersedes interview prose": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::OpenSpec remains normative::Generated OpenSpec skills are regenerated": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Execution authorization is explicit::Default substantial capability stops for approval": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Execution authorization is explicit::Pre-authorized work continues": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Apply can re-enter requirements::Material ambiguity appears during apply": {
+      "status": "revised",
+      "target": "harness/receipt-workflow",
+      "reason": "behavior is preserved through the canonical immutable receipt chain"
+    },
+    "harness/requirements-readiness::Retrospective publishing fixture remains non-executable::GitHub Pages intent is evaluated safely": {
+      "status": "retired-with-reason",
+      "target": null,
+      "reason": "revision-specific retrospective evidence is not a durable workflow contract; its underlying guarantee is covered by receipt-workflow acceptance cases"
+    }
+  }
+}

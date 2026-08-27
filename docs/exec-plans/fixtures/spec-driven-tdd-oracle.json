@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "scenarioId": "meaningful-deterministic-red",
-  "expectedFailureSignature": "ERR_CONTRACT_MISSING",
-  "expectedResultSource": {
-    "kind": "explicit-openspec-literal",
-    "ref": "openspec/changes/enforce-spec-driven-tdd/specs/harness/spec-driven-tdd/spec.md"
-  }
-}

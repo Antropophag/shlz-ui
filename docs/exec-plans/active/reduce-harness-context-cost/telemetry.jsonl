@@ -1,2 +1,0 @@
-{"at":"2026-08-24T11:57:59.090Z","packet":"capsule-implementation","session":"capsule-implementation-worker","agent":"codex-worker","phase":"execution","type":"execution-boundary","executionSource":"codex-exec-jsonl","runtimeId":"01a0339c-f096-76c2-9961-bffc86d96ef9"}
-{"at":"2026-08-24T11:57:59.091Z","packet":"capsule-implementation","session":"capsule-implementation-worker","agent":"codex-worker","phase":"execution","type":"usage","usageSource":"codex-exec-jsonl:turn.completed","tokens":1179626,"contextTokens":1169262}

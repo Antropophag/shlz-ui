@@ -1,7 +1,0 @@
-{
-  "version": 1,
-  "kind": "mainline",
-  "commit": "50bee6f6603e0e4d7b3f511fe610dc1522c233fd",
-  "branch": "feat/reduce-harness-context-cost",
-  "defaultBranch": "main"
-}

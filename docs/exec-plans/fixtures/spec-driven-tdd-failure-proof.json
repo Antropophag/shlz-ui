@@ -1,4 +1,0 @@
-{
-  "command": ["node", "tools/tests/spec-driven-tdd-failure-proof.mjs"],
-  "timeoutMs": 120000
-}

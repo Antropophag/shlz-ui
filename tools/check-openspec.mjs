@@ -24,7 +24,7 @@ const upstreamManagedSkills = [
   "openspec-update-change",
 ];
 const repoPolicyPattern =
-  /requirements-elicitation|pre-authorized|harness pause|without asking the same decision again/;
+  /requirements-elicitation|pre-authorized|harness -- requirements|without asking the same decision again/;
 
 async function openspec(...args) {
   return exec("openspec", args, {
@@ -89,7 +89,7 @@ if (
 for (const marker of [
   "no unresolved blocking user-owned decisions",
   "pre-authorized",
-  "harness -- pause",
+  "harness -- requirements",
   "revision",
 ])
   if (!requirementsContract.includes(marker))

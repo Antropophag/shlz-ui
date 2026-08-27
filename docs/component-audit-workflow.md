@@ -1,6 +1,6 @@
 # UI component completion gate
 
-For substantial component work, the execution planner may split this gate across component-specific and integration packets, but it MUST preserve every applicable step/evidence level and independent component status. Use the change-aware ladder in `docs/validation-workflow.md`; affected validation narrows repeated work, never certifies a component by itself.
+For substantial component work, execution may split this gate across component-specific and integration evidence, but it MUST preserve every applicable step/evidence level and independent component status. Use the ladder in `docs/validation-workflow.md`; focused validation narrows repeated work, never certifies a component by itself.
 
 This is the required, repeatable workflow before a UI component may be reported
 as fixed, complete, production-ready, review-ready, or a finished side quest.

@@ -1,8 +1,0 @@
-{
-  "version": 1,
-  "kind": "existing-pull-request",
-  "commit": "fd4f1cfb6f214ee7068160f97e32ac34c4c9404c",
-  "branch": "feat/execution-context-isolation",
-  "defaultBranch": "main",
-  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/32"
-}

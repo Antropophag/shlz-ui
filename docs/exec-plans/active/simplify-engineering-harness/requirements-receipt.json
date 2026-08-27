@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "simplify-engineering-harness",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "canonical-receipt-interface",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "legacy-command-removal",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "durable-artifact-policy",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "isolated-runner-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Replace the mutable engineering harness orchestration with a narrow immutable-receipt workflow while preserving all fail-closed routing, contract, TDD, validation, review, isolation, budget, telemetry, conformance, and delivery guarantees.",
+    "revision": 1
+  },
+  "routeDigest": "7bac4a92cd196cc2bc2067f67599c9fb1aa443875f1f0e01b8c5ec05da5cb930",
+  "version": 1,
+  "digest": "0bc0d9e4f0c777a27dd8be8719fd1105e025a088726aadbf406586d3dbebd618"
+}
