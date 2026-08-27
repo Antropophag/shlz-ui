@@ -1,0 +1,49 @@
+## Context
+
+See `proposal.md` for the incident. The current harness already concentrates semantic routing in `route()` and binds its digest through requirements, baseline, conformance, and delivery receipts. The roadmap currently authorizes bounded implementation from a short Wave N request and defines completion in terms of merged audit dispositions, which allowed PR #43 to look like product-roadmap progress despite an explicitly zero-runtime scope.
+
+## Goals / Non-Goals
+
+**Goals:**
+
+- Put the new distinction at the existing route-receipt seam.
+- Fail before baseline and expensive validation/review when a product wave has no production delta.
+- Preserve cheap audit/discovery work without letting it advance product state.
+- Keep historical PR #43 data compact and executable as a regression oracle.
+
+**Non-Goals:**
+
+- Add a packet scheduler, roadmap database, or new receipt command.
+- Reopen or rewrite PR #43's audit evidence.
+- Define the production contract for Cards, Upload, Messaging, History, or Planner.
+- Start Wave 11 or any subsequent wave.
+
+## Decisions
+
+### Add one optional typed wave block to route assessments
+
+`route()` will accept an optional `wave` object with a positive integer `number`, a closed `workKind`, and `expectedProductionDelta`. `product` requires a trimmed non-empty delta and produces `executionPath: product` plus `roadmapAdvance: true`. `source-only`, `discovery`, and `audit` ignore numbering as permission and produce `executionPath: bounded-evidence` plus `roadmapAdvance: false`.
+
+This keeps ordinary route inputs backward compatible and gives every downstream receipt the classification through the existing route digest. A new command or parallel roadmap state was rejected because it would duplicate the receipt chain and increase caller knowledge.
+
+### Reject contradictory evidence inputs at the seam
+
+Evidence-only kinds with a claimed production delta will be rejected rather than silently upgraded or discarded. Product kind with an empty delta will also be rejected. This makes caller mistakes visible and prevents keyword-based inference.
+
+### Enforce the heavy boundary in baseline
+
+Route classification is observable immediately; baseline is the first execution-provenance receipt and the fail-closed boundary before candidate work and expensive evidence. Baseline will reassert the product-delta invariant even though route construction already validates it, protecting callers that attempt to supply forged or stale receipt-shaped data through the normal verifier.
+
+### Use PR #43 as a data fixture, not copied implementation
+
+A small JSON fixture will record only incident facts needed by the public `route()` interface: Wave 10, audit/source-only nature, no expected production delta, verified audit disposition, and PR identity. Tests will assert bounded classification and no roadmap advancement. It will not import PR #43's full manifests, SVGs, or historical plan receipts.
+
+## Risks / Trade-offs
+
+- [“Production delta” becomes vague prose] → Require a non-empty explicit statement now and keep proof of the matching delivered delta in existing contract/conformance/delivery evidence; do not invent a second schema in this narrow change.
+- [Legacy Wave N callers omit the new block] → Only explicitly numbered product-wave workflows are required to supply it; ordinary non-wave route inputs remain compatible, while roadmap guidance makes the trigger mandatory for numbered work.
+- [Audit evidence is mistaken for discarded work] → Preserve audit manifests and inventory dispositions, but state explicitly that they are evidence outcomes rather than product progress.
+
+## Migration Plan
+
+Add the new contract and regression test first, implement the route classification, then update roadmap and agent-facing pointers. Existing receipts remain readable because the wave block is optional for non-wave work. Rollback removes the optional classification and restores the prior roadmap language; no product or design-source data migrates.

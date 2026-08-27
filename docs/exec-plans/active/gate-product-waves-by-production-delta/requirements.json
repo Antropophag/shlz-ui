@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Require numbered product waves to declare an expected production delta, route source-only discovery and audit work to bounded evidence execution, prevent that work from advancing the product roadmap, and lock PR #43 as a regression fixture without starting the next wave.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "wave-gate-seam",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "User requested the minimal architectural change be selected independently."
+      }
+    },
+    {
+      "id": "design-source-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md: shlz-design-source is read-only and implementation belongs outside it."
+      }
+    },
+    {
+      "id": "next-wave-boundary",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-message",
+        "ref": "User explicitly instructed not to start the next wave."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "gate-product-waves-by-production-delta",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-message",
+      "ref": "User explicitly requested the harness and roadmap fix and delegated the minimal architecture."
+    }
+  }
+}
