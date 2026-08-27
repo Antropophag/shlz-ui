@@ -49,8 +49,17 @@ const sourceExtensions = new Set([
   ".md",
 ]);
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
-const boundedSignature =
-  /\.(?:shlz-(?:report-)?card|shlz-cover)\b|(?:class|className)\s*=\s*["'][^"']*\bshlz-(?:report-)?card\b|(?:class|className)\s*=\s*["'][^"']*\bshlz-cover\b|data-shlz-(?:report-)?card\b|data-shlz-cover\b|customElements\.define\(\s*["']shlz-(?:report-)?card["']|export\s+(?:class|function|const)\s+(?:Reports?Card|Card|Cover)\b/i;
+const boundedSignatures = [
+  /\.(?:shlz-(?:report-)?card|shlz-cover)\b/i,
+  /(?:class|className)\s*=\s*["'][^"']*\b(?:shlz-(?:report-)?card|shlz-cover)\b/i,
+  /data-(?:shlz-(?:report-)?card|shlz-cover)\b/i,
+  /customElements\.define\(\s*["'](?:shlz-(?:report-)?card|shlz-cover)["']/i,
+  /<(?:shlz-(?:report-)?card|shlz-cover)\b/i,
+  /export\s+(?:default\s+)?(?:class|function|const)\s+(?:Reports?Card|Card|Cover)\b/i,
+  /(?:const|let|var)\s+(Reports?Card|Card|Cover)\b[\s\S]*\bexport\s+default\s+\1\b/i,
+];
+const hasBoundedSignature = (source) =>
+  boundedSignatures.some((signature) => signature.test(source));
 const terminology = /\bcard(?:s)?\b|cover/i;
 const classifiedTerminology = new Set(
   manifest.sourceOccurrences.map(({ path }) => path),
@@ -68,11 +77,9 @@ async function filesBelow(directory) {
   return files;
 }
 
-const matchingPaths = (sources, pattern) =>
+const matchingPaths = (sources, matcher) =>
   new Set(
-    sources
-      .filter(({ source }) => pattern.test(source))
-      .map(({ path }) => path),
+    sources.filter(({ source }) => matcher(source)).map(({ path }) => path),
   );
 
 test("Wave 10 authoritative sources retain exact hashes and critical composition facts", async () => {
@@ -118,8 +125,20 @@ test("Wave 10 authoritative sources retain exact hashes and critical composition
 });
 
 test("Wave 10 manifest records a source-only contract with independent ledgers", () => {
+  const expectedSourcePaths = [...sourceHashes.keys()].sort();
+  const manifestSourcePaths = [
+    manifest.authoritativeSource,
+    ...manifest.referenceSources.filter((path) => sourceHashes.has(path)),
+  ].sort();
+  const sourceFactEvidence = manifest.sourceClaims
+    .filter(({ classification }) => classification === "source-fact")
+    .map(({ evidence }) => evidence)
+    .sort();
+
   assert.equal(manifest.schemaVersion, 2);
   assert.equal(manifest.component, "card-compositions");
+  assert.deepEqual(manifestSourcePaths, expectedSourcePaths);
+  assert.deepEqual(sourceFactEvidence, expectedSourcePaths);
   assert.deepEqual(manifest.implementation, []);
   assert.deepEqual(manifest.occurrences, []);
   assert.deepEqual(manifest.browserTests, [
@@ -131,12 +150,6 @@ test("Wave 10 manifest records a source-only contract with independent ledgers",
     "cover",
     "reportsCard",
   ]);
-  assert.equal(
-    manifest.sourceClaims.filter(
-      ({ classification }) => classification === "source-fact",
-    ).length,
-    3,
-  );
   for (const level of [
     "runtime-browser",
     "accessibility",
@@ -159,7 +172,7 @@ test("Wave 10 repository census proves bounded absence and classifies terminolog
         source: await readFile(path, "utf8"),
       })),
   );
-  assert.deepEqual([...matchingPaths(boundedSources, boundedSignature)], []);
+  assert.deepEqual([...matchingPaths(boundedSources, hasBoundedSignature)], []);
 
   const terminologyFiles = (
     await Promise.all(terminologyCensusRoots.map(filesBelow))
@@ -171,20 +184,37 @@ test("Wave 10 repository census proves bounded absence and classifies terminolog
     })),
   );
   assert.deepEqual(
-    [...matchingPaths(terminologySources, terminology)].sort(),
+    [
+      ...matchingPaths(terminologySources, (source) =>
+        terminology.test(source),
+      ),
+    ].sort(),
     [...classifiedTerminology].sort(),
   );
 });
 
 test("Wave 10 absence census rejects a synthetic production Card composition", () => {
-  const found = matchingPaths(
-    [
-      {
-        path: "packages/styles/components/card.css",
-        source: ".shlz-card { border-radius: 16px; }",
-      },
-    ],
-    boundedSignature,
+  const syntheticImplementations = [
+    {
+      path: "packages/styles/components/card.css",
+      source: ".shlz-card { border-radius: 16px; }",
+    },
+    {
+      path: "packages/react/Card.jsx",
+      source: "export default function Card() { return null; }",
+    },
+    {
+      path: "packages/vue/Card.js",
+      source: "const Card = {};\nexport default Card;",
+    },
+    {
+      path: "apps/example/card.html",
+      source: "<shlz-card></shlz-card>",
+    },
+  ];
+  const found = matchingPaths(syntheticImplementations, hasBoundedSignature);
+  assert.deepEqual(
+    [...found],
+    syntheticImplementations.map(({ path }) => path),
   );
-  assert.deepEqual([...found], ["packages/styles/components/card.css"]);
 });
