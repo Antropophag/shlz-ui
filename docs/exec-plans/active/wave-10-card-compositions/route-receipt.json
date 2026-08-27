@@ -1,0 +1,41 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Complete roadmap Wave 10 by verifying the source-only Card compositions family against its three authoritative SVGs, repository-wide absence, and the component completion gate without inventing runtime semantics.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "wave-10-card-compositions",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "wave-10-scope",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "source-only-disposition",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "runtime-contract-boundary",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "fe7d633c43a37399b7c696af8fc722ef2613f31d9c9eb143557ee3bd604b23f1"
+}

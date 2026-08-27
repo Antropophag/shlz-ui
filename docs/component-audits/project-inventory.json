@@ -1901,20 +1901,24 @@
       }
     },
     {
-      "tests": [],
+      "tests": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js"
+      ],
       "evidence": {
-        "source-integrity": "raw SVG only",
-        "structural-contract": "gap",
-        "runtime-browser": "gap",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",
+        "structural-contract": "pass: bounded repository surfaces contain zero implementations and all 15 generic card/cover terminology collisions are classified",
+        "runtime-browser": "not-applicable: source-only family has no runtime root, behavior, event, controller or public API",
+        "accessibility": "not-applicable: no production semantics, keyboard model or accessible naming contract exists",
+        "focused-visual": "not-applicable: raw artwork is authoritative but no implemented component or runtime state exists for comparison",
+        "consumer-integration": "not-applicable: no live or Data Workspace consumer exists",
+        "responsive-content-stress": "not-applicable: static exports establish no responsive reflow, media lifecycle or dynamic content behavior"
       },
       "canonical_name": "Card compositions",
       "category": "application-compositions",
       "implementation_status": "source-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Card with button.svg",
         "shlz-design-source/raw/svg/Reports card.svg",
@@ -1922,7 +1926,10 @@
       ],
       "production_implementation": [],
       "behavior": [],
-      "docs": [],
+      "docs": [
+        "docs/component-audits/card-compositions.json",
+        "docs/component-audits/wave-10-report.md"
+      ],
       "executable_fixtures": [],
       "live_consumers": [],
       "data_workspace_consumers": [],
@@ -1931,7 +1938,11 @@
       "local_alternatives": [],
       "scope": ["content/image/actions", "report/card/cover variants"],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "VERIFIED is limited to the source/absence audit and does not indicate that a production Card component exists",
+        "outlined text does not establish literal runtime copy or structured typography properties",
+        "click, navigation, loading, media, responsive, data-model and generic Card API semantics remain unsupported"
+      ],
       "measured_counts": {
         "executableShowcase": 0,
         "liveConsumers": 0,
