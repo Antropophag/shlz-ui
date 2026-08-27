@@ -37,6 +37,13 @@ export const materialSignals = [
   "publicContract",
   "materialAmbiguity",
 ];
+const waveEvidenceKinds = new Set(["source-only", "discovery", "audit"]);
+const productionDeltaKinds = new Set([
+  "implementation",
+  "behavior",
+  "public-interface",
+  "consumer",
+]);
 
 export function stable(value) {
   if (Array.isArray(value)) return value.map(stable);
@@ -79,6 +86,78 @@ function signals(value) {
   );
 }
 
+function classifyWave(value) {
+  if (value === undefined) return undefined;
+  assert(value && typeof value === "object", "wave assessment is required");
+  assert(
+    Number.isInteger(value.number) && value.number > 0,
+    "wave number must be a positive integer",
+  );
+  const risk = value.evidenceRisk ?? {};
+  assert(
+    risk &&
+      typeof risk === "object" &&
+      Object.keys(risk).every((name) =>
+        ["testFirst", "independentReview"].includes(name),
+      ) &&
+      Object.values(risk).every((flag) => typeof flag === "boolean"),
+    "wave evidence risk must contain only boolean testFirst and independentReview flags",
+  );
+  const evidenceRisk = {
+    testFirst: risk.testFirst === true,
+    independentReview: risk.independentReview === true,
+  };
+  if (value.expectedProductionDelta != null) {
+    assert(
+      !value.evidenceKind,
+      "evidence-only wave cannot declare a production delta",
+    );
+    assert(
+      typeof value.expectedProductionDelta === "object" &&
+        productionDeltaKinds.has(value.expectedProductionDelta.kind) &&
+        typeof value.expectedProductionDelta.description === "string" &&
+        value.expectedProductionDelta.description.trim(),
+      "numbered product wave requires an expected production delta",
+    );
+    return {
+      number: value.number,
+      workKind: "product",
+      evidenceKind: null,
+      expectedProductionDelta: {
+        kind: value.expectedProductionDelta.kind,
+        description: value.expectedProductionDelta.description.trim(),
+      },
+      evidenceRisk,
+      executionPath: "product",
+      heavyExecution: true,
+      roadmapAdvance: true,
+    };
+  }
+  assert(
+    waveEvidenceKinds.has(value.evidenceKind),
+    "wave requires an evidence kind or expected production delta",
+  );
+  return {
+    number: value.number,
+    workKind: value.evidenceKind,
+    evidenceKind: value.evidenceKind,
+    expectedProductionDelta: null,
+    evidenceRisk,
+    executionPath: "bounded-evidence",
+    heavyExecution: false,
+    roadmapAdvance: false,
+  };
+}
+
+function assertWaveReceipt(value) {
+  if (value === undefined) return;
+  assert(
+    JSON.stringify(stable(value)) ===
+      JSON.stringify(stable(classifyWave(value))),
+    "route receipt has an invalid wave execution classification",
+  );
+}
+
 export function route(assessment) {
   assert(
     assessment?.version === 1 && assessment.intent,
@@ -91,7 +170,13 @@ export function route(assessment) {
   const unknown = materialSignals.filter(
     (name) => assessment.materialSignals[name] === "unknown",
   );
-  const expected = material.length || unknown.length ? "open-spec" : "direct";
+  const wave = classifyWave(assessment.wave);
+  const waveRisk =
+    wave?.evidenceRisk.testFirst || wave?.evidenceRisk.independentReview;
+  const expected =
+    material.length || unknown.length || wave || waveRisk
+      ? "open-spec"
+      : "direct";
   assert(assessment.route === expected, `route must be ${expected}`);
   if (expected === "open-spec") {
     assert(
@@ -111,6 +196,7 @@ export function route(assessment) {
     materialSignals: assessment.materialSignals,
     material,
     unknown,
+    wave,
   });
 }
 export function requirements(routeReceipt, state) {
@@ -206,6 +292,7 @@ export async function baseline({
   pullRequestUrl,
 }) {
   verify(routeReceipt, "route");
+  assertWaveReceipt(routeReceipt.payload.wave);
   if (routeReceipt.payload.route === "open-spec") {
     verify(requirementsReceipt, "requirements");
     assert(
@@ -452,15 +539,19 @@ async function files(repoRoot, names) {
 }
 export async function validation({
   repoRoot,
+  routeReceipt,
   contractReceipt,
   candidateHead,
   target,
   argv,
   inputs,
+  productionDelta = null,
+  outcomeEvidence = [],
   priorReceipt,
   cwd = repoRoot,
 }) {
   verify(contractReceipt, "contract");
+  if (routeReceipt) verify(routeReceipt, "route");
   assert(sha.test(candidateHead), "invalid candidate head");
   assert(
     (await git(repoRoot, "rev-parse", "HEAD")) === candidateHead,
@@ -471,8 +562,34 @@ export async function validation({
     target,
     argv,
     closure,
+    productionDelta,
+    outcomeEvidence,
+    routeDigest: routeReceipt?.digest ?? null,
     contractDigest: contractReceipt.payload.contractDigest,
   });
+  if (productionDelta !== null)
+    assert(
+      typeof productionDelta === "object" &&
+        productionDeltaKinds.has(productionDelta.kind) &&
+        typeof productionDelta.description === "string" &&
+        productionDelta.description.trim() === productionDelta.description &&
+        productionDelta.description,
+      "validation production delta is invalid",
+    );
+  if (productionDelta !== null)
+    assertProductionOutcomeEligible(routeReceipt, productionDelta);
+  assert(
+    Array.isArray(outcomeEvidence) &&
+      outcomeEvidence.every((name) => typeof name === "string"),
+    "validation outcome evidence must be paths",
+  );
+  const closurePaths = new Set(closure.map(({ path: name }) => name));
+  if (productionDelta !== null)
+    assert(
+      outcomeEvidence.length > 0 &&
+        outcomeEvidence.every((name) => closurePaths.has(name)),
+      "production validation requires outcome evidence in its input closure",
+    );
   if (priorReceipt) {
     verify(priorReceipt, "validation");
     assert(
@@ -490,6 +607,19 @@ export async function validation({
   }
   const result = await command(argv, cwd);
   assert(result.outcome === "pass", `validation failed: ${target}`);
+  const productionOutcomeProof =
+    productionDelta === null
+      ? null
+      : {
+          productionDelta,
+          routeDigest: routeReceipt.digest,
+          candidateHead,
+          target,
+          argv,
+          closureDigest,
+          outcomeEvidence: [...new Set(outcomeEvidence)].sort(order),
+          resultDigest: digest(result),
+        };
   return receipt(
     "validation",
     {
@@ -497,12 +627,64 @@ export async function validation({
       contractDigest: contractReceipt.payload.contractDigest,
       target,
       argv,
+      productionDelta,
+      productionOutcomeProof,
       closure,
       closureDigest,
       outcome: "pass",
       result,
     },
     { contractReceiptDigest: contractReceipt.digest },
+  );
+}
+
+export function assertProductionDeltaProof(
+  wave,
+  validationReceipts,
+  routeDigest,
+) {
+  if (!wave?.roadmapAdvance) return;
+  assert(
+    validationReceipts.some(({ payload }) => {
+      const proof = payload.productionOutcomeProof;
+      return (
+        proof &&
+        proof.routeDigest === routeDigest &&
+        digest(proof.productionDelta) ===
+          digest(wave.expectedProductionDelta) &&
+        proof.candidateHead === payload.candidateHead &&
+        proof.target === payload.target &&
+        digest(proof.argv) === digest(payload.argv) &&
+        proof.closureDigest === payload.closureDigest &&
+        Array.isArray(proof.outcomeEvidence) &&
+        proof.outcomeEvidence.length > 0 &&
+        proof.outcomeEvidence.every((name) =>
+          payload.closure.some(({ path: closurePath }) => closurePath === name),
+        ) &&
+        proof.resultDigest === digest(payload.result)
+      );
+    }),
+    "roadmap advancement requires candidate/runtime-bound production outcome proof",
+  );
+}
+
+export function assertProductionOutcomeEligible(routeReceipt, productionDelta) {
+  verify(routeReceipt, "route");
+  assert(
+    routeReceipt.payload.wave?.roadmapAdvance === true &&
+      digest(routeReceipt.payload.wave.expectedProductionDelta) ===
+        digest(productionDelta),
+    "production outcome proof requires its roadmap-eligible route delta",
+  );
+}
+
+export function assertIsolatedExecutionAllowed(dependencies) {
+  const routes = dependencies.filter(({ kind }) => kind === "route");
+  assert(routes.length === 1, "isolated execution requires one route receipt");
+  verify(routes[0], "route");
+  assert(
+    routes[0].payload.wave?.executionPath !== "bounded-evidence",
+    "bounded evidence must execute inline",
   );
 }
 export function review({ contractReceipt, candidateHead, standards, spec }) {
@@ -710,24 +892,35 @@ export async function delivery({
   if (routeReceipt.payload.route === "open-spec") {
     verify(requirementsReceipt, "requirements");
     verify(contractReceipt, "contract");
-    verify(tddReceipt, "tdd");
-    verify(reviewReceipt, "review");
     assert(
       requirementsReceipt.routeDigest === routeReceipt.digest &&
         baselineReceipt.routeDigest === routeReceipt.digest &&
         baselineReceipt.requirementsDigest === requirementsReceipt.digest,
       "route, requirements, and baseline receipt chain differs",
     );
-    assert(
-      tddReceipt.payload.candidateHead === head &&
-        reviewReceipt.payload.candidateHead === head,
-      "TDD or review candidate differs",
-    );
-    assert(
-      tddReceipt.contractReceiptDigest === contractReceipt.digest &&
-        reviewReceipt.contractReceiptDigest === contractReceipt.digest,
-      "TDD or review contract differs",
-    );
+    const wave = routeReceipt.payload.wave;
+    const tddRequired =
+      wave?.heavyExecution !== false || wave.evidenceRisk.testFirst;
+    const reviewRequired =
+      wave?.heavyExecution !== false ||
+      routeReceipt.payload.material.length > 0 ||
+      wave.evidenceRisk.independentReview;
+    if (tddRequired) {
+      verify(tddReceipt, "tdd");
+      assert(
+        tddReceipt.payload.candidateHead === head &&
+          tddReceipt.contractReceiptDigest === contractReceipt.digest,
+        "TDD candidate or contract differs",
+      );
+    }
+    if (reviewRequired) {
+      verify(reviewReceipt, "review");
+      assert(
+        reviewReceipt.payload.candidateHead === head &&
+          reviewReceipt.contractReceiptDigest === contractReceipt.digest,
+        "review candidate or contract differs",
+      );
+    }
     if (contractReceipt.payload.failureInvariants.length) {
       verify(failureProofReceipt, "failure-proof");
       assert(
@@ -750,6 +943,11 @@ export async function delivery({
       "validation contract differs",
     );
   }
+  assertProductionDeltaProof(
+    routeReceipt.payload.wave,
+    validationReceipts,
+    routeReceipt.digest,
+  );
   const repo = await repository(repoRoot);
   assert(
     repo.digest === baselineReceipt.payload.repository.digest,

@@ -2,6 +2,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import {
+  assertIsolatedExecutionAllowed,
   baseline,
   conformance,
   contract,
@@ -77,6 +78,7 @@ async function isolated(manifest) {
     (manifest.dependencies ?? []).map(load),
   );
   for (const dependency of dependencies) verify(dependency);
+  assertIsolatedExecutionAllowed(dependencies);
   const sources = await sourceManifest(
     repoRoot,
     manifest.sources ?? [],
@@ -159,6 +161,7 @@ try {
       result = await validation({
         ...input,
         repoRoot,
+        routeReceipt: input.route ? await load(input.route) : null,
         contractReceipt: await load(input.contract),
         priorReceipt: input.prior ? await load(input.prior) : null,
       });

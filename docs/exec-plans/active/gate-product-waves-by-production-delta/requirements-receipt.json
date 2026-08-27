@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "gate-product-waves-by-production-delta",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "production-outcome-proof",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "bounded-execution-boundary",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "pr43-regression-scope",
+        "owner": "user",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Harden PR #44 so roadmap advancement requires candidate/runtime-bound production outcome proof, bounded evidence cannot enter isolated multi-session execution, PR #43 is the regression fixture for both invariants, and current review findings are resolved without scope expansion.",
+    "revision": 2
+  },
+  "routeDigest": "af30be57b5a740b1af322a7660f0a15e40c9dad1e3daf6557fc0d6a764d1eff7",
+  "version": 1,
+  "digest": "f95f3c90cfd0fddffe99a715a9213b89bbb2d079e5236213b29b7f3e402685eb"
+}

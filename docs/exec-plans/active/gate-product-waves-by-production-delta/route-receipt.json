@@ -1,0 +1,41 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Harden PR #44 so roadmap advancement requires candidate/runtime-bound production outcome proof, bounded evidence cannot enter isolated multi-session execution, PR #43 is the regression fixture for both invariants, and current review findings are resolved without scope expansion.",
+    "material": ["publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "gate-product-waves-by-production-delta",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "production-outcome-proof",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "bounded-execution-boundary",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "pr43-regression-scope",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "af30be57b5a740b1af322a7660f0a15e40c9dad1e3daf6557fc0d6a764d1eff7"
+}
