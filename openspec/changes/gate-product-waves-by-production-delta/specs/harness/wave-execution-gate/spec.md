@@ -24,7 +24,7 @@ The harness SHALL require a numbered product wave to carry a structured, non-emp
 
 ### Requirement: Evidence-only waves automatically use bounded execution
 
-The harness SHALL classify an `evidenceKind` of source-only, discovery-only, or audit-only as bounded evidence execution. Evidence kind and expected production delta MUST be mutually exclusive. This classification MUST set product-roadmap eligibility to false and MUST NOT be overridable by calling the work a product wave or by recording a verified audit disposition. Bounded execution MUST retain TDD or independent review when separately declared applicable and MUST retain proof for marked failure invariants.
+The harness SHALL classify an `evidenceKind` of `source-only`, `discovery`, or `audit` as bounded evidence execution. Evidence kind and expected production delta MUST be mutually exclusive. This classification MUST set product-roadmap eligibility to false and MUST NOT be overridable by calling the work a product wave or by recording a verified audit disposition. Bounded execution MUST retain TDD or independent review when separately declared applicable and MUST retain proof for marked failure invariants.
 
 #### Scenario: Source-only audit is submitted as a numbered wave
 
@@ -32,7 +32,7 @@ The harness SHALL classify an `evidenceKind` of source-only, discovery-only, or 
 <!-- validation-impact: harness,spec,docs -->
 <!-- failure-invariant: evidence-wave-cannot-promote-roadmap concern=state-machine -->
 
-- **WHEN** a numbered wave declares source-only, discovery-only, or audit-only work
+- **WHEN** a numbered wave declares `source-only`, `discovery`, or `audit` work
 - **THEN** its route receipt selects bounded evidence execution and records that product-roadmap advancement is forbidden
 
 ### Requirement: PR 43 remains a discriminating regression fixture
