@@ -20,7 +20,19 @@ const sourceHashes = new Map([
     "c857eb75fe105238c2a0d222a5dd27fae74006cf6db43488fa4d9bbe77feb612",
   ],
 ]);
-const censusRoots = ["apps", "packages", "tools/fixtures", "tools/playwright"];
+const boundedCensusRoots = [
+  "apps",
+  "packages",
+  "tools/fixtures",
+  "tools/playwright",
+  "docs/components",
+];
+const terminologyCensusRoots = [
+  "apps",
+  "packages",
+  "tools/fixtures",
+  "tools/playwright",
+];
 const sourceExtensions = new Set([
   ".html",
   ".js",
@@ -132,16 +144,28 @@ test("Wave 10 manifest records a source-only contract with independent ledgers",
 });
 
 test("Wave 10 repository census proves bounded absence and classifies terminology collisions", async () => {
-  const files = (await Promise.all(censusRoots.map(filesBelow))).flat();
-  const sources = await Promise.all(
-    files.map(async (path) => ({
+  const boundedFiles = (
+    await Promise.all(boundedCensusRoots.map(filesBelow))
+  ).flat();
+  const boundedSources = await Promise.all(
+    boundedFiles.map(async (path) => ({
       path: relative(".", path),
       source: await readFile(path, "utf8"),
     })),
   );
-  assert.deepEqual([...matchingPaths(sources, boundedSignature)], []);
+  assert.deepEqual([...matchingPaths(boundedSources, boundedSignature)], []);
+
+  const terminologyFiles = (
+    await Promise.all(terminologyCensusRoots.map(filesBelow))
+  ).flat();
+  const terminologySources = await Promise.all(
+    terminologyFiles.map(async (path) => ({
+      path: relative(".", path),
+      source: await readFile(path, "utf8"),
+    })),
+  );
   assert.deepEqual(
-    [...matchingPaths(sources, terminology)].sort(),
+    [...matchingPaths(terminologySources, terminology)].sort(),
     [...classifiedTerminology].sort(),
   );
 });

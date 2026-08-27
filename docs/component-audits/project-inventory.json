@@ -1406,7 +1406,7 @@
         "tools/tests/dropdown-source.test.mjs",
         "tools/playwright/dropdown.spec.js",
         "tools/playwright/dropdown-fidelity.spec.js",
-        "tools/playwright/card-compositions-wave10.spec.js"
+        "tools/playwright/interaction-evidence-wave6.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw source matrix and scrollable geometry remain exact",
@@ -1904,7 +1904,7 @@
       "tests": [
         "tools/tests/wave10-card-compositions-source-census.test.mjs",
         "tools/tests/component-audit-manifest.test.mjs",
-        "tools/playwright/interaction-evidence-wave6.spec.js"
+        "tools/playwright/card-compositions-wave10.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",

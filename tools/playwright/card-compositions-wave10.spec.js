@@ -1,5 +1,8 @@
 import { expect, test } from "@playwright/test";
-import { readComponentAuditManifest } from "./component-audit.js";
+import {
+  expectClassifiedComponentOccurrences,
+  readComponentAuditManifest,
+} from "./component-audit.js";
 
 const manifest = await readComponentAuditManifest(
   new globalThis.URL(
@@ -17,7 +20,13 @@ const expectMaterialStates = (component) => {
   );
 };
 
-test("Wave 10 keeps Card compositions source-only with no runtime state", () => {
+test.beforeEach(async ({ page }) => {
+  await page.goto("/");
+});
+
+test("Wave 10 keeps Card compositions source-only with no runtime state", async ({
+  page,
+}) => {
   expect(manifest.implementation).toEqual([]);
   expect(manifest.occurrences).toEqual([]);
   expect(manifest.visualSnapshots).toEqual([]);
@@ -27,5 +36,6 @@ test("Wave 10 keeps Card compositions source-only with no runtime state", () => 
   expect(manifest.interactionEvidence.types.runtimeBehavior).toEqual([
     "not-applicable: click, navigation, loading, media lifecycle, and data behavior are outside the static source contract",
   ]);
+  await expectClassifiedComponentOccurrences(page, manifest);
   expectMaterialStates("card-compositions");
 });
