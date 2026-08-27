@@ -11,4 +11,4 @@
 ## 3. Validation and Delivery
 
 - [x] 3.1 Run strict OpenSpec, focused harness, aggregate repository, formatting, and target-diff checks; record exact results and limitations.
-- [ ] 3.2 Run independent Standards and Spec reviews, resolve every blocking finding, run route conformance and delivery guards, then push and open a separate PR targeting `main` while leaving it unmerged.
+- [x] 3.2 Run independent Standards and Spec reviews, resolve every blocking finding, run route conformance and delivery guards, then push and open a separate PR targeting `main` while leaving it unmerged.

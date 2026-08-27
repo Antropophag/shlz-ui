@@ -8,6 +8,9 @@
 - Strict OpenSpec validation: 21/21 changes passed.
 - `git diff --check`: passed.
 - Symmetric closed-set probe: candidate rejects missing coverage; known-bad adapter accepts it and therefore fails the probe.
+- Independent Standards review: passed after correcting the branch prefix to `feature/`.
+- Independent Spec review: passed after binding `{evidence}`, `{set}`, and `{member}` to each executable challenge and adding the synthetic PR #45 400-only RED fixture.
+- Delivery target: open, unmerged PR #46 targeting `main`.
 
 The first aggregate test attempt ran before dependencies and generated `dist` outputs existed in the new worktree. It reported 12 bootstrap failures (`ENOENT` and `tsc not found`). After `npm ci`, generation, and package build, the unchanged aggregate suite passed 126/126. `npm ci` reported zero vulnerabilities and one blocked `esbuild` install script; Vite builds still completed successfully.
 
