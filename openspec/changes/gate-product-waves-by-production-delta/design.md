@@ -22,13 +22,13 @@ See `proposal.md` for the incident. The current harness already concentrates sem
 
 ### Add one optional typed wave block to route assessments
 
-`route()` will accept an optional `wave` object with a positive integer `number`, a closed `workKind`, and `expectedProductionDelta`. `product` requires a trimmed non-empty delta and produces `executionPath: product` plus `roadmapAdvance: true`. `source-only`, `discovery`, and `audit` ignore numbering as permission and produce `executionPath: bounded-evidence` plus `roadmapAdvance: false`.
+`route()` will accept an optional `wave` object with a positive integer `number` and exactly one of two inputs. A structured `expectedProductionDelta` has a closed production kind plus non-empty description and derives `workKind: product`, `executionPath: product`, and `roadmapAdvance: true`. An `evidenceKind` of `source-only`, `discovery`, or `audit` derives `executionPath: bounded-evidence` and `roadmapAdvance: false`. The mutually exclusive inputs remove the caller-controlled product label that could otherwise relabel evidence work.
 
 This keeps ordinary route inputs backward compatible and gives every downstream receipt the classification through the existing route digest. A new command or parallel roadmap state was rejected because it would duplicate the receipt chain and increase caller knowledge.
 
 ### Reject contradictory evidence inputs at the seam
 
-Evidence-only kinds with a claimed production delta will be rejected rather than silently upgraded or discarded. Product kind with an empty delta will also be rejected. This makes caller mistakes visible and prevents keyword-based inference.
+An evidence kind with a claimed production delta is rejected rather than silently upgraded or discarded. A missing/empty delta without an evidence kind is also rejected. Bounded evidence carries explicit test-first and independent-review risk flags; either can restore its corresponding receipt obligation, while marked failure invariants always require proof. This makes caller mistakes visible and preserves risk-derived safeguards without making wave numbering expensive.
 
 ### Enforce the heavy boundary in baseline
 

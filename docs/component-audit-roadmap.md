@@ -2,8 +2,9 @@
 
 This is the durable scope map for the component-audit families recorded after Wave 8. A request of the form `Сделай Wave N` selects the complete entry for N below, but numbering alone does not make the work a product wave or authorize heavy execution. Before baseline, the route assessment must classify the entry explicitly:
 
-- `product` requires a non-empty expected production delta: an observable production implementation, behavior, public interface, or real consumer outcome;
-- `source-only`, `discovery`, and `audit` automatically use bounded evidence execution and set product-roadmap advancement to false.
+- product execution requires a structured, non-empty expected production delta whose closed kind is `implementation`, `behavior`, `public-interface`, or `consumer`;
+- an `evidenceKind` of `source-only`, `discovery`, or `audit` automatically uses bounded evidence execution and sets product-roadmap advancement to false;
+- `evidenceKind` and expected production delta are mutually exclusive, so evidence work cannot promote itself by changing a work label.
 
 Audit status, source knowledge, documentation, planning, test-only evidence, and a `VERIFIED` disposition are not production deltas. The requester does not need to repeat component names, but a short numbered intent cannot manufacture a production outcome that the source and current contract do not establish.
 
@@ -29,7 +30,7 @@ Every source filename above is relative to `shlz-design-source/raw/svg/`. Those 
 ## Resolving `Сделай Wave N`
 
 1. Read the numbered entry and compare its family, audit status, source authority, and material implementation surfaces with the current project inventory and repository census.
-2. If they still agree, use the entry's included scope, exclusions, and completion boundary as the task scope. Record the typed `wave` block in the harness route assessment. Use `workKind: product` only with an explicit expected production delta; otherwise use the matching bounded evidence kind. Wave numbering expresses map order, not permission to infer production scope.
+2. If they still agree, use the entry's included scope, exclusions, and completion boundary as the task scope. Record the typed `wave` block in the harness route assessment. Supply either the structured expected production delta or the matching bounded `evidenceKind`, never both. Wave numbering expresses map order, not permission to infer production scope.
 3. Apply the current authorities in `docs/openspec.md`, `docs/requirements-elicitation.md`, `docs/agent-execution.md`, `docs/validation-workflow.md`, and `docs/component-audit-workflow.md`. This roadmap selects scope; it does not cache their commands or replace their gates.
 4. Treat the short request as pre-authorization to execute only the classified path and open its separate PR. Bounded evidence work may update source/audit evidence but cannot mark a product wave delivered, exhaust a product-roadmap entry, or authorize the next wave. The request does not authorize a design-source change, an application-derived visual contract, an unsupported public/runtime API, accepting a new finding, merging a PR, or claiming one family complete because another passed.
 
@@ -77,4 +78,4 @@ Completion boundary: each of Messaging, History, and Planner has a source/absenc
 
 ## Product-roadmap advancement
 
-Audit dispositions remain recorded in the inventory and reports, but do not consume product entries. A numbered entry advances only when its pre-execution route receipt records `workKind: product`, a non-empty expected production delta, and product-roadmap eligibility, and delivery proves that same delta. Completing or merging bounded evidence does not authorize the next numbered wave. After the current episode, stop unless the user separately requests another wave; agents never merge on the user's behalf.
+Audit dispositions remain recorded in the inventory and reports, but do not consume product entries. A numbered entry advances only when its pre-execution route receipt derives product execution from a structured expected production delta, records product-roadmap eligibility, and delivery proves that same delta. Completing or merging bounded evidence does not authorize the next numbered wave. After the current episode, stop unless the user separately requests another wave; agents never merge on the user's behalf.

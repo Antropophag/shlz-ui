@@ -67,9 +67,9 @@ test("roadmap gates numbered product work and keeps evidence waves bounded", asy
   assert.match(agents, /docs\/component-audit-roadmap\.md/);
   assert.match(
     roadmap,
-    /product` requires a non-empty expected production delta/,
+    /product execution requires a structured, non-empty expected production delta/,
   );
-  assert.match(roadmap, /automatically use bounded evidence execution/);
+  assert.match(roadmap, /automatically uses bounded evidence execution/);
   assert.match(roadmap, /PR #43 is the regression fixture/);
   assert.match(roadmap, /did not deliver or advance a product Wave 10/);
   assert.match(roadmap, /does not authorize the next numbered wave/);

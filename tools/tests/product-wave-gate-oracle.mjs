@@ -37,8 +37,10 @@ if (!invariant || invariant === "product-wave-without-delta-cannot-start") {
         ...assessment,
         wave: {
           number: 11,
-          workKind: "product",
-          expectedProductionDelta: "",
+          expectedProductionDelta: {
+            kind: "implementation",
+            description: "",
+          },
         },
       }),
     /expected production delta/,
@@ -50,7 +52,7 @@ if (!invariant || invariant === "evidence-wave-cannot-promote-roadmap") {
     ...assessment,
     wave: {
       number: 10,
-      workKind: "source-only",
+      evidenceKind: "source-only",
       expectedProductionDelta: null,
     },
   });

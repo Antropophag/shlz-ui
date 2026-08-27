@@ -13,4 +13,4 @@
 ## 4. Validation and delivery
 
 - [x] 4.1 Validate OpenSpec strictly and run the focused plus repository harness/documentation checks; verify all affected checks pass with no design-source changes.
-- [ ] 4.2 Inspect the complete episode diff, obtain independent Standards and Spec review, resolve scope-local findings, create conformance/delivery evidence, and open an unmerged PR without starting the next wave.
+- [x] 4.2 Inspect the complete episode diff, obtain independent Standards and Spec review, resolve scope-local findings, create conformance/delivery evidence, and open an unmerged PR without starting the next wave.

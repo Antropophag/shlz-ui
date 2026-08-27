@@ -37,7 +37,13 @@ export const materialSignals = [
   "publicContract",
   "materialAmbiguity",
 ];
-const waveWorkKinds = new Set(["product", "source-only", "discovery", "audit"]);
+const waveEvidenceKinds = new Set(["source-only", "discovery", "audit"]);
+const productionDeltaKinds = new Set([
+  "implementation",
+  "behavior",
+  "public-interface",
+  "consumer",
+]);
 
 export function stable(value) {
   if (Array.isArray(value)) return value.map(stable);
@@ -87,31 +93,56 @@ function classifyWave(value) {
     Number.isInteger(value.number) && value.number > 0,
     "wave number must be a positive integer",
   );
-  assert(waveWorkKinds.has(value.workKind), "unknown wave work kind");
-  if (value.workKind === "product") {
+  const risk = value.evidenceRisk ?? {};
+  assert(
+    risk &&
+      typeof risk === "object" &&
+      Object.keys(risk).every((name) =>
+        ["testFirst", "independentReview"].includes(name),
+      ) &&
+      Object.values(risk).every((flag) => typeof flag === "boolean"),
+    "wave evidence risk must contain only boolean testFirst and independentReview flags",
+  );
+  const evidenceRisk = {
+    testFirst: risk.testFirst === true,
+    independentReview: risk.independentReview === true,
+  };
+  if (value.expectedProductionDelta != null) {
     assert(
-      typeof value.expectedProductionDelta === "string" &&
-        value.expectedProductionDelta.trim(),
+      !value.evidenceKind,
+      "evidence-only wave cannot declare a production delta",
+    );
+    assert(
+      typeof value.expectedProductionDelta === "object" &&
+        productionDeltaKinds.has(value.expectedProductionDelta.kind) &&
+        typeof value.expectedProductionDelta.description === "string" &&
+        value.expectedProductionDelta.description.trim(),
       "numbered product wave requires an expected production delta",
     );
     return {
       number: value.number,
-      workKind: value.workKind,
-      expectedProductionDelta: value.expectedProductionDelta.trim(),
+      workKind: "product",
+      evidenceKind: null,
+      expectedProductionDelta: {
+        kind: value.expectedProductionDelta.kind,
+        description: value.expectedProductionDelta.description.trim(),
+      },
+      evidenceRisk,
       executionPath: "product",
       heavyExecution: true,
       roadmapAdvance: true,
     };
   }
   assert(
-    value.expectedProductionDelta === null ||
-      value.expectedProductionDelta === undefined,
-    "evidence-only wave cannot declare a production delta",
+    waveEvidenceKinds.has(value.evidenceKind),
+    "wave requires an evidence kind or expected production delta",
   );
   return {
     number: value.number,
-    workKind: value.workKind,
+    workKind: value.evidenceKind,
+    evidenceKind: value.evidenceKind,
     expectedProductionDelta: null,
+    evidenceRisk,
     executionPath: "bounded-evidence",
     heavyExecution: false,
     roadmapAdvance: false,
@@ -766,28 +797,34 @@ export async function delivery({
         baselineReceipt.requirementsDigest === requirementsReceipt.digest,
       "route, requirements, and baseline receipt chain differs",
     );
-    if (routeReceipt.payload.wave?.heavyExecution !== false) {
+    const wave = routeReceipt.payload.wave;
+    const tddRequired =
+      wave?.heavyExecution !== false || wave.evidenceRisk.testFirst;
+    const reviewRequired =
+      wave?.heavyExecution !== false || wave.evidenceRisk.independentReview;
+    if (tddRequired) {
       verify(tddReceipt, "tdd");
-      verify(reviewReceipt, "review");
       assert(
         tddReceipt.payload.candidateHead === head &&
-          reviewReceipt.payload.candidateHead === head,
-        "TDD or review candidate differs",
+          tddReceipt.contractReceiptDigest === contractReceipt.digest,
+        "TDD candidate or contract differs",
       );
+    }
+    if (reviewRequired) {
+      verify(reviewReceipt, "review");
       assert(
-        tddReceipt.contractReceiptDigest === contractReceipt.digest &&
+        reviewReceipt.payload.candidateHead === head &&
           reviewReceipt.contractReceiptDigest === contractReceipt.digest,
-        "TDD or review contract differs",
+        "review candidate or contract differs",
       );
-      if (contractReceipt.payload.failureInvariants.length) {
-        verify(failureProofReceipt, "failure-proof");
-        assert(
-          failureProofReceipt.payload.candidateHead === head &&
-            failureProofReceipt.contractReceiptDigest ===
-              contractReceipt.digest,
-          "failure proof candidate or contract differs",
-        );
-      }
+    }
+    if (contractReceipt.payload.failureInvariants.length) {
+      verify(failureProofReceipt, "failure-proof");
+      assert(
+        failureProofReceipt.payload.candidateHead === head &&
+          failureProofReceipt.contractReceiptDigest === contractReceipt.digest,
+        "failure proof candidate or contract differs",
+      );
     }
   }
   assert(validationReceipts?.length, "delivery requires validation");

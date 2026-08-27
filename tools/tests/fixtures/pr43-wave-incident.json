@@ -2,7 +2,7 @@
   "pullRequest": 43,
   "wave": {
     "number": 10,
-    "workKind": "source-only",
+    "evidenceKind": "source-only",
     "expectedProductionDelta": null
   },
   "evidence": {

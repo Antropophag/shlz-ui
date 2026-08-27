@@ -6,7 +6,7 @@ Prevents evidence-only work from consuming product-wave execution or roadmap pro
 
 ### Requirement: Numbered product waves declare production delta before heavy execution
 
-The harness SHALL require a numbered product wave to carry a non-empty expected production delta in its route assessment before producing a baseline receipt. The delta MUST identify an observable production implementation, behavior, public interface, or real consumer outcome; audit status, source knowledge, documentation, planning, and test-only evidence MUST NOT satisfy this field.
+The harness SHALL require a numbered product wave to carry a structured, non-empty expected production delta in its route assessment before producing a baseline receipt. The delta MUST select a closed production kind of implementation, behavior, public interface, or real consumer and describe that observable outcome; audit status, source knowledge, documentation, planning, and test-only evidence MUST NOT satisfy this field.
 
 #### Scenario: Product wave has no production outcome
 
@@ -24,7 +24,7 @@ The harness SHALL require a numbered product wave to carry a non-empty expected 
 
 ### Requirement: Evidence-only waves automatically use bounded execution
 
-The harness SHALL classify source-only, discovery-only, and audit-only numbered work as bounded evidence execution. This classification MUST set product-roadmap eligibility to false and MUST NOT be overridable by calling the work a product wave or by recording a verified audit disposition.
+The harness SHALL classify an `evidenceKind` of source-only, discovery-only, or audit-only as bounded evidence execution. Evidence kind and expected production delta MUST be mutually exclusive. This classification MUST set product-roadmap eligibility to false and MUST NOT be overridable by calling the work a product wave or by recording a verified audit disposition. Bounded execution MUST retain TDD or independent review when separately declared applicable and MUST retain proof for marked failure invariants.
 
 #### Scenario: Source-only audit is submitted as a numbered wave
 

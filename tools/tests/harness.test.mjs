@@ -147,8 +147,10 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
         ...waveAssessment,
         wave: {
           number: 11,
-          workKind: "product",
-          expectedProductionDelta: "   ",
+          expectedProductionDelta: {
+            kind: "implementation",
+            description: "   ",
+          },
         },
       }),
     /expected production delta/,
@@ -158,16 +160,23 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
     ...waveAssessment,
     wave: {
       number: 11,
-      workKind: "product",
-      expectedProductionDelta:
-        "A production Upload composition with a public interaction contract",
+      expectedProductionDelta: {
+        kind: "implementation",
+        description:
+          "A production Upload composition with a public interaction contract",
+      },
     },
   });
   assert.deepEqual(product.payload.wave, {
     number: 11,
     workKind: "product",
-    expectedProductionDelta:
-      "A production Upload composition with a public interaction contract",
+    evidenceKind: null,
+    expectedProductionDelta: {
+      kind: "implementation",
+      description:
+        "A production Upload composition with a public interaction contract",
+    },
+    evidenceRisk: { testFirst: false, independentReview: false },
     executionPath: "product",
     heavyExecution: true,
     roadmapAdvance: true,
@@ -183,7 +192,9 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
   assert.deepEqual(replay.payload.wave, {
     number: 10,
     workKind: "source-only",
+    evidenceKind: "source-only",
     expectedProductionDelta: null,
+    evidenceRisk: { testFirst: false, independentReview: false },
     executionPath: "bounded-evidence",
     heavyExecution: false,
     roadmapAdvance: false,
@@ -195,7 +206,10 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
         ...waveAssessment,
         wave: {
           ...incident.wave,
-          expectedProductionDelta: "Claimed production delivery",
+          expectedProductionDelta: {
+            kind: "implementation",
+            description: "Claimed production delivery",
+          },
         },
       }),
     /evidence-only wave cannot declare a production delta/,
