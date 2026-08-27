@@ -1,0 +1,57 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Complete roadmap Wave 11 by independently auditing the composition-only Upload / Document family against Documents.svg and Detailed appeals.svg without inventing upload lifecycle semantics.",
+    "material": [
+      "newCapability",
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "wave-11-upload-document-compositions",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "wave-11-scope",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "primitive-boundary",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "upload-lifecycle-boundary",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": [],
+    "wave": {
+      "evidenceKind": "audit",
+      "evidenceRisk": {
+        "independentReview": false,
+        "testFirst": false
+      },
+      "executionPath": "bounded-evidence",
+      "expectedProductionDelta": null,
+      "heavyExecution": false,
+      "number": 11,
+      "roadmapAdvance": false,
+      "workKind": "audit"
+    }
+  },
+  "version": 1,
+  "digest": "c607d04ad9a549417fc4c0db6593fb895aa3329f947ae3160d5b6525725da03a"
+}
