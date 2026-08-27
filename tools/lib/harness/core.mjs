@@ -170,7 +170,11 @@ export function route(assessment) {
   const unknown = materialSignals.filter(
     (name) => assessment.materialSignals[name] === "unknown",
   );
-  const expected = material.length || unknown.length ? "open-spec" : "direct";
+  const wave = classifyWave(assessment.wave);
+  const waveRisk =
+    wave?.evidenceRisk.testFirst || wave?.evidenceRisk.independentReview;
+  const expected =
+    material.length || unknown.length || waveRisk ? "open-spec" : "direct";
   assert(assessment.route === expected, `route must be ${expected}`);
   if (expected === "open-spec") {
     assert(
@@ -190,7 +194,7 @@ export function route(assessment) {
     materialSignals: assessment.materialSignals,
     material,
     unknown,
-    wave: classifyWave(assessment.wave),
+    wave,
   });
 }
 export function requirements(routeReceipt, state) {
@@ -801,7 +805,9 @@ export async function delivery({
     const tddRequired =
       wave?.heavyExecution !== false || wave.evidenceRisk.testFirst;
     const reviewRequired =
-      wave?.heavyExecution !== false || wave.evidenceRisk.independentReview;
+      wave?.heavyExecution !== false ||
+      routeReceipt.payload.material.length > 0 ||
+      wave.evidenceRisk.independentReview;
     if (tddRequired) {
       verify(tddReceipt, "tdd");
       assert(

@@ -214,6 +214,22 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
       }),
     /evidence-only wave cannot declare a production delta/,
   );
+
+  assert.throws(
+    () =>
+      route({
+        version: 1,
+        intent: "risk-bearing evidence wave",
+        route: "direct",
+        materialSignals: falseSignals,
+        wave: {
+          number: 10,
+          evidenceKind: "audit",
+          evidenceRisk: { testFirst: true, independentReview: false },
+        },
+      }),
+    /route must be open-spec/,
+  );
 });
 
 test("requirements require decisions, synthesis, authorization, and exact route identity", () => {
