@@ -32,6 +32,7 @@ const manifestPaths = [
   "drawer",
   "notification",
   "snackbar",
+  "card-compositions",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

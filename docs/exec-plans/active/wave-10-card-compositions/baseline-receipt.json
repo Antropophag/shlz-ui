@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "audit/wave-10-card-compositions",
+    "commit": "d919cbc0e698637207df5a5bdd55841c9d637868",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "audit/wave-10-card-compositions",
+      "headRefOid": "d919cbc0e698637207df5a5bdd55841c9d637868",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/43"
+    },
+    "repository": {
+      "digest": "7a3f20a9548f02fcc29b6d86056fd3839e3e2701dd1f60b0927a98d5fdb622c2",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-wave-10"
+    },
+    "upstream": "origin/audit/wave-10-card-compositions"
+  },
+  "requirementsDigest": "5ad17a645882f6fef44bc3ef4df50f5f86cbaa9a8a9b4306308e1ca0bbc60258",
+  "routeDigest": "fe7d633c43a37399b7c696af8fc722ef2613f31d9c9eb143557ee3bd604b23f1",
+  "version": 1,
+  "digest": "f9d772a5dd5b7a48946a51abb7531d8bcfd2a949133379726b34e372aaa0d5ea"
+}

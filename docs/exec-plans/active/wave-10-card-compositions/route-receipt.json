@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Complete roadmap Wave 10 by verifying the source-only Card compositions family against its three authoritative SVGs, repository-wide absence, and the component completion gate without inventing runtime semantics.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

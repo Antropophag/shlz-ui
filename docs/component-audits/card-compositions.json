@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 2,
+  "component": "card-compositions",
+  "authoritativeSource": "shlz-design-source/raw/svg/Card with button.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Reports card.svg",
+    "shlz-design-source/raw/svg/Cover.svg",
+    "docs/component-audit-roadmap.md"
+  ],
+  "implementation": [],
+  "behavior": null,
+  "docs": "docs/component-audits/wave-10-report.md",
+  "rootSelector": "[data-component-audit-id^='card-compositions-']",
+  "legacySelectors": [
+    ".shlz-card",
+    ".shlz-report-card",
+    ".shlz-cover",
+    "[data-shlz-card]",
+    "[data-shlz-report-card]",
+    "[data-shlz-cover]"
+  ],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [],
+  "sourceOccurrences": [
+    {
+      "path": "apps/showcase/src/component-docs.js",
+      "classification": "unrelated-prose-terminology"
+    },
+    {
+      "path": "apps/showcase/src/fidelity.js",
+      "classification": "unrelated-coverage-terminology"
+    },
+    {
+      "path": "apps/showcase/src/main.js",
+      "classification": "unrelated-icon-inventory-card"
+    },
+    {
+      "path": "apps/showcase/src/showcase.css",
+      "classification": "unrelated-icon-inventory-card-style"
+    },
+    {
+      "path": "packages/styles/components/avatar.css",
+      "classification": "unrelated-object-fit-value"
+    },
+    {
+      "path": "packages/styles/components/tag.css",
+      "classification": "unrelated-object-fit-value"
+    },
+    {
+      "path": "tools/playwright/consumer-workspace.spec.js",
+      "classification": "unrelated-test-language"
+    },
+    {
+      "path": "tools/playwright/icons.spec.js",
+      "classification": "unrelated-icon-inventory-test"
+    },
+    {
+      "path": "tools/playwright/card-compositions-wave10.spec.js",
+      "classification": "source-only-audit-state-ledger"
+    },
+    {
+      "path": "tools/playwright/notification-snackbar-wave8.spec.js",
+      "classification": "unrelated-test-language"
+    },
+    {
+      "path": "tools/playwright/pagination-typography.spec.js",
+      "classification": "unrelated-test-language"
+    },
+    {
+      "path": "tools/playwright/primitives.spec.js",
+      "classification": "unrelated-icon-inventory-test"
+    },
+    {
+      "path": "tools/playwright/remediation-fidelity.spec.js",
+      "classification": "unrelated-test-language"
+    },
+    {
+      "path": "tools/playwright/showcase-navigation.spec.js",
+      "classification": "unrelated-test-language"
+    },
+    {
+      "path": "tools/playwright/status-identity-wave4.spec.js",
+      "classification": "unrelated-object-fit-assertion"
+    }
+  ],
+  "supportedSizes": ["source-sheets-only"],
+  "supportedStates": [
+    "card-with-content-image-and-action-affordance",
+    "report-card-white",
+    "report-card-muted",
+    "cover-static-composition"
+  ],
+  "contentStress": [],
+  "stateLedgers": {
+    "cardWithButton": ["content", "illustration", "action-affordance"],
+    "reportsCard": ["white-a", "muted", "white-b"],
+    "cover": ["static-cover"]
+  },
+  "sourceClaims": [
+    {
+      "claim": "Card with button.svg is a 314 by 230 sheet with a radius-16 base, a 137 by 40 radius-20 blue action affordance, vector illustration geometry, and no embedded raster image",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Card with button.svg"
+    },
+    {
+      "claim": "Reports card.svg is a 354 by 810 sheet containing three 314 by 230 radius-16 specimens: two white and one #EEF0F4, each with repeated trailing 18.5 by 18.5 outlined geometry",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Reports card.svg"
+    },
+    {
+      "claim": "Cover.svg is an 874 by 400 static vector sheet with white background geometry, six outlined text paths, no filter, and no embedded raster image",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Cover.svg"
+    },
+    {
+      "claim": "radius-16 314 by 230 surfaces and blue/dark neutral paint recur across the card exports but remain composition-specific patterns rather than canonical tokens",
+      "classification": "derived-pattern",
+      "evidence": "tools/tests/wave10-card-compositions-source-census.test.mjs"
+    },
+    {
+      "claim": "the repository verifies the family through source integrity and a mutation-sensitive absence census instead of adding an illustrative runtime component",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/wave-10-report.md"
+    },
+    {
+      "claim": "outlined static exports do not establish click, navigation, loading, media lifecycle, responsive reflow, data-model, or generic Card API semantics",
+      "classification": "assumption",
+      "evidence": "docs/component-audits/wave-10-report.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/card-compositions-wave10.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: exact SHA-256 hashes, sheet dimensions, and source-critical represented geometry for all three raw SVGs are locked by the focused Wave 10 test",
+    "structural-contract": "pass: repository-wide executable and public-export surfaces contain zero bounded Card composition signatures; fifteen generic card/cover terminology collisions are explicitly classified and a synthetic implementation is rejected",
+    "runtime-browser": "not-applicable: the family is source-only and exposes no runtime root, behavior, event, controller, or public API",
+    "accessibility": "not-applicable: no production semantics, focus order, keyboard model, or accessible naming contract exists",
+    "focused-visual": "not-applicable: raw source artwork is the authority but there is no implemented component or material runtime state to compare in a focused snapshot",
+    "consumer-integration": "not-applicable: the census found no live or Data Workspace consumer of the bounded family",
+    "responsive-content-stress": "not-applicable: static exports establish no responsive reflow, dynamic content, media lifecycle, loading, empty, or error behavior"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: direct source inspection records the represented card, report-card, cover, content, illustration, and action-affordance geometry without runtime claims"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: no executable Card composition exists on which a browser can create a real interaction state"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: click, navigation, loading, media lifecycle, and data behavior are outside the static source contract"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/card-compositions-wave10.spec.js",
+    "manualStateWalk": "not-applicable: no executable surface exists; manual review covered all three raw SVGs and the repository-wide absence/terminology census on 2026-08-27"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "VERIFIED describes the bounded source/absence audit and does not mean a production Card component exists",
+    "the SVGs contain outlined text paths, so literal copy and structured typography properties are not recovered as runtime content contracts",
+    "Chromium interaction and screenshot evidence is intentionally inapplicable until a separately approved executable contract exists"
+  ]
+}
