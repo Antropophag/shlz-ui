@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "enforce-closed-set-evidence",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "closed-set-seam",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "coverage-model",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "regression-scope",
+        "owner": "agent",
+        "status": "delegated"
+      }
+    ],
+    "intent": "Require exhaustive executable evidence or explicit per-member exclusions whenever an episode introduces or changes a declared finite contract set, using PR #45 Golos Text weights as a regression fixture.",
+    "revision": 1
+  },
+  "routeDigest": "4f4f1b27bbd7c0bc2518e94f7b8f0023b5ae5eb41465c6fa72d653910681abd0",
+  "version": 1,
+  "digest": "0e6b515d438bda2758296c1f17df00dd5037590fde9c7243f37d6ee7b367a169"
+}

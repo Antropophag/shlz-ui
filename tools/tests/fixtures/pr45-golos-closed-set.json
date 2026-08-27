@@ -1,0 +1,83 @@
+{
+  "source": "https://github.com/Antropophag/shlz-ui/pull/45#discussion_r3876446460",
+  "knownBad": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        }
+      ],
+      "excluded": []
+    }
+  ],
+  "declaredButNotExecutable": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "500",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "600",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        },
+        {
+          "member": "700",
+          "evidence": ["tools/tests/fixtures/pr45-golos-400-only.js"]
+        }
+      ],
+      "excluded": []
+    }
+  ],
+  "complete": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        },
+        {
+          "member": "500",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        },
+        {
+          "member": "600",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        },
+        {
+          "member": "700",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        }
+      ],
+      "excluded": []
+    }
+  ],
+  "withExclusions": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        }
+      ],
+      "excluded": [
+        { "member": "500", "reason": "Explicit regression-fixture exclusion" },
+        { "member": "600", "reason": "Explicit regression-fixture exclusion" },
+        { "member": "700", "reason": "Explicit regression-fixture exclusion" }
+      ]
+    }
+  ]
+}

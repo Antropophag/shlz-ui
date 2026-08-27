@@ -7,9 +7,11 @@ import { promisify } from "node:util";
 import test from "node:test";
 import {
   assertIsolatedExecutionAllowed,
+  assertClosedSetProof,
   assertProductionDeltaProof,
   assertProductionOutcomeEligible,
   contract,
+  conformance,
   digest,
   failureProof,
   materialSignals,
@@ -492,6 +494,336 @@ test("validation reuse requires identical candidate and meaning-changing closure
   );
 });
 
+test("conformance binds normalized changed finite sets and preserves no-impact compatibility", async () => {
+  const episodeBaseline = receipt(
+    "baseline",
+    {
+      repository: baselineReceipt.payload.repository,
+      branch: "feat/task",
+      upstream: "origin/feat/task",
+      commit: candidate,
+      defaultBranch: "main",
+      pullRequest: null,
+    },
+    {
+      routeDigest: routeReceipt.digest,
+      requirementsDigest: requirementsReceipt.digest,
+    },
+  );
+  const discovered = {
+    changedFiles: [],
+    materialSignals: material,
+    closedSets: [
+      { id: "roles", members: ["tab", "button"] },
+      { id: "states", members: ["hover", "default"] },
+    ],
+  };
+  const bound = await conformance({
+    repoRoot,
+    routeReceipt,
+    baselineReceipt: episodeBaseline,
+    discovered,
+  });
+  assert.deepEqual(bound.payload.closedSets, [
+    { id: "roles", members: ["button", "tab"] },
+    { id: "states", members: ["default", "hover"] },
+  ]);
+  assert.deepEqual(
+    (
+      await conformance({
+        repoRoot,
+        routeReceipt,
+        baselineReceipt: episodeBaseline,
+        discovered: { ...discovered, closedSets: undefined },
+      })
+    ).payload.closedSets,
+    [],
+  );
+  await assert.rejects(
+    conformance({
+      repoRoot,
+      routeReceipt,
+      baselineReceipt: episodeBaseline,
+      discovered: {
+        ...discovered,
+        closedSets: [{ id: "roles", members: ["tab", "tab"] }],
+      },
+    }),
+    /duplicate closed-set member/,
+  );
+});
+
+test("validation requires an exhaustive closed-set partition with closure-bound evidence", async () => {
+  const evidence = "tools/tests/harness.test.mjs";
+  const base = {
+    repoRoot,
+    contractReceipt,
+    candidateHead: candidate,
+    target: "closed sets",
+    argv: [
+      process.execPath,
+      "-e",
+      "process.exit(process.argv.slice(1).every(Boolean) ? 0 : 1)",
+      "{evidence}",
+      "{set}",
+      "{member}",
+    ],
+    inputs: [evidence],
+  };
+  const complete = await validation({
+    ...base,
+    closedSetEvidence: [
+      {
+        id: "states",
+        members: ["default", "hover", "disabled"],
+        covered: [
+          { member: "hover", evidence: [evidence] },
+          { member: "default", evidence: [evidence] },
+        ],
+        excluded: [{ member: "disabled", reason: "Platform-owned state" }],
+      },
+    ],
+  });
+  assert.deepEqual(complete.payload.closedSetEvidence[0].members, [
+    "default",
+    "disabled",
+    "hover",
+  ]);
+  assert.deepEqual(
+    complete.payload.result.members.map(({ member }) => member),
+    ["default", "hover"],
+  );
+  assert.doesNotThrow(() =>
+    assertClosedSetProof(
+      [{ id: "states", members: ["default", "hover", "disabled"] }],
+      [complete],
+    ),
+  );
+
+  for (const [closedSetEvidence, message] of [
+    [
+      [
+        {
+          id: "states",
+          members: ["default", "hover"],
+          covered: [{ member: "default", evidence: [evidence] }],
+          excluded: [],
+        },
+      ],
+      /unaccounted closed-set members: states: hover/,
+    ],
+    [
+      [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [{ member: "other", evidence: [evidence] }],
+          excluded: [{ member: "default", reason: "x" }],
+        },
+      ],
+      /undeclared closed-set member/,
+    ],
+    [
+      [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [{ member: "default", evidence: [evidence] }],
+          excluded: [{ member: "default", reason: "x" }],
+        },
+      ],
+      /covered and excluded/,
+    ],
+    [
+      [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [
+            { member: "default", evidence: [evidence] },
+            { member: "default", evidence: [evidence] },
+          ],
+          excluded: [],
+        },
+      ],
+      /duplicate covered closed-set member/,
+    ],
+    [
+      [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [],
+          excluded: [{ member: "default", reason: "" }],
+        },
+      ],
+      /exclusion reason/,
+    ],
+    [
+      [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [{ member: "default", evidence: ["missing.txt"] }],
+          excluded: [],
+        },
+      ],
+      /evidence must be in validation input closure/,
+    ],
+  ])
+    await assert.rejects(validation({ ...base, closedSetEvidence }), message);
+
+  await assert.rejects(
+    validation({
+      ...base,
+      closedSetEvidence: [
+        {
+          id: "states",
+          members: ["default", "hover", "disabled"],
+          covered: [
+            { member: "default", evidence: [evidence] },
+            { member: "hover", evidence: [evidence] },
+          ],
+          excluded: [{ member: "disabled", reason: "Changed reason" }],
+        },
+      ],
+      priorReceipt: complete,
+    }),
+    /cannot be reused/,
+  );
+  await assert.rejects(
+    validation({
+      ...base,
+      argv: [process.execPath, "-e", "process.exit(0)"],
+      closedSetEvidence: [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [{ member: "default", evidence: [evidence] }],
+          excluded: [],
+        },
+      ],
+    }),
+    /exactly one \{evidence\} placeholder/,
+  );
+  await assert.rejects(
+    validation({
+      ...base,
+      argv: [
+        process.execPath,
+        "-e",
+        "process.exit(process.argv[3] === 'hover' ? 1 : 0)",
+        "{evidence}",
+        "{set}",
+        "{member}",
+      ],
+      closedSetEvidence: [
+        {
+          id: "states",
+          members: ["default", "hover"],
+          covered: [
+            { member: "default", evidence: [evidence] },
+            { member: "hover", evidence: [evidence] },
+          ],
+          excluded: [],
+        },
+      ],
+    }),
+    /closed-set validation failed: states: hover/,
+  );
+});
+
+test("PR 45 Golos Text fixture rejects representative-only weight evidence", async () => {
+  const fixture = JSON.parse(
+    await readFile(
+      path.join(repoRoot, "tools/tests/fixtures/pr45-golos-closed-set.json"),
+      "utf8",
+    ),
+  );
+  const run = (closedSetEvidence) =>
+    validation({
+      repoRoot,
+      contractReceipt,
+      candidateHead: candidate,
+      target: "PR 45 Golos weights",
+      argv: [
+        process.execPath,
+        "tools/tests/golos-weight-evidence-probe.mjs",
+        "{evidence}",
+        "{set}",
+        "{member}",
+      ],
+      inputs: [
+        ...new Set(
+          closedSetEvidence.flatMap((item) =>
+            item.covered.flatMap(({ evidence }) => evidence),
+          ),
+        ),
+      ],
+      closedSetEvidence,
+    });
+  await assert.rejects(run(fixture.knownBad), /500, 600, 700/);
+  await assert.rejects(
+    run(fixture.declaredButNotExecutable),
+    /closed-set validation failed: golos-text-weights: 500/,
+  );
+  assert.equal((await run(fixture.complete)).payload.outcome, "pass");
+  assert.equal((await run(fixture.withExclusions)).payload.outcome, "pass");
+});
+
+test("delivery coverage requires every exact conformance declaration", async () => {
+  const proof = (id, members) =>
+    receipt(
+      "validation",
+      {
+        candidateHead: candidate,
+        outcome: "pass",
+        closedSetEvidence: [
+          {
+            id,
+            members,
+            covered: members.map((member) => ({
+              member,
+              evidence: ["test.mjs"],
+            })),
+            excluded: [],
+          },
+        ],
+      },
+      { contractReceiptDigest: contractReceipt.digest },
+    );
+  const declarations = [
+    { id: "roles", members: ["button", "tab"] },
+    { id: "weights", members: ["400", "500"] },
+    {
+      id: "supported-combinations",
+      members: ["size=large|state=default"],
+    },
+  ];
+  assert.throws(
+    () =>
+      assertClosedSetProof(declarations, [proof("roles", ["button", "tab"])]),
+    /missing closed-set validation/,
+  );
+  assert.throws(
+    () =>
+      assertClosedSetProof(declarations, [
+        proof("roles", ["button", "tab"]),
+        proof("supported-combinations", ["size=large|state=default"]),
+        proof("weights", ["400", "600"]),
+      ]),
+    /missing closed-set validation: weights/,
+  );
+  assert.doesNotThrow(() =>
+    assertClosedSetProof(declarations, [
+      proof("roles", ["button", "tab"]),
+      proof("weights", ["400", "500"]),
+      proof("supported-combinations", ["size=large|state=default"]),
+    ]),
+  );
+  assert.doesNotThrow(() => assertClosedSetProof([], []));
+});
+
 test("production validation derives candidate/runtime-bound outcome proof", async (context) => {
   const root = await mkdtemp(
     path.join(repoRoot, "docs/exec-plans/production-proof-"),
@@ -716,6 +1048,7 @@ test("every prior harness scenario has an explicit migration disposition", async
       (name) =>
         name &&
         !name.includes("simplify-engineering-harness") &&
+        !name.includes("enforce-closed-set-evidence") &&
         !name.includes("gate-product-waves-by-production-delta"),
     )) {
     const capability = file.match(/specs\/(harness\/[^/]+)\/spec\.md$/)[1];
