@@ -2,12 +2,12 @@
   "kind": "baseline",
   "payload": {
     "branch": "feature/gate-product-waves-by-production-delta",
-    "commit": "f7c80ee18b22b12883c9285438e9c6227719d608",
+    "commit": "cc532650bea9942a44cfa1f874fa35047fde6b02",
     "defaultBranch": "main",
     "pullRequest": {
       "baseRefName": "main",
       "headRefName": "feature/gate-product-waves-by-production-delta",
-      "headRefOid": "f7c80ee18b22b12883c9285438e9c6227719d608",
+      "headRefOid": "cc532650bea9942a44cfa1f874fa35047fde6b02",
       "isDraft": false,
       "state": "OPEN",
       "url": "https://github.com/Antropophag/shlz-ui/pull/44"
@@ -19,8 +19,8 @@
     },
     "upstream": "origin/feature/gate-product-waves-by-production-delta"
   },
-  "requirementsDigest": "46d6ca40635183f2e169e9dfa0b68d3ce60f3d2777ddaf0fdf3f6d948373e871",
-  "routeDigest": "b8127233682045d5cdab90533c21aa13fdd06e5d549e4fc8914230841540e572",
+  "requirementsDigest": "f95f3c90cfd0fddffe99a715a9213b89bbb2d079e5236213b29b7f3e402685eb",
+  "routeDigest": "af30be57b5a740b1af322a7660f0a15e40c9dad1e3daf6557fc0d6a764d1eff7",
   "version": 1,
-  "digest": "df9f707bdb59ac9a4138fcff5b9492382a0020c0c38d672cfb367d52d3a439ae"
+  "digest": "9982d3e85c35c4836e7a99117389b93fcfa7715a15535c7375cfd07f333a0d48"
 }

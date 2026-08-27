@@ -10,5 +10,10 @@
     "auditDisposition": "VERIFIED",
     "productionImplementations": 0,
     "runtimeConsumers": 0
+  },
+  "historicalExecution": {
+    "sessions": 4,
+    "packets": 3,
+    "isolatedWorkers": true
   }
 }

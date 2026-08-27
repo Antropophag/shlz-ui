@@ -174,7 +174,9 @@ export function route(assessment) {
   const waveRisk =
     wave?.evidenceRisk.testFirst || wave?.evidenceRisk.independentReview;
   const expected =
-    material.length || unknown.length || waveRisk ? "open-spec" : "direct";
+    material.length || unknown.length || wave || waveRisk
+      ? "open-spec"
+      : "direct";
   assert(assessment.route === expected, `route must be ${expected}`);
   if (expected === "open-spec") {
     assert(
@@ -543,6 +545,7 @@ export async function validation({
   argv,
   inputs,
   productionDelta = null,
+  outcomeEvidence = [],
   priorReceipt,
   cwd = repoRoot,
 }) {
@@ -558,6 +561,7 @@ export async function validation({
     argv,
     closure,
     productionDelta,
+    outcomeEvidence,
     contractDigest: contractReceipt.payload.contractDigest,
   });
   if (productionDelta !== null)
@@ -568,6 +572,18 @@ export async function validation({
         productionDelta.description.trim() === productionDelta.description &&
         productionDelta.description,
       "validation production delta is invalid",
+    );
+  assert(
+    Array.isArray(outcomeEvidence) &&
+      outcomeEvidence.every((name) => typeof name === "string"),
+    "validation outcome evidence must be paths",
+  );
+  const closurePaths = new Set(closure.map(({ path: name }) => name));
+  if (productionDelta !== null)
+    assert(
+      outcomeEvidence.length > 0 &&
+        outcomeEvidence.every((name) => closurePaths.has(name)),
+      "production validation requires outcome evidence in its input closure",
     );
   if (priorReceipt) {
     verify(priorReceipt, "validation");
@@ -586,6 +602,18 @@ export async function validation({
   }
   const result = await command(argv, cwd);
   assert(result.outcome === "pass", `validation failed: ${target}`);
+  const productionOutcomeProof =
+    productionDelta === null
+      ? null
+      : {
+          productionDelta,
+          candidateHead,
+          target,
+          argv,
+          closureDigest,
+          outcomeEvidence: [...new Set(outcomeEvidence)].sort(order),
+          resultDigest: digest(result),
+        };
   return receipt(
     "validation",
     {
@@ -594,6 +622,7 @@ export async function validation({
       target,
       argv,
       productionDelta,
+      productionOutcomeProof,
       closure,
       closureDigest,
       outcome: "pass",
@@ -606,12 +635,35 @@ export async function validation({
 export function assertProductionDeltaProof(wave, validationReceipts) {
   if (!wave?.roadmapAdvance) return;
   assert(
-    validationReceipts.some(
-      ({ payload }) =>
-        JSON.stringify(payload.productionDelta) ===
-        JSON.stringify(wave.expectedProductionDelta),
-    ),
-    "roadmap advancement requires validation of the expected production delta",
+    validationReceipts.some(({ payload }) => {
+      const proof = payload.productionOutcomeProof;
+      return (
+        proof &&
+        digest(proof.productionDelta) ===
+          digest(wave.expectedProductionDelta) &&
+        proof.candidateHead === payload.candidateHead &&
+        proof.target === payload.target &&
+        digest(proof.argv) === digest(payload.argv) &&
+        proof.closureDigest === payload.closureDigest &&
+        Array.isArray(proof.outcomeEvidence) &&
+        proof.outcomeEvidence.length > 0 &&
+        proof.outcomeEvidence.every((name) =>
+          payload.closure.some(({ path: closurePath }) => closurePath === name),
+        ) &&
+        proof.resultDigest === digest(payload.result)
+      );
+    }),
+    "roadmap advancement requires candidate/runtime-bound production outcome proof",
+  );
+}
+
+export function assertIsolatedExecutionAllowed(dependencies) {
+  const routes = dependencies.filter(({ kind }) => kind === "route");
+  assert(routes.length === 1, "isolated execution requires one route receipt");
+  verify(routes[0], "route");
+  assert(
+    routes[0].payload.wave?.executionPath !== "bounded-evidence",
+    "bounded evidence must execute inline",
   );
 }
 export function review({ contractReceipt, candidateHead, standards, spec }) {

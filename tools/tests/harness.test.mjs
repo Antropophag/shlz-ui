@@ -6,6 +6,7 @@ import path from "node:path";
 import { promisify } from "node:util";
 import test from "node:test";
 import {
+  assertIsolatedExecutionAllowed,
   assertProductionDeltaProof,
   contract,
   digest,
@@ -190,6 +191,9 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
   });
   assert.equal(incident.evidence.auditDisposition, "VERIFIED");
   assert.equal(incident.evidence.productionImplementations, 0);
+  assert.equal(incident.evidence.runtimeConsumers, 0);
+  assert.ok(incident.historicalExecution.sessions > 1);
+  assert.ok(incident.historicalExecution.packets > 1);
   assert.deepEqual(replay.payload.wave, {
     number: 10,
     workKind: "source-only",
@@ -231,6 +235,11 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
       }),
     /route must be open-spec/,
   );
+
+  assert.throws(
+    () => assertIsolatedExecutionAllowed([replay]),
+    /bounded evidence must execute inline/,
+  );
 });
 
 test("roadmap advancement requires validation of the declared production delta", () => {
@@ -239,10 +248,12 @@ test("roadmap advancement requires validation of the declared production delta",
     description: "Upload reports progress to a real consumer",
   };
   const wave = { roadmapAdvance: true, expectedProductionDelta };
-  assert.doesNotThrow(() =>
-    assertProductionDeltaProof(wave, [
-      { payload: { productionDelta: expectedProductionDelta } },
-    ]),
+  assert.throws(
+    () =>
+      assertProductionDeltaProof(wave, [
+        { payload: { productionDelta: expectedProductionDelta } },
+      ]),
+    /production outcome proof/,
   );
   assert.throws(
     () =>
@@ -256,13 +267,47 @@ test("roadmap advancement requires validation of the declared production delta",
           },
         },
       ]),
-    /expected production delta/,
+    /production outcome proof/,
   );
   assert.doesNotThrow(() =>
     assertProductionDeltaProof(
       { roadmapAdvance: false, expectedProductionDelta: null },
       [],
     ),
+  );
+});
+
+test("all numbered waves require OpenSpec while ordinary non-wave work stays direct", () => {
+  for (const wave of [
+    {
+      number: 11,
+      expectedProductionDelta: {
+        kind: "implementation",
+        description: "A production Upload composition",
+      },
+    },
+    { number: 10, evidenceKind: "source-only" },
+  ])
+    assert.throws(
+      () =>
+        route({
+          version: 1,
+          intent: "numbered wave",
+          route: "direct",
+          materialSignals: falseSignals,
+          wave,
+        }),
+      /route must be open-spec/,
+    );
+
+  assert.equal(
+    route({
+      version: 1,
+      intent: "ordinary local work",
+      route: "direct",
+      materialSignals: falseSignals,
+    }).payload.route,
+    "direct",
   );
 });
 
@@ -435,6 +480,53 @@ test("validation reuse requires identical candidate and meaning-changing closure
       priorReceipt: first,
     }),
     /candidate differs/,
+  );
+});
+
+test("production validation derives candidate/runtime-bound outcome proof", async (context) => {
+  const root = await mkdtemp(
+    path.join(repoRoot, "docs/exec-plans/production-proof-"),
+  );
+  context.after(() => rm(root, { recursive: true, force: true }));
+  const evidence = path.relative(repoRoot, path.join(root, "runtime.txt"));
+  await writeFile(path.join(repoRoot, evidence), "observed runtime outcome");
+  const productionDelta = {
+    kind: "behavior",
+    description: "Upload reports progress to a real consumer",
+  };
+  const proven = await validation({
+    repoRoot,
+    contractReceipt,
+    candidateHead: candidate,
+    target: "runtime consumer",
+    argv: [process.execPath, "-e", "process.exit(0)"],
+    inputs: [evidence],
+    productionDelta,
+    outcomeEvidence: [evidence],
+  });
+  assert.equal(proven.payload.productionOutcomeProof.candidateHead, candidate);
+  assert.equal(
+    proven.payload.productionOutcomeProof.closureDigest,
+    proven.payload.closureDigest,
+  );
+  assert.doesNotThrow(() =>
+    assertProductionDeltaProof(
+      { roadmapAdvance: true, expectedProductionDelta: productionDelta },
+      [proven],
+    ),
+  );
+
+  await assert.rejects(
+    validation({
+      repoRoot,
+      contractReceipt,
+      candidateHead: candidate,
+      target: "self declaration",
+      argv: [process.execPath, "-e", "process.exit(0)"],
+      inputs: [evidence],
+      productionDelta,
+    }),
+    /outcome evidence/,
   );
 });
 

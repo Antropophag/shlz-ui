@@ -26,7 +26,7 @@ Material or review-risky work records separate Standards and Spec outcomes with 
 
 ## Optional isolated execution
 
-Use `run-isolated` only when physical context separation materially helps L/XL work or independent review. Its manifest declares an objective, exact source paths, dependency receipt paths, and an optional positive byte budget. Immediately before launch the harness resolves every source, computes contributors/bytes/digest, validates dependencies, and either launches once or fails closed. It never drops sources to meet a budget.
+Use `run-isolated` only when physical context separation materially helps L/XL work or independent review. Its manifest declares an objective, exact source paths, a route receipt dependency, any other dependency receipt paths, and an optional positive byte budget. Immediately before launch the harness resolves every source, computes contributors/bytes/digest, validates dependencies, and either launches once or fails closed. It never drops sources to meet a budget. A `bounded-evidence` route is inline-only and the isolated seam rejects it before launching a worker.
 
 The result requires runtime-issued identity, terminal completion, report digest, launch identity, manifest digest, and dependency digests. Retry the unchanged manifest to create a new immutable result; there is no mutable claim lifecycle. Concurrency remains an explicit external orchestration choice and requires genuinely disjoint work.
 

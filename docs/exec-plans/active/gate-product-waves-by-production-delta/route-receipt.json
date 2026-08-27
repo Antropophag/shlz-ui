@@ -2,9 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Harden PR #44 so roadmap advancement requires candidate/runtime-bound production outcome proof, bounded evidence cannot enter isolated multi-session execution, PR #43 is the regression fixture for both invariants, and current review findings are resolved without scope expansion.",
-    "material": [
-      "publicContract"
-    ],
+    "material": ["publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
