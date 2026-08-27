@@ -6,6 +6,7 @@ import path from "node:path";
 import { promisify } from "node:util";
 import test from "node:test";
 import {
+  assertProductionDeltaProof,
   contract,
   digest,
   failureProof,
@@ -229,6 +230,39 @@ test("numbered product waves require production delta and PR 43 stays bounded ev
         },
       }),
     /route must be open-spec/,
+  );
+});
+
+test("roadmap advancement requires validation of the declared production delta", () => {
+  const expectedProductionDelta = {
+    kind: "behavior",
+    description: "Upload reports progress to a real consumer",
+  };
+  const wave = { roadmapAdvance: true, expectedProductionDelta };
+  assert.doesNotThrow(() =>
+    assertProductionDeltaProof(wave, [
+      { payload: { productionDelta: expectedProductionDelta } },
+    ]),
+  );
+  assert.throws(
+    () =>
+      assertProductionDeltaProof(wave, [
+        {
+          payload: {
+            productionDelta: {
+              kind: "behavior",
+              description: "An unrelated behavior",
+            },
+          },
+        },
+      ]),
+    /expected production delta/,
+  );
+  assert.doesNotThrow(() =>
+    assertProductionDeltaProof(
+      { roadmapAdvance: false, expectedProductionDelta: null },
+      [],
+    ),
   );
 });
 

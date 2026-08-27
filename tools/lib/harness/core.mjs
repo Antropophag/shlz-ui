@@ -542,6 +542,7 @@ export async function validation({
   target,
   argv,
   inputs,
+  productionDelta = null,
   priorReceipt,
   cwd = repoRoot,
 }) {
@@ -556,8 +557,18 @@ export async function validation({
     target,
     argv,
     closure,
+    productionDelta,
     contractDigest: contractReceipt.payload.contractDigest,
   });
+  if (productionDelta !== null)
+    assert(
+      typeof productionDelta === "object" &&
+        productionDeltaKinds.has(productionDelta.kind) &&
+        typeof productionDelta.description === "string" &&
+        productionDelta.description.trim() === productionDelta.description &&
+        productionDelta.description,
+      "validation production delta is invalid",
+    );
   if (priorReceipt) {
     verify(priorReceipt, "validation");
     assert(
@@ -582,12 +593,25 @@ export async function validation({
       contractDigest: contractReceipt.payload.contractDigest,
       target,
       argv,
+      productionDelta,
       closure,
       closureDigest,
       outcome: "pass",
       result,
     },
     { contractReceiptDigest: contractReceipt.digest },
+  );
+}
+
+export function assertProductionDeltaProof(wave, validationReceipts) {
+  if (!wave?.roadmapAdvance) return;
+  assert(
+    validationReceipts.some(
+      ({ payload }) =>
+        JSON.stringify(payload.productionDelta) ===
+        JSON.stringify(wave.expectedProductionDelta),
+    ),
+    "roadmap advancement requires validation of the expected production delta",
   );
 }
 export function review({ contractReceipt, candidateHead, standards, spec }) {
@@ -846,6 +870,7 @@ export async function delivery({
       "validation contract differs",
     );
   }
+  assertProductionDeltaProof(routeReceipt.payload.wave, validationReceipts);
   const repo = await repository(repoRoot);
   assert(
     repo.digest === baselineReceipt.payload.repository.digest,
