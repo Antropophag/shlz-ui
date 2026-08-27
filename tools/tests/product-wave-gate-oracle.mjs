@@ -8,6 +8,9 @@ const targetStat = await stat(target);
 const modulePath = targetStat.isDirectory()
   ? path.join(target, "tools/lib/harness/core.mjs")
   : target;
+const fixturePath = targetStat.isDirectory()
+  ? path.join(target, "tools/tests/fixtures/pr43-wave-incident.json")
+  : path.join(import.meta.dirname, "fixtures/pr43-wave-incident.json");
 const harness = await import(pathToFileURL(modulePath));
 const { route } = harness;
 const materialSignals = {
@@ -64,13 +67,7 @@ if (!invariant || invariant === "evidence-wave-cannot-promote-roadmap") {
 
 if (invariant === "bounded-evidence-cannot-launch-isolated") {
   assert.equal(typeof harness.assertIsolatedExecutionAllowed, "function");
-  const fixtureRoot = targetStat.isDirectory() ? target : path.dirname(target);
-  const incident = JSON.parse(
-    await readFile(
-      path.join(fixtureRoot, "tools/tests/fixtures/pr43-wave-incident.json"),
-      "utf8",
-    ),
-  );
+  const incident = JSON.parse(await readFile(fixturePath, "utf8"));
   const replay = route({
     ...assessment,
     intent: `Replay PR #${incident.pullRequest}`,
@@ -84,13 +81,7 @@ if (invariant === "bounded-evidence-cannot-launch-isolated") {
 
 if (invariant === "repeated-production-delta-is-not-proof") {
   assert.equal(typeof harness.assertProductionOutcomeEligible, "function");
-  const fixtureRoot = targetStat.isDirectory() ? target : path.dirname(target);
-  const incident = JSON.parse(
-    await readFile(
-      path.join(fixtureRoot, "tools/tests/fixtures/pr43-wave-incident.json"),
-      "utf8",
-    ),
-  );
+  const incident = JSON.parse(await readFile(fixturePath, "utf8"));
   const replay = route({
     ...assessment,
     intent: `Replay PR #${incident.pullRequest}`,
