@@ -34,6 +34,38 @@ test("Golos is default and profiles work on roots and subtrees", async ({
   await expect(body).not.toHaveAttribute("data-shlz-font");
   await expect(body).toHaveCSS("font-family", /Golos Text/);
 
+  const golosFaces = await page.evaluate(async () => {
+    const weights = [400, 500, 600, 700];
+    const loadSample = async (sample) =>
+      Object.fromEntries(
+        await Promise.all(
+          weights.map(async (weight) => [
+            weight,
+            (
+              await document.fonts.load(`${weight} 16px "Golos Text"`, sample)
+            ).map(({ family, status, weight: loadedWeight }) => ({
+              family,
+              status,
+              weight: loadedWeight,
+            })),
+          ]),
+        ),
+      );
+    return {
+      latin: await loadSample("SHLZ"),
+      cyrillic: await loadSample("Кириллица"),
+    };
+  });
+  for (const sample of [golosFaces.latin, golosFaces.cyrillic]) {
+    for (const weight of [400, 500, 600, 700]) {
+      expect(sample[weight]).toContainEqual({
+        family: "Golos Text",
+        status: "loaded",
+        weight: String(weight),
+      });
+    }
+  }
+
   await body.evaluate((node) => {
     const subtree = document.createElement("div");
     subtree.dataset.shlzFont = "fira";

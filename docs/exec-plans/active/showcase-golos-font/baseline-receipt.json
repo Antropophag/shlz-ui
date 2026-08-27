@@ -1,0 +1,18 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/showcase-golos-font",
+    "commit": "1a6ae0c93f7bdf6a7e78c808bc1af9fe8211c3a7",
+    "defaultBranch": "main",
+    "pullRequest": null,
+    "repository": {
+      "digest": "b317577bf8e5b14ebf754e22ee1b2f245eb440d43c57d8e9031f9e780668989f",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-showcase-golos-font"
+    },
+    "upstream": "origin/fix/showcase-golos-font"
+  },
+  "routeDigest": "c314e4e16d2be65998ce94b3baf305c868be351c3dc50b2cc3c706d4b8996737",
+  "version": 1,
+  "digest": "76fd5a31955a493839856a99aa5dbe7b2c71decbb3bf738eb17460df7d150e91"
+}
