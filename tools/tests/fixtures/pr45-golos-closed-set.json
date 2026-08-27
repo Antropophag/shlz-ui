@@ -37,5 +37,22 @@
       ],
       "excluded": []
     }
+  ],
+  "withExclusions": [
+    {
+      "id": "golos-text-weights",
+      "members": ["400", "500", "600", "700"],
+      "covered": [
+        {
+          "member": "400",
+          "evidence": ["tools/playwright/typography-profiles.spec.js"]
+        }
+      ],
+      "excluded": [
+        { "member": "500", "reason": "Explicit regression-fixture exclusion" },
+        { "member": "600", "reason": "Explicit regression-fixture exclusion" },
+        { "member": "700", "reason": "Explicit regression-fixture exclusion" }
+      ]
+    }
   ]
 }

@@ -742,7 +742,29 @@ export async function validation({
       { contractReceiptDigest: contractReceipt.digest },
     );
   }
-  const result = await command(argv, cwd);
+  const coveredMembers = normalizedClosedSetEvidence.flatMap((item) =>
+    item.covered.map(({ member }) => ({ setId: item.id, member })),
+  );
+  if (coveredMembers.length)
+    assert(
+      argv.filter((part) => part === "{member}").length === 1,
+      "closed-set validation command requires exactly one {member} placeholder",
+    );
+  const memberResults = [];
+  for (const { setId, member } of coveredMembers) {
+    const memberResult = await command(
+      argv.map((part) => (part === "{member}" ? member : part)),
+      cwd,
+    );
+    assert(
+      memberResult.outcome === "pass",
+      `closed-set validation failed: ${setId}: ${member}`,
+    );
+    memberResults.push({ setId, member, result: memberResult });
+  }
+  const result = coveredMembers.length
+    ? { outcome: "pass", members: memberResults }
+    : await command(argv, cwd);
   assert(result.outcome === "pass", `validation failed: ${target}`);
   const productionOutcomeProof =
     productionDelta === null

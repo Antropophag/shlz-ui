@@ -560,7 +560,12 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
     contractReceipt,
     candidateHead: candidate,
     target: "closed sets",
-    argv: [process.execPath, "-e", "process.exit(0)"],
+    argv: [
+      process.execPath,
+      "-e",
+      "process.exit(process.argv[1] ? 0 : 1)",
+      "{member}",
+    ],
     inputs: [evidence],
   };
   const complete = await validation({
@@ -582,6 +587,10 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
     "disabled",
     "hover",
   ]);
+  assert.deepEqual(
+    complete.payload.result.members.map(({ member }) => member),
+    ["default", "hover"],
+  );
   assert.doesNotThrow(() =>
     assertClosedSetProof(
       [{ id: "states", members: ["default", "hover", "disabled"] }],
@@ -680,6 +689,44 @@ test("validation requires an exhaustive closed-set partition with closure-bound 
     }),
     /cannot be reused/,
   );
+  await assert.rejects(
+    validation({
+      ...base,
+      argv: [process.execPath, "-e", "process.exit(0)"],
+      closedSetEvidence: [
+        {
+          id: "states",
+          members: ["default"],
+          covered: [{ member: "default", evidence: [evidence] }],
+          excluded: [],
+        },
+      ],
+    }),
+    /exactly one \{member\} placeholder/,
+  );
+  await assert.rejects(
+    validation({
+      ...base,
+      argv: [
+        process.execPath,
+        "-e",
+        "process.exit(process.argv[1] === 'hover' ? 1 : 0)",
+        "{member}",
+      ],
+      closedSetEvidence: [
+        {
+          id: "states",
+          members: ["default", "hover"],
+          covered: [
+            { member: "default", evidence: [evidence] },
+            { member: "hover", evidence: [evidence] },
+          ],
+          excluded: [],
+        },
+      ],
+    }),
+    /closed-set validation failed: states: hover/,
+  );
 });
 
 test("PR 45 Golos Text fixture rejects representative-only weight evidence", async () => {
@@ -696,12 +743,18 @@ test("PR 45 Golos Text fixture rejects representative-only weight evidence", asy
       contractReceipt,
       candidateHead: candidate,
       target: "PR 45 Golos weights",
-      argv: [process.execPath, "-e", "process.exit(0)"],
+      argv: [
+        process.execPath,
+        "-e",
+        "process.exit(['400', '500', '600', '700'].includes(process.argv[1]) ? 0 : 1)",
+        "{member}",
+      ],
       inputs: [evidence],
       closedSetEvidence,
     });
   await assert.rejects(run(fixture.knownBad), /500, 600, 700/);
   assert.equal((await run(fixture.complete)).payload.outcome, "pass");
+  assert.equal((await run(fixture.withExclusions)).payload.outcome, "pass");
 });
 
 test("delivery coverage requires every exact conformance declaration", async () => {
@@ -981,6 +1034,7 @@ test("every prior harness scenario has an explicit migration disposition", async
       (name) =>
         name &&
         !name.includes("simplify-engineering-harness") &&
+        !name.includes("enforce-closed-set-evidence") &&
         !name.includes("gate-product-waves-by-production-delta"),
     )) {
     const capability = file.match(/specs\/(harness\/[^/]+)\/spec\.md$/)[1];

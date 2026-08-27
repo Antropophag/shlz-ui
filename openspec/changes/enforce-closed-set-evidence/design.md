@@ -24,7 +24,7 @@ See `proposal.md` for motivation and `specs/harness/closed-set-executable-eviden
 
 `discovered.closedSets` will contain `{ id, members }` entries. Conformance validates non-empty unique identities and members, normalizes ordering, and binds them into its receipt. This makes post-discovery intent part of the same candidate-bound surface used by delivery.
 
-Validation accepts `closedSetEvidence` entries containing the exact set identity and declaration plus `covered` entries and `excluded` entries. Covered entries carry one or more paths already present in the validation input closure; excluded entries carry a non-empty justification. Delivery compares the current conformance declarations with the aggregate validation receipts.
+Validation accepts `closedSetEvidence` entries containing the exact set identity and declaration plus `covered` entries and `excluded` entries. Covered entries carry one or more paths already present in the validation input closure; excluded entries carry a non-empty justification. When coverage is present, the existing validation `argv` must contain one `{member}` placeholder. The harness runs the same command once per covered member with that canonical identity substituted, fails on any non-zero outcome, and records the sorted per-member result digests. Delivery compares the current conformance declarations with the aggregate validation receipts.
 
 Alternative: validate a standalone manifest with a new CLI command. Rejected because it would create evidence that delivery could forget to compose and would duplicate candidate/contract/closure binding.
 
@@ -38,9 +38,11 @@ Alternative: add typed schemas for weights, roles, states, and enum values. Reje
 
 ### Require evidence paths per covered member
 
-Each covered member references at least one path from the validation closure. This proves that the executable oracle or fixture affecting the assertion is digest-bound; a boolean or count alone is insufficient. The harness does not parse that file to certify semantic quality, which remains a Spec-review responsibility.
+Each covered member references at least one path from the validation closure, and the shared command executes separately with that member identity. This proves that the executable oracle or fixture affecting the assertion is digest-bound and exercised for every declared covered member; a boolean, count, or unrelated passing command is insufficient. The harness does not parse the oracle to certify semantic quality, which remains a Spec-review responsibility.
 
 Alternative: accept `covered: [member]` without references. Rejected because the declaration would be self-attestation disconnected from executable evidence.
+
+Alternative: run one command and trust covered-member labels. Rejected because PR #45 demonstrated that a representative passing execution can be mislabeled as evidence for a larger set. Per-member substitution is the smallest generic executable challenge that does not parse domain-specific tests.
 
 ### Aggregate by exact declaration at delivery
 
