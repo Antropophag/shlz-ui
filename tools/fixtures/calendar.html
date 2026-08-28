@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>SHLZ Calendar behavior fixture</title>
+  </head>
+  <body>
+    <div
+      data-calendar-fixture
+      data-component-audit-id="date-picker-calendar-behavior-fixture"
+    ></div>
+    <output data-calendar-events aria-live="polite"></output>
+    <script type="module">
+      import { CalendarController } from "../../packages/behaviors/dist/calendar.js";
+
+      const root = document.querySelector("[data-calendar-fixture]");
+      const output = document.querySelector("[data-calendar-events]");
+      const controller = new CalendarController(root, {
+        mode: "range",
+        value: { start: "2026-08-12", end: "2026-08-15" },
+        visibleMonth: "2026-08",
+        focusedDate: "2026-08-12",
+        today: "2026-08-20",
+        locale: "ru-RU",
+        min: "2026-07-01",
+        max: "2026-09-30",
+        isDateDisabled: (date) => date === "2026-08-18",
+        label: "Календарь периода",
+      });
+      root.addEventListener("shlz:calendar-change", (event) => {
+        output.value = JSON.stringify(event.detail);
+      });
+      window.__calendarController = controller;
+    </script>
+  </body>
+</html>

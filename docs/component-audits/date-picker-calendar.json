@@ -6,8 +6,8 @@
     "design-source-index/components.json",
     "design-source-index/reference-screens.json"
   ],
-  "implementation": [],
-  "behavior": null,
+  "implementation": ["packages/behaviors/src/calendar.ts"],
+  "behavior": "packages/behaviors/src/calendar.ts",
   "docs": "docs/component-audits/date-picker-calendar-contract.md",
   "rootSelector": "[data-component-audit-id^='date-picker-calendar-']",
   "legacySelectors": [
@@ -23,7 +23,12 @@
     "#fidelity"
   ],
   "diagnosticOccurrenceCount": 0,
-  "occurrences": [],
+  "occurrences": [
+    {
+      "id": "date-picker-calendar-behavior-fixture",
+      "kind": "executable-fixture"
+    }
+  ],
   "supportedSizes": ["source-only: Date-Picker Large 250x63 and Medium 250x55"],
   "supportedStates": [
     "source-only: default, hover, focused, focused-filled, disabled, filled, ranged"
@@ -54,15 +59,16 @@
     }
   ],
   "browserTests": [
+    "tools/playwright/calendar-contract.spec.js",
     "tools/playwright/interaction-evidence-wave6.spec.js",
     "tools/tests/date-picker-calendar-readiness.test.mjs"
   ],
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: raw Date-Picker and Calendar sources are present, indexed and unchanged",
-    "structural-contract": "not-applicable: repository census found no production CSS, export, controller, docs, Showcase root, application-local picker or native date input",
-    "runtime-browser": "not-applicable: source-only family has no runtime contract or programmatic API",
-    "accessibility": "not-applicable: no production semantics or keyboard model is claimed",
+    "structural-contract": "partial-pass: framework-neutral Calendar behavior and one executable behavior fixture are classified; Date Field, Date Picker, styles, Showcase and consumer evidence remain pending",
+    "runtime-browser": "partial-pass: standalone Calendar month navigation, range selection and roving keyboard focus pass focused Chromium contracts",
+    "accessibility": "partial-pass: standalone Calendar exposes named region/grid/month, weekday headings, one tab stop and programmatic date/today/range/disabled states; automated audit and manual walk remain pending",
     "focused-visual": "not-applicable: source-only SVG composition is not a production component fidelity target",
     "consumer-integration": "not-applicable: no consumer implementation exists",
     "responsive-content-stress": "not-applicable: locale, viewport, month transition and form integration require a future scoped implementation"
@@ -73,19 +79,19 @@
         "pass: source index records the static Date-Picker axes and Calendar composition without runtime claims"
       ],
       "realInteractionVisual": [
-        "not-applicable: no executable Calendar or Date Picker exists"
+        "partial-pass: standalone Calendar keyboard and selection behavior is executable; visual fidelity is pending"
       ],
       "runtimeBehavior": [
-        "not-applicable: locale, timezone, parsing, navigation, selection, validation and events have no library API"
+        "partial-pass: Calendar locale, navigation, selection and change event have a library API; Date Field and Date Picker remain pending"
       ]
     },
     "materialStates": [],
-    "browserTest": "tools/playwright/interaction-evidence-wave6.spec.js",
-    "manualStateWalk": "not-applicable: no executable surface exists; the source-only repository census was inspected instead"
+    "browserTest": "tools/playwright/calendar-contract.spec.js",
+    "manualStateWalk": "pending: task 7.3"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "Date Picker and Calendar remain source-only; reusable implementation requires a separate scoped PR"
+    "Calendar behavior is implemented without the source-backed visual layer; Date Field, Date Picker, responsive presentation, consumers and completion evidence remain in progress"
   ]
 }

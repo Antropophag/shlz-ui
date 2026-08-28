@@ -18,7 +18,7 @@
 - [x] 3.2 Implement pure Calendar state and selection transitions and verify the focused Calendar model suite passes without DOM or framework dependencies.
 - [x] 3.3 Add failing keyboard/focus tests for roving focus, arrows, Home/End, Page Up/Page Down, Enter/Space, month crossings, clamping, and disabled-date skipping; verify the failures cover boundary and all-disabled cases.
 - [x] 3.4 Implement Calendar keyboard and focus transitions and verify the focused interaction suite passes.
-- [ ] 3.5 Bind Calendar state to semantic inline DOM with accessible month/weekday/date/today/selection/range/disabled information and verify focused browser accessibility and keyboard tests pass.
+- [x] 3.5 Bind Calendar state to semantic inline DOM with accessible month/weekday/date/today/selection/range/disabled information and verify focused browser accessibility and keyboard tests pass.
 
 ## 4. Date Field behavior
 
