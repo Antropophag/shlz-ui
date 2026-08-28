@@ -36,6 +36,12 @@ test("invalid or constrained manual text is preserved without committing", async
   );
   await expect(hidden).toHaveValue("2026-08-28");
   await expect(output).toHaveText("");
+  await expect(field).not.toHaveJSProperty("validationMessage", "");
+  expect(
+    await page
+      .locator("[data-date-field-form]")
+      .evaluate((form) => form.checkValidity()),
+  ).toBe(false);
 
   await field.fill("01.09.2026");
   await field.press("Enter");
@@ -50,6 +56,7 @@ test("valid manual input commits once and emits the stable value", async ({
   await field.fill("05.09.2026");
   await field.press("Enter");
   await expect(field).toHaveAttribute("aria-invalid", "false");
+  await expect(field).toHaveJSProperty("validationMessage", "");
   await expect(
     page.locator('input[type="hidden"][name="deliveryDate"]'),
   ).toHaveValue("2026-09-05");

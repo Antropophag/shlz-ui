@@ -261,7 +261,13 @@ const baseOptions = {
   locale: "ru-RU",
 };
 
-export function enhanceDatePickerShowcase(root = document) {
+const sourceVariantValue = (variant, mode) => {
+  if (!variant.filled) return undefined;
+  if (mode === "range") return { start: "2026-08-12", end: "2026-08-15" };
+  return "2026-08-12";
+};
+
+const enhanceSourceVariants = (root) => {
   const controllers = [];
   for (const variant of sourceVariants) {
     const host = root.querySelector(
@@ -269,23 +275,23 @@ export function enhanceDatePickerShowcase(root = document) {
     );
     if (!host) continue;
     const mode = variant.ranged ? "range" : "single";
-    const value = variant.filled
-      ? mode === "range"
-        ? { start: "2026-08-12", end: "2026-08-15" }
-        : "2026-08-12"
-      : undefined;
     const controller = new DatePickerController(host, {
       ...baseOptions,
       mode,
       size: variant.size,
       label: variant.ranged ? "Начало периода" : "Дата события",
       ...(mode === "range" ? { endLabel: "Конец периода" } : {}),
-      value,
+      value: sourceVariantValue(variant, mode),
       disabled: variant.state === "disabled",
     });
     controller.root.dataset.showcaseState = variant.state;
     controllers.push(controller);
   }
+  return controllers;
+};
+
+const enhanceStressScenarios = (root) => {
+  const controllers = [];
   for (const scenario of stressScenarios) {
     const host = root.querySelector(
       `[data-date-picker-root="scenario-${scenario.id}"]`,
@@ -305,4 +311,8 @@ export function enhanceDatePickerShowcase(root = document) {
     controllers.push(controller);
   }
   return controllers;
+};
+
+export function enhanceDatePickerShowcase(root = document) {
+  return [...enhanceSourceVariants(root), ...enhanceStressScenarios(root)];
 }

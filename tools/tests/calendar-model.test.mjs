@@ -163,6 +163,8 @@ test("Page navigation clamps the day and skips disabled targets", () => {
 });
 
 test("focus remains stable at bounds and when no enabled destination is discoverable", () => {
+  assert.equal(moveCalendarFocus("0001-01-01", "ArrowLeft"), "0001-01-01");
+  assert.equal(moveCalendarFocus("9999-12-31", "ArrowRight"), "9999-12-31");
   assert.equal(
     moveCalendarFocus("2026-08-28", "ArrowRight", { max: "2026-08-28" }),
     "2026-08-28",

@@ -258,45 +258,50 @@ export function moveCalendarFocus(
   let target: string;
   let direction: -1 | 1;
   let maximumSteps = 3660;
-  switch (command) {
-    case "ArrowLeft":
-      target = addDays(current, -1);
-      direction = -1;
-      break;
-    case "ArrowRight":
-      target = addDays(current, 1);
-      direction = 1;
-      break;
-    case "ArrowUp":
-      target = addDays(current, -7);
-      direction = -1;
-      break;
-    case "ArrowDown":
-      target = addDays(current, 7);
-      direction = 1;
-      break;
-    case "PageUp":
-      target = addMonths(current, -1);
-      direction = -1;
-      break;
-    case "PageDown":
-      target = addMonths(current, 1);
-      direction = 1;
-      break;
-    case "Home": {
-      const offset = positiveModulo(getIsoWeekday(current) - firstDay, 7);
-      target = addDays(current, -offset);
-      direction = 1;
-      maximumSteps = 6;
-      break;
+  try {
+    switch (command) {
+      case "ArrowLeft":
+        target = addDays(current, -1);
+        direction = -1;
+        break;
+      case "ArrowRight":
+        target = addDays(current, 1);
+        direction = 1;
+        break;
+      case "ArrowUp":
+        target = addDays(current, -7);
+        direction = -1;
+        break;
+      case "ArrowDown":
+        target = addDays(current, 7);
+        direction = 1;
+        break;
+      case "PageUp":
+        target = addMonths(current, -1);
+        direction = -1;
+        break;
+      case "PageDown":
+        target = addMonths(current, 1);
+        direction = 1;
+        break;
+      case "Home": {
+        const offset = positiveModulo(getIsoWeekday(current) - firstDay, 7);
+        target = addDays(current, -offset);
+        direction = 1;
+        maximumSteps = 6;
+        break;
+      }
+      case "End": {
+        const offset = positiveModulo(firstDay + 6 - getIsoWeekday(current), 7);
+        target = addDays(current, offset);
+        direction = -1;
+        maximumSteps = 6;
+        break;
+      }
     }
-    case "End": {
-      const offset = positiveModulo(firstDay + 6 - getIsoWeekday(current), 7);
-      target = addDays(current, offset);
-      direction = -1;
-      maximumSteps = 6;
-      break;
-    }
+  } catch (error) {
+    if (error instanceof RangeError) return current;
+    throw error;
   }
   return (
     findEnabledDate(target, direction, constraints, maximumSteps) ?? current

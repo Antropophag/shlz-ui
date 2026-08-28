@@ -20,6 +20,14 @@ test("single picker synchronizes input/calendar, positions in viewport, commits,
   await expect(
     surface.getByRole("button", { name: /12 августа 2026/ }),
   ).toBeFocused();
+  await picker.evaluate((root) => {
+    root.dataset.pickerChangeCount = "0";
+    root.addEventListener("shlz:date-picker-change", () => {
+      root.dataset.pickerChangeCount = String(
+        Number(root.dataset.pickerChangeCount) + 1,
+      );
+    });
+  });
   const box = await surface.boundingBox();
   expect(box.x).toBeGreaterThanOrEqual(8);
   expect(box.x + box.width).toBeLessThanOrEqual(352);
@@ -33,6 +41,7 @@ test("single picker synchronizes input/calendar, positions in viewport, commits,
   await expect(picker.locator('input[name="travelDate"]')).toHaveValue(
     "2026-08-20",
   );
+  await expect(picker).toHaveAttribute("data-picker-change-count", "1");
 
   const input = picker.getByRole("textbox", { name: "Дата поездки" });
   await input.fill("05.09.2026");

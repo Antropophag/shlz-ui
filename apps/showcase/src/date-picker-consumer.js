@@ -36,7 +36,11 @@ export function enhanceDatePickerConsumer(root = document) {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = new globalThis.FormData(form);
-    result.value = `Дата поставки: ${data.get("deliveryDate") || "не выбрана"}`;
+    const deliveryDate = data.get("deliveryDate");
+    result.value = `Дата поставки: ${typeof deliveryDate === "string" && deliveryDate ? deliveryDate : "не выбрана"}`;
+  });
+  form.addEventListener("reset", () => {
+    result.value = "Фильтр ещё не применён";
   });
   return controller;
 }

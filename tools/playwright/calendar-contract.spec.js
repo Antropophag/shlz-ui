@@ -114,6 +114,24 @@ test("Calendar month controls expose bounds and preserve a single tab stop", asy
   ).toHaveCount(1);
 });
 
+test("adjacent enabled fallback remains the grid keyboard entry point", async ({
+  page,
+}) => {
+  await page.evaluate(() =>
+    window.__calendarController.setConstraints({
+      min: "2026-09-01",
+      max: "2026-09-30",
+    }),
+  );
+  await expect(
+    page.locator('.shlz-calendar__day:not([disabled])[tabindex="0"]'),
+  ).toHaveCount(1);
+  await expect(page.locator('button[data-date="2026-09-01"]')).toHaveAttribute(
+    "tabindex",
+    "0",
+  );
+});
+
 test("Calendar source states have observable surface and cell styling", async ({
   page,
 }) => {

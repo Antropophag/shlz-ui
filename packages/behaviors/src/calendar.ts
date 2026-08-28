@@ -355,7 +355,9 @@ export class CalendarController {
     button.dataset.inMonth = String(inMonth);
     button.disabled = disabled;
     button.tabIndex =
-      !disabled && date === this.focusedDate && monthOfIsoDate(date) === month
+      !disabled &&
+      date === this.focusedDate &&
+      (monthOfIsoDate(date) === month || this.monthCount === 1)
         ? 0
         : -1;
     button.setAttribute(

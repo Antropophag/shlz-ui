@@ -194,6 +194,7 @@ function numericDateFormatter(locale: string): Intl.DateTimeFormat {
       `Date input supports Latin decimal digits; ${localeInfo.numberingSystem} is not supported`,
     );
   const formatter = new Intl.DateTimeFormat(locale, {
+    calendar: "gregory",
     year: "numeric",
     month: "2-digit",
     day: "2-digit",
@@ -201,6 +202,8 @@ function numericDateFormatter(locale: string): Intl.DateTimeFormat {
   });
   if (formatter.resolvedOptions().numberingSystem !== "latn")
     throw new RangeError("Date input supports only Latin decimal digits");
+  if (formatter.resolvedOptions().calendar !== "gregory")
+    throw new RangeError("Date input supports only the Gregorian calendar");
   return formatter;
 }
 

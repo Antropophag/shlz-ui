@@ -216,11 +216,11 @@ export class DatePickerController {
     if (!event.detail.committed) return;
     this.#committedValue = cloneValue(event.detail.value);
     if (event.detail.mode === "single") {
-      this.field.setValue(event.detail.value as string, { emit: true });
+      this.field.setValue(event.detail.value as string);
     } else {
       const value = event.detail.value as DateRange;
-      this.field.setValue(value.start, { emit: true });
-      this.endField?.setValue(value.end, { emit: true });
+      this.field.setValue(value.start);
+      this.endField?.setValue(value.end);
     }
     this.popover.close({ restoreFocus: true });
     this.#emitChange();

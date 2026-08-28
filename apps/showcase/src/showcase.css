@@ -288,7 +288,7 @@ main {
 }
 
 .shlz-date-picker-showcase__scenario--narrow .shlz-calendar--two-months {
-  inline-size: 280px;
+  inline-size: min(100%, 280px);
 }
 
 .shlz-date-picker-showcase__scenario--narrow

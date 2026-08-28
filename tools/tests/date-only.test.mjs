@@ -103,6 +103,10 @@ test("Intl display parts produce an exact numeric pattern for the active locale"
   ]);
   assert.equal(formatLocalizedDate("2026-08-28", "ru-RU"), "28.08.2026");
   assert.equal(formatLocalizedDate("2026-08-28", "en-US"), "08/28/2026");
+  for (const locale of ["th-TH", "ja-JP-u-ca-japanese"]) {
+    const formatted = formatLocalizedDate("2026-08-28", locale);
+    assert.equal(parseLocalizedDate(formatted, locale), "2026-08-28");
+  }
 });
 
 test("localized parsing accepts only the complete active display pattern", () => {

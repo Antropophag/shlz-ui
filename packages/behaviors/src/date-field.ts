@@ -178,6 +178,9 @@ export class DateFieldController {
   }
 
   #setInvalid(invalid: boolean): void {
+    this.input.setCustomValidity(
+      invalid ? this.#error?.textContent || "Invalid date" : "",
+    );
     this.input.setAttribute("aria-invalid", String(invalid));
     this.root.classList.toggle("shlz-date-field--invalid", invalid);
     if (this.#error) this.#error.hidden = !invalid;

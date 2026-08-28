@@ -153,13 +153,17 @@ misparsed.
 ## Native forms and events
 
 Named enabled Date Fields submit stable ISO values through hidden native inputs.
-Reset restores initial visible text, ISO values, validity, Calendar state, and
-closes an open picker. Committed changes emit native bubbling `input` and
-`change` from the hidden value owner plus:
+`DateFieldController` commits emit native bubbling `input` and `change` from
+that hidden value owner, then `shlz:date-field-change` with `{ value }`.
+Standalone form reset restores its initial visible text, ISO value, and
+validity.
 
-- `shlz:date-field-change` with `{ value }`;
-- `shlz:calendar-change` with `{ mode, value, committed }`;
-- `shlz:date-picker-change` with `{ mode, value }`.
+`CalendarController` selection emits `shlz:calendar-change` with
+`{ mode, value, committed }`; it does not own a form. `DatePickerController`
+composes the field and calendar lifecycles and emits one
+`shlz:date-picker-change` with `{ mode, value }` for each committed picker
+change. A composed form reset also restores Calendar state and closes an open
+picker.
 
 Invalid edits and provisional range starts do not emit committed-value changes.
 

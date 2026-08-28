@@ -37,3 +37,17 @@ test("application consumer submits a calendar selection through the public contr
     "Дата поставки: 2026-08-20",
   );
 });
+
+test("application consumer clears submitted output on native reset", async ({
+  page,
+}) => {
+  const app = consumer(page);
+  await app.getByRole("button", { name: "Применить дату" }).click();
+  await expect(app.locator("[data-date-picker-consumer-result]")).toContainText(
+    "Дата поставки:",
+  );
+  await app.getByRole("button", { name: "Сбросить" }).click();
+  await expect(app.locator("[data-date-picker-consumer-result]")).toHaveText(
+    "Фильтр ещё не применён",
+  );
+});

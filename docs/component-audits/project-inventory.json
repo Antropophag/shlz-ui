@@ -1793,6 +1793,11 @@
     },
     {
       "tests": [
+        "tools/tests/date-field-source.test.mjs",
+        "tools/tests/date-picker-source.test.mjs",
+        "tools/tests/date-picker-consumer.test.mjs",
+        "tools/tests/date-picker-showcase.test.mjs",
+        "tools/tests/date-picker-calendar-readiness.test.mjs",
         "tools/playwright/calendar-contract.spec.js",
         "tools/playwright/date-field-contract.spec.js",
         "tools/playwright/date-picker-contract.spec.js",
