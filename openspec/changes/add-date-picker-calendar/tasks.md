@@ -7,10 +7,10 @@
 
 ## 2. Date-only foundation
 
-- [ ] 2.1 Add failing unit contracts for ISO date validation, leap years, comparison, safe month/day arithmetic, month matrices, locale week ordering, and timezone invariance; verify the focused test command fails for the intended missing behavior.
-- [ ] 2.2 Implement the framework-neutral date-only helpers behind a small typed interface and verify all focused date-domain tests pass in non-UTC and UTC environments.
-- [ ] 2.3 Add failing contracts for `Intl` display-part formatting and strict complete-pattern parsing across the primary locale and a contrasting day/month locale; verify invalid, ambiguous, incomplete, and impossible input cases fail as specified.
-- [ ] 2.4 Implement locale resolution, formatting, and strict parsing without natural-language guesses and verify the focused parser/formatter suite passes.
+- [x] 2.1 Add failing unit contracts for ISO date validation, leap years, comparison, safe month/day arithmetic, month matrices, locale week ordering, and timezone invariance; verify the focused test command fails for the intended missing behavior.
+- [x] 2.2 Implement the framework-neutral date-only helpers behind a small typed interface and verify all focused date-domain tests pass in non-UTC and UTC environments.
+- [x] 2.3 Add failing contracts for `Intl` display-part formatting and strict complete-pattern parsing across the primary locale and a contrasting day/month locale; verify invalid, ambiguous, incomplete, and impossible input cases fail as specified.
+- [x] 2.4 Implement locale resolution, formatting, and strict parsing without natural-language guesses and verify the focused parser/formatter suite passes.
 
 ## 3. Calendar behavior
 
