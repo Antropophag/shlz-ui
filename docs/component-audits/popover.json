@@ -25,6 +25,15 @@
     { "id": "popover-edge-stress", "kind": "content-stress-fixture" },
     { "id": "popover-scroll-stress", "kind": "content-stress-fixture" },
     { "id": "popover-modal-consumer", "kind": "live-consumer" },
+    {
+      "id": "popover-date-picker-showcase-consumers",
+      "kind": "executable-fixture"
+    },
+    { "id": "popover-date-picker-form-consumer", "kind": "live-consumer" },
+    {
+      "id": "popover-date-picker-standalone-consumers",
+      "kind": "executable-fixture"
+    },
     { "id": "popover-plain-html-consumer", "kind": "live-consumer" }
   ],
   "supportedSizes": ["236x90-source-surface", "viewport-bounded-width"],

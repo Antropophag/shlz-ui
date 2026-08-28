@@ -238,7 +238,7 @@ const rootMarkup = (id, attributes = "") =>
   `<div class="shlz-date-picker-showcase__fixture" data-date-picker-root="${id}" data-component-audit-id="date-picker-calendar-showcase-${id}" ${attributes}></div>`;
 
 export const datePickerShowcaseMarkup = `
-<article id="date-picker-demo" class="shlz-date-picker-showcase">
+<article id="date-picker-demo" class="shlz-date-picker-showcase" data-shlz-visual-addition data-component-audit-id="popover-date-picker-showcase-consumers">
   <h3>Date Field, Calendar and Date Picker</h3>
   <p><code>Date-Picker.svg</code> supplies the two sizes and twenty visual variants. Calendar behavior, constraints, locale handling and responsive month count are repository decisions from the approved OpenSpec contract.</p>
   <section aria-labelledby="date-picker-source-matrix-title">

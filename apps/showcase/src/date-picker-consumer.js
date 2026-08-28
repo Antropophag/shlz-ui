@@ -1,12 +1,12 @@
 import { DatePickerController } from "@shlz/behaviors/date-picker";
 
 export const datePickerConsumerMarkup = `
-<section class="shlz-date-picker-consumer" data-date-picker-consumer>
+<section class="shlz-date-picker-consumer" data-date-picker-consumer data-shlz-visual-addition data-component-audit-id="popover-date-picker-form-consumer">
   <h4>Application form consumer</h4>
   <p>A delivery-filter form owned by Showcase. It composes the published behavior entry point and native form data without library-private imports.</p>
   <form class="shlz-date-picker-consumer__form" data-date-picker-consumer-form>
     <div data-date-picker-consumer-root data-component-audit-id="date-picker-calendar-showcase-form-consumer"></div>
-    <div class="shlz-cluster">
+    <div class="shlz-cluster" data-component-audit-id="button-date-picker-consumer">
       <button class="shlz-button shlz-button--primary" type="submit">Применить дату</button>
       <button class="shlz-button" type="reset">Сбросить</button>
     </div>
