@@ -31,6 +31,9 @@ jobs:
       - name: Generate assets
         run: npm run generate
 
+      - name: Build packages required by source tests
+        run: npm run build:packages
+
       - name: Run tests
         run: npm run test
 
@@ -50,8 +53,8 @@ jobs:
           git diff --name-only --diff-filter=ACMR -z "$BASE_SHA" HEAD -- \
             | xargs -0 -r npx prettier --check --ignore-unknown --
 
-      - name: Build packages and showcase
-        run: npm run build
+      - name: Build showcase
+        run: npm run build -w @shlz/showcase
 
       - name: Validate source fidelity and package exports
         run: node tools/validate.mjs
