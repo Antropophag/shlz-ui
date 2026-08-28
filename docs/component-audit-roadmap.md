@@ -22,7 +22,7 @@ At the Wave 9 delivery baseline, 35 families were `VERIFIED` and the four rows b
 | ---- | ------------------------------------------ | -------------------- | ------------------------------------------------------- |
 | 9    | Sidebar / Application Shell                | application-local    | `Sidebar.svg`; `Header.svg`                             |
 | 10   | Card compositions                          | source-only          | `Card with button.svg`; `Reports card.svg`; `Cover.svg` |
-| 11   | Upload / Document compositions             | composition-only     | `Documents.svg`; `Detailed appeals.svg`                 |
+| 11   | Upload / Document compositions             | composition-only     | `Documents.svg`                                         |
 | 12   | Messaging / History / Planner compositions | source-only          | `Messages.svg`; `History of changes.svg`; `Planner.svg` |
 
 Every source filename above is relative to `shlz-design-source/raw/svg/`. Those original SVGs remain read-only and override derived material.
@@ -60,9 +60,9 @@ Evidence boundary: Card compositions may receive an independent source/absence m
 
 Included inventory family: `Upload / Document compositions`.
 
-Audit the higher-level `Documents.svg` and `Detailed appeals.svg` compositions: Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document. Census and classify composition roots and local alternatives, and determine precisely where the already verified File Row and Document Row primitives are reused versus where the source describes a distinct upload/document composition.
+Audit the higher-level `Documents.svg` compositions: Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document. Attached Document and Drag and Drop Document are represented inside the Upload-Drag frame rather than as separate top-level frames. Census and classify composition roots and local alternatives, and determine precisely where the already verified File Row and Document Row primitives are reused versus where the source describes a distinct upload/document composition.
 
-File Row and Document Row keep their Wave 5 status and are regression dependencies, not proxies for this family. Static source does not establish file selection, drag/drop events, validation, progress, retry, preview, removal, upload transport, persistence, or form integration. This wave excludes inventing that lifecycle or promoting screen-specific Detailed appeals layout into a generic library contract.
+File Row and Document Row keep their Wave 5 status and are regression dependencies, not proxies for this family. Static source does not establish file selection, drag/drop events, validation, progress, retry, preview, removal, upload transport, persistence, or form integration. `Detailed appeals.svg` was inspected during Wave 11 and classified outside this family; this wave excludes inventing an upload lifecycle or promoting that unrelated screen-specific layout into a generic library contract.
 
 Completion boundary: the composition family receives its own manifest, source-to-primitive boundary, occurrence/alternative census, applicable runtime and consumer evidence or explicit absence reasons, inventory update, and Wave 11 report. Any newly justified interactive upload capability requires an explicit current contract and must pass the completion gate independently from File Row and Document Row.
 

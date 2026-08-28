@@ -6,17 +6,17 @@ Defines how source-defined Upload / Document compositions are bounded and verifi
 
 ### Requirement: Raw composition exports remain the sole visual authority
 
-The audit SHALL treat `Documents.svg` and `Detailed appeals.svg` as the authoritative sources for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. It MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify the authoritative exports.
+The audit SHALL treat `Documents.svg` as the authoritative source for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. Attached Document and Drag and Drop Document SHALL be traced to their nested representation inside Upload-Drag. `Detailed appeals.svg` SHALL be recorded as an inspected roadmap reference outside this family. The audit MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify either raw export.
 
 #### Scenario: Derived evidence conflicts with source
 
-- **WHEN** extracted data, repository implementation, or an earlier audit statement conflicts with either original SVG
-- **THEN** the original SVG governs and the conflict is resolved or recorded as a finding
+- **WHEN** extracted data, repository implementation, or an earlier audit statement conflicts with the original SVG
+- **THEN** `Documents.svg` governs the family boundary and the conflict is resolved or recorded as a finding
 
 #### Scenario: Source integrity is evaluated
 
 - **WHEN** Wave 11 evidence is validated
-- **THEN** both authoritative files remain byte-identical to the recorded baseline and every claimed composition boundary is traceable to its source
+- **THEN** `Documents.svg` and the inspected `Detailed appeals.svg` reference remain byte-identical to the recorded baseline, every claimed family boundary is traceable to `Documents.svg`, and the unrelated reference remains explicitly excluded
 
 ### Requirement: Higher-level compositions remain distinct from row primitives
 
@@ -34,7 +34,7 @@ Wave 11 SHALL classify where verified File Row and Document Row primitives are r
 
 ### Requirement: Static compositions do not create upload lifecycle contracts
 
-The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static exports. It MUST NOT promote screen-specific Detailed appeals layout into a generic public API without a separately complete and approved contract.
+The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static export. It MUST NOT promote unrelated screen-specific `Detailed appeals.svg` layout into this family or a generic public API without a separately complete and approved contract.
 
 #### Scenario: Visual upload affordance has no behavior contract
 

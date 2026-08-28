@@ -6,7 +6,7 @@ See `proposal.md` for motivation and the delta spec for acceptance behavior. The
 
 **Goals:**
 
-- Establish independent source ledgers for both SVGs and all six named composition variants.
+- Establish one authoritative source ledger for all six named composition variants, including the nested Upload-Drag variants, and an explicit exclusion ledger for the inspected `Detailed appeals.svg` roadmap reference.
 - Build a reproducible repository census that distinguishes enclosing compositions, primitive-only occurrences, and terminology collisions.
 - Preserve exact evidence boundaries and make a future higher-level implementation force reclassification.
 - Reconcile the family independently without changing Wave 5 primitive status.
@@ -19,9 +19,9 @@ See `proposal.md` for motivation and the delta spec for acceptance behavior. The
 
 ## Decisions
 
-### 1. Use one family manifest with per-source and per-variant ledgers
+### 1. Use one family manifest with authoritative and exclusion ledgers
 
-One `upload-document-compositions.json` matches the roadmap family, while source facts and primitive boundaries remain attributable to the exact SVG and named variant. Treating all document-shaped frames as one generic Upload component was rejected because the exports include application composition and incidental layout geometry.
+One `upload-document-compositions.json` matches the roadmap family, while source facts and primitive boundaries remain attributable to `Documents.svg` and each named variant. Attached Document and Drag and Drop Document are nested represented variants within the Upload-Drag frame rather than independent top-level dashed frames. `Detailed appeals.svg` is retained only as an inspected roadmap reference and classified outside this family. Treating all document-shaped frames as one generic Upload component was rejected because the exports include incidental and application-specific layout geometry.
 
 ### 2. Treat existing rows as dependencies, never occurrence proxies
 

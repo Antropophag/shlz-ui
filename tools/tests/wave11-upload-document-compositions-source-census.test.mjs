@@ -33,7 +33,7 @@ const sourceExtensions = new Set([
 ]);
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
 const higherLevelPath =
-  /(?:^|\/)[^/]*(?:upload-document|document-upload|upload-drag|attached-document|drag-drop-document)[^/]*\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$/i;
+  /(?:^|\/)[^/]*(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-drop-document)[^/]*\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$/i;
 const higherLevelSignatures = [
   /\.(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
   /(?:class|className)\s*=\s*["'][^"']*\b(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
@@ -152,6 +152,10 @@ test("Wave 11 manifest records independent source and primitive-boundary ledgers
 
   assert.equal(manifest.schemaVersion, 2);
   assert.equal(manifest.component, "upload-document-compositions");
+  assert.equal(
+    manifest.authoritativeSource,
+    "shlz-design-source/raw/svg/Documents.svg",
+  );
   assert.deepEqual(manifestSourcePaths, expectedSourcePaths);
   assert.deepEqual(sourceFactEvidence, expectedSourcePaths);
   assert.deepEqual(manifest.implementation, []);
@@ -165,15 +169,22 @@ test("Wave 11 manifest records independent source and primitive-boundary ledgers
     "smallDocument",
     "uploadDrag",
   ]);
-  assert.equal(
-    manifest.stateLedgers.attachedDocument.status,
-    "unresolved-authority",
-  );
-  assert.equal(
-    manifest.stateLedgers.dragAndDropDocument.status,
-    "unresolved-authority",
-  );
-  assert.equal(manifest.findings[0].severity, "P1");
+  for (const nestedVariant of ["attachedDocument", "dragAndDropDocument"]) {
+    assert.equal(
+      manifest.stateLedgers[nestedVariant].source,
+      manifest.authoritativeSource,
+    );
+    assert.equal(
+      manifest.stateLedgers[nestedVariant].frame,
+      manifest.stateLedgers.uploadDrag.frame,
+    );
+    assert.equal(
+      manifest.stateLedgers[nestedVariant].parentComposition,
+      "uploadDrag",
+    );
+    assert.ok(manifest.stateLedgers[nestedVariant].represented.length >= 2);
+  }
+  assert.deepEqual(manifest.findings, []);
   for (const level of [
     "runtime-browser",
     "accessibility",
@@ -267,6 +278,14 @@ test("Wave 11 census rejects synthetic higher-level Upload / Document surfaces",
     },
     {
       path: "apps/example/upload-document.js",
+      source: "export default {};",
+    },
+    {
+      path: "packages/vue/Upload.vue",
+      source: "<template><div /></template>",
+    },
+    {
+      path: "packages/components/upload.js",
       source: "export default {};",
     },
   ];

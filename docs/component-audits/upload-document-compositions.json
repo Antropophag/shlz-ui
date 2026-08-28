@@ -114,18 +114,24 @@
       "primitiveBoundary": "source composition distinct from repository Document Row extension"
     },
     "attachedDocument": {
-      "source": null,
-      "status": "unresolved-authority",
-      "roadmapReference": "shlz-design-source/raw/svg/Detailed appeals.svg",
-      "observedConflict": "the referenced SVG contains Employees, Event plaque, and Event compositions rather than Attached Document",
-      "primitiveBoundary": "row primitives do not certify an unresolved higher-level source"
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=1087.5 width=499 height=411",
+      "represented": [
+        "two-attached-document-items-in-filled-upload-drag-specimen",
+        "attachment-summary-and-delete-all-action"
+      ],
+      "parentComposition": "uploadDrag",
+      "primitiveBoundary": "nested attachment representation inside Upload-Drag; no attachment lifecycle is inferred"
     },
     "dragAndDropDocument": {
-      "source": null,
-      "status": "unresolved-authority",
-      "roadmapReference": "shlz-design-source/raw/svg/Detailed appeals.svg",
-      "observedConflict": "the referenced SVG contains Employees, Event plaque, and Event compositions rather than Drag and Drop Document",
-      "primitiveBoundary": "no drag/drop behavior or source boundary is inferred while authority is unresolved"
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=1087.5 width=499 height=411",
+      "represented": [
+        "empty-drop-zone-specimen",
+        "filled-drop-zone-with-attached-documents-specimen"
+      ],
+      "parentComposition": "uploadDrag",
+      "primitiveBoundary": "nested static states inside Upload-Drag; no drag/drop behavior is inferred"
     }
   },
   "sourceClaims": [
@@ -135,12 +141,12 @@
       "evidence": "shlz-design-source/raw/svg/Documents.svg"
     },
     {
-      "claim": "Detailed appeals.svg is an 873 by 4163 application-composition sheet with three blue dashed frames representing Employees, Event plaque, and Event material; it does not substantiate the roadmap's Attached Document or Drag and Drop Document attribution",
+      "claim": "Detailed appeals.svg is an 873 by 4163 application-composition sheet with three blue dashed frames representing Employees, Event plaque, and Event material; direct inspection classifies it outside the Upload / Document composition family",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Detailed appeals.svg"
     },
     {
-      "claim": "the roadmap maps six names across the two exports, but direct inspection substantiates only the four Documents.svg groups and leaves the two Detailed appeals attributions in conflict with primary source",
+      "claim": "all six family names map to Documents.svg; Attached Document and Drag and Drop Document are nested representations within its Upload-Drag frame, while Detailed appeals.svg is an inspected out-of-family roadmap reference",
       "classification": "repository-decision",
       "evidence": "docs/component-audit-roadmap.md"
     },
@@ -165,7 +171,7 @@
   ],
   "visualSnapshots": [],
   "evidence": {
-    "source-integrity": "pass: exact hashes and geometry are locked for both raw SVGs, and the Detailed appeals authority conflict is recorded instead of being overridden by roadmap metadata",
+    "source-integrity": "pass: exact hashes are locked for Documents.svg and the inspected Detailed appeals.svg reference; all six family variants and their enclosing geometry are traced to Documents.svg",
     "structural-contract": "pass: repository-wide scanning finds zero higher-level runtime or public-export signatures and classifies ten File Row or Document Row dependency surfaces separately; synthetic higher-level surfaces are rejected",
     "runtime-browser": "not-applicable: the higher-level family has no runtime root, controller, event contract, or public API; primitive browser behavior is not inherited",
     "accessibility": "not-applicable: no higher-level production semantics, keyboard model, focus order, status announcement, or accessible naming contract exists",
@@ -176,7 +182,7 @@
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: direct source inspection records the six represented composition groups and the File Row or Document Row boundary without runtime claims"
+        "pass: direct source inspection records the six represented variants, including Attached Document and Drag and Drop Document nested inside Upload-Drag, and the File Row or Document Row boundary without runtime claims"
       ],
       "realInteractionVisual": [
         "not-applicable: no executable higher-level Upload / Document composition exists on which a browser can create a real interaction state"
@@ -190,16 +196,7 @@
     "manualStateWalk": "not-applicable: no executable higher-level surface exists; manual review covered both raw SVG sheets, all six named source groups, and the primitive-boundary census on 2026-08-28"
   },
   "acceptedDeviations": [],
-  "findings": [
-    {
-      "id": "wave11-detailed-appeals-authority-conflict",
-      "severity": "P1",
-      "status": "open-blocking",
-      "description": "Detailed appeals.svg depicts Employees, Event plaque, and Event compositions and does not substantiate Attached Document or Drag and Drop Document as mapped by the Wave 11 roadmap",
-      "evidence": "manual inspection of shlz-design-source/raw/svg/Detailed appeals.svg against docs/component-audit-roadmap.md",
-      "tracking": "https://github.com/Antropophag/shlz-ui/pull/47"
-    }
-  ],
+  "findings": [],
   "knownLimitations": [
     "VERIFIED describes the bounded source, primitive-boundary, and repository-absence audit and does not mean a production uploader exists",
     "outlined text and raster-backed application screenshots do not establish literal runtime copy, structured semantics, or reusable screen layout",

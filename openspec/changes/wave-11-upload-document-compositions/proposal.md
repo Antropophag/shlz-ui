@@ -4,7 +4,7 @@ Upload / Document compositions remain `INVENTORIED` even though File Row and Doc
 
 ## What Changes
 
-- Inspect `Documents.svg` and `Detailed appeals.svg` as the sole visual authorities for Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document compositions.
+- Inspect `Documents.svg` as the sole visual authority for Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document compositions. Record `Detailed appeals.svg` as an inspected roadmap reference outside this family.
 - Census and classify every repository-local composition root, implementation, consumer, fixture, diagnostic, native substitute, and local alternative, distinguishing higher-level compositions from verified File Row and Document Row dependencies.
 - Add an independent Upload / Document compositions manifest, source-to-primitive ledger, inventory reconciliation, and Wave 11 report with exact evidence applicability and limitations.
 - Add mutation-sensitive source-integrity and repository-census evidence without adding upload behavior, transport, persistence, new package exports, or a generic public component API.

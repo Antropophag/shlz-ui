@@ -1,7 +1,7 @@
 {
   "kind": "contract",
   "payload": {
-    "contractDigest": "b47c8054290cf0d60fa81f4dc1c4c66aa662ecc78604a222211c6e4f998aa86b",
+    "contractDigest": "067cc4240388560bfcbf244441ceb9acd4055fe572d56c50964ffee58064b78a",
     "failureInvariants": [],
     "scenarios": [
       {
@@ -38,19 +38,19 @@
       },
       {
         "capability": "application-compositions/upload-document-compositions",
-        "content": "- **WHEN** extracted data, repository implementation, or an earlier audit statement conflicts with either original SVG\n- **THEN** the original SVG governs and the conflict is resolved or recorded as a finding",
+        "content": "- **WHEN** extracted data, repository implementation, or an earlier audit statement conflicts with the original SVG\n- **THEN** `Documents.svg` governs the family boundary and the conflict is resolved or recorded as a finding",
         "id": "application-compositions/upload-document-compositions::Raw composition exports remain the sole visual authority::Derived evidence conflicts with source",
         "name": "Derived evidence conflicts with source",
         "requirement": "Raw composition exports remain the sole visual authority",
-        "requirementContent": "The audit SHALL treat `Documents.svg` and `Detailed appeals.svg` as the authoritative sources for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. It MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify the authoritative exports."
+        "requirementContent": "The audit SHALL treat `Documents.svg` as the authoritative source for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. Attached Document and Drag and Drop Document SHALL be traced to their nested representation inside Upload-Drag. `Detailed appeals.svg` SHALL be recorded as an inspected roadmap reference outside this family. The audit MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify either raw export."
       },
       {
         "capability": "application-compositions/upload-document-compositions",
-        "content": "- **WHEN** Wave 11 evidence is validated\n- **THEN** both authoritative files remain byte-identical to the recorded baseline and every claimed composition boundary is traceable to its source",
+        "content": "- **WHEN** Wave 11 evidence is validated\n- **THEN** `Documents.svg` and the inspected `Detailed appeals.svg` reference remain byte-identical to the recorded baseline, every claimed family boundary is traceable to `Documents.svg`, and the unrelated reference remains explicitly excluded",
         "id": "application-compositions/upload-document-compositions::Raw composition exports remain the sole visual authority::Source integrity is evaluated",
         "name": "Source integrity is evaluated",
         "requirement": "Raw composition exports remain the sole visual authority",
-        "requirementContent": "The audit SHALL treat `Documents.svg` and `Detailed appeals.svg` as the authoritative sources for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. It MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify the authoritative exports."
+        "requirementContent": "The audit SHALL treat `Documents.svg` as the authoritative source for represented Document, Upload-Drag, Description Files, Small document, Attached Document, and Drag and Drop Document composition facts. Attached Document and Drag and Drop Document SHALL be traced to their nested representation inside Upload-Drag. `Detailed appeals.svg` SHALL be recorded as an inspected roadmap reference outside this family. The audit MUST distinguish source facts, derived patterns, repository decisions, assumptions, and unsupported semantics, and MUST NOT modify either raw export."
       },
       {
         "capability": "application-compositions/upload-document-compositions",
@@ -74,7 +74,7 @@
         "id": "application-compositions/upload-document-compositions::Static compositions do not create upload lifecycle contracts::No distinct runtime composition exists",
         "name": "No distinct runtime composition exists",
         "requirement": "Static compositions do not create upload lifecycle contracts",
-        "requirementContent": "The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static exports. It MUST NOT promote screen-specific Detailed appeals layout into a generic public API without a separately complete and approved contract."
+        "requirementContent": "The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static export. It MUST NOT promote unrelated screen-specific `Detailed appeals.svg` layout into this family or a generic public API without a separately complete and approved contract."
       },
       {
         "capability": "application-compositions/upload-document-compositions",
@@ -82,10 +82,10 @@
         "id": "application-compositions/upload-document-compositions::Static compositions do not create upload lifecycle contracts::Visual upload affordance has no behavior contract",
         "name": "Visual upload affordance has no behavior contract",
         "requirement": "Static compositions do not create upload lifecycle contracts",
-        "requirementContent": "The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static exports. It MUST NOT promote screen-specific Detailed appeals layout into a generic public API without a separately complete and approved contract."
+        "requirementContent": "The design system MUST NOT infer file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence, or form integration from the static export. It MUST NOT promote unrelated screen-specific `Detailed appeals.svg` layout into this family or a generic public API without a separately complete and approved contract."
       }
     ]
   },
   "version": 1,
-  "digest": "798f2b4c4c8b5fcfddc8129b3c00a068d35520d1d960dc22b5b7244d97eaec36"
+  "digest": "0f3142aa4ccb144cbac80a675944a7ad6d49b7b07f23801921372e1079449dc5"
 }

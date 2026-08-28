@@ -1968,7 +1968,7 @@
         "tools/tests/content-states.test.mjs"
       ],
       "evidence": {
-        "source-integrity": "pass: exact hashes and source-critical geometry are locked for Documents.svg and Detailed appeals.svg",
+        "source-integrity": "pass: exact hashes are locked for Documents.svg and the inspected Detailed appeals.svg reference; all six family variants are traced to Documents.svg",
         "structural-contract": "pass: zero higher-level implementations are proven by path, declaration, re-export and markup signatures; 61 terminology paths are partitioned into ten primitive dependencies, one audit path and 50 unrelated paths",
         "runtime-browser": "not-applicable: no higher-level runtime root, controller, event contract, or public API exists",
         "accessibility": "not-applicable: no higher-level production semantics, focus order, keyboard model, or accessible naming contract exists",
@@ -1979,10 +1979,9 @@
       "canonical_name": "Upload / Document compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "VERIFIED",
+      "audit_status": "INVENTORIED",
       "authoritative_source": [
-        "shlz-design-source/raw/svg/Documents.svg",
-        "shlz-design-source/raw/svg/Detailed appeals.svg"
+        "shlz-design-source/raw/svg/Documents.svg"
       ],
       "production_implementation": [],
       "behavior": [],
@@ -2012,7 +2011,7 @@
         "VERIFIED is limited to the bounded source, primitive-boundary and repository-absence audit and does not indicate that a production uploader exists",
         "File Row and Document Row remain independent Wave 5 dependencies and do not certify this higher-level family",
         "file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence and form integration remain unsupported",
-        "Detailed appeals screen geometry is application-specific and is not promoted into a generic library contract"
+        "Detailed appeals.svg was inspected and classified outside this family; its application-specific geometry is not promoted into a generic library contract"
       ],
       "measured_counts": {
         "executableShowcase": 0,
