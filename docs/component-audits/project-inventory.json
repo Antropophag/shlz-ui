@@ -1953,36 +1953,43 @@
       }
     },
     {
-      "tests": ["tools/tests/content-states.test.mjs"],
+      "tests": [
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js",
+        "tools/tests/content-states.test.mjs"
+      ],
       "evidence": {
-        "source-integrity": "indexed source only",
-        "structural-contract": "partial via File/Document Row",
-        "runtime-browser": "partial",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "partial"
+        "source-integrity": "pass: exact hashes and source-critical geometry are locked for Documents.svg and Detailed appeals.svg",
+        "structural-contract": "pass: zero higher-level implementations are proven separately from ten classified File Row and Document Row dependency surfaces",
+        "runtime-browser": "not-applicable: no higher-level runtime root, controller, event contract, or public API exists",
+        "accessibility": "not-applicable: no higher-level production semantics, focus order, keyboard model, or accessible naming contract exists",
+        "focused-visual": "not-applicable: no implemented higher-level composition or material runtime state exists for source comparison",
+        "consumer-integration": "not-applicable: Showcase contains only independently audited row fixtures, not a live higher-level consumer",
+        "responsive-content-stress": "not-applicable: static exports establish no higher-level responsive or upload lifecycle behavior"
       },
       "canonical_name": "Upload / Document compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Documents.svg",
         "shlz-design-source/raw/svg/Detailed appeals.svg"
       ],
-      "production_implementation": [
-        "packages/styles/components/file-row.css",
-        "packages/styles/components/document-row.css"
-      ],
+      "production_implementation": [],
       "behavior": [],
-      "docs": [],
+      "docs": [
+        "docs/component-audits/upload-document-compositions.json",
+        "docs/component-audits/wave-11-report.md"
+      ],
       "executable_fixtures": [],
-      "live_consumers": ["apps/showcase/src/content-states.js"],
+      "live_consumers": [],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
-      "local_alternatives": [],
+      "local_alternatives": [
+        "packages/styles/components/file-row.css",
+        "packages/styles/components/document-row.css"
+      ],
       "scope": [
         "Document",
         "Upload-Drag",
@@ -1992,7 +1999,12 @@
         "Drag and Drop Document"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "VERIFIED is limited to the bounded source, primitive-boundary and repository-absence audit and does not indicate that a production uploader exists",
+        "File Row and Document Row remain independent Wave 5 dependencies and do not certify this higher-level family",
+        "file selection, drag/drop events, validation, progress, retry, preview, removal, transport, persistence and form integration remain unsupported",
+        "Detailed appeals screen geometry is application-specific and is not promoted into a generic library contract"
+      ],
       "measured_counts": {
         "executableShowcase": 0,
         "liveConsumers": 0,

@@ -1,0 +1,159 @@
+{
+  "schemaVersion": 2,
+  "component": "upload-document-compositions",
+  "authoritativeSource": "shlz-design-source/raw/svg/Documents.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Detailed appeals.svg",
+    "docs/component-audit-roadmap.md",
+    "docs/component-audits/file-row.json",
+    "docs/component-audits/document-row.json"
+  ],
+  "implementation": [],
+  "behavior": null,
+  "docs": "docs/component-audits/wave-11-report.md",
+  "rootSelector": "[data-component-audit-id^='upload-document-compositions-']",
+  "legacySelectors": [
+    ".shlz-upload",
+    ".shlz-upload-drag",
+    ".shlz-attached-document",
+    ".shlz-drag-drop-document",
+    "[data-shlz-upload]",
+    "[data-shlz-attached-document]"
+  ],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [],
+  "primitiveDependencies": [
+    {
+      "path": "apps/showcase/src/content-states.js",
+      "classification": "file-and-document-row-fixture"
+    },
+    {
+      "path": "apps/showcase/src/main.js",
+      "classification": "file-and-document-row-typography-stress"
+    },
+    {
+      "path": "apps/showcase/src/showcase.css",
+      "classification": "file-and-document-row-fixture-style"
+    },
+    {
+      "path": "docs/components/document-row.md",
+      "classification": "document-row-contract"
+    },
+    {
+      "path": "docs/components/file-row.md",
+      "classification": "file-row-contract"
+    },
+    {
+      "path": "packages/styles/components/document-row.css",
+      "classification": "document-row-implementation"
+    },
+    {
+      "path": "packages/styles/components/file-row.css",
+      "classification": "file-row-implementation"
+    },
+    {
+      "path": "tools/playwright/content-states.spec.js",
+      "classification": "document-row-snapshot-test"
+    },
+    {
+      "path": "tools/playwright/data-content-wave5.spec.js",
+      "classification": "file-and-document-row-browser-test"
+    },
+    {
+      "path": "tools/tests/content-states.test.mjs",
+      "classification": "file-and-document-row-structural-test"
+    }
+  ],
+  "supportedSizes": ["source-sheets-only"],
+  "supportedStates": [
+    "document-specimens",
+    "upload-drag-specimens",
+    "description-files-specimens",
+    "small-document-specimens",
+    "attached-document-specimens",
+    "drag-and-drop-document-specimen"
+  ],
+  "contentStress": [],
+  "stateLedgers": {
+    "document": ["default", "hover", "editing", "error"],
+    "uploadDrag": ["two-static-drop-zone-specimens"],
+    "descriptionFiles": ["two-static-file-row-specimens"],
+    "smallDocument": ["static-small-document-group"],
+    "attachedDocument": ["detailed-appeals-static-attachments"],
+    "dragAndDropDocument": ["detailed-appeals-static-drop-composition"]
+  },
+  "sourceClaims": [
+    {
+      "claim": "Documents.svg is a 700 by 2269 sheet with four blue dashed composition frames, one 240 by 55 and four 230 by 55 Document specimens, two 467 by 102 dashed upload-drop surfaces, and two raster-backed document-preview placements",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg"
+    },
+    {
+      "claim": "Detailed appeals.svg is an 873 by 4163 application-composition sheet with three blue dashed source frames and raster-backed screen/document imagery; its screen geometry is not a generic component contract",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Detailed appeals.svg"
+    },
+    {
+      "claim": "the six roadmap names map source groups across the two exports, while outlined text and derived typography metadata do not upgrade those groups into runtime APIs",
+      "classification": "derived-pattern",
+      "evidence": "docs/component-audit-roadmap.md"
+    },
+    {
+      "claim": "File Row accounts for the source-backed 55px file identity specimens, while Document Row remains a repository extension; neither is an enclosing upload composition",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/file-row.json"
+    },
+    {
+      "claim": "the family is verified through source integrity, a primitive-boundary ledger, and mutation-sensitive absence evidence rather than an illustrative upload implementation",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/wave-11-report.md"
+    },
+    {
+      "claim": "static drop zones and attachment artwork do not establish file selection, drag events, validation, progress, retry, preview, removal, transport, persistence, or form integration",
+      "classification": "assumption",
+      "evidence": "docs/component-audits/wave-11-report.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/upload-document-compositions-wave11.spec.js"
+  ],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: exact SHA-256 hashes, sheet dimensions, and source-critical composition geometry for both raw SVGs are locked by the focused Wave 11 test",
+    "structural-contract": "pass: repository-wide scanning finds zero higher-level runtime or public-export signatures and classifies ten File Row or Document Row dependency surfaces separately; synthetic higher-level surfaces are rejected",
+    "runtime-browser": "not-applicable: the higher-level family has no runtime root, controller, event contract, or public API; primitive browser behavior is not inherited",
+    "accessibility": "not-applicable: no higher-level production semantics, keyboard model, focus order, status announcement, or accessible naming contract exists",
+    "focused-visual": "not-applicable: raw source artwork is authoritative but no implemented higher-level composition or material runtime state exists for comparison",
+    "consumer-integration": "not-applicable: the Showcase surfaces render only independently audited File Row and Document Row fixtures, not a live higher-level consumer",
+    "responsive-content-stress": "not-applicable: the static exports establish no higher-level responsive reflow, dynamic content, upload lifecycle, empty, progress, success, or error behavior"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: direct source inspection records the six represented composition groups and the File Row or Document Row boundary without runtime claims"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: no executable higher-level Upload / Document composition exists on which a browser can create a real interaction state"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: selection, drag/drop, validation, progress, retry, preview, removal, transport, persistence, and form behavior are outside the static source contract"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/upload-document-compositions-wave11.spec.js",
+    "manualStateWalk": "not-applicable: no executable higher-level surface exists; manual review covered both raw SVG sheets, all six named source groups, and the primitive-boundary census on 2026-08-28"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "VERIFIED describes the bounded source, primitive-boundary, and repository-absence audit and does not mean a production uploader exists",
+    "outlined text and raster-backed application screenshots do not establish literal runtime copy, structured semantics, or reusable screen layout",
+    "File Row and Document Row retain their independent Wave 5 contracts and evidence; no primitive status is combined with this family",
+    "Chromium interaction and screenshot evidence is intentionally inapplicable until a separately approved executable contract exists"
+  ]
+}

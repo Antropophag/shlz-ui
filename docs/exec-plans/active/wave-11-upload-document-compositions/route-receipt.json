@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Complete roadmap Wave 11 by independently auditing the composition-only Upload / Document family against Documents.svg and Detailed appeals.svg without inventing upload lifecycle semantics.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
