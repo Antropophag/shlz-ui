@@ -14,4 +14,4 @@
 ## 4. Validation, review, and delivery
 
 - [x] 4.1 Run source integrity, OpenSpec, formatting/lint/build/package, manifest/census, affected, and final aggregate validation; verify no raw source or runtime/public composition implementation is added.
-- [ ] 4.2 Review the complete episode diff independently against repository standards, the Wave 12 spec, all three authoritative SVGs, and non-goals; remediate every scope-local finding, re-run affected checks, satisfy route/delivery guards, and deliver an unmerged green PR targeting `main`.
+- [x] 4.2 Review the complete episode diff independently against repository standards, the Wave 12 spec, all three authoritative SVGs, and non-goals; remediate every scope-local finding, re-run affected checks, satisfy route/delivery guards, and deliver an unmerged green PR targeting `main`.
