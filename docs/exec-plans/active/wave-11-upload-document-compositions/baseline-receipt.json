@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "audit/wave-11-upload-document-compositions",
+    "commit": "f2787626f79ae6e6b63486809ad20792f8cccd38",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "audit/wave-11-upload-document-compositions",
+      "headRefOid": "f2787626f79ae6e6b63486809ad20792f8cccd38",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/47"
+    },
+    "repository": {
+      "digest": "c199dd42606d922aff74b0466a8f54f0c03af2672463ad3a64ed992054d4e9fc",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-wave-11"
+    },
+    "upstream": "origin/audit/wave-11-upload-document-compositions"
+  },
+  "requirementsDigest": "7d82e00dd57d503a17cd825f4b2a151c13015a31231bafd9c231dde443fe7128",
+  "routeDigest": "c607d04ad9a549417fc4c0db6593fb895aa3329f947ae3160d5b6525725da03a",
+  "version": 1,
+  "digest": "6986be87191f2e0f1d95798c817f24c7bcfe98c655670767952607bdf7ec2515"
+}

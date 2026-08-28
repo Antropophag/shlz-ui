@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "wave-11-upload-document-compositions",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "wave-11-scope",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "primitive-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "upload-lifecycle-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Complete roadmap Wave 11 by independently auditing the composition-only Upload / Document family against Documents.svg and Detailed appeals.svg without inventing upload lifecycle semantics.",
+    "revision": 1
+  },
+  "routeDigest": "c607d04ad9a549417fc4c0db6593fb895aa3329f947ae3160d5b6525725da03a",
+  "version": 1,
+  "digest": "7d82e00dd57d503a17cd825f4b2a151c13015a31231bafd9c231dde443fe7128"
+}
