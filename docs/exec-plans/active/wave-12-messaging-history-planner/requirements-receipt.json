@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "wave-12-messaging-history-planner",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "independent-subscope-dispositions",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "runtime-contract-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Complete roadmap Wave 12 by independently auditing the source-only Messaging / History / Planner family against Messages.svg, History of changes.svg, and Planner.svg without inventing application runtime semantics.",
+    "revision": 1
+  },
+  "routeDigest": "767b322d2424fcc5f646686fd0ec1883805424034da4ce7e489a17678529c957",
+  "version": 1,
+  "digest": "f058a0af2fabdf45056d0fc599da4b46d6a17263655fd1d42f1acfa8fd479b83"
+}

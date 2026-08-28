@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "intent": "Complete roadmap Wave 12 by independently auditing the source-only Messaging / History / Planner family against Messages.svg, History of changes.svg, and Planner.svg without inventing application runtime semantics.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "wave-12-scope",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "docs/component-audit-roadmap.md#wave-12--messaging--history--planner-compositions" }
+    },
+    {
+      "id": "independent-subscope-dispositions",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "docs/component-audit-roadmap.md requires separate Messaging, History, and Planner evidence and findings dispositions" }
+    },
+    {
+      "id": "runtime-contract-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "docs/component-audit-roadmap.md excludes unsupported editor, messaging, chronology, planner, employee, attachment, persistence, and live-region semantics" }
+    }
+  ],
+  "openSpec": { "change": "wave-12-messaging-history-planner", "status": "synthesized" },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-request", "ref": "User explicitly requested: сделай вейв 12; the roadmap records this short form as bounded implementation and unmerged-PR authorization." }
+  }
+}
