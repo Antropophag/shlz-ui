@@ -15,6 +15,7 @@ import {
   compareIsoDates,
   getMonthMatrix,
   getWeekdayOrder,
+  monthOfIsoDate,
   parseIsoDate,
   resolveDateLocale,
 } from "./date-only.js";
@@ -32,6 +33,12 @@ export interface CalendarChangeDetail {
   mode: CalendarState["mode"];
   value: CalendarState["value"];
   committed: boolean;
+}
+
+export interface CalendarConstraintMismatchDetail {
+  mode: CalendarState["mode"];
+  value: CalendarState["value"];
+  mismatch: boolean;
 }
 
 const focusCommands = new Set<CalendarFocusCommand>([
@@ -82,10 +89,6 @@ function weekdayLabel(
   }).format(
     dateAtUtcNoon(`2026-08-${String(2 + isoWeekday).padStart(2, "0")}`),
   );
-}
-
-function monthOf(date: string): string {
-  return date.slice(0, 7);
 }
 
 function rangePosition(
@@ -152,6 +155,26 @@ export class CalendarController {
     this.root.replaceChildren();
   }
 
+  setConstraints(constraints: CalendarConstraints): void {
+    this.constraints.min = constraints.min;
+    this.constraints.max = constraints.max;
+    this.constraints.isDateDisabled = constraints.isDateDisabled;
+    this.render();
+    this.root.dispatchEvent(
+      new CustomEvent<CalendarConstraintMismatchDetail>(
+        "shlz:calendar-constraint-mismatch",
+        {
+          bubbles: true,
+          detail: {
+            mode: this.state.mode,
+            value: this.state.value,
+            mismatch: this.#hasConstraintMismatch(),
+          },
+        },
+      ),
+    );
+  }
+
   render({ focus = false } = {}): void {
     const document = this.root.ownerDocument;
     this.root.classList.add("shlz-calendar");
@@ -161,6 +184,9 @@ export class CalendarController {
     );
     this.root.setAttribute("role", "region");
     this.root.setAttribute("aria-label", this.label);
+    this.root.dataset.constraintMismatch = String(
+      this.#hasConstraintMismatch(),
+    );
     this.root.replaceChildren();
 
     const months = Array.from({ length: this.monthCount }, (_, index) =>
@@ -176,7 +202,7 @@ export class CalendarController {
       .flat()
       .filter(({ date }) => !isCalendarDateDisabled(date, this.constraints));
     if (
-      !months.includes(monthOf(this.focusedDate)) ||
+      !months.includes(monthOfIsoDate(this.focusedDate)) ||
       !enabled.some(({ date }) => date === this.focusedDate)
     )
       this.focusedDate =
@@ -272,6 +298,19 @@ export class CalendarController {
     return getWeekdayOrder(this.locale)[0] ?? 1;
   }
 
+  #hasConstraintMismatch(): boolean {
+    if (this.state.mode === "single")
+      return Boolean(
+        this.state.value &&
+        isCalendarDateDisabled(this.state.value, this.constraints),
+      );
+    return Boolean(
+      this.state.value &&
+      (isCalendarDateDisabled(this.state.value.start, this.constraints) ||
+        isCalendarDateDisabled(this.state.value.end, this.constraints)),
+    );
+  }
+
   #navigationButton(
     kind: string,
     label: string,
@@ -301,6 +340,7 @@ export class CalendarController {
       this.state.mode === "single"
         ? this.state.value === date
         : position !== null;
+    gridcell.setAttribute("aria-selected", String(selected));
     const stateLabel =
       position === "start"
         ? "начало диапазона"
@@ -315,14 +355,14 @@ export class CalendarController {
     button.dataset.inMonth = String(inMonth);
     button.disabled = disabled;
     button.tabIndex =
-      !disabled && date === this.focusedDate && monthOf(date) === month
+      !disabled && date === this.focusedDate && monthOfIsoDate(date) === month
         ? 0
         : -1;
     button.setAttribute(
       "aria-label",
       [fullDateLabel(date, this.locale), stateLabel].filter(Boolean).join(", "),
     );
-    button.setAttribute("aria-selected", String(selected));
+    button.dataset.selected = String(selected);
     if (date === this.today) button.setAttribute("aria-current", "date");
     if (position) {
       button.dataset.rangePosition = position;
@@ -379,7 +419,10 @@ export class CalendarController {
           this.constraints,
           this.#firstDay(),
         );
-        this.state = { ...this.state, visibleMonth: monthOf(this.focusedDate) };
+        this.state = {
+          ...this.state,
+          visibleMonth: monthOfIsoDate(this.focusedDate),
+        };
         this.render({ focus: true });
       },
       { signal },

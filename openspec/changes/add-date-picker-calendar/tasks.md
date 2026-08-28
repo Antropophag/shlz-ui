@@ -34,20 +34,20 @@
 
 ## 6. Date Picker composition
 
-- [ ] 6.1 Add failing integration contracts for field/calendar synchronization, Popover opening/viewport positioning, single commit, provisional and committed range behavior, Escape/outside dismissal, focus restoration, disable-while-open, and reset-while-open; verify the expected failures.
-- [ ] 6.2 Compose Date Field and Calendar through the existing Popover seam without changing its public contract and verify the complete focused Date Picker integration suite passes.
-- [ ] 6.3 Export the new framework-neutral styles and behaviors through documented package entry points and verify package build, type checks, export-surface tests, and existing consumer imports remain compatible.
+- [x] 6.1 Add failing integration contracts for field/calendar synchronization, Popover opening/viewport positioning, single commit, provisional and committed range behavior, Escape/outside dismissal, focus restoration, disable-while-open, and reset-while-open; verify the expected failures.
+- [x] 6.2 Compose Date Field and Calendar through the existing Popover seam without changing its public contract and verify the complete focused Date Picker integration suite passes.
+- [x] 6.3 Export the new framework-neutral styles and behaviors through documented package entry points and verify package build, type checks, export-surface tests, and existing consumer imports remain compatible.
 
 ## 7. Fixtures, consumer, and evidence
 
-- [ ] 7.1 Add exhaustive Showcase fixtures for every authoritative size/state plus single/range, constraints, invalid input, one/two-month, narrow, long-label, and locale stress; verify the occurrence guard classifies them as executable fixtures.
-- [ ] 7.2 Add at least one application-owned consumer flow using only public APIs for native form submission and both input/calendar interaction; verify focused runtime tests exercise the integration rather than fixture-only markup.
-- [ ] 7.3 Run automated accessibility checks and a manual keyboard/focus/state walk for standalone Calendar and Date Picker, record exact outcomes and limitations, and verify no scope-local violation remains unresolved.
-- [ ] 7.4 Capture focused visual evidence against the authoritative SVG states at applicable sizes and responsive widths, document tolerances/source limitations, and verify snapshots are component-focused rather than page-level proxies.
+- [x] 7.1 Add exhaustive Showcase fixtures for every authoritative size/state plus single/range, constraints, invalid input, one/two-month, narrow, long-label, and locale stress; verify the occurrence guard classifies them as executable fixtures.
+- [x] 7.2 Add at least one application-owned consumer flow using only public APIs for native form submission and both input/calendar interaction; verify focused runtime tests exercise the integration rather than fixture-only markup.
+- [x] 7.3 Run automated accessibility checks and a manual keyboard/focus/state walk for standalone Calendar and Date Picker, record exact outcomes and limitations, and verify no scope-local violation remains unresolved.
+- [x] 7.4 Capture focused visual evidence against the authoritative SVG states at applicable sizes and responsive widths, document tolerances/source limitations, and verify snapshots are component-focused rather than page-level proxies.
 
 ## 8. Documentation, audit, and delivery
 
-- [ ] 8.1 Publish Date Field, Calendar, and Date Picker usage/reference documentation with contracts, accessibility, constraints, localization, form integration, examples, non-goals, and framework-adapter boundary; verify documentation links and examples pass repository checks.
-- [ ] 8.2 Update the machine-readable audit manifest and related inventory/reporting with exact occurrence counts, evidence, consumer coverage, and separate completion status for each module; verify the audit validator leaves no unclassified or unexplained implementation.
-- [ ] 8.3 Run the proportionate unit, structural, source-integrity, build/type, browser runtime, accessibility, visual, responsive/content-stress, consumer, and regression suites; record exact commands, results, CI status, limitations, and unresolved review threads.
+- [x] 8.1 Publish Date Field, Calendar, and Date Picker usage/reference documentation with contracts, accessibility, constraints, localization, form integration, examples, non-goals, and framework-adapter boundary; verify documentation links and examples pass repository checks.
+- [x] 8.2 Update the machine-readable audit manifest and related inventory/reporting with exact occurrence counts, evidence, consumer coverage, and separate completion status for each module; verify the audit validator leaves no unclassified or unexplained implementation.
+- [x] 8.3 Run the proportionate unit, structural, source-integrity, build/type, browser runtime, accessibility, visual, responsive/content-stress, consumer, and regression suites; record exact commands, results, CI status, limitations, and unresolved review threads.
 - [ ] 8.4 Run post-discovery route conformance, independent review, component completion gates, and delivery guards; reroute any material scope expansion, then commit and push the task branch and open an unmerged PR for the user's merge decision.

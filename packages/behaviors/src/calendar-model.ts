@@ -5,7 +5,9 @@ import {
   daysInMonth,
   getIsoWeekday,
   isIsoDate,
+  monthOfIsoDate,
   parseIsoDate,
+  positiveModulo,
 } from "./date-only.js";
 
 export interface DateRange {
@@ -48,35 +50,42 @@ export interface CalendarSelectionResult {
 }
 
 const MONTH = /^(\d{4})-(\d{2})$/;
-const modulo = (value: number, divisor: number) =>
-  ((value % divisor) + divisor) % divisor;
 
 function requireDate(value: string): void {
-  if (!isIsoDate(value)) throw new TypeError(`${value} is not a valid ISO date`);
+  if (!isIsoDate(value))
+    throw new TypeError(`${value} is not a valid ISO date`);
 }
 
 function requireMonth(value: string): void {
   const match = MONTH.exec(value);
-  if (!match || Number(match[1]) < 1 || Number(match[1]) > 9999 || Number(match[2]) < 1 || Number(match[2]) > 12)
+  if (
+    !match ||
+    Number(match[1]) < 1 ||
+    Number(match[1]) > 9999 ||
+    Number(match[2]) < 1 ||
+    Number(match[2]) > 12
+  )
     throw new TypeError(`${value} is not a valid ISO month`);
 }
 
-function monthOf(value: string): string {
-  return value.slice(0, 7);
-}
-
 function currentMonth(): string {
-  const parts = new Intl.DateTimeFormat("en-CA", { year: "numeric", month: "2-digit" }).formatToParts();
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    year: "numeric",
+    month: "2-digit",
+  }).formatToParts();
   const year = parts.find(({ type }) => type === "year")?.value;
   const month = parts.find(({ type }) => type === "month")?.value;
   return `${year}-${month}`;
 }
 
-export function createCalendarState(options: CreateCalendarOptions): CalendarState {
+export function createCalendarState(
+  options: CreateCalendarOptions,
+): CalendarState {
   if (options.mode === "single") {
     const value = options.value ?? "";
     if (value) requireDate(value);
-    const visibleMonth = options.visibleMonth ?? (value ? monthOf(value) : currentMonth());
+    const visibleMonth =
+      options.visibleMonth ?? (value ? monthOfIsoDate(value) : currentMonth());
     requireMonth(visibleMonth);
     return { mode: "single", value, provisionalStart: null, visibleMonth };
   }
@@ -88,12 +97,17 @@ export function createCalendarState(options: CreateCalendarOptions): CalendarSta
     if (compareIsoDates(value.start, value.end) > 0)
       throw new RangeError("Calendar value must be an ordered range");
   }
-  const visibleMonth = options.visibleMonth ?? (value ? monthOf(value.start) : currentMonth());
+  const visibleMonth =
+    options.visibleMonth ??
+    (value ? monthOfIsoDate(value.start) : currentMonth());
   requireMonth(visibleMonth);
   return { mode: "range", value, provisionalStart: null, visibleMonth };
 }
 
-export function isCalendarDateDisabled(date: string, constraints: CalendarConstraints = {}): boolean {
+export function isCalendarDateDisabled(
+  date: string,
+  constraints: CalendarConstraints = {},
+): boolean {
   requireDate(date);
   if (constraints.min) {
     requireDate(constraints.min);
@@ -117,30 +131,40 @@ export function selectCalendarDate(
 
   if (state.mode === "single")
     return {
-      state: { ...state, value: date, visibleMonth: monthOf(date) },
+      state: { ...state, value: date, visibleMonth: monthOfIsoDate(date) },
       committed: true,
       rejected: false,
     };
 
   if (!state.provisionalStart)
     return {
-      state: { ...state, provisionalStart: date, visibleMonth: monthOf(date) },
+      state: {
+        ...state,
+        provisionalStart: date,
+        visibleMonth: monthOfIsoDate(date),
+      },
       committed: false,
       rejected: false,
     };
 
-  const [start, end] = compareIsoDates(state.provisionalStart, date) <= 0
-    ? [state.provisionalStart, date]
-    : [date, state.provisionalStart];
+  const [start, end] =
+    compareIsoDates(state.provisionalStart, date) <= 0
+      ? [state.provisionalStart, date]
+      : [date, state.provisionalStart];
   return {
-    state: { ...state, value: { start, end }, provisionalStart: null, visibleMonth: monthOf(date) },
+    state: {
+      ...state,
+      value: { start, end },
+      provisionalStart: null,
+      visibleMonth: monthOfIsoDate(date),
+    },
     committed: true,
     rejected: false,
   };
 }
 
 function targetMonth(visibleMonth: string, amount: number): string {
-  return monthOf(addMonths(`${visibleMonth}-01`, amount));
+  return monthOfIsoDate(addMonths(`${visibleMonth}-01`, amount));
 }
 
 export function canNavigateCalendarMonth(
@@ -182,10 +206,13 @@ export function getCalendarConstraintMismatch(
   constraints: CalendarConstraints = {},
 ): boolean {
   if (state.mode === "single")
-    return state.value !== "" && isCalendarDateDisabled(state.value, constraints);
-  return state.value !== null && (
-    isCalendarDateDisabled(state.value.start, constraints)
-    || isCalendarDateDisabled(state.value.end, constraints)
+    return (
+      state.value !== "" && isCalendarDateDisabled(state.value, constraints)
+    );
+  return (
+    state.value !== null &&
+    (isCalendarDateDisabled(state.value.start, constraints) ||
+      isCalendarDateDisabled(state.value.end, constraints))
   );
 }
 
@@ -232,26 +259,46 @@ export function moveCalendarFocus(
   let direction: -1 | 1;
   let maximumSteps = 3660;
   switch (command) {
-    case "ArrowLeft": target = addDays(current, -1); direction = -1; break;
-    case "ArrowRight": target = addDays(current, 1); direction = 1; break;
-    case "ArrowUp": target = addDays(current, -7); direction = -1; break;
-    case "ArrowDown": target = addDays(current, 7); direction = 1; break;
-    case "PageUp": target = addMonths(current, -1); direction = -1; break;
-    case "PageDown": target = addMonths(current, 1); direction = 1; break;
+    case "ArrowLeft":
+      target = addDays(current, -1);
+      direction = -1;
+      break;
+    case "ArrowRight":
+      target = addDays(current, 1);
+      direction = 1;
+      break;
+    case "ArrowUp":
+      target = addDays(current, -7);
+      direction = -1;
+      break;
+    case "ArrowDown":
+      target = addDays(current, 7);
+      direction = 1;
+      break;
+    case "PageUp":
+      target = addMonths(current, -1);
+      direction = -1;
+      break;
+    case "PageDown":
+      target = addMonths(current, 1);
+      direction = 1;
+      break;
     case "Home": {
-      const offset = modulo(getIsoWeekday(current) - firstDay, 7);
+      const offset = positiveModulo(getIsoWeekday(current) - firstDay, 7);
       target = addDays(current, -offset);
       direction = 1;
       maximumSteps = 6;
       break;
     }
     case "End": {
-      const offset = modulo(firstDay + 6 - getIsoWeekday(current), 7);
+      const offset = positiveModulo(firstDay + 6 - getIsoWeekday(current), 7);
       target = addDays(current, offset);
       direction = -1;
       maximumSteps = 6;
       break;
     }
   }
-  return findEnabledDate(target, direction, constraints, maximumSteps) ?? current;
+  return (
+    findEnabledDate(target, direction, constraints, maximumSteps) ?? current
+  );
 }

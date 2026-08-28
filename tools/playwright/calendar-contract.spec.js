@@ -30,9 +30,11 @@ test("Calendar exposes localized grid, month, and date states", async ({
     calendar.getByRole("button", { name: /12 августа 2026/ }),
   ).toHaveAttribute("data-range-position", "start");
   await expect(
-    calendar.getByRole("button", {
-      name: /12 августа 2026.*начало диапазона/,
-    }),
+    calendar
+      .getByRole("button", {
+        name: /12 августа 2026.*начало диапазона/,
+      })
+      .locator(".."),
   ).toHaveAttribute("aria-selected", "true");
   await expect(
     calendar.getByRole("button", { name: /13 августа 2026/ }),
@@ -132,7 +134,7 @@ test("Calendar source states have observable surface and cell styling", async ({
   await expect(end).toHaveCSS("background-color", "rgb(37, 61, 152)");
   await expect(today).toHaveCSS("color", "rgb(37, 61, 152)");
   await expect(disabled).toHaveCSS("cursor", "not-allowed");
-  await expect(outside).toHaveCSS("opacity", "0.25");
+  await expect(outside).toHaveCSS("opacity", "0.65");
 
   await today.hover();
   await expect(today).toHaveCSS("background-color", "rgb(245, 245, 245)");

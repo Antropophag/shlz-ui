@@ -1792,29 +1792,52 @@
       }
     },
     {
-      "tests": ["tools/playwright/interaction-evidence-wave6.spec.js"],
+      "tests": [
+        "tools/playwright/calendar-contract.spec.js",
+        "tools/playwright/date-field-contract.spec.js",
+        "tools/playwright/date-picker-contract.spec.js",
+        "tools/playwright/date-picker-accessibility.spec.js",
+        "tools/playwright/date-picker-visual.spec.js",
+        "tools/playwright/date-picker-showcase.spec.js",
+        "tools/playwright/date-picker-consumer.spec.js"
+      ],
       "evidence": {
         "source-integrity": "pass: raw Date-Picker and Calendar sources are indexed and unchanged",
-        "structural-contract": "not-applicable: census found no production implementation, docs or native substitute",
-        "runtime-browser": "not-applicable: source-only family exposes no behavior or API",
-        "accessibility": "not-applicable: no production semantic or keyboard model is claimed",
-        "focused-visual": "not-applicable: source-only sheets are not production fidelity fixtures",
-        "consumer-integration": "not-applicable: repository contains no consumer implementation",
-        "responsive-content-stress": "not-applicable: locale, viewport and month transition require a future implementation"
+        "structural-contract": "pass: separate public Date Field, Calendar and Date Picker seams, styles, fixtures, docs and classified occurrences exist",
+        "runtime-browser": "pass: focused Chromium contracts execute editing, navigation, synchronization, selection, dismissal, reset and events",
+        "accessibility": "pass: two WCAG A/AA axe scopes report zero violations and keyboard/focus/state behavior executes",
+        "focused-visual": "pass: all 20 Date Picker variants plus Calendar state and responsive surfaces have component-local snapshots",
+        "consumer-integration": "pass: application-owned native form verifies public-entry typing and Calendar selection through FormData",
+        "responsive-content-stress": "pass: one/two-month, narrow, long-label, invalid, constrained and de-DE fixtures execute"
       },
       "canonical_name": "Date Picker / Calendar",
       "category": "form-controls",
-      "implementation_status": "source-only",
+      "implementation_status": "reusable",
       "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Date-Picker.svg",
         "shlz-design-source/raw/svg/Calendar.svg"
       ],
-      "production_implementation": [],
-      "behavior": [],
-      "docs": ["docs/component-audits/wave-6-report.md"],
-      "executable_fixtures": [],
-      "live_consumers": [],
+      "production_implementation": [
+        "packages/styles/components/date-field.css",
+        "packages/styles/components/calendar.css"
+      ],
+      "behavior": [
+        "packages/behaviors/src/date-field.ts",
+        "packages/behaviors/src/calendar.ts",
+        "packages/behaviors/src/date-picker.ts"
+      ],
+      "docs": [
+        "docs/components/date-picker-calendar.md",
+        "docs/component-audits/date-picker-calendar-contract.md"
+      ],
+      "executable_fixtures": [
+        "tools/fixtures/date-field.html",
+        "tools/fixtures/calendar.html",
+        "tools/fixtures/date-picker.html",
+        "apps/showcase/src/date-picker-showcase.js"
+      ],
+      "live_consumers": ["apps/showcase/src/date-picker-consumer.js"],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
@@ -1828,11 +1851,11 @@
       ],
       "known_findings": [],
       "limitations": [
-        "source-only: reusable Date Picker or Calendar requires a separate scoped API and behavior PR"
+        "Chromium automation does not replace consuming-application assistive-technology coverage"
       ],
       "measured_counts": {
-        "executableShowcase": 0,
-        "liveConsumers": 0,
+        "executableShowcase": 33,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,
         "legacyNative": 0,
@@ -2123,7 +2146,6 @@
   ],
   "unclassifiedSurfaces": [
     "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
-    "Date Picker/Calendar has authoritative source scope but no reusable implementation or executable fixture.",
     "Source-only messaging, history, planner and upload families have not been promoted to reusable APIs.",
     "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
     "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."

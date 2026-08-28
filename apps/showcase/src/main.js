@@ -12,6 +12,14 @@ import {
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
 import {
+  datePickerShowcaseMarkup,
+  enhanceDatePickerShowcase,
+} from "./date-picker-showcase.js";
+import {
+  datePickerConsumerMarkup,
+  enhanceDatePickerConsumer,
+} from "./date-picker-consumer.js";
+import {
   consumerWorkspaceMarkup,
   enhanceConsumerWorkspace,
 } from "./consumer-workspace.js";
@@ -154,6 +162,7 @@ const navigationGroups = [
       ["dropdown", "Dropdown"],
       ["file-row", "File Row"],
       ["empty-state", "Empty State"],
+      ["date-picker-demo", "Date Picker"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -259,6 +268,8 @@ app.innerHTML = `<header class="shlz-hero"><div class="shlz-hero__intro"><p>SHLZ
 ${primaryComponentMarkup}
 ${wave3Markup(showcaseIconUrl)}
 ${contentStatesMarkup(showcaseIconUrl, sourceReferenceUrl)}
+${datePickerShowcaseMarkup}
+${datePickerConsumerMarkup}
 <article id="dropdown-demo"><h3>Dropdown</h3><p>Menu-only family, separate from migrated Select: 200/216px surfaces composed from extracted Menu item variants.</p><section><h4>Default and search</h4><div class="shlz-cluster"><div class="shlz-dropdown" data-shlz-dropdown data-component-audit-id="dropdown-showcase-actions"><button class="shlz-button shlz-dropdown__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="showcase-actions">Действия</button><div class="shlz-dropdown__menu" id="showcase-actions" role="menu" hidden><button class="shlz-dropdown__item" type="button" role="menuitem"><span class="shlz-dropdown__icon" aria-hidden="true"><img src="${showcaseIconUrl("user")}" alt=""></span>Создать</button><button class="shlz-dropdown__item" type="button" role="menuitem" aria-current="true"><span class="shlz-dropdown__icon" aria-hidden="true"><img src="${showcaseIconUrl("checkmark")}" alt=""></span>Selected</button><button class="shlz-dropdown__item shlz-dropdown__item--visual-highlight" type="button" role="menuitem">Hover</button><button class="shlz-dropdown__item" type="button" role="menuitem" disabled>Недоступно</button><button class="shlz-dropdown__item" type="button" role="menuitem">Длинный пункт меню для проверки ширины</button></div></div><div class="shlz-dropdown" data-shlz-dropdown data-component-audit-id="dropdown-showcase-search"><button class="shlz-button shlz-button--primary shlz-dropdown__trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="showcase-search-actions">Поиск</button><div class="shlz-dropdown__menu" id="showcase-search-actions" role="menu" hidden><input class="shlz-dropdown__search" aria-label="Поиск в меню" placeholder="Поиск"><button class="shlz-dropdown__item" type="button" role="menuitem">Результат 1</button><button class="shlz-dropdown__item" type="button" role="menuitem">Результат 2</button></div></div></div></section><details class="shlz-component-diagnostics"><summary>Source &amp; fidelity details</summary><div class="shlz-component-diagnostics__content"><p><span class="shlz-fidelity-rating shlz-fidelity-rating--high">HIGH</span> Menu item 16/16; Dropdown 10/10; dropdown-btns 2/2.</p><p>Menu item axes: Type Text/Switch/Checkbox/Status/Avatar and State Default/Hover/Selected/Default red. Menus cover item counts 2–8, source-spelled Srollbar, Status and Search. Trigger variants are Default/Search at 200×36. Select <code>36:1106</code> is explicitly excluded.</p><details class="shlz-source-inventory"><summary>Complete source inventory</summary><div><p><code>43:769</code>: 16 rows, normally 200×40; Switch rows 180×35. <code>45:1204</code>: 10 menus, 200/216px wide and 100–352px high. <code>110:15065</code>: 2 triggers. No extraction warnings.</p></div></details></div></details></article>
 <article id="popover-demo"><h3>Popover</h3><p><code>Popover.svg</code> · <span class="shlz-evidence" data-kind="FACT">FACT · 236×90, radius 12, four sides</span> <span class="shlz-evidence" data-kind="DECISION">DECISION · 8px offset, flip/shift</span></p><div class="shlz-popover-lab">
 <div><button class="shlz-button" type="button" aria-expanded="false" aria-controls="popover-bottom" data-shlz-popover-trigger="popover-bottom" data-shlz-popover-placement="bottom">Bottom</button><div class="shlz-popover" id="popover-bottom" data-shlz-popover data-component-audit-id="popover-showcase-bottom" hidden><span class="shlz-popover__arrow" aria-hidden="true"></span><div class="shlz-popover__header" id="popover-bottom-title">Заголовок</div><div class="shlz-popover__body">Длинный content переносится, не меняя публичный контракт.</div></div></div>
@@ -511,6 +522,8 @@ window.__shlzEnhanceTooltips = enhanceTooltips;
 window.__shlzEnhanceTabs = enhanceTabs;
 window.__shlzTabsControllers = enhanceTabs();
 window.__shlzConsumerWorkspace = enhanceConsumerWorkspace();
+window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
+window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 

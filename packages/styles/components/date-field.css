@@ -9,10 +9,21 @@
 }
 
 .shlz-date-field__label,
-.shlz-date-field__description,
+.shlz-date-field__description {
+  min-block-size: 15px;
+
+  /* DECISION: source gray-200 is 2.78:1 on white; keep the secondary
+     hierarchy with opacity while meeting WCAG AA for normal text. */
+  color: var(--shlz-semantic-color-text-primary);
+  opacity: 0.65;
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  font-weight: var(--shlz-semantic-typography-weight-regular);
+  line-height: 15px;
+}
+
 .shlz-date-field__error {
   min-block-size: 15px;
-  color: var(--shlz-source-color-gray-gray-200);
+  color: var(--shlz-source-color-aditional-red-100);
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   font-weight: var(--shlz-semantic-typography-weight-regular);
   line-height: 15px;
@@ -96,8 +107,4 @@
 
 .shlz-date-field :is(:disabled, [readonly]) {
   cursor: not-allowed;
-}
-
-.shlz-date-field__error {
-  color: var(--shlz-source-color-aditional-red-100);
 }

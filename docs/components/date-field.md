@@ -2,7 +2,7 @@
 
 ## Status
 
-`Executable behavior / visual layer in progress`. Date Field is the editable,
+`Executable / completion gate pending`. Date Field is the editable,
 form-integrated part of the Date Picker family. It does not open or own a
 Calendar; composition arrives through the separate Date Picker contract.
 

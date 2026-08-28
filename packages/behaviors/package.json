@@ -46,6 +46,10 @@
       "types": "./dist/date-field.d.ts",
       "import": "./dist/date-field.js"
     },
+    "./date-picker": {
+      "types": "./dist/date-picker.d.ts",
+      "import": "./dist/date-picker.js"
+    },
     "./browser": {
       "types": "./dist/index.d.ts",
       "import": "./dist/browser.js"

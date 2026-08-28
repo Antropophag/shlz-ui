@@ -18,6 +18,17 @@
   inline-size: 560px;
 }
 
+.shlz-date-picker__popover {
+  /* DECISION: Date Picker adapts the shared 236px Popover shell to the
+     authoritative one-month Calendar surface without changing Popover. */
+  inline-size: min(280px, calc(100vw - var(--shlz-source-spacing-16)));
+}
+
+.shlz-date-picker__popover:has(.shlz-calendar--two-months) {
+  /* FACT: the explicit two-month Picker-Dropdown composition is 560px. */
+  inline-size: min(560px, calc(100vw - var(--shlz-source-spacing-16)));
+}
+
 .shlz-calendar__months {
   display: flex;
 }
@@ -113,7 +124,11 @@
   display: grid;
   block-size: 30px;
   place-items: center;
-  color: var(--shlz-source-color-gray-gray-200);
+
+  /* DECISION: source gray-200 is 2.78:1 on white; preserve hierarchy with
+     primary text at reduced opacity while meeting the 4.5:1 text minimum. */
+  color: var(--shlz-semantic-color-text-primary);
+  opacity: 0.65;
   font-size: 12px;
   line-height: 15px;
   text-transform: capitalize;
@@ -142,10 +157,12 @@
 }
 
 .shlz-calendar__day[data-in-month="false"] {
-  opacity: 0.25;
+  /* DECISION: the source's 25% outside-month treatment is not legible at the
+     exported size; this remains subordinate while meeting text contrast. */
+  opacity: 0.65;
 }
 
-.shlz-calendar__day[aria-current="date"]:not([aria-selected="true"]) {
+.shlz-calendar__day[aria-current="date"]:not([data-selected="true"]) {
   /* FACT: Today uses blue-200 text when it is not selected. */
   color: var(--shlz-source-color-blue-blue-200);
 }
@@ -155,18 +172,22 @@
   border-radius: 0;
 }
 
-.shlz-calendar__day[aria-selected="true"]:is(
+.shlz-calendar
+  [role="gridcell"][aria-selected="true"]
+  .shlz-calendar__day:is(
     [data-range-position="start"],
     [data-range-position="end"]
   ),
-.shlz-calendar__day[aria-selected="true"]:not([data-in-range="true"]) {
+.shlz-calendar
+  [role="gridcell"][aria-selected="true"]
+  .shlz-calendar__day:not([data-in-range="true"]) {
   color: var(--shlz-semantic-color-text-inverse);
   background: var(--shlz-source-color-blue-blue-200);
   border-radius: 50%;
 }
 
-.shlz-calendar__day:hover:not(:disabled, [aria-selected="true"]),
-.shlz-calendar__day:focus-visible:not([aria-selected="true"]) {
+.shlz-calendar__day:hover:not(:disabled, [data-selected="true"]),
+.shlz-calendar__day:focus-visible:not([data-selected="true"]) {
   /* FACT: Picker-Cell/Month Hovered uses gray-50. */
   background: var(--shlz-source-color-gray-gray-50);
 }

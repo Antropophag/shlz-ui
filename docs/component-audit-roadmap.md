@@ -82,7 +82,7 @@ Audit dispositions remain recorded in the inventory and reports, but do not cons
 
 ## Promoted capability — Date Picker / Calendar
 
-Date Picker / Calendar is the first explicitly promoted capability after the source-only audit waves. Its authoritative visual sources are `Date-Picker.svg` and `Calendar.svg`; its current inventory disposition remains `source-only` until an independently verified production implementation passes the component completion gate. This entry authorizes requirements and OpenSpec planning only. Implementation requires a synthesized contract, explicit authorization, and the normal product-execution receipt chain.
+Date Picker / Calendar is the first explicitly promoted capability after the source-only audit waves. Its authoritative visual sources are `Date-Picker.svg` and `Calendar.svg`. The independently verified production implementation is recorded as `reusable` / `VERIFIED` in the project inventory after passing the component completion gate under `add-date-picker-calendar`.
 
 The intended family has three independently testable modules behind small interfaces:
 
@@ -94,15 +94,15 @@ The durable work sequence is:
 
 1. **Complete:** resolve the product contract: selection modes, date-only value model, locale/formatting, manual input and validation, constraints, closing/confirmation behavior, and one/two-month responsive policy. The user-confirmed contract is recorded in requirements state.
 2. **Complete:** synthesize and validate the OpenSpec proposal, behavioral specs, design, and executable tasks. `add-date-picker-calendar` is ready for implementation review.
-3. **Pending:** re-attest `Date-Picker.svg`, `Calendar.svg`, Picker Dropdown, and Picker Cell source facts without modifying `shlz-design-source/`.
-4. **Pending:** define the framework-neutral public interfaces and ownership seams for Date Field, Calendar, and Date Picker.
-5. **Pending:** implement source-backed CSS for fields, calendar surface/header/grid/cells, range paint, navigation, sizes, and narrow layouts.
-6. **Pending:** implement Calendar month arithmetic, navigation, selection, range, today, and date constraints.
-7. **Pending:** implement and prove the keyboard, focus, naming, announcement, disabled, and dismissal accessibility contract.
-8. **Pending:** compose Date Picker with Popover, manual input, parsing/formatting, form events/reset, and viewport-edge positioning.
-9. **Pending:** add exhaustive Showcase fixtures and at least one real application-owned consumer flow.
-10. **Pending:** add unit, structural, runtime-browser, accessibility, focused-visual, responsive/content-stress, consumer, and source-integrity evidence.
-11. **Pending:** publish component documentation and reconcile the audit manifest, occurrence census, and project inventory.
+3. **Complete:** re-attest `Date-Picker.svg`, `Calendar.svg`, Picker Dropdown, and Picker Cell source facts without modifying `shlz-design-source/`.
+4. **Complete:** define the framework-neutral public interfaces and ownership seams for Date Field, Calendar, and Date Picker.
+5. **Complete:** implement source-backed CSS for fields, calendar surface/header/grid/cells, range paint, navigation, sizes, and narrow layouts.
+6. **Complete:** implement Calendar month arithmetic, navigation, selection, range, today, and date constraints.
+7. **Complete:** implement and prove the keyboard, focus, naming, announcement, disabled, and dismissal accessibility contract.
+8. **Complete:** compose Date Picker with Popover, manual input, parsing/formatting, form events/reset, and viewport-edge positioning.
+9. **Complete:** add exhaustive Showcase fixtures and at least one real application-owned consumer flow.
+10. **Complete:** add unit, structural, runtime-browser, accessibility, focused-visual, responsive/content-stress, consumer, and source-integrity evidence.
+11. **Complete:** publish component documentation and reconcile the audit manifest, occurrence census, and project inventory.
 12. **Pending:** run the completion gate, manual state walk, review, conformance, CI, and unmerged-PR delivery.
 
 Initial non-goals unless step 1 explicitly promotes them are date-time selection, timezone conversion, recurrence, week numbers, presets, natural-language parsing, and application-specific scheduling rules. Vue or other framework adapters follow the framework-neutral contract and cannot become the foundation of the family.

@@ -25,8 +25,10 @@ const ISO_DATE = /^(\d{4})-(\d{2})-(\d{2})$/;
 const MIN_YEAR = 1;
 const MAX_YEAR = 9999;
 
-const modulo = (value: number, divisor: number) =>
+export const positiveModulo = (value: number, divisor: number) =>
   ((value % divisor) + divisor) % divisor;
+
+export const monthOfIsoDate = (value: string) => value.slice(0, 7);
 
 export function isLeapYear(year: number): boolean {
   return year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0);
@@ -44,10 +46,21 @@ export function daysInMonth(year: number, month: number): number {
 export function parseIsoDate(value: string): PlainDate | null {
   const match = ISO_DATE.exec(value);
   if (!match) return null;
-  const date = { year: Number(match[1]), month: Number(match[2]), day: Number(match[3]) };
-  if (date.year < MIN_YEAR || date.year > MAX_YEAR || date.month < 1 || date.month > 12)
+  const date = {
+    year: Number(match[1]),
+    month: Number(match[2]),
+    day: Number(match[3]),
+  };
+  if (
+    date.year < MIN_YEAR ||
+    date.year > MAX_YEAR ||
+    date.month < 1 ||
+    date.month > 12
+  )
     return null;
-  return date.day >= 1 && date.day <= daysInMonth(date.year, date.month) ? date : null;
+  return date.day >= 1 && date.day <= daysInMonth(date.year, date.month)
+    ? date
+    : null;
 }
 
 export function isIsoDate(value: string): boolean {
@@ -74,7 +87,11 @@ function toEpochDay({ year, month, day }: PlainDate): number {
   const yearOfEra = adjustedYear - era * 400;
   const monthPrime = month + (month > 2 ? -3 : 9);
   const dayOfYear = Math.floor((153 * monthPrime + 2) / 5) + day - 1;
-  const dayOfEra = yearOfEra * 365 + Math.floor(yearOfEra / 4) - Math.floor(yearOfEra / 100) + dayOfYear;
+  const dayOfEra =
+    yearOfEra * 365 +
+    Math.floor(yearOfEra / 4) -
+    Math.floor(yearOfEra / 100) +
+    dayOfYear;
   return era * 146097 + dayOfEra - 719468;
 }
 
@@ -82,9 +99,17 @@ function fromEpochDay(epochDay: number): PlainDate {
   const shifted = epochDay + 719468;
   const era = Math.floor(shifted / 146097);
   const dayOfEra = shifted - era * 146097;
-  const yearOfEra = Math.floor((dayOfEra - Math.floor(dayOfEra / 1460) + Math.floor(dayOfEra / 36524) - Math.floor(dayOfEra / 146096)) / 365);
+  const yearOfEra = Math.floor(
+    (dayOfEra -
+      Math.floor(dayOfEra / 1460) +
+      Math.floor(dayOfEra / 36524) -
+      Math.floor(dayOfEra / 146096)) /
+      365,
+  );
   let year = yearOfEra + era * 400;
-  const dayOfYear = dayOfEra - (365 * yearOfEra + Math.floor(yearOfEra / 4) - Math.floor(yearOfEra / 100));
+  const dayOfYear =
+    dayOfEra -
+    (365 * yearOfEra + Math.floor(yearOfEra / 4) - Math.floor(yearOfEra / 100));
   const monthPrime = Math.floor((5 * dayOfYear + 2) / 153);
   const day = dayOfYear - Math.floor((153 * monthPrime + 2) / 5) + 1;
   const month = monthPrime + (monthPrime < 10 ? 3 : -9);
@@ -99,30 +124,42 @@ export function compareIsoDates(left: string, right: string): -1 | 0 | 1 {
 }
 
 export function addDays(value: string, amount: number): string {
-  if (!Number.isInteger(amount)) throw new TypeError("Day amount must be an integer");
-  return formatIsoDate(fromEpochDay(toEpochDay(requireIsoDate(value)) + amount));
+  if (!Number.isInteger(amount))
+    throw new TypeError("Day amount must be an integer");
+  return formatIsoDate(
+    fromEpochDay(toEpochDay(requireIsoDate(value)) + amount),
+  );
 }
 
 export function addMonths(value: string, amount: number): string {
-  if (!Number.isInteger(amount)) throw new TypeError("Month amount must be an integer");
+  if (!Number.isInteger(amount))
+    throw new TypeError("Month amount must be an integer");
   const date = requireIsoDate(value);
   const monthIndex = date.year * 12 + date.month - 1 + amount;
   const year = Math.floor(monthIndex / 12);
-  const month = modulo(monthIndex, 12) + 1;
+  const month = positiveModulo(monthIndex, 12) + 1;
   if (year < MIN_YEAR || year > MAX_YEAR)
     throw new RangeError("Result is outside the supported date range");
-  return formatIsoDate({ year, month, day: Math.min(date.day, daysInMonth(year, month)) });
+  return formatIsoDate({
+    year,
+    month,
+    day: Math.min(date.day, daysInMonth(year, month)),
+  });
 }
 
 export function getIsoWeekday(value: string): number {
-  return modulo(toEpochDay(requireIsoDate(value)) + 3, 7) + 1;
+  return positiveModulo(toEpochDay(requireIsoDate(value)) + 3, 7) + 1;
 }
 
-export function getMonthMatrix({ year, month, firstDay }: MonthMatrixOptions): MonthCell[] {
+export function getMonthMatrix({
+  year,
+  month,
+  firstDay,
+}: MonthMatrixOptions): MonthCell[] {
   if (!Number.isInteger(firstDay) || firstDay < 1 || firstDay > 7)
     throw new RangeError("First day must be an ISO weekday from 1 to 7");
   const first = formatIsoDate({ year, month, day: 1 });
-  const leadingDays = modulo(getIsoWeekday(first) - firstDay, 7);
+  const leadingDays = positiveModulo(getIsoWeekday(first) - firstDay, 7);
   const start = addDays(first, -leadingDays);
   return Array.from({ length: 42 }, (_, index) => {
     const date = addDays(start, index);
@@ -132,12 +169,20 @@ export function getMonthMatrix({ year, month, firstDay }: MonthMatrixOptions): M
 
 export function getWeekdayOrder(locale: string): number[] {
   const resolved = new Intl.Locale(locale);
-  const weekInfo = (resolved as Intl.Locale & { weekInfo?: { firstDay: number } }).weekInfo;
+  const weekInfo = (
+    resolved as Intl.Locale & { weekInfo?: { firstDay: number } }
+  ).weekInfo;
   const firstDay = weekInfo?.firstDay ?? 1;
-  return Array.from({ length: 7 }, (_, index) => modulo(firstDay - 1 + index, 7) + 1);
+  return Array.from(
+    { length: 7 },
+    (_, index) => positiveModulo(firstDay - 1 + index, 7) + 1,
+  );
 }
 
-export function resolveDateLocale(requested?: string, documentLanguage?: string): string {
+export function resolveDateLocale(
+  requested?: string,
+  documentLanguage?: string,
+): string {
   const candidate = requested?.trim() || documentLanguage?.trim() || "en";
   return new Intl.DateTimeFormat(candidate).resolvedOptions().locale;
 }
@@ -145,7 +190,9 @@ export function resolveDateLocale(requested?: string, documentLanguage?: string)
 function numericDateFormatter(locale: string): Intl.DateTimeFormat {
   const localeInfo = new Intl.Locale(locale);
   if (localeInfo.numberingSystem && localeInfo.numberingSystem !== "latn")
-    throw new RangeError(`Date input supports Latin decimal digits; ${localeInfo.numberingSystem} is not supported`);
+    throw new RangeError(
+      `Date input supports Latin decimal digits; ${localeInfo.numberingSystem} is not supported`,
+    );
   const formatter = new Intl.DateTimeFormat(locale, {
     year: "numeric",
     month: "2-digit",
@@ -164,8 +211,12 @@ function utcDate({ year, month, day }: PlainDate): Date {
   return value;
 }
 
-export function getLocalizedDatePattern(locale: string): LocalizedDatePatternPart[] {
-  const parts = numericDateFormatter(locale).formatToParts(utcDate({ year: 2006, month: 11, day: 22 }));
+export function getLocalizedDatePattern(
+  locale: string,
+): LocalizedDatePatternPart[] {
+  const parts = numericDateFormatter(locale).formatToParts(
+    utcDate({ year: 2006, month: 11, day: 22 }),
+  );
   return parts.map((part) => {
     if (part.type === "day" || part.type === "month")
       return { type: part.type, value: "2-digit" };
@@ -182,18 +233,25 @@ export function formatLocalizedDate(value: string, locale: string): string {
 const escapeRegularExpression = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-export function parseLocalizedDate(value: string, locale: string): string | null {
+export function parseLocalizedDate(
+  value: string,
+  locale: string,
+): string | null {
   const pattern = getLocalizedDatePattern(locale);
   const fields: Array<"day" | "month" | "year"> = [];
-  const expression = pattern.map((part) => {
-    if (part.type === "literal") return escapeRegularExpression(part.value);
-    fields.push(part.type);
-    return part.type === "year" ? "(\\d{4})" : "(\\d{2})";
-  }).join("");
+  const expression = pattern
+    .map((part) => {
+      if (part.type === "literal") return escapeRegularExpression(part.value);
+      fields.push(part.type);
+      return part.type === "year" ? "(\\d{4})" : "(\\d{2})";
+    })
+    .join("");
   const match = new RegExp(`^${expression}$`, "u").exec(value);
   if (!match) return null;
   const values: Partial<Record<"day" | "month" | "year", number>> = {};
-  fields.forEach((field, index) => { values[field] = Number(match[index + 1]); });
+  fields.forEach((field, index) => {
+    values[field] = Number(match[index + 1]);
+  });
   const iso = `${String(values.year).padStart(4, "0")}-${String(values.month).padStart(2, "0")}-${String(values.day).padStart(2, "0")}`;
   return isIsoDate(iso) ? iso : null;
 }

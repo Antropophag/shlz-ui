@@ -20,7 +20,11 @@ const wave6Markup =
 const classifiedFiles = new Set([
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/content-states.js",
+  "apps/showcase/src/date-picker-consumer.js",
+  "apps/showcase/src/date-picker-showcase.js",
   "apps/showcase/src/main.js",
+  "packages/behaviors/src/calendar.ts",
+  "packages/behaviors/src/date-picker.ts",
   "packages/behaviors/src/dropdown.ts",
   "packages/behaviors/src/popover.ts",
   "packages/behaviors/src/tooltip.ts",
