@@ -114,7 +114,7 @@ export function addMonths(value: string, amount: number): string {
   return formatIsoDate({ year, month, day: Math.min(date.day, daysInMonth(year, month)) });
 }
 
-function isoWeekday(value: string): number {
+export function getIsoWeekday(value: string): number {
   return modulo(toEpochDay(requireIsoDate(value)) + 3, 7) + 1;
 }
 
@@ -122,7 +122,7 @@ export function getMonthMatrix({ year, month, firstDay }: MonthMatrixOptions): M
   if (!Number.isInteger(firstDay) || firstDay < 1 || firstDay > 7)
     throw new RangeError("First day must be an ISO weekday from 1 to 7");
   const first = formatIsoDate({ year, month, day: 1 });
-  const leadingDays = modulo(isoWeekday(first) - firstDay, 7);
+  const leadingDays = modulo(getIsoWeekday(first) - firstDay, 7);
   const start = addDays(first, -leadingDays);
   return Array.from({ length: 42 }, (_, index) => {
     const date = addDays(start, index);
