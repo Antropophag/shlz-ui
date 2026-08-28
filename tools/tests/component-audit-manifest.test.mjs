@@ -34,6 +34,7 @@ const manifestPaths = [
   "snackbar",
   "card-compositions",
   "upload-document-compositions",
+  "messaging-history-planner-compositions",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

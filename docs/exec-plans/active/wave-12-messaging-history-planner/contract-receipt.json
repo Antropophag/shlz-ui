@@ -1,0 +1,75 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "5f35fa2bd4d667af99be5a58fd98161a8dc61eb4e0458aed58f8814cb4b71d26",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** the audit records a composition, state, or content claim\n- **THEN** it identifies the responsible source and distinguishes directly observed source facts from derived patterns, repository decisions, and assumptions",
+        "id": "application-compositions/messaging-history-planner-compositions::Authoritative source attribution::Source facts are recorded",
+        "name": "Source facts are recorded",
+        "requirement": "Authoritative source attribution",
+        "requirementContent": "The audit SHALL trace Messaging only to `Messages.svg`, History only to `History of changes.svg`, and Planner only to `Planner.svg`, SHALL classify source claims explicitly, and SHALL leave every authoritative SVG unchanged."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** Wave 12 validation runs\n- **THEN** it verifies the three authoritative files against their recorded integrity values and fails if any has changed",
+        "id": "application-compositions/messaging-history-planner-compositions::Authoritative source attribution::Source integrity is checked",
+        "name": "Source integrity is checked",
+        "requirement": "Authoritative source attribution",
+        "requirementContent": "The audit SHALL trace Messaging only to `Messages.svg`, History only to `History of changes.svg`, and Planner only to `Planner.svg`, SHALL classify source claims explicitly, and SHALL leave every authoritative SVG unchanged."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** each sub-scope has independently complete source, occurrence, evidence, limitation, finding, and disposition records with no blocking finding\n- **THEN** the inventory may record the parent family's bounded audit status as `VERIFIED`",
+        "id": "application-compositions/messaging-history-planner-compositions::Independent sub-scope dispositions::All sub-scopes have bounded dispositions",
+        "name": "All sub-scopes have bounded dispositions",
+        "requirement": "Independent sub-scope dispositions",
+        "requirementContent": "The Wave 12 audit SHALL preserve separate source, occurrence, evidence, limitation, finding, and disposition records for Messaging, History, and Planner, and SHALL mark the parent family `VERIFIED` only when all three records are explicit and complete."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** any one of Messaging, History, or Planner lacks an explicit source, occurrence, evidence, limitation, finding, or disposition record\n- **THEN** the parent family remains incomplete and evidence from either other sub-scope does not satisfy the missing record",
+        "id": "application-compositions/messaging-history-planner-compositions::Independent sub-scope dispositions::One sub-scope lacks a disposition",
+        "name": "One sub-scope lacks a disposition",
+        "requirement": "Independent sub-scope dispositions",
+        "requirementContent": "The Wave 12 audit SHALL preserve separate source, occurrence, evidence, limitation, finding, and disposition records for Messaging, History, and Planner, and SHALL mark the parent family `VERIFIED` only when all three records are explicit and complete."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** a Wave 12 composition includes or resembles an independently verified primitive\n- **THEN** the audit records the dependency boundary while keeping both completion statuses and evidence ledgers independent",
+        "id": "application-compositions/messaging-history-planner-compositions::Nested primitive evidence stays independent::A verified primitive appears in source or repository evidence",
+        "name": "A verified primitive appears in source or repository evidence",
+        "requirement": "Nested primitive evidence stays independent",
+        "requirementContent": "The audit SHALL classify already verified Notification, Snackbar, File Row, Document Row, Avatar, and other nested primitives as dependencies only and SHALL NOT use their status or evidence to certify any Wave 12 sub-scope."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** a repository change introduces a matching Messaging, History, or Planner implementation, export, fixture, consumer, diagnostic, substitute, or alternative not listed by the audit\n- **THEN** focused census validation fails until that surface is classified and the affected disposition is reconciled",
+        "id": "application-compositions/messaging-history-planner-compositions::Repository-wide occurrence classification::A new matching surface appears",
+        "name": "A new matching surface appears",
+        "requirement": "Repository-wide occurrence classification",
+        "requirementContent": "The audit SHALL census repository-local implementations, public exports, executable fixtures, live consumers, diagnostics, native or legacy substitutes, and local alternatives independently for Messaging, History, and Planner, and SHALL fail closed on an unclassified matching surface."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** no higher-level implementation or occurrence exists for a sub-scope\n- **THEN** its ledger records exact zero counts and concrete not-applicable reasons rather than inheriting evidence from source artwork or nested primitives",
+        "id": "application-compositions/messaging-history-planner-compositions::Repository-wide occurrence classification::Current absence is observed",
+        "name": "Current absence is observed",
+        "requirement": "Repository-wide occurrence classification",
+        "requirementContent": "The audit SHALL census repository-local implementations, public exports, executable fixtures, live consumers, diagnostics, native or legacy substitutes, and local alternatives independently for Messaging, History, and Planner, and SHALL fail closed on an unclassified matching surface."
+      },
+      {
+        "capability": "application-compositions/messaging-history-planner-compositions",
+        "content": "- **WHEN** an authoritative SVG visually depicts editing, messaging, scheduling, employees, or attachments but supplies no executable contract\n- **THEN** the audit records the visual fact and the missing runtime semantics without creating a runtime implementation or claiming runtime, accessibility, consumer, or responsive evidence",
+        "id": "application-compositions/messaging-history-planner-compositions::Unsupported application semantics remain excluded::Static artwork depicts an interactive concept",
+        "name": "Static artwork depicts an interactive concept",
+        "requirement": "Unsupported application semantics remain excluded",
+        "requirementContent": "The audit SHALL NOT infer or add editor commands, message delivery or read state, synchronization, chronology, recurrence, scheduling or timezone rules, employee data behavior, attachment lifecycle, persistence, live-region behavior, or a generic public domain API from static source exports."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "4b9ab93b8514de7469d56d3886a103179bb4b8a6d6572b2c97d2b83be9b12438"
+}

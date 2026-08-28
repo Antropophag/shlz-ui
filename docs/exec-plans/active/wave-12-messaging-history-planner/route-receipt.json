@@ -1,0 +1,54 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Complete roadmap Wave 12 by independently auditing the source-only Messaging / History / Planner family against Messages.svg, History of changes.svg, and Planner.svg without inventing application runtime semantics.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "wave-12-messaging-history-planner",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "independent-subscope-dispositions",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "runtime-contract-boundary",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": [],
+    "wave": {
+      "evidenceKind": "audit",
+      "evidenceRisk": {
+        "independentReview": false,
+        "testFirst": false
+      },
+      "executionPath": "bounded-evidence",
+      "expectedProductionDelta": null,
+      "heavyExecution": false,
+      "number": 12,
+      "roadmapAdvance": false,
+      "workKind": "audit"
+    }
+  },
+  "version": 1,
+  "digest": "767b322d2424fcc5f646686fd0ec1883805424034da4ce7e489a17678529c957"
+}

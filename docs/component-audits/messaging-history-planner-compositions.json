@@ -1,0 +1,342 @@
+{
+  "schemaVersion": 2,
+  "component": "messaging-history-planner-compositions",
+  "authoritativeSource": null,
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Messages.svg",
+    "shlz-design-source/raw/svg/History of changes.svg",
+    "shlz-design-source/raw/svg/Planner.svg",
+    "docs/component-audit-roadmap.md"
+  ],
+  "implementation": [],
+  "behavior": null,
+  "docs": "docs/component-audits/wave-12-report.md",
+  "rootSelector": "[data-component-audit-id^='messaging-history-planner-']",
+  "legacySelectors": [
+    ".shlz-messaging",
+    ".shlz-message-thread",
+    ".shlz-change-history",
+    ".shlz-history-of-changes",
+    ".shlz-planner",
+    ".shlz-event-planner",
+    "[data-shlz-messaging]",
+    "[data-shlz-messages]",
+    "[data-shlz-message-thread]",
+    "[data-shlz-change-history]",
+    "[data-shlz-history-of-changes]",
+    "[data-shlz-audit-history]",
+    "[data-shlz-planner]",
+    "[data-shlz-event-planner]",
+    "[data-shlz-schedule-planner]",
+    "shlz-messaging",
+    "shlz-messages",
+    "shlz-message-thread",
+    "shlz-change-history",
+    "shlz-history-of-changes",
+    "shlz-audit-history",
+    "shlz-planner",
+    "shlz-event-planner",
+    "shlz-schedule-planner"
+  ],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [],
+  "subscopes": {
+    "messaging": {
+      "authority": {
+        "source": "shlz-design-source/raw/svg/Messages.svg",
+        "hash": "b61167bf011d15e5956d409d6746b5440cf4417522f1f14d6d27084bfb4b5357",
+        "canvas": { "width": 1504, "height": 7405 },
+        "frames": [
+          { "x": "80.5", "y": "778.5", "width": "1279", "height": "1383" },
+          { "x": "80.5", "y": "2228.5", "width": "711", "height": "172" },
+          { "x": "80.5", "y": "2564.5", "width": "462", "height": "130" },
+          { "x": "80.5", "y": "2886.5", "width": "1343", "height": "2055" },
+          { "x": "80.5", "y": "5008.5", "width": "1179", "height": "2316" }
+        ],
+        "observed": [
+          "five blue dashed composition frames",
+          "five embedded raster images",
+          "static message, editor, employee and attachment artwork"
+        ]
+      },
+      "occurrences": [],
+      "evidence": {
+        "source-integrity": "pass: Messages.svg hash, 1504 by 7405 canvas, and five dashed frames are locked",
+        "structural-contract": "pass: repository census finds zero higher-level Messaging implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
+        "runtime-browser": "not-applicable: no executable message thread, editor controller, delivery state, synchronization model, or public API exists",
+        "accessibility": "not-applicable: static artwork establishes no focus, keyboard, naming, or announcement contract",
+        "focused-visual": "not-applicable: no implemented Messaging composition exists for comparison",
+        "consumer-integration": "not-applicable: no live higher-level Messaging consumer exists",
+        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic message-content contract"
+      },
+      "limitations": [
+        "delivery, read state, synchronization, editor commands, attachment lifecycle, persistence, and live announcements are unsupported"
+      ],
+      "findings": [],
+      "disposition": "VERIFIED",
+      "primitiveBoundary": "Avatar, File Row, Document Row, Notification, and Snackbar remain independent dependencies and do not certify Messaging"
+    },
+    "history": {
+      "authority": {
+        "source": "shlz-design-source/raw/svg/History of changes.svg",
+        "hash": "83d8c9ab89fa7c3677ed6d4105a150f55676bcf732160892b06773d6d4ac0e76",
+        "canvas": { "width": 873, "height": 1558 },
+        "frames": [
+          { "x": "80.5", "y": "480.5", "width": "463", "height": "997" }
+        ],
+        "observed": [
+          "one blue dashed composition frame",
+          "one embedded raster image",
+          "static history-content artwork"
+        ]
+      },
+      "occurrences": [],
+      "evidence": {
+        "source-integrity": "pass: History of changes.svg hash, 873 by 1558 canvas, and one dashed frame are locked",
+        "structural-contract": "pass: repository census finds zero higher-level History implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
+        "runtime-browser": "not-applicable: no executable chronology, audit-log controller, persistence model, or public API exists",
+        "accessibility": "not-applicable: static artwork establishes no semantic list, focus, keyboard, or announcement contract",
+        "focused-visual": "not-applicable: no implemented History composition exists for comparison",
+        "consumer-integration": "not-applicable: no live higher-level History consumer exists",
+        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic chronology contract"
+      },
+      "limitations": [
+        "chronology rules, audit semantics, persistence, ordering, filtering, and live updates are unsupported"
+      ],
+      "findings": [],
+      "disposition": "VERIFIED",
+      "primitiveBoundary": "Avatar and other verified primitives remain independent dependencies and do not certify History"
+    },
+    "planner": {
+      "authority": {
+        "source": "shlz-design-source/raw/svg/Planner.svg",
+        "hash": "3f23135cbccf6cd8d1054feef90990d94ec647d8ef12de091ee6b76a022f2ed7",
+        "canvas": { "width": 3646, "height": 6729 },
+        "frames": [
+          { "x": "186.5", "y": "593.5", "width": "2468", "height": "365" },
+          { "x": "186.5", "y": "1049.5", "width": "3238", "height": "1422" },
+          { "x": "80.5", "y": "3467.5", "width": "3487", "height": "1010" },
+          { "x": "80.5", "y": "4706.5", "width": "394", "height": "62" },
+          { "x": "80.5", "y": "4859.5", "width": "355", "height": "69" },
+          { "x": "80.5", "y": "5019.5", "width": "1336", "height": "163" },
+          { "x": "80.5", "y": "6413.57", "width": "279", "height": "135" }
+        ],
+        "observed": [
+          "seven blue dashed composition frames",
+          "five embedded raster images",
+          "static employee, event, planner and attachment artwork"
+        ]
+      },
+      "occurrences": [],
+      "evidence": {
+        "source-integrity": "pass: Planner.svg hash, 3646 by 6729 canvas, and seven dashed frames are locked",
+        "structural-contract": "pass: repository census finds zero higher-level Planner implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
+        "runtime-browser": "not-applicable: no executable scheduling, recurrence, timezone, event controller, or public API exists",
+        "accessibility": "not-applicable: static artwork establishes no grid semantics, focus, keyboard, naming, or announcement contract",
+        "focused-visual": "not-applicable: no implemented Planner composition exists for comparison",
+        "consumer-integration": "not-applicable: no live higher-level Planner consumer exists",
+        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic schedule contract"
+      },
+      "limitations": [
+        "scheduling, recurrence, timezone rules, employee data, event behavior, attachment lifecycle, and persistence are unsupported"
+      ],
+      "findings": [],
+      "disposition": "VERIFIED",
+      "primitiveBoundary": "Avatar, File Row, Document Row, Notification, and Snackbar remain independent dependencies and do not certify Planner"
+    }
+  },
+  "primitiveDependencies": [
+    {
+      "path": "apps/showcase/src/component-docs.js",
+      "classification": "verified-primitive-documentation-fixture"
+    },
+    {
+      "path": "apps/showcase/src/content-states.js",
+      "classification": "verified-primitive-content-fixture"
+    },
+    {
+      "path": "apps/showcase/src/fidelity.js",
+      "classification": "verified-primitive-fidelity-fixture"
+    },
+    {
+      "path": "apps/showcase/src/main.js",
+      "classification": "verified-primitive-showcase-composition"
+    },
+    {
+      "path": "apps/showcase/src/notification-consumer.js",
+      "classification": "verified-notification-consumer"
+    },
+    {
+      "path": "apps/showcase/src/showcase.css",
+      "classification": "verified-primitive-fixture-style"
+    },
+    {
+      "path": "apps/showcase/src/wave3.js",
+      "classification": "verified-avatar-fixture"
+    },
+    {
+      "path": "packages/styles/components/avatar.css",
+      "classification": "avatar-implementation"
+    },
+    {
+      "path": "packages/styles/components/document-row.css",
+      "classification": "document-row-implementation"
+    },
+    {
+      "path": "packages/styles/components/file-row.css",
+      "classification": "file-row-implementation"
+    },
+    {
+      "path": "packages/styles/components/notification.css",
+      "classification": "notification-implementation"
+    },
+    {
+      "path": "tools/fixtures/plain-html.html",
+      "classification": "verified-primitive-consumer-fixture"
+    },
+    {
+      "path": "tools/playwright/components-next.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/content-states.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/data-content-wave5.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/fidelity.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/foundation.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/notification-snackbar-wave8.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/status-identity-wave4.spec.js",
+      "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/tests/component-documentation.test.mjs",
+      "classification": "verified-primitive-structural-test"
+    },
+    {
+      "path": "tools/tests/components.test.mjs",
+      "classification": "verified-primitive-structural-test"
+    },
+    {
+      "path": "tools/tests/content-states.test.mjs",
+      "classification": "verified-primitive-structural-test"
+    },
+    {
+      "path": "tools/tests/wave8-repository-census.test.mjs",
+      "classification": "verified-primitive-census"
+    },
+    {
+      "path": "docs/components/avatar.md",
+      "classification": "avatar-contract"
+    },
+    {
+      "path": "docs/components/document-row.md",
+      "classification": "document-row-contract"
+    },
+    {
+      "path": "docs/components/file-row.md",
+      "classification": "file-row-contract"
+    },
+    {
+      "path": "docs/components/notification.md",
+      "classification": "notification-contract"
+    }
+  ],
+  "terminologyCensus": {
+    "auditEvidencePaths": [
+      "tools/playwright/messaging-history-planner-wave12.spec.js"
+    ],
+    "primitiveDependencyPathCount": 27,
+    "unrelatedTerminologyPathCount": 41,
+    "totalPathCount": 51,
+    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency"
+  },
+  "supportedSizes": ["source-sheets-only"],
+  "supportedStates": ["static-source-specimens-only"],
+  "contentStress": [],
+  "sourceClaims": [
+    {
+      "claim": "Messages.svg is a 1504 by 7405 source sheet with five blue dashed composition frames and five embedded raster images",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Messages.svg"
+    },
+    {
+      "claim": "History of changes.svg is an 873 by 1558 source sheet with one blue dashed composition frame and one embedded raster image",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/History of changes.svg"
+    },
+    {
+      "claim": "Planner.svg is a 3646 by 6729 source sheet with seven blue dashed composition frames and five embedded raster images",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Planner.svg"
+    },
+    {
+      "claim": "the roadmap groups three source-only domains for audit logistics while their authority and dispositions remain independent",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audit-roadmap.md"
+    },
+    {
+      "claim": "bounded VERIFIED means source integrity and current repository absence are proven, not that product functionality exists",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/wave-12-report.md"
+    },
+    {
+      "claim": "static artwork does not establish runtime, data, accessibility, responsive, persistence, chronology, synchronization, or scheduling semantics",
+      "classification": "assumption",
+      "evidence": "docs/component-audits/wave-12-report.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/messaging-history-planner-wave12.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: each sub-scope records and verifies its independent raw SVG hash, canvas, dashed frames, and observed source facts",
+    "structural-contract": "pass: the shared occurrence guard and repository-wide census find zero higher-level roots while mutation tests reject all three domain signatures",
+    "runtime-browser": "not-applicable: none of the three higher-level domains has an executable root, controller, event contract, or public API",
+    "accessibility": "not-applicable: the static source sheets establish no higher-level semantic, focus, keyboard, naming, or announcement contract",
+    "focused-visual": "not-applicable: no implemented higher-level composition or material runtime state exists for source comparison",
+    "consumer-integration": "not-applicable: no live higher-level Messaging, History, or Planner consumer exists",
+    "responsive-content-stress": "not-applicable: the static exports establish no higher-level responsive reflow or dynamic content contract"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: direct source inspection records each independent sheet, its dashed frames, and its primitive boundary without runtime claims"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: no executable higher-level Messaging, History, or Planner composition exists on which a browser can create a real interaction state"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: messaging synchronization, history chronology, planner scheduling, persistence, and attachment behavior are outside the static source contracts"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/messaging-history-planner-wave12.spec.js",
+    "manualStateWalk": "not-applicable: no executable higher-level surface exists; manual review covered all three raw SVG sheets and their independent primitive-boundary ledgers on 2026-08-28"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "VERIFIED is bounded independently to source integrity and repository absence for each sub-scope",
+    "no production Messaging, History, or Planner composition is implemented",
+    "outlined text and raster images do not establish literal copy, semantics, behavior, or reusable screen layout",
+    "nested primitive evidence is not inherited by any Wave 12 sub-scope"
+  ]
+}

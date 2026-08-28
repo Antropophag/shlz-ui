@@ -2012,20 +2012,23 @@
       }
     },
     {
-      "tests": [],
+      "tests": [
+        "tools/tests/wave12-messaging-history-planner-source-census.test.mjs",
+        "tools/playwright/messaging-history-planner-wave12.spec.js"
+      ],
       "evidence": {
-        "source-integrity": "indexed source only",
-        "structural-contract": "gap",
-        "runtime-browser": "gap",
-        "accessibility": "gap",
-        "focused-visual": "gap",
-        "consumer-integration": "gap",
-        "responsive-content-stress": "gap"
+        "source-integrity": "pass: three independent hashes, canvases and dashed-frame ledgers",
+        "structural-contract": "pass: zero higher-level surfaces with fail-closed per-domain mutation probes",
+        "runtime-browser": "not-applicable: no executable higher-level composition or runtime contract exists",
+        "accessibility": "not-applicable: no production semantics or interaction model exists",
+        "focused-visual": "not-applicable: no implemented higher-level composition exists for comparison",
+        "consumer-integration": "not-applicable: no live higher-level consumer exists",
+        "responsive-content-stress": "not-applicable: static artwork supplies no responsive or dynamic-content contract"
       },
       "canonical_name": "Messaging / History / Planner compositions",
       "category": "application-compositions",
       "implementation_status": "source-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Messages.svg",
         "shlz-design-source/raw/svg/History of changes.svg",
@@ -2033,7 +2036,10 @@
       ],
       "production_implementation": [],
       "behavior": [],
-      "docs": [],
+      "docs": [
+        "docs/component-audits/messaging-history-planner-compositions.json",
+        "docs/component-audits/wave-12-report.md"
+      ],
       "executable_fixtures": [],
       "live_consumers": [],
       "data_workspace_consumers": [],
@@ -2049,7 +2055,12 @@
         "attachments"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "VERIFIED is independently bounded to source integrity and repository absence for Messaging, History and Planner; no production composition exists",
+        "nested Avatar, File Row, Document Row, Notification and Snackbar contracts remain independent and do not certify this family",
+        "message delivery, read/sync state, editor commands, chronology, scheduling, recurrence, timezones, employee data, event behavior, attachment lifecycle, persistence and live regions remain unsupported",
+        "outlined text and raster artwork do not establish literal copy, behavior, accessibility semantics or responsive layout"
+      ],
       "measured_counts": {
         "executableShowcase": 0,
         "liveConsumers": 0,
