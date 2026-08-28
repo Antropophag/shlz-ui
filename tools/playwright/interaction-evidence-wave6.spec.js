@@ -648,7 +648,9 @@ test("Calendar and Date Picker remain source-only with an empty runtime ledger",
     "Ranged",
   ]);
   expect(pickerCells.variants).toHaveLength(14);
-  expect(dropdowns.map(({ dimensions }) => dimensions.width)).toEqual([280, 560]);
+  expect(dropdowns.map(({ dimensions }) => dimensions.width)).toEqual([
+    280, 560,
+  ]);
   expect(calendarIcon.dimensions).toEqual({ width: 24, height: 24 });
   expectMaterialStates("date-picker-calendar");
 });

@@ -5,9 +5,17 @@
   "openSpecChange": "add-date-picker-calendar",
   "requiredDecisions": [
     { "id": "selection-scope", "owner": "user", "blocking": true },
-    { "id": "date-value-and-locale-contract", "owner": "user", "blocking": true },
+    {
+      "id": "date-value-and-locale-contract",
+      "owner": "user",
+      "blocking": true
+    },
     { "id": "manual-input-and-constraints", "owner": "user", "blocking": true },
-    { "id": "selection-commit-and-responsive-policy", "owner": "user", "blocking": true },
+    {
+      "id": "selection-commit-and-responsive-policy",
+      "owner": "user",
+      "blocking": true
+    },
     { "id": "module-seams", "owner": "agent", "blocking": true },
     { "id": "source-authority", "owner": "repo", "blocking": true }
   ],

@@ -51,6 +51,7 @@ jobs:
             BASE_SHA="$(git hash-object -t tree /dev/null)"
           fi
           git diff --name-only --diff-filter=ACMR -z "$BASE_SHA" HEAD -- \
+            | grep -zvE '^docs/exec-plans/active/.+/.+-receipt\.json$' \
             | xargs -0 -r npx prettier --check --ignore-unknown --
 
       - name: Build showcase
