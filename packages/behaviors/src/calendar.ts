@@ -11,6 +11,7 @@ import {
   selectCalendarDate,
 } from "./calendar-model.js";
 import {
+  addMonths,
   compareIsoDates,
   getMonthMatrix,
   getWeekdayOrder,
@@ -24,6 +25,7 @@ export type CalendarControllerOptions = CreateCalendarOptions &
     today?: string;
     locale?: string;
     label: string;
+    monthCount?: 1 | 2;
   };
 
 export interface CalendarChangeDetail {
@@ -107,6 +109,7 @@ export class CalendarController {
   readonly constraints: CalendarConstraints;
   readonly label: string;
   readonly today?: string;
+  readonly monthCount: 1 | 2;
   state: CalendarState;
   focusedDate: string;
 
@@ -125,11 +128,12 @@ export class CalendarController {
     };
     this.label = options.label;
     this.today = options.today;
+    this.monthCount = options.monthCount ?? 1;
     this.state = createCalendarState(options);
     this.focusedDate =
       options.focusedDate ??
       (this.state.mode === "single"
-        ? this.state.value
+        ? this.state.value || undefined
         : this.state.value?.start) ??
       `${this.state.visibleMonth}-01`;
     if (isCalendarDateDisabled(this.focusedDate, this.constraints))
@@ -150,24 +154,83 @@ export class CalendarController {
 
   render({ focus = false } = {}): void {
     const document = this.root.ownerDocument;
-    const parsedMonth = parseIsoDate(`${this.state.visibleMonth}-01`);
-    if (!parsedMonth)
-      throw new TypeError("Calendar state contains an invalid visible month");
-    const headingId = `${this.root.id || "shlz-calendar"}-month`;
     this.root.classList.add("shlz-calendar");
+    this.root.classList.toggle(
+      "shlz-calendar--two-months",
+      this.monthCount === 2,
+    );
     this.root.setAttribute("role", "region");
     this.root.setAttribute("aria-label", this.label);
     this.root.replaceChildren();
 
+    const months = Array.from({ length: this.monthCount }, (_, index) =>
+      addMonths(`${this.state.visibleMonth}-01`, index).slice(0, 7),
+    );
+    const monthCells = months.map((month) => {
+      const parsedMonth = parseIsoDate(`${month}-01`);
+      if (!parsedMonth)
+        throw new TypeError("Calendar state contains an invalid visible month");
+      return getMonthMatrix({ ...parsedMonth, firstDay: this.#firstDay() });
+    });
+    const enabled = monthCells
+      .flat()
+      .filter(({ date }) => !isCalendarDateDisabled(date, this.constraints));
+    if (
+      !months.includes(monthOf(this.focusedDate)) ||
+      !enabled.some(({ date }) => date === this.focusedDate)
+    )
+      this.focusedDate =
+        monthCells[0]?.find(
+          ({ date, inMonth }) =>
+            inMonth && !isCalendarDateDisabled(date, this.constraints),
+        )?.date ??
+        enabled[0]?.date ??
+        this.focusedDate;
+
+    const monthsElement = document.createElement("div");
+    monthsElement.className = "shlz-calendar__months";
+    months.forEach((month, index) =>
+      monthsElement.append(this.#month(month, monthCells[index] ?? [], index)),
+    );
+    this.root.append(monthsElement);
+    if (focus)
+      this.root
+        .querySelector<HTMLButtonElement>(
+          `button[data-date="${this.focusedDate}"]`,
+        )
+        ?.focus();
+  }
+
+  #month(
+    month: string,
+    cells: ReturnType<typeof getMonthMatrix>,
+    index: number,
+  ): HTMLElement {
+    const document = this.root.ownerDocument;
+    const panel = document.createElement("div");
+    panel.className = "shlz-calendar__month";
+    const headingId = `${this.root.id || "shlz-calendar"}-month-${index}`;
     const header = document.createElement("div");
     header.className = "shlz-calendar__header";
-    const previous = this.#navigationButton("previous", "Предыдущий месяц", -1);
+    header.append(
+      index === 0
+        ? this.#navigationButton("previous", "Предыдущий месяц", -1)
+        : this.#navigationSpacer(),
+    );
     const heading = document.createElement("h2");
     heading.id = headingId;
     heading.className = "shlz-calendar__title";
-    heading.textContent = monthLabel(this.state.visibleMonth, this.locale);
-    const next = this.#navigationButton("next", "Следующий месяц", 1);
-    header.append(previous, heading, next);
+    heading.textContent = monthLabel(month, this.locale);
+    header.append(heading);
+    if (index === this.monthCount - 1) {
+      header.append(this.#navigationButton("next", "Следующий месяц", 1));
+    } else if (index === 0) {
+      const narrowNext = this.#navigationButton("next", "Следующий месяц", 1);
+      narrowNext.classList.add("shlz-calendar__navigation--narrow");
+      header.append(narrowNext);
+    } else {
+      header.append(this.#navigationSpacer());
+    }
 
     const grid = document.createElement("div");
     grid.className = "shlz-calendar__grid";
@@ -187,33 +250,22 @@ export class CalendarController {
       weekdayRow.append(headerCell);
     }
     grid.append(weekdayRow);
-
-    const cells = getMonthMatrix({
-      ...parsedMonth,
-      firstDay: this.#firstDay(),
-    });
-    const enabled = cells.filter(
-      ({ date }) => !isCalendarDateDisabled(date, this.constraints),
-    );
-    if (!enabled.some(({ date }) => date === this.focusedDate))
-      this.focusedDate =
-        enabled.find(({ inMonth }) => inMonth)?.date ??
-        enabled[0]?.date ??
-        this.focusedDate;
     for (let rowIndex = 0; rowIndex < 6; rowIndex += 1) {
       const row = document.createElement("div");
       row.setAttribute("role", "row");
       for (const cell of cells.slice(rowIndex * 7, rowIndex * 7 + 7))
-        row.append(this.#dateCell(cell.date, cell.inMonth));
+        row.append(this.#dateCell(cell.date, cell.inMonth, month));
       grid.append(row);
     }
-    this.root.append(header, grid);
-    if (focus)
-      this.root
-        .querySelector<HTMLButtonElement>(
-          `button[data-date="${this.focusedDate}"]`,
-        )
-        ?.focus();
+    panel.append(header, grid);
+    return panel;
+  }
+
+  #navigationSpacer(): HTMLElement {
+    const spacer = this.root.ownerDocument.createElement("span");
+    spacer.className = "shlz-calendar__navigation-spacer";
+    spacer.setAttribute("aria-hidden", "true");
+    return spacer;
   }
 
   #firstDay(): number {
@@ -238,7 +290,7 @@ export class CalendarController {
     return button;
   }
 
-  #dateCell(date: string, inMonth: boolean): HTMLElement {
+  #dateCell(date: string, inMonth: boolean, month: string): HTMLElement {
     const document = this.root.ownerDocument;
     const gridcell = document.createElement("div");
     gridcell.setAttribute("role", "gridcell");
@@ -262,7 +314,10 @@ export class CalendarController {
     button.dataset.date = date;
     button.dataset.inMonth = String(inMonth);
     button.disabled = disabled;
-    button.tabIndex = !disabled && date === this.focusedDate ? 0 : -1;
+    button.tabIndex =
+      !disabled && date === this.focusedDate && monthOf(date) === month
+        ? 0
+        : -1;
     button.setAttribute(
       "aria-label",
       [fullDateLabel(date, this.locale), stateLabel].filter(Boolean).join(", "),

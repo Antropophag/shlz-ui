@@ -97,3 +97,13 @@ test("Calendar visual layer records every authoritative cell state", async () =>
   ])
     assert.ok(styles.includes(contract), `missing Calendar state: ${contract}`);
 });
+
+test("Calendar exposes an explicit responsive one/two-month contract", async () => {
+  const [styles, declarations] = await Promise.all([
+    readFile("packages/styles/components/calendar.css", "utf8"),
+    readFile("packages/behaviors/dist/calendar.d.ts", "utf8"),
+  ]);
+  assert.match(declarations, /monthCount\?: 1 \| 2/);
+  assert.match(styles, /container-type:\s*inline-size/);
+  assert.match(styles, /@container[^{]*max-width:\s*559px/);
+});

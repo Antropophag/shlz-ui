@@ -2,7 +2,6 @@
   /* FACT: Picker-Dropdown is a 280px white surface with a compact shadow. */
   inline-size: 280px;
   max-inline-size: 100%;
-  padding-block-end: 24px;
   overflow: hidden;
   color: var(--shlz-semantic-color-text-primary);
   background: var(--shlz-semantic-color-surface-base);
@@ -11,6 +10,27 @@
     0 4px 15px rgb(11 22 35 / 10%),
     0 1px 1.5px rgb(11 22 35 / 8%);
   font-family: var(--shlz-semantic-font-family);
+  container-type: inline-size;
+}
+
+.shlz-calendar--two-months {
+  /* FACT: Picker-Dropdown 2 is two adjacent 280px month panels. */
+  inline-size: 560px;
+}
+
+.shlz-calendar__months {
+  display: flex;
+}
+
+.shlz-calendar__month {
+  flex: 0 0 280px;
+  inline-size: 280px;
+  padding-block-end: 24px;
+}
+
+.shlz-calendar__month + .shlz-calendar__month {
+  /* DECISION: preserve panel separation without changing the source width. */
+  box-shadow: -1px 0 var(--shlz-source-color-gray-gray-50);
 }
 
 .shlz-calendar__header {
@@ -67,6 +87,15 @@
 .shlz-calendar__navigation:disabled {
   cursor: not-allowed;
   opacity: var(--shlz-semantic-opacity-disabled);
+}
+
+.shlz-calendar__navigation-spacer {
+  inline-size: 30px;
+  block-size: 30px;
+}
+
+.shlz-calendar__navigation--narrow {
+  display: none;
 }
 
 .shlz-calendar__grid {
@@ -151,4 +180,15 @@
 .shlz-calendar__day:disabled {
   cursor: not-allowed;
   opacity: var(--shlz-semantic-opacity-disabled);
+}
+
+@container (max-width: 559px) {
+  .shlz-calendar--two-months .shlz-calendar__month:nth-child(2) {
+    /* DECISION: an explicitly requested pair collapses instead of overflowing. */
+    display: none;
+  }
+
+  .shlz-calendar__navigation--narrow {
+    display: inline-grid;
+  }
 }

@@ -140,3 +140,54 @@ test("Calendar source states have observable surface and cell styling", async ({
   await expect(today).toHaveCSS("outline-style", "solid");
   await expect(calendar).toHaveScreenshot("calendar-range-states.png");
 });
+
+test("explicit two-month Calendar collapses at the documented width without overflow", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    for (const [name, width] of [
+      ["wide", 600],
+      ["narrow", 320],
+    ]) {
+      const container = document.createElement("div");
+      container.dataset[`${name}Calendar`] = "";
+      container.style.width = `${width}px`;
+      document.body.append(container);
+      const host = document.createElement("div");
+      container.append(host);
+      new window.__calendarController.constructor(host, {
+        mode: "single",
+        visibleMonth: "2026-08",
+        monthCount: 2,
+        locale: name === "wide" ? "en-US" : "de-DE",
+        label: `${name} calendar`,
+      });
+    }
+  });
+
+  const wide = page.getByRole("region", { name: "wide calendar" });
+  const narrow = page.getByRole("region", { name: "narrow calendar" });
+  await expect(wide.getByRole("heading", { level: 2 })).toHaveCount(2);
+  await expect(wide.getByRole("heading", { level: 2 }).nth(0)).toContainText(
+    /august 2026/i,
+  );
+  await expect(wide.getByRole("heading", { level: 2 }).nth(1)).toContainText(
+    /september 2026/i,
+  );
+  await expect(narrow.getByRole("heading", { level: 2 })).toHaveCount(1);
+  await expect(
+    narrow.locator('button[data-month-delta="1"]:visible'),
+  ).toHaveCount(1);
+  expect(
+    await narrow
+      .getByRole("heading", { level: 2 })
+      .evaluate((element) => element.scrollWidth <= element.clientWidth),
+  ).toBe(true);
+  expect(
+    await page.locator("[data-narrow-calendar]").evaluate((element) => ({
+      own: element.scrollWidth,
+      page: document.documentElement.scrollWidth,
+      viewport: document.documentElement.clientWidth,
+    })),
+  ).toMatchObject({ own: 320, page: 1280, viewport: 1280 });
+});
