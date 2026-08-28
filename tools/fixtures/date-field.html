@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>SHLZ Date Field behavior fixture</title>
+  </head>
+  <body>
+    <form data-date-field-form>
+      <div
+        data-date-field-fixture
+        data-component-audit-id="date-picker-calendar-date-field-fixture"
+      ></div>
+      <button type="reset">Сбросить</button>
+      <button type="submit">Отправить</button>
+    </form>
+    <div data-disabled-field></div>
+    <div data-readonly-field></div>
+    <output data-date-field-events></output>
+    <script type="module">
+      import { DateFieldController } from "../../packages/behaviors/dist/date-field.js";
+
+      const root = document.querySelector("[data-date-field-fixture]");
+      const output = document.querySelector("[data-date-field-events]");
+      const controller = new DateFieldController(root, {
+        label: "Дата поставки",
+        description: "Введите дату поставки",
+        error: "Введите доступную дату в формате ДД.ММ.ГГГГ",
+        name: "deliveryDate",
+        value: "2026-08-28",
+        locale: "ru-RU",
+        min: "2026-08-20",
+        max: "2026-09-10",
+        isDateDisabled: (date) => date === "2026-09-01",
+        required: true,
+      });
+      root.addEventListener("shlz:date-field-change", (event) => {
+        output.value = JSON.stringify(event.detail);
+      });
+      window.__dateFieldController = controller;
+      window.__disabledDateField = new DateFieldController(
+        document.querySelector("[data-disabled-field]"),
+        {
+          label: "Отключённая дата",
+          name: "disabledDate",
+          value: "2026-08-28",
+          disabled: true,
+        },
+      );
+      window.__readonlyDateField = new DateFieldController(
+        document.querySelector("[data-readonly-field]"),
+        {
+          label: "Дата только для чтения",
+          name: "readonlyDate",
+          value: "2026-08-28",
+          readOnly: true,
+        },
+      );
+    </script>
+  </body>
+</html>

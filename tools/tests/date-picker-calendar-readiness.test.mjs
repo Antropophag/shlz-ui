@@ -157,6 +157,7 @@ test("Date Picker and Calendar census has no unclassified occurrence or substitu
   assert.deepEqual(matches, [
     "packages/behaviors/src/calendar.ts",
     "tools/fixtures/calendar.html",
+    "tools/fixtures/date-field.html",
   ]);
 
   const manifest = JSON.parse(
@@ -164,9 +165,14 @@ test("Date Picker and Calendar census has no unclassified occurrence or substitu
   );
   assert.deepEqual(manifest.implementation, [
     "packages/behaviors/src/calendar.ts",
+    "packages/behaviors/src/date-field.ts",
   ]);
   assert.deepEqual(manifest.occurrences, [
     { id: "date-picker-calendar-behavior-fixture", kind: "executable-fixture" },
+    {
+      id: "date-picker-calendar-date-field-fixture",
+      kind: "executable-fixture",
+    },
   ]);
   assert.equal(manifest.diagnosticOccurrenceCount, 0);
 });

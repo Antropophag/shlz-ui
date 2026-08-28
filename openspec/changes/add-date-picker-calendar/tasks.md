@@ -22,9 +22,9 @@
 
 ## 4. Date Field behavior
 
-- [ ] 4.1 Add failing browser/unit contracts for stable ISO values, localized display/manual editing, invalid preservation, min/max/disabled constraints, accessible error association, disabled/read-only behavior, committed change events, form submission, and reset; verify the expected failures.
-- [ ] 4.2 Implement Date Field behavior and native form integration without a framework dependency and verify all focused Date Field contracts pass.
-- [ ] 4.3 Document the public Date Field options, values, events, locale fallback, supported parsing boundary, validation ownership, and form semantics and verify every public contract is represented in generated/type checks and an executable plain-HTML example.
+- [x] 4.1 Add failing browser/unit contracts for stable ISO values, localized display/manual editing, invalid preservation, min/max/disabled constraints, accessible error association, disabled/read-only behavior, committed change events, form submission, and reset; verify the expected failures.
+- [x] 4.2 Implement Date Field behavior and native form integration without a framework dependency and verify all focused Date Field contracts pass.
+- [x] 4.3 Document the public Date Field options, values, events, locale fallback, supported parsing boundary, validation ownership, and form semantics and verify every public contract is represented in generated/type checks and an executable plain-HTML example.
 
 ## 5. Source-backed visual layer
 

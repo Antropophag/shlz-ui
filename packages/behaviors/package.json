@@ -42,6 +42,10 @@
       "types": "./dist/calendar.d.ts",
       "import": "./dist/calendar.js"
     },
+    "./date-field": {
+      "types": "./dist/date-field.d.ts",
+      "import": "./dist/date-field.js"
+    },
     "./browser": {
       "types": "./dist/index.d.ts",
       "import": "./dist/browser.js"

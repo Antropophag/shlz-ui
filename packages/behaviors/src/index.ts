@@ -10,5 +10,10 @@ export type {
   CalendarChangeDetail,
   CalendarControllerOptions,
 } from "./calendar.js";
+export { DateFieldController } from "./date-field.js";
+export type {
+  DateFieldChangeDetail,
+  DateFieldControllerOptions,
+} from "./date-field.js";
 export * from "./calendar-model.js";
 export * from "./date-only.js";

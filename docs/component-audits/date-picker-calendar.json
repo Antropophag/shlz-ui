@@ -6,8 +6,11 @@
     "design-source-index/components.json",
     "design-source-index/reference-screens.json"
   ],
-  "implementation": ["packages/behaviors/src/calendar.ts"],
-  "behavior": "packages/behaviors/src/calendar.ts",
+  "implementation": [
+    "packages/behaviors/src/calendar.ts",
+    "packages/behaviors/src/date-field.ts"
+  ],
+  "behavior": "packages/behaviors/src/calendar.ts; packages/behaviors/src/date-field.ts",
   "docs": "docs/component-audits/date-picker-calendar-contract.md",
   "rootSelector": "[data-component-audit-id^='date-picker-calendar-']",
   "legacySelectors": [
@@ -26,6 +29,10 @@
   "occurrences": [
     {
       "id": "date-picker-calendar-behavior-fixture",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "date-picker-calendar-date-field-fixture",
       "kind": "executable-fixture"
     }
   ],
@@ -60,15 +67,16 @@
   ],
   "browserTests": [
     "tools/playwright/calendar-contract.spec.js",
+    "tools/playwright/date-field-contract.spec.js",
     "tools/playwright/interaction-evidence-wave6.spec.js",
     "tools/tests/date-picker-calendar-readiness.test.mjs"
   ],
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: raw Date-Picker and Calendar sources are present, indexed and unchanged",
-    "structural-contract": "partial-pass: framework-neutral Calendar behavior and one executable behavior fixture are classified; Date Field, Date Picker, styles, Showcase and consumer evidence remain pending",
-    "runtime-browser": "partial-pass: standalone Calendar month navigation, range selection and roving keyboard focus pass focused Chromium contracts",
-    "accessibility": "partial-pass: standalone Calendar exposes named region/grid/month, weekday headings, one tab stop and programmatic date/today/range/disabled states; automated audit and manual walk remain pending",
+    "structural-contract": "partial-pass: framework-neutral Calendar and Date Field behaviors and their executable fixtures are classified; Date Picker, styles, Showcase and consumer evidence remain pending",
+    "runtime-browser": "partial-pass: standalone Calendar navigation, selection and keyboard focus plus Date Field localized editing, stable form submission, validation and reset pass focused Chromium contracts",
+    "accessibility": "partial-pass: standalone Calendar exposes named region/grid/month and programmatic states; Date Field exposes native label, description, invalid error, disabled and read-only semantics; automated audit and manual walk remain pending",
     "focused-visual": "not-applicable: source-only SVG composition is not a production component fidelity target",
     "consumer-integration": "not-applicable: no consumer implementation exists",
     "responsive-content-stress": "not-applicable: locale, viewport, month transition and form integration require a future scoped implementation"
@@ -82,7 +90,7 @@
         "partial-pass: standalone Calendar keyboard and selection behavior is executable; visual fidelity is pending"
       ],
       "runtimeBehavior": [
-        "partial-pass: Calendar locale, navigation, selection and change event have a library API; Date Field and Date Picker remain pending"
+        "partial-pass: Calendar and Date Field locale, selection/editing, validation and change events have library APIs; Date Picker composition remains pending"
       ]
     },
     "materialStates": [],
@@ -92,6 +100,6 @@
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "Calendar behavior is implemented without the source-backed visual layer; Date Field, Date Picker, responsive presentation, consumers and completion evidence remain in progress"
+    "Calendar and Date Field behaviors are implemented without the source-backed visual layer; Date Picker, responsive presentation, consumers and completion evidence remain in progress"
   ]
 }
