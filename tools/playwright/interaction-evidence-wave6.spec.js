@@ -630,7 +630,13 @@ test("Calendar and Date Picker remain source-only with an empty runtime ledger",
   const datePicker = index.components.find(
     ({ name }) => name === "Date-Picker",
   );
-  const calendar = index.components.find(
+  const pickerCells = index.components.find(
+    ({ name }) => name === "Picker-Cell/Month",
+  );
+  const dropdowns = index.components.filter(
+    ({ name }) => name === "Picker-Dropdown",
+  );
+  const calendarIcon = index.components.find(
     ({ name }) => name === "Interface / Calendar",
   );
   expect(datePicker.kind).toBe("COMPONENT_SET");
@@ -641,7 +647,9 @@ test("Calendar and Date Picker remain source-only with an empty runtime ledger",
     "Filled",
     "Ranged",
   ]);
-  expect(calendar.kind).toBe("COMPONENT");
+  expect(pickerCells.variants).toHaveLength(14);
+  expect(dropdowns.map(({ dimensions }) => dimensions.width)).toEqual([280, 560]);
+  expect(calendarIcon.dimensions).toEqual({ width: 24, height: 24 });
   expectMaterialStates("date-picker-calendar");
 });
 

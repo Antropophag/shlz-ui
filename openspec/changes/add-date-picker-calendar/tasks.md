@@ -1,9 +1,9 @@
 ## 1. Execution readiness and source contract
 
-- [ ] 1.1 Run the repository apply preflight from the approved OpenSpec change, create the adaptive execution state required for this M/L capability, and verify the execution receipt authorizes only `add-date-picker-calendar` scope.
-- [ ] 1.2 Re-attest `Date-Picker.svg`, `Calendar.svg`, Picker Dropdown, and Picker Cell facts without modifying `shlz-design-source/`; record observed variants/dimensions separately from design-system decisions and verify source-integrity tests cover every cited authority.
-- [ ] 1.3 Inventory repository-wide Date Picker/Calendar occurrences and substitutes, classify each as executable fixture, live composition, inert diagnostic, or legacy/native substitute, and verify the census has no unclassified occurrence.
-- [ ] 1.4 Record the applicable state, size, content-stress, accessibility, responsive, and real-consumer acceptance matrix for Date Field, Calendar, and Date Picker and verify it satisfies `docs/component-audit-workflow.md` before implementation.
+- [x] 1.1 Run the repository apply preflight from the approved OpenSpec change, create the adaptive execution state required for this M/L capability, and verify the execution receipt authorizes only `add-date-picker-calendar` scope.
+- [x] 1.2 Re-attest `Date-Picker.svg`, `Calendar.svg`, Picker Dropdown, and Picker Cell facts without modifying `shlz-design-source/`; record observed variants/dimensions separately from design-system decisions and verify source-integrity tests cover every cited authority.
+- [x] 1.3 Inventory repository-wide Date Picker/Calendar occurrences and substitutes, classify each as executable fixture, live composition, inert diagnostic, or legacy/native substitute, and verify the census has no unclassified occurrence.
+- [x] 1.4 Record the applicable state, size, content-stress, accessibility, responsive, and real-consumer acceptance matrix for Date Field, Calendar, and Date Picker and verify it satisfies `docs/component-audit-workflow.md` before implementation.
 
 ## 2. Date-only foundation
 

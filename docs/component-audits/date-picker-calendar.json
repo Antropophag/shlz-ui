@@ -3,11 +3,12 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Date-Picker.svg",
   "referenceSources": [
     "shlz-design-source/raw/svg/Calendar.svg",
-    "design-source-index/components.json"
+    "design-source-index/components.json",
+    "design-source-index/reference-screens.json"
   ],
   "implementation": [],
   "behavior": null,
-  "docs": null,
+  "docs": "docs/component-audits/date-picker-calendar-contract.md",
   "rootSelector": "[data-component-audit-id^='date-picker-calendar-']",
   "legacySelectors": [
     "input[type='date']",
@@ -37,17 +38,25 @@
       "evidence": "shlz-design-source/raw/svg/Date-Picker.svg"
     },
     {
-      "claim": "Calendar is a separate source composition containing month navigation, weekday and day-cell visuals",
+      "claim": "Calendar.svg is a separate 2081x2386 additional-reference canvas with metadata-only semantic analysis; the indexed Interface / Calendar component is only a 24x24 icon",
       "classification": "source-fact",
-      "evidence": "shlz-design-source/raw/svg/Calendar.svg"
+      "evidence": "design-source-index/reference-screens.json"
+    },
+    {
+      "claim": "Picker-Dropdown has separate 280x274 one-month and 560x274 two-month source compositions, while Picker-Cell/Month has fourteen 30x30 exported state combinations",
+      "classification": "source-fact",
+      "evidence": "design-source-index/components.json"
     },
     {
       "claim": "the repository does not promote either source into a reusable component without a separately designed date-domain and interaction API",
       "classification": "repository-decision",
-      "evidence": "docs/component-audits/wave-6-report.md"
+      "evidence": "docs/component-audits/date-picker-calendar-contract.md"
     }
   ],
-  "browserTests": ["tools/playwright/interaction-evidence-wave6.spec.js"],
+  "browserTests": [
+    "tools/playwright/interaction-evidence-wave6.spec.js",
+    "tools/tests/date-picker-calendar-readiness.test.mjs"
+  ],
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: raw Date-Picker and Calendar sources are present, indexed and unchanged",
