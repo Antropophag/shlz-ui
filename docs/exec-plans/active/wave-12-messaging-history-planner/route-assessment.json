@@ -5,7 +5,11 @@
   "openSpecChange": "wave-12-messaging-history-planner",
   "requiredDecisions": [
     { "id": "wave-12-scope", "owner": "repo", "blocking": true },
-    { "id": "independent-subscope-dispositions", "owner": "repo", "blocking": true },
+    {
+      "id": "independent-subscope-dispositions",
+      "owner": "repo",
+      "blocking": true
+    },
     { "id": "runtime-contract-boundary", "owner": "repo", "blocking": true }
   ],
   "materialSignals": {

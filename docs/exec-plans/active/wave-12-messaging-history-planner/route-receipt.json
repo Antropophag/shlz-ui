@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Complete roadmap Wave 12 by independently auditing the source-only Messaging / History / Planner family against Messages.svg, History of changes.svg, and Planner.svg without inventing application runtime semantics.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

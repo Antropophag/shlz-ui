@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "audit/wave-12-messaging-history-planner",
+    "commit": "bc867d032d865afafee9dc1e10fd9522aee0dc81",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "audit/wave-12-messaging-history-planner",
+      "headRefOid": "bc867d032d865afafee9dc1e10fd9522aee0dc81",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/48"
+    },
+    "repository": {
+      "digest": "aac0408b015b52f1eef4f3a691fe466a8064bb64d2977d20ce78e103d9f09e3b",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-wave-12"
+    },
+    "upstream": "origin/audit/wave-12-messaging-history-planner"
+  },
+  "requirementsDigest": "f058a0af2fabdf45056d0fc599da4b46d6a17263655fd1d42f1acfa8fd479b83",
+  "routeDigest": "767b322d2424fcc5f646686fd0ec1883805424034da4ce7e489a17678529c957",
+  "version": 1,
+  "digest": "e5ca66438fdaa72008ac8dc36aec2b9288dc6cd2d60219328ae97f620a321d17"
+}
