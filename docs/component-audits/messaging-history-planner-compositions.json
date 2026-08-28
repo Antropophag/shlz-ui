@@ -18,7 +18,25 @@
     ".shlz-change-history",
     ".shlz-history-of-changes",
     ".shlz-planner",
-    ".shlz-event-planner"
+    ".shlz-event-planner",
+    "[data-shlz-messaging]",
+    "[data-shlz-messages]",
+    "[data-shlz-message-thread]",
+    "[data-shlz-change-history]",
+    "[data-shlz-history-of-changes]",
+    "[data-shlz-audit-history]",
+    "[data-shlz-planner]",
+    "[data-shlz-event-planner]",
+    "[data-shlz-schedule-planner]",
+    "shlz-messaging",
+    "shlz-messages",
+    "shlz-message-thread",
+    "shlz-change-history",
+    "shlz-history-of-changes",
+    "shlz-audit-history",
+    "shlz-planner",
+    "shlz-event-planner",
+    "shlz-schedule-planner"
   ],
   "diagnosticBoundaries": [
     "[inert]",
@@ -247,8 +265,8 @@
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
     "primitiveDependencyPathCount": 27,
-    "unrelatedTerminologyPathCount": 40,
-    "totalPathCount": 50,
+    "unrelatedTerminologyPathCount": 41,
+    "totalPathCount": 51,
     "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency"
   },
   "supportedSizes": ["source-sheets-only"],
@@ -288,6 +306,31 @@
   ],
   "browserTests": ["tools/playwright/messaging-history-planner-wave12.spec.js"],
   "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: each sub-scope records and verifies its independent raw SVG hash, canvas, dashed frames, and observed source facts",
+    "structural-contract": "pass: the shared occurrence guard and repository-wide census find zero higher-level roots while mutation tests reject all three domain signatures",
+    "runtime-browser": "not-applicable: none of the three higher-level domains has an executable root, controller, event contract, or public API",
+    "accessibility": "not-applicable: the static source sheets establish no higher-level semantic, focus, keyboard, naming, or announcement contract",
+    "focused-visual": "not-applicable: no implemented higher-level composition or material runtime state exists for source comparison",
+    "consumer-integration": "not-applicable: no live higher-level Messaging, History, or Planner consumer exists",
+    "responsive-content-stress": "not-applicable: the static exports establish no higher-level responsive reflow or dynamic content contract"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: direct source inspection records each independent sheet, its dashed frames, and its primitive boundary without runtime claims"
+      ],
+      "realInteractionVisual": [
+        "not-applicable: no executable higher-level Messaging, History, or Planner composition exists on which a browser can create a real interaction state"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: messaging synchronization, history chronology, planner scheduling, persistence, and attachment behavior are outside the static source contracts"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/messaging-history-planner-wave12.spec.js",
+    "manualStateWalk": "not-applicable: no executable higher-level surface exists; manual review covered all three raw SVG sheets and their independent primitive-boundary ledgers on 2026-08-28"
+  },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [

@@ -8,20 +8,6 @@ import test from "node:test";
 const manifestPath =
   "docs/component-audits/messaging-history-planner-compositions.json";
 const manifest = JSON.parse(await readFile(manifestPath, "utf8"));
-const sourceHashes = new Map([
-  [
-    "shlz-design-source/raw/svg/Messages.svg",
-    "b61167bf011d15e5956d409d6746b5440cf4417522f1f14d6d27084bfb4b5357",
-  ],
-  [
-    "shlz-design-source/raw/svg/History of changes.svg",
-    "83d8c9ab89fa7c3677ed6d4105a150f55676bcf732160892b06773d6d4ac0e76",
-  ],
-  [
-    "shlz-design-source/raw/svg/Planner.svg",
-    "3f23135cbccf6cd8d1054feef90990d94ec647d8ef12de091ee6b76a022f2ed7",
-  ],
-]);
 const censusRoots = ["apps", "packages", "tools", "docs/components"];
 const sourceExtensions = new Set([
   ".html",
@@ -39,11 +25,11 @@ const sourceExtensions = new Set([
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
 const scopeMatchers = {
   messaging:
-    /(?:shlz-(?:messaging|messages|message-thread|conversation)|data-(?:shlz-)?(?:messaging|messages|message-thread)|customElements\.define\(\s*["']shlz-(?:messaging|messages|message-thread)|<(?:shlz-)?(?:messaging|messages|message-thread)\b|(?:class|function|const|let|var)\s+(?:Messaging|Messages|MessageThread|Conversation)\b|export\s*\{[^}]*\b(?:Messaging|Messages|MessageThread|Conversation)\b|(?:^|\/)(?:messaging|messages|message-thread|conversation)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
+    /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-messaging|shlz-(?:messaging|messages|message-thread|conversation)|data-(?:shlz-)?(?:messaging|messages|message-thread)|customElements\.define\(\s*["']shlz-(?:messaging|messages|message-thread)|<(?:shlz-)?(?:messaging|messages|message-thread)\b|(?:class|function|const|let|var)\s+(?:Messaging|Messages|MessageThread|Conversation)\b|export\s*\{[^}]*\b(?:Messaging|Messages|MessageThread|Conversation)\b|(?:^|\/)(?:messaging|messages|message-thread|conversation)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
   history:
-    /(?:shlz-(?:change-history|history-of-changes|audit-history)|data-(?:shlz-)?(?:change-history|history-of-changes|audit-history)|customElements\.define\(\s*["']shlz-(?:change-history|history-of-changes|audit-history)|<(?:shlz-)?(?:change-history|history-of-changes|audit-history)\b|(?:class|function|const|let|var)\s+(?:ChangeHistory|HistoryOfChanges|AuditHistory)\b|export\s*\{[^}]*\b(?:ChangeHistory|HistoryOfChanges|AuditHistory)\b|(?:^|\/)(?:change-history|history-of-changes|audit-history)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
+    /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-history|shlz-(?:change-history|history-of-changes|audit-history)|data-(?:shlz-)?(?:change-history|history-of-changes|audit-history)|customElements\.define\(\s*["']shlz-(?:change-history|history-of-changes|audit-history)|<(?:shlz-)?(?:change-history|history-of-changes|audit-history)\b|(?:class|function|const|let|var)\s+(?:ChangeHistory|HistoryOfChanges|AuditHistory)\b|export\s*\{[^}]*\b(?:ChangeHistory|HistoryOfChanges|AuditHistory)\b|(?:^|\/)(?:change-history|history-of-changes|audit-history)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
   planner:
-    /(?:shlz-(?:planner|event-planner|schedule-planner)|data-(?:shlz-)?(?:planner|event-planner|schedule-planner)|customElements\.define\(\s*["']shlz-(?:planner|event-planner|schedule-planner)|<(?:shlz-)?(?:planner|event-planner|schedule-planner)\b|(?:class|function|const|let|var)\s+(?:Planner|EventPlanner|SchedulePlanner)\b|export\s*\{[^}]*\b(?:Planner|EventPlanner|SchedulePlanner)\b|(?:^|\/)(?:planner|event-planner|schedule-planner)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
+    /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-planner|shlz-(?:planner|event-planner|schedule-planner)|data-(?:shlz-)?(?:planner|event-planner|schedule-planner)|customElements\.define\(\s*["']shlz-(?:planner|event-planner|schedule-planner)|<(?:shlz-)?(?:planner|event-planner|schedule-planner)\b|(?:class|function|const|let|var)\s+(?:Planner|EventPlanner|SchedulePlanner)\b|export\s*\{[^}]*\b(?:Planner|EventPlanner|SchedulePlanner)\b|(?:^|\/)(?:planner|event-planner|schedule-planner)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
 };
 const primitiveSignature =
   /\bshlz-(?:notification|snackbar|file-row|document-row|avatar)\b|data-component-audit-id\s*=\s*["'][^"']*(?:notification|snackbar|file-row|document-row|avatar)/i;
@@ -63,20 +49,68 @@ async function filesBelow(directory) {
 }
 
 const validateSubscopes = (candidate) => {
+  const levels = [
+    "source-integrity",
+    "structural-contract",
+    "runtime-browser",
+    "accessibility",
+    "focused-visual",
+    "consumer-integration",
+    "responsive-content-stress",
+  ];
   for (const name of ["messaging", "history", "planner"]) {
     const scope = candidate.subscopes?.[name];
-    for (const key of [
-      "authority",
-      "occurrences",
-      "evidence",
-      "limitations",
-      "findings",
-      "disposition",
-    ])
-      assert.ok(
-        scope && Object.hasOwn(scope, key),
-        `${name}.${key} is required`,
+    assert.ok(
+      scope?.authority && typeof scope.authority === "object",
+      `${name}.authority is required`,
+    );
+    assert.ok(scope.authority.source, `${name}.authority.source is required`);
+    assert.match(
+      scope.authority.hash ?? "",
+      /^[a-f0-9]{64}$/,
+      `${name}.authority.hash is required`,
+    );
+    assert.ok(
+      scope.authority.canvas?.width > 0 && scope.authority.canvas?.height > 0,
+      `${name}.authority.canvas is required`,
+    );
+    assert.ok(
+      Array.isArray(scope.authority.frames) &&
+        scope.authority.frames.length > 0,
+      `${name}.authority.frames is required`,
+    );
+    assert.ok(
+      Array.isArray(scope.authority.observed) &&
+        scope.authority.observed.length > 0,
+      `${name}.authority.observed is required`,
+    );
+    for (const key of ["occurrences", "limitations", "findings"])
+      assert.ok(Array.isArray(scope[key]), `${name}.${key} must be an array`);
+    assert.ok(
+      scope.limitations.length > 0,
+      `${name}.limitations must be explicit`,
+    );
+    assert.deepEqual(
+      Object.keys(scope.evidence ?? {}).sort(),
+      [...levels].sort(),
+      `${name}.evidence must classify every level`,
+    );
+    for (const [level, claim] of Object.entries(scope.evidence))
+      assert.match(
+        claim,
+        /^(?:pass|not-applicable):\s+\S/,
+        `${name}.evidence.${level} must be specific`,
       );
+    assert.ok(
+      ["VERIFIED", "FINDINGS"].includes(scope.disposition),
+      `${name}.disposition is required`,
+    );
+    if (scope.disposition === "FINDINGS")
+      assert.ok(
+        scope.findings.length > 0,
+        `${name}.findings must explain FINDINGS`,
+      );
+    assert.ok(scope.primitiveBoundary, `${name}.primitiveBoundary is required`);
   }
 };
 
@@ -86,7 +120,7 @@ test("Wave 12 authoritative sources retain exact hashes and frame geometry", asy
     const bytes = await readFile(scope.authority.source);
     assert.equal(
       createHash("sha256").update(bytes).digest("hex"),
-      sourceHashes.get(scope.authority.source),
+      scope.authority.hash,
     );
     const source = bytes.toString("utf8");
     assert.match(
@@ -127,12 +161,21 @@ test("Wave 12 manifest requires independent complete sub-scope ledgers", () => {
       "responsive-content-stress",
     ])
       assert.match(scope.evidence[level], /^not-applicable:\s+\S/);
-    const incomplete = JSON.parse(JSON.stringify(manifest));
-    delete incomplete.subscopes[name].disposition;
-    assert.throws(
-      () => validateSubscopes(incomplete),
-      new RegExp(`${name}\\.disposition`),
-    );
+    for (const key of [
+      "authority",
+      "occurrences",
+      "evidence",
+      "limitations",
+      "findings",
+      "disposition",
+    ]) {
+      const incomplete = JSON.parse(JSON.stringify(manifest));
+      delete incomplete.subscopes[name][key];
+      assert.throws(
+        () => validateSubscopes(incomplete),
+        new RegExp(`${name}\\.${key}`),
+      );
+    }
   }
 });
 
@@ -186,15 +229,15 @@ test("Wave 12 census rejects synthetic surfaces for every sub-scope", () => {
   const synthetic = {
     messaging: [
       "packages/components/messages.js",
-      "export class MessageThread {}",
+      '<section data-component-audit-id="messaging-history-planner-messaging">',
     ],
     history: [
       "apps/example/history-of-changes.vue",
-      "export const HistoryOfChanges = {};",
+      '<section data-component-audit-id="messaging-history-planner-history">',
     ],
     planner: [
       "packages/styles/planner.css",
-      ".shlz-planner { display: grid; }",
+      '<section data-component-audit-id="messaging-history-planner-planner">',
     ],
   };
   for (const [name, [path, source]] of Object.entries(synthetic))
