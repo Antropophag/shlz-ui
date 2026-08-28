@@ -1960,7 +1960,7 @@
       ],
       "evidence": {
         "source-integrity": "pass: exact hashes and source-critical geometry are locked for Documents.svg and Detailed appeals.svg",
-        "structural-contract": "pass: zero higher-level implementations are proven separately from ten classified File Row and Document Row dependency surfaces",
+        "structural-contract": "pass: zero higher-level implementations are proven by path, declaration, re-export and markup signatures; 61 terminology paths are partitioned into ten primitive dependencies, one audit path and 50 unrelated paths",
         "runtime-browser": "not-applicable: no higher-level runtime root, controller, event contract, or public API exists",
         "accessibility": "not-applicable: no higher-level production semantics, focus order, keyboard model, or accessible naming contract exists",
         "focused-visual": "not-applicable: no implemented higher-level composition or material runtime state exists for source comparison",

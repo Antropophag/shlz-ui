@@ -69,6 +69,15 @@
       "classification": "file-and-document-row-structural-test"
     }
   ],
+  "terminologyCensus": {
+    "auditEvidencePaths": [
+      "tools/playwright/upload-document-compositions-wave11.spec.js"
+    ],
+    "primitiveDependencyPathCount": 10,
+    "unrelatedTerminologyPathCount": 50,
+    "totalPathCount": 61,
+    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition"
+  },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": [
     "document-specimens",
@@ -80,12 +89,50 @@
   ],
   "contentStress": [],
   "stateLedgers": {
-    "document": ["default", "hover", "editing", "error"],
-    "uploadDrag": ["two-static-drop-zone-specimens"],
-    "descriptionFiles": ["two-static-file-row-specimens"],
-    "smallDocument": ["static-small-document-group"],
-    "attachedDocument": ["detailed-appeals-static-attachments"],
-    "dragAndDropDocument": ["detailed-appeals-static-drop-composition"]
+    "document": {
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=526.5 width=279 height=494",
+      "represented": ["default", "hover", "editing", "error"],
+      "primitiveBoundary": "File Row owns the reusable 55px identity rows"
+    },
+    "uploadDrag": {
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=1087.5 width=499 height=411",
+      "represented": ["two-static-drop-zone-specimens"],
+      "primitiveBoundary": "distinct higher-level source composition; no runtime implementation"
+    },
+    "descriptionFiles": {
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=1565.5 width=274 height=184",
+      "represented": ["two-static-file-row-specimens"],
+      "primitiveBoundary": "File Row dependency only"
+    },
+    "smallDocument": {
+      "source": "shlz-design-source/raw/svg/Documents.svg",
+      "frame": "x=80.5 y=1816.5 width=529 height=371.25",
+      "represented": ["static-small-document-group"],
+      "primitiveBoundary": "source composition distinct from repository Document Row extension"
+    },
+    "attachedDocument": {
+      "source": "shlz-design-source/raw/svg/Detailed appeals.svg",
+      "frames": [
+        "x=80.5 y=526.5 width=504 height=1422",
+        "x=80.5 y=2015.5 width=416 height=1099",
+        "x=80.5 y=3181.5 width=504 height=901 rx=4.5"
+      ],
+      "represented": ["static-attachment-material"],
+      "primitiveBoundary": "screen-level composition; row primitives do not certify it"
+    },
+    "dragAndDropDocument": {
+      "source": "shlz-design-source/raw/svg/Detailed appeals.svg",
+      "frames": [
+        "x=80.5 y=526.5 width=504 height=1422",
+        "x=80.5 y=2015.5 width=416 height=1099",
+        "x=80.5 y=3181.5 width=504 height=901 rx=4.5"
+      ],
+      "represented": ["static-drag-and-drop-material"],
+      "primitiveBoundary": "screen-level composition; no drag/drop behavior is inferred"
+    }
   },
   "sourceClaims": [
     {

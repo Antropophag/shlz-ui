@@ -17,14 +17,7 @@ const sourceHashes = new Map([
     "f916402a452edfdb7eee603cc75dc8028e6cf7d28eda13d6058ba488b59830e7",
   ],
 ]);
-const censusRoots = [
-  "apps",
-  "packages",
-  "tools/fixtures",
-  "tools/playwright",
-  "tools/tests",
-  "docs/components",
-];
+const censusRoots = ["apps", "packages", "tools", "docs/components"];
 const sourceExtensions = new Set([
   ".html",
   ".js",
@@ -39,17 +32,23 @@ const sourceExtensions = new Set([
   ".md",
 ]);
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
+const higherLevelPath =
+  /(?:^|\/)[^/]*(?:upload-document|document-upload|upload-drag|attached-document|drag-drop-document)[^/]*\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$/i;
 const higherLevelSignatures = [
-  /\.(?:shlz-(?:upload|upload-drag|attached-document|drag-drop-document))\b/i,
-  /(?:class|className)\s*=\s*["'][^"']*\bshlz-(?:upload|upload-drag|attached-document|drag-drop-document)\b/i,
-  /data-shlz-(?:upload|attached-document)\b/i,
-  /customElements\.define\(\s*["']shlz-(?:upload|attached-document)["']/i,
-  /<shlz-(?:upload|attached-document)\b/i,
-  /export\s+(?:default\s+)?(?:class|function|const)\s+(?:Upload|UploadDrag|AttachedDocument|DragDropDocument)\b/i,
+  /\.(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
+  /(?:class|className)\s*=\s*["'][^"']*\b(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
+  /data-(?:shlz-)?(?:upload(?:-document)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
+  /customElements\.define\(\s*["'](?:shlz-)?(?:upload|document-upload|attached-document)["']/i,
+  /<(?:shlz-)?(?:upload|document-upload|attached-document)\b/i,
+  /(?:export\s+(?:default\s+)?)?(?:class|function|const|let|var)\s+(?:Upload|UploadDrag|DocumentUpload|UploadDocument|AttachedDocument|DragAndDropDocument|DragDropDocument)\b/i,
+  /export\s*\{[^}]*\b(?:Upload|UploadDrag|DocumentUpload|UploadDocument|AttachedDocument|DragAndDropDocument|DragDropDocument)\b[^}]*\}(?:\s+from\s+["'][^"']+["'])?/i,
 ];
 const primitiveSignature =
   /\bshlz-(?:file|document)-row\b|data-component-audit-id\s*=\s*["'][^"']*(?:file-row|document-row)/i;
-const hasHigherLevelSignature = (source) =>
+const genericTerminology =
+  /\b(?:upload|document|attachment|drag[ -]?(?:and[ -]?)?drop)\b/i;
+const hasHigherLevelSignature = ({ path, source }) =>
+  higherLevelPath.test(path) ||
   higherLevelSignatures.some((signature) => signature.test(source));
 
 async function filesBelow(directory) {
@@ -65,9 +64,7 @@ async function filesBelow(directory) {
 }
 
 const matchingPaths = (sources, matcher) =>
-  new Set(
-    sources.filter(({ source }) => matcher(source)).map(({ path }) => path),
-  );
+  new Set(sources.filter((entry) => matcher(entry)).map(({ path }) => path));
 
 test("Wave 11 authoritative sources retain exact hashes and critical composition facts", async () => {
   for (const [path, expected] of sourceHashes) {
@@ -122,6 +119,23 @@ test("Wave 11 authoritative sources retain exact hashes and critical composition
     (detailedAppeals.match(/data:image\/png;base64/g) ?? []).length,
     2,
   );
+
+  for (const ledger of Object.values(manifest.stateLedgers)) {
+    const source = ledger.source.endsWith("Documents.svg")
+      ? documents
+      : detailedAppeals;
+    for (const frame of [ledger.frame, ...(ledger.frames ?? [])].filter(
+      Boolean,
+    )) {
+      const attributes = Object.fromEntries(
+        frame.split(" ").map((entry) => entry.split("=")),
+      );
+      const framePattern = new RegExp(
+        `<rect[^>]*x="${attributes.x}"[^>]*y="${attributes.y}"[^>]*width="${attributes.width}"[^>]*height="${attributes.height}"${attributes.rx ? `[^>]*rx="${attributes.rx}"` : ""}[^>]*stroke="#253D98"[^>]*stroke-dasharray="10 5"`,
+      );
+      assert.match(source, framePattern);
+    }
+  }
 });
 
 test("Wave 11 manifest records independent source and primitive-boundary ledgers", () => {
@@ -171,12 +185,47 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
       })),
   );
 
-  assert.deepEqual([...matchingPaths(sources, hasHigherLevelSignature)], []);
+  const auditEvidencePaths = new Set(
+    manifest.terminologyCensus.auditEvidencePaths,
+  );
   assert.deepEqual(
     [
-      ...matchingPaths(sources, (source) => primitiveSignature.test(source)),
+      ...matchingPaths(
+        sources.filter(({ path }) => !auditEvidencePaths.has(path)),
+        hasHigherLevelSignature,
+      ),
+    ],
+    [],
+  );
+  assert.deepEqual(
+    [
+      ...matchingPaths(sources, ({ source }) =>
+        primitiveSignature.test(source),
+      ),
     ].sort(),
     manifest.primitiveDependencies.map(({ path }) => path).sort(),
+  );
+
+  const terminologyPaths = matchingPaths(sources, ({ source }) =>
+    genericTerminology.test(source),
+  );
+  const primitivePaths = new Set(
+    manifest.primitiveDependencies.map(({ path }) => path),
+  );
+  const unrelatedTerminologyPaths = [...terminologyPaths].filter(
+    (path) => !primitivePaths.has(path) && !auditEvidencePaths.has(path),
+  );
+  assert.equal(
+    terminologyPaths.size,
+    manifest.terminologyCensus.totalPathCount,
+  );
+  assert.equal(
+    primitivePaths.size,
+    manifest.terminologyCensus.primitiveDependencyPathCount,
+  );
+  assert.equal(
+    unrelatedTerminologyPaths.length,
+    manifest.terminologyCensus.unrelatedTerminologyPathCount,
   );
 });
 
@@ -197,6 +246,18 @@ test("Wave 11 census rejects synthetic higher-level Upload / Document surfaces",
     {
       path: "apps/example/upload.html",
       source: "<shlz-upload></shlz-upload>",
+    },
+    {
+      path: "packages/index.js",
+      source: 'export { Upload } from "./upload.js";',
+    },
+    {
+      path: "apps/example/controller.js",
+      source: "function DocumentUpload() {}",
+    },
+    {
+      path: "apps/example/upload-document.js",
+      source: "export default {};",
     },
   ];
   const found = matchingPaths(
