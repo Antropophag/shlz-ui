@@ -1,0 +1,60 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Promote the source-only Date Picker / Calendar family into a framework-neutral production capability with an explicit date-domain, interaction, accessibility, form, visual, and consumer contract.",
+    "material": [
+      "newCapability",
+      "publicContract",
+      "materialAmbiguity"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": true,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-date-picker-calendar",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "selection-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "date-value-and-locale-contract",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "manual-input-and-constraints",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "selection-commit-and-responsive-policy",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "ab13ef4cae16ad6234cce90d33a26ce27ec00ef69f3db631b12503df3ab0cfba"
+}

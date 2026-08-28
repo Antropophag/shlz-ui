@@ -1,0 +1,50 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "add-date-picker-calendar",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "selection-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "date-value-and-locale-contract",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "manual-input-and-constraints",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "selection-commit-and-responsive-policy",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Promote the source-only Date Picker / Calendar family into a framework-neutral production capability with an explicit date-domain, interaction, accessibility, form, visual, and consumer contract.",
+    "revision": 2
+  },
+  "routeDigest": "ab13ef4cae16ad6234cce90d33a26ce27ec00ef69f3db631b12503df3ab0cfba",
+  "version": 1,
+  "digest": "65b1801b8578f8132546406e42006630b99d5749e6db2f3e5047e581048591c3"
+}

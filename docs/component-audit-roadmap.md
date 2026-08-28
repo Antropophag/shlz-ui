@@ -1,4 +1,4 @@
-# Component-audit scope map and product-wave gate: Waves 9–12
+# Component-audit scope map, product-wave gate, and promoted capabilities
 
 This is the durable scope map for the component-audit families recorded after Wave 8. A request of the form `Сделай Wave N` selects the complete entry for N below, but numbering alone does not make the work a product wave or authorize heavy execution. Before baseline, the route assessment must classify the entry explicitly:
 
@@ -79,3 +79,30 @@ Completion boundary: each of Messaging, History, and Planner has a source/absenc
 ## Product-roadmap advancement
 
 Audit dispositions remain recorded in the inventory and reports, but do not consume product entries. A numbered entry advances only when its pre-execution route receipt derives product execution from a structured expected production delta, records product-roadmap eligibility, and delivery proves that same delta. Completing or merging bounded evidence does not authorize the next numbered wave. After the current episode, stop unless the user separately requests another wave; agents never merge on the user's behalf.
+
+## Promoted capability — Date Picker / Calendar
+
+Date Picker / Calendar is the first explicitly promoted capability after the source-only audit waves. Its authoritative visual sources are `Date-Picker.svg` and `Calendar.svg`; its current inventory disposition remains `source-only` until an independently verified production implementation passes the component completion gate. This entry authorizes requirements and OpenSpec planning only. Implementation requires a synthesized contract, explicit authorization, and the normal product-execution receipt chain.
+
+The intended family has three independently testable modules behind small interfaces:
+
+- Date Field owns date text entry, display, trigger, validation presentation, disabled/read-only state, and form participation;
+- Calendar owns month presentation, date navigation, single/range selection, constraints, and keyboard interaction without requiring a floating surface;
+- Date Picker composes Date Field, Calendar, and the existing Popover positioning/lifecycle infrastructure.
+
+The durable work sequence is:
+
+1. **Complete:** resolve the product contract: selection modes, date-only value model, locale/formatting, manual input and validation, constraints, closing/confirmation behavior, and one/two-month responsive policy. The user-confirmed contract is recorded in requirements state.
+2. **Complete:** synthesize and validate the OpenSpec proposal, behavioral specs, design, and executable tasks. `add-date-picker-calendar` is ready for implementation review.
+3. **Pending:** re-attest `Date-Picker.svg`, `Calendar.svg`, Picker Dropdown, and Picker Cell source facts without modifying `shlz-design-source/`.
+4. **Pending:** define the framework-neutral public interfaces and ownership seams for Date Field, Calendar, and Date Picker.
+5. **Pending:** implement source-backed CSS for fields, calendar surface/header/grid/cells, range paint, navigation, sizes, and narrow layouts.
+6. **Pending:** implement Calendar month arithmetic, navigation, selection, range, today, and date constraints.
+7. **Pending:** implement and prove the keyboard, focus, naming, announcement, disabled, and dismissal accessibility contract.
+8. **Pending:** compose Date Picker with Popover, manual input, parsing/formatting, form events/reset, and viewport-edge positioning.
+9. **Pending:** add exhaustive Showcase fixtures and at least one real application-owned consumer flow.
+10. **Pending:** add unit, structural, runtime-browser, accessibility, focused-visual, responsive/content-stress, consumer, and source-integrity evidence.
+11. **Pending:** publish component documentation and reconcile the audit manifest, occurrence census, and project inventory.
+12. **Pending:** run the completion gate, manual state walk, review, conformance, CI, and unmerged-PR delivery.
+
+Initial non-goals unless step 1 explicitly promotes them are date-time selection, timezone conversion, recurrence, week numbers, presets, natural-language parsing, and application-specific scheduling rules. Vue or other framework adapters follow the framework-neutral contract and cannot become the foundation of the family.
