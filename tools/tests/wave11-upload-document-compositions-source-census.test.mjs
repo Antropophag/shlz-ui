@@ -33,7 +33,7 @@ const sourceExtensions = new Set([
 ]);
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
 const higherLevelPath =
-  /(?:^|\/)[^/]*(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-drop-document)[^/]*\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$/i;
+  /(?:^|\/)[^/]*(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)[^/]*\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$/i;
 const higherLevelSignatures = [
   /\.(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
   /(?:class|className)\s*=\s*["'][^"']*\b(?:shlz-)?(?:upload(?:-document|-drag)?|document-upload|attached-document|drag-(?:and-)?drop-document)\b/i,
@@ -286,6 +286,10 @@ test("Wave 11 census rejects synthetic higher-level Upload / Document surfaces",
     },
     {
       path: "packages/components/upload.js",
+      source: "export default {};",
+    },
+    {
+      path: "packages/components/drag-and-drop-document.js",
       source: "export default {};",
     },
   ];
