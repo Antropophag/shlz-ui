@@ -121,6 +121,7 @@ test("Wave 11 authoritative sources retain exact hashes and critical composition
   );
 
   for (const ledger of Object.values(manifest.stateLedgers)) {
+    if (!ledger.source) continue;
     const source = ledger.source.endsWith("Documents.svg")
       ? documents
       : detailedAppeals;
@@ -164,6 +165,15 @@ test("Wave 11 manifest records independent source and primitive-boundary ledgers
     "smallDocument",
     "uploadDrag",
   ]);
+  assert.equal(
+    manifest.stateLedgers.attachedDocument.status,
+    "unresolved-authority",
+  );
+  assert.equal(
+    manifest.stateLedgers.dragAndDropDocument.status,
+    "unresolved-authority",
+  );
+  assert.equal(manifest.findings[0].severity, "P1");
   for (const level of [
     "runtime-browser",
     "accessibility",

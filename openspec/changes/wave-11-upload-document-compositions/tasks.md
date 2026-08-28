@@ -9,9 +9,9 @@
 
 ## 3. Evidence and disposition
 
-- [x] 3.1 Reconcile the project inventory and create the Wave 11 report with exact hashes, source facts, observed occurrence counts, evidence applicability, unsupported lifecycle semantics, CI/review state, and an independent family disposition; verify Wave 5 primitive statuses remain unchanged.
+- [ ] 3.1 Reconcile the project inventory and create the Wave 11 report with exact hashes, source facts, observed occurrence counts, evidence applicability, unsupported lifecycle semantics, CI/review state, and an independent family disposition; blocked by the Detailed appeals source-authority conflict while Wave 5 primitive statuses remain unchanged.
 
 ## 4. Validation, review, and delivery
 
-- [x] 4.1 Run source integrity, OpenSpec, formatting/lint/build/package, manifest/census, affected, and final aggregate validation; verify exact results are retained and no raw source or runtime/public upload implementation was added.
+- [ ] 4.1 Run source integrity, OpenSpec, formatting/lint/build/package, manifest/census, affected, and final aggregate validation; final candidate-bound validation is blocked pending source-authority resolution, while the pre-finding aggregate passed and no raw source or runtime/public upload implementation was added.
 - [ ] 4.2 Review the complete episode diff independently against repository standards, the Wave 11 spec, authoritative SVGs, and non-goals; remediate every scope-local finding, re-run affected checks, satisfy route/delivery guards, and deliver an unmerged green PR targeting `main`.

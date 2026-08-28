@@ -7,7 +7,9 @@
 
 ## Source contract and primitive boundary
 
-`Documents.svg` is a 700×2269 sheet with four blue dashed composition frames. It contains five Document specimens (one 240×55 outer specimen and four 230×55 specimens), two 467×102 dashed Upload-Drag surfaces, Description Files rows, a Small document group, and embedded document-preview imagery. `Detailed appeals.svg` is an 873×4163 application-composition sheet with three blue dashed source frames, Attached Document and Drag and Drop Document material, and raster-backed screen/document imagery.
+`Documents.svg` is a 700×2269 sheet with four blue dashed composition frames. It contains five Document specimens (one 240×55 outer specimen and four 230×55 specimens), two 467×102 dashed Upload-Drag surfaces, Description Files rows, a Small document group, and embedded document-preview imagery. These four source boundaries are traceable to exact frame rectangles in the manifest.
+
+`Detailed appeals.svg` is an 873×4163 application-composition sheet whose three blue dashed frames visibly contain Employees, Event plaque, and Event material. It does not contain the Attached Document or Drag and Drop Document compositions assigned to it by the Wave 11 roadmap. Because the original SVG outranks roadmap/derived metadata, those two variant authorities remain unresolved rather than being attributed to all three unrelated frames.
 
 The six roadmap names identify source groups, not a reusable runtime API. File Row owns the reusable 55px file identity composition established in Wave 5. Document Row is a separately documented repository extension. Their implementations, fixtures, browser tests, responsive/content evidence, and native nested actions remain regression dependencies; none certifies an enclosing uploader, Detailed appeals screen, attachment lifecycle, or upload controller.
 
@@ -23,6 +25,6 @@ Source integrity and structural contract pass independently. Runtime browser, ac
 
 Focused evidence passes as 6/6 source/manifest/census checks and 1/1 Chromium structural occurrence-guard check. The aggregate `npm run check` passes: OpenSpec health; deterministic generation; 130/130 Node tests; ESLint, Stylelint, and Prettier; all workspace builds (including 497 Showcase modules); validation of 68 source SVGs, 3 token groups, 119 canonical icons, and 42 aliases; clean consumption of 4 packed packages; and 209/209 Chromium tests. The browser result proves only structural absence for this family. `git diff --check`, candidate-bound receipts, GitHub CI, review-thread state, and delivery evidence are recorded at delivery time. No primitive status or evidence result is combined with the Wave 11 family disposition.
 
-## Component disposition
+## Blocking finding and component disposition
 
-Upload / Document compositions are `VERIFIED` for the bounded source, primitive-boundary, and repository-absence contract. `implementation_status` remains `composition-only`, while the family has zero higher-level production implementations. This does not certify a production uploader, upload lifecycle, generic Detailed appeals layout, runtime consumer, or any nested verified primitive. There are no accepted deviations or known scope-local findings.
+`wave11-detailed-appeals-authority-conflict` is an open P1 finding tracked in PR #47. Upload / Document compositions remain `FINDINGS`, not `VERIFIED`, until the roadmap/source assignment is corrected and the affected OpenSpec/evidence is re-synthesized. `implementation_status` remains `composition-only`, with zero higher-level production implementations. The completed Documents.svg census and the File Row / Document Row boundary remain valid evidence but cannot certify the unresolved family.
