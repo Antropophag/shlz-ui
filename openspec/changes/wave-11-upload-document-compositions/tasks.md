@@ -9,9 +9,9 @@
 
 ## 3. Evidence and disposition
 
-- [ ] 3.1 Reconcile the project inventory and create the Wave 11 report with exact hashes, source facts, nested Upload-Drag variant attribution, observed occurrence counts, evidence applicability, unsupported lifecycle semantics, CI/review state, and an independent family disposition while Wave 5 primitive statuses remain unchanged.
+- [x] 3.1 Reconcile the project inventory and create the Wave 11 report with exact hashes, source facts, nested Upload-Drag variant attribution, observed occurrence counts, evidence applicability, unsupported lifecycle semantics, CI/review state, and an independent family disposition while Wave 5 primitive statuses remain unchanged.
 
 ## 4. Validation, review, and delivery
 
-- [ ] 4.1 Run source integrity, OpenSpec, formatting/lint/build/package, manifest/census, affected, and final aggregate validation; no raw source or runtime/public upload implementation is added.
-- [ ] 4.2 Review the complete episode diff independently against repository standards, the Wave 11 spec, authoritative SVGs, and non-goals; remediate every scope-local finding, re-run affected checks, satisfy route/delivery guards, and deliver an unmerged green PR targeting `main`.
+- [x] 4.1 Run source integrity, OpenSpec, formatting/lint/build/package, manifest/census, affected, and final aggregate validation; no raw source or runtime/public upload implementation is added.
+- [x] 4.2 Review the complete episode diff independently against repository standards, the Wave 11 spec, authoritative SVGs, and non-goals; remediate every scope-local finding, re-run affected checks, satisfy route/delivery guards, and deliver an unmerged green PR targeting `main`.

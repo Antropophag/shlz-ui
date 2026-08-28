@@ -1970,7 +1970,7 @@
       "canonical_name": "Upload / Document compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
       "production_implementation": [],
       "behavior": [],
