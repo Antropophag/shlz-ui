@@ -62,6 +62,7 @@ Call `field.destroy()` from the application teardown lifecycle.
 | Option           | Contract                                                                                                        |
 | ---------------- | --------------------------------------------------------------------------------------------------------------- |
 | `label`          | Required visible label.                                                                                         |
+| `size`           | Source-backed `large` (default) or `medium` control size.                                                       |
 | `name`           | Name of the hidden native form value; omit for a display-only field.                                            |
 | `value`          | Initial empty string or strict `YYYY-MM-DD`.                                                                    |
 | `locale`         | Explicit `Intl` locale. Falls back to document language, then the runtime locale.                               |

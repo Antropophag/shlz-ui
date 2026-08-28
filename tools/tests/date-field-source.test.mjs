@@ -51,3 +51,27 @@ test("Date Field documentation points to its executable plain-HTML example", asy
     /data-component-audit-id="date-picker-calendar-date-field-fixture"/,
   );
 });
+
+test("Date Field visual layer records source-backed sizes and interactive states", async () => {
+  const [entrypoint, styles, declarations] = await Promise.all([
+    readFile("packages/styles/shlz.css", "utf8"),
+    readFile("packages/styles/components/date-field.css", "utf8"),
+    readFile("packages/behaviors/dist/date-field.d.ts", "utf8"),
+  ]);
+
+  assert.match(entrypoint, /components\/date-field\.css/);
+  assert.match(declarations, /size\?: "large" \| "medium"/);
+  for (const contract of [
+    "FACT: Date-Picker.svg",
+    ".shlz-date-field--large",
+    ".shlz-date-field--medium",
+    ":hover",
+    ":focus-within",
+    '[aria-invalid="true"]',
+    ":disabled",
+  ])
+    assert.ok(
+      styles.includes(contract),
+      `missing visual contract: ${contract}`,
+    );
+});

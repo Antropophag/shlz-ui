@@ -16,7 +16,7 @@ test("Date Field separates localized text from stable ISO form value", async ({
 
   const data = await page
     .locator("[data-date-field-form]")
-    .evaluate((form) => Object.fromEntries(new FormData(form)));
+    .evaluate((form) => Object.fromEntries(new window.FormData(form)));
   expect(data).toEqual({ deliveryDate: "2026-08-28" });
 });
 
@@ -101,4 +101,82 @@ test("native form reset restores visible value, committed value, and validity", 
   await expect(
     page.locator('input[type="hidden"][name="deliveryDate"]'),
   ).toHaveValue("2026-08-28");
+});
+
+test("source-backed Date Field sizes and states have observable geometry and paint", async ({
+  page,
+}) => {
+  const root = page.locator("[data-date-field-fixture]");
+  const input = page.getByRole("textbox", { name: "Дата поставки" });
+  const control = root.locator(".shlz-date-field__control");
+
+  await expect(root).toHaveClass(/shlz-date-field--large/);
+  await expect(control).toHaveCSS("height", "40px");
+  await expect(root).toHaveCSS("width", "250px");
+  await expect(input).toHaveValue("28.08.2026");
+
+  const defaultBackground = await control.evaluate(
+    (element) => window.getComputedStyle(element).backgroundColor,
+  );
+  await control.hover();
+  await expect(control).not.toHaveCSS("background-color", defaultBackground);
+
+  await input.focus();
+  await expect(control).toHaveCSS("border-top-color", "rgb(37, 61, 152)");
+
+  await input.fill("31.02.2026");
+  await input.press("Enter");
+  await expect(control).toHaveCSS("border-top-color", "rgb(204, 31, 31)");
+
+  const disabledRoot = page.locator("[data-disabled-field]");
+  await expect(disabledRoot.locator(".shlz-date-field__control")).toHaveCSS(
+    "cursor",
+    "not-allowed",
+  );
+
+  const mediumHeight = await page.evaluate(() => {
+    const host = document.createElement("div");
+    document.body.append(host);
+    const controller = new window.__dateFieldController.constructor(host, {
+      label: "Средняя дата",
+      size: "medium",
+    });
+    const height = window.getComputedStyle(
+      host.querySelector(".shlz-date-field__control"),
+    ).height;
+    controller.destroy();
+    host.remove();
+    return height;
+  });
+  expect(mediumHeight).toBe("32px");
+});
+
+test("Date Field source states remain visually stable", async ({ page }) => {
+  const root = page.locator("[data-date-field-fixture]");
+  const input = page.getByRole("textbox", { name: "Дата поставки" });
+
+  await expect(root).toHaveScreenshot("date-field-large-filled.png");
+  await root.locator(".shlz-date-field__control").hover();
+  await expect(root).toHaveScreenshot("date-field-large-hover.png");
+  await input.focus();
+  await expect(root).toHaveScreenshot("date-field-large-focus.png");
+  await input.fill("31.02.2026");
+  await input.press("Enter");
+  await expect(root).toHaveScreenshot("date-field-large-invalid.png");
+  await expect(page.locator("[data-disabled-field]")).toHaveScreenshot(
+    "date-field-large-disabled.png",
+  );
+
+  await page.evaluate(() => {
+    const host = document.createElement("div");
+    host.dataset.mediumDateField = "";
+    document.body.append(host);
+    new window.__dateFieldController.constructor(host, {
+      label: "Дата",
+      size: "medium",
+    });
+  });
+  await expect(page.locator("[data-medium-date-field]")).toHaveScreenshot(
+    "date-field-medium-default.png",
+  );
 });
