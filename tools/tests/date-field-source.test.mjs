@@ -75,3 +75,25 @@ test("Date Field visual layer records source-backed sizes and interactive states
       `missing visual contract: ${contract}`,
     );
 });
+
+test("Calendar visual layer records every authoritative cell state", async () => {
+  const [entrypoint, styles] = await Promise.all([
+    readFile("packages/styles/shlz.css", "utf8"),
+    readFile("packages/styles/components/calendar.css", "utf8"),
+  ]);
+  assert.match(entrypoint, /components\/calendar\.css/);
+  for (const contract of [
+    "FACT: Picker-Dropdown",
+    "FACT: Picker-Cell/Month",
+    ".shlz-calendar__header",
+    ".shlz-calendar__weekdays",
+    '[aria-current="date"]',
+    '[aria-selected="true"]',
+    '[data-in-range="true"]',
+    '[data-in-month="false"]',
+    ":hover",
+    ":focus-visible",
+    ":disabled",
+  ])
+    assert.ok(styles.includes(contract), `missing Calendar state: ${contract}`);
+});

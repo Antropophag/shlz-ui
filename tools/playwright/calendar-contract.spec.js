@@ -111,3 +111,32 @@ test("Calendar month controls expose bounds and preserve a single tab stop", asy
     calendar.locator('[role="gridcell"] button:not(:disabled)[tabindex="0"]'),
   ).toHaveCount(1);
 });
+
+test("Calendar source states have observable surface and cell styling", async ({
+  page,
+}) => {
+  const calendar = page.getByRole("region", { name: "Календарь периода" });
+  await expect(calendar).toHaveCSS("width", "280px");
+  await expect(calendar).toHaveCSS("background-color", "rgb(255, 255, 255)");
+
+  const start = calendar.getByRole("button", { name: /12 августа 2026/ });
+  const middle = calendar.getByRole("button", { name: /13 августа 2026/ });
+  const end = calendar.getByRole("button", { name: /15 августа 2026/ });
+  const today = calendar.getByRole("button", { name: /20 августа 2026/ });
+  const disabled = calendar.getByRole("button", { name: /18 августа 2026/ });
+  const outside = calendar.locator('[data-date="2026-07-27"]');
+
+  await expect(start).toHaveCSS("width", "30px");
+  await expect(start).toHaveCSS("background-color", "rgb(37, 61, 152)");
+  await expect(middle).toHaveCSS("background-color", "rgb(238, 240, 244)");
+  await expect(end).toHaveCSS("background-color", "rgb(37, 61, 152)");
+  await expect(today).toHaveCSS("color", "rgb(37, 61, 152)");
+  await expect(disabled).toHaveCSS("cursor", "not-allowed");
+  await expect(outside).toHaveCSS("opacity", "0.25");
+
+  await today.hover();
+  await expect(today).toHaveCSS("background-color", "rgb(245, 245, 245)");
+  await today.focus();
+  await expect(today).toHaveCSS("outline-style", "solid");
+  await expect(calendar).toHaveScreenshot("calendar-range-states.png");
+});

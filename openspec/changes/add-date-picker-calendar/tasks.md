@@ -29,7 +29,7 @@
 ## 5. Source-backed visual layer
 
 - [x] 5.1 Add Date Field CSS states and Large/Medium sizing from authoritative source evidence, tagging source-observed values versus repository decisions, and verify structural tests plus focused visual comparisons for default, hover, focus, filled, invalid, and disabled states.
-- [ ] 5.2 Add Calendar surface, header, weekday grid, day cells, today, selected, range, hover, focus, outside-month, and disabled styles from authoritative source evidence and verify structural/source tests plus focused state screenshots.
+- [x] 5.2 Add Calendar surface, header, weekday grid, day cells, today, selected, range, hover, focus, outside-month, and disabled styles from authoritative source evidence and verify structural/source tests plus focused state screenshots.
 - [ ] 5.3 Implement one-month default and explicitly requested two-month container-responsive layout, including narrow fallback without horizontal page overflow, and verify focused width-boundary and content/locale-stress browser tests.
 
 ## 6. Date Picker composition
