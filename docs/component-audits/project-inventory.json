@@ -1971,9 +1971,7 @@
       "category": "application-compositions",
       "implementation_status": "composition-only",
       "audit_status": "INVENTORIED",
-      "authoritative_source": [
-        "shlz-design-source/raw/svg/Documents.svg"
-      ],
+      "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
       "production_implementation": [],
       "behavior": [],
       "docs": [
