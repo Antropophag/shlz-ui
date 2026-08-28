@@ -39,7 +39,7 @@
       "canonical_name": "Tokens",
       "category": "foundations",
       "implementation_status": "reusable",
-      "audit_status": "FINDINGS",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Colors.svg",
         "shlz-design-source/raw/svg/Spacing.svg",
@@ -66,16 +66,7 @@
         "CSS generation",
         "package exports"
       ],
-      "known_findings": [
-        {
-          "id": "wave11-detailed-appeals-authority-conflict",
-          "severity": "P1",
-          "status": "open-blocking",
-          "description": "Detailed appeals.svg contains Employees, Event plaque and Event compositions rather than the Attached Document and Drag and Drop Document variants assigned to it by the Wave 11 roadmap",
-          "evidence": "shlz-design-source/raw/svg/Detailed appeals.svg compared with docs/component-audit-roadmap.md",
-          "tracking": "https://github.com/Antropophag/shlz-ui/pull/47"
-        }
-      ],
+      "known_findings": [],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 1,

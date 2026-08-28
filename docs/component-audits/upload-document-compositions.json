@@ -156,7 +156,7 @@
       "evidence": "docs/component-audits/file-row.json"
     },
     {
-      "claim": "the family is verified through source integrity, a primitive-boundary ledger, and mutation-sensitive absence evidence rather than an illustrative upload implementation",
+      "claim": "a future bounded VERIFIED disposition depends on source integrity, a primitive-boundary ledger, and mutation-sensitive absence evidence rather than an illustrative upload implementation",
       "classification": "repository-decision",
       "evidence": "docs/component-audits/wave-11-report.md"
     },
@@ -198,7 +198,7 @@
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "VERIFIED describes the bounded source, primitive-boundary, and repository-absence audit and does not mean a production uploader exists",
+    "If the audit advances to VERIFIED after validation and review, that status describes only the bounded source, primitive-boundary, and repository-absence audit and does not mean a production uploader exists",
     "outlined text and raster-backed application screenshots do not establish literal runtime copy, structured semantics, or reusable screen layout",
     "File Row and Document Row retain their independent Wave 5 contracts and evidence; no primitive status is combined with this family",
     "Chromium interaction and screenshot evidence is intentionally inapplicable until a separately approved executable contract exists"
