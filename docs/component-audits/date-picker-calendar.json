@@ -312,20 +312,21 @@
     "focusedUnitStructuralSourceDocsAudit": "pass: node --test --test-concurrency=1 tools/tests/*date*.test.mjs tools/tests/component-audit-manifest.test.mjs tools/tests/component-documentation.test.mjs — 37/37",
     "packageBuild": "pass: npm run build:packages",
     "showcaseBuild": "pass: npm run build -w @shlz/showcase; Vite reports the existing chunk-size advisory",
-    "focusedBrowser": "pass: seven Calendar/Date Field/Date Picker accessibility, visual, Showcase and consumer specs — 25/25",
+    "focusedBrowser": "pass: seven Calendar/Date Field/Date Picker accessibility, visual, Showcase and consumer specs — 27/27 after review regressions added boundary focus, native validity, exact event-count and consumer-reset coverage",
     "packageConsumer": "pass: npm run test:packages; four packed packages installed and consumed from a clean project",
     "openSpec": "pass: openspec validate --all --strict — 24/24 changes; npm run check:openspec healthy",
     "scopeQuality": "pass: focused ESLint has 0 errors (TypeScript is outside this ESLint config), focused Stylelint passes, all changed text files pass Prettier, and git diff --check passes",
     "fullRegression": "pass: npm test — 166/166 after the reusable/VERIFIED inventory promotion and cross-family census reconciliation",
+    "fullBrowserRegression": "pass: npm run test:e2e — 235/235 locally after additive Showcase stabilization and Wave 6 ledger reconciliation",
     "fullLintLimitation": "npm run lint passes ESLint and Stylelint, then Prettier reports eight pre-existing committed formatting deviations outside this change, including an immutable execution receipt; no scope-local formatting deviation remains",
-    "ci": "not-run for the uncommitted candidate; task 8.4 will push and report PR checks",
-    "reviewThreads": "pass locally: independent Standards and Spec reviews both pass after all findings were closed; GitHub thread reconciliation remains a delivery step"
+    "ci": "pass for implementation candidate 1ace25f on PR #49, run 33211826629: Required checks 2m8s, Browser and visual tests 10m3s, SonarCloud 53s, CodeRabbit status pass/manual-review-required",
+    "reviewThreads": "12 unresolved GitHub threads observed after CodeRabbit review: 2 are outdated after 1ace25f; 8 other current code/docs findings are fixed and regression-checked; the roadmap pending-status finding is closed by this delivery record; the remaining baseline-receipt path comment is explicitly non-actionable because the canonical content-addressed receipt is immutable and harness-generated"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
     "Automated browser evidence is Chromium-only and does not replace application-specific assistive-technology testing",
     "Natural-language parsing, non-Latin digit parsing, time/timezone selection, presets and framework adapters are outside the approved contract",
-    "PR CI status and GitHub review-thread reconciliation are recorded after the immutable candidate is pushed"
+    "The canonical baseline receipt includes the harness-recorded absolute repository root; immutable receipt integrity takes precedence over rewriting that local metadata"
   ]
 }

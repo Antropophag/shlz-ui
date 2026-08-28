@@ -103,6 +103,6 @@ The durable work sequence is:
 9. **Complete:** add exhaustive Showcase fixtures and at least one real application-owned consumer flow.
 10. **Complete:** add unit, structural, runtime-browser, accessibility, focused-visual, responsive/content-stress, consumer, and source-integrity evidence.
 11. **Complete:** publish component documentation and reconcile the audit manifest, occurrence census, and project inventory.
-12. **Pending:** run the completion gate, manual state walk, review, conformance, CI, and unmerged-PR delivery.
+12. **Complete:** the component gate, manual state walk, independent review, conformance, CI, and unmerged PR delivery are recorded for `add-date-picker-calendar`; merge remains user-owned.
 
 Initial non-goals unless step 1 explicitly promotes them are date-time selection, timezone conversion, recurrence, week numbers, presets, natural-language parsing, and application-specific scheduling rules. Vue or other framework adapters follow the framework-neutral contract and cannot become the foundation of the family.
