@@ -22,4 +22,4 @@
 ## 5. Completion, review, and delivery
 
 - [x] 5.1 Run the complete component gate, manual interaction walk, source integrity, OpenSpec, lint, build, package, full browser, accessibility, visual, and regression validation; record exact occurrences, evidence levels, supported bounds, limitations, CI, review threads, and Planner Schedule status without changing Calendar Grid, Date Picker, Messaging, or History status
-- [ ] 5.2 Run independent Standards and Spec review against the immutable baseline, remediate every scope-local finding, rerun affected checks, complete route-conformance and delivery guards, push the task branch, open an unmerged PR to `main`, explicitly trigger CodeRabbit review, resolve every still-valid thread, and verify required GitHub checks are green
+- [x] 5.2 Run independent Standards and Spec review against the immutable baseline, remediate every scope-local finding, rerun affected checks, complete route-conformance and delivery guards, push the task branch, open an unmerged PR to `main`, explicitly trigger CodeRabbit review, resolve every still-valid thread, and verify required GitHub checks are green
