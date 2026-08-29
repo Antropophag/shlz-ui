@@ -5,7 +5,7 @@ const dates = [
   ["28 Aug", "Past · Friday", "past"],
   ["29 Aug", "Today", "today"],
   ["30 Aug", "Unavailable · weekend", "unavailable"],
-  ["31 Aug", "Monday", "unavailable"],
+  ["31 Aug", "Unavailable · holiday", "unavailable"],
   ["1 Sep", "Future · Tuesday", "future"],
 ];
 

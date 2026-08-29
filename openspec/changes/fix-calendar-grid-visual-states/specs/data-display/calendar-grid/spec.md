@@ -29,7 +29,8 @@ The library SHALL style these states without calculating the current date, local
 #### Scenario: Temporal states have independent executable evidence
 
 - **WHEN** Calendar Grid visual acceptance is evaluated
-- **THEN** focused browser assertions independently compare the computed outer and inner backgrounds, foreground, emphasis, inset/corner geometry, borders, and separators of past, today, and future headers and every corresponding body cell against the documented source-backed contract
+- **THEN** focused browser assertions independently compare the computed outer and inner backgrounds, foreground, emphasis, inset/corner geometry, borders, and separators of past, today, and future headers against the documented source-backed contract
+- **AND** corresponding body cells are independently compared for their documented surface, foreground, emphasis, borders, and separators, preserving past, today, and future coverage without requiring header-only inner geometry
 
 #### Scenario: Locale and timezone stay consumer-owned
 

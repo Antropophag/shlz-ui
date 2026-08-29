@@ -35,6 +35,9 @@ test("classifies semantic Calendar Grid occurrences and accessibility", async ({
   await expect(
     grid.getByRole("columnheader", { name: "August 2026" }),
   ).toHaveAttribute("scope", "colgroup");
+  await expect(
+    grid.getByRole("columnheader", { name: "31 Aug Unavailable · holiday" }),
+  ).toBeVisible();
   const headers = await grid.locator("td").first().getAttribute("headers");
   expect(headers).toContain("showcase-grid-row-design");
   expect(headers).toContain("showcase-grid-date-0");
