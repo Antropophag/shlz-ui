@@ -176,7 +176,10 @@
 }
 
 .shlz-calendar-grid
-  :is(th, td)[data-shlz-calendar-grid-state="today"][data-shlz-calendar-grid-unavailable] {
+  :is(
+    th,
+    td
+  )[data-shlz-calendar-grid-state="today"][data-shlz-calendar-grid-unavailable] {
   background-color: var(--shlz-source-color-background-primary);
 }
 
