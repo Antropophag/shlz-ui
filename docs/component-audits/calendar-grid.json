@@ -41,7 +41,7 @@
   ],
   "sourceClaims": [
     {
-      "claim": "the raw Calendar authority establishes distinct past, today and future Time headers, today fill across demonstrated body-cell variants, and full-cell unavailable hatching while remaining byte-identical",
+      "claim": "the raw Calendar authority establishes distinct past, today and future Time headers through exact outer/inner fills, inset and corner geometry, today fill across demonstrated body-cell variants, and full-cell unavailable hatching while remaining byte-identical",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Calendar.svg"
     },
@@ -76,7 +76,7 @@
     "structural-contract": "pass: native table markup, package exports, docs, plain HTML, Showcase fixture and live consumer are classified",
     "runtime-browser": "pass: row/cell disclosure, typed bubbling events, repeat enhancement, teardown, row replacement/re-enhancement and consumer action execute",
     "accessibility": "pass: accessible table name, native row/date headers, cell header relationships, unavailable reason, native buttons and focus retention execute",
-    "focused-visual": "pass: independent computed background, foreground, emphasis and separator assertions prove past, today and future headers/body cells; component-local desktop and unchanged narrow snapshots cover the source matrix",
+    "focused-visual": "pass: independent computed background, foreground, emphasis, separator, inner-surface inset and corner assertions prove past, today and future headers and every corresponding body cell; component-local desktop and unchanged narrow snapshots cover the source matrix",
     "consumer-integration": "pass: Data Workspace composition owns data and its native item action",
     "responsive-content-stress": "pass: narrow, two-axis overflow, long localized content, empty cells and enlarged text remain reachable"
   },
@@ -106,7 +106,7 @@
       "text-scale"
     ],
     "browserTest": "tools/playwright/calendar-grid.spec.js",
-    "manualStateWalk": "pass: inspected past/today/future header and full-column paint, pointer, Tab/focus-visible, Enter/Space, expanded/collapsed, unavailable, narrow, 200-percent text and content-stress states on the Showcase and Data Workspace surfaces"
+    "manualStateWalk": "pass: inspected past/today/future outer and inner header treatments and full-column body paint, pointer, Tab/focus-visible, Enter/Space, expanded/collapsed, unavailable, narrow, 200-percent text and content-stress states on the Showcase and Data Workspace surfaces"
   },
   "acceptedDeviations": [],
   "findings": [],

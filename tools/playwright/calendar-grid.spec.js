@@ -216,6 +216,7 @@ test("renders source-backed past, today and future header and column treatments"
   const stateStyles = await grid.evaluate((element) => {
     const read = (node) => {
       const style = globalThis.getComputedStyle(node);
+      const treatment = globalThis.getComputedStyle(node, "::before");
       const primary = node.querySelector(".shlz-calendar-grid__date-primary");
       const secondary = node.querySelector(
         ".shlz-calendar-grid__date-secondary",
@@ -226,6 +227,7 @@ test("renders source-backed past, today and future header and column treatments"
         borderInlineEndColor: style.borderInlineEndColor,
         borderBlockEndColor: style.borderBlockEndColor,
         boxShadow: style.boxShadow,
+        fontWeight: style.fontWeight,
         primaryWeight: primary
           ? globalThis.getComputedStyle(primary).fontWeight
           : null,
@@ -235,6 +237,14 @@ test("renders source-backed past, today and future header and column treatments"
         secondaryOpacity: secondary
           ? globalThis.getComputedStyle(secondary).opacity
           : null,
+        treatmentBackground: treatment.backgroundColor,
+        treatmentInsetBlockStart: treatment.insetBlockStart,
+        treatmentInsetInlineStart: treatment.insetInlineStart,
+        treatmentInsetInlineEnd: treatment.insetInlineEnd,
+        treatmentStartStartRadius: treatment.borderStartStartRadius,
+        treatmentStartEndRadius: treatment.borderStartEndRadius,
+        treatmentEndStartRadius: treatment.borderEndStartRadius,
+        treatmentEndEndRadius: treatment.borderEndEndRadius,
       };
     };
     return Object.fromEntries(
@@ -258,14 +268,23 @@ test("renders source-backed past, today and future header and column treatments"
   expect(stateStyles).toEqual({
     past: {
       header: {
-        backgroundColor: "rgb(244, 246, 249)",
+        backgroundColor: "rgb(255, 255, 255)",
         color: "rgb(11, 22, 35)",
         borderInlineEndColor: "rgb(209, 216, 223)",
         borderBlockEndColor: "rgb(209, 216, 223)",
         boxShadow: "none",
+        fontWeight: "700",
         primaryWeight: "600",
         secondaryColor: "rgb(11, 22, 35)",
         secondaryOpacity: "1",
+        treatmentBackground: "rgb(238, 240, 244)",
+        treatmentInsetBlockStart: "4px",
+        treatmentInsetInlineStart: "1px",
+        treatmentInsetInlineEnd: "4px",
+        treatmentStartStartRadius: "0px",
+        treatmentStartEndRadius: "8px",
+        treatmentEndStartRadius: "0px",
+        treatmentEndEndRadius: "8px",
       },
       cells: expect.arrayContaining([
         expect.objectContaining({
@@ -276,14 +295,23 @@ test("renders source-backed past, today and future header and column treatments"
     },
     today: {
       header: {
-        backgroundColor: "rgb(238, 240, 244)",
-        color: "rgb(36, 91, 153)",
+        backgroundColor: "rgb(244, 246, 249)",
+        color: "rgb(37, 61, 152)",
         borderInlineEndColor: "rgb(209, 216, 223)",
         borderBlockEndColor: "rgb(209, 216, 223)",
         boxShadow: "none",
+        fontWeight: "700",
         primaryWeight: "600",
-        secondaryColor: "rgb(36, 91, 153)",
+        secondaryColor: "rgb(37, 61, 152)",
         secondaryOpacity: "1",
+        treatmentBackground: "rgba(61, 136, 222, 0.15)",
+        treatmentInsetBlockStart: "4px",
+        treatmentInsetInlineStart: "4px",
+        treatmentInsetInlineEnd: "4px",
+        treatmentStartStartRadius: "8px",
+        treatmentStartEndRadius: "8px",
+        treatmentEndStartRadius: "8px",
+        treatmentEndEndRadius: "8px",
       },
       cells: expect.arrayContaining([
         expect.objectContaining({
@@ -299,9 +327,18 @@ test("renders source-backed past, today and future header and column treatments"
         borderInlineEndColor: "rgb(209, 216, 223)",
         borderBlockEndColor: "rgb(209, 216, 223)",
         boxShadow: "none",
+        fontWeight: "700",
         primaryWeight: "600",
         secondaryColor: "rgb(11, 22, 35)",
         secondaryOpacity: "1",
+        treatmentBackground: "rgb(238, 240, 244)",
+        treatmentInsetBlockStart: "4px",
+        treatmentInsetInlineStart: "4px",
+        treatmentInsetInlineEnd: "0px",
+        treatmentStartStartRadius: "8px",
+        treatmentStartEndRadius: "0px",
+        treatmentEndStartRadius: "8px",
+        treatmentEndEndRadius: "0px",
       },
       cells: expect.arrayContaining([
         expect.objectContaining({
@@ -314,6 +351,20 @@ test("renders source-backed past, today and future header and column treatments"
   expect(stateStyles.past.cells).toHaveLength(2);
   expect(stateStyles.today.cells).toHaveLength(2);
   expect(stateStyles.future.cells).toHaveLength(2);
+  for (const [state, backgroundColor] of [
+    ["past", "rgb(255, 255, 255)"],
+    ["today", "rgb(244, 246, 249)"],
+    ["future", "rgb(255, 255, 255)"],
+  ]) {
+    for (const style of stateStyles[state].cells) {
+      expect(style.backgroundColor).toBe(backgroundColor);
+      expect(style.color).toBe("rgb(11, 22, 35)");
+      expect(style.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+      expect(style.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+      expect(style.boxShadow).toBe("none");
+      expect(style.fontWeight).toBe("400");
+    }
+  }
 
   const unavailableStyles = await grid.evaluate((element) =>
     [

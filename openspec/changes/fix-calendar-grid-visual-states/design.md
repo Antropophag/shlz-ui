@@ -25,14 +25,14 @@ The Calendar SVG component sheet separates a temporal `Time` header primitive fr
 
 Source facts are recorded as follows:
 
-- past `Time`: `#F4F6F9` fill, primary dark text, source separator/border;
-- today `Time`: `#EEF0F4` fill with `#245B99` accent text and source separator/border;
-- future `Time`: white/base fill, primary dark text, `#D1D8DF` source border;
+- past `Time`: white outer cell with a `#EEF0F4` inner surface inset 1px at the start and 4px on the other sides, rounded at the trailing corners, dark text, and source separators;
+- today `Time`: `#F4F6F9` outer cell with a 4px-inset, 8px-rounded `#3D88DE`/15% inner surface, `#253D98` text, and source separators;
+- future `Time`: white outer cell with a `#EEF0F4` inner surface inset 4px at the start and block edges, flush at the end, rounded at the leading corners, dark text, and source separators;
 - today `Calendar Cell`: `#F4F6F9` across every demonstrated body-cell size/content state;
 - day-off/unavailable: white/base cell with repeated `#F5F5F5` diagonal hatch and ordinary `#D1D8DF` separators;
 - past and future have no separate body-cell variant in the authoritative sheet.
 
-Repeated values and applications above are directly observed source facts. The conclusion that today fill applies to every body cell is a derived pattern from all demonstrated Today body variants. Mapping those colors/borders to existing repository tokens and using header-vs-body selectors is a repository decision. No new visual value or unresolved assumption is introduced.
+Repeated values, inset geometry, corner geometry, and applications above are directly observed source facts. The conclusion that today fill applies to every body cell is a derived pattern from all demonstrated Today body variants. Mapping those colors/borders to existing repository tokens and using a generated inner header surface plus header-vs-body selectors is a repository decision. No new visual value or unresolved assumption is introduced.
 
 Alternative: tint entire past and future columns to maximize distinction. Rejected because the source does not define that paint. Alternative: retain the blue today top rule as an extra cue. Rejected because it is not present in the authority and changes the hierarchy.
 
@@ -44,7 +44,7 @@ Alternative: add header-specific variants. Rejected because table role already s
 
 ### 3. Make focused computed styles the primary regression signal
 
-One focused Playwright case will read each state header and a representative body cell in the same rendered Showcase grid, asserting the exact computed background, foreground, font weight, and border/separator properties relevant to the source. It will also prove that today spans all body rows and that past/future body surfaces intentionally match the base surface. Calendar Grid snapshots remain supplemental visual evidence and are updated only after the computed contract passes.
+One focused Playwright case will read each state header, its generated inner treatment, and every corresponding body cell in the same rendered Showcase grid, asserting the exact computed background, foreground, font weight, inset/corner geometry, and border/separator properties relevant to the source. It will also prove that today spans all body rows and that past/future body surfaces intentionally match the base surface. Calendar Grid snapshots remain supplemental visual evidence and are updated only after the computed contract passes.
 
 Alternative: rely on updated snapshots. Rejected because a single image can change without identifying which state contract regressed.
 

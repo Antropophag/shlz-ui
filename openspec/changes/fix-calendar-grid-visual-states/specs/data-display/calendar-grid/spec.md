@@ -2,24 +2,24 @@
 
 ### Requirement: Date columns and temporal presentation
 
-The calendar grid SHALL support consumer-provided date columns with visible primary and secondary labels, optional month or period grouping, and explicit `past`, `today`, `future`, and `unavailable` presentation states. The temporal header treatment SHALL reproduce the authoritative source: past uses the muted filled time-header treatment, today uses the accent-tinted time-header treatment, and future uses the base surface with its source border. The today treatment SHALL also apply the source subtle fill to every corresponding body cell in the column; past and future body cells SHALL retain the base surface because the authoritative source defines no separate body-cell paint for them. Unavailable cells SHALL retain the source hatch treatment across the cell surface. State text color, emphasis, backgrounds, borders, and separators SHALL use source-mapped repository tokens, and an invented today top rule MUST NOT replace the source treatment.
+The calendar grid SHALL support consumer-provided date columns with visible primary and secondary labels, optional month or period grouping, and explicit `past`, `today`, `future`, and `unavailable` presentation states. The temporal header treatment SHALL reproduce the authoritative source: past uses a white outer surface and muted inner surface rounded at the trailing corners, today uses a subtle outer surface and fully rounded accent inner surface, and future uses a white outer surface and muted inner surface rounded at the leading corners. The today treatment SHALL also apply the source subtle fill to every corresponding body cell in the column; past and future body cells SHALL retain the base surface because the authoritative source defines no separate body-cell paint for them. Unavailable cells SHALL retain the source hatch treatment across the cell surface. State text color, emphasis, outer and inner backgrounds, inset and corner geometry, borders, and separators SHALL use source-mapped repository tokens, and an invented today top rule MUST NOT replace the source treatment.
 
 The library SHALL style these states without calculating the current date, locale, week boundary, timezone, work calendar, holiday, or availability. Unavailable columns SHALL remain identifiable without relying only on hatch paint or color.
 
 #### Scenario: Consumer marks a past date
 
 - **WHEN** a consumer identifies a date column header and its cells as `past`
-- **THEN** the header receives the muted filled source treatment while its body cells retain the base surface and ordinary grid separators
+- **THEN** the header receives the white outer and trailing-rounded muted inner source treatment while its body cells retain the base surface and ordinary grid separators
 
 #### Scenario: Consumer marks the current date
 
 - **WHEN** a consumer identifies one date column header and its cells as `today`
-- **THEN** the header receives the accent-tinted source treatment and every corresponding body cell receives the subtle source fill while retaining semantic headers and ordinary grid separators
+- **THEN** the header receives the subtle outer and fully rounded accent inner source treatment and every corresponding body cell receives the subtle source fill while retaining semantic headers and ordinary grid separators
 
 #### Scenario: Consumer marks a future date
 
 - **WHEN** a consumer identifies a date column header and its cells as `future`
-- **THEN** the header receives the base-surface bordered source treatment while its body cells retain the base surface and ordinary grid separators
+- **THEN** the header receives the white outer and leading-rounded muted inner source treatment while its body cells retain the base surface and ordinary grid separators
 
 #### Scenario: Weekend or unavailable date is shown
 
@@ -29,7 +29,7 @@ The library SHALL style these states without calculating the current date, local
 #### Scenario: Temporal states have independent executable evidence
 
 - **WHEN** Calendar Grid visual acceptance is evaluated
-- **THEN** focused browser assertions independently compare the computed background, foreground, emphasis, border or separator treatment of past, today, and future headers and body cells against the documented source-backed contract
+- **THEN** focused browser assertions independently compare the computed outer and inner backgrounds, foreground, emphasis, inset/corner geometry, borders, and separators of past, today, and future headers and every corresponding body cell against the documented source-backed contract
 
 #### Scenario: Locale and timezone stay consumer-owned
 
