@@ -38,6 +38,18 @@
       "types": "./dist/drawer.d.ts",
       "import": "./dist/drawer.js"
     },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "import": "./dist/calendar.js"
+    },
+    "./date-field": {
+      "types": "./dist/date-field.d.ts",
+      "import": "./dist/date-field.js"
+    },
+    "./date-picker": {
+      "types": "./dist/date-picker.d.ts",
+      "import": "./dist/date-picker.js"
+    },
     "./browser": {
       "types": "./dist/index.d.ts",
       "import": "./dist/browser.js"

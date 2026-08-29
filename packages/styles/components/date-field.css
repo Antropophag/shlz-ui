@@ -1,0 +1,110 @@
+.shlz-date-field {
+  /* FACT: Date-Picker.svg variants are 250px wide with an 8px label gap. */
+  display: grid;
+  inline-size: 250px;
+  max-inline-size: 100%;
+  gap: var(--shlz-source-spacing-8);
+  color: var(--shlz-semantic-color-text-primary);
+  font-family: var(--shlz-semantic-font-family);
+}
+
+.shlz-date-field__label,
+.shlz-date-field__description {
+  min-block-size: 15px;
+
+  /* DECISION: source gray-200 is 2.78:1 on white; keep the secondary
+     hierarchy with opacity while meeting WCAG AA for normal text. */
+  color: var(--shlz-semantic-color-text-primary);
+  opacity: 0.65;
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  font-weight: var(--shlz-semantic-typography-weight-regular);
+  line-height: 15px;
+}
+
+.shlz-date-field__error {
+  min-block-size: 15px;
+  color: var(--shlz-source-color-aditional-red-100);
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  font-weight: var(--shlz-semantic-typography-weight-regular);
+  line-height: 15px;
+}
+
+.shlz-date-field__control {
+  /* FACT: Date-Picker.svg Large and Medium controls are 40px and 32px high. */
+  display: flex;
+  min-inline-size: 0;
+  align-items: center;
+  padding-inline-start: 12px;
+  color: var(--shlz-source-color-dark-blue-dark-blue);
+  background: var(--shlz-source-color-gray-gray-50);
+  border: 1px solid transparent;
+}
+
+.shlz-date-field--large .shlz-date-field__control {
+  block-size: 40px;
+  border-radius: 20px;
+}
+
+.shlz-date-field--medium .shlz-date-field__control {
+  block-size: 32px;
+  border-radius: 16px;
+}
+
+.shlz-date-field__input {
+  min-inline-size: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  font: inherit;
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  line-height: var(--shlz-semantic-typography-role-field-value-line-height);
+}
+
+.shlz-date-field__trigger {
+  display: inline-grid;
+  flex: 0 0 40px;
+  inline-size: 40px;
+  block-size: 100%;
+  padding: 0;
+  place-items: center;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: inherit;
+  cursor: pointer;
+}
+
+.shlz-date-field__icon {
+  inline-size: 24px;
+  block-size: 24px;
+}
+
+.shlz-date-field__control:hover:not(:has(:disabled, [readonly])) {
+  /* FACT: the source Hover variants use the blue-50 control surface. */
+  background: var(--shlz-source-color-blue-blue-50);
+}
+
+.shlz-date-field__control:focus-within {
+  /* FACT: the source Focused variants add a blue-200 outline. */
+  background: var(--shlz-source-color-blue-blue-50);
+  border-color: var(--shlz-source-color-blue-blue-200);
+}
+
+.shlz-date-field:has([aria-invalid="true"]) .shlz-date-field__control {
+  /* DECISION: Date-Picker.svg has no invalid variant; use the field contract. */
+  background: var(--shlz-source-color-blue-blue-50);
+  border-color: var(--shlz-source-color-aditional-red-100);
+}
+
+.shlz-date-field:has(:disabled) .shlz-date-field__control {
+  cursor: not-allowed;
+  opacity: var(--shlz-semantic-opacity-disabled);
+}
+
+.shlz-date-field :is(:disabled, [readonly]) {
+  cursor: not-allowed;
+}

@@ -114,7 +114,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
-test("all Wave 6 executable, consumer, stress and absence roots are classified", async ({
+test("all Wave 6 Showcase and plain HTML roots are classified", async ({
   page,
 }) => {
   expect(componentNames).toHaveLength(4);
@@ -122,7 +122,12 @@ test("all Wave 6 executable, consumer, stress and absence roots are classified",
     const manifest = manifests[component];
     const showcaseIds = manifest.occurrences
       .map(({ id }) => id)
-      .filter((id) => !id.endsWith("plain-html-consumer"));
+      .filter(
+        (id) =>
+          !id.endsWith("plain-html-consumer") &&
+          !id.endsWith("standalone-consumers") &&
+          (component !== "date-picker-calendar" || id.includes("-showcase-")),
+      );
     await expectPageOccurrenceSubset(
       page,
       manifest,
@@ -139,6 +144,14 @@ test("all Wave 6 executable, consumer, stress and absence roots are classified",
       .filter((id) => id.endsWith("plain-html-consumer"));
     await expectPageOccurrenceSubset(page, manifest, plainIds, 0);
   }
+
+  await page.goto(fixtureUrl("date-picker.html"));
+  await expectPageOccurrenceSubset(
+    page,
+    manifests.popover,
+    ["popover-date-picker-standalone-consumers"],
+    0,
+  );
 });
 
 test("one Escape closes exactly one top surface independent of registration order", async ({
@@ -609,15 +622,32 @@ test("Popover binds real surface paint to isolated dismissal and focus ownership
   expectMaterialStates("popover");
 });
 
-test("Calendar and Date Picker remain source-only with an empty runtime ledger", async ({
+test("Calendar and Date Picker publish a runtime ledger backed by dedicated evidence", async ({
   page,
 }) => {
-  expect(manifests["date-picker-calendar"].implementation).toEqual([]);
+  const manifest = manifests["date-picker-calendar"];
+  expect(manifest.implementation).toEqual([
+    "packages/behaviors/src/calendar.ts",
+    "packages/behaviors/src/date-field.ts",
+    "packages/behaviors/src/date-picker.ts",
+  ]);
   await expect(
-    page.locator(
-      "input[type='date'], .shlz-calendar, .shlz-date-picker, [data-shlz-calendar], [data-shlz-date-picker]",
-    ),
-  ).toHaveCount(0);
+    page.locator("[data-component-audit-id^='date-picker-calendar-showcase-']"),
+  ).toHaveCount(30);
+  expect(manifest.interactionEvidence.materialStates).toEqual([
+    "calendar-focus",
+    "calendar-range-selection",
+    "picker-open",
+    "picker-dismissed",
+    "picker-committed",
+  ]);
+  expect(manifest.browserTests).toEqual(
+    expect.arrayContaining([
+      "tools/playwright/date-picker-accessibility.spec.js",
+      "tools/playwright/date-picker-contract.spec.js",
+      "tools/playwright/date-picker-visual.spec.js",
+    ]),
+  );
   const index = JSON.parse(
     await readFile(
       new globalThis.URL(
@@ -630,7 +660,13 @@ test("Calendar and Date Picker remain source-only with an empty runtime ledger",
   const datePicker = index.components.find(
     ({ name }) => name === "Date-Picker",
   );
-  const calendar = index.components.find(
+  const pickerCells = index.components.find(
+    ({ name }) => name === "Picker-Cell/Month",
+  );
+  const dropdowns = index.components.filter(
+    ({ name }) => name === "Picker-Dropdown",
+  );
+  const calendarIcon = index.components.find(
     ({ name }) => name === "Interface / Calendar",
   );
   expect(datePicker.kind).toBe("COMPONENT_SET");
@@ -641,8 +677,11 @@ test("Calendar and Date Picker remain source-only with an empty runtime ledger",
     "Filled",
     "Ranged",
   ]);
-  expect(calendar.kind).toBe("COMPONENT");
-  expectMaterialStates("date-picker-calendar");
+  expect(pickerCells.variants).toHaveLength(14);
+  expect(dropdowns.map(({ dimensions }) => dimensions.width)).toEqual([
+    280, 560,
+  ]);
+  expect(calendarIcon.dimensions).toEqual({ width: 24, height: 24 });
 });
 
 test("Wave 6 meaningful text surfaces pass the alpha-aware contrast guard", async ({

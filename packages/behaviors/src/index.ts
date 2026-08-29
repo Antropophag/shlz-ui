@@ -5,3 +5,41 @@ export { TooltipController, enhanceTooltips } from "./tooltip.js";
 export { TabsController, enhanceTabs } from "./tabs.js";
 export { ModalController, enhanceModals } from "./modal.js";
 export { DrawerController, enhanceDrawers } from "./drawer.js";
+export { CalendarController } from "./calendar.js";
+export type {
+  CalendarChangeDetail,
+  CalendarControllerOptions,
+} from "./calendar.js";
+export { DateFieldController } from "./date-field.js";
+export type {
+  DateFieldChangeDetail,
+  DateFieldControllerOptions,
+} from "./date-field.js";
+export { DatePickerController } from "./date-picker.js";
+export type {
+  DatePickerChangeDetail,
+  DatePickerControllerOptions,
+} from "./date-picker.js";
+export * from "./calendar-model.js";
+export {
+  addDays,
+  addMonths,
+  compareIsoDates,
+  daysInMonth,
+  formatLocalizedDate,
+  getIsoWeekday,
+  getLocalizedDatePattern,
+  getMonthMatrix,
+  getWeekdayOrder,
+  isIsoDate,
+  isLeapYear,
+  parseIsoDate,
+  parseLocalizedDate,
+  resolveDateLocale,
+} from "./date-only.js";
+export type {
+  LocalizedDatePatternPart,
+  MonthCell,
+  MonthMatrixOptions,
+  PlainDate,
+} from "./date-only.js";

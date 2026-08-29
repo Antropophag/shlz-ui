@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SHLZ Date Picker behavior fixture</title>
+    <link rel="stylesheet" href="../../packages/tokens/dist/tokens.css" />
+    <link rel="stylesheet" href="../../packages/styles/shlz.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@floating-ui/dom": "../../node_modules/@floating-ui/dom/dist/floating-ui.dom.esm.js",
+          "@floating-ui/core": "../../node_modules/@floating-ui/core/dist/floating-ui.core.esm.js",
+          "@floating-ui/utils": "../../node_modules/@floating-ui/utils/dist/floating-ui.utils.esm.js",
+          "@floating-ui/utils/dom": "../../node_modules/@floating-ui/utils/dist/floating-ui.utils.dom.esm.js"
+        }
+      }
+    </script>
+    <style>
+      body {
+        min-height: 900px;
+        margin: 24px;
+      }
+      form {
+        margin-block-end: 48px;
+      }
+    </style>
+  </head>
+  <body data-component-audit-id="popover-date-picker-standalone-consumers">
+    <form data-single-form>
+      <div
+        data-single-picker
+        data-component-audit-id="date-picker-calendar-single-fixture"
+      ></div>
+      <button type="reset">Сбросить одну дату</button>
+    </form>
+    <form data-range-form>
+      <div
+        data-range-picker
+        data-component-audit-id="date-picker-calendar-range-fixture"
+      ></div>
+      <button type="reset">Сбросить диапазон</button>
+    </form>
+    <button type="button" data-outside>Вне календаря</button>
+    <script type="module">
+      import { DatePickerController } from "../../packages/behaviors/dist/date-picker.js";
+
+      window.__singleDatePicker = new DatePickerController(
+        document.querySelector("[data-single-picker]"),
+        {
+          mode: "single",
+          label: "Дата поездки",
+          calendarLabel: "Календарь даты поездки",
+          name: "travelDate",
+          value: "2026-08-12",
+          visibleMonth: "2026-08",
+          locale: "ru-RU",
+          min: "2026-08-01",
+          max: "2026-09-30",
+        },
+      );
+      window.__rangeDatePicker = new DatePickerController(
+        document.querySelector("[data-range-picker]"),
+        {
+          mode: "range",
+          label: "Начало периода",
+          endLabel: "Конец периода",
+          calendarLabel: "Календарь периода",
+          startName: "periodStart",
+          endName: "periodEnd",
+          value: { start: "2026-08-12", end: "2026-08-15" },
+          visibleMonth: "2026-08",
+          locale: "ru-RU",
+        },
+      );
+    </script>
+  </body>
+</html>

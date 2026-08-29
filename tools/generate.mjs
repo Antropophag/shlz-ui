@@ -195,6 +195,8 @@ const styleSources = [
   "components/avatar.css",
   "components/table.css",
   "components/field.css",
+  "components/date-field.css",
+  "components/calendar.css",
   "components/choice.css",
   "components/status-badge.css",
   "components/dropdown.css",

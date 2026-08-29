@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "intent": "Promote the source-only Date Picker / Calendar family into a framework-neutral production capability with an explicit date-domain, interaction, accessibility, form, visual, and consumer contract.",
+  "revision": 2,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "selection-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "User confirmed that the initial capability includes standalone inline Calendar plus Date Picker in single-date and date-range modes."
+      }
+    },
+    {
+      "id": "date-value-and-locale-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-confirmation",
+        "ref": "User confirmed date-only ISO YYYY-MM-DD public values without timezone conversion; display uses Intl with an application-supplied locale and document language as fallback."
+      }
+    },
+    {
+      "id": "manual-input-and-constraints",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-confirmation",
+        "ref": "User confirmed manual entry with invalid-state feedback plus min, max, and disabled-date constraints."
+      }
+    },
+    {
+      "id": "selection-commit-and-responsive-policy",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-confirmation",
+        "ref": "User confirmed immediate close after single-date selection, close after the range end is selected, no confirmation footer, one month by default, and an explicitly requested second month only when width permits."
+      }
+    },
+    {
+      "id": "module-seams",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md architecture plus docs/adr/0002-framework-agnostic-core.md and docs/adr/0005-progressive-enhancement-behaviors.md support separate Date Field, Calendar, and composing Date Picker modules."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md and docs/component-audits/date-picker-calendar.json designate shlz-design-source/raw/svg/Date-Picker.svg and Calendar.svg as read-only visual authority."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-date-picker-calendar",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "approved",
+    "provenance": {
+      "kind": "user-confirmation",
+      "ref": "On 2026-08-28 the user explicitly instructed: Приступай к реализации OpenSpec."
+    }
+  }
+}

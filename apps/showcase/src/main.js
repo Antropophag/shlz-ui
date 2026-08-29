@@ -12,6 +12,14 @@ import {
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
 import {
+  datePickerShowcaseMarkup,
+  enhanceDatePickerShowcase,
+} from "./date-picker-showcase.js";
+import {
+  datePickerConsumerMarkup,
+  enhanceDatePickerConsumer,
+} from "./date-picker-consumer.js";
+import {
   consumerWorkspaceMarkup,
   enhanceConsumerWorkspace,
 } from "./consumer-workspace.js";
@@ -154,6 +162,7 @@ const navigationGroups = [
       ["dropdown", "Dropdown"],
       ["file-row", "File Row"],
       ["empty-state", "Empty State"],
+      ["date-picker-demo", "Date Picker"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -283,7 +292,9 @@ ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition<
 <section><h2>Icons <span class="shlz-evidence" data-kind="FACT">FACT · normalized Basic Elements manifest</span></h2><p>${manifest.length} canonical logical icons. Compatibility aliases are shown as metadata and are not separate canonical icons.</p>${iconGroups}</section></section>
 <section id="fidelity" class="shlz-major-section"><p class="shlz-section-kicker">C. VISUAL FIDELITY</p><h2>Raw SVG source vs production implementation</h2><p>Левая колонка генерируется непосредственно из raw SVG через документированный viewBox crop; правая использует production DOM, classes, CSS и tokens. Интерактивные behavior demos находятся в Implementation выше.</p>${fidelityMarkup}</section>
 <article id="dropdown-scrollable-demo" data-shlz-dropdown-scrollable-fixture><h3>Dropdown · Items=Srollbar</h3><div class="shlz-dropdown" data-shlz-dropdown data-component-audit-id="dropdown-scrollable-stress"><button class="shlz-button shlz-dropdown__trigger" data-component-audit-id="button-dropdown-scrollable-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="showcase-scrollable-menu">Много действий</button><div class="shlz-dropdown__menu shlz-dropdown__menu--scrollable" id="showcase-scrollable-menu" role="menu" hidden><div class="shlz-dropdown__scroll-region">${Array.from({ length: 34 }, (_, index) => `<button class="shlz-dropdown__item" type="button" role="menuitem">${index + 1} menu item</button>`).join("")}</div><span class="shlz-dropdown__scrollbar" aria-hidden="true"></span></div></div></article><article id="tooltip-stress-demo"><h3>Tooltip · content stress</h3><div class="shlz-popover-edge"><button class="shlz-button" data-component-audit-id="button-tooltip-stress-trigger" type="button" data-shlz-tooltip-trigger="tooltip-edge-stress" data-shlz-tooltip-placement="right" data-shlz-tooltip-open-delay="0">Tooltip edge stress</button><div class="shlz-tooltip shlz-tooltip--multiline" id="tooltip-edge-stress" role="tooltip" data-shlz-tooltip data-component-audit-id="tooltip-edge-stress" hidden>Длинный текст подсказки проверяет перенос у края viewport.<span class="shlz-tooltip__arrow" aria-hidden="true"></span></div></div></article>${typographyCompatibilityMarkup}
-${consumerWorkspaceMarkup(showcaseIconUrl)}`;
+${consumerWorkspaceMarkup(showcaseIconUrl)}
+${datePickerShowcaseMarkup}
+${datePickerConsumerMarkup}`;
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -511,6 +522,8 @@ window.__shlzEnhanceTooltips = enhanceTooltips;
 window.__shlzEnhanceTabs = enhanceTabs;
 window.__shlzTabsControllers = enhanceTabs();
 window.__shlzConsumerWorkspace = enhanceConsumerWorkspace();
+window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
+window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 

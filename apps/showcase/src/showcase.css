@@ -261,6 +261,55 @@ main {
   text-transform: uppercase;
 }
 
+.shlz-date-picker-showcase__matrix,
+.shlz-date-picker-showcase__stress {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: var(--shlz-source-spacing-24);
+  align-items: start;
+}
+
+.shlz-date-picker-showcase__fixture {
+  min-inline-size: 0;
+}
+
+.shlz-date-picker-showcase__scenario {
+  min-inline-size: 0;
+}
+
+.shlz-date-picker-showcase__scenario--wide {
+  grid-column: 1 / -1;
+  container-type: inline-size;
+}
+
+.shlz-date-picker-showcase__scenario--narrow {
+  inline-size: min(100%, 280px);
+  container-type: inline-size;
+}
+
+.shlz-date-picker-showcase__scenario--narrow .shlz-calendar--two-months {
+  inline-size: min(100%, 280px);
+}
+
+.shlz-date-picker-showcase__scenario--narrow
+  .shlz-calendar__month:nth-child(2) {
+  display: none;
+}
+
+.shlz-date-picker-showcase__scenario--narrow
+  .shlz-calendar__navigation--narrow {
+  display: inline-grid;
+}
+
+.shlz-date-picker[data-showcase-state="hover"] .shlz-date-field__control {
+  background: var(--shlz-source-color-blue-blue-50);
+}
+
+.shlz-date-picker[data-showcase-state="focused"] .shlz-date-field__control {
+  background: var(--shlz-source-color-blue-blue-50);
+  border-color: var(--shlz-source-color-blue-blue-200);
+}
+
 .shlz-docs-nav__group a {
   display: flex;
   gap: var(--shlz-source-spacing-8);

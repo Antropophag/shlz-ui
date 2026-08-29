@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/date-picker-calendar",
+    "commit": "1020fde125aa208792cc1569c230bccb25d1511a",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/date-picker-calendar",
+      "headRefOid": "1020fde125aa208792cc1569c230bccb25d1511a",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/49"
+    },
+    "repository": {
+      "digest": "152447736eb7de10d10957b5e63452d97790e9e44ae17f9879f7abe33d7e19db",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-date-picker-calendar"
+    },
+    "upstream": "origin/feature/date-picker-calendar"
+  },
+  "requirementsDigest": "65b1801b8578f8132546406e42006630b99d5749e6db2f3e5047e581048591c3",
+  "routeDigest": "ab13ef4cae16ad6234cce90d33a26ce27ec00ef69f3db631b12503df3ab0cfba",
+  "version": 1,
+  "digest": "1aaa219e9ac49bf046bca467f447478b31705f25d9ad3a7ceb48623736fe2fc4"
+}

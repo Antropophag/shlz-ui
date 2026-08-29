@@ -2,6 +2,32 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import test from "node:test";
 
+test("Date selection reference documents every public seam and executable boundary", async () => {
+  const docs = await readFile(
+    "docs/components/date-picker-calendar.md",
+    "utf8",
+  );
+  for (const heading of [
+    "## Date Field",
+    "## Calendar",
+    "## Date Picker",
+    "## Accessibility",
+    "## Constraints and localization",
+    "## Native forms and events",
+    "## Non-goals and framework adapters",
+  ])
+    assert.match(docs, new RegExp(heading));
+  for (const publicImport of [
+    "@shlz/behaviors/date-field",
+    "@shlz/behaviors/calendar",
+    "@shlz/behaviors/date-picker",
+  ])
+    assert.match(docs, new RegExp(publicImport));
+  assert.match(docs, /YYYY-MM-DD/);
+  assert.match(docs, /FormData/);
+  assert.match(docs, /destroy\(\)/);
+});
+
 import {
   componentDocumentation,
   renderComponentDocumentation,

@@ -24,6 +24,7 @@
       "kind": "content-stress-fixture"
     },
     { "id": "button-notification-consumer", "kind": "live-consumer" },
+    { "id": "button-date-picker-consumer", "kind": "live-consumer" },
     { "id": "button-modal-actions", "kind": "live-consumer" },
     { "id": "button-drawer-actions", "kind": "live-consumer" },
     { "id": "button-framework-composition", "kind": "executable-fixture" },
