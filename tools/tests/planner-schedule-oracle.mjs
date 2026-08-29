@@ -1,15 +1,27 @@
 import assert from "node:assert/strict";
-import { readFile, stat } from "node:fs/promises";
-import { join } from "node:path";
+import { readFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
 const target = process.argv[2];
 assert.ok(target, "Planner Schedule oracle requires a target");
-const source = await readFile(
-  (await stat(target)).isDirectory()
-    ? join(target, "packages/styles/components/planner-schedule.css")
-    : target,
-  "utf8",
+const repositoryRoot = resolve(
+  dirname(fileURLToPath(import.meta.url)),
+  "../..",
 );
+const knownBadPath = join(
+  repositoryRoot,
+  "tools/tests/fixtures/planner-schedule-known-bad.css",
+);
+assert.ok(
+  target === repositoryRoot || target === knownBadPath,
+  "Planner Schedule oracle accepts only the repository or its known-bad fixture",
+);
+const sourcePath =
+  target === repositoryRoot
+    ? join(repositoryRoot, "packages/styles/components/planner-schedule.css")
+    : knownBadPath;
+const source = await readFile(sourcePath, "utf8");
 
 assert.match(
   source,

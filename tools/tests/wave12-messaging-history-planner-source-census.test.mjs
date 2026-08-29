@@ -33,7 +33,9 @@ const promotedPlannerPaths = new Set([
   "tools/playwright/planner-schedule.spec.js",
   "tools/tests/component-audit-manifest.test.mjs",
   "tools/tests/planner-schedule-census.test.mjs",
+  "tools/tests/planner-schedule-oracle.mjs",
   "tools/tests/planner-schedule.test.mjs",
+  "tools/tests/fixtures/planner-schedule-known-bad.css",
 ]);
 const scopeMatchers = {
   messaging:
