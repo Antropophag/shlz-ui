@@ -38,7 +38,7 @@ test("Planner Schedule census classifies every executable implementation", async
   const matches = [];
   for (const path of files)
     if (occurrence.test(await readFile(path, "utf8")))
-      matches.push(relative(".", path));
+      matches.push(relative(".", path).replaceAll("\\", "/"));
   assert.deepEqual(matches.sort(), [
     "apps/showcase/src/planner-schedule-showcase.js",
     "packages/styles/components/planner-schedule.css",
