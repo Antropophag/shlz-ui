@@ -242,6 +242,7 @@ test("renders source-backed past, today and future header and column treatments"
           : null,
         treatmentBackground: treatment.backgroundColor,
         treatmentInsetBlockStart: treatment.insetBlockStart,
+        treatmentInsetBlockEnd: treatment.insetBlockEnd,
         treatmentInsetInlineStart: treatment.insetInlineStart,
         treatmentInsetInlineEnd: treatment.insetInlineEnd,
         treatmentStartStartRadius: treatment.borderStartStartRadius,
@@ -308,6 +309,7 @@ test("renders source-backed past, today and future header and column treatments"
       header.treatmentEndEndRadius,
     ]).toEqual(contract.radii);
     expect(header.treatmentInsetBlockStart).toBe("4px");
+    expect(header.treatmentInsetBlockEnd).toBe("4px");
     expect(header.borderInlineEndColor).toBe("rgb(209, 216, 223)");
     expect(header.borderBlockEndColor).toBe("rgb(209, 216, 223)");
     expect(header.boxShadow).toBe("none");
