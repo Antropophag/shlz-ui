@@ -2,9 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Restore the Calendar Grid past, today, future, and unavailable visual treatments from the authoritative Calendar.svg, add state-specific computed-style and visual evidence, pass the component gate, and deliver an unmerged follow-up PR.",
-    "material": [
-      "publicContract"
-    ],
+    "material": ["publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

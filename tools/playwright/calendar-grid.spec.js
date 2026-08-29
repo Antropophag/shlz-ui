@@ -207,6 +207,115 @@ test("contains two-axis overflow, sticky context, consumer actions and visual st
   await expect(grid).toHaveScreenshot("calendar-grid-narrow.png");
 });
 
+test("renders source-backed past, today and future header and column treatments", async ({
+  page,
+}) => {
+  const grid = page.locator(
+    "[data-component-audit-id='calendar-grid-showcase-source']",
+  );
+  const stateStyles = await grid.evaluate((element) => {
+    const read = (node) => {
+      const style = globalThis.getComputedStyle(node);
+      const primary = node.querySelector(".shlz-calendar-grid__date-primary");
+      const secondary = node.querySelector(
+        ".shlz-calendar-grid__date-secondary",
+      );
+      return {
+        backgroundColor: style.backgroundColor,
+        color: style.color,
+        borderInlineEndColor: style.borderInlineEndColor,
+        borderBlockEndColor: style.borderBlockEndColor,
+        boxShadow: style.boxShadow,
+        primaryWeight: primary
+          ? globalThis.getComputedStyle(primary).fontWeight
+          : null,
+        secondaryColor: secondary
+          ? globalThis.getComputedStyle(secondary).color
+          : null,
+        secondaryOpacity: secondary
+          ? globalThis.getComputedStyle(secondary).opacity
+          : null,
+      };
+    };
+    return Object.fromEntries(
+      ["past", "today", "future"].map((state) => {
+        const header = element.querySelector(
+          `thead [data-shlz-calendar-grid-state="${state}"]`,
+        );
+        const cells = [
+          ...element.querySelectorAll(
+            `tbody [data-shlz-calendar-grid-state="${state}"]`,
+          ),
+        ];
+        return [
+          state,
+          { header: read(header), cells: cells.map((cell) => read(cell)) },
+        ];
+      }),
+    );
+  });
+
+  expect(stateStyles).toEqual({
+    past: {
+      header: {
+        backgroundColor: "rgb(244, 246, 249)",
+        color: "rgb(11, 22, 35)",
+        borderInlineEndColor: "rgb(209, 216, 223)",
+        borderBlockEndColor: "rgb(209, 216, 223)",
+        boxShadow: "none",
+        primaryWeight: "600",
+        secondaryColor: "rgb(11, 22, 35)",
+        secondaryOpacity: "1",
+      },
+      cells: expect.arrayContaining([
+        expect.objectContaining({
+          backgroundColor: "rgb(255, 255, 255)",
+          color: "rgb(11, 22, 35)",
+        }),
+      ]),
+    },
+    today: {
+      header: {
+        backgroundColor: "rgb(238, 240, 244)",
+        color: "rgb(36, 91, 153)",
+        borderInlineEndColor: "rgb(209, 216, 223)",
+        borderBlockEndColor: "rgb(209, 216, 223)",
+        boxShadow: "none",
+        primaryWeight: "600",
+        secondaryColor: "rgb(36, 91, 153)",
+        secondaryOpacity: "1",
+      },
+      cells: expect.arrayContaining([
+        expect.objectContaining({
+          backgroundColor: "rgb(244, 246, 249)",
+          color: "rgb(11, 22, 35)",
+        }),
+      ]),
+    },
+    future: {
+      header: {
+        backgroundColor: "rgb(255, 255, 255)",
+        color: "rgb(11, 22, 35)",
+        borderInlineEndColor: "rgb(209, 216, 223)",
+        borderBlockEndColor: "rgb(209, 216, 223)",
+        boxShadow: "none",
+        primaryWeight: "600",
+        secondaryColor: "rgb(11, 22, 35)",
+        secondaryOpacity: "1",
+      },
+      cells: expect.arrayContaining([
+        expect.objectContaining({
+          backgroundColor: "rgb(255, 255, 255)",
+          color: "rgb(11, 22, 35)",
+        }),
+      ]),
+    },
+  });
+  expect(stateStyles.past.cells).toHaveLength(2);
+  expect(stateStyles.today.cells).toHaveLength(2);
+  expect(stateStyles.future.cells).toHaveLength(2);
+});
+
 test("representative bounded matrix remains within the documented non-virtualized budget", async ({
   page,
 }) => {

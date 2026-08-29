@@ -9,40 +9,61 @@
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "shlz-design-source/raw/svg/Calendar.svg" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "shlz-design-source/raw/svg/Calendar.svg"
+      }
     },
     {
       "id": "column-treatment-scope",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "Calendar.svg Calendar Cell variants: temporal Time headers and Today/Day off body-cell treatments" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "Calendar.svg Calendar Cell variants: temporal Time headers and Today/Day off body-cell treatments"
+      }
     },
     {
       "id": "verification-contract",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "Focused computed-style assertions for past, today, and future plus scoped snapshots and visual verification" }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Focused computed-style assertions for past, today, and future plus scoped snapshots and visual verification"
+      }
     },
     {
       "id": "date-picker-scope-boundary",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "Do not change Date Picker status" }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Do not change Date Picker status"
+      }
     },
     {
       "id": "delivery-contract",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "New task branch/worktree from current origin/main; unmerged PR to main; wait for green CI" }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "New task branch/worktree from current origin/main; unmerged PR to main; wait for green CI"
+      }
     }
   ],
-  "openSpec": { "change": "fix-calendar-grid-visual-states", "status": "synthesized" },
+  "openSpec": {
+    "change": "fix-calendar-grid-visual-states",
+    "status": "synthesized"
+  },
   "authorization": {
     "status": "pre-authorized",
-    "provenance": { "kind": "user-prompt", "ref": "Explicit request to plan, implement, validate, review, and publish this follow-up" }
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Explicit request to plan, implement, validate, review, and publish this follow-up"
+    }
   }
 }

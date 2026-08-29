@@ -41,9 +41,14 @@
   ],
   "sourceClaims": [
     {
-      "claim": "the raw Calendar authority establishes the calendar visual family and remains byte-identical",
+      "claim": "the raw Calendar authority establishes distinct past, today and future Time headers, today fill across demonstrated body-cell variants, and full-cell unavailable hatching while remaining byte-identical",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Calendar.svg"
+    },
+    {
+      "claim": "today body fill applies to every body cell in its column while past and future body cells retain the base surface",
+      "classification": "derived-pattern",
+      "evidence": "docs/component-audits/calendar-grid-contract.md"
     },
     {
       "claim": "full-screen supplied exports show a dense operational row-by-date matrix and unavailable periods",
@@ -71,7 +76,7 @@
     "structural-contract": "pass: native table markup, package exports, docs, plain HTML, Showcase fixture and live consumer are classified",
     "runtime-browser": "pass: row/cell disclosure, typed bubbling events, repeat enhancement, teardown, row replacement/re-enhancement and consumer action execute",
     "accessibility": "pass: accessible table name, native row/date headers, cell header relationships, unavailable reason, native buttons and focus retention execute",
-    "focused-visual": "pass: component-local snapshots and computed sticky/overflow geometry cover source matrix and narrow states",
+    "focused-visual": "pass: independent computed background, foreground, emphasis and separator assertions prove past, today and future headers/body cells; component-local desktop and unchanged narrow snapshots cover the source matrix",
     "consumer-integration": "pass: Data Workspace composition owns data and its native item action",
     "responsive-content-stress": "pass: narrow, two-axis overflow, long localized content, empty cells and enlarged text remain reachable"
   },
@@ -93,12 +98,15 @@
       "cell-expanded",
       "cell-collapsed",
       "focus-visible",
+      "past",
+      "today",
+      "future",
       "unavailable",
       "narrow-layout",
       "text-scale"
     ],
     "browserTest": "tools/playwright/calendar-grid.spec.js",
-    "manualStateWalk": "pass: inspected pointer, Tab/focus-visible, Enter/Space, expanded/collapsed, unavailable, narrow, 200-percent text and content-stress states on the Showcase and Data Workspace surfaces"
+    "manualStateWalk": "pass: inspected past/today/future header and full-column paint, pointer, Tab/focus-visible, Enter/Space, expanded/collapsed, unavailable, narrow, 200-percent text and content-stress states on the Showcase and Data Workspace surfaces"
   },
   "acceptedDeviations": [],
   "findings": [],
