@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/calendar-grid-state-groups",
+    "commit": "151988d38681ee5f7739912ddf0265439e4d3055",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/calendar-grid-state-groups",
+      "headRefOid": "151988d38681ee5f7739912ddf0265439e4d3055",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/52"
+    },
+    "repository": {
+      "digest": "e97056d29cb6caf32b9b864dddbc78676df1a9787231182f506b678bc32188d9",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-calendar-grid-state-groups"
+    },
+    "upstream": "origin/fix/calendar-grid-state-groups"
+  },
+  "requirementsDigest": "c6b43361241fbcfad2de624c59633913faae7000f550fc00d63f611b964e9405",
+  "routeDigest": "89ab63d43ae1a2df1cf5a0f5fca62d7ea37fdeecc8437ffd9ef68e0b469e03af",
+  "version": 1,
+  "digest": "3461f34c9571a571d871e56d8e0efb4a0c3b8a02ed7ac86a2b3a6efc62f14ecf"
+}

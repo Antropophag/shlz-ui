@@ -78,7 +78,7 @@
 
 .shlz-calendar-grid
   thead
-  [data-shlz-calendar-grid-state]:where(
+  [scope="colgroup"][data-shlz-calendar-grid-state]:where(
     [data-shlz-calendar-grid-state="past"],
     [data-shlz-calendar-grid-state="today"],
     [data-shlz-calendar-grid-state="future"]
@@ -89,7 +89,7 @@
 
 .shlz-calendar-grid
   thead
-  [data-shlz-calendar-grid-state]:where(
+  [scope="colgroup"][data-shlz-calendar-grid-state]:where(
     [data-shlz-calendar-grid-state="past"],
     [data-shlz-calendar-grid-state="today"],
     [data-shlz-calendar-grid-state="future"]
@@ -101,24 +101,32 @@
   background: var(--shlz-source-color-blue-blue-50);
 }
 
-.shlz-calendar-grid thead [data-shlz-calendar-grid-state="past"]::before {
+.shlz-calendar-grid
+  thead
+  [scope="colgroup"][data-shlz-calendar-grid-state="past"]::before {
   inset-inline: 1px var(--shlz-source-spacing-4);
   border-start-end-radius: var(--shlz-source-radius-min);
   border-end-end-radius: var(--shlz-source-radius-min);
 }
 
-.shlz-calendar-grid thead [data-shlz-calendar-grid-state="today"] {
+.shlz-calendar-grid
+  thead
+  [scope="colgroup"][data-shlz-calendar-grid-state="today"] {
   color: var(--shlz-source-color-blue-blue-200);
   background: var(--shlz-source-color-background-primary);
 }
 
-.shlz-calendar-grid thead [data-shlz-calendar-grid-state="today"]::before {
+.shlz-calendar-grid
+  thead
+  [scope="colgroup"][data-shlz-calendar-grid-state="today"]::before {
   inset-inline: var(--shlz-source-spacing-4);
   border-radius: var(--shlz-source-radius-min);
   background: var(--shlz-source-color-aditional-bright-blue-15);
 }
 
-.shlz-calendar-grid thead [data-shlz-calendar-grid-state="future"]::before {
+.shlz-calendar-grid
+  thead
+  [scope="colgroup"][data-shlz-calendar-grid-state="future"]::before {
   inset-inline: var(--shlz-source-spacing-4) 0;
   border-start-start-radius: var(--shlz-source-radius-min);
   border-end-start-radius: var(--shlz-source-radius-min);
@@ -126,8 +134,9 @@
 
 .shlz-calendar-grid
   thead
-  [data-shlz-calendar-grid-state]
+  [scope="colgroup"][data-shlz-calendar-grid-state]
   > :is(
+    .shlz-calendar-grid__group-label,
     .shlz-calendar-grid__date-primary,
     .shlz-calendar-grid__date-secondary
   ) {
@@ -135,32 +144,43 @@
   z-index: 1;
 }
 
-.shlz-calendar-grid
-  thead
-  [data-shlz-calendar-grid-state]:not(
-    [data-shlz-calendar-grid-state="unavailable"]
-  )
-  .shlz-calendar-grid__date-secondary {
-  color: inherit;
-  opacity: 1;
+.shlz-calendar-grid__group-label {
+  display: block;
+  font-weight: 700;
 }
 
 .shlz-calendar-grid tbody [data-shlz-calendar-grid-state="past"],
 .shlz-calendar-grid tbody [data-shlz-calendar-grid-state="future"] {
-  background: var(--shlz-semantic-color-surface-base);
+  background-color: var(--shlz-semantic-color-surface-base);
 }
 
 .shlz-calendar-grid tbody [data-shlz-calendar-grid-state="today"] {
-  background: var(--shlz-source-color-background-primary);
+  background-color: var(--shlz-source-color-background-primary);
 }
 
-.shlz-calendar-grid [data-shlz-calendar-grid-state="unavailable"] {
+.shlz-calendar-grid
+  thead
+  tr[data-shlz-calendar-grid-header-row="dates"]
+  [data-shlz-calendar-grid-state="today"] {
+  color: var(--shlz-source-color-blue-blue-200);
+  background-color: var(--shlz-source-color-background-primary);
+}
+
+.shlz-calendar-grid :is(th, td)[data-shlz-calendar-grid-unavailable] {
   background-color: var(--shlz-semantic-color-surface-base);
   background-image: repeating-linear-gradient(
     -46.8232deg,
     transparent 0 6.5px,
     var(--shlz-source-color-gray-gray-50) 6.5px 9px
   );
+}
+
+.shlz-calendar-grid
+  :is(
+    th,
+    td
+  )[data-shlz-calendar-grid-state="today"][data-shlz-calendar-grid-unavailable] {
+  background-color: var(--shlz-source-color-background-primary);
 }
 
 .shlz-calendar-grid__items {

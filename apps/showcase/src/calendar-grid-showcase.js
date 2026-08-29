@@ -2,27 +2,48 @@ import { enhanceCalendarGrids } from "@shlz/behaviors";
 export { enhanceCalendarGrids };
 
 const dates = [
-  ["28 Aug", "Past · Friday", "past"],
-  ["29 Aug", "Today", "today"],
-  ["30 Aug", "Unavailable · weekend", "unavailable"],
-  ["31 Aug", "Unavailable · holiday", "unavailable"],
-  ["1 Sep", "Future · Tuesday", "future"],
+  ["28 Aug", "Friday", "past"],
+  ["29 Aug", "Saturday · unavailable weekend", "today", "weekend"],
+  ["30 Aug", "Sunday · unavailable weekend", "future", "weekend"],
+  ["31 Aug", "Monday · unavailable holiday", "future", "holiday"],
+  ["1 Sep", "Tuesday", "future"],
 ];
+
+const temporalGroups = [
+  ["Past", "past", 1],
+  ["Today", "today", 1],
+  ["Future", "future", 3],
+];
+
+const temporalHeader = (prefix) =>
+  temporalGroups
+    .map(
+      ([label, state, span]) =>
+        `<th scope="colgroup" colspan="${span}" id="${prefix}-group-${state}" data-shlz-calendar-grid-state="${state}"><span class="shlz-calendar-grid__group-label">${label}</span></th>`,
+    )
+    .join("");
 
 const header = (prefix) =>
   dates
-    .map(
-      ([primary, secondary, state], index) =>
-        `<th scope="col" id="${prefix}-date-${index}" data-shlz-calendar-grid-state="${state}"><span class="shlz-calendar-grid__date-primary">${primary}</span><span class="shlz-calendar-grid__date-secondary">${secondary}</span></th>`,
-    )
+    .map(([primary, secondary, state, unavailable], index) => {
+      const unavailableAttribute = unavailable
+        ? ` data-shlz-calendar-grid-unavailable="${unavailable}"`
+        : "";
+      return `<th scope="col" id="${prefix}-date-${index}" headers="${prefix}-group-${state}" data-shlz-calendar-grid-state="${state}"${unavailableAttribute}><span class="shlz-calendar-grid__date-primary">${primary}</span><span class="shlz-calendar-grid__date-secondary">${secondary}</span></th>`;
+    })
     .join("");
-const cell = (prefix, row, date, body, state = dates[date][2]) =>
-  `<td headers="${prefix}-row-${row} ${prefix}-date-${date}" data-shlz-calendar-grid-state="${state}">${body}</td>`;
+const cell = (prefix, row, date, body) => {
+  const [, , state, unavailable] = dates[date];
+  const unavailableAttribute = unavailable
+    ? ` data-shlz-calendar-grid-unavailable="${unavailable}"`
+    : "";
+  return `<td headers="${prefix}-row-${row} ${prefix}-group-${state} ${prefix}-date-${date}" data-shlz-calendar-grid-state="${state}"${unavailableAttribute}>${body}</td>`;
+};
 const items = (entries, prefix = "grid") =>
   `<ul class="shlz-calendar-grid__items">${entries.map(([label, tone = "accent", hidden = false], index) => `<li class="shlz-calendar-grid__item" data-tone="${tone}"${hidden ? ` id="${prefix}-overflow-${index}" hidden` : ""}>${label}</li>`).join("")}</ul>`;
 
 function grid(prefix, auditId, consumer = false) {
-  return `<div class="shlz-calendar-grid" data-shlz-calendar-grid data-component-audit-id="${auditId}"><table aria-label="${consumer ? "Application delivery calendar" : "Calendar Grid source and state matrix"}"><thead><tr><th scope="col" rowspan="2">Workstream</th><th scope="colgroup" colspan="4">August 2026</th><th scope="colgroup">September 2026</th></tr><tr>${header(prefix)}</tr></thead><tbody>
+  return `<div class="shlz-calendar-grid" data-shlz-calendar-grid data-component-audit-id="${auditId}"><table aria-label="${consumer ? "Application delivery calendar" : "Calendar Grid source and state matrix"}"><thead><tr data-shlz-calendar-grid-header-row="temporal"><th scope="col" rowspan="2">Workstream</th>${temporalHeader(prefix)}</tr><tr data-shlz-calendar-grid-header-row="dates">${header(prefix)}</tr></thead><tbody>
     <tr><th scope="row" id="${prefix}-row-design">Design<span class="shlz-calendar-grid__row-description">Interface and research</span></th>${cell(prefix, "design", 0, `<span class="shlz-calendar-grid__count" aria-label="2 items">2</span>`)}${cell(
       prefix,
       "design",

@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Correct Calendar Grid so Past, Today, and Future are semantic column-group headers above a separate date-header row, preserve independent unavailable and today-column treatments from Calendar.svg, complete the component gate, and deliver an open unmerged follow-up PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "source-header-structure",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "shlz-design-source/raw/svg/Calendar.svg Calendar Cell variants: Time and Date"
+      }
+    },
+    {
+      "id": "temporal-unavailable-relationship",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "shlz-design-source/raw/svg/Calendar.svg Calendar Cell variants: Time, Today, Day off, and Day off / Today"
+      }
+    },
+    {
+      "id": "month-grouping-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "Calendar.svg exposes a month-labelled Time variant but does not establish it as a replacement for the Past/Today/Future matrix row"
+      }
+    },
+    {
+      "id": "regression-and-visual-evidence",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "RED regression for colgroup semantics, exact spans, date headers, accessible names, geometry and Today column; focused screenshot required"
+      }
+    },
+    {
+      "id": "date-picker-and-source-boundary",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Do not alter Date Picker status or shlz-design-source/"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Fresh worktree from origin/main, independent Standards and Spec reviews, green required CI, open unmerged PR to main"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "fix-calendar-grid-state-group-headers",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Explicit request to inspect, specify, implement, validate, review, publish, and resolve findings"
+    }
+  }
+}

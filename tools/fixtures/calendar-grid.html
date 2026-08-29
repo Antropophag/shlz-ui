@@ -14,31 +14,122 @@
     >
       <table aria-label="Team delivery calendar">
         <thead>
-          <tr>
+          <tr data-shlz-calendar-grid-header-row="temporal">
             <th scope="col" rowspan="2">Team</th>
-            <th scope="colgroup">August 2026</th>
+            <th
+              scope="colgroup"
+              colspan="1"
+              id="calendar-group-past"
+              data-shlz-calendar-grid-state="past"
+            >
+              <span class="shlz-calendar-grid__group-label">Past</span>
+            </th>
+            <th
+              scope="colgroup"
+              colspan="1"
+              id="calendar-group-today"
+              data-shlz-calendar-grid-state="today"
+            >
+              <span class="shlz-calendar-grid__group-label">Today</span>
+            </th>
+            <th
+              scope="colgroup"
+              colspan="3"
+              id="calendar-group-future"
+              data-shlz-calendar-grid-state="future"
+            >
+              <span class="shlz-calendar-grid__group-label">Future</span>
+            </th>
           </tr>
-          <tr>
+          <tr data-shlz-calendar-grid-header-row="dates">
+            <th
+              scope="col"
+              id="date-2026-08-28"
+              headers="calendar-group-past"
+              data-shlz-calendar-grid-state="past"
+            >
+              <span class="shlz-calendar-grid__date-primary">28 Aug</span
+              ><span class="shlz-calendar-grid__date-secondary">Friday</span>
+            </th>
             <th
               scope="col"
               id="date-2026-08-29"
+              headers="calendar-group-today"
               data-shlz-calendar-grid-state="today"
+              data-shlz-calendar-grid-unavailable="weekend"
             >
               <span class="shlz-calendar-grid__date-primary">29 Aug</span
-              ><span class="shlz-calendar-grid__date-secondary">Today</span>
+              ><span class="shlz-calendar-grid__date-secondary"
+                >Saturday · unavailable weekend</span
+              >
+            </th>
+            <th
+              scope="col"
+              id="date-2026-08-30"
+              headers="calendar-group-future"
+              data-shlz-calendar-grid-state="future"
+              data-shlz-calendar-grid-unavailable="weekend"
+            >
+              <span class="shlz-calendar-grid__date-primary">30 Aug</span
+              ><span class="shlz-calendar-grid__date-secondary"
+                >Sunday · unavailable weekend</span
+              >
+            </th>
+            <th
+              scope="col"
+              id="date-2026-08-31"
+              headers="calendar-group-future"
+              data-shlz-calendar-grid-state="future"
+              data-shlz-calendar-grid-unavailable="holiday"
+            >
+              <span class="shlz-calendar-grid__date-primary">31 Aug</span
+              ><span class="shlz-calendar-grid__date-secondary"
+                >Monday · unavailable holiday</span
+              >
+            </th>
+            <th
+              scope="col"
+              id="date-2026-09-01"
+              headers="calendar-group-future"
+              data-shlz-calendar-grid-state="future"
+            >
+              <span class="shlz-calendar-grid__date-primary">1 Sep</span
+              ><span class="shlz-calendar-grid__date-secondary">Tuesday</span>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row" id="row-design">Design</th>
-            <td headers="row-design date-2026-08-29">
+            <td
+              headers="row-design calendar-group-past date-2026-08-28"
+              data-shlz-calendar-grid-state="past"
+            ></td>
+            <td
+              headers="row-design calendar-group-today date-2026-08-29"
+              data-shlz-calendar-grid-state="today"
+              data-shlz-calendar-grid-unavailable="weekend"
+            >
               <ul class="shlz-calendar-grid__items">
                 <li class="shlz-calendar-grid__item" data-tone="accent">
                   Review interface
                 </li>
               </ul>
             </td>
+            <td
+              headers="row-design calendar-group-future date-2026-08-30"
+              data-shlz-calendar-grid-state="future"
+              data-shlz-calendar-grid-unavailable="weekend"
+            ></td>
+            <td
+              headers="row-design calendar-group-future date-2026-08-31"
+              data-shlz-calendar-grid-state="future"
+              data-shlz-calendar-grid-unavailable="holiday"
+            ></td>
+            <td
+              headers="row-design calendar-group-future date-2026-09-01"
+              data-shlz-calendar-grid-state="future"
+            ></td>
           </tr>
         </tbody>
       </table>
