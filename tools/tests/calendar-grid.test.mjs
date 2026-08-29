@@ -23,7 +23,14 @@ test("Calendar Grid publishes semantic styles and framework-neutral documentatio
     /data-shlz-calendar-grid-header-row="dates"[^]*<th[^]*scope="col"[^]*28 Aug[^]*Friday/,
   );
   assert.doesNotMatch(fixture, /Past · Friday|Future · Tuesday/);
-  assert.match(fixture, /headers="row-design date-2026-08-29"/);
+  assert.match(
+    fixture,
+    /headers="row-design calendar-group-today date-2026-08-29"/,
+  );
+  assert.match(
+    fixture,
+    /data-shlz-calendar-grid-state="today"[^]*data-shlz-calendar-grid-unavailable="weekend"/,
+  );
   assert.match(docs, /Consumers own row, date, and item identities/);
   assert.match(exports, /\.\/calendar-grid/);
 });

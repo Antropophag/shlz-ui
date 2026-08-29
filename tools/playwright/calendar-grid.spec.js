@@ -44,7 +44,7 @@ test("exposes temporal colgroups above independent date headers with source geom
   await expect(dateHeaders).toHaveCount(5);
   const dateNames = [
     "28 Aug Friday",
-    "29 Aug Saturday",
+    "29 Aug Saturday · unavailable weekend",
     "30 Aug Sunday · unavailable weekend",
     "31 Aug Monday · unavailable holiday",
     "1 Sep Tuesday",
@@ -148,6 +148,7 @@ test("classifies semantic Calendar Grid occurrences and accessibility", async ({
   ).toBeVisible();
   const headers = await grid.locator("td").first().getAttribute("headers");
   expect(headers).toContain("showcase-grid-row-design");
+  expect(headers).toContain("showcase-grid-group-past");
   expect(headers).toContain("showcase-grid-date-0");
   const results = await new AxeBuilder({ page })
     .include("#calendar-grid-demo")
@@ -461,9 +462,11 @@ test("renders source-backed past, today and future header and column treatments"
       },
     ),
   );
-  expect(unavailableStyles).toHaveLength(6);
+  expect(unavailableStyles).toHaveLength(9);
   for (const style of unavailableStyles) {
-    expect(style.backgroundColor).toBe("rgb(255, 255, 255)");
+    expect(style.backgroundColor).toBe(
+      style.state === "today" ? "rgb(244, 246, 249)" : "rgb(255, 255, 255)",
+    );
     expect(
       style,
       `${style.tagName} ${style.state} keeps unavailable hatch`,
