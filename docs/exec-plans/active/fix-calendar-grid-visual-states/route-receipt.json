@@ -1,0 +1,53 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Restore the Calendar Grid past, today, future, and unavailable visual treatments from the authoritative Calendar.svg, add state-specific computed-style and visual evidence, pass the component gate, and deliver an unmerged follow-up PR.",
+    "material": [
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "fix-calendar-grid-visual-states",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "source-state-contract",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "column-treatment-scope",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "verification-contract",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "date-picker-scope-boundary",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "a2eb358817354e5e961f9cfcf5dbdcb3510acefada3efd957f6bb97c23b371dc"
+}
