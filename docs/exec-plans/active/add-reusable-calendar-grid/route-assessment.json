@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "intent": "Implement a framework-neutral reusable calendar grid derived from the supplied calendar screens, with a generic consumer-owned data model and independently verified component evidence, then deliver an unmerged PR.",
+  "route": "open-spec",
+  "openSpecChange": "add-reusable-calendar-grid",
+  "requiredDecisions": [
+    { "id": "component-scope", "owner": "user", "blocking": true },
+    { "id": "source-authority", "owner": "repo", "blocking": true },
+    { "id": "module-seam", "owner": "agent", "blocking": true },
+    { "id": "interaction-accessibility-contract", "owner": "agent", "blocking": true },
+    { "id": "delivery-contract", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
+
