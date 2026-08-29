@@ -12,7 +12,7 @@
 - Source and structural: exact source hashes/frame claims, generated style distribution, documentation contract, exact repository census, audit-manifest validation, and unchanged-source guard.
 - Runtime and accessibility: native event buttons, real Popover open/Escape/outside dismissal/focus restoration, consumer action, re-enhancement and destroy behavior, semantic day/time context, axe, keyboard focus, and computed emergency contrast.
 - Visual and stress: duration and overlap geometry, temporal/status/unavailable/current-time paint, sticky axes, two-axis overflow, narrow viewport, 200% text, long and empty content, and focused Chromium snapshots inspected manually.
-- Aggregate local validation: 174/174 structural tests; lint, build, source validation, and clean package-consumer smoke pass. The first full browser run passed 251/252 and exposed an unclassified nested Popover occurrence; after classification, the immutable candidate passed all 252/252 browser tests. Independent review then identified short-duration, multi-tone hover, interaction-ledger, and focused-snapshot gaps; the remediated candidate must repeat the affected and aggregate checks before delivery.
+- Aggregate local validation: 174/174 structural tests; lint, build, source validation, and clean package-consumer smoke pass. The first full browser run passed 251/252 and exposed an unclassified nested Popover occurrence; after classification, the immutable candidate passed all 252/252 browser tests. Independent review then identified short-duration, multi-tone hover, interaction-ledger, and focused-snapshot gaps; after remediation, the affected Planner suite passed 8/8 and the complete browser suite passed 252/252 again on `e8796f1`.
 
 ## Limitations and disposition
 
