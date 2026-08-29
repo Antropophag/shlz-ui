@@ -16,4 +16,4 @@
 ## 4. Validation, review, and delivery
 
 - [x] 4.1 Run OpenSpec validation, relevant targeted tests, the Impeccable detector, and full `npm run check`; resolve all scope-local failures and verify `shlz-design-source/` and Date Picker status are unchanged.
-- [ ] 4.2 Run independent Standards and Spec reviews against the immutable episode baseline, resolve all findings, pass route conformance and delivery guards, create an unmerged PR to `main`, and verify required CI is green.
+- [x] 4.2 Run independent Standards and Spec reviews against the immutable episode baseline, resolve all findings, pass route conformance and delivery guards, create an unmerged PR to `main`, and verify required CI is green.
