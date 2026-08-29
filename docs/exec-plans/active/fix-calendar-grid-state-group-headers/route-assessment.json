@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "intent": "Correct Calendar Grid so Past, Today, and Future are semantic column-group headers above a separate date-header row, preserve independent unavailable and today-column treatments from Calendar.svg, complete the component gate, and deliver an open unmerged follow-up PR.",
+  "route": "open-spec",
+  "openSpecChange": "fix-calendar-grid-state-group-headers",
+  "requiredDecisions": [
+    { "id": "source-header-structure", "owner": "repo", "blocking": true },
+    { "id": "temporal-unavailable-relationship", "owner": "repo", "blocking": true },
+    { "id": "month-grouping-contract", "owner": "repo", "blocking": true },
+    { "id": "regression-and-visual-evidence", "owner": "user", "blocking": true },
+    { "id": "date-picker-and-source-boundary", "owner": "user", "blocking": true },
+    { "id": "delivery-contract", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
