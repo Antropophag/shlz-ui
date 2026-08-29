@@ -41,9 +41,14 @@
   ],
   "sourceClaims": [
     {
-      "claim": "the raw Calendar authority establishes distinct past, today and future Time headers through exact outer/inner fills, inset and corner geometry, today fill across demonstrated body-cell variants, and full-cell unavailable hatching while remaining byte-identical",
+      "claim": "the raw Calendar authority establishes a Time header variant with standalone Past, Today and Future group labels above a distinct Date header variant; it also establishes their outer/inner fills, inset and corner geometry, today fill across demonstrated body-cell variants, and full-cell unavailable hatching while remaining byte-identical",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Calendar.svg"
+    },
+    {
+      "claim": "the Showcase maps one past date, one today date and three future dates to exact colspans 1, 1 and 3; unavailable remains an independent attribute on two future columns",
+      "classification": "repository-decision",
+      "evidence": "apps/showcase/src/calendar-grid-showcase.js"
     },
     {
       "claim": "today body fill applies to every body cell in its column while past and future body cells retain the base surface",
@@ -68,15 +73,16 @@
   ],
   "browserTests": ["tools/playwright/calendar-grid.spec.js"],
   "visualSnapshots": [
+    "tools/playwright/calendar-grid.spec.js-snapshots/calendar-grid-header-rows-chromium-linux.png",
     "tools/playwright/calendar-grid.spec.js-snapshots/calendar-grid-source-matrix-chromium-linux.png",
     "tools/playwright/calendar-grid.spec.js-snapshots/calendar-grid-narrow-chromium-linux.png"
   ],
   "evidence": {
     "source-integrity": "pass: raw Calendar SHA-256 and unchanged-source diff are asserted; supplemental hashes are recorded separately",
-    "structural-contract": "pass: native table markup, package exports, docs, plain HTML, Showcase fixture and live consumer are classified",
+    "structural-contract": "pass: native table markup exposes a standalone temporal colgroup row with exact Showcase colspans 1/1/3 above five independent date headers; package exports, docs, plain HTML, Showcase fixture and live consumer are classified",
     "runtime-browser": "pass: row/cell disclosure, typed bubbling events, repeat enhancement, teardown, row replacement/re-enhancement and consumer action execute",
-    "accessibility": "pass: accessible table name, native row/date headers, cell header relationships, unavailable reason, native buttons and focus retention execute",
-    "focused-visual": "pass: independent computed background, foreground, emphasis, separator, inner-surface inset and corner assertions prove past, today and future headers and every corresponding body cell; component-local desktop and unchanged narrow snapshots cover the source matrix",
+    "accessibility": "pass: accessible table name, scope=colgroup temporal headers, independent scope=col date headers, cell header relationships, unavailable reason, native buttons and focus retention execute",
+    "focused-visual": "pass: a dedicated header-row snapshot plus independent computed geometry, background, foreground, emphasis, separator, inner-surface inset and corner assertions prove Past/Today/Future groups and the Today body column; component-local desktop and narrow snapshots cover the source matrix",
     "consumer-integration": "pass: Data Workspace composition owns data and its native item action",
     "responsive-content-stress": "pass: narrow, two-axis overflow, long localized content, empty cells and enlarged text remain reachable"
   },

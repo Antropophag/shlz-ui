@@ -17,6 +17,112 @@ test.beforeEach(async ({ page }) => {
   await page.goto("/#calendar-grid-demo");
 });
 
+test("exposes temporal colgroups above independent date headers with source geometry", async ({
+  page,
+}) => {
+  const grid = page.locator(
+    "[data-component-audit-id='calendar-grid-showcase-source']",
+  );
+  const table = grid.getByRole("table", {
+    name: "Calendar Grid source and state matrix",
+  });
+  const groups = table.locator(
+    'thead tr[data-shlz-calendar-grid-header-row="temporal"] > th[scope="colgroup"]',
+  );
+
+  await expect(groups).toHaveCount(3);
+  await expect(groups.nth(0)).toHaveAccessibleName("Past");
+  await expect(groups.nth(0)).toHaveAttribute("colspan", "1");
+  await expect(groups.nth(1)).toHaveAccessibleName("Today");
+  await expect(groups.nth(1)).toHaveAttribute("colspan", "1");
+  await expect(groups.nth(2)).toHaveAccessibleName("Future");
+  await expect(groups.nth(2)).toHaveAttribute("colspan", "3");
+
+  const dateHeaders = table.locator(
+    'thead tr[data-shlz-calendar-grid-header-row="dates"] > th[scope="col"]',
+  );
+  await expect(dateHeaders).toHaveCount(5);
+  const dateNames = [
+    "28 Aug Friday",
+    "29 Aug Saturday",
+    "30 Aug Sunday · unavailable weekend",
+    "31 Aug Monday · unavailable holiday",
+    "1 Sep Tuesday",
+  ];
+  for (const [index, name] of dateNames.entries()) {
+    await expect(dateHeaders.nth(index)).toHaveAccessibleName(name);
+  }
+  for (const temporalName of ["Past", "Today", "Future"]) {
+    await expect(
+      dateHeaders.filter({ hasText: new RegExp(temporalName, "i") }),
+    ).toHaveCount(0);
+  }
+
+  await expect(table.locator("thead")).toHaveScreenshot(
+    "calendar-grid-header-rows.png",
+  );
+
+  const geometry = await table.evaluate((element) => {
+    const boxes = (selector) =>
+      [...element.querySelectorAll(selector)].map((node) => {
+        const box = node.getBoundingClientRect();
+        return { left: box.left, right: box.right, width: box.width };
+      });
+    const groupBoxes = boxes(
+      'thead tr[data-shlz-calendar-grid-header-row="temporal"] > th[scope="colgroup"]',
+    );
+    const dateBoxes = boxes(
+      'thead tr[data-shlz-calendar-grid-header-row="dates"] > th[scope="col"]',
+    );
+    const todayCells = boxes('tbody [data-shlz-calendar-grid-state="today"]');
+    const todayTreatment = globalThis.getComputedStyle(
+      element.querySelector(
+        'thead [scope="colgroup"][data-shlz-calendar-grid-state="today"]',
+      ),
+      "::before",
+    );
+    return {
+      groupBoxes,
+      dateBoxes,
+      todayCells,
+      todayInset: [
+        todayTreatment.insetBlockStart,
+        todayTreatment.insetInlineEnd,
+        todayTreatment.insetBlockEnd,
+        todayTreatment.insetInlineStart,
+      ],
+      todayRadius: todayTreatment.borderRadius,
+    };
+  });
+  expect(geometry.groupBoxes.map(({ width }) => width)).toEqual(
+    geometry.dateBoxes
+      .map(({ width }) => width)
+      .map((width, index, all) =>
+        index < 2
+          ? width
+          : index === 2
+            ? all.slice(2).reduce((sum, value) => sum + value, 0)
+            : undefined,
+      )
+      .filter((width) => width !== undefined),
+  );
+  expect(geometry.groupBoxes.map(({ left }) => left)).toEqual([
+    geometry.dateBoxes[0].left,
+    geometry.dateBoxes[1].left,
+    geometry.dateBoxes[2].left,
+  ]);
+  expect(geometry.groupBoxes.at(-1).right).toBe(
+    geometry.dateBoxes.at(-1).right,
+  );
+  expect(geometry.todayCells).toHaveLength(2);
+  for (const box of geometry.todayCells) {
+    expect(box.left).toBe(geometry.dateBoxes[1].left);
+    expect(box.right).toBe(geometry.dateBoxes[1].right);
+  }
+  expect(geometry.todayInset).toEqual(["4px", "4px", "4px", "4px"]);
+  expect(geometry.todayRadius).toBe("8px");
+});
+
 test("classifies semantic Calendar Grid occurrences and accessibility", async ({
   page,
 }) => {
@@ -31,12 +137,14 @@ test("classifies semantic Calendar Grid occurrences and accessibility", async ({
     grid.getByRole("table", { name: "Calendar Grid source and state matrix" }),
   ).toBeVisible();
   await expect(grid.getByRole("rowheader")).toHaveCount(2);
-  await expect(grid.getByRole("columnheader")).toHaveCount(8);
+  await expect(grid.getByRole("columnheader")).toHaveCount(9);
   await expect(
-    grid.getByRole("columnheader", { name: "August 2026" }),
-  ).toHaveAttribute("scope", "colgroup");
+    grid.getByRole("columnheader", { name: "Future" }),
+  ).toHaveAttribute("colspan", "3");
   await expect(
-    grid.getByRole("columnheader", { name: "31 Aug Unavailable · holiday" }),
+    grid.getByRole("columnheader", {
+      name: "31 Aug Monday · unavailable holiday",
+    }),
   ).toBeVisible();
   const headers = await grid.locator("td").first().getAttribute("headers");
   expect(headers).toContain("showcase-grid-row-design");
@@ -54,8 +162,8 @@ test("classifies semantic Calendar Grid occurrences and accessibility", async ({
     plainHtmlGrid.getByRole("table", { name: "Team delivery calendar" }),
   ).toBeVisible();
   await expect(
-    plainHtmlGrid.getByRole("columnheader", { name: "August 2026" }),
-  ).toHaveAttribute("scope", "colgroup");
+    plainHtmlGrid.getByRole("columnheader", { name: "Future" }),
+  ).toHaveAttribute("colspan", "3");
   const plainHtmlInventory = await inspectComponentOccurrences(page, manifest);
   expect(plainHtmlInventory.occurrences).toEqual(["calendar-grid-plain-html"]);
   expect(plainHtmlInventory.unclassifiedLegacy).toEqual([]);
@@ -224,6 +332,7 @@ test("renders source-backed past, today and future header and column treatments"
       const secondary = node.querySelector(
         ".shlz-calendar-grid__date-secondary",
       );
+      const group = node.querySelector(".shlz-calendar-grid__group-label");
       return {
         backgroundColor: style.backgroundColor,
         color: style.color,
@@ -239,6 +348,9 @@ test("renders source-backed past, today and future header and column treatments"
           : null,
         secondaryOpacity: secondary
           ? globalThis.getComputedStyle(secondary).opacity
+          : null,
+        groupWeight: group
+          ? globalThis.getComputedStyle(group).fontWeight
           : null,
         treatmentBackground: treatment.backgroundColor,
         treatmentInsetBlockStart: treatment.insetBlockStart,
@@ -296,7 +408,7 @@ test("renders source-backed past, today and future header and column treatments"
     const header = stateStyles[state].header;
     expect(header.backgroundColor).toBe(contract.outer);
     expect(header.color).toBe(contract.text);
-    expect(header.secondaryColor).toBe(contract.text);
+    expect(header.secondaryColor).toBeNull();
     expect(header.treatmentBackground).toBe(contract.inner);
     expect([
       header.treatmentInsetInlineStart,
@@ -314,15 +426,16 @@ test("renders source-backed past, today and future header and column treatments"
     expect(header.borderBlockEndColor).toBe("rgb(209, 216, 223)");
     expect(header.boxShadow).toBe("none");
     expect(header.fontWeight).toBe("700");
-    expect(header.primaryWeight).toBe("600");
-    expect(header.secondaryOpacity).toBe("1");
+    expect(header.primaryWeight).toBeNull();
+    expect(header.secondaryOpacity).toBeNull();
+    expect(header.groupWeight).toBe("700");
   }
   for (const [state, backgroundColor] of [
     ["past", "rgb(255, 255, 255)"],
     ["today", "rgb(244, 246, 249)"],
     ["future", "rgb(255, 255, 255)"],
   ]) {
-    expect(stateStyles[state].cells).toHaveLength(2);
+    expect(stateStyles[state].cells).toHaveLength(state === "future" ? 6 : 2);
     for (const style of stateStyles[state].cells) {
       expect(style.backgroundColor).toBe(backgroundColor);
       expect(style.color).toBe("rgb(11, 22, 35)");
@@ -334,24 +447,29 @@ test("renders source-backed past, today and future header and column treatments"
   }
 
   const unavailableStyles = await grid.evaluate((element) =>
-    [
-      ...element.querySelectorAll(
-        '[data-shlz-calendar-grid-state="unavailable"]',
-      ),
-    ].map((node) => {
-      const style = globalThis.getComputedStyle(node);
-      return {
-        backgroundColor: style.backgroundColor,
-        backgroundImage: style.backgroundImage,
-        borderInlineEndColor: style.borderInlineEndColor,
-        borderBlockEndColor: style.borderBlockEndColor,
-      };
-    }),
+    [...element.querySelectorAll("[data-shlz-calendar-grid-unavailable]")].map(
+      (node) => {
+        const style = globalThis.getComputedStyle(node);
+        return {
+          tagName: node.tagName,
+          state: node.getAttribute("data-shlz-calendar-grid-state"),
+          backgroundColor: style.backgroundColor,
+          backgroundImage: style.backgroundImage,
+          borderInlineEndColor: style.borderInlineEndColor,
+          borderBlockEndColor: style.borderBlockEndColor,
+        };
+      },
+    ),
   );
   expect(unavailableStyles).toHaveLength(6);
   for (const style of unavailableStyles) {
     expect(style.backgroundColor).toBe("rgb(255, 255, 255)");
-    expect(style.backgroundImage).toContain("rgb(245, 245, 245)");
+    expect(
+      style,
+      `${style.tagName} ${style.state} keeps unavailable hatch`,
+    ).toMatchObject({
+      backgroundImage: expect.stringContaining("rgb(245, 245, 245)"),
+    });
     expect(style.borderInlineEndColor).toBe("rgb(209, 216, 223)");
     expect(style.borderBlockEndColor).toBe("rgb(209, 216, 223)");
   }

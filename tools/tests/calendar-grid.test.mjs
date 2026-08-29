@@ -11,9 +11,18 @@ test("Calendar Grid publishes semantic styles and framework-neutral documentatio
   ]);
   assert.match(css, /position: sticky/);
   assert.match(css, /overflow: auto/);
-  assert.match(css, /data-shlz-calendar-grid-state="unavailable"/);
+  assert.match(css, /data-shlz-calendar-grid-unavailable/);
   assert.match(fixture, /<table aria-label=/);
   assert.match(fixture, /<th scope="row"/);
+  assert.match(
+    fixture,
+    /data-shlz-calendar-grid-header-row="temporal"[^]*scope="colgroup"[^]*>Past<[^]*colspan="1"[^]*>Today<[^]*colspan="3"[^]*>Future</,
+  );
+  assert.match(
+    fixture,
+    /data-shlz-calendar-grid-header-row="dates"[^]*<th[^]*scope="col"[^]*28 Aug[^]*Friday/,
+  );
+  assert.doesNotMatch(fixture, /Past · Friday|Future · Tuesday/);
   assert.match(fixture, /headers="row-design date-2026-08-29"/);
   assert.match(docs, /Consumers own row, date, and item identities/);
   assert.match(exports, /\.\/calendar-grid/);

@@ -2,9 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Correct Calendar Grid so Past, Today, and Future are semantic column-group headers above a separate date-header row, preserve independent unavailable and today-column treatments from Calendar.svg, complete the component gate, and deliver an open unmerged follow-up PR.",
-    "material": [
-      "publicContract"
-    ],
+    "material": ["publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
