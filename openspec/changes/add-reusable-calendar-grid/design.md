@@ -81,4 +81,3 @@ Alternative: rename the existing family wholesale to Calendar Grid. Rejected bec
 ## Migration Plan
 
 This is additive. Add package styles and optional behavior exports, fixtures, documentation, and audits without changing existing table markup or exports. Existing consumers require no migration. Rollback removes the new exports and occurrences while leaving source material untouched. Any implementation discovery that requires virtualization, date computation, a new application contract, or a source change returns to requirements/OpenSpec before code continues.
-

@@ -6,6 +6,14 @@ export { TabsController, enhanceTabs } from "./tabs.js";
 export { ModalController, enhanceModals } from "./modal.js";
 export { DrawerController, enhanceDrawers } from "./drawer.js";
 export { CalendarController } from "./calendar.js";
+export {
+  CalendarGridController,
+  enhanceCalendarGrids,
+} from "./calendar-grid.js";
+export type {
+  CalendarGridDisclosureDetail,
+  CalendarGridDisclosureKind,
+} from "./calendar-grid.js";
 export type {
   CalendarChangeDetail,
   CalendarControllerOptions,

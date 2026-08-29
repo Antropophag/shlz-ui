@@ -1,0 +1,110 @@
+{
+  "component": "calendar-grid",
+  "authoritativeSource": "shlz-design-source/raw/svg/Calendar.svg",
+  "referenceSources": ["docs/component-audits/calendar-grid-contract.md"],
+  "implementation": ["packages/styles/components/calendar-grid.css"],
+  "behavior": "packages/behaviors/src/calendar-grid.ts",
+  "docs": "docs/components/calendar-grid.md",
+  "rootSelector": "[data-component-audit-id^='calendar-grid-']",
+  "legacySelectors": [".shlz-calendar-grid"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "calendar-grid-showcase-source", "kind": "executable-fixture" },
+    { "id": "calendar-grid-data-workspace", "kind": "live-consumer" },
+    { "id": "calendar-grid-plain-html", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["container-bounded", "bounded-non-virtualized-matrix"],
+  "supportedStates": [
+    "past",
+    "today",
+    "future",
+    "unavailable",
+    "empty",
+    "count-only",
+    "dense",
+    "row-expanded",
+    "row-collapsed",
+    "cell-expanded",
+    "cell-collapsed"
+  ],
+  "contentStress": [
+    "long-localized-row-and-item-labels",
+    "empty-cells",
+    "narrow-viewport",
+    "two-axis-overflow",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "the raw Calendar authority establishes the calendar visual family and remains byte-identical",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Calendar.svg"
+    },
+    {
+      "claim": "full-screen supplied exports show a dense operational row-by-date matrix and unavailable periods",
+      "classification": "derived-pattern",
+      "evidence": "docs/component-audits/calendar-grid-contract.md"
+    },
+    {
+      "claim": "native table markup, sticky context, declarative dates, generic tones, and disclosure form the reusable interface",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-reusable-calendar-grid/design.md"
+    },
+    {
+      "claim": "sticky context degrades to ordinary table flow and rendered matrices remain bounded",
+      "classification": "assumption",
+      "evidence": "docs/components/calendar-grid.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/calendar-grid.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/calendar-grid.spec.js-snapshots/calendar-grid-source-matrix-chromium-linux.png",
+    "tools/playwright/calendar-grid.spec.js-snapshots/calendar-grid-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: raw Calendar SHA-256 and unchanged-source diff are asserted; supplemental hashes are recorded separately",
+    "structural-contract": "pass: native table markup, package exports, docs, plain HTML, Showcase fixture and live consumer are classified",
+    "runtime-browser": "pass: row/cell disclosure, typed bubbling events, repeat enhancement, teardown, row replacement/re-enhancement and consumer action execute",
+    "accessibility": "pass: accessible table name, native row/date headers, cell header relationships, unavailable reason, native buttons and focus retention execute",
+    "focused-visual": "pass: component-local snapshots and computed sticky/overflow geometry cover source matrix and narrow states",
+    "consumer-integration": "pass: Data Workspace composition owns data and its native item action",
+    "responsive-content-stress": "pass: narrow, two-axis overflow, long localized content, empty cells and enlarged text remain reachable"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source matrix and temporal/density snapshots remain static-visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: browser-created expanded and collapsed disclosure states expose computed visibility and focused-control outline while active"
+      ],
+      "runtimeBehavior": [
+        "pass: native activation updates hidden and aria-expanded, emits typed events, preserves focus, isolates roots and tears down"
+      ]
+    },
+    "materialStates": [
+      "row-expanded",
+      "row-collapsed",
+      "cell-expanded",
+      "cell-collapsed",
+      "focus-visible",
+      "unavailable",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/calendar-grid.spec.js",
+    "manualStateWalk": "pass: inspected pointer, Tab/focus-visible, Enter/Space, expanded/collapsed, unavailable, narrow, 200-percent text and content-stress states on the Showcase and Data Workspace surfaces"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no virtualization or unbounded matrix guarantee",
+    "sticky positioning degrades where platform containment prevents it",
+    "all temporal and domain behavior remains consumer-owned"
+  ]
+}

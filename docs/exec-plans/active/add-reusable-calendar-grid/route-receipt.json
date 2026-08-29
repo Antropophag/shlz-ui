@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Implement a framework-neutral reusable calendar grid derived from the supplied calendar screens, with a generic consumer-owned data model and independently verified component evidence, then deliver an unmerged PR.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

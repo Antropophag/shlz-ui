@@ -25,4 +25,3 @@ None.
 ## Impact
 
 Implementation is expected to add calendar-grid styles under `packages/styles`, progressive-enhancement behavior under `packages/behaviors` only where the public contract requires it, exports and package builds, component documentation, Showcase and plain-HTML consumers, source/structural tests, focused Playwright coverage and snapshots, plus `docs/component-audits/date-picker-calendar.json` and project inventory updates. No framework adapter, date picker, scheduling engine, persistence, network dependency, or application page shell is introduced. Primary risks are making the interface as complex as the rendered grid, confusing visual source evidence with business semantics, and shipping a visually dense table without coherent keyboard and screen-reader behavior.
-

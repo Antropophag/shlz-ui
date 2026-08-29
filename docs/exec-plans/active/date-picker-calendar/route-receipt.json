@@ -2,11 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Promote the source-only Date Picker / Calendar family into a framework-neutral production capability with an explicit date-domain, interaction, accessibility, form, visual, and consumer contract.",
-    "material": [
-      "newCapability",
-      "publicContract",
-      "materialAmbiguity"
-    ],
+    "material": ["newCapability", "publicContract", "materialAmbiguity"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

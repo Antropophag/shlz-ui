@@ -126,4 +126,3 @@ Calendar Grid SHALL remain `INVENTORIED` or move to `FINDINGS` until its manifes
 
 - **WHEN** source traceability, supported states, semantic relationships, real disclosure, events, focus behavior, two-axis overflow, sticky context, long/empty content, text scaling, plain-HTML use, and a real application consumer pass without a blocking finding
 - **THEN** Calendar Grid may move to `VERIFIED` with exact observed counts, supported limits, and consumer-owned responsibilities recorded
-

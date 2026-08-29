@@ -23,6 +23,11 @@ import {
   consumerWorkspaceMarkup,
   enhanceConsumerWorkspace,
 } from "./consumer-workspace.js";
+import {
+  calendarGridShowcaseMarkup,
+  enhanceCalendarGridShowcase,
+  enhanceCalendarGrids,
+} from "./calendar-grid-showcase.js";
 import tokens from "@shlz/tokens/tokens.json";
 import provenance from "@shlz/tokens/provenance.json";
 import manifest from "@shlz/icons/manifest.json";
@@ -163,6 +168,7 @@ const navigationGroups = [
       ["file-row", "File Row"],
       ["empty-state", "Empty State"],
       ["date-picker-demo", "Date Picker"],
+      ["calendar-grid-demo", "Calendar Grid"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -294,7 +300,8 @@ ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition<
 <article id="dropdown-scrollable-demo" data-shlz-dropdown-scrollable-fixture><h3>Dropdown · Items=Srollbar</h3><div class="shlz-dropdown" data-shlz-dropdown data-component-audit-id="dropdown-scrollable-stress"><button class="shlz-button shlz-dropdown__trigger" data-component-audit-id="button-dropdown-scrollable-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="showcase-scrollable-menu">Много действий</button><div class="shlz-dropdown__menu shlz-dropdown__menu--scrollable" id="showcase-scrollable-menu" role="menu" hidden><div class="shlz-dropdown__scroll-region">${Array.from({ length: 34 }, (_, index) => `<button class="shlz-dropdown__item" type="button" role="menuitem">${index + 1} menu item</button>`).join("")}</div><span class="shlz-dropdown__scrollbar" aria-hidden="true"></span></div></div></article><article id="tooltip-stress-demo"><h3>Tooltip · content stress</h3><div class="shlz-popover-edge"><button class="shlz-button" data-component-audit-id="button-tooltip-stress-trigger" type="button" data-shlz-tooltip-trigger="tooltip-edge-stress" data-shlz-tooltip-placement="right" data-shlz-tooltip-open-delay="0">Tooltip edge stress</button><div class="shlz-tooltip shlz-tooltip--multiline" id="tooltip-edge-stress" role="tooltip" data-shlz-tooltip data-component-audit-id="tooltip-edge-stress" hidden>Длинный текст подсказки проверяет перенос у края viewport.<span class="shlz-tooltip__arrow" aria-hidden="true"></span></div></div></article>${typographyCompatibilityMarkup}
 ${consumerWorkspaceMarkup(showcaseIconUrl)}
 ${datePickerShowcaseMarkup}
-${datePickerConsumerMarkup}`;
+${datePickerConsumerMarkup}
+${calendarGridShowcaseMarkup}`;
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -524,6 +531,8 @@ window.__shlzTabsControllers = enhanceTabs();
 window.__shlzConsumerWorkspace = enhanceConsumerWorkspace();
 window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
 window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
+window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
+window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 
