@@ -1,16 +1,27 @@
 import assert from "node:assert/strict";
-import { readFile, realpath, stat } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-const repoRoot = await realpath(process.cwd());
-const target = await realpath(path.resolve(repoRoot, process.argv[2] ?? ""));
-assert.ok(
-  target === repoRoot || target.startsWith(`${repoRoot}${path.sep}`),
-  "target must stay within the repository",
+const repoRoot = process.cwd();
+const candidateFixture = path.join(
+  repoRoot,
+  "tools/fixtures/calendar-grid.html",
 );
-const source = (await stat(target)).isDirectory()
-  ? path.join(target, "tools/fixtures/calendar-grid.html")
-  : target;
+const knownBadFixture = path.join(
+  repoRoot,
+  "tools/tests/fixtures/calendar-grid-temporal-groups-known-bad.html",
+);
+const requestedTarget = process.argv[2];
+const knownBadRelative =
+  "tools/tests/fixtures/calendar-grid-temporal-groups-known-bad.html";
+const source =
+  requestedTarget === "." || requestedTarget === repoRoot
+    ? candidateFixture
+    : requestedTarget === knownBadFixture ||
+        requestedTarget === knownBadRelative
+      ? knownBadFixture
+      : null;
+assert.ok(source, "target must be an allowed Calendar Grid fixture");
 const html = await readFile(source, "utf8");
 
 const temporalRow = html.match(
