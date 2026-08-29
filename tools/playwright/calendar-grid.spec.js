@@ -265,97 +265,59 @@ test("renders source-backed past, today and future header and column treatments"
     );
   });
 
-  expect(stateStyles).toEqual({
+  const headerContracts = {
     past: {
-      header: {
-        backgroundColor: "rgb(255, 255, 255)",
-        color: "rgb(11, 22, 35)",
-        borderInlineEndColor: "rgb(209, 216, 223)",
-        borderBlockEndColor: "rgb(209, 216, 223)",
-        boxShadow: "none",
-        fontWeight: "700",
-        primaryWeight: "600",
-        secondaryColor: "rgb(11, 22, 35)",
-        secondaryOpacity: "1",
-        treatmentBackground: "rgb(238, 240, 244)",
-        treatmentInsetBlockStart: "4px",
-        treatmentInsetInlineStart: "1px",
-        treatmentInsetInlineEnd: "4px",
-        treatmentStartStartRadius: "0px",
-        treatmentStartEndRadius: "8px",
-        treatmentEndStartRadius: "0px",
-        treatmentEndEndRadius: "8px",
-      },
-      cells: expect.arrayContaining([
-        expect.objectContaining({
-          backgroundColor: "rgb(255, 255, 255)",
-          color: "rgb(11, 22, 35)",
-        }),
-      ]),
+      outer: "rgb(255, 255, 255)",
+      text: "rgb(11, 22, 35)",
+      inner: "rgb(238, 240, 244)",
+      inlineInsets: ["1px", "4px"],
+      radii: ["0px", "8px", "0px", "8px"],
     },
     today: {
-      header: {
-        backgroundColor: "rgb(244, 246, 249)",
-        color: "rgb(37, 61, 152)",
-        borderInlineEndColor: "rgb(209, 216, 223)",
-        borderBlockEndColor: "rgb(209, 216, 223)",
-        boxShadow: "none",
-        fontWeight: "700",
-        primaryWeight: "600",
-        secondaryColor: "rgb(37, 61, 152)",
-        secondaryOpacity: "1",
-        treatmentBackground: "rgba(61, 136, 222, 0.15)",
-        treatmentInsetBlockStart: "4px",
-        treatmentInsetInlineStart: "4px",
-        treatmentInsetInlineEnd: "4px",
-        treatmentStartStartRadius: "8px",
-        treatmentStartEndRadius: "8px",
-        treatmentEndStartRadius: "8px",
-        treatmentEndEndRadius: "8px",
-      },
-      cells: expect.arrayContaining([
-        expect.objectContaining({
-          backgroundColor: "rgb(244, 246, 249)",
-          color: "rgb(11, 22, 35)",
-        }),
-      ]),
+      outer: "rgb(244, 246, 249)",
+      text: "rgb(37, 61, 152)",
+      inner: "rgba(61, 136, 222, 0.15)",
+      inlineInsets: ["4px", "4px"],
+      radii: ["8px", "8px", "8px", "8px"],
     },
     future: {
-      header: {
-        backgroundColor: "rgb(255, 255, 255)",
-        color: "rgb(11, 22, 35)",
-        borderInlineEndColor: "rgb(209, 216, 223)",
-        borderBlockEndColor: "rgb(209, 216, 223)",
-        boxShadow: "none",
-        fontWeight: "700",
-        primaryWeight: "600",
-        secondaryColor: "rgb(11, 22, 35)",
-        secondaryOpacity: "1",
-        treatmentBackground: "rgb(238, 240, 244)",
-        treatmentInsetBlockStart: "4px",
-        treatmentInsetInlineStart: "4px",
-        treatmentInsetInlineEnd: "0px",
-        treatmentStartStartRadius: "8px",
-        treatmentStartEndRadius: "0px",
-        treatmentEndStartRadius: "8px",
-        treatmentEndEndRadius: "0px",
-      },
-      cells: expect.arrayContaining([
-        expect.objectContaining({
-          backgroundColor: "rgb(255, 255, 255)",
-          color: "rgb(11, 22, 35)",
-        }),
-      ]),
+      outer: "rgb(255, 255, 255)",
+      text: "rgb(11, 22, 35)",
+      inner: "rgb(238, 240, 244)",
+      inlineInsets: ["4px", "0px"],
+      radii: ["8px", "0px", "8px", "0px"],
     },
-  });
-  expect(stateStyles.past.cells).toHaveLength(2);
-  expect(stateStyles.today.cells).toHaveLength(2);
-  expect(stateStyles.future.cells).toHaveLength(2);
+  };
+  for (const [state, contract] of Object.entries(headerContracts)) {
+    const header = stateStyles[state].header;
+    expect(header.backgroundColor).toBe(contract.outer);
+    expect(header.color).toBe(contract.text);
+    expect(header.secondaryColor).toBe(contract.text);
+    expect(header.treatmentBackground).toBe(contract.inner);
+    expect([
+      header.treatmentInsetInlineStart,
+      header.treatmentInsetInlineEnd,
+    ]).toEqual(contract.inlineInsets);
+    expect([
+      header.treatmentStartStartRadius,
+      header.treatmentStartEndRadius,
+      header.treatmentEndStartRadius,
+      header.treatmentEndEndRadius,
+    ]).toEqual(contract.radii);
+    expect(header.treatmentInsetBlockStart).toBe("4px");
+    expect(header.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+    expect(header.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+    expect(header.boxShadow).toBe("none");
+    expect(header.fontWeight).toBe("700");
+    expect(header.primaryWeight).toBe("600");
+    expect(header.secondaryOpacity).toBe("1");
+  }
   for (const [state, backgroundColor] of [
     ["past", "rgb(255, 255, 255)"],
     ["today", "rgb(244, 246, 249)"],
     ["future", "rgb(255, 255, 255)"],
   ]) {
+    expect(stateStyles[state].cells).toHaveLength(2);
     for (const style of stateStyles[state].cells) {
       expect(style.backgroundColor).toBe(backgroundColor);
       expect(style.color).toBe("rgb(11, 22, 35)");
