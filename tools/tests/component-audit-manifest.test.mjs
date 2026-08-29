@@ -304,7 +304,13 @@ test("audited component manifests are complete, traceable, and classification-dr
         assert.ok(
           new RegExp(
             `verifyMaterialState\\(\\s*["']${manifest.component}["']\\s*,\\s*["']${state}["']`,
-          ).test(interactionBrowserSource),
+          ).test(interactionBrowserSource) ||
+            (new RegExp(
+              `verifyMaterialStates\\(\\s*["']${manifest.component}["']\\s*,`,
+            ).test(interactionBrowserSource) &&
+              new RegExp(`(?:["']${state}["']|\\b${state})\\s*:`).test(
+                interactionBrowserSource,
+              )),
           `${manifest.component} must record ${state} only after its executable assertion`,
         );
     }

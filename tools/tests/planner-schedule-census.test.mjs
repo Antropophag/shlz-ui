@@ -18,20 +18,23 @@ const extensions = new Set([
 ]);
 const occurrence = /shlz-planner-schedule|data-shlz-planner-schedule/;
 
-async function executableFiles(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
+async function executableFiles(...directories) {
+  const pending = [...directories];
   const files = [];
-  for (const entry of entries) {
-    if (entry.name === "dist" || entry.name === "node_modules") continue;
-    const path = join(directory, entry.name);
-    if (entry.isDirectory()) files.push(...(await executableFiles(path)));
-    else if (extensions.has(extname(entry.name))) files.push(path);
+  while (pending.length) {
+    const directory = pending.pop();
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      if (entry.name === "dist" || entry.name === "node_modules") continue;
+      const path = join(directory, entry.name);
+      if (entry.isDirectory()) pending.push(path);
+      else if (extensions.has(extname(entry.name))) files.push(path);
+    }
   }
   return files;
 }
 
 test("Planner Schedule census classifies every executable implementation", async () => {
-  const files = (await Promise.all(roots.map(executableFiles))).flat();
+  const files = await executableFiles(...roots);
   const matches = [];
   for (const path of files)
     if (occurrence.test(await readFile(path, "utf8")))

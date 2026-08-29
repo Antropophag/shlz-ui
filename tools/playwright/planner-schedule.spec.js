@@ -17,6 +17,10 @@ const verifyMaterialState = async (component, state, assertion) => {
   await assertion();
   executedMaterialStates.add(`${component}:${state}`);
 };
+const verifyMaterialStates = async (component, states) => {
+  for (const [state, assertion] of Object.entries(states))
+    await verifyMaterialState(component, state, assertion);
+};
 const expectMaterialStates = (component) => {
   expect(
     manifest.interactionEvidence.materialStates.every((state) =>
@@ -350,51 +354,17 @@ test("executes the declared Planner Schedule material-state ledger", async ({
   await verifyMaterialState("planner-schedule", "focus-visible", async () =>
     expect(event).toBeFocused(),
   );
-  await verifyMaterialState(
-    "planner-schedule",
-    "completed",
-    visible('[data-state="completed"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "canceled",
-    visible('[data-state="canceled"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "past",
-    visible('[data-shlz-planner-state="past"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "today",
-    visible('[data-shlz-planner-state="today"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "future",
-    visible('[data-shlz-planner-state="future"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "unavailable-day",
-    visible("[data-shlz-planner-unavailable]"),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "unavailable-period",
-    visible(".shlz-planner-schedule__unavailable-period"),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "overlapping-lanes",
-    visible('[style*="--shlz-planner-lane:1"]'),
-  );
-  await verifyMaterialState(
-    "planner-schedule",
-    "current-time",
-    visible(".shlz-planner-schedule__now"),
-  );
+  await verifyMaterialStates("planner-schedule", {
+    completed: visible('[data-state="completed"]'),
+    canceled: visible('[data-state="canceled"]'),
+    past: visible('[data-shlz-planner-state="past"]'),
+    today: visible('[data-shlz-planner-state="today"]'),
+    future: visible('[data-shlz-planner-state="future"]'),
+    "unavailable-day": visible("[data-shlz-planner-unavailable]"),
+    "unavailable-period": visible(".shlz-planner-schedule__unavailable-period"),
+    "overlapping-lanes": visible('[style*="--shlz-planner-lane:1"]'),
+    "current-time": visible(".shlz-planner-schedule__now"),
+  });
   await event.press("Enter");
   await verifyMaterialState("planner-schedule", "detail-open", async () =>
     expect(detail).toBeVisible(),
