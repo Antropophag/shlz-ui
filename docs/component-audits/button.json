@@ -30,6 +30,11 @@
       "kind": "executable-fixture"
     },
     { "id": "button-calendar-grid-consumer", "kind": "live-consumer" },
+    {
+      "id": "button-planner-source-details",
+      "kind": "executable-fixture"
+    },
+    { "id": "button-planner-consumer-details", "kind": "live-consumer" },
     { "id": "button-modal-actions", "kind": "live-consumer" },
     { "id": "button-drawer-actions", "kind": "live-consumer" },
     { "id": "button-framework-composition", "kind": "executable-fixture" },

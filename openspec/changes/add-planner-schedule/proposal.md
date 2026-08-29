@@ -6,7 +6,7 @@ SHLZ UI now has a reusable row-by-date Calendar Grid, but the authoritative Plan
 
 - Add a framework-neutral Planner Schedule module for bounded day-by-time schedules.
 - Define semantic day and time context, duration-based event geometry, overlapping-event lanes, temporal and unavailable states, empty periods, and contained two-axis overflow.
-- Add a small optional controller for event-detail disclosure, active-event synchronization, typed notifications, idempotent enhancement, and destruction.
+- Reuse the existing Popover controller for event-detail disclosure, positioning, dismissal, focus restoration, idempotent enhancement, and destruction; keep Planner itself behavior-free.
 - Provide a reusable event-detail popover composition using existing Popover, Avatar, Button, Textarea, and file primitives without owning application records or mutations.
 - Add source traceability, public documentation, plain-HTML and Showcase fixtures, one Data Workspace consumer, component-audit inventory, occurrence guards, and focused runtime/accessibility/visual evidence.
 - Keep the existing Calendar Grid interface backward compatible and reuse its presentation vocabulary only where the two source contracts genuinely coincide.

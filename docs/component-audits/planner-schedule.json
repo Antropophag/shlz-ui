@@ -1,0 +1,141 @@
+{
+  "component": "planner-schedule",
+  "authoritativeSource": "shlz-design-source/raw/svg/Planner.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Планировщик для сотрудника.svg",
+    "docs/component-audits/planner-schedule-contract.md"
+  ],
+  "implementation": ["packages/styles/components/planner-schedule.css"],
+  "behavior": null,
+  "docs": "docs/components/planner-schedule.md",
+  "rootSelector": "[data-component-audit-id^='planner-schedule-']",
+  "legacySelectors": [".shlz-planner-schedule", "[data-shlz-planner-schedule]"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    {
+      "id": "planner-schedule-showcase-source",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "planner-schedule-data-workspace",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "planner-schedule-plain-html",
+      "kind": "executable-fixture"
+    }
+  ],
+  "supportedSizes": [
+    "one-to-seven-days",
+    "up-to-twenty-four-slots",
+    "bounded-non-virtualized-schedule"
+  ],
+  "supportedStates": [
+    "past",
+    "today",
+    "future",
+    "unavailable-day",
+    "unavailable-period",
+    "empty",
+    "default",
+    "hover",
+    "focus-visible",
+    "completed",
+    "canceled",
+    "overlapping-lanes",
+    "detail-open",
+    "detail-closed",
+    "current-time"
+  ],
+  "contentStress": [
+    "long-localized-day-and-event-labels",
+    "empty-periods",
+    "two-overlap-lanes",
+    "sixty-events",
+    "narrow-viewport",
+    "two-axis-overflow",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Planner.svg establishes New, Done and Canceled meeting cards, Default and Hover rows, 30-minute through 2-hour cells, empty and unavailable cells, detail compositions, and current-time lines",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Planner.svg"
+    },
+    {
+      "claim": "full-screen employee Planner evidence aligns duration-based events beneath dated day headers and hatches unavailable weekend columns",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Планировщик для сотрудника.svg"
+    },
+    {
+      "claim": "semantic day regions, normalized placement, generic tones, bounded native scrolling, sticky context, and existing Popover composition form the reusable interface",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-planner-schedule/design.md"
+    },
+    {
+      "claim": "sticky context degrades to ordinary flow and out-of-range placement remains unsupported input",
+      "classification": "assumption",
+      "evidence": "docs/components/planner-schedule.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/planner-schedule.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-source-chromium-linux.png",
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact raw Planner hashes and unchanged-source assertions",
+    "structural-contract": "pass: style export, docs, fixtures, manifest and repository census",
+    "runtime-browser": "pass: real event and Popover interaction suite",
+    "accessibility": "pass: semantic context, keyboard, focus, contrast and axe checks",
+    "focused-visual": "pass: duration, lanes, states, sticky context and focused snapshots",
+    "consumer-integration": "pass: Data Workspace consumer action executes",
+    "responsive-content-stress": "pass: narrow, 200% text, sixty-event, long and empty cases"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source and state snapshots are classified as static-visual evidence only"
+      ],
+      "realInteractionVisual": [
+        "pass: browser-created hover, focus and detail states expose computed source-backed paint and geometry"
+      ],
+      "runtimeBehavior": [
+        "pass: native event activation, Popover dismissal/focus and consumer actions execute"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "hover",
+      "focus-visible",
+      "completed",
+      "canceled",
+      "past",
+      "today",
+      "future",
+      "unavailable-day",
+      "unavailable-period",
+      "overlapping-lanes",
+      "detail-open",
+      "detail-closed",
+      "current-time",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/planner-schedule.spec.js",
+    "manualStateWalk": "pass: pointer hover/click, Tab focus, Enter activation, outside dismissal, consumer action and narrow two-axis scroll checked in Chromium"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no date parsing, timezone conversion, recurrence, conflict detection, drag/drop, resizing, editing, persistence or virtualization",
+    "supported evidence is bounded to seven days, twenty-four slots, sixty events and two overlap lanes",
+    "sticky positioning degrades where platform containment prevents it",
+    "all domain data, temporal policy and actions remain consumer-owned"
+  ]
+}

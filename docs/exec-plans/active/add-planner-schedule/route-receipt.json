@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Implement the reusable Planner Schedule foundation represented by the supplied Planner screenshots, reuse the existing Calendar Grid and Popover contracts where applicable, and deliver an unmerged merge-ready PR with CodeRabbit review.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
