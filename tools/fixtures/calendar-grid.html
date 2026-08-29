@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="../../packages/styles/dist/shlz.css" />
+    <title>Calendar Grid fixture</title>
+  </head>
+  <body>
+    <div
+      class="shlz-calendar-grid"
+      data-shlz-calendar-grid
+      data-component-audit-id="calendar-grid-plain-html"
+    >
+      <table aria-label="Team delivery calendar">
+        <thead>
+          <tr>
+            <th scope="col" rowspan="2">Team</th>
+            <th scope="colgroup">August 2026</th>
+          </tr>
+          <tr>
+            <th
+              scope="col"
+              id="date-2026-08-29"
+              data-shlz-calendar-grid-state="today"
+            >
+              <span class="shlz-calendar-grid__date-primary">29 Aug</span
+              ><span class="shlz-calendar-grid__date-secondary">Today</span>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" id="row-design">Design</th>
+            <td headers="row-design date-2026-08-29">
+              <ul class="shlz-calendar-grid__items">
+                <li class="shlz-calendar-grid__item" data-tone="accent">
+                  Review interface
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

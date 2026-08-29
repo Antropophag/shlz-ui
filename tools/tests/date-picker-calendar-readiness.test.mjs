@@ -134,7 +134,9 @@ const extensions = new Set([
   ".php",
 ]);
 const pickerOccurrence =
-  /shlz-(?:calendar|date-picker)|data-(?:component-audit-id=["']date-picker-calendar-|shlz-(?:calendar|date-picker))|type\s*=\s*["']date["']/;
+  /shlz-(?:calendar(?!-grid)|date-picker)|data-(?:component-audit-id=["']date-picker-calendar-|shlz-(?:calendar(?!-grid)|date-picker))|type\s*=\s*["']date["']/;
+const gridOccurrence =
+  /shlz-calendar-grid|data-component-audit-id=["']calendar-grid-/;
 
 async function executableFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -154,7 +156,7 @@ test("Date Picker and Calendar census has no unclassified occurrence or substitu
   for (const path of files)
     if (pickerOccurrence.test(await readFile(path, "utf8")))
       matches.push(relative(".", path));
-  assert.deepEqual(matches, [
+  assert.deepEqual(matches.sort(), [
     "apps/showcase/src/date-picker-consumer.js",
     "apps/showcase/src/date-picker-showcase.js",
     "packages/behaviors/src/calendar.ts",
@@ -181,4 +183,28 @@ test("Date Picker and Calendar census has no unclassified occurrence or substitu
   ])
     assert.ok(manifest.occurrences.some((occurrence) => occurrence.id === id));
   assert.equal(manifest.diagnosticOccurrenceCount, 0);
+});
+
+test("Calendar Grid census is independently classified from Date Picker", async () => {
+  const files = (await Promise.all(roots.map(executableFiles))).flat();
+  const matches = [];
+  for (const path of files)
+    if (gridOccurrence.test(await readFile(path, "utf8")))
+      matches.push(relative(".", path));
+  assert.deepEqual(matches.sort(), [
+    "apps/showcase/src/calendar-grid-showcase.js",
+    "packages/behaviors/src/calendar-grid.ts",
+    "tools/fixtures/calendar-grid.html",
+  ]);
+  const manifest = JSON.parse(
+    await readFile("docs/component-audits/calendar-grid.json", "utf8"),
+  );
+  assert.deepEqual(
+    manifest.occurrences.map(({ id }) => id),
+    [
+      "calendar-grid-showcase-source",
+      "calendar-grid-data-workspace",
+      "calendar-grid-plain-html",
+    ],
+  );
 });

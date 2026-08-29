@@ -1,0 +1,11 @@
+# Calendar Grid
+
+Calendar Grid is a framework-neutral native-table composition for row-by-date operational data. It works in plain HTML, server-rendered PHP, Vue templates, and other renderers without a JavaScript rendering runtime.
+
+Consumers own row, date, and item identities; ordering; locale and timezone formatting; temporal and unavailable classification; loading, errors, permissions, filtering, selection, persistence, rerendering, and item actions. The library owns presentation, contained scrolling, sticky context, and optional disclosure synchronization.
+
+Wrap an accessible `table` in `.shlz-calendar-grid`, label every row and date with native `th` elements, and connect data cells with `headers`. Optional month or period bands use an additional header row with native `<th scope="colgroup" colspan="…">`; individual dates remain separate `<th scope="col">` headers beneath it. Set `data-shlz-calendar-grid-state` to `past`, `today`, `future`, or `unavailable`; unavailable dates also need visible or assistive text explaining why. Generic item tones are presentation-only: `accent`, `success`, `warning`, and `danger` carry no business meaning.
+
+Optional disclosure uses a native button with `data-shlz-calendar-grid-disclosure="row|cell"`, globally unique `aria-controls`, and `aria-expanded`. Call `enhanceCalendarGrids()` or construct `CalendarGridController`. The controller emits bubbling `shlz:calendar-grid-disclosure` events with `{ kind, id, expanded }`, is idempotently enhanced, and can be destroyed before consumer rerendering.
+
+The grid is bounded and non-virtualized. Override `--shlz-calendar-grid-row-header-width`, `--shlz-calendar-grid-column-width`, and `--shlz-calendar-grid-max-block-size` at the composition seam when necessary.

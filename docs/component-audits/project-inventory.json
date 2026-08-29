@@ -1815,7 +1815,7 @@
         "consumer-integration": "pass: application-owned native form verifies public-entry typing and Calendar selection through FormData",
         "responsive-content-stress": "pass: one/two-month, narrow, long-label, invalid, constrained and de-DE fixtures execute"
       },
-      "canonical_name": "Date Picker / Calendar",
+      "canonical_name": "Date Picker",
       "category": "form-controls",
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",
@@ -1862,6 +1862,64 @@
         "executableShowcase": 33,
         "liveConsumers": 1,
         "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/calendar-grid.test.mjs",
+        "tools/playwright/calendar-grid.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: raw Calendar hash is attested and source remains unchanged",
+        "structural-contract": "pass: styles, behavior, exports, docs, fixtures and classified occurrences exist",
+        "runtime-browser": "pass: disclosure controller lifecycle and consumer action execute in Chromium",
+        "accessibility": "pass: native table headers, relationships, controls and unavailable descriptions execute",
+        "focused-visual": "pass: source matrix and narrow snapshots plus sticky/overflow computed geometry",
+        "consumer-integration": "pass: Data Workspace owns data and item action",
+        "responsive-content-stress": "pass: narrow, long, empty, dense and text-scale coverage"
+      },
+      "canonical_name": "Calendar Grid",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Calendar.svg"],
+      "production_implementation": [
+        "packages/styles/components/calendar-grid.css"
+      ],
+      "behavior": ["packages/behaviors/src/calendar-grid.ts"],
+      "docs": [
+        "docs/components/calendar-grid.md",
+        "docs/component-audits/calendar-grid-contract.md"
+      ],
+      "executable_fixtures": [
+        "tools/fixtures/calendar-grid.html",
+        "apps/showcase/src/calendar-grid-showcase.js"
+      ],
+      "live_consumers": ["apps/showcase/src/calendar-grid-showcase.js"],
+      "data_workspace_consumers": [
+        "apps/showcase/src/calendar-grid-showcase.js"
+      ],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "native table semantics",
+        "past/today/future/unavailable",
+        "row and cell disclosure",
+        "sticky two-axis overflow",
+        "long/empty/dense content"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "bounded non-virtualized matrix; consumer-owned dates and domain actions"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
         "inertDiagnostics": 0,
         "legacyNative": 0,
         "localAlternatives": 0

@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Implement a framework-neutral reusable calendar grid derived from the supplied calendar screens, with a generic consumer-owned data model and independently verified component evidence, then deliver an unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "component-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Implement the supplied calendar as a reusable grid, excluding the application page shell"
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md, shlz-design-source/raw/svg/Calendar.svg, and recorded user-supplied SVG evidence"
+      }
+    },
+    {
+      "id": "module-seam",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md framework-neutral layering and packages/styles plus packages/behaviors architecture"
+      }
+    },
+    {
+      "id": "interaction-accessibility-contract",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/component-audit-workflow.md and native HTML/accessibility conventions"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md requires a task branch from current origin/main and an unmerged PR"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-reusable-calendar-grid",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Explicit request to implement the calendar in shlz-ui"
+    }
+  }
+}
