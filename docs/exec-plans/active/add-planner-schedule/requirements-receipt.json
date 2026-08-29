@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-planner-schedule",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "planner-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "increment-boundary",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "module-seam",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement the reusable Planner Schedule foundation represented by the supplied Planner screenshots, reuse the existing Calendar Grid and Popover contracts where applicable, and deliver an unmerged merge-ready PR with CodeRabbit review.",
+    "revision": 1
+  },
+  "routeDigest": "1dc5b813a7b058ce9d2e4b464479154f50ad83d9074f64f379bb976b2a17c4e6",
+  "version": 1,
+  "digest": "98947d4becc94f98692845a53d9d3ec8702ee80b8ad45d974a75f2f8eacb0fe1"
+}

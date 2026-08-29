@@ -1,0 +1,54 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement the reusable Planner Schedule foundation represented by the supplied Planner screenshots, reuse the existing Calendar Grid and Popover contracts where applicable, and deliver an unmerged merge-ready PR with CodeRabbit review.",
+    "material": [
+      "newCapability",
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-planner-schedule",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "planner-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "increment-boundary",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "module-seam",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "1dc5b813a7b058ce9d2e4b464479154f50ad83d9074f64f379bb976b2a17c4e6"
+}
