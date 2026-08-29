@@ -86,7 +86,10 @@
   "browserTests": ["tools/playwright/planner-schedule.spec.js"],
   "visualSnapshots": [
     "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-source-chromium-linux.png",
-    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-narrow-chromium-linux.png"
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-narrow-chromium-linux.png",
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-event-hover-chromium-linux.png",
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-event-focus-chromium-linux.png",
+    "tools/playwright/planner-schedule.spec.js-snapshots/planner-schedule-detail-open-chromium-linux.png"
   ],
   "evidence": {
     "source-integrity": "pass: exact raw Planner hashes and unchanged-source assertions",
@@ -128,7 +131,7 @@
       "text-scale"
     ],
     "browserTest": "tools/playwright/planner-schedule.spec.js",
-    "manualStateWalk": "pass: pointer hover/click, Tab focus, Enter activation, outside dismissal, consumer action and narrow two-axis scroll checked in Chromium"
+    "manualStateWalk": "pass: pointer hover/down/click, Tab focus, Enter and Space activation, Escape and outside dismissal, consumer action and narrow two-axis scroll checked in Chromium; disabled is not applicable because event availability is consumer-owned and unsupported by this presentation contract"
   },
   "acceptedDeviations": [],
   "findings": [],

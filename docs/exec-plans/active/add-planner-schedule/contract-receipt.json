@@ -1,0 +1,147 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "a5c55e24f545ee22fe9dce79cf13a2c2696643d4136176bf27655ec31a0e1e49",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer formats day and time labels for its locale, timezone, and work calendar\n- **THEN** Planner Schedule displays those values unchanged and performs no independent date, locale, timezone, recurrence, or availability calculation",
+        "id": "data-display/planner-schedule::Declarative day and time geometry::Date policy stays consumer-owned",
+        "name": "Date policy stays consumer-owned",
+        "requirement": "Declarative day and time geometry",
+        "requirementContent": "The Planner Schedule SHALL accept consumer-provided ordered days, bounded time slots, and explicit event placement values for day, start, end, and optional overlap lane. The library SHALL translate those values into duration-proportional source-backed geometry without parsing dates, comparing timezones, assigning employees, detecting conflicts, or calculating recurrence. Invalid or out-of-range placement SHALL remain a documented unsupported input rather than being silently normalized into a different time."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer supplies an event whose explicit start and end cover multiple schedule slots\n- **THEN** its visual block spans the corresponding duration while its full textual interval remains available",
+        "id": "data-display/planner-schedule::Declarative day and time geometry::Event spans multiple slots",
+        "name": "Event spans multiple slots",
+        "requirement": "Declarative day and time geometry",
+        "requirementContent": "The Planner Schedule SHALL accept consumer-provided ordered days, bounded time slots, and explicit event placement values for day, start, end, and optional overlap lane. The library SHALL translate those values into duration-proportional source-backed geometry without parsing dates, comparing timezones, assigning employees, detecting conflicts, or calculating recurrence. Invalid or out-of-range placement SHALL remain a documented unsupported input rather than being silently normalized into a different time."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer assigns two events to documented lanes within the same day and time interval\n- **THEN** both events remain visible and operable without overlapping each other's interactive surface",
+        "id": "data-display/planner-schedule::Declarative day and time geometry::Events overlap",
+        "name": "Events overlap",
+        "requirement": "Declarative day and time geometry",
+        "requirementContent": "The Planner Schedule SHALL accept consumer-provided ordered days, bounded time slots, and explicit event placement values for day, start, end, and optional overlap lane. The library SHALL translate those values into duration-proportional source-backed geometry without parsing dates, comparing timezones, assigning employees, detecting conflicts, or calculating recurrence. Invalid or out-of-range placement SHALL remain a documented unsupported input rather than being silently normalized into a different time."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a user activates a consumer-authored control inside event details\n- **THEN** the consumer determines validation and mutation while Planner Schedule adds no persistence, authorization, or business workflow",
+        "id": "data-display/planner-schedule::Event detail composition::Consumer handles a detail action",
+        "name": "Consumer handles a detail action",
+        "requirement": "Event detail composition",
+        "requirementContent": "Planner Schedule event controls SHALL compose with the existing Popover interface so consumers can expose event details while preserving the event trigger's expanded state, focus restoration, Escape dismissal, outside-pointer dismissal, and collision-aware positioning. The planner-specific detail markup SHALL support consumer-authored title, description, date/time, location, participants, comments, files, and actions without requiring any field or performing record mutations."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a user activates an event button connected to a Planner detail Popover\n- **THEN** the detail surface opens through the existing Popover behavior, retains the event's schedule context, and closes with the documented Popover keyboard and focus behavior",
+        "id": "data-display/planner-schedule::Event detail composition::Event detail opens from a real event",
+        "name": "Event detail opens from a real event",
+        "requirement": "Event detail composition",
+        "requirementContent": "Planner Schedule event controls SHALL compose with the existing Popover interface so consumers can expose event details while preserving the event trigger's expanded state, focus restoration, Escape dismissal, outside-pointer dismissal, and collision-aware positioning. The planner-specific detail markup SHALL support consumer-authored title, description, date/time, location, participants, comments, files, and actions without requiring any field or performing record mutations."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer marks an event completed or canceled and provides visible or assistive status text\n- **THEN** the source-backed state treatment is applied while the status remains identifiable without color or opacity alone",
+        "id": "data-display/planner-schedule::Events and visual states::Completed or canceled event is presented",
+        "name": "Completed or canceled event is presented",
+        "requirement": "Events and visual states",
+        "requirementContent": "The Planner Schedule SHALL support empty periods and generic event items with visible title, optional time and supporting text, a documented presentation tone, and `default`, `hover`, `focus-visible`, `completed`, and `canceled` presentation states where source-backed. Event labels SHALL remain readable under long localized content, and tone or opacity MUST NOT be the sole indication of completion or cancellation."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer places a labeled event with a supported tone and explicit time interval\n- **THEN** the event appears in the corresponding day and interval without assigning business meaning to the tone",
+        "id": "data-display/planner-schedule::Events and visual states::Generic event is presented",
+        "name": "Generic event is presented",
+        "requirement": "Events and visual states",
+        "requirementContent": "The Planner Schedule SHALL support empty periods and generic event items with visible title, optional time and supporting text, a documented presentation tone, and `default`, `hover`, `focus-visible`, `completed`, and `canceled` presentation states where source-backed. Event labels SHALL remain readable under long localized content, and tone or opacity MUST NOT be the sole indication of completion or cancellation."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** event title, time, supporting text, or day labels contain long localized content\n- **THEN** content remains readable or intentionally truncated with an accessible full label and does not overlap adjacent event controls",
+        "id": "data-display/planner-schedule::Events and visual states::Long content is supplied",
+        "name": "Long content is supplied",
+        "requirement": "Events and visual states",
+        "requirementContent": "The Planner Schedule SHALL support empty periods and generic event items with visible title, optional time and supporting text, a documented presentation tone, and `default`, `hover`, `focus-visible`, `completed`, and `canceled` presentation states where source-backed. Event labels SHALL remain readable under long localized content, and tone or opacity MUST NOT be the sole indication of completion or cancellation."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** the supplied days cannot fit the available inline size\n- **THEN** horizontal overflow remains inside Planner Schedule and the page does not gain horizontal overflow",
+        "id": "data-display/planner-schedule::Overflow, sticky context, and bounded scale::Narrow container scrolls the schedule",
+        "name": "Narrow container scrolls the schedule",
+        "requirement": "Overflow, sticky context, and bounded scale",
+        "requirementContent": "Planner Schedule SHALL contain horizontal and vertical overflow within its own wrapper, retain useful day and time context while scrolling where the platform supports sticky positioning, and avoid causing horizontal page overflow. Controls and labels SHALL remain reachable at the supported narrow viewport and browser text scaling. The public contract SHALL document a bounded, non-virtualized schedule and SHALL NOT promise an unbounded day, slot, or event count."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** the time range exceeds the configured viewport height\n- **THEN** vertical overflow remains inside Planner Schedule and day/time context remains perceivable without covering focused controls",
+        "id": "data-display/planner-schedule::Overflow, sticky context, and bounded scale::Tall schedule preserves context",
+        "name": "Tall schedule preserves context",
+        "requirement": "Overflow, sticky context, and bounded scale",
+        "requirementContent": "Planner Schedule SHALL contain horizontal and vertical overflow within its own wrapper, retain useful day and time context while scrolling where the platform supports sticky positioning, and avoid causing horizontal page overflow. Controls and labels SHALL remain reachable at the supported narrow viewport and browser text scaling. The public contract SHALL document a bounded, non-virtualized schedule and SHALL NOT promise an unbounded day, slot, or event count."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** browser text is enlarged at a narrow supported viewport\n- **THEN** event controls and labels remain reachable through ordinary scrolling with no clipped focus indicator or keyboard trap",
+        "id": "data-display/planner-schedule::Overflow, sticky context, and bounded scale::Text is enlarged",
+        "name": "Text is enlarged",
+        "requirement": "Overflow, sticky context, and bounded scale",
+        "requirementContent": "Planner Schedule SHALL contain horizontal and vertical overflow within its own wrapper, retain useful day and time context while scrolling where the platform supports sticky positioning, and avoid causing horizontal page overflow. Controls and labels SHALL remain reachable at the supported narrow viewport and browser text scaling. The public contract SHALL document a bounded, non-virtualized schedule and SHALL NOT promise an unbounded day, slot, or event count."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** source traceability, semantic context, duration and overlap geometry, event states, current-time and unavailable treatment, real detail interaction, focus behavior, bounded overflow, long/empty content, plain-HTML use, and a real application consumer pass without a blocking finding\n- **THEN** Planner Schedule may move to `VERIFIED` with exact observed counts, supported limits, and consumer-owned responsibilities recorded",
+        "id": "data-display/planner-schedule::Planner Schedule audit acceptance::Complete evidence permits verification",
+        "name": "Complete evidence permits verification",
+        "requirement": "Planner Schedule audit acceptance",
+        "requirementContent": "Planner Schedule SHALL remain `INVENTORIED` or move to `FINDINGS` until its manifest classifies every repository occurrence and independently passes source integrity, structural contract, runtime browser, accessibility, focused visual, consumer integration, and responsive/content-stress evidence. Static SVGs and forced visual states MUST NOT substitute for real Popover interaction, keyboard operation, computed geometry, or consumer-owned action evidence."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** repository or built-DOM census finds Planner Schedule markup, an executable fixture, consumer, diagnostic, or legacy substitute absent from the manifest\n- **THEN** the occurrence guard fails and Planner Schedule cannot be marked `VERIFIED`",
+        "id": "data-display/planner-schedule::Planner Schedule audit acceptance::Unclassified occurrence blocks verification",
+        "name": "Unclassified occurrence blocks verification",
+        "requirement": "Planner Schedule audit acceptance",
+        "requirementContent": "Planner Schedule SHALL remain `INVENTORIED` or move to `FINDINGS` until its manifest classifies every repository occurrence and independently passes source integrity, structural contract, runtime browser, accessibility, focused visual, consumer integration, and responsive/content-stress evidence. Static SVGs and forced visual states MUST NOT substitute for real Popover interaction, keyboard operation, computed geometry, or consumer-owned action evidence."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer uses Planner Schedule\n- **THEN** no profile, sidebar, month picker, status filter, statistics view, application route, or data service is required by the module interface",
+        "id": "data-display/planner-schedule::Planner schedule semantic context::Application shell is omitted",
+        "name": "Application shell is omitted",
+        "requirement": "Planner schedule semantic context",
+        "requirementContent": "The Planner Schedule SHALL expose an accessible name, ordered day headings, visible time labels, and a programmatically determinable day, start time, end time, and label for every event. The public contract SHALL accept consumer-authored labels and event content without requiring an employee profile, navigation, mini-calendar, filter panel, business-status vocabulary, or application routing. Visual position or color MUST NOT be the only means of identifying an event's day, time, or meaning."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a server-rendered or plain HTML consumer supplies the documented Planner Schedule structure\n- **THEN** the schedule renders without a framework runtime and exposes its schedule name, days, time scale, and each event's day and time interval to assistive technology",
+        "id": "data-display/planner-schedule::Planner schedule semantic context::Plain HTML consumer renders a schedule",
+        "name": "Plain HTML consumer renders a schedule",
+        "requirement": "Planner schedule semantic context",
+        "requirementContent": "The Planner Schedule SHALL expose an accessible name, ordered day headings, visible time labels, and a programmatically determinable day, start time, end time, and label for every event. The public contract SHALL accept consumer-authored labels and event content without requiring an employee profile, navigation, mini-calendar, filter panel, business-status vocabulary, or application routing. Visual position or color MUST NOT be the only means of identifying an event's day, time, or meaning."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer identifies a day as today and provides a current-time position and label\n- **THEN** the day and timeline receive the documented treatment while the time remains visible and programmatically available",
+        "id": "data-display/planner-schedule::Temporal and unavailable presentation::Consumer marks today and current time",
+        "name": "Consumer marks today and current time",
+        "requirement": "Temporal and unavailable presentation",
+        "requirementContent": "The Planner Schedule SHALL support consumer-declared `past`, `today`, and `future` day states, unavailable days or periods with an accessible reason, and an optional current-time indicator with consumer-authored visible time text. The library SHALL style these states but MUST NOT determine the current day or time. Unavailable content SHALL remain identifiable without relying only on hatch paint or color."
+      },
+      {
+        "capability": "data-display/planner-schedule",
+        "content": "- **WHEN** a consumer marks a day or bounded period unavailable and supplies its reason\n- **THEN** the source-backed unavailable treatment appears and assistive technology can identify the reason",
+        "id": "data-display/planner-schedule::Temporal and unavailable presentation::Day or period is unavailable",
+        "name": "Day or period is unavailable",
+        "requirement": "Temporal and unavailable presentation",
+        "requirementContent": "The Planner Schedule SHALL support consumer-declared `past`, `today`, and `future` day states, unavailable days or periods with an accessible reason, and an optional current-time indicator with consumer-authored visible time text. The library SHALL style these states but MUST NOT determine the current day or time. Unavailable content SHALL remain identifiable without relying only on hatch paint or color."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "11ed400ae02561c14f0b8aded1214274094e1de20beeb7a0c6397a7167187722"
+}

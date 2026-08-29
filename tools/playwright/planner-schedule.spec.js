@@ -109,6 +109,11 @@ test("duration, overlap, temporal and sticky geometry are computed", async ({
   });
   expect(geometry.first.height).toBeGreaterThan(60);
   expect(geometry.twoHour.height).toBeGreaterThan(geometry.first.height);
+  const halfHour = await schedule
+    .getByRole("button", { name: /Client call 15:00–15:30/ })
+    .locator("..")
+    .boundingBox();
+  expect(halfHour.height).toBeCloseTo(20, 0);
   expect(geometry.first.width).toBeCloseTo(geometry.overlapping.width, 0);
   expect(geometry.overlapping.left).toBeGreaterThan(geometry.first.left);
   expect(geometry.today.backgroundColor).not.toBe("rgba(0, 0, 0, 0)");
@@ -166,6 +171,9 @@ test("real event details use Popover lifecycle and consumer-owned actions", asyn
   await trigger.click();
   await page.locator("#planner-schedule-demo > h3").click();
   await expect(detail).toBeHidden();
+  await trigger.press("Space");
+  await expect(detail).toBeVisible();
+  await page.keyboard.press("Escape");
 
   const consumer = page.locator(
     "[data-component-audit-id='planner-schedule-data-workspace']",
@@ -208,18 +216,57 @@ test("real hover, focus and status paint retain emergency contrast", async ({
   const before = await event.evaluate(
     (node) => globalThis.getComputedStyle(node).backgroundColor,
   );
+  expect(before).toBe("rgb(223, 226, 240)");
   await event.hover();
   const hover = await event.evaluate(
     (node) => globalThis.getComputedStyle(node).backgroundColor,
   );
   expect(hover).not.toBe(before);
-  await event.focus();
+  expect(hover).toBe("rgb(238, 240, 244)");
+  await event.evaluate((node) =>
+    node.addEventListener(
+      "pointerdown",
+      () => {
+        node.dataset.pointerDownObserved = "true";
+      },
+      { once: true },
+    ),
+  );
+  const eventBox = await event.boundingBox();
+  await page.mouse.move(
+    eventBox.x + eventBox.width / 2,
+    eventBox.y + eventBox.height / 2,
+  );
+  await page.mouse.down();
+  await expect(event).toHaveAttribute("data-pointer-down-observed", "true");
+  await page.mouse.up();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Shift+Tab");
   await expect(event).toBeFocused();
   expect(
     await event.evaluate(
       (node) => globalThis.getComputedStyle(node).outlineStyle,
     ),
   ).not.toBe("none");
+  expect(
+    await event.evaluate((node) => {
+      const style = globalThis.getComputedStyle(node);
+      return [style.color, style.outlineColor, style.outlineWidth];
+    }),
+  ).toEqual(["rgb(37, 61, 152)", "rgb(37, 61, 152)", "2px"]);
+
+  for (const stateEvent of await schedule
+    .locator(
+      '.shlz-planner-schedule__event[data-tone="success"], .shlz-planner-schedule__event[data-state="canceled"]',
+    )
+    .all()) {
+    await stateEvent.hover();
+    expect(
+      await stateEvent.evaluate(
+        (node) => globalThis.getComputedStyle(node).boxShadow,
+      ),
+    ).not.toBe("none");
+  }
 
   const ratios = await schedule
     .locator(".shlz-planner-schedule__event")
@@ -408,6 +455,17 @@ test("focused Planner Schedule visuals", async ({ page }) => {
     "[data-component-audit-id='planner-schedule-showcase-source']",
   );
   await expect(source).toHaveScreenshot("planner-schedule-source.png");
+  const event = source.getByRole("button", { name: /Cabin installation/ });
+  await event.hover();
+  await expect(event).toHaveScreenshot("planner-schedule-event-hover.png");
+  await page.mouse.move(0, 0);
+  await event.focus();
+  await expect(source).toHaveScreenshot("planner-schedule-event-focus.png");
+  await event.press("Enter");
+  await expect(
+    page.locator("#planner-source-installation-detail"),
+  ).toHaveScreenshot("planner-schedule-detail-open.png");
+  await page.keyboard.press("Escape");
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(source).toHaveScreenshot("planner-schedule-narrow.png");
 });

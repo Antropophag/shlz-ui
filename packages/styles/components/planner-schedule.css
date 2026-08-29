@@ -237,12 +237,9 @@
   inline-size: calc(
     var(--shlz-planner-day-width) / var(--shlz-planner-lane-count, 1) - 4px
   );
-  block-size: max(
-    1.75rem,
-    calc(
-      (var(--shlz-planner-end) - var(--shlz-planner-start)) *
-        var(--shlz-planner-slot-height) - 4px
-    )
+  block-size: calc(
+    (var(--shlz-planner-end) - var(--shlz-planner-start)) *
+      var(--shlz-planner-slot-height) - 4px
   );
   pointer-events: auto;
 }
@@ -264,6 +261,7 @@
 
 .shlz-planner-schedule__event:hover {
   background: var(--shlz-source-color-blue-blue-50);
+  box-shadow: inset 0 0 0 1px currentcolor;
 }
 
 .shlz-planner-schedule__event:focus-visible {

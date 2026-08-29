@@ -12,10 +12,10 @@
 - Source and structural: exact source hashes/frame claims, generated style distribution, documentation contract, exact repository census, audit-manifest validation, and unchanged-source guard.
 - Runtime and accessibility: native event buttons, real Popover open/Escape/outside dismissal/focus restoration, consumer action, re-enhancement and destroy behavior, semantic day/time context, axe, keyboard focus, and computed emergency contrast.
 - Visual and stress: duration and overlap geometry, temporal/status/unavailable/current-time paint, sticky axes, two-axis overflow, narrow viewport, 200% text, long and empty content, and focused Chromium snapshots inspected manually.
-- Aggregate local validation: 174/174 structural tests; lint, build, source validation, and clean package-consumer smoke pass. The first full browser run passed 251/252 and exposed an unclassified nested Popover occurrence; the exact affected audit test and all 8 Planner tests pass after classification. A final full browser run is required on the immutable candidate.
+- Aggregate local validation: 174/174 structural tests; lint, build, source validation, and clean package-consumer smoke pass. The first full browser run passed 251/252 and exposed an unclassified nested Popover occurrence; after classification, the immutable candidate passed all 252/252 browser tests. Independent review then identified short-duration, multi-tone hover, interaction-ledger, and focused-snapshot gaps; the remediated candidate must repeat the affected and aggregate checks before delivery.
 
 ## Limitations and disposition
 
 Planner Schedule deliberately does not own date parsing, timezone conversion, recurrence, conflict detection, drag/drop, resizing, editing, persistence, virtualization, application navigation, profile/filter/statistics UI, data loading, authorization, or domain actions. Sticky positioning may degrade under host containment. Input outside the documented bounds is unsupported.
 
-No accepted deviations or blocking findings are open. CI status, independent Standards/Spec review, CodeRabbit threads, and final delivery receipts are recorded at delivery time.
+No accepted deviations are open. The initial independent Standards review reported 3 hard findings and 1 low judgement call; the initial Spec review reported 3 findings. All hard/spec findings are remediated in the candidate, while deliberate plain-HTML fixture duplication remains justified as independent consumption evidence. Final review, CI, CodeRabbit threads, and delivery receipts are recorded at delivery time.
