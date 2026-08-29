@@ -314,6 +314,29 @@ test("renders source-backed past, today and future header and column treatments"
   expect(stateStyles.past.cells).toHaveLength(2);
   expect(stateStyles.today.cells).toHaveLength(2);
   expect(stateStyles.future.cells).toHaveLength(2);
+
+  const unavailableStyles = await grid.evaluate((element) =>
+    [
+      ...element.querySelectorAll(
+        '[data-shlz-calendar-grid-state="unavailable"]',
+      ),
+    ].map((node) => {
+      const style = globalThis.getComputedStyle(node);
+      return {
+        backgroundColor: style.backgroundColor,
+        backgroundImage: style.backgroundImage,
+        borderInlineEndColor: style.borderInlineEndColor,
+        borderBlockEndColor: style.borderBlockEndColor,
+      };
+    }),
+  );
+  expect(unavailableStyles).toHaveLength(6);
+  for (const style of unavailableStyles) {
+    expect(style.backgroundColor).toBe("rgb(255, 255, 255)");
+    expect(style.backgroundImage).toContain("rgb(245, 245, 245)");
+    expect(style.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+    expect(style.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+  }
 });
 
 test("representative bounded matrix remains within the documented non-virtualized budget", async ({
