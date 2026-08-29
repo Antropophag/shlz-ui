@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "fix-calendar-grid-visual-states",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "source-state-contract",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "column-treatment-scope",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "verification-contract",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "date-picker-scope-boundary",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "user",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Restore the Calendar Grid past, today, future, and unavailable visual treatments from the authoritative Calendar.svg, add state-specific computed-style and visual evidence, pass the component gate, and deliver an unmerged follow-up PR.",
+    "revision": 1
+  },
+  "routeDigest": "a2eb358817354e5e961f9cfcf5dbdcb3510acefada3efd957f6bb97c23b371dc",
+  "version": 1,
+  "digest": "0b7c17213be7473fbfee88f9531a2e6ac0a646cdede0f205b0bd626fa041a23d"
+}

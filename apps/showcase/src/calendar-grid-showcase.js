@@ -2,11 +2,11 @@ import { enhanceCalendarGrids } from "@shlz/behaviors";
 export { enhanceCalendarGrids };
 
 const dates = [
-  ["28 Aug", "Friday", "past"],
+  ["28 Aug", "Past · Friday", "past"],
   ["29 Aug", "Today", "today"],
   ["30 Aug", "Unavailable · weekend", "unavailable"],
-  ["31 Aug", "Monday", "unavailable"],
-  ["1 Sep", "Tuesday", "future"],
+  ["31 Aug", "Unavailable · holiday", "unavailable"],
+  ["1 Sep", "Future · Tuesday", "future"],
 ];
 
 const header = (prefix) =>

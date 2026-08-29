@@ -35,6 +35,9 @@ test("classifies semantic Calendar Grid occurrences and accessibility", async ({
   await expect(
     grid.getByRole("columnheader", { name: "August 2026" }),
   ).toHaveAttribute("scope", "colgroup");
+  await expect(
+    grid.getByRole("columnheader", { name: "31 Aug Unavailable · holiday" }),
+  ).toBeVisible();
   const headers = await grid.locator("td").first().getAttribute("headers");
   expect(headers).toContain("showcase-grid-row-design");
   expect(headers).toContain("showcase-grid-date-0");
@@ -205,6 +208,153 @@ test("contains two-axis overflow, sticky context, consumer actions and visual st
   expect(scaled.reachableInline).toBe(true);
   expect(scaled.reachableBlock).toBe(true);
   await expect(grid).toHaveScreenshot("calendar-grid-narrow.png");
+});
+
+test("renders source-backed past, today and future header and column treatments", async ({
+  page,
+}) => {
+  const grid = page.locator(
+    "[data-component-audit-id='calendar-grid-showcase-source']",
+  );
+  const stateStyles = await grid.evaluate((element) => {
+    const read = (node) => {
+      const style = globalThis.getComputedStyle(node);
+      const treatment = globalThis.getComputedStyle(node, "::before");
+      const primary = node.querySelector(".shlz-calendar-grid__date-primary");
+      const secondary = node.querySelector(
+        ".shlz-calendar-grid__date-secondary",
+      );
+      return {
+        backgroundColor: style.backgroundColor,
+        color: style.color,
+        borderInlineEndColor: style.borderInlineEndColor,
+        borderBlockEndColor: style.borderBlockEndColor,
+        boxShadow: style.boxShadow,
+        fontWeight: style.fontWeight,
+        primaryWeight: primary
+          ? globalThis.getComputedStyle(primary).fontWeight
+          : null,
+        secondaryColor: secondary
+          ? globalThis.getComputedStyle(secondary).color
+          : null,
+        secondaryOpacity: secondary
+          ? globalThis.getComputedStyle(secondary).opacity
+          : null,
+        treatmentBackground: treatment.backgroundColor,
+        treatmentInsetBlockStart: treatment.insetBlockStart,
+        treatmentInsetBlockEnd: treatment.insetBlockEnd,
+        treatmentInsetInlineStart: treatment.insetInlineStart,
+        treatmentInsetInlineEnd: treatment.insetInlineEnd,
+        treatmentStartStartRadius: treatment.borderStartStartRadius,
+        treatmentStartEndRadius: treatment.borderStartEndRadius,
+        treatmentEndStartRadius: treatment.borderEndStartRadius,
+        treatmentEndEndRadius: treatment.borderEndEndRadius,
+      };
+    };
+    return Object.fromEntries(
+      ["past", "today", "future"].map((state) => {
+        const header = element.querySelector(
+          `thead [data-shlz-calendar-grid-state="${state}"]`,
+        );
+        const cells = [
+          ...element.querySelectorAll(
+            `tbody [data-shlz-calendar-grid-state="${state}"]`,
+          ),
+        ];
+        return [
+          state,
+          { header: read(header), cells: cells.map((cell) => read(cell)) },
+        ];
+      }),
+    );
+  });
+
+  const headerContracts = {
+    past: {
+      outer: "rgb(255, 255, 255)",
+      text: "rgb(11, 22, 35)",
+      inner: "rgb(238, 240, 244)",
+      inlineInsets: ["1px", "4px"],
+      radii: ["0px", "8px", "0px", "8px"],
+    },
+    today: {
+      outer: "rgb(244, 246, 249)",
+      text: "rgb(37, 61, 152)",
+      inner: "rgba(61, 136, 222, 0.15)",
+      inlineInsets: ["4px", "4px"],
+      radii: ["8px", "8px", "8px", "8px"],
+    },
+    future: {
+      outer: "rgb(255, 255, 255)",
+      text: "rgb(11, 22, 35)",
+      inner: "rgb(238, 240, 244)",
+      inlineInsets: ["4px", "0px"],
+      radii: ["8px", "0px", "8px", "0px"],
+    },
+  };
+  for (const [state, contract] of Object.entries(headerContracts)) {
+    const header = stateStyles[state].header;
+    expect(header.backgroundColor).toBe(contract.outer);
+    expect(header.color).toBe(contract.text);
+    expect(header.secondaryColor).toBe(contract.text);
+    expect(header.treatmentBackground).toBe(contract.inner);
+    expect([
+      header.treatmentInsetInlineStart,
+      header.treatmentInsetInlineEnd,
+    ]).toEqual(contract.inlineInsets);
+    expect([
+      header.treatmentStartStartRadius,
+      header.treatmentStartEndRadius,
+      header.treatmentEndStartRadius,
+      header.treatmentEndEndRadius,
+    ]).toEqual(contract.radii);
+    expect(header.treatmentInsetBlockStart).toBe("4px");
+    expect(header.treatmentInsetBlockEnd).toBe("4px");
+    expect(header.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+    expect(header.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+    expect(header.boxShadow).toBe("none");
+    expect(header.fontWeight).toBe("700");
+    expect(header.primaryWeight).toBe("600");
+    expect(header.secondaryOpacity).toBe("1");
+  }
+  for (const [state, backgroundColor] of [
+    ["past", "rgb(255, 255, 255)"],
+    ["today", "rgb(244, 246, 249)"],
+    ["future", "rgb(255, 255, 255)"],
+  ]) {
+    expect(stateStyles[state].cells).toHaveLength(2);
+    for (const style of stateStyles[state].cells) {
+      expect(style.backgroundColor).toBe(backgroundColor);
+      expect(style.color).toBe("rgb(11, 22, 35)");
+      expect(style.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+      expect(style.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+      expect(style.boxShadow).toBe("none");
+      expect(style.fontWeight).toBe("400");
+    }
+  }
+
+  const unavailableStyles = await grid.evaluate((element) =>
+    [
+      ...element.querySelectorAll(
+        '[data-shlz-calendar-grid-state="unavailable"]',
+      ),
+    ].map((node) => {
+      const style = globalThis.getComputedStyle(node);
+      return {
+        backgroundColor: style.backgroundColor,
+        backgroundImage: style.backgroundImage,
+        borderInlineEndColor: style.borderInlineEndColor,
+        borderBlockEndColor: style.borderBlockEndColor,
+      };
+    }),
+  );
+  expect(unavailableStyles).toHaveLength(6);
+  for (const style of unavailableStyles) {
+    expect(style.backgroundColor).toBe("rgb(255, 255, 255)");
+    expect(style.backgroundImage).toContain("rgb(245, 245, 245)");
+    expect(style.borderInlineEndColor).toBe("rgb(209, 216, 223)");
+    expect(style.borderBlockEndColor).toBe("rgb(209, 216, 223)");
+  }
 });
 
 test("representative bounded matrix remains within the documented non-virtualized budget", async ({

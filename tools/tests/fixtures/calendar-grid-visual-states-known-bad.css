@@ -1,0 +1,11 @@
+.shlz-calendar-grid [data-shlz-calendar-grid-state="past"] {
+  color: var(--shlz-semantic-color-text-primary);
+}
+
+.shlz-calendar-grid [data-shlz-calendar-grid-state="today"] {
+  box-shadow: inset 0 3px 0 var(--shlz-semantic-color-action-primary);
+}
+
+.shlz-calendar-grid [data-shlz-calendar-grid-state="future"] {
+  background: var(--shlz-semantic-color-surface-base);
+}
