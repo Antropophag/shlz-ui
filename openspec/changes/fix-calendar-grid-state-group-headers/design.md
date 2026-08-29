@@ -20,7 +20,7 @@ See `proposal.md` and `specs/data-display/calendar-grid/spec.md`. The current fi
 
 ### 1. Temporal state lives on `scope="colgroup"` headers
 
-The required top row contains Past, Today, and Future cells with consumer-authored spans. The Showcase's five date columns therefore use spans 1/1/3: the weekend and holiday dates are chronologically future even though they are unavailable. Date cells below use `scope="col"` and contain only date and weekday content.
+The required top row contains Past, Today, and Future cells with consumer-authored spans. The Showcase's five date columns therefore use spans 1/1/3: the weekend and holiday dates are chronologically future even though they are unavailable. Date cells below use `scope="col"`; their visible labels never repeat a temporal group name, while their accessible names retain the applicable unavailable reason such as weekend or holiday.
 
 Alternative: retain state on every date header and visually merge adjacent cells. Rejected because it misstates the native table structure and repeats group names in date accessible names.
 

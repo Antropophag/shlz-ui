@@ -25,14 +25,19 @@ const temporalHeader = (prefix) =>
 
 const header = (prefix) =>
   dates
-    .map(
-      ([primary, secondary, state, unavailable], index) =>
-        `<th scope="col" id="${prefix}-date-${index}" headers="${prefix}-group-${state}" data-shlz-calendar-grid-state="${state}"${unavailable ? ` data-shlz-calendar-grid-unavailable="${unavailable}"` : ""}><span class="shlz-calendar-grid__date-primary">${primary}</span><span class="shlz-calendar-grid__date-secondary">${secondary}</span></th>`,
-    )
+    .map(([primary, secondary, state, unavailable], index) => {
+      const unavailableAttribute = unavailable
+        ? ` data-shlz-calendar-grid-unavailable="${unavailable}"`
+        : "";
+      return `<th scope="col" id="${prefix}-date-${index}" headers="${prefix}-group-${state}" data-shlz-calendar-grid-state="${state}"${unavailableAttribute}><span class="shlz-calendar-grid__date-primary">${primary}</span><span class="shlz-calendar-grid__date-secondary">${secondary}</span></th>`;
+    })
     .join("");
 const cell = (prefix, row, date, body) => {
   const [, , state, unavailable] = dates[date];
-  return `<td headers="${prefix}-row-${row} ${prefix}-group-${state} ${prefix}-date-${date}" data-shlz-calendar-grid-state="${state}"${unavailable ? ` data-shlz-calendar-grid-unavailable="${unavailable}"` : ""}>${body}</td>`;
+  const unavailableAttribute = unavailable
+    ? ` data-shlz-calendar-grid-unavailable="${unavailable}"`
+    : "";
+  return `<td headers="${prefix}-row-${row} ${prefix}-group-${state} ${prefix}-date-${date}" data-shlz-calendar-grid-state="${state}"${unavailableAttribute}>${body}</td>`;
 };
 const items = (entries, prefix = "grid") =>
   `<ul class="shlz-calendar-grid__items">${entries.map(([label, tone = "accent", hidden = false], index) => `<li class="shlz-calendar-grid__item" data-tone="${tone}"${hidden ? ` id="${prefix}-overflow-${index}" hidden` : ""}>${label}</li>`).join("")}</ul>`;
