@@ -156,7 +156,7 @@ test("Date Picker and Calendar census has no unclassified occurrence or substitu
   for (const path of files)
     if (pickerOccurrence.test(await readFile(path, "utf8")))
       matches.push(relative(".", path));
-  assert.deepEqual(matches, [
+  assert.deepEqual(matches.sort(), [
     "apps/showcase/src/date-picker-consumer.js",
     "apps/showcase/src/date-picker-showcase.js",
     "packages/behaviors/src/calendar.ts",
@@ -191,7 +191,7 @@ test("Calendar Grid census is independently classified from Date Picker", async 
   for (const path of files)
     if (gridOccurrence.test(await readFile(path, "utf8")))
       matches.push(relative(".", path));
-  assert.deepEqual(matches, [
+  assert.deepEqual(matches.sort(), [
     "apps/showcase/src/calendar-grid-showcase.js",
     "packages/behaviors/src/calendar-grid.ts",
     "tools/fixtures/calendar-grid.html",

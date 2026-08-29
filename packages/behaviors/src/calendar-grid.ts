@@ -13,7 +13,7 @@ function buttons(root: HTMLElement): HTMLButtonElement[] {
     ...root.querySelectorAll<HTMLButtonElement>(
       "button[data-shlz-calendar-grid-disclosure]",
     ),
-  ];
+  ].filter((button) => button.closest("[data-shlz-calendar-grid]") === root);
 }
 
 function relationship(root: HTMLElement, button: HTMLButtonElement) {
@@ -58,7 +58,8 @@ export class CalendarGridController {
                 "button[data-shlz-calendar-grid-disclosure]",
               )
             : null;
-        if (!button || !root.contains(button)) return;
+        if (!button || button.closest("[data-shlz-calendar-grid]") !== root)
+          return;
         const { kind, id } = relationship(root, button);
         this.#set(kind, id, button.getAttribute("aria-expanded") !== "true");
       },

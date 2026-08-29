@@ -42,6 +42,10 @@
   text-align: start;
 }
 
+.shlz-calendar-grid thead tr:nth-child(2) > th {
+  inset-block-start: 3.5rem;
+}
+
 .shlz-calendar-grid [scope="row"] {
   position: sticky;
   z-index: 1;
@@ -50,7 +54,7 @@
   inline-size: var(--shlz-calendar-grid-row-header-width);
 }
 
-.shlz-calendar-grid thead [scope="col"]:first-child {
+.shlz-calendar-grid thead tr:first-child > th:first-child {
   z-index: 3;
   inset-inline-start: 0;
 }

@@ -121,6 +121,29 @@ test("cell and row disclosure are independent, typed, focus-safe and destroyable
   await expect(rerenderedCell).toHaveAttribute("aria-expanded", "false");
 });
 
+test("nested Calendar Grid disclosure is owned only by its nearest root", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    const host = document.createElement("div");
+    host.innerHTML = `<div data-shlz-calendar-grid id="outer-grid"><div data-shlz-calendar-grid id="inner-grid"><button type="button" data-shlz-calendar-grid-disclosure="cell" aria-controls="nested-grid-target" aria-expanded="false">Nested details</button><div id="nested-grid-target" hidden>Nested content</div></div></div>`;
+    document.body.append(host);
+    window.__nestedCalendarGridEvents = [];
+    host.addEventListener("shlz:calendar-grid-disclosure", (event) =>
+      window.__nestedCalendarGridEvents.push(event.detail),
+    );
+    window.__shlzEnhanceCalendarGrids(host);
+  });
+  const inner = page.locator("#inner-grid");
+  const button = inner.getByRole("button", { name: "Nested details" });
+  await button.click();
+  await expect(button).toHaveAttribute("aria-expanded", "true");
+  await expect(inner.getByText("Nested content")).toBeVisible();
+  expect(await page.evaluate(() => window.__nestedCalendarGridEvents)).toEqual([
+    { kind: "cell", id: "nested-grid-target", expanded: true },
+  ]);
+});
+
 test("contains two-axis overflow, sticky context, consumer actions and visual states", async ({
   page,
 }) => {
@@ -136,6 +159,15 @@ test("contains two-axis overflow, sticky context, consumer actions and visual st
     rowPosition: globalThis.getComputedStyle(
       element.querySelector("[scope=row]"),
     ).position,
+    secondHeaderOffset: globalThis.getComputedStyle(
+      element.querySelector("thead tr:nth-child(2) th"),
+    ).insetBlockStart,
+    cornerInlineOffset: globalThis.getComputedStyle(
+      element.querySelector("thead tr:first-child > th:first-child"),
+    ).insetInlineStart,
+    firstDateInlineOffset: globalThis.getComputedStyle(
+      element.querySelector("thead tr:nth-child(2) th"),
+    ).insetInlineStart,
     pageOverflow:
       document.documentElement.scrollWidth -
       document.documentElement.clientWidth,
@@ -145,6 +177,9 @@ test("contains two-axis overflow, sticky context, consumer actions and visual st
     overflowY: "auto",
     headerPosition: "sticky",
     rowPosition: "sticky",
+    secondHeaderOffset: "56px",
+    cornerInlineOffset: "0px",
+    firstDateInlineOffset: "auto",
     pageOverflow: 0,
   });
   const consumer = page.locator(
