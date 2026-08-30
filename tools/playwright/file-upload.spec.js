@@ -120,6 +120,18 @@ test("native selection, file drops, filtering, disabled and consumer rendering w
       "[data-component-audit-id='file-row-file-upload-consumer'] .shlz-file-row__title",
     ),
   ).toHaveText("workspace-contract.pdf");
+  const consumerRemove = consumer.locator(".shlz-file-row__action");
+  await expect(consumerRemove).toHaveAttribute(
+    "aria-label",
+    "Remove workspace-contract.pdf",
+  );
+  await consumerRemove.click();
+  await expect(page.locator("[data-file-upload-consumer-status]")).toHaveText(
+    "No files selected.",
+  );
+  await expect(consumer.locator(".shlz-file-row__title")).toHaveText(
+    "No file selected",
+  );
 
   const disabled = page.locator(
     "[data-component-audit-id='file-upload-showcase-disabled']",
@@ -133,7 +145,20 @@ test("native selection, file drops, filtering, disabled and consumer rendering w
     "aria-disabled",
     "true",
   );
-  await disabled.dispatchEvent("drop", { dataTransfer: transfer });
+  const disabledDropPrevented = await disabled.evaluate((element) => {
+    const data = new DataTransfer();
+    data.items.add(new File(["blocked"], "blocked.pdf"));
+    element.dataset.dragActive = "true";
+    const event = new DragEvent("drop", {
+      bubbles: true,
+      cancelable: true,
+      dataTransfer: data,
+    });
+    element.dispatchEvent(event);
+    return event.defaultPrevented;
+  });
+  expect(disabledDropPrevented).toBe(true);
+  await expect(disabled).not.toHaveAttribute("data-drag-active");
   await expect
     .poll(() => page.evaluate(() => window.__fileUploadEvents.length))
     .toBe(3);
@@ -141,6 +166,11 @@ test("native selection, file drops, filtering, disabled and consumer rendering w
     (await new AxeBuilder({ page }).include("#file-upload-demo").analyze())
       .violations,
   ).toEqual([]);
+  await expect(
+    page.locator(
+      "[data-component-audit-id='file-upload-showcase-error'] input[type=file]",
+    ),
+  ).toHaveAttribute("aria-invalid", "true");
 });
 
 test("every File Upload occurrence is classified", async ({ page }) => {

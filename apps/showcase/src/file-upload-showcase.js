@@ -13,11 +13,12 @@ const upload = ({
   const invalidAttribute = invalid ? ' aria-invalid="true"' : "";
   const describedBy = invalid ? `${id}-help ${errorId}` : `${id}-help`;
   const disabledAttribute = disabled ? " disabled" : "";
+  const inputInvalid = invalid ? ' aria-invalid="true"' : "";
   const triggerDisabled = disabled ? ' aria-disabled="true"' : "";
   const error = invalid
     ? `<p class="shlz-file-upload__error" id="${errorId}">The consumer rejected this file.</p>`
     : "";
-  return `<div class="shlz-file-upload" data-shlz-file-upload data-component-audit-id="${auditId}"${invalidAttribute}><input class="shlz-file-upload__input" id="${id}" type="file" multiple aria-describedby="${describedBy}"${disabledAttribute}><div class="shlz-file-upload__surface"><div class="shlz-file-upload__content"><p class="shlz-file-upload__title">${title}</p><p class="shlz-file-upload__instructions" id="${id}-help">${help}</p></div><label class="shlz-file-upload__trigger" for="${id}"${triggerDisabled}>Choose files</label></div>${error}<ul class="shlz-file-upload__files" data-file-upload-files>${files}</ul></div>`;
+  return `<div class="shlz-file-upload" data-shlz-file-upload data-component-audit-id="${auditId}"${invalidAttribute}><input class="shlz-file-upload__input" id="${id}" type="file" multiple aria-describedby="${describedBy}"${inputInvalid}${disabledAttribute}><div class="shlz-file-upload__surface"><div class="shlz-file-upload__content"><p class="shlz-file-upload__title">${title}</p><p class="shlz-file-upload__instructions" id="${id}-help">${help}</p></div><label class="shlz-file-upload__trigger" for="${id}"${triggerDisabled}>Choose files</label></div>${error}<ul class="shlz-file-upload__files" data-file-upload-files>${files}</ul></div>`;
 };
 
 const row = (name, auditId = "") => {
@@ -40,9 +41,15 @@ export function enhanceFileUploadShowcase() {
           status.textContent = `${event.detail.files.length} file(s) queued by the application.`;
         const title = root.querySelector(".shlz-file-row__title");
         const meta = root.querySelector(".shlz-file-row__meta");
+        const action = root.querySelector(".shlz-file-row__action");
         if (title)
           title.textContent = event.detail.files[0]?.name ?? "No file selected";
         if (meta) meta.textContent = `${event.detail.files.length} selected`;
+        if (action)
+          action.setAttribute(
+            "aria-label",
+            `Remove ${event.detail.files[0]?.name ?? "selected file"}`,
+          );
       } else if (list) {
         list.replaceChildren(
           ...[...event.detail.files].map((file) => {
@@ -52,6 +59,21 @@ export function enhanceFileUploadShowcase() {
             return item;
           }),
         );
+      }
+    });
+    root.addEventListener("click", (event) => {
+      const action = event.target.closest?.(".shlz-file-row__action");
+      if (!action || !root.contains(action)) return;
+      if (root.dataset.componentAuditId === "file-upload-data-workspace") {
+        root.querySelector(".shlz-file-row__title").textContent =
+          "No file selected";
+        root.querySelector(".shlz-file-row__meta").textContent = "0 selected";
+        action.setAttribute("aria-label", "Remove selected file");
+        document.querySelector(
+          "[data-file-upload-consumer-status]",
+        ).textContent = "No files selected.";
+      } else {
+        action.closest(".shlz-file-row")?.remove();
       }
     });
   }

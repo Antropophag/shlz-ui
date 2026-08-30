@@ -83,9 +83,15 @@ export class FileUploadController {
     root.addEventListener(
       "drop",
       (event) => {
-        if (this.#unavailable(event) || !hasFiles(event.dataTransfer)) return;
+        if (
+          this.#destroyed ||
+          !owns(this.root, event.target as Element) ||
+          !hasFiles(event.dataTransfer)
+        )
+          return;
         event.preventDefault();
         this.#clearDrag();
+        if (this.input.disabled) return;
         const files = event.dataTransfer?.files;
         if (files?.length) this.#emit(files, "drop");
       },

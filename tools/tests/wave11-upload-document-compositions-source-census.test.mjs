@@ -50,11 +50,17 @@ const genericTerminology =
 const hasHigherLevelSignature = ({ path, source }) =>
   higherLevelPath.test(path) ||
   higherLevelSignatures.some((signature) => signature.test(source));
-const isApprovedFileUploadSurface = ({ path, source }) =>
-  path === "docs/components/file-upload.md" ||
-  /(?:shlz-file-upload|FileUploadController|enhanceFileUploads|file-upload-files)/.test(
-    source,
-  );
+const approvedFileUploadArtifactPaths = new Set([
+  "apps/showcase/src/file-upload-showcase.js",
+  "docs/components/file-upload.md",
+  "packages/behaviors/src/file-upload.ts",
+  "packages/styles/components/file-upload.css",
+  "tools/fixtures/file-upload.html",
+  "tools/playwright/file-upload.spec.js",
+  "tools/tests/file-upload-contract.test.mjs",
+]);
+const isApprovedFileUploadSurface = ({ path }) =>
+  approvedFileUploadArtifactPaths.has(path);
 
 async function filesBelow(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -214,7 +220,7 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
   // later File Upload product contract is classified by file-upload.json.
   const historicalSources = sources.filter(
     ({ path }) =>
-      !/(?:^|\/)file-upload(?:\.|-|\/)/.test(path) &&
+      !approvedFileUploadArtifactPaths.has(path) &&
       path !== "packages/behaviors/src/index.ts" &&
       path !== "tools/package-consumer-smoke.mjs",
   );
