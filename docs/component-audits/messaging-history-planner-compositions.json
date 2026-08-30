@@ -156,6 +156,10 @@
       "classification": "verified-file-upload-consumer-composing-file-row"
     },
     {
+      "path": "tools/playwright/file-upload.spec.js",
+      "classification": "verified-file-upload-runtime-evidence-composing-file-row"
+    },
+    {
       "path": "apps/showcase/src/component-docs.js",
       "classification": "verified-primitive-documentation-fixture"
     },
@@ -268,8 +272,8 @@
     "auditEvidencePaths": [
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
-    "primitiveDependencyPathCount": 28,
-    "unrelatedTerminologyPathCount": 59,
+    "primitiveDependencyPathCount": 29,
+    "unrelatedTerminologyPathCount": 58,
     "totalPathCount": 71,
     "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency"
   },

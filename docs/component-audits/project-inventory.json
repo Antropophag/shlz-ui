@@ -2344,7 +2344,7 @@
   ],
   "unclassifiedSurfaces": [
     "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
-    "Source-only messaging, history, planner and upload families have not been promoted to reusable APIs.",
+    "Source-only messaging, history and planner families have not been promoted to reusable APIs; the higher-level Upload / Document composition audit remains separate from the reusable File Upload seam.",
     "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
     "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."
   ],

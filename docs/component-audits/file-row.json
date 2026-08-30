@@ -22,7 +22,8 @@
       "id": "file-row-content-stress-actions",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-typography-stress", "kind": "content-stress-fixture" }
+    { "id": "file-row-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "file-row-file-upload-populated", "kind": "live-consumer" }
   ],
   "supportedSizes": [
     "55px-body",
@@ -56,11 +57,14 @@
       "evidence": "docs/components/file-row.md"
     }
   ],
-  "browserTests": ["tools/playwright/data-content-wave5.spec.js"],
+  "browserTests": [
+    "tools/playwright/data-content-wave5.spec.js",
+    "tools/playwright/file-upload.spec.js"
+  ],
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: Documents.svg is traced directly for geometry and paint rather than relying on prior source tests",
-    "structural-contract": "pass: all six roots are classified and keep visual, content and trailing actions as siblings",
+    "structural-contract": "pass: all seven roots are classified and keep visual, content and trailing actions as siblings",
     "runtime-browser": "not-applicable: File Row has no controller or root activation; native links and buttons own their behavior",
     "accessibility": "pass: root stays inert, decorative file visuals are hidden and filename/action targets retain meaningful native names",
     "focused-visual": "pass: computed body/icon/action geometry, truncation and real hover paint are asserted",

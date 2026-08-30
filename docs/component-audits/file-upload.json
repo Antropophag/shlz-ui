@@ -53,7 +53,8 @@
   ],
   "browserTests": ["tools/playwright/file-upload.spec.js"],
   "visualSnapshots": [
-    "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png"
+    "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png",
+    "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png"
   ],
   "evidence": {
     "source-integrity": "pass: Documents.svg authority hash is recorded and source-integrity regression remains active",

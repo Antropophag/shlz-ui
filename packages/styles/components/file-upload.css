@@ -93,6 +93,12 @@
   cursor: not-allowed;
 }
 
+.shlz-file-upload:has(.shlz-file-upload__input:disabled)
+  .shlz-file-upload__surface {
+  background: var(--shlz-semantic-color-surface-muted);
+  border-color: var(--shlz-semantic-color-border-default);
+}
+
 .shlz-file-upload__files {
   display: grid;
   gap: 8px;
