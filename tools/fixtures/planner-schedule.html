@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Planner Schedule plain HTML fixture</title>
+    <link rel="stylesheet" href="../../packages/styles/dist/shlz.css" />
+  </head>
+  <body class="shlz-scope">
+    <main>
+      <div
+        class="shlz-planner-schedule"
+        data-shlz-planner-schedule
+        data-component-audit-id="planner-schedule-plain-html"
+        style="--shlz-planner-day-count: 2; --shlz-planner-slot-count: 4"
+        role="region"
+        aria-label="Service appointments"
+      >
+        <div
+          class="shlz-planner-schedule__viewport"
+          tabindex="0"
+          aria-label="Scrollable service schedule"
+        >
+          <div class="shlz-planner-schedule__canvas">
+            <div class="shlz-planner-schedule__corner">UTC+5</div>
+            <ol class="shlz-planner-schedule__days" aria-label="Days">
+              <li
+                class="shlz-planner-schedule__day"
+                id="plain-day-0"
+                data-shlz-planner-state="today"
+              >
+                <span class="shlz-planner-schedule__day-primary">18</span>
+                <span class="shlz-planner-schedule__day-secondary"
+                  >Wednesday</span
+                >
+              </li>
+              <li
+                class="shlz-planner-schedule__day"
+                id="plain-day-1"
+                data-shlz-planner-state="future"
+              >
+                <span class="shlz-planner-schedule__day-primary">19</span>
+                <span class="shlz-planner-schedule__day-secondary"
+                  >Thursday</span
+                >
+              </li>
+            </ol>
+            <ol class="shlz-planner-schedule__times" aria-label="Times">
+              <li class="shlz-planner-schedule__time">09:00</li>
+              <li class="shlz-planner-schedule__time">10:00</li>
+              <li class="shlz-planner-schedule__time">11:00</li>
+              <li class="shlz-planner-schedule__time">12:00</li>
+            </ol>
+            <div class="shlz-planner-schedule__body">
+              <div
+                class="shlz-planner-schedule__day-surface"
+                style="--shlz-planner-day: 0"
+                data-shlz-planner-state="today"
+                aria-hidden="true"
+              ></div>
+              <div
+                class="shlz-planner-schedule__day-surface"
+                style="--shlz-planner-day: 1"
+                data-shlz-planner-state="future"
+                aria-hidden="true"
+              ></div>
+              <ol
+                class="shlz-planner-schedule__events"
+                aria-label="Scheduled events"
+              >
+                <li
+                  class="shlz-planner-schedule__event-slot"
+                  style="
+                    --shlz-planner-day: 0;
+                    --shlz-planner-start: 0;
+                    --shlz-planner-end: 2;
+                  "
+                >
+                  <button
+                    class="shlz-planner-schedule__event"
+                    type="button"
+                    data-tone="accent"
+                    data-shlz-popover-trigger="plain-event-detail"
+                    data-shlz-popover-placement="bottom-start"
+                    aria-describedby="plain-day-0"
+                  >
+                    <span class="shlz-planner-schedule__event-title"
+                      >Cabin installation</span
+                    ><span class="shlz-planner-schedule__event-time"
+                      >09:00–11:00</span
+                    ><span class="shlz-planner-schedule__event-meta"
+                      >South Park</span
+                    >
+                  </button>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+        <div
+          class="shlz-popover shlz-planner-detail"
+          id="plain-event-detail"
+          data-shlz-popover
+          role="dialog"
+          aria-label="Cabin installation details"
+          hidden
+        >
+          <div class="shlz-popover__body shlz-popover__body--fluid">
+            <strong>Cabin installation</strong>
+            <div class="shlz-planner-detail__row">
+              <span class="shlz-planner-detail__label">Time</span
+              ><span>Wednesday, 09:00–11:00</span>
+            </div>
+            <button type="button" class="shlz-button" data-shlz-popover-close>
+              Close details
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script type="module">
+      import { enhancePopovers } from "../../packages/behaviors/dist/browser.js";
+      enhancePopovers();
+    </script>
+  </body>
+</html>

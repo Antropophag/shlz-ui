@@ -26,6 +26,11 @@
     { "id": "popover-scroll-stress", "kind": "content-stress-fixture" },
     { "id": "popover-modal-consumer", "kind": "live-consumer" },
     {
+      "id": "popover-planner-source-details",
+      "kind": "executable-fixture"
+    },
+    { "id": "popover-planner-consumer-details", "kind": "live-consumer" },
+    {
       "id": "popover-date-picker-showcase-consumers",
       "kind": "executable-fixture"
     },

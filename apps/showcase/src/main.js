@@ -28,6 +28,10 @@ import {
   enhanceCalendarGridShowcase,
   enhanceCalendarGrids,
 } from "./calendar-grid-showcase.js";
+import {
+  enhancePlannerScheduleShowcase,
+  plannerScheduleShowcaseMarkup,
+} from "./planner-schedule-showcase.js";
 import tokens from "@shlz/tokens/tokens.json";
 import provenance from "@shlz/tokens/provenance.json";
 import manifest from "@shlz/icons/manifest.json";
@@ -169,6 +173,7 @@ const navigationGroups = [
       ["empty-state", "Empty State"],
       ["date-picker-demo", "Date Picker"],
       ["calendar-grid-demo", "Calendar Grid"],
+      ["planner-schedule-demo", "Planner Schedule"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -301,7 +306,8 @@ ${overlayDemos}<article class="shlz-composition"><h3>Framework-free composition<
 ${consumerWorkspaceMarkup(showcaseIconUrl)}
 ${datePickerShowcaseMarkup}
 ${datePickerConsumerMarkup}
-${calendarGridShowcaseMarkup}`;
+${calendarGridShowcaseMarkup}
+${plannerScheduleShowcaseMarkup}`;
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -532,6 +538,7 @@ window.__shlzConsumerWorkspace = enhanceConsumerWorkspace();
 window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
 window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
+enhancePlannerScheduleShowcase();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();

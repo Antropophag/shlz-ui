@@ -23,12 +23,14 @@ const classifiedFiles = new Set([
   "apps/showcase/src/date-picker-consumer.js",
   "apps/showcase/src/date-picker-showcase.js",
   "apps/showcase/src/main.js",
+  "apps/showcase/src/planner-schedule-showcase.js",
   "packages/behaviors/src/calendar.ts",
   "packages/behaviors/src/date-picker.ts",
   "packages/behaviors/src/dropdown.ts",
   "packages/behaviors/src/popover.ts",
   "packages/behaviors/src/tooltip.ts",
   "tools/fixtures/plain-html.html",
+  "tools/fixtures/planner-schedule.html",
 ]);
 
 async function executableFiles(directory) {

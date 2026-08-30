@@ -23,6 +23,20 @@ const sourceExtensions = new Set([
   ".md",
 ]);
 const currentTestPath = relative(".", fileURLToPath(import.meta.url));
+const promotedPlannerPaths = new Set([
+  "apps/showcase/src/planner-schedule-showcase.js",
+  "docs/components/planner-schedule.md",
+  "packages/styles/components/planner-schedule.css",
+  "packages/styles/shlz.css",
+  "tools/fixtures/planner-schedule.html",
+  "tools/generate.mjs",
+  "tools/playwright/planner-schedule.spec.js",
+  "tools/tests/component-audit-manifest.test.mjs",
+  "tools/tests/planner-schedule-census.test.mjs",
+  "tools/tests/planner-schedule-oracle.mjs",
+  "tools/tests/planner-schedule.test.mjs",
+  "tools/tests/fixtures/planner-schedule-known-bad.css",
+]);
 const scopeMatchers = {
   messaging:
     /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-messaging|shlz-(?:messaging|messages|message-thread|conversation)|data-(?:shlz-)?(?:messaging|messages|message-thread)|customElements\.define\(\s*["']shlz-(?:messaging|messages|message-thread)|<(?:shlz-)?(?:messaging|messages|message-thread)\b|(?:class|function|const|let|var)\s+(?:Messaging|Messages|MessageThread|Conversation)\b|export\s*\{[^}]*\b(?:Messaging|Messages|MessageThread|Conversation)\b|(?:^|\/)(?:messaging|messages|message-thread|conversation)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
@@ -183,7 +197,11 @@ test("Wave 12 census proves independent higher-level absence", async () => {
   const files = (await Promise.all(censusRoots.map(filesBelow))).flat();
   const sources = await Promise.all(
     files
-      .filter((path) => relative(".", path) !== currentTestPath)
+      .filter(
+        (path) =>
+          relative(".", path) !== currentTestPath &&
+          !promotedPlannerPaths.has(relative(".", path)),
+      )
       .map(async (path) => ({
         path: relative(".", path),
         source: await readFile(path, "utf8"),
@@ -194,7 +212,9 @@ test("Wave 12 census proves independent higher-level absence", async () => {
     const found = sources
       .filter(
         ({ path, source }) =>
-          !auditPaths.has(path) && matcher.test(`${path}\n${source}`),
+          !auditPaths.has(path) &&
+          !promotedPlannerPaths.has(path) &&
+          matcher.test(`${path}\n${source}`),
       )
       .map(({ path }) => path);
     assert.deepEqual(found, [], `${name} has unclassified surfaces`);

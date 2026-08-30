@@ -2104,7 +2104,7 @@
       ],
       "evidence": {
         "source-integrity": "pass: three independent hashes, canvases and dashed-frame ledgers",
-        "structural-contract": "pass: zero higher-level surfaces with fail-closed per-domain mutation probes",
+        "structural-contract": "pass: the historical source-only composition remains independently bounded; reusable Planner Schedule is inventoried as its own family",
         "runtime-browser": "not-applicable: no executable higher-level composition or runtime contract exists",
         "accessibility": "not-applicable: no production semantics or interaction model exists",
         "focused-visual": "not-applicable: no implemented higher-level composition exists for comparison",
@@ -2142,7 +2142,7 @@
       ],
       "known_findings": [],
       "limitations": [
-        "VERIFIED is independently bounded to source integrity and repository absence for Messaging, History and Planner; no production composition exists",
+        "VERIFIED is independently bounded to the historical source sheets and absence of full Messaging, History and Planner application compositions; reusable Planner Schedule is tracked separately",
         "nested Avatar, File Row, Document Row, Notification and Snackbar contracts remain independent and do not certify this family",
         "message delivery, read/sync state, editor commands, chronology, scheduling, recurrence, timezones, employee data, event behavior, attachment lifecycle, persistence and live regions remain unsupported",
         "outlined text and raster artwork do not establish literal copy, behavior, accessibility semantics or responsive layout"
@@ -2151,6 +2151,70 @@
         "executableShowcase": 0,
         "liveConsumers": 0,
         "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/planner-schedule.test.mjs",
+        "tools/tests/planner-schedule-census.test.mjs",
+        "tools/playwright/planner-schedule.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact Planner source hashes and unchanged-source assertions",
+        "structural-contract": "pass: style export, docs, fixtures, manifest and exact census",
+        "runtime-browser": "pass: native event and real Popover interactions",
+        "accessibility": "pass: semantic context, keyboard, focus, contrast and axe checks",
+        "focused-visual": "pass: duration, overlap, state, sticky and focused snapshot evidence",
+        "consumer-integration": "pass: Data Workspace consumer action",
+        "responsive-content-stress": "pass: narrow, 200% text, sixty-event, long and empty cases"
+      },
+      "canonical_name": "Planner Schedule",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Planner.svg",
+        "shlz-design-source/raw/svg/Планировщик для сотрудника.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/planner-schedule.css"
+      ],
+      "behavior": ["packages/behaviors/src/popover.ts"],
+      "docs": [
+        "docs/components/planner-schedule.md",
+        "docs/component-audits/planner-schedule.json",
+        "docs/component-audits/planner-schedule-contract.md"
+      ],
+      "executable_fixtures": [
+        "apps/showcase/src/planner-schedule-showcase.js",
+        "tools/fixtures/planner-schedule.html"
+      ],
+      "live_consumers": ["apps/showcase/src/planner-schedule-showcase.js"],
+      "data_workspace_consumers": [
+        "apps/showcase/src/planner-schedule-showcase.js"
+      ],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "bounded day-by-time schedule",
+        "duration and overlap geometry",
+        "generic event states",
+        "current-time and unavailable presentation",
+        "Popover-composed event details"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "no date parsing, timezone conversion, recurrence, conflict detection, drag/drop, resizing, editing, persistence or virtualization",
+        "all domain data, temporal policy and actions remain consumer-owned"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
         "inertDiagnostics": 0,
         "legacyNative": 0,
         "localAlternatives": 0

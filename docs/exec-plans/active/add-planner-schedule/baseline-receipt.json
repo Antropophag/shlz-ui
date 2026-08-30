@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/planner-schedule",
+    "commit": "ea40caa1c15e8303380c43726f5335d2b7f76ea5",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/planner-schedule",
+      "headRefOid": "ea40caa1c15e8303380c43726f5335d2b7f76ea5",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/53"
+    },
+    "repository": {
+      "digest": "895e0f056a08b5ba8d82b994c9116ef7615625baaf021196120b2b775e1b966b",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-planner-schedule"
+    },
+    "upstream": "origin/feature/planner-schedule"
+  },
+  "requirementsDigest": "98947d4becc94f98692845a53d9d3ec8702ee80b8ad45d974a75f2f8eacb0fe1",
+  "routeDigest": "1dc5b813a7b058ce9d2e4b464479154f50ad83d9074f64f379bb976b2a17c4e6",
+  "version": 1,
+  "digest": "421b46bfa3d39ca3fca98043b38ae99dc610c342c15365c522afca5d6cfe273f"
+}

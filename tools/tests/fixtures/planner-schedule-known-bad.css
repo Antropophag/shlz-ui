@@ -1,0 +1,7 @@
+.shlz-planner-schedule__event-slot {
+  block-size: max(1.75rem, 50%);
+}
+
+.shlz-planner-schedule__event:hover {
+  background: gray;
+}
