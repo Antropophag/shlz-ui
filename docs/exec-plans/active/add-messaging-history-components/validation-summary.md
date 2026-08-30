@@ -61,3 +61,12 @@ The focused remediation set separately passes 24/24 Link/Button and Data
 Workspace checks; the Messaging/History suite is included in the aggregate and
 passes all 10 tests. Four component-focused Messaging/History snapshots and the
 Data Workspace consumer snapshot were inspected after regeneration.
+
+The immutable review-follow-up candidate is
+`a99e577d1bff0a85c674ed76ac63981091ae4a95`. Its receipt-bound full gate passed,
+post-discovery conformance passed, and independent Standards and Spec reviews
+both returned PASS with no findings. The delivery guard verified that this exact
+candidate was pushed to the open, unmerged PR. A prior GitHub browser run on the
+planning-only SHA `91bbf6a` failed one unrelated Date Picker accessibility test
+after 268 other tests passed; that stale run is not evidence for the final
+candidate, whose replacement CI run was triggered by the implementation push.
