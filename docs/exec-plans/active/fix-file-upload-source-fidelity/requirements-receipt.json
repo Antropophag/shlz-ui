@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "fix-file-upload-source-fidelity",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "source-composition",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "native-trigger-seam",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "responsive-policy",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "behavior-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Restore File Upload fidelity to the authoritative Documents.svg by making the full 467 by 102 drop surface the visible native-input trigger, removing the invented pill action and compressed four-column showcase layout, preserving controller behavior, completing the component gate, and delivering an unmerged PR.",
+    "revision": 1
+  },
+  "routeDigest": "e3737348f47349492348d023c83e565912adba8be88e0c3671313b166dbf2b7f",
+  "version": 1,
+  "digest": "ab7586d8ccdf1319e5fa398680dc64e49380a56cfbc648d773ee847edc43547a"
+}
