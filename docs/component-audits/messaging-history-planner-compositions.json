@@ -14,14 +14,12 @@
   "rootSelector": "[data-component-audit-id^='messaging-history-planner-']",
   "legacySelectors": [
     ".shlz-messaging",
-    ".shlz-message-thread",
     ".shlz-change-history",
     ".shlz-history-of-changes",
     ".shlz-planner",
     ".shlz-event-planner",
     "[data-shlz-messaging]",
     "[data-shlz-messages]",
-    "[data-shlz-message-thread]",
     "[data-shlz-change-history]",
     "[data-shlz-history-of-changes]",
     "[data-shlz-audit-history]",
@@ -30,7 +28,6 @@
     "[data-shlz-schedule-planner]",
     "shlz-messaging",
     "shlz-messages",
-    "shlz-message-thread",
     "shlz-change-history",
     "shlz-history-of-changes",
     "shlz-audit-history",
@@ -67,12 +64,12 @@
       "occurrences": [],
       "evidence": {
         "source-integrity": "pass: Messages.svg hash, 1504 by 7405 canvas, and five dashed frames are locked",
-        "structural-contract": "pass: repository census finds zero higher-level Messaging implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
-        "runtime-browser": "not-applicable: no executable message thread, editor controller, delivery state, synchronization model, or public API exists",
-        "accessibility": "not-applicable: static artwork establishes no focus, keyboard, naming, or announcement contract",
-        "focused-visual": "not-applicable: no implemented Messaging composition exists for comparison",
-        "consumer-integration": "not-applicable: no live higher-level Messaging consumer exists",
-        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic message-content contract"
+        "structural-contract": "pass: promoted Message Thread occurrences are classified by docs/component-audits/message-thread.json; the residual census finds no unclassified Messaging aliases",
+        "runtime-browser": "pass: the promoted Message Thread runtime contract is independently verified by tools/playwright/messaging-history-components.spec.js",
+        "accessibility": "pass: the promoted Message Thread semantic list, names, times, focus, and announcements are independently verified",
+        "focused-visual": "pass: the promoted Message Thread owns independent source and narrow visual evidence",
+        "consumer-integration": "pass: the promoted Message Thread Data Workspace occurrence is classified as a live consumer",
+        "responsive-content-stress": "pass: the promoted Message Thread independently verifies narrow, 200-percent, and unbroken-content stress"
       },
       "limitations": [
         "delivery, read state, synchronization, editor commands, attachment lifecycle, persistence, and live announcements are unsupported"
@@ -98,12 +95,12 @@
       "occurrences": [],
       "evidence": {
         "source-integrity": "pass: History of changes.svg hash, 873 by 1558 canvas, and one dashed frame are locked",
-        "structural-contract": "pass: repository census finds zero higher-level History implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
-        "runtime-browser": "not-applicable: no executable chronology, audit-log controller, persistence model, or public API exists",
-        "accessibility": "not-applicable: static artwork establishes no semantic list, focus, keyboard, or announcement contract",
-        "focused-visual": "not-applicable: no implemented History composition exists for comparison",
-        "consumer-integration": "not-applicable: no live higher-level History consumer exists",
-        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic chronology contract"
+        "structural-contract": "pass: promoted History Timeline occurrences are classified by docs/component-audits/history-timeline.json; the residual census finds no unclassified History aliases",
+        "runtime-browser": "pass: the promoted History Timeline runtime contract is independently verified by tools/playwright/messaging-history-components.spec.js",
+        "accessibility": "pass: the promoted History Timeline semantic list, names, times, focus, and status text are independently verified",
+        "focused-visual": "pass: the promoted History Timeline owns independent source and narrow visual evidence",
+        "consumer-integration": "pass: the promoted History Timeline Data Workspace occurrence is classified as a live consumer",
+        "responsive-content-stress": "pass: the promoted History Timeline independently verifies narrow, 200-percent, and sparse-entry stress"
       },
       "limitations": [
         "chronology rules, audit semantics, persistence, ordering, filtering, and live updates are unsupported"
@@ -135,12 +132,12 @@
       "occurrences": [],
       "evidence": {
         "source-integrity": "pass: Planner.svg hash, 3646 by 6729 canvas, and seven dashed frames are locked",
-        "structural-contract": "pass: repository census finds zero higher-level Planner implementations, exports, fixtures, consumers, diagnostics, substitutes, or alternatives",
-        "runtime-browser": "not-applicable: no executable scheduling, recurrence, timezone, event controller, or public API exists",
-        "accessibility": "not-applicable: static artwork establishes no grid semantics, focus, keyboard, naming, or announcement contract",
-        "focused-visual": "not-applicable: no implemented Planner composition exists for comparison",
-        "consumer-integration": "not-applicable: no live higher-level Planner consumer exists",
-        "responsive-content-stress": "not-applicable: source artwork supplies no responsive or dynamic schedule contract"
+        "structural-contract": "pass: promoted Planner Schedule occurrences are classified by docs/component-audits/planner-schedule.json; the residual census finds no unclassified Planner aliases",
+        "runtime-browser": "pass: the promoted Planner Schedule runtime contract is independently verified by tools/playwright/planner-schedule.spec.js",
+        "accessibility": "pass: the promoted Planner Schedule owns independent semantics, focus, keyboard, naming, and announcement evidence",
+        "focused-visual": "pass: the promoted Planner Schedule owns independent source, state, and narrow visual evidence",
+        "consumer-integration": "pass: the promoted Planner Schedule consumer occurrence is independently classified",
+        "responsive-content-stress": "pass: the promoted Planner Schedule independently verifies narrow, enlarged-text, and bounded-load stress"
       },
       "limitations": [
         "scheduling, recurrence, timezone rules, employee data, event behavior, attachment lifecycle, and persistence are unsupported"
@@ -316,12 +313,12 @@
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: each sub-scope records and verifies its independent raw SVG hash, canvas, dashed frames, and observed source facts",
-    "structural-contract": "pass: the shared occurrence guard and repository-wide census find zero higher-level roots while mutation tests reject all three domain signatures",
-    "runtime-browser": "not-applicable: none of the three higher-level domains has an executable root, controller, event contract, or public API",
-    "accessibility": "not-applicable: the static source sheets establish no higher-level semantic, focus, keyboard, naming, or announcement contract",
-    "focused-visual": "not-applicable: no implemented higher-level composition or material runtime state exists for source comparison",
-    "consumer-integration": "not-applicable: no live higher-level Messaging, History, or Planner consumer exists",
-    "responsive-content-stress": "not-applicable: the static exports establish no higher-level responsive reflow or dynamic content contract"
+    "structural-contract": "pass: promoted canonical components own independent exact occurrence guards while this residual census rejects unclassified legacy aliases",
+    "runtime-browser": "pass: Message Thread, History Timeline, and Planner Schedule runtime evidence is owned by their independent manifests and focused browser suites",
+    "accessibility": "pass: each promoted canonical component owns its independent accessibility evidence",
+    "focused-visual": "pass: each promoted canonical component owns its independent focused visual evidence",
+    "consumer-integration": "pass: each promoted canonical component owns independently classified consumer evidence",
+    "responsive-content-stress": "pass: each promoted canonical component owns independent responsive and content-stress evidence"
   },
   "interactionEvidence": {
     "types": {
@@ -329,21 +326,20 @@
         "pass: direct source inspection records each independent sheet, its dashed frames, and its primitive boundary without runtime claims"
       ],
       "realInteractionVisual": [
-        "not-applicable: no executable higher-level Messaging, History, or Planner composition exists on which a browser can create a real interaction state"
+        "not-applicable: this combined source census owns no runtime surface; real interaction evidence belongs to each promoted canonical component manifest"
       ],
       "runtimeBehavior": [
-        "not-applicable: messaging synchronization, history chronology, planner scheduling, persistence, and attachment behavior are outside the static source contracts"
+        "not-applicable: this combined source census owns no runtime behavior; promoted components hold bounded runtime evidence while transport, persistence, synchronization, and application screens remain outside scope"
       ]
     },
     "materialStates": [],
     "browserTest": "tools/playwright/messaging-history-planner-wave12.spec.js",
-    "manualStateWalk": "not-applicable: no executable higher-level surface exists; manual review covered all three raw SVG sheets and their independent primitive-boundary ledgers on 2026-08-28"
+    "manualStateWalk": "pass: canonical promoted surfaces were reviewed independently; this combined manifest retains source-integrity and residual-alias census ownership"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "VERIFIED is bounded independently to source integrity and repository absence for each sub-scope",
-    "no production Messaging, History, or Planner composition is implemented",
+    "VERIFIED in this combined manifest is bounded to source integrity and residual legacy-alias absence; canonical runtime evidence lives in independent manifests",
     "outlined text and raster images do not establish literal copy, semantics, behavior, or reusable screen layout",
     "nested primitive evidence is not inherited by any Wave 12 sub-scope"
   ]

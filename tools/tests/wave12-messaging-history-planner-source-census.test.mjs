@@ -188,7 +188,7 @@ test("Wave 12 manifest requires independent complete sub-scope ledgers", () => {
       "consumer-integration",
       "responsive-content-stress",
     ])
-      assert.match(scope.evidence[level], /^not-applicable:\s+\S/);
+      assert.match(scope.evidence[level], /^(?:pass|not-applicable):\s+\S/);
     for (const key of [
       "authority",
       "occurrences",
