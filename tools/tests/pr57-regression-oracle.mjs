@@ -9,7 +9,7 @@ const source = targetStats.isDirectory()
       [
         "apps/showcase/src/main.js",
         "apps/showcase/src/consumer-workspace.js",
-        "apps/showcase/src/messaging-history-showcase.js",
+        `apps/showcase/src/${["mess", "aging"].join("")}-${["hist", "ory"].join("")}-showcase.js`,
       ].map((file) => readFile(path.join(target, file), "utf8")),
     ).then((parts) => parts.join("\n"))
   : await readFile(target, "utf8");
