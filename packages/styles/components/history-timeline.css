@@ -27,7 +27,8 @@
 
 .shlz-history-timeline__entry::before {
   position: absolute;
-  inset-block: calc(var(--shlz-history-marker-size) + 0.5rem) -1.5rem;
+  inset-block: calc(var(--shlz-history-marker-size) + 0.5rem)
+    calc(-1.5rem - var(--shlz-history-marker-size) - 0.5rem);
   inset-inline-start: calc(var(--shlz-history-rail-offset) - 0.5px);
   inline-size: 1px;
   background: var(--shlz-semantic-color-border-default);

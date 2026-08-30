@@ -326,10 +326,7 @@ ${calendarGridShowcaseMarkup}
 ${plannerScheduleShowcaseMarkup}`;
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
-app.insertAdjacentHTML(
-  "beforeend",
-  messagingHistoryShowcaseMarkup.replaceAll('class="shlz-link" ', ""),
-);
+app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],

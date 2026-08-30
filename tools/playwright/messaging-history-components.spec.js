@@ -193,6 +193,28 @@ test("native links and buttons receive keyboard focus with a visible indicator",
   await expect(
     page.locator("[data-messaging-history-consumer-status]"),
   ).toContainText("Application handled");
+  await expect(
+    page.locator("[data-messaging-history-consumer-status]"),
+  ).toHaveAttribute("role", "status");
+  await expect(controls[0]).toHaveClass(/\bshlz-link\b/);
+  await expect(controls[2]).toHaveClass(/\bshlz-link\b/);
+  await expect(controls[3]).toHaveClass(/\bshlz-button\b/);
+});
+
+test("period labels explicitly describe their following history entries", async ({
+  page,
+}) => {
+  const period = page.locator(
+    "#history-timeline-demo .shlz-history-timeline__period",
+  );
+  await expect(period).not.toHaveAttribute("role", "presentation");
+  const label = period.locator("[id]");
+  const labelId = await label.getAttribute("id");
+  expect(labelId).toBeTruthy();
+  const describedEntries = page.locator(
+    `#history-timeline-demo .shlz-history-timeline__entry[aria-describedby='${labelId}']`,
+  );
+  await expect(describedEntries).toHaveCount(2);
 });
 
 test("empty states are independently readable", async ({ page }) => {

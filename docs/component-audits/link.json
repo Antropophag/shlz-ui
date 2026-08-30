@@ -11,7 +11,13 @@
   "occurrences": [
     { "id": "link-showcase-contract", "kind": "executable-fixture" },
     { "id": "link-report-card-action", "kind": "executable-fixture" },
-    { "id": "link-workspace-request-navigation", "kind": "live-consumer" }
+    { "id": "link-workspace-request-navigation", "kind": "live-consumer" },
+    { "id": "link-message-thread-attachment", "kind": "executable-fixture" },
+    {
+      "id": "link-history-timeline-attachment",
+      "kind": "executable-fixture"
+    },
+    { "id": "link-messaging-history-consumer", "kind": "live-consumer" }
   ],
   "supportedSizes": ["16px-source"],
   "supportedStates": [

@@ -33,3 +33,31 @@ rasters.
 
 The focused legacy set passes 5/5 after the refresh. Message Thread and History
 Timeline retain their own independent focused snapshots and browser evidence.
+
+## PR #57 review follow-up
+
+The review follow-up is scoped to the nine CodeRabbit line threads opened
+against implementation commit `77c14c`. The remediation adds an explicit live
+status region, restores the shipped Link and Button classes without string
+rewriting, gives attachment links real in-page targets, and binds History
+period labels to their following entries with native list semantics plus
+`aria-describedby`. The timeline connector now terminates at the adjacent
+marker edges. Planning provenance and rollback text were corrected, the final
+task remains open until delivery, and the structural opening-tag checks no
+longer permit cross-element matches.
+
+Restoring the shared Link and Button classes exposed three Link occurrences
+(two executable fixtures and one live consumer) and one Button occurrence (one
+live consumer) to the repository-wide component guards. All four are now
+explicitly classified in their canonical manifests. No diagnostic or
+legacy/native substitute was introduced. The consumer screenshot was refreshed
+to record the intended shared-component paint.
+
+Validation on the resulting working tree passes OpenSpec health, deterministic
+generation, 178/178 Node tests, ESLint, Stylelint, Prettier, all workspace
+builds, validation of 68 source SVGs / 3 token groups / 119 canonical icons / 42
+aliases, clean consumption of four packed packages, and 270/270 Chromium tests.
+The focused remediation set separately passes 24/24 Link/Button and Data
+Workspace checks; the Messaging/History suite is included in the aggregate and
+passes all 10 tests. Four component-focused Messaging/History snapshots and the
+Data Workspace consumer snapshot were inspected after regeneration.

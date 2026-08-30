@@ -27,7 +27,7 @@ Message Thread and History Timeline have separate interfaces, styles, manifests,
 
 Consumers author `<ol>` or `<ul>` structures with documented classes. CSS owns alignment, grouping, connector paint, wrapping, and responsive behavior. This keeps server rendering natural and makes DOM order the accessibility and chronology/message-order contract.
 
-History Timeline period labels stay in the flat list as presentational `<li role="presentation">` wrappers. The visible label inside each wrapper has a stable consumer-owned `id`, and every following entry in that period references the label with `aria-describedby`. This keeps period labels out of the timeline-entry count while preserving an explicit accessible association without introducing nested-list layout semantics.
+History Timeline period labels stay in the flat list as native `<li>` wrappers. The visible label inside each wrapper has a stable consumer-owned `id`, and every following entry in that period references the label with `aria-describedby`. Keeping the native list-item role satisfies list structure while the explicit description associates each entry with its period without introducing nested-list layout semantics.
 
 ### 3. Ship no behavior controller
 

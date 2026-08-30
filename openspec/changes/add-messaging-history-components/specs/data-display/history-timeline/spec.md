@@ -15,12 +15,12 @@ History Timeline SHALL expose an accessible list of consumer-ordered entries wit
 
 ### Requirement: Entry and grouping presentation
 
-History Timeline SHALL support optional period labels, actor/avatar composition, multiline descriptions, metadata, attachments, current or emphasized entries, and empty or loading-safe presentation without embedding domain event names. A period label SHALL use a presentational list-item wrapper containing a visible element with a stable consumer-owned `id`; every following timeline entry in that period SHALL reference that `id` with `aria-describedby` until the next period label.
+History Timeline SHALL support optional period labels, actor/avatar composition, multiline descriptions, metadata, attachments, current or emphasized entries, and empty or loading-safe presentation without embedding domain event names. A period label SHALL use a native list-item wrapper containing a visible element with a stable consumer-owned `id`; every following timeline entry in that period SHALL reference that `id` with `aria-describedby` until the next period label.
 
 #### Scenario: Entries span periods
 
 - **WHEN** a consumer inserts labeled period groups
-- **THEN** each presentational label is explicitly associated with its following entries, is not exposed as a timeline entry, and does not imply library-owned sorting
+- **THEN** each period label retains valid native list structure, is explicitly associated with its following entries, and does not imply library-owned sorting
 
 #### Scenario: Long and sparse entries
 
