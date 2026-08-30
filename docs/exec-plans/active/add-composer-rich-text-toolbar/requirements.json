@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Add a framework-neutral Composer shell and Rich Text Toolbar derived from the authoritative messaging and planner source artwork.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "component-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user-prompt", "ref": "Делай Composer / Rich Text Toolbar" }
+    },
+    {
+      "id": "public-contract",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user-prompt", "ref": "Делай; agent-owned contract is bounded to a framework-neutral presentational shell and command toolbar" }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-policy", "ref": "AGENTS.md, Messages.svg, Planner.svg, and the Wave 12 source audit" }
+    }
+  ],
+  "openSpec": {
+    "change": "add-composer-rich-text-toolbar",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-prompt", "ref": "Делай" }
+  }
+}

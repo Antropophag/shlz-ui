@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Add a framework-neutral Composer shell and Rich Text Toolbar derived from the authoritative messaging and planner source artwork.",
+  "route": "open-spec",
+  "openSpecChange": "add-composer-rich-text-toolbar",
+  "requiredDecisions": [
+    { "id": "component-scope", "owner": "user", "blocking": true },
+    { "id": "public-contract", "owner": "agent", "blocking": true },
+    { "id": "source-authority", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
