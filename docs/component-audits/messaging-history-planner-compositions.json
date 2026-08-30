@@ -299,7 +299,7 @@
       "evidence": "docs/component-audit-roadmap.md"
     },
     {
-      "claim": "bounded VERIFIED means source integrity and current repository absence are proven, not that product functionality exists",
+      "claim": "bounded VERIFIED means source integrity and residual legacy-alias absence are proven; promoted canonical components keep independent evidence",
       "classification": "repository-decision",
       "evidence": "docs/component-audits/wave-12-report.md"
     },
@@ -334,7 +334,7 @@
     },
     "materialStates": [],
     "browserTest": "tools/playwright/messaging-history-planner-wave12.spec.js",
-    "manualStateWalk": "pass: canonical promoted surfaces were reviewed independently; this combined manifest retains source-integrity and residual-alias census ownership"
+    "manualStateWalk": "not-applicable: this combined residual census has no runtime state walk; direct source review and the residual-alias guard are its only evidence"
   },
   "acceptedDeviations": [],
   "findings": [],

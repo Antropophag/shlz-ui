@@ -1183,7 +1183,7 @@
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 17,
+        "executableShowcase": 15,
         "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 8,
