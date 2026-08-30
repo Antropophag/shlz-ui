@@ -25,7 +25,7 @@ Alternative: keep a nested label styled like plain text. Rejected because it lea
 
 ### Keep source width as a maximum, not an inflexible fixed width
 
-The root and surface use `inline-size: min(100%, 467px)` with source-default `block-size: 102px`. Container queries/media-independent wrapping allow narrower consumers and 200% text to grow vertically rather than clip.
+The root is capped by `inline-size: min(100%, 467px)`, while the surface fills that available width and uses the source-default `min-block-size: 102px`. Media-independent wrapping allows narrower consumers and 200% text to grow vertically rather than clip.
 
 Alternative: force 467px everywhere. Rejected because the established public contract explicitly supports narrow containers and text enlargement.
 

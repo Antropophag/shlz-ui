@@ -5,9 +5,9 @@ Implementation baseline: `b7f34e9` on draft PR #55. Source authority: `shlz-desi
 ## Completion gate
 
 - Repository census: 6 classified File Upload occurrences — 4 executable Showcase fixtures, 1 Data Workspace live consumer, and 1 plain-HTML fixture; no diagnostics, legacy substitutes, or unclassified implementations.
-- Source contract: the default surface is a fluid, maximum 467×102 associated label with a centered 24×24 canonical cloud-upload icon and the single Russian instruction from the source; the invented pill trigger is absent.
+- Source contract: the default root has a fluid 467px maximum width, and its full-width associated label has a 102px minimum height, a centered 24×24 canonical cloud-upload icon, and the single Russian instruction from the source; the invented pill trigger is absent.
 - Runtime/accessibility: native keyboard selection and `change`, real `FileList` drop, non-file filtering, disabled suppression, bubbling payload, idempotence, teardown, focus, and focused Axe checks pass.
-- Visual/content stress: empty, populated, drag-active, disabled, error, narrow, long-content, and 200% text states pass computed assertions; the focused state and narrow snapshots were inspected against the authoritative SVG.
+- Visual/content stress: empty, populated, drag-active, disabled, error, narrow, long-content, and actual 200% text states pass computed assertions; the stress oracle requires the source-default 14px instruction to compute to 28px, and the focused state and narrow snapshots were inspected against the authoritative SVG.
 - Consumer boundary: the Data Workspace consumer still receives selected files and renders the reusable File Row; upload policy, validation, transport, progress, retry, cancellation, and persistence remain consumer-owned.
 
 ## Automated evidence
@@ -25,3 +25,5 @@ Implementation baseline: `b7f34e9` on draft PR #55. Source authority: `shlz-desi
 The default, populated, drag-active, disabled, error, narrow, enlarged-text, keyboard-selection, consumer-rerender, repeated-enhancement, and destroyed-controller states were exercised through the real Showcase and plain-HTML surfaces. The regenerated snapshots show the source-backed full-width composition and a source-scale attached File Row.
 
 The source does not define upload policy or transport semantics. The Impeccable detector ran in degraded regex-only mode because its optional parsers were unavailable; it reported one pre-existing Showcase grid-background advisory outside this change, so that detector is not treated as completion-gate evidence.
+
+CI and review-thread state are recorded at delivery after the final candidate is pushed; neither is represented by the local validation counts above.
