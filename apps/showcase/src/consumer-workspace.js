@@ -29,6 +29,12 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
     <header class="shlz-consumer-workspace__header">
       <div><h3>Заявки ServiceDesk</h3><p>Поиск, фильтрация и групповые действия.</p></div>
     </header>
+    <div class="shlz-consumer-workspace__summary">
+      <article class="shlz-report-card shlz-report-card--muted shlz-report-card--fluid" data-component-audit-id="report-card-workspace-summary" aria-labelledby="workspace-report-title">
+        <p class="shlz-report-card__eyebrow">Сводка</p><h4 class="shlz-report-card__title" id="workspace-report-title">Заявки в работе</h4><p class="shlz-report-card__value">${records.length}</p><p class="shlz-report-card__meta">Текущий набор данных</p>
+        <svg class="shlz-report-card__decoration" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 16.5V3.5h10.4l-2.1 4 2.1 3.9-10.4.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </article>
+    </div>
     <div class="shlz-consumer-workspace__body" data-component-audit-id="domain-table-workspace-requests">
       <div class="shlz-consumer-workspace__toolbar">
         <label class="shlz-field shlz-consumer-workspace__search" data-component-audit-id="input-workspace-search"><span class="shlz-field__label">Поиск по заявкам</span><span class="shlz-field__control"><input class="shlz-input" type="search" placeholder="Номер, тема или статус" data-workspace-search></span></label>

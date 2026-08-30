@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 2,
+  "component": "card-with-action",
+  "authoritativeSource": "shlz-design-source/raw/svg/Card with button.svg",
+  "referenceSources": ["docs/components/card-with-action.md"],
+  "implementation": ["packages/styles/components/card-with-action.css"],
+  "behavior": null,
+  "docs": "docs/components/card-with-action.md",
+  "rootSelector": "[data-component-audit-id^='card-with-action-']",
+  "legacySelectors": [".shlz-card-with-action"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "card-with-action-showcase-source", "kind": "executable-fixture" },
+    {
+      "id": "card-with-action-content-stress",
+      "kind": "content-stress-fixture"
+    }
+  ],
+  "supportedSizes": ["source-314x230", "fluid-min-240"],
+  "supportedStates": [
+    "presentational",
+    "optional-visual",
+    "nested-native-action"
+  ],
+  "contentStress": ["long-title", "long-description", "native-link-action"],
+  "sourceClaims": [
+    {
+      "claim": "The source surface is 314 by 230 with radius 16, #DFE2F0 fill and a 137 by 40 action affordance",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Card with button.svg"
+    }
+  ],
+  "browserTests": ["tools/playwright/card-compositions-wave10.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/card-with-action-source-chromium-linux.png",
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/card-with-action-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact source hash and represented geometry are locked",
+    "structural-contract": "pass: semantic regions and nested native action are classified",
+    "runtime-browser": "not-applicable: the presentational root owns no controller",
+    "accessibility": "pass: article semantics and native nested actions retain focus ownership",
+    "focused-visual": "pass: source-size and narrow focused snapshots cover the material variants",
+    "consumer-integration": "not-applicable: the reusable fixture validates composition; no application lifecycle is claimed",
+    "responsive-content-stress": "pass: the fluid modifier contains long text and a native action at 240px"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: source-size and fluid visual fixtures"],
+      "realInteractionVisual": [
+        "not-applicable: the root has no interaction state"
+      ],
+      "runtimeBehavior": ["not-applicable: nested Button or Link owns behavior"]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/card-compositions-wave10.spec.js",
+    "manualStateWalk": "pass: source-size, narrow and nested-action focus reviewed"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "literal source copy and illustration semantics are not recoverable from outlined paths"
+  ]
+}

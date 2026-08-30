@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 2,
+  "component": "cover",
+  "authoritativeSource": "shlz-design-source/raw/svg/Cover.svg",
+  "referenceSources": ["docs/components/cover.md"],
+  "implementation": ["packages/styles/components/cover.css"],
+  "behavior": null,
+  "docs": "docs/components/cover.md",
+  "rootSelector": "[data-component-audit-id^='cover-']",
+  "legacySelectors": [".shlz-cover"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "cover-showcase-default", "kind": "executable-fixture" },
+    { "id": "cover-content-stress", "kind": "content-stress-fixture" }
+  ],
+  "supportedSizes": ["source-874x400", "fluid-min-320"],
+  "supportedStates": ["static-presentational"],
+  "contentStress": ["long-title", "long-description", "narrow-container"],
+  "sourceClaims": [
+    {
+      "claim": "Cover.svg is an 874 by 400 white static vector composition with six outlined text paths",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Cover.svg"
+    }
+  ],
+  "browserTests": ["tools/playwright/card-compositions-wave10.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/cover-default-chromium-linux.png",
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/cover-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact source hash and frame geometry are locked",
+    "structural-contract": "pass: two semantic occurrences are classified",
+    "runtime-browser": "not-applicable: Cover is a static presentational composition",
+    "accessibility": "pass: structured text remains available to assistive technology",
+    "focused-visual": "pass: default and narrow focused snapshots cover the supported geometry",
+    "consumer-integration": "not-applicable: no application-specific cover lifecycle is claimed",
+    "responsive-content-stress": "pass: long text grows the fluid composition without clipping"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: default and content-stress fixtures"],
+      "realInteractionVisual": [
+        "not-applicable: Cover has no interaction state"
+      ],
+      "runtimeBehavior": ["not-applicable: Cover owns no behavior"]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/card-compositions-wave10.spec.js",
+    "manualStateWalk": "pass: default and narrow long-content variants inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "outlined source paths do not establish literal copy or a canonical typography scale"
+  ]
+}

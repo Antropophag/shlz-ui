@@ -10,6 +10,7 @@
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
     { "id": "link-showcase-contract", "kind": "executable-fixture" },
+    { "id": "link-report-card-action", "kind": "executable-fixture" },
     { "id": "link-workspace-request-navigation", "kind": "live-consumer" }
   ],
   "supportedSizes": ["16px-source"],

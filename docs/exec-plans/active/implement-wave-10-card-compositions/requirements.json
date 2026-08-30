@@ -4,10 +4,43 @@
   "intent": "Implement the three source-studied Wave 10 card compositions as framework-neutral public components with independent completion evidence.",
   "route": "open-spec",
   "decisions": [
-    { "id": "wave10-scope", "owner": "user", "status": "resolved", "blocking": true, "provenance": { "kind": "user-prompt", "ref": "Нужно добавить компоненты изученные в вейв 10" } },
-    { "id": "public-contract", "owner": "agent", "status": "resolved", "blocking": true, "provenance": { "kind": "user-prompt", "ref": "Делай; agent-owned contract is bounded by the Wave 10 audit and OpenSpec design" } },
-    { "id": "source-authority", "owner": "repo", "status": "resolved", "blocking": true, "provenance": { "kind": "repository-policy", "ref": "AGENTS.md and the Wave 10 source audit" } }
+    {
+      "id": "wave10-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Нужно добавить компоненты изученные в вейв 10"
+      }
+    },
+    {
+      "id": "public-contract",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Делай; agent-owned contract is bounded by the Wave 10 audit and OpenSpec design"
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "AGENTS.md and the Wave 10 source audit"
+      }
+    }
   ],
-  "openSpec": { "change": "implement-wave-10-card-compositions", "status": "synthesized" },
-  "authorization": { "status": "pre-authorized", "provenance": { "kind": "user-prompt", "ref": "Делай" } }
+  "openSpec": {
+    "change": "implement-wave-10-card-compositions",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-prompt", "ref": "Делай" }
+  }
 }

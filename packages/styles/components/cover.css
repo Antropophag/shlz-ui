@@ -1,0 +1,72 @@
+.shlz-cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  inline-size: 874px; /* FACT: Cover.svg frame width. */
+  min-inline-size: 0;
+  block-size: 400px; /* FACT: Cover.svg frame height. */
+  padding: 40px;
+  overflow: hidden;
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
+}
+
+.shlz-cover--fluid {
+  inline-size: 100%;
+  min-inline-size: 320px; /* DECISION: bounded narrow composition. */
+  block-size: auto;
+  min-block-size: min(400px, 60vw);
+}
+
+.shlz-cover__eyebrow,
+.shlz-cover__title,
+.shlz-cover__description,
+.shlz-cover__meta {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.shlz-cover__eyebrow {
+  color: var(--shlz-semantic-color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-transform: uppercase;
+}
+
+.shlz-cover__title {
+  max-inline-size: 640px;
+  margin-block-start: 12px;
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 48px;
+  letter-spacing: -0.01em;
+}
+
+.shlz-cover__description {
+  max-inline-size: 560px;
+  margin-block-start: 16px;
+  color: var(--shlz-semantic-color-text-secondary);
+  font-size: 16px;
+  line-height: 20.8px;
+  letter-spacing: -0.01em;
+}
+
+.shlz-cover__meta {
+  margin-block-start: 32px;
+  color: var(--shlz-semantic-color-text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@media (width <= 560px) {
+  .shlz-cover--fluid {
+    min-inline-size: 0;
+    padding: 24px;
+  }
+
+  .shlz-cover--fluid .shlz-cover__title {
+    font-size: 28px;
+    line-height: 36.4px;
+  }
+}

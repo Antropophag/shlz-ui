@@ -20,6 +20,9 @@ const componentFiles = [
   "file-row",
   "document-row",
   "empty-state",
+  "card-with-action",
+  "report-card",
+  "cover",
 ];
 
 test("modal and drawer compose the native dialog lifecycle", async () => {

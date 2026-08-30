@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Implement the three source-studied Wave 10 card compositions as framework-neutral public components with independent completion evidence.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

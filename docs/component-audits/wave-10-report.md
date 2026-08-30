@@ -1,28 +1,36 @@
-# Wave 10 Card compositions audit
+# Wave 10 card compositions implementation
 
-- Baseline: `d919cbc0e698637207df5a5bdd55841c9d637868` on `audit/wave-10-card-compositions`, bound to current `origin/main` and PR #43 by the baseline receipt.
-- Baseline delivery state: PR #43 was open with planning artifacts only; implementation review and CI were pending.
-- Raw authority hashes: `Card with button.svg` `01abde3b045ab0c36160e5e71a829bffc37d2bb3bbafaadac3a04e350b064719`; `Reports card.svg` `e28cb879e2a2e577154cfa3caf541de020431ef8ba6e44550ad0e54bddf63c4f`; `Cover.svg` `c857eb75fe105238c2a0d222a5dd27fae74006cf6db43488fa4d9bbe77feb612`.
-- `shlz-design-source/` is unchanged.
+- Implementation baseline: `2ead5a0d45379d643d369297f45dbe1c7722a49c` on `feature/implement-wave-10-card-components`.
+- Pull request: #56, targeting `main`.
+- Raw authority hashes remain locked by `tools/tests/wave10-card-compositions-source-census.test.mjs`.
+- `shlz-design-source/` remains read-only and unchanged.
 
-## Source contract
+## Implemented contracts
 
-`Card with button.svg` is one 314×230 radius-16 composition with vector illustration geometry, a small white content panel, and a 137×40 radius-20 blue action affordance. `Reports card.svg` is a 354×810 sheet with three vertically arranged 314×230 radius-16 specimens: two white and one `#EEF0F4`; each repeats trailing 18.5×18.5 outlined geometry. `Cover.svg` is an 874×400 static vector composition with two white background rectangles and six outlined text paths. None of the three files embeds a raster image; Card with button has one filter, Reports card has three, and Cover has none.
+Wave 10 now exposes three independent, framework-agnostic CSS compositions rather than a generic Card abstraction:
 
-The repeated 314×230/radius-16 surface and recurring blue/dark/neutral paint are derived composition patterns, not promoted design tokens or a generic component contract. The exports contain outlined text rather than structured content nodes and cannot establish literal runtime copy, click or navigation behavior, loading, media lifecycle, responsive reflow, application data models, or a reusable Card API.
+- Card with action: semantic content, optional decorative visual and a nested native Button or Link; source-size `314×230` plus a fluid variant.
+- Report card: eyebrow, title, value, metadata, optional native Link and trailing decoration; white and muted source materials at `314×230` plus a fluid variant.
+- Cover: semantic eyebrow, title, description and metadata; source-size `874×400` plus a content-growing fluid variant.
 
-## Census and evidence applicability
+The source SVGs establish geometry and paint, but not literal copy, application data, navigation, loading, responsive behavior, or a shared Card API. Those boundaries remain explicit repository decisions in the component documentation.
 
-The bounded census covers application, package, documentation-component, fixture, Playwright, CSS, JavaScript/TypeScript, Vue, PHP, and HTML surfaces. It found exactly zero production implementations, public exports, executable roots, live consumers, Data Workspace consumers, inert diagnostics, legacy/native substitutes, and local alternatives for the source-defined family. It separately classified 15 executable-surface files containing generic card/cover terminology: the Showcase icon inventory and styles/tests, prose and coverage wording, `object-fit: cover` uses/assertions, and other unrelated test language. A synthetic `.shlz-card` production surface is rejected by the focused test.
+## Repository census
 
-Source integrity and structural contract pass independently. Runtime browser, accessibility, focused visual, consumer integration, and responsive/content stress are each `not-applicable` because no executable composition or public behavior exists. Static visual evidence is limited to direct inspection of the authoritative exports. Real-interaction visual and runtime behavior are `not-applicable`, the material-state ledger is empty, and no screenshot is claimed. Manual review covered all three source sheets and the absence/terminology census rather than inventing an interaction walk.
+The executable inventory contains exactly eight roots: two Card with action fixtures, three Report card fixtures, one live Data Workspace Report card consumer, and two Cover fixtures. All roots are classified in independent component manifests. There are no inert diagnostics, legacy/native substitutes, or local alternatives for these three compositions.
 
-## Validation, review, CI, and delivery
+The presentational roots own no keyboard or event controller. Interactive semantics remain with nested native Button and Link primitives. The Data Workspace summary is the real-consumer proof for Report card; Card with action and Cover intentionally claim no application lifecycle.
 
-Focused evidence passes as 6/6 source/manifest/census checks and 1/1 Chromium structural occurrence-guard check; no runtime-browser claim is derived from that structural check. The stabilized aggregate `npm run check` passes: OpenSpec health; deterministic generation; 118/118 Node tests; ESLint, Stylelint, and Prettier; all workspace builds (including 496 Showcase modules); validation of 68 source SVGs, 3 token groups, 119 canonical icons, and 42 aliases; clean consumption of 4 packed packages; and 208/208 Chromium tests. `git diff --check` also passes.
+## Evidence
 
-Independent Standards and Spec reviews inspected the complete implementation diff from the fixed baseline. They found swapped Dropdown/Card inventory references, a missing shared DOM occurrence guard, overstated browser evidence, and incomplete documentation/test census coverage. The remediation restored family-specific references, connected the shared guard, described Chromium evidence as structural only, and expanded the bounded scan to `docs/components` Markdown plus all `tools/tests` except the self-referential guard itself. Both independent axes passed targeted final re-review with no unresolved finding. GitHub CI, review-thread state, receipt conformance, and delivery evidence are recorded at delivery time.
+Focused Chromium coverage checks the repository occurrence census, non-interactive roots, source-size geometry, white/muted report materials, component-local screenshots, narrow long-content containment, and the Data Workspace consumer. Six component-local Chromium snapshots are tracked beside the focused specification and were inspected at source and narrow widths.
 
-## Component disposition
+Local validation passed with these exact results:
 
-Card compositions are `VERIFIED` for the bounded source-only and repository-absence contract. `implementation_status` remains `source-only`. This status does not certify a production component, Card API, consumer behavior, responsive layout, or any nested verified primitive. There are no accepted deviations or known scope-local findings.
+- Node test suite: 175/175 passed.
+- Full Playwright suite: 260/260 passed across Chromium, Firefox, and WebKit.
+- Focused Wave 10 Chromium suite: 4/4 passed.
+- Lint, production build, SVG/token/icon validation, package packing, and strict OpenSpec validation passed.
+- The authoritative Wave 10 SVG hashes passed, and `shlz-design-source/` had no diff.
+
+The only build observation is the repository's pre-existing large-chunk warning; it is not introduced or worsened by these CSS compositions. Independent review, CI, route conformance, delivery receipt, and unresolved review-thread state are recorded at delivery time. The component manifests remain the machine-readable completion evidence for each independent component.

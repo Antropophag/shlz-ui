@@ -1,0 +1,73 @@
+.shlz-card-with-action {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  inline-size: 314px; /* FACT: Card with button.svg frame width. */
+  min-inline-size: 0;
+  block-size: 230px; /* FACT: Card with button.svg frame height. */
+  padding: 24px;
+  overflow: hidden;
+  color: var(--shlz-semantic-color-text-primary);
+  background: #dfe2f0; /* FACT: Card with button.svg surface fill. */
+  border-radius: 16px; /* FACT: Card with button.svg corner radius. */
+}
+
+.shlz-card-with-action--fluid {
+  inline-size: 100%;
+  min-inline-size: 240px; /* DECISION: bounded narrow composition. */
+  block-size: auto;
+  min-block-size: 230px;
+}
+
+.shlz-card-with-action__content,
+.shlz-card-with-action__actions {
+  position: relative;
+  z-index: 1;
+}
+
+.shlz-card-with-action__content {
+  max-inline-size: 232px;
+}
+
+.shlz-card-with-action__title,
+.shlz-card-with-action__description {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.shlz-card-with-action__title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 31.2px;
+  letter-spacing: -0.01em;
+}
+
+.shlz-card-with-action__description {
+  margin-block-start: 8px;
+  color: var(--shlz-semantic-color-text-secondary);
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.01em;
+}
+
+.shlz-card-with-action__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block-start: auto;
+}
+
+.shlz-card-with-action:not(.shlz-card-with-action--fluid)
+  .shlz-card-with-action__actions
+  .shlz-button {
+  inline-size: 137px; /* FACT: Card with button.svg action width. */
+}
+
+.shlz-card-with-action__visual {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-end: 0;
+  max-inline-size: 48%;
+  max-block-size: 68%;
+  pointer-events: none;
+}

@@ -22,4 +22,3 @@ The composition SHALL offer a fluid modifier that fits its container down to 240
 
 - **WHEN** title, description, or action text wraps at a supported narrow width
 - **THEN** content remains visible, the nested control remains operable, and no horizontal overflow is introduced by the component
-

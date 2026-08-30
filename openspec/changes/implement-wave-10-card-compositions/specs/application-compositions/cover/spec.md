@@ -17,4 +17,3 @@ The fluid cover SHALL fit its container down to 320 pixels, wrap structured text
 
 - **WHEN** available width is below the documented source-ratio range
 - **THEN** all text remains visible without horizontal overflow and the cover grows in block size
-

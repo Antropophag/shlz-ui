@@ -27,4 +27,3 @@ The root SHALL remain non-interactive. An optional nested Link MAY be supplied b
 
 - **WHEN** the fluid modifier is rendered at 240 pixels or with long content
 - **THEN** text wraps, the card grows vertically, and content does not overlap the trailing decoration
-
