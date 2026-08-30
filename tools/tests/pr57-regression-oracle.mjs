@@ -1,23 +1,32 @@
 import assert from "node:assert/strict";
-import { readFile, stat } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-const target = path.resolve(process.argv[2]);
-const targetStats = await stat(target);
-const sources = targetStats.isDirectory()
-  ? Object.fromEntries(
-      await Promise.all(
-        [
-          ["main", "apps/showcase/src/main.js"],
-          ["consumer", "apps/showcase/src/consumer-workspace.js"],
-          ["showcase", "apps/showcase/src/messaging-history-showcase.js"],
-        ].map(async ([name, file]) => [
-          name,
-          await readFile(path.join(target, file), "utf8"),
-        ]),
-      ),
-    )
-  : JSON.parse(await readFile(target, "utf8"));
+const repoRoot = path.resolve(import.meta.dirname, "../..");
+const knownBadTarget = path.join(
+  repoRoot,
+  "tools/tests/fixtures/messaging-history-review-known-bad.txt",
+);
+const requestedTarget = path.resolve(process.argv[2]);
+assert.ok(
+  requestedTarget === repoRoot || requestedTarget === knownBadTarget,
+  "target must be the repository root or the review known-bad fixture",
+);
+const sources =
+  requestedTarget === repoRoot
+    ? Object.fromEntries(
+        await Promise.all(
+          [
+            ["main", "apps/showcase/src/main.js"],
+            ["consumer", "apps/showcase/src/consumer-workspace.js"],
+            ["showcase", "apps/showcase/src/messaging-history-showcase.js"],
+          ].map(async ([name, file]) => [
+            name,
+            await readFile(path.join(repoRoot, file), "utf8"),
+          ]),
+        ),
+      )
+    : JSON.parse(await readFile(knownBadTarget, "utf8"));
 
 const failures = [];
 // Build the DOM id without emitting product terminology that repository-wide
