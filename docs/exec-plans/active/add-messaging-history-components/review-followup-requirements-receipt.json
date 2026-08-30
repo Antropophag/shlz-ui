@@ -1,0 +1,50 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-messaging-history-components",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "consumer-ownership",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "period-label-association",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Complete the approved Message Thread and History Timeline change by resolving all actionable review findings on pull request 57 without expanding its component scope.",
+    "revision": 2
+  },
+  "routeDigest": "321f3e7ee67c1dd5e035f93f529e266e7c11ecfa985b6b2343349fe703f2d981",
+  "version": 1,
+  "digest": "8ee2217cb7583b8144e249ae406f465b241b98169b592d75e1dd855819c4bb46"
+}

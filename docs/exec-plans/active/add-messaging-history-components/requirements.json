@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "revision": 1,
-  "intent": "Implement the best reusable product subset of Wave 12 as independent framework-neutral Message Thread and History Timeline modules, leaving Planner Schedule intact and Composer outside scope.",
+  "revision": 2,
+  "intent": "Complete the approved Message Thread and History Timeline change by resolving all actionable review findings on pull request 57 without expanding its component scope.",
   "route": "open-spec",
   "decisions": [
     {
@@ -18,7 +18,7 @@
       "blocking": true,
       "provenance": {
         "kind": "repository-path",
-        "ref": "openspec/changes/wave-12-messaging-history-planner/design.md and docs/component-gap-research-2026-08-30.md"
+        "ref": "openspec/changes/add-messaging-history-components/design.md"
       }
     },
     {
@@ -42,6 +42,16 @@
       }
     },
     {
+      "id": "period-label-association",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "openspec/changes/add-messaging-history-components/design.md and openspec/changes/add-messaging-history-components/specs/data-display/history-timeline/spec.md"
+      }
+    },
+    {
       "id": "delivery-contract",
       "owner": "repo",
       "status": "resolved",
@@ -60,7 +70,7 @@
     "status": "pre-authorized",
     "provenance": {
       "kind": "user-prompt",
-      "ref": "Тогда по вейв 12; just do the best bro"
+      "ref": "Дождись и зарезолви ревью в пр https://github.com/Antropophag/shlz-ui/pull/57"
     }
   }
 }
