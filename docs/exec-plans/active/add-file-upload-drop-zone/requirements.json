@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Implement a framework-neutral reusable File Upload / Drop Zone derived from Documents.svg, composing existing File Row and Document Row primitives while keeping transport and persistence consumer-owned, and deliver an unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "component-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Сделай 1 пункт — пункт 1 обновлённого отчёта: Upload / Drop Zone."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md, shlz-design-source/raw/svg/Documents.svg, and docs/component-audits/wave-11-report.md"
+      }
+    },
+    {
+      "id": "upload-lifecycle-boundary",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/component-gap-research-2026-08-30.md and Wave 11 source limitations: native selection/drop and presentation are reusable; validation policy, transport, progress, retry, persistence, and queue data remain consumer-owned"
+      }
+    },
+    {
+      "id": "module-seam",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md framework-neutral layering and existing packages/styles plus packages/behaviors progressive-enhancement architecture"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md and docs/agent-execution.md require a clean task worktree from origin/main, component gate, independent review, and an unmerged PR"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-file-upload-drop-zone",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-prompt", "ref": "Сделай 1 пункт" }
+  }
+}

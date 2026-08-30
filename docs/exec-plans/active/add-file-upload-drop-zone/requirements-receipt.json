@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-file-upload-drop-zone",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "component-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "upload-lifecycle-boundary",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "module-seam",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement a framework-neutral reusable File Upload / Drop Zone derived from Documents.svg, composing existing File Row and Document Row primitives while keeping transport and persistence consumer-owned, and deliver an unmerged PR.",
+    "revision": 1
+  },
+  "routeDigest": "483b5899eca8e390ea408050e1a9efb03ef1d07d668a522cd71648b9241463f8",
+  "version": 1,
+  "digest": "93abe4e131349b38f5e16fb6e285322881d1caefe8b2e091a5cdafe5fc785d05"
+}

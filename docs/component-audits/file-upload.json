@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "component": "file-upload",
+  "authoritativeSource": "shlz-design-source/raw/svg/Documents.svg",
+  "referenceSources": [
+    "docs/component-audits/upload-document-compositions.json"
+  ],
+  "implementation": ["packages/styles/components/file-upload.css"],
+  "behavior": "packages/behaviors/src/file-upload.ts",
+  "docs": "docs/components/file-upload.md",
+  "rootSelector": "[data-component-audit-id^='file-upload-']",
+  "legacySelectors": [".shlz-file-upload", "[data-shlz-file-upload]"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "file-upload-showcase-empty", "kind": "executable-fixture" },
+    { "id": "file-upload-showcase-populated", "kind": "executable-fixture" },
+    { "id": "file-upload-showcase-disabled", "kind": "executable-fixture" },
+    { "id": "file-upload-showcase-error", "kind": "executable-fixture" },
+    { "id": "file-upload-data-workspace", "kind": "live-consumer" },
+    { "id": "file-upload-plain-html", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["source-467px", "container-fluid", "narrow"],
+  "supportedStates": [
+    "empty",
+    "populated",
+    "drag-active",
+    "disabled",
+    "error",
+    "focus-visible"
+  ],
+  "contentStress": [
+    "long-filename",
+    "long-instructions",
+    "narrow-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Documents.svg contains two 467 by 102 Upload-Drag surfaces with dashed boundaries and empty/populated arrangements; the authority SHA-256 is b2be2ccea150ae49fb8363eae648bede428cace071d9783ce30f15c9c338bfdb",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg"
+    },
+    {
+      "claim": "native input semantics, real file-only drag filtering, focus-visible, disabled, error, responsive reflow and the bubbling event are accessibility and interaction decisions absent from the static export",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-file-upload-drop-zone/design.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/file-upload.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Documents.svg authority hash is recorded and source-integrity regression remains active",
+    "structural-contract": "pass: native input, associated label, instructions, error relationship, CSS, exports, docs and plain HTML are asserted",
+    "runtime-browser": "pass: native selection, real FileList drop, non-file filtering, disabled state, typed payload, repeated enhancement and teardown execute",
+    "accessibility": "pass: native input and label preserve keyboard activation and accessible naming; focused Axe scope has no violation",
+    "focused-visual": "pass: source-backed empty/populated geometry plus real drag-active, disabled, error and narrow computed states are focused",
+    "consumer-integration": "pass: Data Workspace owns queue rendering and composes File Row",
+    "responsive-content-stress": "pass: narrow, long filename/instructions and 200-percent text remain unclipped"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: empty, populated, disabled, error, narrow, long-content and enlarged-text fixtures are independently classified"
+      ],
+      "realInteractionVisual": [
+        "pass: a real file drag enters the zone and its active border/background are read before the drop clears the state"
+      ],
+      "runtimeBehavior": [
+        "pass: native selection, file-only drop, non-file filtering, disabled suppression, typed events, repeat enhancement and teardown execute"
+      ]
+    },
+    "materialStates": [
+      "input-selection",
+      "file-drag-active",
+      "file-drop",
+      "non-file-drag",
+      "disabled",
+      "error",
+      "focus-visible",
+      "destroyed"
+    ],
+    "browserTest": "tools/playwright/file-upload.spec.js",
+    "manualStateWalk": "pass: inspected empty, populated, pointer drag-active/drop, keyboard focus, disabled, error, narrow/long-content and 200-percent-text surfaces on 2026-08-30"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "validation, deduplication, previews, removal, progress, retry, transport, cancellation and persistence are consumer-owned",
+    "the controller does not assign input.files and retains no FileList or queue state"
+  ]
+}

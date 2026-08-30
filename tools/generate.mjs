@@ -213,6 +213,7 @@ const styleSources = [
   "components/drawer.css",
   "components/file-row.css",
   "components/document-row.css",
+  "components/file-upload.css",
   "components/empty-state.css",
   "typography-profiles.css",
 ];

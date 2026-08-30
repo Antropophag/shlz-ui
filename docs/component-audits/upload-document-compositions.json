@@ -74,8 +74,8 @@
       "tools/playwright/upload-document-compositions-wave11.spec.js"
     ],
     "primitiveDependencyPathCount": 10,
-    "unrelatedTerminologyPathCount": 70,
-    "totalPathCount": 81,
+    "unrelatedTerminologyPathCount": 71,
+    "totalPathCount": 82,
     "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition"
   },
   "supportedSizes": ["source-sheets-only"],
