@@ -36,16 +36,22 @@ test("Wave 10 occurrences are classified and roots remain presentational", async
     ".shlz-card-with-action",
     ".shlz-report-card",
     ".shlz-cover",
-  ])
-    await expect(page.locator(selector).first()).not.toHaveAttribute(
-      "tabindex",
-      /.+/,
-    );
-  await expect(
-    page.locator(
-      "[data-component-audit-id='card-with-action-showcase-source'] .shlz-button",
-    ),
-  ).toBeVisible();
+  ]) {
+    const roots = page.locator(selector);
+    for (let index = 0; index < (await roots.count()); index += 1) {
+      const root = roots.nth(index);
+      await expect(root).not.toHaveAttribute("tabindex", /.+/);
+      await expect(root).not.toHaveAttribute("role", /.+/);
+      await expect(root).not.toHaveAttribute("onclick", /.+/);
+      await expect(root).not.toHaveCSS("cursor", "pointer");
+    }
+  }
+  const action = page.locator(
+    "[data-component-audit-id='card-with-action-showcase-source'] .shlz-button",
+  );
+  await expect(action).toBeVisible();
+  await action.focus();
+  await expect(action).toBeFocused();
 });
 
 test("Wave 10 source-size and material variants retain computed geometry", async ({
@@ -76,9 +82,29 @@ test("Wave 10 fluid variants contain long content at narrow width", async ({
   const cover = page.locator(
     "[data-component-audit-id='cover-content-stress']",
   );
+  const report = page.locator(
+    "[data-component-audit-id='report-card-content-stress']",
+  );
   await expect(card).toHaveScreenshot("card-with-action-narrow.png");
+  await expect(report).toHaveScreenshot("report-card-narrow.png");
   await expect(cover).toHaveScreenshot("cover-narrow.png");
-  for (const root of [card, cover])
+  await expect(card).toHaveCSS("width", "240px");
+  await expect(report).toHaveCSS("width", "240px");
+  await expect(cover).toHaveCSS("width", "320px");
+  expect((await report.boundingBox()).height).toBeGreaterThan(230);
+  const metaBox = await report.locator(".shlz-report-card__meta").boundingBox();
+  const decorationBox = await report
+    .locator(".shlz-report-card__decoration")
+    .boundingBox();
+  const metaEndPadding = await report
+    .locator(".shlz-report-card__meta")
+    .evaluate((node) =>
+      Number.parseFloat(window.getComputedStyle(node).paddingInlineEnd),
+    );
+  expect(metaBox.x + metaBox.width - metaEndPadding).toBeLessThanOrEqual(
+    decorationBox.x,
+  );
+  for (const root of [card, report, cover])
     expect(
       await root.evaluate(
         (node) =>

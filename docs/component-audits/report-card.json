@@ -36,6 +36,7 @@
   ],
   "visualSnapshots": [
     "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-variants-chromium-linux.png",
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-narrow-chromium-linux.png",
     "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-consumer-chromium-linux.png"
   ],
   "evidence": {
@@ -43,7 +44,7 @@
     "structural-contract": "pass: four repository occurrences are classified",
     "runtime-browser": "not-applicable: the root owns no controller",
     "accessibility": "pass: article and heading structure remain semantic and optional Link stays native",
-    "focused-visual": "pass: white, muted and consumer focused snapshots cover material variants",
+    "focused-visual": "pass: white, muted, narrow-content and consumer focused snapshots cover material and stress variants",
     "consumer-integration": "pass: Data Workspace renders a real summary composition",
     "responsive-content-stress": "pass: long title, value and metadata remain contained at narrow width"
   },

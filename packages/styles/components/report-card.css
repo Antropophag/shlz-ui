@@ -2,15 +2,20 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  inline-size: 314px; /* FACT: Reports card.svg specimen width. */
+  inline-size: 100%;
   min-inline-size: 0;
-  block-size: 230px; /* FACT: Reports card.svg specimen height. */
+  min-block-size: 230px; /* DECISION: preserve the source rhythm by default. */
   padding: 24px;
   overflow: hidden;
   color: var(--shlz-semantic-color-text-primary);
   background: var(--shlz-semantic-color-surface-base);
   border-radius: 16px; /* FACT: Reports card.svg corner radius. */
   box-shadow: 0 1px 3px rgb(37 61 152 / 5%); /* FACT: source filter. */
+}
+
+.shlz-report-card--source {
+  inline-size: 314px; /* FACT: Reports card.svg specimen width. */
+  block-size: 230px; /* FACT: Reports card.svg specimen height. */
 }
 
 .shlz-report-card--muted {

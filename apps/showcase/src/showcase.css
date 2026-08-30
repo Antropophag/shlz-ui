@@ -1595,6 +1595,20 @@ article {
   margin-block-start: var(--shlz-source-spacing-24);
 }
 
+.shlz-card-composition-grid
+  > [data-component-audit-id="report-card-content-stress"] {
+  inline-size: 240px;
+}
+
+.shlz-card-composition-grid
+  > [data-component-audit-id="card-with-action-content-stress"] {
+  inline-size: 240px;
+}
+
+[data-component-audit-id="cover-content-stress"] {
+  inline-size: 320px;
+}
+
 .shlz-consumer-workspace__summary {
   padding: var(--shlz-source-spacing-24);
   background: var(--shlz-source-color-gray-gray-50);

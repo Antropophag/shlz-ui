@@ -2,13 +2,18 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  inline-size: 874px; /* FACT: Cover.svg frame width. */
+  inline-size: 100%;
   min-inline-size: 0;
-  block-size: 400px; /* FACT: Cover.svg frame height. */
+  min-block-size: min(400px, 60vw); /* DECISION: bounded default layout. */
   padding: 40px;
   overflow: hidden;
   color: var(--shlz-semantic-color-text-primary);
   background: var(--shlz-semantic-color-surface-base);
+}
+
+.shlz-cover--source {
+  inline-size: 874px; /* FACT: Cover.svg frame width. */
+  block-size: 400px; /* FACT: Cover.svg frame height. */
 }
 
 .shlz-cover--fluid {

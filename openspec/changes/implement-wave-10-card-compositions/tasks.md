@@ -19,5 +19,5 @@
 ## 4. Completion and delivery
 
 - [x] 4.1 Run aggregate regression validation and OpenSpec strict validation; verify all required commands pass
-- [ ] 4.2 Run independent Standards and Spec review from the immutable baseline and resolve all blocking findings
-- [ ] 4.3 Run route-conformance and delivery guards, publish the task branch, open an unmerged PR, and record exact CI/review/limitation evidence
+- [x] 4.2 Run independent Standards and Spec review from the immutable baseline and resolve all blocking findings
+- [x] 4.3 Run route-conformance and delivery guards, publish the task branch, open an unmerged PR, and record exact CI/review/limitation evidence

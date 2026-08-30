@@ -1994,6 +1994,65 @@
       ],
       "evidence": {
         "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",
+        "structural-contract": "pass: the durable routing family is implemented as three independent public contracts with independently classified occurrences",
+        "runtime-browser": "pass: all applicable presentational runtime roots render without root-owned behavior",
+        "accessibility": "pass: semantic structure and nested native-control ownership are verified",
+        "focused-visual": "pass: independent source and narrow snapshots cover all three contracts",
+        "consumer-integration": "pass: Report card is used by the Data Workspace consumer; the other static compositions claim no consumer lifecycle",
+        "responsive-content-stress": "pass: independent 240px card/report and 320px cover contracts retain content without overflow"
+      },
+      "canonical_name": "Card compositions",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Card with button.svg",
+        "shlz-design-source/raw/svg/Reports card.svg",
+        "shlz-design-source/raw/svg/Cover.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/card-with-action.css",
+        "packages/styles/components/report-card.css",
+        "packages/styles/components/cover.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/component-audits/card-with-action.json",
+        "docs/component-audits/report-card.json",
+        "docs/component-audits/cover.json",
+        "docs/component-audits/wave-10-report.md"
+      ],
+      "executable_fixtures": ["apps/showcase/src/card-compositions.js"],
+      "live_consumers": [],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "routing aggregate only; public contracts remain Card with action, Report card, and Cover"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "the aggregate family is not a generic Card API and has no shared runtime root",
+        "outlined text does not establish literal runtime copy or structured typography"
+      ],
+      "measured_counts": {
+        "executableShowcase": 7,
+        "liveConsumers": 0,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",
         "structural-contract": "pass: both executable occurrences are classified and the presentational root delegates action semantics to nested native controls",
         "runtime-browser": "not-applicable: the presentational root owns no controller; nested Button or Link owns behavior",
         "accessibility": "pass: semantic article and heading structure retain native nested-action focus ownership",

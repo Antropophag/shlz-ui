@@ -23,7 +23,7 @@ The presentational roots own no keyboard or event controller. Interactive semant
 
 ## Evidence
 
-Focused Chromium coverage checks the repository occurrence census, non-interactive roots, source-size geometry, white/muted report materials, component-local screenshots, narrow long-content containment, and the Data Workspace consumer. Six component-local Chromium snapshots are tracked beside the focused specification and were inspected at source and narrow widths.
+Focused Chromium coverage checks the repository occurrence census, non-interactive roots, source-size geometry, white/muted report materials, component-local screenshots, narrow long-content containment, and the Data Workspace consumer. Seven component-local Chromium snapshots are tracked beside the focused specification and were inspected at source and narrow widths.
 
 Local validation passed with these exact results:
 

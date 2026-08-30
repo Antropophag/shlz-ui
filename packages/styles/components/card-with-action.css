@@ -2,14 +2,19 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  inline-size: 314px; /* FACT: Card with button.svg frame width. */
+  inline-size: 100%;
   min-inline-size: 0;
-  block-size: 230px; /* FACT: Card with button.svg frame height. */
+  min-block-size: 230px; /* DECISION: preserve the source rhythm by default. */
   padding: 24px;
   overflow: hidden;
   color: var(--shlz-semantic-color-text-primary);
   background: #dfe2f0; /* FACT: Card with button.svg surface fill. */
   border-radius: 16px; /* FACT: Card with button.svg corner radius. */
+}
+
+.shlz-card-with-action--source {
+  inline-size: 314px; /* FACT: Card with button.svg frame width. */
+  block-size: 230px; /* FACT: Card with button.svg frame height. */
 }
 
 .shlz-card-with-action--fluid {
@@ -57,9 +62,7 @@
   margin-block-start: auto;
 }
 
-.shlz-card-with-action:not(.shlz-card-with-action--fluid)
-  .shlz-card-with-action__actions
-  .shlz-button {
+.shlz-card-with-action--source .shlz-card-with-action__actions .shlz-button {
   inline-size: 137px; /* FACT: Card with button.svg action width. */
 }
 

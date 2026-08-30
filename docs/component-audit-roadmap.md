@@ -18,12 +18,12 @@ The map was derived on `origin/main` commit `50bee6f6603e0e4d7b3f511fe610dc1522c
 
 At the Wave 9 delivery baseline, 35 families were `VERIFIED` and the four rows below were the complete `INVENTORIED` remainder. Completed rows remain in this durable scope map; each still-unverified family appears exactly once.
 
-| Wave | Inventory family                           | Starting disposition | Original source authority                                                            |
-| ---- | ------------------------------------------ | -------------------- | ------------------------------------------------------------------------------------ |
-| 9    | Sidebar / Application Shell                | application-local    | `Sidebar.svg`; `Header.svg`                                                          |
-| 10   | Card with action                           | composition-only     | `Card with button.svg`; implemented with independent Report card and Cover contracts |
-| 11   | Upload / Document compositions             | composition-only     | `Documents.svg`                                                                      |
-| 12   | Messaging / History / Planner compositions | source-only          | `Messages.svg`; `History of changes.svg`; `Planner.svg`                              |
+| Wave | Inventory family                           | Starting disposition | Original source authority                               |
+| ---- | ------------------------------------------ | -------------------- | ------------------------------------------------------- |
+| 9    | Sidebar / Application Shell                | application-local    | `Sidebar.svg`; `Header.svg`                             |
+| 10   | Card compositions                          | source-only          | `Card with button.svg`; `Reports card.svg`; `Cover.svg` |
+| 11   | Upload / Document compositions             | composition-only     | `Documents.svg`                                         |
+| 12   | Messaging / History / Planner compositions | source-only          | `Messages.svg`; `History of changes.svg`; `Planner.svg` |
 
 Every source filename above is relative to `shlz-design-source/raw/svg/`. Those original SVGs remain read-only and override derived material.
 
@@ -48,7 +48,7 @@ Completion boundary: the family receives its own manifest, occurrence classifica
 
 ## Wave 10 — Card compositions
 
-Included inventory families: `Card with action`, `Report card`, and `Cover`.
+Included inventory family: `Card compositions`.
 
 Audit `Card with button.svg`, `Reports card.svg`, and `Cover.svg` as source-defined card/cover compositions. Record content, image, action, report-card, and cover variants; reconcile source geometry and typography; and prove the repository-wide absence or classification of production, consumer, diagnostic, native, and local alternatives.
 
