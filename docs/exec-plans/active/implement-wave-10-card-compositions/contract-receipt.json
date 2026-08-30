@@ -1,7 +1,7 @@
 {
   "kind": "contract",
   "payload": {
-    "contractDigest": "0908e104e929467a8c8e27877759959b547b8a39ed75005ab726119cf8f5bd8f",
+    "contractDigest": "fe2611edf39aacd32942e95b04cfbe2889d6cdaec99640aadf543a1dd470abc1",
     "failureInvariants": [],
     "scenarios": [
       {
@@ -46,14 +46,6 @@
       },
       {
         "capability": "application-compositions/report-card",
-        "content": "- **WHEN** the fluid modifier is rendered at 240 pixels or with long content\n- **THEN** text wraps, the card grows vertically, and content does not overlap the trailing decoration",
-        "id": "application-compositions/report-card::Report card has no implied activation::Fluid report content is stressed",
-        "name": "Fluid report content is stressed",
-        "requirement": "Report card has no implied activation",
-        "requirementContent": "The root SHALL remain non-interactive. An optional nested Link MAY be supplied by the consumer and SHALL be the only navigation target."
-      },
-      {
-        "capability": "application-compositions/report-card",
         "content": "- **WHEN** the card contains only report data\n- **THEN** it remains a readable article and does not expose pointer or keyboard activation",
         "id": "application-compositions/report-card::Report card has no implied activation::No link is supplied",
         "name": "No link is supplied",
@@ -75,9 +67,17 @@
         "name": "Muted source variant is selected",
         "requirement": "Report card presents a structured report summary",
         "requirementContent": "The styles package SHALL expose a `.shlz-report-card` composition with eyebrow, title, value, metadata, and trailing-decoration regions. Its source specimen SHALL be 314 by 230 pixels with a 16-pixel radius and SHALL support the white and `#EEF0F4` muted source surfaces."
+      },
+      {
+        "capability": "application-compositions/report-card",
+        "content": "- **WHEN** the fluid modifier is rendered at 240 pixels or with long content\n- **THEN** text wraps, the card grows vertically, and content does not overlap the trailing decoration",
+        "id": "application-compositions/report-card::Report card supports bounded content stress::Fluid report content is stressed",
+        "name": "Fluid report content is stressed",
+        "requirement": "Report card supports bounded content stress",
+        "requirementContent": "The fluid report card SHALL fit its container down to 240 pixels, wrap structured text, grow vertically when content needs more height, and reserve the trailing-decoration gutter across lower text regions."
       }
     ]
   },
   "version": 1,
-  "digest": "7bf2b44cdd8b2c73003874b867e1eaaa5f47f2da481997b74b36903792441f8e"
+  "digest": "af09357573647f08830964e3be0cda666d1dff502e172041c090821899e0f1f0"
 }
