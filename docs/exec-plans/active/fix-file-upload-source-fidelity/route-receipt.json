@@ -1,0 +1,51 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Restore File Upload fidelity to the authoritative Documents.svg by making the full 467 by 102 drop surface the visible native-input trigger, removing the invented pill action and compressed four-column showcase layout, preserving controller behavior, completing the component gate, and delivering an unmerged PR.",
+    "material": ["publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "fix-file-upload-source-fidelity",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "source-composition",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "native-trigger-seam",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "responsive-policy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "behavior-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "e3737348f47349492348d023c83e565912adba8be88e0c3671313b166dbf2b7f"
+}

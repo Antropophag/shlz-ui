@@ -1,0 +1,5 @@
+<div class="shlz-file-upload__surface">
+  <span class="shlz-file-upload__trigger">Choose files</span>
+</div>
+
+.shlz-file-upload__instructions { font-size: 14px; }

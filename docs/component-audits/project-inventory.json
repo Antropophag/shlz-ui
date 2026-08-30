@@ -2110,7 +2110,7 @@
         "structural-contract": "pass: the historical absence census remains bounded and the independent native File Upload contract is inventoried",
         "runtime-browser": "pass: File Upload selection, file-only drop, disabled, idempotence and teardown execute",
         "accessibility": "pass: native input/label semantics, focus visibility, error relationship and focused Axe assertions execute",
-        "focused-visual": "pass: empty, populated, drag-active, disabled, error, narrow and enlarged-text states have focused evidence",
+        "focused-visual": "pass: source-default 467 by 102 composition, populated, drag-active, disabled, error, narrow and enlarged-text states have focused computed and snapshot evidence",
         "consumer-integration": "pass: Data Workspace owns validation and queue rendering while composing File Row",
         "responsive-content-stress": "pass: long content, narrow layout and enlarged text remain reachable"
       },

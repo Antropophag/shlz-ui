@@ -1,0 +1,45 @@
+{
+  "baselineReceiptDigest": "e878904bbbb1f61db09ebece14b357fbb1e19aa38284be1e2329670eaf27fb5c",
+  "kind": "conformance",
+  "payload": {
+    "actual": [
+      "apps/showcase/src/file-upload-showcase.js",
+      "apps/showcase/src/showcase.css",
+      "docs/component-audits/file-upload.json",
+      "docs/component-audits/project-inventory.json",
+      "docs/component-audits/upload-document-compositions.json",
+      "docs/component-audits/wave-11-report.md",
+      "docs/components/file-upload.md",
+      "openspec/changes/fix-file-upload-source-fidelity/design.md",
+      "openspec/changes/fix-file-upload-source-fidelity/tasks.md",
+      "packages/styles/components/file-upload.css",
+      "tools/fixtures/file-upload.html",
+      "tools/playwright/file-upload.spec.js",
+      "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png",
+      "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png",
+      "tools/tests/file-upload-contract.test.mjs",
+      "tools/tests/fixtures/file-upload-fidelity-known-bad.txt",
+      "tools/tests/fixtures/file-upload-fidelity-oracle.mjs",
+      "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+      "tools/tests/wave6-repository-census.test.mjs"
+    ],
+    "candidateHead": "074df2f427998d44acbaa19ef9c5897366ea96d5",
+    "closedSets": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "outcome": "pass"
+  },
+  "routeReceiptDigest": "e3737348f47349492348d023c83e565912adba8be88e0c3671313b166dbf2b7f",
+  "version": 1,
+  "digest": "6150f5d6d01484af0bb4c62333ed86ff3238c4e88bcbba4687bd499eeb2d9a8e"
+}

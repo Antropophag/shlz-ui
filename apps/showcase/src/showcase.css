@@ -1243,6 +1243,23 @@ article {
   gap: var(--shlz-source-spacing-16);
 }
 
+.shlz-file-upload-showcase {
+  display: grid;
+  gap: var(--shlz-source-spacing-24);
+  justify-items: start;
+  inline-size: min(100%, 467px);
+}
+
+.shlz-file-upload-showcase__specimen {
+  display: grid;
+  gap: var(--shlz-source-spacing-8);
+  inline-size: min(100%, 467px);
+}
+
+.shlz-file-upload-showcase__specimen > h4 {
+  margin: 0;
+}
+
 .shlz-demo-fieldset {
   display: flex;
   gap: 12px;

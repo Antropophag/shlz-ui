@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/file-upload-source-fidelity",
+    "commit": "b7f34e9a4398310a99d92f3126753a70316065bb",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/file-upload-source-fidelity",
+      "headRefOid": "b7f34e9a4398310a99d92f3126753a70316065bb",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/55"
+    },
+    "repository": {
+      "digest": "f22f80ed64fc0ba6f633e04a45d64eeac842a05df72d2d81c5a0ab69e87d4187",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-file-upload-fidelity"
+    },
+    "upstream": "origin/fix/file-upload-source-fidelity"
+  },
+  "requirementsDigest": "ab7586d8ccdf1319e5fa398680dc64e49380a56cfbc648d773ee847edc43547a",
+  "routeDigest": "e3737348f47349492348d023c83e565912adba8be88e0c3671313b166dbf2b7f",
+  "version": 1,
+  "digest": "e878904bbbb1f61db09ebece14b357fbb1e19aa38284be1e2329670eaf27fb5c"
+}

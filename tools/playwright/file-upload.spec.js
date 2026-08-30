@@ -141,7 +141,7 @@ test("native selection, file drops, filtering, disabled and consumer rendering w
     .locator(".shlz-file-upload__surface")
     .evaluate((node) => getComputedStyle(node).backgroundColor);
   expect(disabledBackground).not.toBe(idlePaint.background);
-  await expect(disabled.locator(".shlz-file-upload__trigger")).toHaveAttribute(
+  await expect(disabled.locator(".shlz-file-upload__surface")).toHaveAttribute(
     "aria-disabled",
     "true",
   );
@@ -203,7 +203,7 @@ test("focus, repeat enhancement and teardown are observable", async ({
   const root = page.locator(
     "[data-component-audit-id='file-upload-showcase-empty']",
   );
-  const trigger = root.locator(".shlz-file-upload__trigger");
+  const trigger = root.locator(".shlz-file-upload__surface");
   await root.locator("input[type=file]").focus();
   await expect(trigger).toHaveCSS("outline-style", "solid");
   const result = await page.evaluate(() => {
@@ -235,7 +235,9 @@ test("plain HTML and visual stress states remain coherent", async ({
   const root = page.locator(
     "[data-component-audit-id='file-upload-plain-html']",
   );
-  await expect(root.getByText("Choose files")).toBeVisible();
+  await expect(
+    root.getByText("Нажмите или перетащите файл в эту область"),
+  ).toBeVisible();
   await page.setViewportSize({ width: 320, height: 800 });
   await expect(root).toHaveScreenshot("file-upload-narrow.png");
   await page.goto("/#file-upload-demo");
@@ -247,7 +249,7 @@ test("plain HTML and visual stress states remain coherent", async ({
     element.style.inlineSize = "300px";
   });
   const input = populated.locator("input[type=file]");
-  const trigger = populated.locator(".shlz-file-upload__trigger");
+  const trigger = populated.locator(".shlz-file-upload__surface");
   await input.focus();
   await expect(trigger).toHaveCSS("outline-style", "solid");
   const triggerOutline = await trigger.evaluate(
@@ -257,11 +259,14 @@ test("plain HTML and visual stress states remain coherent", async ({
   await action.focus();
   await expect(action).toBeFocused();
   const geometry = await populated.evaluate((element) => {
-    const trigger = element.querySelector(".shlz-file-upload__trigger");
+    const trigger = element.querySelector(".shlz-file-upload__surface");
     const surface = element.querySelector(".shlz-file-upload__surface");
     const action = element.querySelector(".shlz-file-row__action");
     const bounds = element.getBoundingClientRect();
     const actionBounds = action.getBoundingClientRect();
+    const instruction = element.querySelector(
+      ".shlz-file-upload__instructions",
+    );
     return {
       rootOverflow: element.scrollWidth - element.clientWidth,
       surfaceOverflow: surface.scrollWidth - surface.clientWidth,
@@ -269,12 +274,16 @@ test("plain HTML and visual stress states remain coherent", async ({
       actionVisible:
         actionBounds.left >= bounds.left && actionBounds.right <= bounds.right,
       actionOutline: getComputedStyle(action).outlineStyle,
+      instructionFontSize: Number.parseFloat(
+        getComputedStyle(instruction).fontSize,
+      ),
     };
   });
   expect(geometry.rootOverflow).toBeLessThanOrEqual(1);
   expect(geometry.surfaceOverflow).toBeLessThanOrEqual(1);
   expect(geometry.triggerVisible).toBe(true);
   expect(geometry.actionVisible).toBe(true);
+  expect(geometry.instructionFontSize).toBe(28);
   expect(triggerOutline).not.toBe("0px");
   expect(geometry.actionOutline).not.toBe("none");
 });
@@ -282,7 +291,7 @@ test("plain HTML and visual stress states remain coherent", async ({
 test("source and repository visual states have independent evidence", async ({
   page,
 }) => {
-  const demo = page.locator("#file-upload-demo .shlz-component-grid");
+  const demo = page.locator("#file-upload-demo .shlz-file-upload-showcase");
   const empty = page.locator(
     "[data-component-audit-id='file-upload-showcase-empty'] .shlz-file-upload__surface",
   );
@@ -292,6 +301,46 @@ test("source and repository visual states have independent evidence", async ({
   const error = page.locator(
     "[data-component-audit-id='file-upload-showcase-error']",
   );
+  const sourceRoot = page.locator(
+    "[data-component-audit-id='file-upload-showcase-empty']",
+  );
+  const sourceSurface = sourceRoot.locator(".shlz-file-upload__surface");
+  await expect(sourceSurface).toHaveJSProperty("tagName", "LABEL");
+  await expect(sourceRoot.locator(".shlz-file-upload__trigger")).toHaveCount(0);
+  await expect(sourceSurface.locator(".shlz-file-upload__icon")).toBeVisible();
+  const sourceGeometry = await sourceSurface.evaluate((surface) => {
+    const icon = surface.querySelector(".shlz-file-upload__icon");
+    const instruction = surface.querySelector(
+      ".shlz-file-upload__instructions",
+    );
+    const surfaceBounds = surface.getBoundingClientRect();
+    const iconBounds = icon.getBoundingClientRect();
+    const instructionStyle = getComputedStyle(instruction);
+    return {
+      width: surfaceBounds.width,
+      height: surfaceBounds.height,
+      iconWidth: iconBounds.width,
+      iconHeight: iconBounds.height,
+      instructionLines: Math.round(
+        instruction.getBoundingClientRect().height /
+          Number.parseFloat(instructionStyle.lineHeight),
+      ),
+      alignment: getComputedStyle(surface).textAlign,
+    };
+  });
+  expect(sourceGeometry).toEqual({
+    width: 467,
+    height: 102,
+    iconWidth: 24,
+    iconHeight: 24,
+    instructionLines: 1,
+    alignment: "center",
+  });
+  const populatedFileWidth = await populated
+    .locator(".shlz-file-row")
+    .evaluate((row) => row.getBoundingClientRect().width);
+  expect(populatedFileWidth).toBeGreaterThanOrEqual(220);
+  expect(populatedFileWidth).toBeLessThanOrEqual(230);
   await expect(empty).toHaveCSS("min-height", "102px");
   await expect(empty).toHaveCSS("border-style", "dashed");
   await expect(populated.locator(".shlz-file-row")).toBeVisible();
@@ -303,5 +352,6 @@ test("source and repository visual states have independent evidence", async ({
   ]);
   expect(errorBorder).not.toBe(emptyBorder);
   await expect(error.locator(".shlz-file-upload__error")).toBeVisible();
+  await page.setViewportSize({ width: 1440, height: 1000 });
   await expect(demo).toHaveScreenshot("file-upload-states.png");
 });

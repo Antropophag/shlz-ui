@@ -23,10 +23,11 @@ test("File Upload publishes native markup, style and behavior contracts", async 
   assert.match(packageJson, /\.\/file-upload/);
   assert.match(docs, /consumer-owned/i);
   assert.match(fixture, /type="file"/);
-  assert.match(
-    fixture,
-    /aria-describedby="fixture-upload-instructions fixture-upload-error"/,
-  );
+  assert.match(fixture, /<label class="shlz-file-upload__surface"/);
+  assert.match(fixture, /shlz-file-upload__icon/);
+  assert.match(fixture, /Нажмите или перетащите файл в эту область/);
+  assert.doesNotMatch(fixture, /shlz-file-upload__trigger/);
+  assert.match(fixture, /aria-describedby="fixture-upload-error"/);
 });
 
 test("the raw Documents authority is locked and never generated", async () => {
