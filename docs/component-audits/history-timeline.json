@@ -80,7 +80,16 @@
     "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "history-timeline-completion-evidence",
+      "severity": "P1",
+      "status": "open",
+      "description": "Data Workspace integration, exact occurrence guard, focus, and independently exercised empty/loading states remain incomplete.",
+      "evidence": "independent Standards and Spec review after d672865",
+      "tracking": "PR #57"
+    }
+  ],
   "knownLimitations": [
     "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
   ]

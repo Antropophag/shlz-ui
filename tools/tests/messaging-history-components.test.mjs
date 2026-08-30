@@ -46,6 +46,7 @@ test("component manifests classify all three intended occurrences", async () => 
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),
     );
-    assert.equal(manifest.findings.length, 0);
+    assert.equal(manifest.findings.length, 1);
+    assert.match(manifest.findings[0].id, /completion-evidence/);
   }
 });

@@ -72,7 +72,16 @@
     "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "message-thread-completion-evidence",
+      "severity": "P1",
+      "status": "open",
+      "description": "Data Workspace integration, exact occurrence guard, focus, and independently exercised empty/loading states remain incomplete.",
+      "evidence": "independent Standards and Spec review after d672865",
+      "tracking": "PR #57"
+    }
+  ],
   "knownLimitations": [
     "no composer, delivery/read state, synchronization, persistence, sanitization, pagination, moderation or attachment lifecycle"
   ]
