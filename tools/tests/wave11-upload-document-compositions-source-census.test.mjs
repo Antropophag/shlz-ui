@@ -58,6 +58,8 @@ const approvedFileUploadArtifactPaths = new Set([
   "tools/fixtures/file-upload.html",
   "tools/playwright/file-upload.spec.js",
   "tools/tests/file-upload-contract.test.mjs",
+  "tools/tests/fixtures/file-upload-fidelity-known-bad.txt",
+  "tools/tests/fixtures/file-upload-fidelity-oracle.mjs",
 ]);
 const isApprovedFileUploadSurface = ({ path }) =>
   approvedFileUploadArtifactPaths.has(path);
