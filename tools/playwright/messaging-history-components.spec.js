@@ -1,9 +1,9 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import assert from "node:assert/strict";
 import { fixtureUrl } from "./fixture-url.js";
 import {
   expectClassifiedComponentOccurrences,
-  inspectComponentOccurrences,
   readComponentAuditManifest,
 } from "./component-audit.js";
 
@@ -95,24 +95,23 @@ test("exact guard classifies Showcase fixtures and Data Workspace consumers", as
     ).toHaveCount(1);
 });
 
-test("occurrence inventory remains mutation-sensitive to missing, duplicate, and unclassified roots", async ({
+test("shared guard rejects missing, duplicate, and unclassified roots on both surfaces", async ({
   page,
 }) => {
-  const manifest = surfaceManifest("message-thread", "showcase");
+  const messageManifest = surfaceManifest("message-thread", "showcase");
   await page
     .locator("[data-component-audit-id='message-thread-showcase-source']")
     .evaluate((root) => root.remove());
-  expect(
-    (await inspectComponentOccurrences(page, manifest)).occurrences,
-  ).toEqual(["message-thread-data-workspace-consumer"]);
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, messageManifest),
+  );
 
   await page.reload();
   await page
     .locator("[data-component-audit-id='message-thread-showcase-source']")
     .evaluate((root) => root.after(root.cloneNode(true)));
-  const duplicated = await inspectComponentOccurrences(page, manifest);
-  expect(new Set(duplicated.occurrences).size).toBeLessThan(
-    duplicated.occurrences.length,
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, messageManifest),
   );
 
   await page.reload();
@@ -124,9 +123,38 @@ test("occurrence inventory remains mutation-sensitive to missing, duplicate, and
         '<ol class="shlz-message-thread"><li>Unclassified</li></ol>',
       ),
     );
-  expect(
-    (await inspectComponentOccurrences(page, manifest)).unclassifiedLegacy,
-  ).toHaveLength(1);
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, messageManifest),
+  );
+
+  await page.goto(fixtureUrl("messaging-history-components.html"));
+  const historyManifest = surfaceManifest("history-timeline", "fixture");
+  const history = page.locator(
+    "[data-component-audit-id='history-timeline-plain-html']",
+  );
+  await history.evaluate((root) => root.remove());
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, historyManifest),
+  );
+
+  await page.reload();
+  await history.evaluate((root) => root.after(root.cloneNode(true)));
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, historyManifest),
+  );
+
+  await page.reload();
+  await page
+    .locator("main")
+    .evaluate((root) =>
+      root.insertAdjacentHTML(
+        "beforeend",
+        '<ol class="shlz-history-timeline"><li>Unclassified</li></ol>',
+      ),
+    );
+  await assert.rejects(() =>
+    expectClassifiedComponentOccurrences(page, historyManifest),
+  );
 });
 
 test("native links and buttons receive keyboard focus with a visible indicator", async ({
@@ -220,7 +248,12 @@ test("200% text, unbroken messages, and sparse history remain reachable", async 
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 800 });
-  await page.addStyleTag({ content: ".shlz-docs-sidebar{display:none}" });
+  await page
+    .locator("aside")
+    .first()
+    .evaluate((node) => {
+      node.hidden = true;
+    });
   await expect(
     page.locator("#message-thread-demo .shlz-message-thread"),
   ).toHaveScreenshot("message-thread-narrow.png");
