@@ -1,7 +1,15 @@
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
+const repoRoot = process.cwd();
+const knownBadTarget = path.join(
+  repoRoot,
+  "tools/tests/fixtures/file-upload-fidelity-known-bad.txt",
+);
 const target = path.resolve(process.argv[2]);
+if (target !== repoRoot && target !== knownBadTarget) {
+  throw new Error("target must be the candidate root or the known-bad fixture");
+}
 const targetStat = await stat(target);
 const content = targetStat.isDirectory()
   ? await Promise.all(
