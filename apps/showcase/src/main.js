@@ -32,6 +32,10 @@ import {
   enhancePlannerScheduleShowcase,
   plannerScheduleShowcaseMarkup,
 } from "./planner-schedule-showcase.js";
+import {
+  enhanceFileUploadShowcase,
+  fileUploadShowcaseMarkup,
+} from "./file-upload-showcase.js";
 import tokens from "@shlz/tokens/tokens.json";
 import provenance from "@shlz/tokens/provenance.json";
 import manifest from "@shlz/icons/manifest.json";
@@ -47,6 +51,7 @@ import {
   enhanceSelects,
   enhanceTabs,
   enhanceTooltips,
+  enhanceFileUploads,
 } from "@shlz/behaviors";
 
 const iconUrls = import.meta.glob(
@@ -174,6 +179,7 @@ const navigationGroups = [
       ["date-picker-demo", "Date Picker"],
       ["calendar-grid-demo", "Calendar Grid"],
       ["planner-schedule-demo", "Planner Schedule"],
+      ["file-upload-demo", "File Upload"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -308,6 +314,7 @@ ${datePickerShowcaseMarkup}
 ${datePickerConsumerMarkup}
 ${calendarGridShowcaseMarkup}
 ${plannerScheduleShowcaseMarkup}`;
+app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -540,6 +547,8 @@ window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
 enhancePlannerScheduleShowcase();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
+window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
+window.__shlzEnhanceFileUploads = enhanceFileUploads;
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 

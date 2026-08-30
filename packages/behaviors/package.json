@@ -38,6 +38,10 @@
       "types": "./dist/drawer.d.ts",
       "import": "./dist/drawer.js"
     },
+    "./file-upload": {
+      "types": "./dist/file-upload.d.ts",
+      "import": "./dist/file-upload.js"
+    },
     "./calendar": {
       "types": "./dist/calendar.d.ts",
       "import": "./dist/calendar.js"

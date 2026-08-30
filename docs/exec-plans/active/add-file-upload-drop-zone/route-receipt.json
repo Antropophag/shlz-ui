@@ -1,0 +1,51 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement a framework-neutral reusable File Upload / Drop Zone derived from Documents.svg, composing existing File Row and Document Row primitives while keeping transport and persistence consumer-owned, and deliver an unmerged PR.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-file-upload-drop-zone",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "component-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "upload-lifecycle-boundary",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "module-seam",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "483b5899eca8e390ea408050e1a9efb03ef1d07d668a522cd71648b9241463f8"
+}

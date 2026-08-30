@@ -50,6 +50,17 @@ const genericTerminology =
 const hasHigherLevelSignature = ({ path, source }) =>
   higherLevelPath.test(path) ||
   higherLevelSignatures.some((signature) => signature.test(source));
+const approvedFileUploadArtifactPaths = new Set([
+  "apps/showcase/src/file-upload-showcase.js",
+  "docs/components/file-upload.md",
+  "packages/behaviors/src/file-upload.ts",
+  "packages/styles/components/file-upload.css",
+  "tools/fixtures/file-upload.html",
+  "tools/playwright/file-upload.spec.js",
+  "tools/tests/file-upload-contract.test.mjs",
+]);
+const isApprovedFileUploadSurface = ({ path }) =>
+  approvedFileUploadArtifactPaths.has(path);
 
 async function filesBelow(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -205,6 +216,14 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
         source: await readFile(path, "utf8"),
       })),
   );
+  // Wave 11 remains a historical absence census. The independently audited,
+  // later File Upload product contract is classified by file-upload.json.
+  const historicalSources = sources.filter(
+    ({ path }) =>
+      !approvedFileUploadArtifactPaths.has(path) &&
+      path !== "packages/behaviors/src/index.ts" &&
+      path !== "tools/package-consumer-smoke.mjs",
+  );
 
   const auditEvidencePaths = new Set(
     manifest.terminologyCensus.auditEvidencePaths,
@@ -212,7 +231,11 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
   assert.deepEqual(
     [
       ...matchingPaths(
-        sources.filter(({ path }) => !auditEvidencePaths.has(path)),
+        historicalSources.filter(
+          (entry) =>
+            !auditEvidencePaths.has(entry.path) &&
+            !isApprovedFileUploadSurface(entry),
+        ),
         hasHigherLevelSignature,
       ),
     ],
@@ -220,14 +243,14 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
   );
   assert.deepEqual(
     [
-      ...matchingPaths(sources, ({ source }) =>
+      ...matchingPaths(historicalSources, ({ source }) =>
         primitiveSignature.test(source),
       ),
     ].sort(),
     manifest.primitiveDependencies.map(({ path }) => path).sort(),
   );
 
-  const terminologyPaths = matchingPaths(sources, ({ source }) =>
+  const terminologyPaths = matchingPaths(historicalSources, ({ source }) =>
     genericTerminology.test(source),
   );
   const primitivePaths = new Set(

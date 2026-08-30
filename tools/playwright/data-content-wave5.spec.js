@@ -130,8 +130,8 @@ test("File Row keeps an inert root, real hover and bounded native targets", asyn
   page,
 }) => {
   const roots = page.locator("[data-component-audit-id^='file-row-']");
-  await expect(roots).toHaveCount(6);
-  for (let index = 0; index < 6; index++) {
+  await expect(roots).toHaveCount(8);
+  for (let index = 0; index < 8; index++) {
     const root = roots.nth(index);
     await expect(root).not.toHaveAttribute("role", /.+/);
     await expect(root).not.toHaveAttribute("tabindex", /.+/);

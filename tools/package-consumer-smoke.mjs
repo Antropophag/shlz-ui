@@ -91,6 +91,7 @@ const moduleExports = ${JSON.stringify([
       "@shlz/behaviors/tabs",
       "@shlz/behaviors/modal",
       "@shlz/behaviors/drawer",
+      "@shlz/behaviors/file-upload",
       "@shlz/behaviors/browser",
     ])};
 for (const specifier of moduleExports) await import(specifier);

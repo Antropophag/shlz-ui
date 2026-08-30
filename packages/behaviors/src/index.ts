@@ -5,6 +5,8 @@ export { TooltipController, enhanceTooltips } from "./tooltip.js";
 export { TabsController, enhanceTabs } from "./tabs.js";
 export { ModalController, enhanceModals } from "./modal.js";
 export { DrawerController, enhanceDrawers } from "./drawer.js";
+export { FileUploadController, enhanceFileUploads } from "./file-upload.js";
+export type { FileUploadFilesDetail, FileUploadSource } from "./file-upload.js";
 export { CalendarController } from "./calendar.js";
 export {
   CalendarGridController,

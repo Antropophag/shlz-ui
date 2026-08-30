@@ -2099,6 +2099,77 @@
     },
     {
       "tests": [
+        "tools/tests/file-upload-contract.test.mjs",
+        "tools/playwright/file-upload.spec.js",
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js",
+        "tools/tests/content-states.test.mjs"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact hashes are locked for Documents.svg and the inspected Detailed appeals.svg reference; all six family variants are traced to Documents.svg",
+        "structural-contract": "pass: the historical absence census remains bounded and the independent native File Upload contract is inventoried",
+        "runtime-browser": "pass: File Upload selection, file-only drop, disabled, idempotence and teardown execute",
+        "accessibility": "pass: native input/label semantics, focus visibility, error relationship and focused Axe assertions execute",
+        "focused-visual": "pass: empty, populated, drag-active, disabled, error, narrow and enlarged-text states have focused evidence",
+        "consumer-integration": "pass: Data Workspace owns validation and queue rendering while composing File Row",
+        "responsive-content-stress": "pass: long content, narrow layout and enlarged text remain reachable"
+      },
+      "canonical_name": "File Upload",
+      "category": "forms",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Documents.svg"],
+      "production_implementation": [
+        "packages/styles/components/file-upload.css"
+      ],
+      "behavior": ["packages/behaviors/src/file-upload.ts"],
+      "docs": [
+        "docs/component-audits/upload-document-compositions.json",
+        "docs/component-audits/file-upload.json",
+        "docs/components/file-upload.md",
+        "docs/component-audits/wave-11-report.md"
+      ],
+      "executable_fixtures": [
+        "file-upload-showcase-empty",
+        "file-upload-showcase-populated",
+        "file-upload-showcase-disabled",
+        "file-upload-showcase-error",
+        "file-upload-plain-html"
+      ],
+      "live_consumers": ["file-upload-data-workspace"],
+      "data_workspace_consumers": ["file-upload-data-workspace"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [
+        "packages/styles/components/file-row.css",
+        "packages/styles/components/document-row.css"
+      ],
+      "scope": [
+        "Document",
+        "Upload-Drag",
+        "Description Files",
+        "Small document",
+        "Attached Document",
+        "Drag and Drop Document"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "the reusable contract selects and reports local files but is not a network uploader",
+        "File Row and Document Row remain independent Wave 5 dependencies and do not certify this higher-level family",
+        "validation, progress, retry, preview, removal, transport and persistence remain consumer-owned",
+        "Detailed appeals.svg was inspected and classified outside this family; its application-specific geometry is not promoted into a generic library contract"
+      ],
+      "measured_counts": {
+        "executableShowcase": 4,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 2
+      }
+    },
+    {
+      "tests": [
         "tools/tests/wave12-messaging-history-planner-source-census.test.mjs",
         "tools/playwright/messaging-history-planner-wave12.spec.js"
       ],
@@ -2273,7 +2344,7 @@
   ],
   "unclassifiedSurfaces": [
     "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
-    "Source-only messaging, history, planner and upload families have not been promoted to reusable APIs.",
+    "Source-only messaging, history and planner families have not been promoted to reusable APIs; the higher-level Upload / Document composition audit remains separate from the reusable File Upload seam.",
     "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
     "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."
   ],

@@ -1,0 +1,19 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/file-upload-drop-zone",
+    "commit": "aa519fae9fc31614d148aa558e2cd33bba555d29",
+    "defaultBranch": "main",
+    "pullRequest": null,
+    "repository": {
+      "digest": "9ac31e6660ed1b3d04e141b95d644288342c4bd5588893ab4a5f6cb2402a0275",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-file-upload-drop-zone"
+    },
+    "upstream": "origin/feature/file-upload-drop-zone"
+  },
+  "requirementsDigest": "93abe4e131349b38f5e16fb6e285322881d1caefe8b2e091a5cdafe5fc785d05",
+  "routeDigest": "483b5899eca8e390ea408050e1a9efb03ef1d07d668a522cd71648b9241463f8",
+  "version": 1,
+  "digest": "c65255dc8c1aefdf62f3d80393bc3ed4d71613aa2c3b2592a16c9b156c01eb65"
+}
