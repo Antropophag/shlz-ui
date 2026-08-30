@@ -55,7 +55,23 @@
 }
 
 .shlz-file-upload__trigger {
+  display: inline-flex;
   flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--shlz-semantic-control-height-medium);
+  padding-inline: var(--shlz-source-spacing-16);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-source-color-blue-blue-50);
+  border-radius: var(--shlz-source-radius-max);
+  font-size: 15px;
+  line-height: 19.5px;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.shlz-file-upload__trigger:hover {
+  color: var(--shlz-semantic-color-action-primary);
 }
 
 .shlz-file-upload__input:focus-visible
@@ -101,11 +117,16 @@
 
 .shlz-file-upload__files {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   min-inline-size: 0;
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.shlz-file-upload__file-name {
+  overflow-wrap: anywhere;
 }
 
 .shlz-file-upload .shlz-file-row__meta {

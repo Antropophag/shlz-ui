@@ -62,8 +62,8 @@
     "runtime-browser": "pass: native selection, real FileList drop, non-file filtering, disabled state, typed payload, repeated enhancement and teardown execute",
     "accessibility": "pass: native input and label preserve keyboard activation and accessible naming; focused Axe scope has no violation",
     "focused-visual": "pass: source-backed empty/populated geometry plus real drag-active, disabled, error and narrow computed states are focused",
-    "consumer-integration": "pass: Data Workspace owns queue rendering and composes File Row",
-    "responsive-content-stress": "pass: narrow, long filename/instructions and 200-percent text remain unclipped"
+    "consumer-integration": "pass: browser selection executes the Data Workspace branch, updates application-owned status, and rerenders its classified File Row",
+    "responsive-content-stress": "pass: narrow, long filename/instructions and 200-percent text keep the trigger, File Row action, and focus indicators visible"
   },
   "interactionEvidence": {
     "types": {

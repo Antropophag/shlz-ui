@@ -23,7 +23,11 @@
       "kind": "content-stress-fixture"
     },
     { "id": "file-row-typography-stress", "kind": "content-stress-fixture" },
-    { "id": "file-row-file-upload-populated", "kind": "live-consumer" }
+    {
+      "id": "file-row-file-upload-populated",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "file-row-file-upload-consumer", "kind": "live-consumer" }
   ],
   "supportedSizes": [
     "55px-body",
@@ -64,11 +68,11 @@
   "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: Documents.svg is traced directly for geometry and paint rather than relying on prior source tests",
-    "structural-contract": "pass: all seven roots are classified and keep visual, content and trailing actions as siblings",
+    "structural-contract": "pass: all eight roots are classified and keep visual, content and trailing actions as siblings",
     "runtime-browser": "not-applicable: File Row has no controller or root activation; native links and buttons own their behavior",
     "accessibility": "pass: root stays inert, decorative file visuals are hidden and filename/action targets retain meaningful native names",
     "focused-visual": "pass: computed body/icon/action geometry, truncation and real hover paint are asserted",
-    "consumer-integration": "not-applicable: no real application consumer exists in this repository; executable and stress fixtures are not relabeled as consumers",
+    "consumer-integration": "pass: the Data Workspace File Upload consumer updates one classified File Row from application-owned queue state",
     "responsive-content-stress": "pass: long and extensionless names truncate while the fixed visual and trailing action area remain contained"
   },
   "interactionEvidence": {
