@@ -37,6 +37,10 @@
   min-inline-size: 0;
 }
 
+.shlz-message-thread__item > .shlz-message-thread__message:first-child {
+  grid-column: 1 / -1;
+}
+
 .shlz-message-thread__header {
   display: flex;
   flex-wrap: wrap;

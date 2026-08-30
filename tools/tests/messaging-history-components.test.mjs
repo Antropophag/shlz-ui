@@ -17,8 +17,16 @@ test("Message Thread and History Timeline ship through the public style bundle",
     /\.shlz-message-thread__item\[data-direction="outgoing"\]/,
   );
   assert.match(message, /overflow-wrap: anywhere/);
+  assert.match(
+    message,
+    /> \.shlz-message-thread__message:first-child[\s\S]*grid-column: 1 \/ -1/,
+  );
   assert.match(history, /\.shlz-history-timeline__entry::before/);
   assert.match(history, /list-style: none/);
+  assert.match(
+    history,
+    /\.shlz-history-timeline__content[\s\S]*grid-column: 2/,
+  );
 });
 
 test("public docs and fixtures preserve native list semantics and consumer ownership", async () => {
