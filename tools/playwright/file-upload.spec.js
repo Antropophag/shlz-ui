@@ -264,6 +264,9 @@ test("plain HTML and visual stress states remain coherent", async ({
     const action = element.querySelector(".shlz-file-row__action");
     const bounds = element.getBoundingClientRect();
     const actionBounds = action.getBoundingClientRect();
+    const instruction = element.querySelector(
+      ".shlz-file-upload__instructions",
+    );
     return {
       rootOverflow: element.scrollWidth - element.clientWidth,
       surfaceOverflow: surface.scrollWidth - surface.clientWidth,
@@ -271,12 +274,16 @@ test("plain HTML and visual stress states remain coherent", async ({
       actionVisible:
         actionBounds.left >= bounds.left && actionBounds.right <= bounds.right,
       actionOutline: getComputedStyle(action).outlineStyle,
+      instructionFontSize: Number.parseFloat(
+        getComputedStyle(instruction).fontSize,
+      ),
     };
   });
   expect(geometry.rootOverflow).toBeLessThanOrEqual(1);
   expect(geometry.surfaceOverflow).toBeLessThanOrEqual(1);
   expect(geometry.triggerVisible).toBe(true);
   expect(geometry.actionVisible).toBe(true);
+  expect(geometry.instructionFontSize).toBe(28);
   expect(triggerOutline).not.toBe("0px");
   expect(geometry.actionOutline).not.toBe("none");
 });
