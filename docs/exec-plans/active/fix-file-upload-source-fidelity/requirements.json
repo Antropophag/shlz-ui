@@ -9,38 +9,56 @@
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "shlz-design-source/raw/svg/Documents.svg and docs/component-audits/upload-document-compositions.json" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "shlz-design-source/raw/svg/Documents.svg and docs/component-audits/upload-document-compositions.json"
+      }
     },
     {
       "id": "native-trigger-seam",
       "owner": "agent",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "docs/components/file-upload.md native associated-label contract; the label can own the complete source-backed surface without changing native input activation" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/components/file-upload.md native associated-label contract; the label can own the complete source-backed surface without changing native input activation"
+      }
     },
     {
       "id": "responsive-policy",
       "owner": "agent",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "Source establishes 467 by 102 default geometry; existing component contract requires container-fluid, narrow, long-content, and 200-percent text support without clipping" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "Source establishes 467 by 102 default geometry; existing component contract requires container-fluid, narrow, long-content, and 200-percent text support without clipping"
+      }
     },
     {
       "id": "behavior-scope",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "Переделывай — following the explicit diagnosis that the Showcase must match Documents.svg while native input and drag/drop behavior remain intact" }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Переделывай — following the explicit diagnosis that the Showcase must match Documents.svg while native input and drag/drop behavior remain intact"
+      }
     },
     {
       "id": "delivery-contract",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "AGENTS.md and docs/agent-execution.md require a clean task worktree from origin/main, component gate, independent review, and an unmerged PR" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md and docs/agent-execution.md require a clean task worktree from origin/main, component gate, independent review, and an unmerged PR"
+      }
     }
   ],
-  "openSpec": { "change": "fix-file-upload-source-fidelity", "status": "synthesized" },
+  "openSpec": {
+    "change": "fix-file-upload-source-fidelity",
+    "status": "synthesized"
+  },
   "authorization": {
     "status": "pre-authorized",
     "provenance": { "kind": "user-prompt", "ref": "Переделывай" }

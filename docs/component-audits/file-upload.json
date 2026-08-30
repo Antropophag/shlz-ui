@@ -46,6 +46,11 @@
       "evidence": "shlz-design-source/raw/svg/Documents.svg"
     },
     {
+      "claim": "the source-default Upload-Drag surface is one centered composition containing a 24 by 24 cloud-upload mark and one instruction line, without a visually separate pill action",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg"
+    },
+    {
       "claim": "native input semantics, real file-only drag filtering, focus-visible, disabled, error, responsive reflow and the bubbling event are accessibility and interaction decisions absent from the static export",
       "classification": "repository-decision",
       "evidence": "openspec/changes/add-file-upload-drop-zone/design.md"
@@ -58,17 +63,17 @@
   ],
   "evidence": {
     "source-integrity": "pass: Documents.svg authority hash is recorded and source-integrity regression remains active",
-    "structural-contract": "pass: native input, associated label, instructions, error relationship, CSS, exports, docs and plain HTML are asserted",
+    "structural-contract": "pass: native input, full-surface associated label, canonical cloud-upload icon, one instruction, error relationship, CSS, exports, docs and plain HTML are asserted",
     "runtime-browser": "pass: native selection, real FileList drop, non-file filtering, disabled state, typed payload, repeated enhancement and teardown execute",
     "accessibility": "pass: native input and label preserve keyboard activation and accessible naming; focused Axe scope has no violation",
-    "focused-visual": "pass: source-backed empty/populated geometry plus real drag-active, disabled, error and narrow computed states are focused",
+    "focused-visual": "pass: source-backed 467 by 102 full-surface label, centered 24px cloud-upload icon, single-line default instruction and populated geometry plus real drag-active, disabled, error and narrow computed states are focused",
     "consumer-integration": "pass: browser selection executes the Data Workspace branch, updates application-owned status, and rerenders its classified File Row",
     "responsive-content-stress": "pass: narrow, long filename/instructions and 200-percent text keep the trigger, File Row action, and focus indicators visible"
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: empty, populated, disabled, error, narrow, long-content and enlarged-text fixtures are independently classified"
+        "pass: source-default, populated, disabled, error, narrow, long-content and enlarged-text fixtures are independently classified; source-default has no separate pill action"
       ],
       "realInteractionVisual": [
         "pass: a real file drag enters the zone and its active border/background are read before the drop clears the state"
@@ -88,7 +93,7 @@
       "destroyed"
     ],
     "browserTest": "tools/playwright/file-upload.spec.js",
-    "manualStateWalk": "pass: inspected empty, populated, pointer drag-active/drop, keyboard focus, disabled, error, narrow/long-content and 200-percent-text surfaces on 2026-08-30"
+    "manualStateWalk": "pass: re-inspected source-default, populated, pointer drag-active/drop, keyboard focus, disabled, error, narrow/long-content and 200-percent-text surfaces on 2026-08-30"
   },
   "acceptedDeviations": [],
   "findings": [],

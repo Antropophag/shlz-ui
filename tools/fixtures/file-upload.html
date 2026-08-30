@@ -22,23 +22,22 @@
         id="fixture-upload"
         type="file"
         multiple
-        aria-describedby="fixture-upload-instructions fixture-upload-error"
+        aria-describedby="fixture-upload-error"
       />
-      <div class="shlz-file-upload__surface">
-        <div class="shlz-file-upload__content">
-          <p class="shlz-file-upload__title">Drop files here</p>
-          <p
-            class="shlz-file-upload__instructions"
-            id="fixture-upload-instructions"
-          >
-            Long filenames and localized instructions wrap without clipping
-            controls.
-          </p>
-        </div>
-        <label class="shlz-file-upload__trigger" for="fixture-upload"
-          >Choose files</label
+      <label class="shlz-file-upload__surface" for="fixture-upload">
+        <svg
+          class="shlz-icon shlz-file-upload__icon"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
         >
-      </div>
+          <use
+            href="../../packages/icons/dist/sprite.svg#shlz-icon-cloud-upload"
+          ></use>
+        </svg>
+        <span class="shlz-file-upload__instructions"
+          >Нажмите или перетащите файл в эту область</span
+        >
+      </label>
       <p class="shlz-file-upload__error" id="fixture-upload-error">
         One or more files need consumer validation.
       </p>
