@@ -2472,9 +2472,9 @@
         "apps/showcase/src/messaging-history-showcase.js",
         "tools/fixtures/messaging-history-components.html"
       ],
-      "live_consumers": ["apps/showcase/src/messaging-history-showcase.js"],
+      "live_consumers": ["apps/showcase/src/messaging-history-consumers.js"],
       "data_workspace_consumers": [
-        "apps/showcase/src/messaging-history-showcase.js"
+        "apps/showcase/src/messaging-history-consumers.js"
       ],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
@@ -2531,9 +2531,9 @@
         "apps/showcase/src/messaging-history-showcase.js",
         "tools/fixtures/messaging-history-components.html"
       ],
-      "live_consumers": ["apps/showcase/src/messaging-history-showcase.js"],
+      "live_consumers": ["apps/showcase/src/messaging-history-consumers.js"],
       "data_workspace_consumers": [
-        "apps/showcase/src/messaging-history-showcase.js"
+        "apps/showcase/src/messaging-history-consumers.js"
       ],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],

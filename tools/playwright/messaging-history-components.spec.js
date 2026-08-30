@@ -2,6 +2,7 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 import { fixtureUrl } from "./fixture-url.js";
+import { inspectComponentOccurrences } from "./component-audit.js";
 
 const manifests = new Map([
   [
@@ -44,6 +45,14 @@ test("renders semantic Message Thread and History Timeline with native consumer 
   const timeline = page.locator(
     "[data-component-audit-id='history-timeline-showcase-source']",
   );
+  for (const component of ["message-thread", "history-timeline"]) {
+    const inventory = await inspectComponentOccurrences(
+      page,
+      manifests.get(component),
+    );
+    expect(inventory.unclassifiedLegacy).toEqual([]);
+    expect(inventory.occurrences).toHaveLength(3);
+  }
   await expect(thread).toHaveAttribute("aria-label", "Project discussion");
   await expect(thread.locator(":scope > li")).toHaveCount(2);
   await expect(timeline.locator(".shlz-history-timeline__entry")).toHaveCount(
@@ -82,6 +91,9 @@ test("contains long content and reflows at a narrow viewport", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 360, height: 800 });
+  await page.addStyleTag({
+    content: ".shlz-message-thread,.shlz-history-timeline{font-size:200%}",
+  });
   const overflow = await page
     .locator("#message-thread-demo, #history-timeline-demo")
     .evaluateAll((roots) =>
@@ -136,6 +148,11 @@ test("contains long content and reflows at a narrow viewport", async ({
       ),
     ).toHaveCount(1),
   );
+  await expect(page.locator("[data-message-empty]")).toBeVisible();
+  await expect(page.locator("[data-history-empty]")).toBeVisible();
+  await expect(
+    page.locator(".shlz-message-thread__item[data-grouped]"),
+  ).toHaveCount(2);
   expectMaterialStates("message-thread");
   expectMaterialStates("history-timeline");
   await expect(

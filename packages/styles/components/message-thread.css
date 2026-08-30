@@ -23,6 +23,11 @@
   justify-content: end;
 }
 
+.shlz-message-thread__item[data-grouped]
+  + .shlz-message-thread__item[data-grouped] {
+  margin-block-start: -1rem;
+}
+
 .shlz-message-thread__item[data-direction="outgoing"]
   .shlz-message-thread__avatar {
   display: none;

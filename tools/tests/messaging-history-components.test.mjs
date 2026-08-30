@@ -41,7 +41,7 @@ test("component manifests classify all three intended occurrences", async () => 
     const manifest = JSON.parse(
       await read(`docs/component-audits/${component}.json`),
     );
-    assert.equal(manifest.occurrences.length, 3);
+    assert.equal(manifest.occurrences.length, 4);
     assert.deepEqual(
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),

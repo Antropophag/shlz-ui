@@ -19,7 +19,8 @@
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
     { "id": "message-thread-showcase-source", "kind": "executable-fixture" },
-    { "id": "message-thread-data-workspace", "kind": "live-consumer" },
+    { "id": "message-thread-data-workspace", "kind": "executable-fixture" },
+    { "id": "message-thread-data-workspace-consumer", "kind": "live-consumer" },
     { "id": "message-thread-plain-html", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["bounded-non-virtualized-thread"],

@@ -19,7 +19,11 @@
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
     { "id": "history-timeline-showcase-source", "kind": "executable-fixture" },
-    { "id": "history-timeline-data-workspace", "kind": "live-consumer" },
+    { "id": "history-timeline-data-workspace", "kind": "executable-fixture" },
+    {
+      "id": "history-timeline-data-workspace-consumer",
+      "kind": "live-consumer"
+    },
     { "id": "history-timeline-plain-html", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["bounded-non-virtualized-timeline"],

@@ -1,0 +1,13 @@
+export const messagingHistoryConsumerMarkup = `<section id="messaging-history-consumers"><h2>Communication and activity</h2><p>Application-owned records, actions, and state composed in Data Workspace.</p><article><h3>Request discussion</h3><ol class="shlz-message-thread" aria-label="Request discussion" data-component-audit-id="message-thread-data-workspace-consumer"><li class="shlz-message-thread__item" data-direction="incoming" data-grouped><article class="shlz-message-thread__message"><header class="shlz-message-thread__header"><span class="shlz-message-thread__author">Dispatch team</span><time class="shlz-message-thread__time">12:20</time></header><div class="shlz-message-thread__bubble"><p>Assignment confirmed for SD-2418.</p><button class="shlz-button shlz-button--sm" type="button" data-workspace-message-action>Open request</button></div></article></li><li class="shlz-message-thread__item" data-direction="incoming" data-grouped><article class="shlz-message-thread__message"><div class="shlz-message-thread__bubble"><p>Additional context follows in the same author group.</p></div></article></li></ol><div class="shlz-message-thread__empty" data-message-empty>No messages yet.</div><div class="shlz-message-thread__loading" role="status">Loading messages…</div></article><article><h3>Request history</h3><ol class="shlz-history-timeline" aria-label="Request history" data-component-audit-id="history-timeline-data-workspace-consumer"><li class="shlz-history-timeline__entry"><span class="shlz-history-timeline__marker" aria-hidden="true"></span><article class="shlz-history-timeline__content"><header class="shlz-history-timeline__header"><span class="shlz-history-timeline__actor">System</span><time class="shlz-history-timeline__time">12:18</time></header><p class="shlz-history-timeline__description">Assigned a responsible team.</p><button class="shlz-button shlz-button--sm" type="button" data-workspace-history-action>Open audit record</button></article></li></ol><div class="shlz-history-timeline__empty" data-history-empty>No history entries.</div><div class="shlz-history-timeline__loading" role="status">Loading history…</div></article><p data-messaging-history-consumer-status>Consumer action has not run.</p></section>`;
+
+export function enhanceMessagingHistoryConsumers(scope = document) {
+  const status = scope.querySelector(
+    "[data-messaging-history-consumer-status]",
+  );
+  for (const control of scope.querySelectorAll(
+    "[data-workspace-message-action], [data-workspace-history-action]",
+  ))
+    control.addEventListener("click", () => {
+      status.textContent = "Application handled the selected record.";
+    });
+}
