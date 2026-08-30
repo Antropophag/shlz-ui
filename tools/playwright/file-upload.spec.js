@@ -144,6 +144,9 @@ test("native selection, file drops, filtering, disabled and consumer rendering w
 });
 
 test("every File Upload occurrence is classified", async ({ page }) => {
+  await expect(
+    page.locator("[data-component-audit-id^='file-upload-']"),
+  ).toHaveCount(5);
   await expectClassifiedComponentOccurrences(
     page,
     manifestSubset([
@@ -155,6 +158,9 @@ test("every File Upload occurrence is classified", async ({ page }) => {
     ]),
   );
   await page.goto(fixtureUrl("file-upload.html"));
+  await expect(
+    page.locator("[data-component-audit-id^='file-upload-']"),
+  ).toHaveCount(1);
   await expectClassifiedComponentOccurrences(
     page,
     manifestSubset(["file-upload-plain-html"]),

@@ -22,4 +22,4 @@
 ## 5. Completion and delivery
 
 - [x] 5.1 Run the full component gate, source integrity, OpenSpec, lint, build, unit, package, browser, accessibility, visual, responsive, and regression checks; record exact counts, limitations, manual state walk, and validation evidence
-- [ ] 5.2 Run independent Standards and Spec review, remediate every scope-local finding, complete conformance and delivery guards, push the task branch, open an unmerged PR to `main`, and verify required CI/review state
+- [x] 5.2 Run independent Standards and Spec review, remediate every scope-local finding, complete conformance and delivery guards, push the task branch, open an unmerged PR to `main`, and verify required CI/review state

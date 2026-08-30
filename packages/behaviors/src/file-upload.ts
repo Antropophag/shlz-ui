@@ -34,7 +34,7 @@ function hasFiles(transfer: DataTransfer | null): boolean {
 export class FileUploadController {
   readonly root: HTMLElement;
   readonly input: HTMLInputElement;
-  #abort = new AbortController();
+  readonly #abort = new AbortController();
   #destroyed = false;
   #dragDepth = 0;
 
@@ -76,7 +76,7 @@ export class FileUploadController {
       (event) => {
         if (this.#unavailable(event) || !hasFiles(event.dataTransfer)) return;
         this.#dragDepth = Math.max(0, this.#dragDepth - 1);
-        if (this.#dragDepth === 0) root.removeAttribute("data-drag-active");
+        if (this.#dragDepth === 0) delete root.dataset.dragActive;
       },
       { signal: this.#abort.signal },
     );
@@ -111,7 +111,7 @@ export class FileUploadController {
 
   #clearDrag(): void {
     this.#dragDepth = 0;
-    this.root.removeAttribute("data-drag-active");
+    delete this.root.dataset.dragActive;
   }
 
   #emit(files: FileList, source: FileUploadSource): void {
