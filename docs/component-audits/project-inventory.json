@@ -1154,11 +1154,11 @@
       ],
       "evidence": {
         "source-integrity": "pass: four sizes by image/text/icon retain all twelve source variants",
-        "structural-contract": "pass: guard classifies matrix and table roots",
+        "structural-contract": "pass: guard separately classifies complete Showcase and plain-HTML Avatar occurrence sets",
         "runtime-browser": "not-applicable: Avatar ships no loader or interaction",
         "accessibility": "pass: standalone and adjacent identity contexts use distinct naming ownership",
         "focused-visual": "pass: exact sizes, crop and paint are asserted component-locally",
-        "consumer-integration": "pass: table consumers keep Avatar presentation-only",
+        "consumer-integration": "pass: table consumers keep Avatar presentation-only; Message Thread and History Timeline fixtures classify nested Avatar dependencies",
         "responsive-content-stress": "pass: fixed geometry cannot shrink and image crop remains cover"
       },
       "canonical_name": "Avatar",
@@ -1169,7 +1169,11 @@
       "production_implementation": ["packages/styles/components/avatar.css"],
       "behavior": [],
       "docs": ["docs/components/avatar.md"],
-      "executable_fixtures": ["apps/showcase/src/wave3.js#avatar-demo"],
+      "executable_fixtures": [
+        "apps/showcase/src/wave3.js#avatar-demo",
+        "apps/showcase/src/messaging-history-showcase.js",
+        "tools/fixtures/messaging-history-components.html"
+      ],
       "live_consumers": ["apps/showcase/src/wave3.js#table-demo"],
       "data_workspace_consumers": [],
       "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-avatar"],
@@ -1179,7 +1183,7 @@
       "known_findings": [],
       "limitations": [],
       "measured_counts": {
-        "executableShowcase": 15,
+        "executableShowcase": 17,
         "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 8,
@@ -2324,7 +2328,7 @@
       ],
       "evidence": {
         "source-integrity": "pass: three independent hashes, canvases and dashed-frame ledgers",
-        "structural-contract": "pass: the historical source-only composition remains independently bounded; reusable Planner Schedule is inventoried as its own family",
+        "structural-contract": "pass: the historical source-only composition remains independently bounded; promoted Message Thread, History Timeline, and Planner Schedule families own their canonical occurrences",
         "runtime-browser": "not-applicable: no executable higher-level composition or runtime contract exists",
         "accessibility": "not-applicable: no production semantics or interaction model exists",
         "focused-visual": "not-applicable: no implemented higher-level composition exists for comparison",
@@ -2362,7 +2366,7 @@
       ],
       "known_findings": [],
       "limitations": [
-        "VERIFIED is independently bounded to the historical source sheets and absence of full Messaging, History and Planner application compositions; reusable Planner Schedule is tracked separately",
+        "VERIFIED is independently bounded to the historical source sheets and absence of unclassified legacy composition aliases; promoted Message Thread, History Timeline, and Planner Schedule are tracked separately",
         "nested Avatar, File Row, Document Row, Notification and Snackbar contracts remain independent and do not certify this family",
         "message delivery, read/sync state, editor commands, chronology, scheduling, recurrence, timezones, employee data, event behavior, attachment lifecycle, persistence and live regions remain unsupported",
         "outlined text and raster artwork do not establish literal copy, behavior, accessibility semantics or responsive layout"

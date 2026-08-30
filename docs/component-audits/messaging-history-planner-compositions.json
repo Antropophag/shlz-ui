@@ -65,11 +65,11 @@
       "evidence": {
         "source-integrity": "pass: Messages.svg hash, 1504 by 7405 canvas, and five dashed frames are locked",
         "structural-contract": "pass: promoted Message Thread occurrences are classified by docs/component-audits/message-thread.json; the residual census finds no unclassified Messaging aliases",
-        "runtime-browser": "pass: the promoted Message Thread runtime contract is independently verified by tools/playwright/messaging-history-components.spec.js",
-        "accessibility": "pass: the promoted Message Thread semantic list, names, times, focus, and announcements are independently verified",
-        "focused-visual": "pass: the promoted Message Thread owns independent source and narrow visual evidence",
-        "consumer-integration": "pass: the promoted Message Thread Data Workspace occurrence is classified as a live consumer",
-        "responsive-content-stress": "pass: the promoted Message Thread independently verifies narrow, 200-percent, and unbroken-content stress"
+        "runtime-browser": "not-applicable: this residual source census owns no Message Thread runtime; promoted runtime evidence remains independent",
+        "accessibility": "not-applicable: this residual source census owns no Message Thread accessibility contract; promoted evidence remains independent",
+        "focused-visual": "not-applicable: this residual source census owns no Message Thread visual baseline; promoted evidence remains independent",
+        "consumer-integration": "not-applicable: this residual source census owns no Message Thread consumer; promoted evidence remains independent",
+        "responsive-content-stress": "not-applicable: this residual source census owns no Message Thread responsive contract; promoted evidence remains independent"
       },
       "limitations": [
         "delivery, read state, synchronization, editor commands, attachment lifecycle, persistence, and live announcements are unsupported"
@@ -96,11 +96,11 @@
       "evidence": {
         "source-integrity": "pass: History of changes.svg hash, 873 by 1558 canvas, and one dashed frame are locked",
         "structural-contract": "pass: promoted History Timeline occurrences are classified by docs/component-audits/history-timeline.json; the residual census finds no unclassified History aliases",
-        "runtime-browser": "pass: the promoted History Timeline runtime contract is independently verified by tools/playwright/messaging-history-components.spec.js",
-        "accessibility": "pass: the promoted History Timeline semantic list, names, times, focus, and status text are independently verified",
-        "focused-visual": "pass: the promoted History Timeline owns independent source and narrow visual evidence",
-        "consumer-integration": "pass: the promoted History Timeline Data Workspace occurrence is classified as a live consumer",
-        "responsive-content-stress": "pass: the promoted History Timeline independently verifies narrow, 200-percent, and sparse-entry stress"
+        "runtime-browser": "not-applicable: this residual source census owns no History Timeline runtime; promoted runtime evidence remains independent",
+        "accessibility": "not-applicable: this residual source census owns no History Timeline accessibility contract; promoted evidence remains independent",
+        "focused-visual": "not-applicable: this residual source census owns no History Timeline visual baseline; promoted evidence remains independent",
+        "consumer-integration": "not-applicable: this residual source census owns no History Timeline consumer; promoted evidence remains independent",
+        "responsive-content-stress": "not-applicable: this residual source census owns no History Timeline responsive contract; promoted evidence remains independent"
       },
       "limitations": [
         "chronology rules, audit semantics, persistence, ordering, filtering, and live updates are unsupported"
@@ -133,11 +133,11 @@
       "evidence": {
         "source-integrity": "pass: Planner.svg hash, 3646 by 6729 canvas, and seven dashed frames are locked",
         "structural-contract": "pass: promoted Planner Schedule occurrences are classified by docs/component-audits/planner-schedule.json; the residual census finds no unclassified Planner aliases",
-        "runtime-browser": "pass: the promoted Planner Schedule runtime contract is independently verified by tools/playwright/planner-schedule.spec.js",
-        "accessibility": "pass: the promoted Planner Schedule owns independent semantics, focus, keyboard, naming, and announcement evidence",
-        "focused-visual": "pass: the promoted Planner Schedule owns independent source, state, and narrow visual evidence",
-        "consumer-integration": "pass: the promoted Planner Schedule consumer occurrence is independently classified",
-        "responsive-content-stress": "pass: the promoted Planner Schedule independently verifies narrow, enlarged-text, and bounded-load stress"
+        "runtime-browser": "not-applicable: this residual source census owns no Planner Schedule runtime; promoted runtime evidence remains independent",
+        "accessibility": "not-applicable: this residual source census owns no Planner Schedule accessibility contract; promoted evidence remains independent",
+        "focused-visual": "not-applicable: this residual source census owns no Planner Schedule visual baseline; promoted evidence remains independent",
+        "consumer-integration": "not-applicable: this residual source census owns no Planner Schedule consumer; promoted evidence remains independent",
+        "responsive-content-stress": "not-applicable: this residual source census owns no Planner Schedule responsive contract; promoted evidence remains independent"
       },
       "limitations": [
         "scheduling, recurrence, timezone rules, employee data, event behavior, attachment lifecycle, and persistence are unsupported"
@@ -314,11 +314,11 @@
   "evidence": {
     "source-integrity": "pass: each sub-scope records and verifies its independent raw SVG hash, canvas, dashed frames, and observed source facts",
     "structural-contract": "pass: promoted canonical components own independent exact occurrence guards while this residual census rejects unclassified legacy aliases",
-    "runtime-browser": "pass: Message Thread, History Timeline, and Planner Schedule runtime evidence is owned by their independent manifests and focused browser suites",
-    "accessibility": "pass: each promoted canonical component owns its independent accessibility evidence",
-    "focused-visual": "pass: each promoted canonical component owns its independent focused visual evidence",
-    "consumer-integration": "pass: each promoted canonical component owns independently classified consumer evidence",
-    "responsive-content-stress": "pass: each promoted canonical component owns independent responsive and content-stress evidence"
+    "runtime-browser": "not-applicable: this residual source census owns no runtime surface; promoted component evidence remains independent",
+    "accessibility": "not-applicable: this residual source census owns no accessibility contract; promoted component evidence remains independent",
+    "focused-visual": "not-applicable: this residual source census owns no visual baseline; promoted component evidence remains independent",
+    "consumer-integration": "not-applicable: this residual source census owns no live consumer; promoted component evidence remains independent",
+    "responsive-content-stress": "not-applicable: this residual source census owns no responsive contract; promoted component evidence remains independent"
   },
   "interactionEvidence": {
     "types": {

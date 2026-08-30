@@ -31,7 +31,9 @@
     { "id": "avatar-person-tag-stress", "kind": "content-stress-fixture" },
     { "id": "avatar-message-thread-source", "kind": "executable-fixture" },
     { "id": "avatar-history-timeline-current", "kind": "executable-fixture" },
-    { "id": "avatar-history-timeline-previous", "kind": "executable-fixture" }
+    { "id": "avatar-history-timeline-previous", "kind": "executable-fixture" },
+    { "id": "avatar-message-thread-plain-html", "kind": "executable-fixture" },
+    { "id": "avatar-history-timeline-plain-html", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["24", "32", "40", "64"],
   "supportedStates": ["text", "image", "icon"],
@@ -62,7 +64,7 @@
   ],
   "evidence": {
     "source-integrity": "pass: all twelve source variants retain exact size/content axes",
-    "structural-contract": "pass: shared guard classifies the source matrix, table consumers, Person Tag stress fixture, and Messaging/History fixtures",
+    "structural-contract": "pass: shared guard separately classifies the complete Showcase and plain-HTML Avatar occurrence sets",
     "runtime-browser": "not-applicable: Avatar ships no loader, fallback controller or interaction",
     "accessibility": "pass: standalone text roots are named while adjacent/repeated images are decorative",
     "focused-visual": "pass: image, initials and icon sizes/crop are asserted component-locally",

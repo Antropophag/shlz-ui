@@ -25,8 +25,15 @@ test("all Wave 4 executable and live roots are semantically classified", async (
   page,
 }) => {
   expect(components).toHaveLength(5);
-  for (const component of components)
-    await expectClassifiedComponentOccurrences(page, manifests[component]);
+  for (const component of components) {
+    const manifest = manifests[component];
+    await expectClassifiedComponentOccurrences(page, {
+      ...manifest,
+      occurrences: manifest.occurrences.filter(
+        ({ id }) => !id.endsWith("-plain-html"),
+      ),
+    });
+  }
 });
 
 test("Status and Badge remain static text/count primitives", async ({

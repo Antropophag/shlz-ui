@@ -27,6 +27,12 @@ const manifests = new Map([
     ),
   ],
 ]);
+const avatarManifest = await readComponentAuditManifest(
+  new globalThis.URL(
+    "../../docs/component-audits/avatar.json",
+    import.meta.url,
+  ),
+);
 const expectedIds = {
   showcase: {
     "message-thread": [
@@ -388,6 +394,13 @@ test("plain HTML fixture has its own exact occurrence inventory", async ({
       page,
       surfaceManifest(component, "fixture"),
     );
+  await expectClassifiedComponentOccurrences(page, {
+    ...avatarManifest,
+    diagnosticOccurrenceCount: 0,
+    occurrences: avatarManifest.occurrences.filter(({ id }) =>
+      id.endsWith("-plain-html"),
+    ),
+  });
   await expect(page.getByRole("list", { name: "Messages" })).toBeVisible();
   await expect(page.getByRole("list", { name: "History" })).toBeVisible();
 });
