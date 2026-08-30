@@ -38,8 +38,8 @@ const promotedPlannerPaths = new Set([
   "tools/tests/fixtures/planner-schedule-known-bad.css",
 ]);
 const promotedMessagingHistoryPaths = new Set([
+  "apps/showcase/src/consumer-workspace.js",
   "apps/showcase/src/messaging-history-showcase.js",
-  "apps/showcase/src/messaging-history-consumers.js",
   "docs/components/message-thread.md",
   "docs/components/history-timeline.md",
   "packages/styles/components/message-thread.css",

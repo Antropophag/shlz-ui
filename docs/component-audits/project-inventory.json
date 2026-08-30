@@ -2457,7 +2457,7 @@
       "canonical_name": "Message Thread",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "FINDINGS",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Messages.svg"],
       "production_implementation": [
         "packages/styles/components/message-thread.css"
@@ -2482,16 +2482,7 @@
         "incoming and outgoing presentation",
         "author, timestamp, content and attachments"
       ],
-      "known_findings": [
-        {
-          "id": "message-thread-completion-evidence",
-          "severity": "P1",
-          "status": "open",
-          "description": "Completion evidence and real Data Workspace integration remain incomplete.",
-          "evidence": "independent review on PR #57",
-          "tracking": "PR #57"
-        }
-      ],
+      "known_findings": [],
       "limitations": [
         "no composer, synchronization, delivery/read state, sanitization, persistence, moderation, pagination or attachment lifecycle"
       ],
@@ -2521,7 +2512,7 @@
       "canonical_name": "History Timeline",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "FINDINGS",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/History of changes.svg"
       ],
@@ -2548,16 +2539,7 @@
         "period groups",
         "actor, timestamp, description and attachments"
       ],
-      "known_findings": [
-        {
-          "id": "history-timeline-completion-evidence",
-          "severity": "P1",
-          "status": "open",
-          "description": "Completion evidence and real Data Workspace integration remain incomplete.",
-          "evidence": "independent review on PR #57",
-          "tracking": "PR #57"
-        }
-      ],
+      "known_findings": [],
       "limitations": [
         "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
       ],

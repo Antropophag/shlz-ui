@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 import { fixtureUrl } from "./fixture-url.js";
 import {
   expectClassifiedComponentOccurrences,
+  inspectComponentOccurrences,
   readComponentAuditManifest,
 } from "./component-audit.js";
 
@@ -69,17 +70,63 @@ test.beforeEach(async ({ page }) => page.goto("/#message-thread-demo"));
 test("exact guard classifies Showcase fixtures and Data Workspace consumers", async ({
   page,
 }) => {
-  for (const component of manifests.keys())
+  for (const component of manifests.keys()) {
+    const partitionedIds = [
+      ...expectedIds.showcase[component],
+      ...expectedIds.fixture[component],
+    ];
+    expect(new Set(partitionedIds).size).toBe(partitionedIds.length);
+    expect(partitionedIds.sort()).toEqual(
+      manifests
+        .get(component)
+        .occurrences.map(({ id }) => id)
+        .sort(),
+    );
     await expectClassifiedComponentOccurrences(
       page,
       surfaceManifest(component, "showcase"),
     );
+  }
   for (const component of manifests.keys())
     await expect(
       page.locator(
         `[data-consumer-workspace] [data-component-audit-id='${component}-data-workspace-consumer']`,
       ),
     ).toHaveCount(1);
+});
+
+test("occurrence inventory remains mutation-sensitive to missing, duplicate, and unclassified roots", async ({
+  page,
+}) => {
+  const manifest = surfaceManifest("message-thread", "showcase");
+  await page
+    .locator("[data-component-audit-id='message-thread-showcase-source']")
+    .evaluate((root) => root.remove());
+  expect(
+    (await inspectComponentOccurrences(page, manifest)).occurrences,
+  ).toEqual(["message-thread-data-workspace-consumer"]);
+
+  await page.reload();
+  await page
+    .locator("[data-component-audit-id='message-thread-showcase-source']")
+    .evaluate((root) => root.after(root.cloneNode(true)));
+  const duplicated = await inspectComponentOccurrences(page, manifest);
+  expect(new Set(duplicated.occurrences).size).toBeLessThan(
+    duplicated.occurrences.length,
+  );
+
+  await page.reload();
+  await page
+    .locator("#message-thread-demo")
+    .evaluate((root) =>
+      root.insertAdjacentHTML(
+        "beforeend",
+        '<ol class="shlz-message-thread"><li>Unclassified</li></ol>',
+      ),
+    );
+  expect(
+    (await inspectComponentOccurrences(page, manifest)).unclassifiedLegacy,
+  ).toHaveLength(1);
 });
 
 test("native links and buttons receive keyboard focus with a visible indicator", async ({
@@ -203,6 +250,17 @@ test("200% text, unbroken messages, and sparse history remain reachable", async 
         .locator(root)
         .evaluate((node) => node.scrollWidth <= node.clientWidth + 1),
     ).toBe(true);
+  expect(
+    await page.evaluate(
+      () =>
+        document.documentElement.scrollWidth <=
+        document.documentElement.clientWidth + 1,
+    ),
+  ).toBe(true);
+  await expect(page.locator("#message-thread-demo a").first()).toBeVisible();
+  await expect(page.locator("#history-timeline-demo a").first()).toBeVisible();
+  await expect(page.locator("[data-workspace-message-action]")).toBeVisible();
+  await expect(page.locator("[data-workspace-history-action]")).toBeVisible();
   await expect(page.getByText("Sparse entry.")).toBeVisible();
   await verifyMaterialState("message-thread", "incoming", () =>
     expect(
