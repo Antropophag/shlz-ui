@@ -1,0 +1,100 @@
+{
+  "contractReceiptDigest": "efa83cfe65ca90483969624c76022ef6ce6e05972774e3296920d8a13f943823",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "npx",
+      "playwright",
+      "test",
+      "tools/playwright/file-upload.spec.js"
+    ],
+    "candidateHead": "074df2f427998d44acbaa19ef9c5897366ea96d5",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 5481,
+        "digest": "cdf90338fe44dd64f5782eeede5cc9fd836f8e8341a7e4bd926a8b7d7d7ee3a3",
+        "path": "apps/showcase/src/file-upload-showcase.js"
+      },
+      {
+        "bytes": 39066,
+        "digest": "61d7d926e2585044fef786e4cefd892565b5662f30f8480c0271edfe5f26f663",
+        "path": "apps/showcase/src/showcase.css"
+      },
+      {
+        "bytes": 5277,
+        "digest": "52cc0e60d38415b4cc1ede4b928ccf6b3b6e2d2db9322b23d4ad46ecc962ba9c",
+        "path": "docs/component-audits/file-upload.json"
+      },
+      {
+        "bytes": 4673,
+        "digest": "616ee632fec50618423afeeab0832d5cde833d04f1bfbe62494860fea805d827",
+        "path": "openspec/changes/fix-file-upload-source-fidelity/specs/forms/file-upload/spec.md"
+      },
+      {
+        "bytes": 127231,
+        "digest": "b25cc9b6d3518f477f1ea79cde7180afd7a7a0933ad1c6595fe578322adfe473",
+        "path": "package-lock.json"
+      },
+      {
+        "bytes": 1890,
+        "digest": "ed85b83b01a90cad1261f9fea72e0f52a66c1b435195812f01b9c3f2ea1af4ac",
+        "path": "package.json"
+      },
+      {
+        "bytes": 2433,
+        "digest": "e7e496c0f70481ae8b61b5dc257d503c6f2d168724aaeb833fcf29d5f1dabe56",
+        "path": "packages/styles/components/file-upload.css"
+      },
+      {
+        "bytes": 899,
+        "digest": "061cf84df3686dd7e14c89bfd52a53e940317a243bc01f2baebf903548ced452",
+        "path": "playwright.config.js"
+      },
+      {
+        "bytes": 1448,
+        "digest": "57d024f6ae57e3d439aa48d21dffd410d76e63fbc0cf9e1aae7f226e46a1df8a",
+        "path": "tools/fixtures/file-upload.html"
+      },
+      {
+        "bytes": 13194,
+        "digest": "d9cb53f166740fbac4429c38cbd1a71907df2e6104a59ce2c8bc75fec59e5a0e",
+        "path": "tools/playwright/file-upload.spec.js"
+      },
+      {
+        "bytes": 9916,
+        "digest": "e9e849f52c4380ab5fb5ea28ab3dd5126e1323b68ce194f5e328f6f7ad833a0c",
+        "path": "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png"
+      },
+      {
+        "bytes": 42346,
+        "digest": "39278cb666d793d91cb694843b8da7e09b5e31f51559e6ef8ea95c50f966deca",
+        "path": "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png"
+      },
+      {
+        "bytes": 1877,
+        "digest": "4c8f4e0ee2c7ee182d2afce922407bb59eaff1657a7a1aed6a2970ac99a3ff5f",
+        "path": "tools/tests/file-upload-contract.test.mjs"
+      },
+      {
+        "bytes": 11342,
+        "digest": "e5b2439ae843b1c8b5e4c5799f78f67657b0e87c6510665b88ac400cbbf2f2eb",
+        "path": "tools/tests/wave11-upload-document-compositions-source-census.test.mjs"
+      }
+    ],
+    "closureDigest": "80858604095d3dca6480a9c27b104f17ff3dcc1fb91bfe3b772fef84752a2d29",
+    "contractDigest": "d3ee46b134a86819906f77b02c318c966aa52c5b1a27382c658e47339e25c51f",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "1b91aea0873d2c9593170318e8ff9da2a10f06db279ab41c9401c62cd5ebcb9f",
+      "stdoutDigest": "9c57def84bbda336906cffbf9150f74c0dd4061f5d52b05c73d57a726d2b6494"
+    },
+    "target": "file-upload-focused-browser-gate"
+  },
+  "version": 1,
+  "digest": "f1d9a7c2733f74b3a7e57b17e7a489665a7d61540541f1fb821d55b12b99f1cc"
+}

@@ -17,4 +17,4 @@
 ## 4. Completion and delivery
 
 - [x] 4.1 Run the complete File Upload component gate and affected/full repository validation, recording exact checks, counts, manual interaction walk, and limitations
-- [ ] 4.2 Run independent Standards and Spec review, remediate every scope-local finding, complete conformance/delivery guards, and open an unmerged PR to `main` with green CI/review state
+- [x] 4.2 Run independent Standards and Spec review, remediate every scope-local finding, complete conformance/delivery guards, and open an unmerged PR to `main` with green CI/review state

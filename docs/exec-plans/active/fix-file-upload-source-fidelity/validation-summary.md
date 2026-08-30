@@ -26,4 +26,4 @@ The default, populated, drag-active, disabled, error, narrow, enlarged-text, key
 
 The source does not define upload policy or transport semantics. The Impeccable detector ran in degraded regex-only mode because its optional parsers were unavailable; it reported one pre-existing Showcase grid-background advisory outside this change, so that detector is not treated as completion-gate evidence.
 
-CI and review-thread state are recorded at delivery after the final candidate is pushed; neither is represented by the local validation counts above.
+Final candidate `074df2f` passed every PR check: Required checks in 52s, SonarCloud Code Analysis in 1m29s, Browser and visual tests in 9m03s, and the CodeRabbit status check. CodeRabbit's two current review threads were both remediated and resolved; the final GitHub review-thread census reports 2 total, 0 unresolved, and 0 unresolved-current threads. Qodo did not review because the repository trial has ended. Delivery validation passed against the open, unmerged PR #55.
