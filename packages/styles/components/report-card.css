@@ -54,6 +54,11 @@
   letter-spacing: -0.01em;
 }
 
+.shlz-report-card__value,
+.shlz-report-card__link {
+  padding-inline-end: 32px;
+}
+
 .shlz-report-card__value {
   margin-block-start: auto;
   font-size: 28px;

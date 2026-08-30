@@ -92,18 +92,23 @@ test("Wave 10 fluid variants contain long content at narrow width", async ({
   await expect(report).toHaveCSS("width", "240px");
   await expect(cover).toHaveCSS("width", "320px");
   expect((await report.boundingBox()).height).toBeGreaterThan(230);
-  const metaBox = await report.locator(".shlz-report-card__meta").boundingBox();
   const decorationBox = await report
     .locator(".shlz-report-card__decoration")
     .boundingBox();
-  const metaEndPadding = await report
-    .locator(".shlz-report-card__meta")
-    .evaluate((node) =>
+  for (const selector of [
+    ".shlz-report-card__value",
+    ".shlz-report-card__meta",
+  ]) {
+    const region = report.locator(selector);
+    const regionBox = await region.boundingBox();
+    const endPadding = await region.evaluate((node) =>
       Number.parseFloat(window.getComputedStyle(node).paddingInlineEnd),
     );
-  expect(metaBox.x + metaBox.width - metaEndPadding).toBeLessThanOrEqual(
-    decorationBox.x,
-  );
+    expect(endPadding).toBe(32);
+    expect(regionBox.x + regionBox.width - endPadding).toBeLessThanOrEqual(
+      decorationBox.x,
+    );
+  }
   for (const root of [card, report, cover])
     expect(
       await root.evaluate(
@@ -121,5 +126,6 @@ test("Report card is composed in the real Data Workspace consumer", async ({
     "[data-component-audit-id='report-card-workspace-summary']",
   );
   await expect(consumer).toBeVisible();
+  await expect(consumer.locator(".shlz-report-card__value")).toHaveText("1");
   await expect(consumer).toHaveScreenshot("report-card-consumer.png");
 });

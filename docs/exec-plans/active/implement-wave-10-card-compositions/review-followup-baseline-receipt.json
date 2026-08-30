@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/implement-wave-10-card-components",
+    "commit": "7caf446e75a8f18fb4c29bae06ae66cb2a08d240",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/implement-wave-10-card-components",
+      "headRefOid": "7caf446e75a8f18fb4c29bae06ae66cb2a08d240",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/56"
+    },
+    "repository": {
+      "digest": "0ecc8179f6110386a0b5b2d6c97ee4f4424ef380cb2a139c3dc9d7a3fc7c7984",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-wave-10-components"
+    },
+    "upstream": "origin/feature/implement-wave-10-card-components"
+  },
+  "routeDigest": "9c0f201a4d06fb0ce88c7cb9c76a33c1047ae210c788af5b78b1f7c32bcff5ea",
+  "version": 1,
+  "digest": "2d692476ab08f7cdda37df019708a8d64b77a5917a11e7a9ac00309ee56f0df6"
+}

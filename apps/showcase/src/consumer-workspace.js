@@ -12,6 +12,10 @@ const records = [
   },
 ];
 
+const inProgressRecordCount = records.filter(
+  ({ status }) => status === "В работе",
+).length;
+
 const row = ({ id, title, status }) => `
   <tr class="shlz-table__row" data-workspace-row data-search-value="${`${id} ${title} ${status}`.toLocaleLowerCase("ru")}" data-status="${status}">
     <td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать заявку ${id}" data-workspace-select data-component-audit-id="checkbox-workspace-${id.toLowerCase()}"></td>
@@ -31,7 +35,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
     </header>
     <div class="shlz-consumer-workspace__summary">
       <article class="shlz-report-card shlz-report-card--muted shlz-report-card--fluid" data-component-audit-id="report-card-workspace-summary" aria-labelledby="workspace-report-title">
-        <p class="shlz-report-card__eyebrow">Сводка</p><h4 class="shlz-report-card__title" id="workspace-report-title">Заявки в работе</h4><p class="shlz-report-card__value">${records.length}</p><p class="shlz-report-card__meta">Текущий набор данных</p>
+        <p class="shlz-report-card__eyebrow">Сводка</p><h4 class="shlz-report-card__title" id="workspace-report-title">Заявки в работе</h4><p class="shlz-report-card__value">${inProgressRecordCount}</p><p class="shlz-report-card__meta">Текущий набор данных</p>
         <svg class="shlz-report-card__decoration" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 16.5V3.5h10.4l-2.1 4 2.1 3.9-10.4.1" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </article>
     </div>

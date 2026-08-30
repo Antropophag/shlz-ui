@@ -23,6 +23,10 @@ The root SHALL remain non-interactive. An optional nested Link MAY be supplied b
 - **WHEN** the card contains only report data
 - **THEN** it remains a readable article and does not expose pointer or keyboard activation
 
+### Requirement: Report card supports bounded content stress
+
+The fluid report card SHALL fit its container down to 240 pixels, wrap structured text, grow vertically when content needs more height, and reserve the trailing-decoration gutter across lower text regions.
+
 #### Scenario: Fluid report content is stressed
 
 - **WHEN** the fluid modifier is rendered at 240 pixels or with long content

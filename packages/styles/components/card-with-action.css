@@ -14,7 +14,7 @@
 
 .shlz-card-with-action--source {
   inline-size: 314px; /* FACT: Card with button.svg frame width. */
-  block-size: 230px; /* FACT: Card with button.svg frame height. */
+  min-block-size: 230px; /* FACT: Card with button.svg frame height. */
 }
 
 .shlz-card-with-action--fluid {
