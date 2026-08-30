@@ -38,10 +38,6 @@ import {
   messagingHistoryShowcaseMarkup,
 } from "./messaging-history-showcase.js";
 import {
-  enhanceMessagingHistoryConsumers,
-  messagingHistoryConsumerMarkup,
-} from "./messaging-history-consumers.js";
-import {
   enhanceFileUploadShowcase,
   fileUploadShowcaseMarkup,
 } from "./file-upload-showcase.js";
@@ -328,8 +324,10 @@ ${datePickerShowcaseMarkup}
 ${datePickerConsumerMarkup}
 ${calendarGridShowcaseMarkup}
 ${plannerScheduleShowcaseMarkup}`;
-app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
-app.insertAdjacentHTML("beforeend", messagingHistoryConsumerMarkup);
+app.insertAdjacentHTML(
+  "beforeend",
+  messagingHistoryShowcaseMarkup.replaceAll('class="shlz-link" ', ""),
+);
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 
@@ -564,7 +562,6 @@ window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
 enhancePlannerScheduleShowcase();
 enhanceMessagingHistoryShowcase();
-enhanceMessagingHistoryConsumers();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
 window.__shlzEnhanceFileUploads = enhanceFileUploads;

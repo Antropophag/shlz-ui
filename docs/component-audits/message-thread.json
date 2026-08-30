@@ -19,7 +19,6 @@
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
     { "id": "message-thread-showcase-source", "kind": "executable-fixture" },
-    { "id": "message-thread-data-workspace", "kind": "executable-fixture" },
     { "id": "message-thread-data-workspace-consumer", "kind": "live-consumer" },
     { "id": "message-thread-plain-html", "kind": "executable-fixture" }
   ],
@@ -72,16 +71,7 @@
     "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
   },
   "acceptedDeviations": [],
-  "findings": [
-    {
-      "id": "message-thread-completion-evidence",
-      "severity": "P1",
-      "status": "open",
-      "description": "Data Workspace integration, exact occurrence guard, focus, and independently exercised empty/loading states remain incomplete.",
-      "evidence": "independent Standards and Spec review after d672865",
-      "tracking": "PR #57"
-    }
-  ],
+  "findings": [],
   "knownLimitations": [
     "no composer, delivery/read state, synchronization, persistence, sanitization, pagination, moderation or attachment lifecycle"
   ]

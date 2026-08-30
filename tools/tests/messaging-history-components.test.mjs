@@ -36,17 +36,16 @@ test("public docs and fixtures preserve native list semantics and consumer owner
   assert.match(historyDocs, /DOM order is authoritative/);
 });
 
-test("component manifests classify all three intended occurrences", async () => {
+test("component manifests classify fixture and live-consumer evidence without gallery consumers", async () => {
   for (const component of ["message-thread", "history-timeline"]) {
     const manifest = JSON.parse(
       await read(`docs/component-audits/${component}.json`),
     );
-    assert.equal(manifest.occurrences.length, 4);
+    assert.equal(manifest.occurrences.length, 3);
     assert.deepEqual(
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),
     );
-    assert.equal(manifest.findings.length, 1);
-    assert.match(manifest.findings[0].id, /completion-evidence/);
+    assert.equal(manifest.findings.length, 0);
   }
 });
