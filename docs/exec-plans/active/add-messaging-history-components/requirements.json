@@ -1,0 +1,48 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Implement the best reusable product subset of Wave 12 as independent framework-neutral Message Thread and History Timeline modules, leaving Planner Schedule intact and Composer outside scope.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "wave-12-scope",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "just do the best bro" }
+    },
+    {
+      "id": "module-seams",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-path", "ref": "openspec/changes/wave-12-messaging-history-planner/design.md and docs/component-gap-research-2026-08-30.md" }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-path", "ref": "AGENTS.md, shlz-design-source/raw/svg/Messages.svg, and shlz-design-source/raw/svg/History of changes.svg" }
+    },
+    {
+      "id": "consumer-ownership",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-path", "ref": "docs/component-audits/wave-12-report.md and openspec/changes/add-messaging-history-components/design.md" }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-path", "ref": "AGENTS.md requires a task branch from current origin/main and an unmerged PR" }
+    }
+  ],
+  "openSpec": { "change": "add-messaging-history-components", "status": "synthesized" },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-prompt", "ref": "Тогда по вейв 12; just do the best bro" }
+  }
+}

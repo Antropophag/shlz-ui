@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-messaging-history-components",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "consumer-ownership",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement the best reusable product subset of Wave 12 as independent framework-neutral Message Thread and History Timeline modules, leaving Planner Schedule intact and Composer outside scope.",
+    "revision": 1
+  },
+  "routeDigest": "41258baa10443690c106af02aa2520ec07c585169b582f6c7859da2c166ec16a",
+  "version": 1,
+  "digest": "d70095412142e0f77c2b3fe08c39270a538835d4e008b1e80b95793f0bc4b1db"
+}
