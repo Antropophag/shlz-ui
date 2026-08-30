@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "intent": "Implement the three source-studied Wave 10 card compositions as framework-neutral public components with independent completion evidence.",
+  "route": "open-spec",
+  "openSpecChange": "implement-wave-10-card-compositions",
+  "requiredDecisions": [
+    { "id": "wave10-scope", "owner": "user", "blocking": true },
+    { "id": "public-contract", "owner": "agent", "blocking": true },
+    { "id": "source-authority", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

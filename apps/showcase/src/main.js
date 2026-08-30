@@ -11,6 +11,7 @@ import {
 } from "./notification-consumer.js";
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
+import { cardCompositionsMarkup } from "./card-compositions.js";
 import {
   datePickerShowcaseMarkup,
   enhanceDatePickerShowcase,
@@ -180,6 +181,9 @@ const navigationGroups = [
       ["calendar-grid-demo", "Calendar Grid"],
       ["planner-schedule-demo", "Planner Schedule"],
       ["file-upload-demo", "File Upload"],
+      ["card-with-action-demo", "Card with action"],
+      ["report-card-demo", "Report card"],
+      ["cover-demo", "Cover"],
     ],
   ],
   ["Validation", [["consumer-validation", "Data workspace"]]],
@@ -315,6 +319,7 @@ ${datePickerConsumerMarkup}
 ${calendarGridShowcaseMarkup}
 ${plannerScheduleShowcaseMarkup}`;
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],

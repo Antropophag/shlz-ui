@@ -25,4 +25,7 @@
 @import url("./components/document-row.css");
 @import url("./components/file-upload.css");
 @import url("./components/empty-state.css");
+@import url("./components/card-with-action.css");
+@import url("./components/report-card.css");
+@import url("./components/cover.css");
 @import url("./typography-profiles.css");

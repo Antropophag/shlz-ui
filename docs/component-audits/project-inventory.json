@@ -1994,43 +1994,192 @@
       ],
       "evidence": {
         "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",
-        "structural-contract": "pass: bounded repository surfaces contain zero implementations and all 15 generic card/cover terminology collisions are classified",
-        "runtime-browser": "not-applicable: source-only family has no runtime root, behavior, event, controller or public API",
-        "accessibility": "not-applicable: no production semantics, keyboard model or accessible naming contract exists",
-        "focused-visual": "not-applicable: raw artwork is authoritative but no implemented component or runtime state exists for comparison",
-        "consumer-integration": "not-applicable: no live or Data Workspace consumer exists",
-        "responsive-content-stress": "not-applicable: static exports establish no responsive reflow, media lifecycle or dynamic content behavior"
+        "structural-contract": "pass: the durable routing family is implemented as three independent public contracts with independently classified occurrences",
+        "runtime-browser": "pass: all applicable presentational runtime roots render without root-owned behavior",
+        "accessibility": "pass: semantic structure and nested native-control ownership are verified",
+        "focused-visual": "pass: independent source and narrow snapshots cover all three contracts",
+        "consumer-integration": "pass: Report card is used by the Data Workspace consumer; the other static compositions claim no consumer lifecycle",
+        "responsive-content-stress": "pass: independent 240px card/report and 320px cover contracts retain content without overflow"
       },
       "canonical_name": "Card compositions",
       "category": "application-compositions",
-      "implementation_status": "source-only",
+      "implementation_status": "composition-only",
       "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Card with button.svg",
         "shlz-design-source/raw/svg/Reports card.svg",
         "shlz-design-source/raw/svg/Cover.svg"
       ],
-      "production_implementation": [],
+      "production_implementation": [
+        "packages/styles/components/card-with-action.css",
+        "packages/styles/components/report-card.css",
+        "packages/styles/components/cover.css"
+      ],
       "behavior": [],
       "docs": [
-        "docs/component-audits/card-compositions.json",
+        "docs/component-audits/card-with-action.json",
+        "docs/component-audits/report-card.json",
+        "docs/component-audits/cover.json",
         "docs/component-audits/wave-10-report.md"
       ],
-      "executable_fixtures": [],
+      "executable_fixtures": ["apps/showcase/src/card-compositions.js"],
+      "live_consumers": [],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "routing aggregate only; public contracts remain Card with action, Report card, and Cover"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "the aggregate family is not a generic Card API and has no shared runtime root",
+        "outlined text does not establish literal runtime copy or structured typography"
+      ],
+      "measured_counts": {
+        "executableShowcase": 7,
+        "liveConsumers": 0,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact hashes and critical geometry for all three raw SVGs are locked by the Wave 10 source test",
+        "structural-contract": "pass: both executable occurrences are classified and the presentational root delegates action semantics to nested native controls",
+        "runtime-browser": "not-applicable: the presentational root owns no controller; nested Button or Link owns behavior",
+        "accessibility": "pass: semantic article and heading structure retain native nested-action focus ownership",
+        "focused-visual": "pass: source-size and narrow focused snapshots cover the supported geometry",
+        "consumer-integration": "not-applicable: no live or Data Workspace consumer exists",
+        "responsive-content-stress": "pass: the fluid modifier contains long text and a native action at 240px"
+      },
+      "canonical_name": "Card with action",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Card with button.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/card-with-action.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/component-audits/card-with-action.json",
+        "docs/components/card-with-action.md"
+      ],
+      "executable_fixtures": ["apps/showcase/src/card-compositions.js"],
       "live_consumers": [],
       "data_workspace_consumers": [],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
-      "scope": ["content/image/actions", "report/card/cover variants"],
+      "scope": [
+        "content",
+        "optional visual",
+        "nested native action",
+        "source and fluid geometry"
+      ],
       "known_findings": [],
       "limitations": [
-        "VERIFIED is limited to the source/absence audit and does not indicate that a production Card component exists",
-        "outlined text does not establish literal runtime copy or structured typography properties",
-        "click, navigation, loading, media, responsive, data-model and generic Card API semantics remain unsupported"
+        "outlined text does not establish literal runtime copy or illustration semantics"
       ],
       "measured_counts": {
-        "executableShowcase": 0,
+        "executableShowcase": 2,
+        "liveConsumers": 0,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: source hash and geometry are locked",
+        "structural-contract": "pass: all four occurrences are classified",
+        "runtime-browser": "not-applicable: presentational root owns no controller",
+        "accessibility": "pass: semantic article and heading structure with native optional link",
+        "focused-visual": "pass: white, muted and consumer snapshots",
+        "consumer-integration": "pass: Data Workspace contains a real summary",
+        "responsive-content-stress": "pass: narrow long-content fixture is covered"
+      },
+      "canonical_name": "Report card",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Reports card.svg"],
+      "production_implementation": [
+        "packages/styles/components/report-card.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/component-audits/report-card.json",
+        "docs/components/report-card.md"
+      ],
+      "executable_fixtures": ["apps/showcase/src/card-compositions.js"],
+      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["white", "muted", "optional link", "source and fluid geometry"],
+      "known_findings": [],
+      "limitations": ["report data lifecycle remains consumer-owned"],
+      "measured_counts": {
+        "executableShowcase": 3,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: source hash and frame are locked",
+        "structural-contract": "pass: both occurrences are classified",
+        "runtime-browser": "not-applicable: static composition owns no controller",
+        "accessibility": "pass: text uses semantic DOM",
+        "focused-visual": "pass: default and narrow snapshots",
+        "consumer-integration": "not-applicable: no application cover lifecycle is claimed",
+        "responsive-content-stress": "pass: narrow long-content fixture is covered"
+      },
+      "canonical_name": "Cover",
+      "category": "application-compositions",
+      "implementation_status": "composition-only",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Cover.svg"],
+      "production_implementation": ["packages/styles/components/cover.css"],
+      "behavior": [],
+      "docs": ["docs/component-audits/cover.json", "docs/components/cover.md"],
+      "executable_fixtures": ["apps/showcase/src/card-compositions.js"],
+      "live_consumers": [],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": ["static semantic cover", "source and fluid geometry"],
+      "known_findings": [],
+      "limitations": ["outlined paths do not establish literal copy"],
+      "measured_counts": {
+        "executableShowcase": 2,
         "liveConsumers": 0,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,

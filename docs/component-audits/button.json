@@ -31,6 +31,14 @@
     },
     { "id": "button-calendar-grid-consumer", "kind": "live-consumer" },
     {
+      "id": "button-card-with-action-command",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-card-with-action-navigation",
+      "kind": "content-stress-fixture"
+    },
+    {
       "id": "button-planner-source-details",
       "kind": "executable-fixture"
     },

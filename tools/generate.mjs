@@ -215,6 +215,9 @@ const styleSources = [
   "components/document-row.css",
   "components/file-upload.css",
   "components/empty-state.css",
+  "components/card-with-action.css",
+  "components/report-card.css",
+  "components/cover.css",
   "typography-profiles.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });

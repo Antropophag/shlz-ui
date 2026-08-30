@@ -1,0 +1,83 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "fe2611edf39aacd32942e95b04cfbe2889d6cdaec99640aadf543a1dd470abc1",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "application-compositions/card-with-action",
+        "content": "- **WHEN** title, description, or action text wraps at a supported narrow width\n- **THEN** content remains visible, the nested control remains operable, and no horizontal overflow is introduced by the component",
+        "id": "application-compositions/card-with-action::Card content remains usable under bounded stress::Long content is rendered in a narrow container",
+        "name": "Long content is rendered in a narrow container",
+        "requirement": "Card content remains usable under bounded stress",
+        "requirementContent": "The composition SHALL offer a fluid modifier that fits its container down to 240 pixels, permits text wrapping, and grows vertically when localized or enlarged content no longer fits the source height."
+      },
+      {
+        "capability": "application-compositions/card-with-action",
+        "content": "- **WHEN** a consumer renders a native link or button in `.shlz-card-with-action__actions`\n- **THEN** that nested control alone owns focus, activation, navigation, and disabled semantics",
+        "id": "application-compositions/card-with-action::Card with action is a narrow presentational composition::Consumer supplies an action",
+        "name": "Consumer supplies an action",
+        "requirement": "Card with action is a narrow presentational composition",
+        "requirementContent": "The styles package SHALL expose a `.shlz-card-with-action` composition with structured title, description, optional decorative visual, and actions regions. The source specimen SHALL be 314 by 230 pixels with a 16-pixel radius and SHALL accept an existing Button or Link as its nested action without making the card root interactive."
+      },
+      {
+        "capability": "application-compositions/card-with-action",
+        "content": "- **WHEN** the source-size modifier is used\n- **THEN** the composition preserves the 314 by 230 source geometry without clipping its structured content contract",
+        "id": "application-compositions/card-with-action::Card with action is a narrow presentational composition::Exact specimen is requested",
+        "name": "Exact specimen is requested",
+        "requirement": "Card with action is a narrow presentational composition",
+        "requirementContent": "The styles package SHALL expose a `.shlz-card-with-action` composition with structured title, description, optional decorative visual, and actions regions. The source specimen SHALL be 314 by 230 pixels with a 16-pixel radius and SHALL accept an existing Button or Link as its nested action without making the card root interactive."
+      },
+      {
+        "capability": "application-compositions/cover",
+        "content": "- **WHEN** a consumer renders the documented semantic heading and supporting content\n- **THEN** the content follows DOM reading order and the root introduces no interaction role",
+        "id": "application-compositions/cover::Cover is a static structured composition::Cover is read by assistive technology",
+        "name": "Cover is read by assistive technology",
+        "requirement": "Cover is a static structured composition",
+        "requirementContent": "The styles package SHALL expose a `.shlz-cover` composition with eyebrow, title, description, and metadata regions. The source-ratio specimen SHALL use an 874 by 400 aspect ratio and a white source surface while retaining real text rather than outlined source paths."
+      },
+      {
+        "capability": "application-compositions/cover",
+        "content": "- **WHEN** available width is below the documented source-ratio range\n- **THEN** all text remains visible without horizontal overflow and the cover grows in block size",
+        "id": "application-compositions/cover::Cover supports bounded responsive content::Cover is rendered in a narrow container",
+        "name": "Cover is rendered in a narrow container",
+        "requirement": "Cover supports bounded responsive content",
+        "requirementContent": "The fluid cover SHALL fit its container down to 320 pixels, wrap structured text, and replace the fixed aspect ratio with content-driven height when the source ratio cannot contain the content."
+      },
+      {
+        "capability": "application-compositions/report-card",
+        "content": "- **WHEN** the card contains only report data\n- **THEN** it remains a readable article and does not expose pointer or keyboard activation",
+        "id": "application-compositions/report-card::Report card has no implied activation::No link is supplied",
+        "name": "No link is supplied",
+        "requirement": "Report card has no implied activation",
+        "requirementContent": "The root SHALL remain non-interactive. An optional nested Link MAY be supplied by the consumer and SHALL be the only navigation target."
+      },
+      {
+        "capability": "application-compositions/report-card",
+        "content": "- **WHEN** structured report content is placed in the documented regions\n- **THEN** the value and title remain the primary reading order and decorative trailing geometry is hidden from assistive technology",
+        "id": "application-compositions/report-card::Report card presents a structured report summary::A report summary is rendered",
+        "name": "A report summary is rendered",
+        "requirement": "Report card presents a structured report summary",
+        "requirementContent": "The styles package SHALL expose a `.shlz-report-card` composition with eyebrow, title, value, metadata, and trailing-decoration regions. Its source specimen SHALL be 314 by 230 pixels with a 16-pixel radius and SHALL support the white and `#EEF0F4` muted source surfaces."
+      },
+      {
+        "capability": "application-compositions/report-card",
+        "content": "- **WHEN** `.shlz-report-card--muted` is applied\n- **THEN** the surface uses the source-observed muted paint without changing semantics or inventing state behavior",
+        "id": "application-compositions/report-card::Report card presents a structured report summary::Muted source variant is selected",
+        "name": "Muted source variant is selected",
+        "requirement": "Report card presents a structured report summary",
+        "requirementContent": "The styles package SHALL expose a `.shlz-report-card` composition with eyebrow, title, value, metadata, and trailing-decoration regions. Its source specimen SHALL be 314 by 230 pixels with a 16-pixel radius and SHALL support the white and `#EEF0F4` muted source surfaces."
+      },
+      {
+        "capability": "application-compositions/report-card",
+        "content": "- **WHEN** the fluid modifier is rendered at 240 pixels or with long content\n- **THEN** text wraps, the card grows vertically, and content does not overlap the trailing decoration",
+        "id": "application-compositions/report-card::Report card supports bounded content stress::Fluid report content is stressed",
+        "name": "Fluid report content is stressed",
+        "requirement": "Report card supports bounded content stress",
+        "requirementContent": "The fluid report card SHALL fit its container down to 240 pixels, wrap structured text, grow vertically when content needs more height, and reserve the trailing-decoration gutter across lower text regions."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "af09357573647f08830964e3be0cda666d1dff502e172041c090821899e0f1f0"
+}

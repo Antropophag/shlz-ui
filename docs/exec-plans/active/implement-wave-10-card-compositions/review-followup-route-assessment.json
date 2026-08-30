@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "intent": "Resolve the four verified actionable review findings on PR #56 while preserving the approved Wave 10 composition contracts.",
+  "route": "direct",
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 2,
+  "component": "report-card",
+  "authoritativeSource": "shlz-design-source/raw/svg/Reports card.svg",
+  "referenceSources": ["docs/components/report-card.md"],
+  "implementation": ["packages/styles/components/report-card.css"],
+  "behavior": null,
+  "docs": "docs/components/report-card.md",
+  "rootSelector": "[data-component-audit-id^='report-card-']",
+  "legacySelectors": [".shlz-report-card"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "report-card-showcase-default", "kind": "executable-fixture" },
+    { "id": "report-card-showcase-muted", "kind": "executable-fixture" },
+    { "id": "report-card-content-stress", "kind": "content-stress-fixture" },
+    { "id": "report-card-workspace-summary", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["source-314x230", "fluid-min-240"],
+  "supportedStates": ["white", "muted", "optional-link"],
+  "contentStress": ["long-title", "large-value", "long-meta", "native-link"],
+  "sourceClaims": [
+    {
+      "claim": "The source contains three 314 by 230 radius-16 specimens, two white and one #EEF0F4, with a repeated trailing decoration",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Reports card.svg"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/card-compositions-wave10.spec.js",
+    "tools/playwright/consumer-workspace.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-variants-chromium-linux.png",
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-narrow-chromium-linux.png",
+    "tools/playwright/card-compositions-wave10.spec.js-snapshots/report-card-consumer-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact source hash, fills, geometry and shadow are locked",
+    "structural-contract": "pass: four repository occurrences are classified",
+    "runtime-browser": "not-applicable: the root owns no controller",
+    "accessibility": "pass: article and heading structure remain semantic and optional Link stays native",
+    "focused-visual": "pass: white, muted, narrow-content and consumer focused snapshots cover material and stress variants",
+    "consumer-integration": "pass: Data Workspace renders a real summary composition",
+    "responsive-content-stress": "pass: long title, value and metadata remain contained at narrow width"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: white, muted and stress fixtures"],
+      "realInteractionVisual": [
+        "not-applicable: the root has no interaction state"
+      ],
+      "runtimeBehavior": ["not-applicable: optional Link behavior is native"]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/card-compositions-wave10.spec.js",
+    "manualStateWalk": "pass: variants, consumer and narrow content inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "outlined source text does not establish literal report data or data lifecycle"
+  ]
+}
