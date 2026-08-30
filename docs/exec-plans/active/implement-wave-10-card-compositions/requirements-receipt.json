@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "implement-wave-10-card-compositions",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "wave10-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "public-contract",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement the three source-studied Wave 10 card compositions as framework-neutral public components with independent completion evidence.",
+    "revision": 1
+  },
+  "routeDigest": "a24f11b1cd3fd731f4e30922857fd373aeb1177cad04a4b8e32f2c8427532e66",
+  "version": 1,
+  "digest": "ca50f3d0dfb2e11369568bddeb48d6c791908a2d754404fb7bf0bb68bd672541"
+}
