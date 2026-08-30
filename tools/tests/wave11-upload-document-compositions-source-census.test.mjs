@@ -61,6 +61,16 @@ const approvedFileUploadArtifactPaths = new Set([
   "tools/tests/fixtures/file-upload-fidelity-known-bad.txt",
   "tools/tests/fixtures/file-upload-fidelity-oracle.mjs",
 ]);
+const laterWave12ProductPaths = new Set([
+  "apps/showcase/src/messaging-history-showcase.js",
+  "docs/components/message-thread.md",
+  "docs/components/history-timeline.md",
+  "packages/styles/components/message-thread.css",
+  "packages/styles/components/history-timeline.css",
+  "tools/fixtures/messaging-history-components.html",
+  "tools/playwright/messaging-history-components.spec.js",
+  "tools/tests/messaging-history-components.test.mjs",
+]);
 const isApprovedFileUploadSurface = ({ path }) =>
   approvedFileUploadArtifactPaths.has(path);
 
@@ -223,6 +233,7 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
   const historicalSources = sources.filter(
     ({ path }) =>
       !approvedFileUploadArtifactPaths.has(path) &&
+      !laterWave12ProductPaths.has(path) &&
       path !== "packages/behaviors/src/index.ts" &&
       path !== "tools/package-consumer-smoke.mjs",
   );

@@ -2442,6 +2442,122 @@
     },
     {
       "tests": [
+        "tools/tests/messaging-history-components.test.mjs",
+        "tools/playwright/messaging-history-components.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: Messages.svg authority remains unchanged",
+        "structural-contract": "pass: style, docs, fixtures and manifest",
+        "runtime-browser": "pass: semantic lists and native consumer action",
+        "accessibility": "pass: list structure, focus and axe",
+        "focused-visual": "pass: incoming, outgoing and responsive geometry",
+        "consumer-integration": "pass: Data Workspace consumer",
+        "responsive-content-stress": "pass: narrow, long content and text scaling"
+      },
+      "canonical_name": "Message Thread",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Messages.svg"],
+      "production_implementation": [
+        "packages/styles/components/message-thread.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/components/message-thread.md",
+        "docs/component-audits/message-thread.json",
+        "docs/component-audits/message-thread-contract.md"
+      ],
+      "executable_fixtures": [
+        "apps/showcase/src/messaging-history-showcase.js",
+        "tools/fixtures/messaging-history-components.html"
+      ],
+      "live_consumers": ["apps/showcase/src/messaging-history-showcase.js"],
+      "data_workspace_consumers": [
+        "apps/showcase/src/messaging-history-showcase.js"
+      ],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "semantic message list",
+        "incoming and outgoing presentation",
+        "author, timestamp, content and attachments"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "no composer, synchronization, delivery/read state, sanitization, persistence, moderation, pagination or attachment lifecycle"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/messaging-history-components.test.mjs",
+        "tools/playwright/messaging-history-components.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: History of changes.svg authority remains unchanged",
+        "structural-contract": "pass: style, docs, fixtures and manifest",
+        "runtime-browser": "pass: semantic lists and native consumer action",
+        "accessibility": "pass: list structure, focus and axe",
+        "focused-visual": "pass: grouping, current emphasis and responsive geometry",
+        "consumer-integration": "pass: Data Workspace consumer",
+        "responsive-content-stress": "pass: narrow, long content and text scaling"
+      },
+      "canonical_name": "History Timeline",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/History of changes.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/history-timeline.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/components/history-timeline.md",
+        "docs/component-audits/history-timeline.json",
+        "docs/component-audits/history-timeline-contract.md"
+      ],
+      "executable_fixtures": [
+        "apps/showcase/src/messaging-history-showcase.js",
+        "tools/fixtures/messaging-history-components.html"
+      ],
+      "live_consumers": ["apps/showcase/src/messaging-history-showcase.js"],
+      "data_workspace_consumers": [
+        "apps/showcase/src/messaging-history-showcase.js"
+      ],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "semantic consumer-ordered history list",
+        "period groups",
+        "actor, timestamp, description and attachments"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
         "tools/playwright/consumer-workspace.spec.js",
         "tools/playwright/data-content-wave5.spec.js"
       ],
@@ -2493,7 +2609,7 @@
   ],
   "unclassifiedSurfaces": [
     "Priority, Icon button, Drag & Drope and File type icon are normalized/icon-level source families without independent public component contracts.",
-    "Source-only messaging, history and planner families have not been promoted to reusable APIs; the higher-level Upload / Document composition audit remains separate from the reusable File Upload seam.",
+    "Full Messaging, History and Planner application compositions remain source-only; reusable Message Thread, History Timeline, and Planner Schedule seams are tracked independently. The higher-level Upload / Document composition audit remains separate from reusable File Upload.",
     "Application-local Showcase shell CSS is a live implementation but is not a reusable package contract.",
     "Remote feat/document-row and feat/document-row-clean branches are unfinished alternatives outside baseline."
   ],

@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Implement the best reusable product subset of Wave 12 as independent framework-neutral Message Thread and History Timeline modules, leaving Planner Schedule intact and Composer outside scope.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

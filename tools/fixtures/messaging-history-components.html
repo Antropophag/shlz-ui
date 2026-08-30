@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Messaging and history fixtures</title>
+    <link rel="stylesheet" href="../../packages/styles/dist/shlz.css" />
+  </head>
+  <body class="shlz-scope">
+    <main>
+      <ol
+        class="shlz-message-thread"
+        aria-label="Messages"
+        data-component-audit-id="message-thread-plain-html"
+      >
+        <li class="shlz-message-thread__item" data-direction="incoming">
+          <span class="shlz-avatar shlz-avatar--40" aria-hidden="true">AP</span>
+          <article class="shlz-message-thread__message">
+            <header class="shlz-message-thread__header">
+              <span class="shlz-message-thread__author">Alex Parker</span
+              ><time class="shlz-message-thread__time">09:15</time>
+            </header>
+            <div class="shlz-message-thread__bubble">
+              <p>Plain HTML message.</p>
+            </div>
+          </article>
+        </li>
+      </ol>
+      <ol
+        class="shlz-history-timeline"
+        aria-label="History"
+        data-component-audit-id="history-timeline-plain-html"
+      >
+        <li class="shlz-history-timeline__entry">
+          <span class="shlz-avatar shlz-avatar--40" aria-hidden="true">MS</span
+          ><span
+            class="shlz-history-timeline__marker"
+            aria-hidden="true"
+          ></span>
+          <article class="shlz-history-timeline__content">
+            <header class="shlz-history-timeline__header">
+              <span class="shlz-history-timeline__actor">Morgan Smith</span
+              ><time class="shlz-history-timeline__time">10:20</time>
+            </header>
+            <p class="shlz-history-timeline__description">
+              Updated the record.
+            </p>
+          </article>
+        </li>
+      </ol>
+    </main>
+  </body>
+</html>

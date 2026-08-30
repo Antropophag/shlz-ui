@@ -16,33 +16,51 @@
       "owner": "agent",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "openspec/changes/wave-12-messaging-history-planner/design.md and docs/component-gap-research-2026-08-30.md" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "openspec/changes/wave-12-messaging-history-planner/design.md and docs/component-gap-research-2026-08-30.md"
+      }
     },
     {
       "id": "source-authority",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "AGENTS.md, shlz-design-source/raw/svg/Messages.svg, and shlz-design-source/raw/svg/History of changes.svg" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md, shlz-design-source/raw/svg/Messages.svg, and shlz-design-source/raw/svg/History of changes.svg"
+      }
     },
     {
       "id": "consumer-ownership",
       "owner": "agent",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "docs/component-audits/wave-12-report.md and openspec/changes/add-messaging-history-components/design.md" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/component-audits/wave-12-report.md and openspec/changes/add-messaging-history-components/design.md"
+      }
     },
     {
       "id": "delivery-contract",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "AGENTS.md requires a task branch from current origin/main and an unmerged PR" }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md requires a task branch from current origin/main and an unmerged PR"
+      }
     }
   ],
-  "openSpec": { "change": "add-messaging-history-components", "status": "synthesized" },
+  "openSpec": {
+    "change": "add-messaging-history-components",
+    "status": "synthesized"
+  },
   "authorization": {
     "status": "pre-authorized",
-    "provenance": { "kind": "user-prompt", "ref": "Тогда по вейв 12; just do the best bro" }
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Тогда по вейв 12; just do the best bro"
+    }
   }
 }

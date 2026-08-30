@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 2,
+  "component": "history-timeline",
+  "authoritativeSource": "shlz-design-source/raw/svg/History of changes.svg",
+  "referenceSources": [
+    "docs/component-audits/wave-12-report.md",
+    "docs/component-audits/history-timeline-contract.md"
+  ],
+  "implementation": ["packages/styles/components/history-timeline.css"],
+  "behavior": null,
+  "docs": "docs/components/history-timeline.md",
+  "rootSelector": "[data-component-audit-id^='history-timeline-']",
+  "legacySelectors": [".shlz-history-timeline"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "history-timeline-showcase-source", "kind": "executable-fixture" },
+    { "id": "history-timeline-data-workspace", "kind": "live-consumer" },
+    { "id": "history-timeline-plain-html", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["bounded-non-virtualized-timeline"],
+  "supportedStates": [
+    "period-group",
+    "default",
+    "current",
+    "attachments",
+    "empty",
+    "loading-safe"
+  ],
+  "contentStress": [
+    "long-localized-content",
+    "sparse-entry",
+    "narrow-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "History of changes.svg depicts static history entries, actors, timestamps and connector artwork",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/History of changes.svg"
+    }
+  ],
+  "browserTests": ["tools/playwright/messaging-history-components.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-source-chromium-linux.png",
+    "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: authoritative hash and unchanged-source check",
+    "structural-contract": "pass: styles, docs, fixtures and occurrence ledger",
+    "runtime-browser": "pass: semantic native actions",
+    "accessibility": "pass: native list structure and axe coverage",
+    "focused-visual": "pass: focused source states and responsive geometry",
+    "consumer-integration": "pass: Data Workspace action",
+    "responsive-content-stress": "pass: narrow viewport, long content and text scaling"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: source and state matrix"],
+      "realInteractionVisual": [
+        "not-applicable: the module has no library-owned interactive visual state"
+      ],
+      "runtimeBehavior": ["pass: native consumer action"]
+    },
+    "materialStates": [
+      "period-group",
+      "current",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/messaging-history-components.spec.js",
+    "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
+  ]
+}
