@@ -1,4 +1,5 @@
-<p class="consumer-status"></p>
-<a class="shared-link" href="#">document.pdf</a>
-<li class="period-label">Today</li>
-<li class="timeline-entry">Updated record</li>
+{
+  "main": "markup.replaceAll('class=\"shlz-link\" ', '')",
+  "consumer": "markup.replaceAll('class=\"shlz-link\" ', '').replaceAll('class=\"shlz-button shlz-button--sm\" ', '') <p data-messaging-history-consumer-status></p>",
+  "showcase": "<a class=\"shlz-link\" href=\"#\">document.pdf</a><li class=\"shlz-history-timeline__period\">Today</li><li class=\"shlz-history-timeline__entry\">Updated record</li>"
+}

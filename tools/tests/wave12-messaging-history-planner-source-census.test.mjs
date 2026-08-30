@@ -50,6 +50,7 @@ const promotedMessagingHistoryPaths = new Set([
   "tools/playwright/messaging-history-components.spec.js",
   "tools/tests/component-audit-manifest.test.mjs",
   "tools/tests/messaging-history-components.test.mjs",
+  "tools/tests/pr57-regression-oracle.mjs",
 ]);
 const scopeMatchers = {
   messaging:
