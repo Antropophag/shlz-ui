@@ -1,0 +1,362 @@
+{
+  "contractReceiptDigest": "2d008fadeb58f6269f47d0ce3848050c9f3a3b4d0b4bb3bf0053c28767bc819a",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "node",
+      "-e",
+      "const fs=require('node:fs');const [p,,m]=process.argv.slice(1);process.exit(fs.readFileSync(p,'utf8').includes(m)?0:1)",
+      "{evidence}",
+      "{set}",
+      "{member}"
+    ],
+    "candidateHead": "fbc8d853db047c51fd7623d9871a41ed7b1a79bf",
+    "closedSetEvidence": [
+      {
+        "covered": [
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "200-percent-text"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "long-filename"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "long-instructions"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "narrow-viewport"
+          }
+        ],
+        "excluded": [],
+        "id": "file-upload-content-stress",
+        "members": [
+          "200-percent-text",
+          "long-filename",
+          "long-instructions",
+          "narrow-viewport"
+        ]
+      },
+      {
+        "covered": [
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-data-workspace"
+          },
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-plain-html"
+          },
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-showcase-disabled"
+          },
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-showcase-empty"
+          },
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-showcase-error"
+          },
+          {
+            "evidence": ["tools/playwright/file-upload.spec.js"],
+            "member": "file-upload-showcase-populated"
+          }
+        ],
+        "excluded": [],
+        "id": "file-upload-occurrences",
+        "members": [
+          "file-upload-data-workspace",
+          "file-upload-plain-html",
+          "file-upload-showcase-disabled",
+          "file-upload-showcase-empty",
+          "file-upload-showcase-error",
+          "file-upload-showcase-populated"
+        ]
+      },
+      {
+        "covered": [
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "disabled"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "drag-active"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "empty"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "error"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "focus-visible"
+          },
+          {
+            "evidence": ["docs/component-audits/file-upload.json"],
+            "member": "populated"
+          }
+        ],
+        "excluded": [],
+        "id": "file-upload-states",
+        "members": [
+          "disabled",
+          "drag-active",
+          "empty",
+          "error",
+          "focus-visible",
+          "populated"
+        ]
+      }
+    ],
+    "closure": [
+      {
+        "bytes": 3821,
+        "digest": "d7d637b153cc05ae044259514087c1bdb744c246b267d38d2b2d10f4b7c71558",
+        "path": "apps/showcase/src/file-upload-showcase.js"
+      },
+      {
+        "bytes": 4124,
+        "digest": "4c6cca0dc905e4633935dc8a1448f8e6441a55a55ced9a987d00dff8e9acfb76",
+        "path": "docs/component-audits/file-row.json"
+      },
+      {
+        "bytes": 4769,
+        "digest": "1e43a1da5fea1bebe7f211c6976f2705f3d0510bb8b86bbaa96774a35242e1f5",
+        "path": "docs/component-audits/file-upload.json"
+      },
+      {
+        "bytes": 4091,
+        "digest": "31dad5d9a0e97a0ef6a35a7129bfbd173db066da2cf5c2c6857cf9085f1a1ae4",
+        "path": "packages/behaviors/src/file-upload.ts"
+      },
+      {
+        "bytes": 3451,
+        "digest": "94c06c8a7508571fd0b2c3908d1207d9a5ce08c7627fe49313e3be2c823d49c3",
+        "path": "packages/styles/components/file-upload.css"
+      },
+      {
+        "bytes": 1463,
+        "digest": "6672124e052e93ba71964fdd2dc57c78014d5203e5ccc8a9bc8c610b2f0f8fb5",
+        "path": "tools/fixtures/file-upload.html"
+      },
+      {
+        "bytes": 16215,
+        "digest": "8c5e3268cdece440c4d010c8dd7eaac6cecb303efb6167b113e37d17a9c5a221",
+        "path": "tools/playwright/data-content-wave5.spec.js"
+      },
+      {
+        "bytes": 9982,
+        "digest": "51b054483f78e694d1ba153a0da0b1e59622b282644101c44c901d583ff6e947",
+        "path": "tools/playwright/file-upload.spec.js"
+      },
+      {
+        "bytes": 15766,
+        "digest": "0e8362b682a22a71f123c8678fe1689006c09ed9198ac16840e76e164e3be648",
+        "path": "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png"
+      },
+      {
+        "bytes": 30999,
+        "digest": "0340772551a3b184a5daec9358c9087986e52d87561adcd88400d998201ff02d",
+        "path": "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png"
+      }
+    ],
+    "closureDigest": "8bd6681e255dc8ed1af226f260359f4521f44b36da47ff39f819d5e084f854b6",
+    "contractDigest": "b3ef1dd8210c96be36612819943faa1c12288c4f8bfa179f29b7edf6c75c9a96",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "members": [
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "200-percent-text",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-content-stress"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "long-filename",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-content-stress"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "long-instructions",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-content-stress"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "narrow-viewport",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-content-stress"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-data-workspace",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-plain-html",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-showcase-disabled",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-showcase-empty",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-showcase-error",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "tools/playwright/file-upload.spec.js",
+          "member": "file-upload-showcase-populated",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-occurrences"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "disabled",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "drag-active",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "empty",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "error",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "focus-visible",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        },
+        {
+          "evidence": "docs/component-audits/file-upload.json",
+          "member": "populated",
+          "result": {
+            "code": 0,
+            "outcome": "pass",
+            "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "setId": "file-upload-states"
+        }
+      ],
+      "outcome": "pass"
+    },
+    "target": "File Upload runtime, consumer, occurrence, visual and responsive evidence"
+  },
+  "version": 1,
+  "digest": "f3d3b1be27e7fa953b7ab88ffae562cd0867e50f176f3efc1970aebeae003e0d"
+}

@@ -10,10 +10,10 @@
       "remote": "git@github.com:Antropophag/shlz-ui.git",
       "root": "/home/antropophag/code/shlz-ui-file-upload-drop-zone"
     },
-    "upstream": "origin/main"
+    "upstream": "origin/feature/file-upload-drop-zone"
   },
   "requirementsDigest": "93abe4e131349b38f5e16fb6e285322881d1caefe8b2e091a5cdafe5fc785d05",
   "routeDigest": "483b5899eca8e390ea408050e1a9efb03ef1d07d668a522cd71648b9241463f8",
   "version": 1,
-  "digest": "487fd556c04605a0b17c5085dbdc2594c97f42b260960f8c3f0cd1503e9b47fa"
+  "digest": "c65255dc8c1aefdf62f3d80393bc3ed4d71613aa2c3b2592a16c9b156c01eb65"
 }

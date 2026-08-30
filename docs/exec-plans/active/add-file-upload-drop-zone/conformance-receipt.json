@@ -1,0 +1,86 @@
+{
+  "baselineReceiptDigest": "c65255dc8c1aefdf62f3d80393bc3ed4d71613aa2c3b2592a16c9b156c01eb65",
+  "kind": "conformance",
+  "payload": {
+    "actual": [
+      "apps/showcase/src/file-upload-showcase.js",
+      "apps/showcase/src/main.js",
+      "docs/component-audits/file-row.json",
+      "docs/component-audits/file-upload.json",
+      "docs/component-audits/messaging-history-planner-compositions.json",
+      "docs/component-audits/project-inventory.json",
+      "docs/component-audits/upload-document-compositions.json",
+      "docs/components/file-upload.md",
+      "openspec/changes/add-file-upload-drop-zone/.openspec.yaml",
+      "openspec/changes/add-file-upload-drop-zone/design.md",
+      "openspec/changes/add-file-upload-drop-zone/proposal.md",
+      "openspec/changes/add-file-upload-drop-zone/specs/forms/file-upload/spec.md",
+      "openspec/changes/add-file-upload-drop-zone/tasks.md",
+      "packages/behaviors/package.json",
+      "packages/behaviors/src/file-upload.ts",
+      "packages/behaviors/src/index.ts",
+      "packages/styles/components/file-upload.css",
+      "packages/styles/shlz.css",
+      "tools/fixtures/file-upload.html",
+      "tools/generate.mjs",
+      "tools/package-consumer-smoke.mjs",
+      "tools/playwright/data-content-wave5.spec.js",
+      "tools/playwright/file-upload.spec.js",
+      "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png",
+      "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png",
+      "tools/tests/file-upload-contract.test.mjs",
+      "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+      "tools/tests/wave6-repository-census.test.mjs"
+    ],
+    "candidateHead": "fbc8d853db047c51fd7623d9871a41ed7b1a79bf",
+    "closedSets": [
+      {
+        "id": "file-upload-content-stress",
+        "members": [
+          "200-percent-text",
+          "long-filename",
+          "long-instructions",
+          "narrow-viewport"
+        ]
+      },
+      {
+        "id": "file-upload-occurrences",
+        "members": [
+          "file-upload-data-workspace",
+          "file-upload-plain-html",
+          "file-upload-showcase-disabled",
+          "file-upload-showcase-empty",
+          "file-upload-showcase-error",
+          "file-upload-showcase-populated"
+        ]
+      },
+      {
+        "id": "file-upload-states",
+        "members": [
+          "disabled",
+          "drag-active",
+          "empty",
+          "error",
+          "focus-visible",
+          "populated"
+        ]
+      }
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "outcome": "pass"
+  },
+  "routeReceiptDigest": "483b5899eca8e390ea408050e1a9efb03ef1d07d668a522cd71648b9241463f8",
+  "version": 1,
+  "digest": "4c6da63c3225b11be26366a16954d089711d76789b1419824002ea1ef01f9f84"
+}
