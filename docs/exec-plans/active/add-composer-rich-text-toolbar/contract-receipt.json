@@ -1,7 +1,7 @@
 {
   "kind": "contract",
   "payload": {
-    "contractDigest": "8c2a0e780cd2822f28daa54e2c769da7cd1243e1ff50cb0b4b331df8f5cab8f0",
+    "contractDigest": "b504fc048c001995439daf563aca8a41ee1aaf02c157ab1d277794f32b432425",
     "failureInvariants": [],
     "scenarios": [
       {
@@ -26,7 +26,7 @@
         "id": "forms/composer::Composer states remain semantic and externally controlled::Consumer makes the surface read-only",
         "name": "Consumer makes the surface read-only",
         "requirement": "Composer states remain semantic and externally controlled",
-        "requirementContent": "Composer SHALL visually support focus-within, invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
+        "requirementContent": "Composer SHALL style the root `:focus-within` presentation when a descendant is focused. Composer SHALL visually support invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
       },
       {
         "capability": "forms/composer",
@@ -34,7 +34,7 @@
         "id": "forms/composer::Composer states remain semantic and externally controlled::Consumer reports invalid content",
         "name": "Consumer reports invalid content",
         "requirement": "Composer states remain semantic and externally controlled",
-        "requirementContent": "Composer SHALL visually support focus-within, invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
+        "requirementContent": "Composer SHALL style the root `:focus-within` presentation when a descendant is focused. Composer SHALL visually support invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
       },
       {
         "capability": "forms/composer",
@@ -66,7 +66,7 @@
         "id": "forms/rich-text-toolbar::Rich Text Toolbar exposes semantic command controls::A consumer renders formatting commands",
         "name": "A consumer renders formatting commands",
         "requirement": "Rich Text Toolbar exposes semantic command controls",
-        "requirementContent": "The styles package SHALL support a toolbar container whose commands are native buttons grouped by formatting purpose. Every icon-only command SHALL have an accessible name, and decorative icons SHALL remain hidden from assistive technology."
+        "requirementContent": "The styles package SHALL support a `role=\"toolbar\"` container with an accessible name. Command groups SHALL use `role=\"group\"` with an accessible name. Commands SHALL be native buttons grouped by formatting purpose. Every icon-only command SHALL have an accessible name, and decorative icons SHALL remain hidden from assistive technology."
       },
       {
         "capability": "forms/rich-text-toolbar",
@@ -87,5 +87,5 @@
     ]
   },
   "version": 1,
-  "digest": "80afa63ff0a3262c2a99cafe7990e30cbed0384c8ee97559246897891bcb117c"
+  "digest": "19d96fe9206232da25d58f1e6222dbe9c0def15ec8863b85dc399e6f1d5fd999"
 }
