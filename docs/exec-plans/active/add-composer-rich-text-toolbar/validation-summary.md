@@ -22,7 +22,7 @@
 
 ## Aggregate limitation
 
-`npm run check` reaches the 265-test Playwright suite after OpenSpec health, generation, 182 Node tests, lint, build, validation, and clean-package consumption pass. The suite then reports an unrelated existing `Card with Action` snapshot mismatch: 386 pixels (about 1%) localized to text antialiasing. The Card implementation, test, and snapshot are unchanged by this branch; its geometry and CSS assertions pass, and the mismatch reproduces in isolation. This scoped PR neither introduced nor worsened it. Follow-up: [#59](https://github.com/Antropophag/shlz-ui/issues/59).
+`npm run check` reaches the 265-test Playwright suite after OpenSpec health, generation, 185 Node tests, lint, build, validation, and clean-package consumption pass. The suite then reports an unrelated existing `Card with Action` snapshot mismatch: 386 pixels (about 1%) localized to text antialiasing. The Card implementation, test, and snapshot are unchanged by this branch; its geometry and CSS assertions pass, and the mismatch reproduces in isolation. This scoped PR neither introduced nor worsened it. Follow-up: [#59](https://github.com/Antropophag/shlz-ui/issues/59).
 
 ## Ownership and limitations
 
