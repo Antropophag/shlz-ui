@@ -24,4 +24,4 @@
 
 - [x] 5.1 Run aggregate regression validation and strict OpenSpec validation; verify all scope-local checks pass without changes under `shlz-design-source/`; record the accepted unchanged cross-component Card snapshot finding and linked follow-up
 - [x] 5.2 Run independent Standards and Spec review from the immutable baseline and resolve all blocking findings; verify final review receipts report no unresolved scope-local issue
-- [ ] 5.3 Run route-conformance and delivery guards, publish the task branch, open an unmerged PR, and record exact CI, review-thread, evidence, limitation, and blocker status
+- [x] 5.3 Run route-conformance and delivery guards, publish the task branch, open an unmerged PR, and record exact CI, review-thread, evidence, limitation, and blocker status
