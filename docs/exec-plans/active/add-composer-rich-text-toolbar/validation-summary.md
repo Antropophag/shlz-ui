@@ -10,7 +10,7 @@
 
 ## Passing evidence
 
-- `node --test --test-concurrency=1 tools/tests/*.test.mjs`: 182/182 passed.
+- `node --test --test-concurrency=1 tools/tests/*.test.mjs`: 185/185 passed.
 - `npx playwright test tools/playwright/composer-rich-text-toolbar.spec.js`: 5/5 passed.
 - `npx stylelint packages/styles/components/composer.css packages/styles/components/rich-text-toolbar.css apps/showcase/src/showcase.css`: passed.
 - `npm run build`: passed for all packages and Showcase; the existing Vite large-chunk advisory remains.
@@ -30,4 +30,4 @@ The library owns framework-neutral presentation, semantic composition hooks, nor
 
 ## Review independence
 
-Standards and Spec were reviewed in separate, context-isolated Codex runtimes against immutable baseline `524d9ba7` and candidate `e990f4f`. Both re-reviews report no remaining scope-local findings after the live-consumer placement, audit-manifest deviation, and editor maximum-height findings were resolved.
+Standards and Spec were reviewed in separate, context-isolated Codex runtimes against the current-main integration baseline. Both re-reviews report no remaining scope-local findings after the live-consumer placement, audit-manifest deviation, editor maximum-height, and rebase-coexistence checks were resolved.
