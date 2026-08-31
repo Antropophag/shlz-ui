@@ -2,7 +2,8 @@ import { expect } from "@playwright/test";
 
 const ADDITIVE_SHOWCASE_SELECTOR =
   "[data-shlz-visual-addition], [data-shlz-dropdown-scrollable-fixture]";
-const SUPPLEMENTAL_SHOWCASE_SELECTOR = "[data-shlz-consumer-supplement]";
+const SUPPLEMENTAL_SHOWCASE_SELECTOR =
+  "[data-shlz-consumer-supplement], [data-shlz-preexisting-visual-supplement]";
 
 export const hideDeveloperDocumentation = (page) =>
   page.evaluate(() => {

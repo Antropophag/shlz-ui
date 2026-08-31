@@ -235,7 +235,7 @@ test("pre-existing captures ignore later consumer supplements", async ({
 
   await page.evaluate(() => {
     const supplement = document.createElement("section");
-    supplement.dataset.shlzConsumerSupplement = "";
+    supplement.dataset.shlzPreexistingVisualSupplement = "";
     supplement.style.blockSize = "777.5px";
     document.querySelector("#tabs-demo").before(supplement);
   });
