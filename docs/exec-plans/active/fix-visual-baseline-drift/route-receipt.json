@@ -1,0 +1,24 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Stabilize pre-existing showcase visual tests against additive consumer fixtures, replace one stale hard-coded occurrence count with its existing audit manifest, and restore Browser and visual CI without changing production code or snapshot baselines.",
+    "material": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "requiredDecisions": [],
+    "route": "direct",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "762d2cec32ee79a2e1392a9e2f990c6608fabfc70cf42801ed62d3e5626387b5"
+}
