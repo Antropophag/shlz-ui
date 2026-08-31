@@ -1,3 +1,4 @@
+import { Buffer } from "node:buffer";
 import { expect, test } from "@playwright/test";
 import {
   hideDeveloperDocumentation,
@@ -233,6 +234,7 @@ test("pre-existing captures ignore later consumer supplements", async ({
   await target.scrollIntoViewIfNeeded();
   const before = await target.screenshot();
 
+  await page.goto("/");
   await page.evaluate(() => {
     const supplement = document.createElement("section");
     supplement.dataset.shlzPreexistingVisualSupplement = "";
@@ -242,5 +244,5 @@ test("pre-existing captures ignore later consumer supplements", async ({
 
   await stabilizePreexistingShowcaseLayout(page);
   await target.scrollIntoViewIfNeeded();
-  await expect(target.screenshot()).resolves.toEqual(before);
+  expect(Buffer.compare(await target.screenshot(), before)).toBe(0);
 });

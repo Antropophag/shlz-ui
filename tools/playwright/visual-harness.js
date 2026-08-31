@@ -38,13 +38,14 @@ export const stabilizeShowcaseLayout = (page) =>
 export const stabilizePreexistingShowcaseLayout = (page) =>
   hideShowcaseFixtures(page, SUPPLEMENTAL_SHOWCASE_SELECTOR);
 
-export const expectStableShowcaseScreenshot = async (
+const expectStabilizedScreenshot = async (
   page,
   locator,
   snapshot,
   options,
+  stabilize,
 ) => {
-  await stabilizeShowcaseLayout(page);
+  await stabilize(page);
   await locator.scrollIntoViewIfNeeded();
   await locator.evaluate((element) => {
     const { requestAnimationFrame } = element.ownerDocument.defaultView;
@@ -55,19 +56,30 @@ export const expectStableShowcaseScreenshot = async (
   await expect(locator).toHaveScreenshot(snapshot, options);
 };
 
+export const expectStableShowcaseScreenshot = (
+  page,
+  locator,
+  snapshot,
+  options,
+) =>
+  expectStabilizedScreenshot(
+    page,
+    locator,
+    snapshot,
+    options,
+    stabilizeShowcaseLayout,
+  );
+
 export const expectStablePreexistingShowcaseScreenshot = async (
   page,
   locator,
   snapshot,
   options,
-) => {
-  await stabilizePreexistingShowcaseLayout(page);
-  await locator.scrollIntoViewIfNeeded();
-  await locator.evaluate((element) => {
-    const { requestAnimationFrame } = element.ownerDocument.defaultView;
-    return new Promise((resolve) =>
-      requestAnimationFrame(() => requestAnimationFrame(resolve)),
-    );
-  });
-  await expect(locator).toHaveScreenshot(snapshot, options);
-};
+) =>
+  expectStabilizedScreenshot(
+    page,
+    locator,
+    snapshot,
+    options,
+    stabilizePreexistingShowcaseLayout,
+  );
