@@ -2,12 +2,12 @@
   "kind": "baseline",
   "payload": {
     "branch": "feature/composer-rich-text-toolbar",
-    "commit": "524d9ba7d34cffc70b3241b4c8e9a7c937682a49",
+    "commit": "5eabc10cc89055996390d2acc481a5a570037c4b",
     "defaultBranch": "main",
     "pullRequest": {
       "baseRefName": "main",
       "headRefName": "feature/composer-rich-text-toolbar",
-      "headRefOid": "524d9ba7d34cffc70b3241b4c8e9a7c937682a49",
+      "headRefOid": "5eabc10cc89055996390d2acc481a5a570037c4b",
       "isDraft": true,
       "state": "OPEN",
       "url": "https://github.com/Antropophag/shlz-ui/pull/58"
@@ -22,5 +22,5 @@
   "requirementsDigest": "e9020d3a185bc0f14e1394013bf27c84349c058c7fa8a3e224008a1623ed097d",
   "routeDigest": "64965f565591dfa21a5c6badcf427ff1691a1c3fc69bea9a920b6fa8b247959b",
   "version": 1,
-  "digest": "6ceb61ef63bda441c61d9220152548621b76e51e6fe8ceb795ad8c024ebbd8b0"
+  "digest": "f818f6f2a89213c6477b11a51a938d24c3bab12397ee512cbc9e205a9bef897c"
 }
