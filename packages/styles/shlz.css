@@ -26,6 +26,8 @@
 @import url("./components/file-row.css");
 @import url("./components/document-row.css");
 @import url("./components/file-upload.css");
+@import url("./components/rich-text-toolbar.css");
+@import url("./components/composer.css");
 @import url("./components/empty-state.css");
 @import url("./components/card-with-action.css");
 @import url("./components/report-card.css");

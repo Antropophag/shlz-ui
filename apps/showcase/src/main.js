@@ -41,6 +41,10 @@ import {
   enhanceFileUploadShowcase,
   fileUploadShowcaseMarkup,
 } from "./file-upload-showcase.js";
+import {
+  composerShowcaseMarkup,
+  enhanceComposerShowcase,
+} from "./composer-showcase.js";
 import tokens from "@shlz/tokens/tokens.json";
 import provenance from "@shlz/tokens/provenance.json";
 import manifest from "@shlz/icons/manifest.json";
@@ -187,6 +191,7 @@ const navigationGroups = [
       ["message-thread-demo", "Message Thread"],
       ["history-timeline-demo", "History Timeline"],
       ["file-upload-demo", "File Upload"],
+      ["composer-demo", "Composer / Rich Text Toolbar"],
       ["card-with-action-demo", "Card with action"],
       ["report-card-demo", "Report card"],
       ["cover-demo", "Cover"],
@@ -325,6 +330,7 @@ ${datePickerConsumerMarkup}
 ${calendarGridShowcaseMarkup}
 ${plannerScheduleShowcaseMarkup}`;
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", composerShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
 
@@ -561,6 +567,7 @@ enhancePlannerScheduleShowcase();
 enhanceMessagingHistoryShowcase();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
+enhanceComposerShowcase();
 window.__shlzEnhanceFileUploads = enhanceFileUploads;
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();

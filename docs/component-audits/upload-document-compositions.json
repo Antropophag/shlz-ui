@@ -29,6 +29,10 @@
   "occurrences": [],
   "primitiveDependencies": [
     {
+      "path": "apps/showcase/src/composer-showcase.js",
+      "classification": "verified-composer-consumer-composing-file-row"
+    },
+    {
       "path": "apps/showcase/src/content-states.js",
       "classification": "file-and-document-row-fixture"
     },
@@ -73,9 +77,9 @@
     "auditEvidencePaths": [
       "tools/playwright/upload-document-compositions-wave11.spec.js"
     ],
-    "primitiveDependencyPathCount": 10,
-    "unrelatedTerminologyPathCount": 70,
-    "totalPathCount": 81,
+    "primitiveDependencyPathCount": 11,
+    "unrelatedTerminologyPathCount": 72,
+    "totalPathCount": 84,
     "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition"
   },
   "supportedSizes": ["source-sheets-only"],

@@ -44,4 +44,3 @@ Composer SHALL fit its container, permit editing content and supporting copy to 
 
 - **WHEN** labels, help text, attachments, or actions exceed the available inline space
 - **THEN** content remains visible, controls remain operable, and the component introduces no horizontal page overflow
-

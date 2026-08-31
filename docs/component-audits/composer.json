@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "component": "composer",
+  "authoritativeSource": "shlz-design-source/raw/svg/Messages.svg",
+  "referenceSources": [
+    "docs/component-audits/composer-rich-text-toolbar-source.json"
+  ],
+  "implementation": [
+    "packages/styles/components/composer.css"
+  ],
+  "behavior": null,
+  "docs": "docs/components/composer-rich-text-toolbar.md",
+  "rootSelector": "[data-component-audit-id^='composer-']",
+  "legacySelectors": [
+    ".shlz-composer"
+  ],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    {
+      "id": "composer-showcase-source",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "composer-showcase-disabled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "composer-showcase-readonly",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "composer-showcase-invalid",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "composer-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "composer-data-workspace",
+      "kind": "live-consumer"
+    }
+  ],
+  "supportedSizes": [
+    "container-fluid",
+    "narrow"
+  ],
+  "supportedStates": [
+    "default",
+    "focus-within",
+    "invalid",
+    "disabled",
+    "read-only"
+  ],
+  "contentStress": [
+    "long-localized-help",
+    "long-filename",
+    "narrow-container",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Messages.svg establishes a message composition with an editing area, text-editor controls, attachments and an action region",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Messages.svg"
+    },
+    {
+      "claim": "semantic regions, native textarea integration, responsive reflow and public state hooks are repository decisions",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-composer-rich-text-toolbar/design.md"
+    }
+  ],
+  "browserTests": [
+    "tools/playwright/composer-rich-text-toolbar.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/composer-rich-text-toolbar.spec.js-snapshots/composer-source-chromium-linux.png",
+    "tools/playwright/composer-rich-text-toolbar.spec.js-snapshots/composer-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Messages.svg source facts and repository decisions are recorded separately and enforced by focused source tests",
+    "structural-contract": "pass: independent root, nested regions, states, docs and export are asserted",
+    "runtime-browser": "pass: the consumer-owned submit flow executes from the native textarea composition",
+    "accessibility": "pass: labelled native editing surface, toolbar semantics, named commands, invalid association and scoped axe scan are browser-checked",
+    "focused-visual": "pass: source-focused and 220px/200-percent-text snapshots are inspected independently",
+    "consumer-integration": "pass: Data Workspace owns formatting and submission state while consuming only public CSS and native semantics",
+    "responsive-content-stress": "pass: long localized support text and filename remain contained at 220px with 200-percent root text"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source, disabled, read-only and invalid fixtures retain explicit audit roots"
+      ],
+      "realInteractionVisual": [
+        "pass: textarea focus changes the composed frame border through focus-within"
+      ],
+      "runtimeBehavior": [
+        "pass: consumer submit command updates application-owned status without a library controller"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "focus-within",
+      "invalid",
+      "disabled",
+      "read-only",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/composer-rich-text-toolbar.spec.js",
+    "manualStateWalk": "pass: 2026-08-31 default, focus-within, invalid, disabled, read-only, long attachment and narrow text-scale snapshots inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "editing, formatting, validation, attachment lifecycle, submission, persistence and live-region policy are consumer-owned",
+    "the component supplies presentation and semantic integration guidance, not an editor engine"
+  ]
+}

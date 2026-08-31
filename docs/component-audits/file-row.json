@@ -27,7 +27,25 @@
       "id": "file-row-file-upload-populated",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-file-upload-consumer", "kind": "live-consumer" }
+    { "id": "file-row-file-upload-consumer", "kind": "live-consumer" },
+    { "id": "file-row-composer-showcase-source", "kind": "executable-fixture" },
+    {
+      "id": "file-row-composer-showcase-disabled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-composer-showcase-readonly",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-composer-showcase-invalid",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-composer-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "file-row-composer-data-workspace", "kind": "live-consumer" }
   ],
   "supportedSizes": [
     "55px-body",

@@ -1,0 +1,74 @@
+.shlz-rich-text-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--shlz-source-spacing-8);
+  align-items: center;
+  min-inline-size: 0;
+  padding: var(--shlz-source-spacing-8);
+  color: var(--shlz-semantic-color-text-primary);
+  background: var(--shlz-semantic-color-surface-base);
+  border-block-end: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
+}
+
+.shlz-rich-text-toolbar__group {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 2px; /* repository decision: keep related commands visually grouped */
+  align-items: center;
+}
+
+.shlz-rich-text-toolbar__group + .shlz-rich-text-toolbar__group {
+  padding-inline-start: var(--shlz-source-spacing-8);
+  border-inline-start: var(--shlz-semantic-border-width-default) solid
+    var(--shlz-semantic-color-border-default);
+}
+
+.shlz-rich-text-toolbar__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: var(--shlz-semantic-control-height-small);
+  block-size: var(--shlz-semantic-control-height-small);
+  padding: 0;
+  color: var(--shlz-semantic-color-text-primary);
+  background: transparent;
+  border: 0;
+  border-radius: var(--shlz-source-radius-min);
+  font: inherit;
+  cursor: pointer;
+}
+
+.shlz-rich-text-toolbar__button:hover:not(:disabled) {
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-blue-blue-50);
+}
+
+.shlz-rich-text-toolbar__button:active:not(:disabled),
+.shlz-rich-text-toolbar__button[aria-pressed="true"] {
+  color: var(--shlz-semantic-color-action-primary);
+  background: var(--shlz-source-color-blue-blue-100);
+}
+
+.shlz-rich-text-toolbar__button:focus-visible {
+  outline: var(--shlz-semantic-border-width-icon) solid
+    var(--shlz-semantic-color-action-primary);
+  outline-offset: 1px;
+}
+
+.shlz-rich-text-toolbar__button:disabled {
+  color: var(--shlz-semantic-color-text-secondary);
+  cursor: not-allowed;
+  opacity: var(--shlz-semantic-opacity-disabled);
+}
+
+.shlz-rich-text-toolbar__icon {
+  inline-size: 20px;
+  block-size: 20px;
+  color: inherit;
+  pointer-events: none;
+}
+
+.shlz-rich-text-toolbar[aria-disabled="true"] .shlz-rich-text-toolbar__button {
+  pointer-events: none;
+}

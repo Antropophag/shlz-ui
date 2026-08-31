@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Add a framework-neutral Composer shell and Rich Text Toolbar derived from the authoritative messaging and planner source artwork.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

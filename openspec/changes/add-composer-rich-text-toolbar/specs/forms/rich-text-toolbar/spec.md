@@ -44,4 +44,3 @@ The toolbar SHALL allow command groups to wrap without clipping controls or intr
 
 - **WHEN** the toolbar is placed in a narrow container or content is enlarged
 - **THEN** complete command groups wrap into additional rows and all controls remain visible and operable
-

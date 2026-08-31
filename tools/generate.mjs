@@ -216,6 +216,8 @@ const styleSources = [
   "components/file-row.css",
   "components/document-row.css",
   "components/file-upload.css",
+  "components/rich-text-toolbar.css",
+  "components/composer.css",
   "components/empty-state.css",
   "components/card-with-action.css",
   "components/report-card.css",

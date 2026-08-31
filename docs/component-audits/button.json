@@ -39,6 +39,30 @@
       "kind": "content-stress-fixture"
     },
     {
+      "id": "button-composer-showcase-source-actions",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-composer-showcase-disabled-actions",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-composer-showcase-readonly-actions",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-composer-showcase-invalid-actions",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-composer-content-stress-actions",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "button-composer-data-workspace-actions",
+      "kind": "live-consumer"
+    },
+    {
       "id": "button-planner-source-details",
       "kind": "executable-fixture"
     },
