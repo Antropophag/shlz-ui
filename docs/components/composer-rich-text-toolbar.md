@@ -64,6 +64,8 @@ Put `aria-invalid="true"` on the Composer and semantic editor when invalid. Pair
 
 Attachments may compose existing File Row or Document Row primitives. Actions may compose existing Buttons. The consumer owns accessible status copy and any live announcement policy.
 
+The native editing-area example grows from 128px to a repository-defined 320px maximum, then scrolls vertically. Consumers replacing it with another editor may choose a different growth policy, but must keep that overflow behavior explicit and preserve the Composer container boundary.
+
 ## Accessibility
 
 Every editing surface and toolbar needs an accessible name. Icons are decorative (`aria-hidden="true"`); button names describe commands. Keep native disabled, read-only, invalid, and pressed semantics synchronized with root hooks. Focus remains in native document order.

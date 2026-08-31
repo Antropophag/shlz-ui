@@ -54,7 +54,9 @@
   inline-size: 100%;
   min-inline-size: 0;
   min-block-size: 128px; /* repository decision: useful native editing area */
+  max-block-size: 320px; /* repository decision: bounded native growth */
   padding: var(--shlz-source-spacing-16);
+  overflow-y: auto;
   overflow-wrap: anywhere;
   color: inherit;
   background: transparent;

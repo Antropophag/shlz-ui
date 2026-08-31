@@ -44,6 +44,11 @@ test("every Composer and Rich Text Toolbar occurrence is classified independentl
   await expectClassifiedComponentOccurrences(page, toolbarManifest);
   await expect(page.locator(composerManifest.rootSelector)).toHaveCount(6);
   await expect(page.locator(toolbarManifest.rootSelector)).toHaveCount(6);
+  await expect(
+    page.locator(
+      "[data-consumer-workspace] [data-component-audit-id='composer-data-workspace']",
+    ),
+  ).toHaveCount(1);
 });
 
 test("semantic controls, material states and consumer-owned commands execute", async ({
@@ -110,6 +115,8 @@ test("focus, accessibility and responsive content stress remain coherent", async
     "[data-component-audit-id='composer-showcase-source']",
   );
   const editor = source.locator("textarea");
+  await expect(editor).toHaveCSS("max-height", "320px");
+  await expect(editor).toHaveCSS("overflow-y", "auto");
   const frame = source.locator(".shlz-composer__frame");
   const idleBorder = await frame.evaluate(
     (node) => getComputedStyle(node).borderColor,

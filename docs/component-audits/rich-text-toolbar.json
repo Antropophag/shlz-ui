@@ -95,7 +95,19 @@
     "browserTest": "tools/playwright/composer-rich-text-toolbar.spec.js",
     "manualStateWalk": "pass: 2026-08-31 default, hover, focus-visible, pressed, disabled, grouped wrapping and 200-percent text inspected"
   },
-  "acceptedDeviations": [],
+  "acceptedDeviations": [
+    {
+      "id": "card-text-antialiasing-snapshot",
+      "severity": "P2",
+      "scope": "pre-existing Card focused screenshot outside Composer and Rich Text Toolbar",
+      "status": "accepted-for-this-pr",
+      "introducedByThisChange": false,
+      "worsenedByThisChange": false,
+      "evidence": "full Playwright run reports a stable 386-pixel (~1%) text-antialiasing-only mismatch in tools/playwright/card-compositions.spec.js; isolated reproduction has unchanged Card implementation, test, and snapshot",
+      "reason": "resolving the shared rendering/snapshot contract is outside this component PR and requires a cross-component decision",
+      "tracking": "https://github.com/Antropophag/shlz-ui/issues/59"
+    }
+  ],
   "findings": [],
   "knownLimitations": [
     "command dispatch, selection state, keyboard shortcut policy and editor integration are consumer-owned",
