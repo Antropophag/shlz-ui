@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/#date-picker-demo");
@@ -17,7 +18,11 @@ test("authoritative Date Picker size and state matrix has component-focused evid
     const key = await variant.getAttribute("data-date-picker-source-variant");
     const expectedHeight = key?.startsWith("large-") ? 63 : 55;
     expect((await field.boundingBox())?.height).toBe(expectedHeight);
-    await expect(field).toHaveScreenshot(`date-picker-${key}.png`);
+    await expectStablePreexistingShowcaseScreenshot(
+      page,
+      field,
+      `date-picker-${key}.png`,
+    );
   }
 });
 
@@ -48,5 +53,9 @@ test("Calendar one/two-month responsive surfaces have component-focused evidence
   await expect(
     narrowSurface.locator(".shlz-calendar__month:visible"),
   ).toHaveCount(1);
-  await expect(narrowSurface).toHaveScreenshot("calendar-one-month-narrow.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    narrowSurface,
+    "calendar-one-month-narrow.png",
+  );
 });

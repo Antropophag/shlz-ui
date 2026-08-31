@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 import {
   inspectComponentOccurrences,
   readComponentAuditManifest,
@@ -424,7 +425,11 @@ test("focused Planner Schedule visuals", async ({ page }) => {
   const source = page.locator(
     "[data-component-audit-id='planner-schedule-showcase-source']",
   );
-  await expect(source).toHaveScreenshot("planner-schedule-source.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    source,
+    "planner-schedule-source.png",
+  );
   const event = source.getByRole("button", { name: /Cabin installation/ });
   await event.hover();
   await expect(event).toHaveScreenshot("planner-schedule-event-hover.png");
@@ -437,5 +442,9 @@ test("focused Planner Schedule visuals", async ({ page }) => {
   ).toHaveScreenshot("planner-schedule-detail-open.png");
   await page.keyboard.press("Escape");
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(source).toHaveScreenshot("planner-schedule-narrow.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    source,
+    "planner-schedule-narrow.png",
+  );
 });

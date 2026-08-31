@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
   hideDeveloperDocumentation,
+  stabilizePreexistingShowcaseLayout,
   stabilizeShowcaseLayout,
 } from "./visual-harness.js";
 
@@ -220,6 +221,26 @@ test("legacy component captures ignore additive showcase sections", async ({
   });
 
   await stabilizeShowcaseLayout(page);
+  await target.scrollIntoViewIfNeeded();
+  await expect(target.screenshot()).resolves.toEqual(before);
+});
+
+test("pre-existing captures ignore later consumer supplements", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const target = page.locator("#tabs-demo");
+  await target.scrollIntoViewIfNeeded();
+  const before = await target.screenshot();
+
+  await page.evaluate(() => {
+    const supplement = document.createElement("section");
+    supplement.dataset.shlzConsumerSupplement = "";
+    supplement.style.blockSize = "777.5px";
+    document.querySelector("#tabs-demo").before(supplement);
+  });
+
+  await stabilizePreexistingShowcaseLayout(page);
   await target.scrollIntoViewIfNeeded();
   await expect(target.screenshot()).resolves.toEqual(before);
 });

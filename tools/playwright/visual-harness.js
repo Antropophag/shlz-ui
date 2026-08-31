@@ -2,6 +2,7 @@ import { expect } from "@playwright/test";
 
 const ADDITIVE_SHOWCASE_SELECTOR =
   "[data-shlz-visual-addition], [data-shlz-dropdown-scrollable-fixture]";
+const SUPPLEMENTAL_SHOWCASE_SELECTOR = "[data-shlz-consumer-supplement]";
 
 export const hideDeveloperDocumentation = (page) =>
   page.evaluate(() => {
@@ -12,9 +13,9 @@ export const hideDeveloperDocumentation = (page) =>
     }
   });
 
-export const stabilizeShowcaseLayout = async (page) => {
-  await page.evaluate((selector) => {
-    const additions = [...document.querySelectorAll(selector)];
+const hideShowcaseFixtures = async (page, selector) => {
+  await page.evaluate((fixtureSelector) => {
+    const additions = [...document.querySelectorAll(fixtureSelector)];
     const additionIds = new Set(additions.map(({ id }) => id).filter(Boolean));
 
     for (const addition of additions) {
@@ -26,9 +27,15 @@ export const stabilizeShowcaseLayout = async (page) => {
     )) {
       if (additionIds.has(link.hash.slice(1))) link.hidden = true;
     }
-  }, ADDITIVE_SHOWCASE_SELECTOR);
+  }, selector);
   await page.evaluate(() => document.fonts.ready);
 };
+
+export const stabilizeShowcaseLayout = (page) =>
+  hideShowcaseFixtures(page, ADDITIVE_SHOWCASE_SELECTOR);
+
+export const stabilizePreexistingShowcaseLayout = (page) =>
+  hideShowcaseFixtures(page, SUPPLEMENTAL_SHOWCASE_SELECTOR);
 
 export const expectStableShowcaseScreenshot = async (
   page,
@@ -37,6 +44,23 @@ export const expectStableShowcaseScreenshot = async (
   options,
 ) => {
   await stabilizeShowcaseLayout(page);
+  await locator.scrollIntoViewIfNeeded();
+  await locator.evaluate((element) => {
+    const { requestAnimationFrame } = element.ownerDocument.defaultView;
+    return new Promise((resolve) =>
+      requestAnimationFrame(() => requestAnimationFrame(resolve)),
+    );
+  });
+  await expect(locator).toHaveScreenshot(snapshot, options);
+};
+
+export const expectStablePreexistingShowcaseScreenshot = async (
+  page,
+  locator,
+  snapshot,
+  options,
+) => {
+  await stabilizePreexistingShowcaseLayout(page);
   await locator.scrollIntoViewIfNeeded();
   await locator.evaluate((element) => {
     const { requestAnimationFrame } = element.ownerDocument.defaultView;

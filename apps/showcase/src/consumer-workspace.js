@@ -26,7 +26,7 @@ const row = ({ id, title, status }) => `
     <td class="shlz-table__cell"><span class="shlz-status" data-component-audit-id="status-workspace-${id.toLowerCase()}">${status}</span></td>
   </tr>`;
 
-export const consumerWorkspaceMarkup = (iconUrl) => `
+export const consumerWorkspaceMarkup = (iconUrl, supplementalMarkup = "") => `
 <section id="consumer-validation" class="shlz-major-section" data-shlz-visual-addition>
   <p class="shlz-section-kicker">D. CONSUMER VALIDATION</p>
   <h2>ServiceDesk Data Workspace</h2>
@@ -59,6 +59,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
       </div>
     </div>
     ${messagingHistoryWorkspaceMarkup}
+    ${supplementalMarkup ? `<section data-shlz-consumer-supplement>${supplementalMarkup}</section>` : ""}
   </article>
   <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer data-component-audit-id="drawer-data-workspace" aria-labelledby="workspace-filter-title">
     <form class="shlz-drawer__surface" method="dialog">

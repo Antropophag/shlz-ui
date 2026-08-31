@@ -5,6 +5,7 @@ import {
   readComponentAuditManifest,
 } from "./component-audit.js";
 import { fixtureUrl } from "./fixture-url.js";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 
 const manifest = await readComponentAuditManifest(
   new globalThis.URL(
@@ -58,7 +59,9 @@ test("exposes temporal colgroups above independent date headers with source geom
     ).toHaveCount(0);
   }
 
-  await expect(table.locator("thead")).toHaveScreenshot(
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    table.locator("thead"),
     "calendar-grid-header-rows.png",
   );
 
@@ -301,7 +304,11 @@ test("contains two-axis overflow, sticky context, consumer actions and visual st
   await expect(page.locator("[data-calendar-consumer-status]")).toHaveText(
     "Application action handled by the consumer.",
   );
-  await expect(grid).toHaveScreenshot("calendar-grid-source-matrix.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    grid,
+    "calendar-grid-source-matrix.png",
+  );
   await page.setViewportSize({ width: 390, height: 844 });
   await page.evaluate(() => {
     document.documentElement.style.fontSize = "200%";

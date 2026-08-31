@@ -3,6 +3,7 @@
 import { Buffer } from "node:buffer";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 import { fixtureUrl } from "./fixture-url.js";
 import {
   expectClassifiedComponentOccurrences,
@@ -353,5 +354,9 @@ test("source and repository visual states have independent evidence", async ({
   expect(errorBorder).not.toBe(emptyBorder);
   await expect(error.locator(".shlz-file-upload__error")).toBeVisible();
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await expect(demo).toHaveScreenshot("file-upload-states.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    demo,
+    "file-upload-states.png",
+  );
 });

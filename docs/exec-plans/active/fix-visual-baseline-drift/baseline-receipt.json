@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/visual-baseline-drift",
+    "commit": "ba48acd469ec95890295770a17235a0ea9683d58",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/visual-baseline-drift",
+      "headRefOid": "ba48acd469ec95890295770a17235a0ea9683d58",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/60"
+    },
+    "repository": {
+      "digest": "3ac18e3f8c70b9e12f99d7e153c36e5ea3dbed0b39552728e827e67ef99354f2",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-visual-baseline-drift"
+    },
+    "upstream": "origin/fix/visual-baseline-drift"
+  },
+  "routeDigest": "762d2cec32ee79a2e1392a9e2f990c6608fabfc70cf42801ed62d3e5626387b5",
+  "version": 1,
+  "digest": "7725775b865cdc41d44137b70c37b0a176167e08e7f4c3da1c2de52b4d411afe"
+}
