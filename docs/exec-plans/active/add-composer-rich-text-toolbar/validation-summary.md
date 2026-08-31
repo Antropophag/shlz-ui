@@ -22,7 +22,7 @@
 
 ## Aggregate limitation
 
-`npm run check` reaches the 265-test Playwright suite after OpenSpec health, generation, 185 Node tests, lint, build, validation, and clean-package consumption pass. The suite then reports an unrelated existing `Card with Action` snapshot mismatch: 386 pixels (about 1%) localized to text antialiasing. The Card implementation, test, and snapshot are unchanged by this branch; its geometry and CSS assertions pass, and the mismatch reproduces in isolation. This scoped PR neither introduced nor worsened it. Follow-up: [#59](https://github.com/Antropophag/shlz-ui/issues/59).
+`npm run check` reaches the 275-test Playwright suite after OpenSpec health, generation, 185 Node tests, lint, build, validation, and clean-package consumption pass. Composer / Rich Text Toolbar and its real consumer pass all 11 focused browser checks. The aggregate run reports nine failures across eight unchanged snapshots belonging to Calendar Grid, Card with Action, Date Picker, File Upload, Message Thread, and Planner Schedule. Differences range from text-rendering deltas to one-pixel height changes. The Calendar Grid header failure reproduces on a detached, clean `origin/main` worktree at `cb27a06089a53b7c57c6706ae0cfe77bc51c5a38` with the exact same 1092-pixel delta. None of the affected implementations, tests, or snapshots is changed by this branch, so this PR neither introduced nor worsened the cross-component baseline drift. Follow-up with the complete snapshot list and CI evidence: [#59](https://github.com/Antropophag/shlz-ui/issues/59).
 
 ## Ownership and limitations
 
