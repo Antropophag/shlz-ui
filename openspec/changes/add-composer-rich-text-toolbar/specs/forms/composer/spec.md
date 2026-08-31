@@ -15,7 +15,7 @@ The styles package SHALL support a Composer root with optional label/help, toolb
 
 ### Requirement: Composer states remain semantic and externally controlled
 
-Composer SHALL visually support focus-within, invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states.
+Composer SHALL style the root `:focus-within` presentation when a descendant is focused. Composer SHALL visually support invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states.
 
 #### Scenario: Consumer reports invalid content
 

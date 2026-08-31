@@ -6,7 +6,7 @@ Provides an accessible, framework-neutral visual toolbar for commands acting on 
 
 ### Requirement: Rich Text Toolbar exposes semantic command controls
 
-The styles package SHALL support a toolbar container whose commands are native buttons grouped by formatting purpose. Every icon-only command SHALL have an accessible name, and decorative icons SHALL remain hidden from assistive technology.
+The styles package SHALL support a `role="toolbar"` container with an accessible name. Command groups SHALL use `role="group"` with an accessible name. Commands SHALL be native buttons grouped by formatting purpose. Every icon-only command SHALL have an accessible name, and decorative icons SHALL remain hidden from assistive technology.
 
 #### Scenario: A consumer renders formatting commands
 

@@ -35,7 +35,7 @@ Use `.shlz-rich-text-toolbar` with `role="toolbar"` and an accessible name. Put 
 </div>
 ```
 
-Toolbar groups wrap as complete units in narrow containers. This is a repository responsive decision because the static source does not establish an overflow interaction.
+Toolbar groups wrap as complete units in narrow containers. This is a repository-specific responsive decision because the static source does not establish an overflow interaction.
 
 ## Composer contract
 
