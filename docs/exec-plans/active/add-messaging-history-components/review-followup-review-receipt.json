@@ -1,0 +1,26 @@
+{
+  "contractReceiptDigest": "04a4ab07fe2c6337548d7e02970dc00c732f89248f33a621e6804f933b73acdf",
+  "kind": "review",
+  "payload": {
+    "candidateHead": "a99e577d1bff0a85c674ed76ac63981091ae4a95",
+    "contractDigest": "2f9ed438b84aa183f39393c4440af5bfc05cac99c90804f5f4b90621f079c928",
+    "spec": {
+      "candidateHead": "a99e577d1bff0a85c674ed76ac63981091ae4a95",
+      "contractDigest": "2f9ed438b84aa183f39393c4440af5bfc05cac99c90804f5f4b90621f079c928",
+      "findings": [],
+      "outcome": "pass",
+      "runtimeId": "codex-agent:/root/spec_review@a99e577d1bff0a85c674ed76ac63981091ae4a95",
+      "runtimeSource": "codex-exec-jsonl"
+    },
+    "standards": {
+      "candidateHead": "a99e577d1bff0a85c674ed76ac63981091ae4a95",
+      "contractDigest": "2f9ed438b84aa183f39393c4440af5bfc05cac99c90804f5f4b90621f079c928",
+      "findings": [],
+      "outcome": "pass",
+      "runtimeId": "codex-agent:/root/standards_review:a99e577d1bff0a85c674ed76ac63981091ae4a95",
+      "runtimeSource": "codex-exec-jsonl"
+    }
+  },
+  "version": 1,
+  "digest": "7db9c88b9c5e9c3f7e5f57a7cf9196364b039d288214e98366611f84416ed2af"
+}

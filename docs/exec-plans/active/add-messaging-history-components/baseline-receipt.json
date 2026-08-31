@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/wave-12-messaging-history-components",
+    "commit": "3b37002e6ea95c6000a6daa5bcf56d997262ddf4",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/wave-12-messaging-history-components",
+      "headRefOid": "3b37002e6ea95c6000a6daa5bcf56d997262ddf4",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/57"
+    },
+    "repository": {
+      "digest": "804123c30866ef222c4abee1485fbc37648ce0c605dc33e2e638d50abb529d2b",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-wave-12-components"
+    },
+    "upstream": "origin/feature/wave-12-messaging-history-components"
+  },
+  "requirementsDigest": "d70095412142e0f77c2b3fe08c39270a538835d4e008b1e80b95793f0bc4b1db",
+  "routeDigest": "41258baa10443690c106af02aa2520ec07c585169b582f6c7859da2c166ec16a",
+  "version": 1,
+  "digest": "b69392715ec43049245e92ab34ab2d9bb67b20a1f44cee18fdb8f44ade183dd3"
+}

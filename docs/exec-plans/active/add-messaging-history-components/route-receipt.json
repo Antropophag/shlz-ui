@@ -1,0 +1,51 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement the best reusable product subset of Wave 12 as independent framework-neutral Message Thread and History Timeline modules, leaving Planner Schedule intact and Composer outside scope.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-messaging-history-components",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "consumer-ownership",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "41258baa10443690c106af02aa2520ec07c585169b582f6c7859da2c166ec16a"
+}

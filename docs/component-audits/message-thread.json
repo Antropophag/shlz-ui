@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 2,
+  "component": "message-thread",
+  "authoritativeSource": "shlz-design-source/raw/svg/Messages.svg",
+  "referenceSources": [
+    "docs/component-audits/wave-12-report.md",
+    "docs/component-audits/message-thread-contract.md"
+  ],
+  "implementation": ["packages/styles/components/message-thread.css"],
+  "behavior": null,
+  "docs": "docs/components/message-thread.md",
+  "rootSelector": "[data-component-audit-id^='message-thread-']",
+  "legacySelectors": [".shlz-message-thread"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "message-thread-showcase-source", "kind": "executable-fixture" },
+    { "id": "message-thread-data-workspace-consumer", "kind": "live-consumer" },
+    { "id": "message-thread-plain-html", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["bounded-non-virtualized-thread"],
+  "supportedStates": [
+    "incoming",
+    "outgoing",
+    "grouped",
+    "attachments",
+    "empty",
+    "loading-safe"
+  ],
+  "contentStress": [
+    "long-localized-content",
+    "unbroken-content",
+    "narrow-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Messages.svg depicts static message, author, timestamp, editor, employee and attachment concepts",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Messages.svg"
+    }
+  ],
+  "browserTests": ["tools/playwright/messaging-history-components.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-source-chromium-linux.png",
+    "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: authoritative hash and unchanged-source check",
+    "structural-contract": "pass: styles, docs, fixtures and occurrence ledger",
+    "runtime-browser": "pass: semantic native actions",
+    "accessibility": "pass: native list structure and axe coverage",
+    "focused-visual": "pass: focused source states and responsive geometry",
+    "consumer-integration": "pass: Data Workspace action",
+    "responsive-content-stress": "pass: narrow viewport, long content and text scaling"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: source and state matrix"],
+      "realInteractionVisual": [
+        "not-applicable: the module has no library-owned interactive visual state"
+      ],
+      "runtimeBehavior": ["pass: native consumer action"]
+    },
+    "materialStates": ["incoming", "outgoing", "narrow-layout", "text-scale"],
+    "browserTest": "tools/playwright/messaging-history-components.spec.js",
+    "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no composer, delivery/read state, synchronization, persistence, sanitization, pagination, moderation or attachment lifecycle"
+  ]
+}

@@ -38,6 +38,8 @@ const manifestPaths = [
   "upload-document-compositions",
   "messaging-history-planner-compositions",
   "planner-schedule",
+  "message-thread",
+  "history-timeline",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

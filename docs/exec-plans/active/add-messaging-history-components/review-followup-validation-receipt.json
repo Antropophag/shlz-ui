@@ -1,0 +1,140 @@
+{
+  "contractReceiptDigest": "04a4ab07fe2c6337548d7e02970dc00c732f89248f33a621e6804f933b73acdf",
+  "kind": "validation",
+  "payload": {
+    "argv": ["npm", "run", "check"],
+    "candidateHead": "a99e577d1bff0a85c674ed76ac63981091ae4a95",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 15501,
+        "digest": "016cadb0a1524325388b723cc28f78e54d457618f09d9f679fd0721bea56f99b",
+        "path": "apps/showcase/src/consumer-workspace.js"
+      },
+      {
+        "bytes": 69933,
+        "digest": "68f3c690e6df7faf603ecb3e0640dc6d7558fcc55ef60d66489404980f158ada",
+        "path": "apps/showcase/src/main.js"
+      },
+      {
+        "bytes": 4066,
+        "digest": "ed4d9cc0aec4f40e4f5d3afa76846954ab14c3482c5dd49b5ad61b6419f77432",
+        "path": "apps/showcase/src/messaging-history-showcase.js"
+      },
+      {
+        "bytes": 7114,
+        "digest": "81cd7ddcf8fc52e3dcea4ba1649339dbf72b6f8b633c629beed039a27845181f",
+        "path": "docs/component-audits/button.json"
+      },
+      {
+        "bytes": 3850,
+        "digest": "21cbb0485cef9b08a45f35a0a85b807b3aa9d70d211b49bf0a6253ee121e4499",
+        "path": "docs/component-audits/link.json"
+      },
+      {
+        "bytes": 1788,
+        "digest": "82911b9d4911df7bb372064df8ce5c78a8701a0b1a6790c8f2844417f3830207",
+        "path": "docs/components/history-timeline.md"
+      },
+      {
+        "bytes": 4882,
+        "digest": "b82d4f4f3a0ed0ecf247eecb2c791c6d2f07882d1d2cd9a75825cf8cddd16644",
+        "path": "openspec/changes/add-messaging-history-components/design.md"
+      },
+      {
+        "bytes": 3562,
+        "digest": "48db37edb3cecb492866e4f3250829811ffddfbc0fa8978af219c3d564c61eb1",
+        "path": "openspec/changes/add-messaging-history-components/specs/data-display/history-timeline/spec.md"
+      },
+      {
+        "bytes": 3540,
+        "digest": "1463603a5fdc2c6d33bfe2e15c90f2bffee1981636673ec2f2342849659fbded",
+        "path": "openspec/changes/add-messaging-history-components/specs/data-display/message-thread/spec.md"
+      },
+      {
+        "bytes": 127231,
+        "digest": "b25cc9b6d3518f477f1ea79cde7180afd7a7a0933ad1c6595fe578322adfe473",
+        "path": "package-lock.json"
+      },
+      {
+        "bytes": 1890,
+        "digest": "ed85b83b01a90cad1261f9fea72e0f52a66c1b435195812f01b9c3f2ea1af4ac",
+        "path": "package.json"
+      },
+      {
+        "bytes": 2850,
+        "digest": "eb0b96e9d352d5cb346241e2f1214c164e3036ec210ea59d28c6f2ffb8bf2a19",
+        "path": "packages/styles/components/history-timeline.css"
+      },
+      {
+        "bytes": 899,
+        "digest": "061cf84df3686dd7e14c89bfd52a53e940317a243bc01f2baebf903548ced452",
+        "path": "playwright.config.js"
+      },
+      {
+        "bytes": 106791,
+        "digest": "8e009a088ea8c7fefdc20b4d2543394bdbb412195ccd605401f85fb48f8936d2",
+        "path": "tools/playwright/consumer-workspace.spec.js-snapshots/consumer-workspace-chromium-linux.png"
+      },
+      {
+        "bytes": 14076,
+        "digest": "d4f7a95f45eebb1f4f245b814d2f3826590f1c5fc670f5f68e2923f7650633e7",
+        "path": "tools/playwright/messaging-history-components.spec.js"
+      },
+      {
+        "bytes": 24646,
+        "digest": "709c5b84d732e1c6a3eadb4cbfc21bc0488a5f8c9e1a740c1e4b005a674e2670",
+        "path": "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-narrow-chromium-linux.png"
+      },
+      {
+        "bytes": 25721,
+        "digest": "94d3108224a5320a267ba18132c04976353036ae0350d761daa51415c997f1e7",
+        "path": "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-source-chromium-linux.png"
+      },
+      {
+        "bytes": 22736,
+        "digest": "8bf159516e2f9c460805844f67a0ec9e073a57fc6c8380d363efa2c773129379",
+        "path": "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-narrow-chromium-linux.png"
+      },
+      {
+        "bytes": 25123,
+        "digest": "afae69cfd25e0b8a9a27e6ac701a5972e6fe3c19a70c6acdcb236f57e7b8693b",
+        "path": "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-source-chromium-linux.png"
+      },
+      {
+        "bytes": 413,
+        "digest": "62387125652107a5a7c9fd9cf33930ac42b75c0dffae4ca75dae8c9839970e9c",
+        "path": "tools/tests/fixtures/messaging-history-review-known-bad.txt"
+      },
+      {
+        "bytes": 3162,
+        "digest": "eada9f0ac48dddc3be334cae497692917a85087b1aa3c7555d3458c21e432c81",
+        "path": "tools/tests/messaging-history-components.test.mjs"
+      },
+      {
+        "bytes": 2181,
+        "digest": "d9510c8b99d00c5f27c488c8a437733f5471df68590e30a727db69323040e02b",
+        "path": "tools/tests/pr57-regression-oracle.mjs"
+      },
+      {
+        "bytes": 11811,
+        "digest": "739cfa0c30f01ee76dc61d84ad3ef01b24caa637789adf133b3d59e2b6f1a8cf",
+        "path": "tools/tests/wave12-messaging-history-planner-source-census.test.mjs"
+      }
+    ],
+    "closureDigest": "9517abc897531e1ace772e091b4422dcd68c94e0b7c31281aaceaf8c7ea93342",
+    "contractDigest": "2f9ed438b84aa183f39393c4440af5bfc05cac99c90804f5f4b90621f079c928",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "2126f2f2c9bd73817fe352295a95afcdda3e495d656ec22797c0894ffb417e3c",
+      "stdoutDigest": "b3809440f4983f6b90ce3beedaf2351209c3036791c8fb155356e9ba76eb8f01"
+    },
+    "target": "pr-57-review-followup-full-gate"
+  },
+  "version": 1,
+  "digest": "564c392d0c265d6adc6f5f2c1b37182679d5cbd8a250e1f381ef368c04a5a95e"
+}

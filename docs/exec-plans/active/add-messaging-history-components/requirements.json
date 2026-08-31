@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "revision": 2,
+  "intent": "Complete the approved Message Thread and History Timeline change by resolving all actionable review findings on pull request 57 without expanding its component scope.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "wave-12-scope",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "just do the best bro" }
+    },
+    {
+      "id": "module-seams",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "openspec/changes/add-messaging-history-components/design.md"
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md, shlz-design-source/raw/svg/Messages.svg, and shlz-design-source/raw/svg/History of changes.svg"
+      }
+    },
+    {
+      "id": "consumer-ownership",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "docs/component-audits/wave-12-report.md and openspec/changes/add-messaging-history-components/design.md"
+      }
+    },
+    {
+      "id": "period-label-association",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "openspec/changes/add-messaging-history-components/design.md and openspec/changes/add-messaging-history-components/specs/data-display/history-timeline/spec.md"
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md requires a task branch from current origin/main and an unmerged PR"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-messaging-history-components",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Дождись и зарезолви ревью в пр https://github.com/Antropophag/shlz-ui/pull/57"
+    }
+  }
+}

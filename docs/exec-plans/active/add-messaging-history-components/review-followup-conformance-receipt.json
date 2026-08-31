@@ -1,0 +1,45 @@
+{
+  "baselineReceiptDigest": "668d10f2558a9ff0b5e96852a9e27ce0336eb7880fcada987c907acfebc81d19",
+  "kind": "conformance",
+  "payload": {
+    "actual": [
+      "apps/showcase/src/consumer-workspace.js",
+      "apps/showcase/src/main.js",
+      "apps/showcase/src/messaging-history-showcase.js",
+      "docs/component-audits/button.json",
+      "docs/component-audits/link.json",
+      "docs/components/history-timeline.md",
+      "openspec/changes/add-messaging-history-components/design.md",
+      "openspec/changes/add-messaging-history-components/specs/data-display/history-timeline/spec.md",
+      "packages/styles/components/history-timeline.css",
+      "tools/playwright/consumer-workspace.spec.js-snapshots/consumer-workspace-chromium-linux.png",
+      "tools/playwright/messaging-history-components.spec.js",
+      "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-narrow-chromium-linux.png",
+      "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-source-chromium-linux.png",
+      "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-narrow-chromium-linux.png",
+      "tools/playwright/messaging-history-components.spec.js-snapshots/message-thread-source-chromium-linux.png",
+      "tools/tests/fixtures/messaging-history-review-known-bad.txt",
+      "tools/tests/messaging-history-components.test.mjs",
+      "tools/tests/pr57-regression-oracle.mjs",
+      "tools/tests/wave12-messaging-history-planner-source-census.test.mjs"
+    ],
+    "candidateHead": "a99e577d1bff0a85c674ed76ac63981091ae4a95",
+    "closedSets": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "outcome": "pass"
+  },
+  "routeReceiptDigest": "321f3e7ee67c1dd5e035f93f529e266e7c11ecfa985b6b2343349fe703f2d981",
+  "version": 1,
+  "digest": "24faf8642ba5b953659faddc17000eb6882f524fd7347292a309c66959c94eac"
+}

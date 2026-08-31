@@ -1579,6 +1579,22 @@ article {
   padding: var(--shlz-source-spacing-24);
 }
 
+.shlz-consumer-workspace__activity {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--shlz-source-spacing-24);
+  padding: var(--shlz-source-spacing-24);
+  border-block-start: 1px solid var(--shlz-semantic-color-border-default);
+}
+
+.shlz-consumer-workspace__activity > :is(h3, p:last-child) {
+  grid-column: 1 / -1;
+}
+
+.shlz-consumer-workspace__activity > :is(h3, p) {
+  margin-block: 0;
+}
+
 .shlz-card-composition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
@@ -1806,6 +1822,14 @@ article {
   .shlz-consumer-workspace__toolbar {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .shlz-consumer-workspace__activity {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .shlz-consumer-workspace__activity > :is(h3, p:last-child) {
+    grid-column: auto;
   }
 
   .shlz-consumer-workspace__search {

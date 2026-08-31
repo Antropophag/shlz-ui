@@ -16,6 +16,8 @@ const inProgressRecordCount = records.filter(
   ({ status }) => status === "В работе",
 ).length;
 
+const messagingHistoryWorkspaceMarkup = `<section class="shlz-consumer-workspace__activity" aria-labelledby="workspace-activity-title"><h3 id="workspace-activity-title">Communication and activity</h3><p>Application-owned records, actions, and state for the selected request.</p><article><h4>Request discussion</h4><ol class="shlz-message-thread" aria-label="Request discussion" data-component-audit-id="message-thread-data-workspace-consumer"><li class="shlz-message-thread__item" data-direction="incoming"><article class="shlz-message-thread__message"><header class="shlz-message-thread__header"><span class="shlz-message-thread__author">Dispatch team</span><time class="shlz-message-thread__time">12:20</time></header><div class="shlz-message-thread__bubble"><p>Assignment confirmed for SD-2418.</p><a class="shlz-link" data-component-audit-id="link-messaging-history-consumer" href="#consumer-workspace" data-workspace-message-action>Open request</a></div></article></li><li class="shlz-message-thread__item" data-direction="incoming" data-grouped><article class="shlz-message-thread__message"><header class="shlz-message-thread__header"><span class="shlz-message-thread__author">Dispatch team</span><time class="shlz-message-thread__time">12:24</time></header><div class="shlz-message-thread__bubble"><p>Additional context follows in the same author group.</p></div></article></li></ol></article><article><h4>Request history</h4><ol class="shlz-history-timeline" aria-label="Request history" data-component-audit-id="history-timeline-data-workspace-consumer"><li class="shlz-history-timeline__entry"><span class="shlz-history-timeline__marker" aria-hidden="true"></span><article class="shlz-history-timeline__content"><header class="shlz-history-timeline__header"><span class="shlz-history-timeline__actor">System</span><time class="shlz-history-timeline__time">12:18</time></header><p class="shlz-history-timeline__description">Assigned a responsible team.</p><button class="shlz-button shlz-button--sm" data-component-audit-id="button-messaging-history-consumer" type="button" data-workspace-history-action>Open audit record</button></article></li></ol></article><p role="status" data-messaging-history-consumer-status>Consumer action has not run.</p></section>`;
+
 const row = ({ id, title, status }) => `
   <tr class="shlz-table__row" data-workspace-row data-search-value="${`${id} ${title} ${status}`.toLocaleLowerCase("ru")}" data-status="${status}">
     <td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать заявку ${id}" data-workspace-select data-component-audit-id="checkbox-workspace-${id.toLowerCase()}"></td>
@@ -56,6 +58,7 @@ export const consumerWorkspaceMarkup = (iconUrl) => `
         <div class="shlz-consumer-workspace__empty shlz-empty-state" data-workspace-empty data-component-audit-id="empty-state-workspace-no-results" hidden><h4 class="shlz-empty-state__title">Заявки не найдены</h4><p class="shlz-empty-state__description">Измените запрос или сбросьте фильтр.</p><div class="shlz-empty-state__actions"><button class="shlz-button" type="button" data-workspace-reset>Сбросить условия</button></div></div>
       </div>
     </div>
+    ${messagingHistoryWorkspaceMarkup}
   </article>
   <dialog class="shlz-drawer" id="workspace-filter-drawer" data-shlz-drawer data-component-audit-id="drawer-data-workspace" aria-labelledby="workspace-filter-title">
     <form class="shlz-drawer__surface" method="dialog">
@@ -208,6 +211,19 @@ export const enhanceConsumerWorkspace = (scope = document) => {
     },
     { signal },
   );
+  const activityStatus = workspace.querySelector(
+    "[data-messaging-history-consumer-status]",
+  );
+  for (const control of workspace.querySelectorAll(
+    "[data-workspace-message-action], [data-workspace-history-action]",
+  ))
+    control.addEventListener(
+      "click",
+      () => {
+        activityStatus.textContent = "Application handled the selected record.";
+      },
+      { signal },
+    );
 
   return { destroy: () => abortController.abort() };
 };

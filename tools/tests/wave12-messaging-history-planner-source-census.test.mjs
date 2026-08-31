@@ -37,6 +37,21 @@ const promotedPlannerPaths = new Set([
   "tools/tests/planner-schedule.test.mjs",
   "tools/tests/fixtures/planner-schedule-known-bad.css",
 ]);
+const promotedMessagingHistoryPaths = new Set([
+  "apps/showcase/src/consumer-workspace.js",
+  "apps/showcase/src/messaging-history-showcase.js",
+  "docs/components/message-thread.md",
+  "docs/components/history-timeline.md",
+  "packages/styles/components/message-thread.css",
+  "packages/styles/components/history-timeline.css",
+  "packages/styles/shlz.css",
+  "tools/fixtures/messaging-history-components.html",
+  "tools/generate.mjs",
+  "tools/playwright/messaging-history-components.spec.js",
+  "tools/tests/component-audit-manifest.test.mjs",
+  "tools/tests/messaging-history-components.test.mjs",
+  "tools/tests/pr57-regression-oracle.mjs",
+]);
 const scopeMatchers = {
   messaging:
     /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-messaging|shlz-(?:messaging|messages|message-thread|conversation)|data-(?:shlz-)?(?:messaging|messages|message-thread)|customElements\.define\(\s*["']shlz-(?:messaging|messages|message-thread)|<(?:shlz-)?(?:messaging|messages|message-thread)\b|(?:class|function|const|let|var)\s+(?:Messaging|Messages|MessageThread|Conversation)\b|export\s*\{[^}]*\b(?:Messaging|Messages|MessageThread|Conversation)\b|(?:^|\/)(?:messaging|messages|message-thread|conversation)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
@@ -200,7 +215,8 @@ test("Wave 12 census proves independent higher-level absence", async () => {
       .filter(
         (path) =>
           relative(".", path) !== currentTestPath &&
-          !promotedPlannerPaths.has(relative(".", path)),
+          !promotedPlannerPaths.has(relative(".", path)) &&
+          !promotedMessagingHistoryPaths.has(relative(".", path)),
       )
       .map(async (path) => ({
         path: relative(".", path),
@@ -214,6 +230,7 @@ test("Wave 12 census proves independent higher-level absence", async () => {
         ({ path, source }) =>
           !auditPaths.has(path) &&
           !promotedPlannerPaths.has(path) &&
+          !promotedMessagingHistoryPaths.has(path) &&
           matcher.test(`${path}\n${source}`),
       )
       .map(({ path }) => path);

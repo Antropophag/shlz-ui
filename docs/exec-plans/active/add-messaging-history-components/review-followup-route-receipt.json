@@ -1,0 +1,56 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Complete the approved Message Thread and History Timeline change by resolving all actionable review findings on pull request 57 without expanding its component scope.",
+    "material": ["publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-messaging-history-components",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "wave-12-scope",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "module-seams",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "consumer-ownership",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "period-label-association",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "321f3e7ee67c1dd5e035f93f529e266e7c11ecfa985b6b2343349fe703f2d981"
+}
