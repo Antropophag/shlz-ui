@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 import {
   expectClassifiedComponentOccurrences,
   readComponentAuditManifest,
@@ -63,7 +64,11 @@ test("Wave 10 source-size and material variants retain computed geometry", async
   await expect(card).toHaveCSS("width", "314px");
   await expect(card).toHaveCSS("height", "230px");
   await expect(card).toHaveCSS("border-radius", "16px");
-  await expect(card).toHaveScreenshot("card-with-action-source.png");
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
+    card,
+    "card-with-action-source.png",
+  );
   await expect(
     page.locator("#report-card-demo .shlz-card-composition-grid"),
   ).toHaveScreenshot("report-card-variants.png");

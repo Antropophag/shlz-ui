@@ -1,5 +1,6 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
+import { expectStablePreexistingShowcaseScreenshot } from "./visual-harness.js";
 import assert from "node:assert/strict";
 import { fixtureUrl } from "./fixture-url.js";
 import {
@@ -397,9 +398,11 @@ test("semantic fixtures pass accessibility and focused source visuals", async ({
     )
     .analyze();
   expect(results.violations).toEqual([]);
-  await expect(
+  await expectStablePreexistingShowcaseScreenshot(
+    page,
     page.locator("[data-component-audit-id='message-thread-showcase-source']"),
-  ).toHaveScreenshot("message-thread-source.png");
+    "message-thread-source.png",
+  );
   await expect(
     page.locator(
       "[data-component-audit-id='history-timeline-showcase-source']",

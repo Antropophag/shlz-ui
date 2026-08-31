@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "intent": "Stabilize pre-existing showcase visual tests against additive consumer fixtures, replace one stale hard-coded occurrence count with its existing audit manifest, and restore Browser and visual CI without changing production code or snapshot baselines.",
+  "route": "direct",
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}
