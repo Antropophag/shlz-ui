@@ -30,4 +30,4 @@ The library owns framework-neutral presentation, semantic composition hooks, nor
 
 ## Review independence
 
-Standards and Spec were reviewed as separate candidate-bound passes. Repository policy for this run prohibited sub-agents, so the reviews were performed in the same Codex runtime and are not context-isolated; this limitation is recorded rather than represented as independent external review.
+Standards and Spec were reviewed in separate, context-isolated Codex runtimes against immutable baseline `524d9ba7` and candidate `e990f4f`. Both re-reviews report no remaining scope-local findings after the live-consumer placement, audit-manifest deviation, and editor maximum-height findings were resolved.
