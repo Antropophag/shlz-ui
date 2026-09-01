@@ -1,8 +1,6 @@
 {
   "version": 1,
-  "changedFiles": [
-    "docs/source-transfer-fidelity-audit-2026-09-01.md"
-  ],
+  "changedFiles": ["docs/source-transfer-fidelity-audit-2026-09-01.md"],
   "materialSignals": {
     "newCapability": false,
     "publishingOrRelease": false,

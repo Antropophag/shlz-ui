@@ -1,0 +1,25 @@
+{
+  "baselineReceiptDigest": "d8b7193244999dfb6bcf6176aae9dc8fcf8dd3f1a46e9d8f3ffe66f279da3cf0",
+  "kind": "conformance",
+  "payload": {
+    "actual": ["docs/source-transfer-fidelity-audit-2026-09-01.md"],
+    "candidateHead": "28936929e2fdf5e45c08c2492308690734ae80ce",
+    "closedSets": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "outcome": "pass"
+  },
+  "routeReceiptDigest": "09bbd95f4dd02da8cead5d08c11f25673f668339b9dfc5e643b4907f1525278d",
+  "version": 1,
+  "digest": "550c52184d88c40abd9ab564c4dc9a8bb172e800ad2a001a5fa039d6c9e053c9"
+}
