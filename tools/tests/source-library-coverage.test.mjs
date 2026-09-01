@@ -77,6 +77,21 @@ test("classification episodes account for their exact baseline census", async ()
     episode.cohorts.reduce((sum, cohort) => sum + cohort.records, 0),
     140,
   );
+  assert.deepEqual(
+    episode.cohorts.map(({ cohort, records, variants }) => ({
+      cohort,
+      records,
+      variants,
+    })),
+    [
+      { cohort: "classified-existing-family", records: 10, variants: 49 },
+      { cohort: "composition-evidence", records: 4, variants: 11 },
+      { cohort: "consumer-composition", records: 9, variants: 31 },
+      { cohort: "deferred-component-contract", records: 9, variants: 42 },
+      { cohort: "deferred-icon-provenance", records: 103, variants: 0 },
+      { cohort: "deferred-shared-model", records: 5, variants: 30 },
+    ],
+  );
   assert.ok(
     episode.records.every(({ cohort, boundary }) => cohort && boundary),
   );
@@ -103,6 +118,39 @@ test("classification episode validation fails closed", async () => {
   );
   reviewed.review.boundary = "";
   await assert.rejects(build(unnamedBoundary), /review boundary/);
+
+  const inventedCohort = clone(ledger);
+  inventedCohort.records.find(
+    ({ review }) => review?.episode === "classify-existing-component-records",
+  ).review.cohort = "invented-cohort";
+  await assert.rejects(build(inventedCohort), /invalid review cohort/);
+
+  const swappedIdentity = clone(ledger);
+  const sourceVariants = new Map(
+    sourceIndex.components.map((record) => [
+      `${record.sourceArchive}#${record.figmaNodeId}`,
+      record.variants.length,
+    ]),
+  );
+  const reviewedRecord = swappedIdentity.records.find(
+    ({ review }) => review?.episode === "classify-existing-component-records",
+  );
+  const reviewedVariantCount = sourceVariants.get(
+    `${reviewedRecord.sourceArchive}#${reviewedRecord.figmaNodeId}`,
+  );
+  const replacement = swappedIdentity.records.find(
+    (record) =>
+      !record.review &&
+      sourceVariants.get(`${record.sourceArchive}#${record.figmaNodeId}`) ===
+        reviewedVariantCount,
+  );
+  assert.ok(replacement);
+  replacement.review = reviewedRecord.review;
+  delete reviewedRecord.review;
+  await assert.rejects(
+    build(swappedIdentity),
+    /reviewed source identities do not match the baseline census/,
+  );
 });
 
 test("coverage validation fails closed on incomplete or stale identities", async () => {
@@ -227,6 +275,12 @@ test("coverage validation rejects unsupported claims and references", async () =
     build(unsupportedExclusion),
     /exclusion needs supporting evidence/,
   );
+
+  const inventedOwnership = clone(ledger);
+  inventedOwnership.records.find(
+    ({ disposition }) => disposition === "intentionally-excluded",
+  ).ownership = "library core";
+  await assert.rejects(build(inventedOwnership), /valid ownership boundary/);
 });
 
 test("normalized icon claims require exact provenance for every indexed variant", async () => {

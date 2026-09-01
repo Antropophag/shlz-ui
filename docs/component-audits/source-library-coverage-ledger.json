@@ -4936,7 +4936,16 @@
       "id": "classify-existing-component-records",
       "baseline": "2e18d09",
       "expectedRecords": 140,
-      "expectedVariants": 163
+      "expectedVariants": 163,
+      "expectedIdentityDigest": "2b4d6996cf405e1025b5936129f5600ed8a7cb6ad515b87936f68f9665bf82d4",
+      "allowedCohorts": [
+        "classified-existing-family",
+        "composition-evidence",
+        "consumer-composition",
+        "deferred-component-contract",
+        "deferred-icon-provenance",
+        "deferred-shared-model"
+      ]
     }
   ]
 }

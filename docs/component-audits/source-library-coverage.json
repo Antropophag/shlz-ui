@@ -43,6 +43,7 @@
     {
       "id": "classify-existing-component-records",
       "baseline": "2e18d09",
+      "identityDigest": "2b4d6996cf405e1025b5936129f5600ed8a7cb6ad515b87936f68f9665bf82d4",
       "expected": { "records": 140, "variants": 163 },
       "actual": { "records": 140, "variants": 163 },
       "cohorts": [

@@ -1,4 +1,5 @@
 import { realpath } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 
 export const dispositions = [
@@ -7,6 +8,8 @@ export const dispositions = [
   "intentionally-excluded",
   "unresolved",
 ];
+
+export const ownershipBoundaries = ["consumer application"];
 
 const keyOf = ({ sourceArchive, figmaNodeId }) =>
   `${sourceArchive}#${figmaNodeId}`;
@@ -102,8 +105,8 @@ function validateDecisionShape(decision, identity) {
     requireEmpty(["families", "implementation", "evidence"]);
     assert(decision.reason?.trim(), `${identity}: exclusion needs a reason`);
     assert(
-      decision.ownership?.trim(),
-      `${identity}: exclusion needs an ownership boundary`,
+      ownershipBoundaries.includes(decision.ownership),
+      `${identity}: exclusion needs a valid ownership boundary`,
     );
     assert(
       decision.exclusionEvidence.length > 0,
@@ -124,19 +127,42 @@ function validateDecisionShape(decision, identity) {
   }
 }
 
-function validateReview(review, identity, episodeIds) {
+function validateReview(review, identity, episodesById) {
   if (review === undefined) return;
   assert(
     review && typeof review === "object" && !Array.isArray(review),
     `${identity}: review must be an object`,
   );
+  const episode = episodesById.get(review.episode);
   assert(
-    episodeIds.has(review.episode),
+    episode,
     `${identity}: unknown classification episode: ${review.episode}`,
   );
-  assert(review.cohort?.trim(), `${identity}: review cohort is required`);
+  assert(
+    episode.allowedCohorts.includes(review.cohort),
+    `${identity}: invalid review cohort: ${review.cohort}`,
+  );
   assert(review.boundary?.trim(), `${identity}: review boundary is required`);
 }
+
+export const classificationIdentityDigest = (records) =>
+  createHash("sha256")
+    .update(
+      JSON.stringify(
+        records
+          .map((record) => ({
+            sourceArchive: record.identity.sourceArchive,
+            figmaNodeId: record.identity.figmaNodeId,
+          }))
+          .sort((left, right) =>
+            compareStrings(
+              `${left.sourceArchive}#${left.figmaNodeId}`,
+              `${right.sourceArchive}#${right.figmaNodeId}`,
+            ),
+          ),
+      ),
+    )
+    .digest("hex");
 
 function summarize(records, variants, families) {
   const count = (items, disposition) =>
@@ -192,13 +218,30 @@ export async function buildCoverageMatrix({
     Array.isArray(ledger.classificationEpisodes),
     "ledger.classificationEpisodes must be an array",
   );
-  const episodeIds = new Set(
-    ledger.classificationEpisodes.map((episode) => episode.id),
+  const episodesById = new Map(
+    ledger.classificationEpisodes.map((episode) => [episode.id, episode]),
   );
   assert(
-    episodeIds.size === ledger.classificationEpisodes.length,
+    episodesById.size === ledger.classificationEpisodes.length,
     "classification episode ids must be unique",
   );
+  for (const episode of ledger.classificationEpisodes) {
+    assert(episode.id?.trim(), "classification episode id is required");
+    assert(
+      Array.isArray(episode.allowedCohorts) &&
+        episode.allowedCohorts.length > 0,
+      `${episode.id}: allowed cohorts are required`,
+    );
+    assert(
+      new Set(episode.allowedCohorts).size === episode.allowedCohorts.length &&
+        episode.allowedCohorts.every((cohort) => cohort?.trim()),
+      `${episode.id}: allowed cohorts must be unique non-empty strings`,
+    );
+    assert(
+      /^[a-f0-9]{64}$/.test(episode.expectedIdentityDigest),
+      `${episode.id}: expected identity digest is required`,
+    );
+  }
   const sourceKeys = sourceIndex.components.map(keyOf);
   assert(
     new Set(sourceKeys).size === sourceKeys.length,
@@ -316,7 +359,7 @@ export async function buildCoverageMatrix({
       `${identity}: stale hierarchyPath`,
     );
     await validateReferences(decision, identity);
-    validateReview(decision.review, identity, episodeIds);
+    validateReview(decision.review, identity, episodesById);
     if (decision.families.includes("Icons")) {
       await validateIconProvenance(decision, identity, source, source.variants);
     }
@@ -437,7 +480,6 @@ export async function buildCoverageMatrix({
   const variants = records.flatMap((record) => record.variants);
   const classificationEpisodes = ledger.classificationEpisodes.map(
     (episode) => {
-      assert(episode.id?.trim(), "classification episode id is required");
       assert(
         Number.isInteger(episode.expectedRecords) &&
           Number.isInteger(episode.expectedVariants),
@@ -448,6 +490,7 @@ export async function buildCoverageMatrix({
           decisions.get(keyOf(record.identity)).review?.episode === episode.id,
       );
       const reviewedVariants = reviewed.flatMap((record) => record.variants);
+      const actualIdentityDigest = classificationIdentityDigest(reviewed);
       assert(
         reviewed.length === episode.expectedRecords,
         `${episode.id}: reviewed record total ${reviewed.length} does not match ${episode.expectedRecords}`,
@@ -455,6 +498,10 @@ export async function buildCoverageMatrix({
       assert(
         reviewedVariants.length === episode.expectedVariants,
         `${episode.id}: reviewed variant total ${reviewedVariants.length} does not match ${episode.expectedVariants}`,
+      );
+      assert(
+        actualIdentityDigest === episode.expectedIdentityDigest,
+        `${episode.id}: reviewed source identities do not match the baseline census`,
       );
       const cohortNames = [
         ...new Set(
@@ -466,6 +513,7 @@ export async function buildCoverageMatrix({
       return {
         id: episode.id,
         baseline: episode.baseline,
+        identityDigest: actualIdentityDigest,
         expected: {
           records: episode.expectedRecords,
           variants: episode.expectedVariants,
