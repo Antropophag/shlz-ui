@@ -1,7 +1,7 @@
 # Existing component record classification validation
 
-Episode baseline: `2e18d09`; candidate reviewed below is the descendant commit
-that contains the classification implementation.
+Episode baseline: `2e18d09eae0f201a2c19f2443113165f471b9e8c`;
+classification candidate: `71a49c5875eb4441d6b9aca466b0f6d8665bd099`.
 
 ## Automated evidence
 
@@ -15,8 +15,12 @@ that contains the classification implementation.
 - OpenSpec: `openspec validate classify-existing-component-records --strict`
   passed.
 - Formatting and ESLint passed for every changed implementation/report file.
-- `git diff --exit-code -- shlz-design-source packages apps` passed: no source,
-  runtime package, or Showcase changes exist in this episode.
+- Protected-path check passed: the committed episode delta contains no source,
+  runtime package, or Showcase changes.
+
+  ```sh
+  git diff --exit-code 2e18d09eae0f201a2c19f2443113165f471b9e8c 71a49c5875eb4441d6b9aca466b0f6d8665bd099 -- shlz-design-source packages apps
+  ```
 
 ## Environment correction and limitations
 
