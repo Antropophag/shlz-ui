@@ -1,0 +1,4128 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "89:17043",
+      "kind": "COMPONENT_SET",
+      "name": "Notification",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Notification",
+        "Container",
+        "Notification"
+      ],
+      "disposition": "implemented",
+      "families": ["Notification"],
+      "implementation": ["packages/styles/components/notification.css"],
+      "evidence": [
+        "tools/tests/notification-source.test.mjs",
+        "tools/playwright/notification-contract.spec.js",
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/notification-snackbar-wave8.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "424:37565",
+      "kind": "COMPONENT_SET",
+      "name": "Snackbar",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Notification",
+        "Container",
+        "Snackbar"
+      ],
+      "disposition": "implemented",
+      "families": ["Snackbar"],
+      "implementation": ["packages/styles/components/notification.css"],
+      "evidence": [
+        "tools/tests/notification-source.test.mjs",
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/notification-snackbar-wave8.spec.js",
+        "tools/tests/wave8-repository-census.test.mjs"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "254:18239",
+      "kind": "COMPONENT_SET",
+      "name": "Priority",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Priority"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "440:21412",
+      "kind": "COMPONENT_SET",
+      "name": "Arrows",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Arrows"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "537:87787",
+      "kind": "COMPONENT_SET",
+      "name": "Icon button",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Icon button"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1431:34618",
+      "kind": "COMPONENT_SET",
+      "name": "Drag & Drope",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Drag & Drope"
+      ],
+      "disposition": "implemented",
+      "families": ["File Upload"],
+      "implementation": ["packages/styles/components/file-upload.css"],
+      "evidence": [
+        "tools/tests/file-upload-contract.test.mjs",
+        "tools/playwright/file-upload.spec.js",
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "253:17470",
+      "kind": "COMPONENT_SET",
+      "name": "File type icon",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "File type icon"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "27:8365",
+      "kind": "COMPONENT_SET",
+      "name": "Button",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Buttons",
+        "Container",
+        "Frame 1171277886",
+        "Button"
+      ],
+      "disposition": "implemented",
+      "families": ["Button"],
+      "implementation": ["packages/styles/components/button.css"],
+      "evidence": [
+        "tools/tests/components.test.mjs",
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "28:8864",
+      "kind": "COMPONENT_SET",
+      "name": "Input",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Input",
+        "Container",
+        "Frame 1171277888",
+        "Input"
+      ],
+      "disposition": "implemented",
+      "families": ["Input"],
+      "implementation": ["packages/styles/components/field.css"],
+      "evidence": [
+        "tools/tests/form-controls-source.test.mjs",
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js",
+        "docs/components/input.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "386:50773",
+      "kind": "COMPONENT_SET",
+      "name": "Input-Number",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Input Number",
+        "Container",
+        "Frame 1171277888",
+        "Input-Number"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "371:32614",
+      "kind": "COMPONENT_SET",
+      "name": "Link",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Link",
+        "Container",
+        "Frame 1171277888",
+        "Link"
+      ],
+      "disposition": "implemented",
+      "families": ["Link"],
+      "implementation": ["packages/styles/components/link.css"],
+      "evidence": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/link.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "785:48349",
+      "kind": "COMPONENT_SET",
+      "name": "Tag",
+      "hierarchyPath": ["UI Kit – Basic elements", "Tag", "Container", "Tag"],
+      "disposition": "implemented",
+      "families": ["Tag"],
+      "implementation": ["packages/styles/components/tag.css"],
+      "evidence": [
+        "tools/tests/tag-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "371:32592",
+      "kind": "COMPONENT_SET",
+      "name": "Person tag",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Tag",
+        "Container",
+        "Person tag"
+      ],
+      "disposition": "implemented",
+      "families": ["Person Tag"],
+      "implementation": ["packages/styles/components/tag.css"],
+      "evidence": [
+        "tools/tests/tag-source.test.mjs",
+        "tools/playwright/review.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js",
+        "tools/playwright/interaction-evidence-wave35.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "100:13966",
+      "kind": "COMPONENT_SET",
+      "name": "Badge/Count",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Bage",
+        "Container",
+        "Badge/Count"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "100:14027",
+      "kind": "COMPONENT_SET",
+      "name": "Badge/Dot",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Bage",
+        "Container",
+        "Badge/Dot"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1382:86758",
+      "kind": "COMPONENT_SET",
+      "name": "Color",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Bage",
+        "Container",
+        "Color"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "51:1615",
+      "kind": "COMPONENT_SET",
+      "name": "Textarea",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Textarea",
+        "Container",
+        "Frame 1171277892",
+        "Textarea"
+      ],
+      "disposition": "implemented",
+      "families": ["Textarea"],
+      "implementation": ["packages/styles/components/field.css"],
+      "evidence": [
+        "tools/tests/form-controls-source.test.mjs",
+        "tools/playwright/fidelity.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js",
+        "docs/components/textarea.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "36:1106",
+      "kind": "COMPONENT_SET",
+      "name": "Dropdown",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Select",
+        "Container",
+        "Frame 1171277888",
+        "Dropdown"
+      ],
+      "disposition": "implemented",
+      "families": ["Dropdown Menu"],
+      "implementation": [
+        "packages/styles/components/dropdown.css",
+        "packages/behaviors/src/dropdown.ts"
+      ],
+      "evidence": [
+        "tools/tests/dropdown-source.test.mjs",
+        "tools/playwright/dropdown.spec.js",
+        "tools/playwright/dropdown-fidelity.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "78:6339",
+      "kind": "COMPONENT_SET",
+      "name": "Selection-Item",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Select",
+        "Container",
+        "Selection-Item"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "81:16445",
+      "kind": "COMPONENT_SET",
+      "name": "Date-Picker",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Date-Picker",
+        "Container",
+        "Frame 1171277888",
+        "Date-Picker"
+      ],
+      "disposition": "implemented",
+      "families": ["Date Picker"],
+      "implementation": [
+        "packages/styles/components/date-field.css",
+        "packages/styles/components/calendar.css"
+      ],
+      "evidence": [
+        "tools/tests/date-field-source.test.mjs",
+        "tools/tests/date-picker-source.test.mjs",
+        "tools/tests/date-picker-consumer.test.mjs",
+        "tools/tests/date-picker-showcase.test.mjs"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "82:10764",
+      "kind": "COMPONENT_SET",
+      "name": "Picker-Cell/Month",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Date-Picker",
+        "Container",
+        "Picker-Cell/Month"
+      ],
+      "disposition": "implemented",
+      "families": ["Date Picker", "Calendar Grid"],
+      "implementation": [
+        "packages/styles/components/date-field.css",
+        "packages/styles/components/calendar.css",
+        "packages/styles/components/calendar-grid.css"
+      ],
+      "evidence": [
+        "tools/tests/date-field-source.test.mjs",
+        "tools/tests/date-picker-source.test.mjs",
+        "tools/tests/date-picker-consumer.test.mjs",
+        "tools/tests/date-picker-showcase.test.mjs"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "52:3213",
+      "kind": "COMPONENT_SET",
+      "name": "tab",
+      "hierarchyPath": ["UI Kit – Basic elements", "Tabs", "Container", "tab"],
+      "disposition": "implemented",
+      "families": ["Tabs"],
+      "implementation": [
+        "packages/styles/components/tabs.css",
+        "packages/behaviors/src/tabs.ts"
+      ],
+      "evidence": [
+        "tools/tests/tabs-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/tabs.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "58:5374",
+      "kind": "COMPONENT_SET",
+      "name": "Tab",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Tabs",
+        "Container",
+        "Frame 1171277893",
+        "Tab"
+      ],
+      "disposition": "implemented",
+      "families": ["Tabs"],
+      "implementation": [
+        "packages/styles/components/tabs.css",
+        "packages/behaviors/src/tabs.ts"
+      ],
+      "evidence": [
+        "tools/tests/tabs-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/tabs.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "185:15928",
+      "kind": "COMPONENT_SET",
+      "name": "Tab",
+      "hierarchyPath": ["UI Kit – Basic elements", "Tabs", "Container", "Tab"],
+      "disposition": "implemented",
+      "families": ["Tabs"],
+      "implementation": [
+        "packages/styles/components/tabs.css",
+        "packages/behaviors/src/tabs.ts"
+      ],
+      "evidence": [
+        "tools/tests/tabs-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/tabs.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "424:36756",
+      "kind": "COMPONENT_SET",
+      "name": "Segmented-Group",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Segment",
+        "Container",
+        "Segmented-Group"
+      ],
+      "disposition": "implemented",
+      "families": ["Segment"],
+      "implementation": ["packages/styles/components/segment.css"],
+      "evidence": [
+        "tools/tests/segment-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/segment.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "424:36728",
+      "kind": "COMPONENT_SET",
+      "name": "Segmented-Item",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Segment",
+        "Container",
+        "Segmented-Item"
+      ],
+      "disposition": "implemented",
+      "families": ["Segment"],
+      "implementation": ["packages/styles/components/segment.css"],
+      "evidence": [
+        "tools/tests/segment-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/segment.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "48:1166",
+      "kind": "COMPONENT_SET",
+      "name": "Switch",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Switch",
+        "Container",
+        "Frame 1171277890",
+        "Switch"
+      ],
+      "disposition": "implemented",
+      "families": ["Switch"],
+      "implementation": ["packages/styles/components/choice.css"],
+      "evidence": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js",
+        "docs/components/switch.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "43:769",
+      "kind": "COMPONENT_SET",
+      "name": "Menu item",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Dropdown menu",
+        "Container",
+        "Menu item"
+      ],
+      "disposition": "implemented",
+      "families": ["Dropdown Menu"],
+      "implementation": [
+        "packages/styles/components/dropdown.css",
+        "packages/behaviors/src/dropdown.ts"
+      ],
+      "evidence": [
+        "tools/tests/dropdown-source.test.mjs",
+        "tools/playwright/dropdown.spec.js",
+        "tools/playwright/dropdown-fidelity.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "45:1204",
+      "kind": "COMPONENT_SET",
+      "name": "Dropdown",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Dropdown menu",
+        "Container",
+        "Dropdown"
+      ],
+      "disposition": "implemented",
+      "families": ["Dropdown Menu"],
+      "implementation": [
+        "packages/styles/components/dropdown.css",
+        "packages/behaviors/src/dropdown.ts"
+      ],
+      "evidence": [
+        "tools/tests/dropdown-source.test.mjs",
+        "tools/playwright/dropdown.spec.js",
+        "tools/playwright/dropdown-fidelity.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "110:15065",
+      "kind": "COMPONENT_SET",
+      "name": "dropdown-btns",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Dropdown menu",
+        "Container",
+        "dropdown-btns"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "145:21821",
+      "kind": "COMPONENT_SET",
+      "name": "Popover",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Popover",
+        "Container",
+        "Popover"
+      ],
+      "disposition": "implemented",
+      "families": ["Popover"],
+      "implementation": [
+        "packages/styles/components/popover.css",
+        "packages/behaviors/src/popover.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/popover.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js",
+        "docs/components/popover.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "145:28072",
+      "kind": "COMPONENT_SET",
+      "name": "Tooltip",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Tooltip",
+        "Container",
+        "Tooltip"
+      ],
+      "disposition": "implemented",
+      "families": ["Tooltip"],
+      "implementation": [
+        "packages/styles/components/tooltip.css",
+        "packages/behaviors/src/tooltip.ts"
+      ],
+      "evidence": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "217:4864",
+      "kind": "COMPONENT_SET",
+      "name": "Avatar",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Avatar",
+        "Container",
+        "Avatar"
+      ],
+      "disposition": "implemented",
+      "families": ["Avatar"],
+      "implementation": ["packages/styles/components/avatar.css"],
+      "evidence": [
+        "tools/tests/wave3-source.test.mjs",
+        "tools/playwright/wave3.spec.js",
+        "tools/playwright/review.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "46:999",
+      "kind": "COMPONENT_SET",
+      "name": "Pagination Btn",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Frame 1171277891",
+        "Pagination Btn"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "28:9244",
+      "kind": "COMPONENT_SET",
+      "name": "Checkbox",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Checkbox",
+        "Container",
+        "Frame 1171277887",
+        "Checkbox"
+      ],
+      "disposition": "implemented",
+      "families": ["Checkbox"],
+      "implementation": ["packages/styles/components/choice.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/primitives.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "49:1046",
+      "kind": "COMPONENT_SET",
+      "name": "Radio",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Radio",
+        "Container",
+        "Frame 1171277887",
+        "Radio"
+      ],
+      "disposition": "implemented",
+      "families": ["Radio"],
+      "implementation": ["packages/styles/components/choice.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "tools/playwright/form-controls-wave2.spec.js",
+        "docs/components/radio.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "50:1680",
+      "kind": "COMPONENT_SET",
+      "name": "Spacing",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Spacing",
+        "Container",
+        "Frame 4588",
+        "Frame 4587",
+        "Spacing"
+      ],
+      "disposition": "implemented",
+      "families": ["Spacing"],
+      "implementation": [
+        "packages/tokens/tokens.json",
+        "packages/styles/foundation.css"
+      ],
+      "evidence": [
+        "tools/tests/foundation-audits.test.mjs",
+        "tools/playwright/foundation.spec.js",
+        "docs/foundation-audits/spacing.json"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "52:3360",
+      "kind": "COMPONENT_SET",
+      "name": "Table Cell",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Table Cell",
+        "Container",
+        "Table Cell"
+      ],
+      "disposition": "implemented",
+      "families": ["Table"],
+      "implementation": ["packages/styles/components/table.css"],
+      "evidence": [
+        "tools/tests/wave3-source.test.mjs",
+        "tools/playwright/wave3.spec.js",
+        "tools/playwright/review.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "105:14073",
+      "kind": "COMPONENT_SET",
+      "name": "Sorter",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Table Cell",
+        "Container",
+        "Sorter"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "105:14116",
+      "kind": "COMPONENT_SET",
+      "name": "Filter",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Table Cell",
+        "Container",
+        "Filter"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "77:6451",
+      "kind": "COMPONENT",
+      "name": "Sidebar/Drawer",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Drawer",
+        "Container",
+        "Sidebar/Drawer"
+      ],
+      "disposition": "implemented",
+      "families": ["Sidebar / Application Shell"],
+      "implementation": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/showcase.css"
+      ],
+      "evidence": [
+        "tools/playwright/showcase-navigation.spec.js",
+        "docs/components/sidebar-application-shell.md",
+        "docs/component-audits/sidebar-application-shell.json",
+        "docs/component-audits/wave-9-report.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "282:20341",
+      "kind": "COMPONENT",
+      "name": ".Modal/Basic(Legacy)",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Modal",
+        "Container",
+        ".Modal/Basic(Legacy)"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "282:21352",
+      "kind": "COMPONENT",
+      "name": "Modal/Info",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Modal",
+        "Container",
+        "Modal/Info"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "282:21371",
+      "kind": "COMPONENT",
+      "name": "Modal/Success",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Modal",
+        "Container",
+        "Modal/Success"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "282:21390",
+      "kind": "COMPONENT",
+      "name": "Modal/Warning",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Modal",
+        "Container",
+        "Modal/Warning"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "282:21409",
+      "kind": "COMPONENT",
+      "name": "Modal/Error",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Modal",
+        "Container",
+        "Modal/Error"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46439",
+      "kind": "COMPONENT",
+      "name": "Setting",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Setting"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "160:47862",
+      "kind": "COMPONENT",
+      "name": "Document paper 2 lines",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Document paper 2 lines"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "165:50497",
+      "kind": "COMPONENT",
+      "name": "Ai Brain Network",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Ai Brain Network"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46411",
+      "kind": "COMPONENT",
+      "name": "Graph",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Graph"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46381",
+      "kind": "COMPONENT",
+      "name": "Chevron Left Duo",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Chevron Left Duo"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "159:46935",
+      "kind": "COMPONENT",
+      "name": "Chevron Right Duo",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Chevron Right Duo"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "158:46825",
+      "kind": "COMPONENT",
+      "name": "user",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "user"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "262:22920",
+      "kind": "COMPONENT",
+      "name": "Icon32",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Icon32"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "159:46972",
+      "kind": "COMPONENT",
+      "name": "Circle grid interface",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Circle grid interface"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "159:47248",
+      "kind": "COMPONENT",
+      "name": "Cloud refresh",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Cloud refresh"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "160:47655",
+      "kind": "COMPONENT",
+      "name": "Data Set",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Data Set"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "160:47675",
+      "kind": "COMPONENT",
+      "name": "Delivery 4",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Delivery 4"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "160:47830",
+      "kind": "COMPONENT",
+      "name": "Docs",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Docs"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "164:48219",
+      "kind": "COMPONENT",
+      "name": "bar chart square plus",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "bar chart square plus"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "163:47882",
+      "kind": "COMPONENT",
+      "name": "setting tool circle",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "setting tool circle"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "165:50951",
+      "kind": "COMPONENT",
+      "name": "Logout",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Logout"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46311",
+      "kind": "COMPONENT",
+      "name": "Interface / Arrow - Down 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Interface / Arrow - Down 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46312",
+      "kind": "COMPONENT",
+      "name": "Interface / Arrow - Up 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Interface / Arrow - Up 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46313",
+      "kind": "COMPONENT",
+      "name": "Interface / Arrow - Left 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Interface / Arrow - Left 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46314",
+      "kind": "COMPONENT",
+      "name": "Interface / Arrow - Right 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Interface / Arrow - Right 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46358",
+      "kind": "COMPONENT",
+      "name": "Chevron Right MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Chevron Right MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46362",
+      "kind": "COMPONENT",
+      "name": "Chevron Left MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Chevron Left MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2361:115664",
+      "kind": "COMPONENT",
+      "name": "Arrow left MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Arrow left MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "261:21995",
+      "kind": "COMPONENT",
+      "name": "Arrow right MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Arrow right MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2361:115660",
+      "kind": "COMPONENT",
+      "name": "Arrow Down MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Arrow Down MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "265:31212",
+      "kind": "COMPONENT",
+      "name": "Arrow Up MD",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Arrow Up MD"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32095",
+      "kind": "COMPONENT",
+      "name": "arrows diagonal maximize alt",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "arrows diagonal maximize alt"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "259:17354",
+      "kind": "COMPONENT",
+      "name": "Plus 4",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Plus 4"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "384:50659",
+      "kind": "COMPONENT",
+      "name": "Minus",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Minus"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "541:88781",
+      "kind": "COMPONENT",
+      "name": "Checkmark",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Checkmark"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "541:88775",
+      "kind": "COMPONENT",
+      "name": "Close remove",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Close remove"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "273:19650",
+      "kind": "COMPONENT",
+      "name": "Icon20",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Icon20"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32401",
+      "kind": "COMPONENT",
+      "name": "down",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "down"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32402",
+      "kind": "COMPONENT",
+      "name": "up",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "up"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "185:16346",
+      "kind": "COMPONENT",
+      "name": "24 / Edit",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "24 / Edit"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "185:16369",
+      "kind": "COMPONENT",
+      "name": "Delete",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Delete"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46338",
+      "kind": "COMPONENT",
+      "name": "Interface / Calendar",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Interface / Calendar"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "155:46434",
+      "kind": "COMPONENT",
+      "name": "Search1",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Search1"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "195:16451",
+      "kind": "COMPONENT",
+      "name": "24 / History",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "24 / History"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "160:47872",
+      "kind": "COMPONENT",
+      "name": "Filter1",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Filter1"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "163:47877",
+      "kind": "COMPONENT",
+      "name": "Refresh right",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Refresh right"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "82:9804",
+      "kind": "COMPONENT",
+      "name": "SwapRight",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "SwapRight"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "110:15063",
+      "kind": "COMPONENT",
+      "name": "Icon-Wrapper 24 ",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Icon-Wrapper 24 "
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "36:1386",
+      "kind": "COMPONENT",
+      "name": "24 / Dots",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "24 / Dots"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "172:73496",
+      "kind": "COMPONENT",
+      "name": "Vertical Mirror",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Vertical Mirror"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "254:17795",
+      "kind": "COMPONENT",
+      "name": "Cloud upload",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Cloud upload"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "273:20077",
+      "kind": "COMPONENT",
+      "name": "Flag",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Flag"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "254:18776",
+      "kind": "COMPONENT",
+      "name": "Chat",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Chat"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "265:29929",
+      "kind": "COMPONENT",
+      "name": "paperclip",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "paperclip"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "268:31356",
+      "kind": "COMPONENT",
+      "name": "Plus 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Plus 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "293:9768",
+      "kind": "COMPONENT",
+      "name": "Minus",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Minus"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "307:10012",
+      "kind": "COMPONENT",
+      "name": "Download",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Download"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "307:10022",
+      "kind": "COMPONENT",
+      "name": "printer 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "printer 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "413:32969",
+      "kind": "COMPONENT",
+      "name": "Reply Share Left",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Reply Share Left"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "413:32973",
+      "kind": "COMPONENT",
+      "name": "Reply Share right",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Reply Share right"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "417:33988",
+      "kind": "COMPONENT",
+      "name": "email open 3",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "email open 3"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "417:34001",
+      "kind": "COMPONENT",
+      "name": "Document Badge plus",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Document Badge plus"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "432:25528",
+      "kind": "COMPONENT",
+      "name": "Eye",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "Eye"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32081",
+      "kind": "COMPONENT",
+      "name": "Folder File Open",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Folder File Open"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32086",
+      "kind": "COMPONENT",
+      "name": "External link",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "External link"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:32315",
+      "kind": "COMPONENT",
+      "name": "Link",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Link"
+      ],
+      "disposition": "implemented",
+      "families": ["Link"],
+      "implementation": ["packages/styles/components/link.css"],
+      "evidence": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/link.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "440:21396",
+      "kind": "COMPONENT",
+      "name": "right",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "right"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "52:3352",
+      "kind": "COMPONENT",
+      "name": "24 / Filter",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "24 / Filter"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "459:43551",
+      "kind": "COMPONENT",
+      "name": "info circle",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "info circle"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "459:43557",
+      "kind": "COMPONENT",
+      "name": "user",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "user"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "499:26524",
+      "kind": "COMPONENT",
+      "name": "Down Scan",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Down Scan"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "499:26593",
+      "kind": "COMPONENT",
+      "name": "corner left down Circle",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "corner left down Circle"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "706:29471",
+      "kind": "COMPONENT",
+      "name": "Copy 2",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Copy 2"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1369:86604",
+      "kind": "COMPONENT",
+      "name": "Gallery view",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Gallery view"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1369:86630",
+      "kind": "COMPONENT",
+      "name": "List",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "List"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "424:37055",
+      "kind": "COMPONENT",
+      "name": "Icon-Wrapper 16",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Icon-Wrapper 16"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1157:19205",
+      "kind": "COMPONENT",
+      "name": "Add documents",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Add documents"
+      ],
+      "disposition": "implemented",
+      "families": ["File Upload"],
+      "implementation": ["packages/styles/components/file-upload.css"],
+      "evidence": [
+        "tools/tests/file-upload-contract.test.mjs",
+        "tools/playwright/file-upload.spec.js",
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1157:19244",
+      "kind": "COMPONENT",
+      "name": "Bag",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "Bag"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1157:19249",
+      "kind": "COMPONENT",
+      "name": "Align left",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Align left"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1157:19255",
+      "kind": "COMPONENT",
+      "name": "Book",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Book"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1157:21441",
+      "kind": "COMPONENT",
+      "name": "Loop direction Repeat  Circle horizontal",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Loop direction Repeat  Circle horizontal"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1369:86543",
+      "kind": "COMPONENT",
+      "name": "Circle grid interface",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Circle grid interface"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1400:98544",
+      "kind": "COMPONENT",
+      "name": "Menu",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Menu"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1409:108305",
+      "kind": "COMPONENT",
+      "name": "Unsuccess list",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Unsuccess list"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1412:108366",
+      "kind": "COMPONENT",
+      "name": "Grid interface",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Grid interface"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1632:15678",
+      "kind": "COMPONENT",
+      "name": "user",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "user"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2193:145196",
+      "kind": "COMPONENT",
+      "name": "Update right",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Update right"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "1632:41030",
+      "kind": "COMPONENT",
+      "name": "File type icon",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "File type icon"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2390:77751",
+      "kind": "COMPONENT",
+      "name": "Flagq",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Flagq"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2390:77752",
+      "kind": "COMPONENT",
+      "name": "Flag",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Flag"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2440:22592",
+      "kind": "COMPONENT",
+      "name": "Star",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Star"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "2572:324389",
+      "kind": "COMPONENT",
+      "name": "Delivery Box ",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Delivery Box "
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "473:44681",
+      "kind": "COMPONENT",
+      "name": "CaretUpDown",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "CaretUpDown"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:35040",
+      "kind": "COMPONENT",
+      "name": "Monotone add",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Monotone add"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:35041",
+      "kind": "COMPONENT",
+      "name": "underline",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "underline"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:35042",
+      "kind": "COMPONENT",
+      "name": "Italic",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Italic"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:35043",
+      "kind": "COMPONENT",
+      "name": "Bold type",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Bold type"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44744",
+      "kind": "COMPONENT",
+      "name": "Align left",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Align left"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "473:44731",
+      "kind": "COMPONENT",
+      "name": "Align center",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Align center"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44737",
+      "kind": "COMPONENT",
+      "name": "Align right",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Align right"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44750",
+      "kind": "COMPONENT",
+      "name": "H1",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "H1"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44756",
+      "kind": "COMPONENT",
+      "name": "H2",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "H2"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44762",
+      "kind": "COMPONENT",
+      "name": "H3",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "H3"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44768",
+      "kind": "COMPONENT",
+      "name": "H4",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "H4"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44774",
+      "kind": "COMPONENT",
+      "name": "H5",
+      "hierarchyPath": ["UI Kit – Basic elements", "Icons", "Container", "H5"],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44780",
+      "kind": "COMPONENT",
+      "name": "Numbered list",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Numbered list"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44786",
+      "kind": "COMPONENT",
+      "name": "Bulleted list",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Bulleted list"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "438:35146",
+      "kind": "COMPONENT",
+      "name": "File",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "File"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "475:44792",
+      "kind": "COMPONENT",
+      "name": "Image",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Icons",
+        "Container",
+        "Image"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "89:5792",
+      "kind": "COMPONENT",
+      "name": "Picker-Dropdown",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Date-Picker",
+        "Container",
+        "Picker-Dropdown"
+      ],
+      "disposition": "implemented",
+      "families": ["Date Picker"],
+      "implementation": [
+        "packages/styles/components/date-field.css",
+        "packages/styles/components/calendar.css"
+      ],
+      "evidence": [
+        "tools/tests/date-field-source.test.mjs",
+        "tools/tests/date-picker-source.test.mjs",
+        "tools/tests/date-picker-consumer.test.mjs",
+        "tools/tests/date-picker-showcase.test.mjs"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "89:13142",
+      "kind": "COMPONENT",
+      "name": "Picker-Dropdown",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Date-Picker",
+        "Container",
+        "Picker-Dropdown"
+      ],
+      "disposition": "implemented",
+      "families": ["Date Picker"],
+      "implementation": [
+        "packages/styles/components/date-field.css",
+        "packages/styles/components/calendar.css"
+      ],
+      "evidence": [
+        "tools/tests/date-field-source.test.mjs",
+        "tools/tests/date-picker-source.test.mjs",
+        "tools/tests/date-picker-consumer.test.mjs",
+        "tools/tests/date-picker-showcase.test.mjs"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "52:3256",
+      "kind": "COMPONENT",
+      "name": "Tab group",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Tabs",
+        "Container",
+        "Tab group"
+      ],
+      "disposition": "implemented",
+      "families": ["Tabs"],
+      "implementation": [
+        "packages/styles/components/tabs.css",
+        "packages/behaviors/src/tabs.ts"
+      ],
+      "evidence": [
+        "tools/tests/tabs-source.test.mjs",
+        "tools/playwright/components-next.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/tabs.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "49:1377",
+      "kind": "COMPONENT",
+      "name": "Pagination",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Pagination"
+      ],
+      "disposition": "implemented",
+      "families": ["Pagination"],
+      "implementation": ["packages/styles/components/pagination.css"],
+      "evidence": [
+        "tools/tests/pagination-source.test.mjs",
+        "tools/playwright/pagination-contract.spec.js",
+        "tools/playwright/pagination-typography.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "49:1378",
+      "kind": "COMPONENT",
+      "name": "Show by",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Show by"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "58:8307",
+      "kind": "COMPONENT",
+      "name": "Empty/Customize",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Empty/Customize"
+      ],
+      "disposition": "implemented",
+      "families": ["Empty State"],
+      "implementation": ["packages/styles/components/empty-state.css"],
+      "evidence": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "58:8366",
+      "kind": "COMPONENT",
+      "name": "Empty/Basic",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Empty/Basic"
+      ],
+      "disposition": "implemented",
+      "families": ["Empty State"],
+      "implementation": ["packages/styles/components/empty-state.css"],
+      "evidence": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "76:6246",
+      "kind": "COMPONENT",
+      "name": "Empty/Simple",
+      "hierarchyPath": [
+        "UI Kit – Basic elements",
+        "Pagination",
+        "Container",
+        "Empty/Simple"
+      ],
+      "disposition": "implemented",
+      "families": ["Empty State"],
+      "implementation": ["packages/styles/components/empty-state.css"],
+      "evidence": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/remediation-fidelity.spec.js",
+        "tools/playwright/data-content-wave5.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "figmaNodeId": "23:7102",
+      "kind": "COMPONENT",
+      "name": "Cover",
+      "hierarchyPath": ["UI Kit – Basic elements", "Cover"],
+      "disposition": "implemented",
+      "families": ["Cover"],
+      "implementation": ["packages/styles/components/cover.css"],
+      "evidence": [
+        "tools/tests/wave10-card-compositions-source-census.test.mjs",
+        "tools/tests/component-audit-manifest.test.mjs",
+        "tools/playwright/card-compositions-wave10.spec.js",
+        "docs/component-audits/cover.json"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "24:519",
+      "kind": "COMPONENT_SET",
+      "name": "Sidebar",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Sidebar",
+        "Container",
+        "Sidebar"
+      ],
+      "disposition": "implemented",
+      "families": ["Sidebar / Application Shell"],
+      "implementation": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/showcase.css"
+      ],
+      "evidence": [
+        "tools/playwright/showcase-navigation.spec.js",
+        "docs/components/sidebar-application-shell.md",
+        "docs/component-audits/sidebar-application-shell.json",
+        "docs/component-audits/wave-9-report.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "23:7285",
+      "kind": "COMPONENT_SET",
+      "name": "menu item",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Sidebar",
+        "Container",
+        "menu item"
+      ],
+      "disposition": "implemented",
+      "families": ["Dropdown Menu"],
+      "implementation": [
+        "packages/styles/components/dropdown.css",
+        "packages/behaviors/src/dropdown.ts"
+      ],
+      "evidence": [
+        "tools/tests/dropdown-source.test.mjs",
+        "tools/playwright/dropdown.spec.js",
+        "tools/playwright/dropdown-fidelity.spec.js",
+        "tools/playwright/interaction-evidence-wave6.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "52:3619",
+      "kind": "COMPONENT_SET",
+      "name": "Status Обращения",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Status",
+        "Container",
+        "Status Обращения"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "490:38087",
+      "kind": "COMPONENT_SET",
+      "name": "Status Детали",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Status",
+        "Container",
+        "Status Детали"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "254:17600",
+      "kind": "COMPONENT_SET",
+      "name": "Document",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Documents",
+        "Container",
+        "Document"
+      ],
+      "disposition": "implemented",
+      "families": ["Document Row"],
+      "implementation": ["packages/styles/components/document-row.css"],
+      "evidence": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/data-content-wave5.spec.js",
+        "docs/components/document-row.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "253:16969",
+      "kind": "COMPONENT_SET",
+      "name": "Upload-Drag",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Documents",
+        "Container",
+        "Upload-Drag"
+      ],
+      "disposition": "implemented",
+      "families": ["File Upload"],
+      "implementation": ["packages/styles/components/file-upload.css"],
+      "evidence": [
+        "tools/tests/file-upload-contract.test.mjs",
+        "tools/playwright/file-upload.spec.js",
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "412:32929",
+      "kind": "COMPONENT_SET",
+      "name": "Description Files",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Documents",
+        "Container",
+        "Description Files"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "303:18548",
+      "kind": "COMPONENT_SET",
+      "name": "Small document",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Documents",
+        "Container",
+        "Small document"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "261:22066",
+      "kind": "COMPONENT_SET",
+      "name": "History content",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "History of changes",
+        "Container",
+        "History content"
+      ],
+      "disposition": "implemented",
+      "families": ["History Timeline"],
+      "implementation": ["packages/styles/components/history-timeline.css"],
+      "evidence": [
+        "tools/tests/messaging-history-components.test.mjs",
+        "tools/playwright/messaging-history-components.spec.js",
+        "docs/components/history-timeline.md",
+        "docs/component-audits/history-timeline.json"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "537:87256",
+      "kind": "COMPONENT_SET",
+      "name": "Employees",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Detailed appeals",
+        "Container",
+        "Employees"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "607:37413",
+      "kind": "COMPONENT_SET",
+      "name": "Event plaque",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Detailed appeals",
+        "Container",
+        "Event plaque"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "537:87770",
+      "kind": "COMPONENT_SET",
+      "name": "Event",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Detailed appeals",
+        "Container",
+        "Event"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1400:98679",
+      "kind": "COMPONENT_SET",
+      "name": "Header",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Form constructor",
+        "Container",
+        "Header"
+      ],
+      "disposition": "implemented",
+      "families": ["Sidebar / Application Shell"],
+      "implementation": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/showcase.css"
+      ],
+      "evidence": [
+        "tools/playwright/showcase-navigation.spec.js",
+        "docs/components/sidebar-application-shell.md",
+        "docs/component-audits/sidebar-application-shell.json",
+        "docs/component-audits/wave-9-report.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1406:100939",
+      "kind": "COMPONENT_SET",
+      "name": "Field",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Form constructor",
+        "Container",
+        "Field"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "473:44652",
+      "kind": "COMPONENT_SET",
+      "name": "Text editor Icon",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Text editor Icon"
+      ],
+      "disposition": "implemented",
+      "families": ["Rich Text Toolbar"],
+      "implementation": ["packages/styles/components/rich-text-toolbar.css"],
+      "evidence": [
+        "tools/tests/composer-rich-text-toolbar-source.test.mjs",
+        "tools/tests/composer-rich-text-toolbar-contract.test.mjs",
+        "tools/playwright/composer-rich-text-toolbar.spec.js",
+        "docs/components/composer-rich-text-toolbar.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "475:46130",
+      "kind": "COMPONENT_SET",
+      "name": "Textarea Message",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Textarea Message"
+      ],
+      "disposition": "implemented",
+      "families": ["Composer"],
+      "implementation": ["packages/styles/components/composer.css"],
+      "evidence": [
+        "tools/tests/composer-rich-text-toolbar-source.test.mjs",
+        "tools/tests/composer-rich-text-toolbar-contract.test.mjs",
+        "tools/playwright/composer-rich-text-toolbar.spec.js",
+        "docs/components/composer-rich-text-toolbar.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "478:54339",
+      "kind": "COMPONENT_SET",
+      "name": "Attached Document",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Attached Document"
+      ],
+      "disposition": "implemented",
+      "families": ["File Row"],
+      "implementation": ["packages/styles/components/file-row.css"],
+      "evidence": [
+        "tools/tests/content-states.test.mjs",
+        "tools/playwright/content-states.spec.js",
+        "tools/playwright/data-content-wave5.spec.js",
+        "docs/components/file-row.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "446:44083",
+      "kind": "COMPONENT_SET",
+      "name": "Message Tag",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Message Tag"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "458:40315",
+      "kind": "COMPONENT_SET",
+      "name": "Sent message",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Sent message"
+      ],
+      "disposition": "implemented",
+      "families": ["Message Thread"],
+      "implementation": ["packages/styles/components/message-thread.css"],
+      "evidence": [
+        "tools/tests/messaging-history-components.test.mjs",
+        "tools/playwright/messaging-history-components.spec.js",
+        "docs/components/message-thread.md",
+        "docs/component-audits/message-thread.json"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1197:61833",
+      "kind": "COMPONENT_SET",
+      "name": "Attached image",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Attached image"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "56:1464",
+      "kind": "COMPONENT_SET",
+      "name": "Table Обращения",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Обращения"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "749:46423",
+      "kind": "COMPONENT_SET",
+      "name": "Table Управление статусами",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Управление статусами"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "805:74645",
+      "kind": "COMPONENT_SET",
+      "name": "Table Управление организациями",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Управление организациями"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "805:75549",
+      "kind": "COMPONENT_SET",
+      "name": "Table Управление профилями",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Управление профилями"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1130:87843",
+      "kind": "COMPONENT_SET",
+      "name": "Table Привязанные профили",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Привязанные профили"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "909:26091",
+      "kind": "COMPONENT_SET",
+      "name": "Table Управление категориями",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Управление категориями"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "878:52931",
+      "kind": "COMPONENT_SET",
+      "name": "Table Управление полями",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Управление полями"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "934:54150",
+      "kind": "COMPONENT_SET",
+      "name": "Table Автоназначение",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Автоназначение"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1325:68226",
+      "kind": "COMPONENT_SET",
+      "name": "Table Справочники",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Table",
+        "Container",
+        "Table Справочники"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "1400:99715",
+      "kind": "COMPONENT",
+      "name": "Divider",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Form constructor",
+        "Container",
+        "Divider"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "475:44808",
+      "kind": "COMPONENT",
+      "name": "Text editor",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Text editor"
+      ],
+      "disposition": "implemented",
+      "families": ["Rich Text Toolbar"],
+      "implementation": ["packages/styles/components/rich-text-toolbar.css"],
+      "evidence": [
+        "tools/tests/composer-rich-text-toolbar-source.test.mjs",
+        "tools/tests/composer-rich-text-toolbar-contract.test.mjs",
+        "tools/playwright/composer-rich-text-toolbar.spec.js",
+        "docs/components/composer-rich-text-toolbar.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "475:47684",
+      "kind": "COMPONENT",
+      "name": "Drag and Drop Document",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Drag and Drop Document"
+      ],
+      "disposition": "implemented",
+      "families": ["File Upload"],
+      "implementation": ["packages/styles/components/file-upload.css"],
+      "evidence": [
+        "tools/tests/file-upload-contract.test.mjs",
+        "tools/playwright/file-upload.spec.js",
+        "tools/tests/wave11-upload-document-compositions-source-census.test.mjs",
+        "tools/playwright/upload-document-compositions-wave11.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "631:55362",
+      "kind": "COMPONENT",
+      "name": "Link",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Messages",
+        "Container",
+        "Link"
+      ],
+      "disposition": "implemented",
+      "families": ["Link"],
+      "implementation": ["packages/styles/components/link.css"],
+      "evidence": [
+        "tools/tests/remediation-wave2-source.test.mjs",
+        "tools/playwright/remediation-wave2.spec.js",
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "docs/components/link.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "52:2655",
+      "kind": "COMPONENT",
+      "name": "Header",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Header",
+        "Container",
+        "Header"
+      ],
+      "disposition": "implemented",
+      "families": ["Sidebar / Application Shell"],
+      "implementation": [
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/showcase.css"
+      ],
+      "evidence": [
+        "tools/playwright/showcase-navigation.spec.js",
+        "docs/components/sidebar-application-shell.md",
+        "docs/component-audits/sidebar-application-shell.json",
+        "docs/component-audits/wave-9-report.md"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "52:2649",
+      "kind": "COMPONENT",
+      "name": "Avatar",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Header",
+        "Container",
+        "Avatar"
+      ],
+      "disposition": "implemented",
+      "families": ["Avatar"],
+      "implementation": ["packages/styles/components/avatar.css"],
+      "evidence": [
+        "tools/tests/wave3-source.test.mjs",
+        "tools/playwright/wave3.spec.js",
+        "tools/playwright/review.spec.js",
+        "tools/playwright/status-identity-wave4.spec.js"
+      ],
+      "exclusionEvidence": [],
+      "variantCoverage": "all",
+      "variantExceptions": []
+    },
+    {
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "figmaNodeId": "56:3025",
+      "kind": "COMPONENT",
+      "name": "Bottom",
+      "hierarchyPath": [
+        "UI Kit – Interface elements",
+        "Pagination",
+        "Container",
+        "Bottom"
+      ],
+      "disposition": "unresolved",
+      "families": [],
+      "implementation": [],
+      "evidence": [],
+      "exclusionEvidence": [],
+      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "variantCoverage": "all",
+      "variantExceptions": []
+    }
+  ]
+}

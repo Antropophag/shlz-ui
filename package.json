@@ -12,6 +12,8 @@
     "generate": "npm run generate:basic-icons && node tools/generate.mjs",
     "generate:basic-icons": "node tools/normalize-basic-icons.mjs",
     "generate:source-index": "node tools/generate-design-source-index.mjs",
+    "generate:source-coverage": "node tools/generate-source-library-coverage.mjs",
+    "check:source-coverage": "node tools/generate-source-library-coverage.mjs --check",
     "build": "npm run generate && npm run build --workspaces --if-present",
     "test": "node --test --test-concurrency=1 tools/tests/*.test.mjs",
     "test:harness": "node --test tools/tests/harness.test.mjs",

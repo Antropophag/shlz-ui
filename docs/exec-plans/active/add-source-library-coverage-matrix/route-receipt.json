@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Add a machine-verifiable source record to library family coverage matrix with explicit implementation, evidence-only, exclusion, and unresolved dispositions before further component expansion.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

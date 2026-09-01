@@ -4,8 +4,16 @@
   "route": "open-spec",
   "openSpecChange": "add-source-library-coverage-matrix",
   "requiredDecisions": [
-    { "id": "coverage-unit-and-denominator", "owner": "user", "blocking": true },
-    { "id": "source-and-library-authorities", "owner": "repo", "blocking": true },
+    {
+      "id": "coverage-unit-and-denominator",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-and-library-authorities",
+      "owner": "repo",
+      "blocking": true
+    },
     { "id": "disposition-contract", "owner": "agent", "blocking": true },
     { "id": "verified-semantics", "owner": "repo", "blocking": true }
   ],

@@ -1,0 +1,107 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "6e05578e7544f6423f2be28279db4766980fe72cb24e0f4f7d4b370600b174ef",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** the matrix is generated successfully\n- **THEN** each record-disposition total sums to the source record total, each variant-disposition total sums to the source variant total, and percentages state their unit and denominator",
+        "id": "audit/source-library-coverage::Coverage metrics use compatible denominators::Coverage summary",
+        "name": "Coverage summary",
+        "requirement": "Coverage metrics use compatible denominators",
+        "requirementContent": "The generated summary SHALL report record and variant counts independently for every disposition, plus family implementation/audit classifications as contextual dimensions. It MUST NOT label a family ratio as corpus transfer coverage or treat `VERIFIED` as equivalent to `implemented`."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** a referenced family has `audit_status: VERIFIED` and `implementation_status: source-only`\n- **THEN** the matrix preserves both facts and does not classify its records as implemented without independent implementation references",
+        "id": "audit/source-library-coverage::Coverage metrics use compatible denominators::Verified source-only family",
+        "name": "Verified source-only family",
+        "requirement": "Coverage metrics use compatible denominators",
+        "requirementContent": "The generated summary SHALL report record and variant counts independently for every disposition, plus family implementation/audit classifications as contextual dimensions. It MUST NOT label a family ratio as corpus transfer coverage or treat `VERIFIED` as equivalent to `implemented`."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** the matrix is validated against the generated source index\n- **THEN** all 195 current records are represented exactly once and the matrix summary equals the source index record totals",
+        "id": "audit/source-library-coverage::Every indexed source record is accounted for exactly once::Complete current corpus",
+        "name": "Complete current corpus",
+        "requirement": "Every indexed source record is accounted for exactly once",
+        "requirementContent": "The coverage matrix SHALL contain one canonical entry for every component record in the current `design-source-index/components.json`, identified by source archive, Figma node ID, kind, name, and hierarchy path. It MUST reject missing, duplicate, stale, or invented record identities."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** a source record is added, removed, or receives a changed canonical identity without a corresponding matrix update\n- **THEN** validation fails and reports the affected record identity",
+        "id": "audit/source-library-coverage::Every indexed source record is accounted for exactly once::Source index changes",
+        "name": "Source index changes",
+        "requirement": "Every indexed source record is accounted for exactly once",
+        "requirementContent": "The coverage matrix SHALL contain one canonical entry for every component record in the current `design-source-index/components.json`, identified by source archive, Figma node ID, kind, name, and hierarchy path. It MUST reject missing, duplicate, stale, or invented record identities."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** one source record maps to multiple reusable families or one family represents multiple source records\n- **THEN** the matrix preserves every explicit edge without duplicating the canonical source record",
+        "id": "audit/source-library-coverage::Family and evidence references are verifiable::Many-to-many relationship",
+        "name": "Many-to-many relationship",
+        "requirement": "Family and evidence references are verifiable",
+        "requirementContent": "Every family reference SHALL resolve to exactly one canonical family in `docs/component-audits/project-inventory.json`. Every implementation, evidence, and exclusion-support path SHALL exist inside the repository, and authoritative source paths SHALL remain read-only inputs rather than generated outputs."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** a mapping names an unknown family or a referenced path no longer exists\n- **THEN** validation fails with the source-record identity and invalid reference",
+        "id": "audit/source-library-coverage::Family and evidence references are verifiable::Stale family or path",
+        "name": "Stale family or path",
+        "requirement": "Family and evidence references are verifiable",
+        "requirementContent": "Every family reference SHALL resolve to exactly one canonical family in `docs/component-audits/project-inventory.json`. Every implementation, evidence, and exclusion-support path SHALL exist inside the repository, and authoritative source paths SHALL remain read-only inputs rather than generated outputs."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** generation runs twice with identical inputs\n- **THEN** the committed machine-readable matrix is byte-identical and source-file hashes remain unchanged",
+        "id": "audit/source-library-coverage::Output is deterministic and reviewable::Repeated generation",
+        "name": "Repeated generation",
+        "requirement": "Output is deterministic and reviewable",
+        "requirementContent": "Generation SHALL produce stable ordering and byte-identical output for unchanged source index, inventory, and mapping decisions. The repository SHALL provide a focused validation command or test that regenerates and verifies the committed matrix without modifying `shlz-design-source/`."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** a record is classified as `implemented`\n- **THEN** it references a valid inventory family, at least one existing production implementation path, and at least one existing evidence path",
+        "id": "audit/source-library-coverage::Record dispositions are explicit and non-overlapping::Implemented source record",
+        "name": "Implemented source record",
+        "requirement": "Record dispositions are explicit and non-overlapping",
+        "requirementContent": "Each source record SHALL declare exactly one disposition: `implemented`, `evidence-only`, `intentionally-excluded`, or `unresolved`. An implemented or evidence-only record MUST reference at least one existing library family; an intentionally excluded record MUST state a concrete reason and ownership boundary; an unresolved record MUST state the missing decision or evidence. `audit_status`, record naming similarity, and shared source-file membership MUST NOT implicitly assign a disposition."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** no supported implementation, evidence-only, or exclusion claim can be proven\n- **THEN** the record remains `unresolved` instead of inheriting a family or `VERIFIED` status",
+        "id": "audit/source-library-coverage::Record dispositions are explicit and non-overlapping::Insufficient evidence",
+        "name": "Insufficient evidence",
+        "requirement": "Record dispositions are explicit and non-overlapping",
+        "requirementContent": "Each source record SHALL declare exactly one disposition: `implemented`, `evidence-only`, `intentionally-excluded`, or `unresolved`. An implemented or evidence-only record MUST reference at least one existing library family; an intentionally excluded record MUST state a concrete reason and ownership boundary; an unresolved record MUST state the missing decision or evidence. `audit_status`, record naming similarity, and shared source-file membership MUST NOT implicitly assign a disposition."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** a record represents application-owned, duplicate, nested, decorative, or otherwise non-library scope\n- **THEN** it is retained in the denominator with `intentionally-excluded`, a non-empty reason, an ownership boundary, and supporting evidence",
+        "id": "audit/source-library-coverage::Record dispositions are explicit and non-overlapping::Intentional exclusion",
+        "name": "Intentional exclusion",
+        "requirement": "Record dispositions are explicit and non-overlapping",
+        "requirementContent": "Each source record SHALL declare exactly one disposition: `implemented`, `evidence-only`, `intentionally-excluded`, or `unresolved`. An implemented or evidence-only record MUST reference at least one existing library family; an intentionally excluded record MUST state a concrete reason and ownership boundary; an unresolved record MUST state the missing decision or evidence. `audit_status`, record naming similarity, and shared source-file membership MUST NOT implicitly assign a disposition."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** every variant of a record shares the same supported disposition and references\n- **THEN** the matrix may use an explicit all-variants declaration while validation expands it to the exact indexed variant identities",
+        "id": "audit/source-library-coverage::Variant coverage remains independently visible::Parent disposition covers all variants",
+        "name": "Parent disposition covers all variants",
+        "requirement": "Variant coverage remains independently visible",
+        "requirementContent": "For every indexed variant, the matrix SHALL record whether it is covered by the parent record disposition, covered by a narrower family/evidence reference, intentionally excluded with a reason, or unresolved. Variant totals MUST be calculated as variant units and MUST NOT be combined with record or family totals."
+      },
+      {
+        "capability": "audit/source-library-coverage",
+        "content": "- **WHEN** one or more variants differ from the parent record disposition\n- **THEN** each exception is listed by Figma node ID and the generated matrix reports the resulting per-variant disposition separately",
+        "id": "audit/source-library-coverage::Variant coverage remains independently visible::Variant exception exists",
+        "name": "Variant exception exists",
+        "requirement": "Variant coverage remains independently visible",
+        "requirementContent": "For every indexed variant, the matrix SHALL record whether it is covered by the parent record disposition, covered by a narrower family/evidence reference, intentionally excluded with a reason, or unresolved. Variant totals MUST be calculated as variant units and MUST NOT be combined with record or family totals."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "3b888c050aba3069bacec51791467ea4fdb08fae67f1fca0deaf8dc6c6c943ba"
+}
