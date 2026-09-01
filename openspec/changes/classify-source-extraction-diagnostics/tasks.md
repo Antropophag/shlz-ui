@@ -17,4 +17,4 @@
 ## 4. Validation and Delivery
 
 - [x] 4.1 Run focused tests, deterministic generation, full repository tests, lint/format, package builds, OpenSpec strict validation, and protected-path comparison; record exact results and limitations.
-- [ ] 4.2 Review the candidate against repository standards and the OpenSpec scenarios, resolve blocking findings, run route conformance and delivery guards, and open an unmerged PR targeting `main` with CI/review status reported.
+- [x] 4.2 Review the candidate against repository standards and the OpenSpec scenarios, resolve blocking findings, run route conformance and delivery guards, and open an unmerged PR targeting `main` with CI/review status reported.
