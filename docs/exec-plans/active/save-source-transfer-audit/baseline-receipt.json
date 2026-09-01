@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "docs/source-transfer-audit-2026-09-01",
+    "commit": "bcd66e20ca343ffff571c98d31686c0176cdd080",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "docs/source-transfer-audit-2026-09-01",
+      "headRefOid": "bcd66e20ca343ffff571c98d31686c0176cdd080",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/61"
+    },
+    "repository": {
+      "digest": "5fabe46782e9f91b0725c8ac8fc1a50cd6b5091d5f345639b6d52d0698f71bdb",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-source-audit"
+    },
+    "upstream": "origin/docs/source-transfer-audit-2026-09-01"
+  },
+  "routeDigest": "09bbd95f4dd02da8cead5d08c11f25673f668339b9dfc5e643b4907f1525278d",
+  "version": 1,
+  "digest": "d8b7193244999dfb6bcf6176aae9dc8fcf8dd3f1a46e9d8f3ffe66f279da3cf0"
+}

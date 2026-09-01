@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "changedFiles": [
+    "docs/source-transfer-fidelity-audit-2026-09-01.md"
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}
