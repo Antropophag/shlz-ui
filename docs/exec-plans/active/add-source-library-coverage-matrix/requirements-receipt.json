@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-source-library-coverage-matrix",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "coverage-unit-and-denominator",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-and-library-authorities",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "disposition-contract",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "verified-semantics",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Add a machine-verifiable source record to library family coverage matrix with explicit implementation, evidence-only, exclusion, and unresolved dispositions before further component expansion.",
+    "revision": 1
+  },
+  "routeDigest": "b636431a5c8bf5a596d967f90a93a9b796ee36ef1e1b440a401d1357ad38735b",
+  "version": 1,
+  "digest": "a9768ffb822f0dabcd9c7b301626f0cffc91bc20076b684d696c77ef0ca734bd"
+}

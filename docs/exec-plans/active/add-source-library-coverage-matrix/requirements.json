@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "intent": "Add a machine-verifiable source record to library family coverage matrix with explicit implementation, evidence-only, exclusion, and unresolved dispositions before further component expansion.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "coverage-unit-and-denominator",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "User explicitly prioritized a machine matrix source record -> library family -> implementation/evidence/exclusion to make transfer scope provable."
+      }
+    },
+    {
+      "id": "source-and-library-authorities",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md authority order, design-source-index/components.json, and docs/component-audits/project-inventory.json"
+      }
+    },
+    {
+      "id": "disposition-contract",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "openspec/changes/add-source-library-coverage-matrix/specs/audit/source-library-coverage/spec.md"
+      }
+    },
+    {
+      "id": "verified-semantics",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "docs/component-audits/manifest-contract.md defines audit_status independently from implementation_status; the new spec makes transfer disposition a third independent dimension."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-source-library-coverage-matrix",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "After requesting a fresh worktree from updated main, the user explicitly said to continue with the stated matrix as the next step."
+    }
+  }
+}
