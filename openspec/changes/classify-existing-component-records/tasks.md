@@ -24,4 +24,4 @@
 
 - [x] 5.1 Run focused audit tests, proportionate full validation, and `openspec validate classify-existing-component-records --strict`; record exact results.
 - [x] 5.2 Complete independent Standards and Spec review, then resolve or explicitly disposition every finding.
-- [ ] 5.3 Run post-discovery route-conformance and delivery guards, push the task branch, and open an unmerged pull request without changing or deleting pre-existing user work.
+- [x] 5.3 Run post-discovery route-conformance and delivery guards, push the task branch, and open an unmerged pull request without changing or deleting pre-existing user work.
