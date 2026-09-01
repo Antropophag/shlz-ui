@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import path from "node:path";
 import test from "node:test";
 import { buildCoverageMatrix } from "../lib/source-library-coverage.mjs";
@@ -101,6 +101,65 @@ test("coverage validation rejects unsupported claims and references", async () =
     build(sourceImplementation),
     /source cannot be implementation/,
   );
+
+  const normalizedSourceImplementation = clone(ledger);
+  normalizedSourceImplementation.records[0].implementation = [
+    `./${normalizedSourceImplementation.records[0].sourceArchive}`,
+  ];
+  await assert.rejects(
+    build(normalizedSourceImplementation),
+    /source cannot be implementation/,
+  );
+
+  const sourceRootImplementation = clone(ledger);
+  sourceRootImplementation.records[0].implementation = ["shlz-design-source"];
+  await assert.rejects(
+    build(sourceRootImplementation),
+    /source cannot be implementation/,
+  );
+
+  for (const [disposition, field] of [
+    ["evidence-only", "implementation"],
+    ["intentionally-excluded", "families"],
+    ["unresolved", "evidence"],
+  ]) {
+    const contradictory = clone(ledger);
+    Object.assign(contradictory.records[0], {
+      disposition,
+      families: [],
+      implementation: [],
+      evidence: [],
+      exclusionEvidence: [],
+      reason: "Deliberate regression fixture.",
+      ownership: "consumer application",
+    });
+    contradictory.records[0][field] =
+      field === "families"
+        ? [inventory.families[0].canonical_name]
+        : ["docs/component-audits/project-inventory.json"];
+    await assert.rejects(build(contradictory), new RegExp(`forbids ${field}`));
+  }
+
+  const escapeDirectory = await mkdtemp(
+    path.join(repoRoot, ".coverage-path-test-"),
+  );
+  const outsideDirectory = await mkdtemp(
+    path.join(path.dirname(repoRoot), ".coverage-outside-test-"),
+  );
+  const outsideFile = path.join(outsideDirectory, "evidence.json");
+  const escapeLink = path.join(escapeDirectory, "escape.json");
+  try {
+    await writeFile(outsideFile, "{}\n");
+    await symlink(outsideFile, escapeLink);
+    const escapingEvidence = clone(ledger);
+    escapingEvidence.records[0].evidence = [
+      path.relative(repoRoot, escapeLink),
+    ];
+    await assert.rejects(build(escapingEvidence), /outside the repository/);
+  } finally {
+    await rm(escapeDirectory, { recursive: true });
+    await rm(outsideDirectory, { recursive: true });
+  }
 
   const unsupportedExclusion = clone(ledger);
   Object.assign(unsupportedExclusion.records[0], {

@@ -1,4 +1,4 @@
-import { access } from "node:fs/promises";
+import { realpath } from "node:fs/promises";
 import path from "node:path";
 
 export const dispositions = [
@@ -27,11 +27,22 @@ async function validatePath(repoRoot, reference, label, identity) {
     !path.isAbsolute(reference) && !reference.split("/").includes(".."),
     `${identity}: ${label} must be a repository-relative path: ${reference}`,
   );
+  let resolvedRoot;
+  let resolvedReference;
   try {
-    await access(path.join(repoRoot, reference));
+    [resolvedRoot, resolvedReference] = await Promise.all([
+      realpath(repoRoot),
+      realpath(path.join(repoRoot, reference)),
+    ]);
   } catch {
-    throw new Error(`${identity}: ${label} path does not exist: ${reference}`);
+    throw new Error(`${identity}: ${label} path is invalid: ${reference}`);
   }
+  assert(
+    resolvedReference === resolvedRoot ||
+      resolvedReference.startsWith(`${resolvedRoot}${path.sep}`),
+    `${identity}: ${label} path resolves outside the repository: ${reference}`,
+  );
+  return resolvedReference;
 }
 
 function validateDecisionShape(decision, identity) {
@@ -46,11 +57,20 @@ function validateDecisionShape(decision, identity) {
     "exclusionEvidence",
   ])
     assert(
-      Array.isArray(decision[field] ?? []),
+      Array.isArray(decision[field]),
       `${identity}: ${field} must be an array`,
     );
 
+  const requireEmpty = (fields) => {
+    for (const field of fields)
+      assert(
+        decision[field].length === 0,
+        `${identity}: ${decision.disposition} forbids ${field}`,
+      );
+  };
+
   if (decision.disposition === "implemented") {
+    requireEmpty(["exclusionEvidence"]);
     assert(
       decision.families.length > 0,
       `${identity}: implemented needs a family`,
@@ -65,6 +85,7 @@ function validateDecisionShape(decision, identity) {
     );
   }
   if (decision.disposition === "evidence-only") {
+    requireEmpty(["implementation", "exclusionEvidence"]);
     assert(
       decision.families.length > 0,
       `${identity}: evidence-only needs a family`,
@@ -75,6 +96,7 @@ function validateDecisionShape(decision, identity) {
     );
   }
   if (decision.disposition === "intentionally-excluded") {
+    requireEmpty(["families", "implementation", "evidence"]);
     assert(decision.reason?.trim(), `${identity}: exclusion needs a reason`);
     assert(
       decision.ownership?.trim(),
@@ -85,11 +107,18 @@ function validateDecisionShape(decision, identity) {
       `${identity}: exclusion needs supporting evidence`,
     );
   }
-  if (decision.disposition === "unresolved")
+  if (decision.disposition === "unresolved") {
+    requireEmpty([
+      "families",
+      "implementation",
+      "evidence",
+      "exclusionEvidence",
+    ]);
     assert(
       decision.reason?.trim(),
       `${identity}: unresolved needs the missing decision or evidence`,
     );
+  }
 }
 
 function summarize(records, variants, families) {
@@ -172,12 +201,22 @@ export async function buildCoverageMatrix({
       ["exclusionEvidence", "exclusion evidence"],
     ])
       for (const reference of decision[field] ?? []) {
-        if (field === "implementation")
+        const resolvedReference = await validatePath(
+          repoRoot,
+          reference,
+          label,
+          identity,
+        );
+        if (field === "implementation") {
+          const protectedRoot = await realpath(
+            path.join(repoRoot, "shlz-design-source"),
+          );
           assert(
-            !reference.startsWith("shlz-design-source/"),
+            resolvedReference !== protectedRoot &&
+              !resolvedReference.startsWith(`${protectedRoot}${path.sep}`),
             `${identity}: source cannot be implementation`,
           );
-        await validatePath(repoRoot, reference, label, identity);
+        }
       }
   };
 
