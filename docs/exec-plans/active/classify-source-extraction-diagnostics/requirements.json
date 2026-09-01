@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "diagnostic-corpus",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "design-source-index/source-issues.json and design-source-index/components.json report 9 errors, 35 warnings, and 47 skipped instances" }
+    },
+    {
+      "id": "classification-taxonomy",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "openspec", "ref": "openspec/changes/classify-source-extraction-diagnostics/design.md models disposition separately from coverage impact" }
+    },
+    {
+      "id": "coverage-impact-seam",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "openspec", "ref": "openspec/changes/classify-source-extraction-diagnostics/specs/audit/source-extraction-diagnostic-classification/spec.md forbids implementation inference" }
+    },
+    {
+      "id": "roadmap-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user-request", "ref": "The user accepted roadmap step 2 by replying go after the proposed PR #65 scope." }
+    }
+  ],
+  "openSpec": { "change": "classify-source-extraction-diagnostics", "status": "synthesized" },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": { "kind": "user-request", "ref": "The user replied go to the proposed diagnostic-classification change." }
+  }
+}

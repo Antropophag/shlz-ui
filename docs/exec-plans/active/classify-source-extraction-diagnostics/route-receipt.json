@@ -1,0 +1,49 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
+    "material": [
+      "newCapability",
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "classify-source-extraction-diagnostics",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "diagnostic-corpus",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "classification-taxonomy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "coverage-impact-seam",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "roadmap-scope",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "bd8622fd1dd3016d8431dd39946ba1346c2f2fb562a8bc4bce002cb86936dc40"
+}
