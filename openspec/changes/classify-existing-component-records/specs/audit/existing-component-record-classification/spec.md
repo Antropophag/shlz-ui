@@ -80,4 +80,3 @@ overwritten as part of classification.
 
 - **WHEN** classification artifacts and reports are updated
 - **THEN** only scoped audit, tooling, test, planning, and generated-report files differ from the episode baseline
-
