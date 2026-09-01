@@ -17,7 +17,11 @@ guard before that family can become `VERIFIED`.
 
 Audit status and implementation status are independent. `INVENTORIED` means
 only that the known scope was mapped. It does not approve quality or imply that
-a source-only family has a production implementation.
+a source-only family has a production implementation. `VERIFIED` means only that
+the evidence declared by the family passed this audit contract; it is not a
+source-transfer or implementation-completeness status. Source-record transfer is
+tracked independently by `source-library-coverage-ledger.json` and its generated
+matrix, as documented in `source-library-coverage.md`.
 
 ## Component-specific manifest
 

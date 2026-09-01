@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "semantics": {
+    "auditStatusVerified": "VERIFIED proves implementation coverage."
+  },
+  "summary": {
+    "variants": {
+      "denominator": 0
+    }
+  },
+  "records": []
+}

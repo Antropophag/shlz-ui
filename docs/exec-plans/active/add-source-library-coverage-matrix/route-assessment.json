@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "intent": "Add a machine-verifiable source record to library family coverage matrix with explicit implementation, evidence-only, exclusion, and unresolved dispositions before further component expansion.",
+  "route": "open-spec",
+  "openSpecChange": "add-source-library-coverage-matrix",
+  "requiredDecisions": [
+    {
+      "id": "coverage-unit-and-denominator",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-and-library-authorities",
+      "owner": "repo",
+      "blocking": true
+    },
+    { "id": "disposition-contract", "owner": "agent", "blocking": true },
+    { "id": "verified-semantics", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

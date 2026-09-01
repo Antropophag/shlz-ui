@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/source-library-coverage-matrix",
+    "commit": "1a264b02c1fbb497a38d7ded1a6f351be13e191c",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/source-library-coverage-matrix",
+      "headRefOid": "1a264b02c1fbb497a38d7ded1a6f351be13e191c",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/62"
+    },
+    "repository": {
+      "digest": "03833a74a8b460ca160a5deeec2712b4c9fd80567bb5d1b07d0bb8a305def4fa",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-source-library-coverage-matrix"
+    },
+    "upstream": "origin/feature/source-library-coverage-matrix"
+  },
+  "requirementsDigest": "a9768ffb822f0dabcd9c7b301626f0cffc91bc20076b684d696c77ef0ca734bd",
+  "routeDigest": "b636431a5c8bf5a596d967f90a93a9b796ee36ef1e1b440a401d1357ad38735b",
+  "version": 1,
+  "digest": "848a95c4a77ca9e74a8f82b14625f7a860f23d0d2f580050f6bdc04c4abdeef4"
+}
