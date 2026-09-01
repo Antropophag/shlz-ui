@@ -1,0 +1,75 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "fd28b82869abe67cb84c84beb234885810a1ab3b0955b3cf4a818c1867e5cc52",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** the classified ledger is generated twice from unchanged inputs\n- **THEN** record and variant totals match the source index and both generated outputs are byte-identical",
+        "id": "audit/existing-component-record-classification::Classification remains fail-closed and deterministic::Coverage generation succeeds",
+        "name": "Coverage generation succeeds",
+        "requirement": "Classification remains fail-closed and deterministic",
+        "requirementContent": "The authored ledger SHALL remain the single source of classification decisions.\nGeneration MUST reject incompatible dispositions, missing repository references,\nor denominator drift, and repeated generation from unchanged inputs MUST produce\nidentical outputs."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** no single stronger disposition satisfies all required evidence\n- **THEN** the authored decision remains `unresolved`",
+        "id": "audit/existing-component-record-classification::Classification remains fail-closed and deterministic::Evidence is incomplete or contradictory",
+        "name": "Evidence is incomplete or contradictory",
+        "requirement": "Classification remains fail-closed and deterministic",
+        "requirementContent": "The authored ledger SHALL remain the single source of classification decisions.\nGeneration MUST reject incompatible dispositions, missing repository references,\nor denominator drift, and repeated generation from unchanged inputs MUST produce\nidentical outputs."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** a repository census or audit establishes that a source record is an application or domain composition rather than a reusable library contract\n- **THEN** the record is intentionally excluded with explicit ownership and exclusion evidence",
+        "id": "audit/existing-component-record-classification::Composition ownership does not become component coverage::Consumer-owned composition is proven",
+        "name": "Consumer-owned composition is proven",
+        "requirement": "Composition ownership does not become component coverage",
+        "requirementContent": "A non-reusable source composition SHALL remain in the denominator and MAY be\nclassified as `evidence-only` or `intentionally-excluded` only when committed\nevidence establishes its relationship or consumer ownership. The result MUST\nname the ownership boundary and MUST NOT claim a reusable implementation."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** a source record is not independently reusable but directly evidences an audited family or composition\n- **THEN** the record is evidence-only and identifies the supported family and evidence",
+        "id": "audit/existing-component-record-classification::Composition ownership does not become component coverage::Nested evidence supports a family",
+        "name": "Nested evidence supports a family",
+        "requirement": "Composition ownership does not become component coverage",
+        "requirementContent": "A non-reusable source composition SHALL remain in the denominator and MAY be\nclassified as `evidence-only` or `intentionally-excluded` only when committed\nevidence establishes its relationship or consumer ownership. The result MUST\nname the ownership boundary and MUST NOT claim a reusable implementation."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** classification artifacts and reports are updated\n- **THEN** only scoped audit, tooling, test, planning, and generated-report files differ from the episode baseline",
+        "id": "audit/existing-component-record-classification::Deferred roadmap work and user history remain intact::Step 1 is completed",
+        "name": "Step 1 is completed",
+        "requirement": "Deferred roadmap work and user history remain intact",
+        "requirementContent": "The classification MUST NOT modify the authoritative source, runtime packages,\nshowcase behavior, accessibility policy, or deferred component plans. Existing\nbranches, worktrees, and uncommitted user files MUST NOT be deleted or\noverwritten as part of classification."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** source-specific and executable evidence binds every applicable variant to an existing reusable family\n- **THEN** the record is classified as `implemented` with its family, implementation, and evidence references",
+        "id": "audit/existing-component-record-classification::Existing component coverage requires direct proof::Existing family directly covers the record",
+        "name": "Existing family directly covers the record",
+        "requirement": "Existing component coverage requires direct proof",
+        "requirementContent": "A source record SHALL be classified as `implemented` only when an existing\ncanonical family, production implementation, and committed evidence directly\ncover its source identity and applicable variants. Shared words, visual\nsimilarity, or use of the same primitive MUST NOT prove implementation."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** a record resembles an existing family but its state or variant contract is not directly covered\n- **THEN** the record remains `unresolved` and states the missing proof",
+        "id": "audit/existing-component-record-classification::Existing component coverage requires direct proof::Similarity is the only relationship",
+        "name": "Similarity is the only relationship",
+        "requirement": "Existing component coverage requires direct proof",
+        "requirementContent": "A source record SHALL be classified as `implemented` only when an existing\ncanonical family, production implementation, and committed evidence directly\ncover its source identity and applicable variants. Shared words, visual\nsimilarity, or use of the same primitive MUST NOT prove implementation."
+      },
+      {
+        "capability": "audit/existing-component-record-classification",
+        "content": "- **WHEN** the step-1 coverage artifacts are generated\n- **THEN** every previously unresolved record is either present in the reviewed census with a recorded outcome or identified under a named deferred boundary",
+        "id": "audit/existing-component-record-classification::The classification scope is explicit and complete::The classification is regenerated",
+        "name": "The classification is regenerated",
+        "requirement": "The classification scope is explicit and complete",
+        "requirementContent": "The classification SHALL publish an exact census of unresolved records reviewed\nas existing-component or composition candidates. Records deferred to source\ndiagnostics, future component implementation, icon provenance, or later roadmap\ndecisions MUST remain visible and MUST NOT be counted as classified by this\nchange."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "2f733fb0279599abd5d23ace7d6e49f2df70678a46cae60460606257f680ea87"
+}

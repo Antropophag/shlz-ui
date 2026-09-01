@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "classify-existing-component-records",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "classification-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-and-evidence-authorities",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "proof-threshold",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "deferred-record-boundaries",
+        "owner": "user",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Reconcile unresolved design-source component and composition records with existing repository implementation and ownership evidence, retaining unresolved wherever proof is insufficient.",
+    "revision": 1
+  },
+  "routeDigest": "b0039e550d9179d138192762c2bc233273fb07efb76cb36fe31f1e7f72002583",
+  "version": 1,
+  "digest": "f449ec8960a08a6d4956f2689ca9cd2024501f5a146183591c42efd352711a90"
+}

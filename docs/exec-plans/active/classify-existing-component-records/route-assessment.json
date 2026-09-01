@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "intent": "Reconcile unresolved design-source component and composition records with existing repository implementation and ownership evidence, retaining unresolved wherever proof is insufficient.",
+  "route": "open-spec",
+  "openSpecChange": "classify-existing-component-records",
+  "requiredDecisions": [
+    {
+      "id": "classification-scope",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-and-evidence-authorities",
+      "owner": "repo",
+      "blocking": true
+    },
+    {
+      "id": "proof-threshold",
+      "owner": "agent",
+      "blocking": true
+    },
+    {
+      "id": "deferred-record-boundaries",
+      "owner": "user",
+      "blocking": true
+    }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
