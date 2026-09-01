@@ -18,6 +18,9 @@ const assert = (condition, errorText) => {
 const percentage = (count, total) =>
   total === 0 ? 0 : Number(((count / total) * 100).toFixed(2));
 
+const compareStrings = (left, right) =>
+  left < right ? -1 : left > right ? 1 : 0;
+
 async function validatePath(repoRoot, reference, label, identity) {
   assert(
     typeof reference === "string" && reference.length > 0,
@@ -143,7 +146,7 @@ function summarize(records, variants, families) {
       denominator: families.length,
       implementationStatuses: Object.fromEntries(
         [...new Set(families.map((family) => family.implementation_status))]
-          .sort()
+          .sort(compareStrings)
           .map((status) => [
             status,
             families.filter((family) => family.implementation_status === status)
@@ -152,7 +155,7 @@ function summarize(records, variants, families) {
       ),
       auditStatuses: Object.fromEntries(
         [...new Set(families.map((family) => family.audit_status))]
-          .sort()
+          .sort(compareStrings)
           .map((status) => [
             status,
             families.filter((family) => family.audit_status === status).length,
