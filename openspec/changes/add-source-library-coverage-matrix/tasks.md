@@ -18,4 +18,4 @@
 
 - [x] 4.1 Run focused matrix tests, source-index/audit tests, deterministic regeneration checks, and the proportionate repository validation suite.
 - [x] 4.2 Inspect and report the exact initial disposition counts, unresolved gaps, exclusions, limitations, and source-integrity evidence without claiming implementation completeness.
-- [ ] 4.3 Run post-discovery route conformance and review/delivery guards, then push the task branch and open an unmerged pull request.
+- [x] 4.3 Run post-discovery route conformance and review/delivery guards, then push the task branch and open an unmerged pull request.
