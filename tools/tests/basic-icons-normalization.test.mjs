@@ -22,7 +22,6 @@ const geometryHash = (svg) =>
       .replace(/\s+/g, " ")
       .trim(),
   );
-
 const paintedElements = (svg) =>
   [
     ...svg.matchAll(

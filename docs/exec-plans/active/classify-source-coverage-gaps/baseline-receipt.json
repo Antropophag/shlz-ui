@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "audit/classify-source-coverage",
+    "commit": "a9ebf63eca080f459b5dedaefc9e78ec3f6966a8",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "audit/classify-source-coverage",
+      "headRefOid": "a9ebf63eca080f459b5dedaefc9e78ec3f6966a8",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/63"
+    },
+    "repository": {
+      "digest": "74c6905d8c2598de443cc104e0e4f4a7a5ad4ce5c372baaca8b538c67c161f4f",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-resolve-source-coverage"
+    },
+    "upstream": "origin/audit/classify-source-coverage"
+  },
+  "requirementsDigest": "4bc9c3f474d200549925729816a5c78b33fca8c742cc662bbd4a345c35a19549",
+  "routeDigest": "a24cd38e27278239df82793cce4edbef66d02baf8c34d8dce1797d2b52255cdd",
+  "version": 1,
+  "digest": "92dba55629e540fc7e596dd791f015ecf76f19cf75f2b7d4cc537f441b052d63"
+}

@@ -167,6 +167,7 @@ function summarize(records, variants, families) {
 
 export async function buildCoverageMatrix({
   sourceIndex,
+  sourceFoundations,
   inventory,
   ledger,
   repoRoot,
@@ -190,6 +191,16 @@ export async function buildCoverageMatrix({
     inventory.families.map((family) => [family.canonical_name, family]),
   );
   const decisions = new Map();
+  const normalizedIconRecords =
+    sourceFoundations?.observed?.normalizedIconComponentCoverage?.records ?? [];
+  const normalizedIconKeys = normalizedIconRecords.map(keyOf);
+  assert(
+    new Set(normalizedIconKeys).size === normalizedIconKeys.length,
+    "normalized icon provenance contains duplicate record identities",
+  );
+  const normalizedIconCoverage = new Map(
+    normalizedIconRecords.map((record) => [keyOf(record), record]),
+  );
 
   const validateReferences = async (decision, identity) => {
     validateDecisionShape(decision, identity);
@@ -223,6 +234,50 @@ export async function buildCoverageMatrix({
       }
   };
 
+  const validateIconProvenance = async (
+    decision,
+    identity,
+    source,
+    requiredVariants,
+  ) => {
+    assert(
+      decision.provenance === "normalized-icon-exact-geometry",
+      `${identity}: Icons needs exact normalized icon provenance`,
+    );
+    const provenance = normalizedIconCoverage.get(keyOf(source));
+    assert(provenance, `${identity}: normalized icon provenance is missing`);
+    const provenanceVariantIds = provenance.variants.map(
+      (variant) => variant.figmaNodeId,
+    );
+    assert(
+      new Set(provenanceVariantIds).size === provenanceVariantIds.length,
+      `${identity}: normalized icon provenance contains duplicate variant identities`,
+    );
+    const provenanceById = new Map(
+      provenance.variants.map((variant) => [variant.figmaNodeId, variant]),
+    );
+    const normalizedRoot = await realpath(
+      path.join(repoRoot, "packages/icons/normalized"),
+    );
+    for (const sourceVariant of requiredVariants) {
+      const variant = provenanceById.get(sourceVariant.figmaNodeId);
+      assert(
+        variant && typeof variant.normalizedPath === "string",
+        `${identity}: normalized icon provenance does not cover every variant`,
+      );
+      const resolved = await validatePath(
+        repoRoot,
+        variant.normalizedPath,
+        "normalized icon provenance",
+        identity,
+      );
+      assert(
+        resolved.startsWith(`${normalizedRoot}${path.sep}`),
+        `${identity}: normalized icon provenance escapes normalized icons`,
+      );
+    }
+  };
+
   for (const decision of ledger.records) {
     const identity = keyOf(decision);
     assert(!decisions.has(identity), `${identity}: duplicate ledger decision`);
@@ -236,6 +291,9 @@ export async function buildCoverageMatrix({
       `${identity}: stale hierarchyPath`,
     );
     await validateReferences(decision, identity);
+    if (decision.families.includes("Icons")) {
+      await validateIconProvenance(decision, identity, source, source.variants);
+    }
     assert(
       decision.variantCoverage === "all",
       `${identity}: variantCoverage must be all`,
@@ -262,6 +320,15 @@ export async function buildCoverageMatrix({
         exception,
         `${identity}#${exception.figmaNodeId}`,
       );
+      if (exception.families.includes("Icons"))
+        await validateIconProvenance(
+          exception,
+          `${identity}#${exception.figmaNodeId}`,
+          source,
+          source.variants.filter(
+            (variant) => variant.figmaNodeId === exception.figmaNodeId,
+          ),
+        );
     }
     decisions.set(identity, decision);
   }
@@ -299,6 +366,7 @@ export async function buildCoverageMatrix({
         hierarchyPath: source.hierarchyPath,
       },
       disposition: decision.disposition,
+      provenance: decision.provenance ?? null,
       reason: decision.reason ?? null,
       ownership: decision.ownership ?? null,
       families: familyFacts,
@@ -325,6 +393,7 @@ export async function buildCoverageMatrix({
           name: variant.name,
           hierarchyPath: variant.hierarchyPath,
           disposition: effective.disposition,
+          provenance: effective.provenance ?? null,
           inheritedFromRecord: !exceptions.has(variant.figmaNodeId),
           reason: effective.reason ?? null,
           ownership: effective.ownership ?? null,
@@ -358,6 +427,7 @@ export async function buildCoverageMatrix({
       projectInventory: "docs/component-audits/project-inventory.json",
       decisionLedger:
         "docs/component-audits/source-library-coverage-ledger.json",
+      sourceFoundations: "design-source-index/foundations.json",
     },
     semantics: {
       auditStatusVerified:

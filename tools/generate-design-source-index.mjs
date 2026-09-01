@@ -4,10 +4,15 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildTypographyIndex } from "./lib/typography-index.mjs";
+import {
+  iconGeometryHash,
+  resolveNormalizedIconPath,
+} from "./lib/icon-geometry.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const raw = path.join(root, "shlz-design-source/raw/svg");
 const output = path.join(root, "design-source-index");
+const normalizedRoot = path.join(root, "packages/icons/normalized");
 const relative = (value) =>
   path.relative(root, value).split(path.sep).join("/");
 const readJson = (value) => JSON.parse(readFileSync(value, "utf8"));
@@ -27,6 +32,8 @@ const zipEntries = (zip) =>
     .trim()
     .split("\n");
 const json = (value) => `${JSON.stringify(value, null, 2)}\n`;
+const rootAttribute = (svg, name) =>
+  svg.match(new RegExp(`<svg\\b[^>]*\\b${name}=["']([^"']+)["']`))?.[1] ?? null;
 
 const archiveNames = [
   "UI Kit – Basic elements.zip",
@@ -154,6 +161,85 @@ const iconAnalysisPath = path.join(
 );
 const icons = readJson(iconsPath);
 const iconAnalysis = readJson(iconAnalysisPath);
+const normalizedIconOutputsBySourcePath = new Map();
+for (const icon of icons) {
+  for (const variant of icon.variants) {
+    for (const sourcePath of variant.sourcePaths) {
+      const matches = normalizedIconOutputsBySourcePath.get(sourcePath) ?? [];
+      matches.push(`packages/icons/normalized/${variant.normalizedPath}`);
+      normalizedIconOutputsBySourcePath.set(sourcePath, matches);
+    }
+  }
+}
+const normalizedIconSourcesByIdentity = new Map();
+for (const source of iconAnalysis.sources) {
+  const identity = `${source.sourceName}\0${source.width}x${source.height}\0${source.geometryHash}`;
+  const matches = normalizedIconSourcesByIdentity.get(identity) ?? [];
+  matches.push(source);
+  normalizedIconSourcesByIdentity.set(identity, matches);
+}
+const normalizedIconComponentCoverage = catalog.flatMap((component) => {
+  if (
+    component.variants.length === 0 ||
+    component.variants.some((variant) => !variant.exported)
+  )
+    return [];
+  const variants = component.variants.map((variant) => {
+    const svg = zipText(
+      path.join(root, component.sourceArchive),
+      variant.archivePath,
+    );
+    const geometryHash = iconGeometryHash(svg);
+    const matches = normalizedIconSourcesByIdentity.get(
+      `${variant.name}\0${variant.dimensions.width}x${variant.dimensions.height}\0${geometryHash}`,
+    );
+    const source = matches?.length === 1 ? matches[0] : null;
+    const normalizedOutputs = source
+      ? [
+          ...new Set(
+            normalizedIconOutputsBySourcePath.get(source.sourcePath) ?? [],
+          ),
+        ]
+      : [];
+    const normalizedPath =
+      normalizedOutputs.length === 1 ? normalizedOutputs[0] : null;
+    const normalizedAbsolutePath = normalizedPath
+      ? resolveNormalizedIconPath(root, normalizedRoot, normalizedPath)
+      : null;
+    const normalizedSvg = normalizedAbsolutePath
+      ? readFileSync(normalizedAbsolutePath, "utf8")
+      : null;
+    const normalizedOutputIsExact =
+      normalizedSvg &&
+      iconGeometryHash(normalizedSvg) === geometryHash &&
+      Number(rootAttribute(normalizedSvg, "width")) ===
+        variant.dimensions.width &&
+      Number(rootAttribute(normalizedSvg, "height")) ===
+        variant.dimensions.height &&
+      rootAttribute(normalizedSvg, "viewBox") === source.viewBox;
+    return source && normalizedPath && normalizedOutputIsExact
+      ? {
+          figmaNodeId: variant.figmaNodeId,
+          name: variant.name,
+          archivePath: variant.archivePath,
+          geometryHash,
+          normalizedSourcePath: source.sourcePath,
+          normalizedPath,
+        }
+      : null;
+  });
+  if (variants.some((variant) => variant === null)) return [];
+  return [
+    {
+      sourceArchive: component.sourceArchive,
+      figmaNodeId: component.figmaNodeId,
+      name: component.name,
+      matchBasis:
+        "exact variant name, dimensions, and paint-independent geometry",
+      variants,
+    },
+  ];
+});
 const typographySourcePaths = [
   path.join(
     root,
@@ -250,6 +336,12 @@ const foundations = {
     },
   },
   observed: {
+    normalizedIconComponentCoverage: {
+      classification: "ENGINEERING_DERIVED",
+      normalizedManifest: "packages/icons/normalized/manifest.json",
+      normalizedAnalysis: "packages/icons/normalized/analysis.json",
+      records: normalizedIconComponentCoverage,
+    },
     repeatedVariantHeights: observedHeights,
     effects: {
       source: "shlz-design-source/tokens/filters-observed.json",

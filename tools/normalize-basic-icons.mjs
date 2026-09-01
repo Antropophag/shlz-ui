@@ -3,6 +3,7 @@ import { mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { format } from "prettier";
+import { stripSvgDefinitions } from "./lib/icon-geometry.mjs";
 
 const repositoryRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -13,6 +14,18 @@ const sourceRoot = path.join(
   "shlz-design-source/raw/svg/UI Kit – Basic elements/icons",
 );
 const outputRoot = path.join(repositoryRoot, "packages/icons/normalized");
+
+const iconGeometryFingerprint = (svg) =>
+  stripSvgDefinitions(svg)
+    .replace(/<svg\b[^>]*>/, "<svg>")
+    .replace(
+      /\s(?:fill|stroke|id|class|style|opacity|fill-opacity|stroke-opacity)=["'][^"']*["']/g,
+      "",
+    )
+    .replace(/url\(#[^)]+\)/g, "url(#reference)")
+    .replace(/>\s+</g, "><")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const categoryMap = {
   arrows: "navigation",
@@ -70,29 +83,12 @@ function rootAttribute(svg, attribute) {
   return root.match(new RegExp(`${attribute}=["']([^"']+)["']`))?.[1] ?? null;
 }
 
-function stripDefinitions(svg) {
-  return svg.replace(/<defs\b[\s\S]*?<\/defs>/g, "");
-}
-
 function paintValues(svg) {
   return [
-    ...stripDefinitions(svg).matchAll(
+    ...stripSvgDefinitions(svg).matchAll(
       /(?:fill|stroke)=["'](?!none\b)([^"']+)["']/g,
     ),
   ].map((match) => match[1]);
-}
-
-function geometryFingerprint(svg) {
-  return stripDefinitions(svg)
-    .replace(/<svg\b[^>]*>/, "<svg>")
-    .replace(
-      /\s(?:fill|stroke|id|class|style|opacity|fill-opacity|stroke-opacity)=["'][^"']*["']/g,
-      "",
-    )
-    .replace(/url\(#[^)]+\)/g, "url(#reference)")
-    .replace(/>\s+</g, "><")
-    .replace(/\s+/g, " ")
-    .trim();
 }
 
 function sha256(value) {
@@ -256,11 +252,11 @@ async function analyze() {
     const viewBox = rootAttribute(svg, "viewBox");
     const colors = unique(paintValues(svg));
     const elementMatches = [
-      ...stripDefinitions(svg).matchAll(
+      ...stripSvgDefinitions(svg).matchAll(
         /<(path|rect|circle|ellipse|line|polyline|polygon|use|image)\b/g,
       ),
     ];
-    const geometry = geometryFingerprint(svg);
+    const geometry = iconGeometryFingerprint(svg);
     const geometryHash = sha256(geometry);
     const identity = logicalIdentity(relativePath, geometryHash);
     const sourceCategory = path.dirname(relativePath);
@@ -285,12 +281,14 @@ async function analyze() {
       rootStroke: rootAttribute(svg, "stroke"),
       fills: unique(
         [
-          ...stripDefinitions(svg).matchAll(/fill=["'](?!none\b)([^"']+)["']/g),
+          ...stripSvgDefinitions(svg).matchAll(
+            /fill=["'](?!none\b)([^"']+)["']/g,
+          ),
         ].map((match) => match[1]),
       ),
       strokes: unique(
         [
-          ...stripDefinitions(svg).matchAll(
+          ...stripSvgDefinitions(svg).matchAll(
             /stroke=["'](?!none\b)([^"']+)["']/g,
           ),
         ].map((match) => match[1]),

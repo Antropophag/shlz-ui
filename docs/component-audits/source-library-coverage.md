@@ -15,6 +15,10 @@ record into those families.
   index and project inventory, expands every variant, carries source diagnostics,
   and calculates unit-specific totals.
 - `tools/generate-source-library-coverage.mjs` validates and generates the matrix.
+- `design-source-index/foundations.json#observed.normalizedIconComponentCoverage`
+  records the narrow, reproducible join between indexed component variants and
+  normalized icon sources. The join requires the same variant name, dimensions,
+  and paint-independent geometry; partial records are omitted.
 
 Do not edit the generated matrix by hand. Update the ledger, then run:
 
@@ -46,6 +50,22 @@ positive mappings. Archive membership alone is not accepted because the two
 source archives contain many unrelated records and families. The initial matrix
 therefore deliberately exposes unresolved work instead of manufacturing complete
 transfer coverage.
+
+## Current classification pass
+
+The exact-provenance pass moved two records from `unresolved` to `implemented`:
+`Priority` (3 variants) and `File type icon` (21 variants). Record coverage is
+now 55 implemented and 140 unresolved out of 195; variant coverage is 467
+implemented and 163 unresolved out of 630. The denominators did not change.
+
+The remaining Basic Elements reusable component-set candidates are `Arrows`,
+`Icon button`, `Input-Number`, `Badge/Count`, `Badge/Dot`, `Color`,
+`Selection-Item`, `dropdown-btns`, `Pagination Btn`, `Sorter`, and `Filter`.
+They remain actionable backlog rather than inferred coverage. In particular,
+`Arrows` has related normalized glyphs but lacks exact geometry for every indexed
+variant. The 110 unresolved standalone records and the unresolved Interface
+Elements sets also remain unclassified until record-specific implementation,
+evidence-only, or application-ownership proof exists.
 
 ## Metrics and `VERIFIED`
 

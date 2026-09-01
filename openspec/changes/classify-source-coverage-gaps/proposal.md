@@ -5,8 +5,8 @@ The initial source-to-library matrix accounts for the complete corpus but delibe
 ## What Changes
 
 - Classify every currently unresolved source record whose disposition can be proven from existing repository implementation and evidence.
-- Bind already normalized standalone glyphs and file-type variants to the Icons family without creating new icon assets.
-- Record evidence-only or intentionally excluded dispositions for nested, legacy, decorative, and application-owned source records when existing repository evidence proves that boundary.
+- Bind only complete indexed icon sets whose every variant has exact normalized provenance to the Icons family without creating new icon assets.
+- Review nested, legacy, decorative, and application-owned source records and retain them as unresolved where existing repository evidence does not prove a stronger boundary.
 - Preserve `unresolved` for genuine reusable component gaps or any record whose stronger disposition cannot be supported.
 - Generate and report the resulting record- and variant-level metrics, including an explicit remaining product-gap list.
 - Classify the source diagnostics associated with affected records; do not modify or regenerate the authoritative source.

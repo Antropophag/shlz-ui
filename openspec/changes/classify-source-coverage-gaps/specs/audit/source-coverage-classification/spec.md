@@ -34,7 +34,7 @@ Nested evidence surfaces, duplicate or legacy records, decorative records, and a
 
 ### Requirement: Normalized icon coverage is traceable
 
-An indexed standalone glyph or file-type variant SHALL be classified as implemented only when committed normalization provenance links its source identity to an existing canonical icon output and the Icons family has production and runtime evidence. Duplicate source glyphs MAY share a canonical output when that normalization decision is explicit.
+An indexed icon record SHALL be classified as implemented only when committed normalization provenance links every indexed variant to an existing canonical icon source using exact name, dimensions, and paint-independent geometry, and the Icons family has production and runtime evidence. Duplicate source glyphs MAY share a canonical output when that normalization decision is explicit.
 
 #### Scenario: Source glyph has normalized provenance
 
@@ -63,4 +63,3 @@ The classification process MUST NOT modify `shlz-design-source/`, add or alter r
 
 - **WHEN** coverage artifacts are updated and regenerated
 - **THEN** authoritative source hashes and runtime package surfaces remain unchanged while diagnostics remain visible in the generated matrix
-

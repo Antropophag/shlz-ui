@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Classify the current unresolved design-source coverage records when existing repository evidence proves implementation, evidence-only, or exclusion status, while preserving genuine reusable gaps as unresolved.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

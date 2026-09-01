@@ -27,7 +27,7 @@ This uses shared evidence patterns without hiding semantic judgment. Automatical
 
 ### 2. Use normalization provenance as the icon join
 
-Standalone glyphs and file-type variants will join through the committed normalized icon manifest/analysis and generator evidence, not filename similarity. A canonical output path is production evidence; icon source/generation tests and the browser icon catalog provide independent evidence.
+Indexed icon variants join through generated provenance derived from the source archive and committed normalized icon analysis, not filename similarity. The join requires exact variant name, dimensions, and paint-independent geometry, and a record is eligible only when every variant joins. A canonical output path is production evidence; icon source/generation tests and the browser icon catalog provide independent evidence.
 
 Adding a second icon mapping inventory was rejected because it would compete with existing normalization provenance.
 
