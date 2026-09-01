@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "components": ["composer", "rich-text-toolbar"],
+  "authoritativeSources": [
+    {
+      "path": "shlz-design-source/raw/svg/Messages.svg",
+      "sha256": "b61167bf011d15e5956d409d6746b5440cf4417522f1f14d6d27084bfb4b5357",
+      "canvas": { "width": 1504, "height": 7405 },
+      "observed": [
+        "five blue dashed composition frames",
+        "five embedded raster images",
+        "static message, editor, employee, and attachment artwork"
+      ]
+    },
+    {
+      "path": "shlz-design-source/raw/svg/Planner.svg",
+      "sha256": "3f23135cbccf6cd8d1054feef90990d94ec647d8ef12de091ee6b76a022f2ed7",
+      "canvas": { "width": 3646, "height": 6729 },
+      "observed": [
+        "seven blue dashed composition frames",
+        "five embedded raster images",
+        "static employee, event, planner, and attachment artwork"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "classification": "source-fact",
+      "claim": "The source sheets depict a static editor/composer composition with employee and attachment concepts."
+    },
+    {
+      "classification": "derived-pattern",
+      "claim": "The normalized editor icon inventory supplies 17 source-backed glyphs suitable for toolbar specimens."
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Composer and Rich Text Toolbar are independent framework-neutral CSS roots."
+    },
+    {
+      "classification": "repository-decision",
+      "claim": "Toolbar groups wrap as complete units and supporting Composer regions stack in narrow containers."
+    },
+    {
+      "classification": "assumption",
+      "claim": "No editor engine, document model, shortcut map, or attachment lifecycle can be inferred from the static exports."
+    }
+  ],
+  "boundaries": {
+    "sizes": [
+      "source-sized focused specimen",
+      "fluid container width with group-preserving wrap"
+    ],
+    "states": [
+      "resting",
+      "hover",
+      "focus-visible",
+      "pressed",
+      "disabled",
+      "invalid",
+      "read-only"
+    ],
+    "contentStress": [
+      "long accessible labels",
+      "long attachment names",
+      "long status and help text",
+      "narrow container without horizontal overflow"
+    ]
+  },
+  "unsupportedBehaviorClaims": [
+    "formatting execution",
+    "selection preservation",
+    "keyboard shortcuts",
+    "document schema",
+    "HTML sanitization",
+    "upload lifecycle",
+    "submission",
+    "messaging",
+    "persistence"
+  ]
+}

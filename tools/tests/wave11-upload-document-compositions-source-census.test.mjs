@@ -184,7 +184,7 @@ test("Wave 11 manifest records independent source and primitive-boundary ledgers
   assert.deepEqual(sourceFactEvidence, expectedSourcePaths);
   assert.deepEqual(manifest.implementation, []);
   assert.deepEqual(manifest.occurrences, []);
-  assert.equal(manifest.primitiveDependencies.length, 10);
+  assert.equal(manifest.primitiveDependencies.length, 11);
   assert.deepEqual(Object.keys(manifest.stateLedgers).sort(), [
     "attachedDocument",
     "descriptionFiles",

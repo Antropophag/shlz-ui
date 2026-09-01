@@ -2558,6 +2558,130 @@
     },
     {
       "tests": [
+        "tools/tests/composer-rich-text-toolbar-source.test.mjs",
+        "tools/tests/composer-rich-text-toolbar-contract.test.mjs",
+        "tools/playwright/composer-rich-text-toolbar.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact Messages and Planner authority hashes and the complete 17-glyph editor inventory are locked",
+        "structural-contract": "pass: independent Composer root, regions, state hooks, exports, docs and absence of editor/controller ownership are asserted",
+        "runtime-browser": "pass: native editing surface, focus-within and consumer submission execute",
+        "accessibility": "pass: labelled native editing surface, described status, visible focus and focused Axe checks execute",
+        "focused-visual": "pass: source-focused, focus-within and narrow snapshots plus computed state evidence",
+        "consumer-integration": "pass: application-owned command and submission status updates execute",
+        "responsive-content-stress": "pass: narrow container, wrapped actions, long localized content and 200-percent text remain reachable"
+      },
+      "canonical_name": "Composer",
+      "category": "forms",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Messages.svg"],
+      "production_implementation": ["packages/styles/components/composer.css"],
+      "behavior": [],
+      "docs": [
+        "docs/components/composer-rich-text-toolbar.md",
+        "docs/component-audits/composer.json",
+        "docs/component-audits/composer-rich-text-toolbar-source.json"
+      ],
+      "executable_fixtures": [
+        "composer-showcase-source",
+        "composer-showcase-disabled",
+        "composer-showcase-readonly",
+        "composer-showcase-invalid",
+        "composer-content-stress"
+      ],
+      "live_consumers": ["composer-data-workspace"],
+      "data_workspace_consumers": ["composer-data-workspace"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "editing shell",
+        "attachments",
+        "status",
+        "actions",
+        "consumer integration"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "editing, validation, attachment lifecycle, submission, persistence and live-region policy are consumer-owned",
+        "the reusable contract contains no editor engine or command controller"
+      ],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/composer-rich-text-toolbar-source.test.mjs",
+        "tools/tests/composer-rich-text-toolbar-contract.test.mjs",
+        "tools/playwright/composer-rich-text-toolbar.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact Messages and Planner authority hashes and the complete 17-glyph editor inventory are locked",
+        "structural-contract": "pass: independent toolbar root, semantic groups, native buttons, state hooks, exports and docs are asserted",
+        "runtime-browser": "pass: native keyboard activation updates consumer-owned aria-pressed state",
+        "accessibility": "pass: toolbar/group roles, accessible command names, native disabled state and visible focus execute",
+        "focused-visual": "pass: resting, hover, focus-visible, pressed, disabled and wrapped computed/snapshot evidence",
+        "consumer-integration": "pass: application-owned Bold command changes pressed state and status",
+        "responsive-content-stress": "pass: command groups wrap without horizontal overflow at 200-percent text"
+      },
+      "canonical_name": "Rich Text Toolbar",
+      "category": "forms",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/Messages.svg",
+        "shlz-design-source/raw/svg/Planner.svg"
+      ],
+      "production_implementation": [
+        "packages/styles/components/rich-text-toolbar.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/components/composer-rich-text-toolbar.md",
+        "docs/component-audits/rich-text-toolbar.json",
+        "docs/component-audits/composer-rich-text-toolbar-source.json"
+      ],
+      "executable_fixtures": [
+        "rich-text-toolbar-showcase-source",
+        "rich-text-toolbar-showcase-disabled",
+        "rich-text-toolbar-showcase-readonly",
+        "rich-text-toolbar-showcase-invalid",
+        "rich-text-toolbar-content-stress"
+      ],
+      "live_consumers": ["rich-text-toolbar-data-workspace"],
+      "data_workspace_consumers": ["rich-text-toolbar-data-workspace"],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "semantic toolbar",
+        "grouped editor commands",
+        "native control states",
+        "wrapped layout"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "command dispatch, selection state, shortcuts and editor integration are consumer-owned",
+        "the reusable contract contains no roving-tabindex or command controller"
+      ],
+      "measured_counts": {
+        "executableShowcase": 5,
+        "liveConsumers": 1,
+        "dataWorkspace": 1,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
         "tools/playwright/consumer-workspace.spec.js",
         "tools/playwright/data-content-wave5.spec.js"
       ],

@@ -30,7 +30,7 @@ test("Wave 11 keeps higher-level Upload / Document compositions source-only", as
   expect(manifest.implementation).toEqual([]);
   expect(manifest.occurrences).toEqual([]);
   expect(manifest.visualSnapshots).toEqual([]);
-  expect(manifest.primitiveDependencies).toHaveLength(10);
+  expect(manifest.primitiveDependencies).toHaveLength(11);
   await expectClassifiedComponentOccurrences(page, manifest);
   expectMaterialStates("upload-document-compositions");
 });

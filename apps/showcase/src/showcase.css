@@ -5,6 +5,16 @@ body {
   background: var(--shlz-semantic-color-surface-page);
 }
 
+.shlz-composer-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 32rem), 1fr));
+  gap: 24px;
+}
+
+.shlz-composer-showcase__narrow {
+  inline-size: min(100%, 22rem);
+}
+
 .shlz-font-switch {
   position: static;
   z-index: 2;

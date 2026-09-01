@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-composer-rich-text-toolbar",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "component-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "public-contract",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Add a framework-neutral Composer shell and Rich Text Toolbar derived from the authoritative messaging and planner source artwork.",
+    "revision": 1
+  },
+  "routeDigest": "64965f565591dfa21a5c6badcf427ff1691a1c3fc69bea9a920b6fa8b247959b",
+  "version": 1,
+  "digest": "e9020d3a185bc0f14e1394013bf27c84349c058c7fa8a3e224008a1623ed097d"
+}

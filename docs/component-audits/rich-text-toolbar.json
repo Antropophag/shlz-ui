@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 2,
+  "component": "rich-text-toolbar",
+  "authoritativeSource": "shlz-design-source/raw/svg/Messages.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Planner.svg",
+    "docs/component-audits/composer-rich-text-toolbar-source.json"
+  ],
+  "implementation": ["packages/styles/components/rich-text-toolbar.css"],
+  "behavior": null,
+  "docs": "docs/components/composer-rich-text-toolbar.md",
+  "rootSelector": "[data-component-audit-id^='rich-text-toolbar-']",
+  "legacySelectors": [".shlz-rich-text-toolbar"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "rich-text-toolbar-showcase-source", "kind": "executable-fixture" },
+    {
+      "id": "rich-text-toolbar-showcase-disabled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "rich-text-toolbar-showcase-readonly",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "rich-text-toolbar-showcase-invalid",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "rich-text-toolbar-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "rich-text-toolbar-data-workspace", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["container-fluid", "wrapped-groups"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "focus-visible",
+    "pressed",
+    "disabled"
+  ],
+  "contentStress": ["wrapped-groups", "narrow-container", "200-percent-text"],
+  "sourceClaims": [
+    {
+      "claim": "Messages.svg and Planner.svg establish grouped text-editor icon controls",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Messages.svg"
+    },
+    {
+      "claim": "native buttons, toolbar/group semantics, accessible names, wrapping and aria-pressed state ownership are repository decisions",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-composer-rich-text-toolbar/design.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/composer-rich-text-toolbar.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/composer-rich-text-toolbar.spec.js-snapshots/rich-text-toolbar-states-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: Messages.svg and Planner.svg icon-control facts are recorded separately from semantic repository decisions and enforced by focused source tests",
+    "structural-contract": "pass: independent semantic root, groups, native controls, states, docs and export are asserted",
+    "runtime-browser": "pass: native Bold command toggles aria-pressed and application-owned status in the real consumer",
+    "accessibility": "pass: toolbar/group roles, native buttons, accessible command names, pressed state, disabled state and scoped axe scan are browser-checked",
+    "focused-visual": "pass: focused pressed consumer toolbar snapshot covers focus-visible and selected paint",
+    "consumer-integration": "pass: Data Workspace supplies the command controller and selection state outside the library",
+    "responsive-content-stress": "pass: command groups wrap without component or toolbar overflow at 220px with 200-percent root text"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: source, disabled, read-only and invalid composition fixtures retain independent toolbar audit roots"
+      ],
+      "realInteractionVisual": [
+        "pass: keyboard focus and aria-pressed paint are captured in a component-focused snapshot"
+      ],
+      "runtimeBehavior": [
+        "pass: consumer Bold command toggles native aria-pressed state exactly once per activation"
+      ]
+    },
+    "materialStates": [
+      "default",
+      "hover",
+      "focus-visible",
+      "pressed",
+      "disabled",
+      "wrapped-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/composer-rich-text-toolbar.spec.js",
+    "manualStateWalk": "pass: 2026-08-31 default, hover, focus-visible, pressed, disabled, grouped wrapping and 200-percent text inspected"
+  },
+  "acceptedDeviations": [
+    {
+      "id": "cross-component-visual-baseline-drift",
+      "severity": "P2",
+      "scope": "pre-existing focused screenshots for six components outside Composer and Rich Text Toolbar",
+      "status": "accepted-for-this-pr",
+      "introducedByThisChange": false,
+      "worsenedByThisChange": false,
+      "evidence": "full Playwright run reports nine failures across eight unchanged snapshots; calendar-grid-header-rows.png reproduces on detached clean origin/main at cb27a06 with the exact same 1092-pixel delta, while all 11 Composer and consumer browser checks pass",
+      "reason": "resolving the shared rendering/snapshot contract is outside this component PR and requires a cross-component decision",
+      "tracking": "https://github.com/Antropophag/shlz-ui/issues/59"
+    }
+  ],
+  "findings": [],
+  "knownLimitations": [
+    "command dispatch, selection state, keyboard shortcut policy and editor integration are consumer-owned",
+    "the component does not implement roving tabindex or an editor command controller"
+  ]
+}

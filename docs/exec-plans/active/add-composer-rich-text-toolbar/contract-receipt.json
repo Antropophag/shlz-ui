@@ -1,0 +1,91 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "b504fc048c001995439daf563aca8a41ee1aaf02c157ab1d277794f32b432425",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "forms/composer",
+        "content": "- **WHEN** labels, help text, attachments, or actions exceed the available inline space\n- **THEN** content remains visible, controls remain operable, and the component introduces no horizontal page overflow",
+        "id": "forms/composer::Composer preserves content at bounded narrow widths::Composer is rendered with long content in a narrow container",
+        "name": "Composer is rendered with long content in a narrow container",
+        "requirement": "Composer preserves content at bounded narrow widths",
+        "requirementContent": "Composer SHALL fit its container, permit editing content and supporting copy to wrap, allow the editing region to grow to its documented maximum before consumer-owned overflow behavior applies, and stack supporting regions when their inline layout no longer fits."
+      },
+      {
+        "capability": "forms/composer",
+        "content": "- **WHEN** a labelled editing surface is placed in the Composer editing-surface region\n- **THEN** the Composer supplies layout and visual containment while the consumer retains editor semantics and behavior",
+        "id": "forms/composer::Composer provides structured regions without owning an editor::A consumer mounts its editor",
+        "name": "A consumer mounts its editor",
+        "requirement": "Composer provides structured regions without owning an editor",
+        "requirementContent": "The styles package SHALL support a Composer root with optional label/help, toolbar, editing-surface, attachments, status, and actions regions. The editing-surface region SHALL accept a consumer-provided textarea, contenteditable element, or editor mount point without changing that surface's value or document model."
+      },
+      {
+        "capability": "forms/composer",
+        "content": "- **WHEN** the consumer applies the editing surface's supported read-only semantics and the documented Composer state hook\n- **THEN** the Composer displays the read-only presentation without disabling unrelated actions implicitly",
+        "id": "forms/composer::Composer states remain semantic and externally controlled::Consumer makes the surface read-only",
+        "name": "Consumer makes the surface read-only",
+        "requirement": "Composer states remain semantic and externally controlled",
+        "requirementContent": "Composer SHALL style the root `:focus-within` presentation when a descendant is focused. Composer SHALL visually support invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
+      },
+      {
+        "capability": "forms/composer",
+        "content": "- **WHEN** the editing surface exposes `aria-invalid=\"true\"` and references an error message\n- **THEN** the Composer displays its invalid presentation and preserves the programmatic relationship to the message",
+        "id": "forms/composer::Composer states remain semantic and externally controlled::Consumer reports invalid content",
+        "name": "Consumer reports invalid content",
+        "requirement": "Composer states remain semantic and externally controlled",
+        "requirementContent": "Composer SHALL style the root `:focus-within` presentation when a descendant is focused. Composer SHALL visually support invalid, disabled, and read-only presentations only when the consumer supplies the corresponding native or ARIA state on the editing surface and documented state hook on the root. Styling SHALL NOT imply that a nested editor engine has enforced those states."
+      },
+      {
+        "capability": "forms/composer",
+        "content": "- **WHEN** a consumer places classified attachment rows and a native submit button in their documented regions\n- **THEN** each nested control retains its existing semantics and behavior contract",
+        "id": "forms/composer::Supporting regions compose existing controls::Attachments and submit action are provided",
+        "name": "Attachments and submit action are provided",
+        "requirement": "Supporting regions compose existing controls",
+        "requirementContent": "The attachments and actions regions SHALL accept existing SHLZ primitives or semantic consumer controls. Composer SHALL NOT own file selection, upload lifecycle, attachment removal, submit/send behavior, pending state, validation rules, persistence, or error recovery."
+      },
+      {
+        "capability": "forms/rich-text-toolbar",
+        "content": "- **WHEN** the consumer disables a command button\n- **THEN** the control is unavailable to native activation and displays the disabled state",
+        "id": "forms/rich-text-toolbar::Command state is explicit and consumer-controlled::A command is unavailable",
+        "name": "A command is unavailable",
+        "requirement": "Command state is explicit and consumer-controlled",
+        "requirementContent": "Toggle commands SHALL expose their current state with `aria-pressed`; unavailable commands SHALL use native disabled semantics. The component SHALL style resting, hover, focus-visible, pressed, and disabled states without executing commands or deriving editor state."
+      },
+      {
+        "capability": "forms/rich-text-toolbar",
+        "content": "- **WHEN** the consumer sets a toggle command's `aria-pressed` value to `true`\n- **THEN** the control exposes and visually presents its pressed state",
+        "id": "forms/rich-text-toolbar::Command state is explicit and consumer-controlled::A formatting mark is active",
+        "name": "A formatting mark is active",
+        "requirement": "Command state is explicit and consumer-controlled",
+        "requirementContent": "Toggle commands SHALL expose their current state with `aria-pressed`; unavailable commands SHALL use native disabled semantics. The component SHALL style resting, hover, focus-visible, pressed, and disabled states without executing commands or deriving editor state."
+      },
+      {
+        "capability": "forms/rich-text-toolbar",
+        "content": "- **WHEN** command buttons are placed in the documented toolbar and group regions\n- **THEN** assistive technology identifies the toolbar, each group, and the accessible name of every command",
+        "id": "forms/rich-text-toolbar::Rich Text Toolbar exposes semantic command controls::A consumer renders formatting commands",
+        "name": "A consumer renders formatting commands",
+        "requirement": "Rich Text Toolbar exposes semantic command controls",
+        "requirementContent": "The styles package SHALL support a `role=\"toolbar\"` container with an accessible name. Command groups SHALL use `role=\"group\"` with an accessible name. Commands SHALL be native buttons grouped by formatting purpose. Every icon-only command SHALL have an accessible name, and decorative icons SHALL remain hidden from assistive technology."
+      },
+      {
+        "capability": "forms/rich-text-toolbar",
+        "content": "- **WHEN** the toolbar is placed in a narrow container or content is enlarged\n- **THEN** complete command groups wrap into additional rows and all controls remain visible and operable",
+        "id": "forms/rich-text-toolbar::Toolbar adapts to bounded width and content stress::Commands do not fit on one row",
+        "name": "Commands do not fit on one row",
+        "requirement": "Toolbar adapts to bounded width and content stress",
+        "requirementContent": "The toolbar SHALL allow command groups to wrap without clipping controls or introducing component-owned horizontal page overflow. Accessible names SHALL remain available when visible labels are omitted, and focus indicators SHALL remain unobscured at supported narrow widths."
+      },
+      {
+        "capability": "forms/rich-text-toolbar",
+        "content": "- **WHEN** the toolbar is rendered with semantic HTML and the styles package only\n- **THEN** its controls remain reachable and activatable through native browser behavior while command effects remain consumer-owned",
+        "id": "forms/rich-text-toolbar::Toolbar interaction remains usable without a library controller::No behavior package is installed",
+        "name": "No behavior package is installed",
+        "requirement": "Toolbar interaction remains usable without a library controller",
+        "requirementContent": "The toolbar SHALL preserve native button keyboard and focus behavior and SHALL NOT require a JavaScript controller, roving tabindex, or editor implementation. The consumer SHALL own command execution, selection preservation, focus restoration, shortcuts, and synchronization with editor state."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "19d96fe9206232da25d58f1e6222dbe9c0def15ec8863b85dc399e6f1d5fd999"
+}
