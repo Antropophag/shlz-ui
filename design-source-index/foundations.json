@@ -328,6 +328,221 @@
     }
   },
   "observed": {
+    "normalizedIconComponentCoverage": {
+      "classification": "ENGINEERING_DERIVED",
+      "normalizedManifest": "packages/icons/normalized/manifest.json",
+      "normalizedAnalysis": "packages/icons/normalized/analysis.json",
+      "records": [
+        {
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "254:18239",
+          "name": "Priority",
+          "matchBasis": "exact variant name, dimensions, and paint-independent geometry",
+          "variants": [
+            {
+              "figmaNodeId": "254:18240",
+              "name": "Property 1=Низкий",
+              "archivePath": "components/Priority/variants/Property 1=Низкий.svg",
+              "geometryHash": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Низкий.svg",
+              "normalizedPath": "packages/icons/normalized/status/priority-low.svg"
+            },
+            {
+              "figmaNodeId": "254:18251",
+              "name": "Property 1=Средний",
+              "archivePath": "components/Priority/variants/Property 1=Средний.svg",
+              "geometryHash": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Средний.svg",
+              "normalizedPath": "packages/icons/normalized/status/priority-medium.svg"
+            },
+            {
+              "figmaNodeId": "254:18242",
+              "name": "Property 1=Высокий",
+              "archivePath": "components/Priority/variants/Property 1=Высокий.svg",
+              "geometryHash": "4bcb1cfdeb03b387bc9a65cda65ca7a2b3a2422a1c6b4589d9997637d34aae2a",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/priority/Property 1=Высокий.svg",
+              "normalizedPath": "packages/icons/normalized/status/priority-high.svg"
+            }
+          ]
+        },
+        {
+          "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+          "figmaNodeId": "253:17470",
+          "name": "File type icon",
+          "matchBasis": "exact variant name, dimensions, and paint-independent geometry",
+          "variants": [
+            {
+              "figmaNodeId": "253:17307",
+              "name": "Type=PDF",
+              "archivePath": "components/File type icon 2/variants/Type=PDF.svg",
+              "geometryHash": "498cb22fdc131b53eb7cd2571a27a75d763d9001bae5ca61e02c300f45ed2938",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-pdf-default.svg"
+            },
+            {
+              "figmaNodeId": "253:17316",
+              "name": "Type=DOC",
+              "archivePath": "components/File type icon 2/variants/Type=DOC.svg",
+              "geometryHash": "afedf781708cf623c4224951d13f0c181b7f4f42b97e9bb8b6b827de66206209",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOC.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-doc.svg"
+            },
+            {
+              "figmaNodeId": "253:17325",
+              "name": "Type=DOCX",
+              "archivePath": "components/File type icon 2/variants/Type=DOCX.svg",
+              "geometryHash": "ab60ccf725051ab7fb90467da12ca4129a85cfd3840e79a32ddf8da1e52df2e2",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=DOCX.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-docx.svg"
+            },
+            {
+              "figmaNodeId": "253:17334",
+              "name": "Type=TXT",
+              "archivePath": "components/File type icon 2/variants/Type=TXT.svg",
+              "geometryHash": "be4e407ed07150d67c728ddff6b9705de81dce25e0617be77d4f11f3374539d2",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=TXT.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-txt.svg"
+            },
+            {
+              "figmaNodeId": "253:17343",
+              "name": "Type=CSV",
+              "archivePath": "components/File type icon 2/variants/Type=CSV.svg",
+              "geometryHash": "92c67805a814c2c5885bed7acda6fba7917edbda178b922d31f789435bc84895",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=CSV.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-csv.svg"
+            },
+            {
+              "figmaNodeId": "253:17352",
+              "name": "Type=XLS",
+              "archivePath": "components/File type icon 2/variants/Type=XLS.svg",
+              "geometryHash": "f109a4e7a1d6585ce478a413aef6ad4cf4173b8938a56003ddc37af43a562cc5",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLS.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-xls.svg"
+            },
+            {
+              "figmaNodeId": "253:17361",
+              "name": "Type=XLSX",
+              "archivePath": "components/File type icon 2/variants/Type=XLSX.svg",
+              "geometryHash": "d992c5da593ebef663809357d76175c232be5c0a0f5663c9491aca9a11c1ef87",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=XLSX.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-xlsx.svg"
+            },
+            {
+              "figmaNodeId": "253:17370",
+              "name": "Type=PPT",
+              "archivePath": "components/File type icon 2/variants/Type=PPT.svg",
+              "geometryHash": "a69034d41bdd8fcf4db7b76da7f70985b67856c483bbd2a866272d27040b1cc8",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPT.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-ppt.svg"
+            },
+            {
+              "figmaNodeId": "253:17379",
+              "name": "Type=PPTX",
+              "archivePath": "components/File type icon 2/variants/Type=PPTX.svg",
+              "geometryHash": "28faa9676872d19ca28c8c9b263c988238c7d81b18db20d01185878cda02b52b",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PPTX.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-pptx.svg"
+            },
+            {
+              "figmaNodeId": "253:17388",
+              "name": "Type=MP3",
+              "archivePath": "components/File type icon 2/variants/Type=MP3.svg",
+              "geometryHash": "57b50cd8c2fcc1becc0db874a96e0753604d3635df6196fbdecaa10cde94352e",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP3.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-mp3.svg"
+            },
+            {
+              "figmaNodeId": "253:17397",
+              "name": "Type=MP4",
+              "archivePath": "components/File type icon 2/variants/Type=MP4.svg",
+              "geometryHash": "e721cd8438c44e83eb6ecd3af3bc96a63fb989c691760987dcc09fbbfda5734e",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MP4.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-mp4.svg"
+            },
+            {
+              "figmaNodeId": "253:17406",
+              "name": "Type=MPEG",
+              "archivePath": "components/File type icon 2/variants/Type=MPEG.svg",
+              "geometryHash": "8fc8e1df258bd9d0a34e1a9f5951a7e2ddb60828a661ef4faefe888308e41d9f",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MPEG.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-mpeg.svg"
+            },
+            {
+              "figmaNodeId": "253:17415",
+              "name": "Type=AVI",
+              "archivePath": "components/File type icon 2/variants/Type=AVI.svg",
+              "geometryHash": "0519fdb53275664c4cf5fccfedff384b8a97985c67752c241dd596501fb0654b",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=AVI.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-avi.svg"
+            },
+            {
+              "figmaNodeId": "253:17424",
+              "name": "Type=MKV",
+              "archivePath": "components/File type icon 2/variants/Type=MKV.svg",
+              "geometryHash": "ea0d050414ce41c54ba085f90d52e0c1b30b987e968bf7588e7020c72441cf1d",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=MKV.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-mkv.svg"
+            },
+            {
+              "figmaNodeId": "253:17433",
+              "name": "Type=ZIP",
+              "archivePath": "components/File type icon 2/variants/Type=ZIP.svg",
+              "geometryHash": "38f7319d3308bb5061efe63a30c935315e16bb4ec217a7f06145298402117459",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=ZIP.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-zip.svg"
+            },
+            {
+              "figmaNodeId": "253:17442",
+              "name": "Type=RAR",
+              "archivePath": "components/File type icon 2/variants/Type=RAR.svg",
+              "geometryHash": "a54b85a02847b784598e54ee91f57ac6a3a2b06960aa98edf3c38ef1ab5eebe2",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=RAR.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-rar.svg"
+            },
+            {
+              "figmaNodeId": "253:17451",
+              "name": "Type=IMG",
+              "archivePath": "components/File type icon 2/variants/Type=IMG.svg",
+              "geometryHash": "1f01057a1168ce40ad69bb795f90439802a0e71fda84bbe78da54dc8f45d46a9",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=IMG.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-img.svg"
+            },
+            {
+              "figmaNodeId": "253:17460",
+              "name": "Type=PNG",
+              "archivePath": "components/File type icon 2/variants/Type=PNG.svg",
+              "geometryHash": "76d488ecb9af617316bf3776f1bfaf430b7cc233980f44b7bc52b28540b9ef5e",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PNG.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-png.svg"
+            },
+            {
+              "figmaNodeId": "253:17469",
+              "name": "Type=SVG",
+              "archivePath": "components/File type icon 2/variants/Type=SVG.svg",
+              "geometryHash": "3a3c86489abb299c8e8fa23a2f8cc2559e4e04328e675db058870769716591da",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=SVG.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-svg.svg"
+            },
+            {
+              "figmaNodeId": "303:20144",
+              "name": "Type=PDF Gray",
+              "archivePath": "components/File type icon 2/variants/Type=PDF Gray.svg",
+              "geometryHash": "498cb22fdc131b53eb7cd2571a27a75d763d9001bae5ca61e02c300f45ed2938",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=PDF Gray.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-pdf-gray.svg"
+            },
+            {
+              "figmaNodeId": "1102:78136",
+              "name": "Type=File",
+              "archivePath": "components/File type icon 2/variants/Type=File.svg",
+              "geometryHash": "bd13ba3341c853a6406c8bb03202165f5b66a8d14ff8b85f895cfa64215ae8d2",
+              "normalizedSourcePath": "shlz-design-source/raw/svg/UI Kit – Basic elements/icons/file type/Type=File.svg",
+              "normalizedPath": "packages/icons/normalized/files/file-generic.svg"
+            }
+          ]
+        }
+      ]
+    },
     "repeatedVariantHeights": [
       {
         "value": 40,

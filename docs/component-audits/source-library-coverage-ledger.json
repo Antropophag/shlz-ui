@@ -60,12 +60,17 @@
         "Container",
         "Priority"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Icons"],
+      "implementation": ["packages/icons/normalized/"],
+      "evidence": [
+        "design-source-index/foundations.json",
+        "docs/foundation-audits/icons.json",
+        "tools/tests/basic-icons-normalization.test.mjs",
+        "tools/playwright/icons.spec.js"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "provenance": "normalized-icon-exact-geometry",
       "variantCoverage": "all",
       "variantExceptions": []
     },
@@ -85,7 +90,7 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The normalized corpus contains related arrow glyphs, but exact variant geometry does not cover this complete source record.",
       "variantCoverage": "all",
       "variantExceptions": []
     },
@@ -144,12 +149,17 @@
         "Container",
         "File type icon"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Icons"],
+      "implementation": ["packages/icons/normalized/"],
+      "evidence": [
+        "design-source-index/foundations.json",
+        "docs/foundation-audits/icons.json",
+        "tools/tests/basic-icons-normalization.test.mjs",
+        "tools/playwright/icons.spec.js"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "provenance": "normalized-icon-exact-geometry",
       "variantCoverage": "all",
       "variantExceptions": []
     },

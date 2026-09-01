@@ -1,0 +1,75 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "30f62d2b7c90274c2ad68bd6b9ac3b6cde7e6b702f29730e3849398be0654f36",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** coverage artifacts are updated and regenerated\n- **THEN** authoritative source hashes and runtime package surfaces remain unchanged while diagnostics remain visible in the generated matrix",
+        "id": "audit/source-coverage-classification::Authoritative source and runtime contracts remain unchanged::Classification is applied",
+        "name": "Classification is applied",
+        "requirement": "Authoritative source and runtime contracts remain unchanged",
+        "requirementContent": "The classification process MUST NOT modify `shlz-design-source/`, add or alter runtime component behavior, or expand a public package API. Source diagnostics SHALL be preserved and their classification impact SHALL be stated where they affect a coverage decision."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** an unresolved source record has a canonical family, production implementation, and evidence that directly covers its source identity or normalized output\n- **THEN** the ledger classifies it as `implemented` and records those family, implementation, and evidence references",
+        "id": "audit/source-coverage-classification::Classification requires disposition-specific proof::Existing implementation is proven",
+        "name": "Existing implementation is proven",
+        "requirement": "Classification requires disposition-specific proof",
+        "requirementContent": "The classification SHALL retain `unresolved` unless existing repository evidence satisfies every requirement of exactly one stronger disposition. A similar name, shared source archive, nested appearance, existing path, or family `audit_status` alone MUST NOT establish the classification."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** a record appears related to an existing family but direct disposition-specific evidence is absent or ambiguous\n- **THEN** the record remains `unresolved` with a concrete statement of the missing decision or evidence",
+        "id": "audit/source-coverage-classification::Classification requires disposition-specific proof::Proof remains insufficient",
+        "name": "Proof remains insufficient",
+        "requirement": "Classification requires disposition-specific proof",
+        "requirementContent": "The classification SHALL retain `unresolved` unless existing repository evidence satisfies every requirement of exactly one stronger disposition. A similar name, shared source archive, nested appearance, existing path, or family `audit_status` alone MUST NOT establish the classification."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** existing audit evidence establishes that a source record describes a consumer-owned screen or domain composition rather than a reusable library contract\n- **THEN** the record is `intentionally-excluded`, retains its source identity in the denominator, and names both the ownership boundary and exclusion evidence",
+        "id": "audit/source-coverage-classification::Existing non-product source records remain visible::Application-owned composition",
+        "name": "Application-owned composition",
+        "requirement": "Existing non-product source records remain visible",
+        "requirementContent": "Nested evidence surfaces, duplicate or legacy records, decorative records, and application-owned compositions SHALL remain in their source-unit denominator. They MAY be classified as `evidence-only` or `intentionally-excluded` only with a concrete reason, an explicit ownership boundary where exclusion applies, and supporting repository evidence."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** a source record is not an independent production implementation but directly supports an already audited family\n- **THEN** it is `evidence-only` and references that family and its specific evidence without claiming implementation",
+        "id": "audit/source-coverage-classification::Existing non-product source records remain visible::Nested evidence surface",
+        "name": "Nested evidence surface",
+        "requirement": "Existing non-product source records remain visible",
+        "requirementContent": "Nested evidence surfaces, duplicate or legacy records, decorative records, and application-owned compositions SHALL remain in their source-unit denominator. They MAY be classified as `evidence-only` or `intentionally-excluded` only with a concrete reason, an explicit ownership boundary where exclusion applies, and supporting repository evidence."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** a record visually or nominally resembles an icon but committed provenance cannot bind it to a canonical output\n- **THEN** it remains unresolved rather than being assigned by name",
+        "id": "audit/source-coverage-classification::Normalized icon coverage is traceable::Icon-like record lacks provenance",
+        "name": "Icon-like record lacks provenance",
+        "requirement": "Normalized icon coverage is traceable",
+        "requirementContent": "An indexed icon record SHALL be classified as implemented only when committed normalization provenance links every indexed variant to an existing canonical icon source using exact name, dimensions, and paint-independent geometry, and the Icons family has production and runtime evidence. Duplicate source glyphs MAY share a canonical output when that normalization decision is explicit."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** normalization provenance binds an unresolved source glyph to a committed canonical icon file\n- **THEN** the record is implemented by the Icons family and cites the normalized output plus source, generation, and runtime evidence",
+        "id": "audit/source-coverage-classification::Normalized icon coverage is traceable::Source glyph has normalized provenance",
+        "name": "Source glyph has normalized provenance",
+        "requirement": "Normalized icon coverage is traceable",
+        "requirementContent": "An indexed icon record SHALL be classified as implemented only when committed normalization provenance links every indexed variant to an existing canonical icon source using exact name, dimensions, and paint-independent geometry, and the Icons family has production and runtime evidence. Duplicate source glyphs MAY share a canonical output when that normalization decision is explicit."
+      },
+      {
+        "capability": "audit/source-coverage-classification",
+        "content": "- **WHEN** the updated ledger is generated and validated\n- **THEN** all 195 records and 630 variants remain accounted for, disposition totals are deterministic, and the remaining unresolved reusable candidates can be reviewed without application-owned or already implemented records being counted as product gaps",
+        "id": "audit/source-coverage-classification::Remaining gaps are reported as an actionable backlog::Classification regeneration completes",
+        "name": "Classification regeneration completes",
+        "requirement": "Remaining gaps are reported as an actionable backlog",
+        "requirementContent": "Generation SHALL report compatible-unit disposition totals after classification and SHALL expose the remaining unresolved component sets separately from resolved icon, evidence, and exclusion decisions. Record and variant totals MUST continue to match the source index exactly."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "0c1da602215cbdf676d034b7e2ddb35d9e36e115167ac77754c706e4e9d595ea"
+}

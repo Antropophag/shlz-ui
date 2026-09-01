@@ -13,6 +13,7 @@ const readJson = async (relative) =>
 const outputPath = "docs/component-audits/source-library-coverage.json";
 const matrix = await buildCoverageMatrix({
   sourceIndex: await readJson("design-source-index/components.json"),
+  sourceFoundations: await readJson("design-source-index/foundations.json"),
   inventory: await readJson("docs/component-audits/project-inventory.json"),
   ledger: await readJson(
     "docs/component-audits/source-library-coverage-ledger.json",

@@ -8,6 +8,9 @@ const repoRoot = path.resolve(import.meta.dirname, "../..");
 const readJson = async (relative) =>
   JSON.parse(await readFile(path.join(repoRoot, relative), "utf8"));
 const sourceIndex = await readJson("design-source-index/components.json");
+const sourceFoundations = await readJson(
+  "design-source-index/foundations.json",
+);
 const inventory = await readJson(
   "docs/component-audits/project-inventory.json",
 );
@@ -16,10 +19,17 @@ const ledger = await readJson(
 );
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const build = (candidate) =>
-  buildCoverageMatrix({ sourceIndex, inventory, ledger: candidate, repoRoot });
+  buildCoverageMatrix({
+    sourceIndex,
+    sourceFoundations,
+    inventory,
+    ledger: candidate,
+    repoRoot,
+  });
 const buildWith = (overrides) =>
   buildCoverageMatrix({
     sourceIndex,
+    sourceFoundations,
     inventory,
     ledger,
     repoRoot,
@@ -177,6 +187,103 @@ test("coverage validation rejects unsupported claims and references", async () =
   );
 });
 
+test("normalized icon claims require exact provenance for every indexed variant", async () => {
+  const priorityIndex = ledger.records.findIndex(
+    ({ figmaNodeId }) => figmaNodeId === "254:18239",
+  );
+  const missingMarker = clone(ledger);
+  delete missingMarker.records[priorityIndex].provenance;
+  await assert.rejects(
+    build(missingMarker),
+    /Icons needs exact normalized icon provenance/,
+  );
+
+  const incompleteFoundations = clone(sourceFoundations);
+  incompleteFoundations.observed.normalizedIconComponentCoverage.records[0].variants.pop();
+  await assert.rejects(
+    buildWith({ sourceFoundations: incompleteFoundations }),
+    /does not cover every variant/,
+  );
+
+  const duplicateRecord = clone(sourceFoundations);
+  duplicateRecord.observed.normalizedIconComponentCoverage.records.push(
+    clone(duplicateRecord.observed.normalizedIconComponentCoverage.records[0]),
+  );
+  await assert.rejects(
+    buildWith({ sourceFoundations: duplicateRecord }),
+    /duplicate record identities/,
+  );
+
+  const duplicateVariant = clone(sourceFoundations);
+  duplicateVariant.observed.normalizedIconComponentCoverage.records[0].variants.push(
+    clone(
+      duplicateVariant.observed.normalizedIconComponentCoverage.records[0]
+        .variants[0],
+    ),
+  );
+  await assert.rejects(
+    buildWith({ sourceFoundations: duplicateVariant }),
+    /duplicate variant identities/,
+  );
+
+  const missingNormalizedOutput = clone(sourceFoundations);
+  delete missingNormalizedOutput.observed.normalizedIconComponentCoverage
+    .records[0].variants[0].normalizedPath;
+  await assert.rejects(
+    buildWith({ sourceFoundations: missingNormalizedOutput }),
+    /does not cover every variant/,
+  );
+
+  const staleNormalizedOutput = clone(sourceFoundations);
+  staleNormalizedOutput.observed.normalizedIconComponentCoverage.records[0].variants[0].normalizedPath =
+    "packages/icons/normalized/missing-output.svg";
+  await assert.rejects(
+    buildWith({ sourceFoundations: staleNormalizedOutput }),
+    /normalized icon provenance path is invalid/,
+  );
+
+  const escapingNormalizedOutput = clone(sourceFoundations);
+  escapingNormalizedOutput.observed.normalizedIconComponentCoverage.records[0].variants[0].normalizedPath =
+    "packages/icons/normalized/../../tokens/tokens.json";
+  await assert.rejects(
+    buildWith({ sourceFoundations: escapingNormalizedOutput }),
+    /must be a repository-relative path/,
+  );
+
+  const arrowsIndex = ledger.records.findIndex(
+    ({ figmaNodeId }) => figmaNodeId === "440:21412",
+  );
+  const unsupported = clone(ledger);
+  Object.assign(unsupported.records[arrowsIndex], {
+    disposition: "implemented",
+    families: ["Icons"],
+    implementation: ["packages/icons/normalized/"],
+    evidence: ["design-source-index/foundations.json"],
+    exclusionEvidence: [],
+    provenance: "normalized-icon-exact-geometry",
+  });
+  delete unsupported.records[arrowsIndex].reason;
+  await assert.rejects(
+    build(unsupported),
+    /normalized icon provenance is missing/,
+  );
+
+  const result = await build(ledger);
+  const priority = result.records.find(
+    ({ identity }) => identity.figmaNodeId === "254:18239",
+  );
+  assert.equal(priority.provenance, "normalized-icon-exact-geometry");
+  assert.ok(
+    priority.variants.every(
+      ({ provenance }) => provenance === "normalized-icon-exact-geometry",
+    ),
+  );
+  assert.equal(
+    result.generatedFrom.sourceFoundations,
+    "design-source-index/foundations.json",
+  );
+});
+
 test("variant exceptions must identify indexed variants and satisfy the same contract", async () => {
   const invented = clone(ledger);
   invented.records[0].variantExceptions = [
@@ -191,6 +298,24 @@ test("variant exceptions must identify indexed variants and satisfy the same con
     },
   ];
   await assert.rejects(build(invented), /invented variant exception/);
+
+  const unsupportedIconException = clone(ledger);
+  const unsupportedIconVariant = sourceIndex.components[0].variants[0];
+  unsupportedIconException.records[0].variantExceptions = [
+    {
+      figmaNodeId: unsupportedIconVariant.figmaNodeId,
+      disposition: "implemented",
+      families: ["Icons"],
+      implementation: ["packages/icons/normalized/"],
+      evidence: ["design-source-index/foundations.json"],
+      exclusionEvidence: [],
+      provenance: "normalized-icon-exact-geometry",
+    },
+  ];
+  await assert.rejects(
+    build(unsupportedIconException),
+    /normalized icon provenance is missing/,
+  );
 
   const narrowed = clone(ledger);
   const variant = sourceIndex.components[0].variants[0];

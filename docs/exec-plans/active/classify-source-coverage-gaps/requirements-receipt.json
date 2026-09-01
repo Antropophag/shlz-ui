@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "classify-source-coverage-gaps",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "classification-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-and-evidence-authorities",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "proof-threshold",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "runtime-scope-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Classify the current unresolved design-source coverage records when existing repository evidence proves implementation, evidence-only, or exclusion status, while preserving genuine reusable gaps as unresolved.",
+    "revision": 1
+  },
+  "routeDigest": "a24cd38e27278239df82793cce4edbef66d02baf8c34d8dce1797d2b52255cdd",
+  "version": 1,
+  "digest": "4bc9c3f474d200549925729816a5c78b33fca8c742cc662bbd4a345c35a19549"
+}

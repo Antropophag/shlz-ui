@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "intent": "Classify the current unresolved design-source coverage records when existing repository evidence proves implementation, evidence-only, or exclusion status, while preserving genuine reusable gaps as unresolved.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "classification-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "After reviewing the two latest pull requests and the proposed next step, the user explicitly requested that the next pull request be made."
+      }
+    },
+    {
+      "id": "source-and-evidence-authorities",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md authority order, design-source-index/components.json, source-library-coverage decisions, component audit manifests, and committed icon normalization provenance"
+      }
+    },
+    {
+      "id": "proof-threshold",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "openspec/changes/classify-source-coverage-gaps/specs/audit/source-coverage-classification/spec.md requires disposition-specific proof and defaults insufficient evidence to unresolved"
+      }
+    },
+    {
+      "id": "runtime-scope-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md scope discipline and openspec/changes/classify-source-coverage-gaps/design.md constrain this change to audit classification without runtime or public package changes"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "classify-source-coverage-gaps",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "The user explicitly requested creation of the next pull request, authorizing implementation and delivery after planning."
+    }
+  }
+}
