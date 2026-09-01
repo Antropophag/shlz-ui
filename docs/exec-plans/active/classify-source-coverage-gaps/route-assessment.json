@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "intent": "Classify the current unresolved design-source coverage records when existing repository evidence proves implementation, evidence-only, or exclusion status, while preserving genuine reusable gaps as unresolved.",
+  "route": "open-spec",
+  "openSpecChange": "classify-source-coverage-gaps",
+  "requiredDecisions": [
+    {
+      "id": "classification-scope",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-and-evidence-authorities",
+      "owner": "repo",
+      "blocking": true
+    },
+    {
+      "id": "proof-threshold",
+      "owner": "agent",
+      "blocking": true
+    },
+    {
+      "id": "runtime-scope-boundary",
+      "owner": "repo",
+      "blocking": true
+    }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
