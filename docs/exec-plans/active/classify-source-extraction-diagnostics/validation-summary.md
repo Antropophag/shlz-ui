@@ -13,6 +13,7 @@ Candidate worktree validated against implementation baseline `51951a31fcfeb373bf
 - OpenSpec strict validation: all 37 changes passed; integration check passed.
 - Changed JavaScript ESLint and changed-file Prettier checks passed.
 - Protected `shlz-design-source/` and runtime `packages/` diff from baseline: empty.
+- Review remediation binds evidence paths to controlled claim types, expands node identities to every preserved occurrence-context field, classifies rationales as `DECISION`, and tests formatted JSON/Markdown byte stability.
 
 ## Limitation
 

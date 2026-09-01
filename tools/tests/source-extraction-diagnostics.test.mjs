@@ -1,8 +1,12 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
+import prettier from "prettier";
 import test from "node:test";
-import { buildDiagnosticClassification } from "../lib/source-extraction-diagnostics.mjs";
+import {
+  buildDiagnosticClassification,
+  renderDiagnosticClassificationMarkdown,
+} from "../lib/source-extraction-diagnostics.mjs";
 
 const repoRoot = path.resolve(import.meta.dirname, "../..");
 const readJson = async (relative) =>
@@ -34,6 +38,16 @@ test("classification reconciles node diagnostics and skipped cohorts", async () 
     2,
   );
   assert.equal(JSON.stringify(await build()), JSON.stringify(result));
+  const formatted = async () => ({
+    json: await prettier.format(JSON.stringify(await build()), {
+      filepath: "source-extraction-diagnostics.json",
+    }),
+    markdown: await prettier.format(
+      renderDiagnosticClassificationMarkdown(await build()),
+      { filepath: "source-extraction-diagnostics.md" },
+    ),
+  });
+  assert.deepEqual(await formatted(), await formatted());
 });
 
 test("classification fails closed on incomplete and duplicate cohorts", async () => {
@@ -71,6 +85,14 @@ test("classification fails closed on stale counts and unsupported claims", async
   await assert.rejects(build(contradictory), /contradictory/);
 
   const escaping = clone(ledger);
-  escaping.classifications[0].evidence = ["../outside.md"];
+  escaping.classifications[0].evidence = [
+    { kind: "source-index", path: "../outside.md" },
+  ];
   await assert.rejects(build(escaping), /escapes repository/);
+
+  const unrelated = clone(ledger);
+  unrelated.classifications[0].evidence = [
+    { kind: "source-index", path: "package.json" },
+  ];
+  await assert.rejects(build(unrelated), /does not match evidence kind/);
 });

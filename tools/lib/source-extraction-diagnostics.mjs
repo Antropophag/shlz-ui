@@ -20,33 +20,97 @@ const compatible = new Set([
   "product-gap-evidence:limits-conclusion",
   "product-gap-evidence:invalidates-current-claim",
 ]);
+const claimAuthorities = new Set(["FACT", "DERIVED", "DECISION", "UNKNOWN"]);
+const selectorFields = new Set([
+  "kind",
+  "component",
+  "sourceArchive",
+  "multiplicity",
+]);
+const evidencePathMatches = {
+  "source-index": (name) => name === "design-source-index/source-issues.json",
+  "source-manifest": (name) => name === "design-source-index/manifest.json",
+  "source-methodology": (name) => name === "design-source-index/README.md",
+  "audit-contract": (name) =>
+    /^docs\/component-audits\/[^/]+\.json$/.test(name) &&
+    !name.endsWith("-ledger.json"),
+  "coverage-ledger": (name) =>
+    name === "docs/component-audits/source-library-coverage-ledger.json",
+};
+const requiredEvidenceKinds = {
+  "extraction-defect": ["source-index", "source-methodology"],
+  "source-ambiguity": ["source-index"],
+  "harmless-diagnostic": ["source-index", "coverage-ledger"],
+  "product-gap-evidence": ["source-index", "audit-contract"],
+};
 
 const identity = (unit) =>
   unit.granularity === "node"
-    ? [
+    ? JSON.stringify([
         unit.sourceArchive,
         unit.kind,
+        unit.component,
+        unit.variant ?? null,
         unit.scope,
+        unit.figmaNodeId,
+        unit.ownerId ?? null,
         unit.nodeId,
+        unit.nodeName,
         unit.field ?? "",
-      ].join("#")
-    : [unit.sourceArchive, unit.kind].join("#");
+        unit.message,
+      ])
+    : JSON.stringify([unit.sourceArchive, unit.kind]);
 
 const selectorMatches = (selector, unit) =>
   Object.entries(selector).every(([key, value]) => unit[key] === value);
 
-async function validateEvidence(evidence, repoRoot) {
+function validateSelector(classification) {
+  const { selector } = classification;
+  if (
+    !classification.id?.trim() ||
+    !selector ||
+    !Object.keys(selector).every((key) => selectorFields.has(key)) ||
+    !["error", "warning", "skipped-instance"].includes(selector.kind)
+  )
+    throw new Error(`invalid classification selector: ${classification.id}`);
+  if (
+    selector.kind === "skipped-instance" &&
+    (!selector.sourceArchive || !Number.isInteger(selector.multiplicity))
+  )
+    throw new Error(`invalid skipped-instance selector: ${classification.id}`);
+}
+
+async function validateEvidence(decision, repoRoot) {
+  const { evidence } = decision;
   if (!Array.isArray(evidence) || !evidence.length)
     throw new Error("classification evidence is required");
   const root = await realpath(repoRoot);
+  const kinds = new Set();
   for (const reference of evidence) {
-    const resolved = path.resolve(root, reference);
+    const name = reference?.path;
+    const resolved = path.resolve(root, name ?? "");
     if (path.relative(root, resolved).startsWith(".."))
-      throw new Error(`evidence escapes repository: ${reference}`);
+      throw new Error(`evidence escapes repository: ${name}`);
+    if (
+      !reference ||
+      !evidencePathMatches[reference.kind] ||
+      !evidencePathMatches[reference.kind](name)
+    )
+      throw new Error(`evidence path does not match evidence kind: ${name}`);
+    kinds.add(reference.kind);
     const canonical = await realpath(resolved);
     if (path.relative(root, canonical).startsWith(".."))
-      throw new Error(`evidence escapes repository: ${reference}`);
+      throw new Error(`evidence escapes repository: ${name}`);
   }
+  for (const required of requiredEvidenceKinds[decision.disposition])
+    if (!kinds.has(required))
+      throw new Error(`classification lacks required evidence: ${required}`);
+  if (
+    decision.disposition === "source-ambiguity" &&
+    !kinds.has("audit-contract") &&
+    !kinds.has("source-manifest")
+  )
+    throw new Error("classification lacks ambiguity boundary evidence");
 }
 
 export async function buildDiagnosticClassification({
@@ -56,6 +120,12 @@ export async function buildDiagnosticClassification({
 }) {
   if (ledger?.schemaVersion !== 1 || !Array.isArray(ledger.classifications))
     throw new Error("invalid diagnostic classification ledger");
+  ledger.classifications.forEach(validateSelector);
+  if (
+    new Set(ledger.classifications.map(({ id }) => id)).size !==
+    ledger.classifications.length
+  )
+    throw new Error("duplicate classification id");
 
   const units = [
     ...issues.extraction.errors.map((item) => ({
@@ -110,12 +180,14 @@ export async function buildDiagnosticClassification({
       throw new Error("contradictory diagnostic classification");
     if (!decision.rationale?.trim())
       throw new Error("classification rationale is required");
+    if (!claimAuthorities.has(decision.claimAuthority))
+      throw new Error(`unknown claim authority: ${decision.claimAuthority}`);
     if (
       decision.selector.multiplicity !== undefined &&
       decision.selector.multiplicity !== unit.multiplicity
     )
       throw new Error(`classification multiplicity differs: ${identity(unit)}`);
-    await validateEvidence(decision.evidence, repoRoot);
+    await validateEvidence(decision, repoRoot);
     classified.push({
       identity: identity(unit),
       kind: unit.kind,
@@ -130,8 +202,13 @@ export async function buildDiagnosticClassification({
       classification: decision.id,
       disposition: decision.disposition,
       coverageImpact: decision.coverageImpact,
+      claimAuthority: decision.claimAuthority,
       rationale: decision.rationale,
-      evidence: [...decision.evidence].sort(),
+      evidence: [...decision.evidence].sort((left, right) =>
+        `${left.kind}:${left.path}`.localeCompare(
+          `${right.kind}:${right.path}`,
+        ),
+      ),
     });
   }
 
