@@ -141,6 +141,16 @@ export async function buildCoverageMatrix({
 }) {
   assert(ledger.schemaVersion === 1, "ledger schemaVersion must be 1");
   assert(Array.isArray(ledger.records), "ledger.records must be an array");
+  const sourceKeys = sourceIndex.components.map(keyOf);
+  assert(
+    new Set(sourceKeys).size === sourceKeys.length,
+    "source index contains duplicate record identities",
+  );
+  const familyNames = inventory.families.map((family) => family.canonical_name);
+  assert(
+    new Set(familyNames).size === familyNames.length,
+    "project inventory contains duplicate canonical family names",
+  );
   const sourceByKey = new Map(
     sourceIndex.components.map((record) => [keyOf(record), record]),
   );
@@ -289,9 +299,12 @@ export async function buildCoverageMatrix({
   });
   const variants = records.flatMap((record) => record.variants);
   const referencedNames = new Set(
-    records.flatMap((record) =>
-      record.families.map((family) => family.canonicalName),
-    ),
+    records.flatMap((record) => [
+      ...record.families.map((family) => family.canonicalName),
+      ...record.variants.flatMap((variant) =>
+        variant.families.map((family) => family.canonicalName),
+      ),
+    ]),
   );
   const referencedFamilies = inventory.families.filter((family) =>
     referencedNames.has(family.canonical_name),

@@ -17,6 +17,14 @@ const ledger = await readJson(
 const clone = (value) => JSON.parse(JSON.stringify(value));
 const build = (candidate) =>
   buildCoverageMatrix({ sourceIndex, inventory, ledger: candidate, repoRoot });
+const buildWith = (overrides) =>
+  buildCoverageMatrix({
+    sourceIndex,
+    inventory,
+    ledger,
+    repoRoot,
+    ...overrides,
+  });
 
 test("coverage matrix accounts for records and variants using separate units", async () => {
   const matrix = await build(ledger);
@@ -57,6 +65,20 @@ test("coverage validation fails closed on incomplete or stale identities", async
   const stale = clone(ledger);
   stale.records[0].name = "Invented name";
   await assert.rejects(build(stale), /stale name/);
+
+  const duplicateSource = clone(sourceIndex);
+  duplicateSource.components.push(clone(duplicateSource.components[0]));
+  await assert.rejects(
+    buildWith({ sourceIndex: duplicateSource }),
+    /duplicate record identities/,
+  );
+
+  const duplicateFamily = clone(inventory);
+  duplicateFamily.families.push(clone(duplicateFamily.families[0]));
+  await assert.rejects(
+    buildWith({ inventory: duplicateFamily }),
+    /duplicate canonical family names/,
+  );
 });
 
 test("coverage validation rejects unsupported claims and references", async () => {
@@ -129,4 +151,32 @@ test("variant exceptions must identify indexed variants and satisfy the same con
   assert.equal(narrowedVariant.inheritedFromRecord, false);
   assert.equal(narrowedVariant.disposition, "unresolved");
   assert.deepEqual(narrowedVariant.evidence, []);
+
+  const baseline = await build(ledger);
+  const referencedNames = new Set(
+    baseline.records.flatMap((record) =>
+      record.families.map((family) => family.canonicalName),
+    ),
+  );
+  const exceptionFamily = inventory.families.find(
+    (family) => !referencedNames.has(family.canonical_name),
+  );
+  assert.ok(exceptionFamily);
+  const variantFamily = clone(ledger);
+  variantFamily.records[0].variantExceptions = [
+    {
+      figmaNodeId: variant.figmaNodeId,
+      disposition: "evidence-only",
+      families: [exceptionFamily.canonical_name],
+      implementation: [],
+      evidence: ["docs/component-audits/project-inventory.json"],
+      exclusionEvidence: [],
+      reason: "Only family-level evidence is currently available.",
+    },
+  ];
+  const variantFamilyMatrix = await build(variantFamily);
+  assert.equal(
+    variantFamilyMatrix.summary.referencedFamilies.denominator,
+    baseline.summary.referencedFamilies.denominator + 1,
+  );
 });
