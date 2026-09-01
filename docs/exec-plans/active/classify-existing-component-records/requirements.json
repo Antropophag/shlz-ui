@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "intent": "Reconcile unresolved design-source component and composition records with existing repository implementation and ownership evidence, retaining unresolved wherever proof is insufficient.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "classification-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "The user explicitly selected classification of existing component and composition records as roadmap step 1."
+      }
+    },
+    {
+      "id": "source-and-evidence-authorities",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md authority order, the generated source index, the authored coverage ledger, project inventory, component audit manifests, executable tests, and composition census artifacts"
+      }
+    },
+    {
+      "id": "proof-threshold",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "openspec/changes/classify-existing-component-records/specs/audit/existing-component-record-classification/spec.md defaults every unsupported or ambiguous relationship to unresolved"
+      }
+    },
+    {
+      "id": "deferred-record-boundaries",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "The ordered roadmap places extraction diagnostics in step 2, File Upload in steps 5-6, Timeline/Message in step 7, and Composer/Card decisions only after step 7."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "classify-existing-component-records",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "The user explicitly requested that the roadmap be recorded and work on step 1 begin."
+    }
+  }
+}
