@@ -124,6 +124,20 @@ function validateDecisionShape(decision, identity) {
   }
 }
 
+function validateReview(review, identity, episodeIds) {
+  if (review === undefined) return;
+  assert(
+    review && typeof review === "object" && !Array.isArray(review),
+    `${identity}: review must be an object`,
+  );
+  assert(
+    episodeIds.has(review.episode),
+    `${identity}: unknown classification episode: ${review.episode}`,
+  );
+  assert(review.cohort?.trim(), `${identity}: review cohort is required`);
+  assert(review.boundary?.trim(), `${identity}: review boundary is required`);
+}
+
 function summarize(records, variants, families) {
   const count = (items, disposition) =>
     items.filter((item) => item.disposition === disposition).length;
@@ -174,6 +188,17 @@ export async function buildCoverageMatrix({
 }) {
   assert(ledger.schemaVersion === 1, "ledger schemaVersion must be 1");
   assert(Array.isArray(ledger.records), "ledger.records must be an array");
+  assert(
+    Array.isArray(ledger.classificationEpisodes),
+    "ledger.classificationEpisodes must be an array",
+  );
+  const episodeIds = new Set(
+    ledger.classificationEpisodes.map((episode) => episode.id),
+  );
+  assert(
+    episodeIds.size === ledger.classificationEpisodes.length,
+    "classification episode ids must be unique",
+  );
   const sourceKeys = sourceIndex.components.map(keyOf);
   assert(
     new Set(sourceKeys).size === sourceKeys.length,
@@ -291,6 +316,7 @@ export async function buildCoverageMatrix({
       `${identity}: stale hierarchyPath`,
     );
     await validateReferences(decision, identity);
+    validateReview(decision.review, identity, episodeIds);
     if (decision.families.includes("Icons")) {
       await validateIconProvenance(decision, identity, source, source.variants);
     }
@@ -409,6 +435,68 @@ export async function buildCoverageMatrix({
     };
   });
   const variants = records.flatMap((record) => record.variants);
+  const classificationEpisodes = ledger.classificationEpisodes.map(
+    (episode) => {
+      assert(episode.id?.trim(), "classification episode id is required");
+      assert(
+        Number.isInteger(episode.expectedRecords) &&
+          Number.isInteger(episode.expectedVariants),
+        `${episode.id}: expected census totals must be integers`,
+      );
+      const reviewed = records.filter(
+        (record) =>
+          decisions.get(keyOf(record.identity)).review?.episode === episode.id,
+      );
+      const reviewedVariants = reviewed.flatMap((record) => record.variants);
+      assert(
+        reviewed.length === episode.expectedRecords,
+        `${episode.id}: reviewed record total ${reviewed.length} does not match ${episode.expectedRecords}`,
+      );
+      assert(
+        reviewedVariants.length === episode.expectedVariants,
+        `${episode.id}: reviewed variant total ${reviewedVariants.length} does not match ${episode.expectedVariants}`,
+      );
+      const cohortNames = [
+        ...new Set(
+          reviewed.map(
+            (record) => decisions.get(keyOf(record.identity)).review.cohort,
+          ),
+        ),
+      ].sort(compareStrings);
+      return {
+        id: episode.id,
+        baseline: episode.baseline,
+        expected: {
+          records: episode.expectedRecords,
+          variants: episode.expectedVariants,
+        },
+        actual: {
+          records: reviewed.length,
+          variants: reviewedVariants.length,
+        },
+        cohorts: cohortNames.map((cohort) => {
+          const cohortRecords = reviewed.filter(
+            (record) =>
+              decisions.get(keyOf(record.identity)).review.cohort === cohort,
+          );
+          return {
+            cohort,
+            records: cohortRecords.length,
+            variants: cohortRecords.flatMap((record) => record.variants).length,
+          };
+        }),
+        records: reviewed.map((record) => ({
+          ...record.identity,
+          disposition: record.disposition,
+          cohort: decisions.get(keyOf(record.identity)).review.cohort,
+          boundary: decisions.get(keyOf(record.identity)).review.boundary,
+          sourceDiagnosticsBoundary:
+            decisions.get(keyOf(record.identity)).review
+              .sourceDiagnosticsBoundary ?? null,
+        })),
+      };
+    },
+  );
   const referencedNames = new Set(
     records.flatMap((record) => [
       ...record.families.map((family) => family.canonicalName),
@@ -436,6 +524,7 @@ export async function buildCoverageMatrix({
         "Complete accounting may include unresolved records and does not imply complete implementation.",
     },
     summary: summarize(records, variants, referencedFamilies),
+    classificationEpisodes,
     records,
   };
 }

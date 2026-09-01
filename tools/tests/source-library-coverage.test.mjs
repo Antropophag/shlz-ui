@@ -63,6 +63,48 @@ test("coverage matrix accounts for records and variants using separate units", a
   assert.equal(JSON.stringify(await build(ledger)), JSON.stringify(matrix));
 });
 
+test("classification episodes account for their exact baseline census", async () => {
+  const matrix = await build(ledger);
+  const episode = matrix.classificationEpisodes.find(
+    ({ id }) => id === "classify-existing-component-records",
+  );
+  assert.ok(episode);
+  assert.equal(episode.expected.records, 140);
+  assert.equal(episode.expected.variants, 163);
+  assert.equal(episode.actual.records, 140);
+  assert.equal(episode.actual.variants, 163);
+  assert.equal(
+    episode.cohorts.reduce((sum, cohort) => sum + cohort.records, 0),
+    140,
+  );
+  assert.ok(
+    episode.records.every(({ cohort, boundary }) => cohort && boundary),
+  );
+});
+
+test("classification episode validation fails closed", async () => {
+  const missingReview = clone(ledger);
+  delete missingReview.records.find(
+    ({ review }) => review?.episode === "classify-existing-component-records",
+  ).review;
+  await assert.rejects(build(missingReview), /reviewed record total/);
+
+  const unknownEpisode = clone(ledger);
+  unknownEpisode.records[0].review = {
+    episode: "invented-episode",
+    cohort: "candidate",
+    boundary: "Missing evidence.",
+  };
+  await assert.rejects(build(unknownEpisode), /unknown classification episode/);
+
+  const unnamedBoundary = clone(ledger);
+  const reviewed = unnamedBoundary.records.find(
+    ({ review }) => review?.episode === "classify-existing-component-records",
+  );
+  reviewed.review.boundary = "";
+  await assert.rejects(build(unnamedBoundary), /review boundary/);
+});
+
 test("coverage validation fails closed on incomplete or stale identities", async () => {
   const missing = clone(ledger);
   missing.records.pop();

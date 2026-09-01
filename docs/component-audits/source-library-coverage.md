@@ -53,19 +53,43 @@ transfer coverage.
 
 ## Current classification pass
 
-The exact-provenance pass moved two records from `unresolved` to `implemented`:
-`Priority` (3 variants) and `File type icon` (21 variants). Record coverage is
-now 55 implemented and 140 unresolved out of 195; variant coverage is 467
-implemented and 163 unresolved out of 630. The denominators did not change.
+The `classify-existing-component-records` episode reviews the exact baseline of
+140 unresolved records and 163 variants. Its census is authored on the same
+ledger decisions and emitted under `classificationEpisodes`; the generator
+fails closed if a reviewed identity is omitted, duplicated, assigned to an
+unknown episode, or lacks a named cohort and boundary.
 
-The remaining Basic Elements reusable component-set candidates are `Arrows`,
-`Icon button`, `Input-Number`, `Badge/Count`, `Badge/Dot`, `Color`,
-`Selection-Item`, `dropdown-btns`, `Pagination Btn`, `Sorter`, and `Filter`.
-They remain actionable backlog rather than inferred coverage. In particular,
-`Arrows` has related normalized glyphs but lacks exact geometry for every indexed
-variant. The 110 unresolved standalone records and the unresolved Interface
-Elements sets also remain unclassified until record-specific implementation,
-evidence-only, or application-ownership proof exists.
+| Reviewed cohort               | Records | Variants | Disposition or boundary           |
+| ----------------------------- | ------: | -------: | --------------------------------- |
+| Existing canonical family     |      10 |       49 | implemented                       |
+| Composition support           |       4 |       11 | evidence-only                     |
+| Consumer-owned domain tables  |       9 |       31 | intentionally excluded            |
+| Missing component contract    |       9 |       42 | unresolved                        |
+| Missing exact icon provenance |     103 |        0 | unresolved                        |
+| Shared model decision         |       5 |       30 | unresolved through roadmap step 7 |
+| **Total reviewed**            | **140** |  **163** | exact baseline census             |
+
+The ten implemented records are the two Badge sets, Pagination Btn, all five
+standalone Modal records, and the two Status sets. Each has a canonical family,
+production path, direct source/variant evidence, and executable browser evidence.
+Sorter and Filter support Table, while Description Files and Small document
+support the audited Upload / Document composition boundary; none is claimed as
+another public implementation. Nine domain-specific Table sets are explicitly
+consumer-owned compositions.
+
+Coverage changed from 55 implemented / 140 unresolved records to 65 implemented,
+4 evidence-only, 9 intentionally excluded, and 117 unresolved records. Variant
+coverage changed from 467 implemented / 163 unresolved to 516 implemented,
+11 evidence-only, 31 intentionally excluded, and 72 unresolved variants. Both
+denominators remain fixed at 195 records and 630 variants.
+
+The residual backlog is deliberately explicit. One hundred three standalone
+records require exact icon provenance; Divider and Bottom instead require a
+component contract. Nine component candidates lack complete source,
+production, and executable proof; and five product-composition records remain
+deferred until the shared Timeline/Message model is explored. Extraction
+diagnostics on `Table Управление организациями` are preserved for roadmap step 2
+and do not change its independently proven application ownership.
 
 ## Metrics and `VERIFIED`
 

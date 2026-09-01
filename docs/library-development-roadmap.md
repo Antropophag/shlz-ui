@@ -6,7 +6,8 @@ not count as new component implementation.
 
 ## Ordered work
 
-1. **Classify existing component and composition records** — in planning.
+1. **Classify existing component and composition records** — implemented on the
+   active change; validation and review are in progress.
    Reconcile unresolved source records with committed reusable components,
    composition evidence, and explicit consumer-ownership boundaries. Retain
    `unresolved` whenever the proof is incomplete.
@@ -40,4 +41,3 @@ losing context, but it does not enter active implementation until its stated
 predecessors are resolved. Existing plans and branches are preserved as user
 history until a dedicated reconciliation records whether each is resumed,
 superseded, archived, or left untouched.
-

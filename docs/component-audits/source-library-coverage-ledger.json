@@ -90,9 +90,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "The normalized corpus contains related arrow glyphs, but exact variant geometry does not cover this complete source record.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -110,9 +115,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -230,9 +240,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -313,14 +328,22 @@
         "Container",
         "Badge/Count"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Badge"],
+      "implementation": ["packages/styles/components/status-badge.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact source variant census, canonical production family, and executable evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -333,14 +356,22 @@
         "Container",
         "Badge/Dot"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Badge"],
+      "implementation": ["packages/styles/components/status-badge.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact source variant census, canonical production family, and executable evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -358,9 +389,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -431,9 +467,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -706,9 +747,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -800,14 +846,22 @@
         "Frame 1171277891",
         "Pagination Btn"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Pagination"],
+      "implementation": ["packages/styles/components/pagination.css"],
+      "evidence": [
+        "tools/tests/pagination-source.test.mjs",
+        "tools/playwright/pagination-contract.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact source variant census, canonical production family, and executable evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -922,14 +976,23 @@
         "Container",
         "Sorter"
       ],
-      "disposition": "unresolved",
-      "families": [],
+      "disposition": "evidence-only",
+      "families": ["Table"],
       "implementation": [],
-      "evidence": [],
+      "evidence": [
+        "tools/tests/wave3-source.test.mjs",
+        "apps/showcase/generated/source-references/manifest.json",
+        "docs/component-audits/domain-table-compositions.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The record supports an audited family or composition boundary but is not an independently implemented public component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "composition-evidence",
+        "boundary": "Retained as source evidence only; it does not establish another public implementation."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -942,14 +1005,23 @@
         "Container",
         "Filter"
       ],
-      "disposition": "unresolved",
-      "families": [],
+      "disposition": "evidence-only",
+      "families": ["Table"],
       "implementation": [],
-      "evidence": [],
+      "evidence": [
+        "tools/tests/wave3-source.test.mjs",
+        "apps/showcase/generated/source-references/manifest.json",
+        "docs/component-audits/domain-table-compositions.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The record supports an audited family or composition boundary but is not an independently implemented public component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "composition-evidence",
+        "boundary": "Retained as source evidence only; it does not establish another public implementation."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -989,14 +1061,25 @@
         "Container",
         ".Modal/Basic(Legacy)"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Modal"],
+      "implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact five-record Modal source census, production runtime, and executable contract evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1009,14 +1092,25 @@
         "Container",
         "Modal/Info"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Modal"],
+      "implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact five-record Modal source census, production runtime, and executable contract evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1029,14 +1123,25 @@
         "Container",
         "Modal/Success"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Modal"],
+      "implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact five-record Modal source census, production runtime, and executable contract evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1049,14 +1154,25 @@
         "Container",
         "Modal/Warning"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Modal"],
+      "implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact five-record Modal source census, production runtime, and executable contract evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1069,14 +1185,25 @@
         "Container",
         "Modal/Error"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Modal"],
+      "implementation": [
+        "packages/styles/components/modal.css",
+        "packages/behaviors/src/modal.ts"
+      ],
+      "evidence": [
+        "tools/tests/overlay-source.test.mjs",
+        "tools/playwright/overlay.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact five-record Modal source census, production runtime, and executable contract evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1094,9 +1221,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1114,9 +1246,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1134,9 +1271,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1154,9 +1296,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1174,9 +1321,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1194,9 +1346,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1214,9 +1371,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1234,9 +1396,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1254,9 +1421,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1274,9 +1446,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1294,9 +1471,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1314,9 +1496,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1334,9 +1521,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1354,9 +1546,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1374,9 +1571,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1394,9 +1596,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1414,9 +1621,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1434,9 +1646,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1454,9 +1671,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1474,9 +1696,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1494,9 +1721,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1514,9 +1746,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1534,9 +1771,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1554,9 +1796,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1574,9 +1821,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1594,9 +1846,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1614,9 +1871,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1634,9 +1896,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1654,9 +1921,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1674,9 +1946,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1694,9 +1971,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1714,9 +1996,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1734,9 +2021,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1749,9 +2041,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1769,9 +2066,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1789,9 +2091,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1809,9 +2116,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1829,9 +2141,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1849,9 +2166,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1869,9 +2191,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1889,9 +2216,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1909,9 +2241,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1929,9 +2266,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1949,9 +2291,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1969,9 +2316,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -1989,9 +2341,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2009,9 +2366,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2029,9 +2391,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2049,9 +2416,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2069,9 +2441,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2089,9 +2466,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2109,9 +2491,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2129,9 +2516,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2149,9 +2541,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2169,9 +2566,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2189,9 +2591,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2209,9 +2616,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2224,9 +2636,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2244,9 +2661,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2264,9 +2686,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2308,9 +2735,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2328,9 +2760,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2348,9 +2785,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2368,9 +2810,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2388,9 +2835,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2408,9 +2860,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2428,9 +2885,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2448,9 +2910,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2468,9 +2935,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2488,9 +2960,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2527,9 +3004,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2547,9 +3029,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2567,9 +3054,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2587,9 +3079,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2607,9 +3104,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2627,9 +3129,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2647,9 +3154,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2667,9 +3179,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2687,9 +3204,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2707,9 +3229,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2727,9 +3254,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2747,9 +3279,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2767,9 +3304,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2787,9 +3329,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2807,9 +3354,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2827,9 +3379,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2847,9 +3404,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2867,9 +3429,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2887,9 +3454,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2907,9 +3479,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2927,9 +3504,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2947,9 +3529,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2967,9 +3554,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2982,9 +3574,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -2997,9 +3594,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3012,9 +3614,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3027,9 +3634,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3042,9 +3654,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3062,9 +3679,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3082,9 +3704,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3102,9 +3729,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3122,9 +3754,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3247,9 +3884,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-icon-provenance",
+        "boundary": "Deferred to exact icon provenance work; visual or semantic similarity is insufficient."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
@@ -3407,14 +4049,22 @@
         "Container",
         "Status Обращения"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Status"],
+      "implementation": ["packages/styles/components/status-badge.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact source variant census, canonical production family, and executable evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3427,14 +4077,22 @@
         "Container",
         "Status Детали"
       ],
-      "disposition": "unresolved",
-      "families": [],
-      "implementation": [],
-      "evidence": [],
+      "disposition": "implemented",
+      "families": ["Status"],
+      "implementation": ["packages/styles/components/status-badge.css"],
+      "evidence": [
+        "tools/tests/choice-status-source.test.mjs",
+        "tools/playwright/choice-status.spec.js",
+        "apps/showcase/generated/source-references/manifest.json"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "classified-existing-family",
+        "boundary": "Exact source variant census, canonical production family, and executable evidence are present."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3495,14 +4153,22 @@
         "Container",
         "Description Files"
       ],
-      "disposition": "unresolved",
-      "families": [],
+      "disposition": "evidence-only",
+      "families": ["Upload / Document compositions"],
       "implementation": [],
-      "evidence": [],
+      "evidence": [
+        "docs/component-audits/upload-document-compositions.json",
+        "docs/component-audits/wave-11-report.md"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The record supports an audited family or composition boundary but is not an independently implemented public component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "composition-evidence",
+        "boundary": "Retained as source evidence only; it does not establish another public implementation."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3515,14 +4181,22 @@
         "Container",
         "Small document"
       ],
-      "disposition": "unresolved",
-      "families": [],
+      "disposition": "evidence-only",
+      "families": ["Upload / Document compositions"],
       "implementation": [],
-      "evidence": [],
+      "evidence": [
+        "docs/component-audits/upload-document-compositions.json",
+        "docs/component-audits/wave-11-report.md"
+      ],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The record supports an audited family or composition boundary but is not an independently implemented public component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "composition-evidence",
+        "boundary": "Retained as source evidence only; it does not establish another public implementation."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3564,9 +4238,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The source record belongs to a product composition whose shared model and ownership are intentionally unresolved.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-shared-model",
+        "boundary": "Preserved for roadmap step 7; existing composition evidence does not authorize a new shared component model."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3584,9 +4263,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The source record belongs to a product composition whose shared model and ownership are intentionally unresolved.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-shared-model",
+        "boundary": "Preserved for roadmap step 7; existing composition evidence does not authorize a new shared component model."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3604,9 +4288,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The source record belongs to a product composition whose shared model and ownership are intentionally unresolved.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-shared-model",
+        "boundary": "Preserved for roadmap step 7; existing composition evidence does not authorize a new shared component model."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3651,9 +4340,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "No canonical family plus direct source, production, and executable behavior evidence currently supports promotion.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "Reviewed and retained unresolved until a component contract and direct evidence are established."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3743,9 +4437,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The source record belongs to a product composition whose shared model and ownership are intentionally unresolved.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-shared-model",
+        "boundary": "Preserved for roadmap step 7; existing composition evidence does not authorize a new shared component model."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3787,9 +4486,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "The source record belongs to a product composition whose shared model and ownership are intentionally unresolved.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-shared-model",
+        "boundary": "Preserved for roadmap step 7; existing composition evidence does not authorize a new shared component model."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3802,14 +4506,23 @@
         "Container",
         "Table Обращения"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3822,14 +4535,23 @@
         "Container",
         "Table Управление статусами"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3842,14 +4564,24 @@
         "Container",
         "Table Управление организациями"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited.",
+        "sourceDiagnosticsBoundary": "Extraction diagnostics are preserved for roadmap step 2 and do not alter application ownership."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3862,14 +4594,23 @@
         "Container",
         "Table Управление профилями"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3882,14 +4623,23 @@
         "Container",
         "Table Привязанные профили"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3902,14 +4652,23 @@
         "Container",
         "Table Управление категориями"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3922,14 +4681,23 @@
         "Container",
         "Table Управление полями"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3942,14 +4710,23 @@
         "Container",
         "Table Автоназначение"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3962,14 +4739,23 @@
         "Container",
         "Table Справочники"
       ],
-      "disposition": "unresolved",
+      "disposition": "intentionally-excluded",
       "families": [],
       "implementation": [],
       "evidence": [],
-      "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "exclusionEvidence": [
+        "docs/component-audits/domain-table-compositions.json",
+        "docs/components/table.md"
+      ],
+      "reason": "This domain-specific table is an application composition of the public Table primitive, not a reusable library component.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "ownership": "consumer application",
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "consumer-composition",
+        "boundary": "Application ownership is explicit; the reusable Table primitive remains independently audited."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -3987,9 +4773,14 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "No canonical family plus direct production and runtime evidence currently supports promotion."
+      }
     },
     {
       "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
@@ -4130,9 +4921,22 @@
       "implementation": [],
       "evidence": [],
       "exclusionEvidence": [],
-      "reason": "No unambiguous record-to-family decision is supported by the current inventory and evidence; semantic classification is still required.",
+      "reason": "Exact normalized geometry and semantic ownership are not yet proven for this standalone source record.",
       "variantCoverage": "all",
-      "variantExceptions": []
+      "variantExceptions": [],
+      "review": {
+        "episode": "classify-existing-component-records",
+        "cohort": "deferred-component-contract",
+        "boundary": "No canonical family plus direct production and runtime evidence currently supports promotion."
+      }
+    }
+  ],
+  "classificationEpisodes": [
+    {
+      "id": "classify-existing-component-records",
+      "baseline": "2e18d09",
+      "expectedRecords": 140,
+      "expectedVariants": 163
     }
   ]
 }

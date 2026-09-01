@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "audit/classify-existing-component-records",
+    "commit": "2e18d09eae0f201a2c19f2443113165f471b9e8c",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "audit/classify-existing-component-records",
+      "headRefOid": "2e18d09eae0f201a2c19f2443113165f471b9e8c",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/64"
+    },
+    "repository": {
+      "digest": "aaa734b651873aaf73c19e45c2a008f3097746bbf8bc94220aeb7d227fcae996",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-classify-existing-records"
+    },
+    "upstream": "origin/audit/classify-existing-component-records"
+  },
+  "requirementsDigest": "f449ec8960a08a6d4956f2689ca9cd2024501f5a146183591c42efd352711a90",
+  "routeDigest": "b0039e550d9179d138192762c2bc233273fb07efb76cb36fe31f1e7f72002583",
+  "version": 1,
+  "digest": "243de351d8d85098f04d6da10a010035a63b7946fd8c88ed47711b044878c352"
+}
