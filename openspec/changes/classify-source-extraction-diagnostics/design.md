@@ -6,7 +6,7 @@ See `proposal.md` for motivation. The committed source issue index reports aggre
 
 **Goals:**
 
-- Establish one stable identity and one authored decision for every committed extraction occurrence.
+- Establish one stable identity and one authored decision for each of 44 node-level diagnostics and each of two archive-level skipped-instance cohorts.
 - Validate classifications independently of generated summaries and fail closed on drift.
 - Make coverage impact explicit without conflating extraction quality with implementation status.
 - Keep generated data reviewable through a compact authored ledger and human summary.
@@ -24,9 +24,11 @@ See `proposal.md` for motivation. The committed source issue index reports aggre
 
 The decision seam will be a compact JSON ledger under `docs/component-audits/`. Generation will derive canonical occurrences from committed index artifacts and join each occurrence to exactly one ledger entry.
 
-Stable identity will use source archive, diagnostic kind, scope, node identity, field/category, and occurrence-specific context. The generator will own identity serialization so authored data cannot silently choose a weaker key.
+Node-level identity will use source archive, diagnostic kind, scope, node identity, field/category, and occurrence-specific context. Because the committed extraction output preserves skipped instances only as archive counts, their identity will be the source archive plus `skipped-instance` kind, with the committed count carried as multiplicity. The generator will own identity serialization so authored data cannot silently choose a weaker key.
 
 Alternative: annotate `design-source-index/source-issues.json` directly. Rejected because the index is derived extraction output and should not mix observed facts with repository decisions.
+
+Alternative: fabricate 47 ordinal skipped-instance identities. Rejected because ordinals would not correspond to recoverable source facts and would create false precision.
 
 ### Model disposition and coverage impact independently
 
@@ -50,7 +52,7 @@ This is a bounded audit wave with no product behavior delta. Focused tests will 
 
 ## Risks / Trade-offs
 
-- [Occurrence identity can change when extraction is regenerated] → Bind all identity fields and fail closed, requiring deliberate ledger review.
+- [Diagnostic identity or skipped cohort count can change when extraction is regenerated] → Bind all preserved identity fields and multiplicities and fail closed, requiring deliberate ledger review.
 - [Many related warnings may create repetitive ledger entries] → Allow cohort metadata only as a review aid; retain occurrence-level authored accountability.
 - [A diagnostic may support multiple interpretations] → Require the least assertive supported impact and keep ambiguity explicit.
 - [Generated totals may appear to supersede coverage totals] → Report diagnostic counts separately and state that classification does not advance product implementation.

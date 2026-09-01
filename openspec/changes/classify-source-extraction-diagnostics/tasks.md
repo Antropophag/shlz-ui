@@ -1,7 +1,7 @@
 ## 1. Diagnostic Contract and Data Model
 
-- [ ] 1.1 Derive and document the canonical occurrence identity for every committed error, warning, and skipped instance; verify independent counts reconcile to 9 errors, 35 warnings, and 47 skipped instances.
-- [ ] 1.2 Add the authored diagnostic-classification ledger with controlled dispositions, coverage impacts, rationales, and evidence; verify all 91 occurrences classify exactly once.
+- [ ] 1.1 Derive and document canonical node identities for 9 errors and 35 warnings plus archive-cohort identities and multiplicities for 47 skipped instances; verify the 44 node units and two aggregate units reconcile to all committed counts.
+- [ ] 1.2 Add the authored diagnostic-classification ledger with controlled granularity, multiplicity, dispositions, coverage impacts, rationales, and evidence; verify all 46 supported classification units account for all 91 reported instances exactly once.
 
 ## 2. Generation and Fail-Closed Validation
 

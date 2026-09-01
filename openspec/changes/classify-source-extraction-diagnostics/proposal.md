@@ -4,9 +4,9 @@ The source-transfer audit still treats 9 extraction errors, 35 warnings, and 47 
 
 ## What Changes
 
-- Add a complete, machine-readable classification of every committed extraction diagnostic and skipped instance.
+- Add a complete, machine-readable classification of every committed extraction diagnostic at the finest identity preserved by the index: 44 node-level errors/warnings and two archive-level skipped-instance cohorts representing 47 instances.
 - Distinguish extraction defects, source ambiguities, harmless diagnostics, and diagnostics that expose unresolved product work.
-- Bind each classification to stable source identity, observed evidence, impact on source-library coverage, and an explicit disposition.
+- Bind each node or aggregate cohort classification to stable source identity, multiplicity, observed evidence, impact on source-library coverage, and an explicit disposition.
 - Generate a human-readable summary and fail closed when indexed diagnostics are missing, duplicated, stale, contradictory, or unsupported.
 - Preserve `shlz-design-source/`, runtime packages, component contracts, and existing coverage dispositions unchanged unless the diagnostic evidence proves that a current coverage claim is invalid.
 - Exclude source repair, component implementation, showcase optimization, accessibility policy, and speculative inference from this change.

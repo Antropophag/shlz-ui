@@ -5,22 +5,22 @@ Provide a complete, reproducible account of design-source extraction diagnostics
 ## ADDED Requirements
 
 ### Requirement: Closed diagnostic census
-The audit system SHALL classify every error, warning, and skipped instance reported by the committed design-source index exactly once, using stable source identity rather than display text alone.
+The audit system SHALL classify every diagnostic unit reported by the committed design-source index exactly once at the finest granularity the index preserves. Errors and warnings SHALL use node-level identity; skipped instances SHALL use archive-level cohort identity and an asserted multiplicity because the committed source records no individual skipped-instance identities.
 
 #### Scenario: Complete committed corpus
 - **WHEN** classification is generated against the committed source index
-- **THEN** every reported diagnostic occurrence is present exactly once and totals reconcile independently by error, warning, and skipped-instance kind
+- **THEN** all 44 node-level diagnostic occurrences and both skipped-instance cohorts are present exactly once, and multiplicities reconcile independently to 9 errors, 35 warnings, and 47 skipped instances
 
 #### Scenario: Missing or duplicate occurrence
-- **WHEN** a reported diagnostic is absent from the classification or the same stable occurrence is classified more than once
+- **WHEN** a reported node diagnostic or skipped-instance cohort is absent, duplicated, or carries a multiplicity that differs from the committed archive count
 - **THEN** validation fails without producing a verified classification
 
 ### Requirement: Evidence-bound classification
-Each diagnostic occurrence SHALL declare a controlled disposition, an impact on source-library coverage, and repository evidence sufficient to support both claims.
+Each diagnostic unit SHALL declare its granularity and multiplicity, a controlled disposition, an impact on source-library coverage, and repository evidence sufficient to support those claims.
 
 #### Scenario: Supported classification
-- **WHEN** a diagnostic has a recognized disposition and coverage impact with resolvable supporting evidence
-- **THEN** the generated audit exposes the source identity, diagnostic kind, disposition, impact, rationale, and evidence
+- **WHEN** a diagnostic unit has recognized granularity, multiplicity, disposition, and coverage impact with resolvable supporting evidence
+- **THEN** the generated audit exposes the source identity or archive cohort, diagnostic kind, multiplicity, disposition, impact, rationale, and evidence
 
 #### Scenario: Unsupported or contradictory claim
 - **WHEN** a classification uses an unknown value, lacks required evidence, contradicts its coverage impact, or references a missing or repository-escaping path

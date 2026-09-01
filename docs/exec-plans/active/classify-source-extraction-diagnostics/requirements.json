@@ -1,7 +1,7 @@
 {
   "version": 1,
   "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
-  "revision": 1,
+  "revision": 2,
   "route": "open-spec",
   "decisions": [
     {
@@ -9,7 +9,7 @@
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository", "ref": "design-source-index/source-issues.json and design-source-index/components.json report 9 errors, 35 warnings, and 47 skipped instances" }
+      "provenance": { "kind": "repository", "ref": "design-source-index/source-issues.json preserves node identities for 9 errors and 35 warnings, but preserves 47 skipped instances only as archive multiplicities 37 and 10" }
     },
     {
       "id": "classification-taxonomy",
@@ -36,6 +36,6 @@
   "openSpec": { "change": "classify-source-extraction-diagnostics", "status": "synthesized" },
   "authorization": {
     "status": "pre-authorized",
-    "provenance": { "kind": "user-request", "ref": "The user replied go to the proposed diagnostic-classification change." }
+    "provenance": { "kind": "user-request", "ref": "The user explicitly approved the revised 44-node plus two-aggregate diagnostic contract and then replied go to resume apply." }
   }
 }

@@ -30,9 +30,9 @@
       }
     ],
     "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
-    "revision": 1
+    "revision": 2
   },
   "routeDigest": "bd8622fd1dd3016d8431dd39946ba1346c2f2fb562a8bc4bce002cb86936dc40",
   "version": 1,
-  "digest": "fe6ee5e24c775a2f2402de9fa29e242d5ce1c575f66f092b4b4af011407ce554"
+  "digest": "dbd50690457ae6dce6c1b4b66fb346a65400f5e1ea9146863dd83ce69ec52581"
 }
