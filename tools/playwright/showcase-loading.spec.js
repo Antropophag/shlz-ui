@@ -51,7 +51,11 @@ test("preserves navigation focus while loading and responds to hash changes", as
   const inputLink = page.getByRole("link", { name: "Input", exact: true });
   const shellBefore = await page
     .locator("[data-shlz-docs-shell]")
-    .boundingBox();
+    .evaluate((element) => ({
+      x: element.getBoundingClientRect().x,
+      y: element.getBoundingClientRect().y + window.scrollY,
+      width: element.getBoundingClientRect().width,
+    }));
   const headerBefore = await page.locator(".shlz-hero").boundingBox();
   await inputLink.focus();
   await inputLink.click();
@@ -59,10 +63,15 @@ test("preserves navigation focus while loading and responds to hash changes", as
   await expect(
     page.locator('[data-shlz-docs-link][href="#input"]'),
   ).toBeFocused();
-  const shellAfter = await page.locator(".shlz-docs-shell").boundingBox();
+  const shellAfter = await page
+    .locator(".shlz-docs-shell")
+    .evaluate((element) => ({
+      x: element.getBoundingClientRect().x,
+      y: element.getBoundingClientRect().y + window.scrollY,
+      width: element.getBoundingClientRect().width,
+    }));
   const headerAfter = await page.locator(".shlz-hero").boundingBox();
-  expect(shellAfter?.x).toBeCloseTo(shellBefore?.x ?? 0, 0);
-  expect(shellAfter?.width).toBeCloseTo(shellBefore?.width ?? 0, 0);
+  expect(shellAfter).toEqual(shellBefore);
   expect(headerAfter?.x).toBeCloseTo(headerBefore?.x ?? 0, 0);
   expect(headerAfter?.width).toBeCloseTo(headerBefore?.width ?? 0, 0);
   expect(headerAfter?.height).toBeCloseTo(headerBefore?.height ?? 0, 0);
@@ -72,6 +81,13 @@ test("preserves navigation focus while loading and responds to hash changes", as
     window.location.hash = "composer-demo";
   });
   await expect(page.locator("#composer-demo")).toBeVisible();
+  await page.locator("[data-shlz-shell-search]").fill("Button");
+  await expect(
+    page.getByRole("link", { name: "Button", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Composer / Rich Text Toolbar" }),
+  ).toBeHidden();
 });
 
 test("reports a deferred import failure and retries without losing the hash", async ({

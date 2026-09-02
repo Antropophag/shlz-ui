@@ -36,7 +36,7 @@ The deferred documentation module exclusively owns the complete reference manife
 
 ### 3. Model loading as an explicit idempotent state machine
 
-Each group has `idle`, `loading`, `ready`, or `error` state and a shared in-flight promise. Repeated requests reuse that promise; enhancers run only after committed markup and only once per group. Placeholders reserve a bounded block, carry a named status/error region, and provide retry without stealing focus. Hash reveal is performed after the owner reaches `ready`; focus changes only as existing navigation/search behavior already requires.
+The documentation boundary has `idle`, `loading`, `ready`, or `error` state and a shared in-flight promise. Repeated requests reuse that promise; enhancers run only after committed markup and only once. The eager shell carries a bounded placeholder and named status/error region. Once ready, the coarse documentation module replaces that placeholder shell while retaining the eager header and the shell's document position and width; this preserves above-boundary geometry without duplicating foundation IDs or enhancer ownership. Hash reveal is performed after the owner reaches `ready`; focus changes only as existing navigation/search behavior already requires.
 
 This explicit seam is preferred to scattered `IntersectionObserver` callbacks because deep links and user requests need deterministic completion and failure behavior. Viewport observation may trigger background loading, but it cannot be the sole owner of correctness.
 

@@ -117,11 +117,13 @@ document
   .querySelector("[data-shlz-shell-search]")
   ?.addEventListener("input", (event) => {
     const query = event.currentTarget.value.trim().toLocaleLowerCase();
-    document.querySelectorAll("[data-showcase-target]").forEach((link) => {
-      link.hidden = Boolean(
-        query && !link.textContent.toLocaleLowerCase().includes(query),
-      );
-    });
+    document
+      .querySelectorAll("[data-showcase-target], [data-shlz-docs-link]")
+      .forEach((link) => {
+        link.hidden = Boolean(
+          query && !link.textContent.toLocaleLowerCase().includes(query),
+        );
+      });
   });
 
 document.querySelectorAll('[name="shlz-font-profile"]').forEach((control) => {
