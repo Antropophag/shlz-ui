@@ -59,7 +59,7 @@ test("preserves navigation focus while loading and responds to hash changes", as
   await expect(
     page.locator('[data-shlz-docs-link][href="#input"]'),
   ).toBeFocused();
-  const shellAfter = await page.locator("[data-shlz-docs-shell]").boundingBox();
+  const shellAfter = await page.locator(".shlz-docs-shell").boundingBox();
   const headerAfter = await page.locator(".shlz-hero").boundingBox();
   expect(shellAfter?.x).toBeCloseTo(shellBefore?.x ?? 0, 0);
   expect(shellAfter?.width).toBeCloseTo(shellBefore?.width ?? 0, 0);

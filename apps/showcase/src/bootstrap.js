@@ -33,8 +33,20 @@ document.querySelector("[data-shlz-docs-shell]").dataset.componentAuditId =
 
 const loader = document.querySelector("[data-showcase-loader]");
 const status = document.querySelector("[data-showcase-loader-status]");
+const fullDocumentMode = new window.URLSearchParams(window.location.search).has(
+  "full",
+);
 let state = "idle";
 let pending;
+
+const setActiveTarget = (id) => {
+  for (const link of document.querySelectorAll("[data-shlz-docs-link]")) {
+    const active = link.getAttribute("href") === `#${id}`;
+    link.classList.toggle("shlz-docs-nav__link--active", active);
+    if (active) link.setAttribute("aria-current", "location");
+    else link.removeAttribute("aria-current");
+  }
+};
 
 const importShowcase = () => {
   const override = globalThis.__SHLZ_SHOWCASE_IMPORT__;
@@ -56,17 +68,21 @@ export const loadShowcase = () => {
     "[data-showcase-target]",
   )?.dataset.showcaseTarget;
   const eagerHeader = app.querySelector(":scope > .shlz-hero");
-  const eagerShell = app.querySelector(":scope > [data-shlz-docs-shell]");
   pending = importShowcase()
     .then(() => {
       const loadedContent = app.querySelector(".shlz-docs-content");
-      const eagerContent = eagerShell?.querySelector(".shlz-docs-main");
-      if (eagerHeader && eagerShell && eagerContent && loadedContent) {
+      const loadedShell = app.querySelector(".shlz-docs-shell");
+      if (
+        !fullDocumentMode &&
+        eagerHeader &&
+        loadedShell &&
+        loadedContent
+      ) {
         loadedContent.querySelector(":scope > .shlz-hero")?.remove();
-        eagerContent.replaceChildren(...loadedContent.childNodes);
-        app.replaceChildren(eagerHeader, eagerShell);
+        app.replaceChildren(eagerHeader, loadedShell);
       }
       state = "ready";
+      setActiveTarget(window.location.hash.slice(1));
       if (focusedTarget) {
         document
           .querySelector(`[data-shlz-docs-link][href="#${focusedTarget}"]`)
@@ -85,6 +101,7 @@ export const loadShowcase = () => {
 
 const requestTarget = (id) => {
   if (!id) return;
+  setActiveTarget(id);
   loadShowcase().catch(() => {});
 };
 
@@ -127,5 +144,4 @@ window.__shlzShowcaseLoader = Object.freeze({
 
 const initialTarget = window.location.hash.slice(1);
 if (initialTarget) requestTarget(initialTarget);
-if (new window.URLSearchParams(window.location.search).has("full"))
-  loadShowcase();
+if (fullDocumentMode) loadShowcase();
