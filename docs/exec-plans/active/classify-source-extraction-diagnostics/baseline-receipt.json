@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "work3/continue-library-work",
+    "commit": "51951a31fcfeb373bfb7a8c0da3af00d93cc8f08",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "work3/continue-library-work",
+      "headRefOid": "51951a31fcfeb373bfb7a8c0da3af00d93cc8f08",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/65"
+    },
+    "repository": {
+      "digest": "b04682425f18cb7499bde278ffa39df5bb488a6f55272db9001a5696e66f3382",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-Work3"
+    },
+    "upstream": "origin/work3/continue-library-work"
+  },
+  "requirementsDigest": "dbd50690457ae6dce6c1b4b66fb346a65400f5e1ea9146863dd83ce69ec52581",
+  "routeDigest": "bd8622fd1dd3016d8431dd39946ba1346c2f2fb562a8bc4bce002cb86936dc40",
+  "version": 1,
+  "digest": "53a4acbeb7aa773bf0a062262b4e0faa5799dd618cfe7da6ddac18bd6eb17d12"
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "classifications": [
+    {
+      "id": "spacing-export-errors",
+      "selector": { "kind": "error", "component": "Spacing" },
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "id": "input-property-warnings",
+      "selector": { "kind": "warning", "component": "Input" },
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "id": "radio-property-warnings",
+      "selector": { "kind": "warning", "component": "Radio" },
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "id": "domain-table-property-warnings",
+      "selector": {
+        "kind": "warning",
+        "component": "Table Управление организациями"
+      },
+      "disposition": "harmless-diagnostic",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "The affected table is already bounded as a consumer-owned composition; property extraction does not change that ownership conclusion.",
+      "evidence": [
+        {
+          "kind": "coverage-ledger",
+          "path": "docs/component-audits/source-library-coverage-ledger.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "id": "basic-elements-skipped-instances",
+      "selector": {
+        "kind": "skipped-instance",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+        "multiplicity": 37
+      },
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "The extractor preserved only an archive count, so the 37 skipped instances cannot support node-level transfer conclusions.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-manifest",
+          "path": "design-source-index/manifest.json"
+        }
+      ]
+    },
+    {
+      "id": "interface-elements-skipped-instances",
+      "selector": {
+        "kind": "skipped-instance",
+        "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+        "multiplicity": 10
+      },
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "The extractor preserved only an archive count, so the 10 skipped instances cannot support node-level transfer conclusions.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-manifest",
+          "path": "design-source-index/manifest.json"
+        }
+      ]
+    }
+  ]
+}

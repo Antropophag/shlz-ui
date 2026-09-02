@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "classify-source-extraction-diagnostics",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "diagnostic-corpus",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "classification-taxonomy",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "coverage-impact-seam",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "roadmap-scope",
+        "owner": "user",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
+    "revision": 2
+  },
+  "routeDigest": "bd8622fd1dd3016d8431dd39946ba1346c2f2fb562a8bc4bce002cb86936dc40",
+  "version": 1,
+  "digest": "dbd50690457ae6dce6c1b4b66fb346a65400f5e1ea9146863dd83ce69ec52581"
+}

@@ -60,6 +60,13 @@ Source-quality diagnostics reported:
 
 These diagnostics limit any claim of exhaustive source extraction until each affected item is classified by impact.
 
+Follow-up PR #65 classifies the committed diagnostic evidence without changing
+this report's point-in-time baseline: 9 errors and 35 warnings retain node-level
+identity, while 47 skipped instances are recoverable only as two archive-level
+cohorts of 37 and 10. See
+`docs/component-audits/source-extraction-diagnostics.md`; classification does
+not itself prove component implementation or increase transfer coverage.
+
 ## Transfer coverage
 
 ### Foundations

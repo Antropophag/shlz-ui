@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "intent": "Classify every committed design-source extraction error, warning, and skipped instance with evidence-bound disposition and coverage impact.",
+  "route": "open-spec",
+  "openSpecChange": "classify-source-extraction-diagnostics",
+  "requiredDecisions": [
+    { "id": "diagnostic-corpus", "owner": "repo", "blocking": true },
+    { "id": "classification-taxonomy", "owner": "agent", "blocking": true },
+    { "id": "coverage-impact-seam", "owner": "agent", "blocking": true },
+    { "id": "roadmap-scope", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

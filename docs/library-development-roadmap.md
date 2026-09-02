@@ -6,14 +6,16 @@ not count as new component implementation.
 
 ## Ordered work
 
-1. **Classify existing component and composition records** — implemented on the
-   active change; validation and review are in progress.
+1. **Classify existing component and composition records** — completed by PR
+   #64.
    Reconcile unresolved source records with committed reusable components,
    composition evidence, and explicit consumer-ownership boundaries. Retain
    `unresolved` whenever the proof is incomplete.
-2. **Classify source extraction diagnostics** — queued after step 1. Separate
+2. **Classify source extraction diagnostics** — active in PR #65. Separate
    extraction defects, source ambiguities, and harmless diagnostics from the
-   product backlog without changing `shlz-design-source/`.
+   product backlog without changing `shlz-design-source/`. The committed index
+   supports 44 node-level diagnostic units and two archive-level skipped-instance
+   cohorts whose multiplicities account for all 91 reported instances.
 3. **Optimize showcase loading** — queued after the coverage denominator is
    trustworthy. Establish a measured baseline before changing loading or
    bundling behavior.

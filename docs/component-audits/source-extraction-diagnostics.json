@@ -1,0 +1,1255 @@
+{
+  "schemaVersion": 1,
+  "semantics": "Diagnostic classification reports extraction evidence only and never implies component implementation.",
+  "summary": {
+    "classificationUnits": 46,
+    "reportedInstances": 91,
+    "errors": 9,
+    "warnings": 35,
+    "skippedInstances": 47
+  },
+  "units": [
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"263:25244\",\"Spacing=4\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "263:25244",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1681\",\"Spacing=64\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1681",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1682\",\"Spacing=56\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1682",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1683\",\"Spacing=48\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1683",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1684\",\"Spacing=40\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1684",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1685\",\"Spacing=32\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1685",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1686\",\"Spacing=24\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1686",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1687\",\"Spacing=16\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1687",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"error\",\"Spacing\",null,\"svgExport\",\"50:1680\",\"50:1680\",\"50:1688\",\"Spacing=8\",\"\",\"Failed to export node. This node may not have any visible layers.\"]",
+      "kind": "error",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Spacing",
+      "nodeId": "50:1688",
+      "scope": "svgExport",
+      "field": null,
+      "message": "Failed to export node. This node may not have any visible layers.",
+      "classification": "spacing-export-errors",
+      "disposition": "extraction-defect",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "Invisible spacing samples fail standalone SVG export, while their indexed variant metadata and full source set remain available.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-methodology",
+          "path": "design-source-index/README.md"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"skipped-instance\"]",
+      "kind": "skipped-instance",
+      "granularity": "archive-cohort",
+      "multiplicity": 37,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": null,
+      "nodeId": null,
+      "scope": null,
+      "field": null,
+      "message": null,
+      "classification": "basic-elements-skipped-instances",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "The extractor preserved only an archive count, so the 37 skipped instances cannot support node-level transfer conclusions.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-manifest",
+          "path": "design-source-index/manifest.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Default, Filled=False, Type=Advanced\",\"variant\",\"1267:96840\",null,\"1267:96840\",\"Size=Large, State=Default, Filled=False, Type=Advanced\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "1267:96840",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Default, Filled=False, Type=Advanced\",\"variant\",\"91:10724\",null,\"91:10724\",\"Size=Large, State=Default, Filled=False, Type=Advanced\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "91:10724",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Default, Filled=False, Type=Default\",\"variant\",\"31:1497\",null,\"31:1497\",\"Size=Large, State=Default, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "31:1497",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Default, Filled=True, Type=Default\",\"variant\",\"31:1706\",null,\"31:1706\",\"Size=Large, State=Default, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "31:1706",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Disabled, Filled=False, Type=Default\",\"variant\",\"36:922\",null,\"36:922\",\"Size=Large, State=Disabled, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:922",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Disabled, Filled=True, Type=Default\",\"variant\",\"31:1740\",null,\"31:1740\",\"Size=Large, State=Disabled, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "31:1740",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Focused, Filled=False, Type=Advanced\",\"variant\",\"1267:96909\",null,\"1267:96909\",\"Size=Large, State=Focused, Filled=False, Type=Advanced\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "1267:96909",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Focused, Filled=False, Type=Default\",\"variant\",\"31:1556\",null,\"31:1556\",\"Size=Large, State=Focused, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "31:1556",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Focused, Filled=True, Type=Advanced\",\"variant\",\"1267:96919\",null,\"1267:96919\",\"Size=Large, State=Focused, Filled=True, Type=Advanced\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "1267:96919",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Focused, Filled=True, Type=Default\",\"variant\",\"31:1649\",null,\"31:1649\",\"Size=Large, State=Focused, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "31:1649",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Hover, Filled=False, Type=Advanced\",\"variant\",\"1267:96901\",null,\"1267:96901\",\"Size=Large, State=Hover, Filled=False, Type=Advanced\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "1267:96901",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Hover, Filled=False, Type=Default\",\"variant\",\"51:1348\",null,\"51:1348\",\"Size=Large, State=Hover, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "51:1348",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Large, State=Hover, Filled=True, Type=Default\",\"variant\",\"51:1386\",null,\"51:1386\",\"Size=Large, State=Hover, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "51:1386",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Default, Filled=False, Type=Default\",\"variant\",\"36:951\",null,\"36:951\",\"Size=Medium, State=Default, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:951",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Default, Filled=True, Type=Default\",\"variant\",\"36:1033\",null,\"36:1033\",\"Size=Medium, State=Default, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:1033",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Disabled, Filled=False, Type=Default\",\"variant\",\"36:1073\",null,\"36:1073\",\"Size=Medium, State=Disabled, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:1073",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Disabled, Filled=True, Type=Default\",\"variant\",\"36:1053\",null,\"36:1053\",\"Size=Medium, State=Disabled, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:1053",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Focused, Filled=False, Type=Default\",\"variant\",\"36:977\",null,\"36:977\",\"Size=Medium, State=Focused, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:977",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Focused, Filled=True, Type=Default\",\"variant\",\"36:1009\",null,\"36:1009\",\"Size=Medium, State=Focused, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "36:1009",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Hover, Filled=False, Type=Default\",\"variant\",\"51:1356\",null,\"51:1356\",\"Size=Medium, State=Hover, Filled=False, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "51:1356",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",\"Size=Medium, State=Hover, Filled=True, Type=Default\",\"variant\",\"51:1409\",null,\"51:1409\",\"Size=Medium, State=Hover, Filled=True, Type=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "51:1409",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Input\",null,\"componentSet\",\"28:8864\",null,\"28:8864\",\"Input\",\"componentPropertyDefinitions\",\"in get_componentPropertyDefinitions: Component set has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Input",
+      "nodeId": "28:8864",
+      "scope": "componentSet",
+      "field": "componentPropertyDefinitions",
+      "message": "in get_componentPropertyDefinitions: Component set has existing errors",
+      "classification": "input-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken exported property definitions prevent treating Advanced Input semantics as a supported source contract.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/input.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Default, Label=False, Active=False\",\"variant\",\"49:1066\",null,\"49:1066\",\"State=Default, Label=False, Active=False\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1066",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Default, Label=False, Active=False\",\"variant\",\"49:1071\",null,\"49:1071\",\"State=Default, Label=False, Active=False\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1071",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Default, Label=False, Active=True\",\"variant\",\"49:1117\",null,\"49:1117\",\"State=Default, Label=False, Active=True\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1117",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Default, Label=True, Active=False\",\"variant\",\"49:1063\",null,\"49:1063\",\"State=Default, Label=True, Active=False\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1063",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Default, Label=True, Active=False\",\"variant\",\"49:1068\",null,\"49:1068\",\"State=Default, Label=True, Active=False\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1068",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Disabled, Label=False, Active=True\",\"variant\",\"49:1118\",null,\"49:1118\",\"State=Disabled, Label=False, Active=True\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1118",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Disabled, Label=True, Active=True\",\"variant\",\"49:1047\",null,\"49:1047\",\"State=Disabled, Label=True, Active=True\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1047",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",\"State=Disabled, Label=True, Active=True\",\"variant\",\"49:1055\",null,\"49:1055\",\"State=Disabled, Label=True, Active=True\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1055",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Basic elements.zip\",\"warning\",\"Radio\",null,\"componentSet\",\"49:1046\",null,\"49:1046\",\"Radio\",\"componentPropertyDefinitions\",\"in get_componentPropertyDefinitions: Component set has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+      "component": "Radio",
+      "nodeId": "49:1046",
+      "scope": "componentSet",
+      "field": "componentPropertyDefinitions",
+      "message": "in get_componentPropertyDefinitions: Component set has existing errors",
+      "classification": "radio-property-warnings",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "Broken property definitions limit semantic inference even though independently audited Radio geometry and runtime behavior remain available.",
+      "evidence": [
+        {
+          "kind": "audit-contract",
+          "path": "docs/component-audits/radio.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Interface elements.zip\",\"skipped-instance\"]",
+      "kind": "skipped-instance",
+      "granularity": "archive-cohort",
+      "multiplicity": 10,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "component": null,
+      "nodeId": null,
+      "scope": null,
+      "field": null,
+      "message": null,
+      "classification": "interface-elements-skipped-instances",
+      "disposition": "source-ambiguity",
+      "coverageImpact": "limits-conclusion",
+      "claimAuthority": "DECISION",
+      "rationale": "The extractor preserved only an archive count, so the 10 skipped instances cannot support node-level transfer conclusions.",
+      "evidence": [
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        },
+        {
+          "kind": "source-manifest",
+          "path": "design-source-index/manifest.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Interface elements.zip\",\"warning\",\"Table Управление организациями\",\"State=Default\",\"variant\",\"805:74552\",null,\"805:74552\",\"State=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "component": "Table Управление организациями",
+      "nodeId": "805:74552",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "domain-table-property-warnings",
+      "disposition": "harmless-diagnostic",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "The affected table is already bounded as a consumer-owned composition; property extraction does not change that ownership conclusion.",
+      "evidence": [
+        {
+          "kind": "coverage-ledger",
+          "path": "docs/component-audits/source-library-coverage-ledger.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Interface elements.zip\",\"warning\",\"Table Управление организациями\",\"State=Default\",\"variant\",\"805:75917\",null,\"805:75917\",\"State=Default\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "component": "Table Управление организациями",
+      "nodeId": "805:75917",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "domain-table-property-warnings",
+      "disposition": "harmless-diagnostic",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "The affected table is already bounded as a consumer-owned composition; property extraction does not change that ownership conclusion.",
+      "evidence": [
+        {
+          "kind": "coverage-ledger",
+          "path": "docs/component-audits/source-library-coverage-ledger.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Interface elements.zip\",\"warning\",\"Table Управление организациями\",\"State=Hover\",\"variant\",\"805:74633\",null,\"805:74633\",\"State=Hover\",\"variantProperties\",\"in get_variantProperties: Component set for node has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "component": "Table Управление организациями",
+      "nodeId": "805:74633",
+      "scope": "variant",
+      "field": "variantProperties",
+      "message": "in get_variantProperties: Component set for node has existing errors",
+      "classification": "domain-table-property-warnings",
+      "disposition": "harmless-diagnostic",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "The affected table is already bounded as a consumer-owned composition; property extraction does not change that ownership conclusion.",
+      "evidence": [
+        {
+          "kind": "coverage-ledger",
+          "path": "docs/component-audits/source-library-coverage-ledger.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    },
+    {
+      "identity": "[\"shlz-design-source/raw/svg/UI Kit – Interface elements.zip\",\"warning\",\"Table Управление организациями\",null,\"componentSet\",\"805:74645\",null,\"805:74645\",\"Table Управление организациями\",\"componentPropertyDefinitions\",\"in get_componentPropertyDefinitions: Component set has existing errors\"]",
+      "kind": "warning",
+      "granularity": "node",
+      "multiplicity": 1,
+      "sourceArchive": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+      "component": "Table Управление организациями",
+      "nodeId": "805:74645",
+      "scope": "componentSet",
+      "field": "componentPropertyDefinitions",
+      "message": "in get_componentPropertyDefinitions: Component set has existing errors",
+      "classification": "domain-table-property-warnings",
+      "disposition": "harmless-diagnostic",
+      "coverageImpact": "no-coverage-effect",
+      "claimAuthority": "DECISION",
+      "rationale": "The affected table is already bounded as a consumer-owned composition; property extraction does not change that ownership conclusion.",
+      "evidence": [
+        {
+          "kind": "coverage-ledger",
+          "path": "docs/component-audits/source-library-coverage-ledger.json"
+        },
+        {
+          "kind": "source-index",
+          "path": "design-source-index/source-issues.json"
+        }
+      ]
+    }
+  ]
+}
