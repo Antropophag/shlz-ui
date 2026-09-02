@@ -10,7 +10,7 @@ const ledgerPath =
         repoRoot,
         "docs/component-audits/source-extraction-diagnostics-ledger.json",
       )
-    : path.join(target, "source-extraction-diagnostics-ledger.json");
+    : target;
 const readJson = async (name) => JSON.parse(await readFile(name, "utf8"));
 
 await buildDiagnosticClassification({
