@@ -73,6 +73,10 @@
       "classification": "focused-executable-fixture"
     },
     {
+      "path": "tools/playwright/showcase-loading.spec.js",
+      "classification": "progressive-loading-executable-fixture"
+    },
+    {
       "path": "tools/playwright/typography-profiles.spec.js",
       "classification": "executable-test-reference"
     },
@@ -129,7 +133,10 @@
       "evidence": "docs/components/sidebar-application-shell.md"
     }
   ],
-  "browserTests": ["tools/playwright/showcase-navigation.spec.js"],
+  "browserTests": [
+    "tools/playwright/showcase-loading.spec.js",
+    "tools/playwright/showcase-navigation.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-opened-chromium-linux.png",
     "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-closed-chromium-linux.png",
