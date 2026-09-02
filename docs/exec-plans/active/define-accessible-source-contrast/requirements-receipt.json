@@ -1,0 +1,50 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "define-accessible-source-contrast",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "policy-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "accessibility-precedence",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "semantic-token-seam",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "affected-family-census",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Define and implement a repository-wide policy for accessible production text when authoritative source paint falls below WCAG 2.2 contrast thresholds, resolve the Field-family and compact Modal P1 deviations, and deliver an unmerged merge-ready PR.",
+    "revision": 1
+  },
+  "routeDigest": "3499ea670426bb4376c23afecf4ba84c2ad897c610e7d26cfdd8bc1a9252a8f5",
+  "version": 1,
+  "digest": "9c803922b19c5dfc5f33c23959952050b24af3a617197aee39e19d968480b34d"
+}
