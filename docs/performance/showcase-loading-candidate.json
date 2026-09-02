@@ -1,7 +1,7 @@
 {
   "report": {
     "version": 1,
-    "commit": "dfb13f28c9dccfee269deb6c6c943228b77d23d2",
+    "commit": "08235382b366ca66c5a447866f53accbe7e1b1e2",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
@@ -23,16 +23,16 @@
       "assets/golos-text-latin-500-normal-BznAvurO.woff2",
       "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
       "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
-      "assets/index-BcxA60IM.js",
+      "assets/index-CsKlEEEz.js",
       "assets/showcase-navigation-8vQ9HlTi.css",
       "assets/showcase-navigation-B-ngcL7a.js",
       "index.html"
     ],
     "totals": {
-      "initialJavaScriptBytes": 8359,
+      "initialJavaScriptBytes": 8374,
       "initialCssBytes": 134020,
       "initialFontBytes": 219500,
-      "emittedBytes": 16556831,
+      "emittedBytes": 16556846,
       "initialImageBytes": 0
     },
     "assets": [
@@ -341,11 +341,11 @@
         "phase": "initial"
       },
       {
-        "file": "assets/index-BcxA60IM.js",
+        "file": "assets/index-CsKlEEEz.js",
         "type": "javascript",
-        "bytes": 7179,
-        "gzipBytes": 2935,
-        "sha256": "9d86e4a5727c609e2846276250fb7a7ed3540a379453b7d16e6f753efeec6087",
+        "bytes": 7194,
+        "gzipBytes": 2941,
+        "sha256": "f949c59a8e1bfa08b586e26fd8724563189e34c4f0030769999ffcc862ffbdb3",
         "phase": "initial"
       },
       {
@@ -1752,19 +1752,19 @@
         "file": "index.html",
         "type": "html",
         "bytes": 548,
-        "gzipBytes": 334,
-        "sha256": "809eb00b249fc3717ea1f9d328994e7042fdaddaabf5d0f50a2af095aea0a5ad",
+        "gzipBytes": 333,
+        "sha256": "8a556100c83a4cc1be4d0a55229608b0d2d72016c70622b423475924e3c0cb57",
         "phase": "initial"
       }
     ],
-    "assetsDigest": "2de409661816b087cb8a3724cc689d57d9fe70d87a225d3d3a135ff48e0a7fff"
+    "assetsDigest": "689f9c5e10276a103aaccfa667eb1c4854bfd1e2b658ab6afdca49e19ca17939"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "dfb13f28c9dccfee269deb6c6c943228b77d23d2",
+    "candidate": "08235382b366ca66c5a447866f53accbe7e1b1e2",
     "checks": {
-      "initialJavaScriptReduction": 0.9923234174797226,
+      "initialJavaScriptReduction": 0.9923096420594805,
       "initialCssGrowth": 0.0027459166647960664,
       "initialFontGrowth": 0
     }

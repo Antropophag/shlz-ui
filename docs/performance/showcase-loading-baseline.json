@@ -30,7 +30,8 @@
     "initialJavaScriptBytes": 1088896,
     "initialCssBytes": 133653,
     "initialFontBytes": 219500,
-    "emittedBytes": 16549683
+    "emittedBytes": 16549683,
+    "initialImageBytes": 0
   },
   "assets": [
     {
