@@ -1,6 +1,6 @@
 ## 1. Contract and regression baseline
 
-- [ ] 1.1 Add structural and browser regression assertions for the failing Field and compact Modal active-text pairs, and verify the unchanged baseline is rejected by the symmetric TDD oracle.
+- [x] 1.1 Add structural and browser regression assertions for the failing Field and compact Modal active-text pairs, and verify the unchanged baseline is rejected by the symmetric TDD oracle.
 - [x] 1.2 Record the closed affected-surface census and source-versus-repository decision policy in developer and audit documentation, verified by documentation/audit schema tests.
 
 ## 2. Semantic token seam
