@@ -17,7 +17,12 @@ test("classifies only HTML-linked assets as initial and binds content hashes", a
     path.join(root, "index.html"),
     '<link rel="stylesheet" href="/assets/app.css"><script type="module" src="/assets/app.js"></script>',
   );
-  await writeFile(path.join(root, "assets/app.css"), "body{}", "utf8");
+  await writeFile(
+    path.join(root, "assets/app.css"),
+    "@font-face{src:url('./app.woff2')}body{}",
+    "utf8",
+  );
+  await writeFile(path.join(root, "assets/app.woff2"), "font", "utf8");
   await writeFile(
     path.join(root, "assets/app.js"),
     "import('./heavy.js')",
@@ -29,6 +34,7 @@ test("classifies only HTML-linked assets as initial and binds content hashes", a
     commit: "base",
   });
   assert.equal(report.totals.initialJavaScriptBytes, 20);
+  assert.equal(report.totals.initialFontBytes, 4);
   assert.equal(
     report.assets.find(({ file }) => file === "assets/heavy.js").phase,
     "deferred",

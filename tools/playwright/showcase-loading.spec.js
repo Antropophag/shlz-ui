@@ -102,3 +102,63 @@ test("search filters the eager index and a result loads its documentation", asyn
     .click();
   await expect(page.locator("#composer-demo")).toBeVisible();
 });
+
+test("initial and loaded states remain contained at narrow enlarged text", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  await page.addStyleTag({ content: "html { font-size: 200%; }" });
+  await expect(page.locator("[data-showcase-loader]")).toBeVisible();
+  expect(
+    await page
+      .locator("[data-showcase-loader]")
+      .evaluate(
+        (element) => element.getBoundingClientRect().right <= window.innerWidth,
+      ),
+  ).toBe(true);
+
+  await page.getByRole("link", { name: "Input", exact: true }).click();
+  await expect(page.locator("#input-demo")).toBeVisible();
+  expect(
+    await page
+      .locator("#input-demo")
+      .evaluate(
+        (element) => element.getBoundingClientRect().right <= window.innerWidth,
+      ),
+  ).toBe(true);
+});
+
+test("focused shell and progressive states have visual evidence", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+  await expect(page).toHaveScreenshot("showcase-loading-shell.png", {
+    animations: "disabled",
+  });
+
+  await page.evaluate(() => {
+    window.__SHLZ_SHOWCASE_IMPORT__ = () => new Promise(() => {});
+  });
+  await page.getByRole("link", { name: "Input", exact: true }).click();
+  await expect(page.locator("[data-showcase-loader]")).toHaveScreenshot(
+    "showcase-loading-progress.png",
+  );
+
+  await page.goto("/");
+  await page.evaluate(() => {
+    window.__SHLZ_SHOWCASE_IMPORT__ = () =>
+      Promise.reject(new Error("visual failure"));
+  });
+  await page.getByRole("link", { name: "Input", exact: true }).click();
+  await expect(page.locator("[data-showcase-loader]")).toHaveScreenshot(
+    "showcase-loading-error.png",
+  );
+
+  await page.goto("/?full=1#input");
+  await expect(page.locator("#input-demo")).toHaveScreenshot(
+    "showcase-loading-loaded-input.png",
+    { animations: "disabled" },
+  );
+});

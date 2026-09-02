@@ -6,6 +6,22 @@
     "node": "v22.23.1"
   },
   "entry": [
+    "assets/fira-sans-cyrillic-400-normal-CKu2TFQr.woff2",
+    "assets/fira-sans-cyrillic-500-normal-CXfldnQ8.woff2",
+    "assets/fira-sans-cyrillic-600-normal-JSBvCpTs.woff2",
+    "assets/fira-sans-cyrillic-700-normal-Bl-HczEO.woff2",
+    "assets/fira-sans-latin-400-normal-a0AnQzuD.woff2",
+    "assets/fira-sans-latin-500-normal-Bvbxc8ch.woff2",
+    "assets/fira-sans-latin-600-normal-CXKlxLG9.woff2",
+    "assets/fira-sans-latin-700-normal-CRhwpWTq.woff2",
+    "assets/golos-text-cyrillic-400-normal-C7us6pn1.woff2",
+    "assets/golos-text-cyrillic-500-normal-BSLQUuP1.woff2",
+    "assets/golos-text-cyrillic-600-normal-lpQ9rVRR.woff2",
+    "assets/golos-text-cyrillic-700-normal-BKmY45Ip.woff2",
+    "assets/golos-text-latin-400-normal-Coi1FYaD.woff2",
+    "assets/golos-text-latin-500-normal-BznAvurO.woff2",
+    "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
+    "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
     "assets/index-B4WubKpD.css",
     "assets/index-C2l7rj4x.js",
     "index.html"
@@ -13,7 +29,7 @@
   "totals": {
     "initialJavaScriptBytes": 1088896,
     "initialCssBytes": 133653,
-    "initialFontBytes": 0,
+    "initialFontBytes": 219500,
     "emittedBytes": 16549683
   },
   "assets": [
@@ -207,7 +223,7 @@
       "bytes": 10788,
       "gzipBytes": 10811,
       "sha256": "2ce9f91ccd598790f734442b0a203f4b2e9383ce7789735b4f4e816a7bdc7c53",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-cyrillic-500-normal-CXfldnQ8.woff2",
@@ -215,7 +231,7 @@
       "bytes": 10820,
       "gzipBytes": 10843,
       "sha256": "7288103d6135200cff7e5ba77383cb2e42dba3f5d35d6063eab9a65a4481c957",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-cyrillic-600-normal-JSBvCpTs.woff2",
@@ -223,7 +239,7 @@
       "bytes": 11600,
       "gzipBytes": 11623,
       "sha256": "7aa1fbcba4dd0a22bcf69dc69040f113b7f593702478234485bcc91c8287e925",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-cyrillic-700-normal-Bl-HczEO.woff2",
@@ -231,7 +247,7 @@
       "bytes": 11552,
       "gzipBytes": 11575,
       "sha256": "c3d7b0dd41e1723b1ca2ec421e8dedc594e683c3a26bcbb6a9ab2ae1454deaa9",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-latin-400-normal-a0AnQzuD.woff2",
@@ -239,7 +255,7 @@
       "bytes": 23872,
       "gzipBytes": 23900,
       "sha256": "3e38d8c01fe97529fbf0a086bf958d724b723ca7fc8be77b4ba5745f6259b6ca",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-latin-500-normal-Bvbxc8ch.woff2",
@@ -247,7 +263,7 @@
       "bytes": 24056,
       "gzipBytes": 24084,
       "sha256": "88d3e420adee3fa99ae50c15b123e3c9a07ce0ec0c03a01bd6bdd5232822da28",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-latin-600-normal-CXKlxLG9.woff2",
@@ -255,7 +271,7 @@
       "bytes": 24844,
       "gzipBytes": 24872,
       "sha256": "55e09735e30d8492afac5d59ac433c6b367bb7dd00c46e157cfe95c9fb29e833",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/fira-sans-latin-700-normal-CRhwpWTq.woff2",
@@ -263,7 +279,7 @@
       "bytes": 25012,
       "gzipBytes": 25040,
       "sha256": "c753d7153cac2cfeb877264d18f11197ca672d3e04ba1472154a54777a4e354d",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-cyrillic-400-normal-C7us6pn1.woff2",
@@ -271,7 +287,7 @@
       "bytes": 6960,
       "gzipBytes": 6983,
       "sha256": "15a5cbadfc1aa7a541651600b757bf7b67bce4e145b3239de072db5427889605",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-cyrillic-500-normal-BSLQUuP1.woff2",
@@ -279,7 +295,7 @@
       "bytes": 7044,
       "gzipBytes": 7067,
       "sha256": "22337b726df83521c7f6b2709e4717116eb53106c6140b45d751f36910191ecc",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-cyrillic-600-normal-lpQ9rVRR.woff2",
@@ -287,7 +303,7 @@
       "bytes": 7140,
       "gzipBytes": 7163,
       "sha256": "1df9c46f33069094b4769bd2f5f04c5c37e4ce74c77bf062f3bb476d93cc3c2b",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-cyrillic-700-normal-BKmY45Ip.woff2",
@@ -295,7 +311,7 @@
       "bytes": 7108,
       "gzipBytes": 7131,
       "sha256": "42db867ddf4b8b025cb2681a796c8c34633e14f77077c5c5ad950383e357a6f5",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-latin-400-normal-Coi1FYaD.woff2",
@@ -303,7 +319,7 @@
       "bytes": 11992,
       "gzipBytes": 12015,
       "sha256": "c8246f55dbddb17ceab94b8de2dbcf326dc189f3bc5a8c13d7b14ad05d7d1d81",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-latin-500-normal-BznAvurO.woff2",
@@ -311,7 +327,7 @@
       "bytes": 12032,
       "gzipBytes": 12055,
       "sha256": "779e46588bc6f5f18918dcdf87d609a8053e1c925abd9e94d2b46b0254f36b24",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
@@ -319,7 +335,7 @@
       "bytes": 12300,
       "gzipBytes": 12323,
       "sha256": "ecd56e7dae8376b32caffd25e5c5e1b37cc400ee6d4d838383cff9454d4e9a48",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
@@ -327,7 +343,7 @@
       "bytes": 12380,
       "gzipBytes": 12403,
       "sha256": "1ac7742b82900b38b483fb65691e8fb786ba16f6c5cae677aa63a128286ce853",
-      "phase": "deferred"
+      "phase": "initial"
     },
     {
       "file": "assets/index-B4WubKpD.css",
@@ -1722,5 +1738,5 @@
       "phase": "initial"
     }
   ],
-  "assetsDigest": "dfdfa7052771265b5e483084aca4e8ffc9bcbb8219c595502ec30d0488147e82"
+  "assetsDigest": "683a20278993ecadb1e4ee52236453b038718456ad8b70c8e27a9271b451f6e0"
 }

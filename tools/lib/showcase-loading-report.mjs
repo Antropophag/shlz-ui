@@ -40,11 +40,32 @@ const referencedAssets = (html) =>
     .map((match) => match[1].replace(/^\//, ""))
     .filter((file) => !file.startsWith("http"));
 
+const referencedCssAssets = (css, cssFile) =>
+  [...css.matchAll(/url\(["']?([^"')]+)["']?\)/g)]
+    .map((match) => match[1])
+    .filter((file) => !file.startsWith("data:") && !file.startsWith("http"))
+    .map((file) =>
+      file.startsWith("/")
+        ? file.slice(1)
+        : path.posix.normalize(
+            path.posix.join(path.posix.dirname(cssFile), file),
+          ),
+    );
+
 export async function createShowcaseLoadingReport({ dist, commit }) {
   if (!commit) throw new Error("commit is required");
   const html = await readFile(path.join(dist, "index.html"), "utf8");
   const initialFiles = new Set(["index.html", ...referencedAssets(html)]);
   const files = await walk(dist);
+  const pendingCss = [...initialFiles].filter((file) => file.endsWith(".css"));
+  for (const cssFile of pendingCss) {
+    const css = await readFile(path.join(dist, cssFile), "utf8");
+    for (const referenced of referencedCssAssets(css, cssFile)) {
+      if (!files.includes(referenced))
+        throw new Error(`missing CSS dependency: ${referenced}`);
+      initialFiles.add(referenced);
+    }
+  }
   const assets = [];
   for (const file of files) {
     const absolute = path.join(dist, file);
