@@ -11,6 +11,7 @@
 .shlz-date-field__label,
 .shlz-date-field__description {
   min-block-size: 15px;
+
   /* DECISION: source Gray 200 remains preserved; Field-family guidance shares
      the accessible production-text role. */
   color: var(--shlz-semantic-color-text-supporting-accessible);

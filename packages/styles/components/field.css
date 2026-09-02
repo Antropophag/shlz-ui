@@ -33,6 +33,7 @@
 .shlz-field__message,
 .shlz-field__counter {
   min-block-size: 15px;
+
   /* DECISION: the source Gray 200 remains a source fact; active production
      guidance uses the shared WCAG AA semantic override. */
   color: var(--shlz-semantic-color-text-supporting-accessible);

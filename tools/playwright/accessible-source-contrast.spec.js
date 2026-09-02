@@ -26,11 +26,11 @@ const contrastEvidence = (locator, pseudo = null) =>
       return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
     };
 
-    const style = getComputedStyle(element, pseudoElement);
+    const style = window.getComputedStyle(element, pseudoElement);
     const backgrounds = [];
     let current = element;
     while (current) {
-      backgrounds.push(getComputedStyle(current).backgroundColor);
+      backgrounds.push(window.getComputedStyle(current).backgroundColor);
       current = current.parentElement;
     }
     const background = backgrounds
