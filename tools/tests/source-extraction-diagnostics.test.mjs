@@ -69,6 +69,12 @@ test("classification fails closed on incomplete and duplicate cohorts", async ()
 });
 
 test("classification fails closed on stale counts and unsupported claims", async () => {
+  const nonPositive = clone(ledger);
+  nonPositive.classifications.find(
+    ({ selector }) => selector.kind === "skipped-instance",
+  ).selector.multiplicity = 0;
+  await assert.rejects(build(nonPositive), /invalid skipped-instance selector/);
+
   const stale = clone(ledger);
   stale.classifications.find(
     ({ selector }) => selector.kind === "skipped-instance",

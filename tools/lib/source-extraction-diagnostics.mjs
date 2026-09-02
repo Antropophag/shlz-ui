@@ -75,7 +75,9 @@ function validateSelector(classification) {
     throw new Error(`invalid classification selector: ${classification.id}`);
   if (
     selector.kind === "skipped-instance" &&
-    (!selector.sourceArchive || !Number.isInteger(selector.multiplicity))
+    (!selector.sourceArchive ||
+      !Number.isInteger(selector.multiplicity) ||
+      selector.multiplicity <= 0)
   )
     throw new Error(`invalid skipped-instance selector: ${classification.id}`);
 }
@@ -120,6 +122,10 @@ function staleMultiplicityExists(classifications, unit) {
 }
 
 async function classifyUnit(unit, classifications, repoRoot) {
+  if (!Number.isInteger(unit.multiplicity) || unit.multiplicity <= 0)
+    throw new Error(
+      `diagnostic multiplicity must be positive: ${identity(unit)}`,
+    );
   const matches = classifications.filter(({ selector }) =>
     selectorMatches(selector, unit),
   );
