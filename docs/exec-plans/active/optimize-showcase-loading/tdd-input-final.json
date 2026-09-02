@@ -1,12 +1,12 @@
 {
-  "candidateHead": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f",
+  "candidateHead": "8206ff9e7812630b233652661fa258190295243d",
   "contract": "docs/exec-plans/active/optimize-showcase-loading/contract-receipt-final.json",
   "baseline": "docs/exec-plans/active/optimize-showcase-loading/baseline-receipt.json",
   "oracle": {
     "command": [
       "node",
       "-e",
-      "const fs=require('node:fs'),p=require('node:path');const t=process.argv[1];const f=fs.statSync(t).isDirectory()?p.join(t,'apps/showcase/src/bootstrap.js'):t;const s=fs.readFileSync(f,'utf8');const dynamic=/import\\(\"(?:\\.\\.\\/)*main\\.js\"\\)/.test(s);const eager=/import\\s+\"(?:\\.\\.\\/)*apps\\/showcase\\/src\\/main\\.js\"/.test(s);process.exit(dynamic&&!eager?0:1)",
+      "const fs=require('node:fs'),p=require('node:path');const t=process.argv[1];const f=fs.statSync(t).isDirectory()?p.join(t,'apps/showcase/src/bootstrap.js'):t;const s=fs.readFileSync(f,'utf8');const dynamic=/import\\([^)]*main\\.js/.test(s);const eager=/import\\s+[\"'][^\"']*main\\.js/.test(s);process.exit(dynamic&&!eager?0:1)",
       "{target}"
     ],
     "redTarget": {
@@ -15,7 +15,7 @@
     },
     "greenTarget": {
       "kind": "candidate",
-      "commit": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f"
+      "commit": "8206ff9e7812630b233652661fa258190295243d"
     }
   }
 }
