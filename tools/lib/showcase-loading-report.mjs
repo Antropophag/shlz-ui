@@ -32,7 +32,7 @@ const walk = async (root, directory = root) => {
     if (entry.isDirectory()) files.push(...(await walk(root, absolute)));
     else files.push(path.relative(root, absolute).split(path.sep).join("/"));
   }
-  return files.sort();
+  return files.sort((left, right) => left.localeCompare(right));
 };
 
 const referencedAssets = (html) =>
@@ -91,7 +91,7 @@ export async function createShowcaseLoadingReport({ dist, commit }) {
       command: "npm run build -w @shlz/showcase",
       node: process.version,
     },
-    entry: [...initialFiles].sort(),
+    entry: [...initialFiles].sort((left, right) => left.localeCompare(right)),
     totals: {
       initialJavaScriptBytes: sum("initial", "javascript"),
       initialCssBytes: sum("initial", "css"),
@@ -104,6 +104,24 @@ export async function createShowcaseLoadingReport({ dist, commit }) {
   };
 }
 
+const validateAsset = (asset, files) => {
+  if (files.has(asset.file))
+    throw new Error(`duplicate emitted asset: ${asset.file}`);
+  files.add(asset.file);
+  if (!Number.isInteger(asset.bytes) || asset.bytes < 0)
+    throw new Error(`invalid emitted byte count: ${asset.file}`);
+  if (!/^[a-f0-9]{64}$/.test(asset.sha256))
+    throw new Error(`invalid emitted asset hash: ${asset.file}`);
+  if (asset.phase !== "initial" && asset.phase !== "deferred")
+    throw new Error(`unclassified emitted asset: ${asset.file}`);
+};
+
+const validateEntry = (entry, files, assets) => {
+  if (!files.has(entry)) throw new Error(`missing entry asset: ${entry}`);
+  if (assets.find(({ file }) => file === entry)?.phase !== "initial")
+    throw new Error(`reclassified entry asset: ${entry}`);
+};
+
 export function validateShowcaseLoadingReport(report) {
   if (report?.version !== 1)
     throw new Error("unsupported showcase loading report");
@@ -114,22 +132,8 @@ export function validateShowcaseLoadingReport(report) {
   )
     throw new Error("incomplete showcase loading report");
   const files = new Set();
-  for (const asset of report.assets) {
-    if (files.has(asset.file))
-      throw new Error(`duplicate emitted asset: ${asset.file}`);
-    files.add(asset.file);
-    if (!Number.isInteger(asset.bytes) || asset.bytes < 0)
-      throw new Error(`invalid emitted byte count: ${asset.file}`);
-    if (!/^[a-f0-9]{64}$/.test(asset.sha256))
-      throw new Error(`invalid emitted asset hash: ${asset.file}`);
-    if (!new Set(["initial", "deferred"]).has(asset.phase))
-      throw new Error(`unclassified emitted asset: ${asset.file}`);
-  }
-  for (const entry of report.entry) {
-    if (!files.has(entry)) throw new Error(`missing entry asset: ${entry}`);
-    if (report.assets.find(({ file }) => file === entry)?.phase !== "initial")
-      throw new Error(`reclassified entry asset: ${entry}`);
-  }
+  for (const asset of report.assets) validateAsset(asset, files);
+  for (const entry of report.entry) validateEntry(entry, files, report.assets);
   if (
     report.assetsDigest &&
     report.assetsDigest !== reportDigest(report.assets)
