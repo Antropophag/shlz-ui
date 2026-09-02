@@ -1,7 +1,7 @@
 {
   "report": {
     "version": 1,
-    "commit": "fbfe83d15f803d1e9bd9735eb6fd508d7ce15fbd",
+    "commit": "dfb13f28c9dccfee269deb6c6c943228b77d23d2",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
@@ -36,14 +36,6 @@
       "initialImageBytes": 0
     },
     "assets": [
-      {
-        "file": "assets/Sidebar-DLttcLHI.svg",
-        "type": "image",
-        "bytes": 195913,
-        "gzipBytes": 67958,
-        "sha256": "92ec7b5992b3f05548f5bb937f856746c4abbd27c675bff3ea37e8ddbdfc96a0",
-        "phase": "deferred"
-      },
       {
         "file": "assets/ai-brain-network-BUmzt9uY.svg",
         "type": "image",
@@ -533,19 +525,19 @@
         "phase": "deferred"
       },
       {
-        "file": "assets/modal-D0Ipf30u.svg",
-        "type": "image",
-        "bytes": 211175,
-        "gzipBytes": 71564,
-        "sha256": "45233d2ff2486f42105828fd7876032e8315f23a2061e84bc3421cb891921463",
-        "phase": "deferred"
-      },
-      {
         "file": "assets/modal-basic-DesFb-TN.svg",
         "type": "image",
         "bytes": 26290,
         "gzipBytes": 9719,
         "sha256": "308612926efb930a3317774968e71060aa95d94004c89003c749875f643ac645",
+        "phase": "deferred"
+      },
+      {
+        "file": "assets/modal-D0Ipf30u.svg",
+        "type": "image",
+        "bytes": 211175,
+        "gzipBytes": 71564,
+        "sha256": "45233d2ff2486f42105828fd7876032e8315f23a2061e84bc3421cb891921463",
         "phase": "deferred"
       },
       {
@@ -589,19 +581,19 @@
         "phase": "deferred"
       },
       {
-        "file": "assets/pagination-JW2eyhXN.svg",
-        "type": "image",
-        "bytes": 126991,
-        "gzipBytes": 42760,
-        "sha256": "3f30cf4709bed567f5b30d3f7f289de063357b7f28acffa6e19d34b87d949f66",
-        "phase": "deferred"
-      },
-      {
         "file": "assets/pagination-compact-DgRTR4Oe.svg",
         "type": "image",
         "bytes": 78022,
         "gzipBytes": 27795,
         "sha256": "5ca0bbd4423f317b9bd36f33cbc26b870fd1b7f422382a8e23163cfcb62ba975",
+        "phase": "deferred"
+      },
+      {
+        "file": "assets/pagination-JW2eyhXN.svg",
+        "type": "image",
+        "bytes": 126991,
+        "gzipBytes": 42760,
+        "sha256": "3f30cf4709bed567f5b30d3f7f289de063357b7f28acffa6e19d34b87d949f66",
         "phase": "deferred"
       },
       {
@@ -1197,6 +1189,14 @@
         "phase": "initial"
       },
       {
+        "file": "assets/Sidebar-DLttcLHI.svg",
+        "type": "image",
+        "bytes": 195913,
+        "gzipBytes": 67958,
+        "sha256": "92ec7b5992b3f05548f5bb937f856746c4abbd27c675bff3ea37e8ddbdfc96a0",
+        "phase": "deferred"
+      },
+      {
         "file": "assets/snackbar-1-n1Thwxei.svg",
         "type": "image",
         "bytes": 19396,
@@ -1757,12 +1757,12 @@
         "phase": "initial"
       }
     ],
-    "assetsDigest": "788f8891f67a8ce55b6ff729f3b074ba11f9e6df1751f791fe9fa3927ccb191b"
+    "assetsDigest": "2de409661816b087cb8a3724cc689d57d9fe70d87a225d3d3a135ff48e0a7fff"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "fbfe83d15f803d1e9bd9735eb6fd508d7ce15fbd",
+    "candidate": "dfb13f28c9dccfee269deb6c6c943228b77d23d2",
     "checks": {
       "initialJavaScriptReduction": 0.9923234174797226,
       "initialCssGrowth": 0.0027459166647960664,
