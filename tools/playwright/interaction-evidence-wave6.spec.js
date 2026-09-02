@@ -111,7 +111,7 @@ const expectPageOccurrenceSubset = async (
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("all Wave 6 Showcase and plain HTML roots are classified", async ({

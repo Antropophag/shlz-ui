@@ -172,10 +172,23 @@ test("Wave 9 repository census classifies every bounded executable shell", async
     [],
   );
 
-  const liveConsumer = await readFile("apps/showcase/src/main.js", "utf8");
-  assert.equal(countToken(liveConsumer, 'className = "shlz-docs-shell"'), 1);
-  assert.equal(countToken(liveConsumer, 'className = "shlz-docs-sidebar"'), 1);
-  assert.equal(countToken(liveConsumer, '<header class="shlz-hero">'), 1);
+  const eagerConsumer = await readFile(
+    "apps/showcase/src/bootstrap.js",
+    "utf8",
+  );
+  const deferredConsumer = await readFile("apps/showcase/src/main.js", "utf8");
+  assert.equal(countToken(eagerConsumer, 'class="shlz-docs-shell"'), 1);
+  assert.equal(countToken(eagerConsumer, 'class="shlz-docs-sidebar"'), 1);
+  assert.equal(countToken(eagerConsumer, '<header class="shlz-hero">'), 1);
+  assert.equal(
+    countToken(deferredConsumer, 'className = "shlz-docs-shell"'),
+    1,
+  );
+  assert.equal(
+    countToken(deferredConsumer, 'className = "shlz-docs-sidebar"'),
+    1,
+  );
+  assert.equal(countToken(deferredConsumer, '<header class="shlz-hero">'), 1);
 });
 
 test("Wave 9 repository census rejects a synthetic unclassified shell", () => {
@@ -204,7 +217,7 @@ test("Wave 9 built-DOM census is exact and mutation-sensitive", async () => {
   const assertBuiltCensus = (source) => {
     assert.equal(countToken(source, 'className="shlz-docs-shell"'), 1);
     assert.equal(countToken(source, 'className="shlz-docs-sidebar"'), 1);
-    assert.equal(countToken(source, '<header class="shlz-hero">'), 1);
+    assert.equal(countToken(source, '<header class="shlz-hero">'), 2);
   };
 
   assertBuiltCensus(builtSource);

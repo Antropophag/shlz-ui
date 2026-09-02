@@ -22,7 +22,7 @@ const manifests = Object.fromEntries(
 );
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("all Wave 3 executable and live roots are semantically classified", async ({

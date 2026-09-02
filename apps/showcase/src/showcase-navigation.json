@@ -1,0 +1,53 @@
+[
+  {
+    "label": "Foundations",
+    "links": [
+      ["foundations", "Overview"],
+      ["colors", "Colors"],
+      ["typography", "Typography"],
+      ["spacing", "Spacing"],
+      ["geometry", "Geometry"]
+    ]
+  },
+  {
+    "label": "Components",
+    "links": [
+      ["button", "Button"],
+      ["input", "Input"],
+      ["textarea", "Textarea"],
+      ["select", "Select"],
+      ["checkbox", "Checkbox"],
+      ["radio", "Radio"],
+      ["switch", "Switch"],
+      ["status", "Status"],
+      ["badge", "Badge"],
+      ["link", "Link"],
+      ["avatar", "Avatar"],
+      ["table", "Table"],
+      ["tabs", "Tabs"],
+      ["pagination", "Pagination"],
+      ["tag", "Tag"],
+      ["person-tag", "Person Tag"],
+      ["segment", "Segment"],
+      ["notification", "Notification"],
+      ["dropdown", "Dropdown"],
+      ["file-row", "File Row"],
+      ["empty-state", "Empty State"],
+      ["date-picker-demo", "Date Picker"],
+      ["calendar-grid-demo", "Calendar Grid"],
+      ["planner-schedule-demo", "Planner Schedule"],
+      ["message-thread-demo", "Message Thread"],
+      ["history-timeline-demo", "History Timeline"],
+      ["file-upload-demo", "File Upload"],
+      ["composer-demo", "Composer / Rich Text Toolbar"],
+      ["card-with-action-demo", "Card with action"],
+      ["report-card-demo", "Report card"],
+      ["cover-demo", "Cover"]
+    ]
+  },
+  {
+    "label": "Validation",
+    "links": [["consumer-validation", "Data workspace"]]
+  },
+  { "label": "Evidence", "links": [["fidelity", "Visual fidelity"]] }
+]

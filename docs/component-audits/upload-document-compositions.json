@@ -75,11 +75,13 @@
   ],
   "terminologyCensus": {
     "auditEvidencePaths": [
+      "apps/showcase/src/bootstrap.js",
+      "tools/playwright/showcase-loading.spec.js",
       "tools/playwright/upload-document-compositions-wave11.spec.js"
     ],
     "primitiveDependencyPathCount": 11,
     "unrelatedTerminologyPathCount": 72,
-    "totalPathCount": 84,
+    "totalPathCount": 86,
     "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition"
   },
   "supportedSizes": ["source-sheets-only"],

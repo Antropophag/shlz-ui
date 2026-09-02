@@ -4,7 +4,7 @@ import { hideDeveloperDocumentation } from "./visual-harness.js";
 test("Pagination documentation exposes native-link semantics", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   const docs = page.locator('[data-component-docs="pagination"]');
   await expect(docs).toBeVisible();
   await expect(
@@ -138,7 +138,7 @@ test("narrow Pagination wraps without clipping or horizontal overflow", async ({
 test("existing Pagination visual fixture remains isolated from developer additions", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await hideDeveloperDocumentation(page);
   await expect(page.locator("[data-pagination-consumer]")).toBeHidden();
   await expect(page.locator("#pagination-demo > section").last()).toBeVisible();

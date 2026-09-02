@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { stabilizeShowcaseLayout } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("dropdown keyboard navigation skips disabled items and restores focus", async ({

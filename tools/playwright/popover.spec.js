@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { fixtureUrl } from "./fixture-url.js";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 async function open(page, name, id) {

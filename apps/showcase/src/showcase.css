@@ -179,6 +179,27 @@ main {
   transition: grid-template-columns 160ms ease-out;
 }
 
+.shlz-showcase-loader {
+  min-block-size: 12rem;
+}
+
+.shlz-showcase-loader [role="status"] {
+  max-inline-size: 48rem;
+  color: var(--shlz-semantic-color-text-secondary);
+}
+
+.shlz-showcase-loader[data-state="loading"] [role="status"] {
+  cursor: progress;
+}
+
+.shlz-showcase-loader[data-state="error"] [role="status"] {
+  color: var(--shlz-semantic-color-status-danger);
+}
+
+.shlz-docs-nav__group a[hidden] {
+  display: none;
+}
+
 .shlz-docs-shell--closed {
   grid-template-columns: 72px minmax(0, 1fr);
 }

@@ -16,6 +16,7 @@
     "check:source-coverage": "node tools/generate-source-library-coverage.mjs --check",
     "generate:source-diagnostics": "node tools/generate-source-extraction-diagnostics.mjs",
     "check:source-diagnostics": "node tools/generate-source-extraction-diagnostics.mjs --check",
+    "report:showcase-loading": "node tools/generate-showcase-loading-report.mjs",
     "build": "npm run generate && npm run build --workspaces --if-present",
     "test": "node --test --test-concurrency=1 tools/tests/*.test.mjs",
     "test:harness": "node --test tools/tests/harness.test.mjs",

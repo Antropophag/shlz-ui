@@ -7,10 +7,11 @@
     "docs/components/sidebar-application-shell.md"
   ],
   "implementation": [
+    "apps/showcase/src/bootstrap.js",
     "apps/showcase/src/main.js",
     "apps/showcase/src/showcase.css"
   ],
-  "behavior": "apps/showcase/src/main.js",
+  "behavior": "apps/showcase/src/bootstrap.js",
   "docs": "docs/components/sidebar-application-shell.md",
   "rootSelector": ".shlz-docs-shell",
   "legacySelectors": [".shlz-docs-sidebar", ".shlz-hero"],
@@ -27,6 +28,10 @@
     }
   ],
   "sourceOccurrences": [
+    {
+      "path": "apps/showcase/src/bootstrap.js",
+      "classification": "progressive-live-consumer-shell"
+    },
     {
       "path": "apps/showcase/src/main.js",
       "classification": "live-consumer"

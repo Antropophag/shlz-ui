@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Measure and optimize the documentation showcase initial load through deferred section and source-reference loading while preserving navigation, accessibility, evidence, public packages, and existing component contracts, then deliver an unmerged PR.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

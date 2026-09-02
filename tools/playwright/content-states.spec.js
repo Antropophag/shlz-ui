@@ -202,7 +202,7 @@ test("empty state composes optional regions responsively", async ({ page }) => {
 test("legacy component captures ignore additive showcase sections", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   const target = page.locator("#tabs-demo");
   await stabilizeShowcaseLayout(page);
   await target.scrollIntoViewIfNeeded();
@@ -229,12 +229,12 @@ test("legacy component captures ignore additive showcase sections", async ({
 test("pre-existing captures ignore later consumer supplements", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   const target = page.locator("#tabs-demo");
   await target.scrollIntoViewIfNeeded();
   const before = await target.screenshot();
 
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.evaluate(() => {
     const supplement = document.createElement("section");
     supplement.dataset.shlzPreexistingVisualSupplement = "";

@@ -4,7 +4,7 @@ test("foundation reconciliation is reviewable at 1440 by 900", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/");
+  await page.goto("/?full=1");
 
   const source = page.locator("#source-spec");
   const production = page.locator("#implementation");
@@ -40,7 +40,7 @@ test("foundation reconciliation is reviewable at 1440 by 900", async ({
 test("migrated showcase families remain present after reconciliation", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   for (const id of [
     "button-demo",
     "input-demo",
@@ -62,7 +62,7 @@ test("migrated showcase families remain present after reconciliation", async ({
 test("foundation tokens resolve exactly in representative production consumers", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 
   const values = await page.evaluate(() => {
     const root = window.getComputedStyle(document.documentElement);

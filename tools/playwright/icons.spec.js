@@ -14,7 +14,7 @@ const representativeIcons = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.locator(".shlz-icon-catalog").evaluate((details) => {
     details.open = true;
   });

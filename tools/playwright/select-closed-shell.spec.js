@@ -10,7 +10,7 @@ const auditManifest = await readComponentAuditManifest(
 );
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("every executable Showcase Select uses the reusable contract", async ({

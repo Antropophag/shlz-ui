@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { hideDeveloperDocumentation } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await hideDeveloperDocumentation(page);
   await page.addStyleTag({
     content: `

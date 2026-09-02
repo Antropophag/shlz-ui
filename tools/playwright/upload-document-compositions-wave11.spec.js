@@ -21,7 +21,7 @@ const expectMaterialStates = (component) => {
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("Wave 11 keeps higher-level Upload / Document compositions source-only", async ({

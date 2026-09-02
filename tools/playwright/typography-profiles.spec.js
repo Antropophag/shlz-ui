@@ -23,7 +23,7 @@ test.beforeEach(async ({ page }) => {
   await page.addInitScript(() =>
     window.localStorage.removeItem("shlz-font-profile"),
   );
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.evaluate(() => document.fonts.ready);
 });
 

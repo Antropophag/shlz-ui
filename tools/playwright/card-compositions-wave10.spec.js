@@ -23,7 +23,7 @@ const expectMaterialStates = (component) => {
     manifestsByComponent[component].interactionEvidence.materialStates,
   ).toEqual([]);
 };
-test.beforeEach(async ({ page }) => page.goto("/"));
+test.beforeEach(async ({ page }) => page.goto("/?full=1"));
 
 test("Wave 10 occurrences are classified and roots remain presentational", async ({
   page,

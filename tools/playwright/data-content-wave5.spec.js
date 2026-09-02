@@ -53,7 +53,7 @@ const resolveColorToken = (page, token) =>
     return color;
   }, token);
 
-test.beforeEach(async ({ page }) => page.goto("/"));
+test.beforeEach(async ({ page }) => page.goto("/?full=1"));
 
 test("all Wave 5 executable, stress and live roots are classified", async ({
   page,

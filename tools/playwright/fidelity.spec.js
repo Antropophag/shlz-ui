@@ -15,7 +15,7 @@ const expectImagesLoaded = async (images) => {
 };
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.locator(".shlz-verification-harness").evaluate((details) => {
     details.open = true;
   });

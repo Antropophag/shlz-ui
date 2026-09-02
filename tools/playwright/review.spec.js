@@ -5,7 +5,7 @@ import {
 } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.addStyleTag({
     content: ".shlz-docs-sidebar { display: none !important; }",
   });
