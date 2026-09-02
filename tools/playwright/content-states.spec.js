@@ -235,6 +235,7 @@ test("pre-existing captures ignore later consumer supplements", async ({
   const before = await target.screenshot();
 
   await page.goto("/?full=1");
+  await expect(target).toBeAttached();
   await page.evaluate(() => {
     const supplement = document.createElement("section");
     supplement.dataset.shlzPreexistingVisualSupplement = "";
