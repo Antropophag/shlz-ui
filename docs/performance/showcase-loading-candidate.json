@@ -1,21 +1,37 @@
 {
   "report": {
     "version": 1,
-    "commit": "working-tree",
+    "commit": "eea97288c2563b415928008b874ae01bab163ec8",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
     },
     "entry": [
+      "assets/fira-sans-cyrillic-400-normal-CKu2TFQr.woff2",
+      "assets/fira-sans-cyrillic-500-normal-CXfldnQ8.woff2",
+      "assets/fira-sans-cyrillic-600-normal-JSBvCpTs.woff2",
+      "assets/fira-sans-cyrillic-700-normal-Bl-HczEO.woff2",
+      "assets/fira-sans-latin-400-normal-a0AnQzuD.woff2",
+      "assets/fira-sans-latin-500-normal-Bvbxc8ch.woff2",
+      "assets/fira-sans-latin-600-normal-CXKlxLG9.woff2",
+      "assets/fira-sans-latin-700-normal-CRhwpWTq.woff2",
+      "assets/golos-text-cyrillic-400-normal-C7us6pn1.woff2",
+      "assets/golos-text-cyrillic-500-normal-BSLQUuP1.woff2",
+      "assets/golos-text-cyrillic-600-normal-lpQ9rVRR.woff2",
+      "assets/golos-text-cyrillic-700-normal-BKmY45Ip.woff2",
+      "assets/golos-text-latin-400-normal-Coi1FYaD.woff2",
+      "assets/golos-text-latin-500-normal-BznAvurO.woff2",
+      "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
+      "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
       "assets/index-8vQ9HlTi.css",
-      "assets/index-DMOM60l2.js",
+      "assets/index-D85Ks5SJ.js",
       "index.html"
     ],
     "totals": {
-      "initialJavaScriptBytes": 7440,
+      "initialJavaScriptBytes": 7551,
       "initialCssBytes": 134020,
-      "initialFontBytes": 0,
-      "emittedBytes": 16556808
+      "initialFontBytes": 219500,
+      "emittedBytes": 16556919
     },
     "assets": [
       {
@@ -208,7 +224,7 @@
         "bytes": 10788,
         "gzipBytes": 10811,
         "sha256": "2ce9f91ccd598790f734442b0a203f4b2e9383ce7789735b4f4e816a7bdc7c53",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-cyrillic-500-normal-CXfldnQ8.woff2",
@@ -216,7 +232,7 @@
         "bytes": 10820,
         "gzipBytes": 10843,
         "sha256": "7288103d6135200cff7e5ba77383cb2e42dba3f5d35d6063eab9a65a4481c957",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-cyrillic-600-normal-JSBvCpTs.woff2",
@@ -224,7 +240,7 @@
         "bytes": 11600,
         "gzipBytes": 11623,
         "sha256": "7aa1fbcba4dd0a22bcf69dc69040f113b7f593702478234485bcc91c8287e925",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-cyrillic-700-normal-Bl-HczEO.woff2",
@@ -232,7 +248,7 @@
         "bytes": 11552,
         "gzipBytes": 11575,
         "sha256": "c3d7b0dd41e1723b1ca2ec421e8dedc594e683c3a26bcbb6a9ab2ae1454deaa9",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-latin-400-normal-a0AnQzuD.woff2",
@@ -240,7 +256,7 @@
         "bytes": 23872,
         "gzipBytes": 23900,
         "sha256": "3e38d8c01fe97529fbf0a086bf958d724b723ca7fc8be77b4ba5745f6259b6ca",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-latin-500-normal-Bvbxc8ch.woff2",
@@ -248,7 +264,7 @@
         "bytes": 24056,
         "gzipBytes": 24084,
         "sha256": "88d3e420adee3fa99ae50c15b123e3c9a07ce0ec0c03a01bd6bdd5232822da28",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-latin-600-normal-CXKlxLG9.woff2",
@@ -256,7 +272,7 @@
         "bytes": 24844,
         "gzipBytes": 24872,
         "sha256": "55e09735e30d8492afac5d59ac433c6b367bb7dd00c46e157cfe95c9fb29e833",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/fira-sans-latin-700-normal-CRhwpWTq.woff2",
@@ -264,7 +280,7 @@
         "bytes": 25012,
         "gzipBytes": 25040,
         "sha256": "c753d7153cac2cfeb877264d18f11197ca672d3e04ba1472154a54777a4e354d",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-cyrillic-400-normal-C7us6pn1.woff2",
@@ -272,7 +288,7 @@
         "bytes": 6960,
         "gzipBytes": 6983,
         "sha256": "15a5cbadfc1aa7a541651600b757bf7b67bce4e145b3239de072db5427889605",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-cyrillic-500-normal-BSLQUuP1.woff2",
@@ -280,7 +296,7 @@
         "bytes": 7044,
         "gzipBytes": 7067,
         "sha256": "22337b726df83521c7f6b2709e4717116eb53106c6140b45d751f36910191ecc",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-cyrillic-600-normal-lpQ9rVRR.woff2",
@@ -288,7 +304,7 @@
         "bytes": 7140,
         "gzipBytes": 7163,
         "sha256": "1df9c46f33069094b4769bd2f5f04c5c37e4ce74c77bf062f3bb476d93cc3c2b",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-cyrillic-700-normal-BKmY45Ip.woff2",
@@ -296,7 +312,7 @@
         "bytes": 7108,
         "gzipBytes": 7131,
         "sha256": "42db867ddf4b8b025cb2681a796c8c34633e14f77077c5c5ad950383e357a6f5",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-latin-400-normal-Coi1FYaD.woff2",
@@ -304,7 +320,7 @@
         "bytes": 11992,
         "gzipBytes": 12015,
         "sha256": "c8246f55dbddb17ceab94b8de2dbcf326dc189f3bc5a8c13d7b14ad05d7d1d81",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-latin-500-normal-BznAvurO.woff2",
@@ -312,7 +328,7 @@
         "bytes": 12032,
         "gzipBytes": 12055,
         "sha256": "779e46588bc6f5f18918dcdf87d609a8053e1c925abd9e94d2b46b0254f36b24",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
@@ -320,7 +336,7 @@
         "bytes": 12300,
         "gzipBytes": 12323,
         "sha256": "ecd56e7dae8376b32caffd25e5c5e1b37cc400ee6d4d838383cff9454d4e9a48",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
@@ -328,7 +344,7 @@
         "bytes": 12380,
         "gzipBytes": 12403,
         "sha256": "1ac7742b82900b38b483fb65691e8fb786ba16f6c5cae677aa63a128286ce853",
-        "phase": "deferred"
+        "phase": "initial"
       },
       {
         "file": "assets/index-8vQ9HlTi.css",
@@ -339,11 +355,11 @@
         "phase": "initial"
       },
       {
-        "file": "assets/index-DMOM60l2.js",
+        "file": "assets/index-D85Ks5SJ.js",
         "type": "javascript",
-        "bytes": 7440,
-        "gzipBytes": 3116,
-        "sha256": "4a54f563753740508200d080bbac26a20858379452fc1e3967bea54f0961abd1",
+        "bytes": 7551,
+        "gzipBytes": 3144,
+        "sha256": "f7de2e1e83d959c562c0d1f2ee3867a57c66373945b323733ccd9e8cbd8088a5",
         "phase": "initial"
       },
       {
@@ -515,11 +531,11 @@
         "phase": "deferred"
       },
       {
-        "file": "assets/main-BA462_1j.js",
+        "file": "assets/main-DTeZKaEH.js",
         "type": "javascript",
         "bytes": 1088214,
         "gzipBytes": 199027,
-        "sha256": "5747273a353669d5266bd5abbe4651a56afc875e0f981e4ed36eab59b6e1e697",
+        "sha256": "f634d35f3f09fe748047b9843c2dd73cdcdeef7d270e9856db3a15e62d4d7b6b",
         "phase": "deferred"
       },
       {
@@ -1726,21 +1742,21 @@
         "file": "index.html",
         "type": "html",
         "bytes": 444,
-        "gzipBytes": 302,
-        "sha256": "84c3a0bdfaeb234aff07cadecb788383392f60223c1781127d6ab9a8a8f3c947",
+        "gzipBytes": 301,
+        "sha256": "a12d4ef5a13f0be383a7448b69af1806aa8cfb33d00f46bdf04c79ca1c563de0",
         "phase": "initial"
       }
     ],
-    "assetsDigest": "99f998de19d26997d9e251136c173a1e97d942ebca5e91b7765aec2c57a9167c"
+    "assetsDigest": "9f8183be5589c6529fc765be7377cf22d644226909a865779c4f9ec1a36f1d16"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "working-tree",
+    "candidate": "eea97288c2563b415928008b874ae01bab163ec8",
     "checks": {
-      "initialJavaScriptReduction": 0.9931673915598919,
+      "initialJavaScriptReduction": 0.9930654534500999,
       "initialCssGrowth": 0.0027459166647960664,
-      "initialFontGrowth": -1
+      "initialFontGrowth": 0
     }
   }
 }
