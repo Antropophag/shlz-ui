@@ -67,6 +67,7 @@
   ],
   "browserTests": [
     "tools/playwright/overlay.spec.js",
+    "tools/playwright/accessible-source-contrast.spec.js",
     "tools/playwright/fidelity.spec.js"
   ],
   "visualSnapshots": [
@@ -78,7 +79,7 @@
     "source-integrity": "pass: raw Modal hash, five names, dimensions, zero variants, geometry, effects, warnings and five generated references are asserted",
     "structural-contract": "pass: five executable Showcase Modal roots, one plain HTML live consumer and five inert diagnostic surfaces are classified without a generic Overlay interface",
     "runtime-browser": "pass: native open, close, return values, backdrop gestures, Escape precedence, repeated enhancement and teardown execute in Chromium",
-    "accessibility": "pass: accessible names, explicit and native fallback focus, containment, background inertness and eligible opener restoration execute; compact secondary-text source deviation is measured and tracked",
+    "accessibility": "pass: accessible names, explicit and native fallback focus, containment, background inertness and eligible opener restoration execute; compact secondary text meets the shared WCAG 2.2 contrast contract",
     "focused-visual": "pass: focused real-open, long-content and nested-popover snapshots plus computed source geometry pass",
     "consumer-integration": "pass: Showcase and direct-ESM plain HTML consume the same framework-neutral Modal interface",
     "responsive-content-stress": "pass: long content owns body scroll and narrow Modal remains viewport-bounded with stable regions"
@@ -108,19 +109,7 @@
     "browserTest": "tools/playwright/overlay.spec.js",
     "manualStateWalk": "pass: pointer open/close/backdrop/drag, Tab and Shift+Tab, focus-visible, Escape precedence, explicit/form actions, long/narrow content, stale opener, repeated open and nested Wave 6 surfaces inspected"
   },
-  "acceptedDeviations": [
-    {
-      "id": "modal-compact-secondary-contrast",
-      "severity": "P1",
-      "scope": "compact Info, Success, Warning and Error secondary body text",
-      "status": "accepted-for-this-pr",
-      "introducedByThisChange": false,
-      "worsenedByThisChange": false,
-      "evidence": "real open computed contrast is approximately 2.79:1 against the source-backed surface in tools/playwright/overlay.spec.js",
-      "reason": "Wave 7 preserves Modal.svg authority; resolving the source-backed paint requires a separately approved source or shared text-color contract decision",
-      "tracking": "https://github.com/Antropophag/shlz-ui/issues/25"
-    }
-  ],
+  "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
     "arbitrary nested or concurrent modal overlays, portals and a public generic overlay manager are unsupported"

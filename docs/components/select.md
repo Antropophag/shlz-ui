@@ -148,11 +148,10 @@ trigger focus; Tab closes without trapping focus.
 - Connect validation/help text with ARIA attributes in application code.
 - Do not remove listbox/option roles or the controller's focus lifecycle.
 - The source label (`#939CA5` on white, approximately 2.79:1) and placeholder
-  (25% dark blue on `#F5F5F5`, approximately 1.73:1) do not meet WCAG 1.4.3
-  for normal text. This is a pre-existing cross-component P1 accessibility
-  deviation in the Field family, not introduced or worsened by this PR. Select
-  keeps the source-backed paint unchanged; the shared accessibility contract is
-  tracked separately in [#13](https://github.com/Antropophag/shlz-ui/issues/13).
+  (25% dark blue on `#F5F5F5`, approximately 1.73:1) remain recorded source
+  facts. Production Select uses the shared accessible supporting and placeholder
+  roles documented in `docs/accessibility-source-contrast.md`; their defaults
+  meet WCAG 2.2 SC 1.4.3 on supported Field backgrounds.
 
 ## Composition
 
@@ -171,9 +170,6 @@ uses the same option count or data.
 - The component requires JavaScript enhancement.
 - ARIA relationship IDs must be globally unique, including when server-rendered
   fragments or repeated fixtures are composed on one page.
-- The accepted pre-existing Field-family contrast deviation is tracked in
-  [#13](https://github.com/Antropophag/shlz-ui/issues/13); it is not a Select PR
-  regression or a source-color change in this scope.
 - No search, multiselect, status-chip, async-loading or virtualization API.
 - No read-only semantic state exists in the current Select contract.
 - Source matrices for unsupported variants are collapsed diagnostics, not

@@ -78,7 +78,7 @@ const verifyModalStatus = async (page, state, color) => {
     color,
   );
   expect(await textContrast(dialog.locator("h2"))).toBeGreaterThanOrEqual(4.5);
-  expect(await textContrast(dialog.locator("p"))).toBeCloseTo(2.79, 1);
+  expect(await textContrast(dialog.locator("p"))).toBeGreaterThanOrEqual(4.5);
   await page.keyboard.press("Escape");
 };
 const expectOccurrenceSubset = async (page, component, ids, diagnostics) =>

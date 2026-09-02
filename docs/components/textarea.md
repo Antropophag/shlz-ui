@@ -69,6 +69,10 @@ The application owns the value, name, constraints, validation and any counter sy
 - For an error, set `aria-invalid="true"` and reference the stable message id with `aria-describedby`.
 - `maxlength` provides a native constraint. A visible counter does not by itself announce the constraint or remaining characters.
 - If a product requires live remaining-character announcements, it must define and test that behavior separately; the current CSS primitive does not provide it.
+- Active labels, guidance, counters, and placeholders use the shared accessible
+  production-text roles documented in `docs/accessibility-source-contrast.md`.
+  Disabled text remains separately measured under the inactive-component
+  exception.
 
 ## Composition
 

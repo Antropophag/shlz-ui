@@ -11,11 +11,9 @@
 .shlz-date-field__label,
 .shlz-date-field__description {
   min-block-size: 15px;
-
-  /* DECISION: source gray-200 is 2.78:1 on white; keep the secondary
-     hierarchy with opacity while meeting WCAG AA for normal text. */
-  color: var(--shlz-semantic-color-text-primary);
-  opacity: 0.65;
+  /* DECISION: source Gray 200 remains preserved; Field-family guidance shares
+     the accessible production-text role. */
+  color: var(--shlz-semantic-color-text-supporting-accessible);
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   font-weight: var(--shlz-semantic-typography-weight-regular);
   line-height: 15px;
@@ -62,6 +60,11 @@
   font: inherit;
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   line-height: var(--shlz-semantic-typography-role-field-value-line-height);
+}
+
+.shlz-date-field__input::placeholder {
+  color: var(--shlz-semantic-color-text-placeholder-accessible);
+  opacity: 1;
 }
 
 .shlz-date-field__trigger {

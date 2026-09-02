@@ -68,7 +68,7 @@ test("Select trigger and chevron match the source-backed size and paint contract
   );
   await expect(placeholder.locator(".shlz-select__trigger")).toHaveCSS(
     "color",
-    "rgba(11, 22, 35, 0.25)",
+    "rgba(11, 22, 35, 0.6)",
   );
 
   await expect(hover.locator(".shlz-field__control")).toHaveCSS(

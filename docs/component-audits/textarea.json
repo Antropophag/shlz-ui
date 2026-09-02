@@ -46,7 +46,10 @@
       "evidence": "docs/components/textarea.md"
     }
   ],
-  "browserTests": ["tools/playwright/form-controls-wave2.spec.js"],
+  "browserTests": [
+    "tools/playwright/form-controls-wave2.spec.js",
+    "tools/playwright/accessible-source-contrast.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/form-controls-wave2.spec.js-snapshots/textarea-focused-states-chromium-linux.png"
   ],
@@ -54,7 +57,7 @@
     "source-integrity": "pass: Textarea.svg complete state by filled by counter matrix remains source-tested",
     "structural-contract": "pass: native textarea markup, field composition, documentation and package CSS are asserted",
     "runtime-browser": "pass: native multiline editing and value ownership execute in Chromium",
-    "accessibility": "pass: invalid and described error relationships plus keyboard focus are asserted",
+    "accessibility": "pass: invalid and described error relationships plus keyboard focus are asserted; active labels, guidance, counters and placeholders meet the shared WCAG 2.2 contrast contract",
     "focused-visual": "pass: real default, hover, keyboard focus, invalid and disabled computed shell paint supplement the focused snapshot",
     "consumer-integration": "not-applicable: no application-owned live consumer exists",
     "responsive-content-stress": "pass: long Cyrillic and Latin multiline content wraps in the audited narrow surface"

@@ -11,18 +11,19 @@ not count as new component implementation.
    Reconcile unresolved source records with committed reusable components,
    composition evidence, and explicit consumer-ownership boundaries. Retain
    `unresolved` whenever the proof is incomplete.
-2. **Classify source extraction diagnostics** — active in PR #65. Separate
+2. **Classify source extraction diagnostics** — completed by PR #65. Separate
    extraction defects, source ambiguities, and harmless diagnostics from the
    product backlog without changing `shlz-design-source/`. The committed index
    supports 44 node-level diagnostic units and two archive-level skipped-instance
    cohorts whose multiplicities account for all 91 reported instances.
-3. **Optimize showcase loading** — active in PR #66. The candidate reduces
+3. **Optimize showcase loading** — completed by PR #66. The delivered change reduces
    initial JavaScript from 1,088,896 to 8,359 bytes (99.23%), keeps initial
    font bytes unchanged at 219,500, limits CSS growth to 0.27%, and makes zero
    initial image or generated source-reference requests.
-4. **Resolve accessibility-versus-fidelity policy** — queued before new
-   component delivery. Record how native semantics, source fidelity, and
-   unavoidable deviations are decided and evidenced.
+4. **Resolve accessibility-versus-fidelity policy** — active in PR #67. Active
+   production text takes precedence when source paint fails WCAG 2.2 SC 1.4.3;
+   source facts stay immutable and explicit semantic overrides carry the
+   repository decision. Issues #13 and #25 are the closed affected surface.
 5. **Audit and propose File Upload / Drop Zone** — queued after the policy.
    Establish source, state, size, content-stress, ownership, and consumer
    contracts without implementing the component.

@@ -79,6 +79,10 @@ The standalone `.shlz-input` compatibility style exists, but the full field comp
 - Use `disabled` only when the field must be unavailable. Use `readonly` when its value should remain focusable and submit with the form.
 - For an error, set `aria-invalid="true"`, give the message a stable id and reference it with `aria-describedby`.
 - Placeholder text is a hint, not an accessible-name substitute.
+- Active labels and placeholders use the shared accessible production-text
+  roles defined in `docs/accessibility-source-contrast.md`. Their defaults meet
+  WCAG 2.2 AA on supported Field backgrounds while the original source paints
+  remain preserved as source facts.
 
 The library does not make screen-reader conformance claims beyond these native relationships; supported AT evidence is governed by the repository acceptance baseline.
 

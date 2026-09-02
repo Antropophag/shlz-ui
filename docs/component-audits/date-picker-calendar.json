@@ -212,6 +212,7 @@
     }
   ],
   "browserTests": [
+    "tools/playwright/accessible-source-contrast.spec.js",
     "tools/playwright/calendar-contract.spec.js",
     "tools/playwright/date-field-contract.spec.js",
     "tools/playwright/date-picker-accessibility.spec.js",
@@ -257,7 +258,7 @@
     "source-integrity": "pass: raw Date-Picker and Calendar sources are present, indexed and unchanged",
     "structural-contract": "pass: public Date Field, Calendar and Date Picker exports, generated CSS bundle, plain-HTML fixtures, 29 Showcase roots and one application-owned consumer are classified and source-tested",
     "runtime-browser": "pass: standalone Calendar, Date Field and composed Date Picker execute navigation, editing, synchronization, selection, dismissal, reset, events and controller lifecycle contracts in Chromium",
-    "accessibility": "pass: standalone Calendar and open Date Picker each report 0 WCAG 2.0/2.1 A/AA axe violations in Chromium after gridcell selection semantics and source-backed low-contrast text were corrected; keyboard focus, disabled-date skipping, Enter/Space selection, Escape dismissal, aria-expanded and trigger focus restoration execute",
+    "accessibility": "pass: standalone Calendar and open Date Picker each report 0 WCAG 2.0/2.1 A/AA axe violations in Chromium; active Date Field labels, descriptions and placeholders meet the shared WCAG 2.2 contrast contract; keyboard focus, disabled-date skipping, Enter/Space selection, Escape dismissal, aria-expanded and trigger focus restoration execute",
     "focused-visual": "pass: 20 component-local Date Picker snapshots cover every authoritative Large/Medium state combination at exact 250px width and 63/55px normal height; Calendar range plus 560px two-month and 280px narrow one-month snapshots cover source-backed cell states and responsive surfaces without page-level proxies",
     "consumer-integration": "pass: application-owned native form consumer imports only @shlz/behaviors/date-picker and verifies FormData after localized typing and Calendar selection",
     "responsive-content-stress": "pass: one/two-month, forced narrow fallback, long label, invalid input, constraints and de-DE locale scenarios execute without narrow-root overflow"
