@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Measure and optimize the documentation showcase initial load through deferred section and source-reference loading while preserving navigation, accessibility, evidence, public packages, and existing component contracts, then deliver an unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "roadmap-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "The user asked to analyze the last five PRs, formulate the next task, continue from current main, and then explicitly replied 'Работай' after the optimize-showcase-loading proposal was presented."
+      }
+    },
+    {
+      "id": "baseline-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "docs/library-development-roadmap.md step 3 and docs/source-transfer-fidelity-audit-2026-09-01.md require a measured current baseline before showcase loading or bundling changes."
+      }
+    },
+    {
+      "id": "loading-architecture",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "openspec/changes/optimize-showcase-loading/design.md selects a showcase-local coarse section registry, dynamic imports, and an idempotent loading state machine."
+      }
+    },
+    {
+      "id": "evidence-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md, docs/validation-workflow.md, and the current showcase audit fixtures require source immutability, preserved evidence counts, browser validation, and candidate-bound measurement."
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md and docs/agent-execution.md require a clean task worktree, immutable baseline, proportionate validation and independent review, and an unmerged PR targeting main."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "optimize-showcase-loading",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "After receiving the completed optimize-showcase-loading OpenSpec and explicit apply boundary, the user replied: Работай."
+    }
+  }
+}
