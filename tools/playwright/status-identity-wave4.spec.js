@@ -19,7 +19,7 @@ const manifests = Object.fromEntries(
   ),
 );
 
-test.beforeEach(async ({ page }) => page.goto("/"));
+test.beforeEach(async ({ page }) => page.goto("/?full=1"));
 
 test("all Wave 4 executable and live roots are semantically classified", async ({
   page,
@@ -39,6 +39,7 @@ test("all Wave 4 executable and live roots are semantically classified", async (
 test("Status and Badge remain static text/count primitives", async ({
   page,
 }) => {
+  test.slow();
   for (const selector of [
     "[data-component-audit-id^='status-']",
     "[data-component-audit-id^='badge-']",

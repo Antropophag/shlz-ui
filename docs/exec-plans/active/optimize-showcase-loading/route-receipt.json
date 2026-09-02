@@ -1,0 +1,51 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Measure and optimize the documentation showcase initial load through deferred section and source-reference loading while preserving navigation, accessibility, evidence, public packages, and existing component contracts, then deliver an unmerged PR.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "optimize-showcase-loading",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "roadmap-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "baseline-contract",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "loading-architecture",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "evidence-boundary",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "cd32efb32eaadce2b3ef451551f1390108acb282e0b847c5b66ea3142e997668"
+}

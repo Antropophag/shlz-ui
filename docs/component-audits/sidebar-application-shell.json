@@ -7,10 +7,11 @@
     "docs/components/sidebar-application-shell.md"
   ],
   "implementation": [
+    "apps/showcase/src/bootstrap.js",
     "apps/showcase/src/main.js",
     "apps/showcase/src/showcase.css"
   ],
-  "behavior": "apps/showcase/src/main.js",
+  "behavior": "apps/showcase/src/bootstrap.js",
   "docs": "docs/components/sidebar-application-shell.md",
   "rootSelector": ".shlz-docs-shell",
   "legacySelectors": [".shlz-docs-sidebar", ".shlz-hero"],
@@ -27,6 +28,10 @@
     }
   ],
   "sourceOccurrences": [
+    {
+      "path": "apps/showcase/src/bootstrap.js",
+      "classification": "progressive-live-consumer-shell"
+    },
     {
       "path": "apps/showcase/src/main.js",
       "classification": "live-consumer"
@@ -66,6 +71,10 @@
     {
       "path": "tools/playwright/showcase-navigation.spec.js",
       "classification": "focused-executable-fixture"
+    },
+    {
+      "path": "tools/playwright/showcase-loading.spec.js",
+      "classification": "progressive-loading-executable-fixture"
     },
     {
       "path": "tools/playwright/typography-profiles.spec.js",
@@ -124,7 +133,10 @@
       "evidence": "docs/components/sidebar-application-shell.md"
     }
   ],
-  "browserTests": ["tools/playwright/showcase-navigation.spec.js"],
+  "browserTests": [
+    "tools/playwright/showcase-loading.spec.js",
+    "tools/playwright/showcase-navigation.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-opened-chromium-linux.png",
     "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-closed-chromium-linux.png",

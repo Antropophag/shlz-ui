@@ -113,7 +113,7 @@ const subset = (component, ids, diagnostics) => ({
 });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("material state ownership covers each independent manifest", () => {

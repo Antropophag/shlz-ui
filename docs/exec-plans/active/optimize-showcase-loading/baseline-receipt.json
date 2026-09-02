@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "perf/optimize-showcase-loading",
+    "commit": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "perf/optimize-showcase-loading",
+      "headRefOid": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/66"
+    },
+    "repository": {
+      "digest": "8e8be57d29567044815cd7caf6f35636806996ab7ede3388bc93f4abe49e2b97",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-optimize-showcase-loading"
+    },
+    "upstream": "origin/perf/optimize-showcase-loading"
+  },
+  "requirementsDigest": "91775157c36ebafc33c58b8e277341edd8a5481e2bef485c1131102109859f31",
+  "routeDigest": "cd32efb32eaadce2b3ef451551f1390108acb282e0b847c5b66ea3142e997668",
+  "version": 1,
+  "digest": "d6acf37e28945c22b3b320dac13647e3d4b582b0dd714a82114e42d89977c859"
+}

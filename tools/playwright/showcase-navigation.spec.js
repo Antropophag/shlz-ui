@@ -96,7 +96,7 @@ test("foundation and verification evidence use progressive disclosure", async ({
 });
 
 test("sidebar supports keyboard navigation", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   const first = page.locator('[data-shlz-docs-link][href="#foundations"]');
   await first.focus();
   await expect(first).toBeFocused();
@@ -109,7 +109,7 @@ test("sidebar supports keyboard navigation", async ({ page }) => {
 test("shell occurrence and native landmarks are classified", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await expectClassifiedComponentOccurrences(page, manifest);
   await expect(sidebar(page)).toHaveAttribute(
     "aria-label",
@@ -223,7 +223,7 @@ test("sidebar opened, closed, and current states use the real interaction seam",
 test("header default, hover, typing, and filled states are native", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   const input = search(page);
 
   await expect(input).toHaveValue("");

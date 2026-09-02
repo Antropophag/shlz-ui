@@ -22,7 +22,7 @@ const manifests = Object.fromEntries(
 );
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("all Wave 2 executable and live roots are classified", async ({

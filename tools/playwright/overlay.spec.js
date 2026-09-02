@@ -91,7 +91,7 @@ const expectOccurrenceSubset = async (page, component, ids, diagnostics) =>
   });
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("Modal and Drawer occurrence guards classify Showcase and plain HTML roots", async ({

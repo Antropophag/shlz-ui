@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("tooltip follows hover, focus, Escape and description semantics", async ({

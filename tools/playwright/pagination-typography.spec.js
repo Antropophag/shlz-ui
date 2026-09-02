@@ -13,7 +13,7 @@ const body15Regular = {
 test("Pagination uses the source Body 15 Regular contract in every numeric role", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 
   const fixture = page.locator("#fidelity-pagination");
   const pageItems = fixture.locator(".shlz-pagination__group").first();
@@ -44,7 +44,7 @@ test("Pagination uses the source Body 15 Regular contract in every numeric role"
 test("Pagination typography visual stays within its bounded raster budget", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await hideDeveloperDocumentation(page);
   await page.addStyleTag({
     content: "#file-row-extension-demo { display: none !important; }",
@@ -79,7 +79,7 @@ test("Pagination typography visual stays within its bounded raster budget", asyn
 test("Pagination digit fixture covers default and current source-fidelity cases", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.locator(".shlz-verification-harness").evaluate((details) => {
     details.open = true;
   });

@@ -12,7 +12,7 @@ const componentIds = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 test("primary component documentation fits a desktop viewport", async ({

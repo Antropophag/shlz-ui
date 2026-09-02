@@ -18,6 +18,7 @@ const executableExtensions = new Set([
 const wave6Markup =
   /shlz-(?:dropdown|tooltip|popover|calendar(?!-grid)|date-picker)|data-shlz-(?:tooltip|popover|calendar(?!-grid)|date-picker)(?:-trigger)?|type\s*=\s*["']date["']|\stitle\s*=\s*["']/;
 const classifiedFiles = new Set([
+  "apps/showcase/src/bootstrap.js",
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/content-states.js",
   "apps/showcase/src/date-picker-consumer.js",

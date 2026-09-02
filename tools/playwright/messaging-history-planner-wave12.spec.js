@@ -23,7 +23,7 @@ const expectMaterialStates = (component) => {
 test("Wave 12 higher-level composition roots remain absent", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await expectClassifiedComponentOccurrences(page, manifest);
   expectMaterialStates("messaging-history-planner-compositions");
 });

@@ -2,6 +2,7 @@ import "@shlz/styles";
 import "./golos-text.css";
 import "./fira-sans.css";
 import "./showcase.css";
+import navigation from "./showcase-navigation.json";
 import { fidelityMarkup, primaryComponentMarkup } from "./fidelity.js";
 import { renderComponentDocumentation } from "./component-docs.js";
 import { paginationConsumerMarkup } from "./pagination-consumer.js";
@@ -151,55 +152,7 @@ const geometryFacts = [
       `<tr><th scope="row">${family}</th><td>${size}px</td><td>${geometry}</td></tr>`,
   )
   .join("");
-const navigationGroups = [
-  [
-    "Foundations",
-    [
-      ["foundations", "Overview"],
-      ["colors", "Colors"],
-      ["typography", "Typography"],
-      ["spacing", "Spacing"],
-      ["geometry", "Geometry"],
-    ],
-  ],
-  [
-    "Components",
-    [
-      ["button", "Button"],
-      ["input", "Input"],
-      ["textarea", "Textarea"],
-      ["select", "Select"],
-      ["checkbox", "Checkbox"],
-      ["radio", "Radio"],
-      ["switch", "Switch"],
-      ["status", "Status"],
-      ["badge", "Badge"],
-      ["link", "Link"],
-      ["avatar", "Avatar"],
-      ["table", "Table"],
-      ["tabs", "Tabs"],
-      ["pagination", "Pagination"],
-      ["tag", "Tag"],
-      ["person-tag", "Person Tag"],
-      ["segment", "Segment"],
-      ["notification", "Notification"],
-      ["dropdown", "Dropdown"],
-      ["file-row", "File Row"],
-      ["empty-state", "Empty State"],
-      ["date-picker-demo", "Date Picker"],
-      ["calendar-grid-demo", "Calendar Grid"],
-      ["planner-schedule-demo", "Planner Schedule"],
-      ["message-thread-demo", "Message Thread"],
-      ["history-timeline-demo", "History Timeline"],
-      ["file-upload-demo", "File Upload"],
-      ["composer-demo", "Composer / Rich Text Toolbar"],
-      ["card-with-action-demo", "Card with action"],
-      ["report-card-demo", "Report card"],
-      ["cover-demo", "Cover"],
-    ],
-  ],
-  ["Validation", [["consumer-validation", "Data workspace"]]],
-];
+const navigationGroups = navigation.map(({ label, links }) => [label, links]);
 const navigationIcons = [
   "circle-grid-interface-sidebar",
   "ai-brain-network",

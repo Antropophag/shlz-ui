@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "optimize-showcase-loading",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "roadmap-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "baseline-contract",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "loading-architecture",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "evidence-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Measure and optimize the documentation showcase initial load through deferred section and source-reference loading while preserving navigation, accessibility, evidence, public packages, and existing component contracts, then deliver an unmerged PR.",
+    "revision": 1
+  },
+  "routeDigest": "cd32efb32eaadce2b3ef451551f1390108acb282e0b847c5b66ea3142e997668",
+  "version": 1,
+  "digest": "91775157c36ebafc33c58b8e277341edd8a5481e2bef485c1131102109859f31"
+}

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const installFixture = async (page) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
   await page.evaluate(
     (items) => {
       document.body.className = "shlz-scope";

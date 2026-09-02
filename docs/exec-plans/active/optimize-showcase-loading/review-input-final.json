@@ -1,0 +1,26 @@
+{
+  "candidateHead": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f",
+  "contract": "docs/exec-plans/active/optimize-showcase-loading/contract-receipt-final.json",
+  "standards": {
+    "candidateHead": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f",
+    "contractDigest": "9df21f6cac785f98201f8c9ebfd639a7d65ca56ebd1e9f65af69b5a443ce9bdc",
+    "outcome": "pass",
+    "runtimeId": "codex-agent:/root/pr66_final_standards@5b90efc",
+    "runtimeSource": "codex-exec-jsonl",
+    "findings": [
+      {
+        "severity": "low",
+        "status": "accepted",
+        "summary": "The test-only /?full=1 compatibility URL is repeated across legacy Playwright suites; centralizing it is a future maintainability improvement with no runtime or contract impact."
+      }
+    ]
+  },
+  "spec": {
+    "candidateHead": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f",
+    "contractDigest": "9df21f6cac785f98201f8c9ebfd639a7d65ca56ebd1e9f65af69b5a443ce9bdc",
+    "outcome": "pass",
+    "runtimeId": "codex-agent:/root/pr66_final_spec@5b90efc",
+    "runtimeSource": "codex-exec-jsonl",
+    "findings": []
+  }
+}

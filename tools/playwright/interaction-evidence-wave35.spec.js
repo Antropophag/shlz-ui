@@ -33,7 +33,7 @@ const manifests = Object.fromEntries(
 );
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?full=1");
 });
 
 const paint = (locator, pseudo = null) =>
