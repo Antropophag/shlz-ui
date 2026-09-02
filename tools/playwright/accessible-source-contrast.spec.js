@@ -128,15 +128,19 @@ test("supported backgrounds and material Field states form a closed contrast mat
   await page.evaluate(() => {
     const probe = document.createElement("div");
     probe.dataset.accessibleContrastSurfaceMatrix = "";
-    probe.innerHTML = [
+    const surfaces = [
       ["white", "--shlz-source-color-white-white"],
       ["gray-50", "--shlz-source-color-gray-gray-50"],
       ["blue-50", "--shlz-source-color-blue-blue-50"],
       ["page", "--shlz-source-color-background-primary"],
-    ]
-      .map(
-        ([name, token]) =>
-          `<span data-contrast-surface="${name}" style="display:block;color:var(--shlz-semantic-color-text-supporting-accessible);background:var(${token})">${name}</span>`,
+    ];
+    const roles = ["supporting-accessible", "placeholder-accessible"];
+    probe.innerHTML = surfaces
+      .flatMap(([name, token]) =>
+        roles.map(
+          (role) =>
+            `<span data-contrast-surface="${name}" data-contrast-role="${role}" style="display:block;color:var(--shlz-semantic-color-text-${role});background:var(${token})">${name} ${role}</span>`,
+        ),
       )
       .join("");
     document.body.append(probe);
@@ -148,12 +152,17 @@ test("supported backgrounds and material Field states form a closed contrast mat
     ["blue-50", "rgb(238, 240, 244)"],
     ["page", "rgb(244, 246, 249)"],
   ];
-  for (const [name, background] of surfaceMatrix) {
-    const locator = page.locator(`[data-contrast-surface='${name}']`);
-    await expect(locator).toHaveCount(1);
-    await expect(locator).toHaveCSS("background-color", background);
-    await expectAa(locator, `${name} semantic surface`);
-  }
+  const roles = ["supporting-accessible", "placeholder-accessible"];
+  for (const [name, background] of surfaceMatrix)
+    for (const role of roles) {
+      const locator = page.locator(
+        `[data-contrast-surface='${name}'][data-contrast-role='${role}']`,
+      );
+      await expect(locator).toHaveCount(1);
+      await expect(locator).toHaveCSS("background-color", background);
+      await expectAa(locator, `${name} ${role} semantic surface`);
+    }
+  expect(surfaceMatrix.length * roles.length).toBe(8);
 
   const stateMatrix = [
     {
@@ -173,6 +182,11 @@ test("supported backgrounds and material Field states form a closed contrast mat
       selector: ".shlz-select__trigger",
       label: "Select focus placeholder",
       background: "rgb(238, 240, 244)",
+    },
+    {
+      id: "request-status-filled",
+      selector: ".shlz-field__label",
+      label: "Select filled-state label",
     },
     {
       target:
@@ -206,7 +220,7 @@ test("supported backgrounds and material Field states form a closed contrast mat
     },
   ];
   for (const member of stateMatrix) await expectOneAa(page, member);
-  expect(stateMatrix).toHaveLength(8);
+  expect(stateMatrix).toHaveLength(9);
 });
 
 test("real consumers inherit accessible defaults and retain interaction", async ({
