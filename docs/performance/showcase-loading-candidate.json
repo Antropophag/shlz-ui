@@ -1,7 +1,7 @@
 {
   "report": {
     "version": 1,
-    "commit": "e2c003326542ed720269938a5cc24aca1de2f19c",
+    "commit": "07db02e6a640d59b4f5942e6457232d79e44f708",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
@@ -24,14 +24,14 @@
       "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
       "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
       "assets/index-8vQ9HlTi.css",
-      "assets/index-BK7ixgCM.js",
+      "assets/index-C3tAcnn4.js",
       "index.html"
     ],
     "totals": {
-      "initialJavaScriptBytes": 7857,
+      "initialJavaScriptBytes": 8060,
       "initialCssBytes": 134020,
       "initialFontBytes": 219500,
-      "emittedBytes": 16556211,
+      "emittedBytes": 16556414,
       "initialImageBytes": 0
     },
     "assets": [
@@ -356,11 +356,11 @@
         "phase": "initial"
       },
       {
-        "file": "assets/index-BK7ixgCM.js",
+        "file": "assets/index-C3tAcnn4.js",
         "type": "javascript",
-        "bytes": 7857,
-        "gzipBytes": 3239,
-        "sha256": "cd762adac6a8eb15427803235cc6fc485eacb5f486d1e5779015a6fab1d36617",
+        "bytes": 8060,
+        "gzipBytes": 3310,
+        "sha256": "641239330c9f0960b706a6093350e12fcae927d31799fbd3fc92d43921566fac",
         "phase": "initial"
       },
       {
@@ -532,11 +532,11 @@
         "phase": "deferred"
       },
       {
-        "file": "assets/main-ClP3j4CE.js",
+        "file": "assets/main-DOU6Ssl-.js",
         "type": "javascript",
         "bytes": 1087200,
-        "gzipBytes": 198622,
-        "sha256": "340b64b4eed366734e41c2db03e0e489e6ecb5b8a813bf2f3a7e5bc7dbfa381b",
+        "gzipBytes": 198620,
+        "sha256": "0feea60f63b90b460cd222717020a1ff811bd1e2bec500c859801b2ed3764cdc",
         "phase": "deferred"
       },
       {
@@ -1743,19 +1743,19 @@
         "file": "index.html",
         "type": "html",
         "bytes": 444,
-        "gzipBytes": 301,
-        "sha256": "c6db54cfb36437a609a81d9c3763cf95cb46826166b9bca6d96f506cecd11d80",
+        "gzipBytes": 300,
+        "sha256": "609b15f9dfa09d468f7c4cf764e1bc81319260bb8ce111cbb98ba45185828e7c",
         "phase": "initial"
       }
     ],
-    "assetsDigest": "64de6023a1d381d147334fbf8ccbd35393e038de7bba378a62ea6e2c5beb5c32"
+    "assetsDigest": "f4f84e8d51a7195a04bd9d7995d1972d7027cdd5c69212af7f0fb63ea9390b55"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "e2c003326542ed720269938a5cc24aca1de2f19c",
+    "candidate": "07db02e6a640d59b4f5942e6457232d79e44f708",
     "checks": {
-      "initialJavaScriptReduction": 0.99278443487716,
+      "initialJavaScriptReduction": 0.9925980075232161,
       "initialCssGrowth": 0.0027459166647960664,
       "initialFontGrowth": 0
     }
