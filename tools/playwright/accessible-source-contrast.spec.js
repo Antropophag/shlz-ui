@@ -56,6 +56,21 @@ const expectAa = async (locator, label, pseudo = null) => {
   return evidence;
 };
 
+const expectOneAa = async (
+  page,
+  { id, selector, target, label, background, pseudo = null },
+) => {
+  const locator = page.locator(
+    target ?? `[data-component-audit-id='${id}'] ${selector}`,
+  );
+  await expect(locator, `${label} must remain a closed-set member`).toHaveCount(
+    1,
+  );
+  if (background)
+    await expect(locator).toHaveCSS("background-color", background);
+  await expectAa(locator, label, pseudo);
+};
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/?full=1");
 });
@@ -105,6 +120,93 @@ test("active Field-family guidance and placeholders meet WCAG AA", async ({
       selectPlaceholders.nth(index),
       `active Select placeholder ${index + 1}`,
     );
+});
+
+test("supported backgrounds and material Field states form a closed contrast matrix", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    const probe = document.createElement("div");
+    probe.dataset.accessibleContrastSurfaceMatrix = "";
+    probe.innerHTML = [
+      ["white", "--shlz-source-color-white-white"],
+      ["gray-50", "--shlz-source-color-gray-gray-50"],
+      ["blue-50", "--shlz-source-color-blue-blue-50"],
+      ["page", "--shlz-source-color-background-primary"],
+    ]
+      .map(
+        ([name, token]) =>
+          `<span data-contrast-surface="${name}" style="display:block;color:var(--shlz-semantic-color-text-supporting-accessible);background:var(${token})">${name}</span>`,
+      )
+      .join("");
+    document.body.append(probe);
+  });
+
+  const surfaceMatrix = [
+    ["white", "rgb(255, 255, 255)"],
+    ["gray-50", "rgb(245, 245, 245)"],
+    ["blue-50", "rgb(238, 240, 244)"],
+    ["page", "rgb(244, 246, 249)"],
+  ];
+  for (const [name, background] of surfaceMatrix) {
+    const locator = page.locator(`[data-contrast-surface='${name}']`);
+    await expect(locator).toHaveCount(1);
+    await expect(locator).toHaveCSS("background-color", background);
+    await expectAa(locator, `${name} semantic surface`);
+  }
+
+  const stateMatrix = [
+    {
+      id: "request-status-empty",
+      selector: ".shlz-select__trigger",
+      label: "Select default placeholder",
+      background: "rgb(245, 245, 245)",
+    },
+    {
+      id: "request-status-hover",
+      selector: ".shlz-select__trigger",
+      label: "Select hover placeholder",
+      background: "rgb(238, 240, 244)",
+    },
+    {
+      id: "request-status-focus",
+      selector: ".shlz-select__trigger",
+      label: "Select focus placeholder",
+      background: "rgb(238, 240, 244)",
+    },
+    {
+      target:
+        "label:has([data-component-audit-id='textarea-error-empty']) .shlz-field__message",
+      label: "Textarea invalid guidance",
+    },
+    {
+      id: "input-workspace-search",
+      selector: ".shlz-input",
+      label: "Input consumer placeholder",
+      pseudo: "::placeholder",
+    },
+    {
+      id: "date-picker-calendar-showcase-source-large-default-empty-single",
+      selector: ".shlz-date-field__label",
+      label: "Date Field default label",
+    },
+    {
+      id: "date-picker-calendar-showcase-source-large-hover-empty-single",
+      selector: ".shlz-date-field__input",
+      label: "Date Field hover placeholder",
+      background: "rgba(0, 0, 0, 0)",
+      pseudo: "::placeholder",
+    },
+    {
+      id: "date-picker-calendar-showcase-source-large-focused-empty-single",
+      selector: ".shlz-date-field__input",
+      label: "Date Field focus placeholder",
+      background: "rgba(0, 0, 0, 0)",
+      pseudo: "::placeholder",
+    },
+  ];
+  for (const member of stateMatrix) await expectOneAa(page, member);
+  expect(stateMatrix).toHaveLength(8);
 });
 
 test("real consumers inherit accessible defaults and retain interaction", async ({
@@ -176,11 +278,12 @@ test("compact Modal variants meet WCAG AA and still dismiss", async ({
       .evaluate((button) => button.click());
     const dialog = page.locator(`#${dialogId}`);
     await expect(dialog).toBeVisible();
-    const copy =
-      name === "info"
-        ? dialog.locator(".shlz-modal__body p")
-        : dialog.locator(".shlz-modal__compact-copy p");
+    const copy = dialog.locator(".shlz-modal__compact-copy p");
+    await expect(copy).toHaveCSS("color", "rgba(11, 22, 35, 0.6)");
     await expectAa(copy, `${name} Modal secondary copy`);
+    await expect(dialog.locator(".shlz-modal__surface")).toHaveScreenshot(
+      `accessible-${name}-modal.png`,
+    );
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
   }
