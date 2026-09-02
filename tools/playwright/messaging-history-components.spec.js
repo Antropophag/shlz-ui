@@ -72,7 +72,7 @@ const expectMaterialStates = (component) =>
       ),
   ).toBe(true);
 
-test.beforeEach(async ({ page }) => page.goto("/#message-thread-demo"));
+test.beforeEach(async ({ page }) => page.goto("/?full=1#message-thread-demo"));
 
 test("exact guard classifies Showcase fixtures and Data Workspace consumers", async ({
   page,

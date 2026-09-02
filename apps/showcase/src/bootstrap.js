@@ -72,12 +72,7 @@ export const loadShowcase = () => {
     .then(() => {
       const loadedContent = app.querySelector(".shlz-docs-content");
       const loadedShell = app.querySelector(".shlz-docs-shell");
-      if (
-        !fullDocumentMode &&
-        eagerHeader &&
-        loadedShell &&
-        loadedContent
-      ) {
+      if (!fullDocumentMode && eagerHeader && loadedShell && loadedContent) {
         loadedContent.querySelector(":scope > .shlz-hero")?.remove();
         app.replaceChildren(eagerHeader, loadedShell);
       }
@@ -144,4 +139,4 @@ window.__shlzShowcaseLoader = Object.freeze({
 
 const initialTarget = window.location.hash.slice(1);
 if (initialTarget) requestTarget(initialTarget);
-if (fullDocumentMode) loadShowcase();
+if (fullDocumentMode) await loadShowcase();

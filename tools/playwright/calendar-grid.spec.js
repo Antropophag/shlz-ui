@@ -15,7 +15,7 @@ const manifest = await readComponentAuditManifest(
 );
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/#calendar-grid-demo");
+  await page.goto("/?full=1#calendar-grid-demo");
 });
 
 test("exposes temporal colgroups above independent date headers with source geometry", async ({
