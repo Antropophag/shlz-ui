@@ -1,0 +1,15 @@
+{
+  "pullRequestUrl": "https://github.com/Antropophag/shlz-ui/pull/66",
+  "receipts": {
+    "routeReceipt": "docs/exec-plans/active/optimize-showcase-loading/route-receipt.json",
+    "requirementsReceipt": "docs/exec-plans/active/optimize-showcase-loading/requirements-receipt.json",
+    "baselineReceipt": "docs/exec-plans/active/optimize-showcase-loading/baseline-receipt.json",
+    "contractReceipt": "docs/exec-plans/active/optimize-showcase-loading/contract-receipt-final.json",
+    "tddReceipt": "docs/exec-plans/active/optimize-showcase-loading/tdd-receipt-final.json",
+    "validationReceipts": [
+      "docs/exec-plans/active/optimize-showcase-loading/validation-receipt-final.json"
+    ],
+    "reviewReceipt": "docs/exec-plans/active/optimize-showcase-loading/review-receipt-final.json",
+    "conformanceReceipt": "docs/exec-plans/active/optimize-showcase-loading/conformance-receipt-final.json"
+  }
+}

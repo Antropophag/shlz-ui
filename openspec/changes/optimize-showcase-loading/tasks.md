@@ -19,5 +19,5 @@
 
 ## 4. Review and delivery
 
-- [ ] 4.1 Run strict OpenSpec validation, post-discovery route conformance, target-diff inspection, and independent Standards/Spec review; resolve every scope-local finding and record any eligible pre-existing limitation with evidence and disposition.
-- [ ] 4.2 Update the roadmap and durable validation/review evidence with exact before/after bytes, request counts, checks, limitations, CI, and review-thread status; push only the task branch, open an unmerged PR to `main`, and pass the repository delivery guard against the final remote head.
+- [x] 4.1 Run strict OpenSpec validation, post-discovery route conformance, target-diff inspection, and independent Standards/Spec review; resolve every scope-local finding and record any eligible pre-existing limitation with evidence and disposition.
+- [x] 4.2 Update the roadmap and durable validation/review evidence with exact before/after bytes, request counts, checks, limitations, CI, and review-thread status; push only the task branch, open an unmerged PR to `main`, and pass the repository delivery guard against the final remote head.

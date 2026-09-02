@@ -1,6 +1,6 @@
 {
   "target": "pr-66-browser-regression-gate",
-  "candidateHead": "f3c04f83687973fe3c93c13a32b8998c09b37379",
+  "candidateHead": "5b90efc4ca9cdfba87a60fe95e5b473b89ff9d2f",
   "contract": "docs/exec-plans/active/optimize-showcase-loading/contract-receipt-r2.json",
   "route": "docs/exec-plans/active/optimize-showcase-loading/route-receipt.json",
   "argv": ["npm", "run", "test:e2e"],
@@ -22,6 +22,9 @@
     "tools/generate-showcase-loading-report.mjs",
     "tools/lib/showcase-loading-report.mjs",
     "tools/playwright/showcase-loading.spec.js",
+    "tools/playwright/content-states.spec.js",
+    "tools/playwright/calendar-grid.spec.js",
+    "tools/playwright/messaging-history-components.spec.js",
     "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-error-chromium-linux.png",
     "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-loaded-input-chromium-linux.png",
     "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-progress-chromium-linux.png",

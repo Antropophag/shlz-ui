@@ -16,9 +16,10 @@ not count as new component implementation.
    product backlog without changing `shlz-design-source/`. The committed index
    supports 44 node-level diagnostic units and two archive-level skipped-instance
    cohorts whose multiplicities account for all 91 reported instances.
-3. **Optimize showcase loading** — queued after the coverage denominator is
-   trustworthy. Establish a measured baseline before changing loading or
-   bundling behavior.
+3. **Optimize showcase loading** — active in PR #66. The candidate reduces
+   initial JavaScript from 1,088,896 to 8,359 bytes (99.23%), keeps initial
+   font bytes unchanged at 219,500, limits CSS growth to 0.27%, and makes zero
+   initial image or generated source-reference requests.
 4. **Resolve accessibility-versus-fidelity policy** — queued before new
    component delivery. Record how native semantics, source fidelity, and
    unavoidable deviations are decided and evidenced.
