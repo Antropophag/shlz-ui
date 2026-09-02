@@ -37,7 +37,13 @@ if (targetStat.isDirectory()) {
 const rgba = (value) => {
   const channels = value.match(/[\d.]+/g)?.map(Number);
   if (!channels || channels.length < 3) throw new Error(`Not RGB: ${value}`);
-  return [channels[0], channels[1], channels[2], channels[3] ?? 1];
+  const alpha = channels[3] ?? 1;
+  return [
+    channels[0],
+    channels[1],
+    channels[2],
+    value.includes("%") ? alpha / 100 : alpha,
+  ];
 };
 const composite = (foreground, background) => {
   const [red, green, blue, alpha] = rgba(foreground);
