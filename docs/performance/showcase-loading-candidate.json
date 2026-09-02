@@ -1,7 +1,7 @@
 {
   "report": {
     "version": 1,
-    "commit": "eea97288c2563b415928008b874ae01bab163ec8",
+    "commit": "e2c003326542ed720269938a5cc24aca1de2f19c",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
@@ -24,14 +24,15 @@
       "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
       "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
       "assets/index-8vQ9HlTi.css",
-      "assets/index-D85Ks5SJ.js",
+      "assets/index-BK7ixgCM.js",
       "index.html"
     ],
     "totals": {
-      "initialJavaScriptBytes": 7551,
+      "initialJavaScriptBytes": 7857,
       "initialCssBytes": 134020,
       "initialFontBytes": 219500,
-      "emittedBytes": 16556919
+      "emittedBytes": 16556211,
+      "initialImageBytes": 0
     },
     "assets": [
       {
@@ -355,11 +356,11 @@
         "phase": "initial"
       },
       {
-        "file": "assets/index-D85Ks5SJ.js",
+        "file": "assets/index-BK7ixgCM.js",
         "type": "javascript",
-        "bytes": 7551,
-        "gzipBytes": 3144,
-        "sha256": "f7de2e1e83d959c562c0d1f2ee3867a57c66373945b323733ccd9e8cbd8088a5",
+        "bytes": 7857,
+        "gzipBytes": 3239,
+        "sha256": "cd762adac6a8eb15427803235cc6fc485eacb5f486d1e5779015a6fab1d36617",
         "phase": "initial"
       },
       {
@@ -531,11 +532,11 @@
         "phase": "deferred"
       },
       {
-        "file": "assets/main-DTeZKaEH.js",
+        "file": "assets/main-ClP3j4CE.js",
         "type": "javascript",
-        "bytes": 1088214,
-        "gzipBytes": 199027,
-        "sha256": "f634d35f3f09fe748047b9843c2dd73cdcdeef7d270e9856db3a15e62d4d7b6b",
+        "bytes": 1087200,
+        "gzipBytes": 198622,
+        "sha256": "340b64b4eed366734e41c2db03e0e489e6ecb5b8a813bf2f3a7e5bc7dbfa381b",
         "phase": "deferred"
       },
       {
@@ -1743,18 +1744,18 @@
         "type": "html",
         "bytes": 444,
         "gzipBytes": 301,
-        "sha256": "a12d4ef5a13f0be383a7448b69af1806aa8cfb33d00f46bdf04c79ca1c563de0",
+        "sha256": "c6db54cfb36437a609a81d9c3763cf95cb46826166b9bca6d96f506cecd11d80",
         "phase": "initial"
       }
     ],
-    "assetsDigest": "9f8183be5589c6529fc765be7377cf22d644226909a865779c4f9ec1a36f1d16"
+    "assetsDigest": "64de6023a1d381d147334fbf8ccbd35393e038de7bba378a62ea6e2c5beb5c32"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "eea97288c2563b415928008b874ae01bab163ec8",
+    "candidate": "e2c003326542ed720269938a5cc24aca1de2f19c",
     "checks": {
-      "initialJavaScriptReduction": 0.9930654534500999,
+      "initialJavaScriptReduction": 0.99278443487716,
       "initialCssGrowth": 0.0027459166647960664,
       "initialFontGrowth": 0
     }
