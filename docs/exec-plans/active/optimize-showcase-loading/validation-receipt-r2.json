@@ -1,0 +1,139 @@
+{
+  "contractReceiptDigest": "0f04ccec7a7de4f7ab2d9392eac2ec727b3f0db8feb83662b38c2e39b0c7a725",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "npm",
+      "run",
+      "test:e2e"
+    ],
+    "candidateHead": "f3c04f83687973fe3c93c13a32b8998c09b37379",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 350,
+        "digest": "321977b7d5cf9b1aa8612168ed07f3bdb77046fce7975ef2a46fbf15c5efb7f8",
+        "path": "apps/showcase/index.html"
+      },
+      {
+        "bytes": 5953,
+        "digest": "5776cccac98d1f695bd21eb4e178baaf716f602170239d1df9a7538085595e8b",
+        "path": "apps/showcase/src/bootstrap.js"
+      },
+      {
+        "bytes": 70223,
+        "digest": "00458b6512d5942b941ed245e6a51953118e21fb6befcd150f568808614f28ca",
+        "path": "apps/showcase/src/main.js"
+      },
+      {
+        "bytes": 1535,
+        "digest": "9c12ecda6685b814d7ff82727f1b3bbe39fed4b812bce381460c56fcaf9a22a5",
+        "path": "apps/showcase/src/showcase-navigation.json"
+      },
+      {
+        "bytes": 41289,
+        "digest": "4d3205251ab19033dfc5be9008c368ed458ced7026605de417de20f0a2be96e0",
+        "path": "apps/showcase/src/showcase.css"
+      },
+      {
+        "bytes": 53184,
+        "digest": "25af1162efb2437a6c913a70154da6ac830c2245c34cc0e4bf199f222ba3e2f4",
+        "path": "docs/performance/showcase-loading-baseline.json"
+      },
+      {
+        "bytes": 57251,
+        "digest": "68caec07cb6dbed05db8f7c6d40bfae10f359f58439ddfa5df35082d49dc9d9c",
+        "path": "docs/performance/showcase-loading-candidate.json"
+      },
+      {
+        "bytes": 8192,
+        "digest": "f2c657860f603c9d656ae37dab9035bc250db217a79e5b0a4f6e75aa50b013fe",
+        "path": "openspec/changes/optimize-showcase-loading/design.md"
+      },
+      {
+        "bytes": 2828,
+        "digest": "1692263666ddad60e92dd1eecfcbed562a81389e89aa5ab5038e5fc786fe2579",
+        "path": "openspec/changes/optimize-showcase-loading/proposal.md"
+      },
+      {
+        "bytes": 6244,
+        "digest": "42f428048f6cbaab87d7999df0328ce776895ce2b90fb60325d01eb175f95245",
+        "path": "openspec/changes/optimize-showcase-loading/specs/showcase/loading-performance/spec.md"
+      },
+      {
+        "bytes": 3255,
+        "digest": "e916eb43d86ff718d9f9c7e297ba11fcc4a02c34b5de52a533a76dc47dba9d22",
+        "path": "openspec/changes/optimize-showcase-loading/tasks.md"
+      },
+      {
+        "bytes": 127231,
+        "digest": "b25cc9b6d3518f477f1ea79cde7180afd7a7a0933ad1c6595fe578322adfe473",
+        "path": "package-lock.json"
+      },
+      {
+        "bytes": 2332,
+        "digest": "a1bf5dbcd312c30299006849ad95cced38054c74c25a9ee1c9b39b632cede503",
+        "path": "package.json"
+      },
+      {
+        "bytes": 899,
+        "digest": "061cf84df3686dd7e14c89bfd52a53e940317a243bc01f2baebf903548ced452",
+        "path": "playwright.config.js"
+      },
+      {
+        "bytes": 1386,
+        "digest": "cdd8466b59b792e054fcd82ec3dfc9b7ceb255740bb1bce489fef27bbd02fc56",
+        "path": "tools/generate-showcase-loading-report.mjs"
+      },
+      {
+        "bytes": 6148,
+        "digest": "64b3244616c1966d6e7319fedfd0ed3b551dea03110b47511c5ff45eae5efca8",
+        "path": "tools/lib/showcase-loading-report.mjs"
+      },
+      {
+        "bytes": 5406,
+        "digest": "17fdf612f17f7d06fb216009a72ee8e75f6f55c777e867e2759d70156fb5285f",
+        "path": "tools/playwright/showcase-loading.spec.js"
+      },
+      {
+        "bytes": 9598,
+        "digest": "553635bae0ee54c3aa229ae4b78bcb76f6345156a25941681402826360b7f3ce",
+        "path": "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-error-chromium-linux.png"
+      },
+      {
+        "bytes": 220938,
+        "digest": "bd9a51133a66d7f69bcf2285520150a652b58fb08760d6546ed2f2edb5dc450a",
+        "path": "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-loaded-input-chromium-linux.png"
+      },
+      {
+        "bytes": 7961,
+        "digest": "3d9af5c56fc20df754d9235813812379b8da5863ee1867dd6798cfd45cb0a8a7",
+        "path": "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-progress-chromium-linux.png"
+      },
+      {
+        "bytes": 73535,
+        "digest": "52a356cf4300df8a642684aba9ae468edd071c7db51192e3e35043a3c90481c9",
+        "path": "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-shell-chromium-linux.png"
+      },
+      {
+        "bytes": 3291,
+        "digest": "c5d520f263f13dfebe3cf4b0965749e97efbe8416e1a952833d8d971f093eb22",
+        "path": "tools/tests/showcase-loading-report.test.mjs"
+      }
+    ],
+    "closureDigest": "c8d7c6319dd683409be321f2d12c5d6d870ba09785c94005a27622df347451ce",
+    "contractDigest": "9df21f6cac785f98201f8c9ebfd639a7d65ca56ebd1e9f65af69b5a443ce9bdc",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "0c73085f1e2ef6ddf3e557d9d63816fe128de1da9aaf0666cbcf541d7bd31c07",
+      "stdoutDigest": "c19315aaf376cb65163af5543f45848ffc2f4a8adf6a909e2e01279ddbdd4aea"
+    },
+    "target": "pr-66-browser-regression-gate"
+  },
+  "version": 1,
+  "digest": "15ccc6422f2fb73a70fef038b0eceadcfa03322d2831db07f06922c2b925ac3d"
+}
