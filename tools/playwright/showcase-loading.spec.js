@@ -13,6 +13,11 @@ test("keeps the root shell usable without requesting deferred source evidence", 
     page.getByRole("navigation", { name: "Components and foundations" }),
   ).toBeVisible();
   await expect(page.getByRole("searchbox")).toBeVisible();
+  await expect(
+    page.locator(
+      '[data-component-audit-id="sidebar-application-shell-showcase"]',
+    ),
+  ).toHaveCount(1);
   await expect(page.locator("[data-showcase-loader]")).not.toHaveAttribute(
     "aria-busy",
     "true",
