@@ -26,6 +26,27 @@ const { stdout } = await run("git", [
 const resolvedCommit = stdout.trim();
 if (resolvedCommit !== commit)
   throw new Error("--commit must be a full Git commit identity");
+if (baselinePath) {
+  const { stdout: headOutput } = await run("git", ["rev-parse", "HEAD"]);
+  if (headOutput.trim() !== resolvedCommit)
+    throw new Error("candidate commit does not match HEAD");
+  try {
+    await run("git", [
+      "diff",
+      "--quiet",
+      "HEAD",
+      "--",
+      "apps/showcase",
+      "package.json",
+      "package-lock.json",
+      "tools/generate-showcase-loading-report.mjs",
+      "tools/lib/showcase-loading-report.mjs",
+    ]);
+  } catch {
+    throw new Error("candidate build inputs contain uncommitted changes");
+  }
+  await run("npm", ["run", "build", "-w", "@shlz/showcase"]);
+}
 const report = await createShowcaseLoadingReport({
   dist,
   commit: resolvedCommit,

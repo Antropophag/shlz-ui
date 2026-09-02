@@ -55,8 +55,17 @@ export const loadShowcase = () => {
   const focusedTarget = document.activeElement?.closest?.(
     "[data-showcase-target]",
   )?.dataset.showcaseTarget;
+  const eagerHeader = app.querySelector(":scope > .shlz-hero");
+  const eagerShell = app.querySelector(":scope > [data-shlz-docs-shell]");
   pending = importShowcase()
     .then(() => {
+      const loadedContent = app.querySelector(".shlz-docs-content");
+      const eagerContent = eagerShell?.querySelector(".shlz-docs-main");
+      if (eagerHeader && eagerShell && eagerContent && loadedContent) {
+        loadedContent.querySelector(":scope > .shlz-hero")?.remove();
+        eagerContent.replaceChildren(...loadedContent.childNodes);
+        app.replaceChildren(eagerHeader, eagerShell);
+      }
       state = "ready";
       if (focusedTarget) {
         document

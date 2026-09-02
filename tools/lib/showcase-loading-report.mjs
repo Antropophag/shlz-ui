@@ -97,6 +97,7 @@ export async function createShowcaseLoadingReport({ dist, commit }) {
       initialCssBytes: sum("initial", "css"),
       initialFontBytes: sum("initial", "font"),
       emittedBytes: assets.reduce((total, asset) => total + asset.bytes, 0),
+      initialImageBytes: sum("initial", "image"),
     },
     assets,
     assetsDigest: reportDigest(assets),
@@ -168,6 +169,8 @@ export function compareShowcaseLoadingReports(baseline, candidate) {
     baseline.totals.initialFontBytes * 1.02
   )
     throw new Error("initial font growth exceeds 2%");
+  if (candidate.totals.initialImageBytes !== 0)
+    throw new Error("initial image or source-reference requests are not zero");
   return {
     version: 1,
     baseline: baseline.commit,

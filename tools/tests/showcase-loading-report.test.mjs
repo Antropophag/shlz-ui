@@ -78,6 +78,7 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
       initialJavaScriptBytes: 1000,
       initialCssBytes: 1000,
       initialFontBytes: 1000,
+      initialImageBytes: 0,
     },
   };
   const candidate = {
@@ -89,6 +90,7 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
       initialJavaScriptBytes: 700,
       initialCssBytes: 1020,
       initialFontBytes: 1020,
+      initialImageBytes: 0,
     },
   };
   assert.doesNotThrow(() => compareShowcaseLoadingReports(baseline, candidate));
@@ -107,5 +109,13 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
         totals: { ...candidate.totals, initialCssBytes: 1021 },
       }),
     /CSS growth/,
+  );
+  assert.throws(
+    () =>
+      compareShowcaseLoadingReports(baseline, {
+        ...candidate,
+        totals: { ...candidate.totals, initialImageBytes: 1 },
+      }),
+    /source-reference requests/,
   );
 });

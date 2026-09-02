@@ -49,12 +49,23 @@ test("preserves navigation focus while loading and responds to hash changes", as
 }) => {
   await page.goto("/");
   const inputLink = page.getByRole("link", { name: "Input", exact: true });
+  const shellBefore = await page
+    .locator("[data-shlz-docs-shell]")
+    .boundingBox();
+  const headerBefore = await page.locator(".shlz-hero").boundingBox();
   await inputLink.focus();
   await inputLink.click();
   await expect(page.locator("#input")).toHaveCount(1);
   await expect(
     page.locator('[data-shlz-docs-link][href="#input"]'),
   ).toBeFocused();
+  const shellAfter = await page.locator("[data-shlz-docs-shell]").boundingBox();
+  const headerAfter = await page.locator(".shlz-hero").boundingBox();
+  expect(shellAfter?.x).toBeCloseTo(shellBefore?.x ?? 0, 0);
+  expect(shellAfter?.width).toBeCloseTo(shellBefore?.width ?? 0, 0);
+  expect(headerAfter?.x).toBeCloseTo(headerBefore?.x ?? 0, 0);
+  expect(headerAfter?.width).toBeCloseTo(headerBefore?.width ?? 0, 0);
+  expect(headerAfter?.height).toBeCloseTo(headerBefore?.height ?? 0, 0);
 
   await page.goto("/");
   await page.evaluate(() => {
