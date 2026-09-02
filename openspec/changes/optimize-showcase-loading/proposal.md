@@ -5,7 +5,7 @@ The repository audit measured a 1.08 MB minified showcase entry chunk and roughl
 ## What Changes
 
 - Add a reproducible, machine-checked showcase loading baseline that records entry assets, initial-request assets, and deferred documentation assets from a production build.
-- Split below-the-fold component, consumer, and fidelity documentation into deferred chunks and load the requested section on demand, including direct hash navigation.
+- Split the initial shell from the complete below-the-fold component, consumer, and fidelity documentation graph, and load that coarse documentation bundle on demand, including direct hash navigation.
 - Keep the initial shell, navigation, search affordance, and above-the-fold foundations usable while deferred content loads; expose an accessible loading and failure state.
 - Prevent audit-only source-reference SVGs from entering the initial request set while retaining every existing reference and fidelity fixture when its section is requested.
 - Add regression budgets derived from the measured current-main baseline and verify keyboard navigation, deep links, search, visual stability, and representative component interactions before and after deferred loading.

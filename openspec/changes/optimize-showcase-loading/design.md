@@ -9,7 +9,7 @@ The showcase is a documentation consumer, not a public package. Its current hash
 **Goals:**
 
 - Make the initial documentation shell useful without evaluating every demo and fidelity fixture.
-- Give every existing deep link a deterministic owner so navigation can load the minimum required section group.
+- Give every existing deep link a deterministic owner so navigation can load the deferred documentation boundary.
 - Move source-reference manifest parsing, URL enumeration, and image requests behind the fidelity boundary.
 - Produce candidate-bound build/network evidence rather than relying on a bundler warning or a hand-copied size.
 - Keep deferred enhancement idempotent and preserve the existing DOM and browser contracts once a section is loaded.
@@ -22,17 +22,17 @@ The showcase is a documentation consumer, not a public package. Its current hash
 
 ## Decisions
 
-### 1. Use a showcase-local section registry and dynamic imports
+### 1. Use a showcase-local section registry and one coarse dynamic documentation boundary
 
-Create a small registry in the entry module that maps every stable top-level and descendant hash id to one coarse section group. Each group module returns markup plus an idempotent enhancer. The entry renders the shell and lightweight placeholders, then imports a group only for an initial hash, navigation/search request, or an explicitly scheduled low-priority warm-up after the shell is usable.
+Create a small registry in the entry module that maps every stable navigation target to one coarse documentation owner. The entry renders the shell and a lightweight placeholder, then imports the complete documentation module only for an initial hash, navigation/search request, or explicit full-document test mode.
 
-Coarse groups are preferred over one chunk per component: they materially reduce the entry while limiting request fan-out and avoiding dozens of bespoke lifecycle seams. A framework router was rejected because it would add a dependency and change a single-document hash contract. `content-visibility` alone was rejected because it reduces rendering work but leaves parsing/evaluation and eager asset discovery intact.
+One coarse documentation bundle is preferred over independently migrating dozens of tightly coupled fixtures and enhancers: it materially reduces the entry, preserves the established single-document lifecycle, and avoids request fan-out and duplicated initialization seams. Finer groups remain a future optimization only if measurements justify them. A framework router was rejected because it would add a dependency and change a single-document hash contract. `content-visibility` alone was rejected because it reduces rendering work but leaves parsing/evaluation and eager asset discovery intact.
 
 ### 2. Keep the shell index eager, but move heavy markup/data behind owners
 
 Navigation labels, ids, search metadata, and group ownership remain in a compact eager index so the shell can navigate before content exists. Markup factories, component-specific consumers, large JSON manifests, and their enhancement imports live with the owning deferred group. Existing ids and relevant `data-component-audit-id` values remain unchanged after insertion.
 
-The fidelity group exclusively owns the complete reference manifest and its `import.meta.glob`. Dynamic module isolation prevents those URLs from entering the entry graph; native `loading="lazy"` remains a secondary image-decoding optimization after the group itself loads. Making every SVG a direct dynamic import was rejected because it complicates evidence enumeration and can create excessive module requests.
+The deferred documentation module exclusively owns the complete reference manifest and its `import.meta.glob`. Dynamic module isolation prevents those URLs from entering the entry graph; native `loading="lazy"` remains a secondary image-decoding optimization after the documentation module loads. Making every SVG a direct dynamic import was rejected because it complicates evidence enumeration and can create excessive module requests.
 
 ### 3. Model loading as an explicit idempotent state machine
 

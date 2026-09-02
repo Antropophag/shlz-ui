@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 1,
+  "revision": 2,
   "intent": "Measure and optimize the documentation showcase initial load through deferred section and source-reference loading while preserving navigation, accessibility, evidence, public packages, and existing component contracts, then deliver an unmerged PR.",
   "route": "open-spec",
   "decisions": [
@@ -31,7 +31,7 @@
       "blocking": true,
       "provenance": {
         "kind": "openspec",
-        "ref": "openspec/changes/optimize-showcase-loading/design.md selects a showcase-local coarse section registry, dynamic imports, and an idempotent loading state machine."
+        "ref": "openspec/changes/optimize-showcase-loading/design.md selects a showcase-local eager registry, one coarse deferred documentation boundary, and an idempotent loading state machine; revision 2 records the agent-owned simplification after implementation measurement and independent review."
       }
     },
     {

@@ -53,16 +53,16 @@ The showcase SHALL expose a named, non-blocking loading state while a requested 
 
 ### Requirement: Audit-only references stay outside the initial request set
 
-The showcase SHALL NOT request generated source-reference SVGs or the complete fidelity-reference manifest during an empty-cache root load before a fidelity or source-reference section is requested. When such a section is requested, every reference and evidence fixture available before this change SHALL remain reachable.
+The showcase SHALL NOT request generated source-reference SVGs or the complete fidelity-reference manifest during an empty-cache root load before deferred documentation is requested. When deferred documentation is requested, every reference and evidence fixture available before this change SHALL remain reachable.
 
 #### Scenario: Load the root page without requesting fidelity evidence
 
 - **WHEN** an empty-cache browser loads the showcase root and does not navigate to fidelity material
 - **THEN** no network request is made for a generated source-reference SVG or the complete fidelity-reference manifest
 
-#### Scenario: Request fidelity evidence
+#### Scenario: Request deferred documentation with fidelity evidence
 
-- **WHEN** a user opens a fidelity or source-reference section
+- **WHEN** a user requests the deferred documentation bundle
 - **THEN** the relevant source images, captions, provenance, and production comparison fixtures load without reducing the pre-change evidence inventory
 
 ### Requirement: Loading improvements are reproducible and budgeted
