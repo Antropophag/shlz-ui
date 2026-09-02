@@ -1,7 +1,7 @@
 {
   "report": {
     "version": 1,
-    "commit": "940b30aaf9bb196b547ef33d3915dc06aa8335a5",
+    "commit": "fbfe83d15f803d1e9bd9735eb6fd508d7ce15fbd",
     "build": {
       "command": "npm run build -w @shlz/showcase",
       "node": "v22.23.1"
@@ -23,16 +23,16 @@
       "assets/golos-text-latin-500-normal-BznAvurO.woff2",
       "assets/golos-text-latin-600-normal-Bhk8uV1U.woff2",
       "assets/golos-text-latin-700-normal-CxmN_Nfd.woff2",
-      "assets/index-BVYjrKWI.js",
+      "assets/index-BcxA60IM.js",
       "assets/showcase-navigation-8vQ9HlTi.css",
       "assets/showcase-navigation-B-ngcL7a.js",
       "index.html"
     ],
     "totals": {
-      "initialJavaScriptBytes": 8336,
+      "initialJavaScriptBytes": 8359,
       "initialCssBytes": 134020,
       "initialFontBytes": 219500,
-      "emittedBytes": 16556808,
+      "emittedBytes": 16556831,
       "initialImageBytes": 0
     },
     "assets": [
@@ -349,11 +349,11 @@
         "phase": "initial"
       },
       {
-        "file": "assets/index-BVYjrKWI.js",
+        "file": "assets/index-BcxA60IM.js",
         "type": "javascript",
-        "bytes": 7156,
-        "gzipBytes": 2930,
-        "sha256": "36914e0c9a52614a9763ac6bc845ebd2468cff67fc32658034693726cf8917ba",
+        "bytes": 7179,
+        "gzipBytes": 2935,
+        "sha256": "9d86e4a5727c609e2846276250fb7a7ed3540a379453b7d16e6f753efeec6087",
         "phase": "initial"
       },
       {
@@ -1753,18 +1753,18 @@
         "type": "html",
         "bytes": 548,
         "gzipBytes": 334,
-        "sha256": "808d9dca07518d0cd29e5083f856dfd1d95f5ef5e4349b761e6bf2f1f3daf2ae",
+        "sha256": "809eb00b249fc3717ea1f9d328994e7042fdaddaabf5d0f50a2af095aea0a5ad",
         "phase": "initial"
       }
     ],
-    "assetsDigest": "dc31aaf57562c225e90590dfdf8f13e27a1498b7007e6ae71986f60a99d55419"
+    "assetsDigest": "788f8891f67a8ce55b6ff729f3b074ba11f9e6df1751f791fe9fa3927ccb191b"
   },
   "comparison": {
     "version": 1,
     "baseline": "0a5ebc69ae16eb3a10a1c9a2bc04634485f5bec1",
-    "candidate": "940b30aaf9bb196b547ef33d3915dc06aa8335a5",
+    "candidate": "fbfe83d15f803d1e9bd9735eb6fd508d7ce15fbd",
     "checks": {
-      "initialJavaScriptReduction": 0.9923445397907605,
+      "initialJavaScriptReduction": 0.9923234174797226,
       "initialCssGrowth": 0.0027459166647960664,
       "initialFontGrowth": 0
     }
