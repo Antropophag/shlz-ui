@@ -6,7 +6,7 @@
     "command": [
       "node",
       "-e",
-      "const fs=require('node:fs'),p=require('node:path');const t=process.argv[1];const f=fs.statSync(t).isDirectory()?p.join(t,'apps/showcase/src/bootstrap.js'):t;const s=fs.readFileSync(f,'utf8');process.exit(s.includes('import(\"./main.js\")')&&!s.includes('import \"../../apps/showcase/src/main.js\"')?0:1)",
+      "const fs=require('node:fs'),p=require('node:path');const t=process.argv[1];const f=fs.statSync(t).isDirectory()?p.join(t,'apps/showcase/src/bootstrap.js'):t;const s=fs.readFileSync(f,'utf8');const dynamic=/import\\(\"(?:\\.\\.\\/)*main\\.js\"\\)/.test(s);const eager=/import\\s+\"(?:\\.\\.\\/)*apps\\/showcase\\/src\\/main\\.js\"/.test(s);process.exit(dynamic&&!eager?0:1)",
       "{target}"
     ],
     "redTarget": {

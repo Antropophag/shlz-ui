@@ -15,14 +15,21 @@ test("classifies only HTML-linked assets as initial and binds content hashes", a
   await mkdir(path.join(root, "assets"));
   await writeFile(
     path.join(root, "index.html"),
-    '<link rel="stylesheet" href="/assets/app.css"><script type="module" src="/assets/app.js"></script>',
+    '<link rel="stylesheet" href="/assets/app.css"><script type="module" src="/assets/app.js"></script><img srcset="/assets/one.png 1x, /assets/two.png 2x">',
   );
   await writeFile(
     path.join(root, "assets/app.css"),
-    "@font-face{src:url('./app.woff2')}body{}",
+    "@import './nested.css';body{}",
+    "utf8",
+  );
+  await writeFile(
+    path.join(root, "assets/nested.css"),
+    "@font-face{src:url('./app.woff2')}",
     "utf8",
   );
   await writeFile(path.join(root, "assets/app.woff2"), "font", "utf8");
+  await writeFile(path.join(root, "assets/one.png"), "one", "utf8");
+  await writeFile(path.join(root, "assets/two.png"), "two", "utf8");
   await writeFile(
     path.join(root, "assets/app.js"),
     "import('./heavy.js')",
@@ -35,6 +42,7 @@ test("classifies only HTML-linked assets as initial and binds content hashes", a
   });
   assert.equal(report.totals.initialJavaScriptBytes, 20);
   assert.equal(report.totals.initialFontBytes, 4);
+  assert.equal(report.totals.initialImageBytes, 6);
   assert.equal(
     report.assets.find(({ file }) => file === "assets/heavy.js").phase,
     "deferred",
@@ -66,31 +74,64 @@ test("classifies only HTML-linked assets as initial and binds content hashes", a
     () => validateShowcaseLoadingReport({ ...changed, entry: ["missing.js"] }),
     /missing entry asset/,
   );
+  assert.throws(
+    () =>
+      validateShowcaseLoadingReport({
+        ...changed,
+        totals: { ...changed.totals, initialCssBytes: 0 },
+      }),
+    /totals mismatch/,
+  );
 });
 
 test("enforces the JavaScript, CSS, and font budgets", () => {
+  const assets = (javascript, css, font) => [
+    {
+      file: "app.js",
+      type: "javascript",
+      bytes: javascript,
+      sha256: "0".repeat(64),
+      phase: "initial",
+    },
+    {
+      file: "app.css",
+      type: "css",
+      bytes: css,
+      sha256: "1".repeat(64),
+      phase: "initial",
+    },
+    {
+      file: "app.woff2",
+      type: "font",
+      bytes: font,
+      sha256: "2".repeat(64),
+      phase: "initial",
+    },
+  ];
   const baseline = {
     version: 1,
     commit: "base",
     entry: [],
-    assets: [],
+    assets: assets(1000, 1000, 1000),
     totals: {
       initialJavaScriptBytes: 1000,
       initialCssBytes: 1000,
       initialFontBytes: 1000,
       initialImageBytes: 0,
+      emittedBytes: 3000,
     },
   };
   const candidate = {
     version: 1,
     commit: "candidate",
     entry: [],
-    assets: [],
+    assets: assets(700, 1020, 1020),
     totals: {
       initialJavaScriptBytes: 700,
       initialCssBytes: 1020,
       initialFontBytes: 1020,
       initialImageBytes: 0,
+      emittedBytes: 2740,
     },
   };
   assert.doesNotThrow(() => compareShowcaseLoadingReports(baseline, candidate));
@@ -98,7 +139,12 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
     () =>
       compareShowcaseLoadingReports(baseline, {
         ...candidate,
-        totals: { ...candidate.totals, initialJavaScriptBytes: 701 },
+        totals: {
+          ...candidate.totals,
+          initialJavaScriptBytes: 701,
+          emittedBytes: 2741,
+        },
+        assets: assets(701, 1020, 1020),
       }),
     /below 30%/,
   );
@@ -106,7 +152,12 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
     () =>
       compareShowcaseLoadingReports(baseline, {
         ...candidate,
-        totals: { ...candidate.totals, initialCssBytes: 1021 },
+        totals: {
+          ...candidate.totals,
+          initialCssBytes: 1021,
+          emittedBytes: 2741,
+        },
+        assets: assets(700, 1021, 1020),
       }),
     /CSS growth/,
   );
@@ -114,7 +165,21 @@ test("enforces the JavaScript, CSS, and font budgets", () => {
     () =>
       compareShowcaseLoadingReports(baseline, {
         ...candidate,
-        totals: { ...candidate.totals, initialImageBytes: 1 },
+        totals: {
+          ...candidate.totals,
+          initialImageBytes: 1,
+          emittedBytes: 2741,
+        },
+        assets: [
+          ...candidate.assets,
+          {
+            file: "source.svg",
+            type: "image",
+            bytes: 1,
+            sha256: "3".repeat(64),
+            phase: "initial",
+          },
+        ],
       }),
     /source-reference requests/,
   );

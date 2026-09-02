@@ -35,22 +35,33 @@ const walk = async (root, directory = root) => {
   return files.sort((left, right) => left.localeCompare(right));
 };
 
-const referencedAssets = (html) =>
-  [...html.matchAll(/(?:src|href)=["']([^"']+)["']/g)]
+const referencedAssets = (html) => {
+  const direct = [...html.matchAll(/(?:src|href)=["']([^"']+)["']/g)]
     .map((match) => match[1].replace(/^\//, ""))
     .filter((file) => !file.startsWith("http"));
+  const responsive = [...html.matchAll(/srcset=["']([^"']+)["']/g)]
+    .flatMap((match) => match[1].split(","))
+    .map((candidate) => candidate.trim().split(/\s+/)[0].replace(/^\//, ""))
+    .filter((file) => file && !file.startsWith("http"));
+  return [...direct, ...responsive];
+};
 
-const referencedCssAssets = (css, cssFile) =>
-  [...css.matchAll(/url\(["']?([^"')]+)["']?\)/g)]
-    .map((match) => match[1])
+const localCssReference = (file, cssFile) =>
+  file.startsWith("/")
+    ? file.slice(1)
+    : path.posix.normalize(path.posix.join(path.posix.dirname(cssFile), file));
+
+const referencedCssAssets = (css, cssFile) => {
+  const urls = [...css.matchAll(/url\(["']?([^"')]+)["']?\)/g)].map(
+    (match) => match[1],
+  );
+  const imports = [
+    ...css.matchAll(/@import\s+(?:url\()?\s*["']([^"']+)["']\s*\)?/g),
+  ].map((match) => match[1]);
+  return [...urls, ...imports]
     .filter((file) => !file.startsWith("data:") && !file.startsWith("http"))
-    .map((file) =>
-      file.startsWith("/")
-        ? file.slice(1)
-        : path.posix.normalize(
-            path.posix.join(path.posix.dirname(cssFile), file),
-          ),
-    );
+    .map((file) => localCssReference(file, cssFile));
+};
 
 export async function createShowcaseLoadingReport({ dist, commit }) {
   if (!commit) throw new Error("commit is required");
@@ -58,12 +69,16 @@ export async function createShowcaseLoadingReport({ dist, commit }) {
   const initialFiles = new Set(["index.html", ...referencedAssets(html)]);
   const files = await walk(dist);
   const pendingCss = [...initialFiles].filter((file) => file.endsWith(".css"));
+  const visitedCss = new Set();
   for (const cssFile of pendingCss) {
+    if (visitedCss.has(cssFile)) continue;
+    visitedCss.add(cssFile);
     const css = await readFile(path.join(dist, cssFile), "utf8");
     for (const referenced of referencedCssAssets(css, cssFile)) {
       if (!files.includes(referenced))
         throw new Error(`missing CSS dependency: ${referenced}`);
       initialFiles.add(referenced);
+      if (referenced.endsWith(".css")) pendingCss.push(referenced);
     }
   }
   const assets = [];
@@ -112,6 +127,8 @@ const validateAsset = (asset, files) => {
     throw new Error(`invalid emitted byte count: ${asset.file}`);
   if (!/^[a-f0-9]{64}$/.test(asset.sha256))
     throw new Error(`invalid emitted asset hash: ${asset.file}`);
+  if (asset.type !== assetType(asset.file))
+    throw new Error(`invalid emitted asset type: ${asset.file}`);
   if (asset.phase !== "initial" && asset.phase !== "deferred")
     throw new Error(`unclassified emitted asset: ${asset.file}`);
 };
@@ -120,6 +137,20 @@ const validateEntry = (entry, files, assets) => {
   if (!files.has(entry)) throw new Error(`missing entry asset: ${entry}`);
   if (assets.find(({ file }) => file === entry)?.phase !== "initial")
     throw new Error(`reclassified entry asset: ${entry}`);
+};
+
+const deriveTotals = (assets) => {
+  const sum = (phase, type) =>
+    assets
+      .filter((asset) => asset.phase === phase && asset.type === type)
+      .reduce((total, asset) => total + asset.bytes, 0);
+  return {
+    initialJavaScriptBytes: sum("initial", "javascript"),
+    initialCssBytes: sum("initial", "css"),
+    initialFontBytes: sum("initial", "font"),
+    emittedBytes: assets.reduce((total, asset) => total + asset.bytes, 0),
+    initialImageBytes: sum("initial", "image"),
+  };
 };
 
 export function validateShowcaseLoadingReport(report) {
@@ -134,6 +165,13 @@ export function validateShowcaseLoadingReport(report) {
   const files = new Set();
   for (const asset of report.assets) validateAsset(asset, files);
   for (const entry of report.entry) validateEntry(entry, files, report.assets);
+  const totals = deriveTotals(report.assets);
+  if (
+    Object.entries(totals).some(
+      ([name, value]) => report.totals?.[name] !== value,
+    )
+  )
+    throw new Error("showcase loading totals mismatch");
   if (
     report.assetsDigest &&
     report.assetsDigest !== reportDigest(report.assets)

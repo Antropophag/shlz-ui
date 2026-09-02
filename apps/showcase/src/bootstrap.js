@@ -101,7 +101,9 @@ const requestTarget = (id) => {
 };
 
 window.addEventListener("hashchange", () => {
-  if (state === "idle") requestTarget(window.location.hash.slice(1));
+  const id = window.location.hash.slice(1);
+  setActiveTarget(id);
+  if (state === "idle") requestTarget(id);
 });
 
 document.addEventListener("click", (event) => {

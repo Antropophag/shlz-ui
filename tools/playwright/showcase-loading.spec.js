@@ -24,7 +24,11 @@ test("keeps the root shell usable without requesting deferred source evidence", 
   );
   expect(requests.filter((url) => url.endsWith(".svg"))).toEqual([]);
   expect(
-    requests.some((url) => url.includes("main-") && url.endsWith(".js")),
+    requests.some(
+      (url) =>
+        url.endsWith("/src/main.js") ||
+        (url.includes("main-") && url.endsWith(".js")),
+    ),
   ).toBe(false);
 });
 
