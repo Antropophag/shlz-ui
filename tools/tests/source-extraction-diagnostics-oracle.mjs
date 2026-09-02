@@ -1,9 +1,19 @@
-import { readFile } from "node:fs/promises";
+import { readFile, realpath } from "node:fs/promises";
 import path from "node:path";
 import { buildDiagnosticClassification } from "../lib/source-extraction-diagnostics.mjs";
 
-const repoRoot = path.resolve(import.meta.dirname, "../..");
-const target = path.resolve(process.argv[2]);
+const repoRoot = await realpath(path.resolve(import.meta.dirname, "../.."));
+const target = await realpath(path.resolve(process.argv[2]));
+const knownBadLedger = await realpath(
+  path.join(
+    repoRoot,
+    "tools/tests/fixtures/source-extraction-diagnostics-known-bad/source-extraction-diagnostics-ledger.json",
+  ),
+);
+if (target !== repoRoot && target !== knownBadLedger)
+  throw new Error(
+    "oracle target is outside the approved candidate/adapter seam",
+  );
 const ledgerPath =
   target === repoRoot
     ? path.join(

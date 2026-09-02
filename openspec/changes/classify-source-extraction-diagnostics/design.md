@@ -38,7 +38,7 @@ Alternative: one combined status enum. Rejected because it couples two independe
 
 ### Generate both machine and human views from one validated model
 
-The generated JSON will contain occurrence-level records and reconciled totals. A generated Markdown report will summarize cohorts, impacts, and remaining limitations. Both outputs will sort by canonical identity and contain no timestamps or environment-specific paths.
+The generated JSON will contain occurrence-level records and reconciled totals. A generated Markdown report will summarize cohorts, impacts, and remaining limitations. Both outputs will sort arrays by canonical identity and contain no timestamps or environment-specific paths. Object keys follow the builder's declared insertion order; JSON escaping uses `JSON.stringify`; repository Prettier configuration owns whitespace and line wrapping for both formats; Markdown cohort rows sort by classification identity; and both files use LF with one final newline. The exact-byte test covers the formatted JSON and Markdown results.
 
 Alternative: hand-author Markdown only. Rejected because completeness, identity drift, and contradiction checks would not be enforceable.
 

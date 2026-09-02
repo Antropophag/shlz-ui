@@ -91,11 +91,7 @@ async function validateEvidence(decision, repoRoot) {
     const resolved = path.resolve(root, name ?? "");
     if (path.relative(root, resolved).startsWith(".."))
       throw new Error(`evidence escapes repository: ${name}`);
-    if (
-      !reference ||
-      !evidencePathMatches[reference.kind] ||
-      !evidencePathMatches[reference.kind](name)
-    )
+    if (!reference || !evidencePathMatches[reference.kind]?.(name))
       throw new Error(`evidence path does not match evidence kind: ${name}`);
     kinds.add(reference.kind);
     const canonical = await realpath(resolved);
@@ -111,6 +107,65 @@ async function validateEvidence(decision, repoRoot) {
     !kinds.has("source-manifest")
   )
     throw new Error("classification lacks ambiguity boundary evidence");
+}
+
+function staleMultiplicityExists(classifications, unit) {
+  return classifications.some(
+    ({ selector }) =>
+      unit.kind === "skipped-instance" &&
+      selector.kind === unit.kind &&
+      selector.sourceArchive === unit.sourceArchive &&
+      selector.multiplicity !== unit.multiplicity,
+  );
+}
+
+async function classifyUnit(unit, classifications, repoRoot) {
+  const matches = classifications.filter(({ selector }) =>
+    selectorMatches(selector, unit),
+  );
+  if (!matches.length) {
+    if (staleMultiplicityExists(classifications, unit))
+      throw new Error(`classification multiplicity differs: ${identity(unit)}`);
+    throw new Error(`unclassified diagnostic: ${identity(unit)}`);
+  }
+  if (matches.length > 1)
+    throw new Error(`multiple classifications: ${identity(unit)}`);
+  const decision = matches[0];
+  if (!dispositions.has(decision.disposition))
+    throw new Error(`unknown disposition: ${decision.disposition}`);
+  if (!impacts.has(decision.coverageImpact))
+    throw new Error(`unknown coverage impact: ${decision.coverageImpact}`);
+  if (!compatible.has(`${decision.disposition}:${decision.coverageImpact}`))
+    throw new Error("contradictory diagnostic classification");
+  if (!decision.rationale?.trim())
+    throw new Error("classification rationale is required");
+  if (!claimAuthorities.has(decision.claimAuthority))
+    throw new Error(`unknown claim authority: ${decision.claimAuthority}`);
+  await validateEvidence(decision, repoRoot);
+  return decision;
+}
+
+function classifiedUnit(unit, decision) {
+  return {
+    identity: identity(unit),
+    kind: unit.kind,
+    granularity: unit.granularity,
+    multiplicity: unit.multiplicity,
+    sourceArchive: unit.sourceArchive,
+    component: unit.component ?? null,
+    nodeId: unit.nodeId ?? null,
+    scope: unit.scope ?? null,
+    field: unit.field ?? null,
+    message: unit.message ?? null,
+    classification: decision.id,
+    disposition: decision.disposition,
+    coverageImpact: decision.coverageImpact,
+    claimAuthority: decision.claimAuthority,
+    rationale: decision.rationale,
+    evidence: [...decision.evidence].sort((left, right) =>
+      `${left.kind}:${left.path}`.localeCompare(`${right.kind}:${right.path}`),
+    ),
+  };
 }
 
 export async function buildDiagnosticClassification({
@@ -151,65 +206,9 @@ export async function buildDiagnosticClassification({
   const classified = [];
   const usedClassifications = new Set();
   for (const unit of units) {
-    const matches = ledger.classifications.filter(({ selector }) =>
-      selectorMatches(selector, unit),
-    );
-    if (!matches.length) {
-      const staleMultiplicity = ledger.classifications.find(
-        ({ selector }) =>
-          unit.kind === "skipped-instance" &&
-          selector.kind === unit.kind &&
-          selector.sourceArchive === unit.sourceArchive &&
-          selector.multiplicity !== unit.multiplicity,
-      );
-      if (staleMultiplicity)
-        throw new Error(
-          `classification multiplicity differs: ${identity(unit)}`,
-        );
-      throw new Error(`unclassified diagnostic: ${identity(unit)}`);
-    }
-    if (matches.length > 1)
-      throw new Error(`multiple classifications: ${identity(unit)}`);
-    const decision = matches[0];
+    const decision = await classifyUnit(unit, ledger.classifications, repoRoot);
     usedClassifications.add(decision.id);
-    if (!dispositions.has(decision.disposition))
-      throw new Error(`unknown disposition: ${decision.disposition}`);
-    if (!impacts.has(decision.coverageImpact))
-      throw new Error(`unknown coverage impact: ${decision.coverageImpact}`);
-    if (!compatible.has(`${decision.disposition}:${decision.coverageImpact}`))
-      throw new Error("contradictory diagnostic classification");
-    if (!decision.rationale?.trim())
-      throw new Error("classification rationale is required");
-    if (!claimAuthorities.has(decision.claimAuthority))
-      throw new Error(`unknown claim authority: ${decision.claimAuthority}`);
-    if (
-      decision.selector.multiplicity !== undefined &&
-      decision.selector.multiplicity !== unit.multiplicity
-    )
-      throw new Error(`classification multiplicity differs: ${identity(unit)}`);
-    await validateEvidence(decision, repoRoot);
-    classified.push({
-      identity: identity(unit),
-      kind: unit.kind,
-      granularity: unit.granularity,
-      multiplicity: unit.multiplicity,
-      sourceArchive: unit.sourceArchive,
-      component: unit.component ?? null,
-      nodeId: unit.nodeId ?? null,
-      scope: unit.scope ?? null,
-      field: unit.field ?? null,
-      message: unit.message ?? null,
-      classification: decision.id,
-      disposition: decision.disposition,
-      coverageImpact: decision.coverageImpact,
-      claimAuthority: decision.claimAuthority,
-      rationale: decision.rationale,
-      evidence: [...decision.evidence].sort((left, right) =>
-        `${left.kind}:${left.path}`.localeCompare(
-          `${right.kind}:${right.path}`,
-        ),
-      ),
-    });
+    classified.push(classifiedUnit(unit, decision));
   }
 
   const unused = ledger.classifications.filter(
@@ -267,5 +266,11 @@ export function renderDiagnosticClassificationMarkdown(result) {
   const rows = [...cohorts.values()].sort((a, b) =>
     a.classification.localeCompare(b.classification),
   );
-  return `# Source extraction diagnostic classification\n\nThis audit classifies extraction evidence only. It does not prove or advance component implementation coverage.\n\n## Census\n\n- Errors: ${result.summary.errors}\n- Warnings: ${result.summary.warnings}\n- Skipped instances: ${result.summary.skippedInstances}\n- Classification units: ${result.summary.classificationUnits} (44 node-level diagnostics and 2 archive cohorts)\n\n## Cohorts\n\n| Classification | Disposition | Coverage impact | Units | Instances |\n| --- | --- | --- | ---: | ---: |\n${rows.map((row) => `| ${row.classification} | ${row.disposition} | ${row.coverageImpact} | ${row.units} | ${row.instances} |`).join("\n")}\n\n## Limitations\n\nThe committed extraction output preserves skipped instances only as archive counts of 37 and 10. No node-level identities are inferred for those 47 instances. A limited conclusion remains unresolved until a later authoritative extraction preserves finer evidence.\n`;
+  const cohortRows = rows
+    .map(
+      (row) =>
+        `| ${row.classification} | ${row.disposition} | ${row.coverageImpact} | ${row.units} | ${row.instances} |`,
+    )
+    .join("\n");
+  return `# Source extraction diagnostic classification\n\nThis audit classifies extraction evidence only. It does not prove or advance component implementation coverage.\n\n## Census\n\n- Errors: ${result.summary.errors}\n- Warnings: ${result.summary.warnings}\n- Skipped instances: ${result.summary.skippedInstances}\n- Classification units: ${result.summary.classificationUnits} (44 node-level diagnostics and 2 archive cohorts)\n\n## Cohorts\n\n| Classification | Disposition | Coverage impact | Units | Instances |\n| --- | --- | --- | ---: | ---: |\n${cohortRows}\n\n## Limitations\n\nThe committed extraction output preserves skipped instances only as archive counts of 37 and 10. No node-level identities are inferred for those 47 instances. A limited conclusion remains unresolved until a later authoritative extraction preserves finer evidence.\n`;
 }

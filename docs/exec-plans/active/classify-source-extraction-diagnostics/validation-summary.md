@@ -14,6 +14,7 @@ Candidate worktree validated against implementation baseline `51951a31fcfeb373bf
 - Changed JavaScript ESLint and changed-file Prettier checks passed.
 - Protected `shlz-design-source/` and runtime `packages/` diff from baseline: empty.
 - Review remediation binds evidence paths to controlled claim types, expands node identities to every preserved occurrence-context field, classifies rationales as `DECISION`, and tests formatted JSON/Markdown byte stability.
+- Sonar remediation confines the CLI-controlled oracle path to the canonical candidate root or exact known-bad ledger, reduces classification-function complexity, and removes the remaining analyzer smells. CodeRabbit contract clarifications now define exact enums and serialization rules.
 
 ## Limitation
 

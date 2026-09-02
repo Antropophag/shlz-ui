@@ -20,7 +20,7 @@ The audit system SHALL classify every diagnostic unit reported by the committed 
 
 ### Requirement: Evidence-bound classification
 
-Each diagnostic unit SHALL declare its granularity and multiplicity, a controlled disposition, an impact on source-library coverage, and repository evidence sufficient to support those claims.
+Each diagnostic unit SHALL declare granularity as `node` or `archive-cohort`; multiplicity as a positive integer; disposition as `extraction-defect`, `source-ambiguity`, `harmless-diagnostic`, or `product-gap-evidence`; coverage impact as `no-coverage-effect`, `limits-conclusion`, or `invalidates-current-claim`; and repository evidence sufficient to support those claims.
 
 #### Scenario: Supported classification
 
