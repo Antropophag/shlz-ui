@@ -125,8 +125,8 @@ test("active Field-family guidance and placeholders meet WCAG AA", async ({
 test("supported backgrounds and material Field states form a closed contrast matrix", async ({
   page,
 }) => {
-  await page.evaluate(() => {
-    const probe = document.createElement("div");
+  await page.locator("body").evaluate((body) => {
+    const probe = body.ownerDocument.createElement("div");
     probe.dataset.accessibleContrastSurfaceMatrix = "";
     const surfaces = [
       ["white", "--shlz-source-color-white-white"],
@@ -143,7 +143,7 @@ test("supported backgrounds and material Field states form a closed contrast mat
         ),
       )
       .join("");
-    document.body.append(probe);
+    body.append(probe);
   });
 
   const surfaceMatrix = [
