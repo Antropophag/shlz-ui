@@ -32,6 +32,8 @@ test("package publication and rollback require protected manual authority", asyn
   assert.match(source, /release-registry\.mjs verify/);
   assert.match(source, /release-registry\.mjs promote/);
   assert.match(source, /release-registry\.mjs rollback/);
+  assert.match(source, /release-registry\.mjs restore/);
+  assert.match(source, /steps\.release_record\.outcome == 'failure'/);
   assert.doesNotMatch(source, /npm unpublish|release-registry\.mjs delete/);
 });
 

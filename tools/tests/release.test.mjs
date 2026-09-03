@@ -53,6 +53,20 @@ test("release set has exactly four fixed-version private packages", () => {
       ),
     /exact internal dependency/,
   );
+  assert.throws(
+    () =>
+      validatePackageSet(
+        manifests(
+          Object.fromEntries(
+            PACKAGE_ORDER.map((name) => [
+              name,
+              { version: "1.0.0-alpha..invalid" },
+            ]),
+          ),
+        ),
+      ),
+    /valid SemVer/,
+  );
 });
 
 test("Changesets config fixes the release set and targets protected main", () => {
@@ -160,6 +174,12 @@ test("package-affecting diffs require consistent release intent", () => {
   assert.doesNotThrow(() =>
     validateReleaseIntent({
       changedPaths: ["docs/releasing.md"],
+      changesets: [],
+    }),
+  );
+  assert.doesNotThrow(() =>
+    validateReleaseIntent({
+      changedPaths: ["packages/icons/tests/catalog.test.mjs"],
       changesets: [],
     }),
   );

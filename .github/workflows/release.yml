@@ -94,7 +94,9 @@ jobs:
         run: node tools/release-registry.mjs promote --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/promotion.json"
 
       - name: Record source release and immutable evidence
+        id: release_record
         if: inputs.operation == 'publish'
+        continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_VERSION: ${{ inputs.target_version }}
@@ -106,6 +108,14 @@ jobs:
           else
             gh release create "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY"/*.tgz --target "$GITHUB_SHA" --generate-notes --title "SHLZ UI $RELEASE_VERSION"
           fi
+
+      - name: Repair stable set when source release recording fails
+        if: steps.release_record.outcome == 'failure'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
+        run: |
+          node tools/release-registry.mjs restore --promotion-audit "$RELEASE_DIRECTORY/promotion.json" --audit "$RELEASE_DIRECTORY/promotion-repair.json"
+          exit 1
 
       - name: Load verified rollback target
         if: inputs.operation == 'rollback'

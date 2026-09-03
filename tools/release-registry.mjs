@@ -115,6 +115,31 @@ async function latestState(npm) {
   );
 }
 
+async function setStableSet(npm, target, fallback) {
+  const mutations = PACKAGE_NAMES.map((name) => ({
+    name,
+    operation: "dist-tag",
+    tag: "latest",
+    version: target[name] ?? null,
+  }));
+  const mutate = ({ name, tag, version }) =>
+    version
+      ? npm(["dist-tag", "add", `${name}@${version}`, tag])
+      : npm(["dist-tag", "rm", name, tag]);
+  return executeTagTransaction({
+    mutate,
+    mutations,
+    previous: fallback,
+    restore: ({ mutation, previousVersion }) =>
+      mutate({ ...mutation, version: previousVersion }),
+    verify: async () => {
+      const actual = await latestState(npm);
+      if (PACKAGE_NAMES.some((name) => actual[name] !== (target[name] ?? null)))
+        throw new Error("stable tags did not converge on the requested set");
+    },
+  });
+}
+
 async function writeAudit(value) {
   const target = option("--audit");
   if (target) await writeFile(target, `${JSON.stringify(value, null, 2)}\n`);
@@ -273,8 +298,54 @@ async function rollback() {
           throw new Error("rollback tags did not converge on the target");
       },
     });
-    for (const item of plan.deprecations)
-      await npm(["deprecate", `${item.name}@${item.version}`, item.message]);
+    const previousDeprecations = Object.fromEntries(
+      await Promise.all(
+        plan.deprecations.map(async ({ name, version }) => [
+          name,
+          (await view(npm, `${name}@${version}`, "deprecated")) ?? "",
+        ]),
+      ),
+    );
+    const deprecated = [];
+    try {
+      for (const item of plan.deprecations) {
+        await npm(["deprecate", `${item.name}@${item.version}`, item.message]);
+        deprecated.push(item);
+      }
+    } catch (cause) {
+      const deprecationRepairFailures = [];
+      for (const item of [...deprecated].reverse()) {
+        try {
+          await npm([
+            "deprecate",
+            `${item.name}@${item.version}`,
+            previousDeprecations[item.name],
+          ]);
+        } catch (error) {
+          deprecationRepairFailures.push({
+            message: error.message,
+            name: item.name,
+          });
+        }
+      }
+      const targetLatest = Object.fromEntries(
+        PACKAGE_NAMES.map((name) => [name, plan.targetVersion]),
+      );
+      let tagRepair;
+      try {
+        tagRepair = await setStableSet(npm, plan.priorLatest, targetLatest);
+      } catch (error) {
+        tagRepair = { message: error.message, outcome: "fail" };
+      }
+      const repairComplete =
+        !deprecationRepairFailures.length && tagRepair.outcome === "pass";
+      const error = new Error(
+        `rollback deprecation failed; prior state repair ${repairComplete ? "complete" : "incomplete"}`,
+      );
+      error.cause = cause;
+      error.audit = { deprecationRepairFailures, tagRepair };
+      throw error;
+    }
     return writeAudit({
       actor: process.env.GITHUB_ACTOR,
       defectiveVersion,
@@ -289,15 +360,43 @@ async function rollback() {
   });
 }
 
+async function restorePromotion() {
+  const auditPath = option("--promotion-audit");
+  if (!auditPath) throw new Error("restore requires --promotion-audit");
+  if (process.env.GITHUB_REF !== "refs/heads/main")
+    throw new Error("promotion repair requires protected main");
+  const promotion = await json(auditPath);
+  if (
+    promotion.operation !== "promotion" ||
+    promotion.outcome !== "pass" ||
+    !promotion.version ||
+    !promotion.previous
+  )
+    throw new Error("promotion repair requires a successful promotion audit");
+  return withNpmConfiguration("publish", async ({ npm }) => {
+    const current = await latestState(npm);
+    if (PACKAGE_NAMES.some((name) => current[name] !== promotion.version))
+      throw new Error("promotion repair current state differs from audit");
+    const transaction = await setStableSet(npm, promotion.previous, current);
+    return writeAudit({
+      operation: "promotion-repair",
+      outcome: "pass",
+      restored: promotion.previous,
+      transaction,
+    });
+  });
+}
+
 try {
   let result;
   if (command === "publish") result = await publish();
   else if (command === "verify") result = await verify();
   else if (command === "promote") result = await promote();
   else if (command === "rollback") result = await rollback();
+  else if (command === "restore") result = await restorePromotion();
   else
     throw new Error(
-      "usage: node tools/release-registry.mjs <publish|verify|promote|rollback>",
+      "usage: node tools/release-registry.mjs <publish|verify|promote|rollback|restore>",
     );
   process.stdout.write(`${JSON.stringify(await result, null, 2)}\n`);
 } catch (error) {

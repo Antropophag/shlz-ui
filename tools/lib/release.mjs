@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
 import { URL } from "node:url";
+import { valid as validSemver } from "semver";
 
 export const PACKAGE_ORDER = ["tokens", "icons", "styles", "behaviors"];
 export const PACKAGE_NAMES = PACKAGE_ORDER.map((name) => `@shlz/${name}`);
 
-const semver = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
 const compareText = (left, right) => left.localeCompare(right, "en");
 
 function fail(message) {
@@ -15,11 +15,7 @@ const digest = (value) =>
   createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
 function isSemver(value) {
-  if (!semver.test(value ?? "")) return false;
-  return value
-    .split(/[+-]/, 1)[0]
-    .split(".")
-    .every((part) => part === "0" || !part.startsWith("0"));
+  return validSemver(value ?? "") !== null;
 }
 
 function validatePackageManifest(shortName, packageJson) {
@@ -112,15 +108,25 @@ export function assertSafeReleaseDocumentation(markdown) {
   }
 }
 
-const packageAffectingPaths = [
-  /^packages\/(tokens|icons|styles|behaviors)\//,
-  /^tools\/(generate|normalize-basic-icons)\.mjs$/,
-];
+function packagePath(name) {
+  return name.match(/^packages\/(tokens|icons|styles|behaviors)\/(.+)$/);
+}
+
+function isPackageAffectingPath(name) {
+  const match = packagePath(name);
+  if (match) {
+    const relative = match[2];
+    return (
+      !/^(?:test|tests|fixtures)\//.test(relative) &&
+      !/(?:^|\.)test\.[^.]+$/.test(relative)
+    );
+  }
+  return /^tools\/(generate|normalize-basic-icons)\.mjs$/.test(name);
+}
 
 export function validateReleaseIntent({ changedPaths, changesets }) {
-  const affectsPackages = changedPaths.some((name) =>
-    packageAffectingPaths.some((pattern) => pattern.test(name)),
-  );
+  const affectingPaths = changedPaths.filter(isPackageAffectingPath);
+  const affectsPackages = affectingPaths.length > 0;
   if (!affectsPackages) return { required: false };
   const changedChangesets = new Set(
     changedPaths
@@ -154,11 +160,8 @@ export function validateReleaseIntent({ changedPaths, changesets }) {
     }
   }
   const affectedPackages = new Set(
-    changedPaths
-      .map(
-        (name) =>
-          name.match(/^packages\/(tokens|icons|styles|behaviors)\//)?.[1],
-      )
+    affectingPaths
+      .map((name) => packagePath(name)?.[1])
       .filter(Boolean)
       .map((name) => `@shlz/${name}`),
   );
