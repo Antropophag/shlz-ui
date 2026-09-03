@@ -2,7 +2,7 @@
 
 ## Status
 
-`Executable / Completion gate pending`. The family is framework-neutral and has three public
+`Executable / Completion gate passed`. The family is framework-neutral and has three public
 seams: editable Date Field, inline Calendar, and the Date Picker composition.
 Public values are Gregorian date-only strings in `YYYY-MM-DD` form; JavaScript
 `Date`, time, and timezone conversion are outside the contract.

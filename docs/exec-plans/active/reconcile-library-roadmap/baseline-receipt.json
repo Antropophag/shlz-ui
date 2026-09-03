@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "docs/reconcile-library-roadmap",
+    "commit": "90c6b88756290d3d6cae35cb66d3be556244a35f",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "docs/reconcile-library-roadmap",
+      "headRefOid": "90c6b88756290d3d6cae35cb66d3be556244a35f",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/68"
+    },
+    "repository": {
+      "digest": "cd17bcde579f396d1d5ea73b534d18a0dc72ff07c419e48682f492781d41b7fe",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-roadmap-reconciliation"
+    },
+    "upstream": "origin/docs/reconcile-library-roadmap"
+  },
+  "routeDigest": "49243a15358d29210b48c85d038ab5a942dc82f5b014a1b4152e7e95ac3d2d0e",
+  "version": 1,
+  "digest": "3c254de9163aee7f5fe0715bc6906f15148996615510cba6ed2551c53cf9e49e"
+}
