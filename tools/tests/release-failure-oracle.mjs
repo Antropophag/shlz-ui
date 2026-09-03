@@ -34,7 +34,7 @@ async function rejects(operation, expected) {
     await operation();
     return false;
   } catch (error) {
-    return error instanceof Error && expected.test(error.message);
+    return error instanceof Error && expected.test(String(error));
   }
 }
 
