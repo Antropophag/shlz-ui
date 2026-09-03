@@ -275,8 +275,8 @@
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
     "primitiveDependencyPathCount": 30,
-    "unrelatedTerminologyPathCount": 62,
-    "totalPathCount": 77,
+    "unrelatedTerminologyPathCount": 66,
+    "totalPathCount": 81,
     "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency"
   },
   "supportedSizes": ["source-sheets-only"],
