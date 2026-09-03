@@ -29,54 +29,60 @@ const candidate = () =>
     validation: "pass",
   });
 
-async function rejects(operation) {
+async function rejects(operation, expected) {
   try {
     await operation();
     return false;
-  } catch {
-    return true;
+  } catch (error) {
+    return error instanceof Error && expected.test(error.message);
   }
 }
 
 const checks = {
   "missing-registry-config-cannot-mutate": () =>
-    rejects(() => release.validateRegistryConfiguration({}, "publish")),
+    rejects(
+      () => release.validateRegistryConfiguration({}, "publish"),
+      /registry configuration is missing/,
+    ),
   "partial-release-cannot-promote": () =>
-    rejects(() =>
-      release.planPromotion({
-        candidate: candidate(),
-        registry: {
-          "@shlz/tokens": {
-            integrity: "sha512-tokens",
-            version: "0.1.0",
+    rejects(
+      () =>
+        release.planPromotion({
+          candidate: candidate(),
+          registry: {
+            "@shlz/tokens": {
+              integrity: "sha512-tokens",
+              version: "0.1.0",
+            },
           },
-        },
-      }),
+        }),
+      /complete verified release set/,
     ),
   "registry-collision-cannot-overwrite": () =>
-    rejects(() =>
-      release.planCandidatePublication({
-        candidate: candidate(),
-        registry: {
-          "@shlz/tokens": {
-            integrity: "sha512-different",
-            version: "0.1.0",
+    rejects(
+      () =>
+        release.planCandidatePublication({
+          candidate: candidate(),
+          registry: {
+            "@shlz/tokens": {
+              integrity: "sha512-different",
+              version: "0.1.0",
+            },
           },
-        },
-      }),
+        }),
+      /registry collision/,
     ),
   "incomplete-rollback-cannot-mutate": () => {
     const targetCandidate = candidate();
-    return rejects(() =>
-      release.planRollback({
-        currentLatest: {},
-        defectiveVersion: "0.2.0",
-        reason: "Broken.",
-        target: {
-          ...targetCandidate,
-          packages: targetCandidate.packages.slice(0, 3),
-        },
-      }),
+    return rejects(
+      () =>
+        release.planRollback({
+          currentLatest: {},
+          defectiveVersion: "0.2.0",
+          reason: "Broken.",
+          target: targetCandidate,
+        }),
+      /coherent current stable release set/,
     );
   },
 };

@@ -45,6 +45,7 @@ jobs:
         with:
           ref: main
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
@@ -143,4 +144,8 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_VERSION: ${{ inputs.target_version }}
-        run: gh release upload "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+        run: |
+          audit="$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+          if [ -f "$audit" ]; then
+            gh release upload "shlz-ui-v$RELEASE_VERSION" "$audit"
+          fi

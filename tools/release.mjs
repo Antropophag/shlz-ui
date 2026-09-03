@@ -61,7 +61,7 @@ async function changesets() {
   for (const name of await readdir(directory)) {
     if (!name.endsWith(".md") || name === "README.md") continue;
     const contents = await readFile(path.join(directory, name), "utf8");
-    const match = contents.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+    const match = contents.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
     if (!match) throw new Error(`invalid changeset frontmatter: ${name}`);
     const releases = match[1]
       .split(/\r?\n/)
@@ -94,6 +94,7 @@ async function validateIntent() {
     const allowed = changedPaths.every(
       (name) =>
         name === "package-lock.json" ||
+        name === "apps/showcase/package.json" ||
         /^packages\/(tokens|icons|styles|behaviors)\/(package\.json|CHANGELOG\.md)$/.test(
           name,
         ) ||
@@ -124,6 +125,10 @@ async function buildCandidate() {
     throw new Error("candidate requires --out and --tarballs");
   const status = (await run("git", ["status", "--porcelain"])).stdout;
   requireCleanReleaseState(status);
+  await run("npm", ["run", "generate"]);
+  await run("npm", ["run", "build:packages"]);
+  const builtStatus = (await run("git", ["status", "--porcelain"])).stdout;
+  requireCleanReleaseState(builtStatus);
   const { manifests } = await readReleaseInputs();
   await validatePolicy();
   await mkdir(tarballDirectory, { recursive: true });

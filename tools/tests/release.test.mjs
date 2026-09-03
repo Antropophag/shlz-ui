@@ -97,7 +97,7 @@ test("tracked package manifests satisfy the release-set contract", async () => {
       await readFile(path.join(root, "packages", name, "package.json"), "utf8"),
     );
   }
-  assert.equal(validatePackageSet(tracked).version, "0.1.0");
+  assert.equal(validatePackageSet(tracked).version, tracked.tokens.version);
 });
 
 test("release documentation uses placeholders and contains no credentials", async () => {
@@ -225,6 +225,14 @@ test("packed package contains every export and only distributable files", () => 
       }),
     /forbidden distributable file/,
   );
+  assert.throws(
+    () =>
+      validatePackedPackage(packageJson, {
+        ...pack,
+        files: [...pack.files, { path: "dist/notes.txt" }],
+      }),
+    /forbidden distributable file/,
+  );
 });
 
 const candidate = () =>
@@ -312,6 +320,16 @@ test("rollback targets a complete verified set and never deletes artifacts", () 
         target: { ...release, packages: release.packages.slice(0, 3) },
       }),
     /complete verified release set/,
+  );
+  assert.throws(
+    () =>
+      planRollback({
+        currentLatest: {},
+        defectiveVersion: "0.2.0",
+        reason: "Broken.",
+        target: release,
+      }),
+    /rollback requires a coherent current stable release set/,
   );
 });
 
