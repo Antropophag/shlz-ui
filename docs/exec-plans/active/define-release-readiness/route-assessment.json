@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "intent": "Define the release-readiness contract for the four public SHLZ packages before implementing a separate release pipeline and real-application pilot.",
+  "route": "open-spec",
+  "openSpecChange": "define-release-readiness",
+  "requiredDecisions": [
+    { "id": "registry-and-access", "owner": "user", "blocking": true },
+    { "id": "versioning-policy", "owner": "agent", "blocking": true },
+    { "id": "release-authority", "owner": "agent", "blocking": true },
+    {
+      "id": "compatibility-and-breaking-changes",
+      "owner": "agent",
+      "blocking": true
+    },
+    { "id": "changelog-policy", "owner": "agent", "blocking": true },
+    { "id": "release-validation", "owner": "agent", "blocking": true },
+    { "id": "rollback-policy", "owner": "agent", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": true,
+    "externalEffects": true,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": true,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": true,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

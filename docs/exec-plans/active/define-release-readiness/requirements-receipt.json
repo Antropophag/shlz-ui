@@ -1,0 +1,56 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "define-release-readiness",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "registry-and-access",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "versioning-policy",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "release-authority",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "compatibility-and-breaking-changes",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "changelog-policy",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "release-validation",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "rollback-policy",
+        "owner": "agent",
+        "status": "delegated"
+      }
+    ],
+    "intent": "Define the release-readiness contract for the four public SHLZ packages before implementing a separate release pipeline and real-application pilot.",
+    "revision": 1
+  },
+  "routeDigest": "6e14dcffc6de5aa13978b2f870308475e4829a24988ebc1ed41712207a07303c",
+  "version": 1,
+  "digest": "9088e8d54ac5347e6b2a4a571ac8d706d9dd8a1bb30720efc4a475fda5a58edf"
+}

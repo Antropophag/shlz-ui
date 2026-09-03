@@ -1,0 +1,70 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Define the release-readiness contract for the four public SHLZ packages before implementing a separate release pipeline and real-application pilot.",
+    "material": [
+      "newCapability",
+      "publishingOrRelease",
+      "externalEffects",
+      "deploymentSemantics",
+      "permissionsOrSecurity",
+      "destructiveOrIrreversible",
+      "externalAutomation",
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": true,
+      "destructiveOrIrreversible": true,
+      "externalAutomation": true,
+      "externalEffects": true,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": true,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": true
+    },
+    "openSpecChange": "define-release-readiness",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "registry-and-access",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "versioning-policy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "release-authority",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "compatibility-and-breaking-changes",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "changelog-policy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "release-validation",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "rollback-policy",
+        "owner": "agent"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "6e14dcffc6de5aa13978b2f870308475e4829a24988ebc1ed41712207a07303c"
+}
