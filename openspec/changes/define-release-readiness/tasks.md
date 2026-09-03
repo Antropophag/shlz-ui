@@ -7,7 +7,7 @@
 ## 2. Exact-candidate validation
 
 - [x] 2.1 Write failing focused tests for package-set closure, version/dependency divergence, tarball allowlists, missing exports, dirty generated state, candidate identity, registry collision, partial-publication resume, promotion, and rollback invariants; verify the tests fail for the intended missing implementation before production code is added.
-- [ ] 2.2 Implement repository-owned release validation and candidate-manifest tooling over the existing build, validation, pack, and clean-consumer seams; verify the focused tests pass and a real local run binds the source SHA, shared version, four tarball inventories/integrities, changelogs, and validation result.
+- [x] 2.2 Implement repository-owned release validation and candidate-manifest tooling over the existing build, validation, pack, and clean-consumer seams; verify the focused tests pass and a real local run binds the source SHA, shared version, four tarball inventories/integrities, changelogs, and validation result.
 - [x] 2.3 Extend clean-consumer coverage to install the exact four local candidates together and support an authenticated exact-version GitLab verification mode; verify local CI needs no write credential and registry mode fails closed with incomplete or masked configuration.
 
 ## 3. Reviewable preparation and protected release operations
