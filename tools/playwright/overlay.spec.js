@@ -4,6 +4,7 @@ import {
   expectClassifiedComponentOccurrences,
   readComponentAuditManifest,
 } from "./component-audit.js";
+import { textContrastEvidence } from "./text-contrast.js";
 
 const manifests = {
   modal: await readComponentAuditManifest(
@@ -78,7 +79,9 @@ const verifyModalStatus = async (page, state, color) => {
     color,
   );
   expect(await textContrast(dialog.locator("h2"))).toBeGreaterThanOrEqual(4.5);
-  expect(await textContrast(dialog.locator("p"))).toBeGreaterThanOrEqual(4.5);
+  expect(
+    (await textContrastEvidence(dialog.locator("p"))).ratio,
+  ).toBeGreaterThanOrEqual(4.5);
   await page.keyboard.press("Escape");
 };
 const expectOccurrenceSubset = async (page, component, ids, diagnostics) =>
