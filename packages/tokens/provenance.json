@@ -58,6 +58,16 @@
       ],
       "rationale": "Engineering roles alias source tokens. Component-only state paints and geometry are not promoted into this layer.",
       "groups": {
+        "color": {
+          "classification": "DECISION",
+          "confidence": "high",
+          "sources": [
+            "raw/svg/Colors.svg",
+            "raw/svg/Select.svg",
+            "raw/svg/Modal.svg"
+          ],
+          "rationale": "Source Gray 200 and 25% Dark Blue remain preserved source facts. The accessible production text roles extend the observed Dark Blue opacity family to 60% as a repository decision so active supporting and placeholder text meets WCAG 2.2 SC 1.4.3 on supported library surfaces."
+        },
         "font": {
           "classification": "DECISION",
           "confidence": "high",

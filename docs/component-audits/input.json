@@ -46,6 +46,7 @@
     }
   ],
   "browserTests": [
+    "tools/playwright/accessible-source-contrast.spec.js",
     "tools/playwright/form-controls-wave2.spec.js",
     "tools/playwright/consumer-workspace.spec.js",
     "tools/playwright/typography-profiles.spec.js"
@@ -57,7 +58,7 @@
     "source-integrity": "pass: Input Number.svg and the classified large/medium field matrix remain source-tested",
     "structural-contract": "pass: native input markup, field composition, documentation and package CSS are asserted",
     "runtime-browser": "pass: native value, input/change lifecycle, disabled state and programmatic updates execute in Chromium",
-    "accessibility": "pass: visible naming, keyboard focus and native disabled semantics execute in Chromium",
+    "accessibility": "pass: visible naming, keyboard focus and native disabled semantics execute in Chromium; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
     "focused-visual": "pass: real default, hover and keyboard focus computed shell paint plus the focused matrix snapshot are asserted",
     "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
     "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"

@@ -97,6 +97,9 @@ a fresh lifecycle.
   return values.
 - Backdrop dismissal is an opt-in engineering decision. Pointer down and up
   must both occur outside the surface, so an interior drag cannot dismiss it.
+- Compact secondary copy uses the accessible supporting-text semantic role
+  documented in `docs/accessibility-source-contrast.md`. The source Gray 200
+  paint remains a source fact; the production default meets WCAG 2.2 SC 1.4.3.
 
 ## Verified behavior and limitations
 

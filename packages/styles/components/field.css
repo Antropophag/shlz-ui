@@ -33,7 +33,10 @@
 .shlz-field__message,
 .shlz-field__counter {
   min-block-size: 15px;
-  color: var(--shlz-source-color-gray-gray-200);
+
+  /* DECISION: the source Gray 200 remains a source fact; active production
+     guidance uses the shared WCAG AA semantic override. */
+  color: var(--shlz-semantic-color-text-supporting-accessible);
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   font-weight: var(--shlz-semantic-typography-weight-regular);
   line-height: 15px;
@@ -88,7 +91,7 @@
 .shlz-input::placeholder,
 .shlz-textarea::placeholder,
 .shlz-select:invalid {
-  color: var(--shlz-source-color-dark-blue-dark-blue-25);
+  color: var(--shlz-semantic-color-text-placeholder-accessible);
   opacity: 1;
 }
 
@@ -108,7 +111,7 @@
 .shlz-select__trigger {
   inline-size: 100%;
   justify-content: space-between;
-  color: var(--shlz-source-color-dark-blue-dark-blue-25);
+  color: var(--shlz-semantic-color-text-placeholder-accessible);
   font: inherit;
   font-size: var(--shlz-semantic-typography-role-field-value-size);
   line-height: var(--shlz-semantic-typography-role-field-value-line-height);
@@ -190,7 +193,7 @@
 }
 
 .shlz-select--placeholder {
-  color: var(--shlz-source-color-dark-blue-dark-blue-25);
+  color: var(--shlz-semantic-color-text-placeholder-accessible);
 }
 
 .shlz-field__icon {

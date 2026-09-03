@@ -1,0 +1,83 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "1a8ca7aa0902b127d32d43ad5f89e0b951ed7e49995e8119dd00a6bcbb85d06f",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** a supported Field-family label or placeholder is visible on any supported active background\n- **THEN** its effective computed foreground and background meet the applicable text contrast threshold",
+        "id": "foundations/accessible-source-contrast::Active production text contrast::Active Field guidance is rendered",
+        "name": "Active Field guidance is rendered",
+        "requirement": "Active production text contrast",
+        "requirementContent": "SHLZ UI SHALL render active normal-size production text at a contrast ratio of at least 4.5:1 against its effective background and active large text at least 3:1, using the WCAG 2.2 relative-luminance calculation. This contract SHALL include labels, instructions, secondary copy, and placeholder text that communicates an expected input; inactive or disabled text MAY remain below the threshold only when it is unavailable for interaction and is reported separately."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** compact Info, Success, Warning, or Error Modal secondary copy is visible\n- **THEN** its effective computed foreground and surface background meet the applicable text contrast threshold",
+        "id": "foundations/accessible-source-contrast::Active production text contrast::Compact Modal secondary copy is rendered",
+        "name": "Compact Modal secondary copy is rendered",
+        "requirement": "Active production text contrast",
+        "requirementContent": "SHLZ UI SHALL render active normal-size production text at a contrast ratio of at least 4.5:1 against its effective background and active large text at least 3:1, using the WCAG 2.2 relative-luminance calculation. This contract SHALL include labels, instructions, secondary copy, and placeholder text that communicates an expected input; inactive or disabled text MAY remain below the threshold only when it is unavailable for interaction and is reported separately."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** the same text belongs to a disabled or otherwise inactive control\n- **THEN** evidence records its measured treatment separately without using the WCAG inactive-component exception to waive any active state",
+        "id": "foundations/accessible-source-contrast::Active production text contrast::Disabled text is evaluated",
+        "name": "Disabled text is evaluated",
+        "requirement": "Active production text contrast",
+        "requirementContent": "SHLZ UI SHALL render active normal-size production text at a contrast ratio of at least 4.5:1 against its effective background and active large text at least 3:1, using the WCAG 2.2 relative-luminance calculation. This contract SHALL include labels, instructions, secondary copy, and placeholder text that communicates an expected input; inactive or disabled text MAY remain below the threshold only when it is unavailable for interaction and is reported separately."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** a consumer supplies a custom value for an accessible-text semantic token\n- **THEN** the normal CSS custom-property cascade applies and the consumer owns proving contrast for its resulting background combinations",
+        "id": "foundations/accessible-source-contrast::Backward-compatible adoption::Consumer overrides a semantic token",
+        "name": "Consumer overrides a semantic token",
+        "requirement": "Backward-compatible adoption",
+        "requirementContent": "The contrast correction SHALL preserve existing public class names, DOM semantics, behavior interfaces, events, geometry, content ownership, and consumer integration contracts. Consumers MAY override semantic tokens through the existing custom-property mechanism, but the distributed defaults MUST satisfy the active contrast contract on every library-supported background."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** an existing plain HTML or application consumer adopts the updated distribution without changing markup or JavaScript\n- **THEN** its affected active text receives accessible default paint and its existing interaction behavior remains unchanged",
+        "id": "foundations/accessible-source-contrast::Backward-compatible adoption::Existing consumer upgrades styles",
+        "name": "Existing consumer upgrades styles",
+        "requirement": "Backward-compatible adoption",
+        "requirementContent": "The contrast correction SHALL preserve existing public class names, DOM semantics, behavior interfaces, events, geometry, content ownership, and consumer integration contracts. Consumers MAY override semantic tokens through the existing custom-property mechanism, but the distributed defaults MUST satisfy the active contrast contract on every library-supported background."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** the contrast policy implementation is proposed as complete\n- **THEN** source integrity, structural token/contract, runtime browser, accessibility, focused visual, consumer integration, and responsive/content-stress evidence each pass or carry a justified not-applicable result with no unresolved scope-local finding",
+        "id": "foundations/accessible-source-contrast::Closed affected-surface evidence::Completion evidence is evaluated",
+        "name": "Completion evidence is evaluated",
+        "requirement": "Closed affected-surface evidence",
+        "requirementContent": "The change SHALL inventory every repository occurrence of the affected Field-family text and compact Modal copy, exercise representative real consumers, and bind passing computed contrast evidence to all supported active background/state combinations before closing issues #13 and #25. Existing unrelated contrast findings MUST retain an explicit disposition rather than being silently declared resolved."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** the existing Status source-paint P3 finding is encountered during the census\n- **THEN** it remains separately documented unless executable evidence proves that the current change's active production-text policy and approved scope require its correction",
+        "id": "foundations/accessible-source-contrast::Closed affected-surface evidence::Status paint remains outside the correction",
+        "name": "Status paint remains outside the correction",
+        "requirement": "Closed affected-surface evidence",
+        "requirementContent": "The change SHALL inventory every repository occurrence of the affected Field-family text and compact Modal copy, exercise representative real consumers, and bind passing computed contrast evidence to all supported active background/state combinations before closing issues #13 and #25. Existing unrelated contrast findings MUST retain an explicit disposition rather than being silently declared resolved."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** Field guidance and Modal secondary copy require the same accessible role\n- **THEN** consumers receive the correction through the shared semantic token contract without component-specific public configuration",
+        "id": "foundations/accessible-source-contrast::Explicit accessible source override::Multiple families need the same override",
+        "name": "Multiple families need the same override",
+        "requirement": "Explicit accessible source override",
+        "requirementContent": "When authoritative source paint fails the active production-text threshold, the library SHALL preserve that source value as a source fact and SHALL apply a named semantic accessible-text decision at the shared token seam. Documentation and evidence MUST distinguish the source fact from the repository decision, and `shlz-design-source/` MUST remain unchanged."
+      },
+      {
+        "capability": "foundations/accessible-source-contrast",
+        "content": "- **WHEN** an authoritative SVG assigns active text a color below the applicable contrast threshold\n- **THEN** the production component uses the documented semantic accessible-text value while provenance retains the original source color and reason for divergence",
+        "id": "foundations/accessible-source-contrast::Explicit accessible source override::Source paint is below threshold",
+        "name": "Source paint is below threshold",
+        "requirement": "Explicit accessible source override",
+        "requirementContent": "When authoritative source paint fails the active production-text threshold, the library SHALL preserve that source value as a source fact and SHALL apply a named semantic accessible-text decision at the shared token seam. Documentation and evidence MUST distinguish the source fact from the repository decision, and `shlz-design-source/` MUST remain unchanged."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "ba811d9995adc40208ef1017031297e8ea5ad80f669c2a977b0f5e552c4ea44b"
+}

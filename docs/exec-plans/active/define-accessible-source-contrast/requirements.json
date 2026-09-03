@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Define and implement a repository-wide policy for accessible production text when authoritative source paint falls below WCAG 2.2 contrast thresholds, resolve the Field-family and compact Modal P1 deviations, and deliver an unmerged merge-ready PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "policy-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "The user authorized autonomous execution of the recommended accessibility-versus-fidelity PR through merge readiness and required CodeRabbit as the last review step."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md and docs/source-of-truth.md keep shlz-design-source/raw/svg authoritative and read-only while requiring repository decisions and deviations to remain explicit."
+      }
+    },
+    {
+      "id": "accessibility-precedence",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "Autonomous execution delegates the policy choice; active production text will meet WCAG 2.2 SC 1.4.3 even when that requires an explicit repository override of source paint."
+      }
+    },
+    {
+      "id": "semantic-token-seam",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "Autonomous execution delegates implementation design; shared semantic accessible text tokens will concentrate the override instead of component-local recoloring."
+      }
+    },
+    {
+      "id": "affected-family-census",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "Issues #13 and #25 plus docs/component-audits/select.json and modal.json identify the Field-family and compact Modal P1 deviations; Status remains a separately recorded P3 source-paint finding unless policy application proves it in scope."
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md and docs/agent-execution.md require a clean origin/main task branch, immutable receipts, validation, independent review, an unmerged PR, and user-owned merge."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "define-accessible-source-contrast",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "Выполняй автономно до готовности ПР к мердж. Последним шагом нужно пройти ревью кодрэббит"
+    }
+  }
+}

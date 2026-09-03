@@ -50,6 +50,7 @@
   ],
   "browserTests": [
     "tools/playwright/select-closed-shell.spec.js",
+    "tools/playwright/accessible-source-contrast.spec.js",
     "tools/playwright/consumer-workspace.spec.js",
     "tools/playwright/primitives.spec.js",
     "tools/playwright/review.spec.js",
@@ -64,7 +65,7 @@
     "source-integrity": "pass: Select.svg closed shell and Dropdown menu reference contracts remain source-tested",
     "structural-contract": "pass: trigger, listbox, option, hidden input and documentation contracts are asserted",
     "runtime-browser": "pass: open, keyboard navigation, selection, dismissal, events and controller lifecycle execute in Chromium",
-    "accessibility": "pass: listbox relationships, focus movement, selected and disabled semantics execute with the tracked field contrast deviation",
+    "accessibility": "pass: listbox relationships, focus movement, selected and disabled semantics execute; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
     "focused-visual": "pass: real closed, hover, keyboard focus, opened, option hover/selected and disabled computed paint is asserted",
     "consumer-integration": "pass: Data Workspace status selection drives application-owned filtering",
     "responsive-content-stress": "pass: long selected value and narrow closed shell remain contained"
@@ -93,24 +94,11 @@
     "browserTest": "tools/playwright/interaction-evidence-wave35.spec.js",
     "manualStateWalk": "pass: pointer hover, Tab focus, open/select keyboard flow, disabled and narrow long-value surfaces inspected"
   },
-  "acceptedDeviations": [
-    {
-      "id": "field-text-contrast",
-      "severity": "P1",
-      "scope": "cross-component-field-family",
-      "status": "accepted-for-this-pr",
-      "introducedByThisChange": false,
-      "worsenedByThisChange": false,
-      "evidence": "docs/components/select.md#accessibility",
-      "reason": "Resolution requires changing authoritative source-backed paint or the shared Field accessibility contract outside this Select PR scope.",
-      "tracking": "https://github.com/Antropophag/shlz-ui/issues/13"
-    }
-  ],
+  "acceptedDeviations": [],
   "knownLimitations": [
     "single-select only",
     "requires JavaScript enhancement",
     "globally unique ARIA relationship IDs required",
-    "pre-existing Field-family label and placeholder contrast deviation accepted for this PR and tracked in issue #13",
     "no search, multiselect, status-chip, async loading, or virtualization"
   ]
 }

@@ -111,6 +111,11 @@ reset restores the initial visible text and ISO value and clears invalid state.
 
 ## Accessibility and framework boundary
 
+Active labels, descriptions, and placeholders use the shared accessible
+production-text roles documented in `docs/accessibility-source-contrast.md`.
+The source Gray 200 hierarchy remains recorded separately from this repository
+decision.
+
 The controller creates a native label/text-input relationship and native
 disabled, read-only, and required semantics. The trigger is a native button with
 an action-oriented accessible name. Framework adapters may wrap lifecycle and

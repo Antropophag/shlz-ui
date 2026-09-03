@@ -1,0 +1,56 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Define and implement a repository-wide policy for accessible production text when authoritative source paint falls below WCAG 2.2 contrast thresholds, resolve the Field-family and compact Modal P1 deviations, and deliver an unmerged merge-ready PR.",
+    "material": ["publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "define-accessible-source-contrast",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "policy-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "accessibility-precedence",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "semantic-token-seam",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "affected-family-census",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "3499ea670426bb4376c23afecf4ba84c2ad897c610e7d26cfdd8bc1a9252a8f5"
+}

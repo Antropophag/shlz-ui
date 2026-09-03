@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/accessible-source-contrast",
+    "commit": "d3057fa30255553cbbb0c48ee598163e13f54b35",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/accessible-source-contrast",
+      "headRefOid": "d3057fa30255553cbbb0c48ee598163e13f54b35",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/67"
+    },
+    "repository": {
+      "digest": "2bc9697c2ea4ebc01c32c5fe50af7c3781f20ae9a3f6e5882ceae377206015f2",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-accessible-contrast"
+    },
+    "upstream": "origin/feature/accessible-source-contrast"
+  },
+  "requirementsDigest": "9c803922b19c5dfc5f33c23959952050b24af3a617197aee39e19d968480b34d",
+  "routeDigest": "3499ea670426bb4376c23afecf4ba84c2ad897c610e7d26cfdd8bc1a9252a8f5",
+  "version": 1,
+  "digest": "f75f5ca3891cb45cf8ea0f633ea8930c547c360ef3fce126f33932e0393b0b8d"
+}

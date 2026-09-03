@@ -440,13 +440,14 @@
       "tests": [
         "tools/tests/form-controls-source.test.mjs",
         "tools/playwright/primitives.spec.js",
-        "tools/playwright/form-controls-wave2.spec.js"
+        "tools/playwright/form-controls-wave2.spec.js",
+        "tools/playwright/accessible-source-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "source matrix test",
         "structural-contract": "CSS/docs",
         "runtime-browser": "pass: native value, focus, input lifecycle, disabled and programmatic updates execute in Chromium",
-        "accessibility": "pass: visible label naming, focus and native disabled semantics are asserted",
+        "accessibility": "pass: visible label naming, focus and native disabled semantics are asserted; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
         "focused-visual": "pass: focused Input state matrix snapshot",
         "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
         "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"
@@ -489,13 +490,14 @@
       "tests": [
         "tools/tests/form-controls-source.test.mjs",
         "tools/playwright/fidelity.spec.js",
-        "tools/playwright/form-controls-wave2.spec.js"
+        "tools/playwright/form-controls-wave2.spec.js",
+        "tools/playwright/accessible-source-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "complete matrix test",
         "structural-contract": "CSS/docs",
         "runtime-browser": "pass: native multiline value executes in Chromium",
-        "accessibility": "pass: invalid and described error relationship are asserted concretely",
+        "accessibility": "pass: invalid and described error relationship are asserted concretely; active labels, guidance, counters and placeholders meet the shared WCAG 2.2 contrast contract",
         "focused-visual": "pass: focused Textarea state matrix snapshot",
         "consumer-integration": "not-applicable: no application-owned live consumer exists",
         "responsive-content-stress": "pass: long Cyrillic/Latin multiline content wraps without page overflow"
@@ -534,13 +536,14 @@
     {
       "tests": [
         "tools/tests/component-audit-manifest.test.mjs",
-        "tools/playwright/select-closed-shell.spec.js"
+        "tools/playwright/select-closed-shell.spec.js",
+        "tools/playwright/accessible-source-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "applicable/pass",
         "structural-contract": "applicable/pass",
         "runtime-browser": "applicable/pass",
-        "accessibility": "applicable/pass with tracked shared contrast deviation",
+        "accessibility": "pass: active labels and placeholders meet the shared WCAG 2.2 contrast contract; disabled text is measured separately",
         "focused-visual": "applicable/pass",
         "consumer-integration": "applicable/pass",
         "responsive-content-stress": "applicable/pass"
@@ -1572,13 +1575,14 @@
     {
       "tests": [
         "tools/tests/overlay-source.test.mjs",
-        "tools/playwright/overlay.spec.js"
+        "tools/playwright/overlay.spec.js",
+        "tools/playwright/accessible-source-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw hash and exact five-component zero-variant census remain traceable",
         "structural-contract": "pass: five Showcase roots, one plain HTML consumer and five inert diagnostic surfaces are classified",
         "runtime-browser": "pass: native lifecycle, dismissal, return values, nested Escape, idempotence and teardown execute",
-        "accessibility": "pass: naming, focus ownership, containment, inertness and eligible restoration execute",
+        "accessibility": "pass: naming, focus ownership, containment, inertness and eligible restoration execute; compact secondary copy meets the shared WCAG 2.2 contrast contract",
         "focused-visual": "pass: source states, real open, focus-visible, long-content and nested snapshots/computed geometry pass",
         "consumer-integration": "pass: Showcase and plain HTML direct ESM consume the reusable contract",
         "responsive-content-stress": "pass: viewport bounds, local scrolling and stable regions pass"
@@ -1808,13 +1812,14 @@
         "tools/playwright/date-picker-accessibility.spec.js",
         "tools/playwright/date-picker-visual.spec.js",
         "tools/playwright/date-picker-showcase.spec.js",
-        "tools/playwright/date-picker-consumer.spec.js"
+        "tools/playwright/date-picker-consumer.spec.js",
+        "tools/playwright/accessible-source-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw Date-Picker and Calendar sources are indexed and unchanged",
         "structural-contract": "pass: separate public Date Field, Calendar and Date Picker seams, styles, fixtures, docs and classified occurrences exist",
         "runtime-browser": "pass: focused Chromium contracts execute editing, navigation, synchronization, selection, dismissal, reset and events",
-        "accessibility": "pass: two WCAG A/AA axe scopes report zero violations and keyboard/focus/state behavior executes",
+        "accessibility": "pass: two WCAG A/AA axe scopes report zero violations, active Date Field guidance and placeholders meet the shared WCAG 2.2 contrast contract, and keyboard/focus/state behavior executes",
         "focused-visual": "pass: all 20 Date Picker variants plus Calendar state and responsive surfaces have component-local snapshots",
         "consumer-integration": "pass: application-owned native form verifies public-entry typing and Calendar selection through FormData",
         "responsive-content-stress": "pass: one/two-month, narrow, long-label, invalid, constrained and de-DE fixtures execute"

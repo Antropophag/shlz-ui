@@ -8,18 +8,18 @@ const verifyMaterialState = (component, state) => {
   expect(component).toBe("date-picker-calendar");
   executedMaterialStates.add(state);
 };
+const materialStateGroups = [
+  ["calendar-focus", "calendar-range-selection"].sort(),
+  ["picker-committed", "picker-dismissed", "picker-open"].sort(),
+];
 const expectMaterialStates = (component) => {
   expect(component).toBe("date-picker-calendar");
-  expect([...executedMaterialStates].sort()).toEqual(
-    [
-      "calendar-focus",
-      "calendar-range-selection",
-      "picker-committed",
-      "picker-dismissed",
-      "picker-open",
-    ].sort(),
+  expect(materialStateGroups).toContainEqual(
+    [...executedMaterialStates].sort(),
   );
 };
+
+test.beforeEach(() => executedMaterialStates.clear());
 
 async function expectNoAccessibilityViolations(page, include) {
   const results = await new AxeBuilder({ page })
@@ -77,6 +77,7 @@ test("standalone Calendar passes automated accessibility checks and keyboard sta
       })
       .locator(".."),
   ).toHaveAttribute("aria-selected", "true");
+  expectMaterialStates("date-picker-calendar");
 });
 
 test("Date Picker passes automated accessibility checks and restores focus after keyboard dismissal and commit", async ({
