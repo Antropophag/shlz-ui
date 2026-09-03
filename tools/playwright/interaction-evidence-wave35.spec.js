@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { readComponentAuditManifest } from "./component-audit.js";
+import {
+  contrastRatio,
+  contrastThreshold,
+  textContrastEvidence,
+} from "./text-contrast.js";
 
 const manifests = Object.fromEntries(
   await Promise.all(
@@ -53,76 +58,13 @@ const paint = (locator, pseudo = null) =>
     };
   }, pseudo);
 
-const rgba = (value) => {
-  const channels = value.match(/[\d.]+/g)?.map(Number);
-  if (!channels || channels.length < 3) throw new Error(`Not RGB: ${value}`);
-  return [channels[0], channels[1], channels[2], channels[3] ?? 1];
-};
-
-const composite = (foreground, background) => {
-  const [red, green, blue, alpha] = Array.isArray(foreground)
-    ? foreground
-    : rgba(foreground);
-  return [
-    red * alpha + background[0] * (1 - alpha),
-    green * alpha + background[1] * (1 - alpha),
-    blue * alpha + background[2] * (1 - alpha),
-  ];
-};
-
-const luminance = (value) => {
-  const linear = (Array.isArray(value) ? value : rgba(value).slice(0, 3)).map(
-    (channel) => {
-      const normalized = channel / 255;
-      return normalized <= 0.04045
-        ? normalized / 12.92
-        : ((normalized + 0.055) / 1.055) ** 2.4;
-    },
-  );
-  return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
-};
-
-const contrast = (foreground, background) => {
-  const renderedBackground = Array.isArray(background)
-    ? background
-    : composite(background, [255, 255, 255]);
-  const renderedForeground = composite(foreground, renderedBackground);
-  const values = [
-    luminance(renderedForeground),
-    luminance(renderedBackground),
-  ].sort((a, b) => b - a);
-  return (values[0] + 0.05) / (values[1] + 0.05);
-};
-
-const contrastThreshold = (fontSize, fontWeight) =>
-  fontSize >= 24 || (fontSize >= 18.66 && fontWeight >= 700) ? 3 : 4.5;
-
 const expectContrast = async (locator, label) => {
-  const { color, backgrounds, fontSize, fontWeight } = await locator.evaluate(
-    (element) => {
-      const style = window.getComputedStyle(element);
-      const color = style.color;
-      const fontSize = Number.parseFloat(style.fontSize);
-      const fontWeight = Number.parseInt(style.fontWeight, 10) || 400;
-      const backgrounds = [];
-      let node = element;
-      while (node) {
-        backgrounds.push(window.getComputedStyle(node).backgroundColor);
-        node = node.parentElement;
-      }
-      return { color, backgrounds, fontSize, fontWeight };
-    },
-  );
-  const backgroundColor = backgrounds
-    .reverse()
-    .reduce(
-      (background, layer) => composite(layer, background),
-      [255, 255, 255],
-    );
+  const { color, background, fontSize, fontWeight, ratio } =
+    await textContrastEvidence(locator);
   const minimum = contrastThreshold(fontSize, fontWeight);
   expect(
-    contrast(color, backgroundColor),
-    `${label}: ${color} on rgb(${backgroundColor.join(" ")})`,
+    ratio,
+    `${label}: ${color} on rgb(${background.join(" ")})`,
   ).toBeGreaterThanOrEqual(minimum);
 };
 
@@ -130,7 +72,7 @@ test("contrast guard applies normal and large-text thresholds", () => {
   expect(contrastThreshold(16, 400)).toBe(4.5);
   expect(contrastThreshold(24, 400)).toBe(3);
   expect(contrastThreshold(18.66, 700)).toBe(3);
-  expect(contrast("rgba(0, 0, 0, 0.5)", "rgb(255, 255, 255)")).toBeCloseTo(
+  expect(contrastRatio("rgba(0, 0, 0, 0.5)", "rgb(255, 255, 255)")).toBeCloseTo(
     3.95,
     1,
   );
@@ -196,7 +138,7 @@ test("Wave 4 contrast ledger separates source fidelity from threshold results", 
         backgroundColor: style.backgroundColor,
       };
     });
-    if (contrast(color, backgroundColor) < 4.5) belowThreshold.push(id);
+    if (contrastRatio(color, backgroundColor) < 4.5) belowThreshold.push(id);
   }
   expect(belowThreshold).toEqual([
     "status-showcase-green",
@@ -1097,7 +1039,7 @@ test("Pagination binds real page/direction hover, active, focus, current and bou
   });
   const paginationDefaultPaint = await paint(live);
   expect(
-    contrast(
+    contrastRatio(
       paginationDefaultPaint.color,
       paginationDefaultPaint.backgroundColor,
     ),

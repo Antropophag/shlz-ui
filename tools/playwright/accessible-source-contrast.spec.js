@@ -1,54 +1,8 @@
 import { expect, test } from "@playwright/test";
-
-const contrastEvidence = (locator, pseudo = null) =>
-  locator.evaluate((element, pseudoElement) => {
-    const rgba = (value) => {
-      const channels = value.match(/[\d.]+/g)?.map(Number);
-      if (!channels || channels.length < 3)
-        throw new Error(`Not RGB: ${value}`);
-      return [channels[0], channels[1], channels[2], channels[3] ?? 1];
-    };
-    const composite = (foreground, background) => {
-      const [red, green, blue, alpha] = rgba(foreground);
-      return [
-        red * alpha + background[0] * (1 - alpha),
-        green * alpha + background[1] * (1 - alpha),
-        blue * alpha + background[2] * (1 - alpha),
-      ];
-    };
-    const luminance = (channels) => {
-      const linear = channels.map((channel) => {
-        const normalized = channel / 255;
-        return normalized <= 0.04045
-          ? normalized / 12.92
-          : ((normalized + 0.055) / 1.055) ** 2.4;
-      });
-      return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2];
-    };
-
-    const style = window.getComputedStyle(element, pseudoElement);
-    const backgrounds = [];
-    let current = element;
-    while (current) {
-      backgrounds.push(window.getComputedStyle(current).backgroundColor);
-      current = current.parentElement;
-    }
-    const background = backgrounds
-      .reverse()
-      .reduce((paint, layer) => composite(layer, paint), [255, 255, 255]);
-    const foreground = composite(style.color, background);
-    const luminances = [luminance(foreground), luminance(background)].sort(
-      (left, right) => right - left,
-    );
-    return {
-      color: style.color,
-      background,
-      ratio: (luminances[0] + 0.05) / (luminances[1] + 0.05),
-    };
-  }, pseudo);
+import { textContrastEvidence } from "./text-contrast.js";
 
 const expectAa = async (locator, label, pseudo = null) => {
-  const evidence = await contrastEvidence(locator, pseudo);
+  const evidence = await textContrastEvidence(locator, pseudo);
   expect(
     evidence.ratio,
     `${label}: ${evidence.color} on rgb(${evidence.background.join(" ")})`,
@@ -273,7 +227,7 @@ test("disabled Field text is measured separately from active thresholds", async 
     "[data-component-audit-id='request-status-disabled'] .shlz-select__trigger",
   );
   await expect(disabledSelect).toBeDisabled();
-  const evidence = await contrastEvidence(disabledSelect);
+  const evidence = await textContrastEvidence(disabledSelect);
   expect(evidence.ratio).toBeLessThan(4.5);
   expect(evidence.color).toBe("rgba(11, 22, 35, 0.1)");
 });
