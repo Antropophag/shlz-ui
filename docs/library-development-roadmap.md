@@ -45,9 +45,10 @@ was already delivered before the roadmap was written:
 
 ## Next milestones
 
-5. **Reconcile current planning and completion claims.** Keep current-state
-   documentation aligned with merged component manifests and preserve dated
-   wave reports as historical evidence rather than rewriting their baselines.
+5. **Reconcile current planning and completion claims** — addressed by PR #68.
+   The current-state documentation is aligned with merged component manifests;
+   dated wave reports remain historical evidence and retain their original
+   baselines.
 6. **Define release readiness.** Establish an explicit versioning,
    distribution, compatibility, changelog, and release-validation contract for
    the four public packages before calling the library generally consumable.
