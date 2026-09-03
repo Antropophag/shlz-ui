@@ -105,7 +105,7 @@ test("package-affecting diffs require consistent release intent", () => {
   );
   assert.doesNotThrow(() =>
     validateReleaseIntent({
-      changedPaths: ["packages/icons/src/index.ts"],
+      changedPaths: [".changeset/icons.md", "packages/icons/src/index.ts"],
       changesets: [
         {
           id: "icons",
@@ -118,7 +118,7 @@ test("package-affecting diffs require consistent release intent", () => {
   assert.throws(
     () =>
       validateReleaseIntent({
-        changedPaths: ["packages/icons/src/index.ts"],
+        changedPaths: [".changeset/wrong.md", "packages/icons/src/index.ts"],
         changesets: [
           {
             id: "wrong",
@@ -128,6 +128,20 @@ test("package-affecting diffs require consistent release intent", () => {
         ],
       }),
     /SHLZ package/,
+  );
+  assert.throws(
+    () =>
+      validateReleaseIntent({
+        changedPaths: ["packages/icons/src/index.ts"],
+        changesets: [
+          {
+            id: "stale-on-main",
+            summary: "Unrelated pending change.",
+            releases: [{ name: "@shlz/icons", type: "patch" }],
+          },
+        ],
+      }),
+    /current diff/,
   );
   assert.doesNotThrow(() =>
     validateReleaseIntent({

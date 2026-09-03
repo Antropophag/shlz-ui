@@ -39,8 +39,6 @@ jobs:
     env:
       SHLZ_GITLAB_REGISTRY_ID: ${{ vars.SHLZ_GITLAB_REGISTRY_ID }}
       SHLZ_NPM_REGISTRY_URL: ${{ vars.SHLZ_NPM_REGISTRY_URL }}
-      GITLAB_NPM_READ_TOKEN: ${{ secrets.GITLAB_NPM_READ_TOKEN }}
-      GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
     steps:
       - name: Check out protected main
         uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -79,14 +77,20 @@ jobs:
 
       - name: Publish non-stable candidate set
         if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
         run: node tools/release-registry.mjs publish --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/publication.json"
 
       - name: Verify exact packages from corporate GitLab
         if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_READ_TOKEN: ${{ secrets.GITLAB_NPM_READ_TOKEN }}
         run: node tools/release-registry.mjs verify --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/registry-verification.json"
 
       - name: Promote complete set to latest
         if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
         run: node tools/release-registry.mjs promote --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/promotion.json"
 
       - name: Record source release and immutable evidence
@@ -94,7 +98,14 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_VERSION: ${{ inputs.target_version }}
-        run: gh release create "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY"/*.tgz --target "$GITHUB_SHA" --generate-notes --title "SHLZ UI $RELEASE_VERSION"
+        run: |
+          if gh release view "shlz-ui-v$RELEASE_VERSION" >/dev/null 2>&1; then
+            mkdir -p "$RELEASE_DIRECTORY/existing"
+            gh release download "shlz-ui-v$RELEASE_VERSION" --pattern candidate.json --dir "$RELEASE_DIRECTORY/existing"
+            cmp "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY/existing/candidate.json"
+          else
+            gh release create "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY"/*.tgz --target "$GITHUB_SHA" --generate-notes --title "SHLZ UI $RELEASE_VERSION"
+          fi
 
       - name: Load verified rollback target
         if: inputs.operation == 'rollback'
@@ -113,12 +124,13 @@ jobs:
         if: inputs.operation == 'rollback'
         env:
           DEFECTIVE_VERSION: ${{ inputs.defective_version }}
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
           ROLLBACK_REASON: ${{ inputs.reason }}
-        run: node tools/release-registry.mjs rollback --target-manifest "$RELEASE_DIRECTORY/candidate.json" --defective-version "$DEFECTIVE_VERSION" --reason "$ROLLBACK_REASON" --audit "$RELEASE_DIRECTORY/rollback.json"
+        run: node tools/release-registry.mjs rollback --target-manifest "$RELEASE_DIRECTORY/candidate.json" --defective-version "$DEFECTIVE_VERSION" --reason "$ROLLBACK_REASON" --audit "$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
 
       - name: Record rollback evidence
         if: inputs.operation == 'rollback' && always()
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_VERSION: ${{ inputs.target_version }}
-        run: gh release upload "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/rollback.json" --clobber
+        run: gh release upload "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"

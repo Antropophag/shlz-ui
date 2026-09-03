@@ -67,6 +67,8 @@ All four packages SHALL be published under the `@shlz` scope to the configured c
 
 #### Scenario: Registry configuration is absent
 
+<!-- failure-invariant: missing-registry-config-cannot-mutate concern=state-machine -->
+
 - **WHEN** a publication run lacks a valid registry endpoint, project identity, or write credential
 - **THEN** publication fails closed without logging credential material or modifying a stable distribution tag
 
@@ -109,10 +111,14 @@ Publication SHALL treat package versions as immutable. A candidate run MUST chec
 
 #### Scenario: The third package fails to publish
 
+<!-- failure-invariant: partial-release-cannot-promote concern=state-machine -->
+
 - **WHEN** two packages were published to the non-stable channel and a later package fails
 - **THEN** no package in the candidate is promoted to `latest`, the partial state is reported, and a retry publishes only missing approved artifacts
 
 #### Scenario: An existing version has different contents
+
+<!-- failure-invariant: registry-collision-cannot-overwrite concern=persistence -->
 
 - **WHEN** the target version already exists for any package with an artifact identity different from the approved candidate
 - **THEN** the run fails and MUST NOT overwrite, resume, or promote that release set
@@ -151,6 +157,8 @@ Published versions MUST NOT be overwritten and SHALL NOT normally be deleted. If
 - **THEN** all four `latest` tags are restored to that same version, the defective set is deprecated, and the action is recorded without changing package contents
 
 #### Scenario: The requested rollback target is incomplete
+
+<!-- failure-invariant: incomplete-rollback-cannot-mutate concern=state-machine -->
 
 - **WHEN** one of the four packages or its validation evidence is missing for the requested target version
 - **THEN** rollback fails without moving any stable tag

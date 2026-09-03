@@ -105,9 +105,17 @@ export function validateReleaseIntent({ changedPaths, changesets }) {
     packageAffectingPaths.some((pattern) => pattern.test(name)),
   );
   if (!affectsPackages) return { required: false };
-  if (!changesets?.length)
-    fail("package-affecting changes require a changeset or release exemption");
-  for (const changeset of changesets) {
+  const changedChangesets = new Set(
+    changedPaths
+      .map((name) => name.match(/^\.changeset\/([^/]+)\.md$/)?.[1])
+      .filter(Boolean),
+  );
+  const currentIntent = (changesets ?? []).filter(({ id }) =>
+    changedChangesets.has(id),
+  );
+  if (!currentIntent.length)
+    fail("package-affecting changes require a changeset in the current diff");
+  for (const changeset of currentIntent) {
     if (
       !changeset.id ||
       !changeset.summary?.trim() ||
@@ -256,6 +264,10 @@ export function planRollback({
     fail("rollback requires a coherent current stable release set");
   if (!semver.test(defectiveVersion ?? "") || !reason?.trim())
     fail("rollback requires a defective version and reason");
+  if (priorVersions[0] !== defectiveVersion)
+    fail("rollback defective version must be the current stable version");
+  if (payload.releaseVersion === defectiveVersion)
+    fail("rollback target must differ from the defective version");
   return {
     targetVersion: payload.releaseVersion,
     priorLatest: { ...currentLatest },
@@ -281,12 +293,10 @@ export function requireCleanReleaseState(status) {
 export function validateRegistryConfiguration(environment, mode) {
   if (!["verify", "publish", "rollback"].includes(mode))
     fail("registry operation mode is invalid");
-  const required = [
-    "SHLZ_NPM_REGISTRY_URL",
-    "SHLZ_GITLAB_REGISTRY_ID",
-    "GITLAB_NPM_READ_TOKEN",
-  ];
-  if (mode !== "verify") required.push("GITLAB_NPM_PUBLISH_TOKEN");
+  const required = ["SHLZ_NPM_REGISTRY_URL", "SHLZ_GITLAB_REGISTRY_ID"];
+  required.push(
+    mode === "verify" ? "GITLAB_NPM_READ_TOKEN" : "GITLAB_NPM_PUBLISH_TOKEN",
+  );
   const missing = required.filter((name) => !environment[name]?.trim());
   if (missing.length)
     fail(`registry configuration is missing: ${missing.join(", ")}`);
