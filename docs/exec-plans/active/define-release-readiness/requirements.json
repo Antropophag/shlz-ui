@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Define the release-readiness contract for the four public SHLZ packages before implementing a separate release pipeline and real-application pilot.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "registry-and-access",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "packages will be stored in the corporate GitLab"
+      }
+    },
+    {
+      "id": "versioning-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    },
+    {
+      "id": "release-authority",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    },
+    {
+      "id": "compatibility-and-breaking-changes",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    },
+    {
+      "id": "changelog-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    },
+    {
+      "id": "release-validation",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    },
+    {
+      "id": "rollback-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-delegation",
+        "ref": "user delegated the remaining release-policy decisions"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "define-release-readiness",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "approved",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "user approved the synthesized release contract"
+    }
+  }
+}
