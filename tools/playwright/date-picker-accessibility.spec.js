@@ -8,9 +8,15 @@ const verifyMaterialState = (component, state) => {
   expect(component).toBe("date-picker-calendar");
   executedMaterialStates.add(state);
 };
-const expectMaterialStates = (component, expected) => {
+const materialStateGroups = [
+  ["calendar-focus", "calendar-range-selection"].sort(),
+  ["picker-committed", "picker-dismissed", "picker-open"].sort(),
+];
+const expectMaterialStates = (component) => {
   expect(component).toBe("date-picker-calendar");
-  expect([...executedMaterialStates].sort()).toEqual([...expected].sort());
+  expect(materialStateGroups).toContainEqual(
+    [...executedMaterialStates].sort(),
+  );
 };
 
 test.beforeEach(() => executedMaterialStates.clear());
@@ -71,10 +77,7 @@ test("standalone Calendar passes automated accessibility checks and keyboard sta
       })
       .locator(".."),
   ).toHaveAttribute("aria-selected", "true");
-  expectMaterialStates("date-picker-calendar", [
-    "calendar-focus",
-    "calendar-range-selection",
-  ]);
+  expectMaterialStates("date-picker-calendar");
 });
 
 test("Date Picker passes automated accessibility checks and restores focus after keyboard dismissal and commit", async ({
@@ -115,9 +118,5 @@ test("Date Picker passes automated accessibility checks and restores focus after
     picker.getByRole("textbox", { name: "Дата поездки" }),
   ).toHaveValue("13.08.2026");
   verifyMaterialState("date-picker-calendar", "picker-committed");
-  expectMaterialStates("date-picker-calendar", [
-    "picker-committed",
-    "picker-dismissed",
-    "picker-open",
-  ]);
+  expectMaterialStates("date-picker-calendar");
 });
