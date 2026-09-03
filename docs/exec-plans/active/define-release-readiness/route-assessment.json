@@ -14,7 +14,8 @@
     },
     { "id": "changelog-policy", "owner": "agent", "blocking": true },
     { "id": "release-validation", "owner": "agent", "blocking": true },
-    { "id": "rollback-policy", "owner": "agent", "blocking": true }
+    { "id": "rollback-policy", "owner": "agent", "blocking": true },
+    { "id": "activation-sequencing", "owner": "user", "blocking": true }
   ],
   "materialSignals": {
     "newCapability": true,

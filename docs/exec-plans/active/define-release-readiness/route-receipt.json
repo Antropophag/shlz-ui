@@ -60,11 +60,16 @@
         "blocking": true,
         "id": "rollback-policy",
         "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "activation-sequencing",
+        "owner": "user"
       }
     ],
     "route": "open-spec",
     "unknown": []
   },
   "version": 1,
-  "digest": "6e14dcffc6de5aa13978b2f870308475e4829a24988ebc1ed41712207a07303c"
+  "digest": "a387222f362e4ec28260c1c4aa19c4d81e827dbcc8cabb075d6c69822c5c2558"
 }

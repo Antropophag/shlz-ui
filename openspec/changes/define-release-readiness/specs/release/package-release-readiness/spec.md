@@ -67,6 +67,8 @@ All four packages SHALL be published under the `@shlz` scope to the configured c
 
 #### Scenario: Registry configuration is absent
 
+<!-- failure-invariant: missing-registry-config-cannot-mutate concern=state-machine -->
+
 - **WHEN** a publication run lacks a valid registry endpoint, project identity, or write credential
 - **THEN** publication fails closed without logging credential material or modifying a stable distribution tag
 
@@ -109,10 +111,14 @@ Publication SHALL treat package versions as immutable. A candidate run MUST chec
 
 #### Scenario: The third package fails to publish
 
+<!-- failure-invariant: partial-release-cannot-promote concern=state-machine -->
+
 - **WHEN** two packages were published to the non-stable channel and a later package fails
 - **THEN** no package in the candidate is promoted to `latest`, the partial state is reported, and a retry publishes only missing approved artifacts
 
 #### Scenario: An existing version has different contents
+
+<!-- failure-invariant: registry-collision-cannot-overwrite concern=persistence -->
 
 - **WHEN** the target version already exists for any package with an artifact identity different from the approved candidate
 - **THEN** the run fails and MUST NOT overwrite, resume, or promote that release set
@@ -152,6 +158,8 @@ Published versions MUST NOT be overwritten and SHALL NOT normally be deleted. If
 
 #### Scenario: The requested rollback target is incomplete
 
+<!-- failure-invariant: incomplete-rollback-cannot-mutate concern=state-machine -->
+
 - **WHEN** one of the four packages or its validation evidence is missing for the requested target version
 - **THEN** rollback fails without moving any stable tag
 
@@ -173,3 +181,17 @@ A successful pipeline release SHALL prove release mechanics but SHALL NOT by its
 
 - **WHEN** the real-application pilot exposes a reusable package or migration-contract defect
 - **THEN** that defect is routed through its own approved contract change and is not silently normalized as application-specific behavior
+
+### Requirement: Pipeline delivery and live registry activation are separate gates
+
+The repository implementation SHALL be eligible for review and merge when local/package validation, workflow validation, failure-path tests, and independent review prove the pipeline implements this contract and fails closed without external configuration. It MUST NOT be reported as active against corporate GitLab until a separate post-merge activation change configures the protected environment and credentials, exercises non-stable publication and collision-safe resume, verifies exact registry consumption, and exercises stable promotion and rollback with redacted evidence. The real-application pilot remains a later and separate gate.
+
+#### Scenario: Implementation PR has no corporate registry credentials
+
+- **WHEN** the implementation PR passes repository validation and proves missing external configuration prevents publication before network mutation
+- **THEN** the PR may be merged as pipeline implementation while live GitLab activation remains explicitly pending
+
+#### Scenario: Post-merge activation succeeds
+
+- **WHEN** an authorized activation change completes the protected non-stable publication, resume, exact-consumer, promotion, and rollback exercise against corporate GitLab
+- **THEN** release automation may be reported active and the project may proceed to the separate real-application pilot

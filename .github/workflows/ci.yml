@@ -28,6 +28,21 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate package release policy
+        run: npm run release:policy
+
+      - name: Validate package release intent
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          VERSION_PR: ${{ github.head_ref == 'changeset-release/main' }}
+        run: |
+          if [ "$VERSION_PR" = "true" ]; then
+            npm run release:intent -- --base "$BASE_SHA" --version-pr
+          else
+            npm run release:intent -- --base "$BASE_SHA"
+          fi
+
       - name: Generate assets
         run: npm run generate
 

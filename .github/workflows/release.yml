@@ -1,0 +1,151 @@
+name: Publish or roll back package release
+
+on:
+  workflow_dispatch:
+    inputs:
+      operation:
+        description: Protected package operation
+        required: true
+        type: choice
+        options:
+          - publish
+          - rollback
+      target_version:
+        description: Version to publish or restore
+        required: true
+        type: string
+      defective_version:
+        description: Defective version (rollback only)
+        required: false
+        type: string
+      reason:
+        description: Incident and replacement guidance (rollback only)
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: shlz-package-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    name: ${{ inputs.operation }} SHLZ package set
+    environment: release
+    runs-on: ubuntu-latest
+    env:
+      SHLZ_GITLAB_REGISTRY_ID: ${{ vars.SHLZ_GITLAB_REGISTRY_ID }}
+      SHLZ_NPM_REGISTRY_URL: ${{ vars.SHLZ_NPM_REGISTRY_URL }}
+    steps:
+      - name: Check out protected main
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@a0853c24544627f65ddf259abe73b1d18a591444 # v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Configure release workspace
+        run: echo "RELEASE_DIRECTORY=$RUNNER_TEMP/shlz-release" >> "$GITHUB_ENV"
+
+      - name: Validate exact source revision
+        env:
+          DISPATCH_SHA: ${{ github.sha }}
+        run: test "$(git rev-parse HEAD)" = "$DISPATCH_SHA"
+
+      - name: Validate release candidate
+        if: inputs.operation == 'publish'
+        env:
+          EXPECTED_VERSION: ${{ inputs.target_version }}
+        run: |
+          npm run check
+          mkdir -p "$RELEASE_DIRECTORY"
+          npm run release:candidate -- \
+            --out "$RELEASE_DIRECTORY/candidate.json" \
+            --tarballs "$RELEASE_DIRECTORY"
+          test "$(jq -r .releaseVersion "$RELEASE_DIRECTORY/candidate.json")" = "$EXPECTED_VERSION"
+
+      - name: Publish non-stable candidate set
+        if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
+        run: node tools/release-registry.mjs publish --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/publication.json"
+
+      - name: Verify exact packages from corporate GitLab
+        if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_READ_TOKEN: ${{ secrets.GITLAB_NPM_READ_TOKEN }}
+        run: node tools/release-registry.mjs verify --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/registry-verification.json"
+
+      - name: Promote complete set to latest
+        if: inputs.operation == 'publish'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
+        run: node tools/release-registry.mjs promote --manifest "$RELEASE_DIRECTORY/candidate.json" --audit "$RELEASE_DIRECTORY/promotion.json"
+
+      - name: Record source release and immutable evidence
+        id: release_record
+        if: inputs.operation == 'publish'
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.target_version }}
+        run: |
+          if gh release view "shlz-ui-v$RELEASE_VERSION" >/dev/null 2>&1; then
+            mkdir -p "$RELEASE_DIRECTORY/existing"
+            gh release download "shlz-ui-v$RELEASE_VERSION" --pattern candidate.json --dir "$RELEASE_DIRECTORY/existing"
+            cmp "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY/existing/candidate.json"
+          else
+            gh release create "shlz-ui-v$RELEASE_VERSION" "$RELEASE_DIRECTORY/candidate.json" "$RELEASE_DIRECTORY"/*.tgz --target "$GITHUB_SHA" --generate-notes --title "SHLZ UI $RELEASE_VERSION"
+          fi
+
+      - name: Repair stable set when source release recording fails
+        if: steps.release_record.outcome == 'failure'
+        env:
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
+        run: |
+          node tools/release-registry.mjs restore --promotion-audit "$RELEASE_DIRECTORY/promotion.json" --audit "$RELEASE_DIRECTORY/promotion-repair.json"
+          exit 1
+
+      - name: Load verified rollback target
+        if: inputs.operation == 'rollback'
+        env:
+          DEFECTIVE_VERSION: ${{ inputs.defective_version }}
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.target_version }}
+          ROLLBACK_REASON: ${{ inputs.reason }}
+        run: |
+          test -n "$DEFECTIVE_VERSION"
+          test -n "$ROLLBACK_REASON"
+          mkdir -p "$RELEASE_DIRECTORY"
+          gh release download "shlz-ui-v$RELEASE_VERSION" --pattern candidate.json --dir "$RELEASE_DIRECTORY"
+
+      - name: Restore prior verified release set
+        if: inputs.operation == 'rollback'
+        env:
+          DEFECTIVE_VERSION: ${{ inputs.defective_version }}
+          GITLAB_NPM_PUBLISH_TOKEN: ${{ secrets.GITLAB_NPM_PUBLISH_TOKEN }}
+          ROLLBACK_REASON: ${{ inputs.reason }}
+        run: node tools/release-registry.mjs rollback --target-manifest "$RELEASE_DIRECTORY/candidate.json" --defective-version "$DEFECTIVE_VERSION" --reason "$ROLLBACK_REASON" --audit "$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+
+      - name: Record rollback evidence
+        if: inputs.operation == 'rollback' && always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_VERSION: ${{ inputs.target_version }}
+        run: |
+          audit="$RELEASE_DIRECTORY/rollback-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+          if [ -f "$audit" ]; then
+            gh release upload "shlz-ui-v$RELEASE_VERSION" "$audit"
+          fi

@@ -2,8 +2,12 @@
   "name": "@shlz/styles",
   "version": "0.1.0",
   "files": [
-    "dist"
+    "dist",
+    "CHANGELOG.md"
   ],
+  "publishConfig": {
+    "access": "restricted"
+  },
   "exports": {
     ".": "./dist/shlz.css",
     "./shlz.css": "./dist/shlz.css"
