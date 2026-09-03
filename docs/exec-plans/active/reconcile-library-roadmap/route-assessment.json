@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "intent": "Reconcile current planning documentation with components and policy work already merged to main, without changing runtime behavior, public contracts, audit evidence, or historical reports.",
+  "route": "direct",
+  "requiredDecisions": [],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}
