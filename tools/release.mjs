@@ -136,7 +136,10 @@ async function buildCandidate() {
       ["pack", ".", "--json", "--pack-destination", tarballDirectory],
       packageDirectory,
     );
-    const [pack] = JSON.parse(stdout);
+    const packOutput = JSON.parse(stdout);
+    const [pack] = Array.isArray(packOutput)
+      ? packOutput
+      : Object.values(packOutput);
     packages.push(validatePackedPackage(manifests[name], pack));
     changelogDigests[manifests[name].name] = sha256(
       await readFile(path.join(packageDirectory, "CHANGELOG.md")),
