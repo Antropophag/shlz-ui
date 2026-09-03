@@ -45,12 +45,18 @@
         "id": "rollback-policy",
         "owner": "agent",
         "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "activation-sequencing",
+        "owner": "user",
+        "status": "resolved"
       }
     ],
     "intent": "Define the release-readiness contract for the four public SHLZ packages before implementing a separate release pipeline and real-application pilot.",
-    "revision": 1
+    "revision": 2
   },
-  "routeDigest": "6e14dcffc6de5aa13978b2f870308475e4829a24988ebc1ed41712207a07303c",
+  "routeDigest": "a387222f362e4ec28260c1c4aa19c4d81e827dbcc8cabb075d6c69822c5c2558",
   "version": 1,
-  "digest": "9088e8d54ac5347e6b2a4a571ac8d706d9dd8a1bb30720efc4a475fda5a58edf"
+  "digest": "ed6b3c49b1e8f8d1bded3e9cf93ccd28a37459b0ae1fc4d479eee1c53e0133a3"
 }
