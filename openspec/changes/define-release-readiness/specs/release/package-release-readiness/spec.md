@@ -173,3 +173,17 @@ A successful pipeline release SHALL prove release mechanics but SHALL NOT by its
 
 - **WHEN** the real-application pilot exposes a reusable package or migration-contract defect
 - **THEN** that defect is routed through its own approved contract change and is not silently normalized as application-specific behavior
+
+### Requirement: Pipeline delivery and live registry activation are separate gates
+
+The repository implementation SHALL be eligible for review and merge when local/package validation, workflow validation, failure-path tests, and independent review prove the pipeline implements this contract and fails closed without external configuration. It MUST NOT be reported as active against corporate GitLab until a separate post-merge activation change configures the protected environment and credentials, exercises non-stable publication and collision-safe resume, verifies exact registry consumption, and exercises stable promotion and rollback with redacted evidence. The real-application pilot remains a later and separate gate.
+
+#### Scenario: Implementation PR has no corporate registry credentials
+
+- **WHEN** the implementation PR passes repository validation and proves missing external configuration prevents publication before network mutation
+- **THEN** the PR may be merged as pipeline implementation while live GitLab activation remains explicitly pending
+
+#### Scenario: Post-merge activation succeeds
+
+- **WHEN** an authorized activation change completes the protected non-stable publication, resume, exact-consumer, promotion, and rollback exercise against corporate GitLab
+- **THEN** release automation may be reported active and the project may proceed to the separate real-application pilot

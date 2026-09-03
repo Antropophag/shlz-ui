@@ -18,6 +18,7 @@ The distribution target is an npm-compatible registry in corporate GitLab. Its h
 
 - Publishing from this planning change or configuring corporate GitLab/GitHub administration state.
 - Selecting or modifying the milestone 7 pilot application.
+- Configuring or exercising the live corporate GitLab registry before the implementation PR is merged.
 - Supporting independent package versions, public/anonymous package access, multiple registries, or local ad hoc publication.
 - Guaranteeing transactional updates across four npm distribution tags; npm registries do not provide a multi-package transaction.
 - Declaring the library generally consumable before separate pilot evidence exists.
@@ -80,6 +81,12 @@ Because four dist-tag changes cannot be atomic, the operation is serialized and 
 
 Deletion was rejected as normal rollback because it can break lockfiles and destroy auditability. Overwriting a version is forbidden by both policy and collision checks.
 
+### Separate implementation delivery from external activation
+
+The implementation PR proves repository-owned policy, candidate construction, workflow permissions/triggers, registry-adapter behavior, failure repair, and fail-closed handling through local packs, injected adapters, static workflow validation, and independent review. It deliberately has no corporate credentials and performs no registry mutation.
+
+After merge, a separate material activation change owns the administrator-controlled GitHub environment and GitLab configuration plus the live non-stable publish/resume/verify/promote/rollback exercise. This preserves the rule that release mutation runs only from protected `main`; running the feature-branch implementation against corporate GitLab was rejected because it would bypass the authority model being introduced. The later real-application pilot starts only after activation evidence is accepted.
+
 ## Risks / Trade-offs
 
 - **[A fixed group releases unchanged packages]** → Accept extra registry versions in exchange for a single supported compatibility coordinate and simpler consumer upgrades.
@@ -95,8 +102,8 @@ Deletion was rejected as normal rollback because it can break lockfiles and dest
 1. In the separate implementation PR, add Changesets configuration, release policy documentation, package metadata, and repository-owned release validation/manifest scripts without publishing.
 2. Add focused tests for fixed versions, compatibility intent, tarball inventory, collision handling, partial-release resume, promotion, and rollback dry-run behavior; run the existing full package and browser validation as applicable.
 3. Add pinned GitHub Actions for version-PR preparation and protected manual publication/rollback. Keep the publication path disabled or guaranteed to fail closed until administrators configure the environment, endpoint, approvers, and least-privilege GitLab credential.
-4. Validate the workflow against a non-stable test version/channel, verify a clean authenticated registry consumer, and record the release evidence before enabling stable promotion.
-5. Merge remains user-owned. After the release pipeline PR is reviewed and merged, perform milestone 7 in its own scoped change/PR and use exact package versions for the real-application pilot.
+4. Merge remains user-owned. After the release pipeline PR is reviewed and merged, create a separate activation change that supplies administrator-controlled configuration, validates a non-stable version/channel, verifies a clean authenticated registry consumer, exercises resume/promotion/rollback, and records redacted evidence before reporting the pipeline active.
+5. After activation evidence is accepted, perform milestone 7 in its own scoped change/PR and use exact package versions for the real-application pilot.
 
 Repository rollback of the implementation is a normal revert while no version has been published. Once artifacts exist, rollback follows the immutable-version and stable-tag procedure above; reverting workflow code does not erase registry history.
 
