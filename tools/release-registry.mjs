@@ -250,6 +250,8 @@ async function rollback() {
   validateCandidateManifest(target);
   if (process.env.GITHUB_REF !== "refs/heads/main")
     throw new Error("rollback mutation requires protected main");
+  if (!process.env.GITHUB_ACTOR)
+    throw new Error("rollback mutation requires an authenticated operator");
   return withNpmConfiguration("rollback", async ({ npm }) => {
     const targetRegistry = await exactRegistryState(npm, target);
     planPromotion({ candidate: target, registry: targetRegistry });
@@ -274,9 +276,11 @@ async function rollback() {
     for (const item of plan.deprecations)
       await npm(["deprecate", `${item.name}@${item.version}`, item.message]);
     return writeAudit({
+      actor: process.env.GITHUB_ACTOR,
       defectiveVersion,
       operation: "rollback",
       outcome: "pass",
+      priorLatest: plan.priorLatest,
       reason,
       targetDigest: target.digest,
       targetVersion: plan.targetVersion,

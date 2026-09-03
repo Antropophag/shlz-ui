@@ -59,3 +59,25 @@ test("registry consumer mode fails before network access without configuration",
       !/ENOTFOUND|ECONNREFUSED/.test(error.stderr),
   );
 });
+
+test("consumer and rollback evidence cover every public release seam", async () => {
+  const consumer = await readFile(
+    path.join(root, "tools/package-consumer-smoke.mjs"),
+    "utf8",
+  );
+  for (const entry of [
+    "@shlz/behaviors/select",
+    "@shlz/behaviors/calendar",
+    "@shlz/behaviors/calendar-grid",
+    "@shlz/behaviors/date-field",
+    "@shlz/behaviors/date-picker",
+  ])
+    assert.match(consumer, new RegExp(entry));
+
+  const registry = await readFile(
+    path.join(root, "tools/release-registry.mjs"),
+    "utf8",
+  );
+  assert.match(registry, /actor: process\.env\.GITHUB_ACTOR/);
+  assert.match(registry, /priorLatest: plan\.priorLatest/);
+});

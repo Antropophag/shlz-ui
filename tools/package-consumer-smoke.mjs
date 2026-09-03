@@ -102,6 +102,7 @@ const moduleExports = ${JSON.stringify([
       "@shlz/tokens",
       "@shlz/icons",
       "@shlz/behaviors",
+      "@shlz/behaviors/select",
       "@shlz/behaviors/dropdown",
       "@shlz/behaviors/popover",
       "@shlz/behaviors/tooltip",
@@ -109,6 +110,10 @@ const moduleExports = ${JSON.stringify([
       "@shlz/behaviors/modal",
       "@shlz/behaviors/drawer",
       "@shlz/behaviors/file-upload",
+      "@shlz/behaviors/calendar",
+      "@shlz/behaviors/calendar-grid",
+      "@shlz/behaviors/date-field",
+      "@shlz/behaviors/date-picker",
       "@shlz/behaviors/browser",
     ])};
 for (const specifier of moduleExports) await import(specifier);

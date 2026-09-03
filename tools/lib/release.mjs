@@ -4,8 +4,8 @@ import { URL } from "node:url";
 export const PACKAGE_ORDER = ["tokens", "icons", "styles", "behaviors"];
 export const PACKAGE_NAMES = PACKAGE_ORDER.map((name) => `@shlz/${name}`);
 
-const semver =
-  /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
+const semver = /^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?(?:\+[0-9A-Za-z.-]+)?$/;
+const compareText = (left, right) => left.localeCompare(right, "en");
 
 function fail(message) {
   throw new Error(message);
@@ -14,44 +14,61 @@ function fail(message) {
 const digest = (value) =>
   createHash("sha256").update(JSON.stringify(value)).digest("hex");
 
+function isSemver(value) {
+  if (!semver.test(value ?? "")) return false;
+  return value
+    .split(/[+-]/, 1)[0]
+    .split(".")
+    .every((part) => part === "0" || !part.startsWith("0"));
+}
+
+function validatePackageManifest(shortName, packageJson) {
+  const expectedName = `@shlz/${shortName}`;
+  if (packageJson?.name !== expectedName)
+    fail(`release package must be named ${expectedName}`);
+  if (!isSemver(packageJson.version))
+    fail(`${expectedName} must have a valid SemVer version`);
+  if (packageJson.private === true) fail(`${expectedName} must be publishable`);
+  if (packageJson.publishConfig?.access !== "restricted")
+    fail(`${expectedName} must declare restricted publication`);
+  if (packageJson.publishConfig?.registry)
+    fail(`${expectedName} must not embed a corporate registry endpoint`);
+  if (
+    !packageJson.files?.includes("dist") ||
+    !packageJson.files?.includes("CHANGELOG.md")
+  )
+    fail(`${expectedName} must publish dist and its changelog`);
+}
+
+function validateInternalDependencies(packageJson, version) {
+  const dependencies = {
+    ...packageJson.dependencies,
+    ...packageJson.peerDependencies,
+    ...packageJson.optionalDependencies,
+  };
+  for (const [dependency, range] of Object.entries(dependencies)) {
+    if (dependency.startsWith("@shlz/") && range !== version)
+      fail(`${packageJson.name} must use an exact internal dependency`);
+  }
+}
+
 export function validatePackageSet(manifests) {
-  const keys = Object.keys(manifests).sort();
-  if (JSON.stringify(keys) !== JSON.stringify([...PACKAGE_ORDER].sort()))
+  const keys = Object.keys(manifests).sort(compareText);
+  const expectedKeys = [...PACKAGE_ORDER].sort(compareText);
+  if (JSON.stringify(keys) !== JSON.stringify(expectedKeys))
     fail("release set must contain exactly the four SHLZ packages");
 
   const packages = PACKAGE_ORDER.map((shortName) => manifests[shortName]);
-  for (const [index, packageJson] of packages.entries()) {
-    const expectedName = `@shlz/${PACKAGE_ORDER[index]}`;
-    if (packageJson?.name !== expectedName)
-      fail(`release package must be named ${expectedName}`);
-    if (!semver.test(packageJson.version ?? ""))
-      fail(`${expectedName} must have a valid SemVer version`);
-    if (packageJson.private === true)
-      fail(`${expectedName} must be publishable`);
-    if (packageJson.publishConfig?.access !== "restricted")
-      fail(`${expectedName} must declare restricted publication`);
-    if (packageJson.publishConfig?.registry)
-      fail(`${expectedName} must not embed a corporate registry endpoint`);
-    if (
-      !packageJson.files?.includes("dist") ||
-      !packageJson.files?.includes("CHANGELOG.md")
-    )
-      fail(`${expectedName} must publish dist and its changelog`);
-  }
+  packages.forEach((packageJson, index) =>
+    validatePackageManifest(PACKAGE_ORDER[index], packageJson),
+  );
 
   const version = packages[0].version;
   if (packages.some((packageJson) => packageJson.version !== version))
     fail("all release packages must use one shared version");
-  for (const packageJson of packages) {
-    for (const [dependency, range] of Object.entries({
-      ...packageJson.dependencies,
-      ...packageJson.peerDependencies,
-      ...packageJson.optionalDependencies,
-    })) {
-      if (dependency.startsWith("@shlz/") && range !== version)
-        fail(`${packageJson.name} must use an exact internal dependency`);
-    }
-  }
+  packages.forEach((packageJson) =>
+    validateInternalDependencies(packageJson, version),
+  );
 
   return { packageNames: packages.map(({ name }) => name), version };
 }
@@ -66,8 +83,8 @@ export function validateChangesetConfig(config) {
   const fixed = config?.fixed ?? [];
   if (
     fixed.length !== 1 ||
-    JSON.stringify([...fixed[0]].sort()) !==
-      JSON.stringify([...PACKAGE_NAMES].sort())
+    JSON.stringify([...fixed[0]].sort(compareText)) !==
+      JSON.stringify([...PACKAGE_NAMES].sort(compareText))
   )
     fail("Changesets fixed group must contain all four SHLZ packages");
 }
@@ -122,12 +139,35 @@ export function validateReleaseIntent({ changedPaths, changesets }) {
       !changeset.releases?.length
     )
       fail("changeset must include an id, summary, and releases");
+    if (
+      changeset.summary.trim().length < 20 ||
+      !/(?:consumer|runtime|migration|breaking|interface|behaviou?r|visual|install|export|package)/i.test(
+        changeset.summary,
+      )
+    )
+      fail("changeset summary must describe consumer impact");
     for (const release of changeset.releases) {
       if (!PACKAGE_NAMES.includes(release.name))
         fail(`changeset release must name a SHLZ package: ${release.name}`);
       if (!["patch", "minor", "major"].includes(release.type))
         fail(`changeset has invalid SemVer intent: ${release.type}`);
     }
+  }
+  const affectedPackages = new Set(
+    changedPaths
+      .map(
+        (name) =>
+          name.match(/^packages\/(tokens|icons|styles|behaviors)\//)?.[1],
+      )
+      .filter(Boolean)
+      .map((name) => `@shlz/${name}`),
+  );
+  const releasedPackages = new Set(
+    currentIntent.flatMap(({ releases }) => releases.map(({ name }) => name)),
+  );
+  for (const name of affectedPackages) {
+    if (!releasedPackages.has(name))
+      fail(`changeset must name the affected package: ${name}`);
   }
   return { required: true };
 }
@@ -152,7 +192,7 @@ export function validatePackedPackage(packageJson, pack) {
     fail(`${packageJson.name} packed identity differs from its manifest`);
   if (!pack.filename || !pack.integrity)
     fail(`${packageJson.name} pack result lacks filename or integrity`);
-  const files = (pack.files ?? []).map(({ path }) => path).sort();
+  const files = (pack.files ?? []).map(({ path }) => path).sort(compareText);
   for (const file of files) {
     if (
       !["package.json", "README.md", "LICENSE", "CHANGELOG.md"].includes(
@@ -161,6 +201,15 @@ export function validatePackedPackage(packageJson, pack) {
       !file.startsWith("dist/")
     )
       fail(`${packageJson.name} has unexpected tarball file: ${file}`);
+    if (
+      file.startsWith("dist/") &&
+      (file
+        .slice("dist/".length)
+        .split("/")
+        .some((part) => part.startsWith(".")) ||
+        (!/\.(?:js|json|css|svg)$/.test(file) && !/\.d\.ts$/.test(file)))
+    )
+      fail(`${packageJson.name} has forbidden distributable file: ${file}`);
   }
   for (const target of exportTargets(packageJson.exports)) {
     if (!matchesExport(files, target))
@@ -185,10 +234,7 @@ function candidatePayload(input) {
   )
     fail("candidate must contain a complete verified release set");
   const version = packages[0].version;
-  if (
-    !semver.test(version) ||
-    packages.some((item) => item.version !== version)
-  )
+  if (!isSemver(version) || packages.some((item) => item.version !== version))
     fail("candidate packages must use one shared SemVer version");
   if (input.validation !== "pass")
     fail("candidate must contain a passing validation result");
@@ -262,7 +308,7 @@ export function planRollback({
     new Set(priorVersions).size !== 1
   )
     fail("rollback requires a coherent current stable release set");
-  if (!semver.test(defectiveVersion ?? "") || !reason?.trim())
+  if (!isSemver(defectiveVersion) || !reason?.trim())
     fail("rollback requires a defective version and reason");
   if (priorVersions[0] !== defectiveVersion)
     fail("rollback defective version must be the current stable version");
@@ -365,7 +411,7 @@ export async function executeTagTransaction({
 }
 
 export function synchronizeWorkspaceConsumer(packageJson, version) {
-  if (!semver.test(version)) fail("workspace consumer version is invalid");
+  if (!isSemver(version)) fail("workspace consumer version is invalid");
   const dependencies = { ...packageJson.dependencies };
   for (const name of PACKAGE_NAMES) {
     if (name in dependencies) dependencies[name] = version;

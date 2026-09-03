@@ -109,7 +109,7 @@ test("package-affecting diffs require consistent release intent", () => {
       changesets: [
         {
           id: "icons",
-          summary: "Add an icon.",
+          summary: "Add an icon export for consumers.",
           releases: [{ name: "@shlz/icons", type: "minor" }],
         },
       ],
@@ -122,7 +122,7 @@ test("package-affecting diffs require consistent release intent", () => {
         changesets: [
           {
             id: "wrong",
-            summary: "Wrong package.",
+            summary: "Wrong package for consumers.",
             releases: [{ name: "@other/icons", type: "patch" }],
           },
         ],
@@ -142,6 +142,20 @@ test("package-affecting diffs require consistent release intent", () => {
         ],
       }),
     /current diff/,
+  );
+  assert.throws(
+    () =>
+      validateReleaseIntent({
+        changedPaths: [".changeset/mismatch.md", "packages/icons/src/index.ts"],
+        changesets: [
+          {
+            id: "mismatch",
+            summary: "Correct a token value for consumers.",
+            releases: [{ name: "@shlz/tokens", type: "patch" }],
+          },
+        ],
+      }),
+    /affected package/,
   );
   assert.doesNotThrow(() =>
     validateReleaseIntent({
@@ -182,6 +196,14 @@ test("packed package contains every export and only distributable files", () => 
         files: [...pack.files, { path: ".env" }],
       }),
     /unexpected tarball file/,
+  );
+  assert.throws(
+    () =>
+      validatePackedPackage(packageJson, {
+        ...pack,
+        files: [...pack.files, { path: "dist/.env" }],
+      }),
+    /forbidden distributable file/,
   );
 });
 
