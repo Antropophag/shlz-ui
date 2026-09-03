@@ -124,47 +124,56 @@ function isPackageAffectingPath(name) {
   return /^tools\/(generate|normalize-basic-icons)\.mjs$/.test(name);
 }
 
-export function validateReleaseIntent({ changedPaths, changesets }) {
-  const affectingPaths = changedPaths.filter(isPackageAffectingPath);
-  const affectsPackages = affectingPaths.length > 0;
-  if (!affectsPackages) return { required: false };
-  const changedChangesets = new Set(
+function validateChangeset(changeset) {
+  if (
+    !changeset.id ||
+    !changeset.summary?.trim() ||
+    !changeset.releases?.length
+  )
+    fail("changeset must include an id, summary, and releases");
+  if (
+    changeset.summary.trim().length < 20 ||
+    !/(?:consumer|runtime|migration|breaking|interface|behaviou?r|visual|install|export|package)/i.test(
+      changeset.summary,
+    )
+  )
+    fail("changeset summary must describe consumer impact");
+  for (const release of changeset.releases) {
+    if (!PACKAGE_NAMES.includes(release.name))
+      fail(`changeset release must name a SHLZ package: ${release.name}`);
+    if (!["patch", "minor", "major"].includes(release.type))
+      fail(`changeset has invalid SemVer intent: ${release.type}`);
+  }
+}
+
+function changedChangesetIds(changedPaths) {
+  return new Set(
     changedPaths
       .map((name) => name.match(/^\.changeset\/([^/]+)\.md$/)?.[1])
       .filter(Boolean),
   );
-  const currentIntent = (changesets ?? []).filter(({ id }) =>
-    changedChangesets.has(id),
-  );
-  if (!currentIntent.length)
-    fail("package-affecting changes require a changeset in the current diff");
-  for (const changeset of currentIntent) {
-    if (
-      !changeset.id ||
-      !changeset.summary?.trim() ||
-      !changeset.releases?.length
-    )
-      fail("changeset must include an id, summary, and releases");
-    if (
-      changeset.summary.trim().length < 20 ||
-      !/(?:consumer|runtime|migration|breaking|interface|behaviou?r|visual|install|export|package)/i.test(
-        changeset.summary,
-      )
-    )
-      fail("changeset summary must describe consumer impact");
-    for (const release of changeset.releases) {
-      if (!PACKAGE_NAMES.includes(release.name))
-        fail(`changeset release must name a SHLZ package: ${release.name}`);
-      if (!["patch", "minor", "major"].includes(release.type))
-        fail(`changeset has invalid SemVer intent: ${release.type}`);
-    }
-  }
-  const affectedPackages = new Set(
+}
+
+function affectedPackageNames(affectingPaths) {
+  return new Set(
     affectingPaths
       .map((name) => packagePath(name)?.[1])
       .filter(Boolean)
       .map((name) => `@shlz/${name}`),
   );
+}
+
+export function validateReleaseIntent({ changedPaths, changesets }) {
+  const affectingPaths = changedPaths.filter(isPackageAffectingPath);
+  if (!affectingPaths.length) return { required: false };
+  const changedChangesets = changedChangesetIds(changedPaths);
+  const currentIntent = (changesets ?? []).filter(({ id }) =>
+    changedChangesets.has(id),
+  );
+  if (!currentIntent.length)
+    fail("package-affecting changes require a changeset in the current diff");
+  currentIntent.forEach(validateChangeset);
+  const affectedPackages = affectedPackageNames(affectingPaths);
   const releasedPackages = new Set(
     currentIntent.flatMap(({ releases }) => releases.map(({ name }) => name)),
   );
@@ -190,6 +199,12 @@ function matchesExport(files, target) {
   );
 }
 
+function hasAllowedDistributionExtension(file) {
+  return [".d.ts", ".js", ".json", ".css", ".svg"].some((extension) =>
+    file.endsWith(extension),
+  );
+}
+
 export function validatePackedPackage(packageJson, pack) {
   if (pack?.name !== packageJson.name || pack?.version !== packageJson.version)
     fail(`${packageJson.name} packed identity differs from its manifest`);
@@ -210,7 +225,7 @@ export function validatePackedPackage(packageJson, pack) {
         .slice("dist/".length)
         .split("/")
         .some((part) => part.startsWith(".")) ||
-        (!/\.(?:js|json|css|svg)$/.test(file) && !/\.d\.ts$/.test(file)))
+        !hasAllowedDistributionExtension(file))
     )
       fail(`${packageJson.name} has forbidden distributable file: ${file}`);
   }
