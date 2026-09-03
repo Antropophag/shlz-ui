@@ -1,0 +1,19 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/implement-release-pipeline",
+    "commit": "0565481c93c3319363240a1f403b84da05dbb413",
+    "defaultBranch": "main",
+    "pullRequest": null,
+    "repository": {
+      "digest": "2df5cecc43debeac37280146bd48dbdcf4fe02b3b3f55c6bc21d942f4d693775",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-release-pipeline"
+    },
+    "upstream": "origin/feature/implement-release-pipeline"
+  },
+  "requirementsDigest": "9088e8d54ac5347e6b2a4a571ac8d706d9dd8a1bb30720efc4a475fda5a58edf",
+  "routeDigest": "6e14dcffc6de5aa13978b2f870308475e4829a24988ebc1ed41712207a07303c",
+  "version": 1,
+  "digest": "a8b18c5f403ead0cca86285bef052e2db25b2feced0fb1c0758eafe628167dbd"
+}

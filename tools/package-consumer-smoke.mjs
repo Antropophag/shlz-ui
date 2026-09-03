@@ -3,10 +3,18 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { promisify } from "node:util";
+import {
+  PACKAGE_NAMES,
+  validateCandidateManifest,
+  validateRegistryConfiguration,
+} from "./lib/release.mjs";
 
 const exec = promisify(execFile);
 const root = process.cwd();
 const packages = ["tokens", "icons", "styles", "behaviors"];
+const manifestOption = process.argv.indexOf("--manifest");
+const registryManifest =
+  manifestOption < 0 ? null : process.argv[manifestOption + 1];
 const temporaryDirectory = await mkdtemp(
   path.join(tmpdir(), "shlz-package-consumer-"),
 );
@@ -18,45 +26,54 @@ async function run(command, args, cwd = root) {
 }
 
 try {
-  await run("npm", ["run", "build:packages"]);
-  await mkdir(tarballDirectory);
-
-  const tarballs = [];
-  for (const packageName of packages) {
-    const packageDirectory = path.join(root, "packages", packageName);
-    const packageJson = JSON.parse(
-      await readFile(path.join(packageDirectory, "package.json"), "utf8"),
+  let installTargets;
+  if (registryManifest) {
+    validateRegistryConfiguration(process.env, "verify");
+    const candidate = JSON.parse(await readFile(registryManifest, "utf8"));
+    validateCandidateManifest(candidate);
+    installTargets = PACKAGE_NAMES.map(
+      (name) => `${name}@${candidate.releaseVersion}`,
     );
-    const { stdout } = await run(
-      "npm",
-      ["pack", ".", "--json", "--pack-destination", tarballDirectory],
-      packageDirectory,
-    );
-    const packResult = JSON.parse(stdout);
-    const [{ filename, files }] = Array.isArray(packResult)
-      ? packResult
-      : Object.values(packResult);
-    if (!files.some(({ path: file }) => file.startsWith("dist/"))) {
-      throw new Error(`@shlz/${packageName} tarball has no dist files`);
-    }
-    const packedFiles = files.map(({ path: file }) => file);
-    for (const exported of Object.values(packageJson.exports).flatMap(
-      (target) =>
-        typeof target === "string" ? [target] : Object.values(target),
-    )) {
-      const packedTarget = exported.replace(/^\.\//, "");
-      const matches = packedTarget.includes("*")
-        ? packedFiles.some((file) =>
-            file.startsWith(packedTarget.slice(0, packedTarget.indexOf("*"))),
-          )
-        : packedFiles.includes(packedTarget);
-      if (!matches) {
-        throw new Error(
-          `${packageJson.name} export ${exported} is absent from its tarball`,
-        );
+  } else {
+    await run("npm", ["run", "build:packages"]);
+    await mkdir(tarballDirectory);
+    installTargets = [];
+    for (const packageName of packages) {
+      const packageDirectory = path.join(root, "packages", packageName);
+      const packageJson = JSON.parse(
+        await readFile(path.join(packageDirectory, "package.json"), "utf8"),
+      );
+      const { stdout } = await run(
+        "npm",
+        ["pack", ".", "--json", "--pack-destination", tarballDirectory],
+        packageDirectory,
+      );
+      const packResult = JSON.parse(stdout);
+      const [{ filename, files }] = Array.isArray(packResult)
+        ? packResult
+        : Object.values(packResult);
+      if (!files.some(({ path: file }) => file.startsWith("dist/"))) {
+        throw new Error(`@shlz/${packageName} tarball has no dist files`);
       }
+      const packedFiles = files.map(({ path: file }) => file);
+      for (const exported of Object.values(packageJson.exports).flatMap(
+        (target) =>
+          typeof target === "string" ? [target] : Object.values(target),
+      )) {
+        const packedTarget = exported.replace(/^\.\//, "");
+        const matches = packedTarget.includes("*")
+          ? packedFiles.some((file) =>
+              file.startsWith(packedTarget.slice(0, packedTarget.indexOf("*"))),
+            )
+          : packedFiles.includes(packedTarget);
+        if (!matches) {
+          throw new Error(
+            `${packageJson.name} export ${exported} is absent from its tarball`,
+          );
+        }
+      }
+      installTargets.push(path.join(tarballDirectory, filename));
     }
-    tarballs.push(path.join(tarballDirectory, filename));
   }
 
   await mkdir(consumerDirectory);
@@ -72,7 +89,7 @@ try {
       "--no-audit",
       "--no-fund",
       "--package-lock=false",
-      ...tarballs,
+      ...installTargets,
     ],
     consumerDirectory,
   );
@@ -126,7 +143,7 @@ for (const file of representativeFiles) {
   await run("node", ["verify.mjs"], consumerDirectory);
 
   console.log(
-    `Installed and consumed ${packages.length} packed SHLZ packages from a clean project.`,
+    `Installed and consumed ${packages.length} ${registryManifest ? "registry" : "packed"} SHLZ packages from a clean project.`,
   );
 } finally {
   await rm(temporaryDirectory, { recursive: true, force: true });

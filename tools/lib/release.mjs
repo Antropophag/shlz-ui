@@ -1,0 +1,364 @@
+import { createHash } from "node:crypto";
+import { URL } from "node:url";
+
+export const PACKAGE_ORDER = ["tokens", "icons", "styles", "behaviors"];
+export const PACKAGE_NAMES = PACKAGE_ORDER.map((name) => `@shlz/${name}`);
+
+const semver =
+  /^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:-[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?(?:\+[0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*)?$/;
+
+function fail(message) {
+  throw new Error(message);
+}
+
+const digest = (value) =>
+  createHash("sha256").update(JSON.stringify(value)).digest("hex");
+
+export function validatePackageSet(manifests) {
+  const keys = Object.keys(manifests).sort();
+  if (JSON.stringify(keys) !== JSON.stringify([...PACKAGE_ORDER].sort()))
+    fail("release set must contain exactly the four SHLZ packages");
+
+  const packages = PACKAGE_ORDER.map((shortName) => manifests[shortName]);
+  for (const [index, packageJson] of packages.entries()) {
+    const expectedName = `@shlz/${PACKAGE_ORDER[index]}`;
+    if (packageJson?.name !== expectedName)
+      fail(`release package must be named ${expectedName}`);
+    if (!semver.test(packageJson.version ?? ""))
+      fail(`${expectedName} must have a valid SemVer version`);
+    if (packageJson.private === true)
+      fail(`${expectedName} must be publishable`);
+    if (packageJson.publishConfig?.access !== "restricted")
+      fail(`${expectedName} must declare restricted publication`);
+    if (packageJson.publishConfig?.registry)
+      fail(`${expectedName} must not embed a corporate registry endpoint`);
+    if (
+      !packageJson.files?.includes("dist") ||
+      !packageJson.files?.includes("CHANGELOG.md")
+    )
+      fail(`${expectedName} must publish dist and its changelog`);
+  }
+
+  const version = packages[0].version;
+  if (packages.some((packageJson) => packageJson.version !== version))
+    fail("all release packages must use one shared version");
+  for (const packageJson of packages) {
+    for (const [dependency, range] of Object.entries({
+      ...packageJson.dependencies,
+      ...packageJson.peerDependencies,
+      ...packageJson.optionalDependencies,
+    })) {
+      if (dependency.startsWith("@shlz/") && range !== version)
+        fail(`${packageJson.name} must use an exact internal dependency`);
+    }
+  }
+
+  return { packageNames: packages.map(({ name }) => name), version };
+}
+
+export function validateChangesetConfig(config) {
+  if (config?.access !== "restricted")
+    fail("Changesets access must be restricted");
+  if (config?.baseBranch !== "main")
+    fail("Changesets base branch must be main");
+  if (!config?.ignore?.includes("@shlz/showcase"))
+    fail("Changesets must ignore the private showcase");
+  const fixed = config?.fixed ?? [];
+  if (
+    fixed.length !== 1 ||
+    JSON.stringify([...fixed[0]].sort()) !==
+      JSON.stringify([...PACKAGE_NAMES].sort())
+  )
+    fail("Changesets fixed group must contain all four SHLZ packages");
+}
+
+export function assertSafeReleaseDocumentation(markdown) {
+  for (const required of [
+    "<gitlab-host>",
+    "<project-or-group-id>",
+    "GITLAB_NPM_READ_TOKEN",
+    "GITLAB_NPM_PUBLISH_TOKEN",
+  ]) {
+    if (!markdown.includes(required))
+      fail(`release documentation must include ${required}`);
+  }
+  for (const line of markdown.split(/\r?\n/)) {
+    const assignment = line.match(/(?:TOKEN|PASSWORD|SECRET)=([^\s]+)/);
+    if (
+      assignment &&
+      !assignment[1].startsWith("<") &&
+      !assignment[1].startsWith("${")
+    )
+      fail("release documentation contains credential material");
+    if (/https?:\/\/(?!<gitlab-host>|example\.)[^/\s]+\/api\/v4\//.test(line))
+      fail("release documentation contains a corporate registry coordinate");
+  }
+}
+
+const packageAffectingPaths = [
+  /^packages\/(tokens|icons|styles|behaviors)\//,
+  /^tools\/(generate|normalize-basic-icons)\.mjs$/,
+];
+
+export function validateReleaseIntent({ changedPaths, changesets }) {
+  const affectsPackages = changedPaths.some((name) =>
+    packageAffectingPaths.some((pattern) => pattern.test(name)),
+  );
+  if (!affectsPackages) return { required: false };
+  if (!changesets?.length)
+    fail("package-affecting changes require a changeset or release exemption");
+  for (const changeset of changesets) {
+    if (
+      !changeset.id ||
+      !changeset.summary?.trim() ||
+      !changeset.releases?.length
+    )
+      fail("changeset must include an id, summary, and releases");
+    for (const release of changeset.releases) {
+      if (!PACKAGE_NAMES.includes(release.name))
+        fail(`changeset release must name a SHLZ package: ${release.name}`);
+      if (!["patch", "minor", "major"].includes(release.type))
+        fail(`changeset has invalid SemVer intent: ${release.type}`);
+    }
+  }
+  return { required: true };
+}
+
+function exportTargets(value) {
+  if (typeof value === "string") return [value];
+  if (!value || typeof value !== "object") return [];
+  return Object.values(value).flatMap(exportTargets);
+}
+
+function matchesExport(files, target) {
+  const normalized = target.replace(/^\.\//, "");
+  if (!normalized.includes("*")) return files.includes(normalized);
+  const [prefix, suffix] = normalized.split("*");
+  return files.some(
+    (file) => file.startsWith(prefix) && file.endsWith(suffix ?? ""),
+  );
+}
+
+export function validatePackedPackage(packageJson, pack) {
+  if (pack?.name !== packageJson.name || pack?.version !== packageJson.version)
+    fail(`${packageJson.name} packed identity differs from its manifest`);
+  if (!pack.filename || !pack.integrity)
+    fail(`${packageJson.name} pack result lacks filename or integrity`);
+  const files = (pack.files ?? []).map(({ path }) => path).sort();
+  for (const file of files) {
+    if (
+      !["package.json", "README.md", "LICENSE", "CHANGELOG.md"].includes(
+        file,
+      ) &&
+      !file.startsWith("dist/")
+    )
+      fail(`${packageJson.name} has unexpected tarball file: ${file}`);
+  }
+  for (const target of exportTargets(packageJson.exports)) {
+    if (!matchesExport(files, target))
+      fail(`${packageJson.name} export ${target} is absent from its tarball`);
+  }
+  return {
+    filename: pack.filename,
+    files,
+    integrity: pack.integrity,
+    name: pack.name,
+    version: pack.version,
+  };
+}
+
+function candidatePayload(input) {
+  const packages = PACKAGE_NAMES.map((name) =>
+    input.packages?.find((item) => item.name === name),
+  );
+  if (
+    packages.some((item) => !item) ||
+    input.packages?.length !== PACKAGE_NAMES.length
+  )
+    fail("candidate must contain a complete verified release set");
+  const version = packages[0].version;
+  if (
+    !semver.test(version) ||
+    packages.some((item) => item.version !== version)
+  )
+    fail("candidate packages must use one shared SemVer version");
+  if (input.validation !== "pass")
+    fail("candidate must contain a passing validation result");
+  if (!/^[0-9a-f]{40,64}$/.test(input.commit ?? ""))
+    fail("candidate must bind an immutable source commit");
+  for (const item of packages) {
+    if (!item.filename || !item.integrity || !item.files?.length)
+      fail(`candidate package identity is incomplete: ${item.name}`);
+    if (!input.changelogDigests?.[item.name])
+      fail(`candidate changelog identity is incomplete: ${item.name}`);
+  }
+  return {
+    version: 1,
+    commit: input.commit,
+    releaseVersion: version,
+    validation: input.validation,
+    changelogDigests: Object.fromEntries(
+      PACKAGE_NAMES.map((name) => [name, input.changelogDigests[name]]),
+    ),
+    packages,
+  };
+}
+
+export function createCandidateManifest(input) {
+  const payload = candidatePayload(input);
+  return { ...payload, digest: digest(payload) };
+}
+
+export function validateCandidateManifest(candidate) {
+  const payload = candidatePayload(candidate);
+  if (candidate.digest !== digest(payload)) fail("candidate identity differs");
+  return payload;
+}
+
+export function planCandidatePublication({ candidate, registry = {} }) {
+  const payload = validateCandidateManifest(candidate);
+  return payload.packages.map(({ name, version, integrity }) => {
+    const existing = registry[name];
+    if (!existing) return { action: "publish", name, version };
+    if (existing.version !== version || existing.integrity !== integrity)
+      fail(`registry collision for ${name}@${version}`);
+    return { action: "skip", name, version };
+  });
+}
+
+export function planPromotion({ candidate, registry = {} }) {
+  const payload = validateCandidateManifest(candidate);
+  const complete = payload.packages.every(({ name, version, integrity }) => {
+    const existing = registry[name];
+    return existing?.version === version && existing?.integrity === integrity;
+  });
+  if (!complete) fail("promotion requires a complete verified release set");
+  return payload.packages.map(({ name, version }) => ({
+    name,
+    operation: "dist-tag",
+    tag: "latest",
+    version,
+  }));
+}
+
+export function planRollback({
+  currentLatest,
+  defectiveVersion,
+  reason,
+  target,
+}) {
+  const payload = validateCandidateManifest(target);
+  const priorVersions = PACKAGE_NAMES.map((name) => currentLatest?.[name]);
+  if (
+    priorVersions.some((version) => !version) ||
+    new Set(priorVersions).size !== 1
+  )
+    fail("rollback requires a coherent current stable release set");
+  if (!semver.test(defectiveVersion ?? "") || !reason?.trim())
+    fail("rollback requires a defective version and reason");
+  return {
+    targetVersion: payload.releaseVersion,
+    priorLatest: { ...currentLatest },
+    mutations: PACKAGE_NAMES.map((name) => ({
+      name,
+      operation: "dist-tag",
+      tag: "latest",
+      version: payload.releaseVersion,
+    })),
+    deprecations: PACKAGE_NAMES.map((name) => ({
+      message: reason,
+      name,
+      operation: "deprecate",
+      version: defectiveVersion,
+    })),
+  };
+}
+
+export function requireCleanReleaseState(status) {
+  if (status.trim()) fail("release validation requires clean generated state");
+}
+
+export function validateRegistryConfiguration(environment, mode) {
+  if (!["verify", "publish", "rollback"].includes(mode))
+    fail("registry operation mode is invalid");
+  const required = [
+    "SHLZ_NPM_REGISTRY_URL",
+    "SHLZ_GITLAB_REGISTRY_ID",
+    "GITLAB_NPM_READ_TOKEN",
+  ];
+  if (mode !== "verify") required.push("GITLAB_NPM_PUBLISH_TOKEN");
+  const missing = required.filter((name) => !environment[name]?.trim());
+  if (missing.length)
+    fail(`registry configuration is missing: ${missing.join(", ")}`);
+  let registry;
+  try {
+    registry = new URL(environment.SHLZ_NPM_REGISTRY_URL);
+  } catch {
+    fail("SHLZ_NPM_REGISTRY_URL must be a valid URL");
+  }
+  if (
+    registry.protocol !== "https:" ||
+    !/\/api\/v4\/(?:projects|groups)\/[^/]+\/(?:-\/)?packages\/npm\/?$/.test(
+      registry.pathname,
+    )
+  )
+    fail("SHLZ_NPM_REGISTRY_URL must be a corporate GitLab npm endpoint");
+  const registryId = environment.SHLZ_GITLAB_REGISTRY_ID;
+  if (
+    !registry.pathname.includes(`/${registryId}/`) &&
+    !registry.pathname.includes(`/${encodeURIComponent(registryId)}/`)
+  )
+    fail("registry endpoint does not match SHLZ_GITLAB_REGISTRY_ID");
+  return {
+    mode,
+    registryId,
+    registry: registry.href,
+  };
+}
+
+export async function executeTagTransaction({
+  mutate,
+  mutations,
+  previous,
+  restore = ({ mutation, previousVersion }) =>
+    mutate({ ...mutation, version: previousVersion }),
+  verify,
+}) {
+  const applied = [];
+  try {
+    for (const mutation of mutations) {
+      await mutate(mutation);
+      applied.push(mutation);
+    }
+    await verify(mutations);
+    return { applied, outcome: "pass", repaired: [] };
+  } catch (cause) {
+    const repaired = [];
+    const repairFailures = [];
+    for (const mutation of [...applied].reverse()) {
+      try {
+        await restore({
+          mutation,
+          previousVersion: previous[mutation.name] ?? null,
+        });
+        repaired.push(mutation.name);
+      } catch (error) {
+        repairFailures.push({ message: error.message, name: mutation.name });
+      }
+    }
+    const repair = repairFailures.length ? "incomplete" : "complete";
+    const error = new Error(`stable-tag transaction failed; repair ${repair}`);
+    error.cause = cause;
+    error.audit = { applied, repairFailures, repaired };
+    throw error;
+  }
+}
+
+export function synchronizeWorkspaceConsumer(packageJson, version) {
+  if (!semver.test(version)) fail("workspace consumer version is invalid");
+  const dependencies = { ...packageJson.dependencies };
+  for (const name of PACKAGE_NAMES) {
+    if (name in dependencies) dependencies[name] = version;
+  }
+  return { ...packageJson, dependencies };
+}
