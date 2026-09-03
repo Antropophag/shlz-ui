@@ -348,6 +348,17 @@ test("release state and registry configuration fail closed without secrets", () 
   assert.doesNotThrow(() =>
     validateRegistryConfiguration(configuration, "verify"),
   );
+  assert.equal(
+    validateRegistryConfiguration(
+      {
+        ...configuration,
+        SHLZ_NPM_REGISTRY_URL:
+          "https://example.invalid/api/v4/projects/123/packages/npm",
+      },
+      "verify",
+    ).registry,
+    "https://example.invalid/api/v4/projects/123/packages/npm/",
+  );
   assert.throws(
     () => validateRegistryConfiguration(configuration, "publish"),
     (error) =>

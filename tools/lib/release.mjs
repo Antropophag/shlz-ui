@@ -383,6 +383,7 @@ export function validateRegistryConfiguration(environment, mode) {
     !registry.pathname.includes(`/${encodeURIComponent(registryId)}/`)
   )
     fail("registry endpoint does not match SHLZ_GITLAB_REGISTRY_ID");
+  if (!registry.pathname.endsWith("/")) registry.pathname += "/";
   return {
     mode,
     registryId,

@@ -50,7 +50,7 @@ async function withNpmConfiguration(mode, operation) {
   const configuration = validateRegistryConfiguration(process.env, mode);
   const directory = await mkdtemp(path.join(tmpdir(), "shlz-release-npm-"));
   const userConfig = path.join(directory, "npmrc");
-  const registry = new URL(".", configuration.registry);
+  const registry = new URL(configuration.registry);
   const token =
     mode === "verify"
       ? process.env.GITLAB_NPM_READ_TOKEN

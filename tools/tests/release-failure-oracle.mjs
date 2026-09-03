@@ -80,9 +80,12 @@ const checks = {
           currentLatest: {},
           defectiveVersion: "0.2.0",
           reason: "Broken.",
-          target: targetCandidate,
+          target: {
+            ...targetCandidate,
+            packages: targetCandidate.packages.slice(0, 3),
+          },
         }),
-      /coherent current stable release set/,
+      /complete verified release set/,
     );
   },
 };
