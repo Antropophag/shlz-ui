@@ -285,14 +285,14 @@ test("History source fixture is content-led and matches source dimensions", asyn
   await expect(history).toHaveScreenshot(
     "history-timeline-source-corrected.png",
   );
-  for (const [state, kind] of [
-    ["created", "created"],
-    ["status-transition", "status"],
-    ["quoted-comment", "comment"],
-    ["field-transition", "field"],
-    ["tags", "tags"],
-    ["people-disclosure", "people"],
-    ["attachment", "attachment"],
+  for (const kind of [
+    "created",
+    "status",
+    "comment",
+    "field",
+    "tags",
+    "people",
+    "attachment",
   ]) {
     await expect(history.locator(`[data-history-kind="${kind}"]`)).toHaveCount(
       1,
