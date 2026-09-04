@@ -147,9 +147,13 @@ test("all seven Comments source states remain represented", async ({
 }) => {
   await page.setViewportSize({ width: 1600, height: 1000 });
   await hideShowcaseNavigation(page);
-  await page.locator("#comment-feed-demo details").evaluate((node) => {
-    node.open = true;
-  });
+  await page
+    .locator("#comment-feed-demo details", {
+      hasText: "Source-observed states",
+    })
+    .evaluate((node) => {
+      node.open = true;
+    });
   const states = [
     "default",
     "composer-populated",
@@ -360,9 +364,13 @@ test("intermediate, wide, enlarged and sparse content keeps component actions re
   page,
 }) => {
   await hideShowcaseNavigation(page);
-  await page.locator("#comment-feed-demo details").evaluate((node) => {
-    node.open = true;
-  });
+  await page
+    .locator("#comment-feed-demo details", {
+      hasText: "Source-observed states",
+    })
+    .evaluate((node) => {
+      node.open = true;
+    });
   for (const width of [768, 1440]) {
     await page.setViewportSize({ width, height: 1000 });
     const selectors = [
@@ -440,24 +448,36 @@ test("intermediate, wide, enlarged and sparse content keeps component actions re
 test("Comment Feed empty, loading and error-safe endpoints remain readable", async ({
   page,
 }) => {
-  const surface = page.locator(
-    '[data-comment-feed-state="default"] .shlz-comment-feed__surface',
-  );
-  for (const [className, text, role] of [
-    ["shlz-comment-feed__empty", "Комментариев пока нет", null],
-    ["shlz-comment-feed__loading", "Загрузка комментариев", "status"],
-    ["shlz-comment-feed__error", "Не удалось загрузить комментарии", "alert"],
+  await page
+    .locator("#comment-feed-demo details", {
+      hasText: "Repository-decision endpoint states",
+    })
+    .evaluate((node) => {
+      node.open = true;
+    });
+  for (const [name, className, text, role] of [
+    ["empty", "shlz-comment-feed__empty", "Комментариев пока нет", null],
+    [
+      "loading-safe",
+      "shlz-comment-feed__loading",
+      "Загрузка комментариев",
+      "status",
+    ],
+    [
+      "error-safe",
+      "shlz-comment-feed__error",
+      "Не удалось загрузить комментарии",
+      "alert",
+    ],
   ]) {
-    await surface.evaluate(
-      (node, state) => {
-        const message = document.createElement("p");
-        message.className = state.className;
-        message.textContent = state.text;
-        if (state.role) message.setAttribute("role", state.role);
-        node.replaceChildren(message);
-      },
-      { className, text, role },
+    const surface = page.locator(
+      `[data-comment-feed-endpoint-state="${name}"] .shlz-comment-feed__surface`,
     );
-    await expect(page.getByText(text, { exact: true })).toBeVisible();
+    const message = surface.locator(`.${className}`);
+    await expect(message).toHaveText(text);
+    await expect(message).toHaveCSS("padding", "32px");
+    await expect(message).toHaveCSS("text-align", "center");
+    if (role) await expect(surface.getByRole(role)).toHaveCount(1);
+    else await expect(message).not.toHaveAttribute("role");
   }
 });

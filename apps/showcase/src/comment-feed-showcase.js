@@ -169,4 +169,24 @@ const composer = ({
 const state = (name, body) =>
   `<section data-comment-feed-state="${name}"><h4>${name}</h4><div class="shlz-comment-feed__surface" data-source-frame>${body}</div></section>`;
 
-export const commentFeedShowcaseMarkup = `<article id="comment-feed-demo"><h3>Comment Feed</h3><p><code>Комментарии.svg</code> · source fixture; data and mutations are consumer-owned.</p>${state("default", comments({ auditId: "comment-feed-showcase-source" }) + composer({ audited: true }))}<details class="shlz-component-diagnostics"><summary>Source-observed states</summary><div class="shlz-stack">${state("composer-populated", comments() + composer({ populated: true }))}${state("comment-added", comments({ includeAdded: true }) + composer() + '<div class="shlz-notification" role="status"><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий успешно добавлен</p></div></div>')}${state("own-comment-actions", comments({ context: "own" }) + composer())}${state("other-comment-reply", comments({ context: "reply" }) + composer())}${state("mention-suggestions", comments() + composer({ populated: true, suggestions: true }))}${state("comment-deleted", comments() + composer() + '<div class="shlz-notification"><span class="shlz-notification__countdown">4</span><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий удален</p></div><button class="shlz-notification__action" type="button">Отменить</button></div>')}</div></details></article>`;
+const endpointState = (name, className, text, role = "") => {
+  const roleAttribute = role ? ` role="${role}"` : "";
+  return `<section data-comment-feed-endpoint-state="${name}"><h4>${name}</h4><div class="shlz-comment-feed__surface"><p class="${className}"${roleAttribute}>${text}</p></div></section>`;
+};
+
+const endpointStatesMarkup =
+  endpointState("empty", "shlz-comment-feed__empty", "Комментариев пока нет") +
+  endpointState(
+    "loading-safe",
+    "shlz-comment-feed__loading",
+    "Загрузка комментариев",
+    "status",
+  ) +
+  endpointState(
+    "error-safe",
+    "shlz-comment-feed__error",
+    "Не удалось загрузить комментарии",
+    "alert",
+  );
+
+export const commentFeedShowcaseMarkup = `<article id="comment-feed-demo"><h3>Comment Feed</h3><p><code>Комментарии.svg</code> · source fixture; data and mutations are consumer-owned.</p>${state("default", comments({ auditId: "comment-feed-showcase-source" }) + composer({ audited: true }))}<details class="shlz-component-diagnostics"><summary>Source-observed states</summary><div class="shlz-stack">${state("composer-populated", comments() + composer({ populated: true }))}${state("comment-added", comments({ includeAdded: true }) + composer() + '<div class="shlz-notification" role="status"><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий успешно добавлен</p></div></div>')}${state("own-comment-actions", comments({ context: "own" }) + composer())}${state("other-comment-reply", comments({ context: "reply" }) + composer())}${state("mention-suggestions", comments() + composer({ populated: true, suggestions: true }))}${state("comment-deleted", comments() + composer() + '<div class="shlz-notification"><span class="shlz-notification__countdown">4</span><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий удален</p></div><button class="shlz-notification__action" type="button">Отменить</button></div>')}</div></details><details class="shlz-component-diagnostics"><summary>Repository-decision endpoint states</summary><div class="shlz-stack">${endpointStatesMarkup}</div></details></article>`;
