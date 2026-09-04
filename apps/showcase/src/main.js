@@ -13,6 +13,7 @@ import {
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
 import { cardCompositionsMarkup } from "./card-compositions.js";
+import { reportingDashboardShowcaseMarkup } from "./reporting-dashboard-showcase.js";
 import {
   datePickerShowcaseMarkup,
   enhanceDatePickerShowcase,
@@ -288,6 +289,7 @@ ${plannerScheduleShowcaseMarkup}`;
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", composerShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
+app.insertAdjacentHTML("beforeend", reportingDashboardShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentFeedShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentsHistoryConsumerMarkup);

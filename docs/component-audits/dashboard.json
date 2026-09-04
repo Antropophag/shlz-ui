@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "component": "dashboard",
+  "authoritativeSource": "shlz-design-source/raw/svg/Дашборды.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Dashboard.svg",
+    "docs/component-audits/reporting-dashboard-source-ledger.json"
+  ],
+  "implementation": ["packages/styles/components/reporting-dashboard.css"],
+  "behavior": null,
+  "docs": "docs/components/reporting-dashboard.md",
+  "rootSelector": "[data-component-audit-id^='dashboard-']",
+  "legacySelectors": [".shlz-dashboard"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "dashboard-showcase-default", "kind": "executable-fixture" },
+    { "id": "dashboard-reporting-consumer", "kind": "live-consumer" },
+    { "id": "dashboard-plain-html", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["fluid-wide", "single-column-narrow"],
+  "supportedStates": ["presentational"],
+  "contentStress": ["long-widget-title", "narrow-single-column"],
+  "sourceClaims": [
+    {
+      "claim": "The source screen arranges repeated white chart-widget surfaces over #F4F6F9 application content",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Дашборды.svg"
+    },
+    {
+      "claim": "The responsive single-column reflow is a repository decision because the source is desktop-only",
+      "classification": "repository-decision",
+      "evidence": "docs/components/reporting-dashboard.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/reporting-dashboard.spec.js-snapshots/dashboard-wide-chromium-linux.png",
+    "tools/playwright/reporting-dashboard.spec.js-snapshots/dashboard-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact source hashes and the region ledger are checked",
+    "structural-contract": "pass: semantic dashboard and section structure plus every occurrence are asserted",
+    "runtime-browser": "not-applicable: Dashboard owns CSS layout and no controller",
+    "accessibility": "pass: labelled sections and headings preserve document structure without nested main landmarks",
+    "focused-visual": "pass: component-local wide and narrow dashboard snapshots plus computed grid geometry",
+    "consumer-integration": "pass: an application-owned reporting composition uses the public dashboard contract",
+    "responsive-content-stress": "pass: long localized widgets reflow to one column without horizontal overflow"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: wide and narrow dashboard fixtures"],
+      "realInteractionVisual": [
+        "not-applicable: Dashboard has no interactive state"
+      ],
+      "runtimeBehavior": ["not-applicable: Dashboard has no controller"]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/reporting-dashboard.spec.js",
+    "manualStateWalk": "pass: wide, narrow, long-title and nested native controls inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "source establishes desktop composition only; responsive reflow is repository-owned",
+    "application shell, editing and persistence remain consumer-owned"
+  ]
+}

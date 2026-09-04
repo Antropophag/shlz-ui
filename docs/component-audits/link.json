@@ -21,7 +21,8 @@
       "id": "link-history-timeline-disclosure",
       "kind": "executable-fixture"
     },
-    { "id": "link-messaging-history-consumer", "kind": "live-consumer" }
+    { "id": "link-messaging-history-consumer", "kind": "live-consumer" },
+    { "id": "link-chart-widget-consumer", "kind": "live-consumer" }
   ],
   "supportedSizes": ["16px-source"],
   "supportedStates": [

@@ -43,12 +43,16 @@
       ["composer-demo", "Composer / Rich Text Toolbar"],
       ["card-with-action-demo", "Card with action"],
       ["report-card-demo", "Report card"],
-      ["cover-demo", "Cover"]
+      ["cover-demo", "Cover"],
+      ["reporting-dashboard-demo", "Reporting dashboard"]
     ]
   },
   {
     "label": "Validation",
-    "links": [["consumer-validation", "Data workspace"]]
+    "links": [
+      ["consumer-validation", "Data workspace"],
+      ["reporting-dashboard-consumer", "Reporting dashboard"]
+    ]
   },
   { "label": "Evidence", "links": [["fidelity", "Visual fidelity"]] }
 ]

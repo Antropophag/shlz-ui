@@ -239,6 +239,34 @@
         <div class="shlz-drawer__body">Plain HTML consumer.</div>
       </div>
     </dialog>
+    <section
+      class="shlz-dashboard"
+      data-component-audit-id="dashboard-plain-html"
+      aria-labelledby="fixture-dashboard-title"
+    >
+      <h2 class="shlz-dashboard__heading" id="fixture-dashboard-title">
+        Reporting dashboard
+      </h2>
+      <div class="shlz-dashboard__grid">
+        <article
+          class="shlz-chart-widget"
+          data-component-audit-id="chart-widget-plain-html"
+          aria-labelledby="fixture-chart-widget-title"
+        >
+          <header class="shlz-chart-widget__header">
+            <h3
+              class="shlz-chart-widget__title"
+              id="fixture-chart-widget-title"
+            >
+              Requests by status
+            </h3>
+          </header>
+          <div class="shlz-chart-widget__plot">
+            <div class="shlz-chart-widget__empty">No report data</div>
+          </div>
+        </article>
+      </div>
+    </section>
     <script type="module">
       import {
         enhanceDrawers,

@@ -77,7 +77,23 @@
     { "id": "button-workspace-bulk-clear", "kind": "live-consumer" },
     { "id": "button-workspace-empty-reset", "kind": "live-consumer" },
     { "id": "button-workspace-drawer-actions", "kind": "live-consumer" },
-    { "id": "button-empty-state-actions", "kind": "executable-fixture" }
+    { "id": "button-empty-state-actions", "kind": "executable-fixture" },
+    {
+      "id": "button-chart-widget-showcase-default-settings",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-chart-widget-showcase-default-reset",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-chart-widget-content-stress-settings",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "button-chart-widget-content-stress-reset",
+      "kind": "content-stress-fixture"
+    }
   ],
   "supportedSizes": ["large-40", "medium-32", "small-26"],
   "supportedStates": [

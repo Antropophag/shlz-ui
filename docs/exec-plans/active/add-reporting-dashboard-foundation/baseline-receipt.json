@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feat/reporting-dashboard-foundation",
+    "commit": "85cf650075d8646e522d645a8a5005bef2787bb2",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feat/reporting-dashboard-foundation",
+      "headRefOid": "85cf650075d8646e522d645a8a5005bef2787bb2",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/74"
+    },
+    "repository": {
+      "digest": "ed3edb6d97507e0927655cd167c12bb85c9368634f8dc58e8b1720d677d2fa41",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/Users/antropophag/code/shlz-ui"
+    },
+    "upstream": "origin/feat/reporting-dashboard-foundation"
+  },
+  "requirementsDigest": "8dfb500bfab57c72ecbaea2863f11c6a47bad816e4ec5c34af2a8b1a1c7cfdbc",
+  "routeDigest": "8b9c2772106821ed896f714f8b2b9987dabc378a9d4d7c8625e6067cc056a5ec",
+  "version": 1,
+  "digest": "8301a40359a564e85ccef5ab8e96d6a0c94def5811aff27483338f36a956f66d"
+}

@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
