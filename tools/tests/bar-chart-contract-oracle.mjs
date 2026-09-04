@@ -1,31 +1,39 @@
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
-const target = path.resolve(process.argv[2] || "");
-const targetStat = await stat(target);
+const repositoryRoot = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "../..",
+);
+const knownBadPath = path.join(
+  repositoryRoot,
+  "tools/tests/fixtures/bar-chart-known-bad.json",
+);
+const targetArgument = process.argv[2];
 
-if (!targetStat.isDirectory()) {
-  const knownBad = JSON.parse(await readFile(target, "utf8"));
+if (targetArgument === knownBadPath) {
+  const knownBad = JSON.parse(await readFile(knownBadPath, "utf8"));
   assert.equal(knownBad.stableIdentity, true);
   assert.equal(knownBad.maximumSeries, 4);
   assert.equal(knownBad.keyboardTooltip, true);
   assert.equal(knownBad.legendVisibility, true);
   assert.equal(knownBad.semanticTable, true);
   assert.equal(knownBad.localOverflow, true);
-} else {
+} else if (targetArgument === repositoryRoot) {
+  assert.equal((await stat(repositoryRoot)).isDirectory(), true);
   const model = await import(
     pathToFileURL(
-      path.join(target, "packages/behaviors/dist/bar-chart-model.js"),
+      path.join(repositoryRoot, "packages/behaviors/dist/bar-chart-model.js"),
     )
   );
   const controller = await readFile(
-    path.join(target, "packages/behaviors/src/bar-chart.ts"),
+    path.join(repositoryRoot, "packages/behaviors/src/bar-chart.ts"),
     "utf8",
   );
   const css = await readFile(
-    path.join(target, "packages/styles/components/bar-chart.css"),
+    path.join(repositoryRoot, "packages/styles/components/bar-chart.css"),
     "utf8",
   );
   const sample = {
@@ -60,4 +68,6 @@ if (!targetStat.isDirectory()) {
   assert.match(controller, /aria-pressed/);
   assert.match(controller, /createElement\("table"\)/);
   assert.match(css, /overflow-x:\s*auto/);
+} else {
+  throw new TypeError("Bar Chart oracle target is not allowlisted.");
 }
