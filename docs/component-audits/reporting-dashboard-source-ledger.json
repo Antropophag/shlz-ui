@@ -190,7 +190,11 @@
       "height": 515,
       "radius": 16,
       "surface": "#FFFFFF",
-      "observedInstances": 29
+      "renderedInstances": 15,
+      "literalRectNodes": 17,
+      "clipPathOnlyRectNodes": 2,
+      "shadowFilterRegions": 12,
+      "variantMatrix": "docs/component-audits/dashboard-chart-source-matrix.json"
     },
     "reportCard": { "width": 314, "height": 230, "radius": 16 }
   },

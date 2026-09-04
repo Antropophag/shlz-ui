@@ -1,0 +1,559 @@
+{
+  "schemaVersion": 1,
+  "matrixId": "dashboard-chart-source-matrix",
+  "auditKind": "source-only",
+  "authority": {
+    "file": "shlz-design-source/raw/svg/Dashboard.svg",
+    "sha256": "1cfca3af5e0ad0e0a25bff436a3b4031fda03de9880f3d110b491283bfec10a8",
+    "svgViewport": { "width": 4366, "height": 6357 },
+    "textRepresentation": "outlined-paths",
+    "textTranscriptionPolicy": "Human-readable labels are visual transcriptions; geometry and paint remain the stronger evidence."
+  },
+  "claimClasses": {
+    "source-fact": "Directly observable in Dashboard.svg.",
+    "derived-pattern": "Computed from repeated source geometry or paint.",
+    "repository-decision": "A repository interpretation, not a Figma-export fact.",
+    "unsupported": "Not established by Dashboard.svg."
+  },
+  "sourceAccounting": {
+    "renderedChartWidgetFrames": 15,
+    "chartWidgetFrameGeometry": {
+      "width": 1304,
+      "height": 515,
+      "radius": 16,
+      "fill": "#FFFFFF"
+    },
+    "literal1304x515RectNodes": 17,
+    "clipPathOnlyRectNodes": 2,
+    "shadowFilterRegions1310x521": 12,
+    "prior29SurfaceClaim": {
+      "status": "corrected",
+      "explanation": "29 combined 17 rect nodes with 12 filter regions; filters and clipPath geometry are not additional rendered chart-widget frames."
+    },
+    "classification": "source-fact"
+  },
+  "matrixLayout": {
+    "familyColumns": [
+      { "family": "status-time", "frameX": 100 },
+      { "family": "status-employee", "frameX": 1524 },
+      { "family": "overdue-monitoring", "frameX": 2948 }
+    ],
+    "stateRows": [
+      { "row": 1, "frameY": 2251.07, "role": "eight-series-default" },
+      { "row": 2, "frameY": 2826.07, "role": "empty" },
+      { "row": 3, "frameY": 3401.07, "role": "reduced-series-default" },
+      { "row": 4, "frameY": 3976.07, "role": "hover-tooltip-above" },
+      { "row": 5, "frameY": 4551.07, "role": "hover-tooltip-below" }
+    ],
+    "classification": "source-fact"
+  },
+  "barPrimitive": {
+    "sourceRegion": { "x": 184, "y": 538, "width": 1458, "height": 500 },
+    "shape": {
+      "width": 24,
+      "height": 200,
+      "topCorners": "rounded",
+      "bottomCorners": "square"
+    },
+    "states": [
+      {
+        "id": "default",
+        "label": "Default",
+        "paintRule": "opaque-series-color"
+      },
+      {
+        "id": "hover",
+        "label": "Hover",
+        "paintRule": "muted-series-color",
+        "note": "Seven variants use 0.15 fill opacity; gray uses opaque #F5F5F5, and orange changes hue as well as opacity."
+      }
+    ],
+    "colorVariants": [
+      {
+        "seriesId": "new",
+        "default": "#253D98",
+        "hover": { "fill": "#253D98", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "in-work-oks",
+        "default": "#57965C",
+        "hover": { "fill": "#57965C", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "transferred-ogo",
+        "default": "#D47E2E",
+        "hover": { "fill": "#DE753D", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "in-work-ogo",
+        "default": "#245B99",
+        "hover": { "fill": "#245B99", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "transferred-supplier",
+        "default": "#8131A7",
+        "hover": { "fill": "#8131A7", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "solution-implementation",
+        "default": "#4191B3",
+        "hover": { "fill": "#4191B3", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "transferred-bgo",
+        "default": "#A942A7",
+        "hover": { "fill": "#A942A7", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "completed",
+        "default": "#25983E",
+        "hover": { "fill": "#25983E", "opacity": 0.15 }
+      },
+      {
+        "seriesId": "closed",
+        "default": "#939CA5",
+        "hover": { "fill": "#F5F5F5", "opacity": 1 }
+      }
+    ],
+    "classification": "source-fact"
+  },
+  "axesAndPeriods": {
+    "plot": {
+      "width": 1212,
+      "height": 300,
+      "horizontalGridLineCount": 6,
+      "gridStroke": "#D1D8DF",
+      "gridStrokeWidth": 1,
+      "verticalYAxisLine": false,
+      "xTickLength": 6,
+      "xTickStroke": "#D1D8DF",
+      "labelFill": "#939CA5"
+    },
+    "scales": [
+      {
+        "id": "count-0-10",
+        "labels": [0, 2, 4, 6, 8, 10],
+        "usedBy": ["status-time", "overdue-monitoring"]
+      },
+      {
+        "id": "count-0-100",
+        "labels": [0, 20, 40, 60, 80, 100],
+        "usedBy": ["status-employee"]
+      }
+    ],
+    "xAxisVariants": [
+      {
+        "id": "five-week-periods",
+        "tickCount": 5,
+        "visibleLabelCount": 5,
+        "usedBy": ["status-time-dual", "overdue-monitoring-three-series"]
+      },
+      {
+        "id": "two-week-periods",
+        "tickCount": 2,
+        "visibleLabelCount": 2,
+        "usedBy": ["overdue-monitoring-eight-series"]
+      },
+      {
+        "id": "fourteen-periods-sparse-labels",
+        "tickCount": 14,
+        "visibleLabelCount": 3,
+        "usedBy": ["status-employee-eight-series"]
+      },
+      {
+        "id": "twenty-three-periods-sparse-labels",
+        "tickCount": 23,
+        "visibleLabelCount": 3,
+        "usedBy": ["status-employee-three-series"]
+      }
+    ],
+    "hoverAdditions": {
+      "crosshair": {
+        "orientation": "vertical",
+        "height": 300,
+        "stroke": "#D1D8DF",
+        "strokeWidth": 1
+      },
+      "activePeriod": {
+        "fill": "#0B1623",
+        "textFill": "#FFFFFF",
+        "height": 22,
+        "radius": 8,
+        "observedWidths": [64, 77]
+      }
+    },
+    "classification": "source-fact"
+  },
+  "tooltipPopover": {
+    "standaloneVariants": [
+      {
+        "id": "arrow-bottom",
+        "placementRelativeToAnchor": "above",
+        "surface": {
+          "width": 300,
+          "height": 262,
+          "radius": 12,
+          "fill": "#0B1623"
+        }
+      },
+      {
+        "id": "arrow-top",
+        "placementRelativeToAnchor": "below",
+        "surface": {
+          "width": 300,
+          "height": 262,
+          "radius": 12,
+          "fill": "#0B1623"
+        }
+      }
+    ],
+    "chartVariants": [
+      {
+        "seriesCount": 2,
+        "width": 300,
+        "height": 101,
+        "placements": ["above-plot", "below-x-axis"]
+      },
+      {
+        "seriesCount": 3,
+        "width": 300,
+        "height": 124,
+        "placements": ["above-plot", "below-x-axis"]
+      }
+    ],
+    "paint": {
+      "fill": "#0B1623",
+      "radius": 12,
+      "primaryText": "#FFFFFF",
+      "secondaryText": "#939CA5"
+    },
+    "content": ["period-range", "series-color-marker", "series-label", "value"],
+    "classification": "source-fact"
+  },
+  "legendAndSeriesMapping": {
+    "persistentLegend": {
+      "observed": false,
+      "classification": "source-fact"
+    },
+    "mappingSurface": "tooltip/popover rows",
+    "standaloneMapping": [
+      { "seriesId": "new", "transcribedLabel": "Новое", "color": "#253D98" },
+      {
+        "seriesId": "in-work-oks",
+        "transcribedLabel": "В работе ОКС",
+        "color": "#57965C"
+      },
+      {
+        "seriesId": "transferred-ogo",
+        "transcribedLabel": "Передано в ОГО",
+        "color": "#D47E2E"
+      },
+      {
+        "seriesId": "in-work-ogo",
+        "transcribedLabel": "В работе у ОГО",
+        "color": "#245B99"
+      },
+      {
+        "seriesId": "transferred-supplier",
+        "transcribedLabel": "Передано поставщику",
+        "color": "#8131A7"
+      },
+      {
+        "seriesId": "solution-implementation",
+        "transcribedLabel": "Реализация решения",
+        "color": "#4191B3"
+      },
+      {
+        "seriesId": "transferred-bgo",
+        "transcribedLabel": "Передано в БГО",
+        "color": "#A942A7"
+      },
+      {
+        "seriesId": "completed",
+        "transcribedLabel": "Выполнено",
+        "color": "#25983E"
+      },
+      {
+        "seriesId": "closed",
+        "transcribedLabel": "Закрыто",
+        "color": "#939CA5"
+      }
+    ],
+    "composedTooltipMappings": {
+      "two-series": ["new", "solution-implementation"],
+      "three-series": ["new", "solution-implementation", "transferred-bgo"],
+      "eight-series": "No tooltip-open example is present; color order follows the first eight standalone mappings."
+    },
+    "classification": "source-fact"
+  },
+  "emptyState": {
+    "instances": 3,
+    "transcribedMessage": "Нет данных по выбранным параметрам",
+    "transcribedAction": "Сбросить фильтры",
+    "regions": ["illustration", "message", "primary-action"],
+    "preservesHeaderAndControls": true,
+    "bars": "absent",
+    "horizontalGridLines": "absent",
+    "yAxisLabels": "absent",
+    "xAxisLabels": "absent",
+    "residualSourceGeometry": [
+      { "family": "status-time", "xTickStubs": 0 },
+      { "family": "status-employee", "xTickStubs": 0 },
+      {
+        "family": "overdue-monitoring",
+        "xTickStubs": 2,
+        "note": "Two 6px #D1D8DF stubs remain at the former category centers."
+      }
+    ],
+    "classification": "source-fact"
+  },
+  "filtersAndPeriodControls": {
+    "shared": [
+      {
+        "id": "period-granularity",
+        "kind": "segmented-control",
+        "options": ["week-or-two-weeks", "month", "quarter"]
+      },
+      {
+        "id": "date-range",
+        "kind": "dropdown-like-control",
+        "observedLabels": ["28 апр — 29 мая", "1 дек 2024 — 30 апр 2025"]
+      },
+      {
+        "id": "aggregation",
+        "kind": "segmented-control",
+        "options": ["По неделям", "По месяцам"]
+      },
+      {
+        "id": "weekend-holiday-inclusion",
+        "kind": "switch",
+        "transcribedLabel": "Учесть выходные и праздники"
+      },
+      { "id": "dimension", "kind": "pill-controls" },
+      { "id": "overflow", "kind": "icon-control" }
+    ],
+    "familyVariants": [
+      {
+        "family": "status-time",
+        "activeGranularity": "month",
+        "dimensionLabels": ["Статусы", "Отделы", "Сотрудники"]
+      },
+      {
+        "family": "status-employee",
+        "activeGranularity": "quarter",
+        "dimensionLabels": ["Статусы", "Сотрудники"]
+      },
+      {
+        "family": "overdue-monitoring",
+        "activeGranularity": "two-weeks",
+        "dimensionLabels": ["Статусы", "Отделы", "Сотрудники"]
+      }
+    ],
+    "dropdownEvidence": {
+      "kind": "hierarchical-checkbox-filter",
+      "parentGroups": ["Открытые", "Закрытые"],
+      "visibleOpenChildren": [
+        "Новое",
+        "В работе ОКС",
+        "Передано в ОГО",
+        "В работе у ОГО",
+        "Передано поставщику",
+        "Реализация решения",
+        "Передано в БГО",
+        "Выполнено"
+      ],
+      "selectionExamples": ["Новое", "Реализация решения"],
+      "scrollbarObserved": true
+    },
+    "behaviorStatus": "unsupported: static SVG does not establish events, selection rules, filtering logic, or date semantics",
+    "classification": "source-fact"
+  },
+  "composedVariantMatrix": [
+    {
+      "id": "status-time-eight-series-default",
+      "family": "status-time",
+      "row": 1,
+      "seriesCount": 8,
+      "periodCount": 5,
+      "barWidthObserved": [21],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "status-time-empty",
+      "family": "status-time",
+      "row": 2,
+      "seriesCount": 0,
+      "periodCount": 0,
+      "barWidthObserved": [],
+      "state": "empty",
+      "tooltip": null
+    },
+    {
+      "id": "status-time-two-series-default",
+      "family": "status-time",
+      "row": 3,
+      "seriesCount": 2,
+      "periodCount": 5,
+      "barWidthObserved": [96],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "status-time-two-series-hover-above",
+      "family": "status-time",
+      "row": 4,
+      "seriesCount": 2,
+      "periodCount": 5,
+      "barWidthObserved": [96],
+      "state": "hover",
+      "activePeriodIndex": 2,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "above-plot"
+    },
+    {
+      "id": "status-time-two-series-hover-below",
+      "family": "status-time",
+      "row": 5,
+      "seriesCount": 2,
+      "periodCount": 5,
+      "barWidthObserved": [96],
+      "state": "hover",
+      "activePeriodIndex": 2,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "below-x-axis"
+    },
+    {
+      "id": "status-employee-eight-series-default",
+      "family": "status-employee",
+      "row": 1,
+      "seriesCount": 8,
+      "periodCount": 14,
+      "barWidthObserved": [7],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "status-employee-empty",
+      "family": "status-employee",
+      "row": 2,
+      "seriesCount": 0,
+      "periodCount": 0,
+      "barWidthObserved": [],
+      "state": "empty",
+      "tooltip": null
+    },
+    {
+      "id": "status-employee-three-series-default",
+      "family": "status-employee",
+      "row": 3,
+      "seriesCount": 3,
+      "periodCount": 23,
+      "barWidthObserved": [12.33, 12.34],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "status-employee-three-series-hover-above",
+      "family": "status-employee",
+      "row": 4,
+      "seriesCount": 3,
+      "periodCount": 23,
+      "barWidthObserved": [12.33, 12.34],
+      "state": "hover",
+      "activePeriodIndex": 14,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "above-plot"
+    },
+    {
+      "id": "status-employee-three-series-hover-below",
+      "family": "status-employee",
+      "row": 5,
+      "seriesCount": 3,
+      "periodCount": 23,
+      "barWidthObserved": [12.33, 12.34],
+      "state": "hover",
+      "activePeriodIndex": 14,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "below-x-axis"
+    },
+    {
+      "id": "overdue-monitoring-eight-series-default",
+      "family": "overdue-monitoring",
+      "row": 1,
+      "seriesCount": 8,
+      "periodCount": 2,
+      "barWidthObserved": [62.75],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "overdue-monitoring-empty",
+      "family": "overdue-monitoring",
+      "row": 2,
+      "seriesCount": 0,
+      "periodCount": 0,
+      "barWidthObserved": [],
+      "state": "empty",
+      "tooltip": null
+    },
+    {
+      "id": "overdue-monitoring-three-series-default",
+      "family": "overdue-monitoring",
+      "row": 3,
+      "seriesCount": 3,
+      "periodCount": 5,
+      "barWidthObserved": [62.66, 62.67],
+      "state": "default",
+      "tooltip": null
+    },
+    {
+      "id": "overdue-monitoring-three-series-hover-above",
+      "family": "overdue-monitoring",
+      "row": 4,
+      "seriesCount": 3,
+      "periodCount": 5,
+      "barWidthObserved": [62.66, 62.67],
+      "state": "hover",
+      "activePeriodIndex": 2,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "above-plot"
+    },
+    {
+      "id": "overdue-monitoring-three-series-hover-below",
+      "family": "overdue-monitoring",
+      "row": 5,
+      "seriesCount": 3,
+      "periodCount": 5,
+      "barWidthObserved": [62.66, 62.67],
+      "state": "hover",
+      "activePeriodIndex": 2,
+      "nonActiveOpacity": 0.15,
+      "tooltip": "below-x-axis"
+    }
+  ],
+  "coverage": {
+    "barColorVariants": "observed",
+    "barDefaultAndHover": "observed",
+    "axesGridTicksAndPeriodLabels": "observed",
+    "tooltipPopover": "observed",
+    "legendSeriesMapping": "tooltip-only; persistent legend absent",
+    "emptyState": "observed",
+    "filtersAndPeriodControls": "visual-only; behavior unsupported",
+    "twoSeries": "observed",
+    "multiSeries": "observed with three and eight series",
+    "singleSeries": "not observed",
+    "stackedBars": "not observed",
+    "negativeValues": "not observed",
+    "horizontalBars": "not observed"
+  },
+  "unsupportedContracts": [
+    "chart data model and value-to-pixel algorithm",
+    "persistent legend behavior",
+    "tooltip trigger, collision, dismissal, and focus behavior",
+    "filter and period-control events or data semantics",
+    "responsive chart reflow",
+    "accessible data alternative",
+    "animation and transitions"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "intent": "Audit authoritative Dashboard.svg chart evidence and persist a machine-readable variant matrix covering bars, states, axes, grid lines, ticks, period labels, tooltip/popover, legend/series mapping, empty state, filters, period controls, and single-, dual-, and multi-series variants without implementing or expanding a chart runtime contract.",
+  "route": "direct",
+  "requiredDecisions": [],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}
