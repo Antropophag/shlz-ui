@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "intent": "Implement source-traceable framework-neutral Dashboard, Widget, and Metric Card presentation contracts from the reporting and dashboard source screens, complete their evidence gates, and deliver an unmerged PR.",
+  "route": "open-spec",
+  "openSpecChange": "add-reporting-dashboard-foundation",
+  "requiredDecisions": [
+    { "id": "product-scope", "owner": "user", "blocking": true },
+    { "id": "source-authority", "owner": "repo", "blocking": true },
+    { "id": "composition-boundary", "owner": "agent", "blocking": true },
+    { "id": "unsupported-semantics", "owner": "agent", "blocking": true },
+    { "id": "delivery-contract", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

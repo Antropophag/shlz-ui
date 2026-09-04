@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-reporting-dashboard-foundation",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "product-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "composition-boundary",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "unsupported-semantics",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement source-traceable framework-neutral Dashboard, Widget, and Metric Card presentation contracts from the reporting and dashboard source screens, complete their evidence gates, and deliver an unmerged PR.",
+    "revision": 1
+  },
+  "routeDigest": "d25e4501bf15331902caec89af3f5a900e65e2c8acb30ef839607cf5652aa3c5",
+  "version": 1,
+  "digest": "da240c3f8e6514839ed938275fc8c2a26d3e06f6490d29d32f6df81cba18abc1"
+}
