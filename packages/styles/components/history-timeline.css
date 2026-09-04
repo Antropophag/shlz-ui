@@ -11,60 +11,34 @@
   list-style: none;
 }
 
+.shlz-history-timeline[data-source-layout] {
+  box-sizing: border-box;
+  gap: 28px;
+  inline-size: 463px;
+  block-size: 997px;
+  padding: 20px;
+}
+
 .shlz-history-timeline__period {
-  margin-block: 0.5rem 0;
-  font-size: 0.875rem;
+  margin: 0;
+  font-size: 15px;
   font-weight: 600;
 }
 
-.shlz-history-timeline__entry {
-  position: relative;
-  display: grid;
-  grid-template-columns: 2.5rem minmax(0, 1fr);
-  gap: 1rem;
+.shlz-history-timeline__entry,
+.shlz-history-timeline__content {
   min-inline-size: 0;
-}
-
-.shlz-history-timeline__entry::before {
-  position: absolute;
-  inset-block: calc(var(--shlz-history-marker-size) + 0.5rem)
-    calc(-1.5rem - var(--shlz-history-marker-size) - 0.5rem);
-  inset-inline-start: calc(var(--shlz-history-rail-offset) - 0.5px);
-  inline-size: 1px;
-  background: var(--shlz-semantic-color-border-default);
-  content: "";
-}
-
-.shlz-history-timeline__entry:last-child::before {
-  display: none;
-}
-
-.shlz-history-timeline__marker {
-  position: absolute;
-  z-index: 1;
-  inset-block-start: 0.875rem;
-  inset-inline-start: calc(
-    var(--shlz-history-rail-offset) - var(--shlz-history-marker-size) / 2
-  );
-  inline-size: var(--shlz-history-marker-size);
-  block-size: var(--shlz-history-marker-size);
-  border: 2px solid var(--shlz-semantic-color-surface-base);
-  border-radius: 50%;
-  background: var(--shlz-source-color-blue-blue-200);
-  box-shadow: 0 0 0 1px var(--shlz-source-color-blue-blue-200);
-}
-
-.shlz-history-timeline__entry[data-emphasis="current"]
-  .shlz-history-timeline__marker {
-  background: var(--shlz-semantic-color-status-success);
-  box-shadow: 0 0 0 1px var(--shlz-semantic-color-status-success);
 }
 
 .shlz-history-timeline__content {
-  grid-column: 2;
-  min-inline-size: 0;
-  padding: 0.75rem 0 1rem;
   overflow-wrap: anywhere;
+}
+
+.shlz-history-timeline[data-source-layout] .shlz-history-timeline__content {
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 0;
 }
 
 .shlz-history-timeline__header {
@@ -78,45 +52,236 @@
   font-weight: 600;
 }
 
+.shlz-history-timeline__action,
 .shlz-history-timeline__time,
 .shlz-history-timeline__meta {
   color: var(--shlz-semantic-color-text-primary);
+}
+
+.shlz-history-timeline__time,
+.shlz-history-timeline__meta {
   font-size: 0.75rem;
   font-variant-numeric: tabular-nums;
 }
 
-.shlz-history-timeline__description {
-  margin-block: 0.375rem 0;
+.shlz-history-timeline__entry[data-history-kind]
+  :is(
+    .shlz-history-timeline__action,
+    .shlz-history-timeline__time,
+    .shlz-history-timeline__meta
+  ) {
+  color: var(--shlz-semantic-color-text-supporting-accessible);
 }
 
-.shlz-history-timeline__attachments {
+.shlz-history-timeline__entry[data-history-kind]
+  :is(.shlz-history-timeline__time, .shlz-history-timeline__meta) {
+  display: block;
+  margin-block-start: 10px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.shlz-history-timeline__description,
+.shlz-history-timeline__values {
+  margin: 6px 0 0;
+}
+
+.shlz-history-timeline__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.shlz-history-timeline__transition {
+  color: var(--shlz-semantic-color-text-secondary);
+}
+
+.shlz-history-timeline__old-value,
+.shlz-history-timeline__new-value,
+.shlz-history-timeline__tag {
+  box-sizing: border-box;
+  display: inline-flex;
+  min-block-size: 30px;
+  align-items: center;
+  padding-inline: 12px;
+  border-radius: 15px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.shlz-history-timeline__old-value {
+  color: var(--shlz-source-color-blue-blue-200);
+  background: var(--shlz-source-color-blue-blue-100);
+}
+
+.shlz-history-timeline__new-value {
+  color: var(--shlz-semantic-color-text-primary);
+  background: rgb(87 150 92 / 15%);
+}
+
+.shlz-history-timeline__quote {
+  box-sizing: border-box;
+  inline-size: 424px;
+  block-size: 137px;
+  margin: 8px 0 0;
+  padding: 16px;
+  background: var(--shlz-source-color-gray-gray-50);
+  border-radius: 8px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="status"]
+  .shlz-history-timeline__old-value {
+  inline-size: 66px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="status"]
+  .shlz-history-timeline__new-value {
+  inline-size: 119px;
+  min-block-size: 35px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="tags"]
+  .shlz-history-timeline__tag:first-child {
+  inline-size: 137px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="tags"]
+  .shlz-history-timeline__tag:nth-child(2) {
+  inline-size: 111px;
+}
+
+.shlz-history-timeline__tags,
+.shlz-history-timeline__people {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-block-start: 8px;
+}
+
+.shlz-history-timeline__tag {
+  background: var(--shlz-source-color-gray-gray-100);
+}
+
+.shlz-history-timeline__person {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  min-block-size: 29px;
+  padding: 2px 10px 2px 2px;
+  border: 1px solid var(--shlz-source-color-gray-gray-75);
+  border-radius: 15px;
+}
+
+.shlz-history-timeline[data-source-layout] .shlz-history-timeline__person {
+  box-sizing: border-box;
+  inline-size: 156px;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.shlz-history-timeline__disclosure {
+  display: inline-flex;
+  margin-block-start: 8px;
+  padding: 0;
+  color: var(--shlz-semantic-color-action-primary);
+  background: transparent;
+  border: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+.shlz-history-timeline .shlz-history-timeline__attachment {
+  inline-size: min(239px, 100%);
+  margin-block-start: 8px;
+}
+
+.shlz-history-timeline .shlz-file-row__meta {
+  color: var(--shlz-semantic-color-text-supporting-accessible);
+}
+
+.shlz-history-timeline__marker {
+  display: none;
+}
+
+.shlz-history-timeline__entry:not([data-history-kind]) {
+  position: relative;
   display: grid;
-  gap: 0.5rem;
-  margin-block-start: 0.75rem;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  gap: 1rem;
+}
+
+.shlz-history-timeline__entry:not([data-history-kind])::before {
+  position: absolute;
+  inset-block: calc(var(--shlz-history-marker-size) + 0.5rem)
+    calc(-28px - var(--shlz-history-marker-size) - 0.5rem);
+  inset-inline-start: calc(var(--shlz-history-rail-offset) - 0.5px);
+  inline-size: 1px;
+  background: var(--shlz-semantic-color-border-default);
+  content: "";
+}
+
+.shlz-history-timeline__entry:not([data-history-kind]):last-child::before {
+  display: none;
+}
+
+.shlz-history-timeline__entry:not([data-history-kind])
+  .shlz-history-timeline__marker {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 0.875rem;
+  inset-inline-start: calc(
+    var(--shlz-history-rail-offset) - var(--shlz-history-marker-size) / 2
+  );
+  display: block;
+  inline-size: var(--shlz-history-marker-size);
+  block-size: var(--shlz-history-marker-size);
+  border: 2px solid var(--shlz-semantic-color-surface-base);
+  border-radius: 50%;
+  background: var(--shlz-source-color-blue-blue-200);
+  box-shadow: 0 0 0 1px var(--shlz-source-color-blue-blue-200);
+}
+
+.shlz-history-timeline__entry:not([data-history-kind])
+  .shlz-history-timeline__content {
+  grid-column: 2;
+  padding: 0.75rem 0 1rem;
 }
 
 .shlz-history-timeline__empty,
 .shlz-history-timeline__loading {
-  padding: 2rem;
-  text-align: center;
+  padding: 32px;
   color: var(--shlz-semantic-color-text-secondary);
+  text-align: center;
 }
 
 @media (width <= 32rem) {
   .shlz-history-timeline {
-    --shlz-history-rail-offset: 1rem;
+    gap: 24px;
+    padding-inline: 0;
   }
 
-  .shlz-history-timeline__entry {
-    grid-template-columns: 2rem minmax(0, 1fr);
-    gap: 0.75rem;
+  .shlz-history-timeline[data-source-layout] {
+    inline-size: 100%;
+    block-size: auto;
+  }
+
+  .shlz-history-timeline__quote {
+    inline-size: min(424px, 100%);
+    block-size: auto;
+    min-block-size: 137px;
   }
 }
 
 @media (forced-colors: active) {
-  .shlz-history-timeline__marker {
-    border-color: Canvas;
-    background: CanvasText;
-    box-shadow: 0 0 0 1px CanvasText;
+  .shlz-history-timeline__old-value,
+  .shlz-history-timeline__new-value,
+  .shlz-history-timeline__tag,
+  .shlz-history-timeline__quote {
+    border: 1px solid CanvasText;
   }
 }

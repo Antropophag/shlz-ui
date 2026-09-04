@@ -12,7 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 6,
+  "diagnosticOccurrenceCount": 8,
   "occurrences": [
     { "id": "notification-showcase-dismissible", "kind": "live-consumer" },
     { "id": "notification-showcase-action", "kind": "live-consumer" },

@@ -34,10 +34,12 @@ import {
   enhancePlannerScheduleShowcase,
   plannerScheduleShowcaseMarkup,
 } from "./planner-schedule-showcase.js";
+import { messagingHistoryShowcaseMarkup } from "./messaging-history-showcase.js";
+import { commentFeedShowcaseMarkup } from "./comment-feed-showcase.js";
 import {
-  enhanceMessagingHistoryShowcase,
-  messagingHistoryShowcaseMarkup,
-} from "./messaging-history-showcase.js";
+  commentsHistoryConsumerMarkup,
+  enhanceCommentsHistoryConsumer,
+} from "./comments-history-consumer.js";
 import {
   enhanceFileUploadShowcase,
   fileUploadShowcaseMarkup,
@@ -287,6 +289,8 @@ app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", composerShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", commentFeedShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", commentsHistoryConsumerMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -518,7 +522,7 @@ window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
 window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
 enhancePlannerScheduleShowcase();
-enhanceMessagingHistoryShowcase();
+enhanceCommentsHistoryConsumer();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
 enhanceComposerShowcase();

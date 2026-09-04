@@ -1,0 +1,50 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "restore-comments-history-source-fidelity",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "authoritative-source-mapping",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "comments-messages-separation",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "reusable-component-boundary",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "history-compatibility",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "responsive-accessibility-policy",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "component-completion-gate",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
+    "revision": 2
+  },
+  "routeDigest": "6193349f72c39d972b3e4e7dc113f7d14ccb9a0c1bee0d02fe48d8f08b8757bb",
+  "version": 1,
+  "digest": "49865ccbe6fda8b08ef2acbc5149cd5769ca33be9f7b76ac4896e8c60858e97e"
+}

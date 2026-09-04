@@ -36,6 +36,7 @@
       ["date-picker-demo", "Date Picker"],
       ["calendar-grid-demo", "Calendar Grid"],
       ["planner-schedule-demo", "Planner Schedule"],
+      ["comment-feed-demo", "Comment Feed"],
       ["message-thread-demo", "Message Thread"],
       ["history-timeline-demo", "History Timeline"],
       ["file-upload-demo", "File Upload"],

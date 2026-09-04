@@ -12,7 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 8,
+  "diagnosticOccurrenceCount": 39,
   "occurrences": [
     { "id": "avatar-showcase-24-text", "kind": "executable-fixture" },
     { "id": "avatar-showcase-24-image", "kind": "executable-fixture" },
@@ -30,10 +30,20 @@
     { "id": "avatar-table-beta", "kind": "live-consumer" },
     { "id": "avatar-person-tag-stress", "kind": "content-stress-fixture" },
     { "id": "avatar-message-thread-source", "kind": "executable-fixture" },
-    { "id": "avatar-history-timeline-current", "kind": "executable-fixture" },
-    { "id": "avatar-history-timeline-previous", "kind": "executable-fixture" },
+    { "id": "avatar-comment-source-one", "kind": "executable-fixture" },
+    { "id": "avatar-comment-source-two", "kind": "executable-fixture" },
+    { "id": "avatar-comment-source-three", "kind": "executable-fixture" },
+    { "id": "avatar-comment-source-four", "kind": "executable-fixture" },
+    { "id": "avatar-comment-composer", "kind": "executable-fixture" },
+    { "id": "avatar-history-person-one", "kind": "executable-fixture" },
+    { "id": "avatar-history-person-two", "kind": "executable-fixture" },
+    { "id": "avatar-history-person-three", "kind": "executable-fixture" },
+    { "id": "avatar-history-person-four", "kind": "executable-fixture" },
     { "id": "avatar-message-thread-plain-html", "kind": "executable-fixture" },
-    { "id": "avatar-history-timeline-plain-html", "kind": "executable-fixture" }
+    {
+      "id": "avatar-history-timeline-plain-html",
+      "kind": "executable-fixture"
+    }
   ],
   "supportedSizes": ["24", "32", "40", "64"],
   "supportedStates": ["text", "image", "icon"],

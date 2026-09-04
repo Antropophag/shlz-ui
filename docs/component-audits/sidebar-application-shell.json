@@ -49,6 +49,10 @@
       "classification": "executable-test-reference"
     },
     {
+      "path": "tools/playwright/comments-history-fidelity.spec.js",
+      "classification": "executable-test-reference"
+    },
+    {
       "path": "tools/playwright/fidelity.spec.js",
       "classification": "executable-test-reference"
     },

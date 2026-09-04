@@ -21,12 +21,10 @@ test("Message Thread and History Timeline ship through the public style bundle",
     message,
     /> \.shlz-message-thread__message:first-child[\s\S]*grid-column: 1 \/ -1/,
   );
-  assert.match(history, /\.shlz-history-timeline__entry::before/);
+  assert.doesNotMatch(history, /\.shlz-history-timeline__entry::before/);
   assert.match(history, /list-style: none/);
-  assert.match(
-    history,
-    /\.shlz-history-timeline__content[\s\S]*grid-column: 2/,
-  );
+  assert.match(history, /\.shlz-history-timeline__old-value/);
+  assert.match(history, /\.shlz-history-timeline__quote/);
 });
 
 test("public docs and fixtures preserve native list semantics and consumer ownership", async () => {
@@ -50,9 +48,9 @@ test("public docs and fixtures preserve native list semantics and consumer owner
     );
   }
   assert.match(showcase, /id="message-attachment"/);
-  assert.match(showcase, /id="history-attachment"/);
+  assert.match(showcase, /data-component-audit-id="file-row-history-source"/);
   assert.doesNotMatch(showcase, /role="presentation"/);
-  assert.match(showcase, /aria-describedby="history-period-today"/);
+  assert.match(showcase, /entry\("status"/);
   assert.match(consumer, /class="shlz-link"/);
   assert.match(consumer, /class="shlz-button shlz-button--sm"/);
   assert.match(
@@ -63,7 +61,7 @@ test("public docs and fixtures preserve native list semantics and consumer owner
   assert.doesNotMatch(main, /messagingHistoryShowcaseMarkup\.replaceAll/);
   assert.match(messageDocs, /sanitization/);
   assert.match(historyDocs, /DOM order is authoritative/);
-  assert.match(historyDocs, /aria-describedby="history-period-today"/);
+  assert.match(historyDocs, /status transitions/);
 });
 
 test("component manifests classify fixture and live-consumer evidence without gallery consumers", async () => {
@@ -71,7 +69,10 @@ test("component manifests classify fixture and live-consumer evidence without ga
     const manifest = JSON.parse(
       await read(`docs/component-audits/${component}.json`),
     );
-    assert.equal(manifest.occurrences.length, 3);
+    assert.equal(
+      manifest.occurrences.length,
+      component === "history-timeline" ? 4 : 3,
+    );
     assert.deepEqual(
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),

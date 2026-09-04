@@ -3,6 +3,7 @@
   "component": "history-timeline",
   "authoritativeSource": "shlz-design-source/raw/svg/History of changes.svg",
   "referenceSources": [
+    "docs/component-audits/comments-history-fidelity-baseline.md",
     "docs/component-audits/wave-12-report.md",
     "docs/component-audits/history-timeline-contract.md"
   ],
@@ -23,14 +24,18 @@
       "id": "history-timeline-data-workspace-consumer",
       "kind": "live-consumer"
     },
+    { "id": "history-timeline-source-consumer", "kind": "live-consumer" },
     { "id": "history-timeline-plain-html", "kind": "executable-fixture" }
   ],
-  "supportedSizes": ["bounded-non-virtualized-timeline"],
+  "supportedSizes": ["source-desktop-timeline", "bounded-responsive-timeline"],
   "supportedStates": [
-    "period-group",
-    "default",
-    "current",
-    "attachments",
+    "created",
+    "status-transition",
+    "quoted-comment",
+    "field-transition",
+    "tags",
+    "people-disclosure",
+    "attachment",
     "empty",
     "loading-safe"
   ],
@@ -42,45 +47,59 @@
   ],
   "sourceClaims": [
     {
-      "claim": "History of changes.svg depicts static history entries, actors, timestamps and connector artwork",
+      "claim": "History of changes.svg depicts seven structured event payloads for creation, status, comment, field, tags, people and attachment without an avatar rail or current marker",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/History of changes.svg"
+    },
+    {
+      "claim": "active secondary text uses the accessible supporting role while provenance retains the source paint",
+      "classification": "repository-decision",
+      "evidence": "docs/accessibility-source-contrast.md"
     }
   ],
-  "browserTests": ["tools/playwright/messaging-history-components.spec.js"],
+  "browserTests": [
+    "tools/playwright/messaging-history-components.spec.js",
+    "tools/playwright/comments-history-fidelity.spec.js"
+  ],
   "visualSnapshots": [
-    "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-source-chromium-linux.png",
-    "tools/playwright/messaging-history-components.spec.js-snapshots/history-timeline-narrow-chromium-linux.png"
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/history-timeline-source-corrected-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/history-timeline-narrow-corrected-chromium-linux.png"
   ],
   "evidence": {
-    "source-integrity": "pass: authoritative hash and unchanged-source check",
+    "source-integrity": "pass: exact source hash, frame and seven event payloads",
     "structural-contract": "pass: styles, docs, fixtures and occurrence ledger",
     "runtime-browser": "pass: semantic native actions",
-    "accessibility": "pass: native list structure and axe coverage",
-    "focused-visual": "pass: focused source states and responsive geometry",
-    "consumer-integration": "pass: Data Workspace action",
-    "responsive-content-stress": "pass: narrow viewport, long content and text scaling"
+    "accessibility": "pass: native list structure, focus, contrast and axe",
+    "focused-visual": "pass: seven source event payloads, 463×997 frame, 424×137 quote, exact status/tag/person/file geometry and focused snapshot",
+    "consumer-integration": "pass: compatibility and source-contract consumers",
+    "responsive-content-stress": "pass: 390px narrow, 768px intermediate, 1440px wide, 200% text, long actor and missing attachment containment"
   },
   "interactionEvidence": {
     "types": {
-      "staticVisual": ["pass: source and state matrix"],
+      "staticVisual": ["pass: seven source-observed event presentations"],
       "realInteractionVisual": [
         "not-applicable: the module has no library-owned interactive visual state"
       ],
       "runtimeBehavior": ["pass: native consumer action"]
     },
     "materialStates": [
-      "period-group",
-      "current",
+      "created",
+      "status-transition",
+      "quoted-comment",
+      "field-transition",
+      "tags",
+      "people-disclosure",
+      "attachment",
       "narrow-layout",
       "text-scale"
     ],
-    "browserTest": "tools/playwright/messaging-history-components.spec.js",
-    "manualStateWalk": "pass: reading order, native actions, focus, narrow layout and text scaling"
+    "browserTest": "tools/playwright/comments-history-fidelity.spec.js",
+    "manualStateWalk": "pass: seven source variants, native actions, focus, narrow layout and text scaling"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
+    "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements",
+    "responsive behavior is a repository decision because the source frame is desktop only"
   ]
 }

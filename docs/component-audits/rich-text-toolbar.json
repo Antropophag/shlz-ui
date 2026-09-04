@@ -16,7 +16,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 0,
+  "diagnosticOccurrenceCount": 2,
   "occurrences": [
     { "id": "rich-text-toolbar-showcase-source", "kind": "executable-fixture" },
     {

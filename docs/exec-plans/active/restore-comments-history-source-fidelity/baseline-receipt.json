@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/comments-history-source-fidelity",
+    "commit": "19483737ef250c70830b74986174e82463fad0cf",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/comments-history-source-fidelity",
+      "headRefOid": "19483737ef250c70830b74986174e82463fad0cf",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/73"
+    },
+    "repository": {
+      "digest": "1121893213c32e5033cb85659512231a7effa443a92b5e41ceb0e40b350feece",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-comments-history-fidelity"
+    },
+    "upstream": "origin/fix/comments-history-source-fidelity"
+  },
+  "requirementsDigest": "49865ccbe6fda8b08ef2acbc5149cd5769ca33be9f7b76ac4896e8c60858e97e",
+  "routeDigest": "6193349f72c39d972b3e4e7dc113f7d14ccb9a0c1bee0d02fe48d8f08b8757bb",
+  "version": 1,
+  "digest": "bb4f2f7c82aa2bfc1e5fefd14430a2373a408760a08b541ecade9ba9ed07ce71"
+}
