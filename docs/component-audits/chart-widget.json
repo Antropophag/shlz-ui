@@ -21,7 +21,8 @@
     { "id": "chart-widget-showcase-default", "kind": "executable-fixture" },
     { "id": "chart-widget-content-stress", "kind": "content-stress-fixture" },
     { "id": "chart-widget-reporting-consumer", "kind": "live-consumer" },
-    { "id": "chart-widget-plain-html", "kind": "live-consumer" }
+    { "id": "chart-widget-plain-html", "kind": "live-consumer" },
+    { "id": "chart-widget-source-fixture", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["source-1304x515", "fluid", "narrow-min-420"],
   "supportedStates": ["content", "empty", "nested-native-actions"],
@@ -41,6 +42,7 @@
   "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
   "visualSnapshots": [
     "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-default-chromium-linux.png",
+    "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-source-chromium-linux.png",
     "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-stress-chromium-linux.png"
   ],
   "evidence": {

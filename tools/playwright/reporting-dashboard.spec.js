@@ -27,7 +27,7 @@ const expectMaterialStates = (component) =>
 const showcaseOnly = (manifest) => ({
   ...manifest,
   occurrences: manifest.occurrences.filter(
-    ({ id }) => !id.endsWith("-plain-html"),
+    ({ id }) => !id.endsWith("-plain-html") && !id.endsWith("-source-fixture"),
   ),
 });
 
@@ -75,6 +75,27 @@ test("source-critical widget surface geometry is protected", async ({
   await expect(
     page.locator("[data-component-audit-id='dashboard-showcase-default']"),
   ).toHaveScreenshot("dashboard-wide.png");
+});
+
+test("isolated source widget retains exact 1304 by 515 geometry", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1400, height: 650 });
+  await page.goto(fixtureUrl("reporting-dashboard.html"));
+  const source = page.locator(
+    "[data-component-audit-id='chart-widget-source-fixture']",
+  );
+  await expect(source).toHaveCSS("width", "1304px");
+  await expect(source).toHaveCSS("height", "515px");
+  await expect(source).toHaveCSS("border-radius", "16px");
+  const inventory = await inspectComponentOccurrences(page, {
+    ...widget,
+    occurrences: widget.occurrences.filter(
+      ({ id }) => id === "chart-widget-source-fixture",
+    ),
+  });
+  expect(inventory.occurrences).toEqual(["chart-widget-source-fixture"]);
+  await expect(source).toHaveScreenshot("chart-widget-source.png");
 });
 
 test("narrow dashboard reflows and contains stressed content", async ({

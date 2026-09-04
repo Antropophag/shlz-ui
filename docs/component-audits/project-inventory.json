@@ -2884,7 +2884,8 @@
       ],
       "executable_fixtures": [
         "chart-widget-showcase-default",
-        "chart-widget-content-stress"
+        "chart-widget-content-stress",
+        "chart-widget-source-fixture"
       ],
       "live_consumers": [
         "chart-widget-reporting-consumer",
@@ -2905,7 +2906,7 @@
         "outlined source text limits typography conclusions"
       ],
       "measured_counts": {
-        "executableShowcase": 2,
+        "executableShowcase": 3,
         "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,
