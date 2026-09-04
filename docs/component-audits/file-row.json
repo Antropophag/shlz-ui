@@ -12,7 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 6,
+  "diagnosticOccurrenceCount": 24,
   "occurrences": [
     { "id": "file-row-showcase-default", "kind": "executable-fixture" },
     { "id": "file-row-showcase-hover", "kind": "executable-fixture" },

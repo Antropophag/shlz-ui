@@ -31,9 +31,12 @@
 }
 
 .shlz-history-timeline__content {
+  overflow-wrap: anywhere;
+}
+
+.shlz-history-timeline[data-source-layout] .shlz-history-timeline__content {
   padding: 0;
   margin: 0;
-  overflow-wrap: anywhere;
   background: transparent;
   border-radius: 0;
 }
