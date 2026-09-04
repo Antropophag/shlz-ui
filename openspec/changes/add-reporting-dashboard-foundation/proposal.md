@@ -5,9 +5,9 @@ The design source contains dedicated dashboard and reporting screens, but the pu
 ## What Changes
 
 - Add a source-accounted decomposition of `Dashboard.svg`, `Дашборды.svg`, `Редактирование дашборда.svg`, and the report list/create/detail/notification screens, classifying every relevant region as an existing primitive, reusable reporting composition, application-owned behavior, or unresolved source evidence.
-- Add framework-neutral Dashboard, Dashboard Section, and Widget presentational contracts whose geometry and paint are limited to repeatable facts observed in the authoritative SVGs.
-- Add a Metric Card composition for source-supported value, label, supporting copy, and surface variants, reusing Report Card where the source proves the same visual family instead of creating a competing card model.
-- Add responsive/content-stress rules for the declared grid, widget, and metric surfaces without inferring drag, resize, persistence, data fetching, or chart semantics.
+- Add framework-neutral Dashboard, Dashboard Section, and Chart Widget presentational contracts whose geometry and paint are limited to repeatable facts observed in the authoritative SVGs.
+- Reuse the existing Report Card for report summaries; the source does not establish a separate Metric Card family.
+- Add responsive/content-stress rules for the declared grid and widget surfaces without inferring drag, resize, persistence, data fetching, or chart semantics.
 - Add Showcase fixtures, one application-owned reporting consumer, focused browser/visual/accessibility evidence, component audit manifests, and source-to-library coverage updates.
 - Preserve all existing selectors and package interfaces; this change is additive.
 - Intentionally exclude chart rendering, chart data models, dashboard editing, saved layouts, report-query construction, server-side table state, export behavior, and application routing until separately supported by source and product contracts.
@@ -16,7 +16,7 @@ The design source contains dedicated dashboard and reporting screens, but the pu
 
 ### New Capabilities
 
-- `application-compositions/reporting-dashboard-foundation`: Source-traceable dashboard layout, widget, and metric-card presentation contracts, including their composition, responsive behavior, ownership boundaries, and completion evidence.
+- `application-compositions/reporting-dashboard-foundation`: Source-traceable dashboard layout and chart-widget presentation contracts, including their composition, responsive behavior, ownership boundaries, and completion evidence.
 
 ### Modified Capabilities
 
@@ -24,7 +24,7 @@ None.
 
 ## Impact
 
-- Public styling surface: `@shlz/styles` gains additive dashboard, widget, and metric-card class contracts.
+- Public styling surface: `@shlz/styles` gains additive dashboard and chart-widget class contracts.
 - Showcase and consumer evidence gain source-backed reporting compositions; no framework adapter is introduced.
 - Audit and source-transfer artifacts gain an explicit reporting/dashboard screen decomposition and component manifests.
 - Existing Table, Pagination, Field, Select, Date Picker, Status, Badge, Button, Link, Empty State, Notification, and Report Card remain dependencies and are not redefined.

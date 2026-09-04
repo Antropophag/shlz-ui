@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "revision": 1,
-  "intent": "Implement source-traceable framework-neutral Dashboard, Widget, and Metric Card presentation contracts from the reporting and dashboard source screens, complete their evidence gates, and deliver an unmerged PR.",
+  "revision": 2,
+  "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
   "route": "open-spec",
   "decisions": [
     {
@@ -41,7 +41,7 @@
       "blocking": true,
       "provenance": {
         "kind": "openspec",
-        "ref": "openspec/changes/add-reporting-dashboard-foundation/specs/application-compositions/reporting-dashboard-foundation/spec.md excludes chart, editor, persistence, query, and data lifecycle behavior not established by static source."
+        "ref": "Direct raw-SVG inspection established Dashboard.svg as a chart component sheet and the report screens as Report Card consumers; the revised OpenSpec excludes chart rendering, editor, persistence, query, and data lifecycle behavior while removing the unsupported Metric Card proposal."
       }
     },
     {

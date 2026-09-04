@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "intent": "Implement source-traceable framework-neutral Dashboard, Widget, and Metric Card presentation contracts from the reporting and dashboard source screens, complete their evidence gates, and deliver an unmerged PR.",
+  "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
   "route": "open-spec",
   "openSpecChange": "add-reporting-dashboard-foundation",
   "requiredDecisions": [

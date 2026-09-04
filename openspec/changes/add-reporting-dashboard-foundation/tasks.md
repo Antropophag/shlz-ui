@@ -2,19 +2,19 @@
 
 - [ ] 1.1 Inventory every material region in the dashboard and reporting source screens in a machine-readable ledger, classify source facts/derived patterns/decisions/unknowns, and verify exact source identities and hashes with focused tests.
 - [ ] 1.2 Map ledger regions to existing audited families, new Dashboard/Widget/Metric Card families, application-owned behavior, or unresolved chart/editor/report-model scope, and verify no region is omitted or assigned multiple owners.
-- [ ] 1.3 Add failing structural and browser contract probes for the declared new families and verify the unchanged baseline is rejected by the same source-derived oracles used for the candidate.
+- [ ] 1.3 Add failing structural and browser contract probes for Dashboard and Chart Widget and verify the unchanged baseline is rejected by the same source-derived oracles used for the candidate.
 
 ## 2. Framework-neutral implementation
 
 - [ ] 2.1 Implement additive Dashboard root, section, and responsive grid styles and documentation, then verify wide and narrow geometry against the approved source ledger.
-- [ ] 2.2 Implement the noninteractive Widget surface and semantic markup contract, then verify optional regions, native action ownership, long content, and narrow containment.
-- [ ] 2.3 Implement the Metric Card composition without changing Report Card, then verify required/optional roles, supported source surfaces, typography, geometry, and absence of implicit whole-card interaction.
+- [ ] 2.2 Implement the noninteractive Chart Widget surface and semantic markup contract, then verify optional controls/actions/plot/empty-state regions, native action ownership, long content, and narrow containment.
+- [ ] 2.3 Preserve Report Card as the sole source-backed report-summary family and verify the new dashboard contracts neither alter nor duplicate its production selectors or evidence.
 - [ ] 2.4 Regenerate the standalone `@shlz/styles` distribution and verify a clean plain-HTML consumer can use every new contract without Showcase code or a framework dependency.
 
 ## 3. Consumer and completion evidence
 
 - [ ] 3.1 Add focused Showcase matrices and one application-owned reporting dashboard composition using existing Table/filter/date/status primitives, then verify every executable occurrence has a stable audit ID and classification.
-- [ ] 3.2 Add separate Dashboard, Widget, and Metric Card manifests plus project-inventory/source-coverage reconciliation, and verify all applicable evidence levels, limitations, findings, and measured occurrence counts are explicit.
+- [ ] 3.2 Add separate Dashboard and Chart Widget manifests plus project-inventory/source-coverage reconciliation, and verify all applicable evidence levels, limitations, findings, and measured occurrence counts are explicit.
 - [ ] 3.3 Add focused Playwright coverage for accessibility, source-critical computed styles, component-local visuals, real consumer integration, and responsive/content stress; verify controlled material mutations fail the relevant family oracle.
 
 ## 4. Validation and delivery

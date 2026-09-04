@@ -1,6 +1,6 @@
 ## Purpose
 
-Defines source-traceable, framework-neutral presentation contracts for assembling SHLZ reporting dashboards without assigning application data, chart, editing, or persistence behavior to the design system.
+Defines source-traceable, framework-neutral layout and widget presentation contracts for assembling SHLZ reporting dashboards without assigning application data, chart rendering, editing, or persistence behavior to the design system.
 
 ## ADDED Requirements
 
@@ -26,31 +26,20 @@ The library SHALL provide additive presentational contracts for a dashboard root
 - **WHEN** the dashboard is rendered below its supported multi-column width
 - **THEN** widgets reflow without horizontal clipping, overlap, or loss of meaningful content
 
-### Requirement: Widget surface preserves semantic ownership
-The library SHALL provide a noninteractive widget surface with optional heading, description, metadata, actions, and body regions. Native controls inside a widget SHALL retain their native semantics; the widget root MUST NOT acquire implicit click, selection, drag, resize, or navigation behavior.
+### Requirement: Chart widget surface preserves semantic ownership
+The library SHALL provide a noninteractive chart-widget surface with optional heading, controls, actions, plot, empty-state, and supporting-description regions. Native controls inside a widget SHALL retain their native semantics; the widget root MUST NOT acquire implicit click, selection, drag, resize, navigation, or chart-data behavior.
 
 #### Scenario: Widget with an action
 - **WHEN** a consumer includes a native button or link in the widget action region
 - **THEN** only that control owns activation and the widget remains a semantic content container
 
 #### Scenario: Widget content stress
-- **WHEN** a widget contains a long localized heading, metadata, and body content
+- **WHEN** a widget contains a long localized heading, controls, and plot or empty-state content
 - **THEN** supported content remains readable and contained in both wide and narrow layouts
 
-### Requirement: Metric card represents only supported source content
-The library SHALL provide a metric-card composition for a label, primary value, optional supporting text, and only those surface variants proven by authoritative dashboard or report-card evidence. Units, comparisons, trends, and status meaning MUST remain consumer content unless separately specified.
-
-#### Scenario: Basic metric
-- **WHEN** a consumer supplies a label and primary value
-- **THEN** the metric card renders both roles using the declared source-backed or explicitly documented typographic and geometric contract
-
-#### Scenario: Optional supporting content
-- **WHEN** supporting text or a native details link is included
-- **THEN** the optional content remains subordinate to the value and does not make the entire card interactive
-
-#### Scenario: Unsupported trend visualization
-- **WHEN** a consumer needs a sparkline, trend arrow, comparison algorithm, or semantic positive/negative state
-- **THEN** the metric-card contract does not infer or provide that behavior as part of this capability
+#### Scenario: Chart rendering remains unresolved
+- **WHEN** a consumer supplies chart data to the widget plot region
+- **THEN** the widget provides only the source-backed container and does not infer marks, axes, legends, series semantics, interaction, or an accessible data alternative
 
 ### Requirement: Reporting composition reuses existing primitives
 The dashboard foundation SHALL compose existing Button, Link, Field, Select, Date Picker, Table, Pagination, Status, Badge, Empty State, Modal, Notification, and Report Card contracts where applicable. It MUST NOT redefine their states, behavior, or accessibility contracts.
@@ -60,9 +49,8 @@ The dashboard foundation SHALL compose existing Button, Link, Field, Select, Dat
 - **THEN** the resulting composition retains the public contracts and ownership boundaries of those primitives
 
 ### Requirement: Completion evidence covers source, runtime, and a consumer
-Dashboard, Widget, and Metric Card SHALL each have an occurrence census and applicable source-integrity, structural, accessibility, focused-visual, consumer-integration, and responsive/content-stress evidence. Runtime behavior SHALL be marked not applicable only with a component-specific reason.
+Dashboard and Chart Widget SHALL each have an occurrence census and applicable source-integrity, structural, accessibility, focused-visual, consumer-integration, and responsive/content-stress evidence. Runtime behavior SHALL be marked not applicable only with a component-specific reason.
 
 #### Scenario: Candidate is evaluated for completion
 - **WHEN** the implementation is proposed as review-ready
 - **THEN** every applicable evidence level, material source state, executable occurrence, limitation, and finding has an explicit disposition for each new family
-
