@@ -23,6 +23,7 @@ const componentFiles = [
   "card-with-action",
   "report-card",
   "cover",
+  "reporting-dashboard",
 ];
 
 test("modal and drawer compose the native dialog lifecycle", async () => {
@@ -155,6 +156,14 @@ test("plain HTML fixture keeps accessibility-critical native contracts", async (
   );
   assert.match(html, /<dialog[\s\S]+data-shlz-modal/);
   assert.match(html, /<dialog[\s\S]+data-shlz-drawer/);
+  assert.match(
+    html,
+    /<(?:section|div)[^>]*class="[^"]*\bshlz-dashboard\b[^"]*"[^>]*data-component-audit-id="dashboard-plain-html"[^>]*>/,
+  );
+  assert.match(
+    html,
+    /<article[^>]*class="[^"]*\bshlz-chart-widget\b[^"]*"[^>]*data-component-audit-id="chart-widget-plain-html"[^>]*>/,
+  );
   assert.match(html, /enhanceModals\(\)/);
   assert.match(html, /enhanceDrawers\(\)/);
   assert.match(html, /enhanceTooltips\(\)/);

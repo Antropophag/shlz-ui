@@ -13,6 +13,7 @@ import {
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
 import { cardCompositionsMarkup } from "./card-compositions.js";
+import { reportingDashboardShowcaseMarkup } from "./reporting-dashboard-showcase.js";
 import {
   datePickerShowcaseMarkup,
   enhanceDatePickerShowcase,
@@ -291,6 +292,7 @@ app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentFeedShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentsHistoryConsumerMarkup);
+app.insertAdjacentHTML("beforeend", reportingDashboardShowcaseMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],

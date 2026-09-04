@@ -43,6 +43,8 @@ const manifestPaths = [
   "history-timeline",
   "composer",
   "rich-text-toolbar",
+  "dashboard",
+  "chart-widget",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

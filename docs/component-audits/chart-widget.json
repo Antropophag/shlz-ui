@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 2,
+  "component": "chart-widget",
+  "authoritativeSource": "shlz-design-source/raw/svg/Dashboard.svg",
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Дашборды.svg",
+    "docs/component-audits/reporting-dashboard-source-ledger.json"
+  ],
+  "implementation": ["packages/styles/components/reporting-dashboard.css"],
+  "behavior": null,
+  "docs": "docs/components/reporting-dashboard.md",
+  "rootSelector": "[data-component-audit-id^='chart-widget-']",
+  "legacySelectors": [".shlz-chart-widget"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "chart-widget-showcase-default", "kind": "executable-fixture" },
+    { "id": "chart-widget-content-stress", "kind": "content-stress-fixture" },
+    { "id": "chart-widget-reporting-consumer", "kind": "live-consumer" },
+    { "id": "chart-widget-plain-html", "kind": "live-consumer" },
+    { "id": "chart-widget-source-fixture", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["source-1304x515", "fluid", "narrow-min-420"],
+  "supportedStates": ["content", "empty", "nested-native-actions"],
+  "contentStress": ["long-title", "wrapped-controls", "empty-copy", "narrow"],
+  "sourceClaims": [
+    {
+      "claim": "Dashboard.svg contains 29 repeated 1304 by 515 white chart-widget surfaces with radius 16",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Dashboard.svg"
+    },
+    {
+      "claim": "Chart data, marks, axes, legends and accessible alternatives are outside this surface contract",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/reporting-dashboard-source-ledger.json"
+    }
+  ],
+  "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: exact source hash and 1304x515 radius-16 white surface matrix are checked",
+    "structural-contract": "pass: heading, controls, actions, plot and empty regions plus all occurrences are asserted",
+    "runtime-browser": "not-applicable: Chart Widget owns no controller or chart data behavior",
+    "accessibility": "pass: article heading relation and nested native action ownership execute in browser",
+    "focused-visual": "pass: source-critical component-local computed width, height, radius, padding, paint and responsive geometry",
+    "consumer-integration": "pass: reporting consumer composes status, link and an explicitly described chart placeholder",
+    "responsive-content-stress": "pass: long title, controls and empty copy remain contained at narrow width"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: default, stress and consumer widget fixtures"],
+      "realInteractionVisual": [
+        "not-applicable: root has no interaction state"
+      ],
+      "runtimeBehavior": [
+        "not-applicable: nested controls remain native and consumer-owned"
+      ]
+    },
+    "materialStates": [],
+    "browserTest": "tools/playwright/reporting-dashboard.spec.js",
+    "manualStateWalk": "pass: nested action focus, default, empty, narrow and content-stress surfaces inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "outlined source text does not establish literal labels or complete typography",
+    "chart rendering and data accessibility require a separate capability"
+  ]
+}

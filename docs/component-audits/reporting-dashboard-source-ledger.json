@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "authority": "shlz-design-source/raw/svg/",
+  "sources": [
+    {
+      "file": "Dashboard.svg",
+      "sha256": "1cfca3af5e0ad0e0a25bff436a3b4031fda03de9880f3d110b491283bfec10a8",
+      "kind": "component-sheet",
+      "regions": [
+        {
+          "id": "chart-bars",
+          "classification": "unresolved",
+          "owner": "future-chart-capability"
+        },
+        {
+          "id": "chart-popover",
+          "classification": "existing-family",
+          "owner": "Popover"
+        },
+        {
+          "id": "chart-period",
+          "classification": "unresolved",
+          "owner": "future-chart-capability"
+        },
+        {
+          "id": "chart-filter-dropdown",
+          "classification": "existing-family",
+          "owner": "Dropdown Menu"
+        },
+        {
+          "id": "chart-widget-matrix",
+          "classification": "new-family",
+          "owner": "Chart Widget"
+        },
+        {
+          "id": "holiday-calendar-cell",
+          "classification": "existing-family",
+          "owner": "Calendar Grid"
+        }
+      ]
+    },
+    {
+      "file": "Дашборды.svg",
+      "sha256": "7e2c9fd027470c1ba773783cdd132c1a0f5084c9a5da5211efe3f5e932b6b5ba",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "dashboard-content-layout",
+          "classification": "new-family",
+          "owner": "Dashboard"
+        },
+        {
+          "id": "dashboard-chart-widget",
+          "classification": "new-family",
+          "owner": "Chart Widget"
+        },
+        {
+          "id": "dashboard-chart-rendering",
+          "classification": "unresolved",
+          "owner": "future-chart-capability"
+        },
+        {
+          "id": "dashboard-filters",
+          "classification": "existing-family",
+          "owner": "Field / Select / Segment / Switch"
+        },
+        {
+          "id": "dashboard-shell",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Редактирование дашборда.svg",
+      "sha256": "dcf6a3c9ded13b250e95816748a956c6316fb1302860d29e61730469cc0eacf7",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "dashboard-edit-menu",
+          "classification": "existing-family",
+          "owner": "Dropdown Menu"
+        },
+        {
+          "id": "dashboard-editing-lifecycle",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        },
+        {
+          "id": "dashboard-export",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Список отчетов.svg",
+      "sha256": "2804500dc0eb13dbb3b837c8d5e6c076dc2579b02febb8b6042977a76ec3e7b9",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "report-card-list",
+          "classification": "existing-family",
+          "owner": "Report card"
+        },
+        {
+          "id": "report-list-tabs-search",
+          "classification": "existing-family",
+          "owner": "Tabs / Field"
+        },
+        {
+          "id": "report-list-shell",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Создание отчета.svg",
+      "sha256": "1dcbab6c9e02ad8f3a603526a5431c68e9a42f52b241df116306b8cdc7e65d27",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "report-form-controls",
+          "classification": "existing-family",
+          "owner": "Field / Select / Date Picker"
+        },
+        {
+          "id": "report-query-model",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Детальная отчета.svg",
+      "sha256": "c426aa8cc80e79a40cb9367c2d6685dd802939ec05fbdb59d97d6bd2c0b66315",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "report-detail-table",
+          "classification": "existing-family",
+          "owner": "Table / Pagination"
+        },
+        {
+          "id": "report-detail-actions",
+          "classification": "existing-family",
+          "owner": "Button / Dropdown Menu"
+        },
+        {
+          "id": "report-detail-data",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Уведомления для отчетов.svg",
+      "sha256": "9258d09d5c48a63f15c607f0395f8fa8666ea657203d45fac9e347bcbf8b7780",
+      "kind": "screen-or-reference",
+      "regions": [
+        {
+          "id": "report-notification-presentation",
+          "classification": "existing-family",
+          "owner": "Notification"
+        },
+        {
+          "id": "report-notification-policy",
+          "classification": "application-owned",
+          "owner": "consumer-application"
+        }
+      ]
+    },
+    {
+      "file": "Reports card.svg",
+      "sha256": "e28cb879e2a2e577154cfa3caf541de020431ef8ba6e44550ad0e54bddf63c4f",
+      "kind": "component-sheet",
+      "regions": [
+        {
+          "id": "report-summary-card",
+          "classification": "existing-family",
+          "owner": "Report card"
+        }
+      ]
+    }
+  ],
+  "sourceFacts": {
+    "chartWidget": {
+      "width": 1304,
+      "height": 515,
+      "radius": 16,
+      "surface": "#FFFFFF",
+      "observedInstances": 29
+    },
+    "reportCard": { "width": 314, "height": 230, "radius": 16 }
+  },
+  "repositoryDecisions": [
+    "Dashboard grid reflows to one column when available inline size cannot preserve supported widget content.",
+    "Widget text uses semantic SHLZ typography because source glyphs are outlined.",
+    "The chart plot slot is consumer-owned until a separate accessible chart contract exists."
+  ],
+  "unsupported": [
+    "chart marks, axes, legends, series and accessible data model",
+    "dashboard edit, reorder, resize and persistence lifecycle",
+    "report query, export, routing, fetching and scheduling behavior",
+    "a separate Metric Card family"
+  ]
+}

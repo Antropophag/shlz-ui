@@ -1,0 +1,51 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-reporting-dashboard-foundation",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "product-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "composition-boundary",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "unsupported-semantics",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "8b9c2772106821ed896f714f8b2b9987dabc378a9d4d7c8625e6067cc056a5ec"
+}

@@ -16,7 +16,12 @@
   "occurrences": [
     { "id": "tag-showcase-filled", "kind": "executable-fixture" },
     { "id": "tag-showcase-outlined", "kind": "executable-fixture" },
-    { "id": "tag-typography-stress", "kind": "content-stress-fixture" }
+    { "id": "tag-typography-stress", "kind": "content-stress-fixture" },
+    { "id": "tag-chart-widget-showcase-default", "kind": "executable-fixture" },
+    {
+      "id": "tag-chart-widget-content-stress",
+      "kind": "content-stress-fixture"
+    }
   ],
   "supportedSizes": ["30"],
   "supportedStates": ["filled", "outlined"],

@@ -223,6 +223,7 @@ const styleSources = [
   "components/card-with-action.css",
   "components/report-card.css",
   "components/cover.css",
+  "components/reporting-dashboard.css",
   "typography-profiles.css",
 ];
 await rm(path.join(styleRoot, "dist"), { recursive: true, force: true });

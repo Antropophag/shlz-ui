@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "revision": 2,
+  "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "product-scope",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user requested implementation after reviewing the reporting/dashboard gap assessment and explicitly authorized autonomous work without further approvals."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md authority order and the reporting/dashboard SVG files under shlz-design-source/raw/svg/."
+      }
+    },
+    {
+      "id": "composition-boundary",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "openspec/changes/add-reporting-dashboard-foundation/design.md defines Dashboard, Widget, and Metric Card as three additive presentational levels."
+      }
+    },
+    {
+      "id": "unsupported-semantics",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "openspec",
+        "ref": "Direct raw-SVG inspection established Dashboard.svg as a chart component sheet and the report screens as Report Card consumers; the revised OpenSpec excludes chart rendering, editor, persistence, query, and data lifecycle behavior while removing the unsupported Metric Card proposal."
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md and docs/agent-execution.md require source integrity, component completion evidence, independent review, and an unmerged PR."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "add-reporting-dashboard-foundation",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Приступай к реализации, работай автономно без моих апрувов; делай"
+    }
+  }
+}

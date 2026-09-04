@@ -1,0 +1,44 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-reporting-dashboard-foundation",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "product-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "composition-boundary",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "unsupported-semantics",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement source-traceable framework-neutral Dashboard and Chart Widget presentation contracts from the reporting and dashboard source screens, preserve Report Card as the report-summary family, complete the new component evidence gates, and deliver an unmerged PR.",
+    "revision": 2
+  },
+  "routeDigest": "8b9c2772106821ed896f714f8b2b9987dabc378a9d4d7c8625e6067cc056a5ec",
+  "version": 1,
+  "digest": "8dfb500bfab57c72ecbaea2863f11c6a47bad816e4ec5c34af2a8b1a1c7cfdbc"
+}

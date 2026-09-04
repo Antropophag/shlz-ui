@@ -29,7 +29,16 @@
     { "id": "status-table-alpha", "kind": "executable-fixture" },
     { "id": "status-typography-stress", "kind": "content-stress-fixture" },
     { "id": "status-typography-table", "kind": "content-stress-fixture" },
-    { "id": "status-framework-composition", "kind": "live-consumer" }
+    { "id": "status-framework-composition", "kind": "live-consumer" },
+    {
+      "id": "status-chart-widget-showcase-default",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "status-chart-widget-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    { "id": "status-chart-widget-consumer", "kind": "live-consumer" }
   ],
   "supportedSizes": ["30"],
   "supportedStates": [
