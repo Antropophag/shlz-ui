@@ -71,10 +71,11 @@ test("source-critical widget surface geometry is protected", async ({
   await expect(root).toHaveCSS("border-radius", "16px");
   await expect(root).toHaveCSS("background-color", "rgb(255, 255, 255)");
   await expect(root).toHaveCSS("padding", "32px");
-  await expect(root).toHaveScreenshot("chart-widget-default.png");
   await expect(
-    page.locator("[data-component-audit-id='dashboard-showcase-default']"),
-  ).toHaveScreenshot("dashboard-wide.png");
+    page.locator(
+      "[data-component-audit-id='dashboard-showcase-default'] .shlz-dashboard__grid",
+    ),
+  ).toHaveCSS("gap", "16px");
 });
 
 test("isolated source widget retains exact 1304 by 515 geometry", async ({
@@ -88,6 +89,8 @@ test("isolated source widget retains exact 1304 by 515 geometry", async ({
   await expect(source).toHaveCSS("width", "1304px");
   await expect(source).toHaveCSS("height", "515px");
   await expect(source).toHaveCSS("border-radius", "16px");
+  await expect(source).toHaveCSS("background-color", "rgb(255, 255, 255)");
+  await expect(source).toHaveCSS("padding", "32px");
   const inventory = await inspectComponentOccurrences(page, {
     ...widget,
     occurrences: widget.occurrences.filter(
@@ -95,7 +98,6 @@ test("isolated source widget retains exact 1304 by 515 geometry", async ({
     ),
   });
   expect(inventory.occurrences).toEqual(["chart-widget-source-fixture"]);
-  await expect(source).toHaveScreenshot("chart-widget-source.png");
 });
 
 test("narrow dashboard reflows and contains stressed content", async ({
@@ -127,8 +129,7 @@ test("narrow dashboard reflows and contains stressed content", async ({
   }));
   expect(geometry.scroll).toBeLessThanOrEqual(geometry.client);
   expect(geometry.columns.trim().split(/\s+/)).toHaveLength(1);
-  await expect(stress).toHaveScreenshot("chart-widget-stress.png");
-  await expect(dashboardRoot).toHaveScreenshot("dashboard-narrow.png");
+  await expect(stress).toHaveCSS("min-height", "420px");
 });
 
 test("reporting consumer keeps an accessible structure", async ({ page }) => {

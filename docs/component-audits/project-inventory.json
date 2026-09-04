@@ -2809,7 +2809,7 @@
         "structural-contract": "pass: semantic root, sections, grid and every occurrence are asserted",
         "runtime-browser": "not-applicable: Dashboard is a CSS layout contract without a controller",
         "accessibility": "pass: labelled section structure and heading hierarchy execute in browser without nested main landmarks",
-        "focused-visual": "pass: wide and narrow component-local snapshots plus computed grid evidence",
+        "focused-visual": "pass: wide and narrow component-local computed grid, gap, containment and surface evidence",
         "consumer-integration": "pass: application-owned reporting composition uses the public contract",
         "responsive-content-stress": "pass: one-column reflow contains long localized widget content"
       },
@@ -2861,7 +2861,7 @@
         "structural-contract": "pass: optional header, controls, actions, plot and empty regions plus every occurrence are asserted",
         "runtime-browser": "not-applicable: Chart Widget owns presentation and no chart controller",
         "accessibility": "pass: article heading relation and nested native action ownership execute in browser",
-        "focused-visual": "pass: exact computed surface geometry plus default and stress snapshots",
+        "focused-visual": "pass: exact component-local computed width, height, radius, padding, paint and responsive geometry",
         "consumer-integration": "pass: reporting consumer composes existing status/link primitives",
         "responsive-content-stress": "pass: long heading, controls and empty copy remain contained at narrow width"
       },

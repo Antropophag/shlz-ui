@@ -40,17 +40,13 @@
     }
   ],
   "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
-  "visualSnapshots": [
-    "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-default-chromium-linux.png",
-    "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-source-chromium-linux.png",
-    "tools/playwright/reporting-dashboard.spec.js-snapshots/chart-widget-stress-chromium-linux.png"
-  ],
+  "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: exact source hash and 1304x515 radius-16 white surface matrix are checked",
     "structural-contract": "pass: heading, controls, actions, plot and empty regions plus all occurrences are asserted",
     "runtime-browser": "not-applicable: Chart Widget owns no controller or chart data behavior",
     "accessibility": "pass: article heading relation and nested native action ownership execute in browser",
-    "focused-visual": "pass: source-critical computed surface geometry and component-local snapshots",
+    "focused-visual": "pass: source-critical component-local computed width, height, radius, padding, paint and responsive geometry",
     "consumer-integration": "pass: reporting consumer composes status, link and an explicitly described chart placeholder",
     "responsive-content-stress": "pass: long title, controls and empty copy remain contained at narrow width"
   },

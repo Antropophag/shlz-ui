@@ -289,10 +289,10 @@ ${plannerScheduleShowcaseMarkup}`;
 app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", composerShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
-app.insertAdjacentHTML("beforeend", reportingDashboardShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentFeedShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", commentsHistoryConsumerMarkup);
+app.insertAdjacentHTML("beforeend", reportingDashboardShowcaseMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],

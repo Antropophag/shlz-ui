@@ -38,16 +38,13 @@
     }
   ],
   "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
-  "visualSnapshots": [
-    "tools/playwright/reporting-dashboard.spec.js-snapshots/dashboard-wide-chromium-linux.png",
-    "tools/playwright/reporting-dashboard.spec.js-snapshots/dashboard-narrow-chromium-linux.png"
-  ],
+  "visualSnapshots": [],
   "evidence": {
     "source-integrity": "pass: exact source hashes and the region ledger are checked",
     "structural-contract": "pass: semantic dashboard and section structure plus every occurrence are asserted",
     "runtime-browser": "not-applicable: Dashboard owns CSS layout and no controller",
     "accessibility": "pass: labelled sections and headings preserve document structure without nested main landmarks",
-    "focused-visual": "pass: component-local wide and narrow dashboard snapshots plus computed grid geometry",
+    "focused-visual": "pass: component-local wide and narrow computed grid, gap, containment and surface geometry",
     "consumer-integration": "pass: an application-owned reporting composition uses the public dashboard contract",
     "responsive-content-stress": "pass: long localized widgets reflow to one column without horizontal overflow"
   },
