@@ -166,6 +166,7 @@ test("all seven Comments source states remain represented", async ({
     await expect(state.locator(".shlz-comment-feed__surface")).toHaveScreenshot(
       `comment-feed-${name}.png`,
     );
+    executedMaterialStates.add(`comment-feed:${name}`);
   }
   await expect(
     page.locator(
@@ -207,39 +208,6 @@ test("all seven Comments source states remain represented", async ({
       .locator("#comment-feed-demo")
       .getByRole("button", { name: "Отменить", exact: true }),
   ).toBeVisible();
-  await verifyMaterialState("comment-feed", "default", () =>
-    expect(page.locator('[data-comment-feed-state="default"]')).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "composer-populated", () =>
-    expect(
-      page.locator('[data-comment-feed-state="composer-populated"]'),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "comment-added", () =>
-    expect(
-      page.locator('[data-comment-feed-state="comment-added"]'),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "own-comment-actions", () =>
-    expect(
-      page.locator('[data-comment-feed-state="own-comment-actions"]'),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "other-comment-reply", () =>
-    expect(
-      page.locator('[data-comment-feed-state="other-comment-reply"]'),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "mention-suggestions", () =>
-    expect(
-      page.locator('[data-comment-feed-state="mention-suggestions"]'),
-    ).toBeVisible(),
-  );
-  await verifyMaterialState("comment-feed", "comment-deleted", () =>
-    expect(
-      page.locator('[data-comment-feed-state="comment-deleted"]'),
-    ).toBeVisible(),
-  );
   await page.setViewportSize({ width: 390, height: 844 });
   await verifyMaterialState("comment-feed", "narrow-layout", () =>
     expect(page.locator('[data-comment-feed-state="default"]')).toBeVisible(),
@@ -303,27 +271,20 @@ test("History source fixture is content-led and matches source dimensions", asyn
   await expect(history).toHaveScreenshot(
     "history-timeline-source-corrected.png",
   );
-  await verifyMaterialState("history-timeline", "created", () =>
-    expect(history.locator('[data-history-kind="created"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "status-transition", () =>
-    expect(history.locator('[data-history-kind="status"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "quoted-comment", () =>
-    expect(history.locator('[data-history-kind="comment"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "field-transition", () =>
-    expect(history.locator('[data-history-kind="field"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "tags", () =>
-    expect(history.locator('[data-history-kind="tags"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "people-disclosure", () =>
-    expect(history.locator('[data-history-kind="people"]')).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "attachment", () =>
-    expect(history.locator('[data-history-kind="attachment"]')).toHaveCount(1),
-  );
+  for (const [state, kind] of [
+    ["created", "created"],
+    ["status-transition", "status"],
+    ["quoted-comment", "comment"],
+    ["field-transition", "field"],
+    ["tags", "tags"],
+    ["people-disclosure", "people"],
+    ["attachment", "attachment"],
+  ]) {
+    await expect(history.locator(`[data-history-kind="${kind}"]`)).toHaveCount(
+      1,
+    );
+    executedMaterialStates.add(`history-timeline:${state}`);
+  }
   await page.setViewportSize({ width: 390, height: 844 });
   await verifyMaterialState("history-timeline", "narrow-layout", () =>
     expect(history).toBeVisible(),
