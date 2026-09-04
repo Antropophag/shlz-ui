@@ -34,14 +34,8 @@ import {
   enhancePlannerScheduleShowcase,
   plannerScheduleShowcaseMarkup,
 } from "./planner-schedule-showcase.js";
-import {
-  enhanceMessagingHistoryShowcase,
-  messagingHistoryShowcaseMarkup,
-} from "./messaging-history-showcase.js";
-import {
-  commentFeedShowcaseMarkup,
-  enhanceCommentFeedShowcase,
-} from "./comment-feed-showcase.js";
+import { messagingHistoryShowcaseMarkup } from "./messaging-history-showcase.js";
+import { commentFeedShowcaseMarkup } from "./comment-feed-showcase.js";
 import {
   commentsHistoryConsumerMarkup,
   enhanceCommentsHistoryConsumer,
@@ -528,8 +522,6 @@ window.__shlzDatePickerShowcaseControllers = enhanceDatePickerShowcase();
 window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
 enhancePlannerScheduleShowcase();
-enhanceMessagingHistoryShowcase();
-enhanceCommentFeedShowcase();
 enhanceCommentsHistoryConsumer();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();

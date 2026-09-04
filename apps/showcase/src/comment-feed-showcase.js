@@ -2,21 +2,26 @@ import docxIconUrl from "../../../packages/icons/dist/file-types/docx.svg?url";
 import pdfIconUrl from "../../../packages/icons/dist/file-types/pdf.svg?url";
 import xlsIconUrl from "../../../packages/icons/dist/file-types/xls.svg?url";
 
-const fileIcon = (title) =>
-  title.toLowerCase().includes("pdf")
-    ? pdfIconUrl
-    : title.toLowerCase().includes("xls")
-      ? xlsIconUrl
-      : docxIconUrl;
+const fileIcon = (title) => {
+  const normalized = title.toLowerCase();
+  if (normalized.includes("pdf")) return pdfIconUrl;
+  if (normalized.includes("xls")) return xlsIconUrl;
+  return docxIconUrl;
+};
 
 const avatar = (initials, id = "") =>
   `<span class="shlz-avatar shlz-avatar--32 shlz-comment-feed__avatar" aria-hidden="true"${id ? ` data-component-audit-id="${id}"` : ""}>${initials}</span>`;
 
-const file = (title, meta, id = "") =>
-  `<div class="shlz-file-row"${id ? ` data-component-audit-id="${id}"` : ""}><div class="shlz-file-row__visual" aria-hidden="true"><img src="${fileIcon(title)}" alt=""></div><div class="shlz-file-row__content"><a class="shlz-file-row__primary" href="#comment-feed-demo">${title}</a><span class="shlz-file-row__meta">${meta}</span></div></div>`;
-
-const removableFile = (title, meta) =>
-  `<div class="shlz-file-row"><div class="shlz-file-row__visual" aria-hidden="true"><img src="${fileIcon(title)}" alt=""></div><div class="shlz-file-row__content"><span class="shlz-file-row__primary">${title}</span><span class="shlz-file-row__meta">${meta}</span></div><div class="shlz-file-row__actions"><button class="shlz-file-row__action" type="button" aria-label="Удалить файл ${title}">×</button></div></div>`;
+const file = (title, meta, id = "", removable = false) => {
+  const auditAttribute = id ? ` data-component-audit-id="${id}"` : "";
+  const primary = removable
+    ? `<span class="shlz-file-row__primary">${title}</span>`
+    : `<a class="shlz-file-row__primary" href="#comment-feed-demo">${title}</a>`;
+  const action = removable
+    ? `<div class="shlz-file-row__actions"><button class="shlz-file-row__action" type="button" aria-label="Удалить файл ${title}">×</button></div>`
+    : "";
+  return `<div class="shlz-file-row"${auditAttribute}><div class="shlz-file-row__visual" aria-hidden="true"><img src="${fileIcon(title)}" alt=""></div><div class="shlz-file-row__content">${primary}<span class="shlz-file-row__meta">${meta}</span></div>${action}</div>`;
+};
 
 const audit = (auditId, nestedId) => (auditId ? nestedId : "");
 
@@ -47,11 +52,9 @@ const composer = ({
   suggestions = false,
   audited = false,
 } = {}) =>
-  `<form class="shlz-comment-feed__composer">${avatar("АВ", audited ? "avatar-comment-composer" : "")}<div class="shlz-comment-feed__composer-frame">${populated ? `<div class="shlz-comment-feed__composer-files">${removableFile("application040…", "20 MB")}${removableFile("application040…", "20 MB")}${removableFile("application040…", "20 MB")}</div><div class="shlz-rich-text-toolbar shlz-comment-feed__composer-toolbar" role="toolbar" aria-label="Форматирование комментария"><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Полужирный">B</button><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Курсив">I</button><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Прикрепить файл">+</button></div>` : ""}<label><span class="shlz-visually-hidden">Комментарий</span><textarea class="shlz-comment-feed__composer-input" placeholder="Оставьте комментарий">${populated ? "Привет еще раз. Сегодня прошла встреча с клиентом" : ""}</textarea></label>${populated ? '<div class="shlz-comment-feed__composer-footer"><span>34 / 100</span><button class="shlz-comment-feed__submit" type="submit" aria-label="Отправить комментарий">↑</button></div>' : ""}</div>${suggestions ? '<div class="shlz-comment-feed__suggestions" aria-label="Упоминания"><button class="shlz-comment-feed__suggestion" type="button">Андрей Михайлов</button><button class="shlz-comment-feed__suggestion" type="button">Михаил Богданов</button></div>' : ""}</form>`;
+  `<form class="shlz-comment-feed__composer">${avatar("АВ", audited ? "avatar-comment-composer" : "")}<div class="shlz-comment-feed__composer-frame">${populated ? `<div class="shlz-comment-feed__composer-files">${file("application040…", "20 MB", "", true)}${file("application040…", "20 MB", "", true)}${file("application040…", "20 MB", "", true)}</div><div class="shlz-rich-text-toolbar shlz-comment-feed__composer-toolbar" role="toolbar" aria-label="Форматирование комментария"><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Полужирный">B</button><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Курсив">I</button><button class="shlz-rich-text-toolbar__button" type="button" aria-label="Прикрепить файл">+</button></div>` : ""}<label><span class="shlz-visually-hidden">Комментарий</span><textarea class="shlz-comment-feed__composer-input" placeholder="Оставьте комментарий">${populated ? "Привет еще раз. Сегодня прошла встреча с клиентом" : ""}</textarea></label>${populated ? '<div class="shlz-comment-feed__composer-footer"><span>34 / 100</span><button class="shlz-comment-feed__submit" type="submit" aria-label="Отправить комментарий">↑</button></div>' : ""}</div>${suggestions ? '<div class="shlz-comment-feed__suggestions" aria-label="Упоминания"><button class="shlz-comment-feed__suggestion" type="button">Андрей Михайлов</button><button class="shlz-comment-feed__suggestion" type="button">Михаил Богданов</button></div>' : ""}</form>`;
 
 const state = (name, body) =>
   `<section data-comment-feed-state="${name}"><h4>${name}</h4><div class="shlz-comment-feed__surface" data-source-frame>${body}</div></section>`;
 
 export const commentFeedShowcaseMarkup = `<article id="comment-feed-demo"><h3>Comment Feed</h3><p><code>Комментарии.svg</code> · source fixture; data and mutations are consumer-owned.</p>${state("default", comments({ auditId: "comment-feed-showcase-source" }) + composer({ audited: true }))}<details class="shlz-component-diagnostics"><summary>Source-observed states</summary><div class="shlz-stack">${state("composer-populated", comments() + composer({ populated: true }))}${state("comment-added", comments({ includeAdded: true }) + composer() + '<div class="shlz-notification" role="status"><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий успешно добавлен</p></div></div>')}${state("own-comment-actions", comments({ context: "own" }) + composer())}${state("other-comment-reply", comments({ context: "reply" }) + composer())}${state("mention-suggestions", comments() + composer({ populated: true, suggestions: true }))}${state("comment-deleted", comments() + composer() + '<div class="shlz-notification"><span class="shlz-notification__countdown">4</span><div class="shlz-notification__content"><p class="shlz-notification__title">Комментарий удален</p></div><button class="shlz-notification__action" type="button">Отменить</button></div>')}</div></details></article>`;
-
-export function enhanceCommentFeedShowcase() {}

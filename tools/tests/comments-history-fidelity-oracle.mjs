@@ -37,7 +37,7 @@ for (const state of [
   "mention-suggestions",
   "comment-deleted",
 ])
-  assert.match(sources.comments, new RegExp(`state\\("${state}"`));
+  assert.match(sources.comments, new RegExp(String.raw`state\("${state}"`));
 for (const kind of [
   "created",
   "status",
@@ -47,7 +47,7 @@ for (const kind of [
   "people",
   "attachment",
 ])
-  assert.match(sources.history, new RegExp(`entry\\("${kind}"`));
+  assert.match(sources.history, new RegExp(String.raw`entry\("${kind}"`));
 assert.doesNotMatch(sources.history, /history-timeline__marker/);
 assert.match(sources.consumer, /comment-feed-source-consumer/);
 assert.match(sources.consumer, /history-timeline-source-consumer/);

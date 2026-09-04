@@ -95,6 +95,9 @@ test("Comment Feed reproduces source geometry without chat polarity", async ({
 test("Comment Feed occurrence ledger covers source, consumer, fixture and diagnostics", async ({
   page,
 }) => {
+  await expect(
+    page.locator("[data-component-audit-id^='comment-feed-']"),
+  ).toHaveCount(2);
   await expectClassifiedComponentOccurrences(page, {
     ...commentManifest,
     occurrences: commentManifest.occurrences.filter(({ id }) =>
@@ -424,7 +427,9 @@ test("intermediate, wide, enlarged and sparse content keeps component actions re
     .locator(".shlz-comment-feed__surface")
     .all()) {
     const measurement = await surface.evaluate((node) => ({
-      state: node.closest("[data-comment-feed-state]")?.getAttribute("data-comment-feed-state"),
+      state: node
+        .closest("[data-comment-feed-state]")
+        ?.getAttribute("data-comment-feed-state"),
       clientWidth: node.clientWidth,
       scrollWidth: node.scrollWidth,
     }));

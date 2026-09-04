@@ -24,6 +24,3 @@ ${entry("attachment", header("Михаил Богданов", "добавил В
 
 export const messagingHistoryShowcaseMarkup =
   messageThreadMarkup + historyMarkup;
-
-/** Keeps the static showcase module compatible with the common enhancement hook. */
-export function enhanceMessagingHistoryShowcase() {}
