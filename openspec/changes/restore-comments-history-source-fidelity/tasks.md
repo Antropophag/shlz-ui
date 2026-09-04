@@ -19,5 +19,5 @@
 
 ## 4. Validation, Review, and Delivery
 
-- [ ] 4.1 Run strict OpenSpec validation, source-integrity checks, focused Node/Chromium suites, package build/lint/type checks, clean packed-package consumer validation, the Impeccable detector once over changed markup, and the proportionate full repository check; verify all results bind to the final candidate and resolve every scope-local finding.
-- [ ] 4.2 Complete target-diff inspection, independent Standards and Spec/source-fidelity review, route conformance, failure/evidence guards where applicable, and delivery checks; verify CI and review threads on an unmerged PR and report exact per-component status without claiming that one component proves another.
+- [x] 4.1 Run strict OpenSpec validation, source-integrity checks, focused Node/Chromium suites, package build/lint/type checks, clean packed-package consumer validation, the Impeccable detector once over changed markup, and the proportionate full repository check; verify all results bind to the final candidate and resolve every scope-local finding.
+- [x] 4.2 Complete target-diff inspection, independent Standards and Spec/source-fidelity review, route conformance, failure/evidence guards where applicable, and delivery checks; verify CI and review threads on an unmerged PR and report exact per-component status without claiming that one component proves another.
