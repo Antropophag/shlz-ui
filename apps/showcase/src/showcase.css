@@ -1626,6 +1626,18 @@ article {
   margin-block: 0;
 }
 
+.shlz-comments-history-consumer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--shlz-source-spacing-32);
+}
+
+@media (width <= 48rem) {
+  .shlz-comments-history-consumer__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 .shlz-card-composition-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));

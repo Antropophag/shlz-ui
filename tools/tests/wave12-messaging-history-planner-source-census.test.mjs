@@ -38,18 +38,25 @@ const promotedPlannerPaths = new Set([
   "tools/tests/fixtures/planner-schedule-known-bad.css",
 ]);
 const promotedMessagingHistoryPaths = new Set([
+  "apps/showcase/src/comment-feed-showcase.js",
+  "apps/showcase/src/comments-history-consumer.js",
   "apps/showcase/src/consumer-workspace.js",
   "apps/showcase/src/messaging-history-showcase.js",
   "docs/components/message-thread.md",
+  "docs/components/comment-feed.md",
   "docs/components/history-timeline.md",
   "packages/styles/components/message-thread.css",
+  "packages/styles/components/comment-feed.css",
   "packages/styles/components/history-timeline.css",
   "packages/styles/shlz.css",
   "tools/fixtures/messaging-history-components.html",
+  "tools/fixtures/comment-feed.html",
   "tools/generate.mjs",
   "tools/playwright/messaging-history-components.spec.js",
+  "tools/playwright/comments-history-fidelity.spec.js",
   "tools/tests/component-audit-manifest.test.mjs",
   "tools/tests/messaging-history-components.test.mjs",
+  "tools/tests/comments-history-fidelity.test.mjs",
   "tools/tests/pr57-regression-oracle.mjs",
 ]);
 const scopeMatchers = {

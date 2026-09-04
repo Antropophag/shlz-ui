@@ -39,6 +39,14 @@ import {
   messagingHistoryShowcaseMarkup,
 } from "./messaging-history-showcase.js";
 import {
+  commentFeedShowcaseMarkup,
+  enhanceCommentFeedShowcase,
+} from "./comment-feed-showcase.js";
+import {
+  commentsHistoryConsumerMarkup,
+  enhanceCommentsHistoryConsumer,
+} from "./comments-history-consumer.js";
+import {
   enhanceFileUploadShowcase,
   fileUploadShowcaseMarkup,
 } from "./file-upload-showcase.js";
@@ -287,6 +295,8 @@ app.insertAdjacentHTML("beforeend", fileUploadShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", composerShowcaseMarkup);
 app.insertAdjacentHTML("beforeend", cardCompositionsMarkup);
 app.insertAdjacentHTML("beforeend", messagingHistoryShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", commentFeedShowcaseMarkup);
+app.insertAdjacentHTML("beforeend", commentsHistoryConsumerMarkup);
 
 const componentAuditRoots = [
   ["#table-demo .shlz-table", "table-showcase-mixed"],
@@ -519,6 +529,8 @@ window.__shlzDatePickerConsumer = enhanceDatePickerConsumer();
 window.__shlzCalendarGridControllers = enhanceCalendarGridShowcase();
 enhancePlannerScheduleShowcase();
 enhanceMessagingHistoryShowcase();
+enhanceCommentFeedShowcase();
+enhanceCommentsHistoryConsumer();
 window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
 enhanceComposerShowcase();

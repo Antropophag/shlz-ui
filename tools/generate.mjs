@@ -200,6 +200,7 @@ const styleSources = [
   "components/calendar-grid.css",
   "components/planner-schedule.css",
   "components/message-thread.css",
+  "components/comment-feed.css",
   "components/history-timeline.css",
   "components/choice.css",
   "components/status-badge.css",

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 2,
+  "component": "comment-feed",
+  "authoritativeSource": "shlz-design-source/raw/svg/Комментарии.svg",
+  "referenceSources": [
+    "docs/component-audits/comment-feed-contract.md",
+    "docs/component-audits/comments-history-fidelity-baseline.md"
+  ],
+  "implementation": ["packages/styles/components/comment-feed.css"],
+  "behavior": null,
+  "docs": "docs/components/comment-feed.md",
+  "rootSelector": "[data-component-audit-id^='comment-feed-']",
+  "legacySelectors": [".shlz-comment-feed"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 3,
+  "occurrences": [
+    { "id": "comment-feed-showcase-source", "kind": "executable-fixture" },
+    { "id": "comment-feed-source-consumer", "kind": "live-consumer" },
+    { "id": "comment-feed-plain-html", "kind": "executable-fixture" }
+  ],
+  "supportedSizes": ["source-desktop-feed", "bounded-responsive-feed"],
+  "supportedStates": [
+    "default",
+    "composer-populated",
+    "comment-added",
+    "own-comment-actions",
+    "other-comment-reply",
+    "mention-suggestions",
+    "comment-deleted",
+    "empty",
+    "loading-safe",
+    "error-safe"
+  ],
+  "contentStress": [
+    "long-localized-content",
+    "long-filename",
+    "multiple-attachments",
+    "missing-optional-content",
+    "narrow-viewport",
+    "200-percent-text"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Комментарии.svg contains seven 1440 by 1000 application frames with one left-aligned comments stream and source-observed composer, contextual action, mention suggestion and feedback states",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Комментарии.svg"
+    },
+    {
+      "claim": "Comment Feed excludes the surrounding application shell and keeps all data and mutations consumer-owned",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/comment-feed-contract.md"
+    },
+    {
+      "claim": "active secondary text uses the accessible supporting role while provenance retains source Gray 200",
+      "classification": "repository-decision",
+      "evidence": "docs/accessibility-source-contrast.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/comments-history-fidelity.spec.js"],
+  "visualSnapshots": [
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-source-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-narrow-chromium-linux.png"
+  ],
+  "evidence": {
+    "source-integrity": "pass: exact Comments SVG hash and seven application frame origins",
+    "structural-contract": "pass: public style bundle, docs, fixtures and exact occurrence ledger",
+    "runtime-browser": "pass: native consumer actions and consumer-owned rerender surface",
+    "accessibility": "pass: native list/form semantics, focus, contrast and axe coverage",
+    "focused-visual": "pass: component-local source geometry and desktop snapshot",
+    "consumer-integration": "pass: ServiceDesk source-contract consumer",
+    "responsive-content-stress": "pass: narrow containment and localized attachment content"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": ["pass: seven source-observed visual states"],
+      "realInteractionVisual": [
+        "not-applicable: contextual eligibility and feedback lifecycle are consumer-owned"
+      ],
+      "runtimeBehavior": ["pass: native consumer action"]
+    },
+    "materialStates": [
+      "default",
+      "composer-populated",
+      "comment-added",
+      "own-comment-actions",
+      "other-comment-reply",
+      "mention-suggestions",
+      "comment-deleted",
+      "narrow-layout",
+      "text-scale"
+    ],
+    "browserTest": "tools/playwright/comments-history-fidelity.spec.js",
+    "manualStateWalk": "pass: source states, native actions, focus, narrow layout and text scaling"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "no data fetching, authorisation, edit/delete/reply mutations, mention lookup, upload, submission, feedback timing, undo, persistence, synchronization, pagination, moderation or announcements",
+    "responsive behavior is a repository decision because the source frames are desktop only"
+  ]
+}

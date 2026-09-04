@@ -140,7 +140,7 @@ test("independent occurrence guards classify Showcase, diagnostics and plain HTM
         "notification-showcase-action",
         "notification-content-stress",
       ],
-      6,
+      8,
     ),
   );
   await expectClassifiedComponentOccurrences(

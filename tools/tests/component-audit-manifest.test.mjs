@@ -38,6 +38,7 @@ const manifestPaths = [
   "upload-document-compositions",
   "messaging-history-planner-compositions",
   "planner-schedule",
+  "comment-feed",
   "message-thread",
   "history-timeline",
   "composer",

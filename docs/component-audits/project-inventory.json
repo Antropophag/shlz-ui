@@ -2451,8 +2451,66 @@
     },
     {
       "tests": [
+        "tools/tests/comments-history-fidelity.test.mjs",
+        "tools/playwright/comments-history-fidelity.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: Comments SVG hash and seven screen frames",
+        "structural-contract": "pass: style, docs, fixtures and manifest",
+        "runtime-browser": "pass: native consumer actions",
+        "accessibility": "pass: list/form semantics, focus, contrast and axe",
+        "focused-visual": "pass: source geometry and component-level desktop snapshot",
+        "consumer-integration": "pass: Data Workspace consumer",
+        "responsive-content-stress": "pass: narrow containment and localized attachments"
+      },
+      "canonical_name": "Comment Feed",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Комментарии.svg"],
+      "production_implementation": [
+        "packages/styles/components/comment-feed.css"
+      ],
+      "behavior": [],
+      "docs": [
+        "docs/components/comment-feed.md",
+        "docs/component-audits/comment-feed.json",
+        "docs/component-audits/comment-feed-contract.md"
+      ],
+      "executable_fixtures": [
+        "apps/showcase/src/comment-feed-showcase.js",
+        "tools/fixtures/comment-feed.html"
+      ],
+      "live_consumers": ["apps/showcase/src/comments-history-consumer.js"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": ["apps/showcase/src/comment-feed-showcase.js"],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "left-aligned source-backed comment stream",
+        "author, time, mentions and attachments",
+        "presentation-only composer and contextual states"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "all comment data, mutations, permissions, upload, persistence and feedback lifecycle remain consumer-owned",
+        "responsive behavior is a repository decision because the source is desktop only"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 6,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
         "tools/tests/messaging-history-components.test.mjs",
-        "tools/playwright/messaging-history-components.spec.js"
+        "tools/playwright/messaging-history-components.spec.js",
+        "tools/tests/comments-history-fidelity.test.mjs",
+        "tools/playwright/comments-history-fidelity.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Messages.svg authority remains unchanged",
@@ -2514,8 +2572,8 @@
         "structural-contract": "pass: style, docs, fixtures and manifest",
         "runtime-browser": "pass: semantic lists and native consumer action",
         "accessibility": "pass: list structure, focus and axe",
-        "focused-visual": "pass: grouping, current emphasis and responsive geometry",
-        "consumer-integration": "pass: Data Workspace consumer",
+        "focused-visual": "pass: seven source event payloads and exact component dimensions",
+        "consumer-integration": "pass: Data Workspace status-transition consumer",
         "responsive-content-stress": "pass: narrow, long content and text scaling"
       },
       "canonical_name": "History Timeline",
@@ -2538,23 +2596,27 @@
         "apps/showcase/src/messaging-history-showcase.js",
         "tools/fixtures/messaging-history-components.html"
       ],
-      "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
+      "live_consumers": [
+        "apps/showcase/src/consumer-workspace.js",
+        "apps/showcase/src/comments-history-consumer.js"
+      ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
       "inert_diagnostics": [],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
         "semantic consumer-ordered history list",
-        "period groups",
-        "actor, timestamp, description and attachments"
+        "creation, status, comment, field, tag, people and attachment payloads",
+        "actor, action, timestamp and structured changed content"
       ],
       "known_findings": [],
       "limitations": [
-        "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements"
+        "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements",
+        "responsive behavior is a repository decision because the source frame is desktop only"
       ],
       "measured_counts": {
         "executableShowcase": 1,
-        "liveConsumers": 1,
+        "liveConsumers": 2,
         "dataWorkspace": 1,
         "inertDiagnostics": 0,
         "legacyNative": 0,

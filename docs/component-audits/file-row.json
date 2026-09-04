@@ -12,7 +12,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 0,
+  "diagnosticOccurrenceCount": 6,
   "occurrences": [
     { "id": "file-row-showcase-default", "kind": "executable-fixture" },
     { "id": "file-row-showcase-hover", "kind": "executable-fixture" },
@@ -45,7 +45,11 @@
       "id": "file-row-composer-content-stress",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-composer-data-workspace", "kind": "live-consumer" }
+    { "id": "file-row-composer-data-workspace", "kind": "live-consumer" },
+    { "id": "file-row-comment-source-pdf", "kind": "executable-fixture" },
+    { "id": "file-row-comment-source-docx", "kind": "executable-fixture" },
+    { "id": "file-row-comment-source-contract", "kind": "executable-fixture" },
+    { "id": "file-row-history-source", "kind": "executable-fixture" }
   ],
   "supportedSizes": [
     "55px-body",

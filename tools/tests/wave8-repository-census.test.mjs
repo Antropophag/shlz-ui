@@ -18,6 +18,7 @@ const executableExtensions = new Set([
 const feedbackMarkup =
   /shlz-(?:notification|snackbar)|data-(?:notification|snackbar)/;
 const classifiedFiles = new Set([
+  "apps/showcase/src/comment-feed-showcase.js",
   "apps/showcase/src/component-docs.js",
   "apps/showcase/src/fidelity.js",
   "apps/showcase/src/main.js",
@@ -26,6 +27,7 @@ const classifiedFiles = new Set([
   "tools/fixtures/plain-html.html",
 ]);
 const auditIdsByFile = new Map([
+  ["apps/showcase/src/comment-feed-showcase.js", []],
   [
     "apps/showcase/src/notification-consumer.js",
     [

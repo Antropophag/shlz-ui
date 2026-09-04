@@ -43,6 +43,7 @@ const expectedIds = {
     "history-timeline": [
       "history-timeline-showcase-source",
       "history-timeline-data-workspace-consumer",
+      "history-timeline-source-consumer",
     ],
   },
   fixture: {
@@ -202,20 +203,18 @@ test("native links and buttons receive keyboard focus with a visible indicator",
   await expect(controls[3]).toHaveClass(/\bshlz-button\b/);
 });
 
-test("period labels explicitly describe their following history entries", async ({
+test("structured history payloads preserve their visible change relationships", async ({
   page,
 }) => {
-  const period = page.locator(
-    "#history-timeline-demo .shlz-history-timeline__period",
-  );
-  await expect(period).not.toHaveAttribute("role", "presentation");
-  const label = period.locator("[id]");
-  const labelId = await label.getAttribute("id");
-  expect(labelId).toBeTruthy();
-  const describedEntries = page.locator(
-    `#history-timeline-demo .shlz-history-timeline__entry[aria-describedby='${labelId}']`,
-  );
-  await expect(describedEntries).toHaveCount(2);
+  const history = page.locator("#history-timeline-demo");
+  await expect(history.locator("[data-history-kind]")).toHaveCount(7);
+  await expect(
+    history.locator(".shlz-history-timeline__old-value"),
+  ).toHaveCount(2);
+  await expect(
+    history.locator(".shlz-history-timeline__new-value"),
+  ).toHaveCount(2);
+  await expect(history.locator(".shlz-history-timeline__quote")).toHaveCount(1);
 });
 
 test("empty states are independently readable", async ({ page }) => {
@@ -303,7 +302,7 @@ test("200% text, unbroken messages, and sparse history remain reachable", async 
     .evaluate((root) => {
       root.insertAdjacentHTML(
         "beforeend",
-        `<li class="shlz-history-timeline__entry"><span class="shlz-history-timeline__marker" aria-hidden="true"></span><article class="shlz-history-timeline__content"><header class="shlz-history-timeline__header"><span class="shlz-history-timeline__actor">System</span><time class="shlz-history-timeline__time">13:00</time></header><p class="shlz-history-timeline__description">Sparse entry.</p></article></li>`,
+        `<li class="shlz-history-timeline__entry"><article class="shlz-history-timeline__content"><header class="shlz-history-timeline__header"><span class="shlz-history-timeline__actor">System</span></header><time class="shlz-history-timeline__time" datetime="2026-08-30T13:00:00+03:00">13:00</time><p class="shlz-history-timeline__description">Sparse entry.</p></article></li>`,
       );
     });
   for (const root of ["#message-thread-demo", "#history-timeline-demo"])
@@ -344,16 +343,20 @@ test("200% text, unbroken messages, and sparse history remain reachable", async 
       page.locator("#message-thread-demo .shlz-message-thread__author").first(),
     ).toBeVisible(),
   );
-  await verifyMaterialState("history-timeline", "period-group", () =>
-    expect(
-      page.locator("#history-timeline-demo .shlz-history-timeline__period"),
-    ).toHaveCount(1),
-  );
-  await verifyMaterialState("history-timeline", "current", () =>
-    expect(
-      page.locator("#history-timeline-demo [data-emphasis='current']"),
-    ).toHaveCount(1),
-  );
+  for (const [state, kind] of [
+    ["created", "created"],
+    ["status-transition", "status"],
+    ["quoted-comment", "comment"],
+    ["field-transition", "field"],
+    ["tags", "tags"],
+    ["people-disclosure", "people"],
+    ["attachment", "attachment"],
+  ])
+    await verifyMaterialState("history-timeline", state, () =>
+      expect(
+        page.locator(`#history-timeline-demo [data-history-kind='${kind}']`),
+      ).toHaveCount(1),
+    );
   await verifyMaterialState("history-timeline", "narrow-layout", () =>
     expect(
       page.locator("#history-timeline-demo .shlz-history-timeline"),

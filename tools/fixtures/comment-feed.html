@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Comment Feed fixture</title>
+    <link rel="stylesheet" href="../../packages/styles/dist/shlz.css" />
+  </head>
+  <body class="shlz-scope">
+    <main>
+      <ol
+        class="shlz-comment-feed"
+        aria-label="Комментарии"
+        data-component-audit-id="comment-feed-plain-html"
+      >
+        <li class="shlz-comment-feed__item">
+          <span class="shlz-comment-feed__avatar" aria-hidden="true">АП</span>
+          <article class="shlz-comment-feed__content">
+            <header class="shlz-comment-feed__header">
+              <span class="shlz-comment-feed__author">Анна Петрова</span
+              ><time class="shlz-comment-feed__time" datetime="2026-08-30"
+                >1 день назад</time
+              >
+            </header>
+            <p class="shlz-comment-feed__body">
+              <span class="shlz-comment-feed__mention">Михаил Богданов</span>
+              Документы проверены.
+            </p>
+            <div class="shlz-comment-feed__attachments">
+              <div class="shlz-comment-feed__file">
+                <div class="shlz-comment-feed__file-visual" aria-hidden="true">
+                  <img
+                    src="../../packages/icons/dist/file-types/pdf.svg"
+                    alt=""
+                  />
+                </div>
+                <div class="shlz-comment-feed__file-content">
+                  <a class="shlz-comment-feed__file-primary" href="#fixture"
+                    >document.pdf</a
+                  ><span class="shlz-comment-feed__file-meta">2 MB</span>
+                </div>
+              </div>
+            </div>
+            <p class="shlz-comment-feed__attachment-summary">
+              1 файл, <span class="shlz-comment-feed__file-meta">2 MB</span>
+            </p>
+          </article>
+        </li>
+      </ol>
+      <form class="shlz-comment-feed__composer">
+        <span class="shlz-comment-feed__avatar" aria-hidden="true">АП</span>
+        <div class="shlz-comment-feed__composer-frame">
+          <label
+            ><span class="shlz-visually-hidden">Комментарий</span
+            ><textarea
+              class="shlz-comment-feed__composer-input"
+              placeholder="Оставьте комментарий"
+            ></textarea>
+          </label>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

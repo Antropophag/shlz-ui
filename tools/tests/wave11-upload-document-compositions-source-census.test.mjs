@@ -62,15 +62,22 @@ const approvedFileUploadArtifactPaths = new Set([
   "tools/tests/fixtures/file-upload-fidelity-oracle.mjs",
 ]);
 const laterWave12ProductPaths = new Set([
+  "apps/showcase/src/comment-feed-showcase.js",
+  "apps/showcase/src/comments-history-consumer.js",
   "apps/showcase/src/messaging-history-showcase.js",
   "apps/showcase/src/messaging-history-consumers.js",
   "docs/components/message-thread.md",
   "docs/components/history-timeline.md",
+  "docs/components/comment-feed.md",
   "packages/styles/components/message-thread.css",
   "packages/styles/components/history-timeline.css",
+  "packages/styles/components/comment-feed.css",
   "tools/fixtures/messaging-history-components.html",
+  "tools/fixtures/comment-feed.html",
   "tools/playwright/messaging-history-components.spec.js",
+  "tools/playwright/comments-history-fidelity.spec.js",
   "tools/tests/messaging-history-components.test.mjs",
+  "tools/tests/comments-history-fidelity.test.mjs",
 ]);
 const isApprovedFileUploadSurface = ({ path }) =>
   approvedFileUploadArtifactPaths.has(path);

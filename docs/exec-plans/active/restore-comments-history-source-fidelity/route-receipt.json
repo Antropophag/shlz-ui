@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

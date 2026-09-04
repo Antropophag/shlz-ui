@@ -14,7 +14,11 @@
     { "id": "link-workspace-request-navigation", "kind": "live-consumer" },
     { "id": "link-message-thread-attachment", "kind": "executable-fixture" },
     {
-      "id": "link-history-timeline-attachment",
+      "id": "link-comment-feed-download-all",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "link-history-timeline-disclosure",
       "kind": "executable-fixture"
     },
     { "id": "link-messaging-history-consumer", "kind": "live-consumer" }
