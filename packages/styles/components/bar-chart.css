@@ -155,6 +155,19 @@
   overflow-x: auto;
 }
 
+.shlz-bar-chart__table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.shlz-bar-chart__table th,
+.shlz-bar-chart__table td {
+  padding: 0.625rem 0.75rem;
+  border-block-end: 1px solid var(--shlz-semantic-color-border-default);
+  text-align: start;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .shlz-bar-chart__bar {
     transition: none;

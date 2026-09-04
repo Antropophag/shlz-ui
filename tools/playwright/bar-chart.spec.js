@@ -145,7 +145,7 @@ test("consumer period owns prepared replacement data", async ({ page }) => {
   await expect(
     consumer.getByRole("cell", { name: "4", exact: true }).first(),
   ).toBeVisible();
-  await page.getByLabel("Квартал").check();
+  await page.getByLabel("90 дней").check();
   await expect(
     consumer.getByRole("cell", { name: "12", exact: true }).first(),
   ).toBeVisible();
@@ -153,6 +153,7 @@ test("consumer period owns prepared replacement data", async ({ page }) => {
 
 test("destroy removes generated chart and listeners", async ({ page }) => {
   const chart = page.locator("#bar-chart-reporting-consumer");
+  await expect(chart).toHaveAttribute("data-shlz-bar-chart-ready", "true");
   await page.evaluate(() => {
     const controller = globalThis.__shlzBarChartControllers.find(
       ({ root }) => root.id === "bar-chart-reporting-consumer",

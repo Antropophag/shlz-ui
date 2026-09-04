@@ -265,7 +265,7 @@ export class BarChartController {
     const wrapper = document.createElement("div");
     wrapper.className = "shlz-bar-chart__table-wrap";
     const table = document.createElement("table");
-    table.className = "shlz-table shlz-bar-chart__table";
+    table.className = "shlz-bar-chart__table";
     const caption = document.createElement("caption");
     caption.textContent = this.root.dataset.tableCaption || "Chart data";
     const thead = document.createElement("thead");

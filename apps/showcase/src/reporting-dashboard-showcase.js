@@ -89,7 +89,9 @@ export const reportingDashboardShowcaseMarkup = `
         <article class="shlz-chart-widget" data-component-audit-id="chart-widget-reporting-consumer" aria-labelledby="consumer-widget-title">
           <header class="shlz-chart-widget__header"><h4 class="shlz-chart-widget__title" id="consumer-widget-title">Обращения по статусам</h4></header>
           <div class="shlz-chart-widget__controls" data-bar-chart-consumer-controls>
-            <fieldset class="shlz-segment shlz-segment--sm"><legend class="shlz-visually-hidden">Период</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="chart-period" value="month" checked><span class="shlz-segment__label">Месяц</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="chart-period" value="quarter"><span class="shlz-segment__label">Квартал</span></label></fieldset>
+            <span class="shlz-status" data-component-audit-id="status-chart-widget-consumer">Выполнено</span>
+            <a class="shlz-link" data-component-audit-id="link-chart-widget-consumer" href="#table-demo">Открыть таблицу</a>
+            <fieldset class="shlz-segment shlz-segment--sm" data-component-audit-id="segment-bar-chart-consumer-period"><legend class="shlz-visually-hidden">Период диаграммы</legend><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="chart-period" value="month" checked><span class="shlz-segment__label">30 дней</span></label><label class="shlz-segment__option"><input class="shlz-segment__input" type="radio" name="chart-period" value="quarter"><span class="shlz-segment__label">90 дней</span></label></fieldset>
           </div>
           <div class="shlz-chart-widget__plot">${chartRoot("bar-chart-reporting-consumer")}</div>
         </article>

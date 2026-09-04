@@ -780,7 +780,7 @@
         "runtime-browser": "pass: real pointer, Space and Arrow selection use native state with per-path input/change counters; disabled paths emit none",
         "accessibility": "pass: named native radio group, mutual exclusion, real Space/Arrow focus movement and disabled focus exclusion are exercised",
         "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
-        "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
+        "consumer-integration": "pass: reporting Bar Chart consumer owns period selection through the native Segment contract",
         "responsive-content-stress": "pass: the component-local narrow fixture checks bounds without page-overflow inference"
       },
       "canonical_name": "Segment",
@@ -795,7 +795,10 @@
         "apps/showcase/src/main.js",
         "tools/fixtures/plain-html.html"
       ],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "segment-bar-chart-consumer-period"
+      ],
       "data_workspace_consumers": [],
       "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
       "legacy_native_implementations": ["native radio group ownership"],
@@ -809,12 +812,10 @@
         "focus"
       ],
       "known_findings": [],
-      "limitations": [
-        "no application consumer; navigation and command semantics are outside Segment"
-      ],
+      "limitations": ["navigation and command semantics are outside Segment"],
       "measured_counts": {
         "executableShowcase": 3,
-        "liveConsumers": 0,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
         "inertDiagnostics": 6,
         "legacyNative": 0,
