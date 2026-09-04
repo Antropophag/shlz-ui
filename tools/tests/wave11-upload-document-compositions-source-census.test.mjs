@@ -78,6 +78,8 @@ const laterWave12ProductPaths = new Set([
   "tools/playwright/comments-history-fidelity.spec.js",
   "tools/tests/messaging-history-components.test.mjs",
   "tools/tests/comments-history-fidelity.test.mjs",
+  "tools/tests/comments-history-fidelity-oracle.mjs",
+  "tools/tests/fixtures/comments-history-fidelity-known-bad.json",
 ]);
 const isApprovedFileUploadSurface = ({ path }) =>
   approvedFileUploadArtifactPaths.has(path);

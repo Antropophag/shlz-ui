@@ -1,0 +1,6 @@
+{
+  "bundle": "@import url(\"./components/message-thread.css\");",
+  "comments": "",
+  "history": "<ol class=\"shlz-history-timeline\"><span class=\"shlz-history-timeline__marker\"></span><li>Updated record</li></ol>",
+  "consumer": ""
+}

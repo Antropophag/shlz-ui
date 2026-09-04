@@ -11,6 +11,12 @@
   list-style: none;
 }
 
+.shlz-comment-feed__surface[data-source-frame] {
+  box-sizing: border-box;
+  inline-size: min(1304px, 100%);
+  padding-inline-start: min(64px, 5%);
+}
+
 .shlz-comment-feed__item {
   position: relative;
   display: grid;
@@ -37,7 +43,11 @@
 }
 
 .shlz-comment-feed__content {
+  padding: 0;
+  margin: 0;
   min-inline-size: 0;
+  background: transparent;
+  border-radius: 0;
 }
 
 .shlz-comment-feed__item > .shlz-comment-feed__content:first-child {
@@ -85,6 +95,7 @@
 .shlz-comment-feed__attachments .shlz-file-row {
   flex: 0 1 var(--shlz-comment-feed-file-width);
   inline-size: var(--shlz-comment-feed-file-width);
+  min-inline-size: 0;
 }
 
 .shlz-comment-feed__file {
@@ -207,6 +218,11 @@
   padding: 16px 12px 8px;
 }
 
+.shlz-comment-feed__composer-files .shlz-file-row {
+  inline-size: min(var(--shlz-comment-feed-file-width), 100%);
+  min-inline-size: 0;
+}
+
 .shlz-comment-feed__composer-toolbar {
   background: transparent;
   border: 0;
@@ -237,6 +253,7 @@
   inset-block-end: calc(100% + 8px);
   inset-inline-start: 44px;
   z-index: 3;
+  box-sizing: border-box;
   display: grid;
   inline-size: min(260px, calc(100% - 44px));
   padding: 8px;
@@ -267,6 +284,10 @@
 }
 
 @media (width <= 32rem) {
+  .shlz-comment-feed__surface[data-source-frame] {
+    padding-inline-start: 0;
+  }
+
   .shlz-comment-feed {
     gap: 32px;
   }

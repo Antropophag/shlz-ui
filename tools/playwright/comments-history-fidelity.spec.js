@@ -59,8 +59,12 @@ const hideShowcaseNavigation = (page) =>
 test("Comment Feed reproduces source geometry without chat polarity", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1600, height: 1000 });
   await hideShowcaseNavigation(page);
   const state = page.locator('[data-comment-feed-state="default"]');
+  await state.evaluate((node) => {
+    node.style.inlineSize = "1304px";
+  });
   const feed = state.locator(".shlz-comment-feed");
   await expect(feed).toBeVisible();
   await expect(feed.locator(".shlz-comment-feed__item")).toHaveCount(4);
@@ -74,6 +78,10 @@ test("Comment Feed reproduces source geometry without chat polarity", async ({
   await expect(feed.locator(".shlz-file-row").first()).toHaveCSS(
     "width",
     "229px",
+  );
+  await expect(state.locator(".shlz-comment-feed__composer-input")).toHaveCSS(
+    "width",
+    "1196px",
   );
   await expect(state.locator(".shlz-comment-feed__composer-input")).toHaveCSS(
     "min-height",
@@ -128,10 +136,12 @@ test("source-contract consumer owns Comment Feed and History actions", async ({
 test("all seven Comments source states remain represented", async ({
   page,
 }) => {
+  await page.setViewportSize({ width: 1600, height: 1000 });
+  await hideShowcaseNavigation(page);
   await page.locator("#comment-feed-demo details").evaluate((node) => {
     node.open = true;
   });
-  for (const name of [
+  const states = [
     "default",
     "composer-populated",
     "comment-added",
@@ -139,10 +149,51 @@ test("all seven Comments source states remain represented", async ({
     "other-comment-reply",
     "mention-suggestions",
     "comment-deleted",
-  ])
-    await expect(
-      page.locator(`[data-comment-feed-state="${name}"]`),
-    ).toBeVisible();
+  ];
+  for (const name of states) {
+    const state = page.locator(`[data-comment-feed-state="${name}"]`);
+    await state.evaluate((node) => {
+      node.style.inlineSize = "1304px";
+    });
+    await expect(state).toBeVisible();
+    await expect(state.locator(".shlz-comment-feed__surface")).toHaveCSS(
+      "width",
+      "1304px",
+    );
+    await expect(state.locator(".shlz-comment-feed__surface")).toHaveScreenshot(
+      `comment-feed-${name}.png`,
+    );
+  }
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="composer-populated"] .shlz-file-row',
+    ),
+  ).toHaveCount(6);
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="comment-added"] .shlz-comment-feed__item',
+    ),
+  ).toHaveCount(5);
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="own-comment-actions"] .shlz-comment-feed__context',
+    ),
+  ).toHaveCSS("height", "100px");
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="other-comment-reply"] .shlz-comment-feed__context',
+    ),
+  ).toHaveCSS("height", "60px");
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="mention-suggestions"] .shlz-comment-feed__suggestions',
+    ),
+  ).toHaveCSS("width", "260px");
+  await expect(
+    page.locator(
+      '[data-comment-feed-state="mention-suggestions"] .shlz-comment-feed__suggestions',
+    ),
+  ).toHaveCSS("height", "120px");
   await expect(page.getByRole("button", { name: "Изменить" })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Удалить", exact: true }),
@@ -207,9 +258,41 @@ test("History source fixture is content-led and matches source dimensions", asyn
     0,
   );
   await expect(history.locator(".shlz-history-timeline__quote")).toHaveCSS(
-    "max-width",
+    "width",
     "424px",
   );
+  await expect(history.locator(".shlz-history-timeline__quote")).toHaveCSS(
+    "height",
+    "137px",
+  );
+  await expect(history).toHaveCSS("width", "463px");
+  await expect(history).toHaveCSS("height", "997px");
+  expect(
+    await history.evaluate((node) => node.scrollHeight <= node.clientHeight),
+  ).toBe(true);
+  await expect(
+    history.locator(
+      '[data-history-kind="status"] .shlz-history-timeline__old-value',
+    ),
+  ).toHaveCSS("width", "66px");
+  await expect(
+    history.locator(
+      '[data-history-kind="status"] .shlz-history-timeline__new-value',
+    ),
+  ).toHaveCSS("width", "119px");
+  await expect(
+    history
+      .locator('[data-history-kind="tags"] .shlz-history-timeline__tag')
+      .first(),
+  ).toHaveCSS("width", "137px");
+  await expect(
+    history
+      .locator('[data-history-kind="tags"] .shlz-history-timeline__tag')
+      .nth(1),
+  ).toHaveCSS("width", "111px");
+  await expect(
+    history.locator(".shlz-history-timeline__person").first(),
+  ).toHaveCSS("width", "156px");
   await expect(history.locator(".shlz-history-timeline__attachment")).toHaveCSS(
     "width",
     "239px",
@@ -285,6 +368,63 @@ test("corrected surfaces remain accessible and contained at narrow width", async
     page.locator('[data-comment-feed-state="default"]'),
   ).toBeVisible();
   await expect(page.locator("#history-timeline-demo")).toBeVisible();
+});
+
+test("intermediate, wide, enlarged and sparse content keeps component actions reachable", async ({
+  page,
+}) => {
+  await hideShowcaseNavigation(page);
+  await page.locator("#comment-feed-demo details").evaluate((node) => {
+    node.open = true;
+  });
+  for (const width of [768, 1440]) {
+    await page.setViewportSize({ width, height: 1000 });
+    const selectors = [
+      '[data-comment-feed-state="mention-suggestions"] .shlz-comment-feed__surface',
+      "#history-timeline-demo .shlz-history-timeline",
+    ];
+    const measurements = await Promise.all(
+      selectors.map((selector) =>
+        page.locator(selector).evaluate(
+          (node, selectorName) => ({
+            selector: selectorName,
+            clientWidth: node.clientWidth,
+            scrollWidth: node.scrollWidth,
+          }),
+          selector,
+        ),
+      ),
+    );
+    expect(measurements).toEqual(
+      measurements.map((measurement) => ({
+        ...measurement,
+        scrollWidth: measurement.clientWidth,
+      })),
+    );
+  }
+  await page.setViewportSize({ width: 768, height: 1000 });
+  await page.addStyleTag({ content: "html{font-size:200%}" });
+  const undo = page
+    .locator("#comment-feed-demo")
+    .getByRole("button", { name: "Отменить", exact: true });
+  await undo.focus();
+  await expect(undo).toBeFocused();
+  await expect(undo).toBeInViewport();
+  const history = page.locator("#history-timeline-demo .shlz-history-timeline");
+  await history.evaluate((node) => {
+    const sparse = node.querySelector('[data-history-kind="attachment"]');
+    sparse?.querySelector(".shlz-history-timeline__attachment")?.remove();
+    const actor = sparse?.querySelector(".shlz-history-timeline__actor");
+    if (actor)
+      actor.textContent =
+        "Ответственный сотрудник с очень длинным локализованным именем";
+  });
+  expect(
+    await history.evaluate((node) => node.scrollWidth <= node.clientWidth + 1),
+  ).toBe(true);
+  await expect(
+    history.locator('[data-history-kind="attachment"]'),
+  ).toBeVisible();
 });
 
 test("Comment Feed empty, loading and error-safe endpoints remain readable", async ({

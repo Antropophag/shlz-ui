@@ -57,6 +57,8 @@ const promotedMessagingHistoryPaths = new Set([
   "tools/tests/component-audit-manifest.test.mjs",
   "tools/tests/messaging-history-components.test.mjs",
   "tools/tests/comments-history-fidelity.test.mjs",
+  "tools/tests/comments-history-fidelity-oracle.mjs",
+  "tools/tests/fixtures/comments-history-fidelity-known-bad.json",
   "tools/tests/pr57-regression-oracle.mjs",
 ]);
 const scopeMatchers = {

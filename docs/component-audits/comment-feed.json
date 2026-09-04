@@ -16,7 +16,7 @@
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 3,
+  "diagnosticOccurrenceCount": 6,
   "occurrences": [
     { "id": "comment-feed-showcase-source", "kind": "executable-fixture" },
     { "id": "comment-feed-source-consumer", "kind": "live-consumer" },
@@ -63,6 +63,13 @@
   "browserTests": ["tools/playwright/comments-history-fidelity.spec.js"],
   "visualSnapshots": [
     "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-source-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-default-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-composer-populated-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-comment-added-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-own-comment-actions-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-other-comment-reply-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-mention-suggestions-chromium-linux.png",
+    "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-comment-deleted-chromium-linux.png",
     "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-narrow-chromium-linux.png"
   ],
   "evidence": {
@@ -70,9 +77,9 @@
     "structural-contract": "pass: public style bundle, docs, fixtures and exact occurrence ledger",
     "runtime-browser": "pass: native consumer actions and consumer-owned rerender surface",
     "accessibility": "pass: native list/form semantics, focus, contrast and axe coverage",
-    "focused-visual": "pass: component-local source geometry and desktop snapshot",
+    "focused-visual": "pass: 1304px source panel, 1196px composer and seven component-local source-state desktop snapshots",
     "consumer-integration": "pass: ServiceDesk source-contract consumer",
-    "responsive-content-stress": "pass: narrow containment and localized attachment content"
+    "responsive-content-stress": "pass: 390px narrow, 768px intermediate, 1440px wide, 200% text, localized/sparse content and attachment containment"
   },
   "interactionEvidence": {
     "types": {

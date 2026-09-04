@@ -70,9 +70,9 @@
     "structural-contract": "pass: styles, docs, fixtures and occurrence ledger",
     "runtime-browser": "pass: semantic native actions",
     "accessibility": "pass: native list structure, focus, contrast and axe",
-    "focused-visual": "pass: seven source event payloads and exact dimensions",
+    "focused-visual": "pass: seven source event payloads, 463×997 frame, 424×137 quote, exact status/tag/person/file geometry and focused snapshot",
     "consumer-integration": "pass: compatibility and source-contract consumers",
-    "responsive-content-stress": "pass: narrow viewport, long content and text scaling"
+    "responsive-content-stress": "pass: 390px narrow, 768px intermediate, 1440px wide, 200% text, long actor and missing attachment containment"
   },
   "interactionEvidence": {
     "types": {

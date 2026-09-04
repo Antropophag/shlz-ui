@@ -2459,9 +2459,9 @@
         "structural-contract": "pass: style, docs, fixtures and manifest",
         "runtime-browser": "pass: native consumer actions",
         "accessibility": "pass: list/form semantics, focus, contrast and axe",
-        "focused-visual": "pass: source geometry and component-level desktop snapshot",
-        "consumer-integration": "pass: Data Workspace consumer",
-        "responsive-content-stress": "pass: narrow containment and localized attachments"
+        "focused-visual": "pass: 1304px panel, 1196px composer and seven source-state desktop snapshots",
+        "consumer-integration": "pass: ServiceDesk source-contract consumer",
+        "responsive-content-stress": "pass: narrow, intermediate, wide, 200% text and localized attachment containment"
       },
       "canonical_name": "Comment Feed",
       "category": "data-display",
@@ -2565,16 +2565,18 @@
     {
       "tests": [
         "tools/tests/messaging-history-components.test.mjs",
-        "tools/playwright/messaging-history-components.spec.js"
+        "tools/playwright/messaging-history-components.spec.js",
+        "tools/tests/comments-history-fidelity.test.mjs",
+        "tools/playwright/comments-history-fidelity.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: History of changes.svg authority remains unchanged",
         "structural-contract": "pass: style, docs, fixtures and manifest",
         "runtime-browser": "pass: semantic lists and native consumer action",
         "accessibility": "pass: list structure, focus and axe",
-        "focused-visual": "pass: seven source event payloads and exact component dimensions",
-        "consumer-integration": "pass: Data Workspace status-transition consumer",
-        "responsive-content-stress": "pass: narrow, long content and text scaling"
+        "focused-visual": "pass: seven source payloads, exact frame, quote, status, tag, person and file dimensions",
+        "consumer-integration": "pass: compatibility and ServiceDesk source-contract consumers",
+        "responsive-content-stress": "pass: narrow, intermediate, wide, 200% text, long actor and missing attachment containment"
       },
       "canonical_name": "History Timeline",
       "category": "data-display",

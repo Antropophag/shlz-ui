@@ -69,7 +69,10 @@ test("component manifests classify fixture and live-consumer evidence without ga
     const manifest = JSON.parse(
       await read(`docs/component-audits/${component}.json`),
     );
-    assert.equal(manifest.occurrences.length, 3);
+    assert.equal(
+      manifest.occurrences.length,
+      component === "history-timeline" ? 4 : 3,
+    );
     assert.deepEqual(
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),

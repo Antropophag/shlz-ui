@@ -17,6 +17,7 @@ test("Comment Feed ships separately from Message Thread with exact source author
 
   assert.match(bundle, /components\/comment-feed\.css/);
   assert.match(css, /\.shlz-comment-feed\b/);
+  assert.match(css, /inline-size:\s*min\(1304px, 100%\)/);
   assert.match(contract, /Комментарии\.svg/);
   assert.match(contract, /seven 1440×1000 application frames/);
   assert.equal(
@@ -98,5 +99,9 @@ test("History source fixture exposes all seven structured event payloads", async
   assert.match(showcase, /shlz-history-timeline__attachment/);
   assert.doesNotMatch(showcase, /history-timeline__marker/);
   assert.doesNotMatch(css, /history-timeline__entry::before/);
+  assert.match(css, /inline-size:\s*463px/);
+  assert.match(css, /block-size:\s*997px/);
+  assert.match(css, /inline-size:\s*424px/);
+  assert.match(css, /block-size:\s*137px/);
   assert.match(contract, /seven visibly distinct event presentations/);
 });
