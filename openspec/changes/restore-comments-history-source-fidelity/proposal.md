@@ -5,7 +5,7 @@ The current showcase presents a generic Message Thread as comments and reduces H
 ## What Changes
 
 - Establish `shlz-design-source/raw/svg/Комментарии.svg` as the sole visual authority for a new framework-neutral Comment Feed capability, independent from the existing Message Thread whose authority remains `Messages.svg`.
-- Implement the source-observed Comment Feed anatomy: one left-aligned chronological stream, author/avatar/date presentation, comment text, mention treatment, file-card composition, attachment summary/action, and bottom composer shell where represented by the selected source frames.
+- Implement the source-observed Comment Feed anatomy and seven exported screen states: one left-aligned chronological stream, author/avatar/date presentation, comment text, mention treatment and suggestions, file-card composition, attachment summary/action, bottom composer shell, own-comment Edit/Delete affordance, other-comment Reply affordance, and composed add/delete/undo feedback.
 - Correct History Timeline presentation against `shlz-design-source/raw/svg/History of changes.svg`, making the source-observed event content—creation, status transition, quoted comment, before/after field value, tags, employee chips with disclosure, and attachment card—the primary visible structure.
 - Preserve native list semantics, DOM order, keyboard access, framework neutrality, and consumer ownership for data, chronology, mutations, uploads, replies, filtering, persistence, and business actions.
 - Replace broad “looks similar” evidence with frame-bound source contracts, computed geometry/style assertions, focused desktop snapshots, responsive/content-stress evidence for repository decisions, and a complete repository-wide occurrence classification.

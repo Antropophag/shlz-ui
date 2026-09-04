@@ -39,9 +39,9 @@ Implementing from a screenshot by eye was rejected because it cannot distinguish
 
 ### 3. Comment Feed extracts the white content-panel composition, not the screen
 
-The reusable boundary begins with the ordered comments content and includes source-observed author/avatar/date rows, bodies, mentions, file-card groups, attachment summary/action, and composer shell states. Header tabs, ticket identity, global navigation, user profile, and page search remain application-owned even when visible in the source.
+The reusable boundary begins with the ordered comments content and includes source-observed author/avatar/date rows, bodies, mentions and anchored suggestions, file-card groups, attachment summary/action, composer shell states, contextual own-comment Edit/Delete and other-comment Reply surfaces, and composed add/delete/undo feedback. Header tabs, ticket identity, global navigation, user profile, and page search remain application-owned even when visible in the source.
 
-Markup uses native lists, `article`, `time`, links, form fields, and buttons. Existing Avatar, File Row/Document Row, Textarea, Button, Link, Tag, and icon assets are composed when their own source contracts fit; this change does not duplicate or inherit their audits. A mismatch at a primitive seam is recorded rather than locally restyled into a hidden fork.
+Markup uses native lists, `article`, `time`, links, form fields, and buttons. Existing Avatar, File Row/Document Row, Textarea, Button, Link, Tag, Notification/Snackbar, and icon assets are composed when their own source contracts fit; this change does not duplicate or inherit their audits. Ownership and action eligibility are explicit consumer state; static artwork does not authorize library-side edit, delete, reply, mention, undo, or timer logic. A mismatch at a primitive seam is recorded rather than locally restyled into a hidden fork.
 
 ### 4. History is content-led and variant-driven
 

@@ -42,9 +42,9 @@
       }
     ],
     "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
-    "revision": 1
+    "revision": 2
   },
   "routeDigest": "6193349f72c39d972b3e4e7dc113f7d14ccb9a0c1bee0d02fe48d8f08b8757bb",
   "version": 1,
-  "digest": "01d87108f9ed9cfa54a34cb57979f509e44e2ec4a23d01ba41071c62701d33b0"
+  "digest": "49865ccbe6fda8b08ef2acbc5149cd5769ca33be9f7b76ac4896e8c60858e97e"
 }

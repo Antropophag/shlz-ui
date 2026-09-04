@@ -51,6 +51,39 @@ Comment Feed SHALL support the source-observed empty and populated composer shel
 - **WHEN** no consumer controller is attached
 - **THEN** the native fields and buttons remain discoverable and operable according to their native semantics without claiming that a comment was saved or uploaded
 
+#### Scenario: Mention suggestions are supplied
+
+- **WHEN** a consumer exposes participant suggestions while text is being composed
+- **THEN** the suggestions use the source-observed anchored employee presentation and native selectable controls without library-owned search, ranking, insertion, or identity lookup
+
+### Requirement: Contextual comment actions preserve ownership
+
+Comment Feed SHALL support the source-observed contextual presentation for Edit and Delete actions on a consumer-identified own comment and Reply on another comment. The actions SHALL use native controls and MUST NOT infer ownership, authorization, mutation, or reply behavior from visual state.
+
+#### Scenario: Consumer exposes own-comment actions
+
+- **WHEN** consumer-owned state marks a comment as eligible for editing and deletion
+- **THEN** the source-observed row emphasis and anchored Edit/Delete action surface remain associated with that comment and expose native labelled controls
+
+#### Scenario: Consumer exposes a reply action
+
+- **WHEN** consumer-owned state exposes Reply for another comment
+- **THEN** the source-observed row emphasis and anchored Reply action remain associated with that comment without automatically changing composer state
+
+### Requirement: Comment feedback composes the shared feedback primitive
+
+Comment Feed SHALL permit source-observed successful-add and deleted-with-undo feedback to compose the existing Notification or Snackbar contract without duplicating its lifecycle or behavior. The feed MUST NOT claim a mutation from presentation alone.
+
+#### Scenario: Comment addition succeeds
+
+- **WHEN** a consumer reports successful comment creation
+- **THEN** the feed can present the source-observed success message through the shared feedback primitive while the new comment remains consumer-supplied markup
+
+#### Scenario: Comment deletion offers undo
+
+- **WHEN** a consumer reports deletion and supplies a time-bounded undo action
+- **THEN** the feed can present the source-observed countdown and native Undo action through the shared feedback primitive without owning restoration or timing
+
 ### Requirement: Responsive and content-stress behavior is explicit
 
 Comment Feed SHALL preserve source hierarchy, DOM order, visible focus, text scaling, and content reachability in narrow containers. Responsive rules absent from the desktop SVG SHALL be recorded as repository decisions and MUST NOT be described as source facts.

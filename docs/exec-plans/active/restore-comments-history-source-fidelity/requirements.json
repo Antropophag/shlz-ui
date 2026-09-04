@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "revision": 1,
+  "revision": 2,
   "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
   "route": "open-spec",
   "decisions": [
@@ -9,7 +9,7 @@
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "use the Figma source instead of guessing" }
+      "provenance": { "kind": "user-prompt", "ref": "use the Figma source instead of guessing; seven Comments frames inspected" }
     },
     {
       "id": "comments-messages-separation",
