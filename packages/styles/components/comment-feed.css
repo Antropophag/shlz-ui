@@ -17,6 +17,10 @@
   padding-inline-start: min(64px, 5%);
 }
 
+.shlz-comment-feed__surface > .shlz-notification {
+  box-sizing: border-box;
+}
+
 .shlz-comment-feed__item {
   position: relative;
   display: grid;
@@ -136,7 +140,7 @@
 }
 
 .shlz-comment-feed__download-all {
-  color: inherit;
+  color: var(--shlz-semantic-color-action-primary);
 }
 
 .shlz-comment-feed__context {
@@ -299,7 +303,7 @@
   }
 
   .shlz-comment-feed__item[data-emphasis="true"] {
-    margin-inline: -12px;
+    margin-inline: 0;
     padding-inline: 12px;
   }
 

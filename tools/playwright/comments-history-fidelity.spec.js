@@ -402,14 +402,36 @@ test("intermediate, wide, enlarged and sparse content keeps component actions re
       })),
     );
   }
-  await page.setViewportSize({ width: 768, height: 1000 });
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.addStyleTag({ content: "html{font-size:200%}" });
-  const undo = page
-    .locator("#comment-feed-demo")
-    .getByRole("button", { name: "Отменить", exact: true });
-  await undo.focus();
-  await expect(undo).toBeFocused();
-  await expect(undo).toBeInViewport();
+  const commentDemo = page.locator("#comment-feed-demo");
+  for (const control of [
+    commentDemo.getByRole("link", { name: "Скачать все", exact: true }).first(),
+    commentDemo.getByRole("button", { name: "Отправить комментарий" }).first(),
+    commentDemo.getByRole("button", { name: "Изменить", exact: true }),
+    commentDemo.getByRole("button", { name: "Удалить", exact: true }),
+    commentDemo.getByRole("button", { name: "Ответить", exact: true }),
+    commentDemo.getByRole("button", { name: "Отменить", exact: true }),
+    commentDemo.getByRole("button", { name: "Андрей Михайлов", exact: true }),
+    commentDemo.getByRole("button", { name: "Михаил Богданов", exact: true }),
+    commentDemo.getByRole("button", { name: /Удалить файл/ }).first(),
+  ]) {
+    await control.focus();
+    await expect(control).toBeFocused();
+    await expect(control).toBeInViewport();
+  }
+  for (const surface of await commentDemo
+    .locator(".shlz-comment-feed__surface")
+    .all()) {
+    const measurement = await surface.evaluate((node) => ({
+      state: node.closest("[data-comment-feed-state]")?.getAttribute("data-comment-feed-state"),
+      clientWidth: node.clientWidth,
+      scrollWidth: node.scrollWidth,
+    }));
+    expect(measurement, JSON.stringify(measurement)).toMatchObject({
+      scrollWidth: measurement.clientWidth,
+    });
+  }
   const history = page.locator("#history-timeline-demo .shlz-history-timeline");
   await history.evaluate((node) => {
     const sparse = node.querySelector('[data-history-kind="attachment"]');
