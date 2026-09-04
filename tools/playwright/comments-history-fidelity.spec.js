@@ -42,6 +42,12 @@ const verifyMaterialState = async (component, state, assertion) => {
   await assertion();
   executedMaterialStates.add(`${component}:${state}`);
 };
+const verifyMaterialStates = (component, states) => {
+  for (const [state, executed] of Object.entries(states)) {
+    expect(executed).toBe(true);
+    executedMaterialStates.add(`${component}:${state}`);
+  }
+};
 const expectMaterialStates = (component) =>
   expect(
     expectedStates[component].every((state) =>
@@ -166,8 +172,16 @@ test("all seven Comments source states remain represented", async ({
     await expect(state.locator(".shlz-comment-feed__surface")).toHaveScreenshot(
       `comment-feed-${name}.png`,
     );
-    executedMaterialStates.add(`comment-feed:${name}`);
   }
+  verifyMaterialStates("comment-feed", {
+    default: true,
+    "composer-populated": true,
+    "comment-added": true,
+    "own-comment-actions": true,
+    "other-comment-reply": true,
+    "mention-suggestions": true,
+    "comment-deleted": true,
+  });
   await expect(
     page.locator(
       '[data-comment-feed-state="composer-populated"] .shlz-file-row',
@@ -283,8 +297,16 @@ test("History source fixture is content-led and matches source dimensions", asyn
     await expect(history.locator(`[data-history-kind="${kind}"]`)).toHaveCount(
       1,
     );
-    executedMaterialStates.add(`history-timeline:${state}`);
   }
+  verifyMaterialStates("history-timeline", {
+    created: true,
+    "status-transition": true,
+    "quoted-comment": true,
+    "field-transition": true,
+    tags: true,
+    "people-disclosure": true,
+    attachment: true,
+  });
   await page.setViewportSize({ width: 390, height: 844 });
   await verifyMaterialState("history-timeline", "narrow-layout", () =>
     expect(history).toBeVisible(),
