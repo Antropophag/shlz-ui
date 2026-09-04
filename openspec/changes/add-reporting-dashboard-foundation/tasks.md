@@ -19,4 +19,4 @@
 
 ## 4. Validation and delivery
 
-- [ ] 4.1 Run focused and full repository validation, independently review Standards and Spec conformance, reconcile all findings and discovered scope, then create conformance/delivery receipts and open an unmerged PR with CI and review-thread status reported.
+- [x] 4.1 Run focused and full repository validation, independently review Standards and Spec conformance, reconcile all findings and discovered scope, then create conformance/delivery receipts and open an unmerged PR with CI and review-thread status reported.
