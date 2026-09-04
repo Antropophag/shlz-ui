@@ -2857,7 +2857,7 @@
         "tools/playwright/reporting-dashboard.spec.js"
       ],
       "evidence": {
-        "source-integrity": "pass: exact Dashboard.svg hash and 29 repeated 1304x515 radius-16 surfaces are locked",
+        "source-integrity": "pass: exact Dashboard.svg hash and 15 rendered 1304x515 radius-16 frames are locked separately from 2 clipPath rects and 12 shadow-filter regions",
         "structural-contract": "pass: optional header, controls, actions, plot and empty regions plus every occurrence are asserted",
         "runtime-browser": "not-applicable: Chart Widget owns presentation and no chart controller",
         "accessibility": "pass: article heading relation and nested native action ownership execute in browser",

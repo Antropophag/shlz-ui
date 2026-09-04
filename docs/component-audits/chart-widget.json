@@ -4,7 +4,8 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Dashboard.svg",
   "referenceSources": [
     "shlz-design-source/raw/svg/Дашборды.svg",
-    "docs/component-audits/reporting-dashboard-source-ledger.json"
+    "docs/component-audits/reporting-dashboard-source-ledger.json",
+    "docs/component-audits/dashboard-chart-source-matrix.json"
   ],
   "implementation": ["packages/styles/components/reporting-dashboard.css"],
   "behavior": null,
@@ -29,7 +30,7 @@
   "contentStress": ["long-title", "wrapped-controls", "empty-copy", "narrow"],
   "sourceClaims": [
     {
-      "claim": "Dashboard.svg contains 29 repeated 1304 by 515 white chart-widget surfaces with radius 16",
+      "claim": "Dashboard.svg renders 15 chart-widget frames at 1304 by 515 with white fill and radius 16; 2 additional matching rect nodes are clipPath geometry and 12 matching 1310 by 521 regions are shadow filters",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Dashboard.svg"
     },
@@ -42,7 +43,7 @@
   "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
   "visualSnapshots": [],
   "evidence": {
-    "source-integrity": "pass: exact source hash and 1304x515 radius-16 white surface matrix are checked",
+    "source-integrity": "pass: exact source hash, 15 rendered 1304x515 radius-16 white frames, 2 clipPath rects, and 12 shadow-filter regions are distinguished",
     "structural-contract": "pass: heading, controls, actions, plot and empty regions plus all occurrences are asserted",
     "runtime-browser": "not-applicable: Chart Widget owns no controller or chart data behavior",
     "accessibility": "pass: article heading relation and nested native action ownership execute in browser",
