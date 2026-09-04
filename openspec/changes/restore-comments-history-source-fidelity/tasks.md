@@ -1,0 +1,23 @@
+## 1. Source Contract and Baseline
+
+- [ ] 1.1 Record the material OpenSpec route, requirements readiness, clean `origin/main` task baseline, source hashes, current PR/CI/review state, and repository-wide Comment Feed/Message Thread/History Timeline occurrence census; verify the harness preflight passes and mark History Timeline `FINDINGS` while the known source mismatch remains.
+- [ ] 1.2 Extract the reusable Comment Feed boundary and every applicable frame/state from `Комментарии.svg`, recording exact geometry, spacing, typography, colors, radii, avatar/mention/file/composer treatments and `source-fact`/`derived-pattern`/`repository-decision`/`unknown` classifications; verify measurements against raw SVG/XML and visually inspected crops without modifying the source.
+- [ ] 1.3 Extract the complete History Timeline event contract from `History of changes.svg`, including creation, status, quoted comment, field transition, tags, employees/disclosure and attachment; verify exact geometry/style and composed-primitive boundaries against raw SVG/XML and reject current generic rail/avatar evidence where unsupported.
+
+## 2. Test-First Component Corrections
+
+- [ ] 2.1 Add failing structural and focused browser tests for Comment Feed source attribution, public export, semantic list/comments, source-frame geometry/style, mentions, file cards, attachment summary/actions and composer shell states; verify RED fails against the current repository for the intended missing capability rather than fixture setup.
+- [ ] 2.2 Implement framework-neutral Comment Feed styles, documented semantic markup and package export using only the approved frame contract and existing compatible primitives; verify focused tests pass without changing `shlz-design-source/` or Message Thread behavior.
+- [ ] 2.3 Add failing focused tests for all source-observed History event variants and for absence of unsupported generic rail/avatar composition in the authoritative fixture; verify RED detects the current mismatch while preserving existing native list/order/consumer-ownership assertions.
+- [ ] 2.4 Correct History Timeline with additive structured event parts and source-exact desktop presentation while keeping existing generic markup readable; verify focused tests pass for creation, status transition, quoted comment, field transition, tags, people/disclosure, attachment and compatibility fallback.
+
+## 3. Real Surfaces and Independent Audits
+
+- [ ] 3.1 Add distinct Comment Feed, Message Thread and History Timeline showcase/plain-HTML fixtures and migrate one real Data Workspace consumer for each affected capability; verify stable audit IDs, source-role separation, native actions and consumer-owned rerendering in the browser.
+- [ ] 3.2 Exercise accessibility and repository-decision states for both affected components and capture one bounded visual pass: native semantics, labels, `time` metadata, keyboard/focus, forced colors, narrow/intermediate/wide containers, 200% text, long localization, missing optional content, multiple attachments, empty/loading/error-safe endpoints, component-focused desktop source snapshots and responsive confirmations; verify axe, interaction, no-overflow and exact source-backed computed-value checks pass independently without labelling responsive values as Figma facts or reusing broad page/Message Thread evidence.
+- [ ] 3.3 Update Comment Feed and History Timeline manifests, Wave 12 report, source/contract ledgers and repository-wide occurrence guards with exact observed counts, limitations and evidence; verify there are no unclassified executable fixtures, consumers, diagnostics or legacy/native substitutes and restore `VERIFIED` independently only when each full component gate passes.
+
+## 4. Validation, Review, and Delivery
+
+- [ ] 4.1 Run strict OpenSpec validation, source-integrity checks, focused Node/Chromium suites, package build/lint/type checks, clean packed-package consumer validation, the Impeccable detector once over changed markup, and the proportionate full repository check; verify all results bind to the final candidate and resolve every scope-local finding.
+- [ ] 4.2 Complete target-diff inspection, independent Standards and Spec/source-fidelity review, route conformance, failure/evidence guards where applicable, and delivery checks; verify CI and review threads on an unmerged PR and report exact per-component status without claiming that one component proves another.

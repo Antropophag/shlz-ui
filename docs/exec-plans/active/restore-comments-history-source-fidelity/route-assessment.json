@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
+  "route": "open-spec",
+  "openSpecChange": "restore-comments-history-source-fidelity",
+  "requiredDecisions": [
+    { "id": "authoritative-source-mapping", "owner": "user", "blocking": true },
+    { "id": "comments-messages-separation", "owner": "agent", "blocking": true },
+    { "id": "reusable-component-boundary", "owner": "agent", "blocking": true },
+    { "id": "history-compatibility", "owner": "agent", "blocking": true },
+    { "id": "responsive-accessibility-policy", "owner": "agent", "blocking": true },
+    { "id": "component-completion-gate", "owner": "repo", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

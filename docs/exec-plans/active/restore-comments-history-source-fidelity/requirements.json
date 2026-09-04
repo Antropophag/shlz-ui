@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Restore source fidelity for the SHLZ Comments feed and History of changes composition while keeping Messages separate and preserving framework-neutral consumer ownership.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "authoritative-source-mapping",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user-prompt", "ref": "use the Figma source instead of guessing" }
+    },
+    {
+      "id": "comments-messages-separation",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user authorized the source-fidelity plan" }
+    },
+    {
+      "id": "reusable-component-boundary",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user authorized the source-fidelity plan" }
+    },
+    {
+      "id": "history-compatibility",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user authorized the source-fidelity plan" }
+    },
+    {
+      "id": "responsive-accessibility-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user authorized the source-fidelity plan" }
+    },
+    {
+      "id": "component-completion-gate",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "repository", "ref": "docs/component-audit-workflow.md" }
+    }
+  ],
+  "openSpec": { "change": "restore-comments-history-source-fidelity", "status": "synthesized" },
+  "authorization": {
+    "status": "approved",
+    "provenance": { "kind": "user-prompt", "ref": "user explicitly granted apply permission" }
+  }
+}
