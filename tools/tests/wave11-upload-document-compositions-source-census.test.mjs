@@ -81,6 +81,18 @@ const laterWave12ProductPaths = new Set([
   "tools/tests/comments-history-fidelity-oracle.mjs",
   "tools/tests/fixtures/comments-history-fidelity-known-bad.json",
 ]);
+const laterBarChartProductPaths = new Set([
+  "apps/showcase/src/reporting-dashboard-showcase.js",
+  "docs/components/bar-chart.md",
+  "docs/components/reporting-dashboard.md",
+  "packages/behaviors/src/bar-chart-model.ts",
+  "packages/behaviors/src/bar-chart.ts",
+  "packages/styles/components/bar-chart.css",
+  "tools/playwright/bar-chart.spec.js",
+  "tools/tests/bar-chart-contract-oracle.mjs",
+  "tools/tests/bar-chart-model.test.mjs",
+  "tools/tests/reporting-dashboard-source.test.mjs",
+]);
 const isApprovedFileUploadSurface = ({ path }) =>
   approvedFileUploadArtifactPaths.has(path);
 
@@ -244,6 +256,7 @@ test("Wave 11 census proves higher-level absence and classifies primitive surfac
     ({ path }) =>
       !approvedFileUploadArtifactPaths.has(path) &&
       !laterWave12ProductPaths.has(path) &&
+      !laterBarChartProductPaths.has(path) &&
       path !== "packages/behaviors/src/index.ts" &&
       path !== "tools/package-consumer-smoke.mjs",
   );

@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feat/framework-agnostic-bar-chart",
+    "commit": "341ac6f54a41c444dc6ffbab8d3296857a392918",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feat/framework-agnostic-bar-chart",
+      "headRefOid": "341ac6f54a41c444dc6ffbab8d3296857a392918",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/76"
+    },
+    "repository": {
+      "digest": "c960244ad7e5ca7ceca6f99b50d85281173a52abb14e8ff04c21b1d4fb9fa49f",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/Users/antropophag/code/shlz-ui-bar-chart"
+    },
+    "upstream": "origin/feat/framework-agnostic-bar-chart"
+  },
+  "requirementsDigest": "ae33b7724deaaef8365625cf53efe26482eac50c38c963173245c1b0a86e1cd9",
+  "routeDigest": "b16fad5f11e5cded3d6fb72a841d6ab810fdf8e462a0d62fe31328b290a4c386",
+  "version": 1,
+  "digest": "0f4ba1cdcea8c2f400957c00639c8f8875544a3d4f0c089f9ebc22ea3189b285"
+}

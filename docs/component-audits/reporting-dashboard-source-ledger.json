@@ -9,8 +9,8 @@
       "regions": [
         {
           "id": "chart-bars",
-          "classification": "unresolved",
-          "owner": "future-chart-capability"
+          "classification": "new-family",
+          "owner": "Bar Chart"
         },
         {
           "id": "chart-popover",
@@ -201,10 +201,10 @@
   "repositoryDecisions": [
     "Dashboard grid reflows to one column when available inline size cannot preserve supported widget content.",
     "Widget text uses semantic SHLZ typography because source glyphs are outlined.",
-    "The chart plot slot is consumer-owned until a separate accessible chart contract exists."
+    "The chart plot slot accepts the separate Bar Chart capability or remains consumer-owned for other visualization types."
   ],
   "unsupported": [
-    "chart marks, axes, legends, series and accessible data model",
+    "chart types and data models outside the approved grouped Bar Chart capability",
     "dashboard edit, reorder, resize and persistence lifecycle",
     "report query, export, routing, fetching and scheduling behavior",
     "a separate Metric Card family"

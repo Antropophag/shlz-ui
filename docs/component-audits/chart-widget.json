@@ -23,7 +23,8 @@
     { "id": "chart-widget-content-stress", "kind": "content-stress-fixture" },
     { "id": "chart-widget-reporting-consumer", "kind": "live-consumer" },
     { "id": "chart-widget-plain-html", "kind": "live-consumer" },
-    { "id": "chart-widget-source-fixture", "kind": "executable-fixture" }
+    { "id": "chart-widget-source-fixture", "kind": "executable-fixture" },
+    { "id": "chart-widget-bar-chart-showcase", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["source-1304x515", "fluid", "narrow-min-420"],
   "supportedStates": ["content", "empty", "nested-native-actions"],

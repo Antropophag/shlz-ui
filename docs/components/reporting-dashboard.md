@@ -16,11 +16,13 @@ Dashboard and Chart Widget are framework-neutral presentation contracts derived 
         <div class="shlz-chart-widget__controls">
           <!-- native SHLZ controls -->
         </div>
-        <div class="shlz-chart-widget__plot"><!-- consumer-owned chart --></div>
+        <div class="shlz-chart-widget__plot">
+          <!-- Bar Chart or consumer plot -->
+        </div>
       </article>
     </div>
   </section>
 </main>
 ```
 
-The widget root is not interactive. Buttons and links in its action/control regions retain native ownership. Chart marks, axes, legends, tooltips, data semantics, accessible data alternatives, fetching, export, editing, drag/resize, and persistence are not supplied. Report summaries continue to use the existing Report Card; the source does not establish a separate Metric Card family.
+The widget root is not interactive. Buttons and links in its action/control regions retain native ownership. The optional Bar Chart capability can now fill the plot region and owns its marks, legend, tooltip, and accessible table. Chart Widget still does not infer those semantics and does not own fetching, filters, periods, export, editing, drag/resize, or persistence. Report summaries continue to use the existing Report Card; the source does not establish a separate Metric Card family.

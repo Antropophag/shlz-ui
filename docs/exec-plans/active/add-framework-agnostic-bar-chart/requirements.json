@@ -9,68 +9,101 @@
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted stable category.id and series.id identities." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted stable category.id and series.id identities."
+      }
     },
     {
       "id": "grouped-series-limit",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted grouped bars with one through four series." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted grouped bars with one through four series."
+      }
     },
     {
       "id": "interaction-and-focus-model",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted equivalent tooltip disclosure for pointer hover and keyboard focus with roving arrow-key navigation." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted equivalent tooltip disclosure for pointer hover and keyboard focus with roving arrow-key navigation."
+      }
     },
     {
       "id": "legend-visibility-policy",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted toggle-button legend controls that keep at least one series visible." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted toggle-button legend controls that keep at least one series visible."
+      }
     },
     {
       "id": "accessible-table-contract",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted an adjacent expandable semantic table alternative." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted an adjacent expandable semantic table alternative."
+      }
     },
     {
       "id": "responsive-policy",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted a minimum plot width with horizontal overflow on narrow containers." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted a minimum plot width with horizontal overflow on narrow containers."
+      }
     },
     {
       "id": "filter-and-period-boundary",
       "owner": "user",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "user-prompt", "ref": "The user accepted consumer-owned filters and period controls that pass prepared chart data into the capability." }
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "The user accepted consumer-owned filters and period controls that pass prepared chart data into the capability."
+      }
     },
     {
       "id": "source-authority",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "AGENTS.md makes shlz-design-source/raw/svg/Dashboard.svg the primary visual authority; the existing reporting dashboard ledger records unresolved chart regions." }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md makes shlz-design-source/raw/svg/Dashboard.svg the primary visual authority; the existing reporting dashboard ledger records unresolved chart regions."
+      }
     },
     {
       "id": "framework-boundary",
       "owner": "repo",
       "status": "resolved",
       "blocking": true,
-      "provenance": { "kind": "repository-path", "ref": "AGENTS.md requires framework-agnostic core styles and interactive web behavior, with framework adapters remaining optional." }
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md requires framework-agnostic core styles and interactive web behavior, with framework adapters remaining optional."
+      }
     }
   ],
-  "openSpec": { "change": "add-framework-agnostic-bar-chart", "status": "synthesized" },
+  "openSpec": {
+    "change": "add-framework-agnostic-bar-chart",
+    "status": "synthesized"
+  },
   "authorization": {
     "status": "approved",
-    "provenance": { "kind": "user-prompt", "ref": "The user explicitly requested implementation: реализуй" }
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "The user explicitly requested implementation: реализуй"
+    }
   }
 }

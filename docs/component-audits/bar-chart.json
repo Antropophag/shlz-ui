@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 2,
+  "component": "bar-chart",
+  "authoritativeSource": "shlz-design-source/raw/svg/Dashboard.svg",
+  "referenceSources": [
+    "docs/component-audits/dashboard-chart-source-matrix.json",
+    "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
+  ],
+  "implementation": [
+    "packages/styles/components/bar-chart.css",
+    "packages/behaviors/src/bar-chart-model.ts",
+    "packages/behaviors/src/bar-chart.ts"
+  ],
+  "behavior": "packages/behaviors/src/bar-chart.ts",
+  "docs": "docs/components/bar-chart.md",
+  "rootSelector": "[data-shlz-bar-chart][data-component-audit-id]",
+  "legacySelectors": [".shlz-bar-chart", "[data-shlz-bar-chart]"],
+  "diagnosticBoundaries": [
+    "[inert]",
+    ".shlz-component-diagnostics",
+    "#fidelity"
+  ],
+  "diagnosticOccurrenceCount": 0,
+  "occurrences": [
+    { "id": "bar-chart-showcase-source", "kind": "executable-fixture" },
+    { "id": "bar-chart-reporting-consumer", "kind": "live-consumer" },
+    { "id": "bar-chart-plain-html", "kind": "live-consumer" }
+  ],
+  "supportedSizes": ["fluid-min-640", "narrow-local-overflow"],
+  "supportedStates": [
+    "default",
+    "pointer-hover",
+    "keyboard-focus",
+    "series-hidden",
+    "table-expanded"
+  ],
+  "contentStress": [
+    "one-to-four-series",
+    "many-categories",
+    "zero-values",
+    "repeated-labels",
+    "long-localized-labels",
+    "narrow"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "Dashboard.svg directly establishes grouped vertical bar, grid, tooltip, series paint, and wide chart specimen geometry recorded in the source matrix",
+      "classification": "source-fact",
+      "evidence": "docs/component-audits/dashboard-chart-source-matrix.json"
+    },
+    {
+      "claim": "Stable identity, one-to-four series, keyboard behavior, legend toggles, semantic table, and responsive overflow are approved product decisions rather than SVG facts",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
+    }
+  ],
+  "browserTests": ["tools/playwright/bar-chart.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: exact Dashboard.svg hash and source matrix classifications are checked",
+    "structural-contract": "pass: public exports, SVG plot, native legend, tooltip, table, documentation and classified roots are asserted",
+    "runtime-browser": "pass: hover, roving navigation, visibility, update and teardown execute in browser",
+    "accessibility": "pass: plot naming, bounded Tab order, pressed states, tooltip equivalence and table headers execute without axe violations",
+    "focused-visual": "pass: source-backed bar, grid, series paint, hover muting, tooltip and focus-visible styles are checked component-locally",
+    "consumer-integration": "pass: reporting consumer owns period state and supplies prepared replacement data",
+    "responsive-content-stress": "pass: long labels, category density, zero values and narrow local overflow remain contained"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: grouped one-to-four-series and narrow fixtures use production markup"
+      ],
+      "realInteractionVisual": [
+        "pass: real hover and keyboard focus activate source-backed muting, tooltip and focus paint"
+      ],
+      "runtimeBehavior": [
+        "pass: arrows, Home/End, legend toggles, table disclosure, update and teardown execute"
+      ]
+    },
+    "materialStates": [
+      "pointer-hover",
+      "keyboard-focus",
+      "series-hidden",
+      "table-expanded",
+      "narrow-overflow"
+    ],
+    "browserTest": "tools/playwright/bar-chart.spec.js",
+    "manualStateWalk": "pass: pointer hover, Tab/focus-visible, arrow navigation, legend activation, table disclosure and narrow overflow inspected"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "source includes eight-series specimens while the approved reusable product contract intentionally supports one through four",
+    "source does not establish keyboard, persistent legend, accessible table, or responsive behavior"
+  ]
+}

@@ -7,6 +7,23 @@ export { ModalController, enhanceModals } from "./modal.js";
 export { DrawerController, enhanceDrawers } from "./drawer.js";
 export { FileUploadController, enhanceFileUploads } from "./file-upload.js";
 export type { FileUploadFilesDetail, FileUploadSource } from "./file-upload.js";
+export { BarChartController, enhanceBarCharts } from "./bar-chart.js";
+export type { BarChartVisibilityChangeDetail } from "./bar-chart.js";
+export {
+  barChartNeighbor,
+  createBarChartModel,
+  firstBarChartDatumId,
+  setBarChartSeriesVisibility,
+  validateBarChartData,
+} from "./bar-chart-model.js";
+export type {
+  BarChartCategory,
+  BarChartData,
+  BarChartDatum,
+  BarChartModel,
+  BarChartSeries,
+  BarChartValue,
+} from "./bar-chart-model.js";
 export { CalendarController } from "./calendar.js";
 export {
   CalendarGridController,

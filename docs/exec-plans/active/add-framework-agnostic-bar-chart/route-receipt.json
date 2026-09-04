@@ -2,11 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Define, without implementation, an OpenSpec product contract and source matrix for a framework-agnostic grouped Bar Chart capability derived conservatively from Dashboard.svg.",
-    "material": [
-      "newCapability",
-      "publicContract",
-      "materialAmbiguity"
-    ],
+    "material": ["newCapability", "publicContract", "materialAmbiguity"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

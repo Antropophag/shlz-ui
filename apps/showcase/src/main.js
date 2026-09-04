@@ -13,7 +13,10 @@ import {
 import { wave3Markup } from "./wave3.js";
 import { contentStatesMarkup } from "./content-states.js";
 import { cardCompositionsMarkup } from "./card-compositions.js";
-import { reportingDashboardShowcaseMarkup } from "./reporting-dashboard-showcase.js";
+import {
+  enhanceReportingBarCharts,
+  reportingDashboardShowcaseMarkup,
+} from "./reporting-dashboard-showcase.js";
 import {
   datePickerShowcaseMarkup,
   enhanceDatePickerShowcase,
@@ -66,6 +69,7 @@ import {
   enhanceTabs,
   enhanceTooltips,
   enhanceFileUploads,
+  enhanceBarCharts,
 } from "@shlz/behaviors";
 
 const iconUrls = import.meta.glob(
@@ -529,6 +533,8 @@ window.__shlzEnhanceCalendarGrids = enhanceCalendarGrids;
 window.__shlzFileUploadControllers = enhanceFileUploadShowcase();
 enhanceComposerShowcase();
 window.__shlzEnhanceFileUploads = enhanceFileUploads;
+window.__shlzBarChartControllers = enhanceReportingBarCharts(enhanceBarCharts);
+window.__shlzEnhanceBarCharts = enhanceBarCharts;
 window.__shlzEnhanceNotificationConsumer = enhanceNotificationConsumer;
 enhanceNotificationConsumer();
 

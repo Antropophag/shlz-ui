@@ -61,6 +61,18 @@ const promotedMessagingHistoryPaths = new Set([
   "tools/tests/fixtures/comments-history-fidelity-known-bad.json",
   "tools/tests/pr57-regression-oracle.mjs",
 ]);
+const promotedBarChartPaths = new Set([
+  "apps/showcase/src/reporting-dashboard-showcase.js",
+  "docs/components/bar-chart.md",
+  "docs/components/reporting-dashboard.md",
+  "packages/behaviors/src/bar-chart-model.ts",
+  "packages/behaviors/src/bar-chart.ts",
+  "packages/styles/components/bar-chart.css",
+  "tools/playwright/bar-chart.spec.js",
+  "tools/tests/bar-chart-contract-oracle.mjs",
+  "tools/tests/bar-chart-model.test.mjs",
+  "tools/tests/reporting-dashboard-source.test.mjs",
+]);
 const scopeMatchers = {
   messaging:
     /(?:data-component-audit-id\s*=\s*["']messaging-history-planner-messaging|shlz-(?:messaging|messages|message-thread|conversation)|data-(?:shlz-)?(?:messaging|messages|message-thread)|customElements\.define\(\s*["']shlz-(?:messaging|messages|message-thread)|<(?:shlz-)?(?:messaging|messages|message-thread)\b|(?:class|function|const|let|var)\s+(?:Messaging|Messages|MessageThread|Conversation)\b|export\s*\{[^}]*\b(?:Messaging|Messages|MessageThread|Conversation)\b|(?:^|\/)(?:messaging|messages|message-thread|conversation)\.(?:html|js|jsx|mjs|cjs|ts|tsx|vue|php|css)$)/i,
@@ -225,7 +237,8 @@ test("Wave 12 census proves independent higher-level absence", async () => {
         (path) =>
           relative(".", path) !== currentTestPath &&
           !promotedPlannerPaths.has(relative(".", path)) &&
-          !promotedMessagingHistoryPaths.has(relative(".", path)),
+          !promotedMessagingHistoryPaths.has(relative(".", path)) &&
+          !promotedBarChartPaths.has(relative(".", path)),
       )
       .map(async (path) => ({
         path: relative(".", path),
@@ -240,6 +253,7 @@ test("Wave 12 census proves independent higher-level absence", async () => {
           !auditPaths.has(path) &&
           !promotedPlannerPaths.has(path) &&
           !promotedMessagingHistoryPaths.has(path) &&
+          !promotedBarChartPaths.has(path) &&
           matcher.test(`${path}\n${source}`),
       )
       .map(({ path }) => path);

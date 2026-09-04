@@ -1,0 +1,8 @@
+{
+  "stableIdentity": false,
+  "maximumSeries": 8,
+  "keyboardTooltip": false,
+  "legendVisibility": false,
+  "semanticTable": false,
+  "localOverflow": false
+}
