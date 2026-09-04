@@ -39,6 +39,18 @@ test("Comment Feed ships separately from Message Thread with exact source author
         `<rect width="1440" height="1000" transform="translate\\(${x} ${y}\\)"`,
       ),
     );
+  assert.match(
+    commentsSource,
+    /<rect width="1304" height="769" fill="white" transform="translate\(444 539\)"\/>/,
+  );
+  assert.match(
+    commentsSource,
+    /<rect x="524\.5" y="740\.496" width="229" height="54" rx="11\.5" stroke="#E0E0E0"\/>/,
+  );
+  assert.match(
+    commentsSource,
+    /<rect x="520" y="1245" width="1196" height="39\.001" rx="8" fill="#F5F5F5"\/>/,
+  );
   assert.match(messagesManifest, /shlz-design-source\/raw\/svg\/Messages\.svg/);
   assert.doesNotMatch(messagesManifest, /Комментарии\.svg/);
 });
@@ -77,10 +89,12 @@ test("Comment Feed fixtures expose the complete source-observed anatomy", async 
 });
 
 test("History source fixture exposes all seven structured event payloads", async () => {
-  const [showcase, css, contract] = await Promise.all([
+  const [showcase, css, contract, historySource, docs] = await Promise.all([
     read("apps/showcase/src/messaging-history-showcase.js"),
     read("packages/styles/components/history-timeline.css"),
     read("docs/component-audits/history-timeline-contract.md"),
+    read("shlz-design-source/raw/svg/History of changes.svg"),
+    read("docs/components/history-timeline.md"),
   ]);
   for (const kind of [
     "created",
@@ -104,4 +118,28 @@ test("History source fixture exposes all seven structured event payloads", async
   assert.match(css, /inline-size:\s*424px/);
   assert.match(css, /block-size:\s*137px/);
   assert.match(contract, /seven visibly distinct event presentations/);
+  assert.equal(
+    createHash("sha256").update(historySource).digest("hex"),
+    "83d8c9ab89fa7c3677ed6d4105a150f55676bcf732160892b06773d6d4ac0e76",
+  );
+  assert.match(
+    historySource,
+    /<rect x="80\.5" y="480\.5" width="463" height="997" stroke="#253D98" stroke-dasharray="10 5"\/>/,
+  );
+  assert.match(
+    historySource,
+    /<rect x="100" y="729" width="424" height="137" rx="8" fill="#F5F5F5"\/>/,
+  );
+  assert.match(
+    historySource,
+    /<rect x="100\.5" y="1376\.5" width="239" height="54" rx="11\.5" stroke="#E0E0E0"\/>/,
+  );
+  assert.match(
+    docs,
+    /class="shlz-history-timeline__entry"\s+data-history-kind="status"/,
+  );
+  assert.doesNotMatch(
+    docs,
+    /class="shlz-history-timeline__content"\s+data-history-kind=/,
+  );
 });

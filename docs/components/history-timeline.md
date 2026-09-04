@@ -9,9 +9,10 @@ History Timeline is a framework-neutral semantic list for consumer-ordered activ
   </li>
   <li
     class="shlz-history-timeline__entry"
+    data-history-kind="status"
     aria-describedby="history-period-today"
   >
-    <article class="shlz-history-timeline__content" data-history-kind="status">
+    <article class="shlz-history-timeline__content">
       <header class="shlz-history-timeline__header">
         <span class="shlz-history-timeline__actor">Елена Крылова</span>
         <time class="shlz-history-timeline__time">12:05</time>
