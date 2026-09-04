@@ -26,11 +26,11 @@ An authored reporting/dashboard source ledger will identify source file, bounded
 
 Starting from class names inferred from screenshots was rejected because outlined text and large composite frames hide semantic ownership. Treating the source screens as only visual references was also rejected because it would leave completeness immeasurable.
 
-### 2. Use three additive composition levels
+### 2. Use two additive composition levels
 
 The public layer has two levels: Dashboard arranges sections and Chart Widget provides the source-backed container for controls, plot content, and empty state. Report summaries continue to use the existing Report Card.
 
-A generic universal Card abstraction was rejected: current Card with Action, Report Card, Cover, widgets, and metrics have different source and semantic boundaries.
+A generic universal Card abstraction was rejected: current Card with Action, Report Card, Cover, and Chart Widget have different source and semantic boundaries.
 
 ### 3. Keep layout in CSS and behavior with consumers
 
@@ -40,7 +40,7 @@ A JS layout engine was rejected because this slice has no ordering, persistence,
 
 ### 4. Prefer semantic HTML contracts
 
-Documentation and fixtures use `main`/`section`/`article`, headings, and native controls. Widget and Metric Card roots remain noninteractive. Any whole-card navigation must use an explicit future contract rather than click handlers on the container.
+Documentation and fixtures use `main`/`section`/`article`, headings, and native controls. Dashboard and Chart Widget roots remain noninteractive, while Report Card remains the existing report-summary family. Any whole-card navigation must use an explicit future contract rather than click handlers on the container.
 
 ### 5. Keep chart rendering inside the widget boundary unresolved
 

@@ -158,11 +158,11 @@ test("plain HTML fixture keeps accessibility-critical native contracts", async (
   assert.match(html, /<dialog[\s\S]+data-shlz-drawer/);
   assert.match(
     html,
-    /class="shlz-dashboard"[\s\S]+data-component-audit-id="dashboard-plain-html"/,
+    /<(?:section|div)[^>]*class="[^"]*\bshlz-dashboard\b[^"]*"[^>]*data-component-audit-id="dashboard-plain-html"[^>]*>/,
   );
   assert.match(
     html,
-    /class="shlz-chart-widget"[\s\S]+data-component-audit-id="chart-widget-plain-html"/,
+    /<article[^>]*class="[^"]*\bshlz-chart-widget\b[^"]*"[^>]*data-component-audit-id="chart-widget-plain-html"[^>]*>/,
   );
   assert.match(html, /enhanceModals\(\)/);
   assert.match(html, /enhanceDrawers\(\)/);

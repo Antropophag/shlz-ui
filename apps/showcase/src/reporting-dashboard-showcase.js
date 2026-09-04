@@ -1,7 +1,7 @@
 const emptyWidget = ({ id, title, stress = false }) => `
   <article class="shlz-chart-widget" data-component-audit-id="${id}" aria-labelledby="${id}-title">
     <header class="shlz-chart-widget__header">
-      <h3 class="shlz-chart-widget__title" id="${id}-title">${title}</h3>
+      <h4 class="shlz-chart-widget__title" id="${id}-title">${title}</h4>
       <div class="shlz-chart-widget__actions"><button class="shlz-button shlz-button--text shlz-button--sm" data-component-audit-id="button-${id}-settings" type="button">Настроить</button></div>
     </header>
     <div class="shlz-chart-widget__controls"><span class="shlz-status" data-component-audit-id="status-${id}">Месяц</span><span class="shlz-tag" data-component-audit-id="tag-${id}">Статусы</span></div>

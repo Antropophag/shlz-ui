@@ -5,12 +5,28 @@ import test from "node:test";
 
 const ledgerPath =
   "docs/component-audits/reporting-dashboard-source-ledger.json";
+const expectedSources = new Set([
+  "Dashboard.svg",
+  "Дашборды.svg",
+  "Редактирование дашборда.svg",
+  "Список отчетов.svg",
+  "Создание отчета.svg",
+  "Детальная отчета.svg",
+  "Уведомления для отчетов.svg",
+  "Reports card.svg",
+]);
 
 test("reporting/dashboard ledger accounts for exact authoritative sources", async () => {
   const ledger = JSON.parse(await readFile(ledgerPath, "utf8"));
   assert.equal(ledger.sources.length, 8);
+  assert.deepEqual(
+    new Set(ledger.sources.map(({ file }) => file)),
+    expectedSources,
+  );
   const ids = [];
   for (const source of ledger.sources) {
+    assert.ok(expectedSources.has(source.file));
+    assert.doesNotMatch(source.file, /[/\\]|\.\./);
     const bytes = await readFile(`shlz-design-source/raw/svg/${source.file}`);
     assert.equal(
       createHash("sha256").update(bytes).digest("hex"),
@@ -45,6 +61,14 @@ test("only source-proven dashboard composition boundaries become public", async 
   assert.match(css, /\.shlz-chart-widget/);
   assert.doesNotMatch(`${css}${docs}${showcase}`, /shlz-metric-card/);
   assert.doesNotMatch(css, /cursor:\s*pointer|<canvas|<svg/);
+  const plotRegions = [
+    ...showcase.matchAll(
+      /class="shlz-chart-widget__plot">([\s\S]*?)<\/article>/g,
+    ),
+  ].map((match) => match[1]);
+  assert.equal(plotRegions.length, 2);
+  for (const plot of plotRegions)
+    assert.doesNotMatch(plot, /<canvas\b|<svg\b|cursor:\s*pointer/i);
   assert.match(ledger, /future-chart-capability/);
   assert.match(showcase, /class="shlz-dashboard"/);
   assert.match(showcase, /<article class="shlz-chart-widget"/);
