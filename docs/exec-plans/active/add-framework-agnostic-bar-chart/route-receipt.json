@@ -1,0 +1,71 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Define, without implementation, an OpenSpec product contract and source matrix for a framework-agnostic grouped Bar Chart capability derived conservatively from Dashboard.svg.",
+    "material": ["newCapability", "publicContract", "materialAmbiguity"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": true,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-framework-agnostic-bar-chart",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "data-and-series-identity",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "grouped-series-limit",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "interaction-and-focus-model",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "legend-visibility-policy",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "accessible-table-contract",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "responsive-policy",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "filter-and-period-boundary",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "framework-boundary",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "b16fad5f11e5cded3d6fb72a841d6ab810fdf8e462a0d62fe31328b290a4c386"
+}

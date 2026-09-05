@@ -46,6 +46,10 @@
       "types": "./dist/file-upload.d.ts",
       "import": "./dist/file-upload.js"
     },
+    "./bar-chart": {
+      "types": "./dist/bar-chart.d.ts",
+      "import": "./dist/bar-chart.js"
+    },
     "./calendar": {
       "types": "./dist/calendar.d.ts",
       "import": "./dist/calendar.js"

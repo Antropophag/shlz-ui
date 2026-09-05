@@ -1,0 +1,68 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "add-framework-agnostic-bar-chart",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "data-and-series-identity",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "grouped-series-limit",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "interaction-and-focus-model",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "legend-visibility-policy",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "accessible-table-contract",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "responsive-policy",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "filter-and-period-boundary",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "framework-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Define, without implementation, an OpenSpec product contract and source matrix for a framework-agnostic grouped Bar Chart capability derived conservatively from Dashboard.svg.",
+    "revision": 1
+  },
+  "routeDigest": "b16fad5f11e5cded3d6fb72a841d6ab810fdf8e462a0d62fe31328b290a4c386",
+  "version": 1,
+  "digest": "ae33b7724deaaef8365625cf53efe26482eac50c38c963173245c1b0a86e1cd9"
+}

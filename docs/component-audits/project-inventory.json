@@ -772,7 +772,8 @@
       "tests": [
         "tools/tests/segment-source.test.mjs",
         "tools/playwright/components-next.spec.js",
-        "tools/playwright/actions-navigation-wave3.spec.js"
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "tools/playwright/bar-chart.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Segment.svg group/item sets, three sizes, icons and state combinations remain directly tested",
@@ -780,7 +781,7 @@
         "runtime-browser": "pass: real pointer, Space and Arrow selection use native state with per-path input/change counters; disabled paths emit none",
         "accessibility": "pass: named native radio group, mutual exclusion, real Space/Arrow focus movement and disabled focus exclusion are exercised",
         "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
-        "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
+        "consumer-integration": "pass: reporting Bar Chart consumer owns period selection through the native Segment contract",
         "responsive-content-stress": "pass: the component-local narrow fixture checks bounds without page-overflow inference"
       },
       "canonical_name": "Segment",
@@ -795,7 +796,10 @@
         "apps/showcase/src/main.js",
         "tools/fixtures/plain-html.html"
       ],
-      "live_consumers": ["apps/showcase/src/main.js"],
+      "live_consumers": [
+        "apps/showcase/src/main.js",
+        "segment-bar-chart-consumer-period"
+      ],
       "data_workspace_consumers": [],
       "inert_diagnostics": ["apps/showcase/src/fidelity.js [inert]"],
       "legacy_native_implementations": ["native radio group ownership"],
@@ -809,12 +813,10 @@
         "focus"
       ],
       "known_findings": [],
-      "limitations": [
-        "no application consumer; navigation and command semantics are outside Segment"
-      ],
+      "limitations": ["navigation and command semantics are outside Segment"],
       "measured_counts": {
         "executableShowcase": 3,
-        "liveConsumers": 0,
+        "liveConsumers": 1,
         "dataWorkspace": 0,
         "inertDiagnostics": 6,
         "legacyNative": 0,
@@ -2885,7 +2887,8 @@
       "executable_fixtures": [
         "chart-widget-showcase-default",
         "chart-widget-content-stress",
-        "chart-widget-source-fixture"
+        "chart-widget-source-fixture",
+        "chart-widget-bar-chart-showcase"
       ],
       "live_consumers": [
         "chart-widget-reporting-consumer",
@@ -2902,11 +2905,75 @@
       ],
       "known_findings": [],
       "limitations": [
-        "chart rendering, data semantics and accessible data alternatives require a separate capability",
+        "chart rendering and data accessibility remain separate from the Chart Widget surface and are supplied only by an explicit chart capability",
         "outlined source text limits typography conclusions"
       ],
       "measured_counts": {
-        "executableShowcase": 3,
+        "executableShowcase": 4,
+        "liveConsumers": 2,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      }
+    },
+    {
+      "tests": [
+        "tools/tests/bar-chart-model.test.mjs",
+        "tools/playwright/bar-chart.spec.js"
+      ],
+      "evidence": {
+        "source-integrity": "pass: exact Dashboard.svg hash and classified chart source matrix are linked",
+        "structural-contract": "pass: model, controller, SVG/HTML/CSS, exports, documentation and occurrences are asserted",
+        "runtime-browser": "pass: tooltip, keyboard, legend visibility, table, update and teardown execute",
+        "accessibility": "pass: names, roving focus, pressed states and semantic table are checked without axe violations",
+        "focused-visual": "pass: component-local bar, grid, hover, tooltip and focus paint are checked",
+        "consumer-integration": "pass: reporting consumer owns period state and replaces prepared chart data",
+        "responsive-content-stress": "pass: one-to-four series, long labels, zero values, many categories and narrow local overflow are checked"
+      },
+      "canonical_name": "Bar Chart",
+      "category": "data-display",
+      "implementation_status": "reusable",
+      "audit_status": "VERIFIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Dashboard.svg"],
+      "production_implementation": [
+        "packages/styles/components/bar-chart.css",
+        "packages/behaviors/src/bar-chart-model.ts",
+        "packages/behaviors/src/bar-chart.ts"
+      ],
+      "behavior": [
+        "packages/behaviors/src/bar-chart-model.ts",
+        "packages/behaviors/src/bar-chart.ts"
+      ],
+      "docs": [
+        "docs/components/bar-chart.md",
+        "docs/component-audits/bar-chart.json",
+        "docs/component-audits/dashboard-chart-source-matrix.json"
+      ],
+      "executable_fixtures": ["bar-chart-showcase-source"],
+      "live_consumers": [
+        "bar-chart-reporting-consumer",
+        "bar-chart-plain-html"
+      ],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "grouped vertical bars with one through four series",
+        "stable category, series and datum identity",
+        "pointer and roving-keyboard tooltip inspection",
+        "toggle-button legend and semantic table alternative",
+        "local narrow overflow and consumer-owned data preparation"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "negative, sparse, stacked, horizontal, line, zoomable and streaming charts are unsupported",
+        "Dashboard.svg does not establish keyboard, persistent legend, accessible table or responsive behavior",
+        "the reusable contract intentionally supports at most four of the up to eight series observed in source"
+      ],
+      "measured_counts": {
+        "executableShowcase": 1,
         "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,

@@ -66,10 +66,11 @@ test("only source-proven dashboard composition boundaries become public", async 
       /class="shlz-chart-widget__plot">([\s\S]*?)<\/article>/g,
     ),
   ].map((match) => match[1]);
-  assert.equal(plotRegions.length, 2);
+  assert.equal(plotRegions.length, 3);
   for (const plot of plotRegions)
     assert.doesNotMatch(plot, /<canvas\b|<svg\b|cursor:\s*pointer/i);
-  assert.match(ledger, /future-chart-capability/);
+  assert.match(ledger, /"owner": "Bar Chart"/);
+  assert.match(showcase, /data-shlz-bar-chart/);
   assert.match(showcase, /class="shlz-dashboard"/);
   assert.match(showcase, /<article class="shlz-chart-widget"/);
 });

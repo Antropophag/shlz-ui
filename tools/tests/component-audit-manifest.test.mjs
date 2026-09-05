@@ -45,6 +45,7 @@ const manifestPaths = [
   "rich-text-toolbar",
   "dashboard",
   "chart-widget",
+  "bar-chart",
 ].map((component) => `docs/component-audits/${component}.json`);
 const inventoryPath = "docs/component-audits/project-inventory.json";
 

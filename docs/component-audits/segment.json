@@ -12,7 +12,8 @@
   "legacySelectors": [".shlz-segment"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
-    { "id": "segment-showcase-choice", "kind": "executable-fixture" }
+    { "id": "segment-showcase-choice", "kind": "executable-fixture" },
+    { "id": "segment-bar-chart-consumer-period", "kind": "live-consumer" }
   ],
   "supportedSizes": ["small-26", "medium-33", "large-41"],
   "supportedStates": ["selected", "unselected", "focus-visible", "disabled"],
@@ -34,7 +35,10 @@
       "evidence": "docs/components/segment.md"
     }
   ],
-  "browserTests": ["tools/playwright/actions-navigation-wave3.spec.js"],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/bar-chart.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/actions-navigation-wave3.spec.js-snapshots/segment-focused-contract-chromium-linux.png"
   ],
@@ -44,7 +48,7 @@
     "runtime-browser": "pass: real pointer, Space and Arrow selection use native radio state with counters asserted per path; disabled forced-pointer, focus, Space and programmatic paths emit no events",
     "accessibility": "pass: native radiogroup naming, mutual exclusion, focus order, real Space/Arrow movement and disabled focus exclusion are exercised",
     "focused-visual": "pass: component-local selected, unselected, disabled, focus, three sizes and icon content are captured",
-    "consumer-integration": "not-applicable: no application-owned or Data Workspace Segment consumer exists on this baseline",
+    "consumer-integration": "pass: reporting Bar Chart consumer owns period selection through the native Segment contract",
     "responsive-content-stress": "pass: long labels stay within a component-local narrow fixture without page-level inference"
   },
   "interactionEvidence": {

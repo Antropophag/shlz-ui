@@ -262,7 +262,34 @@
             </h3>
           </header>
           <div class="shlz-chart-widget__plot">
-            <div class="shlz-chart-widget__empty">No report data</div>
+            <div
+              data-shlz-bar-chart
+              data-component-audit-id="bar-chart-plain-html"
+              data-plot-label="Requests by status plot"
+              data-legend-label="Request status series"
+              data-table-label="Show chart data"
+              data-table-caption="Requests by week and status"
+              data-category-label="Week"
+            >
+              <script type="application/json" data-shlz-bar-chart-data>
+                {
+                  "categories": [{ "id": "week-1", "label": "Week 1" }],
+                  "series": [
+                    {
+                      "id": "new",
+                      "label": "New",
+                      "values": [
+                        {
+                          "categoryId": "week-1",
+                          "value": 4,
+                          "displayValue": "4"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              </script>
+            </div>
           </div>
         </article>
       </div>
@@ -275,6 +302,7 @@
         enhancePopovers,
         enhanceTabs,
         enhanceTooltips,
+        enhanceBarCharts,
       } from "../../packages/behaviors/dist/browser.js";
       enhanceDropdowns();
       window.__fixtureModalControllers = enhanceModals();
@@ -282,6 +310,7 @@
       enhancePopovers();
       enhanceTabs();
       enhanceTooltips();
+      enhanceBarCharts();
     </script>
   </body>
 </html>
