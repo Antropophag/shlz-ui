@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Activate the governed SHLZ package release pipeline against the corporate GitLab registry, prove partial-publication resume, exact four-package consumption, promotion and rollback, and retain redacted evidence before milestone 7.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "corporate-registry-coordinates",
+      "owner": "user",
+      "status": "unresolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-inspection", "ref": "required environment inputs are absent" }
+    },
+    {
+      "id": "github-environment-administrators",
+      "owner": "user",
+      "status": "unresolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-inspection", "ref": "release environment does not exist" }
+    },
+    {
+      "id": "credential-provisioning",
+      "owner": "user",
+      "status": "unresolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-inspection", "ref": "write and read credential inputs are absent" }
+    },
+    {
+      "id": "maintenance-window",
+      "owner": "user",
+      "status": "unresolved",
+      "blocking": true,
+      "provenance": { "kind": "user-prompt", "ref": "activation authorized without an execution window" }
+    },
+    {
+      "id": "activation-versions-and-rollback-target",
+      "owner": "user",
+      "status": "unresolved",
+      "blocking": true,
+      "provenance": { "kind": "repository-inspection", "ref": "no prior SHLZ GitHub release record exists" }
+    },
+    {
+      "id": "partial-publication-method",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user delegated implementation choices" }
+    },
+    {
+      "id": "redacted-evidence-policy",
+      "owner": "agent",
+      "status": "delegated",
+      "blocking": true,
+      "provenance": { "kind": "user-delegation", "ref": "user delegated implementation choices" }
+    },
+    {
+      "id": "milestone-7-gate",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": { "kind": "user-prompt", "ref": "milestone 7 begins only after successful activation" }
+    }
+  ],
+  "openSpec": { "change": "activate-release-pipeline", "status": "synthesized" },
+  "authorization": {
+    "status": "approved",
+    "provenance": { "kind": "user-prompt", "ref": "user explicitly granted apply permission" }
+  }
+}
