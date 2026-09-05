@@ -111,6 +111,11 @@
   transition: opacity 120ms ease;
 }
 
+.shlz-bar-chart__bar--zero {
+  fill: transparent;
+  pointer-events: all;
+}
+
 .shlz-bar-chart__plot:has(.shlz-bar-chart__bar:hover)
   .shlz-bar-chart__bar:not(:hover),
 .shlz-bar-chart__plot:has(.shlz-bar-chart__bar:focus)

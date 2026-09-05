@@ -772,7 +772,8 @@
       "tests": [
         "tools/tests/segment-source.test.mjs",
         "tools/playwright/components-next.spec.js",
-        "tools/playwright/actions-navigation-wave3.spec.js"
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "tools/playwright/bar-chart.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Segment.svg group/item sets, three sizes, icons and state combinations remain directly tested",

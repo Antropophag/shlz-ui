@@ -35,7 +35,10 @@
       "evidence": "docs/components/segment.md"
     }
   ],
-  "browserTests": ["tools/playwright/actions-navigation-wave3.spec.js"],
+  "browserTests": [
+    "tools/playwright/actions-navigation-wave3.spec.js",
+    "tools/playwright/bar-chart.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/actions-navigation-wave3.spec.js-snapshots/segment-focused-contract-chromium-linux.png"
   ],

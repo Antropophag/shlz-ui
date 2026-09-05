@@ -213,6 +213,17 @@ export class BarChartController {
         rect.setAttribute("width", String(barWidth));
         rect.setAttribute("height", String(renderedHeight));
         rect.setAttribute("rx", "4");
+        if (datum.value === 0) {
+          const visual = rect.cloneNode() as SVGRectElement;
+          visual.classList.remove("shlz-bar-chart__bar");
+          delete visual.dataset.datumId;
+          visual.setAttribute("aria-hidden", "true");
+          svg.append(visual);
+          // Interaction geometry only: retain zero quantitative paint.
+          rect.classList.add("shlz-bar-chart__bar--zero");
+          rect.setAttribute("height", "12");
+          rect.setAttribute("y", String(padding.top + plotHeight - 12));
+        }
         rect.setAttribute("tabindex", datum.id === this.#focusId ? "0" : "-1");
         rect.setAttribute("role", "img");
         rect.setAttribute(
@@ -324,7 +335,8 @@ export class BarChartController {
     rect.addEventListener(
       "pointerleave",
       () => {
-        if (!this.root.contains(document.activeElement)) this.#hideTooltip();
+        if (!this.root.querySelector(".shlz-bar-chart__bar:focus"))
+          this.#hideTooltip();
       },
       { signal: this.#abort.signal },
     );

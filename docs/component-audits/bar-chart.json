@@ -88,7 +88,24 @@
     "manualStateWalk": "pass: pointer hover, Tab/focus-visible, arrow navigation, legend activation, table disclosure and narrow overflow inspected"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "zero-datum-inspection-target",
+      "severity": "P1",
+      "status": "resolved",
+      "description": "Zero values retain zero-height paint and use a transparent 12-unit SVG hit and focus target; this interaction geometry is a repository implementation decision, not a source token.",
+      "evidence": "tools/playwright/bar-chart.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/76#discussion_r3939940275"
+    },
+    {
+      "id": "pointer-tooltip-legend-focus",
+      "severity": "P2",
+      "status": "resolved",
+      "description": "Pointer departure dismisses hover inspection when legend focus is present while preserving tooltip ownership by a focused chart datum.",
+      "evidence": "tools/playwright/bar-chart.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/76#discussion_r3939940277"
+    }
+  ],
   "knownLimitations": [
     "source includes eight-series specimens while the approved reusable product contract intentionally supports one through four",
     "source does not establish keyboard, persistent legend, accessible table, or responsive behavior"

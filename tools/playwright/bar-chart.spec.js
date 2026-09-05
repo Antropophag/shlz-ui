@@ -109,6 +109,48 @@ test("hover and roving keyboard focus expose equivalent datum details", async ({
   await expect(chart.locator('[tabindex="0"]')).toHaveCount(1);
 });
 
+test("zero data keeps zero paint and a pointer and keyboard inspection target", async ({
+  page,
+}) => {
+  const chart = page.locator("#bar-chart-showcase-source");
+  const zero = chart.locator('.shlz-bar-chart__bar[aria-label$=": 0"]');
+  await zero.hover();
+  await expect(chart.getByRole("tooltip")).toContainText(": 0");
+  const geometry = await zero.evaluate((node) => ({
+    height: node.getBBox().height,
+    fill: globalThis.getComputedStyle(node).fill,
+    visualHeight: node.previousElementSibling.getAttribute("height"),
+  }));
+  expect(geometry.height).toBeGreaterThanOrEqual(12);
+  expect(geometry.fill).toBe("rgba(0, 0, 0, 0)");
+  expect(geometry.visualHeight).toBe("0");
+  await chart.locator(".shlz-bar-chart__bar").first().focus();
+  await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowDown");
+  await expect(zero).toBeFocused();
+  await expect(zero).toHaveCSS("outline-style", "solid");
+  await expect(zero).toHaveCSS("outline-width", "2px");
+  await expect(chart.getByRole("tooltip")).toContainText(": 0");
+  await expect(chart.locator('[data-datum-id][tabindex="0"]')).toHaveCount(1);
+});
+
+test("pointer tooltip closes with legend focus and retains keyboard inspection", async ({
+  page,
+}) => {
+  const chart = page.locator("#bar-chart-showcase-source");
+  const bars = chart.locator(".shlz-bar-chart__bar");
+  const legend = chart.getByRole("button", { name: /Новые/ });
+  await legend.focus();
+  await bars.first().hover();
+  await expect(chart.getByRole("tooltip")).toBeVisible();
+  await legend.hover();
+  await expect(chart.getByRole("tooltip")).toBeHidden();
+  await bars.first().focus();
+  await bars.nth(3).hover();
+  await legend.hover();
+  await expect(chart.getByRole("tooltip")).toContainText("Новые: 4");
+});
+
 test("legend visibility updates plot, table and notification but protects last series", async ({
   page,
 }) => {
