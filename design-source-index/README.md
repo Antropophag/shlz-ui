@@ -36,4 +36,4 @@ Run:
 node tools/generate-design-source-index.mjs
 ```
 
-The command requires the system `unzip` utility and writes only to `design-source-index/`.
+The command reads ZIP entries through the repository's JavaScript reader after `npm ci` and writes only to `design-source-index/`; no system `unzip` utility is required.

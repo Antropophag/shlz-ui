@@ -1,21 +1,18 @@
 import assert from "node:assert/strict";
-import { execFile } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { promisify } from "node:util";
+import { readZipEntry } from "../lib/source-zip.mjs";
 
-const execFileAsync = promisify(execFile);
 const basic = "shlz-design-source/raw/svg/UI Kit – Basic elements.zip";
 const interfaceArchive =
   "shlz-design-source/raw/svg/UI Kit – Interface elements.zip";
 
 async function manifest(archive, component) {
-  const { stdout } = await execFileAsync("unzip", [
-    "-p",
-    archive,
+  const source = readZipEntry(
+    await readFile(archive),
     `components/${component}/manifest.json`,
-  ]);
-  return JSON.parse(stdout);
+  );
+  return JSON.parse(source.toString("utf8"));
 }
 
 test("choice Component Sets retain their complete source matrices", async () => {

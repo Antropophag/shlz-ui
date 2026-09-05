@@ -4,6 +4,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildTypographyIndex } from "./lib/typography-index.mjs";
+import { listZipEntries, readZipEntry } from "./lib/source-zip.mjs";
 import {
   iconGeometryHash,
   resolveNormalizedIconPath,
@@ -18,19 +19,15 @@ const relative = (value) =>
 const readJson = (value) => JSON.parse(readFileSync(value, "utf8"));
 const sha256 = (value) =>
   createHash("sha256").update(readFileSync(value)).digest("hex");
+const zipSources = new Map();
+const zipSource = (zip) => {
+  if (!zipSources.has(zip)) zipSources.set(zip, readFileSync(zip));
+  return zipSources.get(zip);
+};
 const zipText = (zip, entry) =>
-  execFileSync("unzip", ["-p", zip, entry], {
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
-  });
+  readZipEntry(zipSource(zip), entry).toString("utf8");
 const zipJson = (zip, entry) => JSON.parse(zipText(zip, entry));
-const zipEntries = (zip) =>
-  execFileSync("unzip", ["-Z1", zip], {
-    encoding: "utf8",
-    maxBuffer: 64 * 1024 * 1024,
-  })
-    .trim()
-    .split("\n");
+const zipEntries = (zip) => listZipEntries(zipSource(zip));
 const json = (value) => `${JSON.stringify(value, null, 2)}\n`;
 const rootAttribute = (svg, name) =>
   svg.match(new RegExp(`<svg\\b[^>]*\\b${name}=["']([^"']+)["']`))?.[1] ?? null;
@@ -646,7 +643,7 @@ Run:
 node tools/generate-design-source-index.mjs
 \`\`\`
 
-The command requires the system \`unzip\` utility and writes only to \`design-source-index/\`.
+The command reads ZIP entries through the repository's JavaScript reader after \`npm ci\` and writes only to \`design-source-index/\`; no system \`unzip\` utility is required.
 `;
 writeFileSync(path.join(output, "README.md"), readme);
 

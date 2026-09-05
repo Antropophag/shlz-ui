@@ -1,19 +1,17 @@
 import assert from "node:assert/strict";
-import { execFile } from "node:child_process";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { promisify } from "node:util";
+import { readZipEntry } from "../lib/source-zip.mjs";
 
-const execFileAsync = promisify(execFile);
 const archive = "shlz-design-source/raw/svg/UI Kit – Basic elements.zip";
+const archiveSource = await readFile(archive);
 
 async function componentManifest(name) {
-  const { stdout } = await execFileAsync("unzip", [
-    "-p",
-    archive,
+  const source = readZipEntry(
+    archiveSource,
     `components/${name}/manifest.json`,
-  ]);
-  return JSON.parse(stdout);
+  );
+  return JSON.parse(source.toString("utf8"));
 }
 
 test("Input keeps all broken source nodes without inventing properties", async () => {

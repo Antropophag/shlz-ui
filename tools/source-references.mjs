@@ -1,10 +1,7 @@
 import { createHash } from "node:crypto";
-import { execFile } from "node:child_process";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { promisify } from "node:util";
-
-const execFileAsync = promisify(execFile);
+import { readZipEntry } from "./lib/source-zip.mjs";
 
 const specifications = [
   ["button", "Buttons.svg", 360],
@@ -256,22 +253,18 @@ export async function generateSourceReferences(root = process.cwd()) {
     representativeVariants,
   } of componentSetReferences) {
     const archive = path.join(sourceRoot, archiveName);
-    const { stdout: manifestSource } = await execFileAsync("unzip", [
-      "-p",
-      archive,
-      `components/${componentSet}/manifest.json`,
-    ]);
-    const componentManifest = JSON.parse(manifestSource);
     const archiveSource = await readFile(archive);
+    const manifestSource = readZipEntry(
+      archiveSource,
+      `components/${componentSet}/manifest.json`,
+    ).toString("utf8");
+    const componentManifest = JSON.parse(manifestSource);
     const references = [];
     for (const sourceVariant of componentManifest.variants) {
       const entry = `components/${componentSet}/variants/${sourceVariant.safeFilename}`;
-      const { stdout } = await execFileAsync("unzip", ["-p", archive, entry], {
-        encoding: "buffer",
-        maxBuffer: 20 * 1024 * 1024,
-      });
+      const source = readZipEntry(archiveSource, entry);
       const file = `${component}-${sourceVariant.sourceOrder}.svg`;
-      await writeFile(path.join(targetRoot, file), stdout);
+      await writeFile(path.join(targetRoot, file), source);
       references.push({
         file,
         kind: "component-set-variant",
@@ -308,23 +301,14 @@ export async function generateSourceReferences(root = process.cwd()) {
     const archive = path.join(sourceRoot, archiveName);
     const archiveSource = await readFile(archive);
     const manifestEntry = `components/${sourceComponent}/manifest.json`;
-    const { stdout: manifestSource } = await execFileAsync("unzip", [
-      "-p",
-      archive,
-      manifestEntry,
-    ]);
+    const manifestSource = readZipEntry(archiveSource, manifestEntry).toString(
+      "utf8",
+    );
     const componentManifest = JSON.parse(manifestSource);
     const sourceEntry = `components/${sourceComponent}/${componentManifest.safeFilename}`;
-    const { stdout } = await execFileAsync(
-      "unzip",
-      ["-p", archive, sourceEntry],
-      {
-        encoding: "buffer",
-        maxBuffer: 20 * 1024 * 1024,
-      },
-    );
+    const source = readZipEntry(archiveSource, sourceEntry);
     const file = `${component}.svg`;
-    await writeFile(path.join(targetRoot, file), stdout);
+    await writeFile(path.join(targetRoot, file), source);
     manifest.push({
       component,
       sourceFile: `${archiveName} · ${sourceComponent}`,
