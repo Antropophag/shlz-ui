@@ -1,15 +1,12 @@
 import assert from "node:assert/strict";
-import { execFile } from "node:child_process";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { promisify } from "node:util";
+import { readZipEntry } from "../lib/source-zip.mjs";
 
-const execFileAsync = promisify(execFile);
 const archive = "shlz-design-source/raw/svg/UI Kit – Basic elements.zip";
-const unzip = async (entry) =>
-  (await execFileAsync("unzip", ["-p", archive, entry], { maxBuffer: 2 ** 20 }))
-    .stdout;
+const archiveSource = await readFile(archive);
+const unzip = (entry) => readZipEntry(archiveSource, entry).toString("utf8");
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
 test("Notification raw authority preserves its exact sheet and three variants", async () => {
