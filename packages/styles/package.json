@@ -1,6 +1,6 @@
 {
   "name": "@shlz/styles",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "files": [
     "dist",
     "CHANGELOG.md"
@@ -13,7 +13,7 @@
     "./shlz.css": "./dist/shlz.css"
   },
   "dependencies": {
-    "@shlz/tokens": "0.1.0"
+    "@shlz/tokens": "0.1.1"
   },
   "scripts": {
     "build": "node -e \"require('node:fs').accessSync('dist/shlz.css')\""
