@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "intent": "Improve Status and Empty State text contrast through documented semantic foregrounds while preserving source facts and independently verifying both component contracts.",
+  "route": "open-spec",
+  "openSpecChange": "improve-status-empty-contrast",
+  "requiredDecisions": [
+    { "id": "scope-and-execution", "owner": "user", "blocking": true },
+    {
+      "id": "accessible-production-source-boundary",
+      "owner": "repo",
+      "blocking": true
+    },
+    { "id": "foreground-selection", "owner": "agent", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

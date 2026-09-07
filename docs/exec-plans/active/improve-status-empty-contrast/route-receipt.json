@@ -1,0 +1,43 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Improve Status and Empty State text contrast through documented semantic foregrounds while preserving source facts and independently verifying both component contracts.",
+    "material": [
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "improve-status-empty-contrast",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "scope-and-execution",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "accessible-production-source-boundary",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "foreground-selection",
+        "owner": "agent"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "355a1e8c1557365967c7e75f89a139797b520e5c6dd3e883000df03177427a18"
+}
