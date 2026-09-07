@@ -65,8 +65,33 @@ preserves these negative cases for the same browser oracle used on the candidate
 Current validation: 6/6 new focused browser tests; 43/43 affected component,
 interaction and consumer browser tests; 14/14 focused source/foundation/census
 tests. The Impeccable detector found zero issues in the two changed stylesheets.
-Full repository validation and final independent review/CI are recorded at
-delivery; these focused counts alone are not a global completion claim.
+All 234 Node tests, package builds, source/export validation and clean
+installation of all four packed packages passed. The transient contrast probes
+are test-only compositions created and removed by the browser matrix helper;
+they are distinct from the 19/5 shipped occurrence counts above.
+
+The initial full local browser run had 313/316 passes. One broad gallery
+snapshot exposed an unnecessary 68px documentation shift; removing the added
+paragraph restored gallery layout while retaining the accessible heading and
+component documentation. Its existing snapshot then passed without a tolerance
+or baseline change. The loaded-Input capture passed its isolated replay without
+implementation changes. The third failure compared two captures with different
+rendering lifecycles; diagnosis measured the first capture itself settling Tabs
+height from 2766.8125 to 2775.8125px. The test now restores its original
+same-document fixture-addition invariant (commit 4f000755), prepares both
+captures identically and rejects any capture whose bounding box changes.
+Strict buffer equality is retained, with PNG attachments on failure. This
+setup passed 20/20 repetitions; the final three formerly failing tests passed
+3/3 together. The new component-focused suite passed again, 6/6.
+
+The full `npm run check` command stops at Prettier warnings for two unchanged
+historical files: `docs/exec-plans/active/classify-existing-component-records/route-receipt.json`
+and `docs/exec-plans/active/classify-source-extraction-diagnostics/route-receipt.json`.
+They are identical to baseline and left outside this component change. ESLint,
+Stylelint and formatting of every changed file pass; the remaining build,
+source/export, packed-consumer and browser checks were executed separately.
+Final full browser CI and independent review are assessed on PR #81's current
+head before completion, rather than inferred from these partial runs.
 
 Two repository bookkeeping updates accompany the new token roles and probe:
 the generated foundation index now includes the six semantic values, and the

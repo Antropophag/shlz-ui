@@ -685,7 +685,7 @@ export const primaryComponentMarkup = `
   <article class="shlz-api-component" id="status-demo">
     <header><h3>Status</h3><p>Визуальная метка состояния; продуктовый смысл задаёт consumer и не кодируется именем класса.</p></header>
     ${renderComponentDocumentation("status")}
-    <section><h4>Accessible paint families</h4><p>Шесть оттенков текста затемнены для читаемости. Фоны и исходные SVG сохранены; различия описаны в контракте Status.</p><div class="shlz-cluster">${status("Blue", "", "status-showcase-blue")}${status("Green", "green", "status-showcase-green")}${status("Bright green", "bright-green", "status-showcase-bright-green")}${status("Orange", "orange", "status-showcase-orange")}${status("Blue pair", "source-blue", "status-showcase-source-blue")}${status("Violet", "purple", "status-showcase-purple")}${status("Turquoise", "cyan", "status-showcase-cyan")}${status("Pink", "pink", "status-showcase-pink")}${status("Neutral", "neutral", "status-showcase-neutral")}</div></section>
+    <section><h4>Accessible paint families</h4><div class="shlz-cluster">${status("Blue", "", "status-showcase-blue")}${status("Green", "green", "status-showcase-green")}${status("Bright green", "bright-green", "status-showcase-bright-green")}${status("Orange", "orange", "status-showcase-orange")}${status("Blue pair", "source-blue", "status-showcase-source-blue")}${status("Violet", "purple", "status-showcase-purple")}${status("Turquoise", "cyan", "status-showcase-cyan")}${status("Pink", "pink", "status-showcase-pink")}${status("Neutral", "neutral", "status-showcase-neutral")}</div></section>
     ${statusDiagnostics}
   </article>
   <article class="shlz-api-component" id="badge-demo">

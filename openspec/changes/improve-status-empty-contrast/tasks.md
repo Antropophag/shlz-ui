@@ -11,5 +11,5 @@
 ## 3. Evidence and delivery
 
 - [x] 3.1 Update component documentation, provenance, the two independent audit manifests and inventory findings, correct Empty State source references, and add the tokens/styles patch changeset.
-- [ ] 3.2 Pass relevant source/unit/package checks, lint/build and browser regressions; run discriminating baseline-paint and finite-set proofs and verify source integrity.
+- [x] 3.2 Pass relevant source/unit/package checks, lint/build and browser regressions; run discriminating baseline-paint and finite-set proofs and verify source integrity.
 - [ ] 3.3 Complete independent Standards/Spec review and candidate-bound conformance/delivery for an unmerged PR, reporting exact component counts, checks, limitations, CI and review threads.
