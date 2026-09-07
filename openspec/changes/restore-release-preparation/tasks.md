@@ -7,4 +7,4 @@
 
 - [x] 2.1 Document the permission prerequisite, replay evidence and activation boundary; reconcile the roadmap against current main and PR #72.
 - [x] 2.2 Run focused release checks and strict planning/format validation; bind the failed and successful live preparation attempts to verification evidence.
-- [ ] 2.3 Complete independent Standards and Spec review, route conformance and delivery verification for an unmerged PR; report CI and any remaining blockers.
+- [x] 2.3 Complete independent Standards and Spec review, route conformance and delivery verification for an unmerged PR; report CI and any remaining blockers.
