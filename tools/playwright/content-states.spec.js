@@ -228,14 +228,33 @@ test("legacy component captures ignore additive showcase sections", async ({
 
 test("pre-existing captures ignore later consumer supplements", async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto("/?full=1");
   const target = page.locator("#tabs-demo");
-  await target.scrollIntoViewIfNeeded();
-  const before = await target.screenshot();
+  const capture = async () => {
+    // Both sides compare the same stabilized layout, fonts and paint phase.
+    await stabilizePreexistingShowcaseLayout(page);
+    await target.scrollIntoViewIfNeeded();
+    await target.evaluate(
+      () =>
+        new Promise((resolve) =>
+          window.requestAnimationFrame(() =>
+            window.requestAnimationFrame(resolve),
+          ),
+        ),
+    );
+    let screenshot;
+    await expect(async () => {
+      const before = await target.boundingBox();
+      screenshot = await target.screenshot({ animations: "disabled" });
+      // A first capture can itself settle offscreen layout; reject that frame.
+      expect(await target.boundingBox()).toEqual(before);
+    }).toPass({ timeout: 5000 });
+    return screenshot;
+  };
+  const before = await capture();
 
-  await page.goto("/?full=1");
-  await expect(target).toBeAttached();
+  // Vary only the later supplement, not a second document's rendering lifecycle.
   await page.evaluate(() => {
     const supplement = document.createElement("section");
     supplement.dataset.shlzPreexistingVisualSupplement = "";
@@ -243,7 +262,16 @@ test("pre-existing captures ignore later consumer supplements", async ({
     document.querySelector("#tabs-demo").before(supplement);
   });
 
-  await stabilizePreexistingShowcaseLayout(page);
-  await target.scrollIntoViewIfNeeded();
-  expect(Buffer.compare(await target.screenshot(), before)).toBe(0);
+  const after = await capture();
+  if (!before.equals(after)) {
+    await testInfo.attach("capture-before", {
+      body: before,
+      contentType: "image/png",
+    });
+    await testInfo.attach("capture-after", {
+      body: after,
+      contentType: "image/png",
+    });
+  }
+  expect(Buffer.compare(after, before)).toBe(0);
 });

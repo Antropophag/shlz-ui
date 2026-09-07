@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Improve Status and Empty State text contrast through documented semantic foregrounds while preserving source facts and independently verifying both component contracts.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "scope-and-execution",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "2026-09-07: user approved working through the proposed plan from clean current main, beginning with Status and Empty State contrast; GitLab remains deferred"
+      }
+    },
+    {
+      "id": "accessible-production-source-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-inspection",
+        "ref": "docs/accessibility-source-contrast.md, Status.svg and Basic-elements Empty SVG entries preserve source facts and permit documented accessible semantic production roles"
+      }
+    },
+    {
+      "id": "foreground-selection",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-inspection",
+        "ref": "Source-derived hue darkening and existing supporting-accessible role implement the user-approved correction without changing public markup or business meanings"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "improve-status-empty-contrast",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "2026-09-07: work according to the proposed plan in a clean worktree from main"
+    }
+  }
+}

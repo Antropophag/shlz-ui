@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "improve-status-empty-contrast",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "scope-and-execution",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "accessible-production-source-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "foreground-selection",
+        "owner": "agent",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Improve Status and Empty State text contrast through documented semantic foregrounds while preserving source facts and independently verifying both component contracts.",
+    "revision": 1
+  },
+  "routeDigest": "355a1e8c1557365967c7e75f89a139797b520e5c6dd3e883000df03177427a18",
+  "version": 1,
+  "digest": "be2551dc4c49847f3d54edf08371f3ec4d13fa07afbb14031e634ddb0850bdd5"
+}

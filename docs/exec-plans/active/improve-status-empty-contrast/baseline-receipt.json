@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/status-empty-contrast",
+    "commit": "1aade72296d810577795caf70bf12a8ef9c94076",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/status-empty-contrast",
+      "headRefOid": "1aade72296d810577795caf70bf12a8ef9c94076",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/81"
+    },
+    "repository": {
+      "digest": "e0b421601e06f44668a4579239360a19d85b3381eb7fc776358f236f04d350dd",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-status-empty-contrast"
+    },
+    "upstream": "origin/fix/status-empty-contrast"
+  },
+  "requirementsDigest": "be2551dc4c49847f3d54edf08371f3ec4d13fa07afbb14031e634ddb0850bdd5",
+  "routeDigest": "355a1e8c1557365967c7e75f89a139797b520e5c6dd3e883000df03177427a18",
+  "version": 1,
+  "digest": "53893024637040dd9329ff4518be4f516fa7c31f18489ef9e9e6577094414832"
+}

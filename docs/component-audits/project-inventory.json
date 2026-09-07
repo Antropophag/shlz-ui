@@ -960,14 +960,16 @@
         "tools/tests/choice-status-source.test.mjs",
         "tools/playwright/choice-status.spec.js",
         "tools/playwright/status-identity-wave4.spec.js",
-        "tools/playwright/interaction-evidence-wave35.spec.js"
+        "tools/playwright/interaction-evidence-wave35.spec.js",
+        "tools/tests/status-empty-contrast-source.test.mjs",
+        "tools/playwright/status-empty-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw Status.svg geometry and paint families are asserted without semantic renaming",
         "structural-contract": "pass: occurrence guard classifies all executable and live roots",
         "runtime-browser": "not-applicable: static Status has no behavior; consumer rendering owns updates",
-        "accessibility": "pass: text owns meaning and no implicit role=status is applied",
-        "focused-visual": "pass: computed source-paint matrix is component-local",
+        "accessibility": "pass: all nine production paints exceed 4.5:1 on four supported surfaces; text owns meaning and no implicit role=status is applied",
+        "focused-visual": "pass: component-local semantic foreground/source-background matrix and focused snapshot cover all nine paints",
         "consumer-integration": "pass: three Data Workspace states filter and rerender without stale classes",
         "responsive-content-stress": "pass: long label and narrow table-cell behavior are asserted"
       },
@@ -983,11 +985,14 @@
       "docs": ["docs/components/status.md"],
       "executable_fixtures": [
         "apps/showcase/src/fidelity.js",
-        "apps/showcase/src/wave3.js"
+        "apps/showcase/src/wave3.js",
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/reporting-dashboard-showcase.js"
       ],
       "live_consumers": [
         "apps/showcase/src/main.js",
-        "apps/showcase/src/consumer-workspace.js"
+        "apps/showcase/src/consumer-workspace.js",
+        "apps/showcase/src/reporting-dashboard-showcase.js"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
       "inert_diagnostics": ["apps/showcase/src/fidelity.js#fidelity-status"],
@@ -998,10 +1003,10 @@
         {
           "id": "status-source-paint-contrast",
           "severity": "P3",
-          "status": "documented-source-backed-deviation",
-          "description": "Six exact source paint pairs are below 4.5:1 for normal text; visible text preserves meaning and source paint was not silently recolored.",
-          "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
-          "tracking": "docs/component-audits/wave-4-report.md"
+          "status": "resolved-semantic-contrast",
+          "description": "Six foreground corrections preserve source hue/background families; all nine production paints exceed 4.5:1 on supported surfaces without changing raw source.",
+          "evidence": "tools/playwright/status-empty-contrast.spec.js",
+          "tracking": "docs/component-audits/status-empty-contrast-report.md"
         }
       ],
       "limitations": [],
@@ -1356,14 +1361,16 @@
         "tools/tests/content-states.test.mjs",
         "tools/playwright/content-states.spec.js",
         "tools/playwright/remediation-fidelity.spec.js",
-        "tools/playwright/data-content-wave5.spec.js"
+        "tools/playwright/data-content-wave5.spec.js",
+        "tools/tests/status-empty-contrast-source.test.mjs",
+        "tools/playwright/status-empty-contrast.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Simple, Customize and Basic source compositions are distinct",
         "structural-contract": "pass: five stable roots cover source and fluid composition",
         "runtime-browser": "not-applicable: consumer owns empty-data lifecycle",
-        "accessibility": "pass: no implicit live role and native nested actions",
-        "focused-visual": "pass: computed variant geometry and typography",
+        "accessibility": "pass: all four compositions have readable title/description text on four light surfaces; no implicit live role and native nested actions",
+        "focused-visual": "pass: computed variant geometry/typography and focused accessible-text snapshots",
         "consumer-integration": "pass: Data Workspace zero-result and reset flow",
         "responsive-content-stress": "pass: long content and action remain bounded"
       },
@@ -1372,7 +1379,7 @@
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",
       "authoritative_source": [
-        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
       ],
       "production_implementation": [
         "packages/styles/components/empty-state.css"
@@ -1394,10 +1401,10 @@
         {
           "id": "empty-state-simple-source-contrast",
           "severity": "P3",
-          "status": "documented-source-backed-deviation",
-          "description": "Exact Empty/Simple title paint is about 2.79:1 on white.",
-          "evidence": "tools/playwright/data-content-wave5.spec.js",
-          "tracking": "docs/component-audits/wave-5-report.md"
+          "status": "resolved-semantic-contrast",
+          "description": "The accessible supporting-text role corrects Simple title and Basic description contrast while source Gray 200 remains preserved.",
+          "evidence": "tools/playwright/status-empty-contrast.spec.js",
+          "tracking": "docs/component-audits/status-empty-contrast-report.md"
         }
       ],
       "limitations": [],

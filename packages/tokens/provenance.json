@@ -56,7 +56,7 @@
         "raw/svg/Buttons.svg",
         "raw/svg/Select.svg"
       ],
-      "rationale": "Engineering roles alias source tokens. Component-only state paints and geometry are not promoted into this layer.",
+      "rationale": "Engineering roles alias source tokens or record explicitly justified accessible-text decisions. Unrelated component-only state paints and geometry are not promoted into this layer.",
       "groups": {
         "color": {
           "classification": "DECISION",
@@ -67,6 +67,12 @@
             "raw/svg/Modal.svg"
           ],
           "rationale": "Source Gray 200 and 25% Dark Blue remain preserved source facts. The accessible production text roles extend the observed Dark Blue opacity family to 60% as a repository decision so active supporting and placeholder text meets WCAG 2.2 SC 1.4.3 on supported library surfaces."
+        },
+        "status-foreground": {
+          "classification": "DECISION",
+          "confidence": "high",
+          "source": "raw/svg/Status.svg",
+          "rationale": "Six additive production foreground roles preserve their corresponding source hue families while raising active-text contrast. Each is a source-derived whole-percentage darkening that reaches at least a 4.75:1 engineering margin on the supported white, Gray 50, Blue 50, and page surfaces; the public threshold is 4.5:1. Source foregrounds, all backgrounds, geometry, and the already-compliant blue, source-blue, and purple foregrounds remain unchanged. These roles are not source facts or business-state meanings."
         },
         "font": {
           "classification": "DECISION",
