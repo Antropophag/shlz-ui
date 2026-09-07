@@ -1,0 +1,20 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-cross-browser-smoke",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "smoke-checkout-security",
+        "owner": "user",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Resolve PR #83 review: disable credential persistence in the smoke checkout and preserve the documented negative smoke-selection oracle.",
+    "revision": 2
+  },
+  "routeDigest": "cfab0caa0d0956819932f9481651f68f76d33dce1acf84214511544576e66603",
+  "version": 1,
+  "digest": "3b8d25bcb7e92f148939da8865673f3df424b123e8eabe5cdea753afeb8597fc"
+}

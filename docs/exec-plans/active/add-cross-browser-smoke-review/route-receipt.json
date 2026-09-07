@@ -1,0 +1,33 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Resolve PR #83 review: disable credential persistence in the smoke checkout and preserve the documented negative smoke-selection oracle.",
+    "material": [
+      "permissionsOrSecurity"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": true,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "add-cross-browser-smoke",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "smoke-checkout-security",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "cfab0caa0d0956819932f9481651f68f76d33dce1acf84214511544576e66603"
+}

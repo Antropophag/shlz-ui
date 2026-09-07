@@ -10,4 +10,4 @@
 
 ## 3. PR review follow-up
 
-- [ ] 3.1 Disable smoke checkout credential persistence; verify the parsed workflow explicitly opts out and smoke scenario selection still passes.
+- [x] 3.1 Disable smoke checkout credential persistence; verify the parsed workflow explicitly opts out and smoke scenario selection still passes.
