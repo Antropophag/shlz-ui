@@ -7,3 +7,7 @@
 
 - [x] 2.1 Run the functional smoke scenarios in all three browsers, using CI for missing local prerequisites, and verify existing Chromium regression coverage.
 - [x] 2.2 Complete independent Standards/Spec review, route conformance and delivery checks; publish the unmerged PR with exact results and limitations.
+
+## 3. PR review follow-up
+
+- [ ] 3.1 Disable smoke checkout credential persistence; verify the parsed workflow explicitly opts out and smoke scenario selection still passes.

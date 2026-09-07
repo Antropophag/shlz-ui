@@ -40,3 +40,12 @@ CI SHALL run the three-browser smoke suite in a separate job on pull requests to
 
 - **WHEN** any smoke test fails
 - **THEN** the smoke job reports failure independently of the full Chromium suite
+
+### Requirement: Smoke checkout credentials are not persisted
+
+The smoke job SHALL use checkout without persisting its authentication token or SSH key in local Git configuration for subsequent repository-controlled commands.
+
+#### Scenario: Repository commands run after checkout
+
+- **WHEN** the smoke checkout finishes and dependency, build, or test commands run
+- **THEN** checkout authentication credentials are not retained in local Git configuration

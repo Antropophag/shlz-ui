@@ -12,6 +12,8 @@ Keep a single executable body per scenario and preserve default test/snapshot id
 - Add `playwright.smoke.config.js` inheriting the base configuration, overriding projects, tag filter, and output directory. Keep the base configuration untouched so full-suite snapshot resolution stays stable.
 - Use one sequential three-project CI smoke job with `playwright install --with-deps chromium firefox webkit`. A matrix would repeat installation/build overhead for only seven cases per engine.
 - Expose `npm run test:e2e:smoke`, including normal Playwright `--project` and `--list` options. Document the commands and the limits of smoke coverage.
+- Set `persist-credentials: false` on the smoke checkout. Later commands need local files, not authenticated Git operations. Existing CI jobs and token permission scopes remain outside this review follow-up.
+- Keep the checker default-configuration target as the intentional negative oracle documented in the validation summary: a full Chromium listing must fail the smoke contract. Mapping it to the smoke configuration would invalidate the symmetric RED/GREEN proof.
 - Verify suite discovery through the Playwright CLI against the seven literal scenario identities and the unchanged default test listing. Run functional tests in all three browsers on CI; local Chromium/Firefox results and WebKit prerequisite availability are reported separately.
 
 ## Risks / Trade-offs

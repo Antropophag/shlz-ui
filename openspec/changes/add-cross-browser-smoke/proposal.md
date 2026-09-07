@@ -6,6 +6,7 @@ CI currently exercises browser behavior only in Chromium. A small shared smoke s
 
 - Tag seven existing functional scenarios and run the same scenarios in Chromium, Firefox, and WebKit through a separate smoke configuration and npm command.
 - Add a separate CI job installing all three browsers and their Linux dependencies.
+- Disable checkout credential persistence in that smoke job before repository-controlled commands run.
 - Preserve the complete Chromium browser/visual suite and its snapshot paths.
 
 ## Capabilities
