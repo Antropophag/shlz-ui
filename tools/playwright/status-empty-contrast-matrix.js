@@ -30,15 +30,33 @@ export async function expectReadable(locator, label) {
   return evidence;
 }
 
+function memberMarkup(family, member) {
+  if (family === "status")
+    return `<span class="shlz-status ${member === "blue" ? "" : `shlz-status--${member}`}">Состояние</span>`;
+  return `<section class="shlz-empty-state ${member === "fluid" ? "" : `shlz-empty-state--${member}`}"><h2 class="shlz-empty-state__title">Нет данных</h2><p class="shlz-empty-state__description">Измените условия</p></section>`;
+}
+
+async function expectMemberPaint(text, family, member) {
+  if (family === "status") {
+    await expect(text).toHaveCSS("color", statusPaints[member][0]);
+    await expect(text).toHaveCSS("background-color", statusPaints[member][1]);
+    await expect(text).toHaveCSS("min-height", "30px");
+    return;
+  }
+  const primary = ["customize", "basic"].includes(member);
+  await expect(text.first()).toHaveCSS(
+    "color",
+    primary ? "rgb(11, 22, 35)" : "rgba(11, 22, 35, 0.6)",
+  );
+  await expect(text.last()).toHaveCSS("color", "rgba(11, 22, 35, 0.6)");
+}
+
 export async function expectContrastMember(page, family, member) {
   expect(["status", "empty-state"]).toContain(family);
   const members =
     family === "status" ? Object.keys(statusPaints) : emptyVariants;
   expect(members).toContain(member);
-  const markup =
-    family === "status"
-      ? `<span class="shlz-status ${member === "blue" ? "" : `shlz-status--${member}`}">Состояние</span>`
-      : `<section class="shlz-empty-state ${member === "fluid" ? "" : `shlz-empty-state--${member}`}"><h2 class="shlz-empty-state__title">Нет данных</h2><p class="shlz-empty-state__description">Измените условия</p></section>`;
+  const markup = memberMarkup(family, member);
   await page.locator("body").evaluate(
     (body, { markup, surfaces }) => {
       body.querySelector("[data-contrast-probe]")?.remove();
@@ -69,18 +87,7 @@ export async function expectContrastMember(page, family, member) {
       measurements.push(
         await expectReadable(locator, `${family}/${member}/${name}`),
       );
-    if (family === "status") {
-      await expect(text).toHaveCSS("color", statusPaints[member][0]);
-      await expect(text).toHaveCSS("background-color", statusPaints[member][1]);
-      await expect(text).toHaveCSS("min-height", "30px");
-    } else {
-      const primary = ["customize", "basic"].includes(member);
-      await expect(text.first()).toHaveCSS(
-        "color",
-        primary ? "rgb(11, 22, 35)" : "rgba(11, 22, 35, 0.6)",
-      );
-      await expect(text.last()).toHaveCSS("color", "rgba(11, 22, 35, 0.6)");
-    }
+    await expectMemberPaint(text, family, member);
   }
   await page
     .locator("[data-contrast-probe]")
