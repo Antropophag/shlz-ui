@@ -1,0 +1,41 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Restore the existing release preparation workflow and reconcile development priorities without publishing packages or merging pull requests.",
+    "material": [
+      "publishingOrRelease",
+      "externalEffects",
+      "permissionsOrSecurity",
+      "externalAutomation"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": true,
+      "externalEffects": true,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": true,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": true
+    },
+    "openSpecChange": "restore-release-preparation",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "preparation-permission",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "activation-boundary",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "0326da8c70dbf9ac980d983b5da49b3882482d34c8f79318d17198a9d70f701a"
+}

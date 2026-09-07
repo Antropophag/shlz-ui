@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "restore-release-preparation",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "preparation-permission",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "activation-boundary",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Restore the existing release preparation workflow and reconcile development priorities without publishing packages or merging pull requests.",
+    "revision": 1
+  },
+  "routeDigest": "0326da8c70dbf9ac980d983b5da49b3882482d34c8f79318d17198a9d70f701a",
+  "version": 1,
+  "digest": "ea35dbefee711f101b7662a37cdd44cdc8ca4b8195f9c511213ac41cbabae504"
+}

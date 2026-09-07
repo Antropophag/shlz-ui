@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Restore the existing release preparation workflow and reconcile development priorities without publishing packages or merging pull requests.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "preparation-permission",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "2026-09-07: user said Делай after the plan explicitly proposed restoring version-PR preparation; the existing failure identifies the required repository permission"
+      }
+    },
+    {
+      "id": "activation-boundary",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository-inspection",
+        "ref": "openspec/changes/define-release-readiness/specs/release/package-release-readiness/spec.md and open activation PR #72 retain separate live activation and pilot gates"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "restore-release-preparation",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "2026-09-07: Делай authorizes execution of the proposed first development stage"
+    }
+  }
+}
