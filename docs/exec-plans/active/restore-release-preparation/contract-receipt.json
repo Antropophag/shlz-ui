@@ -1,0 +1,35 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "02e8c9ec64ed80fc19a14abacb43ed613b7a20b0acbb59ec9c0e800e9dd332f6",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "release/preparation-operations",
+        "content": "- **WHEN** maintainers consult the roadmap\n- **THEN** reconciliation of the source mapping is distinguished from implementing a new component and uncertain mappings remain unresolved until supported",
+        "id": "release/preparation-operations::Current roadmap preserves evidence boundaries::A source record remains unresolved for a delivered component",
+        "name": "A source record remains unresolved for a delivered component",
+        "requirement": "Current roadmap preserves evidence boundaries",
+        "requirementContent": "The development roadmap SHALL reference merged capabilities and order remaining release, adoption, accessibility, browser, specification and provenance work. Component audit status and source-record classification MUST NOT be represented as interchangeable product-completion percentages."
+      },
+      {
+        "capability": "release/preparation-operations",
+        "content": "- **WHEN** the version pull request is created successfully\n- **THEN** documentation records preparation as restored without claiming packages were published, GitLab activation passed, or the consumer pilot completed",
+        "id": "release/preparation-operations::Preparation and activation have distinct completion evidence::Preparation succeeds before activation",
+        "name": "Preparation succeeds before activation",
+        "requirement": "Preparation and activation have distinct completion evidence",
+        "requirementContent": "The maintainer record SHALL identify the failed run, corrected permission, successful retry and resulting version PR. Documentation SHALL distinguish completed release-policy/pipeline implementation from pending live GitLab activation and the subsequent real-application pilot."
+      },
+      {
+        "capability": "release/preparation-operations",
+        "content": "- **WHEN** the failed preparation run is retried after enabling the required repository permission\n- **THEN** preparation succeeds and a version pull request targeting main exists with coherent package versions and release notes\n- **AND** the pull request remains unmerged and default workflow permissions remain read-only",
+        "id": "release/preparation-operations::Preparation has the required repository permission::Repository permission prevented version PR creation",
+        "name": "Repository permission prevented version PR creation",
+        "requirement": "Preparation has the required repository permission",
+        "requirementContent": "The repository SHALL permit the existing GitHub Actions release-preparation workflow to create its version pull request. Default workflow token permissions MUST remain read-only. The operation MUST NOT add an approval or merge step or change existing publication/environment protections."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "6027be25c052aeb2eb8ca2b43c9b85abc632584212f0f1e9becb3064f294a2cc"
+}

@@ -2,20 +2,31 @@
 import assert from "node:assert/strict";
 import { Buffer } from "node:buffer";
 import { execFileSync } from "node:child_process";
-import { readFileSync, statSync } from "node:fs";
+import { readFileSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath, URL } from "node:url";
 
-const target = process.argv[2];
-const candidate = statSync(target).isDirectory();
+const root = fileURLToPath(new URL("../../../", import.meta.url));
+const failedFixture = new URL(
+  "./release-preparation-failed.json",
+  import.meta.url,
+);
+const target = path.resolve(process.argv[2] ?? "");
+assert(
+  target === path.resolve(root) || target === fileURLToPath(failedFixture),
+  "target must be this checkout or the fixed failed-attempt fixture",
+);
+const candidate = target === path.resolve(root);
 const selection = candidate
   ? {
       run: 33957916744,
       attempt: 2,
       source: "b1cef24b70822c01de9a84a4f3bc14a09c12feaf",
     }
-  : JSON.parse(readFileSync(target, "utf8"));
+  : JSON.parse(readFileSync(failedFixture, "utf8"));
 const api = (path) =>
   JSON.parse(
-    execFileSync("gh", ["api", `repos/Antropophag/shlz-ui/${path}`], {
+    execFileSync("/usr/bin/gh", ["api", `repos/Antropophag/shlz-ui/${path}`], {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "pipe"],
     }),

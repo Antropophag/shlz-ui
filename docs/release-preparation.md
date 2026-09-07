@@ -52,8 +52,10 @@ request`: GitHub Actions was not permitted to create or approve pull requests.
 The live verification oracle at
 `tools/tests/fixtures/release-preparation-oracle.mjs` checks immutable attempt
 identities and the generated release files through read-only GitHub APIs. Its
-known-bad input selects the original failed attempt. It is an explicit
-maintainer check requiring authenticated GitHub access, not part of offline CI.
+known-bad input selects the original failed attempt. It accepts only this
+checkout or the fixed failed-attempt fixture, and uses `/usr/bin/gh` rather
+than searching `PATH`. It is an explicit Linux maintainer check requiring that
+CLI location and authenticated GitHub access, not part of offline CI.
 
 The generated PR's checks must be assessed independently before a human merges
 it. A successful preparation run alone does not prove that PR CI, package
