@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
-import { statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -8,10 +7,17 @@ const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   "..",
 );
-const target = path.resolve(process.argv[2] ?? repoRoot);
-const config = statSync(target).isDirectory()
-  ? path.join(target, "playwright.smoke.config.js")
-  : target;
+const target = process.argv[2] ?? repoRoot;
+const defaultConfig = path.join(repoRoot, "playwright.config.js");
+if (target !== repoRoot && target !== defaultConfig)
+  throw new Error(
+    "Expected this repository root or its default configuration.",
+  );
+const config =
+  target === defaultConfig
+    ? defaultConfig
+    : path.join(repoRoot, "playwright.smoke.config.js");
+const alphabetical = (left, right) => left.localeCompare(right);
 const report = JSON.parse(
   execFileSync(
     process.execPath,
@@ -34,7 +40,7 @@ const expected = [
   "opens, synchronizes state, dismisses and restores focus",
   "Date Picker passes automated accessibility checks and restores focus after keyboard dismissal and commit",
   "native selection, file drops, filtering, disabled and consumer rendering work",
-].sort();
+].sort(alphabetical);
 const discovered = new Map();
 function visit(suites) {
   for (const suite of suites) {
@@ -54,14 +60,14 @@ function visit(suites) {
 }
 assert.deepEqual(report.errors, []);
 visit(report.suites);
-assert.deepEqual([...discovered.keys()].sort(), [
+assert.deepEqual([...discovered.keys()].sort(alphabetical), [
   "chromium",
   "firefox",
   "webkit",
 ]);
 for (const [browser, titles] of discovered) {
   assert.deepEqual(
-    titles.sort(),
+    titles.sort(alphabetical),
     expected,
     `smoke scenario identities: ${browser}`,
   );

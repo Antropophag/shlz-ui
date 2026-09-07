@@ -114,10 +114,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Install smoke browsers and host dependencies
-        run: npx playwright install --with-deps chromium firefox webkit
+        run: node node_modules/@playwright/test/cli.js install --with-deps chromium firefox webkit
 
       - name: Build packages required by test discovery
         run: npm run generate && npm run build:packages
