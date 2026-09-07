@@ -68,26 +68,34 @@
       "claim": "visible text and consumer context own meaning; role=status is not implicit",
       "classification": "repository-decision",
       "evidence": "docs/components/status.md"
+    },
+    {
+      "claim": "six semantic foreground corrections improve active-text contrast while source colors, all backgrounds and the three compliant foregrounds remain unchanged",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/improve-status-empty-contrast/design.md"
     }
   ],
   "browserTests": [
     "tools/playwright/status-identity-wave4.spec.js",
-    "tools/playwright/consumer-workspace.spec.js"
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/status-empty-contrast.spec.js"
   ],
-  "visualSnapshots": [],
+  "visualSnapshots": [
+    "tools/playwright/status-empty-contrast.spec.js-snapshots/status-accessible-paints-chromium-linux.png"
+  ],
   "evidence": {
     "source-integrity": "pass: raw Status.svg geometry and paint families are asserted without semantic renaming",
     "structural-contract": "pass: shared guard classifies every executable and live Status root",
     "runtime-browser": "not-applicable: Status is a static textual primitive and application rendering owns changes",
-    "accessibility": "pass: labels remain unfocusable text without implicit live-region semantics or color-only meaning",
-    "focused-visual": "pass: component-local computed paint matrix covers all public modifiers",
+    "accessibility": "pass: all nine paints exceed 4.5:1 across four supported surfaces; labels remain unfocusable text without implicit live regions or color-only meaning",
+    "focused-visual": "pass: independent literal foreground/background expectations cover all nine modifiers; focused paint snapshot preserves hue families and geometry",
     "consumer-integration": "pass: Data Workspace filters rows by visible status text while Status paint remains intentionally consumer-neutral",
     "responsive-content-stress": "pass: long text remains component-bounded in a narrow table cell"
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: source paint matrix is static visual evidence only"
+        "pass: original source paints and documented semantic production foregrounds remain distinct static evidence"
       ],
       "realInteractionVisual": [
         "not-applicable: Status is static text with no hover, focus, active or disabled interaction contract"
@@ -105,13 +113,14 @@
     {
       "id": "status-source-paint-contrast",
       "severity": "P3",
-      "status": "documented-source-backed-deviation",
-      "description": "Six exact source paint pairs are below the 4.5:1 normal-text threshold; text still states meaning and Wave 4 does not recolor source authority.",
-      "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
-      "tracking": "docs/component-audits/wave-4-report.md"
+      "status": "resolved-semantic-contrast",
+      "description": "The six formerly failing production foregrounds now use explicit semantic corrections; all nine paints reach at least 4.780:1 across supported surfaces while original source paints remain intact.",
+      "evidence": "tools/playwright/status-empty-contrast.spec.js",
+      "tracking": "docs/component-audits/status-empty-contrast-report.md"
     }
   ],
   "knownLimitations": [
-    "domain status-to-paint mapping and live announcements are consumer-owned"
+    "domain status-to-paint mapping and live announcements are consumer-owned",
+    "custom foregrounds and unsupported surfaces require consumer contrast validation; this episode certifies Chromium only"
   ]
 }

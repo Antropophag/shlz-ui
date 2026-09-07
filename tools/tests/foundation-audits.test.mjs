@@ -149,7 +149,7 @@ test("source token layers preserve exact foundation facts", async () => {
   );
 });
 
-test("semantic color aliases resolve to source facts and generated CSS is exact", async () => {
+test("semantic colors resolve to source facts or accessibility decisions and generated CSS is exact", async () => {
   const authored = JSON.parse(
     await readFile("packages/tokens/tokens.json", "utf8"),
   );
@@ -170,8 +170,16 @@ test("semantic color aliases resolve to source facts and generated CSS is exact"
     }
   };
   collectAliases(authored.semantic.color);
-  const accessibleDecisions = new Set(["rgb(11 22 35 / 60%)"]);
-  assert.equal(colorAliases.length, 13);
+  const accessibleDecisions = new Set([
+    "rgb(11 22 35 / 60%)",
+    "#3D6940",
+    "#1B6D2D",
+    "#8A521E",
+    "#2E667D",
+    "#90388E",
+    "#676D74",
+  ]);
+  assert.equal(colorAliases.length, 19);
   for (const alias of colorAliases) {
     if (accessibleDecisions.has(alias)) continue;
     const value = alias

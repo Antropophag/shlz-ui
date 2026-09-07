@@ -444,6 +444,5 @@ test("Wave 5 meaningful text pairs pass the alpha-aware contrast guard", async (
         (luminance([255, 255, 255]) + 0.05) / (luminance(foreground) + 0.05)
       );
     });
-  expect(emptyStateRatio).toBeCloseTo(2.79, 1);
-  expect(emptyStateRatio).toBeLessThan(4.5);
+  expect(emptyStateRatio).toBeGreaterThanOrEqual(4.5);
 });

@@ -140,14 +140,7 @@ test("Wave 4 contrast ledger separates source fidelity from threshold results", 
     });
     if (contrastRatio(color, backgroundColor) < 4.5) belowThreshold.push(id);
   }
-  expect(belowThreshold).toEqual([
-    "status-showcase-green",
-    "status-showcase-bright-green",
-    "status-showcase-orange",
-    "status-showcase-cyan",
-    "status-showcase-pink",
-    "status-showcase-neutral",
-  ]);
+  expect(belowThreshold).toEqual([]);
 });
 
 const keyboardFocus = async (page, locator) => {

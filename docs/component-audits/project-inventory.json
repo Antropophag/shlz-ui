@@ -998,10 +998,10 @@
         {
           "id": "status-source-paint-contrast",
           "severity": "P3",
-          "status": "documented-source-backed-deviation",
-          "description": "Six exact source paint pairs are below 4.5:1 for normal text; visible text preserves meaning and source paint was not silently recolored.",
-          "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
-          "tracking": "docs/component-audits/wave-4-report.md"
+          "status": "resolved-semantic-contrast",
+          "description": "Six foreground corrections preserve source hue/background families; all nine production paints exceed 4.5:1 on supported surfaces without changing raw source.",
+          "evidence": "tools/playwright/status-empty-contrast.spec.js",
+          "tracking": "docs/component-audits/status-empty-contrast-report.md"
         }
       ],
       "limitations": [],
@@ -1372,7 +1372,7 @@
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",
       "authoritative_source": [
-        "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
       ],
       "production_implementation": [
         "packages/styles/components/empty-state.css"
@@ -1394,10 +1394,10 @@
         {
           "id": "empty-state-simple-source-contrast",
           "severity": "P3",
-          "status": "documented-source-backed-deviation",
-          "description": "Exact Empty/Simple title paint is about 2.79:1 on white.",
-          "evidence": "tools/playwright/data-content-wave5.spec.js",
-          "tracking": "docs/component-audits/wave-5-report.md"
+          "status": "resolved-semantic-contrast",
+          "description": "The accessible supporting-text role corrects Simple title and Basic description contrast while source Gray 200 remains preserved.",
+          "evidence": "tools/playwright/status-empty-contrast.spec.js",
+          "tracking": "docs/component-audits/status-empty-contrast-report.md"
         }
       ],
       "limitations": [],

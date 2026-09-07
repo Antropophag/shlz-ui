@@ -1761,6 +1761,14 @@
           "status": {
             "success": "{source.color.Aditional.Bright green}",
             "danger": "{source.color.Aditional.Red 100}"
+          },
+          "status-foreground": {
+            "green": "#3D6940",
+            "bright-green": "#1B6D2D",
+            "orange": "#8A521E",
+            "cyan": "#2E667D",
+            "pink": "#90388E",
+            "neutral": "#676D74"
           }
         },
         "font": {

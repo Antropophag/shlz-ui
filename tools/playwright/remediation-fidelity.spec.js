@@ -194,7 +194,7 @@ test("Empty State exposes Simple, Customize and Basic source compositions", asyn
   expect(
     await computed(simple.locator(".shlz-empty-state__title")),
   ).toMatchObject({
-    color: "rgb(147, 156, 165)",
+    color: "rgba(11, 22, 35, 0.6)",
     fontSize: "15px",
     fontWeight: "400",
     lineHeight: "19.5px",
@@ -227,7 +227,7 @@ test("Empty State exposes Simple, Customize and Basic source compositions", asyn
   expect(
     await computed(basic.locator(".shlz-empty-state__description")),
   ).toMatchObject({
-    color: "rgb(147, 156, 165)",
+    color: "rgba(11, 22, 35, 0.6)",
     fontSize: "16px",
     fontWeight: "400",
     lineHeight: "20.8px",

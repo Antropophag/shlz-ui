@@ -74,7 +74,8 @@
 }
 
 .shlz-empty-state__title {
-  color: var(--shlz-semantic-color-text-secondary);
+  /* DECISION: readable supporting text; source Gray 200 remains unchanged. */
+  color: var(--shlz-semantic-color-text-supporting-accessible);
   font-size: 15px;
   font-weight: 400;
   line-height: 19.5px;
@@ -82,7 +83,7 @@
 }
 
 .shlz-empty-state__description {
-  color: var(--shlz-semantic-color-text-secondary);
+  color: var(--shlz-semantic-color-text-supporting-accessible);
   font-size: 14px;
   line-height: 20px;
 }

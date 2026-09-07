@@ -1,6 +1,6 @@
 {
   "component": "empty-state",
-  "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip",
+  "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
   "referenceSources": ["docs/components/empty-state.md"],
   "implementation": ["packages/styles/components/empty-state.css"],
   "behavior": null,
@@ -37,28 +37,37 @@
     {
       "claim": "Simple, Customize and Basic are three distinct source compositions with source-specific typography and geometry",
       "classification": "source-fact",
-      "evidence": "shlz-design-source/raw/svg/UI Kit – Interface elements.zip"
+      "evidence": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
     },
     {
       "claim": "optional regions generalize the source compositions without owning application empty-data state",
       "classification": "repository-decision",
       "evidence": "docs/components/empty-state.md"
+    },
+    {
+      "claim": "secondary titles and descriptions reuse the accessible supporting-text role; primary titles, illustrations and source values remain unchanged",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/improve-status-empty-contrast/design.md"
     }
   ],
   "browserTests": [
     "tools/playwright/data-content-wave5.spec.js",
     "tools/playwright/consumer-workspace.spec.js",
-    "tools/playwright/remediation-fidelity.spec.js"
+    "tools/playwright/remediation-fidelity.spec.js",
+    "tools/playwright/status-empty-contrast.spec.js"
   ],
-  "visualSnapshots": [],
+  "visualSnapshots": [
+    "tools/playwright/status-empty-contrast.spec.js-snapshots/empty-state-accessible-text-chromium-linux.png",
+    "tools/playwright/status-empty-contrast.spec.js-snapshots/empty-state-accessible-stress-chromium-linux.png"
+  ],
   "evidence": {
     "source-integrity": "pass: three source variants and their distinct typography/geometry are checked against extracted source references",
     "structural-contract": "pass: all five roots are classified and optional visual/title/description/action regions remain composable",
     "runtime-browser": "not-applicable: Empty State owns no loading, retry, announcement or visibility controller",
-    "accessibility": "pass: no gratuitous alert/status role is added, heading level remains consumer-owned and nested actions stay native",
-    "focused-visual": "pass: computed variant geometry and source-specific typography are asserted without broad snapshot substitution",
-    "consumer-integration": "pass: Data Workspace renders Empty State for an application-owned zero-result condition and reset recovers rows",
-    "responsive-content-stress": "pass: long title/description and action remain contained in a narrow fluid composition"
+    "accessibility": "pass: titles and descriptions exceed 4.5:1 in all four compositions on four light surfaces, no live role is added and actions stay native",
+    "focused-visual": "pass: component snapshots preserve the three source geometries, primary titles and illustration paint with documented supporting-text correction",
+    "consumer-integration": "pass: readable Data Workspace empty results recover all rows through the native reset button activated with Enter",
+    "responsive-content-stress": "pass: long title and description remain contained at 200 percent text size in a 280px fluid composition at a 360px viewport; existing native-action stress also remains covered"
   },
   "interactionEvidence": {
     "types": {
@@ -81,13 +90,14 @@
     {
       "id": "empty-state-simple-source-contrast",
       "severity": "P3",
-      "status": "documented-source-backed-deviation",
-      "description": "The exact subdued Empty/Simple title paint measures about 2.79:1 on white, below the 4.5:1 normal-text threshold; Wave 5 preserves source authority rather than silently recoloring it.",
-      "evidence": "tools/playwright/data-content-wave5.spec.js",
-      "tracking": "docs/component-audits/wave-5-report.md"
+      "status": "resolved-semantic-contrast",
+      "description": "Simple title and Basic description no longer use the low-contrast source Gray 200 in production. The existing accessible supporting role yields at least 4.575:1 across supported surfaces; original SVGs remain unchanged.",
+      "evidence": "tools/playwright/status-empty-contrast.spec.js",
+      "tracking": "docs/component-audits/status-empty-contrast-report.md"
     }
   ],
   "knownLimitations": [
-    "dynamic announcements are consumer-owned and are not implied by ordinary empty presentation"
+    "dynamic announcements are consumer-owned and are not implied by ordinary empty presentation",
+    "custom foreground/background combinations require consumer contrast validation; this episode certifies Chromium only"
   ]
 }

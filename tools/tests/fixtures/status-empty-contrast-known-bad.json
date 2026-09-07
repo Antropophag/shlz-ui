@@ -1,0 +1,4 @@
+{
+  "sourceCommit": "f2a4882",
+  "css": ".shlz-status--green{color:#57965C}.shlz-status--bright-green{color:#25983E}.shlz-status--orange{color:#D47E2E}.shlz-status--cyan{color:#4191B3}.shlz-status--pink{color:#A942A7}.shlz-status--neutral{color:#939CA5}.shlz-empty-state__title,.shlz-empty-state__description{color:#939CA5}.shlz-empty-state--customize .shlz-empty-state__title,.shlz-empty-state--basic .shlz-empty-state__title{color:#0B1623}"
+}

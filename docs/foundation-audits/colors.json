@@ -28,7 +28,7 @@
     },
     {
       "classification": "repository-decision",
-      "claim": "Text, surface, border, action, and status roles are semantic aliases.",
+      "claim": "Text, surface, border, action and status roles alias source colors or document explicit accessible-production foreground decisions.",
       "evidence": "packages/tokens/provenance.json"
     },
     {
@@ -44,7 +44,7 @@
   ],
   "evidence": {
     "source-integrity": "pass: source tests retain all 40 named paints, including 16 explicit alpha values, without rounding or opaque conversion",
-    "structural-contract": "pass: all 11 semantic color aliases resolve to authored source paints and generated CSS contains no unresolved source alias",
+    "structural-contract": "pass: 11 semantic color aliases resolve to authored source paints; two supporting/placeholder roles and six Status foreground roles are explicit accessibility decisions; all 19 generated color roles have exact parity and no unresolved alias",
     "runtime-browser": "pass: focused browser assertions verify primary, alpha, text, surface, and notification-shadow paint outcomes",
     "accessibility": "not-applicable: palette fidelity and representative paint application do not establish component contrast or WCAG compliance; those remain component and consumer audit claims",
     "focused-visual": "pass: representative currentColor and preserved-paint icon snapshots exercise source-backed paint topology without palette substitution",
