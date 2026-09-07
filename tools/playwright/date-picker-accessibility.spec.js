@@ -80,43 +80,45 @@ test("standalone Calendar passes automated accessibility checks and keyboard sta
   expectMaterialStates("date-picker-calendar");
 });
 
-test("Date Picker passes automated accessibility checks and restores focus after keyboard dismissal and commit", async ({
-  page,
-}) => {
-  await page.goto(fixtureUrl("date-picker.html"));
+test(
+  "Date Picker passes automated accessibility checks and restores focus after keyboard dismissal and commit",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    await page.goto(fixtureUrl("date-picker.html"));
 
-  const picker = page.locator("[data-single-picker]");
-  const trigger = picker.getByRole("button", {
-    name: "Открыть календарь для поля «Дата поездки»",
-  });
-  await trigger.focus();
-  await expect(trigger).not.toHaveCSS("outline-style", "none");
-  await trigger.press("Enter");
+    const picker = page.locator("[data-single-picker]");
+    const trigger = picker.getByRole("button", {
+      name: "Открыть календарь для поля «Дата поездки»",
+    });
+    await trigger.focus();
+    await expect(trigger).not.toHaveCSS("outline-style", "none");
+    await trigger.press("Enter");
 
-  const surface = picker.locator("[data-shlz-popover]");
-  await expect(surface).toBeVisible();
-  await expect(trigger).toHaveAttribute("aria-expanded", "true");
-  await expect(
-    surface.getByRole("button", { name: /12 августа 2026/ }),
-  ).toBeFocused();
-  await expectNoAccessibilityViolations(page, "[data-single-picker]");
-  verifyMaterialState("date-picker-calendar", "picker-open");
+    const surface = picker.locator("[data-shlz-popover]");
+    await expect(surface).toBeVisible();
+    await expect(trigger).toHaveAttribute("aria-expanded", "true");
+    await expect(
+      surface.getByRole("button", { name: /12 августа 2026/ }),
+    ).toBeFocused();
+    await expectNoAccessibilityViolations(page, "[data-single-picker]");
+    verifyMaterialState("date-picker-calendar", "picker-open");
 
-  await page.keyboard.press("Escape");
-  await expect(surface).toBeHidden();
-  await expect(trigger).toBeFocused();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-  verifyMaterialState("date-picker-calendar", "picker-dismissed");
+    await page.keyboard.press("Escape");
+    await expect(surface).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    verifyMaterialState("date-picker-calendar", "picker-dismissed");
 
-  await trigger.press("Space");
-  await expect(surface).toBeVisible();
-  await page.keyboard.press("ArrowRight");
-  await page.keyboard.press("Enter");
-  await expect(surface).toBeHidden();
-  await expect(trigger).toBeFocused();
-  await expect(
-    picker.getByRole("textbox", { name: "Дата поездки" }),
-  ).toHaveValue("13.08.2026");
-  verifyMaterialState("date-picker-calendar", "picker-committed");
-  expectMaterialStates("date-picker-calendar");
-});
+    await trigger.press("Space");
+    await expect(surface).toBeVisible();
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+    await expect(surface).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await expect(
+      picker.getByRole("textbox", { name: "Дата поездки" }),
+    ).toHaveValue("13.08.2026");
+    verifyMaterialState("date-picker-calendar", "picker-committed");
+    expectMaterialStates("date-picker-calendar");
+  },
+);

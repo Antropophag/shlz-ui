@@ -33,41 +33,43 @@ test("all Wave 2 executable and live roots are classified", async ({
   expect(Object.keys(manifests)).toHaveLength(5);
 });
 
-test("Input keeps native value, events, focus, disabled and programmatic updates", async ({
-  page,
-}) => {
-  const input = page.locator("[data-workspace-search]");
-  await input.evaluate((element) => {
-    window.__inputEvents = { input: 0, change: 0 };
-    element.addEventListener("input", () => window.__inputEvents.input++);
-    element.addEventListener("change", () => window.__inputEvents.change++);
-  });
-  await expect(input).toHaveAccessibleName("Поиск по заявкам");
-  await input.focus();
-  await expect(input).toBeFocused();
-  await input.fill("SD-2418");
-  await expect(input).toHaveValue("SD-2418");
-  await expect(page.locator("[data-workspace-result-count]")).toHaveText("1");
-  await input.press("Tab");
-  await expect
-    .poll(() => page.evaluate(() => window.__inputEvents))
-    .toEqual({
+test(
+  "Input keeps native value, events, focus, disabled and programmatic updates",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    const input = page.locator("[data-workspace-search]");
+    await input.evaluate((element) => {
+      window.__inputEvents = { input: 0, change: 0 };
+      element.addEventListener("input", () => window.__inputEvents.input++);
+      element.addEventListener("change", () => window.__inputEvents.change++);
+    });
+    await expect(input).toHaveAccessibleName("Поиск по заявкам");
+    await input.focus();
+    await expect(input).toBeFocused();
+    await input.fill("SD-2418");
+    await expect(input).toHaveValue("SD-2418");
+    await expect(page.locator("[data-workspace-result-count]")).toHaveText("1");
+    await input.press("Tab");
+    await expect
+      .poll(() => page.evaluate(() => window.__inputEvents))
+      .toEqual({
+        input: 1,
+        change: 1,
+      });
+    await input.evaluate((element) => {
+      element.value = "programmatic";
+    });
+    await expect(input).toHaveValue("programmatic");
+    expect(await page.evaluate(() => window.__inputEvents)).toEqual({
       input: 1,
       change: 1,
     });
-  await input.evaluate((element) => {
-    element.value = "programmatic";
-  });
-  await expect(input).toHaveValue("programmatic");
-  expect(await page.evaluate(() => window.__inputEvents)).toEqual({
-    input: 1,
-    change: 1,
-  });
-  await input.evaluate((element) => {
-    element.disabled = true;
-  });
-  await expect(input).toBeDisabled();
-});
+    await input.evaluate((element) => {
+      element.disabled = true;
+    });
+    await expect(input).toBeDisabled();
+  },
+);
 
 test("Textarea remains native and relates error text without a library controller", async ({
   page,
@@ -91,63 +93,72 @@ test("Textarea remains native and relates error text without a library controlle
   await expect(textarea).toHaveValue(/Первая строка/);
 });
 
-test("Checkbox uses one native lifecycle for pointer, Space, mixed and workspace state", async ({
-  page,
-}) => {
-  const checkbox = page.locator(
-    "[data-component-audit-id='checkbox-medium-default']",
-  );
-  await checkbox.evaluate((element) => {
-    window.__checkboxEvents = { input: 0, change: 0 };
-    element.addEventListener("input", () => window.__checkboxEvents.input++);
-    element.addEventListener("change", () => window.__checkboxEvents.change++);
-  });
-  await checkbox.click();
-  await expect(checkbox).toBeChecked();
-  await checkbox.press("Space");
-  await expect(checkbox).not.toBeChecked();
-  expect(await page.evaluate(() => window.__checkboxEvents)).toEqual({
-    input: 2,
-    change: 2,
-  });
-  await checkbox.evaluate((element) => {
-    element.checked = true;
-  });
-  expect(await page.evaluate(() => window.__checkboxEvents)).toEqual({
-    input: 2,
-    change: 2,
-  });
-  await expect(
-    page.locator("[data-component-audit-id='checkbox-medium-mixed']"),
-  ).toHaveJSProperty("indeterminate", true);
-  const disabled = page.locator(
-    "[data-component-audit-id='checkbox-medium-disabled']",
-  );
-  await disabled.evaluate((element) => {
-    window.__disabledCheckboxEvents = { input: 0, change: 0 };
-    element.addEventListener(
-      "input",
-      () => window.__disabledCheckboxEvents.input++,
+test(
+  "Checkbox uses one native lifecycle for pointer, Space, mixed and workspace state",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    const checkbox = page.locator(
+      "[data-component-audit-id='checkbox-medium-default']",
     );
-    element.addEventListener(
-      "change",
-      () => window.__disabledCheckboxEvents.change++,
+    await checkbox.evaluate((element) => {
+      window.__checkboxEvents = { input: 0, change: 0 };
+      element.addEventListener("input", () => window.__checkboxEvents.input++);
+      element.addEventListener(
+        "change",
+        () => window.__checkboxEvents.change++,
+      );
+    });
+    await checkbox.click();
+    await expect(checkbox).toBeChecked();
+    await checkbox.press("Space");
+    await expect(checkbox).not.toBeChecked();
+    expect(await page.evaluate(() => window.__checkboxEvents)).toEqual({
+      input: 2,
+      change: 2,
+    });
+    await checkbox.evaluate((element) => {
+      element.checked = true;
+    });
+    expect(await page.evaluate(() => window.__checkboxEvents)).toEqual({
+      input: 2,
+      change: 2,
+    });
+    await expect(
+      page.locator("[data-component-audit-id='checkbox-medium-mixed']"),
+    ).toHaveJSProperty("indeterminate", true);
+    const disabled = page.locator(
+      "[data-component-audit-id='checkbox-medium-disabled']",
     );
-    element.click();
-  });
-  await expect(disabled).toBeChecked();
-  expect(await page.evaluate(() => window.__disabledCheckboxEvents)).toEqual({
-    input: 0,
-    change: 0,
-  });
+    await disabled.evaluate((element) => {
+      window.__disabledCheckboxEvents = { input: 0, change: 0 };
+      element.addEventListener(
+        "input",
+        () => window.__disabledCheckboxEvents.input++,
+      );
+      element.addEventListener(
+        "change",
+        () => window.__disabledCheckboxEvents.change++,
+      );
+      element.click();
+    });
+    await expect(disabled).toBeChecked();
+    expect(await page.evaluate(() => window.__disabledCheckboxEvents)).toEqual({
+      input: 0,
+      change: 0,
+    });
 
-  await page
-    .locator("[data-component-audit-id='checkbox-workspace-sd-2418']")
-    .check();
-  await expect(page.locator("[data-workspace-selected-count]")).toHaveText("1");
-  await page.locator("[data-workspace-clear]").click();
-  await expect(page.locator("[data-workspace-selected-count]")).toHaveText("0");
-});
+    await page
+      .locator("[data-component-audit-id='checkbox-workspace-sd-2418']")
+      .check();
+    await expect(page.locator("[data-workspace-selected-count]")).toHaveText(
+      "1",
+    );
+    await page.locator("[data-workspace-clear]").click();
+    await expect(page.locator("[data-workspace-selected-count]")).toHaveText(
+      "0",
+    );
+  },
+);
 
 test("Radio group owns Tab, Arrow, Space, exclusion and exact events", async ({
   page,

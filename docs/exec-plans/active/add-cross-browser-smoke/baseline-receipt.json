@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "test/browser-smoke",
+    "commit": "961fb72208b5732fc64d80d6ecb1914ce1faab98",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "test/browser-smoke",
+      "headRefOid": "961fb72208b5732fc64d80d6ecb1914ce1faab98",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/83"
+    },
+    "repository": {
+      "digest": "5f5d9ea77cd7f3603ceedb7737a7fd2ad7222914342fe019bef30d07a9f03d3e",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-browser-smoke"
+    },
+    "upstream": "origin/test/browser-smoke"
+  },
+  "requirementsDigest": "55874b44fa832ea74caf2275813833079fc43faa031a1bf47a9f1f9842a830f2",
+  "routeDigest": "bfcbb5e3730fef3ab8ec0f4baa81037d17fe8ac8d6e58fac2ac9bbf218db8961",
+  "version": 1,
+  "digest": "78ee4ebf8ca331c9f8b5240474a945efab74df5857e8f132e9d938cc3093e074"
+}

@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "add-cross-browser-smoke",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "smoke-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "scenario-selection",
+        "owner": "agent",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Continue add-cross-browser-smoke: run seven existing functional scenarios in Chromium, Firefox and WebKit in a separate CI job while preserving the full Chromium suite.",
+    "revision": 1
+  },
+  "routeDigest": "bfcbb5e3730fef3ab8ec0f4baa81037d17fe8ac8d6e58fac2ac9bbf218db8961",
+  "version": 1,
+  "digest": "55874b44fa832ea74caf2275813833079fc43faa031a1bf47a9f1f9842a830f2"
+}

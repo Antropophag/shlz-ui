@@ -241,36 +241,38 @@ test("opened Select uses the SHLZ surface and emits one value change", async ({
   await expect(root.locator(".shlz-select__listbox")).toBeHidden();
 });
 
-test("Select keyboard lifecycle opens, navigates, selects and restores focus", async ({
-  page,
-}) => {
-  const root = page.locator("#select-demo [data-shlz-select]").first();
-  const trigger = root.locator(".shlz-select__trigger");
-  await trigger.focus();
-  await page.keyboard.press("ArrowUp");
-  await expect(root.locator('[role="option"]').first()).toBeFocused();
-  await page.keyboard.press("End");
-  await expect(root.locator('[role="option"]').last()).toBeFocused();
-  await page.keyboard.press("Home");
-  await expect(root.locator('[role="option"]').first()).toBeFocused();
-  await page.keyboard.press("ArrowDown");
-  await expect(root.locator('[role="option"]').nth(1)).toBeFocused();
-  await page.keyboard.press("ArrowUp");
-  await expect(root.locator('[role="option"]').first()).toBeFocused();
-  await page.keyboard.press("Escape");
-  await expect(trigger).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(root.locator('[role="option"]').first()).toBeFocused();
-  await page.keyboard.press("Enter");
-  await expect(root.locator('input[type="hidden"]')).toHaveValue("Новая");
-  await expect(trigger).toBeFocused();
-  await page.keyboard.press(" ");
-  await expect(root.locator('[role="option"]').first()).toBeFocused();
-  await page.keyboard.press("ArrowDown");
-  await page.keyboard.press(" ");
-  await expect(root.locator('input[type="hidden"]')).toHaveValue("В работе");
-  await expect(trigger).toBeFocused();
-});
+test(
+  "Select keyboard lifecycle opens, navigates, selects and restores focus",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    const root = page.locator("#select-demo [data-shlz-select]").first();
+    const trigger = root.locator(".shlz-select__trigger");
+    await trigger.focus();
+    await page.keyboard.press("ArrowUp");
+    await expect(root.locator('[role="option"]').first()).toBeFocused();
+    await page.keyboard.press("End");
+    await expect(root.locator('[role="option"]').last()).toBeFocused();
+    await page.keyboard.press("Home");
+    await expect(root.locator('[role="option"]').first()).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await expect(root.locator('[role="option"]').nth(1)).toBeFocused();
+    await page.keyboard.press("ArrowUp");
+    await expect(root.locator('[role="option"]').first()).toBeFocused();
+    await page.keyboard.press("Escape");
+    await expect(trigger).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(root.locator('[role="option"]').first()).toBeFocused();
+    await page.keyboard.press("Enter");
+    await expect(root.locator('input[type="hidden"]')).toHaveValue("Новая");
+    await expect(trigger).toBeFocused();
+    await page.keyboard.press(" ");
+    await expect(root.locator('[role="option"]').first()).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    await page.keyboard.press(" ");
+    await expect(root.locator('input[type="hidden"]')).toHaveValue("В работе");
+    await expect(trigger).toBeFocused();
+  },
+);
 
 test("outside dismissal, Tab, disabled options and multiple instances remain safe", async ({
   page,
