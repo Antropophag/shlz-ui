@@ -5,5 +5,5 @@
 
 ## 2. Validation and delivery
 
-- [ ] 2.1 Run the functional smoke scenarios in all three browsers, using CI for missing local prerequisites, and verify existing Chromium regression coverage.
-- [ ] 2.2 Complete independent Standards/Spec review, route conformance and delivery checks; publish the unmerged PR with exact results and limitations.
+- [x] 2.1 Run the functional smoke scenarios in all three browsers, using CI for missing local prerequisites, and verify existing Chromium regression coverage.
+- [x] 2.2 Complete independent Standards/Spec review, route conformance and delivery checks; publish the unmerged PR with exact results and limitations.
