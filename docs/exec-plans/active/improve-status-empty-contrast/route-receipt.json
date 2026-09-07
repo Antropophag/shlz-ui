@@ -2,9 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Improve Status and Empty State text contrast through documented semantic foregrounds while preserving source facts and independently verifying both component contracts.",
-    "material": [
-      "publicContract"
-    ],
+    "material": ["publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

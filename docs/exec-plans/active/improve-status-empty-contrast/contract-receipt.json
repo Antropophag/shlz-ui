@@ -1,0 +1,59 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "609b4d0dccf62b013a2a41a9d1febe5cf2784cc05e0bbc065619d930924b1d5b",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "data-display/empty-state",
+        "content": "- **WHEN** Data Workspace search has no matching rows and the user activates its reset action with the keyboard\n- **THEN** readable Empty State content appears for the empty condition and reset restores the rows through existing application behavior",
+        "id": "data-display/empty-state::Consumer state and native actions remain independent::A consumer reaches and clears an empty result",
+        "name": "A consumer reaches and clears an empty result",
+        "requirement": "Consumer state and native actions remain independent",
+        "requirementContent": "The component SHALL preserve optional visual, title, description and action regions. It MUST NOT introduce a visibility controller, implicit alert/live-region behavior, loading/error ownership or new focus stops. Consumers SHALL continue to choose heading levels and empty-data conditions; nested buttons and links SHALL retain native behavior."
+      },
+      {
+        "capability": "data-display/empty-state",
+        "content": "- **WHEN** any supported composition is rendered on any supported surface\n- **THEN** each present title and description reaches 4.5:1 and the component retains its source-specific typography and layout",
+        "id": "data-display/empty-state::Empty State supporting text is readable::A supported Empty State composition is rendered",
+        "name": "A supported Empty State composition is rendered",
+        "requirement": "Empty State supporting text is readable",
+        "requirementContent": "Simple, Customize, Basic and fluid consumer-composed Empty States SHALL use text that reaches 4.5:1 on white, Gray 50, Blue 50 and page surfaces. Secondary titles and descriptions SHALL use the existing accessible supporting-text role. Primary Customize/Basic titles, illustration paints and source composition geometry MUST remain unchanged."
+      },
+      {
+        "capability": "data-display/empty-state",
+        "content": "- **WHEN** the maintainer follows the Empty State source and production evidence\n- **THEN** the original Gray 200 source paint is discoverable in the Basic elements archive and the accessible text is explicitly identified as a repository semantic decision",
+        "id": "data-display/empty-state::Evidence identifies the actual Empty State source::A maintainer traces the corrected text",
+        "name": "A maintainer traces the corrected text",
+        "requirement": "Evidence identifies the actual Empty State source",
+        "requirementContent": "The audit SHALL identify the Simple, Customize and Basic SVG entries in the Basic elements archive and preserve them byte-for-byte. The two components' audits MUST retain independent counts, checks and findings disposition. Custom foreground/background combinations remain consumer-validated."
+      },
+      {
+        "capability": "data-display/status",
+        "content": "- **WHEN** any of the nine paint families is rendered on any of the four supported surfaces\n- **THEN** computed text contrast is at least 4.5:1 and the source background and 30px minimum pill geometry are retained",
+        "id": "data-display/status::All supported Status paints have readable production text::A supported paint appears on a supported light surface",
+        "name": "A supported paint appears on a supported light surface",
+        "requirement": "All supported Status paints have readable production text",
+        "requirementContent": "Status SHALL support blue, green, bright-green, source-blue, orange, purple, cyan, pink and neutral paints. Normal-size text MUST reach at least 4.5:1 against the effective composited background on the white, Gray 50, Blue 50 and page surfaces. The six corrected foregrounds SHALL be semantic production roles; source values, pill backgrounds and already-compliant blue, source-blue and purple foregrounds MUST remain unchanged."
+      },
+      {
+        "capability": "data-display/status",
+        "content": "- **WHEN** the consumer overrides the documented semantic foreground variable\n- **THEN** Status uses that override through the normal CSS cascade and source tokens and Badge paint remain unchanged",
+        "id": "data-display/status::Source and production decisions remain distinguishable::A consumer customizes a corrected foreground",
+        "name": "A consumer customizes a corrected foreground",
+        "requirement": "Source and production decisions remain distinguishable",
+        "requirementContent": "Original Status SVGs and source tokens MUST remain unchanged. Documentation SHALL identify the six semantic foreground corrections and the consumer responsibility for validating custom colors or unsupported backgrounds. Badge styling MUST remain unchanged."
+      },
+      {
+        "capability": "data-display/status",
+        "content": "- **WHEN** a user filters and resets Data Workspace rows\n- **THEN** surviving labels use the accessible paints and remain plain unfocusable text with no implicit announcement or control semantics",
+        "id": "data-display/status::Status remains a static consumer-neutral label::Consumer filters rows containing Status labels",
+        "name": "Consumer filters rows containing Status labels",
+        "requirement": "Status remains a static consumer-neutral label",
+        "requirementContent": "Existing Status markup and modifier names SHALL remain compatible. The component MUST NOT introduce focusability, interaction states, events or live-region semantics. Visible text and consumer context SHALL continue to own meaning; a color modifier MUST NOT establish a business-state enum."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "921b01bf3bdbe81ef25bc40964f4206dac3c7ad51ee97875fded9c768aea54b2"
+}
