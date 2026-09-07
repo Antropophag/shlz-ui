@@ -257,30 +257,32 @@ async function openDrawer(page) {
   return { trigger, dialog };
 }
 
-test("modal uses native focus containment, Escape and return focus", async ({
-  page,
-}) => {
-  const { trigger, dialog } = await openModal(page);
-  await expect(page.locator("#modal-autofocus")).toBeFocused();
+test(
+  "modal uses native focus containment, Escape and return focus",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    const { trigger, dialog } = await openModal(page);
+    await expect(page.locator("#modal-autofocus")).toBeFocused();
 
-  const focusDidNotReachBackground = async () =>
-    page.evaluate(() => {
-      const modal = document.querySelector("#showcase-modal");
-      const active = document.activeElement;
-      return active === document.body || modal.contains(active);
-    });
-  for (let index = 0; index < 8; index += 1) {
-    await page.keyboard.press("Tab");
+    const focusDidNotReachBackground = async () =>
+      page.evaluate(() => {
+        const modal = document.querySelector("#showcase-modal");
+        const active = document.activeElement;
+        return active === document.body || modal.contains(active);
+      });
+    for (let index = 0; index < 8; index += 1) {
+      await page.keyboard.press("Tab");
+      expect(await focusDidNotReachBackground()).toBe(true);
+    }
+    await page.keyboard.press("Shift+Tab");
     expect(await focusDidNotReachBackground()).toBe(true);
-  }
-  await page.keyboard.press("Shift+Tab");
-  expect(await focusDidNotReachBackground()).toBe(true);
 
-  await page.keyboard.press("Escape");
-  await expect(dialog).toBeHidden();
-  await expect(trigger).toBeFocused();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-});
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(trigger).toBeFocused();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  },
+);
 
 test("modal supports explicit close, opt-in backdrop and native dialog form", async ({
   page,

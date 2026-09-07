@@ -62,20 +62,22 @@ async function screenshotPair(page, trigger, popover, name) {
   });
 }
 
-test("opens, synchronizes state, dismisses and restores focus", async ({
-  page,
-}) => {
-  const { trigger, popover } = await open(page, "Bottom", "popover-bottom");
-  await page.keyboard.press("Escape");
-  await expect(popover).toBeHidden();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-  await expect(trigger).toBeFocused();
+test(
+  "opens, synchronizes state, dismisses and restores focus",
+  { tag: "@smoke" },
+  async ({ page }) => {
+    const { trigger, popover } = await open(page, "Bottom", "popover-bottom");
+    await page.keyboard.press("Escape");
+    await expect(popover).toBeHidden();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+    await expect(trigger).toBeFocused();
 
-  await trigger.click();
-  await page.getByRole("heading", { name: "Popover", exact: true }).click();
-  await expect(popover).toBeHidden();
-  await expect(trigger).toHaveAttribute("aria-expanded", "false");
-});
+    await trigger.click();
+    await page.getByRole("heading", { name: "Popover", exact: true }).click();
+    await expect(popover).toBeHidden();
+    await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  },
+);
 
 test("interactive content stays in native keyboard order", async ({ page }) => {
   const { trigger, popover } = await open(

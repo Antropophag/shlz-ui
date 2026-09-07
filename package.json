@@ -27,6 +27,8 @@
     "release:registry": "node tools/release-registry.mjs",
     "release:version": "changeset version && node tools/release.mjs sync-workspace-consumer && npm install --package-lock-only --ignore-scripts",
     "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test --config playwright.smoke.config.js",
+    "check:e2e:smoke": "node tools/check-browser-smoke.mjs",
     "test:e2e:update": "playwright test --update-snapshots",
     "check:openspec": "node tools/check-openspec.mjs",
     "check:docs": "prettier --check docs openspec",

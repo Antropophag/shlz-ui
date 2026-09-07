@@ -1,7 +1,7 @@
 ## 1. Shared smoke suite
 
-- [ ] 1.1 Tag the seven existing scenarios and add the three-project smoke command/configuration; verify exact CLI discovery and unchanged full-suite identities.
-- [ ] 1.2 Add the separate CI job and developer commands; verify browser/host installation precedes smoke execution and existing jobs remain intact.
+- [x] 1.1 Tag the seven existing scenarios and add the three-project smoke command/configuration; verify exact CLI discovery and unchanged full-suite identities.
+- [x] 1.2 Add the separate CI job and developer commands; verify browser/host installation precedes smoke execution and existing jobs remain intact.
 
 ## 2. Validation and delivery
 
