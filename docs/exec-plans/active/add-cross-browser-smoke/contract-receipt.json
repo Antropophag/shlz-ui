@@ -1,0 +1,51 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "6456f26f93393764f88ef325b7267b864f75718fa46076ce880b146a78617494",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "cross-browser-smoke",
+        "content": "- **WHEN** CI starts on a clean supported Linux runner\n- **THEN** browser and host dependencies are installed before the smoke command and no missing local WebKit dependency is treated as a skip",
+        "id": "cross-browser-smoke::CI runs smoke with browser prerequisites::Clean CI runner",
+        "name": "Clean CI runner",
+        "requirement": "CI runs smoke with browser prerequisites",
+        "requirementContent": "CI SHALL run the three-browser smoke suite in a separate job on pull requests to main and pushes to main. That job SHALL install the pinned dependency tree, all three browser binaries, and their Linux host dependencies. A smoke failure SHALL fail its job; full Chromium browser and visual tests SHALL continue in their existing job."
+      },
+      {
+        "capability": "cross-browser-smoke",
+        "content": "- **WHEN** any smoke test fails\n- **THEN** the smoke job reports failure independently of the full Chromium suite",
+        "id": "cross-browser-smoke::CI runs smoke with browser prerequisites::Smoke failure is visible",
+        "name": "Smoke failure is visible",
+        "requirement": "CI runs smoke with browser prerequisites",
+        "requirementContent": "CI SHALL run the three-browser smoke suite in a separate job on pull requests to main and pushes to main. That job SHALL install the pinned dependency tree, all three browser binaries, and their Linux host dependencies. A smoke failure SHALL fail its job; full Chromium browser and visual tests SHALL continue in their existing job."
+      },
+      {
+        "capability": "cross-browser-smoke",
+        "content": "- **WHEN** a developer lists the default suite after smoke support is added\n- **THEN** it contains the same Chromium test identities as before and no Firefox or WebKit projects",
+        "id": "cross-browser-smoke::Full Chromium regression coverage is preserved::Default suite is inspected",
+        "name": "Default suite is inspected",
+        "requirement": "Full Chromium regression coverage is preserved",
+        "requirementContent": "The default browser test command SHALL retain the entire Chromium suite, including the seven smoke scenarios and all existing visual tests, with unchanged snapshot identities."
+      },
+      {
+        "capability": "cross-browser-smoke",
+        "content": "- **WHEN** a developer lists the smoke suite\n- **THEN** the listing contains the same seven scenario identities for each browser and no visual snapshot tests",
+        "id": "cross-browser-smoke::Shared bounded functional smoke coverage::Smoke selection is inspected",
+        "name": "Smoke selection is inspected",
+        "requirement": "Shared bounded functional smoke coverage",
+        "requirementContent": "The smoke command SHALL run exactly seven shared functional scenarios in each of Chromium, Firefox, and WebKit (21 executions). The scenarios SHALL cover Input native value/events, Checkbox native lifecycle, Select keyboard selection and focus restoration, Modal focus containment and Escape, Popover dismissal and state synchronization, Date Picker keyboard dismissal/commit and accessibility, and File Upload selection/drop/disabled/consumer rendering. These SHALL reuse the full suite's test bodies without browser-specific skips or reduced assertions and SHALL NOT compare screenshots."
+      },
+      {
+        "capability": "cross-browser-smoke",
+        "content": "- **WHEN** the smoke command runs with all browser prerequisites installed\n- **THEN** all seven scenarios execute in each of the three engines and any failed scenario makes the command fail",
+        "id": "cross-browser-smoke::Shared bounded functional smoke coverage::Three-engine smoke execution",
+        "name": "Three-engine smoke execution",
+        "requirement": "Shared bounded functional smoke coverage",
+        "requirementContent": "The smoke command SHALL run exactly seven shared functional scenarios in each of Chromium, Firefox, and WebKit (21 executions). The scenarios SHALL cover Input native value/events, Checkbox native lifecycle, Select keyboard selection and focus restoration, Modal focus containment and Escape, Popover dismissal and state synchronization, Date Picker keyboard dismissal/commit and accessibility, and File Upload selection/drop/disabled/consumer rendering. These SHALL reuse the full suite's test bodies without browser-specific skips or reduced assertions and SHALL NOT compare screenshots."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "35ce449f1c44d0e0c8654276494464590b127c5a4b03b10b3268e3e773437d82"
+}
