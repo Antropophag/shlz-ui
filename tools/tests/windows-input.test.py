@@ -2,6 +2,7 @@
 import importlib.util
 from pathlib import Path
 import unittest
+from unittest.mock import Mock, patch
 
 spec = importlib.util.spec_from_file_location(
     "windows_input", Path(__file__).parents[1] / "at" / "windows_input.py"
@@ -28,6 +29,17 @@ class Desktop:
 
 
 class InputOwnershipTests(unittest.TestCase):
+    def test_uptime_reuses_library_and_unsigned_64_bit_function(self):
+        tick = Mock(side_effect=[2**40, 2**40 + 1])
+        kernel = Mock(GetTickCount64=tick)
+        with patch.object(module.ctypes, "WinDLL", return_value=kernel, create=True) as load:
+            with patch.object(module, "_KERNEL32", None), patch.object(module, "_GET_TICK_COUNT64", None):
+                self.assertEqual(module.uptime(), 2**40)
+                self.assertEqual(module.uptime(), 2**40 + 1)
+                load.assert_called_once_with("kernel32")
+                self.assertIs(tick.restype, module.ctypes.c_ulonglong)
+
+
     def test_driver_request_rejects_extra_flags_and_foreign_profile(self):
         root = r"C:\Temp\shlz-at-unit"
         request = {

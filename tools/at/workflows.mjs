@@ -385,7 +385,7 @@ export const workflows = [
         "selected",
         async () => {
           await t.key("Enter");
-          await pause(600);
+          await t.waitForNativeDialog();
           await t.key("Ctrl+A", { nativeDialog: true });
           await t.type(settings.sampleFile, { nativeDialog: true });
           await t.key("Enter", { nativeDialog: true });

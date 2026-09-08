@@ -23,7 +23,7 @@ async function stop(child) {
   if (!alive(child)) return;
   const exited = once(child, "exit");
   child.kill();
-  await Promise.race([exited, pause(3000)]);
+  await Promise.race([exited, pause(3000, undefined, { ref: false })]);
   if (alive(child)) throw new Error("Owned browser process did not exit");
 }
 
@@ -56,6 +56,17 @@ async function chromePort(profile, child) {
     await pause(100);
   }
   throw new Error("Owned Chrome debugging endpoint did not start");
+}
+
+export async function waitForInitialPage(browser, timeout = 5000) {
+  const deadline = Date.now() + timeout;
+  do {
+    const page = browser.contexts()[0]?.pages()[0];
+    if (page) return page;
+    if (Date.now() >= deadline) break;
+    await pause(100);
+  } while (Date.now() < deadline);
+  throw new Error("Owned Chrome exposed no initial page");
 }
 
 async function openChrome(settings, runDirectory) {
@@ -93,7 +104,7 @@ async function openChrome(settings, runDirectory) {
     browser = await chromium.connectOverCDP(`http://127.0.0.1:${port}`, {
       noDefaults: true,
     });
-    const page = browser.contexts()[0].pages()[0];
+    const page = await waitForInitialPage(browser);
     session = await browser.newBrowserCDPSession();
     const { processInfo } = await session.send("SystemInfo.getProcessInfo");
     const pid = processInfo.find((item) => item.type === "browser").id;

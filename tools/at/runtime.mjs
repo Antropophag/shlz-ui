@@ -18,7 +18,7 @@ import {
   speechText,
 } from "./evidence.mjs";
 import { speechContracts } from "./contracts.mjs";
-import { startForegroundMonitor } from "./foreground.mjs";
+import { ownsWindow, startForegroundMonitor } from "./foreground.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -75,6 +75,29 @@ export class ScreenReaderSession {
       await pause(100);
     }
     throw new Error("Browser state wait timed out");
+  }
+
+  async waitForNativeDialog(timeout = 5000) {
+    const deadline = Date.now() + timeout;
+    do {
+      this.monitor.check();
+      if (
+        this.activeSpan &&
+        this.monitor.foreign(this.activeSpan, Infinity, this.browser.pid).length
+      )
+        throw new Error(
+          "Foreign foreground transition detected; dialog wait stopped",
+        );
+      const state = this.desktop({ command: "status" });
+      if (!ownsWindow(state, this.browser.pid))
+        throw new Error(
+          "Foreground ownership lost while waiting for native dialog",
+        );
+      if (state.windowClass === "#32770" && state.focusClass === "Edit") return;
+      if (Date.now() >= deadline) break;
+      await pause(100);
+    } while (Date.now() < deadline);
+    throw new Error("Owned native dialog readiness timed out");
   }
 
   async focus(selector) {
@@ -208,7 +231,7 @@ export class ScreenReaderSession {
     this.captureOffset = null;
     const before = this.desktop({ command: "status" });
     this.activeSpan = before.tick;
-    if (before.pid !== this.browser.pid)
+    if (!ownsWindow(before, this.browser.pid))
       throw new Error("Foreground ownership was lost");
     let offset = (await readFile(this.log, "utf8")).length;
     await operation();
@@ -216,7 +239,7 @@ export class ScreenReaderSession {
     if (onlyFocusReport) offset = (await readFile(this.log, "utf8")).length;
     if (reportFocus) await this.key("NVDA+Tab");
     await pause(600);
-    if (this.desktop({ command: "status" }).pid !== this.browser.pid) {
+    if (!ownsWindow(this.desktop({ command: "status" }), this.browser.pid)) {
       throw new Error("Foreground ownership lost; speech was not retained");
     }
     const delta = (await readFile(this.log, "utf8")).slice(offset);
@@ -226,6 +249,8 @@ export class ScreenReaderSession {
     const text = speechText(speech);
     const states = await stateChecks();
     const after = this.desktop({ command: "status" });
+    if (!ownsWindow(after, this.browser.pid))
+      throw new Error("Foreground ownership lost; speech was not retained");
     const value = {
       id,
       workflow: this.workflowId,
@@ -233,7 +258,7 @@ export class ScreenReaderSession {
       actions: this.actions,
       speech,
       inputEventCount: (delta.match(/Input: kb\(/g) ?? []).length,
-      foregroundVerified: after.pid === this.browser.pid,
+      foregroundVerified: ownsWindow(after, this.browser.pid),
       foregroundSpan: {
         start: before.tick,
         end: after.tick,
@@ -435,7 +460,7 @@ export async function runWithNvda(kind, settings, workflows) {
     result.logHash = hash(content);
     result.nvdaVersion =
       content.match(/Starting NVDA version ([^\r\n]+)/)?.[1] ?? null;
-    result.directory = directory;
+    result.runId = path.basename(directory);
   } finally {
     await closeNvda(nvda, result);
     await closeBrowser(browser, result);

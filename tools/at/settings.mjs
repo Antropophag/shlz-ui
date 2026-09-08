@@ -47,7 +47,10 @@ export function validateSettings(settings) {
     /^shlz-at-[a-zA-Z0-9_-]+$/,
     "dedicated task root required",
   );
-  const root = win.normalize(settings.tempRoot).toLowerCase();
+  const root = win
+    .normalize(settings.tempRoot)
+    .replace(/[\\/]+$/, "")
+    .toLowerCase();
   for (const [key, filename] of Object.entries({
     chrome: "chrome.exe",
     firefox: "firefox.exe",

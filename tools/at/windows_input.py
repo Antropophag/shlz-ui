@@ -237,10 +237,17 @@ class WindowsDesktop:
             raise RuntimeError("Windows rejected some keyboard input")
 
 
+_KERNEL32 = None
+_GET_TICK_COUNT64 = None
+
+
 def uptime():
-    kernel = ctypes.WinDLL("kernel32")
-    kernel.GetTickCount64.restype = ctypes.c_ulonglong
-    return kernel.GetTickCount64()
+    global _KERNEL32, _GET_TICK_COUNT64
+    if _GET_TICK_COUNT64 is None:
+        _KERNEL32 = ctypes.WinDLL("kernel32")
+        _GET_TICK_COUNT64 = _KERNEL32.GetTickCount64
+        _GET_TICK_COUNT64.restype = ctypes.c_ulonglong
+    return _GET_TICK_COUNT64()
 
 
 def watch_foreground():

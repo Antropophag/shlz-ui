@@ -30,3 +30,26 @@ test("desktop settings constrain writes, binaries and fixture navigation", () =>
   ])
     assert.throws(() => validateSettings({ ...settings(), ...delta }));
 });
+
+test("task root accepts trailing separators without widening containment", () => {
+  for (const suffix of ["\\", "/", "\\\\"]) {
+    const value = { ...settings(), tempRoot: settings().tempRoot + suffix };
+    assert.deepEqual(validateSettings(value), ["chrome", "firefox"]);
+    assert.throws(
+      () =>
+        validateSettings({
+          ...value,
+          nvda: "C:\\Temp\\shlz-at-test-other\\nvda.exe",
+        }),
+      /task root/,
+    );
+    assert.throws(
+      () =>
+        validateSettings({
+          ...value,
+          output: "C:\\Temp\\shlz-at-test\\nested\\result.json",
+        }),
+      /direct child/,
+    );
+  }
+});

@@ -189,6 +189,16 @@ export function assertBrowser(row, environment) {
     );
     for (const point of flow.checkpoints) {
       assert.equal(
+        point.status,
+        "pass",
+        `checkpoint did not pass: ${flow.id}/${point.id}`,
+      );
+      assert.equal(
+        point.error,
+        undefined,
+        `checkpoint contains an error: ${flow.id}/${point.id}`,
+      );
+      assert.equal(
         point.workflow,
         flow.id,
         "checkpoint belongs to another workflow",

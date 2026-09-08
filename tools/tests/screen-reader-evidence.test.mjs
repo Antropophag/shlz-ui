@@ -45,6 +45,7 @@ function checkpoint(workflow = "input", id = "name-value", pid = 123) {
   return {
     workflow,
     id,
+    status: "pass",
     speech: speech[workflow][id],
     stateReads,
     inputEventCount: 1,
@@ -170,4 +171,17 @@ test("duplicate or failed workflows cannot complete the matrix", () => {
   const failed = matrix();
   failed.browsers[1].workflows[2].status = "fail";
   assert.throws(() => assertMatrix(failed), /workflow/);
+});
+
+test("failed, blocked, missing and contradictory checkpoint verdicts cannot pass", () => {
+  for (const delta of [
+    { status: "fail" },
+    { status: "blocked" },
+    { status: undefined },
+    { error: "capture failed" },
+  ]) {
+    const record = matrix();
+    Object.assign(record.browsers[0].workflows[0].checkpoints[0], delta);
+    assert.throws(() => assertMatrix(record), /checkpoint/);
+  }
 });

@@ -43,7 +43,7 @@ export async function startGeckoJob(executable, args) {
     if (child.exitCode === null && child.signalCode === null) {
       const ended = once(child, "close");
       child.stdin.end("stop\n");
-      await Promise.race([ended, pause(5000)]);
+      await Promise.race([ended, pause(5000, undefined, { ref: false })]);
     }
     if (
       !observations.some(

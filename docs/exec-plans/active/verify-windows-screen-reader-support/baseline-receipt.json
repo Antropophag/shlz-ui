@@ -13,14 +13,14 @@
       "url": "https://github.com/Antropophag/shlz-ui/pull/84"
     },
     "repository": {
-      "digest": "a55da3f7c9d6f66bf2dab6a5db05458caac35a2b92022211d86a45bdfbb7fd58",
+      "digest": "b908c7ae35e1e67b526b46cd53502abbf9441efa29b851181cd53218b65d425c",
       "remote": "git@github.com:Antropophag/shlz-ui.git",
-      "root": "/home/antropophag/code/shlz-ui-assistive-technology"
+      "root": "[repository-root]"
     },
     "upstream": "origin/feature/assistive-technology-support"
   },
   "requirementsDigest": "dafab6ad2b1c4e25c53aa97507e63ba807837df41669d871de565e0f6753e3c8",
   "routeDigest": "417fc3f56ec8121786fce6588df66e171d09d3fd5825ab57f595dd3c7a2be1b0",
   "version": 1,
-  "digest": "94a86da89953f2acbc9638c861bc0de6f9e36db0f7be490d59146457854f300c"
+  "digest": "6c9d4d29e1e27f4c5295299d1ac4894debd74bf0368fe0e45901c6e2ad090bc6"
 }
