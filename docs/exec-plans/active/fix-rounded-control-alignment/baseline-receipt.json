@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/rounded-control-alignment",
+    "commit": "ac68d6f28ff6145cb0770d512d74fff4ffd090bf",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/rounded-control-alignment",
+      "headRefOid": "ac68d6f28ff6145cb0770d512d74fff4ffd090bf",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    "repository": {
+      "digest": "972d73bbd16ec3a7179ea037f03e7e3ad8d3508d123b7b6ea624b3d617f499b1",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/tmp/shlz-alignment-main"
+    },
+    "upstream": "origin/fix/rounded-control-alignment"
+  },
+  "requirementsDigest": "8fab547b123a8e410c085a1da8f6b8c3084a1837785e86859191dc909dbac690",
+  "routeDigest": "a7250d6ced59117124e4749e2c88573a2376483239d756f8d04049bc3c000a02",
+  "version": 1,
+  "digest": "2f6ff9a8c8cd68e59f7ea917e22fe45b3f5e23b68c3d5a07dd3cd236532d959f"
+}

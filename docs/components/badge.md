@@ -102,3 +102,10 @@ Badge composes inside navigation links, tabs, buttons and list items. The parent
 - `FACT`: Badge-Count source sizes/paint families and Badge-Dot source variants.
 - `DECISION`: CSS modifier names, visually hidden context guidance and non-interactive ownership.
 - `UNKNOWN/CONSUMER-OWNED`: count cap/formatting, business meaning, localization and announcement policy.
+
+## Layout in consumers
+
+Showcase matrix headers and grid columns do not size Badge specimens. Each
+specimen keeps its own intrinsic geometry and typography, including 16×16px
+single Small counts and 14px text in Medium counts. Consumer containers that
+use grid should likewise avoid stretching a counter merely to match a header.

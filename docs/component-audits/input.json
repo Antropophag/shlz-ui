@@ -1,7 +1,10 @@
 {
   "component": "input",
-  "authoritativeSource": "shlz-design-source/raw/svg/Input Number.svg",
-  "referenceSources": ["docs/components/form-controls-source-spec.md"],
+  "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
+  "referenceSources": [
+    "docs/components/form-controls-source-spec.md",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": ["packages/styles/components/field.css"],
   "behavior": null,
   "docs": "docs/components/input.md",
@@ -9,12 +12,30 @@
   "legacySelectors": [".shlz-input"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
-    { "id": "input-popover-value", "kind": "live-consumer" },
-    { "id": "input-modal-autofocus", "kind": "live-consumer" },
-    { "id": "input-drawer-parameter", "kind": "live-consumer" },
-    { "id": "input-framework-composition", "kind": "executable-fixture" },
-    { "id": "input-typography-stress", "kind": "content-stress-fixture" },
-    { "id": "input-workspace-search", "kind": "live-consumer" }
+    {
+      "id": "input-popover-value",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "input-modal-autofocus",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "input-drawer-parameter",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "input-framework-composition",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "input-typography-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "input-workspace-search",
+      "kind": "live-consumer"
+    }
   ],
   "supportedSizes": ["large", "medium"],
   "supportedStates": [
@@ -43,13 +64,24 @@
       "claim": "native input owns value, form, focus, input and change behavior",
       "classification": "repository-decision",
       "evidence": "docs/components/input.md"
+    },
+    {
+      "claim": "Advanced diagnostic text actions retain the original 82x27 geometry. Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
+    },
+    {
+      "claim": "The original Large Advanced 2 Input SVG in the archive contains two 82x27 secondary action pills; Input Number is a separate source sheet.",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
     }
   ],
   "browserTests": [
     "tools/playwright/accessible-source-contrast.spec.js",
     "tools/playwright/form-controls-wave2.spec.js",
     "tools/playwright/consumer-workspace.spec.js",
-    "tools/playwright/typography-profiles.spec.js"
+    "tools/playwright/typography-profiles.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/form-controls-wave2.spec.js-snapshots/input-focused-states-chromium-linux.png"
@@ -59,14 +91,15 @@
     "structural-contract": "pass: native input markup, field composition, documentation and package CSS are asserted",
     "runtime-browser": "pass: native value, input/change lifecycle, disabled state and programmatic updates execute in Chromium",
     "accessibility": "pass: visible naming, keyboard focus and native disabled semantics execute in Chromium; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
-    "focused-visual": "pass: real default, hover and keyboard focus computed shell paint plus the focused matrix snapshot are asserted",
+    "focused-visual": "pass: real default, hover and keyboard focus computed shell paint plus the focused matrix snapshot are asserted Rounded-control regressions additionally verify A11, A12 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
-    "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"
+    "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: source matrix and focused screenshot cover forced field paint states"
+        "pass: source matrix and focused screenshot cover forced field paint states",
+        "pass: focused rounded-control regressions cover A11, A12 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "pass: a real input hover and keyboard focus flow asserts computed background and border paint"
@@ -86,7 +119,24 @@
     "manualStateWalk": "pass: pointer hover, Tab focus, disabled, invalid and narrow long-value surfaces inspected"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "rounded-control-a11",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Advanced diagnostic text actions retain the original 82x27 geometry.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    {
+      "id": "rounded-control-a12",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    }
+  ],
   "knownLimitations": [
     "no library-owned masking, clear action, formatting, autofill policy, or validation controller",
     "advanced Input Number nodes remain diagnostics-only"

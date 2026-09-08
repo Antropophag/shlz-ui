@@ -47,13 +47,41 @@
       "authority": {
         "source": "shlz-design-source/raw/svg/Messages.svg",
         "hash": "b61167bf011d15e5956d409d6746b5440cf4417522f1f14d6d27084bfb4b5357",
-        "canvas": { "width": 1504, "height": 7405 },
+        "canvas": {
+          "width": 1504,
+          "height": 7405
+        },
         "frames": [
-          { "x": "80.5", "y": "778.5", "width": "1279", "height": "1383" },
-          { "x": "80.5", "y": "2228.5", "width": "711", "height": "172" },
-          { "x": "80.5", "y": "2564.5", "width": "462", "height": "130" },
-          { "x": "80.5", "y": "2886.5", "width": "1343", "height": "2055" },
-          { "x": "80.5", "y": "5008.5", "width": "1179", "height": "2316" }
+          {
+            "x": "80.5",
+            "y": "778.5",
+            "width": "1279",
+            "height": "1383"
+          },
+          {
+            "x": "80.5",
+            "y": "2228.5",
+            "width": "711",
+            "height": "172"
+          },
+          {
+            "x": "80.5",
+            "y": "2564.5",
+            "width": "462",
+            "height": "130"
+          },
+          {
+            "x": "80.5",
+            "y": "2886.5",
+            "width": "1343",
+            "height": "2055"
+          },
+          {
+            "x": "80.5",
+            "y": "5008.5",
+            "width": "1179",
+            "height": "2316"
+          }
         ],
         "observed": [
           "five blue dashed composition frames",
@@ -82,9 +110,17 @@
       "authority": {
         "source": "shlz-design-source/raw/svg/History of changes.svg",
         "hash": "83d8c9ab89fa7c3677ed6d4105a150f55676bcf732160892b06773d6d4ac0e76",
-        "canvas": { "width": 873, "height": 1558 },
+        "canvas": {
+          "width": 873,
+          "height": 1558
+        },
         "frames": [
-          { "x": "80.5", "y": "480.5", "width": "463", "height": "997" }
+          {
+            "x": "80.5",
+            "y": "480.5",
+            "width": "463",
+            "height": "997"
+          }
         ],
         "observed": [
           "one blue dashed composition frame",
@@ -113,15 +149,53 @@
       "authority": {
         "source": "shlz-design-source/raw/svg/Planner.svg",
         "hash": "3f23135cbccf6cd8d1054feef90990d94ec647d8ef12de091ee6b76a022f2ed7",
-        "canvas": { "width": 3646, "height": 6729 },
+        "canvas": {
+          "width": 3646,
+          "height": 6729
+        },
         "frames": [
-          { "x": "186.5", "y": "593.5", "width": "2468", "height": "365" },
-          { "x": "186.5", "y": "1049.5", "width": "3238", "height": "1422" },
-          { "x": "80.5", "y": "3467.5", "width": "3487", "height": "1010" },
-          { "x": "80.5", "y": "4706.5", "width": "394", "height": "62" },
-          { "x": "80.5", "y": "4859.5", "width": "355", "height": "69" },
-          { "x": "80.5", "y": "5019.5", "width": "1336", "height": "163" },
-          { "x": "80.5", "y": "6413.57", "width": "279", "height": "135" }
+          {
+            "x": "186.5",
+            "y": "593.5",
+            "width": "2468",
+            "height": "365"
+          },
+          {
+            "x": "186.5",
+            "y": "1049.5",
+            "width": "3238",
+            "height": "1422"
+          },
+          {
+            "x": "80.5",
+            "y": "3467.5",
+            "width": "3487",
+            "height": "1010"
+          },
+          {
+            "x": "80.5",
+            "y": "4706.5",
+            "width": "394",
+            "height": "62"
+          },
+          {
+            "x": "80.5",
+            "y": "4859.5",
+            "width": "355",
+            "height": "69"
+          },
+          {
+            "x": "80.5",
+            "y": "5019.5",
+            "width": "1336",
+            "height": "163"
+          },
+          {
+            "x": "80.5",
+            "y": "6413.57",
+            "width": "279",
+            "height": "135"
+          }
         ],
         "observed": [
           "seven blue dashed composition frames",
@@ -267,6 +341,14 @@
     {
       "path": "docs/components/notification.md",
       "classification": "notification-contract"
+    },
+    {
+      "path": "tools/playwright/rounded-control-alignment.spec.js",
+      "classification": "rounded-control-regression-evidence-for-existing-primitives"
+    },
+    {
+      "path": "tools/tests/fixtures/rounded-control-known-bad.css",
+      "classification": "rounded-control-regression-evidence-for-existing-primitives"
     }
   ],
   "terminologyCensus": {
@@ -274,10 +356,10 @@
       "apps/showcase/src/bootstrap.js",
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
-    "primitiveDependencyPathCount": 30,
+    "primitiveDependencyPathCount": 32,
     "unrelatedTerminologyPathCount": 74,
-    "totalPathCount": 89,
-    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths"
+    "totalPathCount": 90,
+    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths; the rounded-control regression and declared historical CSS adapter are classified existing-primitive evidence, not new higher-level runtime surfaces; the alignment guard also references the standalone messaging-history fixture"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": ["static-source-specimens-only"],

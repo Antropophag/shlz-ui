@@ -36,3 +36,10 @@ Secondary titles and all descriptions use the existing production role `semantic
 ## Source basis
 
 The canonical entries `Empty/Simple` (220×67), `Empty/Customize` (159×137), and `Empty/Basic` (167×262) are in `shlz-design-source/raw/svg/UI Kit – Basic elements.zip`, not the Interface elements archive. They explicitly describe empty states. `Employees / Type=Empty` and `Event / Type=Empty` contain scaled `Empty/Simple` instances. The showcase reproduces the exact `Empty/Simple` illustration paths; the illustration is embedded in the component SVG rather than exported as a normalized icon. Separate title, description, and action regions generalize the three source compositions without owning application state.
+
+## Localized action labels
+
+Customize and Basic action widths are source-backed minima (131px and 142px),
+not fixed clipping boxes. Their short-label heights remain 32px and 40px.
+Loaded fonts and localized labels may require additional width; longer content
+wraps inside a growing button within the available container.

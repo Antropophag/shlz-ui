@@ -200,3 +200,10 @@ uses the same option count or data.
 - `DECISION`: compose the source-backed Select trigger with the source-backed
   option-menu surface as the executable single-select contract.
 - `UNKNOWN/UNSUPPORTED`: search, multiselect, async and status runtime products.
+
+## Diagnostic text layout
+
+The inert chip/status/placeholder diagnostics center their text independently
+of the shell height. Medium chips use a line box that fits inside 23px, rather
+than retaining a 27px alignment assumption. These corrections do not make
+multiselect, status-chip removal, or search executable public Select modes.

@@ -193,6 +193,8 @@
 }
 
 .shlz-select--placeholder {
+  display: flex;
+  align-items: center;
   color: var(--shlz-semantic-color-text-placeholder-accessible);
 }
 
@@ -236,13 +238,14 @@
   flex: 0 1 auto;
   min-inline-size: 0;
   block-size: 27px;
+  align-items: center;
   padding-inline: var(--shlz-source-spacing-8);
   overflow: hidden;
   color: var(--shlz-source-color-dark-blue-dark-blue);
   background: var(--shlz-source-color-white-white);
   border-radius: 13.5px;
   font-size: 12px;
-  line-height: 27px;
+  line-height: var(--shlz-semantic-typography-role-field-value-line-height);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -332,9 +335,14 @@
 
 .shlz-field__advanced-actions .shlz-field__action {
   inline-size: 82px;
+  flex-basis: auto;
   color: var(--shlz-source-color-dark-blue-dark-blue);
   background: var(--shlz-source-color-white-white);
   border-radius: 13.5px;
+  font-family: var(--shlz-semantic-font-family);
+  font-size: var(--shlz-semantic-typography-role-field-value-size);
+  font-weight: var(--shlz-semantic-typography-weight-regular);
+  line-height: var(--shlz-semantic-typography-role-field-value-line-height);
 }
 
 .shlz-field__control:hover:not(:has(:disabled, [readonly])),

@@ -1,7 +1,10 @@
 {
   "component": "tabs",
   "authoritativeSource": "shlz-design-source/raw/svg/Tabs.svg",
-  "referenceSources": ["docs/components/tabs.md"],
+  "referenceSources": [
+    "docs/components/tabs.md",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": ["packages/styles/components/tabs.css"],
   "behavior": "packages/behaviors/src/tabs.ts",
   "docs": "docs/components/tabs.md",
@@ -9,8 +12,14 @@
   "legacySelectors": [".shlz-tabs"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
-    { "id": "tabs-showcase-contract", "kind": "executable-fixture" },
-    { "id": "tabs-typography-stress", "kind": "content-stress-fixture" }
+    {
+      "id": "tabs-showcase-contract",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "tabs-typography-stress",
+      "kind": "content-stress-fixture"
+    }
   ],
   "supportedSizes": ["underline-61", "pill-40", "boxed-39"],
   "supportedStates": [
@@ -36,11 +45,17 @@
       "claim": "TabsController uses automatic activation with roving tabindex; consumers own overflow layout",
       "classification": "repository-decision",
       "evidence": "docs/components/tabs.md"
+    },
+    {
+      "claim": "Pill tabs retain 40px geometry independently of underline tabs. Boxed tabs retain 39px geometry independently of underline tabs.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
   "browserTests": [
     "tools/playwright/actions-navigation-wave3.spec.js",
-    "tools/playwright/components-next.spec.js"
+    "tools/playwright/components-next.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/actions-navigation-wave3.spec.js-snapshots/tabs-focused-contract-chromium-linux.png"
@@ -50,14 +65,15 @@
     "structural-contract": "pass: tablist/tab/tabpanel relationships and controller export are asserted",
     "runtime-browser": "pass: real click updates selection, roving tabindex and panel visibility; disabled forced-click/programmatic activation are no-ops; ArrowLeft/Right, Home/End, root-owned activation, replacement, repeated enhancement and teardown execute",
     "accessibility": "pass: exactly one selected/tab-stop tab, disabled pointer/programmatic exclusion, focus movement, detached-tree IDs and root-scoped unique ARIA relationships are checked",
-    "focused-visual": "pass: component-local active, inactive, real focus and narrow long-label states are captured",
+    "focused-visual": "pass: component-local active, inactive, real focus and narrow long-label states are captured Rounded-control regressions additionally verify A4, A9 at the rendered HTML/paint boundary.",
     "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
     "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: three-family matrix, fake hover tab and focused screenshot remain static visual evidence only"
+        "pass: three-family matrix, fake hover tab and focused screenshot remain static visual evidence only",
+        "pass: focused rounded-control regressions cover A4, A9 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "pass: active, inactive real hover, keyboard focus and disabled computed tab paint execute in Chromium"
@@ -98,6 +114,22 @@
       "description": "Real hover and the static helper diverged, a generic hover contract erased the three source-family paints, active underline/pill paint was source-inaccurate, and disabled foreground/surface/border paint was incomplete across underline, pill and boxed families.",
       "evidence": "tools/playwright/interaction-evidence-wave35.spec.js",
       "tracking": "docs/component-audits/wave-35-interaction-evidence-report.md"
+    },
+    {
+      "id": "rounded-control-a4",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Pill tabs retain 40px geometry independently of underline tabs.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    {
+      "id": "rounded-control-a9",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Boxed tabs retain 39px geometry independently of underline tabs.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
     }
   ],
   "knownLimitations": [

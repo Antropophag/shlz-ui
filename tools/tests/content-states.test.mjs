@@ -70,7 +70,11 @@ test("empty state regions are optional CSS composition", async () => {
     assert.match(css, new RegExp(`\\.shlz-empty-state__${region}`));
   assert.match(showcase, /shlz-empty-state__actions/);
   assert.match(showcase, /class="shlz-empty-state shlz-empty-state--simple"/);
-  assert.doesNotMatch(css, /min-inline-size:/);
+  const root = css.match(/\.shlz-empty-state\s*\{([^}]+)\}/)?.[1];
+  assert.ok(root, "Empty State has a root composition rule");
+  // The root stays fluid; nested source-sized actions retain width minima
+  // without forcing their localized labels into a fixed-size box.
+  assert.doesNotMatch(root, /min-inline-size:/);
   assert.doesNotMatch(css, /border:|border-radius:|background:/);
   assert.match(showcase, /viewBox="78 1 64 39"/);
   for (const variant of ["simple", "customize", "basic"])

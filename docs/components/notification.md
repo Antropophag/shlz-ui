@@ -177,3 +177,13 @@ Snackbar's public presentation composes `.shlz-snackbar` with `.shlz-notificatio
 - `DERIVED`: the families form one feedback primitive with notification and snackbar presentations.
 - `DECISION`: native buttons and application-owned integration are the reusable public boundary.
 - `UNKNOWN/CONSUMER-OWNED`: urgency, placement, queueing, timing, dismissal, focus and domain action.
+
+## Content containment
+
+Short content stays vertically centered even at narrow viewport widths.
+Message and action rows can wrap when the available container requires it;
+long action words remain inside the action shell. Source dimensions describe
+short-content minima, not clipping limits. Actions keep their natural width
+when it fits, and long labels can grow the shell vertically. Reflow changes
+presentation only; events, dismissal, focus recovery, and message ownership
+remain consumer-owned.

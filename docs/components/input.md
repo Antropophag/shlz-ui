@@ -117,3 +117,10 @@ Input composes inside forms, Modal, Drawer, toolbars and data-workspace filters.
 - `FACT`: all 21 Input source nodes, their complete geometry and their Figma node ids.
 - `DECISION`: native input ownership, class contract, focus-visible behavior and consumer-owned validation.
 - `UNKNOWN/UNSUPPORTED`: parsed Input property axes and product behavior of Advanced specimens.
+
+## Diagnostic action layout
+
+The inert Large Advanced source diagnostics preserve 82×27px secondary text
+actions with the active profile and explicit Field text metrics. These examples
+remain outside the executable Input API; they do not introduce action semantics
+or a Medium Advanced variant.

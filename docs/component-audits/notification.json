@@ -1,7 +1,10 @@
 {
   "component": "notification",
   "authoritativeSource": "shlz-design-source/raw/svg/Notification.svg",
-  "referenceSources": ["docs/components/notification-source.md"],
+  "referenceSources": [
+    "docs/components/notification-source.md",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": ["packages/styles/components/notification.css"],
   "behavior": null,
   "docs": "docs/components/notification.md",
@@ -14,10 +17,22 @@
   ],
   "diagnosticOccurrenceCount": 8,
   "occurrences": [
-    { "id": "notification-showcase-dismissible", "kind": "live-consumer" },
-    { "id": "notification-showcase-action", "kind": "live-consumer" },
-    { "id": "notification-content-stress", "kind": "content-stress-fixture" },
-    { "id": "notification-plain-html", "kind": "live-consumer" }
+    {
+      "id": "notification-showcase-dismissible",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "notification-showcase-action",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "notification-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "notification-plain-html",
+      "kind": "live-consumer"
+    }
   ],
   "supportedSizes": ["384x58-source-minimum", "container-bounded"],
   "supportedStates": [
@@ -47,11 +62,17 @@
       "claim": "native semantics and application-owned placement, lifecycle, actions and focus recovery form the reusable boundary",
       "classification": "repository-decision",
       "evidence": "docs/components/notification.md"
+    },
+    {
+      "claim": "Short single-row notification content remains vertically centered at narrow widths. Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
   "browserTests": [
     "tools/playwright/notification-snackbar-wave8.spec.js",
-    "tools/playwright/fidelity.spec.js"
+    "tools/playwright/fidelity.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/notification-default-chromium-linux.png",
@@ -63,14 +84,15 @@
     "structural-contract": "pass: Showcase, content-stress, plain-HTML and inert diagnostic roots are independently classified by repository and DOM guards",
     "runtime-browser": "pass: application-owned close, eligible focus recovery and action activation execute once without a library controller",
     "accessibility": "pass: status/alert choice, complete text, named close, native disabled action, keyboard order and focus-visible are exercised",
-    "focused-visual": "pass: exact default/error/action geometry and paint plus representative focused snapshots are component-local",
+    "focused-visual": "pass: exact default/error/action geometry and paint plus representative focused snapshots are component-local Rounded-control regressions additionally verify A6, A10 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: executable Showcase integration and framework-neutral plain HTML consume the shared styles",
-    "responsive-content-stress": "pass: long title/message/action, 320px viewport and 200 percent text grow without clipping or page overflow"
+    "responsive-content-stress": "pass: long title/message/action, 320px viewport and 200 percent text grow without clipping or page overflow Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: three source variants and diagnostic snapshots remain static visual evidence only"
+        "pass: three source variants and diagnostic snapshots remain static visual evidence only",
+        "pass: focused rounded-control regressions cover A6, A10 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "pass: real hover, pointer-down, focus-visible and native disabled states precede computed paint and focus assertions"
@@ -95,7 +117,24 @@
     "manualStateWalk": "pass: default/error/action, pointer hover/down, Tab/focus-visible, Enter/Space, disabled, close/focus return, narrow/long content and text scaling inspected"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "rounded-control-a6",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Short single-row notification content remains vertically centered at narrow widths.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    {
+      "id": "rounded-control-a10",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    }
+  ],
   "knownLimitations": [
     "placement, stacking, urgency, live-region policy, queue, timing, persistence, dismissal and focus recovery remain consumer-owned"
   ]

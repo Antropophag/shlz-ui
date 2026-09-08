@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "change": "fix-rounded-control-alignment",
+  "baseline": "ac68d6f28ff6145cb0770d512d74fff4ffd090bf",
+  "sourceTree": "8132bdba7491d381973911ef530094415d35cfdf",
+  "scope": "Thirteen audited rendering and composition defects; not full unrelated-family certification.",
+  "findings": [
+    {
+      "id": "A1",
+      "components": ["switch"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A2",
+      "components": ["select"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A3",
+      "components": ["select"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A4",
+      "components": ["tabs"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A5",
+      "components": ["empty-state"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A6",
+      "components": ["notification"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A7",
+      "components": ["badge"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A8",
+      "components": ["badge"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A9",
+      "components": ["tabs"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A10",
+      "components": ["notification"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A11",
+      "components": ["input"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A12",
+      "components": ["input", "comment-feed"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    },
+    {
+      "id": "A13",
+      "components": ["history-timeline"],
+      "severity": "P2",
+      "status": "resolved-layout",
+      "evidence": "docs/component-audits/rounded-control-alignment.md",
+      "regression": "tools/playwright/rounded-control-alignment.spec.js"
+    }
+  ],
+  "observedAt": "2026-09-09",
+  "census": [
+    {
+      "component": "switch",
+      "surface": "showcase",
+      "occurrences": [
+        "switch-labelled-on",
+        "switch-labelled-disabled",
+        "switch-framework-composition"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 13
+    },
+    {
+      "component": "input",
+      "surface": "showcase",
+      "occurrences": [
+        "input-popover-value",
+        "input-modal-autofocus",
+        "input-drawer-parameter",
+        "input-framework-composition",
+        "input-typography-stress",
+        "input-workspace-search"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 50
+    },
+    {
+      "component": "select",
+      "surface": "showcase",
+      "occurrences": [
+        "request-status-empty",
+        "request-status-filled",
+        "request-status-hover",
+        "request-status-focus",
+        "request-status-disabled",
+        "request-status-medium",
+        "typography-assignee",
+        "workspace-status"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 23
+    },
+    {
+      "component": "tabs",
+      "surface": "showcase",
+      "occurrences": ["tabs-showcase-contract", "tabs-typography-stress"],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 3
+    },
+    {
+      "component": "badge",
+      "surface": "showcase",
+      "occurrences": [
+        "badge-showcase-small-blue-single",
+        "badge-showcase-small-invert-single",
+        "badge-showcase-small-neutral-single",
+        "badge-showcase-small-blue-multiple",
+        "badge-showcase-small-invert-multiple",
+        "badge-showcase-small-neutral-multiple",
+        "badge-showcase-medium-blue",
+        "badge-showcase-medium-invert",
+        "badge-showcase-medium-neutral",
+        "badge-showcase-dot-blue",
+        "badge-showcase-dot-neutral",
+        "badge-typography-stress"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 4
+    },
+    {
+      "component": "notification",
+      "surface": "showcase",
+      "occurrences": [
+        "notification-showcase-dismissible",
+        "notification-showcase-action",
+        "notification-content-stress"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 8
+    },
+    {
+      "component": "snackbar",
+      "surface": "showcase",
+      "occurrences": ["snackbar-showcase-action", "snackbar-content-stress"],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 7
+    },
+    {
+      "component": "empty-state",
+      "surface": "showcase",
+      "occurrences": [
+        "empty-state-showcase-simple",
+        "empty-state-showcase-customize",
+        "empty-state-showcase-basic",
+        "empty-state-typography-stress",
+        "empty-state-workspace-no-results"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 0
+    },
+    {
+      "component": "history-timeline",
+      "surface": "showcase",
+      "occurrences": [
+        "history-timeline-data-workspace-consumer",
+        "history-timeline-showcase-source",
+        "history-timeline-source-consumer"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 0
+    },
+    {
+      "component": "comment-feed",
+      "surface": "showcase",
+      "occurrences": [
+        "comment-feed-showcase-source",
+        "comment-feed-source-consumer"
+      ],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 6
+    },
+    {
+      "component": "notification",
+      "surface": "plain-html.html",
+      "occurrences": ["notification-plain-html"],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 0
+    },
+    {
+      "component": "history-timeline",
+      "surface": "messaging-history-components.html",
+      "occurrences": ["history-timeline-plain-html"],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 0
+    },
+    {
+      "component": "comment-feed",
+      "surface": "comment-feed.html",
+      "occurrences": ["comment-feed-plain-html"],
+      "unclassifiedLegacy": [],
+      "diagnosticLegacy": 0
+    }
+  ],
+  "censusMethod": "Manifest root IDs on the full Showcase plus three standalone HTML fixture surfaces; diagnosticLegacy is a selector-match count, not an executable root count.",
+  "checks": {
+    "focusedRegressions": "pass: A1–A13 in both typography profiles; Small Switch additionally at DPR 1, 1.25, 1.5, 2",
+    "existingAffectedBrowser": "pass: 61/66 initial checks plus all five corrected snapshot/source-width checks on rerun, including 200 percent text",
+    "classification": "pass: 49 classified roots across 13 Showcase/standalone surfaces; 114 diagnostic legacy matches; zero unclassified legacy matches",
+    "review": "Governed by the candidate-bound independent review receipt; this source evidence ledger is not a review outcome.",
+    "delivery": "Governed by candidate-bound conformance/delivery receipts and the PR check runs."
+  },
+  "manualWalk": {
+    "method": "Agent-driven Playwright pointer and keyboard walk plus visual inspection of focused controls",
+    "observedAt": "2026-09-09",
+    "observations": {
+      "switch": {
+        "checked": true,
+        "focused": true
+      },
+      "tabs": {
+        "secondSelected": "true"
+      },
+      "select": {
+        "expanded": "false",
+        "focused": true
+      },
+      "input": {
+        "value": "несуществующая заявка"
+      },
+      "notificationAction": {
+        "focused": true
+      },
+      "notificationDismissal": {
+        "returnFocus": true
+      },
+      "comments": "Приложение обработало действие."
+    },
+    "inspected": [
+      "native compact Tabs",
+      "Badge matrix",
+      "Advanced Field actions",
+      "narrow Fira Notification",
+      "Fira Empty State action"
+    ]
+  }
+}
