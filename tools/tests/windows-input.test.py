@@ -27,7 +27,7 @@ class InputOwnershipTests(unittest.TestCase):
         desktop = Desktop(999)
         desktop.foreground = lambda: {
             "window": 42, "pid": 999, "windowClass": "#32770",
-            "ownerPids": [123],
+            "ownerPids": [123], "focusClass": "Edit",
         }
         module.execute({"command": "key", "key": "Enter",
                         "allowedPids": [123], "allowOwnedDialog": True}, desktop)
@@ -36,6 +36,17 @@ class InputOwnershipTests(unittest.TestCase):
         with self.assertRaises(RuntimeError):
             module.execute({"command": "key", "key": "Enter",
                             "allowedPids": [456], "allowOwnedDialog": True}, desktop)
+        self.assertEqual(desktop.sent, [])
+
+    def test_native_text_never_types_into_a_file_tree(self):
+        desktop = Desktop(123)
+        desktop.foreground = lambda: {
+            "window": 42, "pid": 123, "windowClass": "#32770",
+            "ownerPids": [], "focusClass": "SysTreeView32",
+        }
+        with self.assertRaises(RuntimeError):
+            module.execute({"command": "text", "text": "sample",
+                            "allowedPids": [123], "allowOwnedDialog": True}, desktop)
         self.assertEqual(desktop.sent, [])
 
     def test_native_dialog_lease_does_not_allow_browser_chrome(self):

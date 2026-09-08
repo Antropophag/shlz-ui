@@ -275,9 +275,9 @@
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
     "primitiveDependencyPathCount": 30,
-    "unrelatedTerminologyPathCount": 70,
-    "totalPathCount": 85,
-    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,run-windows,runtime}.mjs add three test-only error-message terminology paths"
+    "unrelatedTerminologyPathCount": 74,
+    "totalPathCount": 89,
+    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": ["static-source-specimens-only"],

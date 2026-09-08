@@ -36,7 +36,9 @@ for (const invariant of invariants) {
     console.log(invariant + ": rejected browser-only evidence");
   } else if (invariant === "foreign-foreground-rejects-input") {
     const python =
-      process.platform === "win32" ? "C:\\Windows\\py.exe" : "/usr/bin/python3";
+      process.platform === "win32"
+        ? String.raw`C:\Windows\py.exe`
+        : "/usr/bin/python3";
     const module = bad
       ? fileURLToPath(
           new URL("./fixtures/screen-reader-unsafe-input.py", import.meta.url),

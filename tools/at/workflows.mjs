@@ -6,7 +6,7 @@ const fixture = (settings, name) =>
   settings.baseURL + "/@fs" + settings.repoPosix + "/tools/fixtures/" + name;
 
 async function read(session, selector) {
-  return session.evaluate((selector) => {
+  const state = await session.evaluate((selector) => {
     const element = document.querySelector(selector);
     if (!element) throw new Error("Missing state target");
     const active = document.activeElement;
@@ -26,6 +26,14 @@ async function read(session, selector) {
       open: element.open ?? null,
     };
   }, selector);
+  const retained = { ...state };
+  if (retained.text?.length > 160) delete retained.text;
+  session.stateReads.push({
+    selector,
+    state: retained,
+    actionIndex: session.actions.length,
+  });
+  return state;
 }
 
 export const workflows = [
@@ -41,11 +49,6 @@ export const workflows = [
           await t.key("Ctrl+A");
           await t.type("SD-2418");
         },
-        [
-          ["field name", /Поиск по заявкам/],
-          ["editable role", /edit/],
-          ["entered value", /SD-2418/],
-        ],
         async () => [
           ["native value", (await read(t, selector)).value === "SD-2418"],
           [
@@ -66,11 +69,6 @@ export const workflows = [
       await t.checkpoint(
         "invalid-description",
         async () => {},
-        [
-          ["field name", /Поиск по заявкам/],
-          ["invalid state", /invalid/],
-          ["consumer error description", /Введите корректный номер заявки/],
-        ],
         async () => [
           [
             "native invalid state",
@@ -91,11 +89,6 @@ export const workflows = [
       await t.checkpoint(
         "unchecked",
         async () => {},
-        [
-          ["checkbox name", /checkbox default/],
-          ["checkbox role", /check box/],
-          ["unchecked state", /not checked/],
-        ],
         async () => [
           ["native unchecked", (await read(t, normal)).checked === false],
         ],
@@ -103,10 +96,6 @@ export const workflows = [
       await t.checkpoint(
         "checked",
         () => t.key("Space"),
-        [
-          ["checkbox name", /checkbox default/],
-          ["checked state", /check box.*(?<!not )checked/],
-        ],
         async () => [
           ["native checked", (await read(t, normal)).checked === true],
         ],
@@ -115,20 +104,12 @@ export const workflows = [
       await t.checkpoint(
         "mixed",
         async () => {},
-        [
-          ["checkbox name", /checkbox mixed/],
-          ["mixed state", /half checked|partially checked/],
-        ],
         async () => [["native mixed", (await read(t, mixed)).mixed === true]],
       );
       await t.mode("browse");
       await t.checkpoint(
         "disabled",
         () => t.key("F"),
-        [
-          ["disabled checkbox name", /checkbox checked-disabled/],
-          ["unavailable state", /unavailable/],
-        ],
         async () => [
           ["native disabled", (await read(t, disabled)).disabled === true],
         ],
@@ -147,11 +128,6 @@ export const workflows = [
       await t.checkpoint(
         "collapsed",
         async () => {},
-        [
-          ["select name", /Статус заявки/],
-          ["combobox role", /combo box/],
-          ["collapsed state", /collapsed/],
-        ],
         async () => [
           ["collapsed DOM", (await read(t, trigger)).expanded === "false"],
         ],
@@ -159,7 +135,6 @@ export const workflows = [
       await t.checkpoint(
         "opened",
         () => t.key("Enter"),
-        [["first option", /Новая/]],
         async () => [
           ["expanded DOM", (await read(t, trigger)).expanded === "true"],
           [
@@ -171,7 +146,6 @@ export const workflows = [
       await t.checkpoint(
         "option-next",
         () => t.key("ArrowDown"),
-        [["next option", /В работе/]],
         async () => [
           [
             "next option focused",
@@ -182,10 +156,6 @@ export const workflows = [
       await t.checkpoint(
         "committed",
         () => t.key("Enter"),
-        [
-          ["committed value", /В работе/],
-          ["select role", /combo box/],
-        ],
         async () => [
           ["value committed", (await read(t, value)).value === "В работе"],
           ["focus returned", (await read(t, trigger)).active],
@@ -200,10 +170,6 @@ export const workflows = [
           if ((await read(t, trigger)).expanded === "true")
             await t.key("Escape");
         },
-        [
-          ["original committed value retained", /В работе/],
-          ["collapsed state", /collapsed/],
-        ],
         async () => [
           ["value retained", (await read(t, value)).value === "В работе"],
           [
@@ -218,10 +184,6 @@ export const workflows = [
       await t.checkpoint(
         "disabled",
         () => t.key("F"),
-        [
-          ["disabled select name", /Недоступно/],
-          ["unavailable state", /unavailable/],
-        ],
         async () => [
           [
             "native disabled",
@@ -246,11 +208,6 @@ export const workflows = [
       await t.checkpoint(
         "opened",
         () => t.key("Enter"),
-        [
-          ["dialog name", /Заголовок Modal/],
-          ["dialog role", /dialog/],
-          ["initial field", /Название/],
-        ],
         async () => [
           ["dialog open", (await read(t, "#showcase-modal")).open],
           ["autofocus", (await read(t, "#modal-autofocus")).active],
@@ -268,12 +225,6 @@ export const workflows = [
           }
           await t.key("Shift+Tab");
         },
-        [
-          [
-            "dialog control conveyed",
-            /Название|Закрыть|Dropdown|Tooltip|Popover|Отмена|Сохранить/,
-          ],
-        ],
         async () => [
           ["no background DOM control reached", contained],
           ["focus in dialog", (await read(t, "#showcase-modal")).containsFocus],
@@ -282,10 +233,6 @@ export const workflows = [
       await t.checkpoint(
         "dismissed",
         () => t.key("Escape"),
-        [
-          ["opener name", /Открыть Modal/],
-          ["opener role", /button/],
-        ],
         async () => [
           ["dialog closed", !(await read(t, "#showcase-modal")).open],
           ["focus returned", (await read(t, trigger)).active],
@@ -302,10 +249,6 @@ export const workflows = [
       await t.checkpoint(
         "expanded",
         () => t.key("Enter"),
-        [
-          ["trigger name", /Interactive content/],
-          ["expanded state", /expanded/],
-        ],
         async () => [
           ["expanded DOM", (await read(t, trigger)).expanded === "true"],
         ],
@@ -313,10 +256,6 @@ export const workflows = [
       await t.checkpoint(
         "input",
         () => t.key("Tab"),
-        [
-          ["content input name", /Значение/],
-          ["editable role", /edit/],
-        ],
         async () => [
           ["input focused", (await read(t, "#popover-value")).active],
         ],
@@ -324,10 +263,6 @@ export const workflows = [
       await t.checkpoint(
         "action",
         () => t.key("Tab"),
-        [
-          ["content action name", /Готово/],
-          ["button role", /button/],
-        ],
         async () => [
           [
             "action focused",
@@ -337,12 +272,23 @@ export const workflows = [
         ],
       );
       await t.checkpoint(
+        "untrapped",
+        () => t.key("Tab"),
+        async () => [
+          [
+            "external control focused",
+            (await read(t, "[data-shlz-popover-trigger=popover-edge]")).active,
+          ],
+          [
+            "popover still open",
+            !(await read(t, "#popover-interactive")).hidden,
+          ],
+        ],
+      );
+      await t.key("Shift+Tab");
+      await t.checkpoint(
         "dismissed",
         () => t.key("Enter"),
-        [
-          ["trigger name", /Interactive content/],
-          ["collapsed state", /collapsed/],
-        ],
         async () => [
           ["surface hidden", (await read(t, "#popover-interactive")).hidden],
           ["focus returned", (await read(t, trigger)).active],
@@ -361,7 +307,6 @@ export const workflows = [
       await t.checkpoint(
         "opened",
         () => t.key("Enter"),
-        [["initial date", /12 августа 2026/]],
         async () => [
           ["calendar expanded", (await read(t, trigger)).expanded === "true"],
           [
@@ -377,7 +322,6 @@ export const workflows = [
           await t.mode("focus");
           await t.key("ArrowRight");
         },
-        [["next date", /13 августа 2026/]],
         async () => [
           [
             "next day focused",
@@ -394,10 +338,6 @@ export const workflows = [
           returned = (await read(t, trigger)).active;
           await t.key("Shift+Tab");
         },
-        [
-          ["field name", /Дата поездки/],
-          ["committed date value", /13.08.2026/],
-        ],
         async () => [
           ["returned to trigger after commit", returned],
           [
@@ -415,10 +355,6 @@ export const workflows = [
           if ((await read(t, trigger)).expanded === "true")
             await t.key("Escape");
         },
-        [
-          ["date field trigger name", /Дата поездки/],
-          ["collapsed state", /collapsed/],
-        ],
         async () => [
           ["calendar closed", (await read(t, trigger)).expanded === "false"],
           ["focus returned", (await read(t, trigger)).active],
@@ -436,10 +372,6 @@ export const workflows = [
       await t.checkpoint(
         "trigger",
         async () => {},
-        [
-          ["native file input name", /Нажмите или перетащите файл/],
-          ["file chooser role", /button/],
-        ],
         async () => [["native input focused", (await read(t, input)).active]],
       );
       await t.checkpoint(
@@ -463,7 +395,6 @@ export const workflows = [
             await t.key("ArrowDown");
           }
         },
-        [["chosen file name in consumer list", /shlz-at-upload.txt/]],
         async () => [
           [
             "exact native selection",
@@ -487,10 +418,6 @@ export const workflows = [
       await t.checkpoint(
         "error",
         async () => {},
-        [
-          ["invalid state", /invalid/],
-          ["consumer error", /The consumer rejected this file/],
-        ],
         async () => [
           ["native invalid state", (await read(t, error)).invalid === "true"],
         ],
@@ -500,13 +427,6 @@ export const workflows = [
       await t.checkpoint(
         "plain-error",
         async () => {},
-        [
-          ["plain HTML invalid state", /invalid/],
-          [
-            "plain HTML error description",
-            /One or more files need consumer validation/,
-          ],
-        ],
         async () => [
           [
             "plain native invalid state",
@@ -522,10 +442,6 @@ export const workflows = [
       await t.checkpoint(
         "disabled",
         () => t.key("F"),
-        [
-          ["file input name", /Нажмите или перетащите файл/],
-          ["unavailable state", /unavailable/],
-        ],
         async () => [
           [
             "native disabled",

@@ -16,7 +16,7 @@ Other Windows versions, other NVDA languages/versions, JAWS, VoiceOver/Safari, L
 
 ## Workflow contract
 
-The matrix has seven workflows per browser and 28 named checkpoints per browser. Each checkpoint retains the OS-keyboard actions, observed NVDA speech, input-event count, foreground ownership and semantic/state assertions. Expected names and states come from existing component contracts and fixtures; observed word order is not prescribed universally.
+The matrix has seven workflows per browser and 29 named checkpoints per browser. Each checkpoint retains the OS-keyboard actions, observed NVDA speech, input-event count, continuous foreground ownership and raw DOM snapshots. Validation independently checks speech and snapshots against canonical semantic/state criteria, rather than trusting recorded pass flags. Expected names and states come from existing component contracts and fixtures; observed word order is not prescribed universally.
 
 | Workflow    | Checkpoints                                                                                                    |
 | ----------- | -------------------------------------------------------------------------------------------------------------- |
@@ -24,7 +24,7 @@ The matrix has seven workflows per browser and 28 named checkpoints per browser.
 | Checkbox    | Unchecked, checked, mixed and unavailable                                                                      |
 | Select      | Collapsed name/role, opening, option navigation, commit, cancellation and unavailable                          |
 | Modal       | Named dialog and initial focus, a full Tab cycle without background DOM controls, dismissal and returned focus |
-| Popover     | Expanded trigger, native input/action order, dismissal and returned focus                                      |
+| Popover     | Expanded trigger, native input/action order, Tab beyond the still-open popup, dismissal and returned focus     |
 | Date Picker | Initial date, next-day navigation, commitment/value reading, cancellation                                      |
 | File Upload | Named native chooser, selected filename in the consumer list, Showcase and plain-HTML errors, unavailable      |
 
@@ -54,7 +54,7 @@ npm run build
 SHLZ_SHOWCASE_PORT=4183 node tools/serve-built-showcase.mjs
 ```
 
-Prepare a local settings JSON with these fields:
+Prepare a local settings JSON inside this checkout's ignored `test-results/` directory with these fields:
 
 ```json
 {
@@ -79,7 +79,7 @@ The sample must contain only synthetic test data. The output must be a new JSON 
 <Windows node.exe> <Windows path to tools/at/run-windows.mjs> <Windows path to settings.json>
 ```
 
-The runner opens only isolated test browser profiles, refuses an existing NVDA session, and sends interaction keys through the Windows helper. It validates foreground ownership, including an explicitly owned native file dialog; it does not type into browser chrome as an editable page. On ownership loss it stops the action. Only the run's processes are closed.
+The runner opens only isolated test browser profiles, refuses an existing NVDA session, and sends interaction keys through the Windows helper. It validates foreground ownership, including an explicitly owned native file dialog; it does not type into browser chrome as an editable page. On ownership loss it stops the action. A continuous foreground-event observer also invalidates and discards speech when focus leaves and returns during a checkpoint. Only the run's processes are closed. Geckodriver joins an owned Windows Job Object before receiving a session request, so cleanup covers Firefox even if session creation fails. [Windows foreground events](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-setwineventhook), [Windows Job Objects](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects).
 
 NVDA's documented input/output logging level 12 supplies actual keyboard and speech records. Raw desktop logs stay local. Published evidence contains relevant fixture speech and redacted metadata; native file-dialog directory listings are excluded. [NVDA command-line options](https://download.nvaccess.org/documentation/en/userGuide.html#CommandLineOptions), [NVDA configuration](https://github.com/nvaccess/nvda/blob/release-2026.2/source/config/configSpec.py), [Windows SendInput](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-sendinput).
 

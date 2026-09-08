@@ -19,7 +19,7 @@ export function validateSettings(settings) {
   );
   assert.match(
     settings.repoPosix ?? "",
-    /^\/[^?#\\\\]+$/,
+    /^\/[^?#\\]+$/,
     "POSIX fixture root required",
   );
   const base = new URL(settings.baseURL);

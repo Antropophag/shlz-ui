@@ -1,13 +1,28 @@
 import { open, readFile, realpath } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath, URL } from "node:url";
 import { runWithNvda, environment } from "./runtime.mjs";
 import { workflows } from "./workflows.mjs";
-import { assertMatrix } from "./evidence.mjs";
+import { assertMatrix, assertBrowser } from "./evidence.mjs";
 import { validateSettings } from "./settings.mjs";
 
 if (process.platform !== "win32")
   throw new Error("Run this local AT check with Windows Node.js");
-const settings = JSON.parse(await readFile(process.argv[2], "utf8"));
+const settingsRoot = path.resolve(
+  fileURLToPath(new URL("../../test-results/", import.meta.url)),
+);
+const settingsPath = path.resolve(process.argv[2] ?? "");
+if (
+  path.extname(settingsPath) !== ".json" ||
+  !settingsPath.startsWith(settingsRoot + path.sep)
+)
+  throw new Error(
+    "Settings must be a JSON file inside this checkout's test-results directory",
+  );
+const resolvedSettingsPath = await realpath(settingsPath);
+if (!resolvedSettingsPath.startsWith(settingsRoot + path.sep))
+  throw new Error("Settings path escapes the ignored execution directory");
+const settings = JSON.parse(await readFile(resolvedSettingsPath, "utf8"));
 validateSettings(settings);
 for (const field of [
   "tempRoot",
@@ -59,11 +74,5 @@ if (targets.length === 2) {
   console.log("MATRIX", assertMatrix(report), "workflow passes");
 } else {
   console.log("PARTIAL MATRIX", targets.join(","));
-  if (
-    report.browsers.some((row) =>
-      row.workflows.some((flow) => flow.status !== "pass"),
-    )
-  ) {
-    process.exitCode = 1;
-  }
+  for (const row of report.browsers) assertBrowser(row, report.environment);
 }

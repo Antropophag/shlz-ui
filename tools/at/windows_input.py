@@ -4,6 +4,7 @@ from ctypes import wintypes
 import json
 import sys
 import time
+import threading
 
 KEYS = {
     "Tab": (0x09, 0), "Enter": (0x0D, 0), "Escape": (0x1B, 0),
@@ -16,7 +17,7 @@ KEYS = {
 }
 
 
-def execute(request, desktop=None):
+def validate_request(request):
     command = request.get("command")
     if command not in {"status", "activate", "key", "text"}:
         raise ValueError("Unknown desktop command")
@@ -25,13 +26,11 @@ def execute(request, desktop=None):
         not allowed or any(type(pid) is not int or pid <= 0 for pid in allowed)
     ):
         raise ValueError("Positive owned process IDs are required")
-    desktop = desktop or WindowsDesktop()
-    if command == "activate":
-        pid = request.get("pid")
-        if pid not in allowed:
-            raise ValueError("Activation target is not owned")
-        desktop.activate(pid)
-    state = desktop.foreground()
+    return command, allowed
+
+
+def require_ownership(request, state, allowed):
+    command = request["command"]
     owned = state["pid"] in allowed
     if request.get("allowOwnedDialog"):
         owned = state.get("windowClass") == "#32770" and (
@@ -39,6 +38,22 @@ def execute(request, desktop=None):
         )
     if command != "status" and not owned:
         raise RuntimeError(f"Unowned foreground PID {state['pid']}: input was not sent")
+    if request.get("allowOwnedDialog") and (
+        command == "text" or request.get("key") in {"Ctrl+A", "Enter"}
+    ) and state.get("focusClass") != "Edit":
+        raise RuntimeError("A native dialog edit control must own text input")
+
+
+def execute(request, desktop=None):
+    command, allowed = validate_request(request)
+    desktop = desktop or WindowsDesktop()
+    if command == "activate":
+        pid = request.get("pid")
+        if type(pid) is not int or pid not in allowed:
+            raise ValueError("Activation target is not owned")
+        desktop.activate(pid)
+    state = desktop.foreground()
+    require_ownership(request, state, allowed)
     if command == "key":
         desktop.send(key=request["key"])
     elif command == "text":
@@ -47,6 +62,24 @@ def execute(request, desktop=None):
             raise ValueError("Text must contain 1 to 256 characters")
         desktop.send(text=text)
     return state
+
+
+def key_inputs(key, event, is_held):
+    if not isinstance(key, str):
+        raise ValueError("A key name is required")
+    codes = []
+    for part in key.split("+"):
+        if part in KEYS:
+            codes.append(KEYS[part])
+        elif len(part) == 1 and "A" <= part <= "Z":
+            codes.append((ord(part), 0))
+        else:
+            raise ValueError("Unsupported key")
+    if any(is_held(vk) for vk, _ in codes):
+        raise RuntimeError("A requested key is already held")
+    return [event(vk, flags) for vk, flags in codes] + [
+        event(vk, flags | 2) for vk, flags in reversed(codes)
+    ]
 
 
 class WindowsDesktop:
@@ -73,9 +106,26 @@ class WindowsDesktop:
         self.api.GetClassNameW.argtypes = [wintypes.HWND, wintypes.LPWSTR, ctypes.c_int]
 
     def foreground(self):
-        window = self.api.GetForegroundWindow()
+        return self.describe(self.api.GetForegroundWindow())
+
+    def describe(self, window):
+        class GuiInfo(ctypes.Structure):
+            _fields_ = [
+                ("size", wintypes.DWORD), ("flags", wintypes.DWORD),
+                ("active", wintypes.HWND), ("focus", wintypes.HWND),
+                ("capture", wintypes.HWND), ("menu", wintypes.HWND),
+                ("moveSize", wintypes.HWND), ("caret", wintypes.HWND),
+                ("caretRect", wintypes.RECT),
+            ]
+
         pid = wintypes.DWORD()
-        self.api.GetWindowThreadProcessId(window, ctypes.byref(pid))
+        thread = self.api.GetWindowThreadProcessId(window, ctypes.byref(pid))
+        info = GuiInfo()
+        info.size = ctypes.sizeof(GuiInfo)
+        self.api.GetGUIThreadInfo.argtypes = [wintypes.DWORD, ctypes.POINTER(GuiInfo)]
+        focus_name = ctypes.create_unicode_buffer(256)
+        if self.api.GetGUIThreadInfo(thread, ctypes.byref(info)) and info.focus:
+            self.api.GetClassNameW(info.focus, focus_name, 256)
         name = ctypes.create_unicode_buffer(256)
         self.api.GetClassNameW(window, name, 256)
         owners = []
@@ -86,7 +136,8 @@ class WindowsDesktop:
             owners.append(owner_pid.value)
             owner = self.api.GetWindow(owner, 4)
         return {"window": window or 0, "pid": pid.value,
-                "windowClass": name.value, "ownerPids": owners}
+                "windowClass": name.value, "ownerPids": owners,
+                "focusClass": focus_name.value, "tick": uptime()}
 
     def activate(self, pid):
         windows = []
@@ -106,20 +157,8 @@ class WindowsDesktop:
         if not windows:
             raise RuntimeError("Owned browser has no visible window")
         target = windows[0]
-        foreground = self.api.GetForegroundWindow()
-        foreground_thread = self.api.GetWindowThreadProcessId(foreground, None)
-        current_thread = ctypes.windll.kernel32.GetCurrentThreadId()
-        attached = False
-        if foreground_thread and foreground_thread != current_thread:
-            attached = bool(self.api.AttachThreadInput(
-                current_thread, foreground_thread, True
-            ))
-        try:
-            self.api.ShowWindow(target, 9)
-            self.api.SetForegroundWindow(target)
-        finally:
-            if attached:
-                self.api.AttachThreadInput(current_thread, foreground_thread, False)
+        self.api.ShowWindow(target, 9)
+        self.api.SetForegroundWindow(target)
         deadline = time.monotonic() + 2
         while self.foreground()["pid"] != pid and time.monotonic() < deadline:
             time.sleep(0.05)
@@ -174,19 +213,7 @@ class WindowsDesktop:
 
         inputs = []
         if key is not None:
-            parts = key.split("+")
-            codes = []
-            for part in parts:
-                if part in KEYS:
-                    codes.append(KEYS[part])
-                elif len(part) == 1 and "A" <= part <= "Z":
-                    codes.append((ord(part), 0))
-                else:
-                    raise ValueError("Unsupported key")
-            if any(self.api.GetAsyncKeyState(vk) & 0x8000 for vk, _ in codes):
-                raise RuntimeError("A requested key is already held")
-            inputs = [event(vk, flags) for vk, flags in codes]
-            inputs += [event(vk, flags | 2) for vk, flags in reversed(codes)]
+            inputs = key_inputs(key, event, lambda vk: self.api.GetAsyncKeyState(vk) & 0x8000)
         else:
             encoded = text.encode("utf-16-le")
             for index in range(0, len(encoded), 2):
@@ -210,10 +237,67 @@ class WindowsDesktop:
             raise RuntimeError("Windows rejected some keyboard input")
 
 
+def uptime():
+    kernel = ctypes.WinDLL("kernel32")
+    kernel.GetTickCount64.restype = ctypes.c_ulonglong
+    return kernel.GetTickCount64()
+
+
+def watch_foreground():
+    desktop = WindowsDesktop()
+    api = desktop.api
+    callback_type = ctypes.WINFUNCTYPE(
+        None, wintypes.HANDLE, wintypes.DWORD, wintypes.HWND,
+        wintypes.LONG, wintypes.LONG, wintypes.DWORD, wintypes.DWORD
+    )
+
+    def changed(_hook, _event, window, _object, _child, _thread, event_time):
+        try:
+            state = desktop.describe(window)
+            now = uptime()
+            state["tick"] = now - ((now - event_time) & 0xFFFFFFFF)
+            print(json.dumps({"kind": "foreground", "state": state}), flush=True)
+        except Exception:
+            print(json.dumps({"kind": "error", "error": "foreground callback failed"}), flush=True)
+
+    callback = callback_type(changed)
+    api.SetWinEventHook.restype = wintypes.HANDLE
+    api.SetWinEventHook.argtypes = [
+        wintypes.DWORD, wintypes.DWORD, wintypes.HMODULE, callback_type,
+        wintypes.DWORD, wintypes.DWORD, wintypes.DWORD
+    ]
+    hook = api.SetWinEventHook(3, 3, None, callback, 0, 0, 0)
+    if not hook:
+        raise RuntimeError("Foreground event hook unavailable")
+    thread_id = ctypes.windll.kernel32.GetCurrentThreadId()
+    message = wintypes.MSG()
+    # Initialize the message queue before the stdin thread can post shutdown.
+    api.PeekMessageW(ctypes.byref(message), None, 0, 0, 0)
+
+    def stop_when_requested():
+        sys.stdin.readline()
+        time.sleep(0.3)
+        api.PostThreadMessageW(thread_id, 0x0012, 0, 0)
+
+    threading.Thread(target=stop_when_requested, daemon=True).start()
+    print(json.dumps({"kind": "ready", "tick": uptime()}), flush=True)
+    try:
+        while api.GetMessageW(ctypes.byref(message), None, 0, 0) > 0:
+            api.TranslateMessage(ctypes.byref(message))
+            api.DispatchMessageW(ctypes.byref(message))
+    finally:
+        api.UnhookWinEvent.argtypes = [wintypes.HANDLE]
+        api.UnhookWinEvent(hook)
+    print(json.dumps({"kind": "closed", "tick": uptime()}), flush=True)
+
+
 if __name__ == "__main__":
     try:
-        response = execute(json.load(sys.stdin))
-        print(json.dumps(response))
+        request = json.loads(sys.stdin.readline())
+        if request.get("command") == "watch":
+            watch_foreground()
+        else:
+            print(json.dumps(execute(request)))
     except (ValueError, RuntimeError, KeyError) as error:
         print(json.dumps({"error": str(error)}))
         sys.exit(1)

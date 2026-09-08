@@ -5,10 +5,11 @@ import { createServer } from "node:net";
 import { setTimeout as pause } from "node:timers/promises";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
+import { startGeckoJob } from "./process-tree.mjs";
 
 const alive = (child) => child.exitCode === null && child.signalCode === null;
 
-async function start(command, args, options = {}) {
+export async function startOwnedProcess(command, args, options = {}) {
   const child = spawn(command, args, {
     stdio: "ignore",
     windowsHide: true,
@@ -59,7 +60,7 @@ async function chromePort(profile, child) {
 
 async function openChrome(settings, runDirectory) {
   const profile = path.join(runDirectory, "chrome-profile");
-  const child = await start(
+  const child = await startOwnedProcess(
     settings.chrome,
     [
       `--user-data-dir=${profile}`,
@@ -151,7 +152,7 @@ async function waitForDriver(request, child) {
 
 async function openFirefox(settings, runDirectory) {
   const port = await availablePort();
-  const driver = await start(settings.geckodriver, [
+  const driver = await startGeckoJob(settings.geckodriver, [
     "--host",
     "127.0.0.1",
     "--port",
@@ -168,11 +169,11 @@ async function openFirefox(settings, runDirectory) {
       if (sessionId)
         await request(`/session/${sessionId}`, undefined, "DELETE");
     } finally {
-      await stop(driver);
+      await driver.close();
     }
   };
   try {
-    await waitForDriver(request, driver);
+    await waitForDriver(request, driver.child);
     const created = await request("/session", {
       capabilities: {
         alwaysMatch: {

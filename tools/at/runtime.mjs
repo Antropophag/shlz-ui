@@ -1,4 +1,4 @@
-import { spawn, spawnSync } from "node:child_process";
+import { spawnSync } from "node:child_process";
 import {
   readFile,
   copyFile,
@@ -11,20 +11,28 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath, URL } from "node:url";
 import { setTimeout } from "node:timers";
-import { openBrowser } from "./browsers.mjs";
-import { assertCheckpoint, speechText } from "./evidence.mjs";
+import { openBrowser, startOwnedProcess } from "./browsers.mjs";
+import {
+  assertCheckpoint,
+  assertSemanticCheckpoint,
+  speechText,
+} from "./evidence.mjs";
+import { speechContracts } from "./contracts.mjs";
+import { startForegroundMonitor } from "./foreground.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 export const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export const hash = (value) => createHash("sha256").update(value).digest("hex");
 
 export class ScreenReaderSession {
-  constructor(browser, nvda, log) {
+  constructor(browser, nvda, log, monitor) {
     this.browser = browser;
     this.nvda = nvda;
     this.log = log;
+    this.monitor = monitor;
     this.checkpoints = [];
     this.actions = [];
+    this.stateReads = [];
   }
 
   desktop(command) {
@@ -34,7 +42,7 @@ export class ScreenReaderSession {
     )
       throw new Error("NVDA exited");
     const result = spawnSync(
-      "C:\\Windows\\py.exe",
+      String.raw`C:\Windows\py.exe`,
       ["-3", "-B", path.join(here, "windows_input.py")],
       {
         input: JSON.stringify({ allowedPids: [this.browser.pid], ...command }),
@@ -86,9 +94,50 @@ export class ScreenReaderSession {
     }, selector);
     if (!focused) throw new Error("Setup target could not receive focus");
     await pause(400);
+    await this.confirmReaderFocus(selector);
+  }
+
+  async confirmReaderFocus(selector) {
+    const name = await this.evaluate((selector) => {
+      const target = document.querySelector(selector);
+      const labelId = target.getAttribute("aria-labelledby")?.split(/\s+/)[0];
+      return (
+        target.getAttribute("aria-label") ||
+        (labelId && document.getElementById(labelId)?.textContent) ||
+        target.labels?.[0]?.textContent ||
+        target.textContent
+      )
+        .trim()
+        .replace(/\s+/g, " ");
+    }, selector);
+    if (!name) throw new Error("Setup control has no accessible name");
+    for (let attempt = 0; attempt < 4; attempt++) {
+      const offset = (await readFile(this.log, "utf8")).length;
+      await this.key("NVDA+Tab");
+      await pause(350);
+      const lines = (await readFile(this.log, "utf8"))
+        .slice(offset)
+        .split(/\r?\n/)
+        .filter((line) => line.startsWith("Speaking ["));
+      if (speechText(lines).includes(name)) return;
+      await this.key("Tab");
+      await this.key("Shift+Tab");
+      await this.evaluate(
+        (selector) => document.querySelector(selector).focus(),
+        selector,
+      );
+    }
+    throw new Error("NVDA focus did not reach the setup control");
   }
 
   async key(key, { nativeDialog = false } = {}) {
+    this.monitor.check();
+    if (
+      this.activeSpan &&
+      this.monitor.foreign(this.activeSpan, Infinity, this.browser.pid).length
+    ) {
+      throw new Error("Foreign foreground transition detected; input stopped");
+    }
     if (
       !nativeDialog &&
       !["Tab", "Shift+Tab", "F6", "NVDA+Tab"].includes(key) &&
@@ -102,6 +151,15 @@ export class ScreenReaderSession {
   }
 
   async type(text, { nativeDialog = false } = {}) {
+    this.monitor.check();
+    if (
+      this.activeSpan &&
+      this.monitor.foreign(this.activeSpan, Infinity, this.browser.pid).length
+    ) {
+      throw new Error(
+        "Foreign foreground transition detected; text input stopped",
+      );
+    }
     if (
       !nativeDialog &&
       !(await this.evaluate(
@@ -141,13 +199,15 @@ export class ScreenReaderSession {
   async checkpoint(
     id,
     operation,
-    meanings,
     stateChecks,
     { reportFocus = true, onlyFocusReport = false } = {},
   ) {
     this.actions = [];
+    this.stateReads = [];
+    const meanings = speechContracts[this.workflowId][id];
     this.captureOffset = null;
     const before = this.desktop({ command: "status" });
+    this.activeSpan = before.tick;
     if (before.pid !== this.browser.pid)
       throw new Error("Foreground ownership was lost");
     let offset = (await readFile(this.log, "utf8")).length;
@@ -165,13 +225,22 @@ export class ScreenReaderSession {
       .filter((line) => line.startsWith("Speaking ["));
     const text = speechText(speech);
     const states = await stateChecks();
+    const after = this.desktop({ command: "status" });
     const value = {
       id,
+      workflow: this.workflowId,
+      stateReads: this.stateReads,
       actions: this.actions,
       speech,
       inputEventCount: (delta.match(/Input: kb\(/g) ?? []).length,
-      foregroundVerified:
-        this.desktop({ command: "status" }).pid === this.browser.pid,
+      foregroundVerified: after.pid === this.browser.pid,
+      foregroundSpan: {
+        start: before.tick,
+        end: after.tick,
+        browserPid: this.browser.pid,
+        before,
+        after,
+      },
       assertions: [
         ...meanings.map(([meaning, pattern]) => ({
           meaning,
@@ -182,14 +251,15 @@ export class ScreenReaderSession {
       ],
     };
     try {
-      assertCheckpoint(value);
+      assertSemanticCheckpoint(value);
       value.status = "pass";
     } catch (error) {
       value.status = "fail";
       value.error = error.message;
     }
     this.checkpoints.push(value);
-    console.log(`${id}: ${value.status} | ${text}`);
+    console.log(`${id}: ${value.status} (foreground capture pending)`);
+    this.activeSpan = null;
     if (states.some(([, passed]) => !passed))
       throw new Error("Browser-state assertion failed");
     return value;
@@ -206,6 +276,111 @@ export class ScreenReaderSession {
     return speechText(
       delta.split(/\r?\n/).filter((line) => line.startsWith("Speaking [")),
     );
+  }
+}
+
+async function executeWorkflows(session, settings, workflows, result, kind) {
+  for (const workflow of workflows) {
+    session.workflowId = workflow.id;
+    session.activeSpan = null;
+    session.checkpoints = [];
+    const row = {
+      id: workflow.id,
+      status: "blocked",
+      checkpoints: session.checkpoints,
+    };
+    try {
+      await workflow.run(session, settings);
+      row.status = session.checkpoints.every((point) => point.status === "pass")
+        ? "pass"
+        : "fail";
+    } catch (error) {
+      row.status = "fail";
+      row.error = error.message;
+      console.log(`${kind}/${workflow.id}: ${error.message}`);
+    }
+    result.workflows.push(row);
+  }
+}
+
+async function closeNvda(nvda, result) {
+  if (!nvda) return;
+  if (nvda.exitCode === null && nvda.signalCode === null) {
+    nvda.kill();
+    await pause(500);
+  }
+  result.cleanup.push({
+    process: "owned-nvda",
+    exited: nvda.exitCode !== null || nvda.signalCode !== null,
+  });
+}
+
+async function closeBrowser(browser, result) {
+  if (!browser) return;
+  try {
+    await browser.close();
+    result.cleanup.push({ process: "owned-browser", exited: true });
+  } catch (error) {
+    result.cleanup.push({
+      process: "owned-browser",
+      exited: false,
+      error: error.message,
+    });
+  }
+}
+
+function finishPoint(point, trace, monitor, browser, observation) {
+  const span = point.foregroundSpan;
+  span.events = trace
+    .filter(
+      (item) =>
+        item.kind === "foreground" &&
+        item.state.tick >= span.start &&
+        item.state.tick <= span.end,
+    )
+    .map((item) => item.state);
+  span.complete = true;
+  span.observationStart = observation.started;
+  span.observationEnd = observation.ended;
+  if (monitor.foreign(span.start, span.end, browser.pid).length) {
+    point.speech = [];
+    point.status = "blocked";
+  }
+  try {
+    assertCheckpoint(point);
+  } catch (error) {
+    point.status = "fail";
+    point.error = error.message;
+  }
+}
+
+async function closeMonitor(monitor, browser, result) {
+  if (!monitor) return;
+  try {
+    const trace = await monitor.close();
+    result.monitor = {
+      started: trace.find((item) => item.kind === "ready")?.tick,
+      ended: trace.find((item) => item.kind === "closed")?.tick,
+    };
+    for (const flow of result.workflows) {
+      for (const point of flow.checkpoints)
+        finishPoint(point, trace, monitor, browser, result.monitor);
+      if (flow.checkpoints.some((point) => point.status !== "pass"))
+        flow.status = "fail";
+    }
+    result.cleanup.push({ process: "owned-monitor", exited: true });
+  } catch (error) {
+    for (const flow of result.workflows) {
+      flow.status = "fail";
+      flow.checkpoints.forEach((point) => {
+        point.speech = [];
+      });
+    }
+    result.cleanup.push({
+      process: "owned-monitor",
+      exited: false,
+      error: error.message,
+    });
   }
 }
 
@@ -228,13 +403,16 @@ export async function runWithNvda(kind, settings, workflows) {
   await copyFile(path.join(here, "nvda.ini"), path.join(config, "nvda.ini"));
   let browser;
   let nvda;
+  let monitor;
   const result = { browser: kind, workflows: [], cleanup: [] };
   try {
     browser = await openBrowser(kind, settings, directory);
     result.version = browser.version;
-    const session = new ScreenReaderSession(browser, null, log);
+    result.browserPid = browser.pid;
+    monitor = await startForegroundMonitor();
+    const session = new ScreenReaderSession(browser, null, log, monitor);
     await session.goto(settings.baseURL + "/?full=1");
-    nvda = spawn(
+    nvda = await startOwnedProcess(
       settings.nvda,
       [
         "--minimal",
@@ -252,55 +430,16 @@ export async function runWithNvda(kind, settings, workflows) {
     const initialLog = await readFile(log, "utf8");
     if (!initialLog.includes("Loaded synthDriver espeak"))
       throw new Error("NVDA speech synthesizer did not initialize");
-    for (const workflow of workflows) {
-      session.checkpoints = [];
-      const row = {
-        id: workflow.id,
-        status: "blocked",
-        checkpoints: session.checkpoints,
-      };
-      try {
-        await workflow.run(session, settings);
-        row.status = session.checkpoints.every(
-          (point) => point.status === "pass",
-        )
-          ? "pass"
-          : "fail";
-      } catch (error) {
-        row.status = "fail";
-        row.error = error.message;
-        console.log(`${kind}/${workflow.id}: ${error.message}`);
-      }
-      result.workflows.push(row);
-    }
+    await executeWorkflows(session, settings, workflows, result, kind);
     const content = await readFile(log, "utf8");
     result.logHash = hash(content);
     result.nvdaVersion =
       content.match(/Starting NVDA version ([^\r\n]+)/)?.[1] ?? null;
     result.directory = directory;
   } finally {
-    if (nvda) {
-      if (nvda.exitCode === null && nvda.signalCode === null) {
-        nvda.kill();
-        await pause(500);
-      }
-      result.cleanup.push({
-        process: "owned-nvda",
-        exited: nvda.exitCode !== null || nvda.signalCode !== null,
-      });
-    }
-    if (browser) {
-      try {
-        await browser.close();
-        result.cleanup.push({ process: "owned-browser", exited: true });
-      } catch (error) {
-        result.cleanup.push({
-          process: "owned-browser",
-          exited: false,
-          error: error.message,
-        });
-      }
-    }
+    await closeNvda(nvda, result);
+    await closeBrowser(browser, result);
+    await closeMonitor(monitor, browser, result);
     await writeFile(
       path.join(directory, "result.json"),
       JSON.stringify(result, null, 2),
