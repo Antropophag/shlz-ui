@@ -14,6 +14,17 @@ The Windows baseline is bounded to the recorded versions and settings. NVDA uses
 
 Other Windows versions, other NVDA languages/versions, JAWS, VoiceOver/Safari, Linux/Orca, mobile AT, braille, audio quality and subjective comprehension remain unverified. Playwright WebKit on Linux is not Safari with VoiceOver. A later change does not inherit a new AT pass merely because this record exists.
 
+## Recorded result
+
+The [published Windows/NVDA record](accessibility-evidence/windows-nvda.json) was captured on **2026-09-08**, starting at **07:28:03 UTC**, from source commit `00ff8e77cdbbe751d2da0e4af44f150a21193f46`.
+
+| Actual combination                              | Workflows passed | Checkpoints passed | Owned-process cleanup |
+| ----------------------------------------------- | ---------------- | ------------------ | --------------------- |
+| Windows 10 / NVDA 2026.2 / Chrome 152.0.7977.64 | 7/7              | 29/29              | Confirmed             |
+| Windows 10 / NVDA 2026.2 / Firefox 155.0.1      | 7/7              | 29/29              | Confirmed             |
+
+There are zero failed or blocked workflows in this capture. The record retains exact versions/settings, keyboard actions, fixture speech, contract-relevant raw DOM properties and foreground observation intervals. Task directories and irrelevant browser-chrome speech from the modal Tab walk are omitted; raw logs remain local and are identified by their hashes. Earlier discovery runs are not presented as the final result.
+
 ## Workflow contract
 
 The matrix has seven workflows per browser and 29 named checkpoints per browser. Each checkpoint retains the OS-keyboard actions, observed NVDA speech, input-event count, continuous foreground ownership and raw DOM snapshots. Validation independently checks speech and snapshots against canonical semantic/state criteria, rather than trusting recorded pass flags. Expected names and states come from existing component contracts and fixtures; observed word order is not prescribed universally.
@@ -87,6 +98,8 @@ NVDA's documented input/output logging level 12 supplies actual keyboard and spe
 ## Validation and the discovered fixture defect
 
 `npm test` checks the evidence contract, guarded input policy and the two discriminating failure cases. Missing speech cannot pass even when DOM checks pass; a foreign foreground cannot receive input. These Linux checks do not claim to run NVDA.
+
+`npm run check:at:evidence` revalidates the published record offline, including all 58 checkpoints. It does not launch NVDA or certify changes made after the recorded source commit.
 
 The standalone File Upload error fixture had `aria-invalid` only on its container. NVDA read the description but did not convey the native input's invalid state. The fixture now applies the attribute to the input too, matching the existing public contract. Its six occurrence identities, source artwork, CSS and controller remain unchanged. The focused File Upload suite covers those occurrences, the live Data Workspace consumer, state behavior, narrow/content stress and existing visual baselines.
 

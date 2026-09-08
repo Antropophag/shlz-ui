@@ -1,0 +1,4799 @@
+{
+  "schemaVersion": 1,
+  "phase": "verification",
+  "sourceCommit": "00ff8e77cdbbe751d2da0e4af44f150a21193f46",
+  "measuredAt": "2026-09-08T07:28:03.556Z",
+  "environment": {
+    "os": "Windows 10 Pro",
+    "build": "10.0.19045",
+    "nvda": "2026.2 AMD64",
+    "settingsHash": "175430363ed0e1552e4eaf2897be32aca1191db67232fae03b7a7a3f2c5957a7",
+    "language": "en",
+    "synthesizer": "espeak",
+    "keyboard": "desktop",
+    "modePolicy": "automatic; explicit browse mode for list/unavailable-control reading and focus mode for calendar arrows",
+    "chromeAutomation": "CDP noDefaults; native focus, no focus emulation",
+    "firefoxAutomation": "WebDriver; focusmanager.testmode=false",
+    "globalScreenReaderFlag": "unchanged (--no-sr-flag)",
+    "speechEvidence": "NVDA input/output log; not an acoustic or human usability assessment"
+  },
+  "browsers": [
+    {
+      "browser": "chrome",
+      "workflows": [
+        {
+          "id": "input",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "name-value",
+              "workflow": "input",
+              "stateReads": [
+                {
+                  "selector": "[data-workspace-search]",
+                  "state": { "value": "SD-2418" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-workspace-result-count]",
+                  "state": { "text": "1" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Ctrl+A",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "text": "SD-2418" },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'S', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'D', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'dash', EndUtteranceCommand()]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '2', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '4', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '1', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '8', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Найдено: 1 ']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', LangChangeCommand ('ru'), 'SD-2418']"
+              ],
+              "inputEventCount": 9,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656145734,
+                "end": 656147921,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656145734
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656147921
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Поиск по заявкам",
+                  "passed": true
+                },
+                {
+                  "meaning": "editable role",
+                  "expected": "edit",
+                  "passed": true
+                },
+                {
+                  "meaning": "entered value",
+                  "expected": "SD-2418",
+                  "passed": true
+                },
+                { "meaning": "native value", "passed": true },
+                { "meaning": "consumer filtering", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "invalid-description",
+              "workflow": "input",
+              "stateReads": [
+                {
+                  "selector": "[data-workspace-search]",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', 'invalid entry', 'Введите корректный номер заявки', LangChangeCommand ('ru'), 'SD-2418']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656148062,
+                "end": 656149375,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656148062
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656149375
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Поиск по заявкам",
+                  "passed": true
+                },
+                {
+                  "meaning": "invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "consumer error description",
+                  "expected": "Введите корректный номер заявки",
+                  "passed": true
+                },
+                { "meaning": "native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "checkbox",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "unchecked",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-default']",
+                  "state": { "checked": false },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'not checked', 'off screen']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656152140,
+                "end": 656153406,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656152140
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656153406
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox default",
+                  "passed": true
+                },
+                {
+                  "meaning": "checkbox role",
+                  "expected": "check box",
+                  "passed": true
+                },
+                {
+                  "meaning": "unchecked state",
+                  "expected": "not checked",
+                  "passed": true
+                },
+                { "meaning": "native unchecked", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "checked",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-default']",
+                  "state": { "checked": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checked']",
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'checked', 'off screen']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656153531,
+                "end": 656155234,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656153531
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656155234
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox default",
+                  "passed": true
+                },
+                {
+                  "meaning": "checked state",
+                  "expected": "check box.*(?<!not )checked",
+                  "passed": true
+                },
+                { "meaning": "native checked", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "mixed",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-mixed']",
+                  "state": { "mixed": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox mixed', 'check box', 'focused', 'half checked']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656156625,
+                "end": 656157875,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656156625
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656157875
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox mixed",
+                  "passed": true
+                },
+                {
+                  "meaning": "mixed state",
+                  "expected": "half checked|partially checked",
+                  "passed": true
+                },
+                { "meaning": "native mixed", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-disabled']",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox checked-disabled', 'check box', 'unavailable', 'checked']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656159046,
+                "end": 656160296,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656159046
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656160296
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "disabled checkbox name",
+                  "expected": "checkbox checked-disabled",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "select",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "collapsed",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "expanded": "false" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки Выберите статус', 'combo box', 'Выберите статус', 'focused', 'collapsed', 'off screen', 'opens list']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656163000,
+                "end": 656164312,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656163000
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656164312
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "select name",
+                  "expected": "Статус заявки",
+                  "passed": true
+                },
+                {
+                  "meaning": "combobox role",
+                  "expected": "combo box",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "collapsed DOM", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "opened",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] [role=option]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки', 'list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'not selected', '1 of 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'list item', 'focused', '1 of 5']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656164468,
+                "end": 656166203,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656164468
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656166203
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "first option",
+                  "expected": "Новая",
+                  "passed": true
+                },
+                { "meaning": "expanded DOM", "passed": true },
+                { "meaning": "first option focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "option-next",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] [role=option]:nth-child(2)",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowDown",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'not selected', '2 of 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'list item', 'focused', '2 of 5']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656166328,
+                "end": 656168015,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656166328
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656168015
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "next option",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                { "meaning": "next option focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "committed",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] input[type=hidden]",
+                  "state": { "value": "В работе" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowDown",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656168171,
+                "end": 656169859,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656168171
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656169859
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "committed value",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                {
+                  "meaning": "select role",
+                  "expected": "combo box",
+                  "passed": true
+                },
+                { "meaning": "value committed", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "cancelled",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": false, "expanded": "true" },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] input[type=hidden]",
+                  "state": { "value": "В работе" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656170796,
+                "end": 656172859,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656170796
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656172859
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "original committed value retained",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "value retained", "passed": true },
+                { "meaning": "closed and returned", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-disabled'] .shlz-select__trigger",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Недоступно Закрыта', 'combo box', 'unavailable', 'collapsed', 'opens list', 'Закрыта']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656174953,
+                "end": 656176203,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656174953
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656176203
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "disabled select name",
+                  "expected": "Недоступно",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "modal",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "opened",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "open": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', 'Название￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', 'Название￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', CancellableSpeech (still valid), LangChangeCommand ('ru'), 'Native dialog']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', 'focused', LangChangeCommand ('ru'), 'Native dialog']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656178828,
+                "end": 656180546,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656178828
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656180546
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "dialog name",
+                  "expected": "Заголовок Modal",
+                  "passed": true
+                },
+                {
+                  "meaning": "dialog role",
+                  "expected": "dialog",
+                  "passed": true
+                },
+                {
+                  "meaning": "initial field",
+                  "expected": "Название",
+                  "passed": true
+                },
+                { "meaning": "dialog open", "passed": true },
+                { "meaning": "autofocus", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "contained",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": false, "bodyFocus": true },
+                  "actionIndex": 6
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 6
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": false, "bodyFocus": true },
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": false, "bodyFocus": true },
+                  "actionIndex": 8
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 8
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": false, "bodyFocus": true },
+                  "actionIndex": 9
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 9
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 10
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 10
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 11
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 11
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "containsFocus": true, "bodyFocus": false },
+                  "actionIndex": 13
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Dropdown внутри Modal', LangChangeCommand ('en_GB'), 'menu button', 'collapsed', 'subMenu']",
+                "Speaking [LangChangeCommand ('ru'), 'Tooltip внутри Modal', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('ru'), 'Popover внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'content info landmark', LangChangeCommand ('ru'), 'Отмена', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('ru'), 'Сохранить', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', 'Название￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'button', LangChangeCommand ('ru'), 'Сохранить']",
+                "Speaking [LangChangeCommand ('en_GB'), 'banner landmark', 'Закрыть', 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', CancellableSpeech (still valid), 'selected Native dialog']",
+                "Speaking [LangChangeCommand ('en_GB'), 'banner landmark', 'Закрыть', 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Закрыть', 'button', 'focused']"
+              ],
+              "inputEventCount": 13,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656180671,
+                "end": 656186875,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656180671
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656186875
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "dialog control conveyed",
+                  "expected": "Название|Закрыть|Dropdown|Tooltip|Popover|Отмена|Сохранить",
+                  "passed": true
+                },
+                {
+                  "meaning": "no background DOM control reached",
+                  "passed": true
+                },
+                { "meaning": "focus in dialog", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "dismissed",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "open": false },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-shlz-modal-trigger=showcase-modal]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'unknown', 'defunct']",
+                "Speaking [LangChangeCommand ('en_GB'), 'main landmark', 'Showcase navigation', 'complementary landmark', 'toggle button', 'not pressed', 'Use compact showcase navigation']",
+                "Speaking [LangChangeCommand ('ru'), 'Открыть Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656187000,
+                "end": 656188671,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656187000
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656188671
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "opener name",
+                  "expected": "Открыть Modal",
+                  "passed": true
+                },
+                {
+                  "meaning": "opener role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "dialog closed", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "popover",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "expanded",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-interactive]",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'expanded', 'off screen']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656191468,
+                "end": 656193171,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656191468
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656193171
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "trigger name",
+                  "expected": "Interactive content",
+                  "passed": true
+                },
+                {
+                  "meaning": "expanded state",
+                  "expected": "expanded",
+                  "passed": true
+                },
+                { "meaning": "expanded DOM", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "input",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-value",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', CancellableSpeech (still valid), 'blank']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', 'focused', 'off screen', 'blank']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656193312,
+                "end": 656195000,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656193312
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656195000
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "content input name",
+                  "expected": "Значение",
+                  "passed": true
+                },
+                {
+                  "meaning": "editable role",
+                  "expected": "edit",
+                  "passed": true
+                },
+                { "meaning": "input focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "action",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-interactive [data-shlz-popover-close]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Готово', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Готово', 'button', 'focused', 'off screen']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656195125,
+                "end": 656196765,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656195125
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656196765
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "content action name",
+                  "expected": "Готово",
+                  "passed": true
+                },
+                {
+                  "meaning": "button role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "action focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "untrapped",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-edge]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#popover-interactive",
+                  "state": { "hidden": false },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Около края', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Около края', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656196890,
+                "end": 656198546,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656196890
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656198546
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "external control",
+                  "expected": "Около края",
+                  "passed": true
+                },
+                {
+                  "meaning": "external button role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "external control focused", "passed": true },
+                { "meaning": "popover still open", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "dismissed",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-interactive",
+                  "state": { "hidden": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-interactive]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Interactive content', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656199109,
+                "end": 656200796,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656199109
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656200796
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "trigger name",
+                  "expected": "Interactive content",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "surface hidden", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "date-picker",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "opened",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-single-picker] button[aria-label*='12 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+                "Speaking [LangChangeCommand ('en_GB'), 'unknown', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'clickable', 'Календарь даты поездки', 'region', 'август 2026 г.', 'table', 'with 7 rows and 7 columns', 'row 4', 'Ср', 'column 3', 'selected', '12 августа 2026 г.', 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), '12 августа 2026 г.', 'button', 'focused']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656203109,
+                "end": 656204781,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656203109
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656204781
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "initial date",
+                  "expected": "12 августа 2026",
+                  "passed": true
+                },
+                { "meaning": "calendar expanded", "passed": true },
+                { "meaning": "date focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "next-day",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] button[aria-label*='13 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowRight",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'август 2026 г.', 'table', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'not selected', 'row 4', 'четверг', 'column 4', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', 'focused']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656204906,
+                "end": 656207187,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656204906
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656207187
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "next date",
+                  "expected": "13 августа 2026",
+                  "passed": true
+                },
+                { "meaning": "next day focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "committed",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__input",
+                  "state": { "value": "13.08.2026" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Enter", "nativeDialog": false }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', CancellableSpeech (still valid), 'selected 13.08.2026']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', 'focused', 'selected 13.08.2026']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656207312,
+                "end": 656209343,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656207312
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656209343
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Дата поездки",
+                  "passed": true
+                },
+                {
+                  "meaning": "committed date value",
+                  "expected": "13\\.08\\.2026",
+                  "passed": true
+                },
+                {
+                  "meaning": "returned to trigger after commit",
+                  "passed": true
+                },
+                { "meaning": "committed field value", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "cancelled",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] button[aria-label*='14 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__input",
+                  "state": { "value": "13.08.2026" },
+                  "actionIndex": 5
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowRight",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'август 2026 г.', 'table', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '14 августа 2026 г.', 'not selected', 'row 4', 'пятница', 'column 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '14 августа 2026 г.', 'button', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 5,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656210359,
+                "end": 656213515,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656210359
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656213515
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "date field trigger name",
+                  "expected": "Дата поездки",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "different pending date focused", "passed": true },
+                { "meaning": "calendar closed", "passed": true },
+                { "meaning": "focus returned", "passed": true },
+                { "meaning": "value preserved", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "file-upload",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "trigger",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] input[type=file]",
+                  "state": { "active": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656216468,
+                "end": 656217734,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656216468
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656217734
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "native file input name",
+                  "expected": "Нажмите или перетащите файл",
+                  "passed": true
+                },
+                {
+                  "meaning": "file chooser role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "native input focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "selected",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] input[type=file]",
+                  "state": { "files": ["shlz-at-upload.txt"] },
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] .shlz-file-upload__files",
+                  "state": { "text": "shlz-at-upload.txt" },
+                  "actionIndex": 7
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Ctrl+A",
+                  "nativeDialog": true
+                },
+                { "kind": "os-keyboard", "text": "[task-owned file path]" },
+                { "kind": "os-keyboard", "key": "Enter", "nativeDialog": true },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "key": "L", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'list', 'with 1 item', LangChangeCommand ('ru'), 'shlz-at-upload.txt']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656217859,
+                "end": 656222593,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656217859
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656222593
+                },
+                "events": [
+                  {
+                    "window": 28971256,
+                    "pid": 12232,
+                    "windowClass": "#32770",
+                    "ownerPids": [16040],
+                    "focusClass": "",
+                    "tick": 656218109
+                  },
+                  {
+                    "window": 7083214,
+                    "pid": 16040,
+                    "windowClass": "Chrome_WidgetWin_1",
+                    "ownerPids": [],
+                    "focusClass": "#32770",
+                    "tick": 656220046
+                  }
+                ],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "chosen file name in consumer list",
+                  "expected": "shlz-at-upload\\.txt",
+                  "passed": true
+                },
+                { "meaning": "exact native selection", "passed": true },
+                { "meaning": "consumer renders selected file", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "error",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-error'] input[type=file]",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused', 'invalid entry', 'The consumer rejected this file.']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656223921,
+                "end": 656225156,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656223921
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656225156
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "consumer error",
+                  "expected": "The consumer rejected this file",
+                  "passed": true
+                },
+                { "meaning": "native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "plain-error",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "#fixture-upload",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused', 'invalid entry', 'One or more files need consumer validation.']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656227453,
+                "end": 656228734,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656227453
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656228734
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "plain HTML invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "plain HTML error description",
+                  "expected": "One or more files need consumer validation",
+                  "passed": true
+                },
+                { "meaning": "plain native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-disabled'] input[type=file]",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'clickable', 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'unavailable']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656232656,
+                "end": 656233921,
+                "browserPid": 16040,
+                "before": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656232656
+                },
+                "after": {
+                  "window": 7083214,
+                  "pid": 16040,
+                  "windowClass": "Chrome_WidgetWin_1",
+                  "ownerPids": [],
+                  "focusClass": "Chrome_WidgetWin_1",
+                  "tick": 656233921
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656137000,
+                "observationEnd": 656234796
+              },
+              "assertions": [
+                {
+                  "meaning": "file input name",
+                  "expected": "Нажмите или перетащите файл",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "cleanup": [
+        { "process": "owned-nvda", "exited": true },
+        { "process": "owned-browser", "exited": true },
+        { "process": "owned-monitor", "exited": true }
+      ],
+      "version": "152.0.7977.64",
+      "browserPid": 16040,
+      "logHash": "61d7559d6d8894226aedf5a4b61079064240ac80f8687b386f9de45c09d7c646",
+      "nvdaVersion": "2026.2 AMD64",
+      "monitor": { "started": 656137000, "ended": 656234796 }
+    },
+    {
+      "browser": "firefox",
+      "workflows": [
+        {
+          "id": "input",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "name-value",
+              "workflow": "input",
+              "stateReads": [
+                {
+                  "selector": "[data-workspace-search]",
+                  "state": { "value": "SD-2418" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-workspace-result-count]",
+                  "state": { "text": "1" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Ctrl+A",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "text": "SD-2418" },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'S', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'D', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'dash', EndUtteranceCommand()]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '2', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '4', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [LangChangeCommand ('en_GB'), '3 ']",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '1', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '8', EndUtteranceCommand(), CharacterModeCommand(False)]",
+                "Speaking [LangChangeCommand ('en_GB'), '1 ']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', 'has auto complete', LangChangeCommand ('ru'), 'SD-2418']"
+              ],
+              "inputEventCount": 9,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656246359,
+                "end": 656248593,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656246359
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656248593
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Поиск по заявкам",
+                  "passed": true
+                },
+                {
+                  "meaning": "editable role",
+                  "expected": "edit",
+                  "passed": true
+                },
+                {
+                  "meaning": "entered value",
+                  "expected": "SD-2418",
+                  "passed": true
+                },
+                { "meaning": "native value", "passed": true },
+                { "meaning": "consumer filtering", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "invalid-description",
+              "workflow": "input",
+              "stateReads": [
+                {
+                  "selector": "[data-workspace-search]",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', 'invalid entry', 'has auto complete', 'Введите корректный номер заявки', LangChangeCommand ('ru'), 'SD-2418']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656248765,
+                "end": 656250093,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656248765
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656250093
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Поиск по заявкам",
+                  "passed": true
+                },
+                {
+                  "meaning": "invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "consumer error description",
+                  "expected": "Введите корректный номер заявки",
+                  "passed": true
+                },
+                { "meaning": "native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "checkbox",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "unchecked",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-default']",
+                  "state": { "checked": false },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'not checked']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656252500,
+                "end": 656253781,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656252500
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656253781
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox default",
+                  "passed": true
+                },
+                {
+                  "meaning": "checkbox role",
+                  "expected": "check box",
+                  "passed": true
+                },
+                {
+                  "meaning": "unchecked state",
+                  "expected": "not checked",
+                  "passed": true
+                },
+                { "meaning": "native unchecked", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "checked",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-default']",
+                  "state": { "checked": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checked']",
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'checked']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656253906,
+                "end": 656255703,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656253906
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656255703
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox default",
+                  "passed": true
+                },
+                {
+                  "meaning": "checked state",
+                  "expected": "check box.*(?<!not )checked",
+                  "passed": true
+                },
+                { "meaning": "native checked", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "mixed",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-mixed']",
+                  "state": { "mixed": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'checkbox mixed', 'check box', 'focused', 'half checked']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656257062,
+                "end": 656258312,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656257062
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656258312
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "checkbox name",
+                  "expected": "checkbox mixed",
+                  "passed": true
+                },
+                {
+                  "meaning": "mixed state",
+                  "expected": "half checked|partially checked",
+                  "passed": true
+                },
+                { "meaning": "native mixed", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "checkbox",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='checkbox-medium-disabled']",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'checkbox checked-disabled', LangChangeCommand ('en_GB'), 'check box', 'unavailable', 'checked']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656259515,
+                "end": 656260796,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656259515
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656260796
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "disabled checkbox name",
+                  "expected": "checkbox checked-disabled",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "select",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "collapsed",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "expanded": "false" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки Выберите статус', 'combo box', 'Выберите статус', 'focused', 'collapsed', 'opens list']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656263140,
+                "end": 656264500,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656263140
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656264500
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "select name",
+                  "expected": "Статус заявки",
+                  "passed": true
+                },
+                {
+                  "meaning": "combobox role",
+                  "expected": "combo box",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "collapsed DOM", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "opened",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] [role=option]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки', 'list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'not selected', '1 of 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'list item', 'focused', '1 of 5']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656264671,
+                "end": 656266593,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656264671
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656266593
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "first option",
+                  "expected": "Новая",
+                  "passed": true
+                },
+                { "meaning": "expanded DOM", "passed": true },
+                { "meaning": "first option focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "option-next",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] [role=option]:nth-child(2)",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowDown",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'not selected', '2 of 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'list item', 'focused', '2 of 5']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656266718,
+                "end": 656268500,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656266718
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656268500
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "next option",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                { "meaning": "next option focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "committed",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] input[type=hidden]",
+                  "state": { "value": "В работе" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowDown",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656268609,
+                "end": 656270406,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656268609
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656270406
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "committed value",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                {
+                  "meaning": "select role",
+                  "expected": "combo box",
+                  "passed": true
+                },
+                { "meaning": "value committed", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "cancelled",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": false, "expanded": "true" },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] input[type=hidden]",
+                  "state": { "value": "В работе" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-component-audit-id='request-status-empty'] .shlz-select__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656271328,
+                "end": 656273500,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656271328
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656273500
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "original committed value retained",
+                  "expected": "В работе",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "value retained", "passed": true },
+                { "meaning": "closed and returned", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "select",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='request-status-disabled'] .shlz-select__trigger",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Недоступно Закрыта', 'combo box', 'unavailable', 'collapsed', 'opens list', LangChangeCommand ('ru'), 'Закрыта']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656275515,
+                "end": 656276828,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656275515
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656276828
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "disabled select name",
+                  "expected": "Недоступно",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "modal",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "opened",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "open": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', '￼￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', '￼￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', 'has auto complete', CancellableSpeech (still valid), LangChangeCommand ('ru'), 'Native dialog']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', 'focused', 'has auto complete', LangChangeCommand ('ru'), 'Native dialog']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656279234,
+                "end": 656280984,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656279234
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656280984
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "dialog name",
+                  "expected": "Заголовок Modal",
+                  "passed": true
+                },
+                {
+                  "meaning": "dialog role",
+                  "expected": "dialog",
+                  "passed": true
+                },
+                {
+                  "meaning": "initial field",
+                  "expected": "Название",
+                  "passed": true
+                },
+                { "meaning": "dialog open", "passed": true },
+                { "meaning": "autofocus", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "contained",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 6
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 6
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 8
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 8
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 9
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 9
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 10
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 10
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 11
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 11
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": true, "containsFocus": false },
+                  "actionIndex": 12
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 12
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 13
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 13
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 14
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 14
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 15
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 15
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 16
+                },
+                {
+                  "selector": "#modal-autofocus",
+                  "state": {},
+                  "actionIndex": 16
+                },
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "bodyFocus": false, "containsFocus": true },
+                  "actionIndex": 18
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Dropdown внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed', 'subMenu']",
+                "Speaking [LangChangeCommand ('ru'), 'Tooltip внутри Modal', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('ru'), 'Popover внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('ru'), 'Отмена', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('ru'), 'Сохранить', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'button', LangChangeCommand ('ru'), 'Сохранить']",
+                "Speaking [LangChangeCommand ('ru'), 'Закрыть', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'clickable', LangChangeCommand ('ru'), 'Название', LangChangeCommand ('en_GB'), 'Название', 'edit', 'has auto complete', LangChangeCommand ('ru'), 'Native dialog', 'Body прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.', 'Dropdown внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed', 'subMenu', LangChangeCommand ('ru'), 'Tooltip внутри Modal', LangChangeCommand ('en_GB'), 'button', LangChangeCommand ('ru'), 'Popover внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed', LangChangeCommand ('ru'), 'Строка длинного содержимого 1', 'Строка длинного содержимого 2', 'Строка длинного содержимого 3', 'Строка длинного содержимого 4', 'Строка длинного содержимого 5', 'Строка длинного содержимого 6', 'Строка длинного содержимого 7', 'Строка длинного содержимого 8', 'Строка длинного содержимого 9', 'Строка длинного содержимого 10', 'Строка длинного содержимого 11', 'Строка длинного содержимого 12']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', 'has auto complete', CancellableSpeech (still valid), 'selected Native dialog']",
+                "Speaking [LangChangeCommand ('ru'), 'Название', LangChangeCommand ('en_GB'), 'Название', 'edit', 'has auto complete', LangChangeCommand ('ru'), 'Native dialog', 'Body прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.', 'Dropdown внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed', 'subMenu', LangChangeCommand ('ru'), 'Tooltip внутри Modal', LangChangeCommand ('en_GB'), 'button', LangChangeCommand ('ru'), 'Popover внутри Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed', LangChangeCommand ('ru'), 'Строка длинного содержимого 1', 'Строка длинного содержимого 2', 'Строка длинного содержимого 3', 'Строка длинного содержимого 4', 'Строка длинного содержимого 5', 'Строка длинного содержимого 6', 'Строка длинного содержимого 7', 'Строка длинного содержимого 8', 'Строка длинного содержимого 9', 'Строка длинного содержимого 10', 'Строка длинного содержимого 11', 'Строка длинного содержимого 12']"
+              ],
+              "inputEventCount": 18,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656281093,
+                "end": 656289828,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656281093
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656289828
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "dialog control conveyed",
+                  "expected": "Название|Закрыть|Dropdown|Tooltip|Popover|Отмена|Сохранить",
+                  "passed": true
+                },
+                {
+                  "meaning": "no background DOM control reached",
+                  "passed": true
+                },
+                { "meaning": "focus in dialog", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "dismissed",
+              "workflow": "modal",
+              "stateReads": [
+                {
+                  "selector": "#showcase-modal",
+                  "state": { "open": false },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-shlz-modal-trigger=showcase-modal]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'main landmark', 'Showcase navigation', 'complementary landmark', 'toggle button', 'not pressed', LangChangeCommand ('ru'), 'Use compact showcase navigation']",
+                "Speaking [LangChangeCommand ('ru'), 'Открыть Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть Modal', 'button', 'focused', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'alert', 'Не удалось сохранить изменения', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Повторить', 'button', CancellableSpeech (still valid)]"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656289953,
+                "end": 656291671,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656289953
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656291671
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "opener name",
+                  "expected": "Открыть Modal",
+                  "passed": true
+                },
+                {
+                  "meaning": "opener role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "dialog closed", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "popover",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "expanded",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-interactive]",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'expanded']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656294140,
+                "end": 656295859,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656294140
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656295859
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "trigger name",
+                  "expected": "Interactive content",
+                  "passed": true
+                },
+                {
+                  "meaning": "expanded state",
+                  "expected": "expanded",
+                  "passed": true
+                },
+                { "meaning": "expanded DOM", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "input",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-value",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', 'has auto complete', CancellableSpeech (still valid), 'blank']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', 'focused', 'has auto complete', 'blank']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656296000,
+                "end": 656297718,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656296000
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656297718
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "content input name",
+                  "expected": "Значение",
+                  "passed": true
+                },
+                {
+                  "meaning": "editable role",
+                  "expected": "edit",
+                  "passed": true
+                },
+                { "meaning": "input focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "action",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-interactive [data-shlz-popover-close]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Готово', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Готово', 'button', 'focused']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656297843,
+                "end": 656299515,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656297843
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656299515
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "content action name",
+                  "expected": "Готово",
+                  "passed": true
+                },
+                {
+                  "meaning": "button role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "action focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "untrapped",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-edge]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "#popover-interactive",
+                  "state": { "hidden": false },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Около края', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Около края', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656299656,
+                "end": 656301437,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656299656
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656301437
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "external control",
+                  "expected": "Около края",
+                  "passed": true
+                },
+                {
+                  "meaning": "external button role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "external control focused", "passed": true },
+                { "meaning": "popover still open", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "dismissed",
+              "workflow": "popover",
+              "stateReads": [
+                {
+                  "selector": "#popover-interactive",
+                  "state": { "hidden": true },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-shlz-popover-trigger=popover-interactive]",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('ru'), 'Interactive content', LangChangeCommand ('en_GB'), 'button', 'expanded']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656301984,
+                "end": 656303734,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656301984
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656303734
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "trigger name",
+                  "expected": "Interactive content",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "surface hidden", "passed": true },
+                { "meaning": "focus returned", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "date-picker",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "opened",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "expanded": "true" },
+                  "actionIndex": 2
+                },
+                {
+                  "selector": "[data-single-picker] button[aria-label*='12 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 2
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+                "Speaking [LangChangeCommand ('en_GB'), 'clickable', 'Календарь даты поездки', 'region', 'август 2026 г.', 'table', 'with 7 rows and 7 columns', 'row 4', 'Ср', 'column 3', 'selected', LangChangeCommand ('ru'), '12 августа 2026 г.', LangChangeCommand ('en_GB'), 'button']",
+                "Speaking [LangChangeCommand ('en_GB'), '12 августа 2026 г.', 'button', 'focused']"
+              ],
+              "inputEventCount": 2,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656306125,
+                "end": 656307812,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656306125
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656307812
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "initial date",
+                  "expected": "12 августа 2026",
+                  "passed": true
+                },
+                { "meaning": "calendar expanded", "passed": true },
+                { "meaning": "date focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "next-day",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] button[aria-label*='13 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowRight",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'август 2026 г.', 'table', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'not selected', 'row 4', 'четверг', 'column 4', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', 'focused']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656307937,
+                "end": 656310343,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656307937
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656310343
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "next date",
+                  "expected": "13 августа 2026",
+                  "passed": true
+                },
+                { "meaning": "next day focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "committed",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true },
+                  "actionIndex": 1
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__input",
+                  "state": { "value": "13.08.2026" },
+                  "actionIndex": 3
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Shift+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "key": "Tab", "nativeDialog": false },
+                { "kind": "os-keyboard", "key": "Enter", "nativeDialog": false }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', CancellableSpeech (still valid), 'selected 13.08.2026']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', 'focused', 'selected 13.08.2026']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656310484,
+                "end": 656312546,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656310484
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656312546
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "field name",
+                  "expected": "Дата поездки",
+                  "passed": true
+                },
+                {
+                  "meaning": "committed date value",
+                  "expected": "13\\.08\\.2026",
+                  "passed": true
+                },
+                {
+                  "meaning": "returned to trigger after commit",
+                  "passed": true
+                },
+                { "meaning": "committed field value", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "cancelled",
+              "workflow": "date-picker",
+              "stateReads": [
+                {
+                  "selector": "[data-single-picker] button[aria-label*='14 августа 2026']",
+                  "state": { "active": true },
+                  "actionIndex": 3
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 4
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__trigger",
+                  "state": { "active": true, "expanded": "false" },
+                  "actionIndex": 5
+                },
+                {
+                  "selector": "[data-single-picker] .shlz-date-field__input",
+                  "state": { "value": "13.08.2026" },
+                  "actionIndex": 5
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "ArrowRight",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Escape",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'август 2026 г.', 'table', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '14 августа 2026 г.', 'not selected', 'row 4', 'пятница', 'column 5', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), '14 августа 2026 г.', 'button', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'focused', 'collapsed']"
+              ],
+              "inputEventCount": 5,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656313562,
+                "end": 656317062,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656313562
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656317062
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "date field trigger name",
+                  "expected": "Дата поездки",
+                  "passed": true
+                },
+                {
+                  "meaning": "collapsed state",
+                  "expected": "collapsed",
+                  "passed": true
+                },
+                { "meaning": "different pending date focused", "passed": true },
+                { "meaning": "calendar closed", "passed": true },
+                { "meaning": "focus returned", "passed": true },
+                { "meaning": "value preserved", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        },
+        {
+          "id": "file-upload",
+          "status": "pass",
+          "checkpoints": [
+            {
+              "id": "trigger",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] input[type=file]",
+                  "state": { "active": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область Browse… …', 'button', 'focused', 'off screen']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656319343,
+                "end": 656320640,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656319343
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656320640
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "native file input name",
+                  "expected": "Нажмите или перетащите файл",
+                  "passed": true
+                },
+                {
+                  "meaning": "file chooser role",
+                  "expected": "button",
+                  "passed": true
+                },
+                { "meaning": "native input focused", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "selected",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] input[type=file]",
+                  "state": { "files": ["shlz-at-upload.txt"] },
+                  "actionIndex": 7
+                },
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-empty'] .shlz-file-upload__files",
+                  "state": { "text": "shlz-at-upload.txt" },
+                  "actionIndex": 7
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "Enter",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "Ctrl+A",
+                  "nativeDialog": true
+                },
+                { "kind": "os-keyboard", "text": "[task-owned file path]" },
+                { "kind": "os-keyboard", "key": "Enter", "nativeDialog": true },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                { "kind": "os-keyboard", "key": "L", "nativeDialog": false },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'SHLZ UI foundation', 'document', CancellableSpeech (still valid)]",
+                "Speaking [LangChangeCommand ('en_GB'), 'button', LangChangeCommand ('ru'), 'Нажмите или перетащите файл в эту область Browse… …']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+                "Speaking [LangChangeCommand ('en_GB'), 'list', 'with 1 item', LangChangeCommand ('ru'), 'shlz-at-upload.txt']"
+              ],
+              "inputEventCount": 3,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656320765,
+                "end": 656325734,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656320765
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656325734
+                },
+                "events": [
+                  {
+                    "window": 56364856,
+                    "pid": 16000,
+                    "windowClass": "#32770",
+                    "ownerPids": [13192],
+                    "focusClass": "",
+                    "tick": 656321000
+                  },
+                  {
+                    "window": 158601466,
+                    "pid": 13192,
+                    "windowClass": "MozillaWindowClass",
+                    "ownerPids": [],
+                    "focusClass": "#32770",
+                    "tick": 656322984
+                  }
+                ],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "chosen file name in consumer list",
+                  "expected": "shlz-at-upload\\.txt",
+                  "passed": true
+                },
+                { "meaning": "exact native selection", "passed": true },
+                { "meaning": "consumer renders selected file", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "error",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-error'] input[type=file]",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область Browse… …', 'button', 'focused', 'invalid entry', 'off screen', 'The consumer rejected this file.']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656327062,
+                "end": 656328343,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656327062
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656328343
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "consumer error",
+                  "expected": "The consumer rejected this file",
+                  "passed": true
+                },
+                { "meaning": "native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "plain-error",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "#fixture-upload",
+                  "state": { "invalid": "true" },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Tab",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                },
+                {
+                  "kind": "os-keyboard",
+                  "key": "NVDA+Space",
+                  "nativeDialog": false
+                }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область Browse… …', 'button', 'focused', 'invalid entry', 'off screen', 'One or more files need consumer validation.']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656330750,
+                "end": 656332078,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656330750
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656332078
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "plain HTML invalid state",
+                  "expected": "invalid",
+                  "passed": true
+                },
+                {
+                  "meaning": "plain HTML error description",
+                  "expected": "One or more files need consumer validation",
+                  "passed": true
+                },
+                { "meaning": "plain native invalid state", "passed": true }
+              ],
+              "status": "pass"
+            },
+            {
+              "id": "disabled",
+              "workflow": "file-upload",
+              "stateReads": [
+                {
+                  "selector": "[data-component-audit-id='file-upload-showcase-disabled'] input[type=file]",
+                  "state": { "disabled": true },
+                  "actionIndex": 1
+                }
+              ],
+              "actions": [
+                { "kind": "os-keyboard", "key": "F", "nativeDialog": false }
+              ],
+              "speech": [
+                "Speaking [LangChangeCommand ('en_GB'), 'clickable', LangChangeCommand ('ru'), 'Нажмите или перетащите файл в эту область Browse… …', LangChangeCommand ('en_GB'), 'button', 'unavailable']"
+              ],
+              "inputEventCount": 1,
+              "foregroundVerified": true,
+              "foregroundSpan": {
+                "start": 656335671,
+                "end": 656336953,
+                "browserPid": 13192,
+                "before": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656335671
+                },
+                "after": {
+                  "window": 158601466,
+                  "pid": 13192,
+                  "windowClass": "MozillaWindowClass",
+                  "ownerPids": [],
+                  "focusClass": "MozillaWindowClass",
+                  "tick": 656336953
+                },
+                "events": [],
+                "complete": true,
+                "observationStart": 656238140,
+                "observationEnd": 656338296
+              },
+              "assertions": [
+                {
+                  "meaning": "file input name",
+                  "expected": "Нажмите или перетащите файл",
+                  "passed": true
+                },
+                {
+                  "meaning": "unavailable state",
+                  "expected": "unavailable",
+                  "passed": true
+                },
+                { "meaning": "native disabled", "passed": true }
+              ],
+              "status": "pass"
+            }
+          ]
+        }
+      ],
+      "cleanup": [
+        { "process": "owned-nvda", "exited": true },
+        { "process": "owned-browser", "exited": true },
+        { "process": "owned-monitor", "exited": true }
+      ],
+      "version": "155.0.1",
+      "browserPid": 13192,
+      "logHash": "c944f7b491ab2909a2dddbb16846c99448e53e94c4fbcc2f0bca5ebd63021305",
+      "nvdaVersion": "2026.2 AMD64",
+      "monitor": { "started": 656238140, "ended": 656338296 }
+    }
+  ],
+  "publication": {
+    "method": "Actual Windows OS keyboard input with portable NVDA; speech and state collected by tools/at/run-windows.mjs at sourceCommit.",
+    "redaction": "Removed task directories. Retained only contract-relevant raw DOM properties; omitted unrelated browser-chrome speech during the modal Tab walk. Raw NVDA logs remain local and are identified by logHash.",
+    "limitations": "Versioned agent-operated evidence, not human usability, acoustic quality or general WCAG certification."
+  }
+}

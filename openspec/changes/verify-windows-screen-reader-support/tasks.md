@@ -5,8 +5,8 @@
 
 ## 2. Coverage and findings
 
-- [ ] 2.1 Execute all seven workflows in both declared browser/AT combinations, record speech and state evidence, and fix confirmed scope-local defects with the applicable component gates before rechecking.
-- [ ] 2.2 Publish the versioned support matrix, reproducible commands, primary-source rationale, exact results and limitations; reconcile the browser/AT roadmap row.
+- [x] 2.1 Execute all seven workflows in both declared browser/AT combinations, record speech and state evidence, and fix confirmed scope-local defects with the applicable component gates before rechecking.
+- [x] 2.2 Publish the versioned support matrix, reproducible commands, primary-source rationale, exact results and limitations; reconcile the browser/AT roadmap row.
 
 ## 3. Delivery
 
