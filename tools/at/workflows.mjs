@@ -1,5 +1,3 @@
-import { pause } from "./runtime.mjs";
-
 const audit = (id) => `[data-component-audit-id='${id}']`;
 const home = (settings) => settings.baseURL + "/?full=1";
 const fixture = (settings, name) =>

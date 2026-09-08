@@ -42,8 +42,12 @@ test("Chrome waits for asynchronously attached context and page", async () => {
 });
 
 test("native chooser waits through browser and unfocused dialog states", async () => {
-  const states = [owned, { ...dialog, focusClass: "Button" }, dialog];
-  await session(states).waitForNativeDialog(1000);
+  const states = [
+    ...Array(7).fill(owned),
+    { ...dialog, focusClass: "Button" },
+    dialog,
+  ];
+  await session(states).waitForNativeDialog(2000);
   assert.equal(states.length, 1);
 });
 
