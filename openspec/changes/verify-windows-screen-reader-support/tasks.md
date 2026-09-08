@@ -14,4 +14,4 @@
 
 ## 4. PR review follow-up
 
-- [ ] 4.1 Resolve the six review threads and three accompanying comments; regress delayed startup/dialog readiness, owned-dialog checkpoints, failed evidence statuses, path handling and resource lifetime; refresh focused validation and independent review.
+- [x] 4.1 Resolve the six review threads and three accompanying comments; regress delayed startup/dialog readiness, owned-dialog checkpoints, failed evidence statuses, path handling and resource lifetime; refresh focused validation and independent review.
