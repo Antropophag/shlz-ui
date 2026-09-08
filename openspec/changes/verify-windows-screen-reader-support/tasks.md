@@ -10,4 +10,4 @@
 
 ## 3. Delivery
 
-- [ ] 3.1 Complete focused regression checks, independent Standards/Spec review, marked failure proof, conformance and delivery receipts; publish the unmerged PR with CI and unresolved-thread status.
+- [x] 3.1 Complete focused regression checks, independent Standards/Spec review, marked failure proof, conformance and delivery receipts; publish the unmerged PR with CI and unresolved-thread status.
