@@ -348,14 +348,21 @@ export const workflows = [
       );
       await t.key("Tab");
       await t.key("Enter");
+      let pendingChanged = false;
       await t.checkpoint(
         "cancelled",
         async () => {
+          await t.mode("focus");
+          await t.key("ArrowRight");
+          pendingChanged = (
+            await read(t, root + " button[aria-label*='14 августа 2026']")
+          ).active;
           await t.key("Escape");
           if ((await read(t, trigger)).expanded === "true")
             await t.key("Escape");
         },
         async () => [
+          ["different pending date focused", pendingChanged],
           ["calendar closed", (await read(t, trigger)).expanded === "false"],
           ["focus returned", (await read(t, trigger)).active],
           ["value preserved", (await read(t, input)).value === "13.08.2026"],
@@ -398,7 +405,8 @@ export const workflows = [
         async () => [
           [
             "exact native selection",
-            (await read(t, input)).files[0] === "shlz-at-upload.txt",
+            JSON.stringify((await read(t, input)).files) ===
+              JSON.stringify(["shlz-at-upload.txt"]),
           ],
           [
             "consumer renders selected file",

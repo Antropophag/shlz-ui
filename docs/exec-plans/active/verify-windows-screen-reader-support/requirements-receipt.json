@@ -1,0 +1,32 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "verify-windows-screen-reader-support",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "agent-operated-windows",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "bounded-matrix",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "evidence-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Define and execute agent-operated Windows NVDA coverage for critical SHLZ forms, focus, dialog, floating, date and file flows without manual user work.",
+    "revision": 1
+  },
+  "routeDigest": "417fc3f56ec8121786fce6588df66e171d09d3fd5825ab57f595dd3c7a2be1b0",
+  "version": 1,
+  "digest": "dafab6ad2b1c4e25c53aa97507e63ba807837df41669d871de565e0f6753e3c8"
+}

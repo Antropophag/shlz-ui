@@ -34,6 +34,7 @@ The Input error is an explicitly prepared consumer validation state on an existi
 
 - NVDA can consume the first Escape to leave focus mode. Select cancellation records the actual Escape sequence needed to dismiss the popup and restore focus.
 - Calendar arrows are exercised in NVDA focus mode. The committed date is read from the Date Field after checking that commit first returned focus to the trigger.
+- Cancellation reopens the calendar and moves to a different pending date before Escape; the previously committed field value must remain unchanged.
 - A native HTML modal makes background page controls inert; browser chrome remains reachable. The Tab walk accounts for that browser boundary rather than installing a custom trap.
 - Firefox's focused, visually hidden native file chooser can report `Browse…` without the selected filename. The supported consumer flow reads the rendered file list with NVDA browse navigation. It does not infer an automatic selection announcement.
 - Chrome is an independently launched stock browser connected with Playwright `noDefaults`. Normal Playwright focus emulation would make `document.hasFocus()` unsuitable for verifying real desktop keyboard focus. Firefox uses stock Firefox through Geckodriver with `focusmanager.testmode=false`.

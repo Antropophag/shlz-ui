@@ -1,0 +1,41 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Define and execute agent-operated Windows NVDA coverage for critical SHLZ forms, focus, dialog, floating, date and file flows without manual user work.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "verify-windows-screen-reader-support",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "agent-operated-windows",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "bounded-matrix",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "evidence-authority",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "417fc3f56ec8121786fce6588df66e171d09d3fd5825ab57f595dd3c7a2be1b0"
+}

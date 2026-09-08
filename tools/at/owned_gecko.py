@@ -3,6 +3,7 @@ import ctypes
 from ctypes import wintypes
 import json
 from pathlib import PureWindowsPath
+import re
 import subprocess
 import sys
 import time
@@ -54,12 +55,29 @@ def close_owned_job(kernel, job, child):
         kernel.CloseHandle(job)
 
 
+def validated_command(request):
+    executable = PureWindowsPath(request["executable"])
+    args = request["args"]
+    if len(args) != 8 or args[:3] != ["--host", "127.0.0.1", "--port"] or args[4] != "--profile-root" or args[6:] != ["--log", "error"]:
+        raise ValueError("Only the fixed loopback driver arguments are supported")
+    if not re.fullmatch(r"[0-9]{1,5}", args[3]) or not 1024 <= int(args[3]) <= 65535:
+        raise ValueError("Invalid local driver port")
+    profile = PureWindowsPath(args[5])
+    root = profile.parent
+    if not re.fullmatch(r"[A-Za-z]:", root.drive) or not root.is_absolute() or ".." in root.parts:
+        raise ValueError("A local task root is required")
+    if not re.fullmatch(r"shlz-at-[A-Za-z0-9_-]+", root.name) or not re.fullmatch(r"firefox-run-[A-Za-z0-9_-]+", profile.name):
+        raise ValueError("An isolated task profile is required")
+    if executable.name.lower() != "geckodriver.exe" or ".." in executable.parts or root not in executable.parents:
+        raise ValueError("Only the task-owned Geckodriver is supported")
+    return [str(executable), "--host", "127.0.0.1", "--port", str(int(args[3])),
+            "--profile-root", str(profile), "--log", "error"]
+
+
 def supervise(request):
     if sys.platform != "win32":
         raise RuntimeError("Windows job objects require Windows")
-    executable = request["executable"]
-    if PureWindowsPath(executable).name.lower() != "geckodriver.exe":
-        raise ValueError("Only the owned Geckodriver service is supported")
+    command = validated_command(request)
     kernel = ctypes.WinDLL("kernel32", use_last_error=True)
     kernel.CreateJobObjectW.restype = wintypes.HANDLE
     kernel.SetInformationJobObject.argtypes = [wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p, wintypes.DWORD]
@@ -78,7 +96,7 @@ def supervise(request):
         if not kernel.SetInformationJobObject(job, 9, ctypes.byref(limits), ctypes.sizeof(limits)):
             raise RuntimeError("Cannot configure owned process job")
         child = subprocess.Popen(
-            [executable, *request["args"]], stdin=subprocess.DEVNULL,
+            command, stdin=subprocess.DEVNULL,
             stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
             creationflags=subprocess.CREATE_NO_WINDOW,
         )

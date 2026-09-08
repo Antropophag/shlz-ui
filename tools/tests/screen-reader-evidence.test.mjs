@@ -126,6 +126,13 @@ test("lost-and-returned foreground invalidates retained speech", () => {
   ];
   assert.throws(() => assertCheckpoint(value), /foreign foreground transition/);
 });
+test("date cancellation must prove a different pending date was focused", () => {
+  const value = checkpoint("date-picker", "cancelled");
+  value.stateReads = value.stateReads.filter(
+    (read) => !read.selector.includes("14 августа 2026"),
+  );
+  assert.throws(() => assertCheckpoint(value), /missing runtime snapshot/);
+});
 test("observed input, ownership and runtime snapshots are mandatory", () => {
   for (const delta of [
     { inputEventCount: 0 },

@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Define and execute agent-operated Windows NVDA coverage for critical SHLZ forms, focus, dialog, floating, date and file flows without manual user work.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "agent-operated-windows",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "делай; Не хочу ничего делать руками. Ты работаешь в wsl на win машине"
+      }
+    },
+    {
+      "id": "bounded-matrix",
+      "owner": "agent",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "inspection",
+        "ref": "WSL interop confirms Windows 10 19045, Chrome 152, Windows Node/Python/7-Zip; Windows NVDA+Chrome/Firefox bounded versioned coverage, no macOS or general conformance claim"
+      }
+    },
+    {
+      "id": "evidence-authority",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "AGENTS.md and docs/component-audit-workflow.md: distinct browser and real AT evidence, preserve source, independent component completion"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "verify-windows-screen-reader-support",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "делай; no manual user work, use underlying Windows host"
+    }
+  }
+}

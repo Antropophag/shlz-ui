@@ -272,6 +272,9 @@ export const stateContracts = {
       "committed field value": [at(pickerInput, { value: "13.08.2026" })],
     },
     cancelled: {
+      "different pending date focused": [
+        at(picker + " button[aria-label*='14 августа 2026']", { active: true }),
+      ],
       "calendar closed": [at(pickerTrigger, { expanded: "false" })],
       "focus returned": [at(pickerTrigger, { active: true })],
       "value preserved": [at(pickerInput, { value: "13.08.2026" })],

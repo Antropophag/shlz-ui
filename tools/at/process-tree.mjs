@@ -4,6 +4,17 @@ import { createInterface } from "node:readline";
 import { setTimeout as pause } from "node:timers/promises";
 import { fileURLToPath, URL } from "node:url";
 
+async function failedStartup(primary, close) {
+  try {
+    await close();
+  } catch (cleanup) {
+    throw new Error(`${primary.message}; cleanup: ${cleanup.message}`, {
+      cause: primary,
+    });
+  }
+  throw primary;
+}
+
 export async function startGeckoJob(executable, args) {
   const child = spawn(
     String.raw`C:\Windows\py.exe`,
@@ -49,19 +60,15 @@ export async function startGeckoJob(executable, args) {
     if (ready) return { child, pid: ready.pid, close };
     const error = observations.find((item) => item.kind === "error");
     if (failure || error || child.exitCode !== null) {
-      try {
-        await close();
-      } catch {
-        /* original startup failure remains primary */
-      }
-      throw failure ?? new Error(error?.message ?? "Process supervisor exited");
+      return failedStartup(
+        failure ?? new Error(error?.message ?? "Process supervisor exited"),
+        close,
+      );
     }
     await pause(50);
   }
-  try {
-    await close();
-  } catch {
-    /* timeout remains primary */
-  }
-  throw new Error("Process supervisor startup timed out");
+  return failedStartup(
+    new Error("Process supervisor startup timed out"),
+    close,
+  );
 }

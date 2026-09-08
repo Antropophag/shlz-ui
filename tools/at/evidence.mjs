@@ -31,7 +31,8 @@ export function speechText(lines) {
   const words = [];
   for (const line of lines) {
     let depth = 0;
-    for (let index = 0; index < line.length; index++) {
+    let index = 0;
+    while (index < line.length) {
       const char = line[index];
       if (char === "'" || char === '"') {
         const token = quoted(line, index);
@@ -42,6 +43,7 @@ export function speechText(lines) {
       } else if (char === ")") {
         depth = Math.max(0, depth - 1);
       }
+      index++;
     }
   }
   return words.join(" ");

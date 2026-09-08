@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/assistive-technology-support",
+    "commit": "196b95c217732bca1ee0349f447553c70adf3a41",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/assistive-technology-support",
+      "headRefOid": "196b95c217732bca1ee0349f447553c70adf3a41",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/84"
+    },
+    "repository": {
+      "digest": "a55da3f7c9d6f66bf2dab6a5db05458caac35a2b92022211d86a45bdfbb7fd58",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-assistive-technology"
+    },
+    "upstream": "origin/feature/assistive-technology-support"
+  },
+  "requirementsDigest": "dafab6ad2b1c4e25c53aa97507e63ba807837df41669d871de565e0f6753e3c8",
+  "routeDigest": "417fc3f56ec8121786fce6588df66e171d09d3fd5825ab57f595dd3c7a2be1b0",
+  "version": 1,
+  "digest": "94a86da89953f2acbc9638c861bc0de6f9e36db0f7be490d59146457854f300c"
+}

@@ -8,6 +8,11 @@ spec = importlib.util.spec_from_file_location(
 )
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
+job_spec = importlib.util.spec_from_file_location(
+    "owned_gecko", Path(__file__).parents[1] / "at" / "owned_gecko.py"
+)
+job_module = importlib.util.module_from_spec(job_spec)
+job_spec.loader.exec_module(job_module)
 
 
 class Desktop:
@@ -23,6 +28,22 @@ class Desktop:
 
 
 class InputOwnershipTests(unittest.TestCase):
+    def test_driver_request_rejects_extra_flags_and_foreign_profile(self):
+        root = r"C:\Temp\shlz-at-unit"
+        request = {
+            "executable": root + r"\geckodriver\geckodriver.exe",
+            "args": ["--host", "127.0.0.1", "--port", "49152",
+                     "--profile-root", root + r"\firefox-run-unit", "--log", "error"],
+        }
+        self.assertEqual(job_module.validated_command(request)[-1], "error")
+        for changed in [
+            {**request, "executable": r"C:\Windows\geckodriver.exe"},
+            {**request, "args": request["args"] + ["--connect-existing"]},
+            {**request, "args": [*request["args"][:5], r"C:\Users\user", "--log", "error"]},
+        ]:
+            with self.assertRaises(ValueError):
+                job_module.validated_command(changed)
+
     def test_only_a_dialog_owned_by_the_browser_can_use_a_modal_lease(self):
         desktop = Desktop(999)
         desktop.foreground = lambda: {
