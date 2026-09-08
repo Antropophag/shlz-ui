@@ -39,6 +39,7 @@ metadata on these shared test bodies; the discovery check enforces seven
 scenarios per engine.
 
 Start with the [evidence map](docs/evidence-map.md) and [source-of-truth policy](docs/source-of-truth.md) before changing visual contracts.
+The bounded Windows/NVDA procedure and support limits are documented in [browser and screen-reader evidence](docs/accessibility-support.md).
 Typography profiles are documented in [Typography profiles](docs/typography-profiles.md).
 
 The generated `@shlz/styles/shlz.css` distribution is standalone and can be

@@ -1,0 +1,14 @@
+# Windows screen-reader verification
+
+- Episode baseline: `196b95c217732bca1ee0349f447553c70adf3a41`; PR [#84](https://github.com/Antropophag/shlz-ui/pull/84), unmerged.
+- Actual AT source: `00ff8e77cdbbe751d2da0e4af44f150a21193f46`, captured 2026-09-08. [Published record](../../../accessibility-evidence/windows-nvda.json): 14/14 workflows, 58/58 checkpoints, zero failed/blocked workflows; owned-process cleanup confirmed in both browsers.
+- Scope: Windows 10 Pro 19045, NVDA 2026.2 AMD64, Chrome 152.0.7977.64, Firefox 155.0.1. This is agent-operated speech/keyboard evidence, not human usability or general WCAG certification.
+- Regression: 248/248 unit/source tests; 5/5 focused File Upload browser tests, six classified occurrences, unchanged focused visual baselines and authoritative source. Only the standalone fixture's native `aria-invalid` changed; no package CSS/controller or design-source mutation.
+- Independent Standards and Spec publication reviews: pass at `8ac542943163c05a7609dd893defdf4a28bc3d7e`; both verified published values and local log/configuration hashes. Runtime identities: `01a07fef-cd29-70a3-9eeb-a230ea188907` (Standards); the independent Spec identity is retained in the candidate-bound review receipt.
+- Marked failure proof rejects missing speech and foreign-foreground input against the known-bad adapter. Conformance accounts for every episode path and all 58 checkpoint identities. Initial publication delivery receipt: `f9d6a2868d2fa15e73d328087bfde187d67c3a85e6f29a179f3354f0bfbf7cd0`.
+- Candidate-bound validation, independent reviews, conformance and delivery are regenerated after this checklist/report-only commit; local receipts and raw review logs are under ignored `test-results/at-planning/`. Five durable preflight artifacts here preserve route, requirements, baseline and contract provenance without checking in raw streams.
+- At publication, Required checks and SonarCloud pass; browser/visual and cross-engine smoke CI are still running. The final PR handoff reports their observed status. GitHub has zero review threads; CodeRabbit skipped the draft and is not counted as a review pass.
+
+The Impeccable accessibility audit kept the component correction scoped to native semantics and its own occurrence/consumer/visual gate. Its degraded generic detector is explicitly not used as an accessibility pass. The `code-review` skill supplied independent Standards/Spec checks; TDD supplied discriminating negative cases at the approved evidence/input boundary; OpenSpec remained the normative contract.
+
+No manual user setup or testing was required. Test NVDA, Firefox and Geckodriver exited; the pre-existing Chrome process remained running. Portable binaries, isolated test profiles and raw logs remain in the task-owned temporary directory for reproducibility; no system installation or user-profile replacement was performed.

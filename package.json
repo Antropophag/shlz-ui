@@ -29,6 +29,7 @@
     "test:e2e": "playwright test",
     "test:e2e:smoke": "playwright test --config playwright.smoke.config.js",
     "check:e2e:smoke": "node tools/check-browser-smoke.mjs",
+    "check:at:evidence": "node tools/check-screen-reader-record.mjs",
     "test:e2e:update": "playwright test --update-snapshots",
     "check:openspec": "node tools/check-openspec.mjs",
     "check:docs": "prettier --check docs openspec",

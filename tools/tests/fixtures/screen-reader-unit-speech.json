@@ -1,0 +1,141 @@
+{
+  "input": {
+    "name-value": [
+      "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'S', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [PitchCommand(offset=30), CharacterModeCommand(True), LangChangeCommand ('en_GB'), 'D', PitchCommand(), EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'dash', EndUtteranceCommand()]",
+      "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '2', EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '4', EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '1', EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [CharacterModeCommand(True), LangChangeCommand ('en_GB'), '8', EndUtteranceCommand(), CharacterModeCommand(False)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Найдено: 1 ']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', LangChangeCommand ('ru'), 'SD-2418']"
+    ],
+    "invalid-description": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Поиск по заявкам', 'edit', 'focused', 'invalid entry', 'Введите корректный номер заявки', LangChangeCommand ('ru'), 'SD-2418']"
+    ]
+  },
+  "checkbox": {
+    "unchecked": [
+      "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'not checked']",
+      "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'not checked', 'off screen']"
+    ],
+    "checked": [
+      "Speaking [LangChangeCommand ('en_GB'), 'checked']",
+      "Speaking [LangChangeCommand ('en_GB'), 'checkbox default', 'check box', 'focused', 'checked', 'off screen']"
+    ],
+    "mixed": [
+      "Speaking [LangChangeCommand ('en_GB'), 'checkbox mixed', 'check box', 'focused', 'half checked']"
+    ],
+    "disabled": [
+      "Speaking [LangChangeCommand ('en_GB'), 'checkbox checked-disabled', 'check box', 'unavailable', 'checked']"
+    ]
+  },
+  "select": {
+    "collapsed": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки Выберите статус', 'combo box', 'Выберите статус', 'focused', 'collapsed', 'off screen', 'opens list']"
+    ],
+    "opened": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки', 'list', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'not selected', '1 of 5', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Новая', 'list item', 'focused', '1 of 5']"
+    ],
+    "option-next": [
+      "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'not selected', '2 of 5', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'В работе', 'list item', 'focused', '2 of 5']"
+    ],
+    "committed": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+    ],
+    "cancelled": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'collapsed', 'opens list', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Статус заявки В работе', 'combo box', 'В работе', 'focused', 'collapsed', 'opens list']"
+    ],
+    "disabled": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Недоступно Закрыта', 'combo box', 'unavailable', 'collapsed', 'opens list', 'Закрыта']"
+    ]
+  },
+  "modal": {
+    "opened": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', 'Название￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Заголовок Modal', 'dialog', 'Название￼\\nBody прокручивается независимо от header и footer. Ниже проверяются floating-компоненты внутри top layer.\\nСтрока длинного содержимого 1\\nСтрока длинного содержимого 2\\nСтрока длинного содержимого 3\\nСтрока длинного содержимого 4\\nСтрока длинного содержимого 5\\nСтрока длинного содержимого 6\\nСтрока длинного содержимого 7\\nСтрока длинного содержимого 8\\nСтрока длинного содержимого 9\\nСтрока длинного содержимого 10\\nСтрока длинного содержимого 11\\nСтрока длинного содержимого 12', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', CancellableSpeech (still valid), LangChangeCommand ('ru'), 'Native dialog']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Название', 'edit', 'focused', LangChangeCommand ('ru'), 'Native dialog']"
+    ],
+    "contained": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Закрыть', 'button', 'focused']"
+    ],
+    "dismissed": [
+      "Speaking [LangChangeCommand ('en_GB'), 'unknown', 'defunct']",
+      "Speaking [LangChangeCommand ('en_GB'), 'main landmark', 'Showcase navigation', 'complementary landmark', 'toggle button', 'not pressed', 'Use compact showcase navigation']",
+      "Speaking [LangChangeCommand ('ru'), 'Открыть Modal', LangChangeCommand ('en_GB'), 'button', 'collapsed']"
+    ]
+  },
+  "popover": {
+    "expanded": [
+      "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'expanded', 'off screen']"
+    ],
+    "input": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', CancellableSpeech (still valid), 'blank']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Значение', 'edit', 'focused', 'off screen', 'blank']"
+    ],
+    "action": [
+      "Speaking [LangChangeCommand ('ru'), 'Готово', LangChangeCommand ('en_GB'), 'button']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Готово', 'button', 'focused', 'off screen']"
+    ],
+    "dismissed": [
+      "Speaking [LangChangeCommand ('ru'), 'Interactive content', LangChangeCommand ('en_GB'), 'button', 'collapsed']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Interactive content', 'button', 'focused', 'collapsed']"
+    ],
+    "untrapped": ["Speaking ['Около края', 'button', 'focused', 'collapsed']"]
+  },
+  "date-picker": {
+    "opened": [
+      "Speaking [LangChangeCommand ('en_GB'), 'expanded']",
+      "Speaking [LangChangeCommand ('en_GB'), 'clickable', 'Календарь даты поездки', 'region', 'август 2026 г.', 'table', 'with 7 rows and 7 columns', 'row 4', 'Ср', 'column 3', 'selected', '12 августа 2026 г.', 'button']",
+      "Speaking [LangChangeCommand ('en_GB'), '12 августа 2026 г.', 'button', 'focused']"
+    ],
+    "next-day": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'август 2026 г.', 'table', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'not selected', 'row 4', 'четверг', 'column 4', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), '13 августа 2026 г.', 'button', 'focused']"
+    ],
+    "committed": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', CancellableSpeech (still valid), 'selected 13.08.2026']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Дата поездки', 'edit', 'focused', 'selected 13.08.2026']"
+    ],
+    "cancelled": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'collapsed', CancellableSpeech (still valid)]",
+      "Speaking [LangChangeCommand ('en_GB'), 'Открыть календарь для поля «Дата поездки»', 'button', 'focused', 'collapsed']"
+    ]
+  },
+  "file-upload": {
+    "trigger": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused']"
+    ],
+    "selected": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Focus mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'Browse mode']",
+      "Speaking [LangChangeCommand ('en_GB'), 'list', 'with 1 item', LangChangeCommand ('ru'), 'shlz-at-upload.txt']"
+    ],
+    "error": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused', 'invalid entry', 'The consumer rejected this file.']"
+    ],
+    "plain-error": [
+      "Speaking [LangChangeCommand ('en_GB'), 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'Файл не выбран', 'focused', 'invalid entry', 'One or more files need consumer validation.']"
+    ],
+    "disabled": [
+      "Speaking [LangChangeCommand ('en_GB'), 'clickable', 'Нажмите или перетащите файл в эту область: Файл не выбран', 'button', 'unavailable']"
+    ]
+  }
+}

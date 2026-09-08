@@ -1,0 +1,5 @@
+{
+  "adapter": "unsafe-screen-reader-validation",
+  "missingSpeech": "accept",
+  "foreground": "inject-before-validation"
+}

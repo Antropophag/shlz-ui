@@ -28,6 +28,8 @@ test("File Upload publishes native markup, style and behavior contracts", async 
   assert.match(fixture, /Нажмите или перетащите файл в эту область/);
   assert.doesNotMatch(fixture, /shlz-file-upload__trigger/);
   assert.match(fixture, /aria-describedby="fixture-upload-error"/);
+  const nativeInput = fixture.match(/<input\b[^>]*>/)?.[0];
+  assert.match(nativeInput ?? "", /aria-invalid="true"/);
 });
 
 test("the raw Documents authority is locked and never generated", async () => {

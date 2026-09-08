@@ -96,9 +96,19 @@
     "manualStateWalk": "pass: re-inspected source-default, populated, pointer drag-active/drop, keyboard focus, disabled, error, narrow/long-content and 200-percent-text surfaces on 2026-08-30"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "file-upload-plain-native-invalid",
+      "severity": "P2",
+      "status": "resolved-native-invalid",
+      "description": "The standalone error fixture marked only its container invalid. NVDA conveyed its description but omitted the native input's invalid state. Applying aria-invalid to the native input restores the documented contract; Chrome and Firefox NVDA checkpoints now convey invalid entry.",
+      "evidence": "docs/accessibility-support.md",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/84"
+    }
+  ],
   "knownLimitations": [
     "validation, deduplication, previews, removal, progress, retry, transport, cancellation and persistence are consumer-owned",
-    "the controller does not assign input.files and retains no FileList or queue state"
+    "the controller does not assign input.files and retains no FileList or queue state",
+    "NVDA support evidence is limited to the versioned workflows in docs/accessibility-support.md; Firefox's hidden native chooser may not convey the filename on focus, so the tested consumer exposes it in its rendered file list"
   ]
 }

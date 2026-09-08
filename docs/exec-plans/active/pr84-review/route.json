@@ -1,0 +1,36 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Resolve PR 84 review findings in Windows AT runner, preserving existing screen-reader-support contracts.",
+    "material": ["permissionsOrSecurity"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": true,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "verify-windows-screen-reader-support",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "review-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "existing-contract",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "fdc2154393b14e9656c04dd3b1c3dd9beee5c63ac1912ab5f114d5ffa84e2e6b"
+}

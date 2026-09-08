@@ -80,9 +80,9 @@
       "tools/playwright/upload-document-compositions-wave11.spec.js"
     ],
     "primitiveDependencyPathCount": 11,
-    "unrelatedTerminologyPathCount": 73,
-    "totalPathCount": 87,
-    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the 2026-09-07 contrast matrix helper adds one unrelated DOM document reference in tools/playwright/status-empty-contrast-matrix.js"
+    "unrelatedTerminologyPathCount": 78,
+    "totalPathCount": 92,
+    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": [

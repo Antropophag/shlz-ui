@@ -2319,7 +2319,16 @@
         "Attached Document",
         "Drag and Drop Document"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "file-upload-plain-native-invalid",
+          "severity": "P2",
+          "status": "resolved-native-invalid",
+          "description": "The standalone native input now exposes its existing error state; bounded NVDA evidence and unchanged six-occurrence regression are recorded independently.",
+          "evidence": "docs/accessibility-support.md",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/84"
+        }
+      ],
       "limitations": [
         "the reusable contract selects and reports local files but is not a network uploader",
         "File Row and Document Row remain independent Wave 5 dependencies and do not certify this higher-level family",
