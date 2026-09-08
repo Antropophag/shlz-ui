@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "fix-rounded-control-alignment",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "content-policy",
+        "owner": "agent",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "test-seams",
+        "owner": "agent",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Correct all thirteen audited rounded-control layout, content-containment, and typography defects in one unmerged PR.",
+    "revision": 1
+  },
+  "routeDigest": "a7250d6ced59117124e4749e2c88573a2376483239d756f8d04049bc3c000a02",
+  "version": 1,
+  "digest": "8fab547b123a8e410c085a1da8f6b8c3084a1837785e86859191dc909dbac690"
+}

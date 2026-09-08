@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Correct all thirteen audited rounded-control layout, content-containment, and typography defects in one unmerged PR.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "scope",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "User approved the thirteen-group audit scope with «Делай» and requested one PR."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "AGENTS.md; original Switch/Tabs/Bage/History SVGs and Basic Elements archive; design.md"
+      }
+    },
+    {
+      "id": "content-policy",
+      "owner": "agent",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "Source minima with natural width/reflow for localized labels; design.md decisions 1–4"
+      }
+    },
+    {
+      "id": "test-seams",
+      "owner": "agent",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "Existing public rendered HTML, Showcase diagnostics/consumers, native behavior and painted pixels approved through the audited examples; design.md decision 5"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "fix-rounded-control-alignment",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Делай, following the complete thirteen-group audit and one-PR scope."
+    }
+  }
+}
