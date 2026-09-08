@@ -391,6 +391,15 @@ export const workflows = [
             (selector) => document.querySelector(selector).files.length === 1,
             input,
           );
+          // Revisit the native input with OS keys so NVDA's browse cursor
+          // follows the returned document focus after the Windows dialog.
+          await t.key("Tab");
+          await t.key("Shift+Tab");
+          await t.waitFor(
+            (selector) =>
+              document.activeElement === document.querySelector(selector),
+            input,
+          );
           await t.resetSpeechCapture();
           await t.mode("browse");
           await t.key("L");
