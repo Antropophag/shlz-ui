@@ -17,7 +17,9 @@
 
 .shlz-field__advanced-actions .shlz-field__action {
   flex-basis: 27px;
-  font: 13.3333px Arial;
+  font:
+    13.3333px Arial,
+    sans-serif;
 }
 
 .shlz-tabs--pill .shlz-tabs__list,
@@ -100,5 +102,7 @@
 
 .shlz-comment-feed__context-action,
 .shlz-comment-feed__suggestion {
-  font: 13.3333px Arial;
+  font:
+    13.3333px Arial,
+    sans-serif;
 }

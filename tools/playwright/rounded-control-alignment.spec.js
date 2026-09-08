@@ -430,6 +430,9 @@ test("affected rounded-control occurrences remain classified", async ({
       ...observed,
     });
   }
+  expect(
+    census.flatMap(({ unclassifiedLegacy }) => unclassifiedLegacy),
+  ).toEqual([]);
   await test.info().attach("rounded-control-census.json", {
     body: JSON.stringify(census, null, 2),
     contentType: "application/json",
