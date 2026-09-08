@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "verify-windows-screen-reader-support",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "review-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "existing-contract",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Resolve PR 84 review findings in Windows AT runner, preserving existing screen-reader-support contracts.",
+    "revision": 1
+  },
+  "routeDigest": "fdc2154393b14e9656c04dd3b1c3dd9beee5c63ac1912ab5f114d5ffa84e2e6b",
+  "version": 1,
+  "digest": "3f5217bebe34fafad0b389a825ec5c2a9d1898c307f59f8442d5640bf0b02b22"
+}
