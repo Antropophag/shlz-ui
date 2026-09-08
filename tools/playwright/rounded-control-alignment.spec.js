@@ -6,6 +6,7 @@ import {
   readComponentAuditManifest,
 } from "./component-audit.js";
 import {
+  applyHistoricalLayoutAdapter,
   openAlignmentShowcase,
   paintedThumbOffset,
   textLineGeometry,
@@ -438,3 +439,87 @@ test("affected rounded-control occurrences remain classified", async ({
     contentType: "application/json",
   });
 });
+
+for (const profile of ["golos", "fira"]) {
+  test(`A4 A9 plain HTML Tabs contain short and long labels in ${profile}`, async ({
+    page,
+  }) => {
+    const resource = (path) =>
+      `/@fs${new URL(`../../${path}`, import.meta.url).pathname}`;
+    const variants = [
+      ["underline", 61, "Underline"],
+      ["pill", 40, "A4"],
+      ["boxed", 39, "A9"],
+    ];
+    const markup = variants
+      .map(
+        ([variant]) =>
+          `<section class="rail"><div class="shlz-tabs${variant === "underline" ? "" : ` shlz-tabs--${variant}`}" data-shlz-tabs data-plain-variant="${variant}"><div class="shlz-tabs__list" role="tablist" aria-label="${variant}"><button class="shlz-tabs__tab" id="${variant}-one" type="button" role="tab" aria-selected="true" aria-controls="${variant}-panel-one">One</button><button class="shlz-tabs__tab" id="${variant}-two" type="button" role="tab" aria-selected="false" aria-controls="${variant}-panel-two" tabindex="-1">Two</button></div><div class="shlz-tabs__panel" id="${variant}-panel-one" role="tabpanel" tabindex="0" aria-labelledby="${variant}-one">First panel</div><div class="shlz-tabs__panel" id="${variant}-panel-two" role="tabpanel" tabindex="0" aria-labelledby="${variant}-two" hidden>Second panel</div></div></section>`,
+      )
+      .join("");
+    const html = `<!doctype html><html lang="ru"><head><meta charset="utf-8"><link rel="stylesheet" href="${resource("packages/styles/dist/shlz.css")}"><link rel="stylesheet" href="${resource("node_modules/@fontsource/golos-text/400.css")}"><link rel="stylesheet" href="${resource("node_modules/@fontsource/fira-sans/400.css")}"><style>body{margin:16px}.rail{max-inline-size:100%;overflow-x:auto;margin-block:16px}</style></head><body class="shlz-scope" data-shlz-font="${profile}">${markup}<script type="module">import{enhanceTabs}from"${resource("packages/behaviors/dist/index.js")}";enhanceTabs();document.documentElement.dataset.tabsReady="";</script></body></html>`;
+    await page.route("**/alignment-plain-consumer", (route) =>
+      route.fulfill({ contentType: "text/html", body: html }),
+    );
+    await page.goto("/alignment-plain-consumer");
+    await page.locator("html[data-tabs-ready]").waitFor({ state: "attached" });
+    const loaded = await page.evaluate(
+      async (profile) =>
+        (
+          await document.fonts.load(
+            `400 16px "${profile === "golos" ? "Golos Text" : "Fira Sans"}"`,
+            "One Локализованное",
+          )
+        ).length,
+      profile,
+    );
+    expect(loaded).toBeGreaterThan(0);
+    await applyHistoricalLayoutAdapter(page);
+    for (const width of [320, 390, 768, 1440]) {
+      await page.setViewportSize({ width, height: 1000 });
+      for (const [variant, height, id] of variants) {
+        const root = page.locator(`[data-plain-variant="${variant}"]`);
+        const first = root.getByRole("tab").first();
+        expect
+          .soft(
+            (await first.boundingBox()).height,
+            `${id} ${profile}/${width} plain short height`,
+          )
+          .toBe(height);
+        await first.focus();
+        await first.press("Home");
+        await first.press("ArrowRight");
+        await expect(root.getByRole("tab").nth(1)).toHaveAttribute(
+          "aria-selected",
+          "true",
+        );
+        await expect(root.getByRole("tab").nth(1)).toBeFocused();
+        await root.getByRole("tab").nth(1).press("Tab");
+        await expect(root.getByRole("tabpanel")).toBeFocused();
+        await first.evaluate((element) => {
+          element.style.inlineSize = "180px";
+          element.textContent =
+            "Длинное название раздела с несколькими словами";
+        });
+        const long = await textLineGeometry(first);
+        expect
+          .soft(long.lines.length, `${id} plain long label reflows`)
+          .toBeGreaterThan(1);
+        for (const line of long.lines)
+          for (const edge of ["left", "right", "top", "bottom"])
+            expect
+              .soft(line[edge], `${id} ${profile}/${width} plain long ${edge}`)
+              .toBeGreaterThanOrEqual(-0.5);
+        await first.evaluate((element) => {
+          element.style.removeProperty("inline-size");
+          element.textContent = "One";
+        });
+      }
+      expect(
+        await page.evaluate(
+          () => document.documentElement.scrollWidth <= window.innerWidth,
+        ),
+      ).toBe(true);
+    }
+  });
+}

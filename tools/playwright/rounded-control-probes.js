@@ -87,6 +87,10 @@ export async function openAlignmentShowcase(page) {
       details.open = true;
   });
   await page.evaluate(() => document.fonts.ready);
+  await applyHistoricalLayoutAdapter(page);
+}
+
+export async function applyHistoricalLayoutAdapter(page) {
   if (process.env.SHLZ_ALIGNMENT_KNOWN_BAD_STYLE) {
     await page.addStyleTag({
       path: process.env.SHLZ_ALIGNMENT_KNOWN_BAD_STYLE,

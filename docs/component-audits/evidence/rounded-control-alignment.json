@@ -257,7 +257,7 @@
   "censusMethod": "Manifest root IDs on the full Showcase plus three standalone HTML fixture surfaces; diagnosticLegacy is a selector-match count, not an executable root count.",
   "checks": {
     "focusedRegressions": "pass: A1–A13 in both typography profiles; Small Switch additionally at DPR 1, 1.25, 1.5, 2",
-    "existingAffectedBrowser": "pass: 61/66 initial checks plus all five corrected snapshot/source-width checks on rerun, including 200 percent text",
+    "existingAffectedBrowser": "pass: 61/66 initial checks plus all five corrected snapshot/source-width checks on rerun, including 200 percent text The six remaining full-CI snapshot/source-minimum checks were visually inspected and passed on targeted rerun.",
     "classification": "pass: 49 classified roots across 13 Showcase/standalone surfaces; 114 diagnostic legacy matches; zero unclassified legacy matches",
     "review": "Governed by the candidate-bound independent review receipt; this source evidence ledger is not a review outcome.",
     "delivery": "Governed by candidate-bound conformance/delivery receipts and the PR check runs."
@@ -295,5 +295,10 @@
       "narrow Fira Notification",
       "Fira Empty State action"
     ]
+  },
+  "reviewRemediation": {
+    "finding": "Independent Spec review requested library-only plain HTML compact-tab coverage.",
+    "resolution": "Added isolated HTML with only package styles/fonts and public enhanceTabs; both profiles, 320/390/768/1440px, 61/40/39px short labels, bounded long labels, Arrow/Home activation and Tab-to-panel focus.",
+    "verification": "pass: both plain HTML profile tests"
   }
 }
