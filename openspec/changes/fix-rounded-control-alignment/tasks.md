@@ -11,5 +11,5 @@
 ## 2. Evidence and delivery
 
 - [x] 2.1 Update affected component manifests, documentation, occurrence counts, and focused visual evidence; verify independent family guards and the applicable component completion gates.
-- [ ] 2.2 Run symmetric baseline/candidate regression proof, affected integration, final repository validation, and focused snapshot inspection; record candidate-bound receipts and exact limitations.
-- [ ] 2.3 Complete independent Standards/Spec reviews, resolve findings, run conformance and delivery guards, and deliver one unmerged PR with CI and review-thread status.
+- [x] 2.2 Run symmetric baseline/candidate regression proof, affected integration, final repository validation, and focused snapshot inspection; record candidate-bound receipts and exact limitations.
+- [x] 2.3 Complete independent Standards/Spec reviews, resolve findings, run conformance and delivery guards, and deliver one unmerged PR with CI and review-thread status.
