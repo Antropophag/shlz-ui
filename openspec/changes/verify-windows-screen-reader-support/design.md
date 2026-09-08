@@ -15,6 +15,7 @@ Provide real NVDA speech evidence without manual user work. Preserve existing co
 - Fail closed for missing AT speech, absent matrix members and foreign foreground ownership. Prove the two marked failure invariants against known-bad inputs at the same validation boundary used by actual runs.
 - Keep scope inline at medium size. Tooling, seven workflow definitions and one evidence record are one tightly related seam; independent Standards/Spec review provides the useful physical context boundary. If an actual component requires a fix, re-attest its authoritative source and update its own contract/audit before changing it.
 - Initial downloads are from official NV Access and Mozilla release endpoints; Authenticode signatures of NVDA and Firefox were checked as valid. Record actual runtime versions and binary hashes in local setup evidence.
+- Actual AT exposed a pre-existing standalone File Upload fixture mismatch: the error container had `aria-invalid`, but its native input did not. Correct the fixture to the existing published contract; preserve all six occurrence identities, source geometry, CSS and behavior. Recheck native invalid speech in both browsers and the existing focused File Upload suite.
 
 ## Risks / Trade-offs
 

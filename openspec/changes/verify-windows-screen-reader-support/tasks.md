@@ -1,7 +1,7 @@
 ## 1. Actual AT execution
 
-- [ ] 1.1 Implement isolated Windows/NVDA/browser execution with guarded OS keyboard input; prove a real speech checkpoint and preservation of unrelated sessions.
-- [ ] 1.2 Add checkpoint/matrix validation and executable negative cases; prove missing speech and foreign foreground cannot pass or inject input.
+- [x] 1.1 Implement isolated Windows/NVDA/browser execution with guarded OS keyboard input; prove a real speech checkpoint and preservation of unrelated sessions.
+- [x] 1.2 Add checkpoint/matrix validation and executable negative cases; prove missing speech and foreign foreground cannot pass or inject input.
 
 ## 2. Coverage and findings
 
