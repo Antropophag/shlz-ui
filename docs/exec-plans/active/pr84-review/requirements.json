@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Resolve PR 84 review findings in Windows AT runner, preserving existing screen-reader-support contracts.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "review-scope",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "Зарезолви ревью в пр https://github.com/Antropophag/shlz-ui/pull/84"
+      }
+    },
+    {
+      "id": "existing-contract",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-policy",
+        "ref": "openspec/changes/verify-windows-screen-reader-support/specs/screen-reader-support/spec.md"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "verify-windows-screen-reader-support",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "Зарезолви ревью в пр https://github.com/Antropophag/shlz-ui/pull/84"
+    }
+  }
+}
