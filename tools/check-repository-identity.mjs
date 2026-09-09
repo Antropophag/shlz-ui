@@ -7,7 +7,13 @@ import { promisify } from "node:util";
 
 const exec = promisify(execFile);
 const repoRoot = path.resolve(import.meta.dirname, "..");
-const [target = repoRoot, invariant, member] = process.argv.slice(2);
+const [
+  target = repoRoot,
+  invariant,
+  member,
+  evidence = "tools/tests/harness-repository.test.mjs",
+] = process.argv.slice(2);
+assert.equal(evidence, "tools/tests/harness-repository.test.mjs");
 if (invariant && invariant !== "repository-identity-integrity")
   throw new Error(`unknown identity invariant or evidence set: ${invariant}`);
 if (member && !["legacy", "v2"].includes(member))
@@ -37,7 +43,7 @@ try {
       ...(invariant && !member
         ? ["--test-name-pattern=altered legacy fields"]
         : []),
-      path.join(repoRoot, "tools/tests/harness-repository.test.mjs"),
+      path.join(repoRoot, evidence),
     ],
     { cwd: repoRoot, env: { ...process.env, SHLZ_IDENTITY_CORE: core } },
   );
