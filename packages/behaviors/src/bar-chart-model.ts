@@ -14,6 +14,7 @@ export type BarChartTone = (typeof barChartTones)[number];
 export interface BarChartPresentation {
   density?: "default" | "source";
   scaleMaximum?: number;
+  axisLabels?: string[];
   tooltipPlacement?: "above" | "below";
 }
 
@@ -77,7 +78,31 @@ export function validateBarChartData(data: BarChartData): BarChartData {
     throw new RangeError("Bar Chart supports one through eight series.");
 
   const presentation = data.presentation;
-  if (presentation) {
+  if (presentation !== undefined) {
+    if (
+      typeof presentation !== "object" ||
+      presentation === null ||
+      Array.isArray(presentation)
+    )
+      throw new TypeError("Bar Chart presentation must be an object.");
+    if (
+      presentation.axisLabels !== undefined &&
+      presentation.scaleMaximum === undefined
+    )
+      throw new TypeError(
+        "Formatted axis labels require a fixed scale maximum.",
+      );
+    if (
+      presentation.axisLabels !== undefined &&
+      (!Array.isArray(presentation.axisLabels) ||
+        presentation.axisLabels.length !== 6 ||
+        presentation.axisLabels.some(
+          (label) => typeof label !== "string" || label.trim() === "",
+        ))
+    )
+      throw new TypeError(
+        "Bar Chart requires six non-empty axis labels, from maximum to zero.",
+      );
     if (
       presentation.density !== undefined &&
       !["default", "source"].includes(presentation.density)
@@ -257,11 +282,14 @@ export function barChartLayout(model: BarChartModel) {
     23: 45,
   };
   const available = source
-    ? Math.min(groupWidth - 2, sourceGroups[count] ?? groupWidth - 24)
+    ? Math.max(
+        groupWidth / 2,
+        Math.min(groupWidth - 2, sourceGroups[count] ?? groupWidth - 24),
+      )
     : groupWidth - 24;
-  const gap = 4;
+  const gap = source ? Math.min(4, available / (seriesCount * 2)) : 4;
   const barWidth = source
-    ? Math.max(1, (available - gap * (seriesCount - 1)) / seriesCount)
+    ? (available - gap * (seriesCount - 1)) / seriesCount
     : Math.min(96, Math.max(12, available / seriesCount - gap));
   const maximum =
     model.data.presentation?.scaleMaximum ?? (model.maximum || 10);

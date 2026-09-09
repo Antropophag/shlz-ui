@@ -202,9 +202,9 @@ export class BarChartController {
       label.setAttribute("y", String(y + 4));
       label.setAttribute("text-anchor", "end");
       label.setAttribute("aria-hidden", "true");
-      label.textContent = String(
-        Number((layout.maximum * ((5 - index) / 5)).toPrecision(6)),
-      );
+      label.textContent =
+        this.#model.data.presentation?.axisLabels?.[index] ??
+        String(Number((layout.maximum * ((5 - index) / 5)).toPrecision(6)));
       svg.append(label);
     }
     const visibleSeries = this.#model.data.series.filter(({ id }) =>

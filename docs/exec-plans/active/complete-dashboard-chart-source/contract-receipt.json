@@ -1,7 +1,7 @@
 {
   "kind": "contract",
   "payload": {
-    "contractDigest": "f698704b2e1428f826e4f0b5a84ab491e18ef7239ca710756cbe1627bb0ba335",
+    "contractDigest": "d02d38dcc6d3f633d608f6feab904c262f886c6f20611c25e7397db78a583451",
     "failureInvariants": [],
     "scenarios": [
       {
@@ -34,7 +34,7 @@
         "id": "data-display/bar-chart-source-completeness::Source geometry and axes::Dense source composition",
         "name": "Dense source composition",
         "requirement": "Source geometry and axes",
-        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names."
+        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names. Consumers SHALL be able to supply six formatted numeric-axis labels in maximum-to-zero order paired with a fixed scale maximum; malformed presentation containers or labels SHALL be rejected. Source density with arbitrary category counts SHALL keep each group within its category interval."
       },
       {
         "capability": "data-display/bar-chart-source-completeness",
@@ -42,7 +42,7 @@
         "id": "data-display/bar-chart-source-completeness::Source geometry and axes::Quantitative axes",
         "name": "Quantitative axes",
         "requirement": "Source geometry and axes",
-        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names."
+        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names. Consumers SHALL be able to supply six formatted numeric-axis labels in maximum-to-zero order paired with a fixed scale maximum; malformed presentation containers or labels SHALL be rejected. Source density with arbitrary category counts SHALL keep each group within its category interval."
       },
       {
         "capability": "data-display/bar-chart-source-completeness",
@@ -63,5 +63,5 @@
     ]
   },
   "version": 1,
-  "digest": "a1f0d9360ab63e13843155b1ca236744fc109e63e6302f60fca629d806cc4ed3"
+  "digest": "5d022229735b4f7e1cffcc975c63d1500d350011de43be09519f0c00ee3b85d8"
 }

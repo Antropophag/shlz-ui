@@ -179,3 +179,50 @@ test("invalid presentation cannot change quantitative meaning", () => {
   ])
     assert.throws(() => createBarChartModel({ ...data, presentation }));
 });
+
+test("presentation rejects malformed JSON and accepts consumer tick labels", () => {
+  for (const presentation of [
+    null,
+    false,
+    0,
+    "source",
+    [],
+    { axisLabels: ["bad"] },
+    { axisLabels: ["10", "8", "6", "4", "2", "0"] },
+    { axisLabels: Array(6).fill("") },
+  ])
+    assert.throws(() => createBarChartModel({ ...data, presentation }));
+  const presentation = {
+    scaleMaximum: 10,
+    axisLabels: ["10,0", "8,0", "6,0", "4,0", "2,0", "0,0"],
+  };
+  assert.deepEqual(
+    createBarChartModel({ ...data, presentation }).data.presentation.axisLabels,
+    presentation.axisLabels,
+  );
+});
+
+test("arbitrary dense source groups never overlap neighboring categories", () => {
+  for (const count of [24, 34, 100, 1000]) {
+    const categories = Array.from({ length: count }, (_, i) => ({
+      id: `c${i}`,
+      label: `C${i}`,
+    }));
+    const model = createBarChartModel({
+      categories,
+      series: Array.from({ length: 8 }, (_, i) => ({
+        id: `s${i}`,
+        label: `S${i}`,
+        values: categories.map((c) => ({
+          categoryId: c.id,
+          value: 1,
+          displayValue: "1",
+        })),
+      })),
+      presentation: { density: "source" },
+    });
+    const layout = barChartLayout(model);
+    assert.ok(layout.barWidth > 0);
+    assert.ok(8 * layout.barWidth + 7 * layout.gap <= layout.groupWidth);
+  }
+});

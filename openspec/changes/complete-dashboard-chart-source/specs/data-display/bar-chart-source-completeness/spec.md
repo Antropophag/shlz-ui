@@ -20,7 +20,7 @@ The chart SHALL accept one through eight rectangular nonnegative series. Consume
 
 ### Requirement: Source geometry and axes
 
-The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names.
+The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names. Consumers SHALL be able to supply six formatted numeric-axis labels in maximum-to-zero order paired with a fixed scale maximum; malformed presentation containers or labels SHALL be rejected. Source density with arbitrary category counts SHALL keep each group within its category interval.
 
 #### Scenario: Dense source composition
 

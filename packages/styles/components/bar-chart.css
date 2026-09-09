@@ -228,7 +228,7 @@
 
 .shlz-bar-chart__tooltip::after {
   position: absolute;
-  inset-inline-start: var(--shlz-chart-arrow-x, 50%);
+  left: var(--shlz-chart-arrow-x, 50%);
   inset-block-start: 100%;
   inline-size: 10px;
   block-size: 10px;

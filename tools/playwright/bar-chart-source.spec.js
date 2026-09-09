@@ -229,3 +229,51 @@ test("finite large values retain finite scale labels", async ({ page }) => {
   expect(labels[0]).toBe("1e+308");
   expect(labels.join(" ")).not.toMatch(/Infinity|NaN/);
 });
+
+test("consumer tick labels and RTL arrow use the declared presentation", async ({
+  page,
+}) => {
+  await page.evaluate(() => {
+    const controller = globalThis.__shlzBarChartControllers.find(
+      ({ root }) => root.id === "bar-chart-reporting-consumer",
+    );
+    controller.root.dir = "rtl";
+    controller.update({
+      categories: [
+        { id: "a", label: "A" },
+        { id: "b", label: "B" },
+      ],
+      series: [
+        {
+          id: "s",
+          label: "S",
+          values: [
+            { categoryId: "a", value: 5, displayValue: "5,0" },
+            { categoryId: "b", value: 10, displayValue: "10,0" },
+          ],
+        },
+      ],
+      presentation: {
+        scaleMaximum: 10,
+        axisLabels: ["10,0", "8,0", "6,0", "4,0", "2,0", "0,0"],
+        tooltipPlacement: "below",
+      },
+    });
+  });
+  const chart = page.locator("#bar-chart-reporting-consumer");
+  expect(
+    (
+      await chart.locator(".shlz-bar-chart__axis-label").allTextContents()
+    ).slice(0, 6),
+  ).toEqual(["10,0", "8,0", "6,0", "4,0", "2,0", "0,0"]);
+  await chart.locator(".shlz-bar-chart__bar").first().focus();
+  const offsets = await chart
+    .getByRole("tooltip")
+    .evaluate((node) => ({
+      actual: Number.parseFloat(getComputedStyle(node, "::after").left),
+      expected: Number.parseFloat(
+        node.style.getPropertyValue("--shlz-chart-arrow-x"),
+      ),
+    }));
+  expect(offsets.actual).toBeCloseTo(offsets.expected, 1);
+});
