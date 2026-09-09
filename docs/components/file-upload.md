@@ -27,3 +27,7 @@ Call `enhanceFileUploads()` or construct `FileUploadController` for optional dra
 For invalid state, put `aria-invalid="true"` on both the root and native input, connect the input to the consumer-authored error using `aria-describedby`, and render `.shlz-file-upload__error`. Disabled behavior comes from the native input's `disabled` attribute; also put `aria-disabled="true"` on the full-surface label so its unavailable action is explicit while CSS derives the disabled surface from the input. The associated surface is the File Upload trigger contract, not a Button occurrence. Selected files belong in `.shlz-file-upload__files` and may compose File Row or Document Row.
 
 Repeated enhancement returns the existing controller. `destroy()` removes library listeners and transient drag state but preserves markup and consumer data.
+
+## Attachment cards
+
+Compose `.shlz-file-row` children inside `.shlz-file-upload__files`. Cards use the compact Comment Feed composition: a preferred width of 229px, shrinking to the container and wrapping without stretching. Include a decorative source-derived file-type SVG in `.shlz-file-row__visual`, filename text and secondary metadata in `.shlz-file-row__content`, and any existing native actions in `.shlz-file-row__actions`. Long filenames ellipsize visually; keep their complete text in the document. Selection, metadata and removal remain consumer-owned.

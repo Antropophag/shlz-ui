@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "intent": "Align Composer and File Upload attachments with the compact source-backed Comment Feed file cards.",
+  "route": "open-spec",
+  "openSpecChange": "consistent-attachment-cards",
+  "requiredDecisions": [
+    {
+      "id": "attachment-appearance",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "blocking": true
+    }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

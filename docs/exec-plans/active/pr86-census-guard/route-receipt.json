@@ -1,0 +1,24 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Prevent repeat stale primitive-dependency counts by removing redundant numeric census assertions and adding a local lint regression guard; retain independent filesystem census and browser occurrence checks without product or CI workflow changes.",
+    "material": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "requiredDecisions": [],
+    "route": "direct",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "8f9f740b0f5c89f1d17a39adf0b44eb5b67a0a33f349fc22cf513a72ab8c4f89"
+}

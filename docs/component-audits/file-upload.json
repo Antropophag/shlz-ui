@@ -17,12 +17,30 @@
   ],
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
-    { "id": "file-upload-showcase-empty", "kind": "executable-fixture" },
-    { "id": "file-upload-showcase-populated", "kind": "executable-fixture" },
-    { "id": "file-upload-showcase-disabled", "kind": "executable-fixture" },
-    { "id": "file-upload-showcase-error", "kind": "executable-fixture" },
-    { "id": "file-upload-data-workspace", "kind": "live-consumer" },
-    { "id": "file-upload-plain-html", "kind": "executable-fixture" }
+    {
+      "id": "file-upload-showcase-empty",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-upload-showcase-populated",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-upload-showcase-disabled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-upload-showcase-error",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-upload-data-workspace",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "file-upload-plain-html",
+      "kind": "executable-fixture"
+    }
   ],
   "supportedSizes": ["source-467px", "container-fluid", "narrow"],
   "supportedStates": [
@@ -54,9 +72,17 @@
       "claim": "native input semantics, real file-only drag filtering, focus-visible, disabled, error, responsive reflow and the bubbling event are accessibility and interaction decisions absent from the static export",
       "classification": "repository-decision",
       "evidence": "openspec/changes/add-file-upload-drop-zone/design.md"
+    },
+    {
+      "claim": "Composer and File Upload compose File Row at a preferred 229px width matching current Comment Feed, shrinking in narrow containers without growing into spare space; existing source-derived file SVGs and accessible supporting metadata color are reused.",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/consistent-attachment-cards/design.md"
     }
   ],
-  "browserTests": ["tools/playwright/file-upload.spec.js"],
+  "browserTests": [
+    "tools/playwright/file-upload.spec.js",
+    "tools/playwright/attachment-composition.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/file-upload.spec.js-snapshots/file-upload-narrow-chromium-linux.png",
     "tools/playwright/file-upload.spec.js-snapshots/file-upload-states-chromium-linux.png"
@@ -66,9 +92,9 @@
     "structural-contract": "pass: native input, full-surface associated label, canonical cloud-upload icon, one instruction, error relationship, CSS, exports, docs and plain HTML are asserted",
     "runtime-browser": "pass: native selection, real FileList drop, non-file filtering, disabled state, typed payload, repeated enhancement and teardown execute",
     "accessibility": "pass: native input and label preserve keyboard activation and accessible naming; focused Axe scope has no violation",
-    "focused-visual": "pass: source-backed 467 by 102 full-surface label, centered 24px cloud-upload icon, single-line default instruction and populated geometry plus real drag-active, disabled, error and narrow computed states are focused",
+    "focused-visual": "pass: attachment-composition browser checks compare 229x55 cards, 38px visuals, 12px radius and metadata paint with Comment Feed; focused desktop and 220px attachment crops are inspected",
     "consumer-integration": "pass: browser selection executes the Data Workspace branch, updates application-owned status, and rerenders its classified File Row",
-    "responsive-content-stress": "pass: narrow, long filename/instructions and 200-percent text keep the trigger, File Row action, and focus indicators visible"
+    "responsive-content-stress": "pass: long localized/unbroken attachment names ellipsize inside 220px cards at 200-percent root text; visuals and existing actions remain contained; three selected files wrap without growing"
   },
   "interactionEvidence": {
     "types": {
@@ -93,7 +119,7 @@
       "destroyed"
     ],
     "browserTest": "tools/playwright/file-upload.spec.js",
-    "manualStateWalk": "pass: re-inspected source-default, populated, pointer drag-active/drop, keyboard focus, disabled, error, narrow/long-content and 200-percent-text surfaces on 2026-08-30"
+    "manualStateWalk": "pass: 2026-09-09 affected desktop and narrow attachment crops inspected against Comments/Document SVG crops; focus-visible, keyboard removal and unchanged component state flows exercised in focused browser coverage"
   },
   "acceptedDeviations": [],
   "findings": [

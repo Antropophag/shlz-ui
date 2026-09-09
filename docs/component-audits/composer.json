@@ -73,10 +73,16 @@
       "claim": "semantic regions, native textarea integration, responsive reflow and public state hooks are repository decisions",
       "classification": "repository-decision",
       "evidence": "openspec/changes/add-composer-rich-text-toolbar/design.md"
+    },
+    {
+      "claim": "Composer and File Upload compose File Row at a preferred 229px width matching current Comment Feed, shrinking in narrow containers without growing into spare space; existing source-derived file SVGs and accessible supporting metadata color are reused.",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/consistent-attachment-cards/design.md"
     }
   ],
   "browserTests": [
-    "tools/playwright/composer-rich-text-toolbar.spec.js"
+    "tools/playwright/composer-rich-text-toolbar.spec.js",
+    "tools/playwright/attachment-composition.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/composer-rich-text-toolbar.spec.js-snapshots/composer-source-chromium-linux.png",
@@ -87,9 +93,9 @@
     "structural-contract": "pass: independent root, nested regions, states, docs and export are asserted",
     "runtime-browser": "pass: the consumer-owned submit flow executes from the native textarea composition",
     "accessibility": "pass: labelled native editing surface, toolbar semantics, named commands, invalid association and scoped axe scan are browser-checked",
-    "focused-visual": "pass: source-focused and 220px/200-percent-text snapshots are inspected independently",
+    "focused-visual": "pass: attachment-composition browser checks compare 229x55 cards, 38px visuals, 12px radius and metadata paint with Comment Feed; focused desktop and 220px attachment crops are inspected",
     "consumer-integration": "pass: Data Workspace owns formatting and submission state while consuming only public CSS and native semantics",
-    "responsive-content-stress": "pass: long localized support text and filename remain contained at 220px with 200-percent root text"
+    "responsive-content-stress": "pass: long localized/unbroken attachment names ellipsize inside 220px cards at 200-percent root text; visuals and existing actions remain contained; three selected files wrap without growing"
   },
   "interactionEvidence": {
     "types": {
@@ -113,7 +119,7 @@
       "text-scale"
     ],
     "browserTest": "tools/playwright/composer-rich-text-toolbar.spec.js",
-    "manualStateWalk": "pass: 2026-08-31 default, focus-within, invalid, disabled, read-only, long attachment and narrow text-scale snapshots inspected"
+    "manualStateWalk": "pass: 2026-09-09 affected desktop and narrow attachment crops inspected against Comments/Document SVG crops; focus-visible, keyboard removal and unchanged component state flows exercised in focused browser coverage"
   },
   "acceptedDeviations": [
     {

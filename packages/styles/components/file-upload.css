@@ -83,8 +83,8 @@
 }
 
 .shlz-file-upload__files {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   min-inline-size: 0;
   margin: 0;
@@ -92,10 +92,17 @@
   list-style: none;
 }
 
+.shlz-file-upload__files > .shlz-file-row {
+  /* Repository decision: match the compact Comment Feed composition. */
+  flex: 0 1 229px;
+  inline-size: 229px;
+  min-inline-size: 0;
+}
+
 .shlz-file-upload__file-name {
   overflow-wrap: anywhere;
 }
 
 .shlz-file-upload .shlz-file-row__meta {
-  color: var(--shlz-semantic-color-text-primary);
+  color: var(--shlz-semantic-color-text-supporting-accessible);
 }

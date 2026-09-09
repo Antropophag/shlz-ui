@@ -223,14 +223,6 @@
   },
   "primitiveDependencies": [
     {
-      "path": "apps/showcase/src/file-upload-showcase.js",
-      "classification": "verified-file-upload-consumer-composing-file-row"
-    },
-    {
-      "path": "tools/playwright/file-upload.spec.js",
-      "classification": "verified-file-upload-runtime-evidence-composing-file-row"
-    },
-    {
       "path": "apps/showcase/src/component-docs.js",
       "classification": "verified-primitive-documentation-fixture"
     },
@@ -245,6 +237,10 @@
     {
       "path": "apps/showcase/src/fidelity.js",
       "classification": "verified-primitive-fidelity-fixture"
+    },
+    {
+      "path": "apps/showcase/src/file-upload-showcase.js",
+      "classification": "verified-file-upload-consumer-composing-file-row"
     },
     {
       "path": "apps/showcase/src/main.js",
@@ -263,8 +259,36 @@
       "classification": "verified-avatar-fixture"
     },
     {
+      "path": "docs/components/avatar.md",
+      "classification": "avatar-contract"
+    },
+    {
+      "path": "docs/components/composer-rich-text-toolbar.md",
+      "classification": "attachment-composition-usage-guidance"
+    },
+    {
+      "path": "docs/components/document-row.md",
+      "classification": "document-row-contract"
+    },
+    {
+      "path": "docs/components/file-row.md",
+      "classification": "file-row-contract"
+    },
+    {
+      "path": "docs/components/file-upload.md",
+      "classification": "attachment-composition-usage-guidance"
+    },
+    {
+      "path": "docs/components/notification.md",
+      "classification": "notification-contract"
+    },
+    {
       "path": "packages/styles/components/avatar.css",
       "classification": "avatar-implementation"
+    },
+    {
+      "path": "packages/styles/components/composer.css",
+      "classification": "attachment-composition-scoped-file-row-styles"
     },
     {
       "path": "packages/styles/components/document-row.css",
@@ -275,12 +299,20 @@
       "classification": "file-row-implementation"
     },
     {
+      "path": "packages/styles/components/file-upload.css",
+      "classification": "attachment-composition-scoped-file-row-styles"
+    },
+    {
       "path": "packages/styles/components/notification.css",
       "classification": "notification-implementation"
     },
     {
       "path": "tools/fixtures/plain-html.html",
       "classification": "verified-primitive-consumer-fixture"
+    },
+    {
+      "path": "tools/playwright/attachment-composition.spec.js",
+      "classification": "attachment-composition-test-evidence"
     },
     {
       "path": "tools/playwright/components-next.spec.js",
@@ -299,12 +331,20 @@
       "classification": "verified-primitive-browser-test"
     },
     {
+      "path": "tools/playwright/file-upload.spec.js",
+      "classification": "verified-file-upload-runtime-evidence-composing-file-row"
+    },
+    {
       "path": "tools/playwright/foundation.spec.js",
       "classification": "verified-primitive-browser-test"
     },
     {
       "path": "tools/playwright/notification-snackbar-wave8.spec.js",
       "classification": "verified-primitive-browser-test"
+    },
+    {
+      "path": "tools/playwright/rounded-control-alignment.spec.js",
+      "classification": "rounded-control-regression-evidence-for-existing-primitives"
     },
     {
       "path": "tools/playwright/status-identity-wave4.spec.js",
@@ -323,32 +363,16 @@
       "classification": "verified-primitive-structural-test"
     },
     {
-      "path": "tools/tests/wave8-repository-census.test.mjs",
-      "classification": "verified-primitive-census"
-    },
-    {
-      "path": "docs/components/avatar.md",
-      "classification": "avatar-contract"
-    },
-    {
-      "path": "docs/components/document-row.md",
-      "classification": "document-row-contract"
-    },
-    {
-      "path": "docs/components/file-row.md",
-      "classification": "file-row-contract"
-    },
-    {
-      "path": "docs/components/notification.md",
-      "classification": "notification-contract"
-    },
-    {
-      "path": "tools/playwright/rounded-control-alignment.spec.js",
-      "classification": "rounded-control-regression-evidence-for-existing-primitives"
+      "path": "tools/tests/fixtures/attachment-composition-oracle.mjs",
+      "classification": "attachment-composition-test-evidence"
     },
     {
       "path": "tools/tests/fixtures/rounded-control-known-bad.css",
       "classification": "rounded-control-regression-evidence-for-existing-primitives"
+    },
+    {
+      "path": "tools/tests/wave8-repository-census.test.mjs",
+      "classification": "verified-primitive-census"
     }
   ],
   "terminologyCensus": {
@@ -356,10 +380,10 @@
       "apps/showcase/src/bootstrap.js",
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
-    "primitiveDependencyPathCount": 32,
-    "unrelatedTerminologyPathCount": 74,
-    "totalPathCount": 90,
-    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths; the rounded-control regression and declared historical CSS adapter are classified existing-primitive evidence, not new higher-level runtime surfaces; the alignment guard also references the standalone messaging-history fixture"
+    "primitiveDependencyPathCount": 38,
+    "unrelatedTerminologyPathCount": 73,
+    "totalPathCount": 93,
+    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths; the rounded-control regression and declared historical CSS adapter are classified existing-primitive evidence, not new higher-level runtime surfaces; the alignment guard also references the standalone messaging-history fixture; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family; tools/eslint/no-hardcoded-census-counts.mjs contains ESLint meta.messages terminology only and is unrelated to messaging UI"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": ["static-source-specimens-only"],

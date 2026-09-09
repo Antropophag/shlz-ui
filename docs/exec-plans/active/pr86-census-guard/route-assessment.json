@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "intent": "Prevent repeat stale primitive-dependency counts by removing redundant numeric census assertions and adding a local lint regression guard; retain independent filesystem census and browser occurrence checks without product or CI workflow changes.",
+  "route": "direct",
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}
