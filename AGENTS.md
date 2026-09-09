@@ -114,6 +114,10 @@ For M/L/XL work, or whenever scope/context growth is uncertain, use the adaptive
 
 Normal new implementation starts from clean current `origin/main` on a task branch/worktree. A bounded follow-up on an existing PR may instead start from that clean, fully pushed, verified open-PR head; its immutable episode baseline scopes routing, validation, and review to the follow-up delta. Both paths end with proportionate validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, run the post-discovery route-conformance and delivery guards in `docs/agent-execution.md`; material scope discovered on a direct route requires re-routing before completion.
 
+## Subagent model limit
+
+All spawned subagents, including nested subagents, must use a model and reasoning effort no stronger than `gpt-5.6-sol` with `reasoning_effort: low`. Explicitly set this configuration when spawning; use a weaker configuration only when its compliance with this ceiling is known. Choose a fork mode that permits explicit model and reasoning overrides rather than inheriting a stronger parent configuration. If the ceiling cannot be enforced, perform the work locally without spawning a subagent.
+
 ## UI component completion gate
 
 Do not call a component fixed, complete, production-ready, review-ready, or a
