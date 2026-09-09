@@ -1,0 +1,67 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "368a5a9797c454b6f23b7e41d4deb33ae8750eb31b71bc199dec4c062b50cd38",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** multiple attachments cannot fit side by side\n- **THEN** the cards wrap to subsequent rows while retaining compact widths",
+        "id": "data-display/attachment-composition::Consistent compact attachment presentation::Multiple attachments",
+        "name": "Multiple attachments",
+        "requirement": "Consistent compact attachment presentation",
+        "requirementContent": "Composer and File Upload SHALL present existing and newly selected attachments as compact cards matching the current Comment Feed file-card hierarchy: source-derived file-type visual, filename, secondary metadata and existing actions. Cards SHALL use a preferred width of 229 CSS pixels, shrink to available width and wrap without growing to fill spare row space. This width is a repository composition decision matching the approved comparison surface."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** the user views «Комментарий к заявке» or File Upload's Populated composition\n- **THEN** each PDF displays the existing PDF SVG icon, its unchanged filename and existing metadata in the compact file-card layout, without a paper emoji",
+        "id": "data-display/attachment-composition::Consistent compact attachment presentation::Named populated examples",
+        "name": "Named populated examples",
+        "requirement": "Consistent compact attachment presentation",
+        "requirementContent": "Composer and File Upload SHALL present existing and newly selected attachments as compact cards matching the current Comment Feed file-card hierarchy: source-derived file-type visual, filename, secondary metadata and existing actions. Cards SHALL use a preferred width of 229 CSS pixels, shrink to available width and wrap without growing to fill spare row space. This width is a repository composition decision matching the approved comparison surface."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** attachments with long localized or unbroken filenames are rendered in a container narrower than the preferred card width\n- **THEN** cards fit within the container, truncate overflowing filename text visually while retaining the full text in the document, and keep icons and existing actions visible",
+        "id": "data-display/attachment-composition::Consistent compact attachment presentation::Narrow container and long content",
+        "name": "Narrow container and long content",
+        "requirement": "Consistent compact attachment presentation",
+        "requirementContent": "Composer and File Upload SHALL present existing and newly selected attachments as compact cards matching the current Comment Feed file-card hierarchy: source-derived file-type visual, filename, secondary metadata and existing actions. Cards SHALL use a preferred width of 229 CSS pixels, shrink to available width and wrap without growing to fill spare row space. This width is a repository composition decision matching the approved comparison surface."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** the File Upload consumer renders newly selected files\n- **THEN** those files use the same compact presentation as its static populated example and retain the existing selection and removal flow",
+        "id": "data-display/attachment-composition::Consumer behavior and file identity are preserved::Dynamic selection",
+        "name": "Dynamic selection",
+        "requirement": "Consumer behavior and file identity are preserved",
+        "requirementContent": "The visual change SHALL preserve consumer ownership of selection, removal, metadata and links. Existing disabled, read-only and error behavior SHALL remain intact. File visuals SHALL be decorative; filenames SHALL remain text rather than executable markup. Unsupported file extensions SHALL use the existing generic file SVG rather than a misleading known-type icon."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** a card has a removal control or a consumer-supplied link\n- **THEN** it retains its accessible name, keyboard operation and focus visibility without gaining a new upload or download operation",
+        "id": "data-display/attachment-composition::Consumer behavior and file identity are preserved::Existing controls",
+        "name": "Existing controls",
+        "requirement": "Consumer behavior and file identity are preserved",
+        "requirementContent": "The visual change SHALL preserve consumer ownership of selection, removal, metadata and links. Existing disabled, read-only and error behavior SHALL remain intact. File visuals SHALL be decorative; filenames SHALL remain text rather than executable markup. Unsupported file extensions SHALL use the existing generic file SVG rather than a misleading known-type icon."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** the Comment Feed and standalone File Row examples are viewed after this change\n- **THEN** their existing appearance and behavior are preserved",
+        "id": "data-display/attachment-composition::Consumer behavior and file identity are preserved::Unaffected comparison surface",
+        "name": "Unaffected comparison surface",
+        "requirement": "Consumer behavior and file identity are preserved",
+        "requirementContent": "The visual change SHALL preserve consumer ownership of selection, removal, metadata and links. Existing disabled, read-only and error behavior SHALL remain intact. File visuals SHALL be decorative; filenames SHALL remain text rather than executable markup. Unsupported file extensions SHALL use the existing generic file SVG rather than a misleading known-type icon."
+      },
+      {
+        "capability": "data-display/attachment-composition",
+        "content": "- **WHEN** a selected filename has an unknown extension or contains markup characters\n- **THEN** it is shown as literal text with the generic file SVG and does not execute markup",
+        "id": "data-display/attachment-composition::Consumer behavior and file identity are preserved::Unknown file and hostile filename",
+        "name": "Unknown file and hostile filename",
+        "requirement": "Consumer behavior and file identity are preserved",
+        "requirementContent": "The visual change SHALL preserve consumer ownership of selection, removal, metadata and links. Existing disabled, read-only and error behavior SHALL remain intact. File visuals SHALL be decorative; filenames SHALL remain text rather than executable markup. Unsupported file extensions SHALL use the existing generic file SVG rather than a misleading known-type icon."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "94eb601429285c6d702a8db09bbb5da62497e5438c6fb42d7f5e67747ff00f0a"
+}

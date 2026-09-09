@@ -28,7 +28,7 @@
 }
 
 .shlz-composer .shlz-file-row__meta {
-  color: var(--shlz-semantic-color-text-primary);
+  color: var(--shlz-semantic-color-text-supporting-accessible);
 }
 
 .shlz-composer__frame {
@@ -72,11 +72,18 @@
 }
 
 .shlz-composer__attachments {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: var(--shlz-source-spacing-8);
   min-inline-size: 0;
   margin-block-start: var(--shlz-source-spacing-8);
+}
+
+.shlz-composer__attachments > .shlz-file-row {
+  /* Repository decision: match the compact Comment Feed composition. */
+  flex: 0 1 229px;
+  inline-size: 229px;
+  min-inline-size: 0;
 }
 
 .shlz-composer__footer {

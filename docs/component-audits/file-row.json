@@ -14,21 +14,42 @@
   ],
   "diagnosticOccurrenceCount": 24,
   "occurrences": [
-    { "id": "file-row-showcase-default", "kind": "executable-fixture" },
-    { "id": "file-row-showcase-hover", "kind": "executable-fixture" },
-    { "id": "file-row-showcase-error", "kind": "executable-fixture" },
-    { "id": "file-row-content-stress-long", "kind": "content-stress-fixture" },
+    {
+      "id": "file-row-showcase-default",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-showcase-hover",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-showcase-error",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-content-stress-long",
+      "kind": "content-stress-fixture"
+    },
     {
       "id": "file-row-content-stress-actions",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-typography-stress", "kind": "content-stress-fixture" },
+    {
+      "id": "file-row-typography-stress",
+      "kind": "content-stress-fixture"
+    },
     {
       "id": "file-row-file-upload-populated",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-file-upload-consumer", "kind": "live-consumer" },
-    { "id": "file-row-composer-showcase-source", "kind": "executable-fixture" },
+    {
+      "id": "file-row-file-upload-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "file-row-composer-showcase-source",
+      "kind": "executable-fixture"
+    },
     {
       "id": "file-row-composer-showcase-disabled",
       "kind": "executable-fixture"
@@ -45,11 +66,26 @@
       "id": "file-row-composer-content-stress",
       "kind": "content-stress-fixture"
     },
-    { "id": "file-row-composer-data-workspace", "kind": "live-consumer" },
-    { "id": "file-row-comment-source-pdf", "kind": "executable-fixture" },
-    { "id": "file-row-comment-source-docx", "kind": "executable-fixture" },
-    { "id": "file-row-comment-source-contract", "kind": "executable-fixture" },
-    { "id": "file-row-history-source", "kind": "executable-fixture" }
+    {
+      "id": "file-row-composer-data-workspace",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "file-row-comment-source-pdf",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-comment-source-docx",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-comment-source-contract",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "file-row-history-source",
+      "kind": "executable-fixture"
+    }
   ],
   "supportedSizes": [
     "55px-body",
@@ -81,21 +117,32 @@
       "claim": "the filename and independent native actions own activation; the row root is inert",
       "classification": "repository-decision",
       "evidence": "docs/components/file-row.md"
+    },
+    {
+      "claim": "Composer and File Upload compose File Row at a preferred 229px width matching current Comment Feed, shrinking in narrow containers without growing into spare space; existing source-derived file SVGs and accessible supporting metadata color are reused.",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/consistent-attachment-cards/design.md"
     }
   ],
   "browserTests": [
     "tools/playwright/data-content-wave5.spec.js",
-    "tools/playwright/file-upload.spec.js"
+    "tools/playwright/file-upload.spec.js",
+    "tools/playwright/attachment-composition.spec.js"
   ],
-  "visualSnapshots": [],
+  "visualSnapshots": [
+    "tools/playwright/attachment-composition.spec.js-snapshots/file-row-composer-data-workspace-chromium-linux.png",
+    "tools/playwright/attachment-composition.spec.js-snapshots/file-row-file-upload-populated-chromium-linux.png",
+    "tools/playwright/attachment-composition.spec.js-snapshots/composer-content-stress-attachment-narrow-chromium-linux.png",
+    "tools/playwright/attachment-composition.spec.js-snapshots/file-upload-showcase-populated-attachment-narrow-chromium-linux.png"
+  ],
   "evidence": {
     "source-integrity": "pass: Documents.svg is traced directly for geometry and paint rather than relying on prior source tests",
-    "structural-contract": "pass: all eight roots are classified and keep visual, content and trailing actions as siblings",
+    "structural-contract": "pass: all 18 initial File Row roots and 24 inert diagnostic rows are classified; dynamic selection/removal runs the shared occurrence guard with explicit expected row IDs",
     "runtime-browser": "not-applicable: File Row has no controller or root activation; native links and buttons own their behavior",
     "accessibility": "pass: root stays inert, decorative file visuals are hidden and filename/action targets retain meaningful native names",
-    "focused-visual": "pass: computed body/icon/action geometry, truncation and real hover paint are asserted",
-    "consumer-integration": "pass: the Data Workspace File Upload consumer updates one classified File Row from application-owned queue state",
-    "responsive-content-stress": "pass: long and extensionless names truncate while the fixed visual and trailing action area remain contained"
+    "focused-visual": "pass: attachment-composition browser checks compare 229x55 cards, 38px visuals, 12px radius and metadata paint with Comment Feed; focused desktop and 220px attachment crops are inspected",
+    "consumer-integration": "pass: Data Workspace File Upload updates the classified File Row filename and type icon, then restores the generic empty placeholder on removal; Composer Data Workspace retains its attachment and submit flow",
+    "responsive-content-stress": "pass: long localized/unbroken attachment names ellipsize inside 220px cards at 200-percent root text; visuals and existing actions remain contained; three selected files wrap without growing"
   },
   "interactionEvidence": {
     "types": {
@@ -111,11 +158,21 @@
     },
     "materialStates": ["row-hover"],
     "browserTest": "tools/playwright/data-content-wave5.spec.js",
-    "manualStateWalk": "pass: row hover, filename Tab focus, action focus, long/no-extension names and narrow containment inspected"
+    "manualStateWalk": "pass: 2026-09-09 affected desktop and narrow attachment crops inspected against Comments/Document SVG crops; focus-visible, keyboard removal and unchanged component state flows exercised in focused browser coverage"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "upload progress, preview and whole-row activation are not public File Row behavior"
+    "upload progress, preview and whole-row activation are not public File Row behavior",
+    "File Upload Data Workspace preserves its existing first-file summary and selection count; additional files are shown individually by the showcase selection fixtures, not by that summary consumer."
+  ],
+  "dynamicOccurrences": [
+    {
+      "idPattern": "file-row-<file-upload audit id>-selected-<selection index>",
+      "kind": "executable-fixture",
+      "scope": "Showcase File Upload selections outside Data Workspace; zero at initial load. IDs stay with remaining rows after removal and reset on replacement selection.",
+      "browserTest": "tools/playwright/attachment-composition.spec.js",
+      "guard": "The focused browser test extends the static manifest with explicit expected selected IDs, runs the shared guard after selection and removal, and retains the full static occurrence set."
+    }
   ]
 }

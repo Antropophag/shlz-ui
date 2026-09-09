@@ -2,6 +2,21 @@ import { enhanceFileUploads } from "@shlz/behaviors";
 import { iconHref, iconViewBox } from "@shlz/icons";
 import spriteUrl from "@shlz/icons/sprite.svg?url";
 
+const fileTypeIcons = import.meta.glob(
+  "../../../packages/icons/dist/file-types/*.svg",
+  { eager: true, query: "?url", import: "default" },
+);
+const fileIconUrl = (name) => {
+  const extension = name.includes(".")
+    ? name.split(".").pop().toLowerCase()
+    : "";
+  const directory = "../../../packages/icons/dist/file-types/";
+  return (
+    fileTypeIcons[`${directory}${extension}.svg`] ??
+    fileTypeIcons[`${directory}file-generic.svg`]
+  );
+};
+
 const uploadIcon = `<svg class="shlz-icon shlz-file-upload__icon" viewBox="${iconViewBox("cloud-upload")}" aria-hidden="true"><use href="${iconHref(spriteUrl, "cloud-upload")}"></use></svg>`;
 
 const upload = ({
@@ -26,7 +41,7 @@ const upload = ({
 
 const row = (name, auditId = "") => {
   const auditAttribute = auditId ? ` data-component-audit-id="${auditId}"` : "";
-  return `<li class="shlz-file-row"${auditAttribute}><span class="shlz-file-row__visual" aria-hidden="true">📄</span><span class="shlz-file-row__content"><span class="shlz-file-row__title">${name}</span><span class="shlz-file-row__meta">Selected locally</span></span><button class="shlz-file-row__action" type="button" aria-label="Remove ${name}">×</button></li>`;
+  return `<li class="shlz-file-row"${auditAttribute}><span class="shlz-file-row__visual" aria-hidden="true"><img src="${fileIconUrl(name)}" alt=""></span><span class="shlz-file-row__content"><span class="shlz-file-row__title">${name}</span><span class="shlz-file-row__meta">Selected locally</span></span><span class="shlz-file-row__actions"><button class="shlz-file-row__action" type="button" aria-label="Remove ${name}">×</button></span></li>`;
 };
 
 const specimen = (title, markup) =>
@@ -50,6 +65,8 @@ export function enhanceFileUploadShowcase() {
         const action = root.querySelector(".shlz-file-row__action");
         if (title)
           title.textContent = event.detail.files[0]?.name ?? "No file selected";
+        const image = root.querySelector(".shlz-file-row__visual img");
+        if (image) image.src = fileIconUrl(event.detail.files[0]?.name ?? "");
         if (meta) meta.textContent = `${event.detail.files.length} selected`;
         if (action)
           action.setAttribute(
@@ -58,10 +75,19 @@ export function enhanceFileUploadShowcase() {
           );
       } else if (list) {
         list.replaceChildren(
-          ...[...event.detail.files].map((file) => {
-            const item = document.createElement("li");
-            item.className = "shlz-file-upload__file-name";
-            item.textContent = file.name;
+          ...[...event.detail.files].map((file, index) => {
+            const template = document.createElement("template");
+            // Only fixed markup is parsed; consumer filenames remain literal text.
+            template.innerHTML = row(
+              "",
+              `file-row-${root.dataset.componentAuditId}-selected-${index}`,
+            );
+            const item = template.content.firstElementChild;
+            item.querySelector(".shlz-file-row__title").textContent = file.name;
+            item.querySelector("img").src = fileIconUrl(file.name);
+            item
+              .querySelector("button")
+              .setAttribute("aria-label", `Remove ${file.name}`);
             return item;
           }),
         );
@@ -74,6 +100,7 @@ export function enhanceFileUploadShowcase() {
         root.querySelector(".shlz-file-row__title").textContent =
           "No file selected";
         root.querySelector(".shlz-file-row__meta").textContent = "0 selected";
+        root.querySelector(".shlz-file-row__visual img").src = fileIconUrl("");
         action.setAttribute("aria-label", "Remove selected file");
         document.querySelector(
           "[data-file-upload-consumer-status]",

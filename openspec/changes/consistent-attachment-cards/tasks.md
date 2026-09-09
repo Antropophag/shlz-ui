@@ -1,12 +1,12 @@
 ## 1. Establish implementation evidence
 
 - [x] 1.1 Inventory affected fixtures, live consumers, diagnostics and File Row occurrences; record exact classifications and source/state/content-stress evidence per the component audit gate.
-- [ ] 1.2 Record implementation authorization, validate requirements and commit/push planning before creating the clean baseline receipt; verify the receipt binds the approved change and current main.
+- [x] 1.2 Record implementation authorization, validate requirements and commit/push planning before creating the clean baseline receipt; verify the receipt binds the approved change and current main.
 
 ## 2. Align attachment presentation
 
-- [ ] 2.1 Update Composer and File Upload scoped layouts and static markup with compact cards and source-derived icons; verify both named examples against Comment Feed and focused source crops.
-- [ ] 2.2 Align dynamically selected File Upload cards and generic icon fallback; verify selection/removal, literal filename insertion and existing control semantics in the live consumer.
+- [x] 2.1 Update Composer and File Upload scoped layouts and static markup with compact cards and source-derived icons; verify both named examples against Comment Feed and focused source crops.
+- [x] 2.2 Align dynamically selected File Upload cards and generic icon fallback; verify selection/removal, literal filename insertion and existing control semantics in the live consumer.
 
 ## 3. Validate and deliver
 

@@ -2,9 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Align Composer and File Upload attachments with the compact source-backed Comment Feed file cards.",
-    "material": [
-      "publicContract"
-    ],
+    "material": ["publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

@@ -77,3 +77,7 @@ The Composer contracts to its container, wraps toolbar groups, stacks supporting
 ## Non-goals
 
 The package does not provide an editor engine, document schema, command API, formatting execution, selection preservation, keyboard shortcuts, sanitization, upload lifecycle, messaging, persistence, or submission transport. Framework adapters remain optional consumer code.
+
+## Attachment cards
+
+Compose `.shlz-file-row` children inside `.shlz-composer__attachments`. Cards use the compact Comment Feed composition: a preferred width of 229px, shrinking to the container and wrapping without stretching. Include a decorative source-derived file-type SVG in `.shlz-file-row__visual`, filename text and secondary metadata in `.shlz-file-row__content`, and any existing native actions in `.shlz-file-row__actions`. Long filenames ellipsize visually; keep their complete text in the document. Selection, metadata and removal remain consumer-owned.
