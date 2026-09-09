@@ -132,11 +132,10 @@ export function clipBarChartMark(
     shape.setAttribute("d", `${top}V${y + height + topHeight}H${x}Z`);
   } else {
     // Arbitrary-width dataset fallback; only the named source widths are exact contours.
-    const radius = Math.min(
-      width < 16 ? 4 : width <= 24 ? 8 : 16,
-      width / 2,
-      height / 2,
-    );
+    let nominalRadius = 16;
+    if (width <= 24) nominalRadius = 8;
+    if (width < 16) nominalRadius = 4;
+    const radius = Math.min(nominalRadius, width / 2, height / 2);
     shape.setAttribute(
       "d",
       `M${x} ${y + radius}Q${x} ${y} ${x + radius} ${y}H${x + width - radius}Q${x + width} ${y} ${x + width} ${y + radius}V${y + height + radius}H${x}Z`,

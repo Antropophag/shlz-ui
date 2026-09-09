@@ -116,15 +116,21 @@ const sourceDensities = [
   ["two-eight", 2, [0, 1, 2, 3, 4, 5, 6, 7], "62,75 px · 2 периода × 8 серий"],
   ["five-three", 5, [0, 5, 6], "≈62,67 px · 5 периодов × 3 серии"],
 ];
+const paletteItem = ([, label, tone]) =>
+  `<figure><div class="shlz-chart-palette__pair" aria-hidden="true">${createBarChartSwatch(tone).outerHTML}${createBarChartSwatch(tone, true).outerHTML}</div><figcaption>${label}</figcaption></figure>`;
+const densitySpecimen = ([id, count, indices, label]) => {
+  const chartId = "bar-chart-density-" + id;
+  return `<section class="shlz-chart-specimen" aria-labelledby="density-${id}"><h3 id="density-${id}">${label}</h3>${chartRoot(chartId, sourceData(count, indices))}</section>`;
+};
 const sourceGallery = `
 <section id="dashboard-source-gallery" class="shlz-major-section">
   <h2>Палитра и варианты графиков</h2>
   <p>Девять цветов, состояния и плотность из Dashboard.svg. Числа в диаграммах — демонстрационные данные.</p>
   <div class="shlz-chart-palette" aria-label="Палитра баров: обычное и приглушённое состояние">
-    ${sourceSeries.map(([, label, tone]) => `<figure><div class="shlz-chart-palette__pair" aria-hidden="true">${createBarChartSwatch(tone).outerHTML}${createBarChartSwatch(tone, true).outerHTML}</div><figcaption>${label}</figcaption></figure>`).join("")}
+    ${sourceSeries.map(paletteItem).join("")}
   </div>
   <p>Слева — обычное состояние, справа — приглушённое. Наведите на столбец ниже или перейдите к нему клавишей Tab, чтобы увидеть все серии периода.</p>
-  ${sourceDensities.map(([id, count, indices, label]) => `<section class="shlz-chart-specimen" aria-labelledby="density-${id}"><h3 id="density-${id}">${label}</h3>${chartRoot(`bar-chart-density-${id}`, sourceData(count, indices))}</section>`).join("")}
+  ${sourceDensities.map(densitySpecimen).join("")}
   <section class="shlz-chart-specimen" aria-labelledby="chart-below-title"><h3 id="chart-below-title">Подсказка под осью · закрытые обращения</h3>${chartRoot("bar-chart-tooltip-below", sourceData(5, [0, 5, 8], "below"))}</section>
 </section>`;
 

@@ -8,6 +8,7 @@ import {
   type BarChartData,
   type BarChartDatum,
   type BarChartModel,
+  type BarChartTone,
 } from "./bar-chart-model.js";
 
 export interface BarChartVisibilityChangeDetail {
@@ -29,6 +30,15 @@ function textElement<K extends keyof HTMLElementTagNameMap>(
   return element;
 }
 
+function seriesKeyClasses(index: number, tone?: BarChartTone): string {
+  const classes = [
+    "shlz-bar-chart__legend-key",
+    `shlz-bar-chart__series-${index + 1}`,
+  ];
+  if (tone) classes.push(`shlz-bar-chart__tone-${tone}`);
+  return classes.join(" ");
+}
+
 export class BarChartController {
   readonly root: HTMLElement;
   #model: BarChartModel;
@@ -36,7 +46,7 @@ export class BarChartController {
   #destroyed = false;
   #focusId = "";
   #tableOpen = false;
-  #instanceId = `shlz-chart-${++chartSequence}`;
+  readonly #instanceId = `shlz-chart-${++chartSequence}`;
   #activeDatum: BarChartDatum | null = null;
   #resize: ResizeObserver | null = null;
 
@@ -146,7 +156,7 @@ export class BarChartController {
           `${series.label}. At least one series must remain visible.`,
         );
       const key = document.createElement("span");
-      key.className = `shlz-bar-chart__legend-key shlz-bar-chart__series-${index + 1}${series.tone ? ` shlz-bar-chart__tone-${series.tone}` : ""}`;
+      key.className = seriesKeyClasses(index, series.tone);
       key.setAttribute("aria-hidden", "true");
       button.append(key, document.createTextNode(series.label));
       button.addEventListener("click", () => this.#toggle(series.id), {
@@ -165,8 +175,7 @@ export class BarChartController {
     const categoryCount = this.#model.data.categories.length;
     const seriesCount = this.#model.visibleSeriesIds.length;
     const layout = barChartLayout(this.#model);
-    const { width, height, plotWidth, plotHeight, groupWidth, gap, barWidth } =
-      layout;
+    const { width, height, plotHeight, groupWidth, gap, barWidth } = layout;
     const padding = { top: 16, right: 16, bottom: 52, left: 48 };
     const svg = document.createElementNS(svgNamespace, "svg");
     svg.classList.add("shlz-bar-chart__plot");
@@ -503,7 +512,7 @@ export class BarChartController {
       const row = document.createElement("div");
       row.className = "shlz-bar-chart__tooltip-row";
       const key = document.createElement("i");
-      key.className = `shlz-bar-chart__legend-key shlz-bar-chart__series-${index + 1}${series.tone ? ` shlz-bar-chart__tone-${series.tone}` : ""}`;
+      key.className = seriesKeyClasses(index, series.tone);
       key.setAttribute("aria-hidden", "true");
       row.append(
         key,

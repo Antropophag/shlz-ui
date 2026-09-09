@@ -76,9 +76,9 @@ if (set === "layout-mode") {
 if (set === "placement") {
   assert.ok(["above", "below"].includes(member));
   execFileSync(
-    "npx",
+    process.execPath,
     [
-      "playwright",
+      path.resolve("node_modules/@playwright/test/cli.js"),
       "test",
       "tools/playwright/bar-chart-source.spec.js",
       "--grep",

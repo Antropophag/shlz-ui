@@ -99,9 +99,14 @@
       "evidence": "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
     },
     {
-      "claim": "Nine 24x200 default/muted swatch pairs use the same source-normalized top contour factory as chart marks; decorative swatches are not controller roots.",
+      "claim": "Nine 24x200 default/muted bar variants with width-specific top contours are directly observed in Dashboard.svg.",
       "classification": "source-fact",
       "evidence": "shlz-design-source/raw/svg/Dashboard.svg"
+    },
+    {
+      "claim": "The decorative palette factory and quantitative renderer share one clipped-mark implementation; decorative swatches are not controller roots.",
+      "classification": "repository-decision",
+      "evidence": "packages/behaviors/src/bar-chart-mark.ts"
     }
   ],
   "browserTests": [
