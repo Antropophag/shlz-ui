@@ -85,7 +85,11 @@
     "narrow",
     "nine-tones",
     "six-source-density-families",
-    "above-below-tooltip"
+    "above-below-tooltip",
+    "dense-source-34-to-1000-categories",
+    "malformed-presentation",
+    "consumer-axis-labels",
+    "rtl-tooltip-arrow"
   ],
   "sourceClaims": [
     {

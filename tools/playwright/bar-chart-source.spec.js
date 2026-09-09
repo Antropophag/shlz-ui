@@ -267,13 +267,13 @@ test("consumer tick labels and RTL arrow use the declared presentation", async (
     ).slice(0, 6),
   ).toEqual(["10,0", "8,0", "6,0", "4,0", "2,0", "0,0"]);
   await chart.locator(".shlz-bar-chart__bar").first().focus();
-  const offsets = await chart
-    .getByRole("tooltip")
-    .evaluate((node) => ({
-      actual: Number.parseFloat(getComputedStyle(node, "::after").left),
-      expected: Number.parseFloat(
-        node.style.getPropertyValue("--shlz-chart-arrow-x"),
-      ),
-    }));
+  const offsets = await chart.getByRole("tooltip").evaluate((node) => ({
+    actual: Number.parseFloat(
+      globalThis.getComputedStyle(node, "::after").left,
+    ),
+    expected: Number.parseFloat(
+      node.style.getPropertyValue("--shlz-chart-arrow-x"),
+    ),
+  }));
   expect(offsets.actual).toBeCloseTo(offsets.expected, 1);
 });

@@ -96,7 +96,7 @@ export function validateBarChartData(data: BarChartData): BarChartData {
       presentation.axisLabels !== undefined &&
       (!Array.isArray(presentation.axisLabels) ||
         presentation.axisLabels.length !== 6 ||
-        presentation.axisLabels.some(
+        Array.from(presentation.axisLabels).some(
           (label) => typeof label !== "string" || label.trim() === "",
         ))
     )

@@ -190,6 +190,7 @@ test("presentation rejects malformed JSON and accepts consumer tick labels", () 
     { axisLabels: ["bad"] },
     { axisLabels: ["10", "8", "6", "4", "2", "0"] },
     { axisLabels: Array(6).fill("") },
+    { scaleMaximum: 10, axisLabels: Array(6) },
   ])
     assert.throws(() => createBarChartModel({ ...data, presentation }));
   const presentation = {
