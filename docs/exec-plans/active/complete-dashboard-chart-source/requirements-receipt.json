@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "complete-dashboard-chart-source",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "source-completeness",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement all missing source-backed Bar Chart presentation and dashboard specimens identified in the preceding dashboard gap investigation.",
+    "revision": 1
+  },
+  "routeDigest": "e9944fd8a964538985d5af61759c2b5bff03a0d39c97a90d80168af460347f2b",
+  "version": 1,
+  "digest": "1970b9a10bae0613367b4d3c4c85a478e3b2742d1a712b140298b6b586e9ea73"
+}
