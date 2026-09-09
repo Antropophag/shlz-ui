@@ -1,3 +1,4 @@
+import { clipBarChartMark } from "./bar-chart-mark.js";
 import {
   barChartNeighbor,
   barChartLayout,
@@ -99,7 +100,6 @@ export class BarChartController {
     this.#abort.abort();
     this.#resize?.disconnect();
     this.root.replaceChildren();
-    this.root.style.paddingBottom = "";
     delete this.root.dataset.shlzBarChartReady;
     if (controllers.get(this.root) === this) controllers.delete(this.root);
   }
@@ -123,7 +123,6 @@ export class BarChartController {
     this.#abort.abort();
     this.#abort = new AbortController();
     this.root.replaceChildren();
-    this.root.style.paddingBottom = "";
     this.root.classList.add("shlz-bar-chart");
     this.root.dataset.shlzBarChartReady = "true";
 
@@ -195,7 +194,7 @@ export class BarChartController {
       label.setAttribute("text-anchor", "end");
       label.setAttribute("aria-hidden", "true");
       label.textContent = String(
-        Number(((layout.maximum * (5 - index)) / 5).toPrecision(6)),
+        Number((layout.maximum * ((5 - index) / 5)).toPrecision(6)),
       );
       svg.append(label);
     }
@@ -234,25 +233,12 @@ export class BarChartController {
         );
         rect.setAttribute("width", String(barWidth));
         rect.setAttribute("height", String(renderedHeight));
-        // Clip a rounded rectangle beyond the baseline to keep both bottom corners square.
-        const clipId = `${this.#instanceId}-bar-${categoryIndex}-${visibleIndex}`;
-        const clip = document.createElementNS(svgNamespace, "clipPath");
-        clip.id = clipId;
-        const shape = document.createElementNS(svgNamespace, "rect");
-        shape.setAttribute("x", rect.getAttribute("x")!);
-        shape.setAttribute("y", rect.getAttribute("y")!);
-        shape.setAttribute("width", String(barWidth));
-        shape.setAttribute(
-          "height",
-          String(renderedHeight + Math.min(8, barWidth / 2)),
+        svg.append(
+          clipBarChartMark(
+            rect,
+            `${this.#instanceId}-bar-${categoryIndex}-${visibleIndex}`,
+          ),
         );
-        shape.setAttribute(
-          "rx",
-          String(Math.min(8, barWidth / 2, renderedHeight / 2)),
-        );
-        clip.append(shape);
-        svg.append(clip);
-        rect.setAttribute("clip-path", `url(#${clipId})`);
         if (datum.value === 0) {
           const visual = rect.cloneNode() as SVGRectElement;
           visual.classList.remove("shlz-bar-chart__bar");
@@ -495,6 +481,13 @@ export class BarChartController {
     );
     if (!tooltip) return;
     this.#activeDatum = datum;
+    for (const bar of this.root.querySelectorAll<SVGRectElement>(
+      ".shlz-bar-chart__bar",
+    )) {
+      if (bar.dataset.datumId === datum.id)
+        bar.setAttribute("aria-describedby", tooltip.id);
+      else bar.removeAttribute("aria-describedby");
+    }
     tooltip.replaceChildren(
       textElement(
         "strong",
@@ -514,7 +507,16 @@ export class BarChartController {
       key.setAttribute("aria-hidden", "true");
       row.append(
         key,
-        textElement("span", "", `${series.label}: ${value.displayValue}`),
+        textElement(
+          "span",
+          "shlz-bar-chart__tooltip-label",
+          `${series.label}: `,
+        ),
+        textElement(
+          "span",
+          "shlz-bar-chart__tooltip-value",
+          value.displayValue,
+        ),
       );
       tooltip.append(row);
     });
@@ -610,6 +612,10 @@ export class BarChartController {
       ".shlz-bar-chart__tooltip",
     );
     if (tooltip) tooltip.hidden = true;
+    for (const bar of this.root.querySelectorAll(
+      ".shlz-bar-chart__bar[aria-describedby]",
+    ))
+      bar.removeAttribute("aria-describedby");
     const viewport = this.root.querySelector<HTMLElement>(
       ".shlz-bar-chart__viewport",
     );

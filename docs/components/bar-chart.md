@@ -46,10 +46,14 @@ Consumers own fetching, filtering, aggregation, period controls, sorting, locale
 
 - `density: "source"`: a 1212×300 plot using source group widths for 2, 5, 14 and 23 categories; other category counts use a derived layout. At original series counts this yields 62.75 px (2×8), 21 px (5×8), 96 px (5×2), approximately 62.67 px (5×3), 7 px (14×8), and approximately 12.33 px (23×3). Hiding series redistributes the group's paint width. Fourteen and twenty-three categories display three regular labels while retaining every tick and accessible name.
 - `scaleMaximum`: a positive finite ceiling, at least every supplied value. Omit it to scale to the visible maximum (10 for all-zero data). Six numeric Y labels share the same scale as the bars.
-- `tooltipPlacement: "above" | "below"`: period disclosure above the plot or below the axis. The latter reserves space inside the chart so widget clipping cannot hide it. Long tooltip content grows beyond source specimen heights.
+- `tooltipPlacement: "above" | "below"`: period disclosure above the plot, clamped to the chart boundary or below the axis. The latter reserves space inside the chart so widget clipping cannot hide it. Long tooltip content grows beyond source specimen heights.
 
 The chart highlights a whole period and lists every visible series with a color key. Other periods use 15% paint; explicit orange changes to #DE753D and explicit gray uses opaque #F5F5F5. The active period has a guide and axis badge; the tooltip retains the full category name when the badge is shortened. Escape dismisses inspection; moving focus to another datum reopens it. Zero values retain transparent inspection geometry and zero quantitative paint.
 
 Source facts (palette, source widths, plot dimensions, top-only corners and period presentation) are distinct from repository decisions (arbitrary data geometry, responsive overflow, keyboard behavior, legend and accessible table). The Showcase `#dashboard-source-gallery` presents nine default/muted color pairs, six populated density specimens and a below-axis gray-series example. These are reusable presentation demonstrations, not business filters.
 
 The source-completeness extension supersedes the original four-series restriction and single-datum tooltip presentation in the unarchived initial Bar Chart change. Existing data, event and lifecycle calls remain compatible. Invalid presentation, tones or replacement data are rejected before changing an existing controller.
+
+`createBarChartSwatch(tone, muted = false)` returns a decorative 24×200 SVG using the same clipped mark geometry and tone classes as the chart. It is intended for labeled palettes, requires a DOM, and does not create a controller or interactive data point; callers provide the visible label.
+
+Canonical widths use normalized top contours directly extracted from Dashboard.svg rather than one radius for every bar: the source changes the curve with bar width. The 24 px palette uses the same source contour factory. Very short values vertically compress only the top contour; arbitrary widths use a documented quadratic fallback with square bottoms.

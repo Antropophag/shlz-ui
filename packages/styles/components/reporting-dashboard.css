@@ -126,13 +126,13 @@
 }
 
 .shlz-chart-widget__empty-illustration {
-  inline-size: 159px;
-  block-size: 60px;
+  inline-size: 167px;
+  block-size: 131px;
   overflow: hidden;
 }
 
 .shlz-chart-widget__empty-illustration img {
   display: block;
-  inline-size: 159px;
+  inline-size: 167px;
   max-inline-size: none;
 }

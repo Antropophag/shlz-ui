@@ -1,4 +1,5 @@
-import emptyIllustration from "../generated/source-references/empty-customize.svg?url";
+import { createBarChartSwatch } from "@shlz/behaviors";
+import emptyIllustration from "../generated/source-references/empty-basic.svg?url";
 
 const emptyWidget = ({ id, title, stress = false }) => `
   <article class="shlz-chart-widget" data-component-audit-id="${id}" aria-labelledby="${id}-title">
@@ -78,6 +79,7 @@ const sourceSeries = [
   ["closed", "Закрыто", "gray"],
 ];
 const sourceData = (periodCount, seriesIndices, placement = "above") => {
+  const multiplier = periodCount === 14 || periodCount === 23 ? 10 : 1;
   const categories = Array.from({ length: periodCount }, (_, index) => ({
     id: `p${index}`,
     label: `${index + 1}–${index + 7} мая`,
@@ -90,13 +92,13 @@ const sourceData = (periodCount, seriesIndices, placement = "above") => {
       tone: sourceSeries[sourceIndex][2],
       values: categories.map((category, categoryIndex) => ({
         categoryId: category.id,
-        value: ((categoryIndex + index) % 9) + 1,
-        displayValue: String(((categoryIndex + index) % 9) + 1),
+        value: (((categoryIndex + index) % 9) + 1) * multiplier,
+        displayValue: String((((categoryIndex + index) % 9) + 1) * multiplier),
       })),
     })),
     presentation: {
       density: "source",
-      scaleMaximum: 10,
+      scaleMaximum: 10 * multiplier,
       tooltipPlacement: placement,
     },
   };
@@ -119,7 +121,7 @@ const sourceGallery = `
   <h2>Палитра и варианты графиков</h2>
   <p>Девять цветов, состояния и плотность из Dashboard.svg. Числа в диаграммах — демонстрационные данные.</p>
   <div class="shlz-chart-palette" aria-label="Палитра баров: обычное и приглушённое состояние">
-    ${sourceSeries.map(([, label, tone]) => `<figure><div class="shlz-chart-palette__pair" aria-hidden="true"><span class="shlz-chart-palette__bar shlz-bar-chart__tone-${tone}"></span><span class="shlz-chart-palette__bar shlz-bar-chart__tone-${tone} shlz-bar-chart__bar--muted"></span></div><figcaption>${label}</figcaption></figure>`).join("")}
+    ${sourceSeries.map(([, label, tone]) => `<figure><div class="shlz-chart-palette__pair" aria-hidden="true">${createBarChartSwatch(tone).outerHTML}${createBarChartSwatch(tone, true).outerHTML}</div><figcaption>${label}</figcaption></figure>`).join("")}
   </div>
   <p>Слева — обычное состояние, справа — приглушённое. Наведите на столбец ниже или перейдите к нему клавишей Tab, чтобы увидеть все серии периода.</p>
   ${sourceDensities.map(([id, count, indices, label]) => `<section class="shlz-chart-specimen" aria-labelledby="density-${id}"><h3 id="density-${id}">${label}</h3>${chartRoot(`bar-chart-density-${id}`, sourceData(count, indices))}</section>`).join("")}

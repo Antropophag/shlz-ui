@@ -82,6 +82,7 @@ const laterWave12ProductPaths = new Set([
   "tools/tests/fixtures/comments-history-fidelity-known-bad.json",
 ]);
 const laterBarChartProductPaths = new Set([
+  "packages/behaviors/src/bar-chart-mark.ts",
   "tools/playwright/bar-chart-source.spec.js",
   "apps/showcase/src/reporting-dashboard-showcase.js",
   "docs/components/bar-chart.md",

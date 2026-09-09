@@ -139,7 +139,7 @@
 }
 
 .shlz-bar-chart__tooltip span {
-  color: #939ca5;
+  color: #fff;
 }
 
 .shlz-bar-chart__data > summary {
@@ -211,6 +211,18 @@
 }
 
 .shlz-bar-chart__tooltip-period {
+  color: #939ca5;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+
+.shlz-bar-chart__tooltip-label {
+  min-inline-size: 0;
+}
+
+.shlz-bar-chart__tooltip-value {
+  margin-inline-start: auto;
+  text-align: end;
   overflow-wrap: anywhere;
 }
 

@@ -1,3 +1,4 @@
+export { createBarChartSwatch } from "./bar-chart-mark.js";
 export { DropdownController, enhanceDropdowns } from "./dropdown.js";
 export { SelectController, enhanceSelects } from "./select.js";
 export { PopoverController, enhancePopovers } from "./popover.js";

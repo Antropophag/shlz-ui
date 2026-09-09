@@ -12,8 +12,9 @@ See proposal.md. Dashboard.svg and its hash-verified matrix are visual authority
 
 - Add optional named series tone; keep existing positional CSS slots 1–4 and extend slots 5–8. Explicit tones remain stable under reorder. Chart-specific paint uses verified source values, including exceptional muted orange/gray, rather than assigning status meaning from arbitrary IDs.
 - Isolate quantitative layout and validated presentation options in the chart model. Source-density presets encode component-specific measurements; do not promote observed widths to global tokens. Default mode remains a responsive, locally scrollable chart; reference specimens use a 1212×300 plot with source counts, widths and sparse ticks. Add optional scale maximum and tooltip placement with validation.
+- Expose a decorative `createBarChartSwatch(tone, muted)` DOM factory, sharing the clipped mark primitive with the renderer so palette geometry cannot drift into showcase-only CSS.
 - Retain SVG rectangles for compatibility with existing focus and zero-target semantics; use clipping to keep bottom corners square. Use one category inspection state shared by pointer/focus, SVG guide/badge and grouped tooltip. Tooltip positioning is chart-local and recomputed on scrolling/resizing; no portal or floating dependency.
-- Reuse existing Empty State illustration for widget empty presentation after checking source evidence. Keep widget presentation separate from chart data validation.
+- Reuse the existing Basic Empty State illustration for widget empty presentation after checking source evidence. Keep widget presentation separate from chart data validation.
 - Work inline in two sequential implementation sections: model/renderer and gallery/evidence. They share contracts and do not warrant parallel execution packets. Independent Standards/Spec review follows the code-review skill.
 
 ## Risks / Trade-offs
