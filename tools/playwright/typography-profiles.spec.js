@@ -24,6 +24,7 @@ test.beforeEach(async ({ page }) => {
     window.localStorage.removeItem("shlz-font-profile"),
   );
   await page.goto("/?full=1");
+  await expect(page.locator("[data-shlz-type-stress]")).toBeVisible();
   await page.evaluate(() => document.fonts.ready);
 });
 

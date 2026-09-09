@@ -4,7 +4,8 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Комментарии.svg",
   "referenceSources": [
     "docs/component-audits/comment-feed-contract.md",
-    "docs/component-audits/comments-history-fidelity-baseline.md"
+    "docs/component-audits/comments-history-fidelity-baseline.md",
+    "docs/component-audits/rounded-control-alignment.md"
   ],
   "implementation": ["packages/styles/components/comment-feed.css"],
   "behavior": null,
@@ -18,9 +19,18 @@
   ],
   "diagnosticOccurrenceCount": 6,
   "occurrences": [
-    { "id": "comment-feed-showcase-source", "kind": "executable-fixture" },
-    { "id": "comment-feed-source-consumer", "kind": "live-consumer" },
-    { "id": "comment-feed-plain-html", "kind": "executable-fixture" }
+    {
+      "id": "comment-feed-showcase-source",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "comment-feed-source-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "comment-feed-plain-html",
+      "kind": "executable-fixture"
+    }
   ],
   "supportedSizes": ["source-desktop-feed", "bounded-responsive-feed"],
   "supportedStates": [
@@ -58,9 +68,17 @@
       "claim": "active secondary text uses the accessible supporting role while provenance retains source Gray 200",
       "classification": "repository-decision",
       "evidence": "docs/accessibility-source-contrast.md"
+    },
+    {
+      "claim": "Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
-  "browserTests": ["tools/playwright/comments-history-fidelity.spec.js"],
+  "browserTests": [
+    "tools/playwright/comments-history-fidelity.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
+  ],
   "visualSnapshots": [
     "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-source-chromium-linux.png",
     "tools/playwright/comments-history-fidelity.spec.js-snapshots/comment-feed-default-chromium-linux.png",
@@ -77,13 +95,16 @@
     "structural-contract": "pass: public style bundle, docs, fixtures and exact occurrence ledger",
     "runtime-browser": "pass: native consumer actions and consumer-owned rerender surface",
     "accessibility": "pass: native list/form semantics, focus, contrast and axe coverage",
-    "focused-visual": "pass: 1304px source panel, 1196px composer and seven component-local source-state desktop snapshots",
+    "focused-visual": "pass: 1304px source panel, 1196px composer and seven component-local source-state desktop snapshots Rounded-control regressions additionally verify A12 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: ServiceDesk source-contract consumer",
-    "responsive-content-stress": "pass: 390px narrow, 768px intermediate, 1440px wide, 200% text, localized/sparse content and attachment containment"
+    "responsive-content-stress": "pass: 390px narrow, 768px intermediate, 1440px wide, 200% text, localized/sparse content and attachment containment Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
-      "staticVisual": ["pass: seven source-observed visual states"],
+      "staticVisual": [
+        "pass: seven source-observed visual states",
+        "pass: focused rounded-control regressions cover A12 with separate line, shell, and paint assertions as applicable"
+      ],
       "realInteractionVisual": [
         "not-applicable: contextual eligibility and feedback lifecycle are consumer-owned"
       ],
@@ -104,7 +125,16 @@
     "manualStateWalk": "pass: source states, native actions, focus, narrow layout and text scaling"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "rounded-control-a12",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    }
+  ],
   "knownLimitations": [
     "no data fetching, authorisation, edit/delete/reply mutations, mention lookup, upload, submission, feedback timing, undo, persistence, synchronization, pagination, moderation or announcements",
     "responsive behavior is a repository decision because the source frames are desktop only"

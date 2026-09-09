@@ -125,3 +125,10 @@ Automatic activation is a behavior-layer **DECISION**. Source exposes no icon ax
 - Source tests: `tools/tests/tabs-source.test.mjs`
 - Behavior contract tests: `tools/tests/components.test.mjs`
 - Browser tests: `tools/playwright/components-next.spec.js`
+
+## Compact layout
+
+Compact tablists derive their height from their own tab variants: 40px for pill
+and 39px for boxed short labels. They do not inherit the underline list's 61px
+minimum. Longer content remains within a growing tab without changing keyboard
+or panel ownership.

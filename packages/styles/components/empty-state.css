@@ -118,8 +118,8 @@
 }
 
 .shlz-empty-state--customize .shlz-empty-state__actions .shlz-button {
-  inline-size: 131px;
-  block-size: 32px;
+  min-inline-size: 131px;
+  min-block-size: 32px;
 }
 
 .shlz-empty-state--basic .shlz-empty-state__title {
@@ -146,6 +146,6 @@
 }
 
 .shlz-empty-state--basic .shlz-empty-state__actions .shlz-button {
-  inline-size: 142px;
-  block-size: 40px;
+  min-inline-size: 142px;
+  min-block-size: 40px;
 }

@@ -1,7 +1,10 @@
 {
   "component": "empty-state",
   "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
-  "referenceSources": ["docs/components/empty-state.md"],
+  "referenceSources": [
+    "docs/components/empty-state.md",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": ["packages/styles/components/empty-state.css"],
   "behavior": null,
   "docs": "docs/components/empty-state.md",
@@ -14,11 +17,26 @@
   ],
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
-    { "id": "empty-state-showcase-simple", "kind": "executable-fixture" },
-    { "id": "empty-state-showcase-customize", "kind": "executable-fixture" },
-    { "id": "empty-state-showcase-basic", "kind": "executable-fixture" },
-    { "id": "empty-state-typography-stress", "kind": "content-stress-fixture" },
-    { "id": "empty-state-workspace-no-results", "kind": "live-consumer" }
+    {
+      "id": "empty-state-showcase-simple",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "empty-state-showcase-customize",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "empty-state-showcase-basic",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "empty-state-typography-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "empty-state-workspace-no-results",
+      "kind": "live-consumer"
+    }
   ],
   "supportedSizes": [
     "simple-220x67",
@@ -48,13 +66,19 @@
       "claim": "secondary titles and descriptions reuse the accessible supporting-text role; primary titles, illustrations and source values remain unchanged",
       "classification": "repository-decision",
       "evidence": "openspec/changes/improve-status-empty-contrast/design.md"
+    },
+    {
+      "claim": "Empty State action widths are source minima and localized labels remain inside growing shells.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
   "browserTests": [
     "tools/playwright/data-content-wave5.spec.js",
     "tools/playwright/consumer-workspace.spec.js",
     "tools/playwright/remediation-fidelity.spec.js",
-    "tools/playwright/status-empty-contrast.spec.js"
+    "tools/playwright/status-empty-contrast.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/status-empty-contrast.spec.js-snapshots/empty-state-accessible-text-chromium-linux.png",
@@ -65,14 +89,15 @@
     "structural-contract": "pass: all five roots are classified and optional visual/title/description/action regions remain composable",
     "runtime-browser": "not-applicable: Empty State owns no loading, retry, announcement or visibility controller",
     "accessibility": "pass: titles and descriptions exceed 4.5:1 in all four compositions on four light surfaces, no live role is added and actions stay native",
-    "focused-visual": "pass: component snapshots preserve the three source geometries, primary titles and illustration paint with documented supporting-text correction",
+    "focused-visual": "pass: component snapshots preserve the three source geometries, primary titles and illustration paint with documented supporting-text correction Rounded-control regressions additionally verify A5 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: readable Data Workspace empty results recover all rows through the native reset button activated with Enter",
-    "responsive-content-stress": "pass: long title and description remain contained at 200 percent text size in a 280px fluid composition at a 360px viewport; existing native-action stress also remains covered"
+    "responsive-content-stress": "pass: long title and description remain contained at 200 percent text size in a 280px fluid composition at a 360px viewport; existing native-action stress also remains covered Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: Simple, Customize and Basic source matrices are static composition evidence"
+        "pass: Simple, Customize and Basic source matrices are static composition evidence",
+        "pass: focused rounded-control regressions cover A5 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "not-applicable: Empty State has no root hover, focus, active or disabled interaction contract"
@@ -94,6 +119,14 @@
       "description": "Simple title and Basic description no longer use the low-contrast source Gray 200 in production. The existing accessible supporting role yields at least 4.575:1 across supported surfaces; original SVGs remain unchanged.",
       "evidence": "tools/playwright/status-empty-contrast.spec.js",
       "tracking": "docs/component-audits/status-empty-contrast-report.md"
+    },
+    {
+      "id": "rounded-control-a5",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Empty State action widths are source minima and localized labels remain inside growing shells.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
     }
   ],
   "knownLimitations": [

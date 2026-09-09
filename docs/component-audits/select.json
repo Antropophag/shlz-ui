@@ -1,7 +1,10 @@
 {
   "component": "select",
   "authoritativeSource": "shlz-design-source/raw/svg/Select.svg",
-  "referenceSources": ["shlz-design-source/raw/svg/Dropdown menu.svg"],
+  "referenceSources": [
+    "shlz-design-source/raw/svg/Dropdown menu.svg",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": [
     "packages/styles/components/field.css",
     "packages/behaviors/src/select.ts"
@@ -12,14 +15,38 @@
   "legacySelectors": ["select"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
-    { "id": "request-status-empty", "kind": "executable-fixture" },
-    { "id": "request-status-filled", "kind": "executable-fixture" },
-    { "id": "request-status-hover", "kind": "executable-fixture" },
-    { "id": "request-status-focus", "kind": "executable-fixture" },
-    { "id": "request-status-disabled", "kind": "executable-fixture" },
-    { "id": "request-status-medium", "kind": "executable-fixture" },
-    { "id": "workspace-status", "kind": "live-consumer" },
-    { "id": "typography-assignee", "kind": "content-stress-fixture" }
+    {
+      "id": "request-status-empty",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "request-status-filled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "request-status-hover",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "request-status-focus",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "request-status-disabled",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "request-status-medium",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "workspace-status",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "typography-assignee",
+      "kind": "content-stress-fixture"
+    }
   ],
   "supportedSizes": ["large", "medium"],
   "supportedStates": [
@@ -46,6 +73,11 @@
       "claim": "button/listbox controller, hidden input, and emitted events",
       "classification": "repository-decision",
       "evidence": "docs/components/select.md"
+    },
+    {
+      "claim": "Medium diagnostic chip lines fit and center inside the 23px shell. Diagnostic placeholder lines are centered inside both field heights.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
   "browserTests": [
@@ -54,7 +86,8 @@
     "tools/playwright/consumer-workspace.spec.js",
     "tools/playwright/primitives.spec.js",
     "tools/playwright/review.spec.js",
-    "tools/playwright/typography-profiles.spec.js"
+    "tools/playwright/typography-profiles.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/review.spec.js-snapshots/review-select-chromium-linux.png",
@@ -66,14 +99,15 @@
     "structural-contract": "pass: trigger, listbox, option, hidden input and documentation contracts are asserted",
     "runtime-browser": "pass: open, keyboard navigation, selection, dismissal, events and controller lifecycle execute in Chromium",
     "accessibility": "pass: listbox relationships, focus movement, selected and disabled semantics execute; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
-    "focused-visual": "pass: real closed, hover, keyboard focus, opened, option hover/selected and disabled computed paint is asserted",
+    "focused-visual": "pass: real closed, hover, keyboard focus, opened, option hover/selected and disabled computed paint is asserted Rounded-control regressions additionally verify A2, A3 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: Data Workspace status selection drives application-owned filtering",
-    "responsive-content-stress": "pass: long selected value and narrow closed shell remain contained"
+    "responsive-content-stress": "pass: long selected value and narrow closed shell remain contained Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: Select source matrices and closed/open screenshots remain static visual evidence only"
+        "pass: Select source matrices and closed/open screenshots remain static visual evidence only",
+        "pass: focused rounded-control regressions cover A2, A3 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "pass: one real trigger and option flow asserts closed, hover, focus-visible, opened, selected and disabled computed paint"
@@ -100,5 +134,23 @@
     "requires JavaScript enhancement",
     "globally unique ARIA relationship IDs required",
     "no search, multiselect, status-chip, async loading, or virtualization"
+  ],
+  "findings": [
+    {
+      "id": "rounded-control-a2",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Medium diagnostic chip lines fit and center inside the 23px shell.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    {
+      "id": "rounded-control-a3",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Diagnostic placeholder lines are centered inside both field heights.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    }
   ]
 }

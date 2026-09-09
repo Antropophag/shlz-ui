@@ -441,14 +441,15 @@
         "tools/tests/form-controls-source.test.mjs",
         "tools/playwright/primitives.spec.js",
         "tools/playwright/form-controls-wave2.spec.js",
-        "tools/playwright/accessible-source-contrast.spec.js"
+        "tools/playwright/accessible-source-contrast.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "source matrix test",
         "structural-contract": "CSS/docs",
         "runtime-browser": "pass: native value, focus, input lifecycle, disabled and programmatic updates execute in Chromium",
         "accessibility": "pass: visible label naming, focus and native disabled semantics are asserted; active labels and placeholders meet the shared WCAG 2.2 contrast contract",
-        "focused-visual": "pass: focused Input state matrix snapshot",
+        "focused-visual": "pass: focused Input state matrix snapshot Rounded-control correction evidence: A11, A12; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: Data Workspace search drives application-owned filtering",
         "responsive-content-stress": "pass: long Cyrillic value remains contained in a narrow Fira subtree"
       },
@@ -456,7 +457,9 @@
       "category": "form-controls",
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",
-      "authoritative_source": ["shlz-design-source/raw/svg/Input Number.svg"],
+      "authoritative_source": [
+        "shlz-design-source/raw/svg/UI Kit – Basic elements.zip"
+      ],
       "production_implementation": ["packages/styles/components/field.css"],
       "behavior": [],
       "docs": ["docs/components/input.md"],
@@ -475,7 +478,24 @@
         "default/hover/focus/disabled/error",
         "number actions"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a11",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Advanced diagnostic text actions retain the original 82x27 geometry.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a12",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 5,
@@ -537,14 +557,15 @@
       "tests": [
         "tools/tests/component-audit-manifest.test.mjs",
         "tools/playwright/select-closed-shell.spec.js",
-        "tools/playwright/accessible-source-contrast.spec.js"
+        "tools/playwright/accessible-source-contrast.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "applicable/pass",
         "structural-contract": "applicable/pass",
         "runtime-browser": "applicable/pass",
         "accessibility": "pass: active labels and placeholders meet the shared WCAG 2.2 contrast contract; disabled text is measured separately",
-        "focused-visual": "applicable/pass",
+        "focused-visual": "applicable/pass Rounded-control correction evidence: A2, A3; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "applicable/pass",
         "responsive-content-stress": "applicable/pass"
       },
@@ -577,7 +598,24 @@
         "long value",
         "narrow viewport"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a2",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Medium diagnostic chip lines fit and center inside the 23px shell.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a3",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Diagnostic placeholder lines are centered inside both field heights.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 7,
@@ -683,14 +721,15 @@
       "tests": [
         "tools/tests/remediation-wave2-source.test.mjs",
         "tools/playwright/remediation-fidelity.spec.js",
-        "tools/playwright/form-controls-wave2.spec.js"
+        "tools/playwright/form-controls-wave2.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "matrix test",
         "structural-contract": "CSS/docs",
         "runtime-browser": "pass: native pointer/Space, exact input/change counts, event-free programmatic checked and disabled no-interaction lifecycle execute in Chromium",
         "accessibility": "pass: role=switch, stable visible name, focus and disabled semantics are asserted",
-        "focused-visual": "pass: focused two-size Switch state snapshot",
+        "focused-visual": "pass: focused two-size Switch state snapshot Rounded-control correction evidence: A1; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "not-applicable: no Data Workspace or application-owned Switch consumer exists",
         "responsive-content-stress": "not-applicable: no audited long-label or narrow live consumer exists"
       },
@@ -709,7 +748,16 @@
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": ["small/medium", "on/off", "disabled", "label/no label"],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a1",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Source-sized thumb paint remains centered at fractional coordinates and native on/off/focus/disabled states.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 3,
@@ -827,14 +875,15 @@
       "tests": [
         "tools/tests/tabs-source.test.mjs",
         "tools/playwright/components-next.spec.js",
-        "tools/playwright/actions-navigation-wave3.spec.js"
+        "tools/playwright/actions-navigation-wave3.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: underline, pill and boxed source families retain exact state and height contracts",
         "structural-contract": "pass: tablist/tab/tabpanel relationships and behavior exports are asserted",
         "runtime-browser": "pass: real click updates selection/tabstop/panels; disabled click/programmatic paths are no-ops; arrows, Home/End, owned activation, replacement, repeat enhancement and teardown execute",
         "accessibility": "pass: one selected/tab-stop tab, disabled pointer/programmatic exclusion, focus movement, detached-tree IDs and unique root-scoped ARIA IDs are checked",
-        "focused-visual": "pass: component-local active, inactive, real-focus and narrow long-label states are captured",
+        "focused-visual": "pass: component-local active, inactive, real-focus and narrow long-label states are captured Rounded-control correction evidence: A4, A9; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "not-applicable: no application-owned or Data Workspace Tabs consumer exists on this baseline",
         "responsive-content-stress": "not-applicable: overflow and wrapping policy are consumer-owned; the narrow composition is additional integration evidence only"
       },
@@ -867,7 +916,24 @@
         "default/selected/hover/disabled",
         "focus"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a4",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Pill tabs retain 40px geometry independently of underline tabs.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a9",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Boxed tabs retain 39px geometry independently of underline tabs.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [
         "no application consumer; overflow/wrapping/routing remain consumer-owned"
       ],
@@ -1024,14 +1090,15 @@
         "tools/tests/choice-status-source.test.mjs",
         "tools/playwright/choice-status.spec.js",
         "tools/playwright/status-identity-wave4.spec.js",
-        "tools/playwright/interaction-evidence-wave35.spec.js"
+        "tools/playwright/interaction-evidence-wave35.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Badge-Count and Badge-Dot matrices remain separate and complete",
         "structural-contract": "pass: occurrence guard classifies all executable roots",
         "runtime-browser": "not-applicable: Badge is a static count/dot marker",
         "accessibility": "pass: count context and decorative dot ownership are verified",
-        "focused-visual": "pass: computed size/content/paint matrix is component-local",
+        "focused-visual": "pass: computed size/content/paint matrix is component-local Rounded-control correction evidence: A7, A8; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "not-applicable: no live Badge consumer exists",
         "responsive-content-stress": "pass: one, two and three-plus digit samples retain source geometry"
       },
@@ -1057,7 +1124,24 @@
         "blue/invert/gray",
         "single/multiple digit"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a7",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Medium Badge retains 14px typography inside Showcase matrices.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a8",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Badge intrinsic sizes are independent of grid-header width.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [],
       "measured_counts": {
         "executableShowcase": 12,
@@ -1363,14 +1447,15 @@
         "tools/playwright/remediation-fidelity.spec.js",
         "tools/playwright/data-content-wave5.spec.js",
         "tools/tests/status-empty-contrast-source.test.mjs",
-        "tools/playwright/status-empty-contrast.spec.js"
+        "tools/playwright/status-empty-contrast.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Simple, Customize and Basic source compositions are distinct",
         "structural-contract": "pass: five stable roots cover source and fluid composition",
         "runtime-browser": "not-applicable: consumer owns empty-data lifecycle",
         "accessibility": "pass: all four compositions have readable title/description text on four light surfaces; no implicit live role and native nested actions",
-        "focused-visual": "pass: computed variant geometry/typography and focused accessible-text snapshots",
+        "focused-visual": "pass: computed variant geometry/typography and focused accessible-text snapshots Rounded-control correction evidence: A5; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: Data Workspace zero-result and reset flow",
         "responsive-content-stress": "pass: long content and action remain bounded"
       },
@@ -1405,6 +1490,14 @@
           "description": "The accessible supporting-text role corrects Simple title and Basic description contrast while source Gray 200 remains preserved.",
           "evidence": "tools/playwright/status-empty-contrast.spec.js",
           "tracking": "docs/component-audits/status-empty-contrast-report.md"
+        },
+        {
+          "id": "rounded-control-a5",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Empty State action widths are source minima and localized labels remain inside growing shells.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
         }
       ],
       "limitations": [],
@@ -1694,14 +1787,15 @@
         "tools/playwright/notification-contract.spec.js",
         "tools/playwright/fidelity.spec.js",
         "tools/playwright/notification-snackbar-wave8.spec.js",
-        "tools/tests/wave8-repository-census.test.mjs"
+        "tools/tests/wave8-repository-census.test.mjs",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw SVG hash and exact three Type names, nodes, dimensions, extraction health and references are asserted",
         "structural-contract": "pass: repository and DOM guards classify three Showcase roots, one plain HTML root and six inert diagnostics",
         "runtime-browser": "pass: application-owned close, focus return and action execute once without a library controller",
         "accessibility": "pass: semantics, text, named close, keyboard focus-visible and native disabled action execute",
-        "focused-visual": "pass: default, error/action and narrow content snapshots plus exact computed geometry and paint pass",
+        "focused-visual": "pass: default, error/action and narrow content snapshots plus exact computed geometry and paint pass Rounded-control correction evidence: A6, A10; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: Showcase and plain HTML consume the framework-neutral CSS primitive",
         "responsive-content-stress": "pass: long title/message/action, 320px viewport and 200 percent text scale remain usable"
       },
@@ -1736,7 +1830,24 @@
         "close/action",
         "focus return"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a6",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Short single-row notification content remains vertically centered at narrow widths.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a10",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [
         "placement, stacking, urgency, live-region policy, queue, timing, persistence, dismissal and focus recovery remain consumer-owned"
       ],
@@ -1754,14 +1865,15 @@
         "tools/tests/notification-source.test.mjs",
         "tools/playwright/fidelity.spec.js",
         "tools/playwright/notification-snackbar-wave8.spec.js",
-        "tools/tests/wave8-repository-census.test.mjs"
+        "tools/tests/wave8-repository-census.test.mjs",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: raw ZIP hash, exact six Number names/nodes/dimensions and byte-preserved exports are asserted",
         "structural-contract": "pass: repository and DOM guards classify two Showcase roots and seven inert diagnostics",
         "runtime-browser": "pass: native application action executes once while timer, stepping and auto-dismiss remain absent",
         "accessibility": "pass: stable text, decorative countdown, keyboard focus-visible and native disabled action execute",
-        "focused-visual": "pass: all six exact contours and representative countdown/content snapshots pass independently",
+        "focused-visual": "pass: all six exact contours and representative countdown/content snapshots pass independently Rounded-control correction evidence: A6, A10; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: executable Showcase Snackbar owns action and lifecycle outside the library",
         "responsive-content-stress": "pass: long message/action, 320px viewport and 200 percent text scale remain usable"
       },
@@ -1795,7 +1907,24 @@
         "disabled",
         "long/narrow content"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a6",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Short single-row notification content remains vertically centered at narrow widths.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        },
+        {
+          "id": "rounded-control-a10",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [
         "no timer, animation, auto-dismiss, pause, queue, placement, persistence, synchronization, callback or live-region policy"
       ],
@@ -2470,14 +2599,15 @@
     {
       "tests": [
         "tools/tests/comments-history-fidelity.test.mjs",
-        "tools/playwright/comments-history-fidelity.spec.js"
+        "tools/playwright/comments-history-fidelity.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: Comments SVG hash and seven screen frames",
         "structural-contract": "pass: style, docs, fixtures and manifest",
         "runtime-browser": "pass: native consumer actions",
         "accessibility": "pass: list/form semantics, focus, contrast and axe",
-        "focused-visual": "pass: 1304px panel, 1196px composer and seven source-state desktop snapshots",
+        "focused-visual": "pass: 1304px panel, 1196px composer and seven source-state desktop snapshots Rounded-control correction evidence: A12; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: ServiceDesk source-contract consumer",
         "responsive-content-stress": "pass: narrow, intermediate, wide, 200% text and localized attachment containment"
       },
@@ -2509,7 +2639,16 @@
         "author, time, mentions and attachments",
         "presentation-only composer and contextual states"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a12",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Text-bearing Field and Comment Feed native buttons follow the active typography profile.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [
         "all comment data, mutations, permissions, upload, persistence and feedback lifecycle remain consumer-owned",
         "responsive behavior is a repository decision because the source is desktop only"
@@ -2585,14 +2724,15 @@
         "tools/tests/messaging-history-components.test.mjs",
         "tools/playwright/messaging-history-components.spec.js",
         "tools/tests/comments-history-fidelity.test.mjs",
-        "tools/playwright/comments-history-fidelity.spec.js"
+        "tools/playwright/comments-history-fidelity.spec.js",
+        "tools/playwright/rounded-control-alignment.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: History of changes.svg authority remains unchanged",
         "structural-contract": "pass: style, docs, fixtures and manifest",
         "runtime-browser": "pass: semantic lists and native consumer action",
         "accessibility": "pass: list structure, focus and axe",
-        "focused-visual": "pass: seven source payloads, exact frame, quote, status, tag, person and file dimensions",
+        "focused-visual": "pass: seven source payloads, exact frame, quote, status, tag, person and file dimensions Rounded-control correction evidence: A13; see docs/component-audits/evidence/rounded-control-alignment.json for the current per-surface census.",
         "consumer-integration": "pass: compatibility and ServiceDesk source-contract consumers",
         "responsive-content-stress": "pass: narrow, intermediate, wide, 200% text, long actor and missing attachment containment"
       },
@@ -2629,7 +2769,16 @@
         "creation, status, comment, field, tag, people and attachment payloads",
         "actor, action, timestamp and structured changed content"
       ],
-      "known_findings": [],
+      "known_findings": [
+        {
+          "id": "rounded-control-a13",
+          "severity": "P2",
+          "status": "resolved-layout",
+          "description": "Short History labels retain 30px shells and source width minima; neighboring tags do not stretch.",
+          "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+          "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+        }
+      ],
       "limitations": [
         "no chronology policy, sorting, filtering, permissions, persistence, live updates or announcements",
         "responsive behavior is a repository decision because the source frame is desktop only"

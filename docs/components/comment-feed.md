@@ -7,3 +7,10 @@ Use a native ordered or unordered list with `.shlz-comment-feed`. Each item cont
 All data, mutation, and lifecycle concerns are consumer-owned: comment identity, order, author and mention data, sanitization, permissions, editing/deletion/reply eligibility, submission, upload lifecycle, search, pagination, synchronization, persistence, moderation, feedback lifecycle, and rerendering. The component is presentation-only and adds no controller.
 
 Desktop geometry follows `docs/component-audits/comment-feed-contract.md`. Narrow layout, enlarged text, forced colors, focus and missing-content behavior are repository decisions rather than Figma facts.
+
+## Text-action typography
+
+Context-menu actions and mention suggestions explicitly inherit their containing
+text typography, including the active Golos/Fira profile. This is a repository
+inheritance decision for native text buttons, not a new source type scale.
+Icon-only affordances keep their existing styling.

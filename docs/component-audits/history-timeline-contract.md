@@ -42,3 +42,11 @@ The frame contains seven visibly distinct event presentations:
 - `repository-decision`: narrow layout, 200% text, focus and forced-colors behavior are accessibility/containment decisions, not Figma facts.
 
 `History of changes.svg` remains unchanged. Evidence for every nested primitive remains independent.
+
+## Loaded-font containment correction
+
+`repository-decision`: the original 66/119/137/111px label widths remain recorded
+above as source facts and become runtime minima. The loaded Golos font requires
+slightly more advance for some original labels; growing the short shell avoids
+breaking "Новое" and "По гарантии" while retaining their 30px heights. The
+separate new-status minimum remains 119×35. Source artwork is not changed.

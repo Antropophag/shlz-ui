@@ -121,3 +121,10 @@ Switch composes in settings rows and preference panels. Description/help text, p
 - `DERIVED`: repeated on/off rows support two sizes and disabled treatments.
 - `DECISION`: native checkbox with `role="switch"`, stable label, CSS motion, focus outline and reduced-motion override.
 - `UNKNOWN/CONSUMER-OWNED`: persistence timing, async failure, rollback and status announcements.
+
+## Fractional layout
+
+The thumb is centered through positioned paint, independently of native input
+content-box rounding. This preserves the source dimensions and checked travel
+at fractional layout positions. Pixel comparisons supplement CSS-box checks;
+native checked, disabled, input/change events and focus remain unchanged.

@@ -157,6 +157,11 @@
   transform: translateY(-50%);
 }
 
+.shlz-comment-feed__context-action,
+.shlz-comment-feed__suggestion {
+  font: inherit;
+}
+
 .shlz-comment-feed__context-action {
   min-block-size: 40px;
   padding-inline: 16px;

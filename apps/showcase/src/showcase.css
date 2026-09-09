@@ -1210,6 +1210,10 @@ section {
   grid-template-columns: max-content repeat(3, max-content);
 }
 
+.shlz-badge-matrix > .shlz-badge {
+  justify-self: start;
+}
+
 .shlz-choice-comparisons {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1257,7 +1261,7 @@ section {
 }
 
 .shlz-control-matrix > b,
-.shlz-control-matrix > span {
+.shlz-control-matrix > span:not([class]) {
   font-size: 12px;
 }
 

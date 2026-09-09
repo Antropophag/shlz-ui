@@ -88,6 +88,8 @@
 
 .shlz-tabs--pill .shlz-tabs__list,
 .shlz-tabs--boxed .shlz-tabs__list {
+  /* Compact rows derive their height from the 40px/39px tab variants. */
+  min-block-size: 0;
   gap: var(--shlz-source-spacing-8);
   border: 0;
 }

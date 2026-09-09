@@ -263,22 +263,27 @@ test("History source fixture is content-led and matches source dimensions", asyn
     history.locator(
       '[data-history-kind="status"] .shlz-history-timeline__old-value',
     ),
-  ).toHaveCSS("width", "66px");
+  ).toHaveCSS("min-inline-size", "66px");
   await expect(
     history.locator(
       '[data-history-kind="status"] .shlz-history-timeline__new-value',
     ),
-  ).toHaveCSS("width", "119px");
+  ).toHaveCSS("min-inline-size", "119px");
   await expect(
     history
       .locator('[data-history-kind="tags"] .shlz-history-timeline__tag')
       .first(),
-  ).toHaveCSS("width", "137px");
+  ).toHaveCSS("min-inline-size", "137px");
   await expect(
     history
       .locator('[data-history-kind="tags"] .shlz-history-timeline__tag')
       .nth(1),
-  ).toHaveCSS("width", "111px");
+  ).toHaveCSS("min-inline-size", "111px");
+  for (const label of await history
+    .locator(".shlz-history-timeline__old-value, .shlz-history-timeline__tag")
+    .all()) {
+    await expect(label).toHaveCSS("height", "30px");
+  }
   await expect(
     history.locator(".shlz-history-timeline__person").first(),
   ).toHaveCSS("width", "156px");

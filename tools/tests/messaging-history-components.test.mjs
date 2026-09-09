@@ -77,6 +77,12 @@ test("component manifests classify fixture and live-consumer evidence without ga
       new Set(manifest.occurrences.map(({ kind }) => kind)),
       new Set(["executable-fixture", "live-consumer"]),
     );
-    assert.equal(manifest.findings.length, 0);
+    for (const finding of manifest.findings) {
+      assert.match(
+        finding.status,
+        /^resolved(?:-|$)/,
+        `${component}: unresolved finding ${finding.id}`,
+      );
+    }
   }
 });

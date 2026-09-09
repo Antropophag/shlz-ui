@@ -1,0 +1,108 @@
+/* Reintroduce A1–A13 from baseline ac68d6f for the symmetric browser oracle.
+ * This is a declared historical behavior adapter, not production CSS.
+ */
+.shlz-switch__input::before {
+  position: static;
+  translate: none;
+}
+
+.shlz-field__chip {
+  align-items: normal;
+  line-height: 27px;
+}
+
+.shlz-select--placeholder {
+  display: block;
+}
+
+.shlz-field__advanced-actions .shlz-field__action {
+  flex-basis: 27px;
+  font:
+    13.3333px Arial,
+    sans-serif;
+}
+
+.shlz-tabs--pill .shlz-tabs__list,
+.shlz-tabs--boxed .shlz-tabs__list {
+  min-block-size: 61px;
+}
+
+.shlz-badge-matrix > .shlz-badge {
+  justify-self: stretch;
+}
+
+.shlz-control-matrix > span {
+  font-size: 12px;
+}
+
+.shlz-empty-state--customize .shlz-empty-state__actions .shlz-button {
+  inline-size: 131px;
+  block-size: 32px;
+}
+
+.shlz-empty-state--basic .shlz-empty-state__actions .shlz-button {
+  inline-size: 142px;
+  block-size: 40px;
+}
+
+.shlz-notification {
+  flex-wrap: nowrap;
+}
+
+.shlz-notification__content {
+  flex: 1 1 auto;
+  overflow-wrap: anywhere;
+}
+
+.shlz-notification__action {
+  flex: 0 1 auto;
+  max-inline-size: 50%;
+  overflow-wrap: normal;
+}
+
+@media (width <= 420px) {
+  .shlz-notification {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+
+  .shlz-notification__action {
+    max-inline-size: 100%;
+  }
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="status"]
+  .shlz-history-timeline__old-value {
+  inline-size: 66px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="status"]
+  .shlz-history-timeline__new-value {
+  inline-size: 119px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="tags"]
+  .shlz-history-timeline__tag:first-child {
+  inline-size: 137px;
+}
+
+.shlz-history-timeline[data-source-layout]
+  [data-history-kind="tags"]
+  .shlz-history-timeline__tag:nth-child(2) {
+  inline-size: 111px;
+}
+
+.shlz-history-timeline__tags,
+.shlz-history-timeline__people {
+  align-items: stretch;
+}
+
+.shlz-comment-feed__context-action,
+.shlz-comment-feed__suggestion {
+  font:
+    13.3333px Arial,
+    sans-serif;
+}

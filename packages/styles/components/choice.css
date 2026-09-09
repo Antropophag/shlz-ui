@@ -135,6 +135,7 @@
   --shlz-switch-thumb: 16px;
   --shlz-switch-inset: 2px;
 
+  position: relative;
   appearance: none;
   inline-size: var(--shlz-switch-width);
   block-size: var(--shlz-switch-height);
@@ -148,12 +149,17 @@
 }
 
 .shlz-switch__input::before {
+  /* Center the paint independently of native input content-box rounding. */
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: var(--shlz-switch-inset);
   display: block;
   inline-size: var(--shlz-switch-thumb);
   block-size: var(--shlz-switch-thumb);
   background: var(--shlz-semantic-color-surface-base);
   border-radius: 50%;
   content: "";
+  translate: 0 -50%;
   transition: transform 120ms ease;
 }
 

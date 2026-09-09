@@ -30,3 +30,12 @@ History Timeline is a framework-neutral semantic list for consumer-ordered activ
 DOM order is authoritative; the component never parses or sorts dates. A period uses a native list-item wrapper whose visible, consumer-identified label is referenced by every following entry through `aria-describedby` until the next period. Source-observed presentation parts cover creation, status transitions, quoted comments, before/after values, tags, people/disclosure and attachments. Compose native actions and existing primitives inside entry content; their behavior remains consumer-owned.
 
 The supported interface is a bounded, non-virtualized list tested with period groups, current emphasis, long localized text, sparse entries, attachments, narrow containers, and 200% text.
+
+## Source label sizing
+
+In the source-layout specimen, status/tag widths 66/119/137/111px are minima.
+A loaded font can expand a short label slightly instead of splitting a word
+inside the export width. The old-status and tag shells remain 30px high for
+short labels; the separately sourced new-status shell remains 35px. Longer
+labels reflow within a growing shell, and neighboring tags are centered rather
+than stretched to match its height.

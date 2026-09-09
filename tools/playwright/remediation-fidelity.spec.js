@@ -238,13 +238,13 @@ test("Empty State exposes Simple, Customize and Basic source compositions", asyn
   ).toHaveCSS("height", "32px");
   await expect(
     customize.locator(".shlz-empty-state__actions .shlz-button"),
-  ).toHaveCSS("width", "131px");
+  ).toHaveCSS("min-inline-size", "131px");
   await expect(
     basic.locator(".shlz-empty-state__actions .shlz-button"),
   ).toHaveCSS("height", "40px");
   await expect(
     basic.locator(".shlz-empty-state__actions .shlz-button"),
-  ).toHaveCSS("width", "142px");
+  ).toHaveCSS("min-inline-size", "142px");
 
   await fixture.scrollIntoViewIfNeeded();
   await expect(fixture).toHaveScreenshot("remediation-empty-state.png", {

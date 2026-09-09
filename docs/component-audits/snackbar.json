@@ -1,7 +1,10 @@
 {
   "component": "snackbar",
   "authoritativeSource": "shlz-design-source/raw/svg/UI Kit – Basic elements.zip",
-  "referenceSources": ["docs/components/notification-source.md"],
+  "referenceSources": [
+    "docs/components/notification-source.md",
+    "docs/component-audits/rounded-control-alignment.md"
+  ],
   "implementation": ["packages/styles/components/notification.css"],
   "behavior": null,
   "docs": "docs/components/notification.md",
@@ -14,8 +17,14 @@
   ],
   "diagnosticOccurrenceCount": 7,
   "occurrences": [
-    { "id": "snackbar-showcase-action", "kind": "live-consumer" },
-    { "id": "snackbar-content-stress", "kind": "content-stress-fixture" }
+    {
+      "id": "snackbar-showcase-action",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "snackbar-content-stress",
+      "kind": "content-stress-fixture"
+    }
   ],
   "supportedSizes": ["384x58-source-minimum", "container-bounded"],
   "supportedStates": [
@@ -46,11 +55,17 @@
       "claim": "duration, stepping, animation, pause, removal, action handling and announcement cadence remain consumer-owned",
       "classification": "repository-decision",
       "evidence": "docs/components/notification-source.md"
+    },
+    {
+      "claim": "Short single-row notification content remains vertically centered at narrow widths. Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+      "classification": "repository-decision",
+      "evidence": "docs/component-audits/rounded-control-alignment.md"
     }
   ],
   "browserTests": [
     "tools/playwright/notification-snackbar-wave8.spec.js",
-    "tools/playwright/fidelity.spec.js"
+    "tools/playwright/fidelity.spec.js",
+    "tools/playwright/rounded-control-alignment.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/notification-snackbar-wave8.spec.js-snapshots/snackbar-number-5-chromium-linux.png",
@@ -61,14 +76,15 @@
     "structural-contract": "pass: live, stress and seven inert diagnostic roots are independently classified by repository and DOM guards",
     "runtime-browser": "pass: native action activation is application-owned and executes once while no timer, auto-dismiss or library controller runs",
     "accessibility": "pass: stable text, decorative countdown, native action, keyboard focus-visible and disabled behavior are exercised",
-    "focused-visual": "pass: every numeral and exact contour path plus representative action/countdown snapshots are checked independently",
+    "focused-visual": "pass: every numeral and exact contour path plus representative action/countdown snapshots are checked independently Rounded-control regressions additionally verify A6, A10 at the rendered HTML/paint boundary.",
     "consumer-integration": "pass: the executable Showcase consumer owns action and lifecycle without promoting its event to SHLZ API",
-    "responsive-content-stress": "pass: long localized message/action, 320px viewport and 200 percent text grow without clipping or page overflow"
+    "responsive-content-stress": "pass: long localized message/action, 320px viewport and 200 percent text grow without clipping or page overflow Scoped rounded-control checks retain active typography and content containment; exact cases and observed counts are recorded in rounded-control-alignment.md."
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: six exact Number frames are static visual evidence and do not prove countdown runtime"
+        "pass: six exact Number frames are static visual evidence and do not prove countdown runtime",
+        "pass: focused rounded-control regressions cover A6, A10 with separate line, shell, and paint assertions as applicable"
       ],
       "realInteractionVisual": [
         "pass: real hover, pointer-down, focus-visible and native disabled action states precede computed assertions"
@@ -96,7 +112,24 @@
     "manualStateWalk": "pass: six frames, pointer hover/down, Tab/focus-visible, Enter/Space, disabled, stable announcement content, narrow/long content and text scaling inspected"
   },
   "acceptedDeviations": [],
-  "findings": [],
+  "findings": [
+    {
+      "id": "rounded-control-a6",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Short single-row notification content remains vertically centered at narrow widths.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    },
+    {
+      "id": "rounded-control-a10",
+      "severity": "P2",
+      "status": "resolved-layout",
+      "description": "Notification actions retain readable text inside their shells at narrow and intermediate widths.",
+      "evidence": "tools/playwright/rounded-control-alignment.spec.js",
+      "tracking": "https://github.com/Antropophag/shlz-ui/pull/85"
+    }
+  ],
   "knownLimitations": [
     "no timer, animation, auto-dismiss, pause, queue, placement, persistence, synchronization, callback or live-region policy"
   ]
