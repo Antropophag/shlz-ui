@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { URL } from "node:url";
@@ -33,6 +34,17 @@ test("File Upload publishes native markup, style and behavior contracts", async 
 });
 
 test("the raw Documents authority is locked and never generated", async () => {
+  const svg = await read("shlz-design-source/raw/svg/Documents.svg");
+  assert.equal(
+    createHash("sha256").update(svg).digest("hex"),
+    "b2be2ccea150ae49fb8363eae648bede428cace071d9783ce30f15c9c338bfdb",
+  );
+  // First Upload-Drag cloud and arrow in the authoritative composition.
+  const cloud = svg.match(/<path\b[^>]*d="M340\.026 1138[^>]*>/)?.[0];
+  const arrow = svg.match(/<path\b[^>]*d="M335\.452 1149\.16[^>]*>/)?.[0];
+  assert.match(cloud ?? "", /fill="#939CA5"/);
+  assert.match(cloud ?? "", /opacity="0\.4"/);
+  assert.match(arrow ?? "", /fill="#939CA5"/);
   const report = await read("docs/component-audits/file-upload.json");
   assert.match(
     report,

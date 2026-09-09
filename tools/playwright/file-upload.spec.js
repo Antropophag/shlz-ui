@@ -23,6 +23,21 @@ const manifestSubset = (ids) => ({
 
 test.beforeEach(async ({ page }) => page.goto("/#file-upload-demo"));
 
+test("upload icons preserve the source Gray 200 paint in every occurrence", async ({
+  page,
+}) => {
+  for (const url of ["/#file-upload-demo", fixtureUrl("file-upload.html")]) {
+    await page.goto(url);
+    const icons = page.locator(".shlz-file-upload__icon");
+    await expect(icons).toHaveCount(url.startsWith("/#") ? 5 : 1);
+    for (const icon of await icons.all()) {
+      await expect(icon).toHaveCSS("color", "rgb(147, 156, 165)");
+      await expect(icon).toHaveCSS("opacity", "1");
+      await expect(icon).toHaveAttribute("aria-hidden", "true");
+    }
+  }
+});
+
 test(
   "native selection, file drops, filtering, disabled and consumer rendering work",
   { tag: "@smoke" },
@@ -97,6 +112,10 @@ test(
         borderStyle: getComputedStyle(surface).borderStyle,
       }));
     expect(activePaint.borderStyle).toBe("solid");
+    await expect(root.locator(".shlz-file-upload__icon")).toHaveCSS(
+      "color",
+      "rgb(147, 156, 165)",
+    );
     expect(activePaint.background).not.toBe(idlePaint.background);
     expect(activePaint.borderColor).not.toBe(idlePaint.borderColor);
     await root.dispatchEvent("drop", { dataTransfer: transfer });

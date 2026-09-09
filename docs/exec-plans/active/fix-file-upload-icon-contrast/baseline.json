@@ -1,0 +1,18 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/file-upload-icon-contrast",
+    "commit": "7f99c57c9b25e655d0a96fed50a1ee4b4b296ca0",
+    "defaultBranch": "main",
+    "pullRequest": null,
+    "repository": {
+      "digest": "f189daa9d68d93de5ad039df4b2ce06e394e9fd82d8794432f8db273ee263e65",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-upload-contrast"
+    },
+    "upstream": "origin/fix/file-upload-icon-contrast"
+  },
+  "routeDigest": "76ab16878a72d93c3de53925cc3576c35b363586cbe8b7c590cd9e55ffcae88c",
+  "version": 1,
+  "digest": "9a405bbbc3eaf210483b5deb6b88bdc4fb9da186ee7fca1f465a58b44d6014db"
+}

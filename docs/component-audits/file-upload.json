@@ -77,6 +77,11 @@
       "claim": "Composer and File Upload compose File Row at a preferred 229px width matching current Comment Feed, shrinking in narrow containers without growing into spare space; existing source-derived file SVGs and accessible supporting metadata color are reused.",
       "classification": "repository-decision",
       "evidence": "openspec/changes/consistent-attachment-cards/design.md"
+    },
+    {
+      "claim": "Both paths of the Upload-Drag cloud mark in Documents.svg use Gray 200 (#939CA5); its cloud silhouette has opacity 0.4 and its arrow is opaque. Gray 75 is the dashed boundary paint, not the icon paint.",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Documents.svg; tools/tests/file-upload-contract.test.mjs"
     }
   ],
   "browserTests": [
@@ -92,7 +97,7 @@
     "structural-contract": "pass: native input, full-surface associated label, canonical cloud-upload icon, one instruction, error relationship, CSS, exports, docs and plain HTML are asserted",
     "runtime-browser": "pass: native selection, real FileList drop, non-file filtering, disabled state, typed payload, repeated enhancement and teardown execute",
     "accessibility": "pass: native input and label preserve keyboard activation and accessible naming; focused Axe scope has no violation",
-    "focused-visual": "pass: attachment-composition browser checks compare 229x55 cards, 38px visuals, 12px radius and metadata paint with Comment Feed; focused desktop and 220px attachment crops are inspected",
+    "focused-visual": "pass: 2026-09-09 source Gray 200 icon color and root opacity are checked in all six occurrences and during real file drag; desktop/narrow component crops inspected; existing geometry and compact attachment checks pass",
     "consumer-integration": "pass: browser selection executes the Data Workspace branch, updates application-owned status, and rerenders its classified File Row",
     "responsive-content-stress": "pass: long localized/unbroken attachment names ellipsize inside 220px cards at 200-percent root text; visuals and existing actions remain contained; three selected files wrap without growing"
   },
@@ -102,7 +107,8 @@
         "pass: source-default, populated, disabled, error, narrow, long-content and enlarged-text fixtures are independently classified; source-default has no separate pill action"
       ],
       "realInteractionVisual": [
-        "pass: a real file drag enters the zone and its active border/background are read before the drop clears the state"
+        "pass: a real file drag enters the zone and its active border/background are read before the drop clears the state",
+        "pass: real file drag keeps the source Gray 200 icon color while the active surface border/background change"
       ],
       "runtimeBehavior": [
         "pass: native selection, file-only drop, non-file filtering, disabled suppression, typed events, repeat enhancement and teardown execute"
@@ -119,7 +125,7 @@
       "destroyed"
     ],
     "browserTest": "tools/playwright/file-upload.spec.js",
-    "manualStateWalk": "pass: 2026-09-09 affected desktop and narrow attachment crops inspected against Comments/Document SVG crops; focus-visible, keyboard removal and unchanged component state flows exercised in focused browser coverage"
+    "manualStateWalk": "pass: 2026-09-09 focused browser state walk observed hover/down, pointer chooser, Tab/Shift+Tab native focus, Enter/Space chooser, solid focus outline, disabled input, all four showcase states and 320px viewport at 200-percent text with long Russian instructions; 256px root had scrollWidth=clientWidth=256"
   },
   "acceptedDeviations": [],
   "findings": [
@@ -130,11 +136,20 @@
       "description": "The standalone error fixture marked only its container invalid. NVDA conveyed its description but omitted the native input's invalid state. Applying aria-invalid to the native input restores the documented contract; Chrome and Firefox NVDA checkpoints now convey invalid entry.",
       "evidence": "docs/accessibility-support.md",
       "tracking": "https://github.com/Antropophag/shlz-ui/pull/84"
+    },
+    {
+      "id": "file-upload-icon-wrong-gray",
+      "severity": "P2",
+      "status": "resolved-source-paint",
+      "description": "The component used Gray 75 (#E0E0E0) for the cloud mark instead of source Gray 200 (#939CA5), compounded by the source cloud opacity of 0.4. Restoring Gray 200 raises the opaque arrow contrast on white from 1.32:1 to 2.79:1; the decorative cloud stays at its source opacity (1.44:1).",
+      "evidence": "tools/playwright/file-upload.spec.js; tools/tests/file-upload-contract.test.mjs",
+      "tracking": "docs/exec-plans/active/fix-file-upload-icon-contrast/route.json"
     }
   ],
   "knownLimitations": [
     "validation, deduplication, previews, removal, progress, retry, transport, cancellation and persistence are consumer-owned",
     "the controller does not assign input.files and retains no FileList or queue state",
-    "NVDA support evidence is limited to the versioned workflows in docs/accessibility-support.md; Firefox's hidden native chooser may not convey the filename on focus, so the tested consumer exposes it in its rendered file list"
+    "NVDA support evidence is limited to the versioned workflows in docs/accessibility-support.md; Firefox's hidden native chooser may not convey the filename on focus, so the tested consumer exposes it in its rendered file list",
+    "The mark is decorative (aria-hidden) beside a complete text instruction. Source fidelity retains the 0.4 cloud opacity; this fix is not a claim that every icon path reaches 3:1 non-text contrast."
   ]
 }
