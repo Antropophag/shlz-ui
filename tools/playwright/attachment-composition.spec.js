@@ -98,7 +98,7 @@ test("selected files keep compact cards, literal names and removal", async ({
   const names = [
     "техническое-задание-с-длинным-названием.PDF",
     "report.pdf.unknown",
-    "<img onerror=alert(1)>.unknown",
+    "<img onerror=alert(1)>.pdf",
   ];
   await root.locator("input").setInputFiles(
     names.map((name) => ({
@@ -126,6 +126,7 @@ test("selected files keep compact cards, literal names and removal", async ({
     .getAttribute("src");
   await expect(rows.nth(0).locator("img")).toHaveAttribute("src", pdfSource);
   await expectFileIcon(page, rows.nth(1).locator("img"), "file-generic");
+  await expectFileIcon(page, rows.nth(2).locator("img"), "file-generic");
   const bounds = await rows.evaluateAll((elements) =>
     elements.map((row) => ({
       width: row.getBoundingClientRect().width,

@@ -11,6 +11,8 @@ const fileIconUrl = (name) => {
     ? name.split(".").pop().toLowerCase()
     : "";
   const directory = "../../../packages/icons/dist/file-types/";
+  if (/[<>&"']/.test(name))
+    return fileTypeIcons[`${directory}file-generic.svg`];
   return (
     fileTypeIcons[`${directory}${extension}.svg`] ??
     fileTypeIcons[`${directory}file-generic.svg`]

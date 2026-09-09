@@ -26,3 +26,11 @@ Validation and completion results will be appended after execution; existing man
 - Eleven focused source/contract/manifest Node tests passed. ESLint and Stylelint passed on changed implementation and tests.
 
 Final confirmation, independent review and candidate-bound delivery checks are recorded separately after the implementation commit. This correction does not certify unrelated components or extend upload transport/queue behavior.
+
+## Final focused checks
+
+- Confirmation without snapshot updates: 29/29 browser tests passed (attachment composition, Composer/Toolbar, File Upload, Wave 5 File Row/consumer/contrast and Comments/History fidelity).
+- Independent Standards review passed. Spec review identified a missing generic-icon fallback for markup-containing names with recognized extensions; the implementation and test now cover `<img onerror=alert(1)>.pdf`, and the focused runtime regression passes.
+- Additional interactive walk: pointer removal works; Tab reaches the populated removal button by its filename; native disabled state and Composer read-only remain set; focusing the live Composer changes its border.
+- Full lint reaches Prettier and fails only on five unchanged receipt files: add-cross-browser-smoke-review, add-cross-browser-smoke, classify-existing-component-records, classify-source-extraction-diagnostics and fix-rounded-control-alignment. All five are byte-identical to 58efc3a, and Prettier independently rejects that baseline content. ESLint/Stylelint pass. These unrelated files are not modified by this component correction.
+- The symmetric browser geometry oracle rejects the captured baseline CSS and accepts the compact candidate at both desktop and narrow widths. Requirements, baseline, contract and conformance checks pass. Candidate-bound receipts are recreated after the final commit.

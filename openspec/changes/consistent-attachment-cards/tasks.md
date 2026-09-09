@@ -10,6 +10,6 @@
 
 ## 3. Validate and deliver
 
-- [ ] 3.1 Run focused runtime, accessibility, desktop/narrow visual and long-content checks across affected states and live consumers; verify Comment Feed and standalone File Row remain unchanged.
-- [ ] 3.2 Update affected component audit manifests and usage guidance with exact counts, evidence and limitations; verify the component completion gate separately for each affected component.
+- [x] 3.1 Run focused runtime, accessibility, desktop/narrow visual and long-content checks across affected states and live consumers; verify Comment Feed and standalone File Row remain unchanged.
+- [x] 3.2 Update affected component audit manifests and usage guidance with exact counts, evidence and limitations; verify the component completion gate separately for each affected component.
 - [ ] 3.3 Run proportionate Standards/Spec review and route conformance, push an unmerged PR and verify delivery receipts; report CI and unresolved review threads without merging.
