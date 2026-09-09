@@ -1,12 +1,22 @@
 import assert from "node:assert/strict";
 import { readFile, stat } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { chromium } from "@playwright/test";
 
 // The same public rendered-card assertions run against candidate styles and
 // the immutable pre-change styles captured in the known-bad fixture.
+const root = path.dirname(
+  fileURLToPath(new globalThis.URL("../../../package.json", import.meta.url)),
+);
 const target = path.resolve(process.argv[2]);
-const root = process.cwd();
+const knownBadPath = path.join(
+  root,
+  "tools/tests/fixtures/attachment-composition-known-bad.json",
+);
+if (target !== root && target !== knownBadPath) {
+  throw new Error("target must be the candidate root or the known-bad fixture");
+}
 const bad = (await stat(target)).isFile()
   ? JSON.parse(await readFile(target, "utf8"))
   : null;
