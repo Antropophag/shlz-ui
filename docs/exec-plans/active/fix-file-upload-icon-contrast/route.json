@@ -1,0 +1,24 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Restore File Upload icon color from Gray 75 to source Gray 200 (#939CA5), observed on both paths of the Documents.svg upload mark. Local reversible CSS correction preserves the existing source-fidelity contract, icon alpha/geometry, states, DOM, behavior and all other components.",
+    "material": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "requiredDecisions": [],
+    "route": "direct",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "76ab16878a72d93c3de53925cc3576c35b363586cbe8b7c590cd9e55ffcae88c"
+}

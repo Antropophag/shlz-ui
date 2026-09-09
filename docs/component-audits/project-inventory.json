@@ -2406,7 +2406,7 @@
         "structural-contract": "pass: the historical absence census remains bounded and the independent native File Upload contract is inventoried",
         "runtime-browser": "pass: File Upload selection, file-only drop, disabled, idempotence and teardown execute",
         "accessibility": "pass: native input/label semantics, focus visibility, error relationship and focused Axe assertions execute",
-        "focused-visual": "pass: source-default 467 by 102 composition, populated, drag-active, disabled, error, narrow and enlarged-text states have focused computed and snapshot evidence",
+        "focused-visual": "pass: 2026-09-09 source Gray 200 icon color and root opacity are checked in all six occurrences and during real file drag; desktop/narrow component crops inspected; existing geometry and compact attachment checks pass",
         "consumer-integration": "pass: Data Workspace owns validation and queue rendering while composing File Row",
         "responsive-content-stress": "pass: long content, narrow layout and enlarged text remain reachable"
       },
@@ -2456,6 +2456,14 @@
           "description": "The standalone native input now exposes its existing error state; bounded NVDA evidence and unchanged six-occurrence regression are recorded independently.",
           "evidence": "docs/accessibility-support.md",
           "tracking": "https://github.com/Antropophag/shlz-ui/pull/84"
+        },
+        {
+          "id": "file-upload-icon-wrong-gray",
+          "severity": "P2",
+          "status": "resolved-source-paint",
+          "description": "The component used Gray 75 (#E0E0E0) for the cloud mark instead of source Gray 200 (#939CA5), compounded by the source cloud opacity of 0.4. Restoring Gray 200 raises the opaque arrow contrast on white from 1.32:1 to 2.79:1; the decorative cloud stays at its source opacity (1.44:1).",
+          "evidence": "tools/playwright/file-upload.spec.js; tools/tests/file-upload-contract.test.mjs",
+          "tracking": "docs/exec-plans/active/fix-file-upload-icon-contrast/route.json"
         }
       ],
       "limitations": [
