@@ -3,6 +3,8 @@ import test from "node:test";
 
 import {
   barChartNeighbor,
+  barChartLayout,
+  barChartTones,
   createBarChartModel,
   setBarChartSeriesVisibility,
   validateBarChartData,
@@ -81,12 +83,12 @@ test("invalid rectangular and unsupported series data is rejected", () => {
     () =>
       validateBarChartData({
         ...data,
-        series: Array.from({ length: 5 }, (_, index) => ({
+        series: Array.from({ length: 9 }, (_, index) => ({
           ...data.series[0],
           id: `s${index}`,
         })),
       }),
-    /one through four/i,
+    /one through eight/i,
   );
 });
 
@@ -112,4 +114,116 @@ test("focus navigation follows category and visible-series axes without wrapping
   assert.equal(barChartNeighbor(model, "a::first", "ArrowLeft"), "a::first");
   assert.equal(barChartNeighbor(model, "b::second", "End"), "b::second");
   assert.equal(barChartNeighbor(model, "b::second", "Home"), "a::second");
+});
+
+test("all source tones and eight series are accepted independently of ids", () => {
+  for (const tone of barChartTones) {
+    const series = Array.from({ length: 8 }, (_, i) => ({
+      ...data.series[0],
+      id: `s${i}`,
+      tone,
+    }));
+    assert.equal(createBarChartModel({ ...data, series }).dataById.size, 16);
+  }
+  assert.throws(
+    () =>
+      createBarChartModel({
+        ...data,
+        series: [{ ...data.series[0], tone: "unknown" }],
+      }),
+    /tone/,
+  );
+});
+
+test("source density reproduces all six populated geometry families", () => {
+  for (const [categories, series, expected] of [
+    [5, 8, 21],
+    [5, 2, 96],
+    [14, 8, 7],
+    [23, 3, 37 / 3],
+    [2, 8, 62.75],
+    [5, 3, 188 / 3],
+  ]) {
+    const categoryData = Array.from({ length: categories }, (_, i) => ({
+      id: `c${i}`,
+      label: `C${i}`,
+    }));
+    const model = createBarChartModel({
+      categories: categoryData,
+      series: Array.from({ length: series }, (_, i) => ({
+        id: `s${i}`,
+        label: `S${i}`,
+        values: categoryData.map((c) => ({
+          categoryId: c.id,
+          value: 10,
+          displayValue: "10",
+        })),
+      })),
+      presentation: { density: "source", scaleMaximum: 100 },
+    });
+    const layout = barChartLayout(model);
+    assert.ok(Math.abs(layout.barWidth - expected) < 0.005);
+    assert.equal(layout.plotWidth, 1212);
+    assert.equal(layout.plotHeight, 300);
+    assert.equal(layout.maximum, 100);
+  }
+});
+
+test("invalid presentation cannot change quantitative meaning", () => {
+  for (const presentation of [
+    { scaleMaximum: 0 },
+    { scaleMaximum: 5 },
+    { scaleMaximum: Infinity },
+    { density: "invented" },
+    { tooltipPlacement: "left" },
+  ])
+    assert.throws(() => createBarChartModel({ ...data, presentation }));
+});
+
+test("presentation rejects malformed JSON and accepts consumer tick labels", () => {
+  for (const presentation of [
+    null,
+    false,
+    0,
+    "source",
+    [],
+    { axisLabels: ["bad"] },
+    { axisLabels: ["10", "8", "6", "4", "2", "0"] },
+    { axisLabels: Array(6).fill("") },
+    { scaleMaximum: 10, axisLabels: Array(6) },
+  ])
+    assert.throws(() => createBarChartModel({ ...data, presentation }));
+  const presentation = {
+    scaleMaximum: 10,
+    axisLabels: ["10,0", "8,0", "6,0", "4,0", "2,0", "0,0"],
+  };
+  assert.deepEqual(
+    createBarChartModel({ ...data, presentation }).data.presentation.axisLabels,
+    presentation.axisLabels,
+  );
+});
+
+test("arbitrary dense source groups never overlap neighboring categories", () => {
+  for (const count of [24, 34, 100, 1000]) {
+    const categories = Array.from({ length: count }, (_, i) => ({
+      id: `c${i}`,
+      label: `C${i}`,
+    }));
+    const model = createBarChartModel({
+      categories,
+      series: Array.from({ length: 8 }, (_, i) => ({
+        id: `s${i}`,
+        label: `S${i}`,
+        values: categories.map((c) => ({
+          categoryId: c.id,
+          value: 1,
+          displayValue: "1",
+        })),
+      })),
+      presentation: { density: "source" },
+    });
+    const layout = barChartLayout(model);
+    assert.ok(layout.barWidth > 0);
+    assert.ok(8 * layout.barWidth + 7 * layout.gap <= layout.groupWidth);
+  }
 });

@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/complete-dashboard-chart-source",
+    "commit": "172ff10972da23f79a59dbb2da73e4edfb862a8a",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/complete-dashboard-chart-source",
+      "headRefOid": "172ff10972da23f79a59dbb2da73e4edfb862a8a",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/90"
+    },
+    "repository": {
+      "digest": "a78194fe10aca4943c5d5d72662221a420e98ffb6f8826304c9c27a79bf7b231",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/tmp/shlz-dashboard-completion"
+    },
+    "upstream": "origin/feature/complete-dashboard-chart-source"
+  },
+  "requirementsDigest": "1970b9a10bae0613367b4d3c4c85a478e3b2742d1a712b140298b6b586e9ea73",
+  "routeDigest": "e9944fd8a964538985d5af61759c2b5bff03a0d39c97a90d80168af460347f2b",
+  "version": 1,
+  "digest": "7547ecf1e7f4855c68e34ca2d54b946cdf7466f2eff28376a69b32c076ab94e7"
+}

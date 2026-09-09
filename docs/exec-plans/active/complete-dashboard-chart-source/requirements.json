@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Implement all missing source-backed Bar Chart presentation and dashboard specimens identified in the preceding dashboard gap investigation.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "source-completeness",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "2026-09-10: \u0414\u0430\u0432\u0430\u0439 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0435\u043c \u0432\u0441\u0435 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0435 \u043d\u0435\u0434\u043e\u0441\u0442\u0430\u044e\u0449\u0435\u0435, following the concrete dashboard gap report and recommended scope."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md; docs/component-audits/dashboard-chart-source-matrix.json"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "complete-dashboard-chart-source",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "2026-09-10: \u0414\u0430\u0432\u0430\u0439 \u043f\u0435\u0440\u0435\u043d\u0435\u0441\u0435\u043c \u0432\u0441\u0435 \u043d\u0435\u043e\u0431\u0445\u043e\u0434\u0438\u043c\u043e\u0435 \u043d\u0435\u0434\u043e\u0441\u0442\u0430\u044e\u0449\u0435\u0435 explicitly requests implementing the preceding concrete gap scope; synthesis is the required preparatory step."
+    }
+  }
+}

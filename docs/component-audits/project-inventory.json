@@ -3093,16 +3093,17 @@
     {
       "tests": [
         "tools/tests/bar-chart-model.test.mjs",
-        "tools/playwright/bar-chart.spec.js"
+        "tools/playwright/bar-chart.spec.js",
+        "tools/playwright/bar-chart-source.spec.js"
       ],
       "evidence": {
         "source-integrity": "pass: exact Dashboard.svg hash and classified chart source matrix are linked",
         "structural-contract": "pass: model, controller, SVG/HTML/CSS, exports, documentation and occurrences are asserted",
         "runtime-browser": "pass: tooltip, keyboard, legend visibility, table, update and teardown execute",
         "accessibility": "pass: names, roving focus, pressed states and semantic table are checked without axe violations",
-        "focused-visual": "pass: component-local bar, grid, hover, tooltip and focus paint are checked",
+        "focused-visual": "pass: five focused snapshots, exact source density and shared top curves, nine palette paints, grouped hover and both tooltip placements.",
         "consumer-integration": "pass: reporting consumer owns period state and replaces prepared chart data",
-        "responsive-content-stress": "pass: one-to-four series, long labels, zero values, many categories and narrow local overflow are checked"
+        "responsive-content-stress": "pass: one-to-eight series, long labels, zero values, many categories and narrow local overflow are checked"
       },
       "canonical_name": "Bar Chart",
       "category": "data-display",
@@ -3112,7 +3113,8 @@
       "production_implementation": [
         "packages/styles/components/bar-chart.css",
         "packages/behaviors/src/bar-chart-model.ts",
-        "packages/behaviors/src/bar-chart.ts"
+        "packages/behaviors/src/bar-chart.ts",
+        "packages/behaviors/src/bar-chart-mark.ts"
       ],
       "behavior": [
         "packages/behaviors/src/bar-chart-model.ts",
@@ -3123,7 +3125,16 @@
         "docs/component-audits/bar-chart.json",
         "docs/component-audits/dashboard-chart-source-matrix.json"
       ],
-      "executable_fixtures": ["bar-chart-showcase-source"],
+      "executable_fixtures": [
+        "bar-chart-showcase-source",
+        "bar-chart-density-five-eight",
+        "bar-chart-density-five-two",
+        "bar-chart-density-fourteen-eight",
+        "bar-chart-density-twenty-three-three",
+        "bar-chart-density-two-eight",
+        "bar-chart-density-five-three",
+        "bar-chart-tooltip-below"
+      ],
       "live_consumers": [
         "bar-chart-reporting-consumer",
         "bar-chart-plain-html"
@@ -3133,7 +3144,7 @@
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
-        "grouped vertical bars with one through four series",
+        "grouped vertical bars with one through eight series and nine explicit tones",
         "stable category, series and datum identity",
         "pointer and roving-keyboard tooltip inspection",
         "toggle-button legend and semantic table alternative",
@@ -3142,11 +3153,10 @@
       "known_findings": [],
       "limitations": [
         "negative, sparse, stacked, horizontal, line, zoomable and streaming charts are unsupported",
-        "Dashboard.svg does not establish keyboard, persistent legend, accessible table or responsive behavior",
-        "the reusable contract intentionally supports at most four of the up to eight series observed in source"
+        "Dashboard.svg does not establish keyboard, persistent legend, accessible table or responsive behavior"
       ],
       "measured_counts": {
-        "executableShowcase": 1,
+        "executableShowcase": 8,
         "liveConsumers": 2,
         "dataWorkspace": 0,
         "inertDiagnostics": 0,

@@ -1,0 +1,36 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement all missing source-backed Bar Chart presentation and dashboard specimens identified in the preceding dashboard gap investigation.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "complete-dashboard-chart-source",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "source-completeness",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "e9944fd8a964538985d5af61759c2b5bff03a0d39c97a90d80168af460347f2b"
+}

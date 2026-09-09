@@ -19,12 +19,30 @@
   ],
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
-    { "id": "chart-widget-showcase-default", "kind": "executable-fixture" },
-    { "id": "chart-widget-content-stress", "kind": "content-stress-fixture" },
-    { "id": "chart-widget-reporting-consumer", "kind": "live-consumer" },
-    { "id": "chart-widget-plain-html", "kind": "live-consumer" },
-    { "id": "chart-widget-source-fixture", "kind": "executable-fixture" },
-    { "id": "chart-widget-bar-chart-showcase", "kind": "executable-fixture" }
+    {
+      "id": "chart-widget-showcase-default",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "chart-widget-content-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "chart-widget-reporting-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "chart-widget-plain-html",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "chart-widget-source-fixture",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "chart-widget-bar-chart-showcase",
+      "kind": "executable-fixture"
+    }
   ],
   "supportedSizes": ["source-1304x515", "fluid", "narrow-min-420"],
   "supportedStates": ["content", "empty", "nested-native-actions"],
@@ -42,14 +60,16 @@
     }
   ],
   "browserTests": ["tools/playwright/reporting-dashboard.spec.js"],
-  "visualSnapshots": [],
+  "visualSnapshots": [
+    "tools/playwright/reporting-dashboard.spec.js-snapshots/dashboard-empty-illustration-chromium-linux.png"
+  ],
   "evidence": {
     "source-integrity": "pass: exact source hash, 15 rendered 1304x515 radius-16 white frames, 2 clipPath rects, and 12 shadow-filter regions are distinguished",
     "structural-contract": "pass: heading, controls, actions, plot and empty regions plus all occurrences are asserted",
     "runtime-browser": "not-applicable: Chart Widget owns no controller or chart data behavior",
     "accessibility": "pass: article heading relation and nested native action ownership execute in browser",
-    "focused-visual": "pass: source-critical component-local computed width, height, radius, padding, paint and responsive geometry",
-    "consumer-integration": "pass: reporting consumer composes status, link and an explicitly described chart placeholder",
+    "focused-visual": "pass: source-critical component-local computed width, height, radius, padding, paint and responsive geometry; Basic Empty State illustration cropped to the source 167x131 visual region is covered by a focused snapshot.",
+    "consumer-integration": "pass: reporting consumer composes status, link, period control and Bar Chart with explicit tones.",
     "responsive-content-stress": "pass: long title, controls and empty copy remain contained at narrow width"
   },
   "interactionEvidence": {

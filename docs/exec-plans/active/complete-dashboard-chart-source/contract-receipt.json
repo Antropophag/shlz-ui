@@ -1,0 +1,67 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "d02d38dcc6d3f633d608f6feab904c262f886c6f20611c25e7397db78a583451",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** a consumer selects blue, green, orange, deep-blue, violet, turquoise, pink, bright-green or gray\n- **THEN** bars and tooltip/legend keys use the matching Dashboard.svg default color and its source muted paint, including orange #DE753D at 15% and opaque gray #F5F5F5.",
+        "id": "data-display/bar-chart-source-completeness::Complete series palette and capacity::Full source palette",
+        "name": "Full source palette",
+        "requirement": "Complete series palette and capacity",
+        "requirementContent": "The chart SHALL accept one through eight rectangular nonnegative series. Consumers SHALL select any of the nine source colors by a named tone, independently of series position. Existing callers without tones SHALL retain their first four positional colors. Invalid tones and more than eight series SHALL fail before replacing a mounted chart."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** an update or replacement constructor receives invalid data\n- **THEN** it rejects the input and the existing chart remains usable with its data, listeners and visibility unchanged.",
+        "id": "data-display/bar-chart-source-completeness::Complete series palette and capacity::Invalid replacement preserves current chart",
+        "name": "Invalid replacement preserves current chart",
+        "requirement": "Complete series palette and capacity",
+        "requirementContent": "The chart SHALL accept one through eight rectangular nonnegative series. Consumers SHALL select any of the nine source colors by a named tone, independently of series position. Existing callers without tones SHALL retain their first four positional colors. Invalid tones and more than eight series SHALL fail before replacing a mounted chart."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** a user opens the dashboard section\n- **THEN** palette, width/density and state specimens are labeled and use production chart rendering rather than screenshot substitutes.",
+        "id": "data-display/bar-chart-source-completeness::Discoverable source gallery and consumer::Gallery coverage",
+        "name": "Gallery coverage",
+        "requirement": "Discoverable source gallery and consumer",
+        "requirementContent": "Showcase SHALL expose nine palette variants, the six populated source density compositions, above/below inspection and the illustrated empty state. Executable roots SHALL be classified in the component audit manifest. A reporting consumer SHALL demonstrate explicit status colors and preserve consumer ownership of filtering and period preparation."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** the fourteen-period eight-series or twenty-three-period three-series source specimen is rendered\n- **THEN** its bar widths and period ticks match the source matrix and only three regular period labels are displayed.",
+        "id": "data-display/bar-chart-source-completeness::Source geometry and axes::Dense source composition",
+        "name": "Dense source composition",
+        "requirement": "Source geometry and axes",
+        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names. Consumers SHALL be able to supply six formatted numeric-axis labels in maximum-to-zero order paired with a fixed scale maximum; malformed presentation containers or labels SHALL be rejected. Source density with arbitrary category counts SHALL keep each group within its category interval."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** values use the source 0–10 or 0–100 scales\n- **THEN** the six numeric labels and bar heights share that scale, including exact zero-height paint and a separate inspectable zero target.",
+        "id": "data-display/bar-chart-source-completeness::Source geometry and axes::Quantitative axes",
+        "name": "Quantitative axes",
+        "requirement": "Source geometry and axes",
+        "requirementContent": "The chart SHALL expose the source density families at their reference plot dimensions, including 7, approximately 12.33, 21, approximately 62.67, 62.75 and 96 pixel bars. Bars SHALL have rounded top corners and square bottoms. Numeric Y labels, six grid lines, X ticks and sparse labels SHALL remain consistent with quantitative geometry. The default responsive chart SHALL preserve local overflow and accessible full category names. Consumers SHALL be able to supply six formatted numeric-axis labels in maximum-to-zero order paired with a fixed scale maximum; malformed presentation containers or labels SHALL be rejected. Source density with arbitrary category counts SHALL keep each group within its category interval."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** a user hovers or focuses any bar in a period\n- **THEN** the grouped tooltip exposes the same visible series data and all bars in that period remain opaque.",
+        "id": "data-display/bar-chart-source-completeness::Whole-period inspection::Equivalent grouped disclosure",
+        "name": "Equivalent grouped disclosure",
+        "requirement": "Whole-period inspection",
+        "requirementContent": "Hover or keyboard focus SHALL highlight all visible series of the active category, mute other categories, show a vertical guide and active period badge, and disclose the period and every visible series value with matching color markers. Above and below tooltip placements SHALL be supported with an arrow, bounded horizontal placement and accessible full text. Pointer exit, focus departure and Escape SHALL dismiss inspection appropriately. Roving keyboard navigation, legend visibility, data table and stable identity updates SHALL continue working."
+      },
+      {
+        "capability": "data-display/bar-chart-source-completeness",
+        "content": "- **WHEN** inspection occurs in a narrow locally scrolled plot\n- **THEN** the active bar is reachable, the tooltip remains readable within its chart and the page does not gain horizontal overflow.",
+        "id": "data-display/bar-chart-source-completeness::Whole-period inspection::Narrow or scrolled chart",
+        "name": "Narrow or scrolled chart",
+        "requirement": "Whole-period inspection",
+        "requirementContent": "Hover or keyboard focus SHALL highlight all visible series of the active category, mute other categories, show a vertical guide and active period badge, and disclose the period and every visible series value with matching color markers. Above and below tooltip placements SHALL be supported with an arrow, bounded horizontal placement and accessible full text. Pointer exit, focus departure and Escape SHALL dismiss inspection appropriately. Roving keyboard navigation, legend visibility, data table and stable identity updates SHALL continue working."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "5d022229735b4f7e1cffcc975c63d1500d350011de43be09519f0c00ee3b85d8"
+}

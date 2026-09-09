@@ -88,7 +88,8 @@ test("hover and roving keyboard focus expose equivalent datum details", async ({
   await verifyMaterialState("bar-chart", "pointer-hover", async () => {
     await first.hover();
     await expect(chart.getByRole("tooltip")).toContainText("1–7 сентября");
-    await expect(bars.nth(1)).toHaveCSS("opacity", "0.15");
+    await expect(bars.nth(1)).toHaveCSS("opacity", "1");
+    await expect(bars.nth(3)).toHaveCSS("opacity", "0.15");
   });
   await expect(chart.getByRole("tooltip")).toContainText("Новые: 4");
   await verifyMaterialState("bar-chart", "keyboard-focus", async () => {

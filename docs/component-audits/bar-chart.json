@@ -4,12 +4,14 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Dashboard.svg",
   "referenceSources": [
     "docs/component-audits/dashboard-chart-source-matrix.json",
-    "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
+    "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md",
+    "openspec/changes/complete-dashboard-chart-source/specs/data-display/bar-chart-source-completeness/spec.md"
   ],
   "implementation": [
     "packages/styles/components/bar-chart.css",
     "packages/behaviors/src/bar-chart-model.ts",
-    "packages/behaviors/src/bar-chart.ts"
+    "packages/behaviors/src/bar-chart.ts",
+    "packages/behaviors/src/bar-chart-mark.ts"
   ],
   "behavior": "packages/behaviors/src/bar-chart.ts",
   "docs": "docs/components/bar-chart.md",
@@ -22,11 +24,52 @@
   ],
   "diagnosticOccurrenceCount": 0,
   "occurrences": [
-    { "id": "bar-chart-showcase-source", "kind": "executable-fixture" },
-    { "id": "bar-chart-reporting-consumer", "kind": "live-consumer" },
-    { "id": "bar-chart-plain-html", "kind": "live-consumer" }
+    {
+      "id": "bar-chart-showcase-source",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-reporting-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "bar-chart-plain-html",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "bar-chart-density-five-eight",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-density-five-two",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-density-fourteen-eight",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-density-twenty-three-three",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-density-two-eight",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-density-five-three",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "bar-chart-tooltip-below",
+      "kind": "executable-fixture"
+    }
   ],
-  "supportedSizes": ["fluid-min-640", "narrow-local-overflow"],
+  "supportedSizes": [
+    "fluid-min-640",
+    "narrow-local-overflow",
+    "source-1212x300-plot"
+  ],
   "supportedStates": [
     "default",
     "pointer-hover",
@@ -35,12 +78,19 @@
     "table-expanded"
   ],
   "contentStress": [
-    "one-to-four-series",
+    "one-to-eight-series",
     "many-categories",
     "zero-values",
     "repeated-labels",
     "long-localized-labels",
-    "narrow"
+    "narrow",
+    "nine-tones",
+    "six-source-density-families",
+    "above-below-tooltip",
+    "dense-source-34-to-1000-categories",
+    "malformed-presentation",
+    "consumer-axis-labels",
+    "rtl-tooltip-arrow"
   ],
   "sourceClaims": [
     {
@@ -49,29 +99,49 @@
       "evidence": "docs/component-audits/dashboard-chart-source-matrix.json"
     },
     {
-      "claim": "Stable identity, one-to-four series, keyboard behavior, legend toggles, semantic table, and responsive overflow are approved product decisions rather than SVG facts",
+      "claim": "Stable identity, keyboard behavior, legend toggles, semantic table, responsive overflow and arbitrary dataset layout are repository decisions. Nine tones and source density/inspection paint derive from Dashboard.svg.",
       "classification": "repository-decision",
       "evidence": "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
+    },
+    {
+      "claim": "Nine 24x200 default/muted bar variants with width-specific top contours are directly observed in Dashboard.svg.",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Dashboard.svg"
+    },
+    {
+      "claim": "The decorative palette factory and quantitative renderer share one clipped-mark implementation; decorative swatches are not controller roots.",
+      "classification": "repository-decision",
+      "evidence": "packages/behaviors/src/bar-chart-mark.ts"
     }
   ],
-  "browserTests": ["tools/playwright/bar-chart.spec.js"],
-  "visualSnapshots": [],
+  "browserTests": [
+    "tools/playwright/bar-chart.spec.js",
+    "tools/playwright/bar-chart-source.spec.js"
+  ],
+  "visualSnapshots": [
+    "tools/playwright/bar-chart-source.spec.js-snapshots/dashboard-eight-series-chromium-linux.png",
+    "tools/playwright/bar-chart-source.spec.js-snapshots/dashboard-narrow-below-chromium-linux.png",
+    "tools/playwright/bar-chart-source.spec.js-snapshots/dashboard-palette-chromium-linux.png",
+    "tools/playwright/bar-chart-source.spec.js-snapshots/dashboard-period-above-chromium-linux.png",
+    "tools/playwright/bar-chart-source.spec.js-snapshots/dashboard-period-below-chromium-linux.png"
+  ],
   "evidence": {
     "source-integrity": "pass: exact Dashboard.svg hash and source matrix classifications are checked",
     "structural-contract": "pass: public exports, SVG plot, native legend, tooltip, table, documentation and classified roots are asserted",
     "runtime-browser": "pass: hover, roving navigation, visibility, update and teardown execute in browser",
     "accessibility": "pass: plot naming, bounded Tab order, pressed states, tooltip equivalence and table headers execute without axe violations",
-    "focused-visual": "pass: source-backed bar, grid, series paint, hover muting, tooltip and focus-visible styles are checked component-locally",
+    "focused-visual": "pass: five component snapshots plus exact six-family geometry, nine palette tones, and real grouped inspection in bar-chart-source.spec.js; source SVG hash remains unchanged.",
     "consumer-integration": "pass: reporting consumer owns period state and supplies prepared replacement data",
     "responsive-content-stress": "pass: long labels, category density, zero values and narrow local overflow remain contained"
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: grouped one-to-four-series and narrow fixtures use production markup"
+        "pass: grouped one-to-eight-series, nine shared source swatches, six density families and narrow fixtures use production primitives."
       ],
       "realInteractionVisual": [
-        "pass: real hover and keyboard focus activate source-backed muting, tooltip and focus paint"
+        "pass: real hover and keyboard focus activate source-backed muting, tooltip and focus paint",
+        "pass: bar-chart-source.spec.js checks whole-period opacity, orange/gray exceptions, guide, badge, both tooltip placements and narrow full-text disclosure."
       ],
       "runtimeBehavior": [
         "pass: arrows, Home/End, legend toggles, table disclosure, update and teardown execute"
@@ -85,7 +155,7 @@
       "narrow-overflow"
     ],
     "browserTest": "tools/playwright/bar-chart.spec.js",
-    "manualStateWalk": "pass: pointer hover, Tab/focus-visible, arrow navigation, legend activation, table disclosure and narrow overflow inspected"
+    "manualStateWalk": "pass: inspected focused snapshots from actual pointer/focus/arrow/Escape flows, both grouped tooltip placements, muted orange/gray, narrow scrolling and source contours; native legend/table and consumer lifecycle covered in bar-chart.spec.js."
   },
   "acceptedDeviations": [],
   "findings": [
@@ -107,7 +177,7 @@
     }
   ],
   "knownLimitations": [
-    "source includes eight-series specimens while the approved reusable product contract intentionally supports one through four",
-    "source does not establish keyboard, persistent legend, accessible table, or responsive behavior"
+    "Source presets expose measured density; arbitrary dataset geometry remains a repository decision.",
+    "Filters, date preparation, export and dashboard editing remain consumer-owned."
   ]
 }

@@ -1,3 +1,6 @@
+import { createBarChartSwatch } from "@shlz/behaviors";
+import emptyIllustration from "../generated/source-references/empty-basic.svg?url";
+
 const emptyWidget = ({ id, title, stress = false }) => `
   <article class="shlz-chart-widget" data-component-audit-id="${id}" aria-labelledby="${id}-title">
     <header class="shlz-chart-widget__header">
@@ -5,7 +8,7 @@ const emptyWidget = ({ id, title, stress = false }) => `
       <div class="shlz-chart-widget__actions"><button class="shlz-button shlz-button--text shlz-button--sm" data-component-audit-id="button-${id}-settings" type="button">Настроить</button></div>
     </header>
     <div class="shlz-chart-widget__controls"><span class="shlz-status" data-component-audit-id="status-${id}">Месяц</span><span class="shlz-tag" data-component-audit-id="tag-${id}">Статусы</span></div>
-    <div class="shlz-chart-widget__plot"><div class="shlz-chart-widget__empty"><span>${stress ? "Нет данных по выбранным параметрам и дополнительным условиям отчёта" : "Нет данных по выбранным параметрам"}</span><button class="shlz-button shlz-button--primary" data-component-audit-id="button-${id}-reset" type="button">Сбросить фильтры</button></div></div>
+    <div class="shlz-chart-widget__plot"><div class="shlz-chart-widget__empty"><div class="shlz-chart-widget__empty-illustration" aria-hidden="true"><img src="${emptyIllustration}" alt=""></div><span>${stress ? "Нет данных по выбранным параметрам и дополнительным условиям отчёта" : "Нет данных по выбранным параметрам"}</span><button class="shlz-button shlz-button--primary" data-component-audit-id="button-${id}-reset" type="button">Сбросить фильтры</button></div></div>
   </article>`;
 
 const chartData = {
@@ -23,6 +26,7 @@ const chartData = {
     {
       id: "new",
       label: "Новые",
+      tone: "blue",
       values: [4, 7, 5, 9, 6].map((value, index) => ({
         categoryId: `week-${index + 1}`,
         value,
@@ -32,6 +36,7 @@ const chartData = {
     {
       id: "in-work",
       label: "В работе",
+      tone: "green",
       values: [6, 5, 8, 4, 7].map((value, index) => ({
         categoryId: `week-${index + 1}`,
         value,
@@ -41,6 +46,7 @@ const chartData = {
     {
       id: "completed",
       label: "Выполнено",
+      tone: "bright-green",
       values: [0, 6, 4, 8, 10].map((value, index) => ({
         categoryId: `week-${index + 1}`,
         value,
@@ -61,11 +67,78 @@ const chartRoot = (id, data = chartData) => `<div
   data-category-label="Период"
 ><script type="application/json" data-shlz-bar-chart-data>${JSON.stringify(data)}</script></div>`;
 
+const sourceSeries = [
+  ["new", "Новое", "blue"],
+  ["in-work-oks", "В работе ОКС", "green"],
+  ["transferred-ogo", "Передано в ОГО", "orange"],
+  ["in-work-ogo", "В работе у ОГО", "deep-blue"],
+  ["transferred-supplier", "Передано поставщику", "violet"],
+  ["solution-implementation", "Реализация решения", "turquoise"],
+  ["transferred-bgo", "Передано в БГО", "pink"],
+  ["completed", "Выполнено", "bright-green"],
+  ["closed", "Закрыто", "gray"],
+];
+const sourceData = (periodCount, seriesIndices, placement = "above") => {
+  const multiplier = periodCount === 14 || periodCount === 23 ? 10 : 1;
+  const categories = Array.from({ length: periodCount }, (_, index) => ({
+    id: `p${index}`,
+    label: `${index + 1}–${index + 7} мая`,
+  }));
+  return {
+    categories,
+    series: seriesIndices.map((sourceIndex, index) => ({
+      id: sourceSeries[sourceIndex][0],
+      label: sourceSeries[sourceIndex][1],
+      tone: sourceSeries[sourceIndex][2],
+      values: categories.map((category, categoryIndex) => ({
+        categoryId: category.id,
+        value: (((categoryIndex + index) % 9) + 1) * multiplier,
+        displayValue: String((((categoryIndex + index) % 9) + 1) * multiplier),
+      })),
+    })),
+    presentation: {
+      density: "source",
+      scaleMaximum: 10 * multiplier,
+      tooltipPlacement: placement,
+    },
+  };
+};
+const sourceDensities = [
+  ["five-eight", 5, [0, 1, 2, 3, 4, 5, 6, 7], "21 px · 5 периодов × 8 серий"],
+  ["five-two", 5, [0, 5], "96 px · 5 периодов × 2 серии"],
+  [
+    "fourteen-eight",
+    14,
+    [0, 1, 2, 3, 4, 5, 6, 7],
+    "7 px · 14 периодов × 8 серий",
+  ],
+  ["twenty-three-three", 23, [0, 5, 6], "≈12,33 px · 23 периода × 3 серии"],
+  ["two-eight", 2, [0, 1, 2, 3, 4, 5, 6, 7], "62,75 px · 2 периода × 8 серий"],
+  ["five-three", 5, [0, 5, 6], "≈62,67 px · 5 периодов × 3 серии"],
+];
+const paletteItem = ([, label, tone]) =>
+  `<figure><div class="shlz-chart-palette__pair" aria-hidden="true">${createBarChartSwatch(tone).outerHTML}${createBarChartSwatch(tone, true).outerHTML}</div><figcaption>${label}</figcaption></figure>`;
+const densitySpecimen = ([id, count, indices, label]) => {
+  const chartId = "bar-chart-density-" + id;
+  return `<section class="shlz-chart-specimen" aria-labelledby="density-${id}"><h3 id="density-${id}">${label}</h3>${chartRoot(chartId, sourceData(count, indices))}</section>`;
+};
+const sourceGallery = `
+<section id="dashboard-source-gallery" class="shlz-major-section">
+  <h2>Палитра и варианты графиков</h2>
+  <p>Девять цветов, состояния и плотность из Dashboard.svg. Числа в диаграммах — демонстрационные данные.</p>
+  <div class="shlz-chart-palette" aria-label="Палитра баров: обычное и приглушённое состояние">
+    ${sourceSeries.map(paletteItem).join("")}
+  </div>
+  <p>Слева — обычное состояние, справа — приглушённое. Наведите на столбец ниже или перейдите к нему клавишей Tab, чтобы увидеть все серии периода.</p>
+  ${sourceDensities.map(densitySpecimen).join("")}
+  <section class="shlz-chart-specimen" aria-labelledby="chart-below-title"><h3 id="chart-below-title">Подсказка под осью · закрытые обращения</h3>${chartRoot("bar-chart-tooltip-below", sourceData(5, [0, 5, 8], "below"))}</section>
+</section>`;
+
 export const reportingDashboardShowcaseMarkup = `
 <section id="reporting-dashboard-demo" class="shlz-major-section">
   <p class="shlz-section-kicker">REPORTING COMPOSITIONS</p>
   <h2>Dashboard and Chart Widget</h2>
-  <p><code>Dashboard.svg</code> and <code>Дашборды.svg</code> · chart rendering remains consumer-owned.</p>
+  <p><code>Dashboard.svg</code> and <code>Дашборды.svg</code> · графики отображает Bar Chart; данные и фильтры задаёт приложение.</p>
   <div class="shlz-dashboard" data-component-audit-id="dashboard-showcase-default">
     <section class="shlz-dashboard__section" aria-labelledby="dashboard-showcase-title">
       <h3 class="shlz-dashboard__heading" id="dashboard-showcase-title">Дашборды</h3>
@@ -98,7 +171,8 @@ export const reportingDashboardShowcaseMarkup = `
       </div>
     </section>
   </div>
-</section>`;
+</section>
+${sourceGallery}`;
 
 export const enhanceReportingBarCharts = (enhance) => {
   const controllers = enhance(

@@ -170,3 +170,25 @@ test("plain HTML consumes the standalone dashboard contracts", async ({
     page.locator("[data-component-audit-id='chart-widget-plain-html']"),
   ).toHaveCSS("border-radius", "16px");
 });
+
+test("empty chart widget shows the source illustration and recovery action", async ({
+  page,
+}) => {
+  const root = page.locator(
+    "[data-component-audit-id='chart-widget-showcase-default']",
+  );
+  const illustration = root.locator(".shlz-chart-widget__empty-illustration");
+  await expect(illustration).toHaveCSS("width", "167px");
+  await expect(illustration).toHaveCSS("height", "131px");
+  expect(
+    await illustration
+      .locator("img")
+      .evaluate((image) => image.complete && image.naturalWidth > 0),
+  ).toBe(true);
+  await expect(
+    root.getByRole("button", { name: "Сбросить фильтры" }),
+  ).toBeVisible();
+  await expect(illustration).toHaveScreenshot(
+    "dashboard-empty-illustration.png",
+  );
+});
