@@ -381,9 +381,9 @@
       "tools/playwright/messaging-history-planner-wave12.spec.js"
     ],
     "primitiveDependencyPathCount": 38,
-    "unrelatedTerminologyPathCount": 73,
-    "totalPathCount": 93,
-    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths; the rounded-control regression and declared historical CSS adapter are classified existing-primitive evidence, not new higher-level runtime surfaces; the alignment guard also references the standalone messaging-history fixture; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family; tools/eslint/no-hardcoded-census-counts.mjs contains ESLint meta.messages terminology only and is unrelated to messaging UI"
+    "unrelatedTerminologyPathCount": 74,
+    "totalPathCount": 94,
+    "classification": "generic messaging, history, planner, employee, event, editor, and attachment terminology is unrelated unless it matches a higher-level structural signature or a listed primitive dependency; tools/check-browser-smoke.mjs contributes unrelated event terminology, and tools/at/{browsers,evidence,foreground,process-tree,run-windows,runtime}.mjs plus tools/tests/screen-reader-evidence.test.mjs add seven test-only error-message and foreground-event terminology paths; the rounded-control regression and declared historical CSS adapter are classified existing-primitive evidence, not new higher-level runtime surfaces; the alignment guard also references the standalone messaging-history fixture; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family; tools/eslint/no-hardcoded-census-counts.mjs contains ESLint meta.messages terminology only and is unrelated to messaging UI; tools/check-repository-identity.mjs contributes error.message terminology only and is unrelated to messaging UI"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": ["static-source-specimens-only"],

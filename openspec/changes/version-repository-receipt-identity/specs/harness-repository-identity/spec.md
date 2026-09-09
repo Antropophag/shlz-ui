@@ -6,7 +6,7 @@ Minimize disclosed repository coordinates in harness receipts while preserving c
 
 ### Requirement: Versioned minimized identity
 
-New repository identity payloads SHALL declare version 2 and contain only version, checkout digest, origin digest, and aggregate digest. Receipt envelopes SHALL retain their current version. Identity digests SHALL bind the resolved checkout root and exact configured origin without publishing either raw value.
+New repository identity payloads SHALL declare version 2 and contain only version, checkout digest, origin digest, and aggregate digest. Receipt envelopes SHALL retain their current version. Identity digests SHALL bind the resolved checkout root and exact configured origin and its resolved URL without publishing raw coordinates.
 
 #### Scenario: New baseline and delivery
 
@@ -20,7 +20,7 @@ New repository identity payloads SHALL declare version 2 and contain only versio
 
 ### Requirement: Checkout isolation survives minimization
 
-Delivery SHALL verify repository identity against the current checkout using the baseline identity version. Distinct checkout roots, relocated roots, and changed origins SHALL not continue the original episode. Relocation requires a fresh baseline; portable serialization does not authorize cross-checkout continuation.
+Delivery SHALL verify repository identity against the current checkout using the baseline identity version. Distinct checkout roots and relocated roots SHALL not continue the original episode. Version 2 SHALL reject changes to either the configured origin spelling or its resolved URL; legacy verification SHALL preserve the original resolved-URL comparison. Relocation requires a fresh baseline; portable serialization does not authorize cross-checkout continuation.
 
 #### Scenario: Different worktree or clone
 
@@ -34,12 +34,17 @@ Delivery SHALL verify repository identity against the current checkout using the
 
 #### Scenario: Changed origin
 
-- **WHEN** the checkout origin differs from its baseline, including a different spelling of the origin
+- **WHEN** a version 2 baseline sees a changed configured origin spelling (including a rewrite alias) or a changed resolved URL
 - **THEN** delivery rejects the repository mismatch
 
 ### Requirement: Immutable legacy compatibility
 
 Existing unversioned repository identities SHALL remain verifiable using the original root-and-remote digest algorithm. Historical receipt bytes and downstream digest references SHALL remain unchanged. Successful legacy continuation SHALL emit a minimized version 2 repository payload while retaining the original baseline receipt digest reference.
+
+#### Scenario: Legacy URL rewrite compatibility
+
+- **WHEN** a legacy baseline sees a different configured alias resolving to the original origin URL
+- **THEN** its original repository comparison still succeeds and the new delivery uses version 2
 
 #### Scenario: Legacy continuation
 

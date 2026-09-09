@@ -263,3 +263,33 @@ test("delivery rejects altered legacy fields with a recomputed outer receipt", a
     /repository identity digest is stale/,
   );
 });
+
+test("v2 binds raw origin spelling across Git URL rewrites while legacy keeps its algorithm", async (t) => {
+  const { root, remote, base, deliver, withIdentity, legacy } =
+    await episode(t);
+  await git(root, "config", `url.${remote}.insteadOf`, "shlz-origin:");
+  await git(root, "remote", "set-url", "origin", "shlz-origin:");
+  assert.equal(await git(root, "remote", "get-url", "origin"), remote);
+  await assert.rejects(deliver(base), /repository differs.*fresh baseline/);
+  const result = await deliver(withIdentity(legacy));
+  assert.equal(result.payload.repository.version, 2);
+  assert.notEqual(
+    result.payload.repository.originDigest,
+    base.payload.repository.originDigest,
+  );
+});
+
+test("v2 also rejects a changed resolved origin when its configured alias stays the same", async (t) => {
+  const { root, remote, deliver, withIdentity } = await episode(t);
+  await git(root, "config", `url.${remote}.insteadOf`, "shlz-origin:");
+  await git(root, "remote", "set-url", "origin", "shlz-origin:");
+  const initial = withIdentity(await repository(root));
+  await git(root, "config", "--unset", `url.${remote}.insteadOf`);
+  await git(
+    root,
+    "config",
+    "url.https://example.test/other.git.insteadOf",
+    "shlz-origin:",
+  );
+  await assert.rejects(deliver(initial), /repository differs.*fresh baseline/);
+});
