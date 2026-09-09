@@ -10,5 +10,5 @@
 
 ## 3. Delivery evidence
 
-- [ ] 3.1 Update docs and manifests with source, runtime, accessibility, focused visuals, consumer and stress evidence; run scoped and repository-required checks.
-- [ ] 3.2 Complete independent Standards/Spec review, conformance and delivery guards; publish an unmerged PR with CI and review-thread status.
+- [x] 3.1 Update docs and manifests with source, runtime, accessibility, focused visuals, consumer and stress evidence; run scoped and repository-required checks.
+- [x] 3.2 Complete independent Standards/Spec review, conformance and delivery guards; publish an unmerged PR with CI and review-thread status.

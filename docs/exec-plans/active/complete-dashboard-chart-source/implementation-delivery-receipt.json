@@ -1,0 +1,34 @@
+{
+  "kind": "delivery",
+  "payload": {
+    "branch": "feature/complete-dashboard-chart-source",
+    "candidateHead": "af0f34132ac8c04f832d6b2af6150ae3f0a89cb7",
+    "outcome": "pass",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/complete-dashboard-chart-source",
+      "headRefOid": "af0f34132ac8c04f832d6b2af6150ae3f0a89cb7",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/90"
+    },
+    "receiptDigests": [
+      "e9944fd8a964538985d5af61759c2b5bff03a0d39c97a90d80168af460347f2b",
+      "1970b9a10bae0613367b4d3c4c85a478e3b2742d1a712b140298b6b586e9ea73",
+      "7547ecf1e7f4855c68e34ca2d54b946cdf7466f2eff28376a69b32c076ab94e7",
+      "a1f0d9360ab63e13843155b1ca236744fc109e63e6302f60fca629d806cc4ed3",
+      "490ca5e57df856ebbd6c95b71cb62cdd826a721f33220de3b5e239b8d2750e65",
+      "6ef833b747cc68b5d1b350b8812446c7d3d8bee17a4f3519edb06a85c0aa9eda",
+      "cc0fb2fcd64b8200fd84e24e405e7c73ef560ad8efbb7137a19eea173ae5d14d",
+      "e53cac6791d56dc2d25e6e2b9b40019e8d9619914376df017173d46acc80c2ea"
+    ],
+    "repository": {
+      "digest": "a78194fe10aca4943c5d5d72662221a420e98ffb6f8826304c9c27a79bf7b231",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/tmp/shlz-dashboard-completion"
+    },
+    "upstream": "af0f34132ac8c04f832d6b2af6150ae3f0a89cb7"
+  },
+  "version": 1,
+  "digest": "63a38578995708e9d93dcee60e0ee343c4a138da81e3740bd3d519a041d95354"
+}
