@@ -1,0 +1,31 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Resolve issues #71 and #82 with versioned repository identity and immutable legacy compatibility",
+    "material": ["permissionsOrSecurity", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": true,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "version-repository-receipt-identity",
+    "requiredDecisions": [
+      {
+        "blocking": false,
+        "id": "identity-compatibility",
+        "owner": "agent-owned"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "91efde5373818a8246e19642a8a7c7397df9d84eb98ea58366c4b5b4e81ba6b8"
+}

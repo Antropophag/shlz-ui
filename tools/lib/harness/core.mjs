@@ -408,12 +408,77 @@ async function gh(cwd, url) {
     ),
   );
 }
-export async function repository(repoRoot) {
+async function repositoryCoordinates(repoRoot) {
   const root = path.resolve(
     await git(repoRoot, "rev-parse", "--show-toplevel"),
   );
-  const remote = await git(repoRoot, "remote", "get-url", "origin");
-  return { root, remote, digest: digest({ root, remote }) };
+  // Read the configured spelling, without insteadOf expansion or whitespace loss.
+  const { stdout } = await exec(
+    "git",
+    ["config", "--null", "--get", "remote.origin.url"],
+    { cwd: repoRoot, maxBuffer: 10 * 1024 * 1024 },
+  );
+  const remote = stdout.slice(0, -1);
+  const effectiveRemote = await git(repoRoot, "remote", "get-url", "origin");
+  return { root, remote, effectiveRemote };
+}
+function repositoryIdentity({ root, remote, effectiveRemote }) {
+  const body = {
+    version: 2,
+    checkoutDigest: digest({ domain: "harness-repository-checkout-v2", root }),
+    originDigest: digest({
+      domain: "harness-repository-origin-v2",
+      remote,
+      effectiveRemote,
+    }),
+  };
+  return { ...body, digest: digest(body) };
+}
+export async function repository(repoRoot) {
+  return repositoryIdentity(await repositoryCoordinates(repoRoot));
+}
+async function verifyRepository(repoRoot, expected) {
+  assert(
+    expected && typeof expected === "object" && !Array.isArray(expected),
+    "invalid repository identity",
+  );
+  const legacy = !Object.hasOwn(expected, "version");
+  const fields = legacy
+    ? ["digest", "remote", "root"]
+    : ["checkoutDigest", "digest", "originDigest", "version"];
+  assert(
+    (legacy || expected.version === 2) &&
+      JSON.stringify(Object.keys(expected).sort(order)) ===
+        JSON.stringify(fields),
+    "unsupported repository identity schema",
+  );
+  assert(
+    digestPattern.test(expected.digest ?? "") &&
+      (legacy
+        ? typeof expected.root === "string" &&
+          path.isAbsolute(expected.root) &&
+          typeof expected.remote === "string" &&
+          expected.remote.length > 0
+        : [expected.checkoutDigest, expected.originDigest].every(
+            (value) => typeof value === "string" && digestPattern.test(value),
+          )),
+    "invalid repository identity fields",
+  );
+  const { digest: storedDigest, ...body } = expected;
+  assert(digest(body) === storedDigest, "repository identity digest is stale");
+  const coordinates = await repositoryCoordinates(repoRoot);
+  const current = repositoryIdentity(coordinates);
+  const liveDigest = legacy
+    ? digest({
+        root: coordinates.root,
+        remote: coordinates.effectiveRemote,
+      })
+    : current.digest;
+  assert(
+    expected.digest === liveDigest,
+    "delivery repository differs; create a fresh baseline for this checkout or origin",
+  );
+  return current;
 }
 export async function baseline({
   repoRoot,
@@ -1134,10 +1199,9 @@ export async function delivery({
     conformanceReceipt.payload.closedSets ?? [],
     validationReceipts,
   );
-  const repo = await repository(repoRoot);
-  assert(
-    repo.digest === baselineReceipt.payload.repository.digest,
-    "delivery repository differs",
+  const repo = await verifyRepository(
+    repoRoot,
+    baselineReceipt.payload.repository,
   );
   return receipt("delivery", {
     repository: repo,

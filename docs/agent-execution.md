@@ -37,3 +37,11 @@ The result requires runtime-issued identity, terminal completion, report digest,
 The user owns merge. Report CI, review threads, checks, limitations, and residual risks; never merge the PR.
 
 Runtime metrics are reported only when supplied by the runtime. Missing tokens and active context remain `unavailable`; bytes and file counts are labeled observations. Keep raw logs/streams local or in CI and retain no more than eight compact episode receipts in Git.
+
+## Repository identity compatibility
+
+New baseline and delivery receipts use a version 2 repository payload with exactly `version`, `checkoutDigest`, `originDigest`, and `digest`. SHA-256 digests bind the resolved checkout root and exact configured Git origin plus its resolved URL with separate `harness-repository-checkout-v2` and `harness-repository-origin-v2` domains; the aggregate uses the harness stable serializer over the other three fields. The receipt envelope remains version 1. Raw paths, origin URLs, and credentials are absent from this payload. Hashing minimizes disclosure; predictable coordinates can still be guessed.
+
+Delivery accepts either this schema or the original unversioned `{ root, remote, digest }` schema. It validates the exact shape and embedded digest, then recomputes identity with the baseline's algorithm. Unknown versions, malformed fields, stale digests, and mixed schemas fail closed. A successful legacy continuation emits a version 2 delivery payload referencing the unchanged original baseline receipt digest. Never edit historical receipts or their digest references to migrate them.
+
+Identity remains checkout-bound: another clone, another worktree, a relocated root, or a changed configured origin spelling or resolved URL requires a fresh version 2 baseline. Legacy identities retain their original resolved-URL comparison, including Git URL rewriting. Portable serialization does not permit moving an active episode. Older harness versions cannot consume version 2 baselines; finish those episodes using version-aware code or start a fresh baseline after rollback.

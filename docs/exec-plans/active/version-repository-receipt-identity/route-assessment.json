@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "intent": "Resolve issues #71 and #82 with versioned repository identity and immutable legacy compatibility",
+  "route": "open-spec",
+  "openSpecChange": "version-repository-receipt-identity",
+  "requiredDecisions": [
+    {
+      "id": "identity-compatibility",
+      "owner": "agent-owned",
+      "blocking": false
+    }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
