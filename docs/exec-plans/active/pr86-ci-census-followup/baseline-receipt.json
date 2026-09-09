@@ -1,0 +1,25 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/consistent-attachment-cards",
+    "commit": "96db84321981df8e2aaffd06781ddb7994ab1dc0",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/consistent-attachment-cards",
+      "headRefOid": "96db84321981df8e2aaffd06781ddb7994ab1dc0",
+      "isDraft": false,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/86"
+    },
+    "repository": {
+      "digest": "61f1e91b5cb9105d1e121cc16c733238c3508ce2ef3cce01efcfd7ba8b741f12",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/home/antropophag/code/shlz-ui-attachment-cards"
+    },
+    "upstream": "origin/fix/consistent-attachment-cards"
+  },
+  "routeDigest": "a43fd2da5806b274818b5fe45cd59bb6bc1c3d65c5e8a453a8428211460aacab",
+  "version": 1,
+  "digest": "ff79571057da28020aa1ffbab1aa5a1e793c3198f10582f7e1e83ae4acaa9bd7"
+}

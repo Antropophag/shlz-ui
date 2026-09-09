@@ -1,0 +1,24 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Correct the stale Wave 11 browser census assertion from 11 to the already established 15 primitive dependencies in PR 86; preserve product and test semantics.",
+    "material": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "requiredDecisions": [],
+    "route": "direct",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "a43fd2da5806b274818b5fe45cd59bb6bc1c3d65c5e8a453a8428211460aacab"
+}
