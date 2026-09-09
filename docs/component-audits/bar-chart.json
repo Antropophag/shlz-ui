@@ -4,7 +4,8 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Dashboard.svg",
   "referenceSources": [
     "docs/component-audits/dashboard-chart-source-matrix.json",
-    "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md"
+    "openspec/changes/add-framework-agnostic-bar-chart/specs/data-display/bar-chart/spec.md",
+    "openspec/changes/complete-dashboard-chart-source/specs/data-display/bar-chart-source-completeness/spec.md"
   ],
   "implementation": [
     "packages/styles/components/bar-chart.css",
