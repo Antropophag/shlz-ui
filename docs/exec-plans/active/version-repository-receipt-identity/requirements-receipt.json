@@ -1,0 +1,20 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "version-repository-receipt-identity",
+    "decisions": [
+      {
+        "blocking": false,
+        "id": "identity-compatibility",
+        "owner": "agent-owned",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Resolve issues #71 and #82 with versioned repository identity and immutable legacy compatibility",
+    "revision": 1
+  },
+  "routeDigest": "91efde5373818a8246e19642a8a7c7397df9d84eb98ea58366c4b5b4e81ba6b8",
+  "version": 1,
+  "digest": "a7476712f709192cf59b71dc98e29a3abae6bf3790d4b320efc2a5a73cc7c470"
+}
