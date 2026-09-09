@@ -11,5 +11,5 @@
 ## 3. Documentation and delivery
 
 - [x] 3.1 Document schema dispatch, relocation behavior, and compatibility limits; verify documentation agrees with all spec scenarios.
-- [ ] 3.2 Run harness regression tests, focused lint/format checks, strict OpenSpec validation, and discriminating contract evidence; record candidate-bound validation receipts.
-- [ ] 3.3 Complete independent Standards/Spec review, conformance, and delivery on an unmerged PR linked to #71 and #82; report CI and unresolved review threads.
+- [x] 3.2 Run harness regression tests, focused lint/format checks, strict OpenSpec validation, and discriminating contract evidence; record candidate-bound validation receipts.
+- [x] 3.3 Complete independent Standards/Spec review, conformance, and delivery on an unmerged PR linked to #71 and #82; report CI and unresolved review threads.

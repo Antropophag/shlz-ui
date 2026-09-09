@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Resolve issues #71 and #82 with versioned repository identity and immutable legacy compatibility",
-    "material": [
-      "permissionsOrSecurity",
-      "publicContract"
-    ],
+    "material": ["permissionsOrSecurity", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,
