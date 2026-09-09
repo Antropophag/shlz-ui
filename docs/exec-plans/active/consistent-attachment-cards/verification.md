@@ -34,3 +34,11 @@ Final confirmation, independent review and candidate-bound delivery checks are r
 - Additional interactive walk: pointer removal works; Tab reaches the populated removal button by its filename; native disabled state and Composer read-only remain set; focusing the live Composer changes its border.
 - Full lint reaches Prettier and fails only on five unchanged receipt files: add-cross-browser-smoke-review, add-cross-browser-smoke, classify-existing-component-records, classify-source-extraction-diagnostics and fix-rounded-control-alignment. All five are byte-identical to 58efc3a, and Prettier independently rejects that baseline content. ESLint/Stylelint pass. These unrelated files are not modified by this component correction.
 - The symmetric browser geometry oracle rejects the captured baseline CSS and accepts the compact candidate at both desktop and narrow widths. Requirements, baseline, contract and conformance checks pass. Candidate-bound receipts are recreated after the final commit.
+
+## Review and delivery
+
+Both independent review axes passed after the filename fallback correction. SonarCloud also passed after the geometry oracle restricted its input to the candidate root or recorded baseline fixture. The first complete delivery chain passed on f885df7 (delivery digest 125a03c13a92e777c9dd9f6b23083fa9f16a54fd10d5d0a65c6b2edd7d8a1678); final candidate receipts remain local under node_modules/.cache/attachment-receipts to avoid self-invalidating evidence commits.
+
+PR: https://github.com/Antropophag/shlz-ui/pull/86 (unmerged). Required checks initially stopped on the missing styles changeset; this final metadata follow-up supplies it. The five independently reproduced baseline Prettier failures remain outside this correction. Final CI and unresolved review-thread status are reported in the delivery message rather than frozen as successful in this document.
+
+Component scope: Composer 6 roots and File Upload 6 roots have focused evidence; File Row's 18 initial classified roots plus dynamic 21/20-row selection/removal inventories pass. This is scoped attachment-composition evidence, not certification of unrelated editor/upload services or other component families.
