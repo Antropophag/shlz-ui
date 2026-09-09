@@ -26,3 +26,5 @@ Dashboard and Chart Widget are framework-neutral presentation contracts derived 
 ```
 
 The widget root is not interactive. Buttons and links in its action/control regions retain native ownership. The optional Bar Chart capability can now fill the plot region and owns its marks, legend, tooltip, and accessible table. Chart Widget still does not infer those semantics and does not own fetching, filters, periods, export, editing, drag/resize, or persistence. Report summaries continue to use the existing Report Card; the source does not establish a separate Metric Card family.
+
+The dashboard source gallery demonstrates all nine bar tones, six source density families, period inspection and both tooltip placements. The empty widget example now includes the existing source-backed customization illustration, cropped to its visual region. Filtering and reset actions still require consumer logic; the gallery does not claim a dashboard editor or query engine.

@@ -17,6 +17,8 @@ export {
   validateBarChartData,
 } from "./bar-chart-model.js";
 export type {
+  BarChartTone,
+  BarChartPresentation,
   BarChartCategory,
   BarChartData,
   BarChartDatum,

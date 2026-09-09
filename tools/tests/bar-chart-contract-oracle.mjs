@@ -57,12 +57,12 @@ if (targetArgument === knownBadPath) {
     () =>
       model.validateBarChartData({
         ...sample,
-        series: Array.from({ length: 5 }, (_, index) => ({
+        series: Array.from({ length: 9 }, (_, index) => ({
           ...sample.series[0],
           id: `s${index}`,
         })),
       }),
-    /one through four/i,
+    /one through eight/i,
   );
   assert.match(controller, /ArrowLeft/);
   assert.match(controller, /aria-pressed/);

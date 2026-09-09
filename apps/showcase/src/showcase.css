@@ -1884,3 +1884,42 @@ article {
     max-inline-size: none;
   }
 }
+
+.shlz-chart-palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-block: 24px;
+}
+
+.shlz-chart-palette figure {
+  flex: 0 1 110px;
+  margin: 0;
+}
+
+.shlz-chart-palette__pair {
+  display: flex;
+  gap: 16px;
+  margin-block-end: 12px;
+}
+
+.shlz-chart-palette__bar {
+  display: block;
+  inline-size: 24px;
+  block-size: 200px;
+  border-radius: 8px 8px 0 0;
+  background: currentcolor;
+}
+
+.shlz-chart-palette__bar.shlz-bar-chart__tone-orange.shlz-bar-chart__bar--muted {
+  background: #de753d;
+}
+
+.shlz-chart-palette__bar.shlz-bar-chart__tone-gray.shlz-bar-chart__bar--muted {
+  background: #f5f5f5;
+}
+
+.shlz-chart-specimen {
+  max-inline-size: 100%;
+  margin-block: 40px;
+}

@@ -1,3 +1,22 @@
+export const barChartTones = [
+  "blue",
+  "green",
+  "orange",
+  "deep-blue",
+  "violet",
+  "turquoise",
+  "pink",
+  "bright-green",
+  "gray",
+] as const;
+export type BarChartTone = (typeof barChartTones)[number];
+
+export interface BarChartPresentation {
+  density?: "default" | "source";
+  scaleMaximum?: number;
+  tooltipPlacement?: "above" | "below";
+}
+
 export interface BarChartCategory {
   id: string;
   label: string;
@@ -13,11 +32,13 @@ export interface BarChartSeries {
   id: string;
   label: string;
   values: BarChartValue[];
+  tone?: BarChartTone;
 }
 
 export interface BarChartData {
   categories: BarChartCategory[];
   series: BarChartSeries[];
+  presentation?: BarChartPresentation;
 }
 
 export interface BarChartDatum extends BarChartValue {
@@ -52,9 +73,30 @@ export function validateBarChartData(data: BarChartData): BarChartData {
     throw new TypeError("Bar Chart requires categories and series arrays.");
   if (data.categories.length === 0)
     throw new RangeError("Bar Chart requires at least one category.");
-  if (data.series.length < 1 || data.series.length > 4)
-    throw new RangeError("Bar Chart supports one through four series.");
+  if (data.series.length < 1 || data.series.length > 8)
+    throw new RangeError("Bar Chart supports one through eight series.");
 
+  const presentation = data.presentation;
+  if (presentation) {
+    if (
+      presentation.density !== undefined &&
+      !["default", "source"].includes(presentation.density)
+    )
+      throw new TypeError("Unknown Bar Chart density.");
+    if (
+      presentation.tooltipPlacement !== undefined &&
+      !["above", "below"].includes(presentation.tooltipPlacement)
+    )
+      throw new TypeError("Unknown Bar Chart tooltip placement.");
+    if (
+      presentation.scaleMaximum !== undefined &&
+      (!Number.isFinite(presentation.scaleMaximum) ||
+        presentation.scaleMaximum <= 0)
+    )
+      throw new RangeError(
+        "Bar Chart scale maximum must be finite and positive.",
+      );
+  }
   const categoryIds = new Set<string>();
   for (const category of data.categories) {
     requireIdentity(category.id, "category id");
@@ -66,6 +108,8 @@ export function validateBarChartData(data: BarChartData): BarChartData {
 
   const seriesIds = new Set<string>();
   for (const series of data.series) {
+    if (series.tone !== undefined && !barChartTones.includes(series.tone))
+      throw new TypeError("Unknown Bar Chart tone.");
     requireIdentity(series.id, "series id");
     requireIdentity(series.label, "series label");
     if (seriesIds.has(series.id))
@@ -89,6 +133,11 @@ export function validateBarChartData(data: BarChartData): BarChartData {
         throw new RangeError(
           "Bar Chart values must be finite and non-negative.",
         );
+      if (
+        presentation?.scaleMaximum !== undefined &&
+        datum.value > presentation.scaleMaximum
+      )
+        throw new RangeError("Bar Chart value exceeds scale maximum.");
       values.set(datum.categoryId, datum);
     }
     for (const category of data.categories)
@@ -188,4 +237,43 @@ export function barChartNeighbor(
 
 export function firstBarChartDatumId(model: BarChartModel): string {
   return key(model.data.categories[0].id, model.visibleSeriesIds[0]);
+}
+
+/** Source-specific group paint widths; never global spacing tokens. */
+export function barChartLayout(model: BarChartModel) {
+  const count = model.data.categories.length;
+  const seriesCount = model.visibleSeriesIds.length;
+  const source = model.data.presentation?.density === "source";
+  const width = source
+    ? 1276
+    : Math.max(640, count * Math.max(88, seriesCount * 30 + 32));
+  const plotWidth = width - 64;
+  const plotHeight = 300;
+  const groupWidth = plotWidth / count;
+  const sourceGroups: Record<number, number> = {
+    2: 530,
+    5: 196,
+    14: 84,
+    23: 45,
+  };
+  const available = source
+    ? Math.min(groupWidth - 2, sourceGroups[count] ?? groupWidth - 24)
+    : groupWidth - 24;
+  const gap = 4;
+  const barWidth = source
+    ? Math.max(1, (available - gap * (seriesCount - 1)) / seriesCount)
+    : Math.min(96, Math.max(12, available / seriesCount - gap));
+  const maximum =
+    model.data.presentation?.scaleMaximum ?? (model.maximum || 10);
+  return {
+    width,
+    height: 368,
+    plotWidth,
+    plotHeight,
+    groupWidth,
+    barWidth,
+    gap,
+    maximum,
+    sparse: source && (count === 14 || count === 23),
+  };
 }

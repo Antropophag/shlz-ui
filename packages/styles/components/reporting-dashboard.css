@@ -124,3 +124,15 @@
     align-items: flex-start;
   }
 }
+
+.shlz-chart-widget__empty-illustration {
+  inline-size: 159px;
+  block-size: 60px;
+  overflow: hidden;
+}
+
+.shlz-chart-widget__empty-illustration img {
+  display: block;
+  inline-size: 159px;
+  max-inline-size: none;
+}
