@@ -1,0 +1,26 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "fix/receipt-repository-identity",
+    "commit": "5a6693f64f2f7d525b32c2e8f20bbe07be1ece33",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "fix/receipt-repository-identity",
+      "headRefOid": "5a6693f64f2f7d525b32c2e8f20bbe07be1ece33",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/89"
+    },
+    "repository": {
+      "digest": "06247af4ed00dbfc1636eb382b6d81fb2ddde8c9df81642f89236e759f190790",
+      "remote": "git@github.com:Antropophag/shlz-ui.git",
+      "root": "/tmp/shlz-receipt-identity"
+    },
+    "upstream": "origin/fix/receipt-repository-identity"
+  },
+  "requirementsDigest": "a7476712f709192cf59b71dc98e29a3abae6bf3790d4b320efc2a5a73cc7c470",
+  "routeDigest": "91efde5373818a8246e19642a8a7c7397df9d84eb98ea58366c4b5b4e81ba6b8",
+  "version": 1,
+  "digest": "3786216143e27586916fa511349b4fa63b839e3ec687678c19d2810b05ccc766"
+}

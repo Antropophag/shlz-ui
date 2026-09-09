@@ -52,6 +52,8 @@ Repository verification SHALL validate the complete version-specific shape and e
 
 #### Scenario: Tampered identity
 
+<!-- failure-invariant: repository-identity-integrity concern=persistence -->
+
 - **WHEN** an identity field is changed but its embedded digest is stale
 - **THEN** verification rejects it even if the enclosing receipt digest is valid
 

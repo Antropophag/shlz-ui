@@ -19,7 +19,7 @@
     "report:showcase-loading": "node tools/generate-showcase-loading-report.mjs",
     "build": "npm run generate && npm run build --workspaces --if-present",
     "test": "node --test --test-concurrency=1 tools/tests/*.test.mjs",
-    "test:harness": "node --test tools/tests/harness.test.mjs",
+    "test:harness": "node --test tools/tests/harness*.test.mjs",
     "test:packages": "node tools/package-consumer-smoke.mjs",
     "release:policy": "node tools/release.mjs policy",
     "release:intent": "node tools/release.mjs intent",
