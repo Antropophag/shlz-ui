@@ -45,6 +45,10 @@
       "classification": "file-and-document-row-fixture-style"
     },
     {
+      "path": "docs/components/composer-rich-text-toolbar.md",
+      "classification": "attachment-composition-usage-guidance"
+    },
+    {
       "path": "docs/components/document-row.md",
       "classification": "document-row-contract"
     },
@@ -53,12 +57,20 @@
       "classification": "file-row-contract"
     },
     {
+      "path": "packages/styles/components/composer.css",
+      "classification": "attachment-composition-scoped-file-row-styles"
+    },
+    {
       "path": "packages/styles/components/document-row.css",
       "classification": "document-row-implementation"
     },
     {
       "path": "packages/styles/components/file-row.css",
       "classification": "file-row-implementation"
+    },
+    {
+      "path": "tools/playwright/attachment-composition.spec.js",
+      "classification": "attachment-composition-test-evidence"
     },
     {
       "path": "tools/playwright/content-states.spec.js",
@@ -71,6 +83,10 @@
     {
       "path": "tools/tests/content-states.test.mjs",
       "classification": "file-and-document-row-structural-test"
+    },
+    {
+      "path": "tools/tests/fixtures/attachment-composition-oracle.mjs",
+      "classification": "attachment-composition-test-evidence"
     }
   ],
   "terminologyCensus": {
@@ -80,10 +96,10 @@
       "tools/playwright/upload-document-compositions-wave11.spec.js",
       "tools/playwright/rounded-control-alignment.spec.js"
     ],
-    "primitiveDependencyPathCount": 11,
-    "unrelatedTerminologyPathCount": 79,
-    "totalPathCount": 94,
-    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths; rounded-control alignment is test-only audit evidence, and its pixel/DOM helper adds one unrelated document terminology path"
+    "primitiveDependencyPathCount": 15,
+    "unrelatedTerminologyPathCount": 78,
+    "totalPathCount": 96,
+    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths; rounded-control alignment is test-only audit evidence, and its pixel/DOM helper adds one unrelated document terminology path; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family"
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": [

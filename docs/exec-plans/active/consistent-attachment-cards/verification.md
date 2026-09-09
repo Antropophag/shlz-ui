@@ -42,3 +42,7 @@ Both independent review axes passed after the filename fallback correction. Sona
 PR: https://github.com/Antropophag/shlz-ui/pull/86 (unmerged). Required checks initially stopped on the missing styles changeset; this final metadata follow-up supplies it. The five independently reproduced baseline Prettier failures remain outside this correction. Final CI and unresolved review-thread status are reported in the delivery message rather than frozen as successful in this document.
 
 Component scope: Composer 6 roots and File Upload 6 roots have focused evidence; File Row's 18 initial classified roots plus dynamic 21/20-row selection/removal inventories pass. This is scoped attachment-composition evidence, not certification of unrelated editor/upload services or other component families.
+
+## Census integration follow-up
+
+Final CI also exercised historical Wave 11/12 terminology ledgers. The attachment correction adds four primitive-reference paths to Wave 11 (15 total) and six to Wave 12 (38 total). Their manifests now classify the scoped styles, usage documentation and executable attachment evidence explicitly; Wave 11's fixed census assertion is updated to the measured total. Both census suites pass (9 tests). No historical higher-level component is promoted or re-certified.
