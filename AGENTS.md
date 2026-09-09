@@ -114,6 +114,10 @@ For M/L/XL work, or whenever scope/context growth is uncertain, use the receipt-
 
 Normal new implementation starts from clean current `origin/main` on a task branch/worktree. An explicitly based episode may instead start from a clean, fully pushed, verified open-PR head; its immutable baseline scopes routing, validation, and review. Both paths end with proportionate validation/review plus an unmerged PR. Never commit or push implementation directly to `main`. Before completion, create conformance and delivery receipts; material scope discovered on a direct route requires re-routing.
 
+## Subagent model limit
+
+All spawned subagents, including nested subagents, must use a model and reasoning effort no stronger than `gpt-5.6-sol` with `reasoning_effort: low`. Explicitly set this configuration when spawning; use a weaker configuration only when its compliance with this ceiling is known. Choose a fork mode that permits explicit model and reasoning overrides rather than inheriting a stronger parent configuration. If the ceiling cannot be enforced, perform the work locally without spawning a subagent.
+
 ## UI component completion gate
 
 For any numbered product or component-audit request such as `Сделай Wave N`,
