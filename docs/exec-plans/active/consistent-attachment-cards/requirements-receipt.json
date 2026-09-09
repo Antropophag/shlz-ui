@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "approved",
+    "change": "consistent-attachment-cards",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "attachment-appearance",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-authority",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Align Composer and File Upload attachments with the compact source-backed Comment Feed file cards.",
+    "revision": 1
+  },
+  "routeDigest": "95b9b2661e93eb9892ef9c8f602f283ae3595e9607592944dd89bb000b5df861",
+  "version": 1,
+  "digest": "ba793cd5727290bfe924881d1d2ffdaf20d0ca0d8e4d4a330d51699c8c94345f"
+}

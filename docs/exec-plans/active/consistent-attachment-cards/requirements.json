@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Align Composer and File Upload attachments with the compact source-backed Comment Feed file cards.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "attachment-appearance",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "User identifies Composer and Populated composition filenames; Comment Feed attachments look correct."
+      }
+    },
+    {
+      "id": "source-authority",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md; shlz-design-source/raw/svg/Documents.svg; shlz-design-source/raw/svg/\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0438.svg"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "consistent-attachment-cards",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "approved",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "User approved the synthesized change: \u0418\u0441\u043f\u0440\u0430\u0432\u043b\u044f\u0439"
+    }
+  }
+}
