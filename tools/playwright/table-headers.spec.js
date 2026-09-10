@@ -280,8 +280,8 @@ test("complete Table material-state ledger and focused accessibility", async ({
 test("Table navigation resolves to the executable table instead of a missing anchor", async ({
   page,
 }) => {
-  await page.goto("/#table");
-  await expect(page.locator("#table")).toHaveCount(1);
+  await page.goto("/#table-demo");
+  await expect(page.locator("#table-demo")).toHaveCount(1);
   await expect(page.locator("#table-demo")).toBeVisible();
   await expect(
     page.locator("#table-demo [data-table-demo-sort]"),

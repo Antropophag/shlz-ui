@@ -104,3 +104,20 @@ Table ships no data engine, persistence, remote API, virtualization, resizing,
 sticky mode or mobile-card transformation. Popup placement and data operations
 are consumer integration. The standalone contracts of nested components remain
 independent. Merge remains the user's decision.
+
+## Host-page regression follow-up
+
+The first full CI browser run exposed 51 failures: predominantly inherited
+snapshot-origin shifts, plus page-wide overflow. The new source galleries had
+been inserted before old fixtures, and a Switch's absolutely positioned hidden
+label escaped the scrolling table (507px document width at a 390px viewport).
+The galleries now follow existing Showcase surfaces, additive diagnostics are
+marked for existing visual isolation, feedback reuses the original paragraph,
+and the table wrapper contains positioned descendants. The Table navigation
+link uses the existing table-demo target without adding a layout box.
+
+Focused reproduction turned both the narrow-layout and existing Segment
+snapshot checks green. Replaying the failed CI cases restored 49 existing
+checks without changing their baselines; the isolated Bar Chart ledger case
+requires its full spec file, and the broad component image is checked separately
+with the corrected navigation layout. The full Bar Chart spec and broad component image subsequently passed. A 45-test integration run passed 40 checks and isolated five table-related snapshot updates; all five updated checks then passed. All 278 unit tests passed. Final CI remains a delivery gate.

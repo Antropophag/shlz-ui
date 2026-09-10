@@ -23,7 +23,7 @@
       ["badge", "Badge"],
       ["link", "Link"],
       ["avatar", "Avatar"],
-      ["table", "Table"],
+      ["table-demo", "Table"],
       ["table-cell-demo", "Table Cells"],
       ["table-compositions-demo", "Table Compositions"],
       ["tabs", "Tabs"],

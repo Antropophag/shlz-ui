@@ -141,6 +141,8 @@ checkbox's accessible state. Focus-visible controls remain keyboard visible.
 
 ## Popup composition inside scrolling tables
 
+The table wrapper establishes a relative positioning context so absolutely positioned captions and visually hidden control labels remain inside its horizontal overflow boundary.
+
 Existing Dropdown supplies menu semantics, keyboard navigation and dismissal.
 Its default absolute positioning can be clipped by a scrolling table wrapper.
 The executable table example positions its choice panel relative to the viewport,

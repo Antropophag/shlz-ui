@@ -286,3 +286,18 @@ test("focused source-cell snapshots preserve header, typing and open choice", as
     ).toHaveScreenshot(`table-cell-${index}.png`);
   }
 });
+
+test("hidden table labels stay inside the scroller at enlarged text", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.evaluate(() => {
+    document.documentElement.style.fontSize = "20px";
+  });
+  await expect(
+    page.locator("#table-editing-example .shlz-table-wrap"),
+  ).toHaveCSS("position", "relative");
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(
+    390,
+  );
+});
