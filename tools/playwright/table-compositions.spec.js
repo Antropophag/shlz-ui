@@ -82,6 +82,19 @@ test("transferred layouts contain their observed nested primitives", async ({
   await expect(root.locator("input.shlz-checkbox")).not.toHaveCount(0);
   await expect(root.locator(".shlz-status")).not.toHaveCount(0);
   await expect(root.locator(".shlz-table__priority")).not.toHaveCount(0);
+  await expect(
+    root
+      .locator(".shlz-table__priority rect:not(.shlz-table__priority-muted)")
+      .first(),
+  ).toHaveCSS("fill", "rgb(69, 182, 78)");
+  await expect(root.locator(".shlz-table__priority-muted").first()).toHaveCSS(
+    "fill",
+    "rgb(87, 150, 92)",
+  );
+  await expect(root.locator(".shlz-table__priority-muted").first()).toHaveCSS(
+    "fill-opacity",
+    "0.25",
+  );
   await expect(root.locator("input[role='switch']")).not.toHaveCount(0);
   await expect(root.locator("input[role='switch']").first()).toHaveCSS(
     "width",

@@ -13,18 +13,26 @@ const adapterPath = path.join(
 );
 const requested = path.resolve(process.argv[2] ?? root);
 assert.ok([root, adapterPath].includes(requested), "undeclared oracle target");
-const waveFile = "apps/showcase/src/wave3.js";
 const adapter =
   requested === adapterPath
     ? JSON.parse(await readFile(adapterPath, "utf8"))
     : null;
 if (adapter) assert.match(adapter.baselineCommit, /^[a-f0-9]{40}$/);
-const wave = adapter
-  ? execFileSync("git", ["show", `${adapter.baselineCommit}:${waveFile}`], {
-      cwd: root,
-      encoding: "utf8",
-    })
-  : await readFile(path.join(root, waveFile), "utf8");
+const sources = new Map();
+const readSource = async (relative) => {
+  if (!sources.has(relative))
+    sources.set(
+      relative,
+      adapter
+        ? execFileSync(
+            "git",
+            ["show", `${adapter.baselineCommit}:${relative}`],
+            { cwd: root, encoding: "utf8" },
+          )
+        : await readFile(path.join(root, relative), "utf8"),
+    );
+  return sources.get(relative);
+};
 const server = createServer(async (request, response) => {
   const pathname = new globalThis.URL(request.url, "http://localhost").pathname;
   if (pathname === "/") {
@@ -44,9 +52,7 @@ const server = createServer(async (request, response) => {
   }
   try {
     response.setHeader("Content-Type", "text/javascript");
-    response.end(
-      file === path.join(root, waveFile) ? wave : await readFile(file),
-    );
+    response.end(await readSource(path.relative(root, file)));
   } catch {
     response.writeHead(404).end();
   }

@@ -2,7 +2,6 @@ import { readFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import assert from "node:assert/strict";
-import { flatten, kebab, resolveAliases } from "../lib.mjs";
 
 // dist is untracked: reconstruct baseline CSS from its tracked token source.
 export async function loadTableOracleStyles(repoRoot, adapter = null) {
@@ -25,6 +24,9 @@ export async function loadTableOracleStyles(repoRoot, adapter = null) {
       cwd: repoRoot,
       encoding: "utf8",
     });
+  const { flatten, kebab, resolveAliases } = await import(
+    `data:text/javascript;base64,${Buffer.from(pinned("tools/lib.mjs")).toString("base64")}`
+  );
   const definitions = JSON.parse(pinned("packages/tokens/tokens.json"));
   const tokens = `:root {\n${Object.entries(
     resolveAliases(flatten(definitions)),

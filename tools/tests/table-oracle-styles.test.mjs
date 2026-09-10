@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
+import { mkdtemp, mkdir, writeFile, rm, readFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { tmpdir } from "node:os";
@@ -11,7 +11,11 @@ test("baseline styles ignore current token and table mutations", async () => {
   try {
     const git = (...args) =>
       execFileSync("git", args, { cwd: root, encoding: "utf8" }).trim();
-    for (const dir of ["packages/styles/components", "packages/tokens/dist"])
+    for (const dir of [
+      "packages/styles/components",
+      "packages/tokens/dist",
+      "tools",
+    ])
       await mkdir(path.join(root, dir), { recursive: true });
     const stylesheet = "packages/styles/components/table.css";
     const write = (name, value) => writeFile(path.join(root, name), value);
@@ -22,8 +26,12 @@ test("baseline styles ignore current token and table mutations", async () => {
         color: { source: "#253d98", active: "{color.source}" },
       }),
     );
+    await write(
+      "tools/lib.mjs",
+      await readFile(new globalThis.URL("../lib.mjs", import.meta.url), "utf8"),
+    );
     git("init", "-q");
-    git("add", "packages");
+    git("add", "packages", "tools");
     git(
       "-c",
       "user.name=Test",
@@ -44,6 +52,10 @@ test("baseline styles ignore current token and table mutations", async () => {
     await write(
       "packages/tokens/dist/tokens.css",
       ":root { --shlz-color-active: red; }",
+    );
+    await write(
+      "tools/lib.mjs",
+      'throw new Error("candidate helper must not run");',
     );
     assert.deepEqual(await loadTableOracleStyles(root, adapter), before);
     assert.deepEqual(await loadTableOracleStyles(root), {

@@ -372,7 +372,7 @@
 }
 
 .shlz-table__priority-muted {
-  fill: #45b64e;
+  fill: #57965c; /* FACT: muted bar in Table Cell.svg. */
   fill-opacity: 0.25;
 }
 
