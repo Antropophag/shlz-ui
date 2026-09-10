@@ -17,4 +17,4 @@
 ## 4. PR review follow-up
 
 - [x] 4.1 Correct dialog-filter semantics, edited-value filtering, fixture markup and added-row presentation; cover review regressions and immutable baseline inputs.
-- [ ] 4.2 Validate the follow-up, independently review its delta, and resolve verified GitHub findings with delivery evidence.
+- [x] 4.2 Validate the follow-up, independently review its delta, and resolve verified GitHub findings with delivery evidence.

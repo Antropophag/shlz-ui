@@ -100,3 +100,34 @@ and `fix-rounded-control-alignment`. All were verified in immutable main base
 The completion-record follow-up changes documentation/checklist state only.
 GitHub may rerun checks for that metadata commit; implementation evidence above
 is bound to the fully green implementation commit. Merge remains user-owned.
+
+## PR 91 review follow-up
+
+The bounded follow-up starts at planning baseline `2496fc4`. Seven GitHub
+threads were answered and resolved; three summary nits were also handled.
+Dialog filter launchers now expose dialog semantics and a separate accessible
+applied-state description. Sorting/filtering share current editable values;
+source viewers contain an accessible static-example description. Added rows
+reuse the original icon action, and the fidelity heading wraps its label.
+
+Original SVG paint overrides the bot's proposed muted priority color: solid
+bars are `#45B64E`, while the muted bar is `#57965C` at 25% opacity. The baseline
+oracle now pins token definitions and transformation helpers together with
+table CSS; the regression oracle pins its complete browser module closure.
+
+Observed follow-up evidence: 279/279 unit tests, four packed packages consumed,
+all 26 focused Table cases passed across focused runs after correcting the new
+inline-SVG assertion, and six Data Workspace checks plus the existing Table
+showcase check passed. The 49-cell geometry test hit a local 90-second timeout;
+batching the same complete measurements resolved it, with the two affected
+source tests passing in 18.2 seconds including build. No assertion or source
+member was dropped. A concurrent generation/unit run was discarded and the
+279-test run repeated sequentially.
+
+The occurrence boundary remains 65 Table roots (5 executable/stress/consumer,
+60 diagnostic) plus 47 classified non-Table native tables. No source files or
+component identities changed. Separate Standards and Spec reviews passed after
+remediating pinned dependencies and source paint. Final candidate receipts and
+CI re-attest this follow-up; see PR #91 for current CI and thread state. The
+parent transfer's unsupported modes and independent component statuses remain
+as recorded above.
