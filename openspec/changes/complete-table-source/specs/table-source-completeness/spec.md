@@ -16,12 +16,22 @@ The library SHALL account individually for the 49 exported Table Cell variants, 
 
 ### Requirement: Source-backed header controls
 
-Production header and add-row text SHALL use the repository's existing accessible supporting-text role; explicitly inert source diagnostics SHALL retain original text paints. Headers SHALL render the two-arrow sorter in none, ascending and descending states and the funnel filter in default, hover and active states. Text and icon headers SHALL preserve source grouping and geometry. Active sorting SHALL be exposed by the column's aria-sort; filter applied state SHALL remain distinct from popup expanded state. Native buttons SHALL support keyboard focus and activation and disabled controls SHALL not act.
+Production header and add-row text SHALL use the repository's existing accessible supporting-text role; explicitly inert source diagnostics SHALL retain original text paints. Headers SHALL render the two-arrow sorter in none, ascending and descending states and the funnel filter in default, hover and active states. Text and icon headers SHALL preserve source grouping and geometry. Active sorting SHALL be exposed by the column's aria-sort; filter applied state SHALL remain distinct from popup expanded state. Toggle filters SHALL use aria-pressed; dialog launchers SHALL use aria-haspopup="dialog", expose applied state through an accessible description, and use data-filter-active for visual state without aria-pressed. Native buttons SHALL support keyboard focus and activation and disabled controls SHALL not act.
 
 #### Scenario: Sort and filter a live table
 
 - **WHEN** the user activates the consumer's sort control and opens/applies/resets the header filter
 - **THEN** row order and filter results change through consumer code, the corresponding header state reflects the applied data state, and dismissal returns focus to the initiating control
+
+#### Scenario: Filter an edited value
+
+- **WHEN** an editable row name changes to match the active filter
+- **THEN** filtering and sorting read the same current cell value
+
+#### Scenario: Announce the dialog filter
+
+- **WHEN** a user focuses the workspace header filter before or after applying a condition
+- **THEN** it announces a dialog launcher and an applied-filter description, retains source active paint, and does not announce a pressed toggle
 
 #### Scenario: Observe independent header states
 
@@ -59,6 +69,11 @@ Tables SHALL retain caption, column header associations and native table semanti
 ### Requirement: Component-specific completion evidence
 
 Completion SHALL require classified occurrences, per-variant executable evidence, focused visual/state checks, keyboard and disabled behavior, a real consumer, and responsive/content stress. Existing nested-component contracts SHALL not be silently replaced. Unresolved deviations SHALL be recorded and SHALL not be represented as passed fidelity.
+
+#### Scenario: Compare immutable baseline inputs
+
+- **WHEN** the table contract oracle renders the pinned baseline
+- **THEN** both table styles and token definitions come from the pinned commit, independent of current generated tokens
 
 #### Scenario: Review the transfer
 

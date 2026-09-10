@@ -20,6 +20,10 @@ See proposal.md. Table currently has one CSS module, a mixed Showcase table, one
 - Decompose into source/cell evidence, domain compositions, and core/consumer integration; independent writing uses disjoint files. Root owns CSS, shared wiring and manifests. Independent Standards and Spec reviews follow integration. This is one coherent table transfer PR despite multiple evidence surfaces.
 - Validation uses source facts plus real browser states, not snapshots alone. Declare the finite cell, sorter, filter and composition sets and bind per-member executable evidence. Source-wide raw screenshots are reference inspection only.
 
+## Review follow-up
+
+Dialog-opening filters use aria-haspopup="dialog" and a described applied-state message. The additive data-filter-active CSS hook preserves source active paint independently of toggle semantics. Existing true toggle filters retain aria-pressed. Inert source scrollers retain keyboard scrolling with an accessible description outside the hidden table. Sorting and filtering share the current editable value accessor. Baseline oracle token CSS is rendered from pinned tracked token definitions because dist files are generated and untracked. Review regressions also cover popup boundary crossing, visible SVG paint, stable empty-cell identity, and added-row presentation.
+
 ## Risks / Trade-offs
 
 - Popup clipping → reuse floating existing components and test narrow edges.

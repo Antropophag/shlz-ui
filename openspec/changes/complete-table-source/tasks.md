@@ -13,3 +13,8 @@
 - [x] 3.1 Update developer contract, source matrix and component manifests; verify documentation, source integrity and occurrence guards.
 - [x] 3.2 Run focused visual, runtime, accessibility, narrow/content stress and affected regression/package checks; inspect actual state screenshots and record exact results.
 - [x] 3.3 Complete independent Standards and Spec reviews, fix findings, run conformance and delivery guards, and leave an unmerged PR with CI/review status.
+
+## 4. PR review follow-up
+
+- [ ] 4.1 Correct dialog-filter semantics, edited-value filtering, fixture markup and added-row presentation; cover review regressions and immutable baseline inputs.
+- [ ] 4.2 Validate the follow-up, independently review its delta, and resolve verified GitHub findings with delivery evidence.
