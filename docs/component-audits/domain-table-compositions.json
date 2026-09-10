@@ -4,24 +4,32 @@
   "referenceSources": [
     "shlz-design-source/raw/svg/Managing appeals.svg",
     "shlz-design-source/raw/svg/Form constructor.svg",
-    "docs/components/table.md"
+    "docs/components/table.md",
+    "docs/components/table-source.md"
   ],
   "implementation": [
     "apps/showcase/src/consumer-workspace.js",
-    "packages/styles/components/table.css"
+    "packages/styles/components/table.css",
+    "apps/showcase/src/table-compositions.js"
   ],
   "behavior": "apps/showcase/src/consumer-workspace.js",
   "docs": "docs/components/table.md",
   "rootSelector": "[data-component-audit-id^='domain-table-']",
-  "legacySelectors": [".shlz-consumer-workspace .shlz-table"],
+  "legacySelectors": [
+    ".shlz-consumer-workspace .shlz-table",
+    ".shlz-table-compositions .shlz-table"
+  ],
   "diagnosticBoundaries": [
     "[inert]",
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 0,
+  "diagnosticOccurrenceCount": 10,
   "occurrences": [
-    { "id": "domain-table-workspace-requests", "kind": "live-consumer" }
+    {
+      "id": "domain-table-workspace-requests",
+      "kind": "live-consumer"
+    }
   ],
   "supportedSizes": ["consumer-defined-columns"],
   "supportedStates": ["filtered", "sorted", "selected", "empty-result"],
@@ -45,14 +53,15 @@
   ],
   "browserTests": [
     "tools/playwright/data-content-wave5.spec.js",
-    "tools/playwright/consumer-workspace.spec.js"
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/table-compositions.spec.js"
   ],
   "visualSnapshots": [
     "tools/playwright/consumer-workspace.spec.js-snapshots/consumer-workspace-chromium-linux.png"
   ],
   "evidence": {
     "source-integrity": "pass: domain examples are reference compositions and do not override Table Cell as primitive authority",
-    "structural-contract": "pass: the single executable domain composition is classified and reuses public Table, Status, Link, Button and Checkbox primitives",
+    "structural-contract": "pass: one live Data Workspace composition plus ten inert source tables account for nine families and all 31 exported rows/headers",
     "runtime-browser": "pass: Data Workspace application code proves draft/apply/reset filtering, sorting, selection teardown and empty recovery",
     "accessibility": "pass: composition preserves native Table headings/caption and names of nested controls and links",
     "focused-visual": "pass: Data Workspace has focused composition evidence while Table geometry is asserted component-locally",
@@ -78,6 +87,8 @@
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "nine source-observed domain table layouts remain application-local references and are not promoted to public API"
+    "Source schemas are inert composition recipes, not nine public business APIs",
+    "Field management has separate short/long examples; decorative source gutters/edit slots fold into logical column geometry",
+    "Independent review and CI passed for this source-transfer episode; Table changes do not certify other component families"
   ]
 }

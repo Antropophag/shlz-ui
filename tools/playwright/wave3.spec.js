@@ -89,8 +89,8 @@ test("Table showcase remains a 50px coherent grid with bounded affordances", asy
   const table = page.locator("#table-demo .shlz-table");
   const rows = table.locator("tr");
   await expect(rows).toHaveCount(3);
-  await expect(table).toHaveCSS("font-size", "14px");
-  await expect(table).toHaveCSS("line-height", "20px");
+  await expect(table).toHaveCSS("font-size", "15px");
+  await expect(table).toHaveCSS("line-height", "19.5px");
   const headerCell = table.locator("thead .shlz-table__cell").first();
   await expect(headerCell).toHaveCSS("font-size", "12px");
   await expect(headerCell).toHaveCSS("font-weight", "500");
@@ -118,7 +118,9 @@ test("Table showcase remains a 50px coherent grid with bounded affordances", asy
   await expect(editor).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
   await expect(table.locator(".shlz-checkbox")).toHaveCount(3);
   await expect(table.locator(".shlz-status")).toHaveCount(1);
-  await expect(table.locator(".shlz-table__dropdown")).toHaveCount(2);
+  await expect(table.locator(".shlz-table__cell-choice-trigger")).toHaveCount(
+    2,
+  );
   await expectStableShowcaseScreenshot(
     page,
     page.locator("#table-demo"),

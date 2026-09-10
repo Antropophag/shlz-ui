@@ -1,0 +1,278 @@
+{
+  "component": "table-source-matrix",
+  "authority": {
+    "tableCell": {
+      "file": "shlz-design-source/raw/svg/Table Cell.svg",
+      "sha256": "07ce2976671d2c74fdd0afb7058a5fe162bbf3ecf8e7c8c7920f160796ba69c5",
+      "width": 2580,
+      "height": 1626
+    },
+    "table": {
+      "file": "shlz-design-source/raw/svg/Table.svg",
+      "sha256": "3d9c6eca8a31a12e1e9de448acf5c28f1e04c6819f04e7bb4cbb7f0d1df2714a",
+      "width": 2042,
+      "height": 3886
+    }
+  },
+  "evidenceClasses": {
+    "original-svg-fact": "Geometry and paint directly observable in an original SVG.",
+    "derived-extraction": "Name, axis or node identity recovered from a byte-preserved ZIP manifest.",
+    "repository-decision": "Framework-neutral public or evidence contract introduced by this repository.",
+    "source-limitation": "Meaning or runtime behavior not established by the source."
+  },
+  "cellGeometry": {
+    "ordinaryHeight": 50,
+    "inlineInset": 8,
+    "divider": {
+      "width": 1,
+      "color": "#D1D8DF"
+    },
+    "expandedHeightIsPopupBound": 154,
+    "dividerVariants": {
+      "#DFE2F0": [12, 13, 37, 38, 39, 40, 41],
+      "#253D98": [26, 30, 42, 43, 49],
+      "default": "#D1D8DF"
+    },
+    "checkboxSize": 20,
+    "expandedSvgBounds": {
+      "width": 200,
+      "height": 188,
+      "contentWidth": 140,
+      "contentHeight": 154,
+      "reason": "SVG bounds include the source popup shadow padding; row height stays 50"
+    }
+  },
+  "cellVariants": [
+    [1, "Text", "Default", false, "Header", false, 110, 50],
+    [2, "Text", "Hover", false, "Header", false, 110, 50],
+    [3, "Text", "Filter active", false, "Header", false, 110, 50],
+    [4, "Text", "Both active (descending)", false, "Header", false, 110, 50],
+    [5, "Text", "Both active (ascending)", false, "Header", false, 110, 50],
+    [6, "Text", "Ascending sorter", false, "Header", false, 110, 50],
+    [7, "Text", "Descending sorter", false, "Header", false, 110, 50],
+    [8, "Text", "Default", false, "Row", true, 110, 50],
+    [9, "Text", "Hover", false, "Row", true, 110, 50],
+    [10, "Empty", "Default", false, "Row", false, 110, 50],
+    [11, "Empty", "Hover", false, "Row", false, 110, 50],
+    [12, "Status", "Default", false, "Row", true, 110, 50],
+    [13, "Status", "Hover", false, "Row", true, 110, 50],
+    [14, "Check", "Default", false, "Row", false, 40, 50],
+    [15, "Check", "Default", false, "Row", true, 40, 50],
+    [16, "Check", "Hover", false, "Row", false, 40, 50],
+    [17, "Icon", "Default", false, "Header", false, 48, 50],
+    [18, "Priority", "Default", false, "Row", true, 48, 50],
+    [19, "Priority", "Hover", false, "Row", true, 48, 50],
+    [20, "Icon", "Hover", false, "Header", false, 48, 50],
+    [21, "Icon", "Ascending sorter", false, "Header", false, 48, 50],
+    [22, "Text", "Default", true, "Row", false, 140, 50],
+    [23, "Status", "Default", true, "Row", false, 140, 50],
+    [24, "Status", "Hover", true, "Row", false, 140, 50],
+    [25, "Text", "Hover", true, "Row", false, 140, 50],
+    [26, "Text", "Pressed", true, "Row", false, 140, 50],
+    [27, "Text", "Default", true, "Row", true, 140, 50],
+    [28, "Dropdown", "Default", true, "Row", true, 140, 50],
+    [29, "Text", "Hover", true, "Row", true, 140, 50],
+    [30, "Text", "Typing", true, "Row", true, 140, 50],
+    [31, "Check", "Default", true, "Row", false, 40, 50],
+    [32, "Button", "Default", false, "Row", true, 167, 50],
+    [33, "Button", "Pressed", false, "Row", true, 167, 50],
+    [34, "Button", "Hover", false, "Row", true, 167, 50],
+    [35, "Check", "Default", true, "Row", true, 40, 50],
+    [36, "Check", "Hover", true, "Row", false, 40, 50],
+    [37, "Switch", "Default", true, "Row", false, 54, 50],
+    [38, "Switch", "Default", true, "Row", true, 54, 50],
+    [39, "Switch", "Hover", true, "Row", false, 54, 50],
+    [40, "Status", "Default", true, "Row", true, 140, 50],
+    [41, "Status", "Hover", true, "Row", true, 140, 50],
+    [42, "Text", "Typing", true, "Row", false, 140, 154],
+    [43, "Status", "Pressed", true, "Row", false, 140, 154],
+    [44, "Icon", "Default", false, "Row", false, 40, 50],
+    [45, "Icon", "Hover", false, "Row", false, 40, 50],
+    [46, "Icon", "Pressed", false, "Row", false, 40, 50],
+    [47, "Dropdown", "Hover", true, "Row", false, 140, 50],
+    [48, "Dropdown", "Default", true, "Row", false, 140, 50],
+    [49, "Dropdown", "Pressed", true, "Row", false, 140, 154]
+  ],
+  "cellVariantColumns": [
+    "sourceOrder",
+    "type",
+    "state",
+    "editable",
+    "cell",
+    "filled",
+    "width",
+    "height"
+  ],
+  "cellGalleryIdPattern": "table-cell-source-{sourceOrder}",
+  "sorter": [
+    {
+      "name": "Inactive",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "name": "Ascending",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "name": "Descending",
+      "width": 16,
+      "height": 16
+    }
+  ],
+  "filter": [
+    {
+      "name": "Default",
+      "width": 16,
+      "height": 18
+    },
+    {
+      "name": "Hover",
+      "width": 16,
+      "height": 18
+    },
+    {
+      "name": "Active",
+      "width": 16,
+      "height": 18
+    }
+  ],
+  "domainCompositions": [
+    {
+      "slug": "appeals",
+      "selector": "table-composition-appeals",
+      "sourceName": "Table Обращения",
+      "variantCount": 4,
+      "widths": [1304],
+      "states": [
+        "Header Default 50px (metadata 48px conflicts with SVG)",
+        "Row Default",
+        "Row Hover",
+        "Row Active"
+      ]
+    },
+    {
+      "slug": "status-management",
+      "selector": "table-composition-status-management",
+      "sourceName": "Table Управление статусами",
+      "variantCount": 4,
+      "widths": [1304],
+      "states": [
+        "Header Default",
+        "Row Default",
+        "Row Hover",
+        "Row Dots pressed"
+      ]
+    },
+    {
+      "slug": "organization-management",
+      "selector": "table-composition-organization-management",
+      "sourceName": "Table Управление организациями",
+      "variantCount": 3,
+      "widths": [1304],
+      "states": ["Default occurrence 1", "Default occurrence 2", "Hover"]
+    },
+    {
+      "slug": "profile-management",
+      "selector": "table-composition-profile-management",
+      "sourceName": "Table Управление профилями",
+      "variantCount": 3,
+      "widths": [1304],
+      "states": ["Header", "Row Default", "Row Hover"]
+    },
+    {
+      "slug": "linked-profiles",
+      "selector": "table-composition-linked-profiles",
+      "sourceName": "Table Привязанные профили",
+      "variantCount": 2,
+      "widths": [1830],
+      "states": ["Header", "Row"]
+    },
+    {
+      "slug": "category-management",
+      "selector": "table-composition-category-management",
+      "sourceName": "Table Управление категориями",
+      "variantCount": 3,
+      "widths": [1304],
+      "states": ["Header Default", "Row Default", "Row Hover"]
+    },
+    {
+      "slug": "field-management",
+      "selectors": [
+        "table-composition-field-management-short",
+        "table-composition-field-management-long"
+      ],
+      "sourceName": "Table Управление полями",
+      "variantCount": 6,
+      "widths": [1304, 1842],
+      "states": [
+        "Header Short",
+        "Header Long",
+        "Row Default Short",
+        "Row Hover Short",
+        "Row Default Long",
+        "Row Hover Long"
+      ]
+    },
+    {
+      "slug": "auto-assignment",
+      "selector": "table-composition-auto-assignment",
+      "sourceName": "Table Автоназначение",
+      "variantCount": 3,
+      "widths": [1306],
+      "states": ["Header Default", "Row Default", "Row Hover"]
+    },
+    {
+      "slug": "directories",
+      "selector": "table-composition-directories",
+      "sourceName": "Table Справочники",
+      "variantCount": 3,
+      "widths": [1304],
+      "states": ["Header Default", "Row Default", "Row Hover"]
+    }
+  ],
+  "pagination": {
+    "buttonWidth": 40,
+    "buttonHeight": 40,
+    "variantCount": 20,
+    "compositionWidth": 320,
+    "compositionHeight": 40,
+    "types": ["Prev", "Next", "Number", "Ellipsis Prev", "Ellipsis Next"],
+    "states": ["Default", "Hover", "Pressed", "Disabled"],
+    "ownership": "Independent native-link Pagination contract; composed by consumers beside Table."
+  },
+  "limitations": [
+    "Outlined SVG text requires derived manifests for names.",
+    "154px exports describe popup bounds, not row heights.",
+    "Static compositions establish presentation only and are inert.",
+    "No data controller, resizing, virtualization, sticky header or responsive-card behavior is inferred."
+  ],
+  "sourceConflicts": [
+    {
+      "source": "Table.svg and Table Обращения/variants/State=Default, Type=Header.svg",
+      "metadataHeight": 48,
+      "svgHeight": 50,
+      "disposition": "Original SVG wins; render 50px."
+    }
+  ],
+  "typography": {
+    "visibleBody": {
+      "fontFamily": "Golos Text",
+      "fontSize": 15,
+      "lineHeight": 19.5,
+      "letterSpacing": "-1%",
+      "evidence": "shlz-design-source/raw/typography-UI Kit – Basic elements.json sourceReferences for Table Cell Text/Status/Dropdown, corroborated by outlined glyph geometry"
+    },
+    "headerAndAddRow": {
+      "fontSize": 12,
+      "lineHeight": 18,
+      "weight": 500,
+      "letterSpacing": "0"
+    },
+    "hiddenCheckboxLabels": {
+      "fontSize": 14,
+      "rendered": false
+    }
+  }
+}

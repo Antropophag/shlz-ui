@@ -5,7 +5,7 @@
   "implementation": ["packages/styles/components/button.css"],
   "behavior": null,
   "docs": "docs/components/button.md",
-  "rootSelector": "[data-component-audit-id^='button-']",
+  "rootSelector": "[data-component-audit-id^='button-'], [data-component-audit-id='table-editing-example']",
   "legacySelectors": [".shlz-button"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
@@ -93,7 +93,8 @@
     {
       "id": "button-chart-widget-content-stress-reset",
       "kind": "content-stress-fixture"
-    }
+    },
+    { "id": "table-editing-example", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["large-40", "medium-32", "small-26"],
   "supportedStates": [

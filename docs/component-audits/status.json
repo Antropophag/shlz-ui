@@ -5,14 +5,14 @@
   "implementation": ["packages/styles/components/status-badge.css"],
   "behavior": null,
   "docs": "docs/components/status.md",
-  "rootSelector": "[data-component-audit-id^='status-']",
+  "rootSelector": "[data-component-audit-id^='status-'], [data-component-audit-id='table-editing-example']",
   "legacySelectors": [".shlz-status"],
   "diagnosticBoundaries": [
     "[inert]",
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 13,
+  "diagnosticOccurrenceCount": 27,
   "occurrences": [
     { "id": "status-showcase-blue", "kind": "executable-fixture" },
     { "id": "status-showcase-green", "kind": "executable-fixture" },
@@ -38,7 +38,8 @@
       "id": "status-chart-widget-content-stress",
       "kind": "content-stress-fixture"
     },
-    { "id": "status-chart-widget-consumer", "kind": "live-consumer" }
+    { "id": "status-chart-widget-consumer", "kind": "live-consumer" },
+    { "id": "table-editing-example", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["30"],
   "supportedStates": [

@@ -28,6 +28,11 @@ export const paginationConsumerMarkup = (search, iconUrl) => {
     <h4>Executable consumer boundary</h4>
     <p>Application-owned URL state: <code>?page=${currentPage}</code></p>
     <p data-pagination-result>${result}</p>
+    <div class="shlz-table-wrap"><table class="shlz-table" data-component-audit-id="table-pagination-consumer">
+      <caption>Первые две заявки страницы ${currentPage}</caption>
+      <thead class="shlz-table__head"><tr><th class="shlz-table__cell" scope="col">Номер</th><th class="shlz-table__cell" scope="col">Тема</th></tr></thead>
+      <tbody>${[1, 2].map((offset) => `<tr class="shlz-table__row"><td class="shlz-table__cell">SD-${2400 + (currentPage - 1) * 20 + offset}</td><td class="shlz-table__cell">Заявка на обслуживание ${offset}</td></tr>`).join("")}</tbody>
+    </table></div>
     <nav class="shlz-pagination" aria-label="Страницы consumer validation">
       <ul class="shlz-pagination__list">
         ${direction("previous", currentPage - 1, currentPage === 1)}

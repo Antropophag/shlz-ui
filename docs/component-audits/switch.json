@@ -5,7 +5,7 @@
   "implementation": ["packages/styles/components/choice.css"],
   "behavior": null,
   "docs": "docs/components/switch.md",
-  "rootSelector": "[data-component-audit-id^='switch-']",
+  "rootSelector": "[data-component-audit-id^='switch-'], [data-component-audit-id='table-editing-example']",
   "legacySelectors": [".shlz-switch__input"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
@@ -20,7 +20,8 @@
     {
       "id": "switch-framework-composition",
       "kind": "executable-fixture"
-    }
+    },
+    { "id": "table-editing-example", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["medium-38x20", "small-24x14"],
   "supportedStates": [

@@ -5,7 +5,7 @@
   "implementation": ["packages/styles/components/choice.css"],
   "behavior": null,
   "docs": "docs/components/checkbox.md",
-  "rootSelector": "[data-component-audit-id^='checkbox-']",
+  "rootSelector": "[data-component-audit-id^='checkbox-'], [data-component-audit-id='table-editing-example']",
   "legacySelectors": [".shlz-checkbox"],
   "diagnosticBoundaries": ["[inert]"],
   "occurrences": [
@@ -20,7 +20,8 @@
     { "id": "checkbox-workspace-select-all", "kind": "live-consumer" },
     { "id": "checkbox-workspace-sd-2418", "kind": "live-consumer" },
     { "id": "checkbox-workspace-sd-2415", "kind": "live-consumer" },
-    { "id": "checkbox-workspace-sd-2409", "kind": "live-consumer" }
+    { "id": "checkbox-workspace-sd-2409", "kind": "live-consumer" },
+    { "id": "table-editing-example", "kind": "executable-fixture" }
   ],
   "supportedSizes": ["large-20", "medium-16"],
   "supportedStates": [
