@@ -1307,7 +1307,7 @@
       "canonical_name": "Table",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Table Cell.svg",
         "shlz-design-source/raw/svg/Table.svg"
@@ -1346,7 +1346,7 @@
       ],
       "known_findings": [],
       "limitations": [
-        "Source transfer local evidence is recorded in table-source-transfer-report.md; independent review and CI are pending."
+        "Verified source transfer evidence, independent reviews and implementation CI are recorded in table-source-transfer-report.md."
       ],
       "measured_counts": {
         "executableShowcase": 3,
@@ -2953,7 +2953,7 @@
       "canonical_name": "Domain table compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Managing appeals.svg",
         "shlz-design-source/raw/svg/Form constructor.svg",
@@ -2977,7 +2977,7 @@
       ],
       "known_findings": [],
       "limitations": [
-        "Nine source families are ten inert native composition recipes; independent review and CI pending."
+        "Nine source families are ten inert native composition recipes; current evidence and CI are recorded in table-source-transfer-report.md."
       ],
       "measured_counts": {
         "executableShowcase": 0,

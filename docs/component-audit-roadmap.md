@@ -113,7 +113,7 @@ These explicit OpenSpec follow-ups re-open previously audited families outside
 the numbered Wave 9–12 scope. Their current source-transfer evidence is tracked
 independently; the old wave verdict is not a certificate for the expanded family.
 
-| OpenSpec change         | Inventory family          | Current boundary                                                      |
-| ----------------------- | ------------------------- | --------------------------------------------------------------------- |
-| `complete-table-source` | Table                     | Full cell/header transfer; independent review and CI pending          |
-| `complete-table-source` | Domain table compositions | Nine source families / 31 variants; independent review and CI pending |
+| OpenSpec change         | Inventory family          | Current boundary                                                 |
+| ----------------------- | ------------------------- | ---------------------------------------------------------------- |
+| `complete-table-source` | Table                     | Full cell/header transfer verified; PR remains unmerged          |
+| `complete-table-source` | Domain table compositions | Nine source families / 31 variants verified; PR remains unmerged |

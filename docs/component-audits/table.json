@@ -155,7 +155,7 @@
     "responsive cards, sticky headers, resizing, virtualization and data operations are unsupported or consumer-owned",
     "Static source compositions are inert recipes, not nine business-specific core components",
     "Popup collision handling and data operations are consumer integrations; Table exports CSS/native markup, no data controller",
-    "Overall PR completion remains pending independent review and CI; see table-source-transfer-report.md"
+    "Implementation, independent review and CI evidence are recorded in table-source-transfer-report.md; merge remains user-owned"
   ],
   "nativeTableCensus": [
     {

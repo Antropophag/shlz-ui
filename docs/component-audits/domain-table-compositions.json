@@ -89,6 +89,6 @@
   "knownLimitations": [
     "Source schemas are inert composition recipes, not nine public business APIs",
     "Field management has separate short/long examples; decorative source gutters/edit slots fold into logical column geometry",
-    "PR review and CI remain separate gates; Table changes do not certify other component families"
+    "Independent review and CI passed for this source-transfer episode; Table changes do not certify other component families"
   ]
 }
