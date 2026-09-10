@@ -24,8 +24,12 @@ if (baselineTargets.has(requested)) {
   const adapter = JSON.parse(await readFile(baselinePath, "utf8"));
   assert.match(adapter.baselineCommit, /^[a-f0-9]{40}$/);
   assert.equal(adapter.stylesheet, stylesheet);
+  const gitExecutable =
+    process.platform === "win32"
+      ? String.raw`C:\Program Files\Git\cmd\git.exe`
+      : "/usr/bin/git";
   css = execFileSync(
-    "git",
+    gitExecutable,
     ["show", `${adapter.baselineCommit}:${stylesheet}`],
     { cwd: repoRoot, encoding: "utf8" },
   );

@@ -177,6 +177,11 @@ const typeClass = (type) =>
     Priority: " shlz-table__cell--priority",
   })[type] ?? "";
 
+const specimenDimensions = (width, popup) =>
+  popup
+    ? { contentHeight: 154, svgWidth: 200, svgHeight: 188 }
+    : { contentHeight: 50, svgWidth: width, svgHeight: 50 };
+
 const specimen = (variant, offset, iconUrl) => {
   const index = offset + 1;
   const [type, state, editable, cell, filled, width, popup] = variant;
@@ -195,9 +200,10 @@ const specimen = (variant, offset, iconUrl) => {
   let rows = `<thead class="shlz-visually-hidden"><tr><th scope="col">Значение</th></tr></thead><tbody><tr class="shlz-table__row">${cellMarkup}</tr></tbody>`;
   if (isHeader)
     rows = `<thead class="shlz-table__head"><tr>${cellMarkup}</tr></thead><tbody></tbody>`;
-  const contentHeight = popup ? 154 : 50;
-  const svgWidth = popup ? 200 : width;
-  const svgHeight = popup ? 188 : 50;
+  const { contentHeight, svgWidth, svgHeight } = specimenDimensions(
+    width,
+    popup,
+  );
   const editableLabel = editable ? " · editable" : "";
   const filledLabel = filled ? " · filled" : "";
   const popupLabel = popup ? " · popup export" : "";
