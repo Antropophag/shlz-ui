@@ -101,7 +101,7 @@
       "text-disabled"
     ],
     "browserTest": "tools/playwright-vue/button.spec.js",
-    "manualStateWalk": "pass: separate interactive browser walk inspected pointer-down computed paints, Tab/focus, Enter/Space count, disabled state and desktop/320px screenshots; 22 rendered buttons in 3 classified roots, 4 icon children"
+    "manualStateWalk": "pass: separate interactive browser walk inspected pointer-down computed paints, Tab/focus, Enter/Space count, disabled state and desktop/320px screenshots; 22 rendered buttons in 3 classified roots, 4 icon children; review follow-up at 320px: invalid icon-only xs rendered 32x32, reactive md rendered 40x40 and label xs retained 26px height, with no conflicting modifiers"
   },
   "acceptedDeviations": [],
   "findings": [],

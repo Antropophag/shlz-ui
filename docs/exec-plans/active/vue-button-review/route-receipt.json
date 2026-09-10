@@ -1,0 +1,38 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Resolve PR #93 reviews: enforce supported Vue icon-only Button sizes and deliver ready unmerged PR.",
+    "material": [
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "vue-adapter-foundation",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "review-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "supported-sizes",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "bcd5c303e8f185d234574b53877116f23a3654357c670914a46174a70cd48f58"
+}

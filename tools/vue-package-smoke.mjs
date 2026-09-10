@@ -58,6 +58,10 @@ h(ShlzButton, attrs);
 const badEvent: PublicProps = { onClick(event: string) {} }; void badEvent;
 // @ts-expect-error native button type is a closed set
 const badType: PublicProps = { type: 'navigation' }; void badType;
+declare const dynamicIcon: boolean;
+const dynamicSafe: PublicProps[] = [{ iconOnly: dynamicIcon }, { iconOnly: dynamicIcon, size: 'md' }, { iconOnly: dynamicIcon, size: 'sm' }]; void dynamicSafe;
+// @ts-expect-error a dynamic boolean cannot guarantee that xs is not icon-only
+const dynamicUnsafe: PublicProps = { iconOnly: dynamicIcon, size: 'xs' }; void dynamicUnsafe;
 const validIcon: PublicProps = { iconOnly: true, size: 'sm', 'aria-label': 'Add' }; void validIcon;
 const validSmall: PublicProps = { size: 'xs' }; void validSmall;
 // @ts-expect-error xs is not a supported icon-only size
