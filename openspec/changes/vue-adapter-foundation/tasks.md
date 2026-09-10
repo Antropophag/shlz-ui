@@ -8,3 +8,8 @@
 - [x] 2.1 Verify native form/keyboard/disabled/attribute/reactivity contract, source-backed visual states and content stress with focused browser checks and manual state walk.
 - [x] 2.2 Update scoped Button audit occurrences and Vue documentation; verify occurrence guard, source integrity and relevant existing consumer regressions.
 - [x] 2.3 Run independent Standards/Spec review and candidate-bound validation; deliver an unmerged PR with conformance/delivery receipts and update issue #92 with exact scope and remaining tasks.
+
+## 3. Review follow-up
+
+- [ ] 3.1 Reject xs/icon-only in the public type and normalize JavaScript inputs to sm; verify negative type, SSR, hydration and reactive regression checks.
+- [ ] 3.2 Re-attest the scoped audit and review, resolve GitHub discussions, and make the unmerged PR ready after green CI and delivery guards.

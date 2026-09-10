@@ -15,12 +15,18 @@ The private packable `@shlz/vue` package SHALL export typed `ShlzButton` through
 
 ### Requirement: Native Button interface
 
-`ShlzButton` SHALL render one native button with default slot content, native attributes and native listeners forwarded to that element. Its props SHALL be `variant` (neutral default, primary, text), `size` (md default, sm, xs), `iconOnly` (false default), `type` (button default, submit, reset), and `disabled` (false default). These map to the existing CSS contract with 40/32/26px sizes; icon-only is supported at md/sm only. Consumer class/style and accessible-name attributes SHALL be preserved. The component SHALL expose a typed `element` reference to its native button after mount. Loading, navigation, model state and generated IDs are outside the supported interface.
+`ShlzButton` SHALL render one native button with default slot content, native attributes and native listeners forwarded to that element. Its props SHALL be `variant` (neutral default, primary, text), `size` (md default, sm, xs), `iconOnly` (false default), `type` (button default, submit, reset), and `disabled` (false default). These map to the existing CSS contract with 40/32/26px sizes; icon-only is supported at md/sm only. The public prop type MUST reject iconOnly=true with size=xs. Runtime JavaScript inputs combining these values SHALL render the supported sm icon-only Button, including during SSR and reactive updates; xs and icon-only classes MUST NOT appear together. Consumer class/style and accessible-name attributes SHALL be preserved. The component SHALL expose a typed `element` reference to its native button after mount. Loading, navigation, model state and generated IDs are outside the supported interface.
 
 #### Scenario: Reactive presentation and attributes
 
 - **WHEN** a parent changes supported props, attrs or slot content
 - **THEN** the same native button reflects those values and retains the SHLZ base class alongside consumer classes
+
+#### Scenario: Unsupported icon-only size
+
+- **WHEN** a JavaScript consumer supplies iconOnly=true with size=xs, initially or during a reactive update
+- **THEN** the Button uses the 32px sm icon-only presentation without the xs modifier
+- **AND** the corresponding literal prop combination is rejected by the exported TypeScript contract
 
 #### Scenario: Native activation and disabled
 
