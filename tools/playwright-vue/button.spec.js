@@ -44,6 +44,12 @@ test("SSR DOM survives hydration and application lifecycle dispatches once", asy
   await expect(button).toHaveText("Actions: 4");
   await page.getByRole("button", { name: "Change variant" }).click();
   await expect(button).toHaveClass(/shlz-button--primary/);
+  await expect(button).toHaveAttribute("data-command-state", "primary");
+  expect(
+    await page.evaluate(
+      () => window.serverButton === document.querySelector("#reactive-button"),
+    ),
+  ).toBe(true);
   await expect(button).toHaveClass(/consumer-class/);
   await expect(button).toHaveAttribute("style", /vertical-align/);
   for (let i = 0; i < 3; i++) {

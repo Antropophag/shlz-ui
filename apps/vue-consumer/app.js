@@ -49,6 +49,7 @@ export function createConsumer() {
                         action(`Actions: ${count.value}`, {
                           ref: button,
                           id: "reactive-button",
+                          "data-command-state": variant.value,
                           class: "consumer-class",
                           style: "vertical-align:middle",
                           "aria-label": "Run action",

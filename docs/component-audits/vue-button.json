@@ -68,13 +68,13 @@
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "Computed size matrix and inspected consumer screenshots; screenshots are supplemental only"
+        "pass: Computed size matrix and inspected consumer screenshots; screenshots are supplemental only"
       ],
       "realInteractionVisual": [
-        "Browser-created hover/active/focus/disabled paints asserted against Buttons.svg values for each mode"
+        "pass: Browser-created hover/active/focus/disabled paints asserted against Buttons.svg values for each mode"
       ],
       "runtimeBehavior": [
-        "Native event/form/lifecycle and hydration flows in tools/playwright-vue/button.spec.js"
+        "pass: Native event/form/lifecycle and hydration flows in tools/playwright-vue/button.spec.js"
       ]
     },
     "materialStates": [
@@ -83,11 +83,11 @@
       "primary-active",
       "primary-focus-visible",
       "primary-disabled",
-      "secondary-default",
-      "secondary-hover",
-      "secondary-active",
-      "secondary-focus-visible",
-      "secondary-disabled",
+      "neutral-default",
+      "neutral-hover",
+      "neutral-active",
+      "neutral-focus-visible",
+      "neutral-disabled",
       "text-default",
       "text-hover",
       "text-active",
@@ -110,5 +110,6 @@
     "unclassified": 0,
     "inertDiagnostics": 0,
     "iconChildren": 4
-  }
+  },
+  "diagnosticOccurrenceCount": 0
 }

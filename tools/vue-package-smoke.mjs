@@ -45,8 +45,12 @@ try {
   );
   writeFileSync(
     path.join(dir, "consumer.ts"),
-    `import { h } from 'vue';
+    `import { h, ref } from 'vue';
 import { ShlzButton, type ButtonHandle, type ButtonVariant, type ButtonSize } from '@shlz/vue';
+const buttonRef = ref<InstanceType<typeof ShlzButton> | null>(null);
+const native: HTMLButtonElement | null | undefined = buttonRef.value?.element; void native;
+// @ts-expect-error exposed element is a button, not a string
+const wrongElement: string = buttonRef.value?.element; void wrongElement;
 type PublicProps = InstanceType<typeof ShlzButton>['$props'];
 const attrs: PublicProps = { name: 'command', value: 'save', form: 'editor', 'aria-label': 'Save', onClick(event) { const mouse: MouseEvent = event; mouse.preventDefault(); } };
 h(ShlzButton, attrs);

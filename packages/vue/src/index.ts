@@ -23,7 +23,7 @@ export interface ButtonHandle {
 }
 
 /** Native SHLZ Button. Load @shlz/styles/shlz.css in the consuming application. */
-export const ShlzButton = defineComponent(
+const ButtonImplementation = defineComponent(
   (props: ButtonProps, { slots, expose }) => {
     const element = ref<HTMLButtonElement | null>(null);
     expose({ element });
@@ -59,3 +59,10 @@ export const ShlzButton = defineComponent(
     },
   },
 );
+
+// Vue's setup-function overload does not infer expose(); bind the tested handle
+// to the public instance while retaining native prop and listener inference.
+export const ShlzButton =
+  ButtonImplementation as typeof ButtonImplementation & {
+    new (): InstanceType<typeof ButtonImplementation> & ButtonHandle;
+  };
