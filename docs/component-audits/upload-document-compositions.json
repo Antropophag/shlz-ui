@@ -90,6 +90,7 @@
     }
   ],
   "terminologyCensus": {
+    "vueAdapterDisposition": "Three additional unrelated document-global references: apps/vue-consumer/client.js, tools/playwright-vue/button.spec.js, tools/vue-package-smoke.mjs. These do not implement higher-level document or messaging compositions.",
     "auditEvidencePaths": [
       "apps/showcase/src/bootstrap.js",
       "tools/playwright/showcase-loading.spec.js",
@@ -97,8 +98,8 @@
       "tools/playwright/rounded-control-alignment.spec.js"
     ],
     "primitiveDependencyPathCount": 15,
-    "unrelatedTerminologyPathCount": 83,
-    "totalPathCount": 101,
+    "unrelatedTerminologyPathCount": 86,
+    "totalPathCount": 104,
     "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths; rounded-control alignment is test-only audit evidence, and its pixel/DOM helper adds one unrelated document terminology path; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family; Table transfer adds DOM document references in table-cells.js, wave3.js, table-cells.spec.js and table-contract-oracle.mjs; these are table-only terminology, not upload/document compositions. The PR 91 table-review-oracle.mjs adds one table-only DOM document reference."
   },
   "supportedSizes": ["source-sheets-only"],

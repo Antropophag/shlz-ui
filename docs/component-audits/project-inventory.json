@@ -392,6 +392,7 @@
         "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
       },
       "canonical_name": "Button",
+      "adapterEvidence": ["docs/component-audits/vue-button.json"],
       "category": "actions-navigation",
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",

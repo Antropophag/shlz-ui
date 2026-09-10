@@ -1,0 +1,114 @@
+{
+  "component": "vue-button",
+  "authoritativeSource": "shlz-design-source/raw/svg/Buttons.svg",
+  "referenceSources": ["docs/components/button.md", "docs/components/vue.md"],
+  "implementation": ["packages/vue/src/index.ts"],
+  "behavior": null,
+  "docs": "docs/components/vue.md",
+  "rootSelector": "[data-component-audit-id^='button-vue-']",
+  "legacySelectors": [".shlz-button"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    {
+      "id": "button-vue-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "button-vue-matrix",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-vue-stress",
+      "kind": "content-stress-fixture"
+    }
+  ],
+  "supportedSizes": ["large-40", "medium-32", "small-26"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+  ],
+  "contentStress": [
+    "icon-leading",
+    "icon-trailing",
+    "icon-only",
+    "long-label",
+    "narrow-container"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "primary, secondary and text modes retain three sizes and four source paint rows",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "source specimen widths are content examples rather than fixed public widths",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "native button owns activation, form type, disabled and click semantics; the library adds no controller",
+      "classification": "repository-decision",
+      "evidence": "docs/components/button.md"
+    }
+  ],
+  "browserTests": ["tools/playwright-vue/button.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: raw Buttons.svg inspected; rect heights 40/32/26 and source paints confirmed; no source changes",
+    "structural-contract": "pass: ESM/types and packed isolated consumer resolve; core release policy unchanged",
+    "runtime-browser": "pass: pointer/Enter/Space/programmatic activation, disabled suppression, reactive variant/slot, native form submit/reset and repeated remount",
+    "accessibility": "pass: accessible labels, native keyboard/focus/disabled and active-state contrast guard",
+    "focused-visual": "pass: real computed paints for neutral/primary/text; sizes 40/32/26; icon-only 40/32; no new stylesheet",
+    "consumer-integration": "pass: Vue form owns counter, submit count, disabled state and mount lifecycle; server DOM retained during hydration",
+    "responsive-content-stress": "pass: 180px long-label container and 320px viewport; leading/trailing and icon-only content"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "Computed size matrix and inspected consumer screenshots; screenshots are supplemental only"
+      ],
+      "realInteractionVisual": [
+        "Browser-created hover/active/focus/disabled paints asserted against Buttons.svg values for each mode"
+      ],
+      "runtimeBehavior": [
+        "Native event/form/lifecycle and hydration flows in tools/playwright-vue/button.spec.js"
+      ]
+    },
+    "materialStates": [
+      "primary-default",
+      "primary-hover",
+      "primary-active",
+      "primary-focus-visible",
+      "primary-disabled",
+      "secondary-default",
+      "secondary-hover",
+      "secondary-active",
+      "secondary-focus-visible",
+      "secondary-disabled",
+      "text-default",
+      "text-hover",
+      "text-active",
+      "text-focus-visible",
+      "text-disabled"
+    ],
+    "browserTest": "tools/playwright-vue/button.spec.js",
+    "manualStateWalk": "pass: separate interactive browser walk inspected pointer-down computed paints, Tab/focus, Enter/Space count, disabled state and desktop/320px screenshots; 22 rendered buttons in 3 classified roots, 4 icon children"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "loading is not part of the public contract",
+    "button-styled anchors are not a supported Button variant",
+    "SSR compatibility applies to ShlzButton only; Nuxt is not independently verified"
+  ],
+  "observedCounts": {
+    "buttons": 22,
+    "classifiedRoots": 3,
+    "unclassified": 0,
+    "inertDiagnostics": 0,
+    "iconChildren": 4
+  }
+}

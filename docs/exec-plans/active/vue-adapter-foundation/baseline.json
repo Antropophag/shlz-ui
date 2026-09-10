@@ -1,0 +1,27 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feat/vue-adapter-foundation",
+    "commit": "180398a4b0fe4654ae54749ba137c7dbba5341cf",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feat/vue-adapter-foundation",
+      "headRefOid": "180398a4b0fe4654ae54749ba137c7dbba5341cf",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/93"
+    },
+    "repository": {
+      "checkoutDigest": "3a7c39fe4656c437c48d91cf12e2be52bd8956c6d01ea28a9c41114db7c498e9",
+      "digest": "95b26305b40ec5caebbabe1ca1a6fd350b145aefa495f87baebeb66b31f4a6d9",
+      "originDigest": "eb5de31d2b63adf203b6e867973e50e9f9f8b0bb882aa3cc0389033ad6126676",
+      "version": 2
+    },
+    "upstream": "origin/feat/vue-adapter-foundation"
+  },
+  "requirementsDigest": "0327f0c38970341f8032defd30903f86a2e64a7894eba503c59f40f01613c417",
+  "routeDigest": "0c1e7020df7130c87b46ca56482314fb3bb54ff1d77f9a30d9bb622ab399dfe6",
+  "version": 1,
+  "digest": "14a2b506a33c61ab2ced7bee05b87f10915e6287cbede8095f5ea719e0f69a3c"
+}
