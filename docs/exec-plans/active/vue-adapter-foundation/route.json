@@ -1,0 +1,46 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Implement issue #92 first Vue adapter slice: typed Button with SSR and focused consumer evidence.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "vue-adapter-foundation",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "ssr",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "source",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "architecture",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "0c1e7020df7130c87b46ca56482314fb3bb54ff1d77f9a30d9bb622ab399dfe6"
+}
