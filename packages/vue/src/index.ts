@@ -4,31 +4,38 @@ import {
   ref,
   type ButtonHTMLAttributes,
   type PropType,
+  type VNodeProps,
 } from "vue";
 
 export type ButtonVariant = "neutral" | "primary" | "text";
 export type ButtonSize = "md" | "sm" | "xs";
-export interface ButtonProps extends Omit<
-  ButtonHTMLAttributes,
-  "type" | "disabled"
-> {
+export type ButtonProps = Omit<ButtonHTMLAttributes, "type" | "disabled"> & {
   variant?: ButtonVariant;
-  size?: ButtonSize;
-  iconOnly?: boolean;
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
-}
+} & (
+    | { iconOnly?: false; size?: ButtonSize }
+    | { iconOnly: true; size?: Exclude<ButtonSize, "xs"> }
+  );
+type RuntimeButtonProps = Omit<ButtonProps, "iconOnly" | "size"> & {
+  iconOnly?: boolean;
+  size?: ButtonSize;
+};
+
 export interface ButtonHandle {
   readonly element: HTMLButtonElement | null;
 }
 
 /** Native SHLZ Button. Load @shlz/styles/shlz.css in the consuming application. */
 const ButtonImplementation = defineComponent(
-  (props: ButtonProps, { slots, expose }) => {
+  (props: RuntimeButtonProps, { slots, expose }) => {
     const element = ref<HTMLButtonElement | null>(null);
     expose({ element });
-    return () =>
-      h(
+    return () => {
+      const requestedSize = props.size;
+      const iconOnly = props.iconOnly;
+      const size = iconOnly && requestedSize === "xs" ? "sm" : requestedSize;
+      return h(
         "button",
         {
           ref: element,
@@ -37,12 +44,13 @@ const ButtonImplementation = defineComponent(
           class: [
             "shlz-button",
             props.variant !== "neutral" && `shlz-button--${props.variant}`,
-            props.size !== "md" && `shlz-button--${props.size}`,
+            size !== "md" && `shlz-button--${size}`,
             props.iconOnly && "shlz-button--icon",
           ],
         },
         slots.default?.(),
       );
+    };
   },
   {
     name: "ShlzButton",
@@ -60,9 +68,10 @@ const ButtonImplementation = defineComponent(
   },
 );
 
-// Vue's setup-function overload does not infer expose(); bind the tested handle
-// to the public instance while retaining native prop and listener inference.
-export const ShlzButton =
-  ButtonImplementation as typeof ButtonImplementation & {
-    new (): InstanceType<typeof ButtonImplementation> & ButtonHandle;
-  };
+// Runtime inputs can bypass TypeScript; expose the stricter supported contract
+// and the tested native handle without retaining a permissive constructor.
+export const ShlzButton = ButtonImplementation as unknown as {
+  new (): Omit<InstanceType<typeof ButtonImplementation>, "$props"> & {
+    $props: ButtonProps & VNodeProps;
+  } & ButtonHandle;
+};

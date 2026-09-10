@@ -58,6 +58,10 @@ h(ShlzButton, attrs);
 const badEvent: PublicProps = { onClick(event: string) {} }; void badEvent;
 // @ts-expect-error native button type is a closed set
 const badType: PublicProps = { type: 'navigation' }; void badType;
+const validIcon: PublicProps = { iconOnly: true, size: 'sm', 'aria-label': 'Add' }; void validIcon;
+const validSmall: PublicProps = { size: 'xs' }; void validSmall;
+// @ts-expect-error xs is not a supported icon-only size
+const invalidIcon: PublicProps = { iconOnly: true, size: 'xs' }; void invalidIcon;
 const variant: ButtonVariant = 'primary'; const size: ButtonSize = 'sm';
 h(ShlzButton, { variant, size, disabled: false, type: 'submit' }, () => 'Save');
 const focus = (handle: ButtonHandle) => handle.element?.focus(); void focus;

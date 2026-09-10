@@ -11,5 +11,7 @@
 
 ## 3. Review follow-up
 
-- [ ] 3.1 Reject xs/icon-only in the public type and normalize JavaScript inputs to sm; verify negative type, SSR, hydration and reactive regression checks.
-- [ ] 3.2 Re-attest the scoped audit and review, resolve GitHub discussions, and make the unmerged PR ready after green CI and delivery guards.
+- [x] 3.1 Reject xs/icon-only in the public type and normalize JavaScript inputs to sm; verify negative type, SSR, hydration and reactive regression checks.
+- [ ] 3.2 Re-attest the scoped audit and independent review, resolve GitHub discussions, and verify candidate-bound conformance/delivery receipts.
+
+PR readiness remains an external delivery gate: remove draft only after all CI jobs on the final head are green. A checked local validation task does not assert remote CI completion.

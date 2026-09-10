@@ -194,3 +194,46 @@ test("real visual states retain authoritative Button paints", async ({
     );
   }
 });
+
+test("unsupported icon-only xs is normalized during SSR, hydration and reactive updates", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("console", (message) => {
+    if (["warning", "error"].includes(message.type()))
+      errors.push(message.text());
+  });
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/?iconSizeProbe=1");
+  await page.waitForFunction(() => window.consumerHydrated);
+  const button = page.locator("#reactive-button");
+  await expect(button).toHaveClass(/shlz-button--sm/);
+  await expect(button).toHaveClass(/shlz-button--icon/);
+  await expect(button).not.toHaveClass(/shlz-button--xs/);
+  await expect(button).toHaveCSS("min-height", "32px");
+  await expect(button).toHaveAccessibleName("Run action");
+  for (const [props, height, iconOnly] of [
+    [{ size: "md" }, 40, true],
+    [{ size: "xs" }, 32, true],
+    [{ iconOnly: false }, 26, false],
+    [{ iconOnly: true }, 32, true],
+  ]) {
+    await page.evaluate((next) => window.setButtonPresentation(next), props);
+    await expect(button).toHaveCSS("min-height", `${height}px`);
+    expect(
+      await button.evaluate((node) =>
+        node.classList.contains("shlz-button--icon"),
+      ),
+    ).toBe(iconOnly);
+    expect(
+      await page.locator(".shlz-button--xs.shlz-button--icon").count(),
+    ).toBe(0);
+    expect(
+      await page.evaluate(
+        () =>
+          window.serverButton === document.querySelector("#reactive-button"),
+      ),
+    ).toBe(true);
+  }
+  expect(errors).toEqual([]);
+});

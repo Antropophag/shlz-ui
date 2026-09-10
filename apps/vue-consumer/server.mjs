@@ -15,7 +15,13 @@ const vite = await createViteServer({
 const server = createHttpServer((request, response) => {
   vite.middlewares(request, response, async () => {
     try {
-      const markup = await renderToString(createConsumer());
+      const markup = await renderToString(
+        createConsumer(
+          new globalThis.URL(request.url, "http://127.0.0.1").searchParams.has(
+            "iconSizeProbe",
+          ),
+        ),
+      );
       const html = await vite.transformIndexHtml(
         request.url,
         `<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SHLZ Vue consumer</title></head><body><div id="app">${markup}</div><script type="module" src="/apps/vue-consumer/client.js"></script></body></html>`,

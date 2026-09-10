@@ -1,10 +1,17 @@
 import { createSSRApp, defineComponent, h, ref } from "vue";
 import { ShlzButton } from "@shlz/vue";
 
-export function createConsumer() {
+export function createConsumer(iconSizeProbe = false) {
   return createSSRApp(
     defineComponent({
-      setup() {
+      setup(_, { expose }) {
+        const presentation = ref({
+          size: iconSizeProbe ? "xs" : "md",
+          iconOnly: iconSizeProbe,
+        });
+        expose({
+          setPresentation: (next) => Object.assign(presentation.value, next),
+        });
         const count = ref(0);
         const submitted = ref(0);
         const disabled = ref(false);
@@ -46,17 +53,24 @@ export function createConsumer() {
                         h("input", { name: "draft", value: "Initial" }),
                       ]),
                       visible.value &&
-                        action(`Actions: ${count.value}`, {
-                          ref: button,
-                          id: "reactive-button",
-                          "data-command-state": variant.value,
-                          class: "consumer-class",
-                          style: "vertical-align:middle",
-                          "aria-label": "Run action",
-                          disabled: disabled.value,
-                          variant: variant.value,
-                          onClick: () => count.value++,
-                        }),
+                        action(
+                          presentation.value.iconOnly
+                            ? icon()
+                            : `Actions: ${count.value}`,
+                          {
+                            size: presentation.value.size,
+                            iconOnly: presentation.value.iconOnly,
+                            ref: button,
+                            id: "reactive-button",
+                            "data-command-state": variant.value,
+                            class: "consumer-class",
+                            style: "vertical-align:middle",
+                            "aria-label": "Run action",
+                            disabled: disabled.value,
+                            variant: variant.value,
+                            onClick: () => count.value++,
+                          },
+                        ),
                       action("Submit", {
                         type: "submit",
                         name: "command",

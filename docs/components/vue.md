@@ -31,7 +31,7 @@ The application supplies `save`, fonts and business state. See [Button](button.m
 | type     | button, submit, reset           | button  |
 | disabled | boolean                         | false   |
 
-The default slot supplies text and optional icons. Use `.shlz-button__icon` on an icon child and provide an accessible name for icon-only buttons. Invalid values and icon-only xs are unsupported. No loading, link-button or v-model interface is supplied.
+The default slot supplies text and optional icons. Use `.shlz-button__icon` on an icon child and provide an accessible name for icon-only buttons. Invalid values are unsupported. The public prop type rejects icon-only xs; JavaScript inputs that bypass types are normalized to sm (32px), consistently during SSR and reactive updates. No loading, link-button or v-model interface is supplied.
 
 Native attributes (`name`, `value`, `form`, `aria-*`, `data-*`, etc.), consumer classes/styles and listeners fall through to the single native button. `@click` receives the native event once. Parent changes update props, attrs and slot content. Native disabled and keyboard semantics remain browser-owned. The default type intentionally prevents accidental form submission; set `type="submit"` or `type="reset"` explicitly.
 

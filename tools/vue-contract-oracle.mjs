@@ -34,8 +34,19 @@ const check = async (setId, value) => {
   else if (setId === "vue-button.iconOnly") {
     props.iconOnly = value === "true";
     props["aria-label"] = "Action";
+  } else if (setId === "vue-button.iconSize") {
+    const [iconOnly, size] = value.split(":");
+    props.iconOnly = iconOnly === "true";
+    props.size = size;
   } else throw new Error(`Unknown set ${setId}`);
   const html = await render(props);
+  if (setId === "vue-button.iconSize") {
+    const expectedSize =
+      props.iconOnly && props.size === "xs" ? "sm" : props.size;
+    assert.equal(html.includes("shlz-button--xs"), expectedSize === "xs");
+    assert.equal(html.includes("shlz-button--sm"), expectedSize === "sm");
+    assert.equal(html.includes("shlz-button--icon"), props.iconOnly);
+  }
   assert.match(html, /^<button\b/);
   assert.match(html, /shlz-button/);
   assert.match(html, /type="(?:button|submit|reset)"/);
@@ -57,6 +68,14 @@ else {
     type: ["button", "submit", "reset"],
     disabled: ["false", "true"],
     iconOnly: ["false", "true"],
+    iconSize: [
+      "false:md",
+      "false:sm",
+      "false:xs",
+      "true:md",
+      "true:sm",
+      "true:xs",
+    ],
   })) {
     for (const value of values) await check(`vue-button.${id}`, value);
   }
