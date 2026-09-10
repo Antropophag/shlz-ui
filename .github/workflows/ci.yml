@@ -100,6 +100,9 @@ jobs:
       - name: Run browser and visual tests
         run: npm run test:e2e
 
+      - name: Verify Vue package, SSR and browser integration
+        run: npm run test:vue
+
   browser-smoke:
     name: Cross-browser smoke tests
     runs-on: ubuntu-latest
