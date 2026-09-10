@@ -26,7 +26,7 @@
       "canonical_name": "Vue Button",
       "category": "framework-adapters",
       "implementation_status": "reusable",
-      "audit_status": "INVENTORIED",
+      "audit_status": "VERIFIED",
       "authoritative_source": ["shlz-design-source/raw/svg/Buttons.svg"],
       "production_implementation": ["packages/vue/src/index.ts"],
       "behavior": [],
@@ -51,7 +51,7 @@
       "known_findings": [],
       "limitations": [
         "Private packable adapter; no registry release or Nuxt integration",
-        "Independent review and current CI tracked in PR #93; no inherited Button completion status"
+        "Vue-local runtime, type, SSR, source and consumer evidence plus independent Standards/Spec reviews passed; current repository CI is tracked separately in PR #93"
       ],
       "tests": [
         "tools/playwright-vue/button.spec.js",
