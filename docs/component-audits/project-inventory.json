@@ -23,6 +23,66 @@
   ],
   "families": [
     {
+      "canonical_name": "Vue Button",
+      "category": "framework-adapters",
+      "implementation_status": "reusable",
+      "audit_status": "INVENTORIED",
+      "authoritative_source": ["shlz-design-source/raw/svg/Buttons.svg"],
+      "production_implementation": ["packages/vue/src/index.ts"],
+      "behavior": [],
+      "docs": [
+        "docs/components/vue.md",
+        "docs/component-audits/vue-button.json"
+      ],
+      "executable_fixtures": [
+        "apps/vue-consumer/app.js#button-vue-matrix",
+        "apps/vue-consumer/app.js#button-vue-stress"
+      ],
+      "live_consumers": ["apps/vue-consumer/app.js#button-vue-consumer"],
+      "data_workspace_consumers": [],
+      "inert_diagnostics": [],
+      "legacy_native_implementations": [],
+      "local_alternatives": [],
+      "scope": [
+        "ShlzButton only; native attrs/listeners and typed element ref",
+        "neutral/primary/text; md/sm/xs; icon-only md/sm",
+        "SSR/hydration; native forms; reactive parent state and mount lifecycle"
+      ],
+      "known_findings": [],
+      "limitations": [
+        "Private packable adapter; no registry release or Nuxt integration",
+        "Independent review and current CI tracked in PR #93; no inherited Button completion status"
+      ],
+      "tests": [
+        "tools/playwright-vue/button.spec.js",
+        "tools/vue-package-smoke.mjs",
+        "tools/vue-contract-oracle.mjs"
+      ],
+      "evidence": {
+        "source-integrity": "pass: raw Buttons.svg inspected; rect heights 40/32/26 and source paints confirmed; no source changes",
+        "structural-contract": "pass: ESM/types and packed isolated consumer resolve; core release policy unchanged",
+        "runtime-browser": "pass: pointer/Enter/Space/programmatic activation, disabled suppression, reactive variant/slot, native form submit/reset and repeated remount",
+        "accessibility": "pass: accessible labels, native keyboard/focus/disabled and active-state contrast guard",
+        "focused-visual": "pass: real computed paints for neutral/primary/text; sizes 40/32/26; icon-only 40/32; no new stylesheet",
+        "consumer-integration": "pass: Vue form owns counter, submit count, disabled state and mount lifecycle; server DOM retained during hydration",
+        "responsive-content-stress": "pass: 180px long-label container and 320px viewport; leading/trailing and icon-only content"
+      },
+      "measured_counts": {
+        "executableShowcase": 0,
+        "liveConsumers": 1,
+        "dataWorkspace": 0,
+        "inertDiagnostics": 0,
+        "legacyNative": 0,
+        "localAlternatives": 0
+      },
+      "measurement": {
+        "date": "2026-09-10",
+        "surface": "apps/vue-consumer",
+        "method": "Built adapter with SSR/hydrated browser census: 22 Button elements within 3 audit roots, 1 live consumer and 2 fixture roots. executableShowcase=0 because this is a separate Vue application.",
+        "source": "tools/playwright-vue/button.spec.js"
+      }
+    },
+    {
       "tests": [
         "tools/tests/generators.test.mjs",
         "tools/playwright/foundation.spec.js"
@@ -392,7 +452,6 @@
         "responsive-content-stress": "pass: long label and icon content remain bounded in a 220px component-local fixture"
       },
       "canonical_name": "Button",
-      "adapterEvidence": ["docs/component-audits/vue-button.json"],
       "category": "actions-navigation",
       "implementation_status": "reusable",
       "audit_status": "VERIFIED",
