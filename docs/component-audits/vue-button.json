@@ -1,0 +1,122 @@
+{
+  "component": "vue-button",
+  "authoritativeSource": "shlz-design-source/raw/svg/Buttons.svg",
+  "referenceSources": ["docs/components/button.md", "docs/components/vue.md"],
+  "implementation": ["packages/vue/src/index.ts"],
+  "behavior": null,
+  "docs": "docs/components/vue.md",
+  "rootSelector": "[data-component-audit-id^='button-vue-']",
+  "legacySelectors": [".shlz-button"],
+  "diagnosticBoundaries": ["[inert]"],
+  "occurrences": [
+    {
+      "id": "button-vue-consumer",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "button-vue-matrix",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "button-vue-stress",
+      "kind": "content-stress-fixture"
+    }
+  ],
+  "supportedSizes": ["large-40", "medium-32", "small-26"],
+  "supportedStates": [
+    "default",
+    "hover",
+    "active",
+    "focus-visible",
+    "disabled"
+  ],
+  "contentStress": [
+    "icon-leading",
+    "icon-trailing",
+    "icon-only",
+    "long-label",
+    "narrow-container"
+  ],
+  "sourceClaims": [
+    {
+      "claim": "primary, secondary and text modes retain three sizes and four source paint rows",
+      "classification": "source-fact",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "source specimen widths are content examples rather than fixed public widths",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/svg/Buttons.svg"
+    },
+    {
+      "claim": "native button owns activation, form type, disabled and click semantics; the library adds no controller",
+      "classification": "repository-decision",
+      "evidence": "docs/components/button.md"
+    },
+    {
+      "claim": "The public Vue type rejects icon-only xs; JavaScript inputs normalize to source-backed sm during SSR and reactive rendering.",
+      "classification": "repository-decision",
+      "evidence": "openspec/changes/vue-adapter-foundation/specs/adapters/vue-button/spec.md"
+    }
+  ],
+  "browserTests": ["tools/playwright-vue/button.spec.js"],
+  "visualSnapshots": [],
+  "evidence": {
+    "source-integrity": "pass: raw Buttons.svg inspected; rect heights 40/32/26 and source paints confirmed; no source changes",
+    "structural-contract": "pass: ESM/types and packed isolated consumer resolve; core release policy unchanged; negative public-prop type case rejects icon-only xs",
+    "runtime-browser": "pass: pointer/Enter/Space/programmatic activation, disabled suppression, reactive variant/slot, native form submit/reset and repeated remount; icon-only xs is normalized to sm across hydration and reactive updates",
+    "accessibility": "pass: accessible labels, native keyboard/focus/disabled and active-state contrast guard",
+    "focused-visual": "pass: real computed paints for neutral/primary/text; sizes 40/32/26; icon-only 40/32; no new stylesheet",
+    "consumer-integration": "pass: Vue form owns counter, submit count, disabled state and mount lifecycle; server DOM retained during hydration",
+    "responsive-content-stress": "pass: 180px long-label container and 320px viewport; leading/trailing and icon-only content"
+  },
+  "interactionEvidence": {
+    "types": {
+      "staticVisual": [
+        "pass: Computed size matrix and inspected consumer screenshots; screenshots are supplemental only"
+      ],
+      "realInteractionVisual": [
+        "pass: Browser-created hover/active/focus/disabled paints asserted against Buttons.svg values for each mode"
+      ],
+      "runtimeBehavior": [
+        "pass: Native event/form/lifecycle and hydration flows in tools/playwright-vue/button.spec.js",
+        "pass: six size/iconOnly JavaScript input combinations are covered by the SSR oracle; browser probe preserves SSR DOM while switching xs icon-only, md icon-only and xs label states."
+      ]
+    },
+    "materialStates": [
+      "primary-default",
+      "primary-hover",
+      "primary-active",
+      "primary-focus-visible",
+      "primary-disabled",
+      "neutral-default",
+      "neutral-hover",
+      "neutral-active",
+      "neutral-focus-visible",
+      "neutral-disabled",
+      "text-default",
+      "text-hover",
+      "text-active",
+      "text-focus-visible",
+      "text-disabled"
+    ],
+    "browserTest": "tools/playwright-vue/button.spec.js",
+    "manualStateWalk": "pass: separate interactive browser walk inspected pointer-down computed paints, Tab/focus, Enter/Space count, disabled state and desktop/320px screenshots; 22 rendered buttons in 3 classified roots, 4 icon children; review follow-up at 320px: invalid icon-only xs rendered 32x32, reactive md rendered 40x40 and label xs retained 26px height, with no conflicting modifiers"
+  },
+  "acceptedDeviations": [],
+  "findings": [],
+  "knownLimitations": [
+    "loading is not part of the public contract",
+    "button-styled anchors are not a supported Button variant",
+    "SSR compatibility applies to ShlzButton only; Nuxt is not independently verified",
+    "Icon-only xs is rejected by TypeScript; untyped JavaScript inputs use sm (32px)."
+  ],
+  "observedCounts": {
+    "buttons": 22,
+    "classifiedRoots": 3,
+    "unclassified": 0,
+    "inertDiagnostics": 0,
+    "iconChildren": 4
+  },
+  "diagnosticOccurrenceCount": 0
+}

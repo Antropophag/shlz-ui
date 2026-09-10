@@ -1,7 +1,10 @@
 {
   "component": "button",
   "authoritativeSource": "shlz-design-source/raw/svg/Buttons.svg",
-  "referenceSources": ["docs/components/button.md"],
+  "referenceSources": [
+    "docs/components/button.md",
+    "docs/component-audits/vue-button.json"
+  ],
   "implementation": ["packages/styles/components/button.css"],
   "behavior": null,
   "docs": "docs/components/button.md",

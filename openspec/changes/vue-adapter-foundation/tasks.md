@@ -1,0 +1,17 @@
+## 1. Package and Button
+
+- [x] 1.1 Implement private typed Vue package and native ShlzButton; verify build, isolated packed consumption, type checking and Node SSR.
+- [x] 1.2 Add minimal Vue SSR/hydration consumer; verify matching DOM, application state and remount behavior in browser.
+
+## 2. Evidence and delivery
+
+- [x] 2.1 Verify native form/keyboard/disabled/attribute/reactivity contract, source-backed visual states and content stress with focused browser checks and manual state walk.
+- [x] 2.2 Update scoped Button audit occurrences and Vue documentation; verify occurrence guard, source integrity and relevant existing consumer regressions.
+- [x] 2.3 Run independent Standards/Spec review and candidate-bound validation; deliver an unmerged PR with conformance/delivery receipts and update issue #92 with exact scope and remaining tasks.
+
+## 3. Review follow-up
+
+- [x] 3.1 Reject xs/icon-only in the public type and normalize JavaScript inputs to sm; verify negative type, SSR, hydration and reactive regression checks.
+- [x] 3.2 Re-attest the scoped audit and independent review, resolve GitHub discussions, and verify candidate-bound conformance/delivery receipts.
+
+PR readiness remains an external delivery gate: remove draft only after all CI jobs on the final head are green. A checked local validation task does not assert remote CI completion.

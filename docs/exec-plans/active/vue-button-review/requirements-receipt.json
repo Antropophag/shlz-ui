@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "vue-adapter-foundation",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "review-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "supported-sizes",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Resolve PR #93 reviews: enforce supported Vue icon-only Button sizes and deliver ready unmerged PR.",
+    "revision": 2
+  },
+  "routeDigest": "bcd5c303e8f185d234574b53877116f23a3654357c670914a46174a70cd48f58",
+  "version": 1,
+  "digest": "9f54f22b5c2ca8628cf96c04a0fff164c0facc2c0842dece68a3b25672bddd65"
+}

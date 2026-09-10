@@ -1,0 +1,38 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "vue-adapter-foundation",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "ssr",
+        "owner": "agent",
+        "status": "delegated"
+      },
+      {
+        "blocking": true,
+        "id": "source",
+        "owner": "repo",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "architecture",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Implement issue #92 first Vue adapter slice: typed Button with SSR and focused consumer evidence.",
+    "revision": 1
+  },
+  "routeDigest": "0c1e7020df7130c87b46ca56482314fb3bb54ff1d77f9a30d9bb622ab399dfe6",
+  "version": 1,
+  "digest": "0327f0c38970341f8032defd30903f86a2e64a7894eba503c59f40f01613c417"
+}

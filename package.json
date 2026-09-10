@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "dev": "npm run generate && npm run build:packages && npm run dev -w @shlz/showcase",
-    "build:packages": "npm run build -w @shlz/tokens -w @shlz/icons -w @shlz/styles -w @shlz/behaviors",
+    "build:packages": "npm run build -w @shlz/tokens -w @shlz/icons -w @shlz/styles -w @shlz/behaviors -w @shlz/vue",
     "generate": "npm run generate:basic-icons && node tools/generate.mjs",
     "generate:basic-icons": "node tools/normalize-basic-icons.mjs",
     "generate:source-index": "node tools/generate-design-source-index.mjs",
@@ -36,8 +36,9 @@
     "check:focused": "npm run test:harness && npm run check:openspec",
     "harness": "node tools/harness.mjs",
     "lint": "eslint . && stylelint 'packages/**/*.css' 'apps/**/*.css' && prettier --check .",
-    "check": "npm run check:openspec && npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs && npm run test:packages && npm run test:e2e",
-    "format": "prettier --write ."
+    "check": "npm run check:openspec && npm run generate && npm run test && npm run lint && npm run build && node tools/validate.mjs && npm run test:packages && npm run test:e2e && npm run test:vue",
+    "format": "prettier --write .",
+    "test:vue": "node tools/vue-package-smoke.mjs && playwright test --config playwright.vue.config.js"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
@@ -53,7 +54,8 @@
     "stylelint": "^16.23.1",
     "stylelint-config-standard": "^39.0.0",
     "typescript": "^5.9.2",
-    "vite": "^7.1.1"
+    "vite": "^7.1.1",
+    "vue": "3.5.42"
   },
   "engines": {
     "node": ">=20",
