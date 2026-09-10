@@ -119,6 +119,39 @@ test("all table composition icons are real painted source graphics", async ({
   for (const icon of await root.locator(".shlz-table__icon-action svg").all()) {
     const box = await icon.evaluate((svg) => ({ width: svg.getBBox().width }));
     expect(box.width).toBeGreaterThan(0);
+    const painted = await icon.evaluate((svg) =>
+      [
+        ...svg.querySelectorAll("path, circle, rect, line, polyline, polygon"),
+      ].some((shape) => {
+        const bounds = shape.getBBox();
+        const style = window.getComputedStyle(shape);
+        const visibleColor = (paint) =>
+          paint !== "none" &&
+          paint !== "transparent" &&
+          !/rgba\([^)]*,\s*0\)$/.test(paint);
+        for (let node = shape; node; node = node.parentElement) {
+          const parentStyle = window.getComputedStyle(node);
+          if (
+            Number(parentStyle.opacity) === 0 ||
+            parentStyle.visibility !== "visible" ||
+            parentStyle.display === "none"
+          )
+            return false;
+          if (node === svg) break;
+        }
+        return (
+          (bounds.width > 0 || bounds.height > 0) &&
+          ((bounds.width > 0 &&
+            bounds.height > 0 &&
+            Number(style.fillOpacity) > 0 &&
+            visibleColor(style.fill)) ||
+            (Number.parseFloat(style.strokeWidth) > 0 &&
+              Number(style.strokeOpacity) > 0 &&
+              visibleColor(style.stroke)))
+        );
+      }),
+    );
+    expect(painted).toBe(true);
   }
 });
 
@@ -156,6 +189,9 @@ test("source composition viewers scroll with keyboard while their controls stay 
 }) => {
   await page.setViewportSize({ width: 360, height: 800 });
   const viewer = page.locator("[data-table-source-scroll]").first();
+  await expect(viewer.locator(":scope > .shlz-visually-hidden")).toContainText(
+    "Статический образец Table.svg",
+  );
   await viewer.focus();
   await page.keyboard.press("ArrowRight");
   await expect

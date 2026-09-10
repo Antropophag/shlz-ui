@@ -144,7 +144,7 @@ const bodyContent = (index, type, state, editable, filled, iconUrl) => {
     },
     Empty: () => "",
     Icon: () => {
-      if (index === 44) return "";
+      if (state === "Default") return "";
       return `<button class="shlz-table__icon-action" type="button" aria-label="Копировать строку">${icon(iconUrl, "copy-2")}</button>`;
     },
     Priority: () => `<span>${tablePriority("Приоритет")}</span>`,
@@ -327,7 +327,13 @@ export const initTableCells = (scope = document, { enhanceDropdowns } = {}) => {
         const number = body.rows.length + 1;
         const added = body.insertRow();
         added.className = "shlz-table__row";
-        added.innerHTML = `<td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox" type="checkbox" checked aria-label="Выбрать добавленную заявку ${number}" data-table-select-row></td><td class="shlz-table__cell shlz-table__cell--editable"><input class="shlz-table__editor" aria-label="Название заявки ${number}" value="Новая заявка ${number}" data-table-live-name></td><td class="shlz-table__cell"><span class="shlz-status">Новый</span></td><td class="shlz-table__cell">Обычный</td><td class="shlz-table__cell"><input class="shlz-switch__input" type="checkbox" role="switch" aria-label="Включить заявку ${number}" data-table-live-switch></td><td class="shlz-table__cell"><button class="shlz-button shlz-button--xs" type="button" data-table-live-icon aria-pressed="false">Отметить</button></td>`;
+        added.innerHTML = `<td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox" type="checkbox" checked aria-label="Выбрать добавленную заявку ${number}" data-table-select-row></td><td class="shlz-table__cell shlz-table__cell--editable"><input class="shlz-table__editor" aria-label="Название заявки ${number}" value="Новая заявка ${number}" data-table-live-name></td><td class="shlz-table__cell shlz-table__cell--editable shlz-table__cell--status"><span class="shlz-status">Новый</span></td><td class="shlz-table__cell">Обычный</td><td class="shlz-table__cell"><input class="shlz-switch__input" type="checkbox" role="switch" aria-label="Включить заявку ${number}" data-table-live-switch></td><td class="shlz-table__cell">${body.rows[0].querySelector("[data-table-live-icon]").outerHTML}</td>`;
+        added
+          .querySelector("[data-table-live-icon]")
+          .setAttribute("aria-pressed", "false");
+        added
+          .querySelector("[data-table-live-icon]")
+          .setAttribute("aria-label", `Отметить заявку ${number}`);
         updateSelection();
         announce(`Добавлена строка ${number}.`);
       }

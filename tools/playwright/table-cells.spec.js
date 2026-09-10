@@ -164,6 +164,19 @@ test("executable fixture updates through keyboard, input, choice, switch, icon a
   await example.locator("[data-table-live-add]").click();
   await expect(example.locator("tbody tr")).toHaveCount(2);
   await expect(status).toHaveText("Добавлена строка 2.");
+  const added = example.locator("tbody tr").last();
+  const mark = added.getByRole("button", {
+    name: "Отметить заявку 2",
+    exact: true,
+  });
+  await expect(mark).toHaveClass("shlz-table__icon-action");
+  await expect(mark).toHaveAttribute("aria-pressed", "false");
+  await expect(mark.locator("svg.shlz-table__cell-icon")).toHaveCount(1);
+  await expect(added.locator("td").nth(2)).toHaveClass(
+    /shlz-table__cell--editable shlz-table__cell--status/,
+  );
+  await mark.click();
+  await expect(mark).toHaveAttribute("aria-pressed", "true");
 
   await example.locator("[data-table-select-all]").check();
   await example.locator("[data-table-select-all]").uncheck();
@@ -203,6 +216,7 @@ test("live choice popup escapes the narrow scrolling table wrapper", async ({
   });
   expect(geometry.left).toBeGreaterThanOrEqual(8);
   expect(geometry.right).toBeLessThanOrEqual(geometry.viewport - 8);
+  expect(geometry.extendsPastWrapper).toBe(true);
   expect(geometry.reachable).toBe(true);
   await menu.getByRole("menuitem", { name: "В работе", exact: true }).click();
   await expect(trigger).toHaveText("В работе");

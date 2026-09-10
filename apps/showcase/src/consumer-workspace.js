@@ -49,12 +49,13 @@ export const consumerWorkspaceMarkup = (iconUrl, supplementalMarkup = "") => `
       </div>
       <div class="shlz-consumer-workspace__bulk" data-workspace-bulk hidden aria-live="polite"><strong><span data-workspace-selected-count>0</span> выбрано</strong><button class="shlz-button shlz-button--sm" type="button" data-workspace-clear>Снять выбор</button></div>
       <p class="shlz-consumer-workspace__results" aria-live="polite">Найдено: <span data-workspace-result-count>${records.length}</span></p>
+      <span class="shlz-visually-hidden" id="workspace-filter-state">Фильтр по статусу не применён</span>
       <div class="shlz-table-wrap">
         <table class="shlz-table" data-component-audit-id="table-workspace-requests"><caption class="shlz-visually-hidden">Заявки ServiceDesk</caption><thead class="shlz-table__head"><tr>
           <th class="shlz-table__cell shlz-table__cell--check" scope="col"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать все видимые заявки" data-workspace-select-all data-component-audit-id="checkbox-workspace-select-all"></th>
           <th class="shlz-table__cell" scope="col">Номер</th>
           <th class="shlz-table__cell" scope="col" aria-sort="none"><span class="shlz-table__heading"><span>Тема</span><span class="shlz-table__actions">${tableSorter("Сортировать по теме", "data-workspace-sort")}</span></span></th>
-          <th class="shlz-table__cell" scope="col"><span class="shlz-table__heading"><span>Статус</span><span class="shlz-table__actions">${tableFilter("Фильтр по статусу", 'data-workspace-header-filter data-shlz-drawer-trigger="workspace-filter-drawer" aria-pressed="false"')}</span></span></th>
+          <th class="shlz-table__cell" scope="col"><span class="shlz-table__heading"><span>Статус</span><span class="shlz-table__actions">${tableFilter("Фильтр по статусу", 'data-workspace-header-filter data-shlz-drawer-trigger="workspace-filter-drawer" aria-haspopup="dialog" aria-describedby="workspace-filter-state" data-filter-active="false"')}</span></span></th>
         </tr></thead><tbody data-workspace-body>${records.map(row).join("")}</tbody></table>
         <div class="shlz-consumer-workspace__empty shlz-empty-state" data-workspace-empty data-component-audit-id="empty-state-workspace-no-results" hidden><h4 class="shlz-empty-state__title">Заявки не найдены</h4><p class="shlz-empty-state__description">Измените запрос или сбросьте фильтр.</p><div class="shlz-empty-state__actions"><button class="shlz-button" type="button" data-workspace-reset>Сбросить условия</button></div></div>
       </div>
@@ -126,7 +127,11 @@ export const enhanceConsumerWorkspace = (scope = document) => {
       selected.length > 0 && selected.length < visible.length;
   };
   const applyConditions = () => {
-    headerFilter.setAttribute("aria-pressed", String(Boolean(appliedStatus)));
+    headerFilter.dataset.filterActive = String(Boolean(appliedStatus));
+    workspace.querySelector("#workspace-filter-state").textContent =
+      appliedStatus
+        ? `Применён фильтр по статусу: ${appliedStatus}`
+        : "Фильтр по статусу не применён";
     const query = search.value.trim().toLocaleLowerCase("ru");
     for (const item of rows) {
       item.hidden = !(

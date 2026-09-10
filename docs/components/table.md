@@ -90,7 +90,9 @@ The copyable source paths and complete markup are in the
         class="shlz-table__affordance shlz-table__filter"
         type="button"
         aria-label="Фильтр по теме"
-        aria-pressed="false"
+        aria-haspopup="dialog"
+        aria-describedby="topic-filter-state"
+        data-filter-active="false"
         aria-expanded="false"
         aria-controls="topic-filter"
       >
@@ -106,9 +108,12 @@ The copyable source paths and complete markup are in the
 ```
 
 Set `aria-sort` on the affected column: `none`, `ascending` or `descending`.
-The application chooses the sort cycle and compares its own data. Filter
-`aria-pressed` describes an applied condition; `aria-expanded` describes its
-open UI. A draft choice does not activate the applied indicator. Dismissal
+The application chooses the sort cycle and compares its own data. A toggle filter uses `aria-pressed`. A dialog launcher uses `aria-haspopup="dialog"`
+and `aria-expanded` for its open UI, with no `aria-pressed`. Set
+`data-filter-active="true"` for the applied visual state and describe the
+applied condition in an `aria-describedby` target (for example,
+`<span id="topic-filter-state">Фильтр не применён</span>`), updating its text
+when applying or resetting the filter. A draft choice does not activate the applied indicator. Dismissal
 returns focus to the opener. Native `disabled` prevents activation. The filter
 hover is source gray-100, while active is blue-200. Sorter's inactive arrow stays
 gray-200 even when the other arrow is active.

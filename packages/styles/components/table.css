@@ -205,7 +205,9 @@
 .shlz-table__heading--visual-hover,
 .shlz-table__cell:is([aria-sort="ascending"], [aria-sort="descending"])
   > .shlz-table__heading,
-.shlz-table__heading:has(.shlz-table__filter[aria-pressed="true"]) {
+.shlz-table__heading:has(
+  .shlz-table__filter:is([aria-pressed="true"], [data-filter-active="true"])
+) {
   background: var(--shlz-source-color-blue-blue-50);
 }
 
@@ -215,7 +217,9 @@
 .shlz-table__cell:is([aria-sort="ascending"], [aria-sort="descending"])
   > .shlz-table__heading
   .shlz-table__actions,
-.shlz-table__heading:has(.shlz-table__filter[aria-pressed="true"])
+.shlz-table__heading:has(
+    .shlz-table__filter:is([aria-pressed="true"], [data-filter-active="true"])
+  )
   .shlz-table__actions {
   opacity: 1;
 }
@@ -273,7 +277,7 @@
   color: var(--shlz-source-color-gray-gray-100);
 }
 
-.shlz-table__filter[aria-pressed="true"] {
+.shlz-table__filter:is([aria-pressed="true"], [data-filter-active="true"]) {
   color: var(--shlz-semantic-color-action-primary);
 }
 
@@ -368,7 +372,7 @@
 }
 
 .shlz-table__priority-muted {
-  fill: var(--shlz-source-color-aditional-green);
+  fill: #45b64e;
   fill-opacity: 0.25;
 }
 
@@ -498,7 +502,9 @@
 .shlz-table__cell[aria-sort="ascending"]
   > .shlz-table__heading:not(
     .shlz-table__heading--icon,
-    :has(.shlz-table__filter[aria-pressed="true"])
+    :has(
+      .shlz-table__filter:is([aria-pressed="true"], [data-filter-active="true"])
+    )
   ) {
   min-block-size: 26px;
 }

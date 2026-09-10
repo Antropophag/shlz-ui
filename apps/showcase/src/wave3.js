@@ -84,14 +84,14 @@ export const enhanceTableDemo = (scope = document) => {
       }
     update();
   });
+  const name = (row) =>
+    row.cells[2].querySelector("input")?.value ?? row.cells[2].textContent;
   demo
     .querySelector("[data-table-demo-sort]")
     .addEventListener("click", (event) => {
       const th = event.currentTarget.closest("th");
       const descending = th.getAttribute("aria-sort") !== "descending";
       th.setAttribute("aria-sort", descending ? "descending" : "ascending");
-      const name = (row) =>
-        row.cells[2].querySelector("input")?.value ?? row.cells[2].textContent;
       body.append(
         ...[...body.rows].sort(
           (a, b) => name(a).localeCompare(name(b)) * (descending ? -1 : 1),
@@ -105,7 +105,7 @@ export const enhanceTableDemo = (scope = document) => {
         event.currentTarget.getAttribute("aria-pressed") !== "true";
       event.currentTarget.setAttribute("aria-pressed", String(active));
       for (const row of body.rows) {
-        row.hidden = active && !row.cells[2].textContent.includes("Alpha");
+        row.hidden = active && !name(row).includes("Alpha");
         if (row.hidden)
           row.querySelector("input[type=checkbox]").checked = false;
       }

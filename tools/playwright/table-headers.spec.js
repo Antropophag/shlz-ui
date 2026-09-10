@@ -48,6 +48,8 @@ for (const state of ["none", "ascending", "descending"]) {
 for (const state of ["default", "hover", "active"]) {
   test(`table filter source state ${state}`, async ({ page }) => {
     const filter = page.locator("[data-workspace-header-filter]");
+    await expect(filter).toHaveAttribute("aria-haspopup", "dialog");
+    await expect(filter).not.toHaveAttribute("aria-pressed");
     if (state === "hover") await filter.hover();
     else if (state === "default") await filter.focus();
     else {
@@ -65,8 +67,13 @@ for (const state of ["default", "hover", "active"]) {
       await expect(page.locator("[data-workspace-row]:visible")).toHaveCount(1);
     }
     await expect(filter).toHaveAttribute(
-      "aria-pressed",
+      "data-filter-active",
       String(state === "active"),
+    );
+    await expect(filter).toHaveAccessibleDescription(
+      state === "active"
+        ? "Применён фильтр по статусу: В работе"
+        : "Фильтр по статусу не применён",
     );
     await expect(filter.locator("svg")).toHaveCSS("width", "16px");
     await expect(filter.locator("svg")).toHaveCSS("height", "18px");
@@ -84,7 +91,7 @@ test("header filter preserves applied state on Escape and restores initiating fo
   await filter.focus();
   await page.keyboard.press("Enter");
   await expect(filter).toHaveAttribute("aria-expanded", "true");
-  await expect(filter).toHaveAttribute("aria-pressed", "false");
+  await expect(filter).toHaveAttribute("data-filter-active", "false");
   await page.keyboard.press("Escape");
   await expect(filter).toBeFocused();
   await expect(filter).toHaveAttribute("aria-expanded", "false");
@@ -234,7 +241,7 @@ test("complete Table material-state ledger and focused accessibility", async ({
     await dialog
       .getByRole("button", { name: "Применить", exact: true })
       .click();
-    await expect(filter).toHaveAttribute("aria-pressed", "true");
+    await expect(filter).toHaveAttribute("data-filter-active", "true");
     await expect(filter.locator("path")).toHaveCSS("fill", primary);
   });
   await verifyMaterialState("table", "row-selected", async () => {
@@ -286,4 +293,17 @@ test("Table navigation resolves to the executable table instead of a missing anc
   await expect(
     page.locator("#table-demo [data-table-demo-sort]"),
   ).toBeEnabled();
+});
+
+test("filter reads the current edited row name", async ({ page }) => {
+  const demo = page.locator("#table-demo");
+  const editor = demo.getByRole("textbox", { name: "Edit name" });
+  await editor.fill("Alpha request edited");
+  await demo.locator("[data-table-demo-filter]").click();
+  await expect(editor).toBeVisible();
+  await expect(demo.locator("tbody tr:visible")).toHaveCount(2);
+  await demo.locator("[data-table-demo-filter]").click();
+  await editor.fill("Gamma request");
+  await demo.locator("[data-table-demo-filter]").click();
+  await expect(editor).not.toBeVisible();
 });

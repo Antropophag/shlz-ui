@@ -1,9 +1,9 @@
 import { readFile } from "node:fs/promises";
-import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { chromium } from "@playwright/test";
+import { loadTableOracleStyles } from "./lib/table-oracle-styles.mjs";
 import { tableFilter, tableSorter } from "../apps/showcase/src/table-parts.js";
 
 // The same public HTML contract is rendered with candidate CSS or immutable
@@ -18,34 +18,10 @@ assert.ok(
   candidateTargets.has(requested) || baselineTargets.has(requested),
   "Only this checkout or its declared baseline adapter is an oracle target",
 );
-const stylesheet = "packages/styles/components/table.css";
-let css;
-if (baselineTargets.has(requested)) {
-  const adapter = JSON.parse(await readFile(baselinePath, "utf8"));
-  assert.match(adapter.baselineCommit, /^[a-f0-9]{40}$/);
-  assert.equal(adapter.stylesheet, stylesheet);
-  const gitExecutable =
-    process.platform === "win32"
-      ? String.raw`C:\Program Files\Git\cmd\git.exe`
-      : "/usr/bin/git";
-  css = execFileSync(
-    gitExecutable,
-    ["show", `${adapter.baselineCommit}:${stylesheet}`],
-    { cwd: repoRoot, encoding: "utf8" },
-  );
-} else {
-  css = await readFile(
-    new globalThis.URL(
-      "../packages/styles/components/table.css",
-      import.meta.url,
-    ),
-    "utf8",
-  );
-}
-const tokens = await readFile(
-  new globalThis.URL("../packages/tokens/dist/tokens.css", import.meta.url),
-  "utf8",
-);
+const adapter = baselineTargets.has(requested)
+  ? JSON.parse(await readFile(baselinePath, "utf8"))
+  : null;
+const { css, tokens } = await loadTableOracleStyles(repoRoot, adapter);
 const browser = await chromium.launch();
 try {
   const page = await browser.newPage();

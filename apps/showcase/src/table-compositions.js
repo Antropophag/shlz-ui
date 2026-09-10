@@ -73,7 +73,7 @@ const table = ({ slug, family, title, width, header, rows }) => {
     .join("");
   const headerMarkup = renderRow(header, true);
   const rowsMarkup = rows.map((record) => renderRow(record)).join("");
-  return `<figure class="shlz-table-composition" data-table-composition-family="${family}"><figcaption>${title} · source width ${width}px</figcaption><div class="shlz-table-wrap" data-table-source-scroll tabindex="0" role="region" aria-label="Полная таблица: ${title}"><table class="shlz-table" inert aria-hidden="true" data-component-audit-id="table-composition-${slug}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">${title}, inert Table.svg source composition</caption><colgroup>${columns}</colgroup><thead class="shlz-table__head">${headerMarkup}</thead><tbody>${rowsMarkup}</tbody></table></div></figure>`;
+  return `<figure class="shlz-table-composition" data-table-composition-family="${family}"><figcaption>${title} · source width ${width}px</figcaption><div class="shlz-table-wrap" data-table-source-scroll tabindex="0" role="region" aria-label="Полная таблица: ${title}"><span class="shlz-visually-hidden">Статический образец Table.svg: ${title}. Стрелки прокручивают таблицу; элементы образца не интерактивны.</span><table class="shlz-table" inert aria-hidden="true" data-component-audit-id="table-composition-${slug}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">${title}, inert Table.svg source composition</caption><colgroup>${columns}</colgroup><thead class="shlz-table__head">${headerMarkup}</thead><tbody>${rowsMarkup}</tbody></table></div></figure>`;
 };
 
 export const tableCompositionsMarkup = (iconUrl) => {

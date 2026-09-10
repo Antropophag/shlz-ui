@@ -155,7 +155,8 @@
     "responsive cards, sticky headers, resizing, virtualization and data operations are unsupported or consumer-owned",
     "Static source compositions are inert recipes, not nine business-specific core components",
     "Popup collision handling and data operations are consumer integrations; Table exports CSS/native markup, no data controller",
-    "Implementation, independent review and CI evidence are recorded in table-source-transfer-report.md; merge remains user-owned"
+    "Implementation, independent review and CI evidence are recorded in table-source-transfer-report.md; merge remains user-owned",
+    "PR 91 review follow-up: dialog filter semantics use an accessible description and data-filter-active; edited-value regression and pinned-token independence are covered by tools/table-review-oracle.mjs and tools/tests/table-oracle-styles.test.mjs. Follow-up validation/review receipts are scoped to baseline 2496fc4."
   ],
   "nativeTableCensus": [
     {
