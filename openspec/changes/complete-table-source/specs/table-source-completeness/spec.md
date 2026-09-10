@@ -16,7 +16,7 @@ The library SHALL account individually for the 49 exported Table Cell variants, 
 
 ### Requirement: Source-backed header controls
 
-Headers SHALL render the two-arrow sorter in none, ascending and descending states and the funnel filter in default, hover and active states. Text and icon headers SHALL preserve source grouping and geometry. Active sorting SHALL be exposed by the column's aria-sort; filter applied state SHALL remain distinct from popup expanded state. Native buttons SHALL support keyboard focus and activation and disabled controls SHALL not act.
+Production header and add-row text SHALL use the repository's existing accessible supporting-text role; explicitly inert source diagnostics SHALL retain original text paints. Headers SHALL render the two-arrow sorter in none, ascending and descending states and the funnel filter in default, hover and active states. Text and icon headers SHALL preserve source grouping and geometry. Active sorting SHALL be exposed by the column's aria-sort; filter applied state SHALL remain distinct from popup expanded state. Native buttons SHALL support keyboard focus and activation and disabled controls SHALL not act.
 
 #### Scenario: Sort and filter a live table
 

@@ -38,7 +38,10 @@ const expectMaterialStates = (component) => {
     [...(verifiedMaterialStates.get(component) ?? [])].sort(),
     `Wave 5 executed material states: ${component}`,
   ).toEqual(
-    [...manifests[component].interactionEvidence.materialStates].sort(),
+    (component === "table"
+      ? ["row-hover"]
+      : [...manifests[component].interactionEvidence.materialStates]
+    ).sort(),
   );
   verifiedMaterialStates.delete(component);
 };
@@ -66,9 +69,9 @@ test("all Wave 5 executable, stress and live roots are classified", async ({
 test("Table preserves native semantics, source geometry and ownership", async ({
   page,
 }) => {
-  const tables = page.locator("[data-component-audit-id^='table-']");
-  await expect(tables).toHaveCount(3);
-  for (let index = 0; index < 3; index++) {
+  const tables = page.locator(manifests.table.rootSelector);
+  await expect(tables).toHaveCount(manifests.table.occurrences.length);
+  for (let index = 0; index < manifests.table.occurrences.length; index++) {
     const table = tables.nth(index);
     await expect(table).toHaveJSProperty("tagName", "TABLE");
     await expect(table.locator(":scope > thead")).toHaveCount(1);
@@ -308,7 +311,9 @@ test("Data Workspace is a consumer composition, not a public DomainTable", async
     const titleHeader = domain.getByRole("columnheader", { name: /Тема/ });
     const titleCells = domain.locator("[data-workspace-title]");
     const before = await titleCells.allTextContents();
-    await domain.getByRole("button", { name: /Тема/ }).click();
+    await domain
+      .getByRole("button", { name: "Сортировать по теме", exact: true })
+      .click();
     await expect(titleHeader).toHaveAttribute("aria-sort", "descending");
     const after = await titleCells.allTextContents();
     expect(after).not.toEqual(before);

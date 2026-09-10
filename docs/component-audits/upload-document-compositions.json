@@ -97,9 +97,9 @@
       "tools/playwright/rounded-control-alignment.spec.js"
     ],
     "primitiveDependencyPathCount": 15,
-    "unrelatedTerminologyPathCount": 78,
-    "totalPathCount": 96,
-    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths; rounded-control alignment is test-only audit evidence, and its pixel/DOM helper adds one unrelated document terminology path; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family"
+    "unrelatedTerminologyPathCount": 82,
+    "totalPathCount": 100,
+    "classification": "generic upload, document, drag/drop, and attachment terminology outside the audit evidence and primitive dependency ledgers is unrelated to a higher-level runtime composition; the contrast matrix helper adds one unrelated DOM document reference, and tools/at/{contracts,runtime,settings,workflows}.mjs plus tools/tests/screen-reader-settings.test.mjs add five test-only terminology paths; rounded-control alignment is test-only audit evidence, and its pixel/DOM helper adds one unrelated document terminology path; compact attachment composition adds scoped File Row styles, usage guidance and executable evidence, without introducing a higher-level runtime family; Table transfer adds DOM document references in table-cells.js, wave3.js, table-cells.spec.js and table-contract-oracle.mjs; these are table-only terminology, not upload/document compositions."
   },
   "supportedSizes": ["source-sheets-only"],
   "supportedStates": [

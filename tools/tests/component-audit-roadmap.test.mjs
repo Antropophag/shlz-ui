@@ -21,6 +21,22 @@ test("Wave 9+ roadmap assigns every remaining inventory family exactly once", as
   const inventory = JSON.parse(await readFile(inventoryPath, "utf8"));
   const roadmap = await readFile(roadmapPath, "utf8");
   const mappedRows = parseRoadmapRows(roadmap);
+  const followupSection =
+    roadmap.split("## Active source-transfer follow-ups")[1] ?? "";
+  const followups = [
+    ...followupSection.matchAll(/^\|\s+`([^`]+)`\s+\|\s+([^|]+?)\s+\|/gm),
+  ].map(([, change, family]) => ({ change, family: family.trim() }));
+  for (const { change } of followups)
+    await readFile(`openspec/changes/${change}/proposal.md`, "utf8");
+  const plannedFamilies = [
+    ...mappedRows.map(([, family]) => family),
+    ...followups.map(({ family }) => family),
+  ];
+  assert.equal(
+    new Set(plannedFamilies).size,
+    plannedFamilies.length,
+    "a family must have one active wave/follow-up assignment",
+  );
   const mappedWaveNumbers = mappedRows.map(([wave]) => wave);
   const mappedWaves = new Map(mappedRows);
   const inventoryStatus = new Map(
@@ -37,10 +53,10 @@ test("Wave 9+ roadmap assigns every remaining inventory family exactly once", as
   assert.equal(new Set(mappedWaveNumbers).size, mappedRows.length);
   assert.deepEqual(mappedWaves, expectedWaves);
   assert.deepEqual(
-    [...mappedWaves.values()].filter(
-      (family) => inventoryStatus.get(family) !== "VERIFIED",
-    ),
-    remainingFamilies,
+    plannedFamilies
+      .filter((family) => inventoryStatus.get(family) !== "VERIFIED")
+      .sort(),
+    remainingFamilies.sort(),
   );
   assert.equal(new Set(mappedWaves.values()).size, mappedWaves.size);
 });

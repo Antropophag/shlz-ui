@@ -105,7 +105,9 @@ test("search, empty recovery and sort stay application-owned", async ({
   );
 
   const titleHeader = workspace.getByRole("columnheader", { name: /Тема/ });
-  await workspace.getByRole("button", { name: /Тема/ }).click();
+  await workspace
+    .getByRole("button", { name: "Сортировать по теме", exact: true })
+    .click();
   await expect(titleHeader).toHaveAttribute("aria-sort", "descending");
 });
 

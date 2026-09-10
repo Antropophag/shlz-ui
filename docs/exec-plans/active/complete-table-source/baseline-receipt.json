@@ -1,0 +1,27 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/complete-table-source",
+    "commit": "1c142dfda470aea5679504ea68a7283ed0ccba67",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/complete-table-source",
+      "headRefOid": "1c142dfda470aea5679504ea68a7283ed0ccba67",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/91"
+    },
+    "repository": {
+      "checkoutDigest": "3f796af576fdeb8cbfb4d3d999ce53026cc3b616f73901acca4be7a3fef055e6",
+      "digest": "301f4d46bfbd9a1de648261342fbb4e62abd022c8e353b5b9a6e741f892fcdb7",
+      "originDigest": "eb5de31d2b63adf203b6e867973e50e9f9f8b0bb882aa3cc0389033ad6126676",
+      "version": 2
+    },
+    "upstream": "origin/feature/complete-table-source"
+  },
+  "requirementsDigest": "d805b06ba7cf5381cf96ef55e464c0e3bb8d851cff2df9ef663285a2ba74fd31",
+  "routeDigest": "5a766979b60278ad15d996f04b0a124ec8e23e7c08989400a277946f21525181",
+  "version": 1,
+  "digest": "e84b627d53df3c0c5e4db5183ca97ba5a648f1e84b30b82efadf1c2328225bde"
+}

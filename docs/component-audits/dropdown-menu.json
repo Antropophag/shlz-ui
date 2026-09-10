@@ -22,7 +22,11 @@
     { "id": "dropdown-modal-consumer", "kind": "live-consumer" },
     { "id": "dropdown-scrollable-stress", "kind": "content-stress-fixture" },
     { "id": "dropdown-typography-stress", "kind": "content-stress-fixture" },
-    { "id": "dropdown-plain-html-consumer", "kind": "live-consumer" }
+    { "id": "dropdown-plain-html-consumer", "kind": "live-consumer" },
+    { "id": "dropdown-table-standard", "kind": "executable-fixture" },
+    { "id": "dropdown-table-review", "kind": "executable-fixture" },
+    { "id": "dropdown-table-editing-status", "kind": "executable-fixture" },
+    { "id": "dropdown-table-editing-mode", "kind": "executable-fixture" }
   ],
   "supportedSizes": [
     "200px-menu",

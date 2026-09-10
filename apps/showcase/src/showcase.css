@@ -1703,16 +1703,6 @@ article {
   min-inline-size: 640px;
 }
 
-.shlz-consumer-workspace .shlz-table__affordance {
-  display: inline-flex;
-  inline-size: auto;
-  block-size: auto;
-  gap: var(--shlz-source-spacing-4);
-  color: inherit;
-  font: inherit;
-  text-transform: inherit;
-}
-
 .shlz-consumer-workspace__empty {
   padding: 64px var(--shlz-source-spacing-24);
   text-align: center;
@@ -1906,4 +1896,63 @@ article {
 .shlz-chart-specimen {
   max-inline-size: 100%;
   margin-block: 40px;
+}
+
+.shlz-table-cell-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+  margin-block: 24px;
+}
+
+.shlz-table-cell-gallery > * {
+  flex: 0 0 230px;
+  min-block-size: 220px;
+  margin: 0;
+}
+
+.shlz-table-cell-gallery [data-table-source-cell] {
+  position: relative;
+}
+
+.shlz-table-cell-gallery table {
+  table-layout: fixed;
+}
+
+.shlz-table-compositions {
+  display: grid;
+  gap: 32px;
+  min-inline-size: 0;
+}
+
+.shlz-table-compositions > :is(section, figure) {
+  min-inline-size: 0;
+}
+
+.shlz-table-editing-example .shlz-table {
+  min-inline-size: 800px;
+}
+
+.shlz-table-composition .shlz-table__cell {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.shlz-table-composition__leading-gutter {
+  padding-inline-start: 24px;
+}
+
+.shlz-table-composition__edit-slot {
+  display: inline-flex;
+  inline-size: 40px;
+  margin-inline: -8px 8px;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.shlz-table-composition thead .shlz-table__cell-icon {
+  color: var(--shlz-semantic-color-text-primary);
 }

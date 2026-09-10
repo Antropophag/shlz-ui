@@ -10,6 +10,7 @@ See proposal.md. Table currently has one CSS module, a mixed Showcase table, one
 
 ## Decisions
 
+- Reuse the existing accessible supporting-text token for production header/add-row text, with original gray text retained only in explicitly inert source diagnostics. This follows the existing repository distinction between source paint and semantic text corrections; no new palette value or shared token is introduced.
 - Add dedicated sorter/filter SVG parts using source paths and CSS state selectors. Reusing general-purpose up/filter icons loses two-tone state and funnel geometry. Keep generic affordance compatibility.
 - Add source-backed header grouping, editable-cell and icon-action styles, priority marks, actual hover/active/focus state selectors and narrowly scoped diagnostic helpers. No global token promotion for incidental cell widths.
 - Reuse existing Select/Dropdown controllers and native input controls for table choices. Their floating implementation avoids clipping; Table only styles the embedded trigger. Consumer code owns text commits, sort/filter data, row additions and selection. Do not add a duplicate table state machine.

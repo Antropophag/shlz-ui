@@ -3,32 +3,69 @@
   "authoritativeSource": "shlz-design-source/raw/svg/Table Cell.svg",
   "referenceSources": [
     "shlz-design-source/raw/svg/Table.svg",
-    "docs/components/table.md"
+    "docs/components/table.md",
+    "docs/components/table-source.md",
+    "docs/component-audits/table-source-matrix.json"
   ],
   "implementation": ["packages/styles/components/table.css"],
   "behavior": null,
   "docs": "docs/components/table.md",
-  "rootSelector": "[data-component-audit-id^='table-']",
+  "rootSelector": "table.shlz-table[data-component-audit-id]:not([inert], [inert] *)",
   "legacySelectors": [".shlz-table"],
   "diagnosticBoundaries": [
     "[inert]",
     ".shlz-component-diagnostics",
     "#fidelity"
   ],
-  "diagnosticOccurrenceCount": 1,
+  "diagnosticOccurrenceCount": 60,
   "occurrences": [
-    { "id": "table-showcase-mixed", "kind": "executable-fixture" },
-    { "id": "table-typography-stress", "kind": "content-stress-fixture" },
-    { "id": "table-workspace-requests", "kind": "live-consumer" }
+    {
+      "id": "table-showcase-mixed",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "table-typography-stress",
+      "kind": "content-stress-fixture"
+    },
+    {
+      "id": "table-workspace-requests",
+      "kind": "live-consumer"
+    },
+    {
+      "id": "table-editing-example",
+      "kind": "executable-fixture"
+    },
+    {
+      "id": "table-pagination-consumer",
+      "kind": "live-consumer"
+    }
   ],
   "supportedSizes": ["50px-row", "content-driven-width"],
-  "supportedStates": ["default", "row-hover", "cell-pressed", "typing"],
+  "supportedStates": [
+    "default",
+    "row-hover",
+    "cell-hover",
+    "row-selected",
+    "cell-pressed",
+    "typing",
+    "sort-none",
+    "sort-ascending",
+    "sort-descending",
+    "filter-default",
+    "filter-hover",
+    "filter-active",
+    "choice-open",
+    "focus-visible"
+  ],
   "contentStress": [
     "long-header",
     "long-body",
     "numeric",
     "action-cell",
-    "narrow-overflow-wrapper"
+    "narrow-overflow-wrapper",
+    "editable-choice-popup",
+    "selected-editing-row",
+    "dynamic-row-addition"
   ],
   "sourceClaims": [
     {
@@ -45,41 +82,101 @@
       "claim": "the public primitive preserves native table markup and leaves data operations to consumers",
       "classification": "repository-decision",
       "evidence": "docs/components/table.md"
+    },
+    {
+      "claim": "Visible Table text is Golos Text Regular 15px/130%/-1%; 14px metadata belongs to non-rendered checkbox labels",
+      "classification": "derived-pattern",
+      "evidence": "shlz-design-source/raw/typography-UI Kit – Basic elements.json"
+    },
+    {
+      "claim": "Original Table.svg header masks are 50px despite one 48px Figma metadata height",
+      "classification": "source-fact",
+      "evidence": "tools/tests/table-source.test.mjs"
+    },
+    {
+      "claim": "Production header/add-row text uses the existing accessible supporting role; inert diagnostics retain original source gray",
+      "classification": "repository-decision",
+      "evidence": "docs/components/table.md"
     }
   ],
   "browserTests": [
     "tools/playwright/data-content-wave5.spec.js",
-    "tools/playwright/consumer-workspace.spec.js"
+    "tools/playwright/consumer-workspace.spec.js",
+    "tools/playwright/table-headers.spec.js",
+    "tools/playwright/table-cells.spec.js",
+    "tools/playwright/table-compositions.spec.js"
   ],
-  "visualSnapshots": [],
+  "visualSnapshots": [
+    "tools/playwright/table-cells.spec.js-snapshots/table-cell-2-chromium-linux.png",
+    "tools/playwright/table-cells.spec.js-snapshots/table-cell-30-chromium-linux.png",
+    "tools/playwright/table-cells.spec.js-snapshots/table-cell-43-chromium-linux.png"
+  ],
   "evidence": {
-    "source-integrity": "pass: raw Table Cell and Table remain unchanged and source axes are checked independently of old snapshots",
-    "structural-contract": "pass: every public Table root is classified and native table sections and scoped headings are asserted",
-    "runtime-browser": "not-applicable: Table ships no sorting, filtering, pagination, selection, loading or data controller",
-    "accessibility": "pass: captions, native sections, scoped headers and unmodified cell semantics are verified in executable consumers",
-    "focused-visual": "pass: computed 50px geometry, divider, numeric alignment and real row-hover paint are asserted",
-    "consumer-integration": "pass: Data Workspace composes Table while application code owns filtering, sorting, selection and empty data",
-    "responsive-content-stress": "pass: a narrow viewport proves horizontal overflow belongs to the Table wrapper while the table remains wider"
+    "source-integrity": "pass: original Table Cell/Table/Icons bytes and exact ZIP tuples are pinned; SVG masks override conflicting 48px metadata",
+    "structural-contract": "pass: 5 executable Table roots, 60 inert Table roots and 47 non-Table native tables are explicitly classified",
+    "runtime-browser": "pass: native controls and existing Dropdown/Drawer composition drive application-owned sorting/filtering/selection/editing/addition",
+    "accessibility": "pass: native captions/headers/names, keyboard/dismissal/disabled behavior, focused axe and production active-text contrast; no blanket WCAG certification",
+    "focused-visual": "pass: all source cell geometry/state checks, 31 source composition rows, three focused cell snapshots and 12 actual material-state flows",
+    "consumer-integration": "pass: Data Workspace header filters/sort/selection/empty recovery; Pagination consumer follows URLs and changes table rows",
+    "responsive-content-stress": "pass: 320px choice popup is reachable outside the table scroller; long content and selected editing stay native"
   },
   "interactionEvidence": {
     "types": {
       "staticVisual": [
-        "pass: source and diagnostic pressed/typing cells remain static visual evidence only"
+        "pass: 49 labelled inert source cells and 31 rows in 10 source composition tables; source paint remains distinct from semantic text corrections"
       ],
       "realInteractionVisual": [
-        "pass: locator.hover() on a real body row produces the source-backed muted row paint"
+        "pass: 12 exact-match material states exercise native hover/focus/pressed and consumer-applied styles"
       ],
       "runtimeBehavior": [
-        "not-applicable: row hover changes paint only; nested controls and application data operations retain their own ownership"
+        "pass: consumer-owned data order, conditions, choices, text suggestions, selection, row creation and URL page changes execute"
       ]
     },
-    "materialStates": ["row-hover"],
-    "browserTest": "tools/playwright/data-content-wave5.spec.js",
-    "manualStateWalk": "pass: real row hover, nested focus visibility, long text, numeric alignment and narrow wrapper overflow inspected"
+    "materialStates": [
+      "row-hover",
+      "cell-hover",
+      "editing-focus",
+      "typing",
+      "sort-descending",
+      "sort-ascending",
+      "filter-hover",
+      "filter-active",
+      "row-selected",
+      "choice-open",
+      "focus-visible",
+      "add-row-pressed"
+    ],
+    "browserTest": "tools/playwright/table-headers.spec.js",
+    "manualStateWalk": "pass: inspected original sheets and focused desktop/mobile table surfaces; walked hover/down, Tab/Enter/Space, editing, suggestion/dismissal, disabled add-row and narrow popup reachability"
   },
   "acceptedDeviations": [],
   "findings": [],
   "knownLimitations": [
-    "responsive cards, sticky headers, resizing, virtualization and data operations are unsupported or consumer-owned"
+    "responsive cards, sticky headers, resizing, virtualization and data operations are unsupported or consumer-owned",
+    "Static source compositions are inert recipes, not nine business-specific core components",
+    "Popup collision handling and data operations are consumer integrations; Table exports CSS/native markup, no data controller",
+    "Overall PR completion remains pending independent review and CI; see table-source-transfer-report.md"
+  ],
+  "nativeTableCensus": [
+    {
+      "selector": ".shlz-developer-docs__table",
+      "classification": "developer metadata, not Table UI",
+      "observedCount": 34
+    },
+    {
+      "selector": ".shlz-foundation-table",
+      "classification": "source reference metadata",
+      "observedCount": 2
+    },
+    {
+      "selector": "#calendar-grid-demo table:not(.shlz-table)",
+      "classification": "independent Calendar Grid diagnostics",
+      "observedCount": 2
+    },
+    {
+      "selector": ".shlz-bar-chart__table",
+      "classification": "independent Bar Chart accessible data tables",
+      "observedCount": 9
+    }
   ]
 }

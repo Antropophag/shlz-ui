@@ -24,6 +24,8 @@ const classifiedFiles = new Set([
   "apps/showcase/src/date-picker-consumer.js",
   "apps/showcase/src/date-picker-showcase.js",
   "apps/showcase/src/main.js",
+  "apps/showcase/src/table-cells.js",
+  "apps/showcase/src/wave3.js",
   "apps/showcase/src/planner-schedule-showcase.js",
   "packages/behaviors/src/calendar.ts",
   "packages/behaviors/src/date-picker.ts",

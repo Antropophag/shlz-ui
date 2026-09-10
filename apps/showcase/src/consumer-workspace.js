@@ -1,3 +1,4 @@
+import { tableSorter, tableFilter } from "./table-parts.js";
 const records = [
   { id: "SD-2418", title: "Не открывается карточка заявки", status: "Новая" },
   {
@@ -52,8 +53,8 @@ export const consumerWorkspaceMarkup = (iconUrl, supplementalMarkup = "") => `
         <table class="shlz-table" data-component-audit-id="table-workspace-requests"><caption class="shlz-visually-hidden">Заявки ServiceDesk</caption><thead class="shlz-table__head"><tr>
           <th class="shlz-table__cell shlz-table__cell--check" scope="col"><input class="shlz-checkbox shlz-checkbox--sm" type="checkbox" aria-label="Выбрать все видимые заявки" data-workspace-select-all data-component-audit-id="checkbox-workspace-select-all"></th>
           <th class="shlz-table__cell" scope="col">Номер</th>
-          <th class="shlz-table__cell" scope="col" aria-sort="none"><button class="shlz-table__affordance" type="button" data-workspace-sort>Тема <span class="shlz-visually-hidden">Сортировать</span></button></th>
-          <th class="shlz-table__cell" scope="col">Статус</th>
+          <th class="shlz-table__cell" scope="col" aria-sort="none"><span class="shlz-table__heading"><span>Тема</span><span class="shlz-table__actions">${tableSorter("Сортировать по теме", "data-workspace-sort")}</span></span></th>
+          <th class="shlz-table__cell" scope="col"><span class="shlz-table__heading"><span>Статус</span><span class="shlz-table__actions">${tableFilter("Фильтр по статусу", 'data-workspace-header-filter data-shlz-drawer-trigger="workspace-filter-drawer" aria-pressed="false"')}</span></span></th>
         </tr></thead><tbody data-workspace-body>${records.map(row).join("")}</tbody></table>
         <div class="shlz-consumer-workspace__empty shlz-empty-state" data-workspace-empty data-component-audit-id="empty-state-workspace-no-results" hidden><h4 class="shlz-empty-state__title">Заявки не найдены</h4><p class="shlz-empty-state__description">Измените запрос или сбросьте фильтр.</p><div class="shlz-empty-state__actions"><button class="shlz-button" type="button" data-workspace-reset>Сбросить условия</button></div></div>
       </div>
@@ -101,6 +102,9 @@ export const enhanceConsumerWorkspace = (scope = document) => {
     "[data-workspace-selected-count]",
   );
   const filterCount = workspace.querySelector("[data-workspace-filter-count]");
+  const headerFilter = workspace.querySelector(
+    "[data-workspace-header-filter]",
+  );
   let appliedStatus = "";
   let ascending = true;
 
@@ -110,6 +114,10 @@ export const enhanceConsumerWorkspace = (scope = document) => {
     const selected = visible.filter(
       (item) => item.querySelector("[data-workspace-select]").checked,
     );
+    for (const item of rows)
+      item.dataset.selected = String(
+        item.querySelector("[data-workspace-select]").checked,
+      );
     selectedCount.textContent = String(selected.length);
     bulk.hidden = selected.length === 0;
     selectAll.checked =
@@ -118,6 +126,7 @@ export const enhanceConsumerWorkspace = (scope = document) => {
       selected.length > 0 && selected.length < visible.length;
   };
   const applyConditions = () => {
+    headerFilter.setAttribute("aria-pressed", String(Boolean(appliedStatus)));
     const query = search.value.trim().toLocaleLowerCase("ru");
     for (const item of rows) {
       item.hidden = !(

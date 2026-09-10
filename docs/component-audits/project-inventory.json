@@ -1290,38 +1290,47 @@
         "tools/tests/wave3-source.test.mjs",
         "tools/playwright/wave3.spec.js",
         "tools/playwright/review.spec.js",
-        "tools/playwright/data-content-wave5.spec.js"
+        "tools/playwright/data-content-wave5.spec.js",
+        "tools/tests/table-source.test.mjs",
+        "tools/playwright/table-headers.spec.js",
+        "tools/playwright/table-cells.spec.js"
       ],
       "evidence": {
-        "source-integrity": "pass: raw Table Cell and Table authority is traced separately from historical tests",
-        "structural-contract": "pass: native table roots and every executable occurrence are guarded",
-        "runtime-browser": "not-applicable: data operations are consumer-owned",
-        "accessibility": "pass: captions, native sections and scoped headings are asserted",
-        "focused-visual": "pass: computed cell geometry, divider, numeric alignment and real hover paint",
-        "consumer-integration": "pass: Data Workspace application state composes the primitive",
-        "responsive-content-stress": "pass: narrow wrapper proves real horizontal overflow"
+        "source-integrity": "pass: original Table Cell/Table/Icons bytes and exact ZIP tuples are pinned; SVG masks override conflicting 48px metadata",
+        "structural-contract": "pass: 5 executable Table roots, 60 inert Table roots and 47 non-Table native tables are explicitly classified",
+        "runtime-browser": "pass: native controls and existing Dropdown/Drawer composition drive application-owned sorting/filtering/selection/editing/addition",
+        "accessibility": "pass: native captions/headers/names, keyboard/dismissal/disabled behavior, focused axe and production active-text contrast; no blanket WCAG certification",
+        "focused-visual": "pass: all source cell geometry/state checks, 31 source composition rows, three focused cell snapshots and 12 actual material-state flows",
+        "consumer-integration": "pass: Data Workspace header filters/sort/selection/empty recovery; Pagination consumer follows URLs and changes table rows",
+        "responsive-content-stress": "pass: 320px choice popup is reachable outside the table scroller; long content and selected editing stay native"
       },
       "canonical_name": "Table",
       "category": "data-display",
       "implementation_status": "reusable",
-      "audit_status": "VERIFIED",
+      "audit_status": "INVENTORIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Table Cell.svg",
         "shlz-design-source/raw/svg/Table.svg"
       ],
       "production_implementation": ["packages/styles/components/table.css"],
       "behavior": [],
-      "docs": ["docs/components/table.md"],
+      "docs": ["docs/components/table.md", "docs/components/table-source.md"],
       "executable_fixtures": [
         "apps/showcase/src/wave3.js",
-        "apps/showcase/src/main.js"
+        "apps/showcase/src/main.js",
+        "apps/showcase/src/table-cells.js"
       ],
       "live_consumers": [
         "apps/showcase/src/main.js",
-        "apps/showcase/src/consumer-workspace.js"
+        "apps/showcase/src/consumer-workspace.js",
+        "apps/showcase/src/pagination-consumer.js"
       ],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": ["apps/showcase/src/fidelity.js"],
+      "inert_diagnostics": [
+        "apps/showcase/src/fidelity.js",
+        "apps/showcase/src/table-cells.js",
+        "apps/showcase/src/table-compositions.js"
+      ],
       "legacy_native_implementations": [],
       "local_alternatives": [
         "apps/showcase/src/component-docs.js#developer-contract-table",
@@ -1336,12 +1345,14 @@
         "narrow/long content"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "Source transfer local evidence is recorded in table-source-transfer-report.md; independent review and CI are pending."
+      ],
       "measured_counts": {
-        "executableShowcase": 2,
-        "liveConsumers": 1,
+        "executableShowcase": 3,
+        "liveConsumers": 2,
         "dataWorkspace": 1,
-        "inertDiagnostics": 1,
+        "inertDiagnostics": 60,
         "legacyNative": 0,
         "localAlternatives": 3
       }
@@ -2927,21 +2938,22 @@
     {
       "tests": [
         "tools/playwright/consumer-workspace.spec.js",
-        "tools/playwright/data-content-wave5.spec.js"
+        "tools/playwright/data-content-wave5.spec.js",
+        "tools/playwright/table-compositions.spec.js"
       ],
       "evidence": {
-        "source-integrity": "pass: domain examples remain references over Table authority",
-        "structural-contract": "pass: one live composition reuses public primitives without a new API",
-        "runtime-browser": "pass: application filter/sort/selection/empty flows",
-        "accessibility": "pass: native table and nested primitive semantics preserved",
-        "focused-visual": "pass: focused workspace composition plus component-local Table evidence",
-        "consumer-integration": "pass: Data Workspace is exercised as live application state",
-        "responsive-content-stress": "pass: realistic data and narrow wrapper overflow"
+        "source-integrity": "pass: domain examples are reference compositions and do not override Table Cell as primitive authority",
+        "structural-contract": "pass: one live Data Workspace composition plus ten inert source tables account for nine families and all 31 exported rows/headers",
+        "runtime-browser": "pass: Data Workspace application code proves draft/apply/reset filtering, sorting, selection teardown and empty recovery",
+        "accessibility": "pass: composition preserves native Table headings/caption and names of nested controls and links",
+        "focused-visual": "pass: Data Workspace has focused composition evidence while Table geometry is asserted component-locally",
+        "consumer-integration": "pass: Data Workspace is exercised as live application state rather than a gallery screenshot",
+        "responsive-content-stress": "pass: narrow viewport creates overflow on the Table wrapper and realistic long values remain tabular"
       },
       "canonical_name": "Domain table compositions",
       "category": "application-compositions",
       "implementation_status": "composition-only",
-      "audit_status": "VERIFIED",
+      "audit_status": "INVENTORIED",
       "authoritative_source": [
         "shlz-design-source/raw/svg/Managing appeals.svg",
         "shlz-design-source/raw/svg/Form constructor.svg",
@@ -2956,7 +2968,7 @@
       "executable_fixtures": [],
       "live_consumers": ["apps/showcase/src/consumer-workspace.js"],
       "data_workspace_consumers": ["apps/showcase/src/consumer-workspace.js"],
-      "inert_diagnostics": [],
+      "inert_diagnostics": ["apps/showcase/src/table-compositions.js"],
       "legacy_native_implementations": [],
       "local_alternatives": [],
       "scope": [
@@ -2964,14 +2976,16 @@
         "header/row/hover/active/dots"
       ],
       "known_findings": [],
-      "limitations": [],
+      "limitations": [
+        "Nine source families are ten inert native composition recipes; independent review and CI pending."
+      ],
       "measured_counts": {
         "executableShowcase": 0,
         "liveConsumers": 1,
         "dataWorkspace": 1,
-        "inertDiagnostics": 0,
+        "inertDiagnostics": 10,
         "legacyNative": 0,
-        "localAlternatives": 9
+        "localAlternatives": 0
       }
     },
     {

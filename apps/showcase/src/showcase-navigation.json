@@ -24,6 +24,8 @@
       ["link", "Link"],
       ["avatar", "Avatar"],
       ["table", "Table"],
+      ["table-cell-demo", "Table Cells"],
+      ["table-compositions-demo", "Table Compositions"],
       ["tabs", "Tabs"],
       ["pagination", "Pagination"],
       ["tag", "Tag"],
@@ -54,5 +56,8 @@
       ["reporting-dashboard-consumer", "Reporting dashboard"]
     ]
   },
-  { "label": "Evidence", "links": [["fidelity", "Visual fidelity"]] }
+  {
+    "label": "Evidence",
+    "links": [["fidelity", "Visual fidelity"]]
+  }
 ]

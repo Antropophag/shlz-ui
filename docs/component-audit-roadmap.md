@@ -106,3 +106,14 @@ The durable work sequence is:
 12. **Complete:** the component gate, manual state walk, independent review, conformance, CI, and unmerged PR delivery are recorded for `add-date-picker-calendar`; merge remains user-owned.
 
 Initial non-goals unless step 1 explicitly promotes them are date-time selection, timezone conversion, recurrence, week numbers, presets, natural-language parsing, and application-specific scheduling rules. Vue or other framework adapters follow the framework-neutral contract and cannot become the foundation of the family.
+
+## Active source-transfer follow-ups
+
+These explicit OpenSpec follow-ups re-open previously audited families outside
+the numbered Wave 9–12 scope. Their current source-transfer evidence is tracked
+independently; the old wave verdict is not a certificate for the expanded family.
+
+| OpenSpec change         | Inventory family          | Current boundary                                                      |
+| ----------------------- | ------------------------- | --------------------------------------------------------------------- |
+| `complete-table-source` | Table                     | Full cell/header transfer; independent review and CI pending          |
+| `complete-table-source` | Domain table compositions | Nine source families / 31 variants; independent review and CI pending |
