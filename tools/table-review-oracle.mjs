@@ -18,6 +18,10 @@ const adapter =
     ? JSON.parse(await readFile(adapterPath, "utf8"))
     : null;
 if (adapter) assert.match(adapter.baselineCommit, /^[a-f0-9]{40}$/);
+const gitExecutable =
+  process.platform === "win32"
+    ? String.raw`C:\Program Files\Git\cmd\git.exe`
+    : "/usr/bin/git";
 const sources = new Map();
 const readSource = async (relative) => {
   if (!sources.has(relative))
@@ -25,7 +29,7 @@ const readSource = async (relative) => {
       relative,
       adapter
         ? execFileSync(
-            "git",
+            gitExecutable,
             ["show", `${adapter.baselineCommit}:${relative}`],
             { cwd: root, encoding: "utf8" },
           )

@@ -24,7 +24,26 @@ test("accounts for each source cell with native semantics and exact cell geometr
   const specimens = page.locator("[data-table-source-cell]");
   await expect(specimens).toHaveCount(49);
 
-  for (const reference of manifest.references) {
+  const observed = await specimens.evaluateAll((elements) =>
+    elements.map((specimen) => {
+      const table = specimen.querySelector("table");
+      const cell = [
+        ...table.querySelectorAll("th.shlz-table__cell, td.shlz-table__cell"),
+      ].at(-1);
+      return {
+        source: { ...specimen.dataset },
+        auditId: table.dataset.componentAuditId,
+        role: table.getAttribute("role"),
+        captions: table.querySelectorAll(":scope > caption").length,
+        headerCells: table.querySelectorAll("thead th[scope='col']").length,
+        bodyCells: table.querySelectorAll("tbody td").length,
+        height: window.getComputedStyle(cell).height,
+        width: table.getBoundingClientRect().width,
+        cellWidth: cell.getBoundingClientRect().width,
+      };
+    }),
+  );
+  for (const [index, reference] of manifest.references.entries()) {
     const source = await readFile(
       new globalThis.URL(reference.file, referenceRoot),
       "utf8",
@@ -33,61 +52,25 @@ test("accounts for each source cell with native semantics and exact cell geometr
     expect(source, `${reference.file} retains source divider paint`).toMatch(
       /#(?:D1D8DF|DFE2F0|253D98)/,
     );
-
-    const specimen = specimens.nth(reference.sourceOrder - 1);
-    await expect(specimen).toHaveAttribute(
-      "data-table-source-cell",
-      String(reference.sourceOrder),
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-reference",
-      reference.file,
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-width",
-      String(reference.sourceWidth),
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-content-height",
-      String(reference.sourceHeight),
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-type",
-      reference.variantProperties.Type,
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-state",
-      reference.variantProperties.State,
-    );
-    await expect(specimen).toHaveAttribute(
-      "data-source-cell-kind",
-      reference.variantProperties.Cell,
-    );
-
-    const table = specimen.locator("table");
-    await expect(table).toHaveAttribute(
-      "data-component-audit-id",
-      `table-cell-source-${reference.sourceOrder}`,
-    );
-    await expect(table).not.toHaveAttribute("role", /.+/);
-    await expect(table.locator(":scope > caption")).toHaveCount(1);
-    const cell = table
-      .locator("th.shlz-table__cell, td.shlz-table__cell")
-      .last();
-    await expect(cell).toHaveCSS("height", "50px");
-    const geometry = await table.evaluate((element) => ({
-      width: element.getBoundingClientRect().width,
-      cellWidth: element
-        .querySelector(".shlz-table__cell")
-        .getBoundingClientRect().width,
-    }));
-    expect(geometry.width).toBeCloseTo(reference.sourceWidth, 0);
-    expect(geometry.cellWidth).toBeCloseTo(reference.sourceWidth, 0);
-    if (reference.variantProperties.Cell === "Header") {
-      await expect(table.locator("thead th[scope='col']")).toHaveCount(1);
-    } else {
-      await expect(table.locator("tbody td")).toHaveCount(1);
-    }
+    const actual = observed[index];
+    expect(actual.source).toMatchObject({
+      tableSourceCell: String(reference.sourceOrder),
+      sourceReference: reference.file,
+      sourceWidth: String(reference.sourceWidth),
+      sourceContentHeight: String(reference.sourceHeight),
+      sourceType: reference.variantProperties.Type,
+      sourceState: reference.variantProperties.State,
+      sourceCellKind: reference.variantProperties.Cell,
+    });
+    expect(actual.auditId).toBe(`table-cell-source-${reference.sourceOrder}`);
+    expect(actual.role ?? "").toBe("");
+    expect(actual.captions).toBe(1);
+    expect(actual.height).toBe("50px");
+    expect(actual.width).toBeCloseTo(reference.sourceWidth, 0);
+    expect(actual.cellWidth).toBeCloseTo(reference.sourceWidth, 0);
+    if (reference.variantProperties.Cell === "Header")
+      expect(actual.headerCells).toBe(1);
+    else expect(actual.bodyCells).toBe(1);
   }
 });
 
