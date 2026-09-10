@@ -1,16 +1,25 @@
 import assert from "node:assert/strict";
-import { stat } from "node:fs/promises";
+import { realpath } from "node:fs/promises";
 import path from "node:path";
-import { pathToFileURL } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { createSSRApp, h } from "vue";
 import { renderToString } from "vue/server-renderer";
 
 // The same oracle accepts either the candidate checkout or a known-bad module.
-const target = process.argv[2] ?? process.cwd();
-const modulePath = (await stat(target)).isDirectory()
-  ? path.join(target, "packages/vue/dist/index.js")
-  : target;
-const { ShlzButton } = await import(pathToFileURL(modulePath));
+const root = fileURLToPath(new globalThis.URL("../", import.meta.url));
+const target = path.resolve(root, process.argv[2] ?? ".");
+const relativeTarget = path.relative(root, target);
+if (relativeTarget.startsWith("..") || path.isAbsolute(relativeTarget))
+  throw new Error("Oracle target must stay within this checkout");
+const modulePath =
+  target === path.resolve(root)
+    ? path.join(root, "packages/vue/dist/index.js")
+    : target;
+const resolvedModule = await realpath(modulePath);
+const relativeModule = path.relative(root, resolvedModule);
+if (relativeModule.startsWith("..") || path.isAbsolute(relativeModule))
+  throw new Error("Oracle target symlink escapes this checkout");
+const { ShlzButton } = await import(pathToFileURL(resolvedModule));
 const render = (props = {}) =>
   renderToString(
     createSSRApp({ render: () => h(ShlzButton, props, () => "Action") }),

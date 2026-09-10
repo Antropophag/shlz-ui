@@ -78,7 +78,11 @@ test("native forms and disabled behavior", async ({ page }) => {
   );
   await page.getByRole("button", { name: "Toggle disabled" }).click();
   await expect(button).toBeDisabled();
-  await button.click({ force: true });
+  const disabledBounds = await button.boundingBox();
+  await page.mouse.click(
+    disabledBounds.x + disabledBounds.width / 2,
+    disabledBounds.y + disabledBounds.height / 2,
+  );
   await button.evaluate((node) => node.click());
   await page.getByRole("textbox", { name: "Draft" }).focus();
   await page.keyboard.press("Tab");

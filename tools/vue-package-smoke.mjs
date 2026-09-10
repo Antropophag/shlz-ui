@@ -6,7 +6,7 @@ import path from "node:path";
 const root = process.cwd();
 const dir = mkdtempSync(path.join(tmpdir(), "shlz-vue-consumer-"));
 const run = (args, cwd = root) =>
-  execFileSync("npm", args, {
+  execFileSync(path.join(path.dirname(process.execPath), "npm"), args, {
     cwd,
     encoding: "utf8",
     stdio: ["ignore", "pipe", "pipe"],
@@ -47,6 +47,13 @@ try {
     path.join(dir, "consumer.ts"),
     `import { h } from 'vue';
 import { ShlzButton, type ButtonHandle, type ButtonVariant, type ButtonSize } from '@shlz/vue';
+type PublicProps = InstanceType<typeof ShlzButton>['$props'];
+const attrs: PublicProps = { name: 'command', value: 'save', form: 'editor', 'aria-label': 'Save', onClick(event) { const mouse: MouseEvent = event; mouse.preventDefault(); } };
+h(ShlzButton, attrs);
+// @ts-expect-error click handler receives MouseEvent, not a string
+const badEvent: PublicProps = { onClick(event: string) {} }; void badEvent;
+// @ts-expect-error native button type is a closed set
+const badType: PublicProps = { type: 'navigation' }; void badType;
 const variant: ButtonVariant = 'primary'; const size: ButtonSize = 'sm';
 h(ShlzButton, { variant, size, disabled: false, type: 'submit' }, () => 'Save');
 const focus = (handle: ButtonHandle) => handle.element?.focus(); void focus;
@@ -72,14 +79,14 @@ const invalid: ButtonVariant = 'loading'; void invalid;
   );
   writeFileSync(
     path.join(dir, "consumer.mjs"),
-    `import assert from 'node:assert/strict';
+    String.raw`import assert from 'node:assert/strict';
 import { createSSRApp, h } from 'vue';
 import { renderToString } from 'vue/server-renderer';
 import { ShlzButton } from '@shlz/vue';
 assert.equal(typeof window, 'undefined'); assert.equal(typeof document, 'undefined');
 const render = (label, props={}) => renderToString(createSSRApp({render: () => h(ShlzButton, props, () => label)}));
 const [a,b] = await Promise.all([render('First'), render('Second', {variant:'primary',size:'sm',disabled:true,'aria-label':'Save',class:'custom'})]);
-assert.match(a, /type="button"/); assert.match(a, />First<\\/button>/); assert.ok(!a.includes('Second'));
+assert.match(a, /type="button"/); assert.match(a, />First<\/button>/); assert.ok(!a.includes('Second'));
 assert.match(b, /disabled/); assert.match(b, /shlz-button--primary/); assert.match(b, /shlz-button--sm/); assert.match(b, /custom/); assert.match(b, /aria-label="Save"/); assert.ok(!b.includes('First'));
 console.log('Packed Vue consumer: types, server-safe import, SSR and isolated requests passed');
 `,
