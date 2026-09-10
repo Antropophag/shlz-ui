@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "intent": "Complete all source-backed table cells, header controls, table compositions and related integration, beyond the header.",
+  "route": "open-spec",
+  "openSpecChange": "complete-table-source",
+  "requiredDecisions": [
+    {
+      "id": "complete-table-scope",
+      "owner": "user",
+      "blocking": true
+    },
+    {
+      "id": "source-and-data-ownership",
+      "owner": "repo",
+      "blocking": true
+    }
+  ],
+  "materialSignals": {
+    "newCapability": true,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}

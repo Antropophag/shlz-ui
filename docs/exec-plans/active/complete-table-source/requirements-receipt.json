@@ -1,0 +1,26 @@
+{
+  "kind": "requirements",
+  "payload": {
+    "authorization": "pre-authorized",
+    "change": "complete-table-source",
+    "decisions": [
+      {
+        "blocking": true,
+        "id": "complete-table-scope",
+        "owner": "user",
+        "status": "resolved"
+      },
+      {
+        "blocking": true,
+        "id": "source-and-data-ownership",
+        "owner": "repo",
+        "status": "resolved"
+      }
+    ],
+    "intent": "Complete all source-backed table cells, header controls, table compositions and related integration, beyond the header.",
+    "revision": 1
+  },
+  "routeDigest": "5a766979b60278ad15d996f04b0a124ec8e23e7c08989400a277946f21525181",
+  "version": 1,
+  "digest": "d805b06ba7cf5381cf96ef55e464c0e3bb8d851cff2df9ef663285a2ba74fd31"
+}

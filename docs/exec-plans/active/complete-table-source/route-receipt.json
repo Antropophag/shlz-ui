@@ -1,0 +1,36 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Complete all source-backed table cells, header controls, table compositions and related integration, beyond the header.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "complete-table-source",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "complete-table-scope",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "source-and-data-ownership",
+        "owner": "repo"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "5a766979b60278ad15d996f04b0a124ec8e23e7c08989400a277946f21525181"
+}

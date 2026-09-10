@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "revision": 1,
+  "intent": "Complete all source-backed table cells, header controls, table compositions and related integration, beyond the header.",
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "complete-table-scope",
+      "owner": "user",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "user-prompt",
+        "ref": "2026-09-10: Сделай и не ограничивайся заголовком, нас интересует все что относится к таблицам."
+      }
+    },
+    {
+      "id": "source-and-data-ownership",
+      "owner": "repo",
+      "blocking": true,
+      "status": "resolved",
+      "provenance": {
+        "kind": "repository-path",
+        "ref": "AGENTS.md; docs/components/table.md; docs/components/pagination.md; Table Cell.svg; Table.svg"
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "complete-table-source",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-prompt",
+      "ref": "2026-09-10 explicit implementation request expanding the preceding concrete table gap report to the entire table source family."
+    }
+  }
+}
