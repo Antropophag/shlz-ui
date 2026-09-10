@@ -4,10 +4,10 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@shlz/behaviors": "0.1.0",
-    "@shlz/icons": "0.1.0",
-    "@shlz/styles": "0.1.0",
-    "@shlz/tokens": "0.1.0"
+    "@shlz/behaviors": "0.2.0",
+    "@shlz/icons": "0.2.0",
+    "@shlz/styles": "0.2.0",
+    "@shlz/tokens": "0.2.0"
   },
   "scripts": {
     "dev": "vite",
