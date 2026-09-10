@@ -10,22 +10,35 @@ const matrix = JSON.parse(
   await readFile("docs/component-audits/table-source-matrix.json", "utf8"),
 );
 const css = await readFile("packages/styles/dist/shlz.css", "utf8");
-const iconUrl = (name) => `http://source-icons.invalid/${name}.svg`;
+const iconUrl = (name) => `https://source-icons.invalid/${name}.svg`;
 const browser = await chromium.launch();
 try {
   const page = await browser.newPage();
-  const markup =
-    set === "table-cell"
-      ? tableCellsMarkup(iconUrl)
-      : set === "table-composition"
-        ? tableCompositionsMarkup(iconUrl)
-        : `<table class="shlz-table"><thead class="shlz-table__head"><tr><th class="shlz-table__cell" aria-sort="${set === "table-sorter" ? member : "none"}">${tableSorter("Sort")}${tableFilter("Filter", member === "active" ? 'aria-pressed="true"' : "")}</th></tr></thead></table>`;
+  let markup;
+  if (set === "table-cell") markup = tableCellsMarkup(iconUrl);
+  else if (set === "table-composition")
+    markup = tableCompositionsMarkup(iconUrl);
+  else {
+    const sort = set === "table-sorter" ? member : "none";
+    const filterAttributes = member === "active" ? 'aria-pressed="true"' : "";
+    markup = `<table class="shlz-table"><thead class="shlz-table__head"><tr><th class="shlz-table__cell" aria-sort="${sort}">${tableSorter("Sort")}${tableFilter("Filter", filterAttributes)}</th></tr></thead></table>`;
+  }
   // Static state evidence uses real production HTML/CSS. Runtime flows live in
   // the separate Playwright consumer specs; this oracle never claims those.
-  await page.route("http://source-icons.invalid/**", async (route) => {
+  await page.route("https://source-icons.invalid/**", async (route) => {
     const name = new globalThis.URL(route.request().url()).pathname
       .split("/")
       .pop();
+    assert.ok(
+      [
+        "flag-filled.svg",
+        "flag.svg",
+        "plus-alt-2.svg",
+        "plus-circle.svg",
+        "copy-2.svg",
+      ].includes(name),
+      "Unknown table fixture icon",
+    );
     await route.fulfill({
       contentType: "image/svg+xml",
       body: await readFile(`packages/icons/dist/icons/${name}`),
@@ -61,14 +74,11 @@ try {
     assert.equal(actual.fontSize, kind === "Header" ? "12px" : "15px");
     assert.equal(actual.lineHeight, kind === "Header" ? "18px" : "19.5px");
     const editing = editable && ["Pressed", "Typing"].includes(state);
-    assert.equal(
-      actual.border,
-      editing
-        ? "rgb(37, 61, 152)"
-        : [12, 13, 37, 38, 39, 40, 41].includes(Number(member))
-          ? "rgb(223, 226, 240)"
-          : "rgb(209, 216, 223)",
-    );
+    let border = "rgb(209, 216, 223)";
+    if (editing) border = "rgb(37, 61, 152)";
+    else if ([12, 13, 37, 38, 39, 40, 41].includes(Number(member)))
+      border = "rgb(223, 226, 240)";
+    assert.equal(actual.border, border);
     assert.equal(
       actual.background,
       state === "Hover" && kind === "Row"
@@ -173,14 +183,11 @@ try {
     if (family === "field-management")
       assert.ok([4, 10].includes(actual.count));
     else assert.equal(actual.count, expectedColumns[family]);
-    assert.equal(
-      actual.paint,
-      ["hover", "dots-pressed"].includes(actual.state)
-        ? "rgb(238, 240, 244)"
-        : actual.state === "active"
-          ? "rgb(244, 246, 249)"
-          : "rgba(0, 0, 0, 0)",
-    );
+    let paint = "rgba(0, 0, 0, 0)";
+    if (["hover", "dots-pressed"].includes(actual.state))
+      paint = "rgb(238, 240, 244)";
+    else if (actual.state === "active") paint = "rgb(244, 246, 249)";
+    assert.equal(actual.paint, paint);
   } else if (set === "table-sorter") {
     assert.ok(["none", "ascending", "descending"].includes(member));
     assert.deepEqual(
@@ -201,11 +208,11 @@ try {
       await page
         .locator(".shlz-table__filter path")
         .evaluate((el) => window.getComputedStyle(el).fill),
-      member === "active"
-        ? "rgb(37, 61, 152)"
-        : member === "hover"
-          ? "rgb(209, 216, 223)"
-          : "rgb(147, 156, 165)",
+      {
+        active: "rgb(37, 61, 152)",
+        hover: "rgb(209, 216, 223)",
+        default: "rgb(147, 156, 165)",
+      }[member],
     );
   } else throw new Error(`unknown set ${set}`);
   console.log(`PASS ${set} ${member}`);

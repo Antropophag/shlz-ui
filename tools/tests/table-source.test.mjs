@@ -198,3 +198,18 @@ test("original table header geometry overrides conflicting Figma metadata", () =
     /M100 545H116V595H100V545Z/,
   );
 });
+
+test("table oracle rejects undeclared CLI paths before filesystem use", async () => {
+  const { spawnSync } = await import("node:child_process");
+  const result = spawnSync(
+    process.execPath,
+    ["tools/table-contract-oracle.mjs", "../undeclared-target.json"],
+    { encoding: "utf8" },
+  );
+  assert.notEqual(result.status, 0);
+  assert.match(
+    result.stderr,
+    /Only this checkout or its declared baseline adapter/,
+  );
+  assert.doesNotMatch(result.stderr, /ENOENT|Unexpected token/);
+});

@@ -1,28 +1,47 @@
-import { readFile, stat } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import { execFileSync } from "node:child_process";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
 import { chromium } from "@playwright/test";
 import { tableFilter, tableSorter } from "../apps/showcase/src/table-parts.js";
 
 // The same public HTML contract is rendered with candidate CSS or immutable
 // pre-transfer CSS. Expected paint/geometry comes from Table Cell.svg.
-const target = path.resolve(process.argv[2] ?? ".");
-const info = await stat(target);
-const adapter = info.isDirectory()
-  ? null
-  : JSON.parse(await readFile(target, "utf8"));
-const css = adapter
-  ? execFileSync(
-      "git",
-      ["show", `${adapter.baselineCommit}:${adapter.stylesheet}`],
-      { encoding: "utf8" },
-    )
-  : await readFile(
-      path.join(target, "packages/styles/components/table.css"),
-      "utf8",
-    );
-const tokens = await readFile("packages/tokens/dist/tokens.css", "utf8");
+const repoRoot = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const baselineRelative = "tools/tests/fixtures/table-baseline.json";
+const baselinePath = path.join(repoRoot, baselineRelative);
+const requested = process.argv[2] ?? ".";
+const candidateTargets = new Set([".", repoRoot]);
+const baselineTargets = new Set([baselineRelative, baselinePath]);
+assert.ok(
+  candidateTargets.has(requested) || baselineTargets.has(requested),
+  "Only this checkout or its declared baseline adapter is an oracle target",
+);
+const stylesheet = "packages/styles/components/table.css";
+let css;
+if (baselineTargets.has(requested)) {
+  const adapter = JSON.parse(await readFile(baselinePath, "utf8"));
+  assert.match(adapter.baselineCommit, /^[a-f0-9]{40}$/);
+  assert.equal(adapter.stylesheet, stylesheet);
+  css = execFileSync(
+    "git",
+    ["show", `${adapter.baselineCommit}:${stylesheet}`],
+    { cwd: repoRoot, encoding: "utf8" },
+  );
+} else {
+  css = await readFile(
+    new globalThis.URL(
+      "../packages/styles/components/table.css",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+}
+const tokens = await readFile(
+  new globalThis.URL("../packages/tokens/dist/tokens.css", import.meta.url),
+  "utf8",
+);
 const browser = await chromium.launch();
 try {
   const page = await browser.newPage();

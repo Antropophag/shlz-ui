@@ -216,6 +216,11 @@ test("text suggestions keep focus, select a value and dismiss without clipping",
   const input = root.getByRole("combobox");
   await input.fill("Комп");
   await expect(input).toHaveAttribute("aria-expanded", "true");
+  await input.press("ArrowUp");
+  await expect(input).toHaveAttribute(
+    "aria-activedescendant",
+    "table-name-option-2",
+  );
   await input.press("ArrowDown");
   await expect(input).toHaveAttribute(
     "aria-activedescendant",

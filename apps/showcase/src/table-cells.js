@@ -60,15 +60,27 @@ const variants = [
 const icon = (iconUrl, name, alt = "") =>
   `<img class="shlz-table__cell-icon" src="${iconUrl(name)}" alt="${alt}">`;
 
-const staticPopup = (index, type) => {
-  const items =
-    type === "Text"
-      ? ["Комплектую...", "Комплектую..."]
-      : type === "Status"
-        ? ["Отгружен", "Отгружен"]
-        : ["Комплектую...", "Комплектую..."];
-  return `<div class="shlz-table__cell-choice-menu" data-table-source-popup="${index}" aria-hidden="true">${items.map((item) => `<span class="shlz-table__cell-choice-option">${type === "Status" ? `<span class="shlz-status shlz-status--green">${item}</span>` : item}</span>`).join("")}</div>`;
+const popupItems = {
+  Status: ["Отгружен", "Отгружен"],
+  Text: ["Комплектую...", "Комплектую..."],
 };
+
+const popupItem = (item, statusItem) => {
+  const content = statusItem
+    ? `<span class="shlz-status shlz-status--green">${item}</span>`
+    : item;
+  return `<span class="shlz-table__cell-choice-option">${content}</span>`;
+};
+
+const staticPopup = (index, type) => {
+  const items = popupItems[type] ?? popupItems.Text;
+  const options = items
+    .map((item) => popupItem(item, type === "Status"))
+    .join("");
+  return `<div class="shlz-table__cell-choice-menu" data-table-source-popup="${index}" aria-hidden="true">${options}</div>`;
+};
+
+const pressedAttribute = (pressed) => (pressed ? ' aria-pressed="true"' : "");
 
 const headerContent = (index, type, state, iconUrl) => {
   const iconHeader = type === "Icon";
@@ -84,70 +96,131 @@ const headerContent = (index, type, state, iconUrl) => {
   ]
     .filter(Boolean)
     .join(" ");
-  const label = iconHeader
-    ? `<img class="shlz-table__header-icon" src="${iconUrl("flag-filled")}" alt="">`
-    : `<span>Номер</span>`;
-  const controls = `${tableSorter("Сортировать по номеру", `data-table-source-sorter="${index}" ${ascending || descending ? ' aria-pressed="true"' : ""}`)}${tableFilter("Фильтровать по номеру", `data-table-source-filter="${index}" ${filtered ? ' aria-pressed="true"' : ""}`)}`;
-  return `<span class="${headingClasses}"${controlsVisible ? ' data-table-heading-controls-visible="true"' : ""}>${label}<span class="shlz-table__actions">${controls}</span></span>`;
+  let label = `<span>Номер</span>`;
+  if (iconHeader)
+    label = `<img class="shlz-table__header-icon" src="${iconUrl("flag-filled")}" alt="">`;
+  const sorterAttributes = `data-table-source-sorter="${index}" ${pressedAttribute(ascending || descending)}`;
+  const filterAttributes = `data-table-source-filter="${index}" ${pressedAttribute(filtered)}`;
+  const sorter = tableSorter("Сортировать по номеру", sorterAttributes);
+  const filter = tableFilter("Фильтровать по номеру", filterAttributes);
+  const controlsVisibleAttribute = controlsVisible
+    ? ' data-table-heading-controls-visible="true"'
+    : "";
+  return `<span class="${headingClasses}"${controlsVisibleAttribute}>${label}<span class="shlz-table__actions">${sorter}${filter}</span></span>`;
+};
+
+const textContent = (index, state, editable, filled) => {
+  if (state === "Pressed")
+    return `<input class="shlz-table__editor" aria-label="Пустой редактор" value="">`;
+  if (state === "Typing") {
+    const value = filled ? "3" : "Комп";
+    return `<input class="shlz-table__editor" aria-label="Диагностический редактор ${index}" value="${value}">`;
+  }
+  let value = "";
+  if (filled) value = editable ? "3" : "Номер";
+  return `<span>${value}</span>`;
+};
+
+const statusContent = (editable, filled) => {
+  if (!filled) return "";
+  const modifier = editable ? " shlz-status--green" : "";
+  const value = editable ? "Отгружен" : "Новое";
+  return `<span class="shlz-status${modifier}">${value}</span>`;
 };
 
 const bodyContent = (index, type, state, editable, filled, iconUrl) => {
-  if (type === "Empty") return "";
-  if (type === "Text" && state === "Pressed")
-    return `<input class="shlz-table__editor" aria-label="Пустой редактор" value="">`;
-  if (type === "Text")
-    return state === "Typing"
-      ? `<input class="shlz-table__editor" aria-label="Диагностический редактор ${index}" value="${filled ? "3" : "Комп"}">`
-      : `<span>${filled ? (editable ? "3" : "Номер") : ""}</span>`;
-  if (type === "Status")
-    return filled
-      ? `<span class="shlz-status${editable ? " shlz-status--green" : ""}">${editable ? "Отгружен" : "Новое"}</span>`
-      : "";
-  if (type === "Check")
-    return `<input class="shlz-checkbox" type="checkbox" aria-label="Диагностический выбор ${index}"${filled ? " checked" : ""}>`;
-  if (type === "Priority") return `<span>${tablePriority("Приоритет")}</span>`;
-  if (type === "Switch")
-    return `<input class="shlz-switch__input" type="checkbox" role="switch" aria-label="Диагностический переключатель ${index}"${filled ? " checked" : ""}>`;
-  if (type === "Button")
-    return `<button class="shlz-table__add-row${state === "Pressed" ? " shlz-table__add-row--visual-pressed" : ""}" type="button">${icon(iconUrl, "plus-alt-2")}Добавить строку</button>`;
-  if (type === "Icon")
-    return index === 44
-      ? ""
-      : `<button class="shlz-table__icon-action" type="button" aria-label="Копировать строку">${icon(iconUrl, "copy-2")}</button>`;
-  if (!filled) return "";
-  return `<button class="shlz-table__cell-choice-trigger" type="button" aria-label="Выбрать значение">3</button>`;
+  const checkedAttribute = filled ? " checked" : "";
+  const renderers = {
+    Button: () => {
+      const pressedClass =
+        state === "Pressed" ? " shlz-table__add-row--visual-pressed" : "";
+      return `<button class="shlz-table__add-row${pressedClass}" type="button">${icon(iconUrl, "plus-alt-2")}Добавить строку</button>`;
+    },
+    Check: () =>
+      `<input class="shlz-checkbox" type="checkbox" aria-label="Диагностический выбор ${index}"${checkedAttribute}>`,
+    Dropdown: () => {
+      if (!filled) return "";
+      return `<button class="shlz-table__cell-choice-trigger" type="button" aria-label="Выбрать значение">3</button>`;
+    },
+    Empty: () => "",
+    Icon: () => {
+      if (index === 44) return "";
+      return `<button class="shlz-table__icon-action" type="button" aria-label="Копировать строку">${icon(iconUrl, "copy-2")}</button>`;
+    },
+    Priority: () => `<span>${tablePriority("Приоритет")}</span>`,
+    Status: () => statusContent(editable, filled),
+    Switch: () =>
+      `<input class="shlz-switch__input" type="checkbox" role="switch" aria-label="Диагностический переключатель ${index}"${checkedAttribute}>`,
+    Text: () => textContent(index, state, editable, filled),
+  };
+  return renderers[type]();
 };
+
+const cellStateClasses = {
+  Hover: " shlz-table__cell--visual-hover",
+  Pressed: " shlz-table__cell--visual-pressed",
+  Typing: " shlz-table__cell--typing",
+};
+
+const sortAttribute = (state) => {
+  if (state.includes("ascending") || state.includes("Ascending"))
+    return ' aria-sort="ascending"';
+  if (state.includes("descending") || state.includes("Descending"))
+    return ' aria-sort="descending"';
+  return "";
+};
+
+const typeClass = (type) =>
+  ({
+    Check: " shlz-table__cell--check",
+    Icon: " shlz-table__cell--icon",
+    Priority: " shlz-table__cell--priority",
+  })[type] ?? "";
 
 const specimen = (variant, offset, iconUrl) => {
   const index = offset + 1;
   const [type, state, editable, cell, filled, width, popup] = variant;
   const isHeader = cell === "Header";
-  const stateClass =
-    state === "Hover" && !isHeader
-      ? " shlz-table__cell--visual-hover"
-      : state === "Pressed"
-        ? " shlz-table__cell--visual-pressed"
-        : state === "Typing"
-          ? " shlz-table__cell--typing"
-          : "";
-  const content = isHeader
-    ? headerContent(index, type, state, iconUrl)
-    : bodyContent(index, type, state, editable, filled, iconUrl);
-  const sort =
-    state.includes("ascending") || state.includes("Ascending")
-      ? ' aria-sort="ascending"'
-      : state.includes("descending") || state.includes("Descending")
-        ? ' aria-sort="descending"'
-        : "";
-  const cellMarkup = `<${isHeader ? "th" : "td"} class="shlz-table__cell${editable ? " shlz-table__cell--editable" : ""}${type === "Icon" ? " shlz-table__cell--icon" : type === "Check" ? " shlz-table__cell--check" : type === "Priority" ? " shlz-table__cell--priority" : ""}${type === "Button" ? " shlz-table__cell--button" : ""}${stateClass}" ${isHeader ? `scope="col"${sort}` : ""}>${content}${popup ? staticPopup(index, type) : ""}</${isHeader ? "th" : "td"}>`;
-  const rows = isHeader
-    ? `<thead class="shlz-table__head"><tr>${cellMarkup}</tr></thead><tbody></tbody>`
-    : `<thead class="shlz-visually-hidden"><tr><th scope="col">Значение</th></tr></thead><tbody><tr class="shlz-table__row">${cellMarkup}</tr></tbody>`;
-  return `<figure class="shlz-table-cell-source" data-table-source-cell="${index}" data-source-reference="table-cell-${index}.svg" data-source-width="${width}" data-source-content-height="${popup ? 154 : 50}" data-source-svg-width="${popup ? 200 : width}" data-source-svg-height="${popup ? 188 : 50}" data-source-type="${type}" data-source-state="${state}" data-source-cell-kind="${cell}"><figcaption>${index}. ${type} · ${state} · ${cell}${editable ? " · editable" : ""}${filled ? " · filled" : ""}${popup ? " · popup export" : ""}</figcaption><table class="shlz-table" data-component-audit-id="table-cell-source-${index}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">Table Cell source variant ${index}: ${type}, ${state}, ${cell}</caption><colgroup><col style="inline-size:${width}px"></colgroup>${rows}</table></figure>`;
+  let stateClass = cellStateClasses[state] ?? "";
+  if (isHeader && state === "Hover") stateClass = "";
+  let content;
+  if (isHeader) content = headerContent(index, type, state, iconUrl);
+  else content = bodyContent(index, type, state, editable, filled, iconUrl);
+  const tag = isHeader ? "th" : "td";
+  const editableClass = editable ? " shlz-table__cell--editable" : "";
+  const buttonClass = type === "Button" ? " shlz-table__cell--button" : "";
+  const scope = isHeader ? `scope="col"${sortAttribute(state)}` : "";
+  const popupMarkup = popup ? staticPopup(index, type) : "";
+  const cellMarkup = `<${tag} class="shlz-table__cell${editableClass}${typeClass(type)}${buttonClass}${stateClass}" ${scope}>${content}${popupMarkup}</${tag}>`;
+  let rows = `<thead class="shlz-visually-hidden"><tr><th scope="col">Значение</th></tr></thead><tbody><tr class="shlz-table__row">${cellMarkup}</tr></tbody>`;
+  if (isHeader)
+    rows = `<thead class="shlz-table__head"><tr>${cellMarkup}</tr></thead><tbody></tbody>`;
+  const contentHeight = popup ? 154 : 50;
+  const svgWidth = popup ? 200 : width;
+  const svgHeight = popup ? 188 : 50;
+  const editableLabel = editable ? " · editable" : "";
+  const filledLabel = filled ? " · filled" : "";
+  const popupLabel = popup ? " · popup export" : "";
+  return `<figure class="shlz-table-cell-source" data-table-source-cell="${index}" data-source-reference="table-cell-${index}.svg" data-source-width="${width}" data-source-content-height="${contentHeight}" data-source-svg-width="${svgWidth}" data-source-svg-height="${svgHeight}" data-source-type="${type}" data-source-state="${state}" data-source-cell-kind="${cell}"><figcaption>${index}. ${type} · ${state} · ${cell}${editableLabel}${filledLabel}${popupLabel}</figcaption><table class="shlz-table" data-component-audit-id="table-cell-source-${index}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">Table Cell source variant ${index}: ${type}, ${state}, ${cell}</caption><colgroup><col style="inline-size:${width}px"></colgroup>${rows}</table></figure>`;
 };
 
-const liveChoice = (id, auditId, value, items) =>
-  `<div class="shlz-dropdown shlz-table__cell-choice" data-shlz-dropdown data-table-live-choice data-table-menu-root data-component-audit-id="${auditId}"><button class="shlz-table__cell-choice-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="${id}-menu"><span data-table-live-choice-value${id === "table-editing-status" ? ' class="shlz-status shlz-status--green"' : ""}>${value}</span></button><div class="shlz-dropdown__menu shlz-table__cell-choice-menu" id="${id}-menu" role="menu" hidden>${items.map((item) => `<button class="shlz-dropdown__item" type="button" role="menuitem" data-value="${item}">${id === "table-editing-status" ? `<span class="shlz-status shlz-status--green">${item}</span>` : item}</button>`).join("")}</div></div>`;
+const liveChoiceItem = (item, statusChoice) => {
+  const content = statusChoice
+    ? `<span class="shlz-status shlz-status--green">${item}</span>`
+    : item;
+  return `<button class="shlz-dropdown__item" type="button" role="menuitem" data-value="${item}">${content}</button>`;
+};
+
+const liveChoice = (id, auditId, value, items) => {
+  const statusChoice = id === "table-editing-status";
+  const valueClass = statusChoice
+    ? ' class="shlz-status shlz-status--green"'
+    : "";
+  const options = items
+    .map((item) => liveChoiceItem(item, statusChoice))
+    .join("");
+  return `<div class="shlz-dropdown shlz-table__cell-choice" data-shlz-dropdown data-table-live-choice data-table-menu-root data-component-audit-id="${auditId}"><button class="shlz-table__cell-choice-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="${id}-menu"><span data-table-live-choice-value${valueClass}>${value}</span></button><div class="shlz-dropdown__menu shlz-table__cell-choice-menu" id="${id}-menu" role="menu" hidden>${options}</div></div>`;
+};
 
 const editingExample = (iconUrl) =>
   `<section class="shlz-table-editing-example" id="table-editing-example"><h4>Executable table editing example</h4><p data-table-editing-status role="status">No changes yet.</p><div class="shlz-table-wrap" data-table-editing-wrap><table class="shlz-table" data-component-audit-id="table-editing-example"><caption>Редактирование заявки</caption><thead class="shlz-table__head"><tr><th class="shlz-table__cell shlz-table__cell--check" scope="col"><input class="shlz-checkbox" type="checkbox" aria-label="Выбрать все строки" data-table-select-all></th><th class="shlz-table__cell" scope="col">Название</th><th class="shlz-table__cell" scope="col">Статус</th><th class="shlz-table__cell" scope="col">Режим</th><th class="shlz-table__cell" scope="col">Включено</th><th class="shlz-table__cell" scope="col">Действия</th></tr></thead><tbody data-table-editing-body><tr class="shlz-table__row"><td class="shlz-table__cell shlz-table__cell--check"><input class="shlz-checkbox" type="checkbox" aria-label="Выбрать заявку" data-table-select-row></td><td class="shlz-table__cell shlz-table__cell--editable"><div class="shlz-table__cell-choice" data-table-suggestions data-table-menu-root><input class="shlz-table__editor shlz-table__cell-choice-trigger" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="table-editing-name-suggestions" data-table-live-name aria-label="Название заявки" value="Замена пропуска"><div class="shlz-table__cell-choice-menu" id="table-editing-name-suggestions" role="listbox" aria-label="Предложения названия" hidden><button class="shlz-table__cell-choice-option" id="table-name-option-1" type="button" role="option" tabindex="-1" aria-selected="false">Комплектующие</button><button class="shlz-table__cell-choice-option" id="table-name-option-2" type="button" role="option" tabindex="-1" aria-selected="false">Комплектование</button></div></div></td><td class="shlz-table__cell shlz-table__cell--editable shlz-table__cell--status">${liveChoice("table-editing-status", "dropdown-table-editing-status", "Новый", ["Новый", "В работе", "Закрыт"])}</td><td class="shlz-table__cell shlz-table__cell--editable">${liveChoice("table-editing-mode", "dropdown-table-editing-mode", "Обычный", ["Обычный", "Срочный"])}</td><td class="shlz-table__cell"><label class="shlz-switch"><input class="shlz-switch__input" data-table-live-switch type="checkbox" role="switch"><span class="shlz-visually-hidden">Включить заявку</span></label></td><td class="shlz-table__cell"><span class="shlz-cluster"><button class="shlz-table__icon-action" type="button" data-table-live-icon aria-pressed="false" aria-label="Отметить заявку">${icon(iconUrl, "flag")}</button><button class="shlz-table__add-row" type="button" data-table-live-add>${icon(iconUrl, "plus-circle")}Добавить строку</button></span></td></tr></tbody></table></div></section>`;
@@ -321,14 +394,12 @@ const bindTableSuggestions = (root, signal, announce) => {
       event.preventDefault();
       if (menu.hidden) open();
       const count = visible().length;
-      if (count)
-        highlight(
-          event.key === "ArrowDown"
-            ? (active + 1) % count
-            : active < 0
-              ? count - 1
-              : (active - 1 + count) % count,
-        );
+      if (count) {
+        let next = (active + 1) % count;
+        if (event.key === "ArrowUp")
+          next = active < 0 ? count - 1 : (active - 1 + count) % count;
+        highlight(next);
+      }
     },
     { signal },
   );

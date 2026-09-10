@@ -82,9 +82,17 @@ assertions were fixed rather than accepted as component evidence.
 
 ## Remaining gates and limitations
 
-Independent worker reviews hit the account execution limit during this episode.
-They are not substituted by the author's checks. The PR stays draft pending an
-independent Standards and Spec outcome.
+Early orchestration workers hit an account limit. Separate `codex exec` reviewers
+subsequently completed both Standards and Spec reviews with PASS against
+`64a2939`, using distinct runtime identities. Their follow-up review covers the
+Sonar-driven rendering refactor and proof-tool target validation.
+
+The refactor preserves byte-identical rendering output for table cells (63,204
+characters), domain compositions (39,237), and the mixed examples (19,480).
+The proof CLI now accepts only this checkout or its declared baseline adapter;
+undeclared targets are rejected before filesystem reads. Focused keyboard/menu
+and 12-state ledger checks passed after the refactor. The PR remains draft while
+final CI and delivery receipts are completed.
 
 Full lint is blocked by five pre-existing formatting failures in route receipts:
 `add-cross-browser-smoke-review`, `add-cross-browser-smoke`,

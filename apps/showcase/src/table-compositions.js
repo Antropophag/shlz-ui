@@ -9,7 +9,11 @@ const toggle = (label) =>
 const img = (iconUrl, name, label = "") =>
   `<img class="shlz-table__cell-icon" src="${iconUrl(name)}" alt="${label}">`;
 const action = (iconUrl, name, label) =>
-  `<button class="shlz-table__icon-action" type="button" tabindex="-1" aria-label="${label}">${name === "edit" ? tableEditIcon() : tableMoreIcon()}</button>`;
+  `<button class="shlz-table__icon-action" type="button" tabindex="-1" aria-label="${label}">${actionIcon(name)}</button>`;
+const actionIcon = (name) => {
+  if (name === "edit") return tableEditIcon();
+  return tableMoreIcon();
+};
 // Source decorative gutters/edit slots are folded into logical columns rather
 // than exposed as meaningless extra data columns. Widths sum to the source row.
 const widths = {
@@ -52,9 +56,24 @@ const table = ({ slug, family, title, width, header, rows }) => {
     }
     return `<${tag} class="${classes.join(" ")}"${isHead ? ' scope="col"' : ""}>${content}</${tag}>`;
   };
-  const renderRow = (record, isHead = false) =>
-    `<tr class="shlz-table__row${["hover", "dots-pressed"].includes(record.state) ? " shlz-table__row--visual-hover" : record.state === "active" ? " shlz-table__row--visual-active" : ""}" data-table-composition-variant="${record.order}" data-source-state="${record.state ?? "default"}" data-source-height="50">${record.cells.map((value, index) => cell(value, index, isHead)).join("")}</tr>`;
-  return `<figure class="shlz-table-composition" data-table-composition-family="${family}"><figcaption>${title} · source width ${width}px</figcaption><div class="shlz-table-wrap" data-table-source-scroll tabindex="0" role="region" aria-label="Полная таблица: ${title}"><table class="shlz-table" inert aria-hidden="true" data-component-audit-id="table-composition-${slug}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">${title}, inert Table.svg source composition</caption><colgroup>${widths[slug].map((size) => `<col style="inline-size:${size}px">`).join("")}</colgroup><thead class="shlz-table__head">${renderRow(header, true)}</thead><tbody>${rows.map((record) => renderRow(record)).join("")}</tbody></table></div></figure>`;
+  const renderRow = (record, isHead = false) => {
+    let stateClass = "";
+    if (["hover", "dots-pressed"].includes(record.state))
+      stateClass = " shlz-table__row--visual-hover";
+    if (record.state === "active")
+      stateClass = " shlz-table__row--visual-active";
+    const cells = record.cells
+      .map((value, index) => cell(value, index, isHead))
+      .join("");
+    const sourceState = record.state ?? "default";
+    return `<tr class="shlz-table__row${stateClass}" data-table-composition-variant="${record.order}" data-source-state="${sourceState}" data-source-height="50">${cells}</tr>`;
+  };
+  const columns = widths[slug]
+    .map((size) => `<col style="inline-size:${size}px">`)
+    .join("");
+  const headerMarkup = renderRow(header, true);
+  const rowsMarkup = rows.map((record) => renderRow(record)).join("");
+  return `<figure class="shlz-table-composition" data-table-composition-family="${family}"><figcaption>${title} · source width ${width}px</figcaption><div class="shlz-table-wrap" data-table-source-scroll tabindex="0" role="region" aria-label="Полная таблица: ${title}"><table class="shlz-table" inert aria-hidden="true" data-component-audit-id="table-composition-${slug}" style="inline-size:${width}px;table-layout:fixed"><caption class="shlz-visually-hidden">${title}, inert Table.svg source composition</caption><colgroup>${columns}</colgroup><thead class="shlz-table__head">${headerMarkup}</thead><tbody>${rowsMarkup}</tbody></table></div></figure>`;
 };
 
 export const tableCompositionsMarkup = (iconUrl) => {
