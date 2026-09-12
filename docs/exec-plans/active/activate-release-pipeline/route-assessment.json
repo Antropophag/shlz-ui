@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "intent": "Activate the governed SHLZ package release pipeline against the corporate GitLab registry, prove partial-publication resume, exact four-package consumption, promotion and rollback, and retain redacted evidence before milestone 7.",
+  "route": "open-spec",
+  "openSpecChange": "activate-release-pipeline",
+  "requiredDecisions": [
+    { "id": "corporate-registry-coordinates", "owner": "user", "blocking": true },
+    { "id": "github-environment-administrators", "owner": "user", "blocking": true },
+    { "id": "credential-provisioning", "owner": "user", "blocking": true },
+    { "id": "maintenance-window", "owner": "user", "blocking": true },
+    { "id": "activation-versions-and-rollback-target", "owner": "user", "blocking": true },
+    { "id": "partial-publication-method", "owner": "agent", "blocking": true },
+    { "id": "redacted-evidence-policy", "owner": "agent", "blocking": true },
+    { "id": "milestone-7-gate", "owner": "user", "blocking": true }
+  ],
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": true,
+    "externalEffects": true,
+    "publicUrlOrDomain": true,
+    "deploymentSemantics": true,
+    "permissionsOrSecurity": true,
+    "destructiveOrIrreversible": true,
+    "externalAutomation": true,
+    "publicContract": true,
+    "materialAmbiguity": false
+  }
+}
