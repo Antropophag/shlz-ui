@@ -3,6 +3,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { format } from "prettier";
+import { replaceGeneratedMarkdownSection } from "./lib.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rawPath = path.join(root, "shlz-design-source/raw/svg/Icons.svg");
@@ -351,16 +352,21 @@ await writeFile(
 );
 const readmePath = path.join(normalizedRoot, "README.md");
 const basicReadme = await readFile(readmePath, "utf8");
+const readmeSection =
+  `The second normalization stage reads all 125 recovered candidates from the authoritative \`raw/svg/Icons.svg\` sheet. ` +
+  `Historical extraction metadata supplies grouping and crop localization only; every emitted primitive is matched back to the raw SVG byte geometry before use.\n\n` +
+  `- All 406 raw path/rect primitives are frozen in an independent partition: 302 candidate primitives and 104 non-icon sheet chrome/label primitives.\n` +
+  `- Exact deduplication requires matching topology, viewBox, paint policy, and ordered element-level paint assignments. No sheet candidate passes every check; 62 add a new canonical name and 63 name/geometry collisions receive an explicit qualified name.\n` +
+  `- \`calendar-sidebar\` and \`calendar-interface\` preserve the two distinct candidates that previously collided as \`calendar.svg\`.\n` +
+  `- The merged production input contains 244 canonical logical icons and 250 emitted variants.\n` +
+  `- \`icons-sheet-analysis.json\` records source IDs, category, crop transform, source paints, semantic-name confidence, topology hash, and disposition for every candidate.\n`;
 await writeFile(
   readmePath,
-  `${basicReadme}\n## Icons.svg sheet extension\n\n` +
-    `The second normalization stage reads all 125 recovered candidates from the authoritative \`raw/svg/Icons.svg\` sheet. ` +
-    `Historical extraction metadata supplies grouping and crop localization only; every emitted primitive is matched back to the raw SVG byte geometry before use.\n\n` +
-    `- All 406 raw path/rect primitives are frozen in an independent partition: 302 candidate primitives and 104 non-icon sheet chrome/label primitives.\n` +
-    `- Exact deduplication requires matching topology, viewBox, paint policy, and ordered element-level paint assignments. No sheet candidate passes every check; 62 add a new canonical name and 63 name/geometry collisions receive an explicit qualified name.\n` +
-    `- \`calendar-sidebar\` and \`calendar-interface\` preserve the two distinct candidates that previously collided as \`calendar.svg\`.\n` +
-    `- The merged production input contains 244 canonical logical icons and 250 emitted variants.\n` +
-    `- \`icons-sheet-analysis.json\` records source IDs, category, crop transform, source paints, semantic-name confidence, topology hash, and disposition for every candidate.\n`,
+  replaceGeneratedMarkdownSection(
+    basicReadme,
+    "Icons.svg sheet extension",
+    readmeSection,
+  ),
 );
 
 process.stdout.write(

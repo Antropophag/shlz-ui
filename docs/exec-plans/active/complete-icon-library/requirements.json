@@ -31,7 +31,7 @@
       "blocking": true,
       "provenance": {
         "kind": "repository",
-        "ref": "apps/showcase/src/showcase-navigation.js omits Icons while apps/showcase/src/main.js nests the catalog in an unlinked details element; the existing navigation contract supplies the discoverable integration seam."
+        "ref": "apps/showcase/src/showcase-navigation.json omits Icons while apps/showcase/src/main.js nests the catalog in an unlinked details element; the existing navigation contract supplies the discoverable integration seam."
       }
     },
     {

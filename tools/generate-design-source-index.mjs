@@ -272,6 +272,7 @@ const preservedColorIcons = icons
     semanticColors,
     paintPolicy,
   }));
+const currentColorIconCount = icons.length - preservedColorIcons.length;
 const fileTypeIcons = icons
   .filter(({ category }) => category === "files")
   .map(({ name, normalizedPath }) => ({ name, normalizedPath }));
@@ -533,8 +534,8 @@ const manifest = {
     icons: {
       logicalGlyphs: icons.length,
       emittedSvgFiles: emittedIconPaths.length,
-      currentColor: iconAnalysis.summary.currentColorIcons,
-      preservedColor: iconAnalysis.summary.preservedColorIcons,
+      currentColor: currentColorIconCount,
+      preservedColor: preservedColorIcons.length,
     },
     referenceScreens: {
       total: referenceScreens.length,
@@ -618,7 +619,7 @@ Original Figma exports under \`shlz-design-source/raw/svg/\` are the primary sou
 - ${components.summary.componentSets} component sets, ${components.summary.standaloneComponents} standalone components and ${components.summary.variants} variants from both UI Kit pages.
 - ${colorsManifest.count} explicitly named colors, 9 explicit spacing values and 5 human-verified corner-radius values.
 - ${typography.summary.mergedSignatures} merged factual typography signatures from ${typography.summary.textNodes} Figma TEXT nodes; ${typography.summary.referencedTextStyles} opaque referenced text-style IDs are cataloged.
-- ${icons.length} normalized logical icons; ${iconAnalysis.summary.currentColorIcons} support \`currentColor\`, while ${iconAnalysis.summary.preservedColorIcons} preserve semantic or multicolor paints.
+- ${icons.length} normalized logical icons; ${currentColorIconCount} support \`currentColor\`, while ${preservedColorIcons.length} preserve semantic or multicolor paints.
 - ${referenceScreens.length} large reference sheets (${manifest.corpus.referenceScreens.serviceDesk} classified as Service Desk references).
 
 ## Reliability

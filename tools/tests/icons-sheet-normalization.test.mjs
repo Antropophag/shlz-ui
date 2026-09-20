@@ -2,10 +2,42 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { replaceGeneratedMarkdownSection } from "../lib.mjs";
 
 const json = async (file) => JSON.parse(await readFile(file, "utf8"));
 const sha256 = (value) =>
   createHash("sha256").update(JSON.stringify(value)).digest("hex");
+
+test("generated Icons.svg README section is replace-idempotent", () => {
+  const initial = "# Normalized icons\n\nBase contract.\n";
+  const section = "Generated facts.\n";
+  const once = replaceGeneratedMarkdownSection(
+    initial,
+    "Icons.svg sheet extension",
+    section,
+  );
+  const twice = replaceGeneratedMarkdownSection(
+    once,
+    "Icons.svg sheet extension",
+    section,
+  );
+
+  assert.equal(twice, once);
+  assert.equal(twice.match(/^## Icons\.svg sheet extension$/gm)?.length, 1);
+  assert.match(twice, /Base contract/);
+});
+
+test("Showcase navigation provenance names the tracked JSON contract", async () => {
+  const requirements = await readFile(
+    "docs/exec-plans/active/complete-icon-library/requirements.json",
+    "utf8",
+  );
+  assert.match(requirements, /apps\/showcase\/src\/showcase-navigation\.json/);
+  assert.doesNotMatch(
+    requirements,
+    /apps\/showcase\/src\/showcase-navigation\.js\b/,
+  );
+});
 
 test("Icons.svg candidates are exhaustively dispositioned from raw source IDs", async () => {
   const analysis = await json(
