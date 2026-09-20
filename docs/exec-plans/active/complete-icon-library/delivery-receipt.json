@@ -1,0 +1,35 @@
+{
+  "kind": "delivery",
+  "payload": {
+    "branch": "feature/complete-icon-library",
+    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "outcome": "pass",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/complete-icon-library",
+      "headRefOid": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/94"
+    },
+    "receiptDigests": [
+      "cc2129bf17dbf8ff5113e9de92ceacfcda969afdc4b0446066d3c629a8bbcb99",
+      "b6a04a779b227f0bd7a3020588620d8985909e1b59a7b65a204dade5176d2fb6",
+      "491954022679161f9ade92d27c9ab4f142d226a98f4f8d80da1a31ceaa624cd4",
+      "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+      "11d8ead05bb97bfa95a92e8463e8ce1dfd763f7ec3cb61b2120809b496d8d31c",
+      "d671814040929bc5db7b5abb70c47445bde47a946973699dbc08310c6ff96846",
+      "64042e8d16b6f26d61c2151425267ae20faada26ea6946bb848a41aa95a065f2",
+      "710a875d29ded575d52efc14d13958408fb7b4832f832e0a77a8f7921750ad4b"
+    ],
+    "repository": {
+      "checkoutDigest": "a7871d1d140cb5958ea788df350ab26d0b2b4612d9687634348476f1a86b8a9a",
+      "digest": "61febf6af348281d03018346a40605414c822a2593d6120046a7df59d0edc1e0",
+      "originDigest": "eb5de31d2b63adf203b6e867973e50e9f9f8b0bb882aa3cc0389033ad6126676",
+      "version": 2
+    },
+    "upstream": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7"
+  },
+  "version": 1,
+  "digest": "ac78ed1f13950406458bc997a2e708725ca077bc19a4a1b2890d1ac34fbf8d02"
+}

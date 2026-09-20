@@ -1,0 +1,32 @@
+{
+  "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+  "kind": "review",
+  "payload": {
+    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "spec": {
+      "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+      "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+      "findings": [],
+      "outcome": "pass",
+      "runtimeId": "codex-agent:/root/icon_spec_review@6e1b99e",
+      "runtimeSource": "codex-exec-jsonl"
+    },
+    "standards": {
+      "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+      "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+      "findings": [
+        {
+          "severity": "low",
+          "status": "accepted",
+          "summary": "Candidate category and collision policy uses explicit string maps and special cases; centralization may improve future maintenance but is not a contract or correctness issue."
+        }
+      ],
+      "outcome": "pass",
+      "runtimeId": "codex-agent:/root/icon_standards_review@6e1b99e",
+      "runtimeSource": "codex-exec-jsonl"
+    }
+  },
+  "version": 1,
+  "digest": "64042e8d16b6f26d61c2151425267ae20faada26ea6946bb848a41aa95a065f2"
+}

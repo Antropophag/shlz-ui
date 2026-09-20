@@ -1,0 +1,84 @@
+{
+  "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tools/tests/icon-library-baseline.test.mjs",
+      "tools/tests/icons-sheet-normalization.test.mjs",
+      "tools/tests/basic-icons-normalization.test.mjs",
+      "tools/tests/generators.test.mjs",
+      "tools/tests/design-source-index.test.mjs"
+    ],
+    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 5975,
+        "digest": "711bbba3cdc518972b3bfc10b97d91bfb888401ba27cb19c82286f8374ce219e",
+        "path": "openspec/changes/complete-icon-library/specs/foundations/icon-library/spec.md"
+      },
+      {
+        "bytes": 107820,
+        "digest": "3ce3e44a685fca202ef5cc5ca3431d5ccfde6f3de4c988d0f482790f57bc5e22",
+        "path": "packages/icons/normalized/icons-sheet-analysis.json"
+      },
+      {
+        "bytes": 379817,
+        "digest": "a87ad771f49db557ca2b141bfbd544789b706f984e3c4dd64f83efdc85d0807a",
+        "path": "packages/icons/normalized/manifest.json"
+      },
+      {
+        "bytes": 1089,
+        "digest": "de690582b05bd5a69846558fd640d86dc7ed67d8b1ac541499665f875605a2fa",
+        "path": "tools/fixtures/icon-library-baseline.json"
+      },
+      {
+        "bytes": 13988,
+        "digest": "b3de7f69533d954f9c05160853e12fc67a52e33c249970c3bf6cea66e7cc22d1",
+        "path": "tools/normalize-icons-sheet.mjs"
+      },
+      {
+        "bytes": 5646,
+        "digest": "217fcb520aa36b45ee145ad45dca714193e118e9d6f4a30fe3f61627f4b6370d",
+        "path": "tools/tests/basic-icons-normalization.test.mjs"
+      },
+      {
+        "bytes": 4654,
+        "digest": "f8a460b2567eaea9d15881dee9aca87dc213201c89fa3dd4bcb56419cae04e8c",
+        "path": "tools/tests/design-source-index.test.mjs"
+      },
+      {
+        "bytes": 10551,
+        "digest": "1be1d809f12f34a10618beca81e56e759f573d8d3649b89418b9fcf47500b989",
+        "path": "tools/tests/generators.test.mjs"
+      },
+      {
+        "bytes": 1459,
+        "digest": "e256457bc847054a8c5b597ba2d5da2a0e720f3dccfe7683860ad2c0fcea21f0",
+        "path": "tools/tests/icon-library-baseline.test.mjs"
+      },
+      {
+        "bytes": 5270,
+        "digest": "7ff42576764068106f55e83f75e76c8989ba684005c91c0a661b3dd28798f2df",
+        "path": "tools/tests/icons-sheet-normalization.test.mjs"
+      }
+    ],
+    "closureDigest": "64afc3d65555bfc3cb5f28e7849623a89aa5f5b49e52ca430cafa1850f9bfcb5",
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutDigest": "867d59f876cd2dc3ef9569b307ad7e6f1b828861778013a3a2468a1f1b242e7c"
+    },
+    "target": "complete-icon-library-focused-contract"
+  },
+  "version": 1,
+  "digest": "d671814040929bc5db7b5abb70c47445bde47a946973699dbc08310c6ff96846"
+}

@@ -1,0 +1,25 @@
+{
+  "baselineReceiptDigest": "491954022679161f9ade92d27c9ab4f142d226a98f4f8d80da1a31ceaa624cd4",
+  "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+  "kind": "tdd",
+  "payload": {
+    "baselineCommit": "dc317fdd80b259f411be2aa8ac9eab09c4cee697",
+    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "green": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "oracleDigest": "791c3510d11b24c8e39a4e5d14baa24c01009d36a55445a59b32b42d0763967a",
+    "red": {
+      "code": 1,
+      "outcome": "fail",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "version": 1,
+  "digest": "11d8ead05bb97bfa95a92e8463e8ce1dfd763f7ec3cb61b2120809b496d8d31c"
+}

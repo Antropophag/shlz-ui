@@ -20,4 +20,4 @@
 - [x] 4.1 Add focused visual evidence for old/new, monochrome/preserved-paint, collision, uncertain, and both-calendar topologies; run affected browser snapshots and document exact source/canonical/deduplication counts plus package-size delta.
 - [x] 4.2 Update icon methodology and the machine-readable foundation audit with multi-source coverage, dispositions, checks, limitations, and no unsupported completion claims; verify docs and audit contracts.
 - [x] 4.3 Run strict OpenSpec validation, source integrity, icon tests, package builds, full relevant Chromium coverage, and the production Showcase build; inspect the built assets for the `#icons` navigation target and manifest-matching catalog count.
-- [ ] 4.4 Perform independent Standards and Spec reviews against the immutable baseline, remediate scoped findings, run final conformance/delivery guards, push the task branch, and open an unmerged PR with CI and residual-risk status.
+- [x] 4.4 Perform independent Standards and Spec reviews against the immutable baseline, remediate scoped findings, run final conformance/delivery guards, push the task branch, and open an unmerged PR with CI and residual-risk status.
