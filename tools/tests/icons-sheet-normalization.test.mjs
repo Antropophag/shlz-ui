@@ -106,7 +106,7 @@ test("Icons.svg candidates are exhaustively dispositioned from raw source IDs", 
       topology: true,
       viewBox: true,
       paintPolicy: true,
-      paintValues: true,
+      paintTopology: true,
     });
     const target = manifest.find(({ name }) => name === candidate.target);
     assert.ok(
