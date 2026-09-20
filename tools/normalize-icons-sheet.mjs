@@ -66,7 +66,7 @@ function paintFingerprint(svg) {
         ),
       ]
         .map(([, attribute, value]) => `${attribute}=${value}`)
-        .sort()
+        .sort((left, right) => left.localeCompare(right))
         .join(";"),
     )
     .join("|");
