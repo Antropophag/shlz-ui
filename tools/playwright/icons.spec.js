@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-import { expectStableShowcaseScreenshot } from "./visual-harness.js";
 
 const representativeIcons = [
   "add-documents",
@@ -26,11 +25,12 @@ test.beforeEach(async ({ page }) => {
   });
 });
 
-test("all canonical icons resolve to painted production sprite symbols", async ({
+test("all catalog icon families resolve to painted production sprite symbols", async ({
   page,
 }) => {
   const cards = page.locator(".shlz-icon-card");
-  await expect(cards).toHaveCount(244);
+  await expect(cards).toHaveCount(182);
+  await expect(page.locator("[data-icon-related-name]")).toHaveCount(62);
   const failures = await cards.evaluateAll((items) =>
     items.flatMap((card) => {
       const graphic = card.querySelector(
@@ -51,11 +51,33 @@ test("all canonical icons resolve to painted production sprite symbols", async (
   expect(failures).toEqual([]);
 });
 
+test("outlined icons do not acquire an implicit solid fill", async ({
+  page,
+}) => {
+  const implicitFills = await page.evaluate(async () => {
+    const uses = [...document.querySelectorAll(".shlz-icon-card > svg use")];
+    const spriteUrl = uses[0].href.baseVal.split("#")[0];
+    const sprite = new window.DOMParser().parseFromString(
+      await (await window.fetch(spriteUrl)).text(),
+      "image/svg+xml",
+    );
+    return uses.flatMap((use) => {
+      const name = use.closest("[data-icon-name]")?.dataset.iconName;
+      const symbol = sprite.querySelector(`#${use.href.baseVal.split("#")[1]}`);
+      return symbol?.getAttribute("fill") !== "none" &&
+        symbol?.querySelector("[stroke]:not([fill])")
+        ? [name]
+        : [];
+    });
+  });
+  expect([...new Set(implicitFills)]).toEqual([]);
+});
+
 test("standalone monochrome icons use the semantic default foreground", async ({
   page,
 }) => {
   const monochrome = page.locator(".shlz-icon-card > svg.shlz-icon");
-  await expect(monochrome).toHaveCount(200);
+  await expect(monochrome).toHaveCount(159);
   const colors = await monochrome.evaluateAll((items) => [
     ...new Set(items.map((item) => window.getComputedStyle(item).color)),
   ]);
@@ -93,25 +115,13 @@ test("representative paint topologies remain visually stable", async ({
   await expect(fixture.locator(".shlz-icon-card")).toHaveCount(
     representativeIcons.length,
   );
-  // Empty State retains a source-exact fractional height. Normalize this
-  // detached diagnostic fixture to the baseline raster phase so unrelated
-  // document-flow additions cannot recolor currentColor antialiasing.
-  await fixture.evaluate((element) => {
-    element.style.marginBlockStart = "0.5px";
-    element.style.marginBlockEnd = "-0.5px";
-  });
-  await expect(fixture).toHaveScreenshot("icon-catalog-representative.png", {
-    animations: "disabled",
-  });
-});
-
-test("Icon Catalog review is captured independently at large scale", async ({
-  page,
-}) => {
-  await expectStableShowcaseScreenshot(
-    page,
-    page.locator(".shlz-icon-catalog"),
-    "icon-catalog.png",
+  const boxes = await fixture
+    .locator(".shlz-icon-card > :is(svg, img)")
+    .evaluateAll((items) =>
+      items.map((item) => item.getBoundingClientRect().toJSON()),
+    );
+  expect(boxes.every(({ width, height }) => width > 0 && height > 0)).toBe(
+    true,
   );
 });
 

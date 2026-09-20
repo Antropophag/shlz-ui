@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <g transform="translate(-512 -741)">
     <path d="M515 751.524C515 750.522 515.489 749.583 516.312 749.011L522.472 744.719C523.39 744.079 524.61 744.079 525.528 744.719L531.688 749.011C532.51 749.583 533 750.522 533 751.524V757.369C533 760.134 531.155 761.767 528.418 761.76H519.582C516.845 761.767 515 760.134 515 757.369V751.524Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M515.385 750.041L521.928 755.314C523.161 756.286 524.897 756.286 526.121 755.314L532.62 750.041" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

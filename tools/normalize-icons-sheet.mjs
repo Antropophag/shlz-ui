@@ -184,7 +184,7 @@ for (const [index, candidate] of legacyManifest.entries()) {
     .split(/\s+/)
     .map(Number);
   const svg =
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${candidate.viewBox}">\n` +
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${candidate.viewBox}"${currentColor ? ' fill="none"' : ""}>\n` +
     `  <g transform="${transform}">\n    ${normalizedElements.join("\n    ")}\n  </g>\n` +
     `</svg>\n`;
   const candidateTopologySha256 = sha256(geometryFingerprint(svg));
