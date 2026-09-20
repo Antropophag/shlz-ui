@@ -149,6 +149,7 @@
       "tools/playwright/icons.spec.js",
       "tools/playwright/icons.spec.js-snapshots/icon-catalog-chromium-linux.png",
       "tools/playwright/icons.spec.js-snapshots/icon-catalog-representative-chromium-linux.png",
+      "tools/playwright/primitives.spec.js",
       "tools/playwright/showcase-loading.spec.js",
       "tools/playwright/showcase-loading.spec.js-snapshots/showcase-loading-shell-chromium-linux.png",
       "tools/playwright/showcase-navigation.spec.js-snapshots/wave9-sidebar-closed-chromium-linux.png",
@@ -161,7 +162,7 @@
       "tools/tests/icons-sheet-normalization.test.mjs",
       "tools/validate.mjs"
     ],
-    "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
+    "candidateHead": "5eb441a592b1ec622bfc671dd814d7c187873e04",
     "closedSets": [],
     "materialSignals": {
       "deploymentSemantics": false,
@@ -179,5 +180,5 @@
   },
   "routeReceiptDigest": "cc2129bf17dbf8ff5113e9de92ceacfcda969afdc4b0446066d3c629a8bbcb99",
   "version": 1,
-  "digest": "fdb43ec517b9ba49dda9577e68ede206d403643c51ced529ddaca2be3d2efead"
+  "digest": "a14c713fe15b0382eddfc1b251a2e12eb5b3ee4dd193240f8677f09371669c45"
 }
