@@ -9,7 +9,12 @@
     "candidateCount": 125,
     "primitiveCount": 302,
     "candidateLedgerSha256": "bef4660585796d217e6f25cbedd882b3f3eb3c1ac520344ab43edc8e449339de",
-    "sourceIdSetSha256": "d4359cee7d29b8bb5b4fc6ebfb66d6e0331693638a5abd9717ad2b138d45c209"
+    "sourceIdSetSha256": "d4359cee7d29b8bb5b4fc6ebfb66d6e0331693638a5abd9717ad2b138d45c209",
+    "rawPrimitiveCount": 406,
+    "rawPrimitiveSequenceSha256": "1d377c412297f5b3835904309a7f34ce3cd7b6b48cc4d85f1539829bae1a29c0",
+    "excludedPrimitiveCount": 104,
+    "excludedPrimitiveSequenceSha256": "658b09f7831da48142f6f84e9e361a9551f41527c36ee05f624cdfa19df34da1",
+    "excludedPrimitiveClassification": "non-icon sheet chrome and labels"
   },
   "artifactBytes": {
     "manifest": 238849,

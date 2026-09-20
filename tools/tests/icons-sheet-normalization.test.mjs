@@ -24,6 +24,16 @@ test("Icons.svg candidates are exhaustively dispositioned from raw source IDs", 
   const independentSourceIds = [
     ...new Set(independentCensus.flatMap(({ sourceIds }) => sourceIds)),
   ].sort();
+  const raw = await readFile("shlz-design-source/raw/svg/Icons.svg", "utf8");
+  const rawPrimitiveHashes = [
+    ...raw.matchAll(/<(?:path|rect)\b[^>]*\/?>(?:<\/(?:path|rect)>)?/g),
+  ].map(([element]) => createHash("sha256").update(element).digest("hex"));
+  const candidatePrimitiveHashes = new Set(
+    analysis.candidates.flatMap(({ rawPrimitiveSha256 }) => rawPrimitiveSha256),
+  );
+  const excludedPrimitiveHashes = rawPrimitiveHashes.filter(
+    (hash) => !candidatePrimitiveHashes.has(hash),
+  );
 
   assert.equal(
     sha256(independentCensus),
@@ -40,6 +50,35 @@ test("Icons.svg candidates are exhaustively dispositioned from raw source IDs", 
   assert.equal(
     independentSourceIds.length,
     baseline.iconsSheetCensus.primitiveCount,
+  );
+  assert.equal(
+    rawPrimitiveHashes.length,
+    baseline.iconsSheetCensus.rawPrimitiveCount,
+  );
+  assert.equal(
+    sha256(rawPrimitiveHashes),
+    baseline.iconsSheetCensus.rawPrimitiveSequenceSha256,
+  );
+  assert.equal(
+    candidatePrimitiveHashes.size,
+    baseline.iconsSheetCensus.primitiveCount,
+  );
+  assert.ok(
+    [...candidatePrimitiveHashes].every((hash) =>
+      rawPrimitiveHashes.includes(hash),
+    ),
+  );
+  assert.equal(
+    excludedPrimitiveHashes.length,
+    baseline.iconsSheetCensus.excludedPrimitiveCount,
+  );
+  assert.equal(
+    sha256(excludedPrimitiveHashes),
+    baseline.iconsSheetCensus.excludedPrimitiveSequenceSha256,
+  );
+  assert.equal(
+    rawPrimitiveHashes.length,
+    candidatePrimitiveHashes.size + excludedPrimitiveHashes.length,
   );
   assert.equal(analysis.sourceCandidateCount, 125);
   assert.equal(analysis.coreCandidateCount, 104);
@@ -67,6 +106,7 @@ test("Icons.svg candidates are exhaustively dispositioned from raw source IDs", 
       topology: true,
       viewBox: true,
       paintPolicy: true,
+      paintValues: true,
     });
     const target = manifest.find(({ name }) => name === candidate.target);
     assert.ok(

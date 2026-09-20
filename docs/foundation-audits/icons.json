@@ -49,7 +49,7 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass: hash and element-level paint tests cover all 133 Basic Elements SVGs plus every one of the 302 referenced raw Icons.svg primitives; the candidate ledger has no omission or primitive reuse",
+    "source-integrity": "pass: hash and element-level paint tests cover all 133 Basic Elements SVGs; an independent digest partition accounts for all 406 raw Icons.svg path/rect primitives as 302 candidate and 104 non-icon sheet chrome/label primitives, with no candidate omission or primitive reuse",
     "structural-contract": "pass: tests verify 244 canonical icons, 250 variants, the unchanged 119-icon compatibility subset, 42 explicit aliases, distinct calendars, provenance, sprite symbols, runtime helpers, and package exports",
     "runtime-browser": "pass: the icon catalog resolves all 244 canonical symbols to non-empty painted browser geometry",
     "accessibility": "not-applicable: the icon package supplies geometry and paint but no semantic meaning; accessible names and decorative treatment remain consumer-level claims",
