@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "intent": "Publish every distinct icon glyph from the authoritative Icons.svg alongside the existing Basic Elements corpus, preserve compatibility, and make the complete icon catalog directly discoverable in Showcase.",
+  "revision": 1,
+  "route": "open-spec",
+  "decisions": [
+    {
+      "id": "source-coverage",
+      "owner": "repo",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "AGENTS.md and shlz-design-source/raw/svg/Icons.svg establish the raw SVG as authoritative; the extraction report records 104 core candidates and a two-calendar collision."
+      }
+    },
+    {
+      "id": "collision-policy",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "openspec/config.yaml requires backward compatibility; docs/icon-methodology.md forbids unconfirmed silent substitution, so existing names remain stable and distinct collisions receive explicit names."
+      }
+    },
+    {
+      "id": "showcase-discoverability",
+      "owner": "agent",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "repository",
+        "ref": "apps/showcase/src/showcase-navigation.js omits Icons while apps/showcase/src/main.js nests the catalog in an unlinked details element; the existing navigation contract supplies the discoverable integration seam."
+      }
+    },
+    {
+      "id": "delivery-contract",
+      "owner": "user",
+      "status": "resolved",
+      "blocking": true,
+      "provenance": {
+        "kind": "user-request",
+        "ref": "User explicitly requested that all icons including calendar be added to the library and that Showcase be fixed."
+      }
+    }
+  ],
+  "openSpec": {
+    "change": "complete-icon-library",
+    "status": "synthesized"
+  },
+  "authorization": {
+    "status": "pre-authorized",
+    "provenance": {
+      "kind": "user-request",
+      "ref": "The user explicitly requested implementation, not planning only."
+    }
+  }
+}
