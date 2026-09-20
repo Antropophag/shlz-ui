@@ -1,0 +1,71 @@
+{
+  "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "node",
+      "--test",
+      "--test-concurrency=1",
+      "tools/tests/icons-sheet-normalization.test.mjs",
+      "tools/tests/design-source-index.test.mjs"
+    ],
+    "candidateHead": "9e69f4e5171fcdb0f7ef2cf04699946bdf345b88",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 3091,
+        "digest": "5ed7043d12fc52dc03fa34799ca59b46fb3af6216aac5bbdc0539ff2ed64b2e6",
+        "path": "design-source-index/README.md"
+      },
+      {
+        "bytes": 20520,
+        "digest": "50765d6226e2e2f7e5905c7bee152c2f9c2ad44936623b63dacb340bffd41ac0",
+        "path": "design-source-index/manifest.json"
+      },
+      {
+        "bytes": 2082,
+        "digest": "b868f180416e73a0445eb402625969d80c8c90d29e310269f6f2a49130590258",
+        "path": "docs/exec-plans/active/complete-icon-library/requirements.json"
+      },
+      {
+        "bytes": 25730,
+        "digest": "3f84cdc40fed02d6b173ec3e710fb518ae4e87d96ce101eb0c37e2942946676a",
+        "path": "tools/generate-design-source-index.mjs"
+      },
+      {
+        "bytes": 2060,
+        "digest": "1338d5d5219f161730a675a0e0e98f952a32e161e5f31b669b885d71763b5687",
+        "path": "tools/lib.mjs"
+      },
+      {
+        "bytes": 14153,
+        "digest": "fc08fb8c2bc5ef471f19ff406d2e3da936fe64036a1ee535beaf9bf113e4cd8e",
+        "path": "tools/normalize-icons-sheet.mjs"
+      },
+      {
+        "bytes": 4769,
+        "digest": "864f835348d4aa79d7f483e739b561c1b176184532794e617d8406b07c165d7f",
+        "path": "tools/tests/design-source-index.test.mjs"
+      },
+      {
+        "bytes": 6275,
+        "digest": "f947ce42c986f348ccdd418aac3fa17145373f439740c70b760f29d05a59cc71",
+        "path": "tools/tests/icons-sheet-normalization.test.mjs"
+      }
+    ],
+    "closureDigest": "90973b8dd9873ead06f9f41352ea7a27348b9bfc98b835ea70f4fd954a49a491",
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutDigest": "120340b7b642879bad10567c54ee757906cb0d50985ec7815509caff5c917d5e"
+    },
+    "target": "complete-icon-library-review-followup"
+  },
+  "version": 1,
+  "digest": "70d27323794cd2b876e8faf2288e9f985f22986623d5d74b5d6f5409d3d795e6"
+}
