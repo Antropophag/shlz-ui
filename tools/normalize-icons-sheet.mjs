@@ -105,7 +105,7 @@ async function sourceElements(candidate, raw) {
     const element = paths[40]?.[0];
     if (!element || !element.includes("M456.868 496.6"))
       throw new Error("Sidebar calendar raw path41 no longer matches");
-    return [element];
+    return [{ sourceId: "path41", element, sourceOrder: 40 }];
   }
   const extracted = await readFile(legacyAssetPath(candidate), "utf8");
   const rawGeometryElements = [
@@ -116,23 +116,29 @@ async function sourceElements(candidate, raw) {
       .replace(/\s+(?:fill|stroke|id)=["'][^"']+["']/g, "")
       .replace(/\s+/g, " ")
       .trim();
-  return candidate.source_ids.map((sourceId) => {
-    const match = extracted.match(
-      new RegExp(
-        `<(?:path|rect)\\b[^>]*\\bid=["']${sourceId}["'][^>]*\\/?>(?:<\\/(?:path|rect)>)?`,
-      ),
-    )?.[0];
-    if (!match) throw new Error(`Missing extracted locator: ${sourceId}`);
-    const fingerprint = locatorFingerprint(match);
-    const matches = rawGeometryElements.filter(
-      (element) => locatorFingerprint(element) === fingerprint,
-    );
-    if (matches.length !== 1)
-      throw new Error(
-        `Locator geometry differs from raw source or is ambiguous: ${sourceId} (${matches.length})`,
+  return candidate.source_ids
+    .map((sourceId) => {
+      const match = extracted.match(
+        new RegExp(
+          `<(?:path|rect)\\b[^>]*\\bid=["']${sourceId}["'][^>]*\\/?>(?:<\\/(?:path|rect)>)?`,
+        ),
+      )?.[0];
+      if (!match) throw new Error(`Missing extracted locator: ${sourceId}`);
+      const fingerprint = locatorFingerprint(match);
+      const matches = rawGeometryElements.filter(
+        (element) => locatorFingerprint(element) === fingerprint,
       );
-    return matches[0];
-  });
+      if (matches.length !== 1)
+        throw new Error(
+          `Locator geometry differs from raw source or is ambiguous: ${sourceId} (${matches.length})`,
+        );
+      return {
+        sourceId,
+        element: matches[0],
+        sourceOrder: rawGeometryElements.indexOf(matches[0]),
+      };
+    })
+    .sort((left, right) => left.sourceOrder - right.sourceOrder);
 }
 
 function explicitName(candidate, occupied, duplicateNames) {
@@ -174,12 +180,15 @@ for (const [index, candidate] of legacyManifest.entries()) {
     usedSourceIds.add(sourceId);
   }
   const sourceElementsForCandidate = await sourceElements(candidate, raw);
+  const orderedSourceElements = sourceElementsForCandidate.map(
+    ({ element }) => element,
+  );
   const transform = await translation(candidate);
-  const sourcePaints = paints(sourceElementsForCandidate);
+  const sourcePaints = paints(orderedSourceElements);
   const currentColor = sourcePaints.length <= 1;
   const normalizedElements = currentColor
-    ? sourceElementsForCandidate.map(toCurrentColor)
-    : sourceElementsForCandidate;
+    ? orderedSourceElements.map(toCurrentColor)
+    : orderedSourceElements;
   const [minX, minY, width, height] = candidate.viewBox
     .split(/\s+/)
     .map(Number);
@@ -235,6 +244,9 @@ for (const [index, candidate] of legacyManifest.entries()) {
     canonicalName: name,
     category: candidate.category,
     sourceIds: candidate.source_ids,
+    renderOrderSourceIds: sourceElementsForCandidate.map(
+      ({ sourceId }) => sourceId,
+    ),
     viewBox: candidate.viewBox,
     transform,
     semanticNameConfidence: candidate.semantic_name_confidence,
@@ -244,7 +256,7 @@ for (const [index, candidate] of legacyManifest.entries()) {
     target: exactTarget,
     comparedTarget: targetReference?.target ?? null,
     exactEquivalence,
-    rawPrimitiveSha256: sourceElementsForCandidate.map(sha256),
+    rawPrimitiveSha256: orderedSourceElements.map(sha256),
   };
   candidates.push(record);
   if (exactTarget) {

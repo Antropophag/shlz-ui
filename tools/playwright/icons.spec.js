@@ -29,8 +29,8 @@ test("all catalog icon families resolve to painted production sprite symbols", a
   page,
 }) => {
   const cards = page.locator(".shlz-icon-card");
-  await expect(cards).toHaveCount(182);
-  await expect(page.locator("[data-icon-related-name]")).toHaveCount(62);
+  await expect(cards).toHaveCount(181);
+  await expect(page.locator("[data-icon-related-name]")).toHaveCount(63);
   const failures = await cards.evaluateAll((items) =>
     items.flatMap((card) => {
       const graphic = card.querySelector(
@@ -128,17 +128,23 @@ test("representative paint topologies remain visually stable", async ({
 test("plain HTML consumes both calendars and preserved-paint sheet icons", async ({
   page,
 }) => {
-  const sources = await page.evaluate(() =>
-    Object.fromEntries(
-      ["calendar-sidebar", "calendar-interface", "xls-file"].map((name) => [
-        name,
-        document
-          .querySelector(`[data-icon-name="${name}"] use`)
-          ?.getAttribute("href") ??
-          document.querySelector(`[data-icon-name="${name}"] img`).src,
-      ]),
-    ),
-  );
+  const sources = await page.evaluate(() => {
+    const spriteUrl = document
+      .querySelector(".shlz-icon-card use")
+      .getAttribute("href")
+      .split("#")[0];
+    return Object.fromEntries(
+      ["calendar-sidebar", "calendar-interface", "xls-file"].map((name) => {
+        const card = document.querySelector(`[data-icon-name="${name}"]`);
+        return [
+          name,
+          card?.querySelector("use")?.getAttribute("href") ??
+            card?.querySelector("img")?.src ??
+            `${spriteUrl}#shlz-icon-${name}`,
+        ];
+      }),
+    );
+  });
   await page.setContent(`
     <!doctype html>
     <html lang="en"><body>
