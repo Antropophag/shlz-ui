@@ -11,7 +11,7 @@ Original Figma exports under `shlz-design-source/raw/svg/` are the primary sourc
 - 69 component sets, 126 standalone components and 630 variants from both UI Kit pages.
 - 40 explicitly named colors, 9 explicit spacing values and 5 human-verified corner-radius values.
 - 36 merged factual typography signatures from 2193 Figma TEXT nodes; 18 opaque referenced text-style IDs are cataloged.
-- 119 normalized logical icons; 97 support `currentColor`, while 22 preserve semantic or multicolor paints.
+- 201 normalized logical icons; 97 support `currentColor`, while 22 preserve semantic or multicolor paints.
 - 34 large reference sheets (24 classified as Service Desk references).
 
 ## Reliability

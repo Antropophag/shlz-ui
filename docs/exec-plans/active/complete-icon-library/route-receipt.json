@@ -2,10 +2,7 @@
   "kind": "route",
   "payload": {
     "intent": "Publish every distinct icon glyph from the authoritative Icons.svg alongside the existing Basic Elements corpus, preserve compatibility, and make the complete icon catalog directly discoverable in Showcase.",
-    "material": [
-      "newCapability",
-      "publicContract"
-    ],
+    "material": ["newCapability", "publicContract"],
     "materialSignals": {
       "deploymentSemantics": false,
       "destructiveOrIrreversible": false,

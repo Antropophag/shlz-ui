@@ -1,0 +1,15 @@
+{
+  "canonicalCount": 119,
+  "variantCount": 125,
+  "aliasCount": 42,
+  "contractDigest": "2e476ecd208918aa5d80fa801cada537f993222c192203f99aaa39ad18d00393",
+  "aliasDigest": "51db556854e4f897a4a4337dff0e78242ea2b398d4d0acb8f5f3a99d183133e7",
+  "iconsSourceSha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+  "artifactBytes": {
+    "manifest": 238849,
+    "aliases": 6580,
+    "sprite": 245024,
+    "runtime": 10612,
+    "types": 3202
+  }
+}

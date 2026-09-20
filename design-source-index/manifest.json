@@ -59,8 +59,8 @@
       "variants": 630
     },
     "icons": {
-      "logicalGlyphs": 119,
-      "emittedSvgFiles": 125,
+      "logicalGlyphs": 201,
+      "emittedSvgFiles": 207,
       "currentColor": 97,
       "preservedColor": 22
     },
@@ -81,20 +81,20 @@
     "icons": {
       "manifest": "packages/icons/normalized/manifest.json",
       "analysis": "packages/icons/normalized/analysis.json",
-      "logicalGlyphs": 119,
-      "emittedSvgFiles": 125,
+      "logicalGlyphs": 201,
+      "emittedSvgFiles": 207,
       "categories": [
         {
           "category": "interface",
-          "count": 62
+          "count": 113
         },
         {
           "category": "sidebar",
-          "count": 16
+          "count": 29
         },
         {
           "category": "editor",
-          "count": 17
+          "count": 34
         },
         {
           "category": "navigation",
@@ -106,7 +106,7 @@
         },
         {
           "category": "files",
-          "count": 20
+          "count": 21
         },
         {
           "category": "status",
@@ -193,6 +193,10 @@
         {
           "name": "file-zip",
           "normalizedPath": "files/file-zip.svg"
+        },
+        {
+          "name": "file-file-types",
+          "normalizedPath": "files/file-file-types.svg"
         }
       ],
       "semanticOrMulticolor": [
@@ -332,6 +336,18 @@
           "name": "priority",
           "category": "status",
           "semanticColors": ["#CC1F1F", "#D5E5D6", "#57965C", "#45B64E"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "xls-file",
+          "category": "interface",
+          "semanticColors": ["#079455", "white", "#DBDBDB", "#D4D4D8"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
           "paintPolicy": "preserved-source-colors"
         }
       ]

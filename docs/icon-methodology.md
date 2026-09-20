@@ -1,6 +1,6 @@
 # Icon methodology
 
-`packages/icons/normalized/manifest.json` and its normalized SVG files are the only production input for Basic Elements icons. They are generated from the read-only Figma export under `shlz-design-source/raw/svg/UI Kit – Basic elements/icons/`; raw remains the authority.
+`packages/icons/normalized/manifest.json` and its normalized SVG files are the only production input for icons. They are generated from two read-only authoritative Figma exports: `shlz-design-source/raw/svg/UI Kit – Basic elements/icons/` and `shlz-design-source/raw/svg/Icons.svg`; raw remains the authority.
 
 `tools/generate.mjs` copies normalized SVG bytes without a second paint or geometry transform. The normalized layer has already classified monochrome icons (`currentColor`) and semantic/multicolor icons (preserved paints). Production emits individual SVGs, logical manifest records with variants, a sprite, runtime name lists and TypeScript name unions.
 
@@ -11,11 +11,19 @@ use `.shlz-icon--inherit`, so Button, field, menu, feedback and other component
 states remain the source of their icon foreground. Preserved-paint assets stay
 external images and are not recolored by this contract.
 
-The production manifest contains 119 canonical logical icons and 125 emitted variants. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
+The production manifest contains 201 canonical logical icons and 207 emitted variants. The original 119 canonical icons and 125 variants remain an immutable compatibility subset. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
+
+## Icons.svg sheet normalization
+
+`tools/normalize-icons-sheet.mjs` runs after Basic Elements normalization. The historical manifest is used only to recover candidate grouping, category, semantic-name confidence and crop localization. Each selected `path` or `rect` is matched uniquely back to byte geometry in the authoritative raw sheet before it can be emitted; derived SVG geometry is never copied into production.
+
+The sheet census contains 125 candidates (104 core and 21 file-type) referencing 302 unique primitives. Every candidate has one explicit disposition in `packages/icons/normalized/icons-sheet-analysis.json`: 43 confirmed existing targets, 62 new canonical glyphs and 20 qualified name/geometry collisions. The two historically colliding calendars are independently emitted as `calendar-sidebar` (`path41`) and `calendar-interface` (`path83`, `path80`, `path82`, `path81`).
+
+Recovered labels are not promoted beyond their evidence. Each sheet-derived manifest record keeps its source IDs and semantic-name confidence; non-equivalent collisions never replace existing geometry.
 
 ## Migration boundary
 
-The former pipeline (`shlz-design-source/assets/icon-manifest.json` and `shlz-design-source/assets/{icons,file-types}`) is retained as historical derived evidence, but `@shlz/icons` no longer reads it. No fuzzy name mapping is performed.
+The former pipeline (`shlz-design-source/assets/icon-manifest.json` and `shlz-design-source/assets/{icons,file-types}`) is retained as historical derived evidence. Normalization reads its manifest and crop transforms only as candidate-localization metadata, then proves every primitive against raw `Icons.svg`. `@shlz/icons` production generation still reads only `packages/icons/normalized/`. No fuzzy name mapping is performed.
 
 Coverage analysis found 46 source/geometry-confirmed old-to-new mappings. Forty-two renamed public names are retained as explicit aliases. Same-name confirmed mappings need no alias. Seventy-nine old emitted records remain conservative breaking candidates because a correspondence was not sufficiently evidenced.
 
@@ -25,7 +33,7 @@ Known collisions are deliberately not aliased:
 - old file-type `file` corresponds to `file-generic`, while normalized canonical `file` is an editor glyph;
 - misleading or uncertain pairs such as `sort → icon-20-uncertain`, `flag-outline → flagq-uncertain` and `menu → list` remain migration issues rather than silent substitutions.
 
-The old recovered calendar collision is not carried into production because neither old calendar geometry has a confirmed normalized-corpus mapping.
+The old recovered calendar collision is resolved additively: neither candidate replaces an existing glyph, and both raw geometries are public under category-qualified names.
 
 ## Consumer contract
 

@@ -72,7 +72,7 @@ test("design source index is reproducible and complete", () => {
     standaloneComponents: 126,
     variants: 630,
   });
-  assert.equal(manifest.corpus.icons.logicalGlyphs, 119);
+  assert.equal(manifest.corpus.icons.logicalGlyphs, 201);
   assert.equal(manifest.corpus.referenceScreens.total, 34);
   assert.deepEqual(
     foundations.canonical.spacing.valuesPx,
