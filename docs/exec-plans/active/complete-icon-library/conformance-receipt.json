@@ -161,7 +161,7 @@
       "tools/tests/icons-sheet-normalization.test.mjs",
       "tools/validate.mjs"
     ],
-    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
     "closedSets": [],
     "materialSignals": {
       "deploymentSemantics": false,
@@ -179,5 +179,5 @@
   },
   "routeReceiptDigest": "cc2129bf17dbf8ff5113e9de92ceacfcda969afdc4b0446066d3c629a8bbcb99",
   "version": 1,
-  "digest": "710a875d29ded575d52efc14d13958408fb7b4832f832e0a77a8f7921750ad4b"
+  "digest": "e13b7387e18ebcf4bbd782de8eefa152efd2db76f86b52306a49398b14987fe0"
 }

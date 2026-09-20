@@ -6,13 +6,11 @@
       "node",
       "--test",
       "--test-concurrency=1",
-      "tools/tests/icon-library-baseline.test.mjs",
       "tools/tests/icons-sheet-normalization.test.mjs",
-      "tools/tests/basic-icons-normalization.test.mjs",
       "tools/tests/generators.test.mjs",
-      "tools/tests/design-source-index.test.mjs"
+      "tools/tests/icon-library-baseline.test.mjs"
     ],
-    "candidateHead": "6e1b99e778e8594f97a85277239e4dfbb0ceb2a7",
+    "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
     "closedSetEvidence": [],
     "closure": [
       {
@@ -31,24 +29,9 @@
         "path": "packages/icons/normalized/manifest.json"
       },
       {
-        "bytes": 1089,
-        "digest": "de690582b05bd5a69846558fd640d86dc7ed67d8b1ac541499665f875605a2fa",
-        "path": "tools/fixtures/icon-library-baseline.json"
-      },
-      {
-        "bytes": 13988,
-        "digest": "b3de7f69533d954f9c05160853e12fc67a52e33c249970c3bf6cea66e7cc22d1",
+        "bytes": 14030,
+        "digest": "c7d827ce83aa2c6a58eb0f90dbc85167c8ca2c23f0473d38f1acbf3fb558c4cd",
         "path": "tools/normalize-icons-sheet.mjs"
-      },
-      {
-        "bytes": 5646,
-        "digest": "217fcb520aa36b45ee145ad45dca714193e118e9d6f4a30fe3f61627f4b6370d",
-        "path": "tools/tests/basic-icons-normalization.test.mjs"
-      },
-      {
-        "bytes": 4654,
-        "digest": "f8a460b2567eaea9d15881dee9aca87dc213201c89fa3dd4bcb56419cae04e8c",
-        "path": "tools/tests/design-source-index.test.mjs"
       },
       {
         "bytes": 10551,
@@ -66,7 +49,7 @@
         "path": "tools/tests/icons-sheet-normalization.test.mjs"
       }
     ],
-    "closureDigest": "64afc3d65555bfc3cb5f28e7849623a89aa5f5b49e52ca430cafa1850f9bfcb5",
+    "closureDigest": "35956f6f8d92a8fd706a751643695b80e14e5ba73adf9bcc22b0b93306d32ae6",
     "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
     "outcome": "pass",
     "productionDelta": null,
@@ -75,10 +58,10 @@
       "code": 0,
       "outcome": "pass",
       "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stdoutDigest": "867d59f876cd2dc3ef9569b307ad7e6f1b828861778013a3a2468a1f1b242e7c"
+      "stdoutDigest": "1483f7b399741225dac23976fbb86ae0279f721118c8a95dbb3e726294e2dbb7"
     },
-    "target": "complete-icon-library-focused-contract"
+    "target": "complete-icon-library-ci-followup"
   },
   "version": 1,
-  "digest": "d671814040929bc5db7b5abb70c47445bde47a946973699dbc08310c6ff96846"
+  "digest": "738c06591ea419c7765102ffd5c04d9a3b167fc68db187296c6302b1566c18b5"
 }
