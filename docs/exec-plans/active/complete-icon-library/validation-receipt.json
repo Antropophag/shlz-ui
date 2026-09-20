@@ -1,0 +1,53 @@
+{
+  "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
+  "kind": "validation",
+  "payload": {
+    "argv": [
+      "npx",
+      "playwright",
+      "test",
+      "tools/playwright/primitives.spec.js",
+      "--project=chromium",
+      "-g",
+      "existing controls use inheriting"
+    ],
+    "candidateHead": "5eb441a592b1ec622bfc671dd814d7c187873e04",
+    "closedSetEvidence": [],
+    "closure": [
+      {
+        "bytes": 70718,
+        "digest": "fca73f48c5342ea70314ec4db686dacaa377d26858ab2453bad2768b9756c036",
+        "path": "apps/showcase/src/main.js"
+      },
+      {
+        "bytes": 5975,
+        "digest": "711bbba3cdc518972b3bfc10b97d91bfb888401ba27cb19c82286f8374ce219e",
+        "path": "openspec/changes/complete-icon-library/specs/foundations/icon-library/spec.md"
+      },
+      {
+        "bytes": 379817,
+        "digest": "a87ad771f49db557ca2b141bfbd544789b706f984e3c4dd64f83efdc85d0807a",
+        "path": "packages/icons/normalized/manifest.json"
+      },
+      {
+        "bytes": 6708,
+        "digest": "e75b0348b165d92d0b461a6b7186cfa3c3c577b74ccb44438307884f1900a178",
+        "path": "tools/playwright/primitives.spec.js"
+      }
+    ],
+    "closureDigest": "209fda3331ce7431a60796d5063ccc2936d9bb3a31b236ca93d7d28b434c61e4",
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "outcome": "pass",
+    "productionDelta": null,
+    "productionOutcomeProof": null,
+    "result": {
+      "code": 0,
+      "outcome": "pass",
+      "stderrDigest": "848b6fdf4ced84f5ecce6fc6afc29aa5c32ec7ca51f2afadb771eeda16615058",
+      "stdoutDigest": "9a47df2b2e8746fc44bbea1d9ec9e95765160dcb139625e8ced2974f3d01e057"
+    },
+    "target": "complete-icon-library-final-ci-test"
+  },
+  "version": 1,
+  "digest": "3455337070322ae920dd77ea752148ba7343682b438d227098e1a462e96f6de7"
+}

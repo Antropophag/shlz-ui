@@ -59,10 +59,10 @@
       "variants": 630
     },
     "icons": {
-      "logicalGlyphs": 119,
-      "emittedSvgFiles": 125,
-      "currentColor": 97,
-      "preservedColor": 22
+      "logicalGlyphs": 244,
+      "emittedSvgFiles": 250,
+      "currentColor": 200,
+      "preservedColor": 44
     },
     "referenceScreens": {
       "total": 34,
@@ -81,20 +81,20 @@
     "icons": {
       "manifest": "packages/icons/normalized/manifest.json",
       "analysis": "packages/icons/normalized/analysis.json",
-      "logicalGlyphs": 119,
-      "emittedSvgFiles": 125,
+      "logicalGlyphs": 244,
+      "emittedSvgFiles": 250,
       "categories": [
         {
           "category": "interface",
-          "count": 62
+          "count": 133
         },
         {
           "category": "sidebar",
-          "count": 16
+          "count": 32
         },
         {
           "category": "editor",
-          "count": 17
+          "count": 34
         },
         {
           "category": "navigation",
@@ -106,7 +106,7 @@
         },
         {
           "category": "files",
-          "count": 20
+          "count": 41
         },
         {
           "category": "status",
@@ -193,6 +193,90 @@
         {
           "name": "file-zip",
           "normalizedPath": "files/file-zip.svg"
+        },
+        {
+          "name": "pdf-file-types",
+          "normalizedPath": "files/pdf-file-types.svg"
+        },
+        {
+          "name": "doc-file-types",
+          "normalizedPath": "files/doc-file-types.svg"
+        },
+        {
+          "name": "docx-file-types",
+          "normalizedPath": "files/docx-file-types.svg"
+        },
+        {
+          "name": "txt-file-types",
+          "normalizedPath": "files/txt-file-types.svg"
+        },
+        {
+          "name": "csv-file-types",
+          "normalizedPath": "files/csv-file-types.svg"
+        },
+        {
+          "name": "xls-file-types",
+          "normalizedPath": "files/xls-file-types.svg"
+        },
+        {
+          "name": "xlsx-file-types",
+          "normalizedPath": "files/xlsx-file-types.svg"
+        },
+        {
+          "name": "ppt-file-types",
+          "normalizedPath": "files/ppt-file-types.svg"
+        },
+        {
+          "name": "pptx-file-types",
+          "normalizedPath": "files/pptx-file-types.svg"
+        },
+        {
+          "name": "mp3-file-types",
+          "normalizedPath": "files/mp3-file-types.svg"
+        },
+        {
+          "name": "mp4-file-types",
+          "normalizedPath": "files/mp4-file-types.svg"
+        },
+        {
+          "name": "mpeg-file-types",
+          "normalizedPath": "files/mpeg-file-types.svg"
+        },
+        {
+          "name": "avi-file-types",
+          "normalizedPath": "files/avi-file-types.svg"
+        },
+        {
+          "name": "mkv-file-types",
+          "normalizedPath": "files/mkv-file-types.svg"
+        },
+        {
+          "name": "zip-file-types",
+          "normalizedPath": "files/zip-file-types.svg"
+        },
+        {
+          "name": "rar-file-types",
+          "normalizedPath": "files/rar-file-types.svg"
+        },
+        {
+          "name": "img-file-types",
+          "normalizedPath": "files/img-file-types.svg"
+        },
+        {
+          "name": "png-file-types",
+          "normalizedPath": "files/png-file-types.svg"
+        },
+        {
+          "name": "svg-file-types",
+          "normalizedPath": "files/svg-file-types.svg"
+        },
+        {
+          "name": "pdf-alt-file-types",
+          "normalizedPath": "files/pdf-alt-file-types.svg"
+        },
+        {
+          "name": "file-file-types",
+          "normalizedPath": "files/file-file-types.svg"
         }
       ],
       "semanticOrMulticolor": [
@@ -332,6 +416,138 @@
           "name": "priority",
           "category": "status",
           "semanticColors": ["#CC1F1F", "#D5E5D6", "#57965C", "#45B64E"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "xls-file",
+          "category": "interface",
+          "semanticColors": ["#079455", "white", "#DBDBDB", "#D4D4D8"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "pdf-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#D92D20"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "doc-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "docx-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "txt-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "csv-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "xls-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "xlsx-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "ppt-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "pptx-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "mp3-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "mp4-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "mpeg-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "avi-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "mkv-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "zip-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "rar-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "img-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "png-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "svg-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "pdf-alt-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
+          "paintPolicy": "preserved-source-colors"
+        },
+        {
+          "name": "file-file-types",
+          "category": "files",
+          "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
           "paintPolicy": "preserved-source-colors"
         }
       ]

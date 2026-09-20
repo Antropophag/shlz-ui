@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile, readdir } from "node:fs/promises";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const contractPath =
@@ -39,9 +39,16 @@ test("source contract distinguishes facts, patterns, decisions, and assumptions"
 });
 
 test("the normalized editor inventory contains the complete 17-glyph set", async () => {
-  const names = (await readdir("packages/icons/normalized/editor"))
-    .filter((name) => name.endsWith(".svg"))
-    .map((name) => name.replace(/\.svg$/, ""))
+  const manifest = JSON.parse(
+    await readFile("packages/icons/normalized/manifest.json", "utf8"),
+  );
+  const names = manifest
+    .filter(
+      ({ category, sourceFigmaPaths }) =>
+        category === "editor" &&
+        !sourceFigmaPaths.includes("shlz-design-source/raw/svg/Icons.svg"),
+    )
+    .map(({ name }) => name)
     .sort();
   assert.deepEqual(names, [
     "align-center",

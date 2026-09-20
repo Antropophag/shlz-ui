@@ -1,0 +1,27 @@
+{
+  "kind": "baseline",
+  "payload": {
+    "branch": "feature/complete-icon-library",
+    "commit": "dc317fdd80b259f411be2aa8ac9eab09c4cee697",
+    "defaultBranch": "main",
+    "pullRequest": {
+      "baseRefName": "main",
+      "headRefName": "feature/complete-icon-library",
+      "headRefOid": "dc317fdd80b259f411be2aa8ac9eab09c4cee697",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/Antropophag/shlz-ui/pull/94"
+    },
+    "repository": {
+      "checkoutDigest": "a7871d1d140cb5958ea788df350ab26d0b2b4612d9687634348476f1a86b8a9a",
+      "digest": "61febf6af348281d03018346a40605414c822a2593d6120046a7df59d0edc1e0",
+      "originDigest": "eb5de31d2b63adf203b6e867973e50e9f9f8b0bb882aa3cc0389033ad6126676",
+      "version": 2
+    },
+    "upstream": "origin/feature/complete-icon-library"
+  },
+  "requirementsDigest": "b6a04a779b227f0bd7a3020588620d8985909e1b59a7b65a204dade5176d2fb6",
+  "routeDigest": "cc2129bf17dbf8ff5113e9de92ceacfcda969afdc4b0446066d3c629a8bbcb99",
+  "version": 1,
+  "digest": "491954022679161f9ade92d27c9ab4f142d226a98f4f8d80da1a31ceaa624cd4"
+}

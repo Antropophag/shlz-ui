@@ -10,7 +10,7 @@
     "dev": "npm run generate && npm run build:packages && npm run dev -w @shlz/showcase",
     "build:packages": "npm run build -w @shlz/tokens -w @shlz/icons -w @shlz/styles -w @shlz/behaviors -w @shlz/vue",
     "generate": "npm run generate:basic-icons && node tools/generate.mjs",
-    "generate:basic-icons": "node tools/normalize-basic-icons.mjs",
+    "generate:basic-icons": "node tools/normalize-basic-icons.mjs && node tools/normalize-icons-sheet.mjs",
     "generate:source-index": "node tools/generate-design-source-index.mjs",
     "generate:source-coverage": "node tools/generate-source-library-coverage.mjs",
     "check:source-coverage": "node tools/generate-source-library-coverage.mjs --check",

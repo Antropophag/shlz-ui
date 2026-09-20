@@ -180,6 +180,9 @@ test("existing controls use inheriting monochrome icons without recoloring prese
       ),
     );
   }
+  await page.evaluate(() => {
+    window.location.hash = "icons";
+  });
   await expect(page.locator(".shlz-icon-card img").first()).toBeAttached();
 });
 

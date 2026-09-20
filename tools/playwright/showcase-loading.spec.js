@@ -48,6 +48,26 @@ test("loads a direct hash and shares concurrent work", async ({ page }) => {
   await expect(page).toHaveURL(/#file-upload-demo$/);
 });
 
+test("Icons is a searchable direct destination with the complete catalog", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const iconsLink = page.getByRole("link", { name: "Icons", exact: true });
+  await expect(iconsLink).toBeVisible();
+  await page.getByRole("searchbox").fill("Icons");
+  await expect(iconsLink).toBeVisible();
+  await iconsLink.click();
+  await expect(page).toHaveURL(/#icons$/);
+  await expect(page.locator("#icons")).toBeVisible();
+  await expect(page.locator("#icons .shlz-icon-card")).toHaveCount(244);
+
+  await page.goto("/#icons");
+  await expect(page.locator("#icons")).toBeVisible();
+  await expect(
+    page.locator('[data-shlz-docs-link][href="#icons"]'),
+  ).toHaveAttribute("aria-current", "location");
+});
+
 test("preserves navigation focus while loading and responds to hash changes", async ({
   page,
 }) => {

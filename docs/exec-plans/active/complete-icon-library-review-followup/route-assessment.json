@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "intent": "Resolve the three verified PR #94 review findings by correcting one provenance path, deriving merged icon paint totals, and making the generated README section idempotent without changing the approved icon-library contract.",
+  "route": "direct",
+  "materialSignals": {
+    "newCapability": false,
+    "publishingOrRelease": false,
+    "externalEffects": false,
+    "publicUrlOrDomain": false,
+    "deploymentSemantics": false,
+    "permissionsOrSecurity": false,
+    "destructiveOrIrreversible": false,
+    "externalAutomation": false,
+    "publicContract": false,
+    "materialAmbiguity": false
+  }
+}

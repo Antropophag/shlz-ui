@@ -6,7 +6,8 @@
       ["colors", "Colors"],
       ["typography", "Typography"],
       ["spacing", "Spacing"],
-      ["geometry", "Geometry"]
+      ["geometry", "Geometry"],
+      ["icons", "Icons"]
     ]
   },
   {

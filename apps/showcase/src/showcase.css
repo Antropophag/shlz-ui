@@ -545,6 +545,7 @@ section {
 
 .shlz-icon-catalog {
   margin-block-start: var(--shlz-source-spacing-32);
+  padding: var(--shlz-source-spacing-24);
   border: 1px solid var(--shlz-semantic-color-border-default);
   border-radius: var(--shlz-source-radius-min);
 }
@@ -559,16 +560,14 @@ section {
 }
 
 .shlz-foundation-evidence > summary,
-.shlz-verification-harness > summary,
-.shlz-icon-catalog > summary {
+.shlz-verification-harness > summary {
   padding: var(--shlz-source-spacing-16);
   color: var(--shlz-semantic-color-text-secondary);
   cursor: pointer;
   font-weight: 600;
 }
 
-.shlz-foundation-evidence > #source-spec,
-.shlz-icon-catalog > section {
+.shlz-foundation-evidence > #source-spec {
   padding: 0 var(--shlz-source-spacing-24) var(--shlz-source-spacing-24);
 }
 

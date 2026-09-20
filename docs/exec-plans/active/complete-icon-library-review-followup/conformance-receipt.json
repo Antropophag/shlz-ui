@@ -1,0 +1,33 @@
+{
+  "baselineReceiptDigest": "986bacb8ae1a7a48ab60c3daa1a5f4c1d03a2653a51fad88cd8a287a98258dc2",
+  "kind": "conformance",
+  "payload": {
+    "actual": [
+      "design-source-index/README.md",
+      "design-source-index/manifest.json",
+      "tools/generate-design-source-index.mjs",
+      "tools/lib.mjs",
+      "tools/normalize-icons-sheet.mjs",
+      "tools/tests/design-source-index.test.mjs",
+      "tools/tests/icons-sheet-normalization.test.mjs"
+    ],
+    "candidateHead": "9e69f4e5171fcdb0f7ef2cf04699946bdf345b88",
+    "closedSets": [],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": false,
+      "publicContract": false,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "outcome": "pass"
+  },
+  "routeReceiptDigest": "1840e4d68013422ed91a807fa02c27e9f238f80a8e435f0399e4e740823d6d5b",
+  "version": 1,
+  "digest": "6be881ae32577ece9ca9e335190a71097c320f4a327310ea986d61ee4c80bdca"
+}

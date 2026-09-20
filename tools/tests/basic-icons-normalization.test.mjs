@@ -55,9 +55,13 @@ test("basic icon normalization covers all raw sources with intact hashes", async
   );
 
   assert.equal(analysis.summary.sourceSvgCount, 133);
-  assert.equal(manifest.length, 119);
+  const basicManifest = manifest.filter(
+    ({ sourceFigmaPaths }) =>
+      !sourceFigmaPaths.includes("shlz-design-source/raw/svg/Icons.svg"),
+  );
+  assert.equal(basicManifest.length, 119);
 
-  const manifestedSources = manifest
+  const manifestedSources = basicManifest
     .flatMap((icon) => icon.variants)
     .flatMap((variant) => variant.sources);
   assert.equal(manifestedSources.length, 133);
@@ -94,7 +98,7 @@ test("normalized SVG paints follow manifest policy", async () => {
   const svgFiles = (await filesBelow(normalizedRoot)).filter((file) =>
     file.endsWith(".svg"),
   );
-  assert.equal(svgFiles.length, 125);
+  assert.equal(svgFiles.length, 250);
 });
 
 test("all normalized variants preserve source paint semantics element by element", async () => {
@@ -119,6 +123,8 @@ test("all normalized variants preserve source paint semantics element by element
     "clip-path",
   ];
   for (const icon of manifest) {
+    if (icon.sourceFigmaPaths.includes("shlz-design-source/raw/svg/Icons.svg"))
+      continue;
     for (const variant of icon.variants) {
       const source = await readFile(
         path.join(root, variant.sourcePaths[0]),

@@ -1,0 +1,26 @@
+{
+  "canonicalCount": 119,
+  "variantCount": 125,
+  "aliasCount": 42,
+  "contractDigest": "2e476ecd208918aa5d80fa801cada537f993222c192203f99aaa39ad18d00393",
+  "aliasDigest": "51db556854e4f897a4a4337dff0e78242ea2b398d4d0acb8f5f3a99d183133e7",
+  "iconsSourceSha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+  "iconsSheetCensus": {
+    "candidateCount": 125,
+    "primitiveCount": 302,
+    "candidateLedgerSha256": "bef4660585796d217e6f25cbedd882b3f3eb3c1ac520344ab43edc8e449339de",
+    "sourceIdSetSha256": "d4359cee7d29b8bb5b4fc6ebfb66d6e0331693638a5abd9717ad2b138d45c209",
+    "rawPrimitiveCount": 406,
+    "rawPrimitiveSequenceSha256": "1d377c412297f5b3835904309a7f34ce3cd7b6b48cc4d85f1539829bae1a29c0",
+    "excludedPrimitiveCount": 104,
+    "excludedPrimitiveSequenceSha256": "658b09f7831da48142f6f84e9e361a9551f41527c36ee05f624cdfa19df34da1",
+    "excludedPrimitiveClassification": "non-icon sheet chrome and labels"
+  },
+  "artifactBytes": {
+    "manifest": 238849,
+    "aliases": 6580,
+    "sprite": 245024,
+    "runtime": 10612,
+    "types": 3202
+  }
+}

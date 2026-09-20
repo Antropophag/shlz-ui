@@ -80,8 +80,9 @@ for (const entry of sourceManifest) {
     colorMode: entry.currentColor ? "currentColor" : "multicolor",
     variants,
     provenance: {
+      ...(entry.provenance ?? {}),
       classification: "FACT",
-      sourceLayer: "packages/icons/normalized",
+      sourceLayer: entry.provenance?.sourceLayer ?? "packages/icons/normalized",
       sourceFigmaPaths: entry.sourceFigmaPaths,
     },
   });

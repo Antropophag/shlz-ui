@@ -47,6 +47,9 @@ for (const reference of sourceReferences) {
   }
 }
 const manifest = await json("packages/icons/dist/manifest.json");
+const normalizedManifest = await json(
+  "packages/icons/normalized/manifest.json",
+);
 const aliases = await json("packages/icons/dist/compatibility-aliases.json");
 if (new Set(manifest.map(({ name }) => name)).size !== manifest.length)
   throw new Error("Icon names are not unique");
@@ -75,18 +78,23 @@ for (const icon of manifest) {
       throw new Error(`Normalized geometry/paint changed: ${variant.file}`);
   }
 }
-if (manifest.length !== 119)
-  throw new Error("Expected 119 normalized logical icons");
-if (manifest.reduce((count, icon) => count + icon.variants.length, 0) !== 125)
-  throw new Error("Expected 125 normalized emitted variants");
+if (manifest.length !== normalizedManifest.length)
+  throw new Error("Generated canonical icon count differs from normalization");
 if (
-  manifest.filter(({ colorMode }) => colorMode === "currentColor").length !== 97
+  manifest.reduce((count, icon) => count + icon.variants.length, 0) !==
+  normalizedManifest.reduce((count, icon) => count + icon.variants.length, 0)
 )
-  throw new Error("Expected 97 currentColor logical icons");
-if (
-  manifest.filter(({ colorMode }) => colorMode === "multicolor").length !== 22
-)
-  throw new Error("Expected 22 preserved-paint logical icons");
+  throw new Error("Generated icon variant count differs from normalization");
+for (const currentColor of [true, false]) {
+  const generatedCount = manifest.filter(
+    (icon) => icon.currentColor === currentColor,
+  ).length;
+  const normalizedCount = normalizedManifest.filter(
+    (icon) => icon.currentColor === currentColor,
+  ).length;
+  if (generatedCount !== normalizedCount)
+    throw new Error("Generated icon paint policies differ from normalization");
+}
 if (new Set(aliases.map(({ alias }) => alias)).size !== aliases.length)
   throw new Error("Compatibility aliases are not unique");
 for (const alias of aliases) {

@@ -7,6 +7,7 @@
   ],
   "referenceSources": [
     "packages/icons/normalized/analysis.json",
+    "packages/icons/normalized/icons-sheet-analysis.json",
     "packages/icons/normalized/manifest.json"
   ],
   "derivedArtifacts": [
@@ -28,12 +29,12 @@
   "sourceClaims": [
     {
       "classification": "source-fact",
-      "claim": "133 source SVGs map to 119 logical glyphs and 125 emitted variants without geometry or paint loss.",
-      "evidence": "packages/icons/normalized/analysis.json"
+      "claim": "The Basic Elements corpus has 133 source SVGs; Icons.svg contributes 125 exhaustively dispositioned candidates over 302 unique primitives, including two distinct calendar glyphs.",
+      "evidence": "packages/icons/normalized/icons-sheet-analysis.json"
     },
     {
       "classification": "repository-decision",
-      "claim": "97 logical monochrome icons use currentColor and 22 preserve source paint.",
+      "claim": "The merged corpus publishes 244 canonical icons and 250 variants while preserving the original 119-icon compatibility subset.",
       "evidence": "docs/icon-methodology.md"
     },
     {
@@ -48,16 +49,24 @@
     }
   ],
   "evidence": {
-    "source-integrity": "pass: hash and element-level paint tests cover all 133 source SVGs and retain 119 logical glyphs, 125 emitted variants, and explicit uncertain names",
-    "structural-contract": "pass: tests verify 97 currentColor and 22 preserved-paint logical icons, unique canonical names, 42 explicit aliases, sprite symbols, runtime helpers, and package exports",
-    "runtime-browser": "pass: the icon catalog resolves all 119 canonical symbols to non-empty painted browser geometry",
+    "source-integrity": "pass: hash and element-level paint tests cover all 133 Basic Elements SVGs; an independent digest partition accounts for all 406 raw Icons.svg path/rect primitives as 302 candidate and 104 non-icon sheet chrome/label primitives, with no candidate omission or primitive reuse",
+    "structural-contract": "pass: tests verify 244 canonical icons, 250 variants, the unchanged 119-icon compatibility subset, 42 explicit aliases, distinct calendars, provenance, sprite symbols, runtime helpers, and package exports",
+    "runtime-browser": "pass: the icon catalog resolves all 244 canonical symbols to non-empty painted browser geometry",
     "accessibility": "not-applicable: the icon package supplies geometry and paint but no semantic meaning; accessible names and decorative treatment remain consumer-level claims",
-    "focused-visual": "pass: a focused nine-icon snapshot covers representative currentColor, preserved-paint, container, state-family, and file-type topologies",
-    "consumer-integration": "pass: representative controls verify currentColor inheritance, preserved-paint assets are not recolored, and plain HTML consumes the published sprite/assets",
+    "focused-visual": "pass: a focused twelve-icon snapshot covers original/new, currentColor, preserved-paint, collision, state-family, file-type, uncertain, and both-calendar topologies",
+    "consumer-integration": "pass: Showcase exposes a direct searchable #icons destination and plain HTML consumes both calendars plus a preserved-paint sheet icon through published assets",
     "responsive-content-stress": "not-applicable: intrinsic icon geometry is viewport-independent"
   },
   "findings": [],
+  "artifactSizeDeltaBytes": {
+    "manifest": 245586,
+    "compatibilityAliases": 0,
+    "sprite": 174636,
+    "runtime": 5872,
+    "types": 2311
+  },
   "limitations": [
-    "Consumer-specific accessible names remain the consumer contract."
+    "Consumer-specific accessible names remain the consumer contract.",
+    "Most recovered Icons.svg semantic labels have medium confidence and remain identified by source IDs and confidence metadata."
   ]
 }

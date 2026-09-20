@@ -39,6 +39,20 @@ export async function json(path) {
   return JSON.parse(await readFile(path, "utf8"));
 }
 
+export function replaceGeneratedMarkdownSection(content, heading, body) {
+  const marker = `## ${heading}`;
+  const lines = content.split(/\r?\n/);
+  const start = lines.findIndex((line) => line === marker);
+  if (start >= 0) {
+    const next = lines.findIndex(
+      (line, index) => index > start && line.startsWith("## "),
+    );
+    lines.splice(start, (next < 0 ? lines.length : next) - start);
+  }
+  const preserved = lines.join("\n").trimEnd();
+  return `${preserved}\n\n${marker}\n\n${body.trim()}\n`;
+}
+
 export function normalizeMonochromeSvg(svg) {
   return svg
     .replace(/<\?xml[^>]*>\s*/g, "")

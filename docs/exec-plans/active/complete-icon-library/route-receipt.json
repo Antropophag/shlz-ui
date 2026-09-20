@@ -1,0 +1,46 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Publish every distinct icon glyph from the authoritative Icons.svg alongside the existing Basic Elements corpus, preserve compatibility, and make the complete icon catalog directly discoverable in Showcase.",
+    "material": ["newCapability", "publicContract"],
+    "materialSignals": {
+      "deploymentSemantics": false,
+      "destructiveOrIrreversible": false,
+      "externalAutomation": false,
+      "externalEffects": false,
+      "materialAmbiguity": false,
+      "newCapability": true,
+      "permissionsOrSecurity": false,
+      "publicContract": true,
+      "publicUrlOrDomain": false,
+      "publishingOrRelease": false
+    },
+    "openSpecChange": "complete-icon-library",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "source-coverage",
+        "owner": "repo"
+      },
+      {
+        "blocking": true,
+        "id": "collision-policy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "showcase-discoverability",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "delivery-contract",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "cc2129bf17dbf8ff5113e9de92ceacfcda969afdc4b0446066d3c629a8bbcb99"
+}
