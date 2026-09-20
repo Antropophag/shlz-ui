@@ -17,7 +17,7 @@ const representativeIcons = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/?full=1");
+  await page.goto("/?full=1#icons");
   await page.addStyleTag({
     content: `
       .shlz-docs-sidebar { display: none !important; }
