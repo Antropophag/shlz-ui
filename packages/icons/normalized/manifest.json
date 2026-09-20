@@ -38,18 +38,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path160", "path162", "path161"],
-          "recoveredName": "download-box",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "ai-brain-network",
@@ -389,18 +378,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path59"],
-          "recoveredName": "arrow-down",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "arrow-left-md",
@@ -441,18 +419,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path57"],
-          "recoveredName": "arrow-left",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "arrow-opened",
@@ -587,18 +554,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path58"],
-          "recoveredName": "arrow-right",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "arrow-up-md",
@@ -639,18 +595,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path60"],
-          "recoveredName": "arrow-up",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "arrows-diagonal-maximize-alt",
@@ -691,18 +636,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path61", "path62"],
-          "recoveredName": "expand",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "bag",
@@ -1112,18 +1046,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path56"],
-          "recoveredName": "chevron-left-small",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "chevron-right-duo",
@@ -1205,18 +1128,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path55"],
-          "recoveredName": "chevron-right-small",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "circle-grid-interface",
@@ -1257,18 +1169,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path176", "path177", "path178", "path179"],
-          "recoveredName": "apps-add-alt",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "circle-grid-interface-sidebar",
@@ -1309,18 +1210,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path29", "path30", "path31", "path32"],
-          "recoveredName": "apps-add",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "close-remove",
@@ -1361,18 +1251,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path67", "path68"],
-          "recoveredName": "close",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "cloud-refresh",
@@ -1618,18 +1497,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path75", "path76", "path77", "path78", "path79"],
-          "recoveredName": "trash",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "delete-contained",
@@ -1963,18 +1831,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path71"],
-          "recoveredName": "sort-desc",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "down-scan",
@@ -2261,18 +2118,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path319", "path320", "rect320", "path321"],
-          "recoveredName": "avi",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-csv",
@@ -2313,18 +2159,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path295", "path296", "rect296", "path297"],
-          "recoveredName": "csv",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-doc",
@@ -2365,18 +2200,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path286", "path287", "rect287", "path288"],
-          "recoveredName": "doc",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-docx",
@@ -2417,18 +2241,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path289", "path290", "rect290", "path291"],
-          "recoveredName": "docx",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-generic",
@@ -2510,18 +2323,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path331", "path332", "rect332", "path333"],
-          "recoveredName": "img",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-mkv",
@@ -2562,18 +2364,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path322", "path323", "rect323", "path324"],
-          "recoveredName": "mkv",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-mp3",
@@ -2614,18 +2405,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path310", "path311", "rect311", "path312"],
-          "recoveredName": "mp3",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-mp4",
@@ -2666,18 +2446,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path313", "path314", "rect314", "path315"],
-          "recoveredName": "mp4",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-mpeg",
@@ -2718,18 +2487,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path316", "path317", "rect317", "path318"],
-          "recoveredName": "mpeg",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-pdf",
@@ -2792,25 +2550,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path283", "path284", "rect284", "path285"],
-          "recoveredName": "pdf",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        },
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path340", "path341", "rect341", "path342"],
-          "recoveredName": "pdf-alt",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-png",
@@ -2851,18 +2591,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path334", "path335", "rect335", "path336"],
-          "recoveredName": "png",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-ppt",
@@ -2903,18 +2632,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path304", "path305", "rect305", "path306"],
-          "recoveredName": "ppt",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-pptx",
@@ -2955,18 +2673,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path307", "path308", "rect308", "path309"],
-          "recoveredName": "pptx",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-rar",
@@ -3007,18 +2714,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path328", "path329", "rect329", "path330"],
-          "recoveredName": "rar",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-svg",
@@ -3059,18 +2755,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path337", "path338", "rect338", "path339"],
-          "recoveredName": "svg",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-txt",
@@ -3111,18 +2796,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path292", "path293", "rect293", "path294"],
-          "recoveredName": "txt",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-type-icon",
@@ -3204,18 +2878,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path298", "path299", "rect299", "path300"],
-          "recoveredName": "xls",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-xlsx",
@@ -3256,18 +2919,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path301", "path302", "rect302", "path303"],
-          "recoveredName": "xlsx",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "file-zip",
@@ -3308,18 +2960,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path325", "path326", "rect326", "path327"],
-          "recoveredName": "zip",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "filter",
@@ -3442,18 +3083,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path203", "path202"],
-          "recoveredName": "flag-filled",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "flagq-uncertain",
@@ -3576,18 +3206,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path152", "path154", "path155", "path153"],
-          "recoveredName": "table",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "graph",
@@ -3628,18 +3247,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path21", "path22"],
-          "recoveredName": "pie-chart",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "grid-interface",
@@ -4377,18 +3985,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path65"],
-          "recoveredName": "minus",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "minus-alt",
@@ -4429,18 +4026,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path112", "path113"],
-          "recoveredName": "minus-circle",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "monotone-add",
@@ -4604,18 +4190,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path109", "path110", "path111"],
-          "recoveredName": "plus-circle",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "plus-alt-4",
@@ -4656,18 +4231,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path63", "path64"],
-          "recoveredName": "plus",
-          "semanticNameConfidence": "high",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "printer-2",
@@ -5043,18 +4607,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path9", "path8"],
-          "recoveredName": "settings",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "setting-tool-circle",
@@ -5361,18 +4914,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path72"],
-          "recoveredName": "sort-asc",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "update-right",
@@ -5413,18 +4955,7 @@
         ]
       }
     ],
-    "comment": null,
-    "provenance": {
-      "additionalSourceEvidence": [
-        {
-          "path": "shlz-design-source/raw/svg/Icons.svg",
-          "sourceIds": ["path194", "path196", "path197", "path195"],
-          "recoveredName": "sync-alt",
-          "semanticNameConfidence": "medium",
-          "disposition": "exact-existing"
-        }
-      ]
-    }
+    "comment": null
   },
   {
     "name": "user",
@@ -5591,6 +5122,51 @@
     "comment": null
   },
   {
+    "name": "settings-sidebar",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/settings-sidebar.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["settings"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/settings-sidebar.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2c69a9c94cab9ec47ccebb0fbd07ac6ffee36b653a701932ff0fd3c52f50310f",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["settings"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "settings",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path9", "path8"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path9", "path8"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
     "name": "panel",
     "category": "sidebar",
     "normalizedPath": "sidebar/panel.svg",
@@ -5697,6 +5273,51 @@
         "path18",
         "path19"
       ],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "pie-chart-sidebar",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/pie-chart-sidebar.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["pie-chart"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/pie-chart-sidebar.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2cf257719333eda953246e64f2d830c6700010d69b739cd72b4250ab8d33ac95",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["pie-chart"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "pie-chart",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path21", "path22"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path21", "path22"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -5877,6 +5498,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path28"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "apps-add-sidebar",
+    "category": "sidebar",
+    "normalizedPath": "sidebar/apps-add-sidebar.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["apps-add"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "sidebar/apps-add-sidebar.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "355f462e50c85f382b33350c7458c8c995efaf4fdb4d9f8ea52027b388aac1a7",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["apps-add"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "apps-add",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path29", "path30", "path31", "path32"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path29", "path30", "path31", "path32"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -6376,6 +6042,411 @@
     }
   },
   {
+    "name": "chevron-right-small-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/chevron-right-small-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["chevron-right-small"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/chevron-right-small-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "37c3cadc334dd78fd6a64af90a9456bbfb769961f7662334ae02993a56057c99",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["chevron-right-small"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "chevron-right-small",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path55"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path55"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "chevron-left-small-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/chevron-left-small-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["chevron-left-small"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/chevron-left-small-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "13b982e648049f72b53948408bd581951e3a764b824149aaf76c554973dd9990",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["chevron-left-small"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "chevron-left-small",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path56"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path56"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "arrow-left-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-left-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["arrow-left"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-left-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "c7335d4643c378cd1b1155b03421b5b0e08b624c24a7b69c34c7e28d1de8a58f",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["arrow-left"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "arrow-left",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path57"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path57"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "arrow-right-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-right-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["arrow-right"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-right-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "c70330e39e6e673992a84ec08ed7f4425fa35573f2e99e37012d10a86fd5ed28",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["arrow-right"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "arrow-right",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path58"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path58"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "arrow-down-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-down-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["arrow-down"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-down-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "647bafe9f1de4e1cd43137a4b7eff6668f2c412beaaf52fe236caefe5892a6b4",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["arrow-down"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "arrow-down",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path59"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path59"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "arrow-up-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/arrow-up-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["arrow-up"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/arrow-up-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "b31bc285b874d4450d995931838b5b3960c000ffa60866441d9fc69e667fa0a9",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["arrow-up"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "arrow-up",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path60"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path60"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "expand-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/expand-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["expand"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/expand-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "6d38c7e3ab53073bbee38c8c9f0402ba8a521b5a30c89c8e28ee41e02a54748e",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["expand"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "expand",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path61", "path62"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path61", "path62"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "plus-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/plus-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["plus"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/plus-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "0e498ac99a5fbab07a4b52f791cac027bc8f5421094f3cdb20e025dbf5bceef6",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["plus"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "plus",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path63", "path64"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path63", "path64"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "minus-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/minus-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["minus"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/minus-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "7bb91205d3691ec1f78e8024be0e6ea030fd9c60e8ace7d864b1aa8949d3acd3",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["minus"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "minus",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path65"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path65"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
     "name": "check",
     "category": "interface",
     "normalizedPath": "interface/check.svg",
@@ -6417,6 +6488,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path66"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "close-interface-1",
+    "category": "interface",
+    "normalizedPath": "interface/close-interface-1.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["close"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/close-interface-1.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "b6ff966a44dd2ced2719192619fafbce19bdf48fc127a289db128b7e8ef47122",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["close"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "close",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path67", "path68"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path67", "path68"],
       "semanticNameConfidence": "high"
     }
   },
@@ -6466,6 +6582,96 @@
     }
   },
   {
+    "name": "sort-desc-interface-2",
+    "category": "interface",
+    "normalizedPath": "interface/sort-desc-interface-2.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["sort-desc"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/sort-desc-interface-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "62c10631adbafb2f0b8835b8f7432b2526ea9640a84fae49b021d394356fa824",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["sort-desc"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "sort-desc",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"],
+            "sourceIds": ["path71"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path71"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "sort-asc-interface-2",
+    "category": "interface",
+    "normalizedPath": "interface/sort-asc-interface-2.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["sort-asc"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/sort-asc-interface-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "38fb343dc86861df81a1a7653208da88d237753d9ac59f2257a6e291e257ad2a",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["sort-asc"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "sort-asc",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"],
+            "sourceIds": ["path72"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path72"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
     "name": "edit",
     "category": "interface",
     "normalizedPath": "interface/edit.svg",
@@ -6507,6 +6713,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path73", "path74"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "trash-interface-2",
+    "category": "interface",
+    "normalizedPath": "interface/trash-interface-2.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["trash"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/trash-interface-2.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "d602c9211722f32c7a4e65f3ea6955e38ff005613f71fc80e579cb04375bfcf3",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["trash"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "trash",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"],
+            "sourceIds": ["path75", "path76", "path77", "path78", "path79"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path75", "path76", "path77", "path78", "path79"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -7099,6 +7350,96 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path108"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "plus-circle-interface-3",
+    "category": "interface",
+    "normalizedPath": "interface/plus-circle-interface-3.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["plus-circle"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/plus-circle-interface-3.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "b98590c960d8efa930faaac38b4e28169e7327fc871115abd65df4528fd5c57f",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["plus-circle"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "plus-circle",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path109", "path110", "path111"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path109", "path110", "path111"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "minus-circle-interface-3",
+    "category": "interface",
+    "normalizedPath": "interface/minus-circle-interface-3.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["minus-circle"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/minus-circle-interface-3.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "bc7f179f99ac7d3d7bda826326fe1da92bf3b41cc60ef87b8b2aaa0e273f77c6",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["minus-circle"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "minus-circle",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path112", "path113"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path112", "path113"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -7868,6 +8209,51 @@
     }
   },
   {
+    "name": "table-interface-4",
+    "category": "interface",
+    "normalizedPath": "interface/table-interface-4.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["table"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/table-interface-4.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "6ded0dfbd98f0f8d688eac98dfdf7e282e0776d930bdb2b957c4145a1c303b84",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["table"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "table",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path152", "path154", "path155", "path153"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path152", "path154", "path155", "path153"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
     "name": "menu",
     "category": "interface",
     "normalizedPath": "interface/menu.svg",
@@ -7954,6 +8340,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path159"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "download-box-interface-4",
+    "category": "interface",
+    "normalizedPath": "interface/download-box-interface-4.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["download-box"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/download-box-interface-4.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "2f43fbded66253f0f57db02104cdc4c7c6fcb742412569b0d40522a07d738d58",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["download-box"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "download-box",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path160", "path162", "path161"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path160", "path162", "path161"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -8134,6 +8565,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path175", "path172", "path174", "path173"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "apps-add-alt-interface-5",
+    "category": "interface",
+    "normalizedPath": "interface/apps-add-alt-interface-5.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["apps-add-alt"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/apps-add-alt-interface-5.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "28a6585565bf1ce6a4c69950b5e483e0656350e5a033277de700484365fbb50d",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["apps-add-alt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "apps-add-alt",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path176", "path177", "path178", "path179"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path176", "path177", "path178", "path179"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -8332,6 +8808,51 @@
     }
   },
   {
+    "name": "sync-alt-interface-5",
+    "category": "interface",
+    "normalizedPath": "interface/sync-alt-interface-5.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["sync-alt"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/sync-alt-interface-5.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "1bdc4f7c0ec37df780793c487eaa4ba1c70634baeb87cdaf2756eee224acb6d2",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["sync-alt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "sync-alt",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["black"],
+            "sourceIds": ["path194", "path196", "path197", "path195"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path194", "path196", "path197", "path195"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
     "name": "xls-file",
     "category": "interface",
     "normalizedPath": "interface/xls-file.svg",
@@ -8418,6 +8939,51 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path201"],
+      "semanticNameConfidence": "medium"
+    }
+  },
+  {
+    "name": "flag-filled-interface-5",
+    "category": "interface",
+    "normalizedPath": "interface/flag-filled-interface-5.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["flag-filled"],
+    "size": { "width": 24, "height": 24 },
+    "viewBox": "0 0 24 24",
+    "monochrome": true,
+    "currentColor": true,
+    "paintPolicy": "currentColor",
+    "semanticColors": [],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "interface/flag-filled-interface-5.svg",
+        "size": { "width": 24, "height": 24 },
+        "viewBox": "0 0 24 24",
+        "state": null,
+        "geometrySha256": "d0f84716c0cfe70a6c921710025b0390e895831018a7684d806c96dbed9f7620",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["flag-filled"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "flag-filled",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["#0B1623"],
+            "sourceIds": ["path203", "path202"]
+          }
+        ]
+      }
+    ],
+    "comment": "Recovered semantic name has non-authoritative confidence; source IDs preserve the factual identity.",
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path203", "path202"],
       "semanticNameConfidence": "medium"
     }
   },
@@ -9273,6 +9839,906 @@
       "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
       "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
       "sourceIds": ["path226"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "pdf-file-types",
+    "category": "files",
+    "normalizedPath": "files/pdf-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["pdf"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#D92D20"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/pdf-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "041b0662850d0fa379d23f7fd23eb1d0e971b69054177f313b2824c4a1f08090",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["pdf"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "pdf",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#D92D20"],
+            "sourceIds": ["path283", "path284", "rect284", "path285"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path283", "path284", "rect284", "path285"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "doc-file-types",
+    "category": "files",
+    "normalizedPath": "files/doc-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["doc"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/doc-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "c3788d28a3baf1122cc9a809678dc5b9fc9d809909b6d3259784119c0e210da1",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["doc"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "doc",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path286", "path287", "rect287", "path288"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path286", "path287", "rect287", "path288"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "docx-file-types",
+    "category": "files",
+    "normalizedPath": "files/docx-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["docx"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/docx-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "ef4db5ba09c83bd8d128293371db9b547040eb1a32f1b8f8eafc0bf517b7dc4e",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["docx"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "docx",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path289", "path290", "rect290", "path291"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path289", "path290", "rect290", "path291"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "txt-file-types",
+    "category": "files",
+    "normalizedPath": "files/txt-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["txt"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/txt-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "7166b57e6d1de581493e91246442458de9e433979429afaf726ea614e251b4ac",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["txt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "txt",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
+            "sourceIds": ["path292", "path293", "rect293", "path294"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path292", "path293", "rect293", "path294"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "csv-file-types",
+    "category": "files",
+    "normalizedPath": "files/csv-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["csv"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/csv-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "b1d59587dd4d25e00ab93c03d48840daa51a65411667738c5931846c26ba9040",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["csv"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "csv",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+            "sourceIds": ["path295", "path296", "rect296", "path297"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path295", "path296", "rect296", "path297"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "xls-file-types",
+    "category": "files",
+    "normalizedPath": "files/xls-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["xls"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/xls-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "a4602914102d8cbc25d5ca329f42a162859048d126eb5d03f211b0fc5e85d161",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["xls"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "xls",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+            "sourceIds": ["path298", "path299", "rect299", "path300"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path298", "path299", "rect299", "path300"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "xlsx-file-types",
+    "category": "files",
+    "normalizedPath": "files/xlsx-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["xlsx"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/xlsx-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "f327260c73da83e2f7480d55309d790988160c7fd9de403c2c890b10777ee0fa",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["xlsx"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "xlsx",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
+            "sourceIds": ["path301", "path302", "rect302", "path303"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path301", "path302", "rect302", "path303"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "ppt-file-types",
+    "category": "files",
+    "normalizedPath": "files/ppt-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["ppt"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/ppt-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "44e74069ad153b04704406756fcc537279934e1fc6f251b2e007115e03d659c1",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["ppt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "ppt",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+            "sourceIds": ["path304", "path305", "rect305", "path306"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path304", "path305", "rect305", "path306"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "pptx-file-types",
+    "category": "files",
+    "normalizedPath": "files/pptx-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["pptx"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/pptx-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "25fdb47341e24b06d49e11478f4ef6e90e7778ded050aa094567abca48ee33ef",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["pptx"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "pptx",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
+            "sourceIds": ["path307", "path308", "rect308", "path309"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path307", "path308", "rect308", "path309"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "mp3-file-types",
+    "category": "files",
+    "normalizedPath": "files/mp3-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["mp3"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/mp3-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "858be841b56ef20452379db30e4039042091bb734f0b5b110944b270d15f7340",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["mp3"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "mp3",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
+            "sourceIds": ["path310", "path311", "rect311", "path312"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path310", "path311", "rect311", "path312"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "mp4-file-types",
+    "category": "files",
+    "normalizedPath": "files/mp4-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["mp4"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/mp4-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "22b43e4f292c00cd1d518f2e0eae42c8e3efae97eeee4840d1862dd04fa37738",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["mp4"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "mp4",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path313", "path314", "rect314", "path315"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path313", "path314", "rect314", "path315"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "mpeg-file-types",
+    "category": "files",
+    "normalizedPath": "files/mpeg-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["mpeg"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/mpeg-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "4632d87eb6446e872fbb9922790447f214ad439d4f8853727755b7147ea76cb9",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["mpeg"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "mpeg",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path316", "path317", "rect317", "path318"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path316", "path317", "rect317", "path318"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "avi-file-types",
+    "category": "files",
+    "normalizedPath": "files/avi-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["avi"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/avi-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "c8cd9e87bcf7bbb6d11ef802bf923773cd8b41105f07ffca7e34529cdbd698c6",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["avi"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "avi",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path319", "path320", "rect320", "path321"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path319", "path320", "rect320", "path321"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "mkv-file-types",
+    "category": "files",
+    "normalizedPath": "files/mkv-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["mkv"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/mkv-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "ee1750f6261d28a7f063ca7d578bdf9f6b3c6aad03d9bfb1238d2a349b6b9663",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["mkv"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "mkv",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
+            "sourceIds": ["path322", "path323", "rect323", "path324"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path322", "path323", "rect323", "path324"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "zip-file-types",
+    "category": "files",
+    "normalizedPath": "files/zip-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["zip"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/zip-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "144dac288ebbb8334d66b0d7a445888f7c7ca8c020a99327a5b4beeca03d927f",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["zip"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "zip",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+            "sourceIds": ["path325", "path326", "rect326", "path327"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path325", "path326", "rect326", "path327"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "rar-file-types",
+    "category": "files",
+    "normalizedPath": "files/rar-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["rar"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/rar-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "aa88583f83e388282eb01bf364df158368c6657248d93f9e0ef6271a2055a77e",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["rar"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "rar",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
+            "sourceIds": ["path328", "path329", "rect329", "path330"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path328", "path329", "rect329", "path330"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "img-file-types",
+    "category": "files",
+    "normalizedPath": "files/img-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["img"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/img-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "a5aca8aedc173f78b6b1c14d302287178fe33b0fb913c420bb6b9925e76dda98",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["img"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "img",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+            "sourceIds": ["path331", "path332", "rect332", "path333"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path331", "path332", "rect332", "path333"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "png-file-types",
+    "category": "files",
+    "normalizedPath": "files/png-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["png"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/png-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "a161c19ff79fe7703ad53de04f3ddf871c95fc5bac7d3408481ad241c6cb60e7",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["png"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "png",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+            "sourceIds": ["path334", "path335", "rect335", "path336"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path334", "path335", "rect335", "path336"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "svg-file-types",
+    "category": "files",
+    "normalizedPath": "files/svg-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["svg"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/svg-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "964fbb08d19001f6e5b30e46c7e907cb0a8046c55fde1aac6566ea89b68b7b1c",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["svg"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "svg",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
+            "sourceIds": ["path337", "path338", "rect338", "path339"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path337", "path338", "rect338", "path339"],
+      "semanticNameConfidence": "high"
+    }
+  },
+  {
+    "name": "pdf-alt-file-types",
+    "category": "files",
+    "normalizedPath": "files/pdf-alt-file-types.svg",
+    "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+    "sourceNames": ["pdf-alt"],
+    "size": { "width": 44, "height": 44 },
+    "viewBox": "0 0 44 44",
+    "monochrome": false,
+    "currentColor": false,
+    "paintPolicy": "preserved-source-colors",
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
+    "nearDuplicateGroup": null,
+    "mergedVariants": [],
+    "variants": [
+      {
+        "normalizedPath": "files/pdf-alt-file-types.svg",
+        "size": { "width": 44, "height": 44 },
+        "viewBox": "0 0 44 44",
+        "state": null,
+        "geometrySha256": "1f89828e7e0a3a83e9bf58d1de77cf4b7a0354972833d91e34a5ae80e034fd56",
+        "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
+        "sourceNames": ["pdf-alt"],
+        "sources": [
+          {
+            "path": "shlz-design-source/raw/svg/Icons.svg",
+            "name": "pdf-alt",
+            "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
+            "state": null,
+            "declaredSize": null,
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
+            "sourceIds": ["path340", "path341", "rect341", "path342"]
+          }
+        ]
+      }
+    ],
+    "comment": null,
+    "provenance": {
+      "classification": "FACT",
+      "sourceLayer": "shlz-design-source/raw/svg/Icons.svg",
+      "sourceFigmaPaths": ["shlz-design-source/raw/svg/Icons.svg"],
+      "sourceIds": ["path340", "path341", "rect341", "path342"],
       "semanticNameConfidence": "high"
     }
   },

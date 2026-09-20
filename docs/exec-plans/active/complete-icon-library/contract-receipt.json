@@ -1,0 +1,123 @@
+{
+  "kind": "contract",
+  "payload": {
+    "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
+    "failureInvariants": [],
+    "scenarios": [
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** a manifest record includes geometry from `Icons.svg`\n- **THEN** its provenance identifies `Icons.svg` and the source IDs used for extraction",
+        "id": "foundations/icon-library::Auditable icon provenance::Consumer audits an Icons.svg glyph",
+        "name": "Consumer audits an Icons.svg glyph",
+        "requirement": "Auditable icon provenance",
+        "requirementContent": "Every canonical icon SHALL expose enough machine-readable provenance to identify its authoritative source path and source identity. Records derived from `Icons.svg` MUST retain recovered source IDs, and uncertain semantic names MUST remain explicitly marked rather than presented as verified facts."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the source evidence does not establish a reliable semantic name\n- **THEN** the canonical name or manifest metadata explicitly communicates that uncertainty",
+        "id": "foundations/icon-library::Auditable icon provenance::Semantics are uncertain",
+        "name": "Semantics are uncertain",
+        "requirement": "Auditable icon provenance",
+        "requirementContent": "Every canonical icon SHALL expose enough machine-readable provenance to identify its authoritative source path and source identity. Records derived from `Icons.svg` MUST retain recovered source IDs, and uncertain semantic names MUST remain explicitly marked rather than presented as verified facts."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** a consumer resolves `calendar-sidebar` or `calendar-interface` through the manifest, individual SVG export, or sprite API\n- **THEN** the requested name resolves to its corresponding non-empty source-derived geometry\n- **AND** the two names do not resolve to the same geometry",
+        "id": "foundations/icon-library::Both calendar glyphs are public::Consumer requests either calendar",
+        "name": "Consumer requests either calendar",
+        "requirement": "Both calendar glyphs are public",
+        "requirementContent": "The icon library SHALL publish the two distinct calendar candidates recovered from `Icons.svg` as `calendar-sidebar` and `calendar-interface`."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** an `Icons.svg` candidate is exactly geometry-equivalent to an existing canonical glyph\n- **THEN** the candidate is recorded as provenance for that canonical glyph rather than emitted as an indistinguishable additional canonical icon",
+        "id": "foundations/icon-library::Compatibility-safe canonicalization::Exact duplicate is consolidated",
+        "name": "Exact duplicate is consolidated",
+        "requirement": "Compatibility-safe canonicalization",
+        "requirementContent": "The icon library SHALL preserve the existing canonical names, compatibility aliases, emitted geometry, and paint behavior. A newly incorporated candidate that differs from an existing glyph but collides by name or semantics MUST receive a distinct stable canonical name rather than replacing or silently aliasing the existing glyph."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** a consumer resolves any canonical name or compatibility alias that existed before this change\n- **THEN** it resolves to the same glyph geometry and paint policy as before the change",
+        "id": "foundations/icon-library::Compatibility-safe canonicalization::Existing consumers retain their glyphs",
+        "name": "Existing consumers retain their glyphs",
+        "requirement": "Compatibility-safe canonicalization",
+        "requirementContent": "The icon library SHALL preserve the existing canonical names, compatibility aliases, emitted geometry, and paint behavior. A newly incorporated candidate that differs from an existing glyph but collides by name or semantics MUST receive a distinct stable canonical name rather than replacing or silently aliasing the existing glyph."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** two source candidates share a recovered semantic name but have different geometry\n- **THEN** both remain addressable through distinct explicit canonical names",
+        "id": "foundations/icon-library::Compatibility-safe canonicalization::Non-equivalent name collision is retained",
+        "name": "Non-equivalent name collision is retained",
+        "requirement": "Compatibility-safe canonicalization",
+        "requirementContent": "The icon library SHALL preserve the existing canonical names, compatibility aliases, emitted geometry, and paint behavior. A newly incorporated candidate that differs from an existing glyph but collides by name or semantics MUST receive a distinct stable canonical name rather than replacing or silently aliasing the existing glyph."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the icon corpus is analyzed and generated\n- **THEN** an executable coverage check maps every authoritative source candidate to a canonical emitted glyph or a documented exact duplicate\n- **AND** no candidate is silently omitted",
+        "id": "foundations/icon-library::Complete authoritative-source coverage::Every source candidate is accounted for",
+        "name": "Every source candidate is accounted for",
+        "requirement": "Complete authoritative-source coverage",
+        "requirementContent": "The icon library SHALL account for every distinct icon candidate in `shlz-design-source/raw/svg/Icons.svg` and every existing normalized Basic Elements source icon. Each candidate MUST resolve either to an emitted canonical glyph or to an explicitly recorded exact-geometry deduplication, without changing files under `shlz-design-source/`."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the expanded icon library is generated\n- **THEN** hashes of the authoritative source files remain unchanged",
+        "id": "foundations/icon-library::Complete authoritative-source coverage::Source material remains immutable",
+        "name": "Source material remains immutable",
+        "requirement": "Complete authoritative-source coverage",
+        "requirementContent": "The icon library SHALL account for every distinct icon candidate in `shlz-design-source/raw/svg/Icons.svg` and every existing normalized Basic Elements source icon. Each candidate MUST resolve either to an emitted canonical glyph or to an explicitly recorded exact-geometry deduplication, without changing files under `shlz-design-source/`."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** consumers use one icon for different contextual meanings\n- **THEN** the package does not force a single accessible label\n- **AND** each consumer can provide its own semantic treatment",
+        "id": "foundations/icon-library::Consumer-owned icon semantics::Same glyph is used for different actions",
+        "name": "Same glyph is used for different actions",
+        "requirement": "Consumer-owned icon semantics",
+        "requirementContent": "The icon package SHALL provide geometry and paint but SHALL NOT assign accessible meaning that depends on consumer context. Consumers remain responsible for accessible names or decorative treatment."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the production Showcase build used by GitHub Pages is created\n- **THEN** the built navigation contains the Icons destination\n- **AND** the built catalog count matches the generated production manifest",
+        "id": "foundations/icon-library::Discoverable complete Showcase catalog::Published Showcase build is generated",
+        "name": "Published Showcase build is generated",
+        "requirement": "Discoverable complete Showcase catalog",
+        "requirementContent": "Showcase SHALL expose Icons as a first-class navigation item with a stable `#icons` destination. Loading that destination SHALL render the complete canonical production manifest in a visible catalog, and Showcase search SHALL make the destination discoverable without requiring users to know hidden disclosure text."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the user activates Icons in the Showcase navigation or opens the page with `#icons`\n- **THEN** component documentation loads if needed\n- **AND** focus/navigation reaches a visible catalog representing every canonical manifest entry",
+        "id": "foundations/icon-library::Discoverable complete Showcase catalog::User opens the Icons navigation item",
+        "name": "User opens the Icons navigation item",
+        "requirement": "Discoverable complete Showcase catalog",
+        "requirementContent": "Showcase SHALL expose Icons as a first-class navigation item with a stable `#icons` destination. Loading that destination SHALL render the complete canonical production manifest in a visible catalog, and Showcase search SHALL make the destination discoverable without requiring users to know hidden disclosure text."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** the user enters `icons` in the Showcase navigation search\n- **THEN** the Icons destination remains visible as a matching result",
+        "id": "foundations/icon-library::Discoverable complete Showcase catalog::User searches for Icons",
+        "name": "User searches for Icons",
+        "requirement": "Discoverable complete Showcase catalog",
+        "requirementContent": "Showcase SHALL expose Icons as a first-class navigation item with a stable `#icons` destination. Loading that destination SHALL render the complete canonical production manifest in a visible catalog, and Showcase search SHALL make the destination discoverable without requiring users to know hidden disclosure text."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** an authoritative candidate is monochrome or uses semantic/multicolor paint\n- **THEN** its emitted form respectively follows `currentColor` or preserves the required source paints without geometry loss",
+        "id": "foundations/icon-library::Framework-neutral distribution::Paint policy is preserved",
+        "name": "Paint policy is preserved",
+        "requirement": "Framework-neutral distribution",
+        "requirementContent": "Every newly canonical icon SHALL be available through the same framework-neutral surfaces as existing icons: the package manifest, individual SVG export, sprite symbol, runtime name lists, name resolution helpers, and TypeScript name union. Monochrome and preserved-paint behavior MUST follow the established package contract."
+      },
+      {
+        "capability": "foundations/icon-library",
+        "content": "- **WHEN** a plain HTML, PHP, JavaScript, or framework consumer selects a newly canonical icon\n- **THEN** it can use the published individual SVG or sprite symbol without a framework adapter",
+        "id": "foundations/icon-library::Framework-neutral distribution::Plain consumer uses a new icon",
+        "name": "Plain consumer uses a new icon",
+        "requirement": "Framework-neutral distribution",
+        "requirementContent": "Every newly canonical icon SHALL be available through the same framework-neutral surfaces as existing icons: the package manifest, individual SVG export, sprite symbol, runtime name lists, name resolution helpers, and TypeScript name union. Monochrome and preserved-paint behavior MUST follow the established package contract."
+      }
+    ]
+  },
+  "version": 1,
+  "digest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a"
+}

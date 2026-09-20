@@ -5,16 +5,12 @@
   "coreCandidateCount": 104,
   "fileTypeCandidateCount": 21,
   "referencedPrimitiveCount": 302,
-  "dispositionCounts": {
-    "exact-existing": 43,
-    "new-canonical": 62,
-    "qualified-collision": 20
-  },
+  "dispositionCounts": { "qualified-collision": 63, "new-canonical": 62 },
   "candidates": [
     {
       "id": "icons-svg/sidebar/001",
       "recoveredName": "settings",
-      "canonicalName": "setting",
+      "canonicalName": "settings-sidebar",
       "category": "sidebar",
       "sourceIds": ["path9", "path8"],
       "viewBox": "0 0 24 24",
@@ -22,8 +18,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "2c69a9c94cab9ec47ccebb0fbd07ac6ffee36b653a701932ff0fd3c52f50310f",
-      "disposition": "exact-existing",
-      "target": "setting"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "setting",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/sidebar/002",
@@ -37,7 +39,9 @@
       "paints": ["black"],
       "topologySha256": "f048154fdd8c6112cf857885afb640c7db478496d4a637bfde77a7b4ca3f3ea0",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/003",
@@ -61,12 +65,14 @@
       "paints": ["black"],
       "topologySha256": "0f813180b1e0684efe63aab1833faad895ba5270a66c718a6094200dabdf58d6",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/004",
       "recoveredName": "pie-chart",
-      "canonicalName": "graph",
+      "canonicalName": "pie-chart-sidebar",
       "category": "sidebar",
       "sourceIds": ["path21", "path22"],
       "viewBox": "0 0 24 24",
@@ -74,8 +80,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "2cf257719333eda953246e64f2d830c6700010d69b739cd72b4250ab8d33ac95",
-      "disposition": "exact-existing",
-      "target": "graph"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "graph",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/sidebar/005",
@@ -89,7 +101,9 @@
       "paints": ["black"],
       "topologySha256": "6c77e1ec9888a4fbccac6cc46c8907f4d9ee0f24971a4f884ce2bd887f5f78e3",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/006",
@@ -103,7 +117,9 @@
       "paints": ["black"],
       "topologySha256": "069c2adb36221b5088aa015714d08d8acb7d8ff1863911ae128f223e71d7a8c7",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/007",
@@ -117,7 +133,9 @@
       "paints": ["black"],
       "topologySha256": "f32d1d81da33c0a50a3377220fc70af8da1b99c97d84980f0f72857c9ca23dfe",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/008",
@@ -131,12 +149,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "2bc2f7776e978790b958cf9baac229152819159830a144cdc3b34df4728d6310",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/009",
       "recoveredName": "apps-add",
-      "canonicalName": "circle-grid-interface-sidebar",
+      "canonicalName": "apps-add-sidebar",
       "category": "sidebar",
       "sourceIds": ["path29", "path30", "path31", "path32"],
       "viewBox": "0 0 24 24",
@@ -144,8 +164,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "355f462e50c85f382b33350c7458c8c995efaf4fdb4d9f8ea52027b388aac1a7",
-      "disposition": "exact-existing",
-      "target": "circle-grid-interface-sidebar"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "circle-grid-interface-sidebar",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/sidebar/010",
@@ -159,7 +185,9 @@
       "paints": ["black"],
       "topologySha256": "b640aeb49c3d161b3558045670987197fb35b5cc32766e1417784ff65243c2b8",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/011",
@@ -173,7 +201,9 @@
       "paints": ["black"],
       "topologySha256": "1aed59145a1c29ae217f81bdb9a1555ce8030c638c216d676f806ec3bb4fdc41",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/012",
@@ -187,7 +217,9 @@
       "paints": ["black"],
       "topologySha256": "da452114f613d2188e695bd64e2b6a37a5e5f0fb1188e8f34be3f4d365fe7b70",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/013",
@@ -201,7 +233,9 @@
       "paints": ["black"],
       "topologySha256": "cea9612f5f183e3e0d2cccea4b0278afdb121be162589b8aa52badfeb30f8c04",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/014",
@@ -215,7 +249,9 @@
       "paints": ["black"],
       "topologySha256": "10e9d9067eba8a9e58d1f62e9cb19838e457e799e7c89ddbe4824043c0f5fd6a",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/015",
@@ -229,7 +265,9 @@
       "paints": ["black"],
       "topologySha256": "cedb0f9811d76eebf1d4cbdb24b23055843d7553817b753c9bc236445dd075e5",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/sidebar/016",
@@ -243,7 +281,13 @@
       "paints": ["black"],
       "topologySha256": "5b91b2b991c5088f2b78776a3272d3dfad436db967e15d7f19300eedaa8fc4ee",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "logout",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/017",
@@ -257,7 +301,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "bc88d3fbf5ae40f83f1377494d0d6ce150aa551869cecd78aa7a41292192b23c",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-1/018",
@@ -271,7 +317,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "dee568d93f393256fbe77afb7dc723c2d2e7046b3c7b7875a5dbf85c6ab2d0f7",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-1/019",
@@ -285,7 +333,9 @@
       "paints": ["black"],
       "topologySha256": "e943ad6fe1f740afceef2307a6cda37df48ba136a93a856f8c4e7baab8f13b5a",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-1/020",
@@ -299,12 +349,14 @@
       "paints": ["black"],
       "topologySha256": "6ced3a234d6681e80d76fe009c1e4bb587085d7ee176e7c19a97c11cef497e3e",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-1/021",
       "recoveredName": "chevron-right-small",
-      "canonicalName": "chevron-right-md",
+      "canonicalName": "chevron-right-small-interface-1",
       "category": "interface-1",
       "sourceIds": ["path55"],
       "viewBox": "0 0 24 24",
@@ -312,13 +364,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "37c3cadc334dd78fd6a64af90a9456bbfb769961f7662334ae02993a56057c99",
-      "disposition": "exact-existing",
-      "target": "chevron-right-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "chevron-right-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/022",
       "recoveredName": "chevron-left-small",
-      "canonicalName": "chevron-left-md",
+      "canonicalName": "chevron-left-small-interface-1",
       "category": "interface-1",
       "sourceIds": ["path56"],
       "viewBox": "0 0 24 24",
@@ -326,13 +384,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "13b982e648049f72b53948408bd581951e3a764b824149aaf76c554973dd9990",
-      "disposition": "exact-existing",
-      "target": "chevron-left-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "chevron-left-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/023",
       "recoveredName": "arrow-left",
-      "canonicalName": "arrow-left-md",
+      "canonicalName": "arrow-left-interface-1",
       "category": "interface-1",
       "sourceIds": ["path57"],
       "viewBox": "0 0 24 24",
@@ -340,13 +404,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "c7335d4643c378cd1b1155b03421b5b0e08b624c24a7b69c34c7e28d1de8a58f",
-      "disposition": "exact-existing",
-      "target": "arrow-left-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "arrow-left-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/024",
       "recoveredName": "arrow-right",
-      "canonicalName": "arrow-right-md",
+      "canonicalName": "arrow-right-interface-1",
       "category": "interface-1",
       "sourceIds": ["path58"],
       "viewBox": "0 0 24 24",
@@ -354,13 +424,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "c70330e39e6e673992a84ec08ed7f4425fa35573f2e99e37012d10a86fd5ed28",
-      "disposition": "exact-existing",
-      "target": "arrow-right-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "arrow-right-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/025",
       "recoveredName": "arrow-down",
-      "canonicalName": "arrow-down-md",
+      "canonicalName": "arrow-down-interface-1",
       "category": "interface-1",
       "sourceIds": ["path59"],
       "viewBox": "0 0 24 24",
@@ -368,13 +444,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "647bafe9f1de4e1cd43137a4b7eff6668f2c412beaaf52fe236caefe5892a6b4",
-      "disposition": "exact-existing",
-      "target": "arrow-down-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "arrow-down-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/026",
       "recoveredName": "arrow-up",
-      "canonicalName": "arrow-up-md",
+      "canonicalName": "arrow-up-interface-1",
       "category": "interface-1",
       "sourceIds": ["path60"],
       "viewBox": "0 0 24 24",
@@ -382,13 +464,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "b31bc285b874d4450d995931838b5b3960c000ffa60866441d9fc69e667fa0a9",
-      "disposition": "exact-existing",
-      "target": "arrow-up-md"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "arrow-up-md",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/027",
       "recoveredName": "expand",
-      "canonicalName": "arrows-diagonal-maximize-alt",
+      "canonicalName": "expand-interface-1",
       "category": "interface-1",
       "sourceIds": ["path61", "path62"],
       "viewBox": "0 0 24 24",
@@ -396,13 +484,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "6d38c7e3ab53073bbee38c8c9f0402ba8a521b5a30c89c8e28ee41e02a54748e",
-      "disposition": "exact-existing",
-      "target": "arrows-diagonal-maximize-alt"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "arrows-diagonal-maximize-alt",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/028",
       "recoveredName": "plus",
-      "canonicalName": "plus-alt-4",
+      "canonicalName": "plus-interface-1",
       "category": "interface-1",
       "sourceIds": ["path63", "path64"],
       "viewBox": "0 0 24 24",
@@ -410,13 +504,19 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "0e498ac99a5fbab07a4b52f791cac027bc8f5421094f3cdb20e025dbf5bceef6",
-      "disposition": "exact-existing",
-      "target": "plus-alt-4"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "plus-alt-4",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/029",
       "recoveredName": "minus",
-      "canonicalName": "minus",
+      "canonicalName": "minus-interface-1",
       "category": "interface-1",
       "sourceIds": ["path65"],
       "viewBox": "0 0 24 24",
@@ -424,8 +524,14 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "7bb91205d3691ec1f78e8024be0e6ea030fd9c60e8ace7d864b1aa8949d3acd3",
-      "disposition": "exact-existing",
-      "target": "minus"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "minus",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-1/030",
@@ -439,12 +545,14 @@
       "paints": ["black"],
       "topologySha256": "b81a58e5c2e963942c28ae07274a8c73fe9ed73ae79fec46d01dd660a1c79bbe",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-1/031",
       "recoveredName": "close",
-      "canonicalName": "close-remove",
+      "canonicalName": "close-interface-1",
       "category": "interface-1",
       "sourceIds": ["path67", "path68"],
       "viewBox": "0 0 24 24",
@@ -452,8 +560,14 @@
       "semanticNameConfidence": "high",
       "paints": ["black"],
       "topologySha256": "b6ff966a44dd2ced2719192619fafbce19bdf48fc127a289db128b7e8ef47122",
-      "disposition": "exact-existing",
-      "target": "close-remove"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "close-remove",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-2/032",
@@ -467,12 +581,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "a4f61516a6125950f1e12c7e05d852d34e6ad04ebc2cb7ba82326a3423ac5136",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/033",
       "recoveredName": "sort-desc",
-      "canonicalName": "down",
+      "canonicalName": "sort-desc-interface-2",
       "category": "interface-2",
       "sourceIds": ["path71"],
       "viewBox": "0 0 24 24",
@@ -480,13 +596,19 @@
       "semanticNameConfidence": "medium",
       "paints": ["#0B1623"],
       "topologySha256": "62c10631adbafb2f0b8835b8f7432b2526ea9640a84fae49b021d394356fa824",
-      "disposition": "exact-existing",
-      "target": "down"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "down",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-2/034",
       "recoveredName": "sort-asc",
-      "canonicalName": "up",
+      "canonicalName": "sort-asc-interface-2",
       "category": "interface-2",
       "sourceIds": ["path72"],
       "viewBox": "0 0 24 24",
@@ -494,8 +616,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["#0B1623"],
       "topologySha256": "38fb343dc86861df81a1a7653208da88d237753d9ac59f2257a6e291e257ad2a",
-      "disposition": "exact-existing",
-      "target": "up"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "up",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-2/035",
@@ -509,12 +637,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "2db75d69b1d89d923ec2ab3074fb35baa8ce2e6449b3a55323dbae2c32f37de1",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/036",
       "recoveredName": "trash",
-      "canonicalName": "delete",
+      "canonicalName": "trash-interface-2",
       "category": "interface-2",
       "sourceIds": ["path75", "path76", "path77", "path78", "path79"],
       "viewBox": "0 0 24 24",
@@ -522,8 +652,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["#0B1623"],
       "topologySha256": "d602c9211722f32c7a4e65f3ea6955e38ff005613f71fc80e579cb04375bfcf3",
-      "disposition": "exact-existing",
-      "target": "delete"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "delete",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-2/037",
@@ -537,7 +673,9 @@
       "paints": ["black"],
       "topologySha256": "1bc5d3b7dbf498c65a1455ae57c9ec6e9d7bb43eb28c299ed0c7376dd97a6a9e",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/038",
@@ -551,7 +689,13 @@
       "paints": ["black"],
       "topologySha256": "8e819211d1f21f304beeb02ea68d9dca06dc76a3166f9f0e4684e7b112fe4e12",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "search",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-2/039",
@@ -565,7 +709,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "b2c8d02da67919f723d89088b27c2a488c0ba4227e8f2cc337b92aad8835ff6f",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/040",
@@ -579,7 +725,9 @@
       "paints": ["black"],
       "topologySha256": "85c65169671e8809ac411401618ea38e19933390a731c185b2d5026cc0199626",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/041",
@@ -593,7 +741,9 @@
       "paints": ["black"],
       "topologySha256": "f835ae82d75cec892de2a60216fc3450ae1eee44ee8b343315bf388efab8f44d",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/042",
@@ -607,7 +757,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "7f04e254e0377320befe18a6bca15b6a654f6ca34eb87df773de80377606c19e",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/043",
@@ -621,7 +773,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "585446a64e8bf13377cc0020cf6e2ec40a066a36f10f188e25764c3b7ce124a2",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/044",
@@ -635,7 +789,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "bbd4ce62b80f3168360255993eb3d9b85b2536869788977cd8d29daf10744bf9",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/045",
@@ -649,7 +805,9 @@
       "paints": ["black"],
       "topologySha256": "e1572ef08715a8014842e3d06086f5aeff37892ae39ba30103b3c4d0d2905c94",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-2/046",
@@ -663,7 +821,9 @@
       "paints": ["black"],
       "topologySha256": "69266ad6db191d2f9065b67b2b224877fb2d0b892705a7920b7574ea297baa4f",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/047",
@@ -677,7 +837,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "9b51768224afbe06ac8064309d482ebd9323339782d7c654b55a89b3cab4298e",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "flag",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/048",
@@ -691,7 +857,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "abb65937a3df60eb9c97f89af4e123d860c9da2220f87fc9589d71ebad946787",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/049",
@@ -705,12 +873,18 @@
       "paints": ["black"],
       "topologySha256": "29cc4c20a3635b63c6c96bed886fe1c399fb9b264858da7e5977717617066fd2",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "paperclip",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/050",
       "recoveredName": "plus-circle",
-      "canonicalName": "plus-alt-2",
+      "canonicalName": "plus-circle-interface-3",
       "category": "interface-3",
       "sourceIds": ["path109", "path110", "path111"],
       "viewBox": "0 0 24 24",
@@ -718,13 +892,19 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "b98590c960d8efa930faaac38b4e28169e7327fc871115abd65df4528fd5c57f",
-      "disposition": "exact-existing",
-      "target": "plus-alt-2"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "plus-alt-2",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/051",
       "recoveredName": "minus-circle",
-      "canonicalName": "minus-alt",
+      "canonicalName": "minus-circle-interface-3",
       "category": "interface-3",
       "sourceIds": ["path112", "path113"],
       "viewBox": "0 0 24 24",
@@ -732,8 +912,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "bc7f179f99ac7d3d7bda826326fe1da92bf3b41cc60ef87b8b2aaa0e273f77c6",
-      "disposition": "exact-existing",
-      "target": "minus-alt"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "minus-alt",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/052",
@@ -747,7 +933,13 @@
       "paints": ["black"],
       "topologySha256": "b7039ebc0e9c7894134d6eb54340bb0955bb6b332fd1ee7734de92635fcb421a",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "download",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/053",
@@ -761,7 +953,9 @@
       "paints": ["black"],
       "topologySha256": "a0c2e79c4726ac9f78a149a857dafe770fae5cc955389e93d5b6d5f00cc46ab1",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/054",
@@ -775,7 +969,9 @@
       "paints": ["black"],
       "topologySha256": "9a6939f821edbf352ca60808452695557ebf5484e1220465d42ddf055435cc80",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/055",
@@ -789,7 +985,9 @@
       "paints": ["black"],
       "topologySha256": "22d4fa8b70e421f2da6d3b60aa6ff35a992a2aab6a71498eeb38183ca00666e3",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/056",
@@ -803,7 +1001,9 @@
       "paints": ["black"],
       "topologySha256": "5e342c264820e3b888ba68b89a2854e87b29a2e4fe1903adcc99106376afd321",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/057",
@@ -817,7 +1017,9 @@
       "paints": ["black"],
       "topologySha256": "551bff5d00929a53ab6481298df133d809bdd9f15eb3c891cc39f729d6110438",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/058",
@@ -831,7 +1033,13 @@
       "paints": ["black"],
       "topologySha256": "5a321800f830917b31316207eacaf7caa7a700a5056d995592529b510fbcb94c",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "eye",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/059",
@@ -845,7 +1053,9 @@
       "paints": ["black"],
       "topologySha256": "7f5e9065cfc759c8cddbf404ce32a2165c4dbc24b8e39ef58168b48de0594d78",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-3/060",
@@ -859,7 +1069,13 @@
       "paints": ["black"],
       "topologySha256": "15b0d9e312a8e7febfe99eb0a78ada39660de2068bfbe9aacd06babd15ffa427",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "external-link",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-3/061",
@@ -873,7 +1089,13 @@
       "paints": ["black"],
       "topologySha256": "ad030a0eb1139b872f5efe65b0eb0733264c7f9fe06d5d7c042c7bd94426b9ad",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "link",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-4/062",
@@ -887,7 +1109,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "80845a1088f32f02552904a18ce6cb32c5d86f518860daa03c9496c5c666c530",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/063",
@@ -901,7 +1125,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "4644aabecaabddc15e806f687668d4e7ef5499f54d629a68cb39dc34cb91c765",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/064",
@@ -915,7 +1141,13 @@
       "paints": ["black"],
       "topologySha256": "05d70b3c448c7d7e9e25341268c52544398cdb65bcb4f6fdaf3670b279097aa7",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "info-circle",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-4/065",
@@ -929,7 +1161,13 @@
       "paints": ["black"],
       "topologySha256": "857282242112580b789d0255f22a4a694a63e2a0e29a8037e0a5b891008a83a9",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "user",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-4/066",
@@ -943,7 +1181,9 @@
       "paints": ["black"],
       "topologySha256": "25ff5f316d7096edbdbf481b3381f8459a130c5a951dc8e85955aa85ccb440d3",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/067",
@@ -957,7 +1197,9 @@
       "paints": ["black"],
       "topologySha256": "a7d0aacba71f65557e5e08dd9eb0ff95639cfeb90b777906c441a457ad7270a9",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/068",
@@ -971,12 +1213,14 @@
       "paints": ["black"],
       "topologySha256": "8a63068bcefb318a3f0b2cc031e5d8828a5aaec649dff2dc058f166bb78213a2",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/069",
       "recoveredName": "table",
-      "canonicalName": "gallery-view",
+      "canonicalName": "table-interface-4",
       "category": "interface-4",
       "sourceIds": ["path152", "path154", "path155", "path153"],
       "viewBox": "0 0 24 24",
@@ -984,8 +1228,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "6ded0dfbd98f0f8d688eac98dfdf7e282e0776d930bdb2b957c4145a1c303b84",
-      "disposition": "exact-existing",
-      "target": "gallery-view"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "gallery-view",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-4/070",
@@ -999,7 +1249,9 @@
       "paints": ["black"],
       "topologySha256": "4c09c1fadfdb5bbe57090e39b5dc3da65ccdcac26de1587a32ffbe8612a59625",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/071",
@@ -1013,12 +1265,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "7e3fff8176141c7664a6f9371914b5e2eeaf0a849b01d3bace772fe56e249b49",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/072",
       "recoveredName": "download-box",
-      "canonicalName": "add-documents",
+      "canonicalName": "download-box-interface-4",
       "category": "interface-4",
       "sourceIds": ["path160", "path162", "path161"],
       "viewBox": "0 0 24 24",
@@ -1026,8 +1280,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "2f43fbded66253f0f57db02104cdc4c7c6fcb742412569b0d40522a07d738d58",
-      "disposition": "exact-existing",
-      "target": "add-documents"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "add-documents",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-4/073",
@@ -1041,7 +1301,9 @@
       "paints": ["black"],
       "topologySha256": "4edeac60447a7f208d60d22ed642abc48fd088cb0901dfb4fd107200dd802d43",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/074",
@@ -1055,7 +1317,9 @@
       "paints": ["black"],
       "topologySha256": "e0b1b33e684572838bd3eeb7526bc67e5f12c3a6065fdaf6fadcf719888898f0",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/075",
@@ -1069,7 +1333,9 @@
       "paints": ["black"],
       "topologySha256": "69481384879d34d1a1d47f302a204ca73f27f4ff8220137b4b11bf16cd69303f",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-4/076",
@@ -1083,12 +1349,14 @@
       "paints": ["black"],
       "topologySha256": "cda8365b5d901d2de5c361f46a4cf9001dcd361e52642376fb39db69808f500f",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/077",
       "recoveredName": "apps-add-alt",
-      "canonicalName": "circle-grid-interface",
+      "canonicalName": "apps-add-alt-interface-5",
       "category": "interface-5",
       "sourceIds": ["path176", "path177", "path178", "path179"],
       "viewBox": "0 0 24 24",
@@ -1096,8 +1364,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "28a6585565bf1ce6a4c69950b5e483e0656350e5a033277de700484365fbb50d",
-      "disposition": "exact-existing",
-      "target": "circle-grid-interface"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "circle-grid-interface",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-5/078",
@@ -1118,7 +1392,9 @@
       "paints": ["black"],
       "topologySha256": "99ac11673dc1b3ba56cc2b7ac29f2ed7266c51acf25332d1ba5c0519f25c5fa0",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/079",
@@ -1132,7 +1408,9 @@
       "paints": ["black"],
       "topologySha256": "61f3d1d72d1309ad837a95238c4f2bdc9cbeac1963c3f34e88b4df8304063c53",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/080",
@@ -1146,7 +1424,9 @@
       "paints": ["black"],
       "topologySha256": "33192d9c4a4381bbb2ec0976bbd7d30fb193ed2a5ce1cb8aa74369b396a476b1",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/081",
@@ -1160,12 +1440,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "99584426b7ac6a1580d7cca2a820658bb7a86482f95b2c086100cdcc63164a8b",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/082",
       "recoveredName": "sync-alt",
-      "canonicalName": "update-right",
+      "canonicalName": "sync-alt-interface-5",
       "category": "interface-5",
       "sourceIds": ["path194", "path196", "path197", "path195"],
       "viewBox": "0 0 24 24",
@@ -1173,8 +1455,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["black"],
       "topologySha256": "1bdc4f7c0ec37df780793c487eaa4ba1c70634baeb87cdaf2756eee224acb6d2",
-      "disposition": "exact-existing",
-      "target": "update-right"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "update-right",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-5/083",
@@ -1188,7 +1476,9 @@
       "paints": ["#079455", "white", "#DBDBDB", "#D4D4D8"],
       "topologySha256": "6bb03ce0531ff930956bdccca711bd744c8f08b5e209582ff0e1c6fba32c99c8",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/084",
@@ -1202,12 +1492,14 @@
       "paints": ["#0B1623"],
       "topologySha256": "d78772922979e5f61f5f4dcda748719a86245b78104d3d300bc42ef7d4bd135f",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/interface-5/085",
       "recoveredName": "flag-filled",
-      "canonicalName": "flag-alt",
+      "canonicalName": "flag-filled-interface-5",
       "category": "interface-5",
       "sourceIds": ["path203", "path202"],
       "viewBox": "0 0 24 24",
@@ -1215,8 +1507,14 @@
       "semanticNameConfidence": "medium",
       "paints": ["#0B1623"],
       "topologySha256": "d0f84716c0cfe70a6c921710025b0390e895831018a7684d806c96dbed9f7620",
-      "disposition": "exact-existing",
-      "target": "flag-alt"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "flag-alt",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-5/086",
@@ -1230,7 +1528,13 @@
       "paints": ["black"],
       "topologySha256": "87c3e994ace088bc5157a45999e42aef205327de5c3dc5de84d7fae8447e8e3f",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "star",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/interface-5/087",
@@ -1244,7 +1548,9 @@
       "paints": ["black"],
       "topologySha256": "449d79f734decf7912f319259ee3438250fadc2f28593d8cfc459143b07bd815",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/088",
@@ -1258,7 +1564,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "b9680712a0729c6103c5e35a81f0a62115678f01a5cee367ac8f3b95954c0423",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/089",
@@ -1272,7 +1580,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "435442625882deedade9d97dddb94555dfdac3026ba3ecef7312b0d6d9fded4b",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/090",
@@ -1286,7 +1596,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "4870fa3e1164df4710022de04218ce6b90cd8b6a29a0780906da8f59d78f0ba4",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "underline",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/text-editor/091",
@@ -1300,7 +1616,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "e9be4b2410e9a76e70ba2f9272f6a838fc51b50d9e5bb282c9c9d6ca232dfae8",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "italic",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/text-editor/092",
@@ -1314,7 +1636,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "1fb7fd21d2c30aa865eca9b842bb33d26d812bb5dcb646a51b7c6cc827397b94",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/093",
@@ -1328,7 +1652,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "e94f224ac9a6f712459e7fd69971589e2268a1df1c7160c6d392e89f32822635",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "align-left",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/text-editor/094",
@@ -1342,7 +1672,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "0290f35f960ff63d8d8ee740f6d601625c69901bf3a64f2f1bb15b42a98f0588",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "align-center",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/text-editor/095",
@@ -1356,7 +1692,13 @@
       "paints": ["#0B1623"],
       "topologySha256": "7bddab8b18928a56c18702ee3d742f0fd227e4149f71d644608156290bd6a029",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "align-right",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/text-editor/096",
@@ -1370,7 +1712,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "976e623779d06a99f22aec980d1506b7de31b1b54989bb79b0b5cc2b541152f0",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/097",
@@ -1384,7 +1728,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "3d3b259ea089e48c9667d9b9a593363c9c18d3098810344e0734dc9c51e96839",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/098",
@@ -1398,7 +1744,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "99b7d68303659012d81501be1dd4037e77dfff7be0cf5e071a5302a56306157a",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/099",
@@ -1412,7 +1760,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "b3a470b5b30e1c32b2c8100172162165ecb3c1af28ee1dc1bffad35db407fff5",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/100",
@@ -1426,7 +1776,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "f6149aac9b892793ef4b3c2228658a3c4dc722cf1cbb5ec76bfb7d6d32dbe60b",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/101",
@@ -1440,7 +1792,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "a05a19197e7a43e1a447997d18828fa9596064529d96e1aa12cf59cf96f728ff",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/102",
@@ -1454,7 +1808,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "09d2a8acd3b571b337ce599b6e189a61d972a397511893b53763c6a2b9abcbdb",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/103",
@@ -1468,7 +1824,9 @@
       "paints": ["#0B1623"],
       "topologySha256": "9622396b49e6223aaee1378729a13d520a16cb3e738516df2846ba5f0d6bf2d5",
       "disposition": "new-canonical",
-      "target": null
+      "target": null,
+      "comparedTarget": null,
+      "exactEquivalence": null
     },
     {
       "id": "icons-svg/text-editor/104",
@@ -1482,12 +1840,18 @@
       "paints": ["#0B1623"],
       "topologySha256": "e7613af8da9f5ad0ada9e5fda2bc23a863a66878e0aee7ebed3632a0c1a3fc51",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "image",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": true,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/105",
       "recoveredName": "pdf",
-      "canonicalName": "file-pdf",
+      "canonicalName": "pdf-file-types",
       "category": "file-types",
       "sourceIds": ["path283", "path284", "rect284", "path285"],
       "viewBox": "0 0 44 44",
@@ -1495,13 +1859,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#D92D20"],
       "topologySha256": "041b0662850d0fa379d23f7fd23eb1d0e971b69054177f313b2824c4a1f08090",
-      "disposition": "exact-existing",
-      "target": "file-pdf"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-pdf",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/106",
       "recoveredName": "doc",
-      "canonicalName": "file-doc",
+      "canonicalName": "doc-file-types",
       "category": "file-types",
       "sourceIds": ["path286", "path287", "rect287", "path288"],
       "viewBox": "0 0 44 44",
@@ -1509,13 +1879,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "c3788d28a3baf1122cc9a809678dc5b9fc9d809909b6d3259784119c0e210da1",
-      "disposition": "exact-existing",
-      "target": "file-doc"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-doc",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/107",
       "recoveredName": "docx",
-      "canonicalName": "file-docx",
+      "canonicalName": "docx-file-types",
       "category": "file-types",
       "sourceIds": ["path289", "path290", "rect290", "path291"],
       "viewBox": "0 0 44 44",
@@ -1523,13 +1899,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "ef4db5ba09c83bd8d128293371db9b547040eb1a32f1b8f8eafc0bf517b7dc4e",
-      "disposition": "exact-existing",
-      "target": "file-docx"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-docx",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/108",
       "recoveredName": "txt",
-      "canonicalName": "file-txt",
+      "canonicalName": "txt-file-types",
       "category": "file-types",
       "sourceIds": ["path292", "path293", "rect293", "path294"],
       "viewBox": "0 0 44 44",
@@ -1537,13 +1919,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#343A3E"],
       "topologySha256": "7166b57e6d1de581493e91246442458de9e433979429afaf726ea614e251b4ac",
-      "disposition": "exact-existing",
-      "target": "file-txt"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-txt",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/109",
       "recoveredName": "csv",
-      "canonicalName": "file-csv",
+      "canonicalName": "csv-file-types",
       "category": "file-types",
       "sourceIds": ["path295", "path296", "rect296", "path297"],
       "viewBox": "0 0 44 44",
@@ -1551,13 +1939,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
       "topologySha256": "b1d59587dd4d25e00ab93c03d48840daa51a65411667738c5931846c26ba9040",
-      "disposition": "exact-existing",
-      "target": "file-csv"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-csv",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/110",
       "recoveredName": "xls",
-      "canonicalName": "file-xls",
+      "canonicalName": "xls-file-types",
       "category": "file-types",
       "sourceIds": ["path298", "path299", "rect299", "path300"],
       "viewBox": "0 0 44 44",
@@ -1565,13 +1959,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
       "topologySha256": "a4602914102d8cbc25d5ca329f42a162859048d126eb5d03f211b0fc5e85d161",
-      "disposition": "exact-existing",
-      "target": "file-xls"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-xls",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/111",
       "recoveredName": "xlsx",
-      "canonicalName": "file-xlsx",
+      "canonicalName": "xlsx-file-types",
       "category": "file-types",
       "sourceIds": ["path301", "path302", "rect302", "path303"],
       "viewBox": "0 0 44 44",
@@ -1579,13 +1979,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
       "topologySha256": "f327260c73da83e2f7480d55309d790988160c7fd9de403c2c890b10777ee0fa",
-      "disposition": "exact-existing",
-      "target": "file-xlsx"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-xlsx",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/112",
       "recoveredName": "ppt",
-      "canonicalName": "file-ppt",
+      "canonicalName": "ppt-file-types",
       "category": "file-types",
       "sourceIds": ["path304", "path305", "rect305", "path306"],
       "viewBox": "0 0 44 44",
@@ -1593,13 +1999,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
       "topologySha256": "44e74069ad153b04704406756fcc537279934e1fc6f251b2e007115e03d659c1",
-      "disposition": "exact-existing",
-      "target": "file-ppt"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-ppt",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/113",
       "recoveredName": "pptx",
-      "canonicalName": "file-pptx",
+      "canonicalName": "pptx-file-types",
       "category": "file-types",
       "sourceIds": ["path307", "path308", "rect308", "path309"],
       "viewBox": "0 0 44 44",
@@ -1607,13 +2019,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#E62E05"],
       "topologySha256": "25fdb47341e24b06d49e11478f4ef6e90e7778ded050aa094567abca48ee33ef",
-      "disposition": "exact-existing",
-      "target": "file-pptx"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-pptx",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/114",
       "recoveredName": "mp3",
-      "canonicalName": "file-mp3",
+      "canonicalName": "mp3-file-types",
       "category": "file-types",
       "sourceIds": ["path310", "path311", "rect311", "path312"],
       "viewBox": "0 0 44 44",
@@ -1621,13 +2039,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#DD2590"],
       "topologySha256": "858be841b56ef20452379db30e4039042091bb734f0b5b110944b270d15f7340",
-      "disposition": "exact-existing",
-      "target": "file-mp3"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-mp3",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/115",
       "recoveredName": "mp4",
-      "canonicalName": "file-mp4",
+      "canonicalName": "mp4-file-types",
       "category": "file-types",
       "sourceIds": ["path313", "path314", "rect314", "path315"],
       "viewBox": "0 0 44 44",
@@ -1635,13 +2059,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "22b43e4f292c00cd1d518f2e0eae42c8e3efae97eeee4840d1862dd04fa37738",
-      "disposition": "exact-existing",
-      "target": "file-mp4"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-mp4",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/116",
       "recoveredName": "mpeg",
-      "canonicalName": "file-mpeg",
+      "canonicalName": "mpeg-file-types",
       "category": "file-types",
       "sourceIds": ["path316", "path317", "rect317", "path318"],
       "viewBox": "0 0 44 44",
@@ -1649,13 +2079,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "4632d87eb6446e872fbb9922790447f214ad439d4f8853727755b7147ea76cb9",
-      "disposition": "exact-existing",
-      "target": "file-mpeg"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-mpeg",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/117",
       "recoveredName": "avi",
-      "canonicalName": "file-avi",
+      "canonicalName": "avi-file-types",
       "category": "file-types",
       "sourceIds": ["path319", "path320", "rect320", "path321"],
       "viewBox": "0 0 44 44",
@@ -1663,13 +2099,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "c8cd9e87bcf7bbb6d11ef802bf923773cd8b41105f07ffca7e34529cdbd698c6",
-      "disposition": "exact-existing",
-      "target": "file-avi"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-avi",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/118",
       "recoveredName": "mkv",
-      "canonicalName": "file-mkv",
+      "canonicalName": "mkv-file-types",
       "category": "file-types",
       "sourceIds": ["path322", "path323", "rect323", "path324"],
       "viewBox": "0 0 44 44",
@@ -1677,13 +2119,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#155EEF"],
       "topologySha256": "ee1750f6261d28a7f063ca7d578bdf9f6b3c6aad03d9bfb1238d2a349b6b9663",
-      "disposition": "exact-existing",
-      "target": "file-mkv"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-mkv",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/119",
       "recoveredName": "zip",
-      "canonicalName": "file-zip",
+      "canonicalName": "zip-file-types",
       "category": "file-types",
       "sourceIds": ["path325", "path326", "rect326", "path327"],
       "viewBox": "0 0 44 44",
@@ -1691,13 +2139,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
       "topologySha256": "144dac288ebbb8334d66b0d7a445888f7c7ca8c020a99327a5b4beeca03d927f",
-      "disposition": "exact-existing",
-      "target": "file-zip"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-zip",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/120",
       "recoveredName": "rar",
-      "canonicalName": "file-rar",
+      "canonicalName": "rar-file-types",
       "category": "file-types",
       "sourceIds": ["path328", "path329", "rect329", "path330"],
       "viewBox": "0 0 44 44",
@@ -1705,13 +2159,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#414651"],
       "topologySha256": "aa88583f83e388282eb01bf364df158368c6657248d93f9e0ef6271a2055a77e",
-      "disposition": "exact-existing",
-      "target": "file-rar"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-rar",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/121",
       "recoveredName": "img",
-      "canonicalName": "file-img",
+      "canonicalName": "img-file-types",
       "category": "file-types",
       "sourceIds": ["path331", "path332", "rect332", "path333"],
       "viewBox": "0 0 44 44",
@@ -1719,13 +2179,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
       "topologySha256": "a5aca8aedc173f78b6b1c14d302287178fe33b0fb913c420bb6b9925e76dda98",
-      "disposition": "exact-existing",
-      "target": "file-img"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-img",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/122",
       "recoveredName": "png",
-      "canonicalName": "file-png",
+      "canonicalName": "png-file-types",
       "category": "file-types",
       "sourceIds": ["path334", "path335", "rect335", "path336"],
       "viewBox": "0 0 44 44",
@@ -1733,13 +2199,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
       "topologySha256": "a161c19ff79fe7703ad53de04f3ddf871c95fc5bac7d3408481ad241c6cb60e7",
-      "disposition": "exact-existing",
-      "target": "file-png"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-png",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/123",
       "recoveredName": "svg",
-      "canonicalName": "file-svg",
+      "canonicalName": "svg-file-types",
       "category": "file-types",
       "sourceIds": ["path337", "path338", "rect338", "path339"],
       "viewBox": "0 0 44 44",
@@ -1747,13 +2219,19 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#7F56D9"],
       "topologySha256": "964fbb08d19001f6e5b30e46c7e907cb0a8046c55fde1aac6566ea89b68b7b1c",
-      "disposition": "exact-existing",
-      "target": "file-svg"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-svg",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/124",
       "recoveredName": "pdf-alt",
-      "canonicalName": "file-pdf",
+      "canonicalName": "pdf-alt-file-types",
       "category": "file-types",
       "sourceIds": ["path340", "path341", "rect341", "path342"],
       "viewBox": "0 0 44 44",
@@ -1761,8 +2239,14 @@
       "semanticNameConfidence": "high",
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
       "topologySha256": "1f89828e7e0a3a83e9bf58d1de77cf4b7a0354972833d91e34a5ae80e034fd56",
-      "disposition": "exact-existing",
-      "target": "file-pdf"
+      "disposition": "qualified-collision",
+      "target": null,
+      "comparedTarget": "file-pdf",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": true
+      }
     },
     {
       "id": "icons-svg/file-types/125",
@@ -1776,7 +2260,13 @@
       "paints": ["white", "#DBDBDB", "#D4D4D8", "#939CA5"],
       "topologySha256": "c3991f3a9b8f0ae50e67d1f94221741a5daf83163b8ed001b2515aeaab8a8055",
       "disposition": "qualified-collision",
-      "target": null
+      "target": null,
+      "comparedTarget": "file",
+      "exactEquivalence": {
+        "topology": false,
+        "viewBox": false,
+        "paintPolicy": false
+      }
     }
   ]
 }

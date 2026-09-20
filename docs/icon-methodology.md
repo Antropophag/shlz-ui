@@ -11,13 +11,13 @@ use `.shlz-icon--inherit`, so Button, field, menu, feedback and other component
 states remain the source of their icon foreground. Preserved-paint assets stay
 external images and are not recolored by this contract.
 
-The production manifest contains 201 canonical logical icons and 207 emitted variants. The original 119 canonical icons and 125 variants remain an immutable compatibility subset. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
+The production manifest contains 244 canonical logical icons and 250 emitted variants. The original 119 canonical icons and 125 variants remain an immutable compatibility subset. Categories come directly from the normalized manifest. Compatibility aliases are explicit in `packages/icons/compatibility-aliases.json`; they point to emitted normalized variants and are never counted as canonical icons.
 
 ## Icons.svg sheet normalization
 
 `tools/normalize-icons-sheet.mjs` runs after Basic Elements normalization. The historical manifest is used only to recover candidate grouping, category, semantic-name confidence and crop localization. Each selected `path` or `rect` is matched uniquely back to byte geometry in the authoritative raw sheet before it can be emitted; derived SVG geometry is never copied into production.
 
-The sheet census contains 125 candidates (104 core and 21 file-type) referencing 302 unique primitives. Every candidate has one explicit disposition in `packages/icons/normalized/icons-sheet-analysis.json`: 43 confirmed existing targets, 62 new canonical glyphs and 20 qualified name/geometry collisions. The two historically colliding calendars are independently emitted as `calendar-sidebar` (`path41`) and `calendar-interface` (`path83`, `path80`, `path82`, `path81`).
+The sheet census contains 125 candidates (104 core and 21 file-type) referencing 302 unique primitives. A frozen independent census digest detects changes to the derivative grouping ledger, while each referenced primitive is uniquely matched back to raw `Icons.svg`. Every candidate has one explicit disposition in `packages/icons/normalized/icons-sheet-analysis.json`: 62 new canonical glyphs and 63 qualified name/geometry collisions. Potential compatibility targets are deduplicated only when topology, viewBox, and paint policy all match; none currently pass all three checks. The two historically colliding calendars are independently emitted as `calendar-sidebar` (`path41`) and `calendar-interface` (`path83`, `path80`, `path82`, `path81`).
 
 Recovered labels are not promoted beyond their evidence. Each sheet-derived manifest record keeps its source IDs and semantic-name confidence; non-equivalent collisions never replace existing geometry.
 

@@ -45,7 +45,7 @@ The following source names do not establish a reliable purpose: `flagq-uncertain
 The second normalization stage reads all 125 recovered candidates from the authoritative `raw/svg/Icons.svg` sheet. Historical extraction metadata supplies grouping and crop localization only; every emitted primitive is matched back to the raw SVG byte geometry before use.
 
 - 302 raw path/rect primitives are exhaustively and uniquely accounted for.
-- 43 candidates retain an already-confirmed canonical target, 62 add a new canonical name, and 20 name/geometry collisions receive an explicit qualified name.
+- Exact deduplication requires matching topology, viewBox, and paint policy. No sheet candidate passes all three checks; 62 add a new canonical name and 63 name/geometry collisions receive an explicit qualified name.
 - `calendar-sidebar` and `calendar-interface` preserve the two distinct candidates that previously collided as `calendar.svg`.
-- The merged production input contains 201 canonical logical icons and 207 emitted variants.
+- The merged production input contains 244 canonical logical icons and 250 emitted variants.
 - `icons-sheet-analysis.json` records source IDs, category, crop transform, source paints, semantic-name confidence, topology hash, and disposition for every candidate.

@@ -139,9 +139,10 @@ const legacyManifest = JSON.parse(await readFile(legacyManifestPath, "utf8"));
 const aliases = JSON.parse(await readFile(aliasesPath, "utf8"));
 const manifest = JSON.parse(await readFile(normalizedManifestPath, "utf8"));
 const aliasTargets = new Map(
-  aliases.map(({ alias, target }) => [alias, target]),
+  aliases.map(({ alias, target, variant }) => [alias, { target, variant }]),
 );
-const occupied = new Set(manifest.map(({ name }) => name));
+const canonicalNames = new Set(manifest.map(({ name }) => name));
+const occupied = new Set([...canonicalNames, ...aliasTargets.keys()]);
 const duplicateNames = new Set(
   Object.entries(Object.groupBy(legacyManifest, ({ name }) => name))
     .filter(([, candidates]) => candidates.length > 1)
@@ -157,17 +158,6 @@ for (const [index, candidate] of legacyManifest.entries()) {
     usedSourceIds.add(sourceId);
   }
   const sourceElementsForCandidate = await sourceElements(candidate, raw);
-  const exactTarget =
-    aliasTargets.get(candidate.name) ??
-    (candidate.name === "minus" ? "minus" : null);
-  const disposition = exactTarget
-    ? "exact-existing"
-    : occupied.has(candidate.name) || duplicateNames.has(candidate.name)
-      ? "qualified-collision"
-      : "new-canonical";
-  const name = exactTarget
-    ? exactTarget
-    : explicitName(candidate, occupied, duplicateNames);
   const transform = await translation(candidate);
   const sourcePaints = paints(sourceElementsForCandidate);
   const currentColor = sourcePaints.length <= 1;
@@ -181,6 +171,47 @@ for (const [index, candidate] of legacyManifest.entries()) {
     `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="${candidate.viewBox}">\n` +
     `  <g transform="${transform}">\n    ${normalizedElements.join("\n    ")}\n  </g>\n` +
     `</svg>\n`;
+  const candidateTopologySha256 = sha256(geometryFingerprint(svg));
+  const targetReference =
+    aliasTargets.get(candidate.name) ??
+    (canonicalNames.has(candidate.name)
+      ? { target: candidate.name, variant: candidate.name }
+      : null);
+  let exactEquivalence = null;
+  let exactTarget = null;
+  if (targetReference) {
+    const target = manifest.find(({ name }) => name === targetReference.target);
+    const targetVariant =
+      target?.variants.find(
+        ({ normalizedPath }) =>
+          path.basename(normalizedPath, ".svg") === targetReference.variant,
+      ) ??
+      target?.variants.find(
+        ({ normalizedPath }) => normalizedPath === target?.normalizedPath,
+      );
+    if (!target || !targetVariant)
+      throw new Error(`Missing comparison target: ${targetReference.target}`);
+    const targetSvg = await readFile(
+      path.join(normalizedRoot, targetVariant.normalizedPath),
+      "utf8",
+    );
+    exactEquivalence = {
+      topology:
+        candidateTopologySha256 === sha256(geometryFingerprint(targetSvg)),
+      viewBox: candidate.viewBox === targetVariant.viewBox,
+      paintPolicy: currentColor === target.currentColor,
+    };
+    if (Object.values(exactEquivalence).every(Boolean))
+      exactTarget = targetReference.target;
+  }
+  const disposition = exactTarget
+    ? "exact-existing"
+    : occupied.has(candidate.name) || duplicateNames.has(candidate.name)
+      ? "qualified-collision"
+      : "new-canonical";
+  const name = exactTarget
+    ? exactTarget
+    : explicitName(candidate, occupied, duplicateNames);
   const record = {
     id: `icons-svg/${candidate.category}/${String(index + 1).padStart(3, "0")}`,
     recoveredName: candidate.name,
@@ -191,9 +222,11 @@ for (const [index, candidate] of legacyManifest.entries()) {
     transform,
     semanticNameConfidence: candidate.semantic_name_confidence,
     paints: sourcePaints,
-    topologySha256: sha256(geometryFingerprint(svg)),
+    topologySha256: candidateTopologySha256,
     disposition,
     target: exactTarget,
+    comparedTarget: targetReference?.target ?? null,
+    exactEquivalence,
   };
   candidates.push(record);
   if (exactTarget) {
@@ -307,9 +340,9 @@ await writeFile(
     `The second normalization stage reads all 125 recovered candidates from the authoritative \`raw/svg/Icons.svg\` sheet. ` +
     `Historical extraction metadata supplies grouping and crop localization only; every emitted primitive is matched back to the raw SVG byte geometry before use.\n\n` +
     `- 302 raw path/rect primitives are exhaustively and uniquely accounted for.\n` +
-    `- 43 candidates retain an already-confirmed canonical target, 62 add a new canonical name, and 20 name/geometry collisions receive an explicit qualified name.\n` +
+    `- Exact deduplication requires matching topology, viewBox, and paint policy. No sheet candidate passes all three checks; 62 add a new canonical name and 63 name/geometry collisions receive an explicit qualified name.\n` +
     `- \`calendar-sidebar\` and \`calendar-interface\` preserve the two distinct candidates that previously collided as \`calendar.svg\`.\n` +
-    `- The merged production input contains 201 canonical logical icons and 207 emitted variants.\n` +
+    `- The merged production input contains 244 canonical logical icons and 250 emitted variants.\n` +
     `- \`icons-sheet-analysis.json\` records source IDs, category, crop transform, source paints, semantic-name confidence, topology hash, and disposition for every candidate.\n`,
 );
 

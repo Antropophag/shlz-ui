@@ -30,7 +30,7 @@ test("all canonical icons resolve to painted production sprite symbols", async (
   page,
 }) => {
   const cards = page.locator(".shlz-icon-card");
-  await expect(cards).toHaveCount(201);
+  await expect(cards).toHaveCount(244);
   const failures = await cards.evaluateAll((items) =>
     items.flatMap((card) => {
       const graphic = card.querySelector(
@@ -55,7 +55,7 @@ test("standalone monochrome icons use the semantic default foreground", async ({
   page,
 }) => {
   const monochrome = page.locator(".shlz-icon-card > svg.shlz-icon");
-  await expect(monochrome).toHaveCount(177);
+  await expect(monochrome).toHaveCount(200);
   const colors = await monochrome.evaluateAll((items) => [
     ...new Set(items.map((item) => window.getComputedStyle(item).color)),
   ]);

@@ -98,7 +98,7 @@ test("normalized SVG paints follow manifest policy", async () => {
   const svgFiles = (await filesBelow(normalizedRoot)).filter((file) =>
     file.endsWith(".svg"),
   );
-  assert.equal(svgFiles.length, 207);
+  assert.equal(svgFiles.length, 250);
 });
 
 test("all normalized variants preserve source paint semantics element by element", async () => {
