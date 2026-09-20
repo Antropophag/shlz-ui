@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { canonicalIconNames } from "@shlz/icons";
 
 test("keeps the root shell usable without requesting deferred source evidence", async ({
   page,
@@ -59,7 +60,12 @@ test("Icons is a searchable direct destination with the complete catalog", async
   await iconsLink.click();
   await expect(page).toHaveURL(/#icons$/);
   await expect(page.locator("#icons")).toBeVisible();
-  await expect(page.locator("#icons .shlz-icon-card")).toHaveCount(244);
+  const cards = page.locator("#icons .shlz-icon-card");
+  const relatedNames = page.locator("#icons [data-icon-related-name]");
+  await expect
+    .poll(async () => (await cards.count()) + (await relatedNames.count()))
+    .toBe(canonicalIconNames.length);
+  expect(await cards.count()).toBeLessThan(canonicalIconNames.length);
 
   await page.goto("/#icons");
   await expect(page.locator("#icons")).toBeVisible();
