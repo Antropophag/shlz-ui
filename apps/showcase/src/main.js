@@ -200,10 +200,15 @@ const canonicalIconNames = new Set(manifest.map(({ name }) => name));
 const aliasTargetByName = new Map(
   compatibilityAliases.map(({ alias, target }) => [alias, target]),
 );
+const catalogRelationOverrides = new Map([
+  // These sources use different canvas coordinates but render the same path.
+  ["calendar-sidebar", "delivery-4"],
+]);
 const relatedTargetByName = new Map(
   manifest.flatMap(({ name, sourceNames = [] }) => {
     const sourceName = sourceNames[0];
     const target =
+      catalogRelationOverrides.get(name) ??
       aliasTargetByName.get(sourceName) ??
       (canonicalIconNames.has(sourceName) ? sourceName : null);
     return target && target !== name ? [[name, target]] : [];
