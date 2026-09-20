@@ -4,7 +4,7 @@
   "kind": "tdd",
   "payload": {
     "baselineCommit": "dc317fdd80b259f411be2aa8ac9eab09c4cee697",
-    "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
+    "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
     "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
     "green": {
       "code": 0,
@@ -12,7 +12,7 @@
       "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       "stdoutDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
     },
-    "oracleDigest": "76312374e1d9f678db1c30d280baf69f4543a8c0da7512c793b02fccc5bf0ff6",
+    "oracleDigest": "974248f83621431608b49333b894ee86fbcb25d1f5a2f0c965bee34154c2e1e6",
     "red": {
       "code": 1,
       "outcome": "fail",
@@ -21,5 +21,5 @@
     }
   },
   "version": 1,
-  "digest": "f3a03417be54e4a48910c979a8f4cf4a58898fc48135bd72bb5e54306694ab1f"
+  "digest": "b4afd36144f66cecb0fdef1f18344621bb9deae154a52f410674967ad9390d7f"
 }

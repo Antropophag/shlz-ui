@@ -2,18 +2,18 @@
   "contractReceiptDigest": "513473924783ea8a66f40de3ea0ccb1040f1e34b079e1a3d4fce0af3c608519a",
   "kind": "review",
   "payload": {
-    "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
+    "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
     "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
     "spec": {
-      "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
+      "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
       "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
       "findings": [],
       "outcome": "pass",
-      "runtimeId": "codex-agent:/root/icon_spec_review@6f38a39",
+      "runtimeId": "codex-agent:/root/icon_spec_review@8d1ccd5",
       "runtimeSource": "codex-exec-jsonl"
     },
     "standards": {
-      "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
+      "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
       "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
       "findings": [
         {
@@ -23,10 +23,10 @@
         }
       ],
       "outcome": "pass",
-      "runtimeId": "codex-agent:/root/icon_standards_review@6f38a39",
+      "runtimeId": "codex-agent:/root/icon_standards_review@8d1ccd5",
       "runtimeSource": "codex-exec-jsonl"
     }
   },
   "version": 1,
-  "digest": "3981fb506b91b5d0920e50ff4bd1132e2c385578de3d4056a32abdf21d391838"
+  "digest": "3c6a5c7ad2d9f33976c5f5f0fc666e80ae051523a792fb8d4fc65d5adaa5d4a5"
 }

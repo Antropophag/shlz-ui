@@ -3,25 +3,36 @@
   "kind": "validation",
   "payload": {
     "argv": [
-      "node",
-      "--test",
-      "--test-concurrency=1",
-      "tools/tests/icons-sheet-normalization.test.mjs",
-      "tools/tests/generators.test.mjs",
-      "tools/tests/icon-library-baseline.test.mjs"
+      "npx",
+      "playwright",
+      "test",
+      "tools/playwright/icons.spec.js",
+      "tools/playwright/showcase-loading.spec.js",
+      "tools/playwright/showcase-navigation.spec.js",
+      "--project=chromium"
     ],
-    "candidateHead": "6f38a394a8883490a13630c181ae28c45ca6a117",
+    "candidateHead": "8d1ccd5d96d853d17e761c93ed4fc2de1c960576",
     "closedSetEvidence": [],
     "closure": [
+      {
+        "bytes": 70718,
+        "digest": "fca73f48c5342ea70314ec4db686dacaa377d26858ab2453bad2768b9756c036",
+        "path": "apps/showcase/src/main.js"
+      },
+      {
+        "bytes": 1854,
+        "digest": "14d41a2fc5f772535df935c3f14ca2c97e97e7320f9d29f963b48782439e181b",
+        "path": "apps/showcase/src/showcase-navigation.json"
+      },
+      {
+        "bytes": 42786,
+        "digest": "83876610326b5366ae450816eb50ccd64e52d4db063600c3ed4fffe13faaa60f",
+        "path": "apps/showcase/src/showcase.css"
+      },
       {
         "bytes": 5975,
         "digest": "711bbba3cdc518972b3bfc10b97d91bfb888401ba27cb19c82286f8374ce219e",
         "path": "openspec/changes/complete-icon-library/specs/foundations/icon-library/spec.md"
-      },
-      {
-        "bytes": 107820,
-        "digest": "3ce3e44a685fca202ef5cc5ca3431d5ccfde6f3de4c988d0f482790f57bc5e22",
-        "path": "packages/icons/normalized/icons-sheet-analysis.json"
       },
       {
         "bytes": 379817,
@@ -29,27 +40,32 @@
         "path": "packages/icons/normalized/manifest.json"
       },
       {
-        "bytes": 14030,
-        "digest": "c7d827ce83aa2c6a58eb0f90dbc85167c8ca2c23f0473d38f1acbf3fb558c4cd",
-        "path": "tools/normalize-icons-sheet.mjs"
+        "bytes": 5753,
+        "digest": "c6bb9407f176edc6473713cf19cf9fa48f71969dc659350d1122789416d40dbf",
+        "path": "tools/playwright/icons.spec.js"
       },
       {
-        "bytes": 10551,
-        "digest": "1be1d809f12f34a10618beca81e56e759f573d8d3649b89418b9fcf47500b989",
-        "path": "tools/tests/generators.test.mjs"
+        "bytes": 512827,
+        "digest": "d2738d43b8d081fc306ca3609b86afd95f0e826b7edcfd7a04e2152ab6d2530a",
+        "path": "tools/playwright/icons.spec.js-snapshots/icon-catalog-chromium-linux.png"
       },
       {
-        "bytes": 1459,
-        "digest": "e256457bc847054a8c5b597ba2d5da2a0e720f3dccfe7683860ad2c0fcea21f0",
-        "path": "tools/tests/icon-library-baseline.test.mjs"
+        "bytes": 25803,
+        "digest": "f90500e12e2b60ff2041186b3dd00e340957a4de3f1f893baba804793e5568a7",
+        "path": "tools/playwright/icons.spec.js-snapshots/icon-catalog-representative-chromium-linux.png"
       },
       {
-        "bytes": 5270,
-        "digest": "7ff42576764068106f55e83f75e76c8989ba684005c91c0a661b3dd28798f2df",
-        "path": "tools/tests/icons-sheet-normalization.test.mjs"
+        "bytes": 7397,
+        "digest": "453ddcfd5137c94e922bbb62b677d21e034f94a48bc8ece6441707bdfc92bdfe",
+        "path": "tools/playwright/showcase-loading.spec.js"
+      },
+      {
+        "bytes": 13185,
+        "digest": "1fb3649750624ea0ceff3ad4e79def36bacec70e424e80859547842d4b567631",
+        "path": "tools/playwright/showcase-navigation.spec.js"
       }
     ],
-    "closureDigest": "35956f6f8d92a8fd706a751643695b80e14e5ba73adf9bcc22b0b93306d32ae6",
+    "closureDigest": "09f3435c0551c32ef58b20c9c0194f8d95dc67b038d7bf1f02ed86fb3bc2b386",
     "contractDigest": "7bb3ceed53600f35b673054065630ad448adf80a55a70e01f2ff41657f9761ac",
     "outcome": "pass",
     "productionDelta": null,
@@ -57,11 +73,11 @@
     "result": {
       "code": 0,
       "outcome": "pass",
-      "stderrDigest": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "stdoutDigest": "1483f7b399741225dac23976fbb86ae0279f721118c8a95dbb3e726294e2dbb7"
+      "stderrDigest": "ff5a904675d957556fbc58e91c4a6b6cd934550ff6d0e505f72a58e7f18c378c",
+      "stdoutDigest": "818ad4732b324a8d513376cbfbd5fc030de54c58d4b6a54b9799734b45052ff2"
     },
-    "target": "complete-icon-library-ci-followup"
+    "target": "complete-icon-library-showcase-ci-remediation"
   },
   "version": 1,
-  "digest": "738c06591ea419c7765102ffd5c04d9a3b167fc68db187296c6302b1566c18b5"
+  "digest": "7e5ab5c0e4fefb303424e937cf6c7d985dc6363f5c84b8fb3609ac4d8ccca809"
 }
