@@ -229,7 +229,7 @@ const iconGroups = [...groupBy(catalogManifest, ({ category }) => category)]
       )?.[1];
       const aliases = aliasesByTarget.get(name) ?? [];
       const related = relatedByTarget.get(name) ?? [];
-      return `<figure class="shlz-icon-card" data-icon-name="${name}" title="${comment ?? ""}"><img src="${url}" alt=""/><figcaption>${name}<small>${colorMode} · ${variants.length} variant${variants.length === 1 ? "" : "s"}</small>${aliases.length ? `<small>compat: ${aliases.map(({ alias }) => alias).join(", ")}</small>` : ""}${related.map(({ name: relatedName }) => `<small data-icon-related-name="${relatedName}">source variant: ${relatedName}</small>`).join("")}</figcaption></figure>`;
+      return `<figure class="shlz-icon-card" data-icon-name="${name}" data-icon-color-mode="${colorMode}" title="${comment ?? ""}"><img src="${url}" alt=""/><figcaption>${name}<small>${colorMode} · ${variants.length} variant${variants.length === 1 ? "" : "s"}</small>${aliases.length ? `<small>compat: ${aliases.map(({ alias }) => alias).join(", ")}</small>` : ""}${related.map(({ name: relatedName }) => `<small data-icon-related-name="${relatedName}">source variant: ${relatedName}</small>`).join("")}</figcaption></figure>`;
     });
     return `<section class="shlz-icon-category"><h3>${category} <small>${icons.length} visual families</small></h3><div class="shlz-icon-grid">${cards.join("")}</div></section>`;
   })

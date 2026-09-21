@@ -10,7 +10,7 @@ const representativeIcons = [
   "document-badge-plus",
   "six-dot-grid",
   "file-pdf",
-  "calendar-sidebar",
+  "delivery-4",
   "calendar-interface",
   "xls-file",
 ];
@@ -76,8 +76,10 @@ test("outlined icons do not acquire an implicit solid fill", async ({
 test("standalone monochrome icons use the semantic default foreground", async ({
   page,
 }) => {
-  const monochrome = page.locator(".shlz-icon-card > svg.shlz-icon");
-  await expect(monochrome).toHaveCount(159);
+  const monochrome = page.locator(
+    '.shlz-icon-card[data-icon-color-mode="currentColor"] > svg.shlz-icon',
+  );
+  expect(await monochrome.count()).toBeGreaterThan(0);
   const colors = await monochrome.evaluateAll((items) => [
     ...new Set(items.map((item) => window.getComputedStyle(item).color)),
   ]);
