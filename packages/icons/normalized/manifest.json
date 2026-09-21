@@ -5141,7 +5141,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "2c69a9c94cab9ec47ccebb0fbd07ac6ffee36b653a701932ff0fd3c52f50310f",
+        "geometrySha256": "3beaf3341b7186122ec90cbd41aed537022d98485f2b1a9c72bcbe819194b0ef",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["settings"],
         "sources": [
@@ -5231,7 +5231,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "0f813180b1e0684efe63aab1833faad895ba5270a66c718a6094200dabdf58d6",
+        "geometrySha256": "9b86df0b61b97e1ab73fd07e3905224f5e6f87d713eed438ddb4d49f1d73b162",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["globe"],
         "sources": [
@@ -5566,7 +5566,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "b640aeb49c3d161b3558045670987197fb35b5cc32766e1417784ff65243c2b8",
+        "geometrySha256": "f23fee5dd7bc230d691a4438966a56f03e082c97e1ff4178764a9616a67d1856",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["cloud-sync"],
         "sources": [
@@ -5746,7 +5746,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "10e9d9067eba8a9e58d1f62e9cb19838e457e799e7c89ddbe4824043c0f5fd6a",
+        "geometrySha256": "c55ed6eb15b1504e8a75f6b992d64cad6de09c7c1fb1faaabe1948b9eda9066a",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["chart-add"],
         "sources": [
@@ -6781,7 +6781,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "1bc5d3b7dbf498c65a1455ae57c9ec6e9d7bb43eb28c299ed0c7376dd97a6a9e",
+        "geometrySha256": "c290e81be972ca7a99d14eb04f164eb8d8bddcf5b9c73d2c9a72af420de45dd4",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["calendar"],
         "sources": [
@@ -7096,7 +7096,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "bbd4ce62b80f3168360255993eb3d9b85b2536869788977cd8d29daf10744bf9",
+        "geometrySha256": "25c394f15e0a2235de4ae3b6ada083b39f206a84c83995f1fc509ae1d55ec03b",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["more-vertical"],
         "sources": [
@@ -7148,7 +7148,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "e1572ef08715a8014842e3d06086f5aeff37892ae39ba30103b3c4d0d2905c94",
+        "geometrySha256": "e46c87158c2dd01ed12681de8c6c244281fc201c38f54d2517d673afc46573d5",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["collapse-horizontal"],
         "sources": [
@@ -7508,7 +7508,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "a0c2e79c4726ac9f78a149a857dafe770fae5cc955389e93d5b6d5f00cc46ab1",
+        "geometrySha256": "10e278b23985e9b7455b661eef84133caed1c79ea563fc9d581d6160865c983b",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["print"],
         "sources": [
@@ -7688,7 +7688,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "551bff5d00929a53ab6481298df133d809bdd9f15eb3c891cc39f729d6110438",
+        "geometrySha256": "2dbf9089ec0976c2703e22140e115a1abf189a4059524ddf5d6db75b44f554e8",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["note-add"],
         "sources": [
@@ -7778,7 +7778,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "7f5e9065cfc759c8cddbf404ce32a2165c4dbc24b8e39ef58168b48de0594d78",
+        "geometrySha256": "f70454c82e68665e9510de548c8169533b27b7fddce21e3d3ddea57dccf84c84",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["folder"],
         "sources": [
@@ -7868,7 +7868,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "ad030a0eb1139b872f5efe65b0eb0733264c7f9fe06d5d7c042c7bd94426b9ad",
+        "geometrySha256": "40722b9cb5cf9ae5a0cc09ffc5d58e02e375c510c5e058a10aef2fdab70071c4",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["link"],
         "sources": [
@@ -8093,7 +8093,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "25ff5f316d7096edbdbf481b3381f8459a130c5a951dc8e85955aa85ccb440d3",
+        "geometrySha256": "812f4674e04ce7b40285063ac2738438eef6dc3849c90b0786e0f052d2b8901c",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["focus"],
         "sources": [
@@ -8138,7 +8138,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "a7d0aacba71f65557e5e08dd9eb0ff95639cfeb90b777906c441a457ad7270a9",
+        "geometrySha256": "4908ad190bd6fdc3c1ed57c585375f108ff2f8e1629e8b82860b6a2b6fc08986",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["currency-circle"],
         "sources": [
@@ -8228,7 +8228,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "6ded0dfbd98f0f8d688eac98dfdf7e282e0776d930bdb2b957c4145a1c303b84",
+        "geometrySha256": "184f1706599697e4b89b72bcfc65d8aa09dd7cf728babf15b46deb828dd33668",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["table"],
         "sources": [
@@ -8363,7 +8363,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "2f43fbded66253f0f57db02104cdc4c7c6fcb742412569b0d40522a07d738d58",
+        "geometrySha256": "2eb75423a563f84d71b9c3e374d3ba72e15ade1928da5bc42c0d01c25a08f626",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["download-box"],
         "sources": [
@@ -8408,7 +8408,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "4edeac60447a7f208d60d22ed642abc48fd088cb0901dfb4fd107200dd802d43",
+        "geometrySha256": "8d105d7e8983edf7ec4bf80c84bc8395cde3886a344910b29b6f115b6114f6be",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["briefcase"],
         "sources": [
@@ -8498,7 +8498,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "69481384879d34d1a1d47f302a204ca73f27f4ff8220137b4b11bf16cd69303f",
+        "geometrySha256": "080ec1c5c7a25f7807d0c5b79ccca31626f0b675a26b497e0eb632a34e696384",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["laptop"],
         "sources": [
@@ -8543,7 +8543,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "cda8365b5d901d2de5c361f46a4cf9001dcd361e52642376fb39db69808f500f",
+        "geometrySha256": "0692f94329af290e9420d8d6d5e62bcc1c52e8119ebd3db3a3fbabd357f548e2",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["sync"],
         "sources": [
@@ -8827,7 +8827,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "1bdc4f7c0ec37df780793c487eaa4ba1c70634baeb87cdaf2756eee224acb6d2",
+        "geometrySha256": "8916644508332cb9d87544f538ad0f2bb269d07ac86502b242338678c941d203",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["sync-alt"],
         "sources": [
@@ -8863,7 +8863,7 @@
     "monochrome": false,
     "currentColor": false,
     "paintPolicy": "preserved-source-colors",
-    "semanticColors": ["#079455", "white", "#DBDBDB", "#D4D4D8"],
+    "semanticColors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
     "nearDuplicateGroup": null,
     "mergedVariants": [],
     "variants": [
@@ -8872,7 +8872,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "6bb03ce0531ff930956bdccca711bd744c8f08b5e209582ff0e1c6fba32c99c8",
+        "geometrySha256": "a54782793a93936c05d94e61886032a65816b9a940737ae811c92d320d0b6804",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["xls-file"],
         "sources": [
@@ -8882,7 +8882,7 @@
             "sha256": "5199517d51474fbae60642e8afadb484511392a82754022b222cc37de9850c22",
             "state": null,
             "declaredSize": null,
-            "colors": ["#079455", "white", "#DBDBDB", "#D4D4D8"],
+            "colors": ["white", "#DBDBDB", "#D4D4D8", "#079455"],
             "sourceIds": ["rect199", "path200", "path198", "path199"]
           }
         ]
@@ -8962,7 +8962,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "d0f84716c0cfe70a6c921710025b0390e895831018a7684d806c96dbed9f7620",
+        "geometrySha256": "82d70a6ccaf2a9bded9f53a2e5a5ce5112e0482612e72971dbd693de15120d31",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["flag-filled"],
         "sources": [
@@ -9052,7 +9052,7 @@
         "size": { "width": 24, "height": 24 },
         "viewBox": "0 0 24 24",
         "state": null,
-        "geometrySha256": "449d79f734decf7912f319259ee3438250fadc2f28593d8cfc459143b07bd815",
+        "geometrySha256": "d5e88243ac64f5a997e32632fdabea8cc352b0526afa9eb401f2106c5523ab4d",
         "sourcePaths": ["shlz-design-source/raw/svg/Icons.svg"],
         "sourceNames": ["cube"],
         "sources": [

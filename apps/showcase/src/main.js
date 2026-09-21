@@ -200,10 +200,15 @@ const canonicalIconNames = new Set(manifest.map(({ name }) => name));
 const aliasTargetByName = new Map(
   compatibilityAliases.map(({ alias, target }) => [alias, target]),
 );
+const catalogRelationOverrides = new Map([
+  // These sources use different canvas coordinates but render the same path.
+  ["calendar-sidebar", "delivery-4"],
+]);
 const relatedTargetByName = new Map(
   manifest.flatMap(({ name, sourceNames = [] }) => {
     const sourceName = sourceNames[0];
     const target =
+      catalogRelationOverrides.get(name) ??
       aliasTargetByName.get(sourceName) ??
       (canonicalIconNames.has(sourceName) ? sourceName : null);
     return target && target !== name ? [[name, target]] : [];
@@ -224,7 +229,7 @@ const iconGroups = [...groupBy(catalogManifest, ({ category }) => category)]
       )?.[1];
       const aliases = aliasesByTarget.get(name) ?? [];
       const related = relatedByTarget.get(name) ?? [];
-      return `<figure class="shlz-icon-card" data-icon-name="${name}" title="${comment ?? ""}"><img src="${url}" alt=""/><figcaption>${name}<small>${colorMode} · ${variants.length} variant${variants.length === 1 ? "" : "s"}</small>${aliases.length ? `<small>compat: ${aliases.map(({ alias }) => alias).join(", ")}</small>` : ""}${related.map(({ name: relatedName }) => `<small data-icon-related-name="${relatedName}">source variant: ${relatedName}</small>`).join("")}</figcaption></figure>`;
+      return `<figure class="shlz-icon-card" data-icon-name="${name}" data-icon-color-mode="${colorMode}" title="${comment ?? ""}"><img src="${url}" alt=""/><figcaption>${name}<small>${colorMode} · ${variants.length} variant${variants.length === 1 ? "" : "s"}</small>${aliases.length ? `<small>compat: ${aliases.map(({ alias }) => alias).join(", ")}</small>` : ""}${related.map(({ name: relatedName }) => `<small data-icon-related-name="${relatedName}">source variant: ${relatedName}</small>`).join("")}</figcaption></figure>`;
     });
     return `<section class="shlz-icon-category"><h3>${category} <small>${icons.length} visual families</small></h3><div class="shlz-icon-grid">${cards.join("")}</div></section>`;
   })

@@ -170,6 +170,27 @@ test("both source calendar geometries are canonical and distinct", async () => {
   ]);
 });
 
+test("Icons.svg normalization preserves source paint stacking", async () => {
+  const xls = await readFile(
+    new globalThis.URL(
+      "../../packages/icons/normalized/interface/xls-file.svg",
+      import.meta.url,
+    ),
+    "utf8",
+  );
+  const sourceOrder = [
+    xls.indexOf("M375.617"),
+    xls.indexOf("M384.215"),
+    xls.indexOf("<rect"),
+    xls.indexOf("M372.389"),
+  ];
+  assert.ok(sourceOrder.every((position) => position >= 0));
+  assert.deepEqual(
+    sourceOrder,
+    [...sourceOrder].sort((a, b) => a - b),
+  );
+});
+
 test("expanded icon package exposes every normalized canonical glyph", async () => {
   const manifest = await json("packages/icons/dist/manifest.json");
   const runtime = await import("../../packages/icons/dist/index.js");

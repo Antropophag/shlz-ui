@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <g transform="translate(-744 -789)">
-    <path d="M758.945 806.307H752.31C749.377 806.307 747 803.929 747 800.996C747 799.081 748.013 797.403 749.534 796.469" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M756.12 792.671L753.105 795.685L756.12 798.701" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M753.125 795.686H759.689C762.622 795.686 765 798.063 765 800.996C765 802.968 763.926 804.688 762.331 805.604" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M756.018 803.3L759.033 806.314L756.018 809.329" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M753.125 795.686H759.689C762.622 795.686 765 798.063 765 800.996C765 802.968 763.926 804.688 762.331 805.604" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M758.945 806.307H752.31C749.377 806.307 747 803.929 747 800.996C747 799.081 748.013 797.403 749.534 796.469" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>
