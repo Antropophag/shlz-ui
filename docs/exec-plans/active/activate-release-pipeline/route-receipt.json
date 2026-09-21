@@ -1,0 +1,75 @@
+{
+  "kind": "route",
+  "payload": {
+    "intent": "Activate the governed SHLZ package release pipeline against the corporate GitLab registry, prove partial-publication resume, exact four-package consumption, promotion and rollback, and retain redacted evidence before milestone 7.",
+    "material": [
+      "publishingOrRelease",
+      "externalEffects",
+      "publicUrlOrDomain",
+      "deploymentSemantics",
+      "permissionsOrSecurity",
+      "destructiveOrIrreversible",
+      "externalAutomation",
+      "publicContract"
+    ],
+    "materialSignals": {
+      "deploymentSemantics": true,
+      "destructiveOrIrreversible": true,
+      "externalAutomation": true,
+      "externalEffects": true,
+      "materialAmbiguity": false,
+      "newCapability": false,
+      "permissionsOrSecurity": true,
+      "publicContract": true,
+      "publicUrlOrDomain": true,
+      "publishingOrRelease": true
+    },
+    "openSpecChange": "activate-release-pipeline",
+    "requiredDecisions": [
+      {
+        "blocking": true,
+        "id": "corporate-registry-coordinates",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "github-environment-administrators",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "credential-provisioning",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "maintenance-window",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "activation-versions-and-rollback-target",
+        "owner": "user"
+      },
+      {
+        "blocking": true,
+        "id": "partial-publication-method",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "redacted-evidence-policy",
+        "owner": "agent"
+      },
+      {
+        "blocking": true,
+        "id": "milestone-7-gate",
+        "owner": "user"
+      }
+    ],
+    "route": "open-spec",
+    "unknown": []
+  },
+  "version": 1,
+  "digest": "889ae4b7487c938591f401e4fabd047628ce531018a5aa1a0f68cbf8f3369e1a"
+}
